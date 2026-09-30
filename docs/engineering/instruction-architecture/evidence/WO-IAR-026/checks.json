@@ -1,0 +1,5202 @@
+{
+  "platform": "Windows; source Python 3.14.6; independent released evaluator 0.20.0",
+  "commands": [
+    {
+      "label": "resumed-identity",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.20.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--evaluator-payload-sha256",
+        "88c26138f759af78b2d7eeed3d15f92b573ff264ea6a531b2c22dbbf1905130e",
+        "--evaluator-wheel-sha256",
+        "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:22:47.675837+00:00",
+      "result": {
+        "candidate_commit": null,
+        "checkout_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "diagnostics": [],
+        "distribution_origin": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Lib\\site-packages",
+        "entry_point_origin": null,
+        "evaluator_archive_name": "se_harness-0.20.0-py3-none-any.whl",
+        "evaluator_archive_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+        "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+        "evaluator_payload_sha256": "88c26138f759af78b2d7eeed3d15f92b573ff264ea6a531b2c22dbbf1905130e",
+        "evaluator_wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+        "expected_root": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator",
+        "harness_version": "0.20.0",
+        "isolated_python": true,
+        "module_origin": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Lib\\site-packages\\se_harness\\runtime_identity.py",
+        "passed": true,
+        "python_binary_position": "within-expected-root",
+        "python_entry_is_link": false,
+        "python_executable": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "python_version": "3.14.6",
+        "pythonpath_present": false,
+        "role": "released-evaluator",
+        "schema": "se-harness-runtime-identity-v4",
+        "template_origin": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\share\\se-harness\\templates\\repository\\standard",
+        "user_site_enabled": false
+      }
+    },
+    {
+      "label": "approval-check",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+        "--artifact",
+        "WO-IAR-026",
+        "--checkpoint",
+        "transition",
+        "--target",
+        "approved",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "observed_at": "2026-09-30T06:10:57.576718+00:00",
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "check",
+          "outcome": "blocked"
+        },
+        "selection": {
+          "primary": "WO-IAR-026",
+          "artifacts": [
+            "WO-IAR-026"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-028",
+            "SPEC-IAR-015",
+            "VER-IAR-018"
+          ],
+          "dependencies": [],
+          "declared_paths": [
+            ".engineering-harness.lock",
+            "docs/engineering/DECISION_RIGHTS.md",
+            "docs/engineering/instruction-architecture/evidence/VREC-IAR-016-evaluator.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/",
+            "docs/engineering/instruction-architecture/verification-records/VREC-IAR-016.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+            "docs/engineering/OPERATING_CARD.md",
+            "docs/engineering/QUALITY_GATES.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
+            "docs/engineering/TRACEABILITY.md",
+            "docs/engineering/WORKFLOW.md",
+            "tests/test_artifact_catalog.py"
+          ],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "transition",
+          "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "status": "fail",
+          "gates": [
+            {
+              "id": "QG-G3-WORK-AUTHORIZATION",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G3-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:WO-IAR-026"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G3-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:transition"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G3-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:WO-IAR-026"
+                    }
+                  ],
+                  "message": "No open decision blocks WO-IAR-026."
+                }
+              ]
+            },
+            {
+              "id": "QG-STRUCTURAL",
+              "status": "fail",
+              "predicates": [
+                {
+                  "id": "QGS-EDGE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "draft -> approved is a declared lifecycle edge for WO-IAR-026."
+                },
+                {
+                  "id": "QGS-ASSURANCE",
+                  "status": "fail",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "work order WO-IAR-026 requires a complete assurance classification before approval"
+                }
+              ]
+            }
+          ],
+          "formal_snapshot_sha256": "dbe50cb6483d80452d94d6a57e497d3d82004f20e8dde639b1cc97ff7db971d8",
+          "change_set_source": "arguments"
+        },
+        "procedure": {
+          "id": "PROC-FOCUS-SELECTED",
+          "current_step": "STEP-FOCUS-SELECTED",
+          "steps": [
+            {
+              "id": "STEP-FOCUS-SELECTED",
+              "kind": "command",
+              "gate_ids": [],
+              "effects": [
+                "Projected selected state for WO-IAR-026."
+              ],
+              "non_effects": [
+                "Focus changes no lifecycle state."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-IAR-026"
+              ]
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-IAR-026",
+              "status": "draft"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-IAR-026",
+              "status": "draft"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 54
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [
+            "Evaluated transition compliance for WO-IAR-026."
+          ],
+          "not_done": [
+            "The transition checkpoint did not pass."
+          ],
+          "blocked_by": [
+            "QGS-ASSURANCE: work order WO-IAR-026 requires a complete assurance classification before approval"
+          ],
+          "current_lifecycle_state": [
+            "WO-IAR-026 is draft."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-FOCUS-SELECTED",
+            "step_id": "STEP-FOCUS-SELECTED",
+            "action": "Supply the corrective input for QGS-ASSURANCE"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "Resolve QGS-ASSURANCE for WO-IAR-026: work order WO-IAR-026 requires a complete assurance classification before approval"
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-FOCUS-SELECTED",
+              "location": {
+                "file": "docs/engineering/harness/CONTINUE.md",
+                "heading": "continue-selected-work"
+              },
+              "prerequisites": [],
+              "steps": {
+                "STEP-FOCUS-SELECTED": {
+                  "location": {
+                    "file": "docs/engineering/harness/CONTINUE.md",
+                    "heading": "continue-selected-work"
+                  },
+                  "prerequisites": []
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-FOCUS-SELECTED",
+              "location": {
+                "file": "docs/engineering/harness/CONTINUE.md",
+                "heading": "continue-selected-work"
+              },
+              "prerequisites": []
+            }
+          },
+          "formal_artifact_ids": [
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-028",
+            "SPEC-IAR-015",
+            "VER-IAR-018",
+            "WO-IAR-026"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "38e537e932841151a633be660773d159bef5995195a95ee5f18fe61eca4a041c"
+      }
+    },
+    {
+      "label": "approval-preview-actual-human",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "VER-IAR-018=approved",
+        "--decision",
+        "VER-IAR-018=mmzen",
+        "--reason",
+        "VER-IAR-018=Human mmzen: I approve, in response to the explicit WO-IAR-026 / VER-IAR-018 and required commit-bound verification request. Reviewed draft SHA-256 59e5a3108ac56a6b2b43465d4d41e04b09f161c6ac72d81064a81aa01ad4e69b",
+        "--set",
+        "WO-IAR-026=approved",
+        "--decision",
+        "WO-IAR-026=mmzen",
+        "--reason",
+        "WO-IAR-026=Human mmzen: I approve, confirming the reviewed six-file byte hashes, bounded test correction and required commit-bound verification. Native delivery and consumer checks must pass before deletion. Reviewed draft SHA-256 522bea0051eb224d4990733bdcb9e5a6eece57d304ff0c29365bac63fada3303. Only the supplied assurance classification was added before preview.",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:16:34.674659+00:00",
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "VER-IAR-018",
+          "artifacts": [
+            "VER-IAR-018",
+            "WO-IAR-026"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "transition",
+          "workflow_rule_id": "WFL-DEFINITION-COMPLETE",
+          "procedure_id": "PROC-DEFINITION-COMPLETE",
+          "status": "pass",
+          "gates": [
+            {
+              "id": "QG-G1-DEFINITION",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G1-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:VER-IAR-018"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G1-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:transition"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G1-AUTHORING",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "VER-IAR-018"
+                    }
+                  ],
+                  "message": "VER-IAR-018 has no unfinished content or unresolved decision text."
+                },
+                {
+                  "id": "QGP-G1-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:VER-IAR-018"
+                    }
+                  ],
+                  "message": "No open decision blocks VER-IAR-018."
+                }
+              ]
+            },
+            {
+              "id": "QG-STRUCTURAL",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGS-EDGE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "VER-IAR-018"
+                    }
+                  ],
+                  "message": "draft -> approved is a declared lifecycle edge for VER-IAR-018."
+                }
+              ]
+            },
+            {
+              "id": "QG-G3-WORK-AUTHORIZATION",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G3-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:WO-IAR-026"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G3-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:transition"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G3-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:WO-IAR-026"
+                    }
+                  ],
+                  "message": "No open decision blocks WO-IAR-026."
+                }
+              ]
+            },
+            {
+              "id": "QG-STRUCTURAL",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGS-EDGE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "draft -> approved is a declared lifecycle edge for WO-IAR-026."
+                },
+                {
+                  "id": "QGS-ASSURANCE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "WO-IAR-026 classifies commit-bound verification as required."
+                }
+              ]
+            }
+          ]
+        },
+        "procedure": {
+          "id": "PROC-DEFINITION-COMPLETE",
+          "current_step": "STEP-DEFINITION-COMPLETE",
+          "steps": [
+            {
+              "id": "STEP-DEFINITION-COMPLETE",
+              "kind": "decision",
+              "gate_ids": [
+                "QG-G1-DEFINITION",
+                "QG-G2-ARCHITECTURE"
+              ],
+              "effects": [
+                "Permits a decision on VER-IAR-018 only."
+              ],
+              "non_effects": [
+                "Related definitions remain unchanged unless separately selected."
+              ],
+              "decision_right": "DR-DEFINITION-DECIDE",
+              "role": "definition-owner",
+              "artifact": "VER-IAR-018",
+              "decision": "whether the selected definition is complete",
+              "outcomes": [
+                "implemented",
+                "reject",
+                "stop"
+              ],
+              "response": "Decide the selected definition VER-IAR-018 only."
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "VER-IAR-018",
+              "status": "draft"
+            },
+            {
+              "id": "WO-IAR-026",
+              "status": "draft"
+            }
+          ],
+          "after": [
+            {
+              "id": "VER-IAR-018",
+              "status": "approved"
+            },
+            {
+              "id": "WO-IAR-026",
+              "status": "approved"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": [
+            {
+              "id": "VER-IAR-018",
+              "path": "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+              "fields": [
+                "lifecycle_events",
+                "status",
+                "updated"
+              ]
+            },
+            {
+              "id": "WO-IAR-026",
+              "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+              "fields": [
+                "lifecycle_events",
+                "status",
+                "updated"
+              ]
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Planned 2 explicit lifecycle transition(s); no files were written."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "VER-IAR-018 is approved."
+          ],
+          "decision_required": {
+            "decision_right": "DR-DEFINITION-DECIDE",
+            "role": "definition-owner",
+            "artifact": "VER-IAR-018",
+            "decision": "whether the selected definition is complete",
+            "outcomes": [
+              "implemented",
+              "reject",
+              "stop"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-DEFINITION-COMPLETE",
+            "step_id": "STEP-DEFINITION-COMPLETE",
+            "action": "whether the selected definition is complete"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "Decide the selected definition VER-IAR-018 only."
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-DEFINITION-COMPLETE",
+              "location": {
+                "file": "docs/engineering/harness/RECORD_STATE.md",
+                "heading": "complete-a-selected-definition"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ],
+              "steps": {
+                "STEP-DEFINITION-COMPLETE": {
+                  "location": {
+                    "file": "docs/engineering/harness/RECORD_STATE.md",
+                    "heading": "complete-a-selected-definition"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "decision-rights",
+                      "when": "Before obtaining or applying an accountable decision."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-DEFINITION-COMPLETE",
+              "location": {
+                "file": "docs/engineering/harness/RECORD_STATE.md",
+                "heading": "complete-a-selected-definition"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "VER-IAR-018",
+            "WO-IAR-026"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "cdffa3c9fb371c86ff9721f9878b9e251de74fa1d9c07fccd3d3565dc1936b44"
+      }
+    },
+    {
+      "label": "approval-apply",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "VER-IAR-018=approved",
+        "--decision",
+        "VER-IAR-018=mmzen",
+        "--reason",
+        "VER-IAR-018=Human mmzen: I approve, in response to the explicit WO-IAR-026 / VER-IAR-018 and required commit-bound verification request. Reviewed draft SHA-256 59e5a3108ac56a6b2b43465d4d41e04b09f161c6ac72d81064a81aa01ad4e69b",
+        "--set",
+        "WO-IAR-026=approved",
+        "--decision",
+        "WO-IAR-026=mmzen",
+        "--reason",
+        "WO-IAR-026=Human mmzen: I approve, confirming the reviewed six-file byte hashes, bounded test correction and required commit-bound verification. Native delivery and consumer checks must pass before deletion. Reviewed draft SHA-256 522bea0051eb224d4990733bdcb9e5a6eece57d304ff0c29365bac63fada3303. Only the supplied assurance classification was added before preview.",
+        "--json",
+        "--apply"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:17:29.172191+00:00",
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "VER-IAR-018",
+          "artifacts": [
+            "VER-IAR-018",
+            "WO-IAR-026"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "transition",
+          "workflow_rule_id": "WFL-DEFINITION-COMPLETE",
+          "procedure_id": "PROC-DEFINITION-COMPLETE",
+          "status": "pass",
+          "gates": [
+            {
+              "id": "QG-G1-DEFINITION",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G1-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:VER-IAR-018"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G1-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:transition"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G1-AUTHORING",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "VER-IAR-018"
+                    }
+                  ],
+                  "message": "VER-IAR-018 has no unfinished content or unresolved decision text."
+                },
+                {
+                  "id": "QGP-G1-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:VER-IAR-018"
+                    }
+                  ],
+                  "message": "No open decision blocks VER-IAR-018."
+                }
+              ]
+            },
+            {
+              "id": "QG-STRUCTURAL",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGS-EDGE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "VER-IAR-018"
+                    }
+                  ],
+                  "message": "draft -> approved is a declared lifecycle edge for VER-IAR-018."
+                }
+              ]
+            },
+            {
+              "id": "QG-G3-WORK-AUTHORIZATION",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G3-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:WO-IAR-026"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G3-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:transition"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G3-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:WO-IAR-026"
+                    }
+                  ],
+                  "message": "No open decision blocks WO-IAR-026."
+                }
+              ]
+            },
+            {
+              "id": "QG-STRUCTURAL",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGS-EDGE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "draft -> approved is a declared lifecycle edge for WO-IAR-026."
+                },
+                {
+                  "id": "QGS-ASSURANCE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "WO-IAR-026 classifies commit-bound verification as required."
+                }
+              ]
+            }
+          ]
+        },
+        "procedure": {
+          "id": "PROC-DEFINITION-COMPLETE",
+          "current_step": "STEP-DEFINITION-COMPLETE",
+          "steps": [
+            {
+              "id": "STEP-DEFINITION-COMPLETE",
+              "kind": "decision",
+              "gate_ids": [
+                "QG-G1-DEFINITION",
+                "QG-G2-ARCHITECTURE"
+              ],
+              "effects": [
+                "Permits a decision on VER-IAR-018 only."
+              ],
+              "non_effects": [
+                "Related definitions remain unchanged unless separately selected."
+              ],
+              "decision_right": "DR-DEFINITION-DECIDE",
+              "role": "definition-owner",
+              "artifact": "VER-IAR-018",
+              "decision": "whether the selected definition is complete",
+              "outcomes": [
+                "implemented",
+                "reject",
+                "stop"
+              ],
+              "response": "Decide the selected definition VER-IAR-018 only."
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "VER-IAR-018",
+              "status": "draft"
+            },
+            {
+              "id": "WO-IAR-026",
+              "status": "draft"
+            }
+          ],
+          "after": [
+            {
+              "id": "VER-IAR-018",
+              "status": "approved"
+            },
+            {
+              "id": "WO-IAR-026",
+              "status": "approved"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": [
+            {
+              "id": "VER-IAR-018",
+              "path": "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+              "fields": [
+                "lifecycle_events",
+                "status",
+                "updated"
+              ]
+            },
+            {
+              "id": "WO-IAR-026",
+              "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+              "fields": [
+                "lifecycle_events",
+                "status",
+                "updated"
+              ]
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Applied 2 explicit lifecycle transition(s) atomically."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "VER-IAR-018 is approved."
+          ],
+          "decision_required": {
+            "decision_right": "DR-DEFINITION-DECIDE",
+            "role": "definition-owner",
+            "artifact": "VER-IAR-018",
+            "decision": "whether the selected definition is complete",
+            "outcomes": [
+              "implemented",
+              "reject",
+              "stop"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-DEFINITION-COMPLETE",
+            "step_id": "STEP-DEFINITION-COMPLETE",
+            "action": "whether the selected definition is complete"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "Decide the selected definition VER-IAR-018 only."
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-DEFINITION-COMPLETE",
+              "location": {
+                "file": "docs/engineering/harness/RECORD_STATE.md",
+                "heading": "complete-a-selected-definition"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ],
+              "steps": {
+                "STEP-DEFINITION-COMPLETE": {
+                  "location": {
+                    "file": "docs/engineering/harness/RECORD_STATE.md",
+                    "heading": "complete-a-selected-definition"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "decision-rights",
+                      "when": "Before obtaining or applying an accountable decision."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-DEFINITION-COMPLETE",
+              "location": {
+                "file": "docs/engineering/harness/RECORD_STATE.md",
+                "heading": "complete-a-selected-definition"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "VER-IAR-018",
+            "WO-IAR-026"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "cdffa3c9fb371c86ff9721f9878b9e251de74fa1d9c07fccd3d3565dc1936b44"
+      }
+    },
+    {
+      "label": "start-preflight",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-IAR-026",
+        "--phase",
+        "start",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:17:38.541768+00:00",
+      "result": {
+        "assurance": {
+          "commit_bound_verification": "required",
+          "decided_by": "mmzen",
+          "rationale": "Human mmzen confirmed required commit-bound verification when approving WO-IAR-026 and VER-IAR-018. Later instruction-discovery and integration decisions depend on the six removed pointers and corrected catalog test."
+        },
+        "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+        "background": [],
+        "diagnostics": [],
+        "phase": "start",
+        "reading_manifest": [
+          "ENGINEERING_HARNESS.md",
+          "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+          "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+          "docs/engineering/instruction-architecture/requirements/REQ-IAR-028.md",
+          "docs/engineering/instruction-architecture/specifications/SPEC-IAR-015.md",
+          "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md"
+        ],
+        "ready": true,
+        "schema": "se-harness-preflight-v2",
+        "skew": [],
+        "work_order": {
+          "id": "WO-IAR-026",
+          "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+          "status": "approved"
+        }
+      }
+    },
+    {
+      "label": "start-preview",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-026=in_progress",
+        "--decision",
+        "WO-IAR-026=Codex",
+        "--reason",
+        "WO-IAR-026=Start under human mmzen approval of the reviewed cleanup and required assurance; consumer, native delivery and exact byte checks remain mandatory before deletion.",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:17:48.011967+00:00",
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "WO-IAR-026",
+          "artifacts": [
+            "WO-IAR-026"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [],
+          "dependencies": [],
+          "declared_paths": [
+            ".engineering-harness.lock",
+            "docs/engineering/DECISION_RIGHTS.md",
+            "docs/engineering/instruction-architecture/evidence/VREC-IAR-016-evaluator.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/",
+            "docs/engineering/instruction-architecture/verification-records/VREC-IAR-016.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+            "docs/engineering/OPERATING_CARD.md",
+            "docs/engineering/QUALITY_GATES.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
+            "docs/engineering/TRACEABILITY.md",
+            "docs/engineering/WORKFLOW.md",
+            "tests/test_artifact_catalog.py"
+          ],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "transition",
+          "workflow_rule_id": "WFL-WO-IMPLEMENT",
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "status": "pass",
+          "gates": [
+            {
+              "id": "QG-G3-WORK-AUTHORIZATION",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G3-STATUS",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "WO-IAR-026 status is approved."
+                },
+                {
+                  "id": "QGP-G3-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:WO-IAR-026"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G3-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:transition"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G3-SCOPE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026:[execution_scope]"
+                    }
+                  ],
+                  "message": "WO-IAR-026 has recorded execution approval for its 13 scope path(s)."
+                },
+                {
+                  "id": "QGP-G3-PREFLIGHT",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "preflight:WO-IAR-026:start"
+                    }
+                  ],
+                  "message": "Released-installation start preflight inputs are ready."
+                },
+                {
+                  "id": "QGP-G3-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:WO-IAR-026"
+                    }
+                  ],
+                  "message": "No open decision blocks WO-IAR-026."
+                }
+              ]
+            },
+            {
+              "id": "QG-STRUCTURAL",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGS-EDGE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "approved -> in_progress is a declared lifecycle edge for WO-IAR-026."
+                }
+              ]
+            }
+          ]
+        },
+        "procedure": {
+          "id": "PROC-WO-IMPLEMENT",
+          "current_step": "STEP-WO-IMPLEMENT-CHECK",
+          "steps": [
+            {
+              "id": "STEP-WO-IMPLEMENT-CHECK",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Evaluated implementation handoff for WO-IAR-026."
+              ],
+              "non_effects": [
+                "A checkpoint does not complete or verify work."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-IAR-026",
+                "--checkpoint",
+                "handoff"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-PREVIEW",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Plan completion of WO-IAR-026."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-026=implemented",
+                "--decision",
+                "WO-IAR-026=delegated-executor"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-APPLY",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Record completion of only WO-IAR-026 under its approved execution scope."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-026=implemented",
+                "--decision",
+                "WO-IAR-026=delegated-executor",
+                "--apply"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-IAR-026",
+              "status": "approved"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-IAR-026",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": [
+            {
+              "id": "WO-IAR-026",
+              "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+              "fields": [
+                "lifecycle_events",
+                "status",
+                "updated"
+              ]
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Planned 1 explicit lifecycle transition(s); no files were written."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-IAR-026 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-026",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-WO-IMPLEMENT",
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "retain-the-implementation-evidence"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ],
+              "steps": {
+                "STEP-WO-IMPLEMENT-CHECK": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "retain-the-implementation-evidence"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                },
+                "STEP-WO-IMPLEMENT-PREVIEW": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "record-implementation-completion"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                },
+                "STEP-WO-IMPLEMENT-APPLY": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "record-implementation-completion"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-WO-IMPLEMENT-CHECK",
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "retain-the-implementation-evidence"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "WO-IAR-026"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "584f3488e99b410dc6687dadd84343a8c1a9bbdb9cd480da4179a0139bf33103"
+      }
+    },
+    {
+      "label": "start-apply",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-026=in_progress",
+        "--decision",
+        "WO-IAR-026=Codex",
+        "--reason",
+        "WO-IAR-026=Start under human mmzen approval of the reviewed cleanup and required assurance; consumer, native delivery and exact byte checks remain mandatory before deletion.",
+        "--json",
+        "--apply"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:18:01.906193+00:00",
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "WO-IAR-026",
+          "artifacts": [
+            "WO-IAR-026"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [],
+          "dependencies": [],
+          "declared_paths": [
+            ".engineering-harness.lock",
+            "docs/engineering/DECISION_RIGHTS.md",
+            "docs/engineering/instruction-architecture/evidence/VREC-IAR-016-evaluator.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/",
+            "docs/engineering/instruction-architecture/verification-records/VREC-IAR-016.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+            "docs/engineering/OPERATING_CARD.md",
+            "docs/engineering/QUALITY_GATES.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
+            "docs/engineering/TRACEABILITY.md",
+            "docs/engineering/WORKFLOW.md",
+            "tests/test_artifact_catalog.py"
+          ],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "transition",
+          "workflow_rule_id": "WFL-WO-IMPLEMENT",
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "status": "pass",
+          "gates": [
+            {
+              "id": "QG-G3-WORK-AUTHORIZATION",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G3-STATUS",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "WO-IAR-026 status is approved."
+                },
+                {
+                  "id": "QGP-G3-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:WO-IAR-026"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G3-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:transition"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G3-SCOPE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026:[execution_scope]"
+                    }
+                  ],
+                  "message": "WO-IAR-026 has recorded execution approval for its 13 scope path(s)."
+                },
+                {
+                  "id": "QGP-G3-PREFLIGHT",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "preflight:WO-IAR-026:start"
+                    }
+                  ],
+                  "message": "Released-installation start preflight inputs are ready."
+                },
+                {
+                  "id": "QGP-G3-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:WO-IAR-026"
+                    }
+                  ],
+                  "message": "No open decision blocks WO-IAR-026."
+                }
+              ]
+            },
+            {
+              "id": "QG-STRUCTURAL",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGS-EDGE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "approved -> in_progress is a declared lifecycle edge for WO-IAR-026."
+                }
+              ]
+            }
+          ]
+        },
+        "procedure": {
+          "id": "PROC-WO-IMPLEMENT",
+          "current_step": "STEP-WO-IMPLEMENT-CHECK",
+          "steps": [
+            {
+              "id": "STEP-WO-IMPLEMENT-CHECK",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Evaluated implementation handoff for WO-IAR-026."
+              ],
+              "non_effects": [
+                "A checkpoint does not complete or verify work."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-IAR-026",
+                "--checkpoint",
+                "handoff"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-PREVIEW",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Plan completion of WO-IAR-026."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-026=implemented",
+                "--decision",
+                "WO-IAR-026=delegated-executor"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-APPLY",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Record completion of only WO-IAR-026 under its approved execution scope."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-026=implemented",
+                "--decision",
+                "WO-IAR-026=delegated-executor",
+                "--apply"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-IAR-026",
+              "status": "approved"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-IAR-026",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": [
+            {
+              "id": "WO-IAR-026",
+              "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+              "fields": [
+                "lifecycle_events",
+                "status",
+                "updated"
+              ]
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Applied 1 explicit lifecycle transition(s) atomically."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-IAR-026 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-026",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-WO-IMPLEMENT",
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "retain-the-implementation-evidence"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ],
+              "steps": {
+                "STEP-WO-IMPLEMENT-CHECK": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "retain-the-implementation-evidence"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                },
+                "STEP-WO-IMPLEMENT-PREVIEW": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "record-implementation-completion"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                },
+                "STEP-WO-IMPLEMENT-APPLY": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "record-implementation-completion"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-WO-IMPLEMENT-CHECK",
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "retain-the-implementation-evidence"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "WO-IAR-026"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "584f3488e99b410dc6687dadd84343a8c1a9bbdb9cd480da4179a0139bf33103"
+      }
+    },
+    {
+      "label": "planned-scope",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-IAR-026",
+        "--checkpoint",
+        "scope",
+        "--changed-path",
+        "docs/engineering/OPERATING_CARD.md",
+        "--changed-path",
+        "docs/engineering/DECISION_RIGHTS.md",
+        "--changed-path",
+        "docs/engineering/QUALITY_GATES.md",
+        "--changed-path",
+        "docs/engineering/WORKFLOW.md",
+        "--changed-path",
+        "docs/engineering/TRACEABILITY.md",
+        "--changed-path",
+        "docs/engineering/TECHNICAL_COMMUNICATION.md",
+        "--changed-path",
+        "tests/test_artifact_catalog.py",
+        "--changed-path",
+        ".engineering-harness.lock",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/verification-records/VREC-IAR-016.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/VREC-IAR-016-evaluator.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-026/checks.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-026/review.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-026/preservation.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-026/stock-review.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-026/consumers.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-026/native-delivery.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-026/handoff.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-026/handoff.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-026/full-tests.txt",
+        "--changes-complete",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:23:43.240139+00:00",
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "check",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "WO-IAR-026",
+          "artifacts": [
+            "WO-IAR-026"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-028",
+            "SPEC-IAR-015",
+            "VER-IAR-018"
+          ],
+          "dependencies": [],
+          "declared_paths": [
+            ".engineering-harness.lock",
+            "docs/engineering/DECISION_RIGHTS.md",
+            "docs/engineering/instruction-architecture/evidence/VREC-IAR-016-evaluator.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/",
+            "docs/engineering/instruction-architecture/verification-records/VREC-IAR-016.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+            "docs/engineering/OPERATING_CARD.md",
+            "docs/engineering/QUALITY_GATES.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
+            "docs/engineering/TRACEABILITY.md",
+            "docs/engineering/WORKFLOW.md",
+            "tests/test_artifact_catalog.py"
+          ],
+          "changed_paths": [
+            ".engineering-harness.lock",
+            "docs/engineering/DECISION_RIGHTS.md",
+            "docs/engineering/instruction-architecture/evidence/VREC-IAR-016-evaluator.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/checks.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/consumers.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/full-tests.txt",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/handoff.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/handoff.md",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/native-delivery.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/preservation.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/review.md",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/stock-review.json",
+            "docs/engineering/instruction-architecture/verification-records/VREC-IAR-016.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+            "docs/engineering/OPERATING_CARD.md",
+            "docs/engineering/QUALITY_GATES.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
+            "docs/engineering/TRACEABILITY.md",
+            "docs/engineering/WORKFLOW.md",
+            "tests/test_artifact_catalog.py"
+          ],
+          "change_set_complete": true
+        },
+        "compliance": {
+          "checkpoint": "scope",
+          "workflow_rule_id": "WFL-WO-IMPLEMENT",
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "status": "pass",
+          "gates": [
+            {
+              "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G4I-SCOPE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026:[execution_scope]"
+                    }
+                  ],
+                  "message": "WO-IAR-026 declares 13 normalized scope path(s); this inspection grants no execution authority."
+                },
+                {
+                  "id": "QGP-G4I-COMPLETE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "declared-change-set:WO-IAR-026"
+                    }
+                  ],
+                  "message": "The caller explicitly asserted that the declared change set is complete."
+                },
+                {
+                  "id": "QGP-G4I-PATHS",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "path",
+                      "reference": "declared-change-set:WO-IAR-026"
+                    }
+                  ],
+                  "message": "All 21 declared changed path(s) are within execution scope."
+                }
+              ]
+            }
+          ],
+          "formal_snapshot_sha256": "44657b9fb74f2e57197c6ff3a77c6914ddd271df5694cd8d8efeae4a76c2a15c",
+          "change_set_source": "arguments"
+        },
+        "procedure": {
+          "id": "PROC-WO-IMPLEMENT",
+          "current_step": "STEP-WO-IMPLEMENT-PREVIEW",
+          "steps": [
+            {
+              "id": "STEP-WO-IMPLEMENT-CHECK",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Evaluated implementation handoff for WO-IAR-026."
+              ],
+              "non_effects": [
+                "A checkpoint does not complete or verify work."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-IAR-026",
+                "--checkpoint",
+                "handoff"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-PREVIEW",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Plan completion of WO-IAR-026."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-026=implemented",
+                "--decision",
+                "WO-IAR-026=delegated-executor"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-APPLY",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Record completion of only WO-IAR-026 under its approved execution scope."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-026=implemented",
+                "--decision",
+                "WO-IAR-026=delegated-executor",
+                "--apply"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-IAR-026",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-IAR-026",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 54
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Evaluated scope compliance for WO-IAR-026."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-IAR-026 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "transition",
+              ".",
+              "--set",
+              "WO-IAR-026=implemented",
+              "--decision",
+              "WO-IAR-026=delegated-executor"
+            ]
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-WO-IMPLEMENT",
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "retain-the-implementation-evidence"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ],
+              "steps": {
+                "STEP-WO-IMPLEMENT-CHECK": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "retain-the-implementation-evidence"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                },
+                "STEP-WO-IMPLEMENT-PREVIEW": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "record-implementation-completion"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                },
+                "STEP-WO-IMPLEMENT-APPLY": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "record-implementation-completion"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-WO-IMPLEMENT-PREVIEW",
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "record-implementation-completion"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-028",
+            "SPEC-IAR-015",
+            "VER-IAR-018",
+            "WO-IAR-026"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "262f957482d3c9fc3d7885c53a5c052d92e30d702c2b28f5debddc178d423220"
+      }
+    },
+    {
+      "label": "cleanup-upgrade-preview",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:23:57.887300+00:00",
+      "result": {
+        "changes": [
+          {
+            "action": "unchanged",
+            "path": ".engineering-harness.toml"
+          },
+          {
+            "action": "unchanged",
+            "path": ".gitattributes"
+          },
+          {
+            "action": "unchanged",
+            "path": ".github/PULL_REQUEST_TEMPLATE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": ".github/workflows/engineering-harness.yml"
+          },
+          {
+            "action": "unchanged",
+            "path": ".gitignore"
+          },
+          {
+            "action": "unchanged",
+            "path": "ENGINEERING_HARNESS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "GLOSSARY.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/ARTIFACT_AUTHORING.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/QUALITY_GATES.json"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/README.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/WORKFLOW.json"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/AMEND_DEFINITIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/ARTIFACTS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/AUTHORITY.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/AUTHORIZE_WORK.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/COMMUNICATION.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/CONTINUE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DEFINE_CHANGE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DEFINITION_LINKS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DELIVER_RESULT.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DRAFT_DEFINITIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DRAFT_WORK_ORDERS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/EXCEPTIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/EXECUTE_WORK.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/PULL_REQUEST.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RECORD_STATE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RELEASE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RESULTS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RISKS_AND_DECISIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/SETUP.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/SKILL_PROVIDER.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/UPGRADE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/VERIFY_OUTCOME.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/WORK_AND_EVIDENCE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/migration/REFERENCE_MAP.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/ADR.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/ARCHITECTURE.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/CAPABILITY.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/DECISION.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/INTENT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/OPERATING_CONTRACT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/README.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/RELEASE_CONTRACT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/RELEASE_RECORD.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/REQUIREMENT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/RISK.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/SPECIFICATION.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/VERIFICATION.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/VERIFICATION_RECORD.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/WORK_ORDER.template.md"
+          }
+        ],
+        "command": "upgrade",
+        "instruction_delivery_required": false,
+        "outcome": "completed",
+        "schema": "se-harness-command-result-v1",
+        "written": false
+      }
+    },
+    {
+      "label": "cleanup-upgrade-apply",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:24:18.824560+00:00",
+      "result": {
+        "changes": [
+          {
+            "action": "unchanged",
+            "path": ".engineering-harness.toml"
+          },
+          {
+            "action": "unchanged",
+            "path": ".gitattributes"
+          },
+          {
+            "action": "unchanged",
+            "path": ".github/PULL_REQUEST_TEMPLATE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": ".github/workflows/engineering-harness.yml"
+          },
+          {
+            "action": "unchanged",
+            "path": ".gitignore"
+          },
+          {
+            "action": "unchanged",
+            "path": "ENGINEERING_HARNESS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "GLOSSARY.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/ARTIFACT_AUTHORING.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/QUALITY_GATES.json"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/README.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/WORKFLOW.json"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/AMEND_DEFINITIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/ARTIFACTS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/AUTHORITY.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/AUTHORIZE_WORK.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/COMMUNICATION.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/CONTINUE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DEFINE_CHANGE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DEFINITION_LINKS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DELIVER_RESULT.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DRAFT_DEFINITIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DRAFT_WORK_ORDERS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/EXCEPTIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/EXECUTE_WORK.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/PULL_REQUEST.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RECORD_STATE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RELEASE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RESULTS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RISKS_AND_DECISIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/SETUP.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/SKILL_PROVIDER.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/UPGRADE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/VERIFY_OUTCOME.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/WORK_AND_EVIDENCE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/migration/REFERENCE_MAP.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/ADR.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/ARCHITECTURE.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/CAPABILITY.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/DECISION.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/INTENT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/OPERATING_CONTRACT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/README.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/RELEASE_CONTRACT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/RELEASE_RECORD.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/REQUIREMENT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/RISK.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/SPECIFICATION.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/VERIFICATION.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/VERIFICATION_RECORD.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/WORK_ORDER.template.md"
+          }
+        ],
+        "command": "upgrade",
+        "evidence_output": null,
+        "outcome": "completed",
+        "schema": "se-harness-command-result-v1",
+        "written": true
+      }
+    },
+    {
+      "label": "cleanup-doctor",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:24:21.292059+00:00",
+      "result": {
+        "checks": [
+          {
+            "detail": "required",
+            "name": "ENGINEERING_HARNESS.md",
+            "passed": true
+          },
+          {
+            "detail": ".engineering-harness.toml",
+            "name": "config",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:.gitattributes",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:.gitignore",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:ENGINEERING_HARNESS.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/QUALITY_GATES.json",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/WORKFLOW.json",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/AMEND_DEFINITIONS.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/ARTIFACTS.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/AUTHORITY.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/AUTHORIZE_WORK.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/COMMUNICATION.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/CONTINUE.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/DEFINE_CHANGE.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/DEFINITION_LINKS.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/DELIVER_RESULT.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/DRAFT_DEFINITIONS.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/DRAFT_WORK_ORDERS.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/EXCEPTIONS.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/EXECUTE_WORK.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/PULL_REQUEST.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/RECORD_STATE.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/RELEASE.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/RESULTS.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/RISKS_AND_DECISIONS.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/SETUP.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/SKILL_PROVIDER.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/UPGRADE.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/VERIFY_OUTCOME.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/WORK_AND_EVIDENCE.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+            "passed": true
+          },
+          {
+            "detail": "matches distribution",
+            "name": "distribution:docs/engineering/harness/migration/REFERENCE_MAP.md",
+            "passed": true
+          },
+          {
+            "detail": "required",
+            "name": "docs/engineering/ARTIFACT_AUTHORING.md",
+            "passed": true
+          },
+          {
+            "detail": "required",
+            "name": "docs/engineering/QUALITY_GATES.json",
+            "passed": true
+          },
+          {
+            "detail": "required",
+            "name": "docs/engineering/README.md",
+            "passed": true
+          },
+          {
+            "detail": "required",
+            "name": "docs/engineering/WORKFLOW.json",
+            "passed": true
+          },
+          {
+            "detail": "installed checker payload matches its installation record",
+            "name": "evaluator-payload",
+            "passed": true
+          },
+          {
+            "detail": "declared instruction headings are available",
+            "name": "instruction-discovery",
+            "passed": true
+          },
+          {
+            "detail": ".engineering-harness.lock",
+            "name": "lock",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:.gitattributes",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:.gitignore",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:ENGINEERING_HARNESS.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/QUALITY_GATES.json",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/WORKFLOW.json",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/AMEND_DEFINITIONS.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/ARTIFACTS.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/AUTHORITY.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/AUTHORIZE_WORK.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/COMMUNICATION.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/CONTINUE.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/DEFINE_CHANGE.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/DEFINITION_LINKS.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/DELIVER_RESULT.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/DRAFT_DEFINITIONS.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/DRAFT_WORK_ORDERS.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/EXCEPTIONS.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/EXECUTE_WORK.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/PULL_REQUEST.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/RECORD_STATE.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/RELEASE.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/RESULTS.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/RISKS_AND_DECISIONS.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/SETUP.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/SKILL_PROVIDER.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/UPGRADE.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/VERIFY_OUTCOME.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/WORK_AND_EVIDENCE.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+            "passed": true
+          },
+          {
+            "detail": "unchanged",
+            "name": "managed:docs/engineering/harness/migration/REFERENCE_MAP.md",
+            "passed": true
+          },
+          {
+            "detail": "3.14.6",
+            "name": "python",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:.engineering-harness.toml",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:.github/PULL_REQUEST_TEMPLATE.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:.github/workflows/engineering-harness.yml",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:GLOSSARY.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/ARTIFACT_AUTHORING.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/README.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/ADR.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/ARCHITECTURE.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/CAPABILITY.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/DECISION.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/INTENT.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/README.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/RELEASE_RECORD.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/REQUIREMENT.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/RISK.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/SPECIFICATION.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/VERIFICATION.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+            "passed": true
+          },
+          {
+            "detail": "present",
+            "name": "seed:docs/engineering/templates/WORK_ORDER.template.md",
+            "passed": true
+          },
+          {
+            "detail": "config, installation and running checker versions must agree",
+            "name": "selected-version",
+            "passed": true
+          },
+          {
+            "detail": "skills are provided by the plugin",
+            "name": "skill-ownership",
+            "passed": true
+          },
+          {
+            "detail": "2 file formats declared; consuming formats validate their own fields",
+            "name": "hash-bound-class-declared",
+            "passed": true
+          },
+          {
+            "detail": "1 raw classes effective for 249 tracked paths",
+            "name": "hash-bound-attribute-effective",
+            "passed": true
+          },
+          {
+            "detail": "one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1",
+            "name": "hash-bound-mode-consistent",
+            "passed": true
+          }
+        ],
+        "command": "doctor",
+        "outcome": "completed",
+        "schema": "se-harness-command-result-v1",
+        "warnings": [
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-ECP-041' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-ECP-041.md'",
+            "path": "docs/engineering/execution-control-plane/verification-records/VREC-ECP-041.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-PMI-001' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-PMI-001.md'",
+            "path": "docs/engineering/portable-managed-integrity/verification-records/VREC-PMI-001.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-019' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-019.md'",
+            "path": "docs/engineering/release-0-10-0/releases/RLS-SEH-019.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-019' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-019.md'",
+            "path": "docs/engineering/release-0-10-0/verification-records/VREC-SEH-019.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-020' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-020.md'",
+            "path": "docs/engineering/release-0-11-0/releases/RLS-SEH-020.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-020' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-020.md'",
+            "path": "docs/engineering/release-0-11-0/verification-records/VREC-SEH-020.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-021' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-021.md'",
+            "path": "docs/engineering/release-0-12-0/releases/RLS-SEH-021.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-021' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-021.md'",
+            "path": "docs/engineering/release-0-12-0/verification-records/VREC-SEH-021.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-022' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-022.md'",
+            "path": "docs/engineering/release-0-13-0/releases/RLS-SEH-022.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-022' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-022.md'",
+            "path": "docs/engineering/release-0-13-0/verification-records/VREC-SEH-022.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-023' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-023.md'",
+            "path": "docs/engineering/release-0-14-0/releases/RLS-SEH-023.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-023' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-023.md'",
+            "path": "docs/engineering/release-0-14-0/verification-records/VREC-SEH-023.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-024' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-024.md'",
+            "path": "docs/engineering/release-0-15-0/releases/RLS-SEH-024.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-024' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-024.md'",
+            "path": "docs/engineering/release-0-15-0/verification-records/VREC-SEH-024.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-025' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-025.md'",
+            "path": "docs/engineering/release-0-16-0/releases/RLS-SEH-025.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-025' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-025.md'",
+            "path": "docs/engineering/release-0-16-0/verification-records/VREC-SEH-025.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-026' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-026.md'",
+            "path": "docs/engineering/release-0-17-0/releases/RLS-SEH-026.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-026' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-026.md'",
+            "path": "docs/engineering/release-0-17-0/verification-records/VREC-SEH-026.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-027' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-027.md'",
+            "path": "docs/engineering/release-0-18-0/releases/RLS-SEH-027.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-027' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-027.md'",
+            "path": "docs/engineering/release-0-18-0/verification-records/VREC-SEH-027.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-028' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-028.md'",
+            "path": "docs/engineering/release-0-19-0/releases/RLS-SEH-028.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-028' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-028.md'",
+            "path": "docs/engineering/release-0-19-0/verification-records/VREC-SEH-028.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-029' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-029.md'",
+            "path": "docs/engineering/release-0-20-0/releases/RLS-SEH-029.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-029' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-029.md'",
+            "path": "docs/engineering/release-0-20-0/verification-records/VREC-SEH-029.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-009' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-009.md'",
+            "path": "docs/engineering/release-0-6-0/releases/RLS-SEH-009.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-012' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-012.md'",
+            "path": "docs/engineering/release-0-6-0/releases/RLS-SEH-012.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-008' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-008.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-008.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-009' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-009.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-009.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-010' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-010.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-010.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-012' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-012.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-012.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-014' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-014.md'",
+            "path": "docs/engineering/release-0-7-0/releases/RLS-SEH-014.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-015' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-015.md'",
+            "path": "docs/engineering/release-0-7-0/releases/RLS-SEH-015.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-014' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-014.md'",
+            "path": "docs/engineering/release-0-7-0/verification-records/VREC-SEH-014.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-016' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-016.md'",
+            "path": "docs/engineering/release-0-7-1/releases/RLS-SEH-016.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-015' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-015.md'",
+            "path": "docs/engineering/release-0-7-1/verification-records/VREC-SEH-015.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-017' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-017.md'",
+            "path": "docs/engineering/release-0-8-0/releases/RLS-SEH-017.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-017' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-017.md'",
+            "path": "docs/engineering/release-0-8-0/verification-records/VREC-SEH-017.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-018' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-018.md'",
+            "path": "docs/engineering/release-0-9-0/releases/RLS-SEH-018.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-018' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-018.md'",
+            "path": "docs/engineering/release-0-9-0/verification-records/VREC-SEH-018.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-001' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-001.md'",
+            "path": "docs/engineering/release-0.2.0/releases/RLS-SEH-001.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-001' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-001.md'",
+            "path": "docs/engineering/release-0.2.0/verification-records/VREC-SEH-001.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-002' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-002.md'",
+            "path": "docs/engineering/release-0.2.1/releases/RLS-SEH-002.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-002' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-002.md'",
+            "path": "docs/engineering/release-0.2.1/verification-records/VREC-SEH-002.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-004' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-004.md'",
+            "path": "docs/engineering/release-0.2.2/releases/RLS-SEH-004.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-004' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-004.md'",
+            "path": "docs/engineering/release-0.2.2/verification-records/VREC-SEH-004.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-005' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-005.md'",
+            "path": "docs/engineering/release-0.3.0/releases/RLS-SEH-005.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-005' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-005.md'",
+            "path": "docs/engineering/release-0.3.0/verification-records/VREC-SEH-005.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-006' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-006.md'",
+            "path": "docs/engineering/release-0.4.0/releases/RLS-SEH-006.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-006' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-006.md'",
+            "path": "docs/engineering/release-0.4.0/verification-records/VREC-SEH-006.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-007' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-007.md'",
+            "path": "docs/engineering/release-0.4.1/releases/RLS-SEH-007.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-007' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-007.md'",
+            "path": "docs/engineering/release-0.4.1/verification-records/VREC-SEH-007.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-HUP-019' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-HUP-019.md'",
+            "path": "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-019.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-DOC-003' is valid outside its canonical location; expected 'docs/engineering/harness-distribution/verification-records/VREC-DOC-003.md'",
+            "path": "docs/engineering/verification-records/VREC-DOC-003.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-DOC-005' is valid outside its canonical location; expected 'docs/engineering/harness-distribution/verification-records/VREC-DOC-005.md'",
+            "path": "docs/engineering/verification-records/VREC-DOC-005.md"
+          }
+        ]
+      }
+    },
+    {
+      "label": "cleanup-repeat-preview",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:24:21.639614+00:00",
+      "result": {
+        "changes": [
+          {
+            "action": "unchanged",
+            "path": ".engineering-harness.toml"
+          },
+          {
+            "action": "unchanged",
+            "path": ".gitattributes"
+          },
+          {
+            "action": "unchanged",
+            "path": ".github/PULL_REQUEST_TEMPLATE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": ".github/workflows/engineering-harness.yml"
+          },
+          {
+            "action": "unchanged",
+            "path": ".gitignore"
+          },
+          {
+            "action": "unchanged",
+            "path": "ENGINEERING_HARNESS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "GLOSSARY.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/ARTIFACT_AUTHORING.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/QUALITY_GATES.json"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/README.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/WORKFLOW.json"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/AMEND_DEFINITIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/ARTIFACTS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/AUTHORITY.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/AUTHORIZE_WORK.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/COMMUNICATION.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/CONTINUE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DEFINE_CHANGE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DEFINITION_LINKS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DELIVER_RESULT.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DRAFT_DEFINITIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/DRAFT_WORK_ORDERS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/EXCEPTIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/EXECUTE_WORK.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/PULL_REQUEST.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RECORD_STATE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RELEASE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RESULTS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/RISKS_AND_DECISIONS.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/SETUP.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/SKILL_PROVIDER.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/UPGRADE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/VERIFY_OUTCOME.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/WORK_AND_EVIDENCE.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/harness/migration/REFERENCE_MAP.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/ADR.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/ARCHITECTURE.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/CAPABILITY.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/DECISION.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/INTENT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/OPERATING_CONTRACT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/README.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/RELEASE_CONTRACT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/RELEASE_RECORD.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/REQUIREMENT.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/RISK.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/SPECIFICATION.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/VERIFICATION.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/VERIFICATION_RECORD.template.md"
+          },
+          {
+            "action": "unchanged",
+            "path": "docs/engineering/templates/WORK_ORDER.template.md"
+          }
+        ],
+        "command": "upgrade",
+        "instruction_delivery_required": false,
+        "outcome": "completed",
+        "schema": "se-harness-command-result-v1",
+        "written": false
+      }
+    },
+    {
+      "label": "affected-tests",
+      "argv": [
+        "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_artifact_catalog",
+        "tests.test_installer",
+        "tests.test_instruction_architecture",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_workflow_documentation_contract"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:25:20.186301+00:00",
+      "stdout": "",
+      "stderr": "...................................................................\n----------------------------------------------------------------------\nRan 67 tests in 41.393s\n\nOK\n"
+    },
+    {
+      "label": "full-tests",
+      "argv": [
+        "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+        "-X",
+        "utf8",
+        "scripts/run_tests.py",
+        "--scale",
+        "full"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:27:27.247188+00:00",
+      "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-y72lew1y\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-y72lew1y\\private\\verity-plane\\evaluator\\Scripts\\python.exe\n0.21.0\nWEX_SCALE artifacts=100 validation=0.105258s focus=0.357359s plan=0.284868s\nWEX_SCALE artifacts=500 validation=0.760447s focus=0.913619s plan=1.291522s\nWEX_SCALE artifacts=1000 validation=1.371044s focus=1.593330s plan=2.565730s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1162 tests in 125.669s (177 classes, 8 workers)\n\nOK (skipped=17)\n",
+      "stderr": "--workers must be at least 1\n"
+    },
+    {
+      "label": "distribution-check",
+      "argv": [
+        "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+        "-X",
+        "utf8",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:27:30.783802+00:00",
+      "stdout": "SE Harness release distribution validation: PASS (18 distribution-bearing records)\n",
+      "stderr": ""
+    },
+    {
+      "label": "cli-smoke",
+      "argv": [
+        "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:27:31.062844+00:00",
+      "stdout": "usage: harnessctl [-h] [--version]\n                  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...\n\nInstall and operate the standard software-engineering harness.\n\npositional arguments:\n  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release}\n    init                install the standard harness into an absent, empty or\n                        existing repository\n    validate            validate the repository artifact graph\n    inspect             inspect repository-wide attention and lifecycle queues\n    dashboard           generate the repository Harness Explorer\n    doctor              check an installed harness\n    skill-ownership     plan, apply, or restore explicit retained skill\n                        ownership\n    preflight           check work-order implementation or review readiness\n    check               project one selected WO, VREC, or RLS scope, or\n                        evaluate one of its checkpoints, and emit canonical\n                        restitution\n    evidence            write or rebind one work order's evidence packet to\n                        the current formal snapshot\n    pr-body             emit the LF-terminated pull-request body for one work\n                        order\n    transition          plan or atomically apply explicit lifecycle\n                        transitions\n    decide              dispose one pending decision with a declared option,\n                        under DR-DECISION-DISPOSE\n    raise-risk          record a risk description, owner and next action;\n                        optionally request a blocking decision\n    risks               list the risks threatening one artifact and its\n                        governing chain; writes nothing\n    check-pr            check a PR against its selected work orders and their\n                        combined scope\n    select-work-order   select one structured work-order field from a GitHub\n                        pull-request event\n    upgrade             plan or apply safe harness upgrades\n    scaffold-domain     safely create the canonical organization for one\n                        engineering domain\n    create-artifact     create one incomplete draft from the canonical\n                        artifact template\n    release-unit        derive a release unit's work-order census from the\n                        commits between the previous release tag and a\n                        candidate commit\n    identity            emit and verify one evaluator or candidate runtime\n                        identity\n    qualify             run one typed, provenance-bound release qualification\n                        operation\n    capture-verification\n                        prepare a ready commit-bound verification record\n    refresh-verification\n                        create a new ready record after an unchanged rebase;\n                        preserve the original\n    prepare-release     prepare a ready commit-bound release record\n\noptions:\n  -h, --help            show this help message and exit\n  --version             show program's version number and exit\n",
+      "stderr": ""
+    },
+    {
+      "label": "post-cleanup-validation",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:26:33.256742+00:00",
+      "result": {
+        "advisories": [],
+        "advisory_count": 0,
+        "artifact_count": 1757,
+        "error_count": 0,
+        "errors": [],
+        "plane_counts": {
+          "governance": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "maintenance": {
+            "errors": 0,
+            "warnings": 54
+          },
+          "policy": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "structure": {
+            "errors": 0,
+            "warnings": 0
+          }
+        },
+        "taxonomy": "se-harness-validation-taxonomy-v1",
+        "valid": true,
+        "warning_count": 54
+      },
+      "omitted_fields": "Full artifact enumeration and 54 pre-existing unrelated warnings; exact result hash retained.",
+      "original_sha256": "5cfbb01fa6ad692e636287cb77bec7be2f4328ed69a914e2bcdd1eaaee318af1"
+    },
+    {
+      "label": "host-versions",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "commands": [
+        {
+          "argv": [
+            "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+            "--version"
+          ],
+          "exit_code": 0,
+          "stdout": "Python 3.14.6\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "C:/Users/mathi/AppData/Local/OpenAI/Codex/bin/faa963e871dd422c/codex.exe",
+            "--version"
+          ],
+          "exit_code": 0,
+          "stdout": "codex-cli 0.158.0-alpha.2.1\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "C:/Users/mathi/.local/bin/claude.exe",
+            "--version"
+          ],
+          "exit_code": 0,
+          "stdout": "2.1.273 (Claude Code)\n",
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "label": "cleanup-review-preflight",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-IAR-026",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "observed_at": "2026-09-30T06:28:27.121434+00:00",
+      "result": {
+        "assurance": {
+          "commit_bound_verification": "required",
+          "decided_by": "mmzen",
+          "rationale": "Human mmzen confirmed required commit-bound verification when approving WO-IAR-026 and VER-IAR-018. Later instruction-discovery and integration decisions depend on the six removed pointers and corrected catalog test."
+        },
+        "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+        "background": [],
+        "diagnostics": [],
+        "phase": "review",
+        "reading_manifest": [
+          "ENGINEERING_HARNESS.md",
+          "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+          "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+          "docs/engineering/instruction-architecture/requirements/REQ-IAR-028.md",
+          "docs/engineering/instruction-architecture/specifications/SPEC-IAR-015.md",
+          "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md"
+        ],
+        "ready": true,
+        "schema": "se-harness-preflight-v2",
+        "skew": [],
+        "work_order": {
+          "id": "WO-IAR-026",
+          "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+          "status": "in_progress"
+        }
+      }
+    },
+    {
+      "label": "cleanup-handoff-final",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-IAR-026",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "728c057115abd4cb7dbfe8e53ad8d9993d98b1bf",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "observed_at": "2026-09-30T06:29:02.703018+00:00",
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "check",
+          "outcome": "blocked"
+        },
+        "selection": {
+          "primary": "WO-IAR-026",
+          "artifacts": [
+            "WO-IAR-026"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-028",
+            "SPEC-IAR-015",
+            "VER-IAR-018"
+          ],
+          "dependencies": [],
+          "declared_paths": [
+            ".engineering-harness.lock",
+            "docs/engineering/DECISION_RIGHTS.md",
+            "docs/engineering/instruction-architecture/evidence/VREC-IAR-016-evaluator.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/",
+            "docs/engineering/instruction-architecture/verification-records/VREC-IAR-016.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+            "docs/engineering/OPERATING_CARD.md",
+            "docs/engineering/QUALITY_GATES.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
+            "docs/engineering/TRACEABILITY.md",
+            "docs/engineering/WORKFLOW.md",
+            "tests/test_artifact_catalog.py"
+          ],
+          "changed_paths": [
+            "docs/engineering/DECISION_RIGHTS.md",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/checks.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/consumers.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/full-tests.txt",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/handoff.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/native-delivery.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/preservation.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/review.md",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/stock-review.json",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-026/WO-IAR-026-handoff.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-018.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-026.md",
+            "docs/engineering/OPERATING_CARD.md",
+            "docs/engineering/QUALITY_GATES.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
+            "docs/engineering/TRACEABILITY.md",
+            "docs/engineering/WORKFLOW.md",
+            "tests/test_artifact_catalog.py"
+          ],
+          "change_set_complete": true
+        },
+        "compliance": {
+          "checkpoint": "handoff",
+          "workflow_rule_id": "WFL-WO-IMPLEMENT",
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "status": "not_assessable",
+          "gates": [
+            {
+              "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+              "status": "not_assessable",
+              "predicates": [
+                {
+                  "id": "QGP-G4I-STATUS",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026"
+                    }
+                  ],
+                  "message": "WO-IAR-026 status is in_progress."
+                },
+                {
+                  "id": "QGP-G4I-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:WO-IAR-026"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G4I-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:handoff"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G4I-SCOPE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-IAR-026:[execution_scope]"
+                    }
+                  ],
+                  "message": "WO-IAR-026 has recorded execution approval for its 13 scope path(s)."
+                },
+                {
+                  "id": "QGP-G4I-COMPLETE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "declared-change-set:WO-IAR-026"
+                    }
+                  ],
+                  "message": "The caller explicitly asserted that the declared change set is complete."
+                },
+                {
+                  "id": "QGP-G4I-PATHS",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "path",
+                      "reference": "declared-change-set:WO-IAR-026"
+                    }
+                  ],
+                  "message": "All 18 declared changed path(s) are within execution scope."
+                },
+                {
+                  "id": "QGP-G4I-PREFLIGHT",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "preflight:WO-IAR-026:review"
+                    }
+                  ],
+                  "message": "Released-installation review preflight inputs are ready."
+                },
+                {
+                  "id": "QGP-G4I-EVIDENCE",
+                  "status": "not_assessable",
+                  "evidence": [
+                    {
+                      "kind": "path",
+                      "reference": "work-order-evidence:WO-IAR-026"
+                    }
+                  ],
+                  "message": "No readable evidence for WO-IAR-026, checkpoint handoff, and formal snapshot fd6c6d039a85dba2c3c7efe54fa00c017c772f66a685dd72fe21d6c532976eaa is available; write the header with harnessctl evidence . --artifact WO-IAR-026 --checkpoint handoff."
+                },
+                {
+                  "id": "QGP-G4I-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:WO-IAR-026"
+                    }
+                  ],
+                  "message": "No open decision blocks WO-IAR-026."
+                }
+              ]
+            }
+          ],
+          "formal_snapshot_sha256": "fd6c6d039a85dba2c3c7efe54fa00c017c772f66a685dd72fe21d6c532976eaa",
+          "change_set_source": "git"
+        },
+        "procedure": {
+          "id": "PROC-WO-IMPLEMENT",
+          "current_step": "STEP-WO-IMPLEMENT-CHECK",
+          "steps": [
+            {
+              "id": "STEP-WO-IMPLEMENT-CHECK",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Evaluated implementation handoff for WO-IAR-026."
+              ],
+              "non_effects": [
+                "A checkpoint does not complete or verify work."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-IAR-026",
+                "--checkpoint",
+                "handoff"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-PREVIEW",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Plan completion of WO-IAR-026."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-026=implemented",
+                "--decision",
+                "WO-IAR-026=delegated-executor"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-APPLY",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Record completion of only WO-IAR-026 under its approved execution scope."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-026=implemented",
+                "--decision",
+                "WO-IAR-026=delegated-executor",
+                "--apply"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-026",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-026",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-IAR-026",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-IAR-026",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 54
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [
+            "Evaluated handoff compliance for WO-IAR-026."
+          ],
+          "not_done": [
+            "The handoff checkpoint did not pass."
+          ],
+          "blocked_by": [
+            "QGP-G4I-EVIDENCE: No readable evidence for WO-IAR-026, checkpoint handoff, and formal snapshot fd6c6d039a85dba2c3c7efe54fa00c017c772f66a685dd72fe21d6c532976eaa is available; write the header with harnessctl evidence . --artifact WO-IAR-026 --checkpoint handoff."
+          ],
+          "current_lifecycle_state": [
+            "WO-IAR-026 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
+            "action": "Supply the corrective input for QGP-G4I-EVIDENCE"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-IAR-026",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-WO-IMPLEMENT",
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "retain-the-implementation-evidence"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ],
+              "steps": {
+                "STEP-WO-IMPLEMENT-CHECK": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "retain-the-implementation-evidence"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                },
+                "STEP-WO-IMPLEMENT-PREVIEW": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "record-implementation-completion"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                },
+                "STEP-WO-IMPLEMENT-APPLY": {
+                  "location": {
+                    "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                    "heading": "record-implementation-completion"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "authority-from-work-approval",
+                      "when": "Before using the selected work order's execution grant."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-WO-IMPLEMENT-CHECK",
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "retain-the-implementation-evidence"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-028",
+            "SPEC-IAR-015",
+            "VER-IAR-018",
+            "WO-IAR-026"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "34597b7a225f1c5db92bd7f0f67a353d8c0ccc401adb2e1041f4dbb5d6390d06"
+      }
+    }
+  ],
+  "preparation_failure": "Initial draft approval-check lacked required assurance classification. Human approval explicitly confirmed required classification; recorded before passing preview/apply.",
+  "identity_invocation_correction": "An initial identity call with a positional repository argument was rejected by argparse (exit 2). No identity result or write occurred. The retained resumed-identity uses the required role, expected root/version, and locked wheel/payload digests.",
+  "handoff_retry": "Adding review body text changed the generated packet bytes. The evaluator refused that packet; use its required evidence rebind, then rerun handoff. No lifecycle transition occurred on refusal.",
+  "candidate_serialization": {
+    "observations": [
+      {
+        "path": "tests/test_artifact_catalog.py",
+        "before_sha256": "a2418839739c21e9c6c5724c0880c4b0fb76e5a7b0f5eb119db80b4d9e3ffb7c",
+        "after_sha256": "84b5895cabc66d89016f37a9de806040e8aea165a4261083705600bf120c96f0",
+        "only_crlf_to_lf": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-026/review.md",
+        "before_sha256": "ddbe91dbdd1e326b4661006944e1bc3284122ae31cc440cc5b65f5a7345e34f4",
+        "after_sha256": "27086374ce79731b14dcf7852d66787c10a86521d37104273af62242d6c75e11",
+        "only_crlf_to_lf": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-026/WO-IAR-026-handoff.md",
+        "before_sha256": "861e8329edf99ca2ad1e597eb0283b7aa6b4bc2ca5da18a4708c410912010855",
+        "after_sha256": "a8f4cd0b35982b15718daaa8e79419bb7e799250275c0d109e92c7d368afc1cf",
+        "only_crlf_to_lf": true
+      }
+    ],
+    "reason": "Git staging checks found CRLF whitespace under command-local core.autocrlf=false. Canonicalized only the selected test and two new evidence texts to LF for the candidate; text after universal-newline decoding is identical. Capture reruns verification on these exact committed bytes. Generated first header fields remain unchanged.",
+    "failed_attempts": [
+      "Initial staged diff check rejected CRLF as trailing whitespace; no commit created.",
+      "Retry named already-staged deleted files and Git rejected those pathspecs; no commit created.",
+      "Normal add and renormalize did not resolve the command-local mixed-newline result; no commit created."
+    ]
+  }
+}

@@ -68,12 +68,20 @@ class ArtifactCatalogTests(unittest.TestCase):
         self.assertIn("`TRC-015`", content)
         self.assertIn("`TRC-016`", content)
 
-    def test_current_compatibility_pointer_reaches_installed_guides(self) -> None:
-        pointer = (REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md").read_text(encoding="utf-8")
-        self.assertIn("Compatibility pointer", pointer)
-        for destination in ("ARTIFACTS.md", "DEFINITION_LINKS.md", "WORK_AND_EVIDENCE.md"):
-            self.assertIn("harness/" + destination, pointer)
-            self.assertTrue((REPOSITORY_ROOT / "docs/engineering/harness" / destination).is_file())
+    def test_current_routes_resolve_without_retired_pointers(self) -> None:
+        for name in ("OPERATING_CARD.md", "DECISION_RIGHTS.md", "QUALITY_GATES.md",
+                     "WORKFLOW.md", "TRACEABILITY.md", "TECHNICAL_COMMUNICATION.md"):
+            with self.subTest(retired=name):
+                self.assertFalse((REPOSITORY_ROOT / "docs/engineering" / name).exists())
+        guides = REPOSITORY_ROOT / "docs/engineering/harness"
+        for source, destination, heading in (
+            ("DEFINE_CHANGE.md", "ARTIFACTS.md", "## Artifact types"),
+            ("DEFINE_CHANGE.md", "DEFINITION_LINKS.md", "## Links between definitions"),
+            ("DRAFT_WORK_ORDERS.md", "WORK_AND_EVIDENCE.md", "## Links from work orders (WO)"),
+        ):
+            with self.subTest(destination=destination):
+                self.assertIn(destination, (guides / source).read_text(encoding="utf-8"))
+                self.assertIn(heading, (guides / destination).read_text(encoding="utf-8"))
         router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
         self.assertIn("MUST be the only source of truth", router)
         self.assertIn("docs/engineering/harness/CONTINUE.md", router)

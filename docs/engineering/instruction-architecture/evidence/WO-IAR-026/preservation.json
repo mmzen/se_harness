@@ -1,0 +1,29 @@
+{
+  "baseline_commit": "728c057115abd4cb7dbfe8e53ad8d9993d98b1bf",
+  "baseline_tracked_file_count": 12409,
+  "baseline_snapshot_sha256": "3451d004842031cb30d2729971f2d383c78d50a57aa56a5abba2a52fa76c21e4",
+  "comparison": "SHA-256 of actual working-file bytes before and after, without newline normalization; compare every previously tracked file. New authorized formal records and evidence are outside that baseline.",
+  "removed": [
+    "docs/engineering/DECISION_RIGHTS.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "docs/engineering/QUALITY_GATES.md",
+    "docs/engineering/TECHNICAL_COMMUNICATION.md",
+    "docs/engineering/TRACEABILITY.md",
+    "docs/engineering/WORKFLOW.md"
+  ],
+  "modified": [
+    "tests/test_artifact_catalog.py"
+  ],
+  "all_other_preexisting_tracked_files_byte_identical": true,
+  "protected_sha256": {
+    "AGENTS.md": "c69db32976ae152095d167e5eca8aad56fc731b7111ef11bfe9e13781128ecf6",
+    "ENGINEERING_HARNESS.md": "b0faac200ca8879b50ce9ff28c015495e84fa164b97543584f5b0d2d5650a611",
+    ".engineering-harness.lock": "a6a3e4ab6e8efd2d64e7ecbf85c2496b3350b748eb19586eb763ce79856fb9a0",
+    ".engineering-harness.toml": "3dd2445b7bf43a0bb6caf23711a4b5f93e6a06262d895f6b2a87e2a76c5c9534",
+    "GLOSSARY.md": "25b711d3f7cd64aab058727595f62217e177d009f17a371dd03b007bcda50c8b",
+    "docs/engineering/ARTIFACT_AUTHORING.md": "a0dc549b6666b52ce4d496061f875b2d0e25f27eb7971a3b8f366bfa14bebb8b",
+    "docs/engineering/WORKFLOW.json": "8e3abe782f38c8fd196e9ee9d225e2e5919fc7a8e2eccb905cb28184a9ba26b6",
+    "docs/engineering/QUALITY_GATES.json": "625bd6b8f1157fc836f19b24c12814f94af21ee87f9f49564aaa02f214b54ffb"
+  },
+  "source_test_sha256": "a2418839739c21e9c6c5724c0880c4b0fb76e5a7b0f5eb119db80b4d9e3ffb7c"
+}

@@ -1,0 +1,91 @@
+{
+  "files": [
+    {
+      "path": "docs/engineering/OPERATING_CARD.md",
+      "sha256": "f33ec9e96702ad63f5cb816bc182398fdb58fd2a55436a29a306972692faccb7",
+      "bytes": 255,
+      "matches_019_fixture": false,
+      "tracked_by_lock": false,
+      "normalized_matches_public_fixture": true,
+      "safe_regular_path": true
+    },
+    {
+      "path": "docs/engineering/DECISION_RIGHTS.md",
+      "sha256": "f291428b93bf7165c293964be340f18935f06c06c2f981acc593d6cebd5fd95a",
+      "bytes": 258,
+      "matches_019_fixture": false,
+      "tracked_by_lock": false,
+      "normalized_matches_public_fixture": true,
+      "safe_regular_path": true
+    },
+    {
+      "path": "docs/engineering/QUALITY_GATES.md",
+      "sha256": "647941d3301caa0aeee58afc94415c345dfaa2072f85d37e6744fa5915e216b5",
+      "bytes": 252,
+      "matches_019_fixture": false,
+      "tracked_by_lock": false,
+      "normalized_matches_public_fixture": true,
+      "safe_regular_path": true
+    },
+    {
+      "path": "docs/engineering/WORKFLOW.md",
+      "sha256": "d9949e28d281260bd7d7aa9538dd239ea60fb18b5b0391cda2fdbab39ad7b1b3",
+      "bytes": 331,
+      "matches_019_fixture": false,
+      "tracked_by_lock": false,
+      "normalized_matches_public_fixture": true,
+      "safe_regular_path": true
+    },
+    {
+      "path": "docs/engineering/TRACEABILITY.md",
+      "sha256": "26e43956215d49eb74d2f56d361c76c55984b2b98c84daf995d4faf5ded64a09",
+      "bytes": 365,
+      "matches_019_fixture": false,
+      "tracked_by_lock": false,
+      "normalized_matches_public_fixture": true,
+      "safe_regular_path": true
+    },
+    {
+      "path": "docs/engineering/TECHNICAL_COMMUNICATION.md",
+      "sha256": "e8ceafc9969e1710ecaf3fd791fb9046606765bc3a4c48eed21769c6ecc2e049",
+      "bytes": 274,
+      "matches_019_fixture": false,
+      "tracked_by_lock": false,
+      "normalized_matches_public_fixture": true,
+      "safe_regular_path": true
+    }
+  ],
+  "all_checked_before_any_deletion": true,
+  "fixture_provenance": {
+    "archive": "se_harness-0.19.0-py3-none-any.whl",
+    "archive_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+    "version": "0.19.0",
+    "files": {
+      "OPERATING_CARD.md": {
+        "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/OPERATING_CARD.md",
+        "sha256": "32eee9a8ef3a9351d14db98f8c0af40261b97386118e7d5cd52584e525974a94"
+      },
+      "DECISION_RIGHTS.md": {
+        "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/DECISION_RIGHTS.md",
+        "sha256": "d41f91528924b665c88b3d5820d8f3691c7aaf6cd9a0be1bdd588d21c3d76c46"
+      },
+      "QUALITY_GATES.md": {
+        "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/QUALITY_GATES.md",
+        "sha256": "1255a1e3006f1d7473f6ccb4fcea3767942f84d80c5e5b8affccfcc4c97c572c"
+      },
+      "WORKFLOW.md": {
+        "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/WORKFLOW.md",
+        "sha256": "9065e3c302c2445284784a504c85c320e19c95010f966a05b38bf7528cf3fcff"
+      },
+      "TRACEABILITY.md": {
+        "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/TRACEABILITY.md",
+        "sha256": "1a1a8c0ed9b758d88a2835a8ee32764fa91360b36362e75fe04c28cf2bc2fe2e"
+      },
+      "TECHNICAL_COMMUNICATION.md": {
+        "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md",
+        "sha256": "0729f5b696d5a3e6e2a957ecdac8df7ab7a2ea58856773fb3b3a3008c41db118"
+      }
+    },
+    "newline_policy": "Files are extracted bytes from the released wheel. Tests normalize checkout CRLF to LF before comparing with these published LF digests; owner preservation compares exact observed bytes without normalization."
+  }
+}
