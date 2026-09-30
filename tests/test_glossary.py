@@ -62,7 +62,7 @@ class GlossaryTests(unittest.TestCase):
 
     # ---------------------------------------------------------------- TCM-RFR-007: the seed
 
-    def test_init_seeds_an_empty_repository_owned_glossary(self) -> None:
+    def test_legacy_init_seeds_an_empty_repository_owned_glossary(self) -> None:
         self.assertTrue(self.glossary.is_file())
         text = self.glossary.read_text(encoding="utf-8")
         self.assertIn("# Glossary for Ledger Service", text)
@@ -85,14 +85,23 @@ class GlossaryTests(unittest.TestCase):
         self.assertEqual(0, code, error + output)
         self.assertNotIn("glossary.md: FAIL", output)
 
-    def test_adopt_seeds_the_glossary_and_keeps_an_existing_one(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
-            target = Path(temporary)
-            (target / "README.md").write_text("# existing\n", encoding="utf-8")
-            (target / "GLOSSARY.md").write_text("# Ours\n\n## Terms\n\n**Posting.** Ours.\n", encoding="utf-8")
-            code, output, error = invoke("init", str(target), "--project-name", "Adopted")
-            self.assertEqual(0, code, error + output)
-            self.assertEqual("# Ours\n\n## Terms\n\n**Posting.** Ours.\n", (target / "GLOSSARY.md").read_text(encoding="utf-8"))
+    def test_minimal_init_preserves_owner_glossary_without_generating_one(self) -> None:
+        # Unit-only resource origin; the real wheel is checked in test_release_build.
+        with mock.patch("se_harness.resources._installed_resource_root", return_value=TEMPLATE_ROOT):
+            for existing in (False, True):
+                with self.subTest(existing=existing), tempfile.TemporaryDirectory() as temporary:
+                    target = Path(temporary)
+                    glossary = target / "GLOSSARY.md"
+                    owner_bytes = b"# Ours\r\n\r\n## Terms\r\n\r\n**Posting.** Ours.\r\n"
+                    if existing:
+                        glossary.write_bytes(owner_bytes)
+                    code, output, error = invoke("init", str(target), "--project-name", "Adopted")
+                    self.assertEqual(0, code, error + output)
+                    self.assertEqual(existing, glossary.exists())
+                    if existing:
+                        self.assertEqual(owner_bytes, glossary.read_bytes())
+                    lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+                    self.assertNotIn("GLOSSARY.md", lock["files"])
 
     # ---------------------------------------------------------------- TCM-RFR-008: the report
 

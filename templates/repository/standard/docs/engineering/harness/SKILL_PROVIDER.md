@@ -8,6 +8,13 @@ Provider selection or discovery repair is requested.
 
 Read the actual ownership/provider selection and available host capabilities. If the evaluator is unavailable, use [SETUP.md#procedure](SETUP.md#procedure) first.
 
+For `resource_layout = "released-resources-v1"`, use the host-installed plugin.
+This layout creates no repository-local skills or provider record. Confirm the
+plugin is enabled and trusted, prepare the exact selected evaluator, then activate
+the checkout through the plugin setup skill. Verify native discovery in the host.
+Do not run `skill-ownership`: it refuses this layout. The procedure below applies
+only to supported repository-copy installations.
+
 ## Procedure
 
 ### Select or restore the skill provider

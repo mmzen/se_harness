@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import json
 import re
 import sysconfig
+import tempfile
+import zipfile
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path, PurePosixPath
@@ -14,6 +17,7 @@ from se_harness.evaluator_identity import EvaluatorIdentityError, installed_eval
 from se_harness.integrity import (
     HASH_ALGORITHM,
     HASH_MODE,
+    EXTERNAL_RESOURCE_LAYOUT,
     LOCK_SCHEMA,
     IntegrityError,
     atomic_write_bytes,
@@ -25,6 +29,7 @@ from se_harness.integrity import (
     parse_lock,
     pretty_json_bytes,
     read_toml,
+    raw_sha256,
 )
 
 
@@ -107,7 +112,7 @@ class TemplateFile:
 
 #: ECP-PRM-013: the installer's closed value sets, typed.
 InstallMode = Literal["init", "upgrade"]
-ChangeAction = Literal["add", "update", "adopt", "remove", "customized", "conflict", "integrate", "unchanged"]
+ChangeAction = Literal["add", "update", "adopt", "remove", "customized", "conflict", "integrate", "unchanged", "preserve"]
 
 @dataclass(frozen=True)
 class Change:
@@ -136,6 +141,8 @@ def template_root() -> Path:
 
 
 def ensure_target(path: Path, *, must_exist: bool) -> Path:
+    from se_harness.resources import _safe_path
+    _safe_path(path.expanduser())
     target = path.expanduser().resolve()
     if must_exist and not target.is_dir():
         raise HarnessError(f"target repository does not exist: {target}")
@@ -267,10 +274,10 @@ def safe_destination(root: Path, relative: Path) -> Path:
     probe = root
     for part in relative.parts[:-1]:
         probe = probe / part
-        if probe.is_symlink():
+        if probe.is_symlink() or (probe.exists() and getattr(probe.lstat(), "st_file_attributes", 0) & 0x400):
             raise HarnessError(f"refusing to traverse a symlinked directory: {probe}")
     unresolved_destination = root / relative
-    if unresolved_destination.is_symlink():
+    if unresolved_destination.is_symlink() or (unresolved_destination.exists() and getattr(unresolved_destination.lstat(), "st_file_attributes", 0) & 0x400):
         raise HarnessError(f"refusing to replace a symlink: {unresolved_destination}")
     destination = unresolved_destination.resolve()
     try:
@@ -321,7 +328,194 @@ def _updated_config(current: bytes, version: str) -> bytes:
     return (text[:section.start()] + value + text[section.end():]).encode("utf-8")
 
 
+INTEGRATIONS = {
+    "git": (".gitattributes",),
+    "ci": (".github/workflows/engineering-harness.yml", ".gitignore"),
+    "pr": (".github/PULL_REQUEST_TEMPLATE.md",),
+}
+
+
+def _resource_config(current: bytes | None, variables: dict[str, str]) -> bytes:
+    if current is None:
+        current = _render((template_root() / (CONFIG_NAME + ".tpl")).read_bytes(), variables)
+    updated = _updated_config(current, __version__)
+    text = updated.decode("utf-8")
+    if not re.search(r"(?m)^resource_layout\s*=", text):
+        text = re.sub(r"(?m)^(\[harness\][^\n]*\n)",
+                      lambda m: m[0] + f'resource_layout = "{EXTERNAL_RESOURCE_LAYOUT}"\n', text, count=1)
+    return text.encode("utf-8")
+
+
+def _replacement_resources(target: Path, config: bytes, lock: dict) -> bytes:
+    """Validate proposed selection outside the checkout through the shared resolver."""
+    from se_harness.resources import ResourceSet
+    with tempfile.TemporaryDirectory(prefix="se-harness-selection-") as directory:
+        preview = Path(directory)
+        (preview / CONFIG_NAME).write_bytes(config)
+        (preview / LOCK_NAME).write_bytes(pretty_json_bytes(lock, ensure_ascii=True))
+        selected = ResourceSet(preview)
+        if selected.root.is_relative_to(target):
+            raise HarnessError("replacement resources must be outside the target repository")
+        entry = selected.query("ENGINEERING_HARNESS.md", content=True)["content"].encode("utf-8")
+        selected.assert_current()
+        return entry
+
+
+def _prior_templates(wheel: Path, lock: dict, variables: dict[str, str]) -> dict[str, tuple[str, bytes]]:
+    """Read stock bytes from the exact prior wheel; never execute prior package code."""
+    from se_harness.evaluator_identity import wheel_payload_sha256
+    from se_harness.resources import _read
+    raw = _read(wheel, limit=100 * 1024 * 1024)
+    identity = lock["evaluator"]
+    if identity.get("archive_sha256") and raw_sha256(raw) != identity["archive_sha256"]:
+        raise HarnessError("prior wheel archive differs from the selected lock")
+    prefix = f'se_harness-{lock["tool_version"]}.data/data/share/se-harness/templates/repository/standard/'
+    old_variables = {**variables, "HARNESS_VERSION": lock["tool_version"]}
+    result = {}
+    fragments = {**FRAGMENT_TARGETS, "AGENTS.md.fragment": "AGENTS.md", "CLAUDE.md.fragment": "CLAUDE.md"}
+    # Hash and inspect one bounded snapshot, even if the source wheel changes.
+    with tempfile.TemporaryDirectory(prefix="se-harness-prior-wheel-") as directory:
+        snapshot = Path(directory) / wheel.name
+        snapshot.write_bytes(raw)
+        if wheel_payload_sha256(snapshot, lock["tool_version"]) != identity["payload_sha256"]:
+            raise HarnessError("prior wheel payload differs from the selected lock")
+        with zipfile.ZipFile(snapshot) as archive:
+            for name in archive.namelist():
+                if not name.startswith(prefix) or name.endswith("/"):
+                    continue
+                relative = Path(name.removeprefix(prefix))
+                mode = "managed" if _managed(relative) else "seed"
+                if relative.name in fragments:
+                    relative, mode = Path(fragments[relative.name]), "fragment"
+                elif relative.suffix in {".tpl", ".seed"}:
+                    relative = relative.with_suffix("")
+                    mode = "managed" if _managed(relative) else "seed"
+                result[relative.as_posix()] = (mode, _render(archive.read(name), old_variables))
+    return result
+
+
 def plan_install(
+    target: Path, *, project_name: str | None, mode: str,
+    adoption_report: bytes | None = None, replace_files: Iterable[str] = (),
+    external_resources: bool = False, integrations: Iterable[str] = (),
+    retire_files: Iterable[str] = (), prior_wheel: Path | None = None,
+) -> tuple[list[Change], dict]:
+    """Default new installations are minimal; legacy layout migration is explicit."""
+    if mode not in {"init", "upgrade"}:
+        raise HarnessError(f"unknown installation mode {mode!r}; expected init or upgrade")
+    integrations, retire_files, replace_files = tuple(integrations), tuple(retire_files), tuple(replace_files)
+    target = ensure_target(target, must_exist=mode == "upgrade")
+    old = _load_lock(target)
+    selected_external = old.get("resource_layout") == EXTERNAL_RESOURCE_LAYOUT
+    minimal = selected_external or external_resources or (mode == "init" and old.get("tool_version") is None)
+    if not minimal:
+        if integrations or retire_files or prior_wheel:
+            raise HarnessError("legacy integrations are already installed; select --external-resources to migrate")
+        return _plan_legacy_install(target, project_name=project_name, mode=mode,
+                                    adoption_report=adoption_report, replace_files=replace_files)
+    if replace_files or adoption_report:
+        raise HarnessError("minimal installation does not replace owner files or generate an adoption report")
+    if set(integrations) - INTEGRATIONS.keys():
+        raise HarnessError("unknown repository integration")
+    config_path = safe_destination(target, Path(CONFIG_NAME))
+    current_config = config_path.read_bytes() if config_path.exists() else None
+    if current_config is not None and old.get("tool_version") is None:
+        raise HarnessError("configuration exists without its selected lock; no files were written")
+    harness = read_toml(config_path).get("harness", {}) if current_config else {}
+    if current_config and (not isinstance(harness, dict) or harness.get("tool_version") != old["tool_version"]
+                           or harness.get("resource_layout") != old.get("resource_layout")):
+        raise HarnessError("configuration and lock selections differ")
+    variables = _variables(target, project_name or harness.get("project_name"), harness.get("installed_at"))
+    config = _resource_config(current_config, variables)
+    if selected_external and harness.get("tool_version") == __version__:
+        config = current_config
+    identity = installed_evaluator_identity().to_lock()
+    lock = {"schema": 5, "resource_layout": EXTERNAL_RESOURCE_LAYOUT,
+            "tool_version": __version__, "hash_algorithm": HASH_ALGORITHM, "hash_mode": HASH_MODE,
+            "evaluator": identity, "files": {}}
+    _replacement_resources(target, config, lock)
+    if selected_external and mode == "init" and old["evaluator"] != identity:
+        raise HarnessError("init cannot change an existing evaluator selection; use upgrade")
+    changes = [Change(CONFIG_NAME, "add" if current_config is None else "unchanged" if config == current_config else "update",
+                      "seed", config, current_config)]
+    old_files = old.get("files", {})
+    available_integrations = {path for paths in INTEGRATIONS.values() for path in paths}
+    if selected_external and set(old_files) - available_integrations:
+        raise HarnessError("external selection contains an unsupported repository integration")
+    requested_integrations = {path for name in integrations for path in INTEGRATIONS[name]}
+    integration_paths = set(requested_integrations)
+    # Existing integration files remain selected; migration does not add new integrations.
+    integration_paths.update(set(old_files) & available_integrations)
+    templates = {item.target.as_posix(): item for item in _templates()}
+    for relative in sorted(integration_paths):
+        item = templates[relative]
+        destination = safe_destination(target, Path(relative))
+        current = destination.read_bytes() if destination.exists() else None
+        rendered = _render(item.source.read_bytes(), variables)
+        desired = _merge_block(current, _block(rendered, item.target)) if item.mode == "fragment" else rendered
+        mode_value = item.mode
+        action = "add" if current is None else "unchanged" if canonical_text_equal(current, desired) else "conflict"
+        if current is None and item.mode == "seed" and relative in old_files and relative not in requested_integrations:
+            # Removing an owner seed is an owner choice, not installation damage.
+            desired, action = b"", "unchanged"
+        elif current is not None and item.mode == "seed":
+            # Optional seed files become owner content at installation.
+            desired, action = current, "unchanged"
+        elif current is not None and item.mode == "fragment" and _extract_block(current) is None:
+            action = "integrate"
+        elif current is not None and compare_lock_entry(old_files.get(relative, {}), tracked_content(item.mode, current) or b"") == "canonical":
+            action = "update" if current != desired else "unchanged"
+        changes.append(Change(relative, action, mode_value, desired, current))
+        lock["files"][relative] = ({"mode": "seed", "state": "removed" if current is None and action == "unchanged" else "present"} if item.mode == "seed"
+                                   else {"mode": item.mode, "sha256": canonical_sha256(tracked_content(item.mode, desired))})
+    retire = set(retire_files)
+    migrating = old.get("tool_version") is not None and not selected_external
+    if prior_wheel is not None and not migrating:
+        raise HarnessError("--prior-wheel is only for an explicit legacy resource migration")
+    if retire and not migrating:
+        raise HarnessError("--retire-file is only for an explicit legacy resource migration")
+    if migrating:
+        if prior_wheel is None:
+            raise HarnessError("resource migration requires --prior-wheel for stock-file recognition")
+        stock = _prior_templates(prior_wheel, old, variables)
+        eligible = {path for path, entry in old_files.items()
+                    if entry["mode"] == "seed" and path != CONFIG_NAME and path not in integration_paths}
+        if retire - eligible:
+            raise HarnessError("--retire-file must name a prior editable seed: " + ", ".join(sorted(retire - eligible)))
+        for relative, old_entry in sorted(old_files.items()):
+            if relative == CONFIG_NAME or relative in integration_paths:
+                continue
+            destination = safe_destination(target, Path(relative))
+            current = destination.read_bytes() if destination.exists() else None
+            if current is None:
+                continue
+            mode_value = old_entry["mode"]
+            resource_seed = relative == "docs/engineering/ARTIFACT_AUTHORING.md" or relative.startswith("docs/engineering/templates/")
+            if mode_value == "seed" and not resource_seed and relative not in retire:
+                changes.append(Change(relative, "preserve", mode_value, current, current))
+                continue
+            known = stock.get(relative)
+            tracked = current if mode_value == "seed" else tracked_content(mode_value, current)
+            expected = _block(known[1], Path(relative)) if known and mode_value == "fragment" else known[1] if known else None
+            recognized = expected is not None and tracked is not None and canonical_text_equal(tracked, expected)
+            if mode_value != "seed":
+                recognized = recognized and compare_lock_entry(old_entry, tracked or b"") == "canonical"
+            action = "customized" if not recognized else "remove" if mode_value != "seed" or relative in retire else "preserve"
+            desired = current
+            if action == "remove":
+                desired = current.replace(tracked, b"", 1) if mode_value == "fragment" else b""
+            changes.append(Change(relative, action, mode_value, desired, current))
+    lock_bytes = pretty_json_bytes(lock, ensure_ascii=True)
+    lock_path = safe_destination(target, Path(LOCK_NAME))
+    old_bytes = lock_path.read_bytes() if lock_path.exists() else None
+    changes.append(Change(LOCK_NAME, "add" if old_bytes is None else "unchanged" if old_bytes == lock_bytes else "update",
+                          "selection", lock_bytes, old_bytes))
+    if mode == "init" and any(item.action == "update" and item.path != LOCK_NAME for item in changes):
+        raise HarnessError("init cannot update an existing installation; use upgrade")
+    return sorted(changes, key=lambda item: item.path), old
+
+
+def _plan_legacy_install(
     target: Path,
     *,
     project_name: str | None,
@@ -609,8 +803,23 @@ def apply_changes(
     evidence_output: Path | None = None,
     replace_files: Iterable[str] = (),
     instruction_delivery_evidence: Path | None = None,
+    external_resources: bool = False,
+    integrations: Iterable[str] = (),
+    retire_files: Iterable[str] = (),
+    prior_wheel: Path | None = None,
 ) -> dict:
     changes = list(changes)
+    integrations, retire_files, replace_files = tuple(integrations), tuple(retire_files), tuple(replace_files)
+    selection = next((item for item in changes if item.path == LOCK_NAME and item.mode == "selection"), None)
+    if selection is not None:
+        config = next(item.desired for item in changes if item.path == CONFIG_NAME)
+        replacement_entry = _replacement_resources(target, config, json.loads(selection.desired))
+        # Fresh plans also bind every observed destination. No overwrite after preview.
+        for item in changes:
+            path = safe_destination(target, Path(item.path))
+            observed = path.read_bytes() if path.exists() else None
+            if observed != item.current:
+                raise HarnessError("installation plan changed before apply; no files were written")
     transition = False
     target_identity = None
     prior_lock_sha256: str | None = None
@@ -620,6 +829,10 @@ def apply_changes(
             project_name=None,
             mode="upgrade",
             replace_files=replace_files,
+            external_resources=external_resources,
+            integrations=integrations,
+            retire_files=retire_files,
+            prior_wheel=prior_wheel,
         )
         if old_lock != refreshed_lock or changes != refreshed_changes:
             raise HarnessError("upgrade plan or installed root changed before apply; no files were written")
@@ -658,9 +871,9 @@ def apply_changes(
     blocking = {"conflict", "customized"}
     if any(item.action in blocking for item in changes):
         raise HarnessError("installation has conflicts or customizations; no files were written")
-    if allow_updates and any(item.action == "remove" and item.path in RETIRED_ENTRIES for item in changes):
+    if allow_updates and any(item.action == "remove" and item.path in RETIRED_ENTRIES | {"ENGINEERING_HARNESS.md"} for item in changes):
         from se_harness.instruction_discovery import validate_delivery_evidence
-        entry = next(item.desired for item in changes if item.path == "ENGINEERING_HARNESS.md")
+        entry = replacement_entry if selection is not None else next(item.desired for item in changes if item.path == "ENGINEERING_HARNESS.md")
         validate_delivery_evidence(instruction_delivery_evidence, target, entry, (target / LOCK_NAME).read_bytes())
     target.mkdir(parents=True, exist_ok=True)
 
@@ -670,7 +883,7 @@ def apply_changes(
     destinations = {
         item.path: safe_destination(target, Path(item.path))
         for item in changes
-        if item.action in safe_actions
+        if item.action in safe_actions and item.path != LOCK_NAME
     }
     # Removals execute only inside an update-allowing transaction; a plan
     # applied without update authority keeps the prior lock entries so the
@@ -720,6 +933,8 @@ def apply_changes(
         old_files = old_lock.get("files", {}) if isinstance(old_lock.get("files"), dict) else {}
         for item in changes:
             destination = target / item.path
+            if item.action == "preserve" or item.path == LOCK_NAME:
+                continue
             if item.action == "customized":
                 if item.path in old_files:
                     files[item.path] = old_files[item.path]
@@ -754,6 +969,8 @@ def apply_changes(
         if old_lock.get("schema") == 4:
             lock["schema"] = 4
             lock["skill_ownership"] = old_lock["skill_ownership"]
+        if selection is not None:
+            lock = json.loads(selection.desired)
         lock["hash_algorithm"] = HASH_ALGORITHM
         lock["hash_mode"] = HASH_MODE
         try:
@@ -766,7 +983,11 @@ def apply_changes(
                     "installed evaluator identity changed after the authority check; no files were retained"
                 )
         lock_bytes = pretty_json_bytes(lock, ensure_ascii=True)  # ECP-PRM-006: the same bytes as before
-        _atomic_write(lock_path, lock_bytes)
+        if not lock_path.exists() or lock_path.read_bytes() != lock_bytes:
+            _atomic_write(lock_path, lock_bytes)
+        if selection is not None:
+            from se_harness.resources import ResourceSet
+            ResourceSet(target).assert_current()
         if transition:
             replay, replay_lock = plan_install(target, project_name=None, mode="upgrade")
             if replay_lock != lock or any(item.action != "unchanged" for item in replay):

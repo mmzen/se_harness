@@ -146,6 +146,51 @@ are retained. Long disposable paths used process-local Git long-path support.
 Desktop UI, automatic threshold compaction and other operating systems need
 separate evidence. Model sessions require valid host authentication.
 
+## Successor candidate: clone, activate and resume
+
+This route belongs to the successor candidate, not published plugin 0.2.2.
+Installation of the host plugin is separate from a repository's release selection.
+An existing repository continues to use its selected release after a plugin update.
+
+1. Start the host session. If no checkout is selected, the hook supplies short
+   bootstrap instructions and the host/session and plugin-data inputs.
+2. Clone the requested repository, or reuse its identified checkout. Use the
+   actual resulting absolute path, including a selected worktree's path.
+3. Invoke the setup skill. Prepare any missing exact evaluator in the supplied
+   external plugin-data directory. A project without selection needs explicit
+   initialization; the candidate's default writes only its configuration and lock.
+4. Activate the checkout with the helper below. Use the host-provided session ID
+   and data directory. Do not invent an ID or copy it from another conversation.
+5. Read the complete returned entry before governed work. Follow its current
+   procedure to prepare a new change or continue the selected work order.
+6. After compaction or resume, inspect the delivered repository and release.
+   The same host session recovers its locator and revalidates the selection.
+   If the host creates a new session ID, activate its checkout again.
+
+```text
+PYTHON -I ABSOLUTE_PLUGIN/scripts/activate.py --host HOST --session-id SESSION_ID --data-root ABSOLUTE_PLUGIN_DATA --target ABSOLUTE_CHECKOUT
+```
+
+`HOST` is `codex` or `claude`. The plugin root is the installed package containing
+this script. Activation returns the selected compact entry immediately and writes
+only a small private session locator. It does not modify repository policy or
+grant work authority. Use the same command with another exact `--target` to switch.
+Replace `--target ABSOLUTE_CHECKOUT` with `--clear` to clear only that session.
+
+For parallel work, use separate writable checkouts and activate each session's
+own path. Release environments coexist; no global last-used checkout is shared.
+Repeat cycles within a session reuse its selection. A moved checkout, malformed
+locator, missing host identity or altered release produces a delivery gap; the
+hook does not search child directories or silently choose another repository.
+Authorized push and PR work follows the selected release's delivery procedure.
+
+The entry, procedures and templates come from the selected wheel. `resources`
+returns exact local resource paths; formal artifacts remain checkout files.
+See [minimal installation and safe migration](harness-installation-and-upgrades.md#minimal-installation-successor-candidate).
+CLI observations alone do not qualify desktop delivery.
+
+## Historical qualification
+
 Historical development checks with Codex 0.154.0-alpha.6.2, Claude Code 2.1.266
 and a development 0.18.0 checker remain in
 [WO-PLG-016 evidence](../engineering/plugin-integration/evidence/WO-PLG-016/README.md).

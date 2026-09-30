@@ -35,6 +35,14 @@ WO-HUP-021 applied 25 additions, 8 updates and two fragment retirements, leaving
 from AGENTS.md. The transaction and native-delivery evidence are retained under
 `docs/engineering/repository-harness-upgrade/evidence/`.
 
+The successor candidate defaults to external wheel resources and two repository
+selection files. Test current `init` from an independently installed wheel outside
+this checkout. Unit fixtures explicitly distinguish that layout from materialized
+legacy installations; do not make all CLI calls silently use the legacy fixture.
+The [migration procedure](harness-installation-and-upgrades.md#minimal-installation-successor-candidate)
+requires the prior selected wheel and reviewed native delivery before retirement.
+Candidate behavior does not adopt its layout into this development repository.
+
 ## Agent skills for this checkout
 
 This repository gets its agent skills and native instruction-delivery hook

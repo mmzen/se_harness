@@ -267,15 +267,20 @@ def scaffold_domain(
 
     domain_relative = Path("docs") / "engineering" / selected_domain
     validate_existing_chain(root, domain_relative, final_kind="directory")
-    directory_relatives = [domain_relative / Path(*parts) for parts in canonical_directory_paths()]
-    for relative in [domain_relative, *directory_relatives]:
+    # Minimal installations have no artifact root. Preview and create its
+    # missing parents through the same validated, rollback-aware path.
+    missing_parents = [parent for parent in reversed(domain_relative.parents)
+                       if parent != Path(".") and not (root / parent).is_dir()]
+    directory_relatives = [*missing_parents, domain_relative,
+                           *(domain_relative / Path(*parts) for parts in canonical_directory_paths())]
+    for relative in directory_relatives:
         validate_existing_chain(root, relative, final_kind="directory")
     index_relative = domain_relative / "README.md"
     index = validate_existing_chain(root, index_relative, final_kind="file")
 
     changes = [
         AuthoringChange("present" if (root / relative).is_dir() else "create", relative.as_posix())
-        for relative in [domain_relative, *directory_relatives]
+        for relative in directory_relatives
     ]
     changes.append(AuthoringChange("present" if index.is_file() else "create", index_relative.as_posix()))
     if dry_run:
@@ -286,7 +291,7 @@ def scaffold_domain(
         resources.assert_current()
     created_directories: list[Path] = []
     try:
-        for relative in [domain_relative, *directory_relatives]:
+        for relative in directory_relatives:
             destination = root / relative
             if destination.is_dir():
                 continue

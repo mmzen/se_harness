@@ -10,6 +10,7 @@ from unittest.mock import patch
 from se_harness import __version__, resources
 from se_harness.artifact_layout import authoring_checklist, create_artifact
 from se_harness.evaluator_identity import installed_evaluator_identity
+from se_harness.engine.validate_engineering_artifacts import validate_repository
 from se_harness.instruction_discovery import describe, load_catalog, locations
 from se_harness.integrity import EXTERNAL_RESOURCE_LAYOUT, HASH_ALGORITHM, HASH_MODE, validate_lock
 from se_harness.preflight import inspect_installation
@@ -87,6 +88,137 @@ class ResourceTests(unittest.TestCase):
         self.assertFalse((self.root / "docs/engineering/templates").exists())
         checks = inspect_installation(self.root)
         self.assertTrue(all(item.passed for item in checks), checks)
+
+    def test_empty_external_install_validates_without_creating_an_artifact_directory(self):
+        before = self.files()
+        report = validate_repository(self.root)
+        self.assertTrue(report.valid, report.errors)
+        self.assertEqual([], report.artifacts)
+        self.assertEqual([], report.advisories)
+        self.assertTrue(validate_repository(self.root, self.root / "docs/engineering").valid)
+        code, output, error = invoke("validate", str(self.root), "--json")
+        self.assertEqual(0, code, output + error)
+        self.assertTrue(json.loads(output)["valid"])
+        self.assertEqual(before, self.files())
+        self.assertFalse((self.root / "docs").exists())
+
+    def test_scaffold_previews_missing_parents_then_creates_only_the_requested_domain(self):
+        before = self.files()
+        self.assertEqual({resources.CONFIG, resources.LOCK}, set(before))
+        args = ("scaffold-domain", str(self.root), "--domain", "example", "--json")
+        code, output, error = invoke(*args, "--dry-run")
+        self.assertEqual(0, code, error)
+        preview = json.loads(output)["changes"]
+        self.assertEqual(["docs", "docs/engineering"], [c["path"] for c in preview[:2]])
+        self.assertTrue(all(c["action"] == "create" for c in preview))
+        self.assertEqual(before, self.files())
+        self.assertFalse((self.root / "docs").exists())
+        code, output, error = invoke(*args)
+        self.assertEqual(0, code, error)
+        self.assertEqual(preview, json.loads(output)["changes"])
+        self.assertEqual({c["path"] for c in preview},
+                         {p.relative_to(self.root).as_posix() for p in (self.root / "docs").rglob("*")} | {"docs"})
+        self.assertEqual({"docs/engineering/example/README.md"}, set(self.files()) - set(before))
+        for name, raw in before.items():
+            self.assertEqual(raw, (self.root / name).read_bytes())
+        index = self.root / "docs/engineering/example/README.md"
+        index.write_bytes(b"Owner index\r\n")
+        before = self.files()
+        code, output, error = invoke(*args)
+        self.assertEqual(0, code, error)
+        self.assertTrue(all(c["action"] == "present" for c in json.loads(output)["changes"]))
+        self.assertEqual(before, self.files())
+
+    def test_scaffold_rollback_preserves_preexisting_parent_content(self):
+        for existing in (False, True):
+            with self.subTest(existing=existing):
+                if existing:
+                    owner = self.root / "docs/engineering/owner.txt"
+                    owner.parent.mkdir(parents=True)
+                    owner.write_bytes(b"Owner bytes\r\n")
+                before = self.files()
+                paths = set(self.root.rglob("*"))
+                with patch("se_harness.artifact_layout.atomic_create", side_effect=OSError("interrupted index write")):
+                    code, _, error = invoke("scaffold-domain", str(self.root), "--domain", "example")
+                self.assertEqual(2, code)
+                self.assertIn("interrupted index write", error)
+                self.assertEqual(before, self.files())
+                self.assertEqual(paths, set(self.root.rglob("*")))
+
+    def test_scaffold_refuses_a_file_in_the_required_parent_path_without_writes(self):
+        (self.root / "docs").write_bytes(b"Owner file\r\n")
+        before = self.files()
+        for preview in ((), ("--dry-run",)):
+            with self.subTest(preview=preview):
+                code, _, error = invoke("scaffold-domain", str(self.root), "--domain", "example", *preview)
+                self.assertEqual(2, code)
+                self.assertIn("not a directory", error)
+                self.assertEqual(before, self.files())
+
+    def test_scaffold_refuses_a_linked_parent_without_touching_its_destination(self):
+        outside = Path(self.temp.name) / "owner"
+        outside.mkdir()
+        (outside / "keep.txt").write_bytes(b"Owner bytes\r\n")
+        try:
+            (self.root / "docs").symlink_to(outside, target_is_directory=True)
+        except OSError:
+            self.skipTest("host cannot create symlinks")
+        before = self.files()
+        code, _, error = invoke("scaffold-domain", str(self.root), "--domain", "example")
+        self.assertEqual(2, code)
+        self.assertRegex(error, "linked|symlink|escape")
+        self.assertEqual(before, self.files())
+        self.assertEqual([outside / "keep.txt"], list(outside.iterdir()))
+        self.assertEqual(b"Owner bytes\r\n", (outside / "keep.txt").read_bytes())
+
+    def test_missing_legacy_or_alternate_artifact_root_remains_an_error(self):
+        legacy = Path(self.temp.name) / "legacy"
+        standard_repository(legacy)
+        artifact_root = (legacy / "docs/engineering").resolve()
+        self.assertTrue(artifact_root.is_relative_to(Path(self.temp.name).resolve()))
+        shutil.rmtree(artifact_root)
+        for root, selected in ((legacy, None), (self.root, self.root / "alternate")):
+            with self.subTest(root=root, selected=selected):
+                report = validate_repository(root, selected)
+                self.assertFalse(report.valid)
+                self.assertEqual([], report.advisories)
+                self.assertTrue(any(item.code == "E001" and item.message == "artifact root does not exist"
+                                    for item in report.errors), report.errors)
+
+    def test_empty_artifact_root_does_not_hide_invalid_selection_or_missing_resources(self):
+        config = self.root / resources.CONFIG
+        original = config.read_bytes()
+        for problem in ("malformed", "missing-lock", "digest", "resources"):
+            with self.subTest(problem=problem):
+                self.lock["evaluator"] = installed_evaluator_identity().to_lock()
+                self.write_lock()
+                config.write_bytes(original)
+                if problem == "malformed":
+                    config.write_bytes(b"[invalid")
+                elif problem == "missing-lock":
+                    (self.root / resources.LOCK).unlink()
+                elif problem == "digest":
+                    self.lock["evaluator"]["payload_sha256"] = "0" * 64
+                    self.write_lock()
+                else:
+                    (self.bundle / "docs/engineering/templates/REQUIREMENT.template.md").unlink()
+                before = self.files()
+                report = validate_repository(self.root)
+                self.assertFalse(report.valid)
+                self.assertTrue(any(item.code == "E001" for item in report.errors), report.errors)
+                self.assertEqual(before, self.files())
+                self.assertFalse((self.root / "docs").exists())
+
+    def test_existing_invalid_artifacts_are_not_an_empty_installation(self):
+        create_artifact(self.root, domain="product", artifact_type="requirement",
+                        artifact_id="REQ-TST-001", dry_run=False)
+        path = self.root / "docs/engineering/product/requirements/REQ-TST-001.md"
+        path.write_text('+++\nid = [broken\n+++\n', encoding="utf-8")
+        before = self.files()
+        report = validate_repository(self.root)
+        self.assertFalse(report.valid)
+        self.assertTrue(report.errors)
+        self.assertEqual(before, self.files())
 
     def test_all_typed_steps_identify_portable_release_references_without_changing_selection(self):
         for pid, procedure in load_catalog()["procedures"].items():

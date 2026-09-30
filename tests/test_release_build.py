@@ -21,6 +21,7 @@ from unittest import mock
 
 from repository_tools import release_build as BUILD
 from se_harness import __version__
+from se_harness.evaluator_identity import canonical_payload_manifest
 from tests.git_support import git
 
 
@@ -256,7 +257,7 @@ class DeterministicSdistTests(unittest.TestCase):
             self.assertIn(required, manifest)
         self.assertFalse((REPOSITORY_ROOT / "se_harness/skills").exists())
 
-    def test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_all_skill_cores_once(self) -> None:
+    def test_non_promotable_wheel_carries_legacy_skills_and_installs_minimal_resources(self) -> None:
         def record_digest(raw: bytes) -> str:
             encoded = base64.urlsafe_b64encode(hashlib.sha256(raw).digest()).rstrip(b"=")
             return "sha256=" + encoded.decode("ascii")
@@ -269,16 +270,13 @@ class DeterministicSdistTests(unittest.TestCase):
             distribution = f"se_harness-{__version__}.dist-info"
             data_prefix = f"se_harness-{__version__}.data/data/share/se-harness/templates/repository/standard"
             members: dict[str, bytes] = {}
-            for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*")):
-                if path.is_file() and path.suffix in {".py", ".json"}:
-                    members[f"se_harness/{path.name}"] = path.read_bytes()
-            # ECP-ENG-001: the engine is a subpackage the CLI imports; a wheel without it does not start.
-            for path in sorted((REPOSITORY_ROOT / "se_harness/engine").glob("*.py")):
-                members[f"se_harness/engine/{path.name}"] = path.read_bytes()
-            template_root = REPOSITORY_ROOT / "templates/repository/standard"
-            for path in sorted(template_root.rglob("*")):
-                if path.is_file() and "__pycache__" not in path.parts:
-                    members[f"{data_prefix}/{path.relative_to(template_root).as_posix()}"] = path.read_bytes()
+            # Include the complete canonical payload, including engine assets.
+            # This fixture is installed outside the checkout and is never promoted.
+            for item in json.loads(canonical_payload_manifest())["files"]:
+                relative = item["path"]
+                name = relative if relative.startswith("se_harness/") else (
+                    f"se_harness-{__version__}.data/data/share/se-harness/" + relative)
+                members[name] = (REPOSITORY_ROOT / relative).read_bytes()
             members[f"{distribution}/METADATA"] = (
                 "Metadata-Version: 2.1\n"
                 "Name: se-harness\n"
@@ -355,28 +353,65 @@ class DeterministicSdistTests(unittest.TestCase):
             )
             self.assertEqual(0, installed.returncode, installed.stderr)
             target = root / "fresh-repository"
-            initialized = subprocess.run(
-                [str(python), "-I", "-m", "se_harness", "init", str(target), "--project-name", "Wheel Fixture"],
-                cwd=root,
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            self.assertEqual(0, initialized.returncode, initialized.stderr)
-            for name, relatives in SKILL_FILES.items():
-                for relative in relatives:
-                    source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills" / name / relative
-                    self.assertEqual(
-                        source.read_text(encoding="utf-8").encode("utf-8"),
-                        (target / ".agents/skills" / name / relative).read_bytes(),
-                    )
-            for name, relatives in CLAUDE_ADAPTER_FILES.items():
-                for relative in relatives:
-                    source = REPOSITORY_ROOT / "templates/repository/standard/.claude/skills" / name / relative
-                    self.assertEqual(
-                        source.read_text(encoding="utf-8").encode("utf-8"),
-                        (target / ".claude/skills" / name / relative).read_bytes(),
-                    )
+
+            def command(*args: str, expected: int = 0) -> dict:
+                result = subprocess.run(
+                    [str(python), "-I", "-m", "se_harness", *args, "--json"],
+                    cwd=root, capture_output=True, text=True, encoding="utf-8", timeout=90,
+                    check=False,
+                )
+                self.assertEqual(expected, result.returncode, result.stdout + result.stderr)
+                return json.loads(result.stdout)
+
+            def files() -> dict[str, bytes]:
+                return {p.relative_to(target).as_posix(): p.read_bytes()
+                        for p in target.rglob("*") if p.is_file() and ".git" not in p.relative_to(target).parts}
+
+            command("init", str(target), "--project-name", "Wheel Fixture")
+            initial = files()
+            self.assertEqual({".engineering-harness.toml", ".engineering-harness.lock"}, set(initial))
+            lock = json.loads(initial[".engineering-harness.lock"])
+            resources = command("resources", str(target))
+            self.assertEqual("released-resources-v1", resources["resource_layout"])
+            self.assertEqual(lock["evaluator"], resources["release"])
+            self.assertEqual(hashlib.sha256(wheel.read_bytes()).hexdigest(), resources["release"]["archive_sha256"])
+            for resource in resources["resources"]:
+                location = Path(resource["path"])
+                self.assertTrue(location.is_relative_to(environment), location)
+                self.assertFalse(location.is_relative_to(target), location)
+                self.assertEqual(resource["sha256"], hashlib.sha256(location.read_bytes()).hexdigest())
+            entry = command("resources", str(target), "--resource", "ENGINEERING_HARNESS.md", "--content")
+            self.assertIn("# Engineering Harness for Wheel Fixture", entry["content"])
+            self.assertTrue(command("validate", str(target))["valid"])
+            self.assertEqual(initial, files())
+            repeat = command("init", str(target), "--project-name", "Wheel Fixture")
+            self.assertTrue(all(c["action"] == "unchanged" for c in repeat["changes"]))
+            self.assertEqual(initial, files())
+
+            # Evidence readiness needs an explicit Git integration even before
+            # the first artifact exists. No user or global Git settings change.
+            git(target, "init", "-q", "-b", "main")
+            doctor = command("doctor", str(target), expected=1)
+            self.assertTrue(any(c["name"] == "hash-bound-attribute-effective" and not c["passed"]
+                                for c in doctor["checks"]), doctor)
+            additions = {
+                "git": {".gitattributes"},
+                "ci": {".gitignore", ".github/workflows/engineering-harness.yml"},
+                "pr": {".github/PULL_REQUEST_TEMPLATE.md"},
+            }
+            for integration, expected_paths in additions.items():
+                before = files()
+                preview = command("upgrade", str(target), "--integration", integration)
+                self.assertEqual(before, files())
+                self.assertEqual(expected_paths, {c["path"] for c in preview["changes"] if c["action"] == "add"})
+                command("upgrade", str(target), "--integration", integration, "--apply")
+                after = files()
+                self.assertEqual(expected_paths, set(after) - set(before))
+                for path, raw in before.items():
+                    if path != ".engineering-harness.lock":
+                        self.assertEqual(raw, after[path])
+            self.assertTrue(all(c["passed"] for c in command("doctor", str(target))["checks"]))
+            self.assertEqual(set(initial) | set().union(*additions.values()), set(files()))
 
 
 class BuildRecipeSchemaTests(unittest.TestCase):

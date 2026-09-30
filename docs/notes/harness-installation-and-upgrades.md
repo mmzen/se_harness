@@ -5,9 +5,109 @@
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
-This guide describes the 0.20.0 installation and instruction-delivery model. An existing
-repository keeps its installed evaluator and lock until an explicit upgrade.
-The SE Harness development repository adopted released 0.20.0 under WO-HUP-024.
+The published 0.20.0 layout and the successor candidate layout are separate.
+This repository remains governed by released 0.20.0. Candidate examples below
+are for qualification until a release and a separate adoption are authorized.
+
+## Minimal installation (successor candidate)
+
+The selected wheel holds the entry, procedures, policy and templates outside
+the checkout. Default `init` writes exactly `.engineering-harness.toml` and
+`.engineering-harness.lock`. It creates no instruction copies, example domain,
+glossary, local skills or adoption report. Existing owner files stay untouched.
+
+Run from outside the checkout. `CHECKER` is the absolute Python executable in
+the selected environment; `REPO` is the absolute checkout path. PowerShell needs
+`&` before a quoted executable. Preview, inspect the two paths, then apply:
+
+```text
+"CHECKER" -I -m se_harness init "REPO" --project-name "Project" --dry-run --json
+"CHECKER" -I -m se_harness init "REPO" --project-name "Project" --json
+"CHECKER" -I -m se_harness resources "REPO" --resource ENGINEERING_HARNESS.md --content --json
+```
+
+The lookup returns the selected release, content, paths and byte identities.
+Read only the requested instructions. It also works without a plugin and offline
+when the exact wheel is already installed. Missing resources require explicit
+setup. Source code and a newer plugin are never substitute policy sources.
+
+### Optional repository integrations
+
+Add a repeatable `--integration` to `init`, or use `upgrade` on an installed
+external-resource repository. Each selected file appears in the plan:
+
+| Selection | Repository output |
+| --- | --- |
+| `--integration git` | Managed evidence byte-preservation block in `.gitattributes`. |
+| `--integration ci` | Editable `.github/workflows/engineering-harness.yml` and the generated-output block in `.gitignore`. |
+| `--integration pr` | Editable `.github/PULL_REQUEST_TEMPLATE.md`. |
+
+For example, establish Git evidence attributes before producing hash-bound
+evidence. Review the preview and apply the same choice:
+
+```text
+"CHECKER" -I -m se_harness upgrade "REPO" --integration git --json
+"CHECKER" -I -m se_harness upgrade "REPO" --integration git --apply --json
+"CHECKER" -I -m se_harness doctor "REPO" --json
+```
+
+The effective rule remains `docs/engineering/**/evidence/*.json text eol=lf`.
+An equivalent owner rule is valid. Missing or overriding rules are readiness
+findings; checks do not relax hashing. Use `scaffold-domain` and `create-artifact`
+for requested formal content, rather than copying the template collection.
+
+### Migrate a repository-copy installation
+
+Use the target evaluator for this explicitly authorized upgrade. Preserve the
+prior wheel selected by the current lock as `PRIOR_WHEEL`; the installer reads
+it as data and verifies its payload and any recorded archive digest. This is
+needed because old seed entries record presence, not stock content hashes.
+
+```text
+"CHECKER" -I -m se_harness upgrade "REPO" --external-resources --prior-wheel "PRIOR_WHEEL" --json
+```
+
+The plan classifies every tracked leaving file. Recognized managed instructions
+are removed. Stock editable seeds are preserved unless named with a repeatable
+`--retire-file PATH`. Customized authoring guidance or templates stop migration;
+move their owner-specific rules into reviewed owner files first. The installer
+does not merge policy or execute the old wheel. It preserves historical records
+and existing integrations. Paths outside the checkout and linked destinations
+are refused before writes.
+
+Rehearse the replacement entry with the exact target wheel in a disposable
+checkout. Review real native startup and post-compaction traces. The existing
+[delivery receipt](#review-and-apply-an-upgrade) binds the real target repository,
+its prior lock and the complete replacement entry. For external resources,
+`entry_sha256` binds the rendered `resources --content` text under `utf8-text-lf-v1`.
+Then repeat the reviewed plan with its selected retirements and receipt:
+
+```text
+"CHECKER" -I -m se_harness upgrade "REPO" --external-resources --prior-wheel "PRIOR_WHEEL" --retire-file docs/engineering/ARTIFACT_AUTHORING.md --instruction-delivery-evidence "RECEIPT" --apply --json
+```
+
+That example retires only the named editable seed. Add every other explicitly
+selected seed to both preview and apply. No receipt means no retirement of the
+local entry. The existing atomic transaction restores file contents after a
+failed write or postcondition. Recheck after interruption before retrying;
+successful repeated setup changes nothing.
+
+| Former repository material | External-resource destination |
+| --- | --- |
+| `ENGINEERING_HARNESS.md` | `resources --resource ENGINEERING_HARNESS.md --content --json` |
+| `docs/engineering/harness/*.md` | Same resource ID; read the returned local path and heading. |
+| `docs/engineering/ARTIFACT_AUTHORING.md` | Same resource ID; standard checklist comes from the wheel. |
+| `docs/engineering/templates/*` | Same resource ID; `create-artifact` consumes it directly. |
+| `WORKFLOW.json`, `QUALITY_GATES.json` | Selected evaluator inputs; agents use returned lifecycle results. |
+| Formal artifacts and evidence | Remain in the repository with unchanged historical bytes. |
+
+See [session activation](plugin-installation-guide.md#successor-candidate-clone-activate-and-resume)
+for cloning after startup, repeated work and parallel sessions.
+
+## Published 0.20.0 installation
+
+The remainder of this guide describes the supported repository-copy layout.
+An existing repository keeps that layout until an explicit resource migration.
 
 ## What is kept under control
 

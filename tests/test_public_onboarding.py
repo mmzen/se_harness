@@ -16,6 +16,7 @@ from pathlib import Path
 
 from se_harness import __version__
 from tests.git_support import git
+from tests.fixture_support import legacy_repository
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -276,11 +277,13 @@ HASH_BOUND_CHECKS = (
 
 @unittest.skipUnless(shutil.which("git"), "git is unavailable")
 class FreshConsumerDoctorTests(unittest.TestCase):
-    """The state every adopter meets first: installed, committed once, `doctor`.
+    """Legacy installation, committed once, then `doctor`.
 
     `WO-HBI-005` for issue #207. Until then `doctor` exited 1 here on two
     hash-bound checks, and no scenario observed it because the acceptance lane
     never commits its initialized target.
+    The installed-wheel scenario in test_release_build covers the minimal default
+    and its explicitly selected Git integration.
     """
 
     def harnessctl(self, *arguments: str, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -299,8 +302,7 @@ class FreshConsumerDoctorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory)
             consumer = base / "consumer"
-            init = self.harnessctl("init", str(consumer), "--project-name", "Consumer", cwd=base)
-            self.assertEqual(0, init.returncode, init.stdout + init.stderr)
+            legacy_repository(consumer, "Consumer")
             conversion = ("-c", f"core.autocrlf={autocrlf}")
             git(consumer, *conversion, "init", "-q", "-b", "main")
             git(consumer, *conversion, "config", "user.email", "adopter@example.invalid")
@@ -320,10 +322,10 @@ class FreshConsumerDoctorTests(unittest.TestCase):
                 self.assertEqual(1, len(lines), doctor.stdout)
                 self.assertTrue(lines[0].startswith("PASS "), lines[0])
 
-    def test_init_commit_doctor_exits_zero_on_an_lf_checkout(self) -> None:
+    def test_legacy_init_commit_doctor_exits_zero_on_an_lf_checkout(self) -> None:
         self.assert_doctor_passes("false")
 
-    def test_init_commit_doctor_exits_zero_on_a_crlf_checkout(self) -> None:
+    def test_legacy_init_commit_doctor_exits_zero_on_a_crlf_checkout(self) -> None:
         # Mirrors a Windows checkout: `core.autocrlf=true` converts every text file
         # the managed `.gitattributes` block does not pin.
         self.assert_doctor_passes("true")

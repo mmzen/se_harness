@@ -15,8 +15,10 @@ integration and the final closeout receipt remain separate steps.
 For any new assembly, first require the selected RLS to be released and its wheel to be independently
 available from the public release. Compare the downloaded wheel SHA-256 with
 that record's distribution binding. A local candidate wheel does not satisfy
-this prerequisite. The repository's own governing evaluator stays at 0.19.0
-until a separate adoption.
+this prerequisite. The repository's own governing evaluator stays at its selected
+0.20.0 until a separate adoption. A successor plugin may deliver external wheel
+resources and session activation; publication must qualify those exact package
+bytes and must not imply that existing repositories adopted the new layout.
 
 From the source checkout, replace every uppercase placeholder below. Read
 `RELEASE_COMMIT`, `RLS_PATH` and `WHEEL_SHA256` from the actual released record

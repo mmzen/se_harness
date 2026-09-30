@@ -48,6 +48,15 @@ Observed public delivery (2026-09-29): Plugin **0.2.2** bundles released **SE Ha
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
 
+## Successor candidate: fewer repository files
+
+The development candidate keeps shared instructions and templates in the selected
+evaluator wheel. Default initialization writes only the configuration and lock;
+Git, CI and PR integrations are explicit. The plugin activates the actual checkout
+after cloning and restores that session's selection after compaction or resume.
+See the [minimal installation and migration procedure](docs/notes/harness-installation-and-upgrades.md#minimal-installation-successor-candidate).
+This is not yet the published 0.20.0 / 0.2.2 package and does not upgrade existing repositories.
+
 ## How it works today
 
 1. **Define the change.** Record the desired outcome, requirements, design, and verification approach.

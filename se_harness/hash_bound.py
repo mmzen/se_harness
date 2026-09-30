@@ -17,6 +17,8 @@ from se_harness.integrity import (
     canonical_sha256,
     canonical_text,
     raw_sha256,
+    read_toml,
+    EXTERNAL_RESOURCE_LAYOUT,
     unique_object_hook,
 )
 
@@ -309,6 +311,19 @@ def _attribute_effective(
         for pattern in item.patterns:
             paths.extend(relative for relative in tracked if matches(pattern, relative))
         covered[item.class_id] = sorted(set(paths))
+    config = root / ".engineering-harness.toml"
+    try:
+        harness = read_toml(config).get("harness", {}) if config.exists() else {}
+    except IntegrityError as exc:
+        raise HashBoundError(str(exc)) from exc
+    if isinstance(harness, dict) and harness.get("resource_layout") == EXTERNAL_RESOURCE_LAYOUT:
+        # Minimal init supplies no Git files. Assess the declared evidence path
+        # before the first evidence file exists, as well as all tracked evidence.
+        for item in raw_classes:
+            covered[item.class_id].extend(
+                pattern.replace("**", "_attribute_probe").replace("*", "_attribute_probe").replace("?", "x")
+                for pattern in item.patterns
+            )
     resolved = resolved_attributes(
         root, sorted({relative for paths in covered.values() for relative in paths})
     )
