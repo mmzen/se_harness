@@ -2,7 +2,7 @@
 id = "VREC-SEH-030"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-027"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-20-1/evidence/WO-RLS-027/WO-RLS-02
 evaluator_evidence_path = "docs/engineering/release-0-20-1/evidence/VREC-SEH-030-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-09-30T20:43:10Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLS-027"]
 conforms_to = ["VER-RLS-027"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-30T20:43:10Z"
+decided_by = "assurance-owner"
+reason = "Human mmzen: I verify VREC-SEH-030 as assurance owner. Decision covers exact candidate b9af631b850c495eace9807361ed3ec3e36a10b2 and unchanged retained evidence reviewed at commit 7b68abb8bcf86515bc98b6d189681d3f5bf22038. VREC SHA256 d2f9eefbaeb1f1b0fd40f15664a5505a2243afd003db2438de8e536b9efe786d; evaluator evidence SHA256 e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2; final observations SHA256 806463b7983be392ff531c7c97944d4e5a1fb7650d3994a59f1dad6b100fa69f. Codex applies the human decision using the selected 0.19.0 assurance-owner encoding. This decision does not authorize merge, release, publication or adoption."
 +++
 
 # Verification Record Candidate
