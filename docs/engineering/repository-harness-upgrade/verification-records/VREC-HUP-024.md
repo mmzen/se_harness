@@ -2,7 +2,7 @@
 id = "VREC-HUP-024"
 type = "verification_record"
 title = "Verification candidate for WO-HUP-025"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-024-evaluator.json"
 evaluator_evidence_sha256 = "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26"
 
+verified_at = "2026-10-01T14:39:49Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-HUP-025"]
 conforms_to = ["VER-HUP-023"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-01T14:39:49Z"
+decided_by = "assurance-owner"
+reason = "Human mmzen: I verify VREC-HUP-024. Confirms the separate assurance decision for candidate 70b52c8585fe2fe88355de7d6797320f98e53f48, reviewed record SHA256 573805c9fda40ed648c1bd881a5490ff799159456e13d43f1802843f1d0d17bb, and its unchanged retained evidence in PR 515 at 266a0ab99921c5609bd220906264e7e60fe8f655. All applicable hosted Linux and Windows CI passed. Codex applies the human decision using the released evaluator assurance-owner label; mmzen is the actual decision-maker. Merge and release remain separate."
 +++
 
 # Verification Record Candidate
