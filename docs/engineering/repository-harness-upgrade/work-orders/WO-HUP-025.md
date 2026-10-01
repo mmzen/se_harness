@@ -2,7 +2,7 @@
 id = "WO-HUP-025"
 type = "work_order"
 title = "Adopt public 0.20.1 in the repository and CI"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -51,6 +51,13 @@ to = "in_progress"
 decided_at = "2026-10-01T13:50:05Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-01T13:58:21Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Completed the approved exact public 0.20.1 adoption. Installer transaction, owner preservation, no-op replay, released identity/doctor/validation/root qualification, predecessor assessment, documentation and distribution checks, full source suite (1189 tests, 18 skips) and complete handoff passed. Human verification, hosted integration checks and merge remain separate."
 +++
 
 # Adopt public 0.20.1 in the repository and CI

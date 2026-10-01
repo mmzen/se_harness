@@ -1,0 +1,308 @@
+{
+  "review-preflight": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "preflight",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--work-order",
+      "WO-HUP-025",
+      "--phase",
+      "review",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "seconds": 4.9295013999981165,
+    "result": {
+      "ready": true,
+      "diagnostics": []
+    },
+    "complete_output": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption0201-evidence\\review-preflight.json",
+      "sha256": "fc9e944a2f9ef9dbae1e03ccf7434fd76302ad1c98feb32185b1a9365fbbd36b"
+    }
+  },
+  "complete-handoff": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--artifact",
+      "WO-HUP-025",
+      "--checkpoint",
+      "handoff",
+      "--from-git",
+      "aeebcabf8e3ed958e0166dfe2754a2af2681a59d",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "seconds": 5.865499999999884,
+    "result": {
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Evaluated handoff compliance for WO-HUP-025."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-HUP-025 is in_progress."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "transition",
+            ".",
+            "--set",
+            "WO-HUP-025=implemented",
+            "--decision",
+            "WO-HUP-025=delegated-executor"
+          ]
+        },
+        "alternatives": []
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [
+          "ADR-REB-011",
+          "ARCH-REB-011",
+          "CAP-REB-001",
+          "INT-REB-001",
+          "REQ-REB-027",
+          "SPEC-REB-012",
+          "VER-HUP-023"
+        ],
+        "dependencies": [],
+        "declared_paths": [
+          ".engineering-harness.lock",
+          ".engineering-harness.toml",
+          ".github/workflows/engineering-harness.yml",
+          "docs/engineering/instruction-architecture/README.md",
+          "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-024-evaluator.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025-evaluator-upgrade.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025/",
+          "docs/engineering/repository-harness-upgrade/README.md",
+          "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-024.md",
+          "docs/engineering/repository-harness-upgrade/verification/VER-HUP-023.md",
+          "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-025.md",
+          "docs/notes/developing-se-harness.md",
+          "docs/notes/harness-installation-and-upgrades.md",
+          "ENGINEERING_HARNESS.md",
+          "tests/test_progressive_documentation.py"
+        ],
+        "changed_paths": [
+          ".engineering-harness.lock",
+          ".engineering-harness.toml",
+          ".github/workflows/engineering-harness.yml",
+          "docs/engineering/instruction-architecture/README.md",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025-evaluator-upgrade.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025/checks.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025/full-source-summary.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025/handoff.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025/preservation.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025/README.md",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025/WO-HUP-025-handoff.md",
+          "docs/engineering/repository-harness-upgrade/README.md",
+          "docs/engineering/repository-harness-upgrade/verification/VER-HUP-023.md",
+          "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-025.md",
+          "docs/notes/developing-se-harness.md",
+          "docs/notes/harness-installation-and-upgrades.md",
+          "ENGINEERING_HARNESS.md",
+          "tests/test_progressive_documentation.py"
+        ],
+        "change_set_complete": true
+      }
+    },
+    "complete_output": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption0201-evidence\\complete-handoff.json",
+      "sha256": "2cd867a3d8ea3d0456af308651c222e08a8cf3d2389a9eb27ee2b630fc7441c1"
+    }
+  },
+  "completion-preview": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "transition",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--set",
+      "WO-HUP-025=implemented",
+      "--decision",
+      "WO-HUP-025=Codex",
+      "--reason",
+      "WO-HUP-025=Completed the approved exact public 0.20.1 adoption. Installer transaction, owner preservation, no-op replay, released identity/doctor/validation/root qualification, predecessor assessment, documentation and distribution checks, full source suite (1189 tests, 18 skips) and complete handoff passed. Human verification, hosted integration checks and merge remain separate.",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "seconds": 11.22084619999805,
+    "result": {
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Planned 1 explicit lifecycle transition(s); no files were written."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-HUP-025 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-PREPARE-VREC",
+          "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "capture-verification",
+            ".",
+            "--work-order",
+            "WO-HUP-025",
+            "--owner",
+            "delegated-executor",
+            "--id",
+            "VREC-...",
+            "--verification",
+            "VER-...",
+            "--evidence",
+            "..."
+          ]
+        },
+        "alternatives": []
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [],
+        "dependencies": [],
+        "declared_paths": [
+          ".engineering-harness.lock",
+          ".engineering-harness.toml",
+          ".github/workflows/engineering-harness.yml",
+          "docs/engineering/instruction-architecture/README.md",
+          "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-024-evaluator.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025-evaluator-upgrade.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025/",
+          "docs/engineering/repository-harness-upgrade/README.md",
+          "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-024.md",
+          "docs/engineering/repository-harness-upgrade/verification/VER-HUP-023.md",
+          "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-025.md",
+          "docs/notes/developing-se-harness.md",
+          "docs/notes/harness-installation-and-upgrades.md",
+          "ENGINEERING_HARNESS.md",
+          "tests/test_progressive_documentation.py"
+        ],
+        "changed_paths": [],
+        "change_set_complete": false
+      }
+    },
+    "complete_output": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption0201-evidence\\completion-preview.json",
+      "sha256": "55d51307e3cca22f0616491c7a5574249ee9c9ac7044885edba581e7a93c52bf"
+    }
+  },
+  "completion-apply": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "transition",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--set",
+      "WO-HUP-025=implemented",
+      "--decision",
+      "WO-HUP-025=Codex",
+      "--reason",
+      "WO-HUP-025=Completed the approved exact public 0.20.1 adoption. Installer transaction, owner preservation, no-op replay, released identity/doctor/validation/root qualification, predecessor assessment, documentation and distribution checks, full source suite (1189 tests, 18 skips) and complete handoff passed. Human verification, hosted integration checks and merge remain separate.",
+      "--json",
+      "--apply"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "seconds": 16.118146600001637,
+    "result": {
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Applied 1 explicit lifecycle transition(s) atomically."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-HUP-025 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-PREPARE-VREC",
+          "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "capture-verification",
+            ".",
+            "--work-order",
+            "WO-HUP-025",
+            "--owner",
+            "delegated-executor",
+            "--id",
+            "VREC-...",
+            "--verification",
+            "VER-...",
+            "--evidence",
+            "..."
+          ]
+        },
+        "alternatives": []
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [],
+        "dependencies": [],
+        "declared_paths": [
+          ".engineering-harness.lock",
+          ".engineering-harness.toml",
+          ".github/workflows/engineering-harness.yml",
+          "docs/engineering/instruction-architecture/README.md",
+          "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-024-evaluator.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025-evaluator-upgrade.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-025/",
+          "docs/engineering/repository-harness-upgrade/README.md",
+          "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-024.md",
+          "docs/engineering/repository-harness-upgrade/verification/VER-HUP-023.md",
+          "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-025.md",
+          "docs/notes/developing-se-harness.md",
+          "docs/notes/harness-installation-and-upgrades.md",
+          "ENGINEERING_HARNESS.md",
+          "tests/test_progressive_documentation.py"
+        ],
+        "changed_paths": [],
+        "change_set_complete": false
+      }
+    },
+    "complete_output": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption0201-evidence\\completion-apply.json",
+      "sha256": "ffca15994a9c7961d013866d5d94d53d71be3225b5057c9526937473c855c695"
+    }
+  }
+}
