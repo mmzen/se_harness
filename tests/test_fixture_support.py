@@ -1,4 +1,4 @@
-"""Evidence for REQ-TST-003 (WO-TST-002): the cached fixture install equals a direct init."""
+"""The cached legacy fixture equals an explicit materialized legacy install."""
 
 from __future__ import annotations
 
@@ -18,12 +18,11 @@ def _tree(root: Path) -> dict[str, bytes]:
 
 
 class FixtureSupportTests(unittest.TestCase):
-    def test_copies_are_byte_identical_to_a_direct_init_and_init_runs_once(self) -> None:
+    def test_copies_equal_explicit_legacy_construction_and_initialise_once(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             base = Path(temporary)
             direct = base / "direct"
-            code, _, error = invoke("init", str(direct), "--project-name", "Cache Equality")
-            self.assertEqual(0, code, error)
+            fixture_support.legacy_repository(direct, "Cache Equality")
             before = len(fixture_support.initialisations())
             first = standard_repository(base / "first", "Cache Equality")
             second = standard_repository(base / "second", "Cache Equality")

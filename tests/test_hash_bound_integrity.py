@@ -585,6 +585,24 @@ class FreshCheckoutTests(unittest.TestCase):
 
 @unittest.skipUnless(git_available(), "git is unavailable")
 class AttributeEffectivenessTests(unittest.TestCase):
+    def test_external_install_requires_attributes_before_the_first_evidence_file(self) -> None:
+        from se_harness.integrity import EXTERNAL_RESOURCE_LAYOUT
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "repo"
+            root.mkdir()
+            files = {
+                ".engineering-harness.toml": f'[harness]\nresource_layout = "{EXTERNAL_RESOURCE_LAYOUT}"\n'.encode(),
+                ".engineering-harness.lock": b'{"schema": 5}\n',
+            }
+            build_source(root, b"", files)
+            passed, detail = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
+            self.assertFalse(passed, detail)
+            self.assertIn("evaluator-evidence", detail)
+            (root / ".gitattributes").write_bytes(b"docs/engineering/**/evidence/*.json text eol=lf\n")
+            passed, detail = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
+            self.assertTrue(passed, detail)
+            self.assertFalse((root / "docs").exists())
+
     def assess_with_attributes(self, attributes: bytes) -> dict[str, tuple[bool, str]]:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "repo"
@@ -803,7 +821,9 @@ class ProducerNewlineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             target = Path(directory) / "initialized"
             completed = subprocess.run(
-                [sys.executable, "-B", "-m", "se_harness", "init", str(target), "--project-name", "Assurance"],
+                [sys.executable, "-B", "-c",
+                 "import sys; from pathlib import Path; from tests.fixture_support import legacy_repository; legacy_repository(Path(sys.argv[1]), 'Assurance')",
+                 str(target)],
                 cwd=ROOT,
                 check=False,
                 capture_output=True,

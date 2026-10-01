@@ -10,6 +10,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
 
+from tests.fixture_support import legacy_repository
 from se_harness import __version__
 from se_harness.artifact_layout import create_artifact, scaffold_domain
 from se_harness.cli import main
@@ -20,7 +21,7 @@ from se_harness.evaluator_evidence import (
 )
 from se_harness.evaluator_identity import EvaluatorIdentityError, InstalledEvaluatorIdentity, PAYLOAD_MANIFEST
 from se_harness.hash_bound import LOCK_RELATIVE
-from se_harness.installer import HarnessError, apply_changes, plan_install, template_files
+from se_harness.installer import _plan_legacy_install, HarnessError, apply_changes, plan_install, template_files
 from se_harness.integrity import canonical_sha256, raw_sha256
 from se_harness.mutation_guard import (
     PUBLIC_MUTATION_OPERATIONS,
@@ -238,7 +239,7 @@ class MutationGuardTests(unittest.TestCase):
         # SPEC-REB-012 rules 2-4: the installed released evaluator is the target
         # identity; no work-order packet; evidence only when requested.
         root = self.base / "simple-transition"
-        changes, old_lock = plan_install(root, project_name="Simple Transition", mode="init")
+        changes, old_lock = _plan_legacy_install(root, project_name="Simple Transition", mode="init")
         apply_changes(root, changes, old_lock, allow_updates=False)
         target_identity = InstalledEvaluatorIdentity(
             __version__,
@@ -313,7 +314,7 @@ class MutationGuardTests(unittest.TestCase):
         # REQ-REB-028: no PEP 610 archive digest, no packet, one apply; the lock
         # carries the archive pair as null and the replay is a no-op.
         root = self.base / "index-install-transition"
-        changes, old_lock = plan_install(root, project_name="Index Install", mode="init")
+        changes, old_lock = _plan_legacy_install(root, project_name="Index Install", mode="init")
         apply_changes(root, changes, old_lock, allow_updates=False)
         target_identity = InstalledEvaluatorIdentity(__version__, PAYLOAD_MANIFEST, "a" * 64)
         lock_path = root / LOCK_RELATIVE
@@ -386,8 +387,7 @@ class MutationGuardTests(unittest.TestCase):
 
     def test_candidate_source_is_rejected_before_real_artifact_creation(self) -> None:
         root = self.base / "candidate-target"
-        code, _, error = self._invoke("init", str(root), "--project-name", "Boundary Sample")
-        self.assertEqual(0, code, error)
+        legacy_repository(root, "Boundary Sample")
         before = self._snapshot(root)
         code, _, error = self._invoke(
             "create-artifact",
@@ -406,7 +406,7 @@ class MutationGuardTests(unittest.TestCase):
     def test_every_public_mutator_rejects_before_any_target_write(self) -> None:
 
         root = self.base / "all-mutators"
-        changes, old_lock = plan_install(root, project_name="All Mutators", mode="init")
+        changes, old_lock = _plan_legacy_install(root, project_name="All Mutators", mode="init")
         apply_changes(root, changes, old_lock, allow_updates=False)
         retained = root / "docs" / "engineering" / "evidence" / "WO-TST-001-input.txt"
         retained.parent.mkdir(parents=True, exist_ok=True)
@@ -516,7 +516,7 @@ class MutationGuardTests(unittest.TestCase):
 
     def test_upgrade_apply_rejects_a_caller_supplied_stale_plan_without_writes(self) -> None:
         root = self.base / "stale-upgrade"
-        changes, old_lock = plan_install(root, project_name="Stale Plan", mode="init")
+        changes, old_lock = _plan_legacy_install(root, project_name="Stale Plan", mode="init")
         apply_changes(root, changes, old_lock, allow_updates=False)
         before = self._snapshot(root)
         current_lock = json.loads((root / ".engineering-harness.lock").read_text(encoding="utf-8"))

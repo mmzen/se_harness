@@ -36,15 +36,18 @@ selected released wheel.
 2. Obtain the matching released wheel. If the lock records an archive digest,
    compare the wheel's SHA-256 with it before installation. Do not substitute a
    development build with the same version label.
-3. Select a reusable environment outside the repository. With Verity Plane,
-   use `DATA_ROOT/verity-plane/evaluator`, where `DATA_ROOT` is the host's
-   persistent plugin data directory. Do not create a new environment for each
-   retry.
-4. Create or repair that environment with the available Python. Install the
-   selected wheel without index lookup or dependencies, replacing the prior
-   installed copy. Verity Plane's helper performs these actions and runs doctor
-   with the command shown below. Without the plugin, perform the same environment
-   actions using Python's standard environment and package tools.
+3. Select a private environment outside the repository, keyed by the complete
+   release identity. Verity Plane uses `DATA-ROOT/evaluators/VERSION/IDENTITY`,
+   where `IDENTITY` is the archive SHA-256, or the payload SHA-256 when no archive
+   digest is recorded. Reuse a matching completed environment. Keep environments
+   for other releases unchanged; concurrent sessions may still use them.
+4. Use Verity Plane's setup helper below to prepare a missing environment. It
+   coordinates concurrent setup for the same identity, installs the wheel without
+   index lookup or dependencies, validates identity, then marks the environment
+   ready. An incomplete or mismatched environment requires inspection; do not
+   reinstall over a possibly active environment. Without the plugin, prepare
+   a separate environment with Python's environment and package tools and perform
+   the same identity checks before use.
 5. Resolve the environment's absolute Python executable: `Scripts/python.exe`
    on Windows or `bin/python` on Unix. Use it with `-I -m se_harness` from a
    working directory outside the checkout.
@@ -52,9 +55,12 @@ selected released wheel.
    environment root. Include the locked archive digest when one exists.
 7. Run doctor and inspect every failure. Environment setup success is not a
    passing repository check.
-8. On interruption, reuse the same environment and selected wheel. When
-   switching repositories, install the newly selected wheel rather than assuming
-   the previously used version applies.
+8. On interruption, inspect the exact environment before retrying. Retire an
+   incomplete environment only after confirming it is unused. When switching
+   repositories, select that repository's matching environment. After cloning or
+   changing the selected checkout, use the plugin setup skill's activation helper
+   with the actual host session identity and checkout path. Read its returned
+   entry before governed work. Environment setup alone does not activate a session.
 
 **Harness commands:**
 
@@ -74,7 +80,7 @@ perform their own identity and action checks.
 When the installed Verity Plane helper is used, its separate setup command is:
 
 ```text
-PYTHON ABSOLUTE-PLUGIN/scripts/setup.py --target REPO --data-root DATA-ROOT --wheel ABSOLUTE-WHEEL
+PYTHON -I ABSOLUTE-PLUGIN/scripts/setup.py --target REPO --data-root DATA-ROOT --wheel ABSOLUTE-WHEEL
 ```
 
 Here `PYTHON` is the available Python 3.11+ executable, and every path is an

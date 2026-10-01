@@ -16,8 +16,9 @@ verification record, decision right and checkpoint, are the same in every
 repository that uses the harness and are defined in the managed
 instructions; a few are repeated here because this repository's readers
 meet them first. Project terms, such as candidate, digest and evaluator, are
-this repository's own. This page is repository content at the repository root: the harness seeds
-an empty `GLOSSARY.md` there at installation and never rewrites it, and no
+this repository's own. This page is repository content at the repository root.
+Repository-copy releases seed an empty `GLOSSARY.md`; the external-resource
+candidate creates no glossary by default. The harness never rewrites it, and no
 entry here ships to another repository. `harnessctl inspect` names the frequent
 project terms that lack an entry and the entries whose term has left the
 artifacts.
@@ -35,6 +36,15 @@ artifacts.
 **Decision right.** The rule that identifies who may authorize a specific action. The evaluator reports the required right and checks the action; a command may apply an authorized decision, but running it does not supply that decision (see [decision rights](docs/engineering/harness/AUTHORITY.md#decision-rights)).
 
 **Evaluator.** The installed copy of SE Harness that judges a repository. It runs at a pinned released version, from a virtual environment outside the checkout.
+
+**External resources.** The successor layout keeps standard instructions, policy
+and templates in the exact selected evaluator wheel. The repository holds its
+portable selection, owner content and formal artifacts. The plugin delivers
+selected instructions; it does not supply a separately versioned policy copy.
+
+**Session activation.** Selection of an exact checkout for one native host session.
+The plugin validates the release, saves a private local locator and returns the
+entry immediately. The locator grants no authority and is not a repository file.
 
 **Plugin.** A package loaded by a coding application to add instructions, event handlers, and other supported components.
 
@@ -54,7 +64,7 @@ artifacts.
 
 **Owner file.** Repository content the owner controls, such as product code and local instructions. The harness may seed some owner files at installation, but later replacement requires explicit owner authority; owner content is not hash-locked as managed policy (see [upgrades](docs/engineering/harness/UPGRADE.md#upgrade-the-installed-harness)).
 
-**Lock.** The file `.engineering-harness.lock`, which records the digest of every managed file and the identity of the evaluator release that installed them.
+**Lock.** The file `.engineering-harness.lock`, which records the selected evaluator identity and hashes for managed repository files. Schema 5 also selects external resources; its file entries cover only selected repository integrations.
 
 **Gate.** A named group of checks evaluated together. A gate passes only when every one of its checks passes.
 

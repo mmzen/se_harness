@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from dataclasses import replace
 from pathlib import Path
 from typing import Iterable
 
@@ -117,6 +118,7 @@ from se_harness.artifact_layout import (  # noqa: F401
 )
 from se_harness.evaluator_evidence import validate_evaluator_evidence  # noqa: F401
 from se_harness.front_matter import body_sections  # noqa: F401
+from se_harness.resources import ResourceError, ResourceSet, uses_external_resources
 from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES, LifecycleState, load_lifecycle_registry  # noqa: F401
 
 
@@ -132,16 +134,26 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
     assessment_warnings: list[Diagnostic] = []
     traceability_warnings: list[Diagnostic] = []
     authoring_warnings: list[Diagnostic] = []
+    authoring_advisories: list[Diagnostic] = []
     decision_warnings: list[Diagnostic] = []
     if not selected_artifact_root.exists():
-        errors.append(
-            Diagnostic(
-                display_path(selected_artifact_root, repository_root),
-                E001,
-                "artifact root does not exist",
-                "structure",
-            )
+        missing_root = Diagnostic(
+            display_path(selected_artifact_root, repository_root),
+            E001,
+            "artifact root does not exist",
+            "structure",
         )
+        if selected_artifact_root == repository_root / "docs" / "engineering":
+            try:
+                if uses_external_resources(repository_root):
+                    # Minimal installation creates no empty artifact directory.
+                    # Selection alone is insufficient: the exact resources must resolve.
+                    ResourceSet(repository_root)
+                    missing_root = None
+            except ResourceError as exc:
+                missing_root = replace(missing_root, message=str(exc))
+        if missing_root is not None:
+            errors.append(missing_root)
     else:
         errors.extend(validate_common_metadata(artifacts, repository_root))
         errors.extend(validate_lifecycle_events(artifacts, repository_root))

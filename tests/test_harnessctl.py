@@ -17,6 +17,7 @@ from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, _templa
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, IntegrityError, canonical_sha256, canonical_text_bytes, parse_lock
 from tests.mutation_guard_support import patch_mutation_authority
 from tests.cli_support import invoke
+from tests.fixture_support import legacy_repository
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +26,10 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 class HarnessCtlTests(unittest.TestCase):
     def setUp(self) -> None:
         patch_mutation_authority(self)
+        # Unit origin fixture only; packaged qualification uses installed resources.
+        origin = mock.patch("se_harness.resources._installed_resource_root", return_value=template_root())
+        origin.start()
+        self.addCleanup(origin.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
 
@@ -109,7 +114,7 @@ class HarnessCtlTests(unittest.TestCase):
         from se_harness.skill_ownership import CATALOG
 
         target = self.root / "plugin-repository"
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         plugin = self.root / "plugin"
         manifest = plugin / ".codex-plugin/plugin.json"
         manifest.parent.mkdir(parents=True)
@@ -131,7 +136,7 @@ class HarnessCtlTests(unittest.TestCase):
 
     def test_repository_owned_upgrade_still_repairs_a_missing_retained_file(self) -> None:
         target = self.root / "repository-owned-repair"
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         relative = ".agents/skills/harness-orient/SKILL.md"
         selected = target / relative
         original = selected.read_bytes()
@@ -176,24 +181,13 @@ class HarnessCtlTests(unittest.TestCase):
         with self.assertRaisesRegex(IntegrityError, "unknown evaluator lock field"):
             parse_lock(json.dumps(invalid))
 
-    def test_init_installs_complete_valid_harness_and_dashboard(self) -> None:
+    def test_init_selects_resources_and_dashboard_is_explicit(self) -> None:
         target = self.root / "new-repository"
         code, output, error = invoke("init", str(target), "--project-name", "Example")
         self.assertEqual(0, code, error)
         self.assertIn("installed se-harness", output)
-        required = [
-            ".engineering-harness.toml",
-            ".engineering-harness.lock",
-            "docs/engineering/harness/CONTINUE.md",
-            "docs/engineering/harness/AUTHORITY.md",
-            "ENGINEERING_HARNESS.md",
-            ".github/workflows/engineering-harness.yml",
-            "docs/engineering/templates/REQUIREMENT.template.md",
-            "docs/engineering/templates/VERIFICATION_RECORD.template.md",
-            "docs/engineering/templates/RELEASE_RECORD.template.md",
-        ]
-        for relative in required:
-            self.assertTrue((target / relative).is_file(), relative)
+        self.assertEqual({".engineering-harness.toml", ".engineering-harness.lock"},
+                         {p.relative_to(target).as_posix() for p in target.rglob("*") if p.is_file()})
         # SPEC-DST-025 DST-ENG-002: no evaluator script is written into the target.
         self.assertFalse((target / "scripts").exists(), "no scripts/ path may be installed")
         self.assertIn('project_name = "Example"', (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
@@ -203,7 +197,6 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertNotIn("schema_version", (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
         self.assertFalse((target / "AGENTS.md").exists())
         self.assertFalse((target / "CLAUDE.md").exists())
-        self.assert_portable_release_surfaces(target)
 
         # SPEC-DST-025 DST-ENG-004: the commands run the package's own scripts.
         code, _, error = invoke("validate", str(target))
@@ -230,20 +223,14 @@ class HarnessCtlTests(unittest.TestCase):
         ignored = (target / ".gitignore").read_text(encoding="utf-8")
         self.assertEqual("# Existing agent rules\n", agents)
         self.assertEqual("# Existing Claude rules\n", claude)
-        self.assertIn("# se-harness:begin", ignored)
-        self.assertIn("# se-harness:end", ignored)
-        self.assertTrue(ignored.startswith("/build/"))
+        self.assertEqual("/build/\n", ignored)
         self.assertEqual("# Owner-curated context\n", context_path.read_text(encoding="utf-8"))
         adopted_lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", adopted_lock["files"])
-        report = (target / "docs/engineering/ADOPTION_REPORT.md").read_text(encoding="utf-8")
-        self.assertIn("Detected ecosystems: Rust", report)
-        self.assertIn("does not approve or infer product intent", report)
-        self.assertIn("Human decisions required", report)
+        self.assertFalse((target / "docs/engineering/ADOPTION_REPORT.md").exists())
         self.assertEqual(0, invoke("validate", str(target))[0])
         self.assertEqual(0, invoke("dashboard", str(target))[0])
         self.assertTrue((target / "target/harness-dashboard/index.html").is_file())
-        self.assert_portable_release_surfaces(target)
 
     def test_adopt_adds_dedicated_workflow_without_changing_existing_ci(self) -> None:
         target = self.root / "existing-ci"
@@ -256,7 +243,7 @@ class HarnessCtlTests(unittest.TestCase):
         for name, content in existing.items():
             (workflows / name).write_bytes(content)
 
-        code, _, error = invoke("init", str(target), "--project-name", "Existing CI")
+        code, _, error = invoke("init", str(target), "--project-name", "Existing CI", "--integration", "ci")
         self.assertEqual(0, code, error)
         for name, content in existing.items():
             self.assertEqual(content, (workflows / name).read_bytes())
@@ -273,7 +260,7 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(0, code, error)
         self.assertEqual(b"name: Owner workflow\n", workflow.read_bytes())
 
-    def test_adopt_conflict_causes_no_partial_writes(self) -> None:
+    def test_init_preserves_owner_instruction_files(self) -> None:
         target = self.root / "conflict"
         target.mkdir()
         original = b"repository-owned contract\n"
@@ -281,15 +268,13 @@ class HarnessCtlTests(unittest.TestCase):
         (target / "AGENTS.md").write_text("existing\n", encoding="utf-8")
 
         code, output, error = invoke("init", str(target))
-        self.assertEqual(1, code)
-        self.assertIn("conflict", output)
-        self.assertIn("no files were written", output)
+        self.assertEqual(0, code, error)
         self.assertEqual(original, (target / "ENGINEERING_HARNESS.md").read_bytes())
         self.assertEqual("existing\n", (target / "AGENTS.md").read_text(encoding="utf-8"))
-        self.assertFalse((target / ".engineering-harness.lock").exists())
+        self.assertTrue((target / ".engineering-harness.lock").exists())
         self.assertFalse((target / "docs").exists())
 
-    def test_init_writes_the_adoption_report_only_for_a_target_with_content(self) -> None:
+    def test_init_does_not_generate_an_adoption_report(self) -> None:
         # WO-ECP-026 (ECP-INS-002, ECP-INS-003, ECP-INS-005): one command; the
         # target's content selects the behaviour, and the JSON result names
         # "init" in both states.
@@ -310,14 +295,14 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(0, code, error)
         payload = json.loads(output)
         self.assertEqual(("init", "completed", True), (payload["command"], payload["outcome"], payload["written"]))
-        self.assertIn({"action": "add", "path": report.as_posix()}, payload["changes"])
-        self.assertIn("Detected ecosystems: Python", (existing / report).read_text(encoding="utf-8"))
+        self.assertNotIn(report.as_posix(), [item["path"] for item in payload["changes"]])
+        self.assertFalse((existing / report).exists())
         lock = json.loads((existing / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertNotIn(report.as_posix(), lock["files"])
 
     def test_upgrade_plan_is_read_only_and_apply_preserves_customized_file(self) -> None:
         target = self.root / "upgrade"
-        self.assertEqual(0, invoke("init", str(target), "--project-name", "Stable Name")[0])
+        legacy_repository(target, "Stable Name")
         managed = target / "ENGINEERING_HARNESS.md"
         managed.write_text(managed.read_text(encoding="utf-8") + "\nLocal policy.\n", encoding="utf-8")
         original = managed.read_bytes()
@@ -339,7 +324,7 @@ class HarnessCtlTests(unittest.TestCase):
 
     def test_upgrade_keeps_customized_guidance_and_replaces_only_selected_files(self) -> None:
         target = self.root / "editable-upgrade"
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         paths = ["docs/engineering/ARTIFACT_AUTHORING.md", "docs/engineering/templates/REQUIREMENT.template.md", ".github/workflows/engineering-harness.yml"]
         for path in paths:
             (target / path).write_bytes(b"Owner content\n")
@@ -370,7 +355,7 @@ class HarnessCtlTests(unittest.TestCase):
                 target.mkdir()
                 original = f"rules\n{BEGIN_MARKER}\nbroken\n".encode()
                 (target / name).write_bytes(original)
-                code, _, error = invoke("init", str(target))
+                code, _, error = invoke("init", str(target), "--integration", "ci" if name == ".gitignore" else "git")
                 self.assertEqual(2, code)
                 self.assertIn("markers", error)
                 self.assertEqual(original, (target / name).read_bytes())
@@ -387,7 +372,7 @@ class HarnessCtlTests(unittest.TestCase):
 
     def test_upgrade_does_not_revive_owner_adapters_or_retired_scaffold(self) -> None:
         target = self.root / "older-installation"
-        self.assertEqual(0, invoke("init", str(target), "--project-name", "Legacy Project")[0])
+        legacy_repository(target, "Legacy Project")
         claude_path = target / "CLAUDE.md"
         retired = "docs/engineering/REPOSITORY_CONTEXT.md"
         self.assertFalse(claude_path.exists())
@@ -408,7 +393,7 @@ class HarnessCtlTests(unittest.TestCase):
 
     def test_upgrade_preserves_claude_customization_and_owner_content_at_the_retired_path(self) -> None:
         target = self.root / "repository-owned-context"
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         claude_path = target / "CLAUDE.md"
         retired = "docs/engineering/REPOSITORY_CONTEXT.md"
         context_path = target / retired
@@ -438,7 +423,7 @@ class HarnessCtlTests(unittest.TestCase):
         for legacy_schema in (1, 2):
             with self.subTest(schema=legacy_schema):
                 target = self.root / f"pre3-schema-{legacy_schema}"
-                self.assertEqual(0, invoke("init", str(target), "--project-name", "Legacy")[0])
+                legacy_repository(target, "Legacy")
                 self.make_pre3_lock(target, legacy_schema)
                 snapshot = {
                     path: path.read_bytes()
@@ -459,28 +444,21 @@ class HarnessCtlTests(unittest.TestCase):
                 for path, content in snapshot.items():
                     self.assertEqual(content, path.read_bytes(), path)
 
-    def test_removing_the_stale_lock_and_readopting_writes_schema_three(self) -> None:
-        # WO-HUP-012 (HUP-LSF-001, HUP-LSF-003): the diagnostic's route works â€”
-        # remove the pre-3 lock, re-adopt, and the emitted lock is schema 3.
-        target = self.root / "pre3-readopted"
-        self.assertEqual(0, invoke("init", str(target), "--project-name", "Legacy")[0])
-        self.make_pre3_lock(target, 2)
+    def test_removing_only_the_lock_cannot_reselect_a_repository(self) -> None:
+        target = self.root / "unbound-config"
+        self.assertEqual(0, invoke("init", str(target))[0])
         lock_path = target / ".engineering-harness.lock"
         lock_path.unlink()
-
-        code, _, error = invoke("init", str(target), "--project-name", "Legacy")
-        self.assertEqual(0, code, error)
-        lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        self.assertEqual(LOCK_SCHEMA, lock["schema"])
-        self.assertEqual(HASH_ALGORITHM, lock["hash_algorithm"])
-        self.assertEqual(HASH_MODE, lock["hash_mode"])
-        self.assertEqual(__version__, lock["evaluator"]["version"])
-        self.assertRegex(lock["evaluator"]["payload_sha256"], r"^[0-9a-f]{64}$")
-        self.assert_portable_release_surfaces(target)
+        before = (target / ".engineering-harness.toml").read_bytes()
+        code, _, error = invoke("init", str(target))
+        self.assertEqual(2, code)
+        self.assertIn("configuration exists without its selected lock", error)
+        self.assertFalse(lock_path.exists())
+        self.assertEqual(before, (target / ".engineering-harness.toml").read_bytes())
 
     def test_doctor_hashes_only_the_remaining_managed_fragment(self) -> None:
         target = self.root / "fragment-doctor"
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         fragment = target / ".gitignore"
         installed = fragment.read_text(encoding="utf-8")
         fragment.write_text("# Owner rules\n\n" + installed + "\n# Owner tail.\n", encoding="utf-8")
@@ -492,7 +470,7 @@ class HarnessCtlTests(unittest.TestCase):
 
     def test_doctor_detects_managed_drift(self) -> None:
         target = self.root / "doctor"
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         self.assertEqual(0, invoke("doctor", str(target))[0])
         path = target / "docs/engineering/WORKFLOW.json"
         path.write_text("changed\n", encoding="utf-8")
@@ -502,7 +480,7 @@ class HarnessCtlTests(unittest.TestCase):
 
     def test_doctor_detects_stale_canonical_lock_digest(self) -> None:
         target = self.root / "stale-lock"
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         lock_path = target / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["files"]["docs/engineering/WORKFLOW.json"]["sha256"] = "0" * 64
@@ -513,7 +491,7 @@ class HarnessCtlTests(unittest.TestCase):
 
     def test_doctor_requires_current_instructions_without_a_claude_import(self) -> None:
         target = self.root / "doctor-instructions"
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         (target / "CLAUDE.md").write_text("Claude owner rules only.\n", encoding="utf-8")
         code, output, error = invoke("doctor", str(target))
         self.assertEqual(0, code, output + error)
@@ -526,7 +504,7 @@ class HarnessCtlTests(unittest.TestCase):
 
     def test_validate_inspect_and_dashboard_commands_preserve_success(self) -> None:
         target = self.root / "operate"
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         self.assertEqual(0, invoke("validate", str(target))[0])
         before = sorted(path.relative_to(target).as_posix() for path in target.rglob("*"))
         inspection = subprocess.run(
@@ -587,7 +565,7 @@ class HarnessCtlTests(unittest.TestCase):
         target.mkdir()
         self.assertEqual(0, invoke("init", str(target))[0])
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual(LOCK_SCHEMA, lock["schema"])
+        self.assertEqual(5, lock["schema"])
         self.assertEqual(HASH_ALGORITHM, lock["hash_algorithm"])
         self.assertEqual(HASH_MODE, lock["hash_mode"])
         self.assertEqual(__version__, lock["evaluator"]["version"])
@@ -596,8 +574,7 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual([], [path for path in lock["files"] if path.startswith("scripts/")])
         self.assertNotIn("AGENTS.md", lock["files"])
         self.assertNotIn("CLAUDE.md", lock["files"])
-        self.assertEqual("managed", lock["files"]["docs/engineering/harness/CONTINUE.md"]["mode"])
-        self.assertEqual({"mode": "seed", "state": "present"}, lock["files"]["docs/engineering/README.md"])
+        self.assertEqual({}, lock["files"])
         self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", lock["files"])
         self.assertNotIn("docs/engineering/ADOPTION_REPORT.md", lock["files"])
 
@@ -611,7 +588,8 @@ class HarnessCtlTests(unittest.TestCase):
         except (OSError, NotImplementedError):
             self.skipTest("directory symlinks are unavailable")
         with self.assertRaisesRegex(Exception, "symlinked directory"):
-            plan_install(target, project_name=None, mode="init")
+            from se_harness.installer import _plan_legacy_install
+            _plan_legacy_install(target, project_name=None, mode="init")
         self.assertEqual([], list(outside.iterdir()))
 
     def test_path_traversal_and_unsafe_lock_entry_fail_closed(self) -> None:
@@ -620,7 +598,7 @@ class HarnessCtlTests(unittest.TestCase):
         with self.assertRaises(HarnessError):
             safe_destination(target, Path("../outside.txt"))
 
-        self.assertEqual(0, invoke("init", str(target))[0])
+        legacy_repository(target)
         lock_path = target / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["files"]["../outside.txt"] = {"mode": "managed", "sha256": "0" * 64}

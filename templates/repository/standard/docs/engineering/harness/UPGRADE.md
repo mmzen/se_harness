@@ -6,7 +6,7 @@ An exact harness upgrade is requested and authorized.
 
 ## Before this action
 
-Read [SETUP.md#prepare-or-repair-the-released-evaluator](SETUP.md#prepare-or-repair-the-released-evaluator) for the selected target evaluator. Read [migration/IMPLEMENTATION_PLAN.md#installation-and-adoption](migration/IMPLEMENTATION_PLAN.md#installation-and-adoption) for the instruction-ownership migration.
+Read [SETUP.md#prepare-or-repair-the-released-evaluator](SETUP.md#prepare-or-repair-the-released-evaluator) for the selected target evaluator. For migration from repository copies, also read [External resource migration](#external-resource-migration). The older 0.18.0/0.19.0 guide-retirement rules below apply only to repository-copy upgrades.
 
 ## Procedure
 
@@ -35,11 +35,13 @@ editable-file replacements.
    repository. Separate expected old-version/template differences from unrelated
    integrity failures.
 3. Preview the upgrade. Inspect every changed path and the target identity.
-   If the plan retires an AGENTS.md or CLAUDE.md harness block, follow
+   If the plan retires ENGINEERING_HARNESS.md or an AGENTS.md or CLAUDE.md harness block, follow
    [Legacy entry delivery evidence](#legacy-entry-delivery-evidence) before apply.
-4. Leave editable seed files unchanged unless their replacement was explicitly
-   selected. Repeat `--replace-file PATH` for each selected editable file in both
-   preview and apply. Preserve unrelated owner files and formal records.
+4. Leave editable seed files unchanged unless their replacement or retirement
+   was explicitly selected. Use `--replace-file PATH` only for repository-copy
+   upgrades. External resource migration uses `--retire-file PATH` for unchanged
+   stock seeds. Repeat the selected arguments in preview and apply. Preserve
+   unrelated owner files and formal records.
 5. If transaction evidence is required, choose its authorized repository path
    below `docs/engineering/DOMAIN/evidence/` and pass `--evidence-output PATH`.
 6. Apply the same selected plan only when its changes match the existing upgrade
@@ -49,8 +51,8 @@ editable-file replacements.
 7. Run doctor and the repository's required post-upgrade checks with the resulting
    selected evaluator. Report actual failures and effects.
 8. After interruption, inspect the configuration, lock, and files. Reuse the same
-   selected wheel and installer operation. Do not introduce a second environment
-   or a fabricated recovery receipt.
+   selected wheel, completed environment and installer operation. Do not fabricate
+   a recovery receipt or overwrite an environment used by another session.
 
 **Harness commands:**
 
@@ -78,13 +80,62 @@ actual writes are explicit.
 existing authority. An upgrade performs no merge, tag, publication, deployment,
 or product release.
 
+## External resource migration
+
+Default initialization writes only `.engineering-harness.toml` and
+`.engineering-harness.lock`. The selected wheel holds the entry, procedures,
+templates and machine policy. Existing repository-copy installations keep their
+layout until an authorized upgrade explicitly selects `--external-resources`.
+
+**Additional inputs:** The exact prior wheel matching the current lock, reviewed
+native replacement-delivery evidence, and the exact editable seeds selected for
+retirement. The prior wheel is read as data; its code is not executed.
+
+**Actions:**
+
+1. Keep the old selection intact while preparing the target evaluator externally.
+2. Preview with `--external-resources --prior-wheel PRIOR-WHEEL`. The installer
+   validates replacement resources before classifying leaving files. Review every
+   path and resolve customized or ambiguous content before any apply.
+3. Add `--retire-file PATH` for each unchanged editable seed the owner explicitly
+   selects. This can include `docs/engineering/ARTIFACT_AUTHORING.md` and artifact
+   templates. Stock seeds otherwise remain as owner files. A customized instruction
+   seed requires an owner migration and review; it is not an implicit policy overlay.
+4. Review replacement delivery as described below. Apply the same migration inputs
+   with the retained delivery evidence. Managed stock copies retire atomically;
+   historical artifacts and evidence are not rewritten.
+5. Run doctor, query the selected entry, activate the resulting checkout in the
+   host session, and read the returned entry. Inspect actual state after interruption
+   before retrying. A successful repeat of the migrated selection changes nothing.
+
+```text
+harnessctl upgrade REPO --external-resources --prior-wheel PRIOR-WHEEL --json
+harnessctl upgrade REPO --external-resources --prior-wheel PRIOR-WHEEL --instruction-delivery-evidence DELIVERY-JSON --apply --json
+harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json
+```
+
+Include each selected `--retire-file` in both commands. Do not use `--prior-wheel`
+or `--retire-file` again after migration. `--replace-file` does not apply to the
+external layout. Existing Git, CI and PR integrations stay selected. Owner-deleted
+seed files stay deleted unless explicitly requested again.
+
+For fresh installation or an external-layout upgrade, repeat `--integration git`,
+`--integration ci`, or `--integration pr` for the requested integrations. Preview
+lists their exact writes. Git selects `.gitattributes`; CI selects the workflow
+and `.gitignore`; PR selects its template. Select Git byte-preservation rules
+before producing hash-bound evidence. Missing rules are a readiness failure;
+installation does not waive them. No integration is required merely to write the
+two selection files.
+
 ## Legacy entry delivery evidence
 
-Before approving removal of an old harness block, review native startup and
+Before approving removal of an old harness block or local entry file, review native startup and
 post-compaction traces from the configured replacement host. A direct call to
 the hook script is not a native trace. Confirm the host is installed, enabled
 and trusted for this repository. Rehearse the exact planned root in an isolated
-copy before changing the real installation.
+copy before changing the real installation. For external resources, use the
+complete rendered entry returned by the target evaluator's resource query;
+do not expect a repository-local entry file.
 
 Retain a JSON evidence file and its trace files in the authorized evidence
 location. Its schema is `se-harness-native-instruction-delivery-v1`:
@@ -118,10 +169,11 @@ After the resulting identity and checks pass → [CONTINUE.md#procedure](CONTINU
 
 ## Retired guide files
 
-New installations omit OPERATING_CARD.md, DECISION_RIGHTS.md, QUALITY_GATES.md,
+The 0.20.0 repository-copy layout omits OPERATING_CARD.md, DECISION_RIGHTS.md, QUALITY_GATES.md,
 WORKFLOW.md, TRACEABILITY.md and TECHNICAL_COMMUNICATION.md under
-docs/engineering/. The current instructions are under docs/engineering/harness/.
+docs/engineering/. In that layout the instructions are under docs/engineering/harness/;
 ARTIFACT_AUTHORING.md, WORKFLOW.json and QUALITY_GATES.json remain in place.
+The external layout resolves all these shared resources from its selected wheel.
 
 An upgrade from 0.19.0 preserves each existing pointer or customized owner file
 byte-for-byte. An absent file stays absent. The preview lists previously tracked

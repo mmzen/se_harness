@@ -11,7 +11,7 @@ from unittest import mock
 
 from se_harness import __version__
 from se_harness.engine.validate_engineering_artifacts import load_revision_policy
-from se_harness.installer import HarnessError, apply_changes, plan_install
+from se_harness.installer import _plan_legacy_install, HarnessError, apply_changes, plan_install
 from se_harness.integrity import canonical_sha256
 from se_harness.preflight import inspect_installation
 from se_harness.workflow_edges import revision_policy
@@ -59,7 +59,7 @@ class ConfigurationSurfaceTests(unittest.TestCase):
 
     def install(self, temporary: str, *, project_name: str = "Fixture") -> Path:
         target = Path(temporary) / "repository"
-        changes, old_lock = plan_install(target, project_name=project_name, mode="init")
+        changes, old_lock = _plan_legacy_install(target, project_name=project_name, mode="init")
         apply_changes(target, changes, old_lock, allow_updates=False)
         return target
 

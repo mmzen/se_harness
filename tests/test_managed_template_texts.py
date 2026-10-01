@@ -12,6 +12,7 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from tests.cli_support import invoke
 from tests.mutation_guard_support import patch_mutation_authority
@@ -108,7 +109,10 @@ class DraftedWorkOrderTests(unittest.TestCase):
 
     def test_a_drafted_work_order_carries_the_guidance_and_no_copied_sentence(self) -> None:
         patch_mutation_authority(self)
-        with tempfile.TemporaryDirectory() as scratch:
+        # Explicit unit origin; production still requires an installed wheel.
+        with tempfile.TemporaryDirectory() as scratch, patch(
+            "se_harness.resources._installed_resource_root", return_value=STANDARD.parent.parent,
+        ):
             target = Path(scratch) / "target"
             code, _, error = invoke("init", str(target), "--project-name", "Scenario B")
             self.assertEqual(0, code, error)
@@ -121,6 +125,7 @@ class DraftedWorkOrderTests(unittest.TestCase):
             self.assertEqual(0, code, error)
             drafted = next((target / "docs/engineering/scratch-domain").rglob("WO-SCR-001.md"))
             text = drafted.read_text(encoding="utf-8")
+            self.assertFalse((target / "docs/engineering/templates").exists())
         section = " ".join(_section(text, "Completion report format").split())
         self.assertIn("installed workflow and shared approval rule", section)
         self.assertNotIn("[delegation]", text)

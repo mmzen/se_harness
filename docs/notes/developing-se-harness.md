@@ -6,7 +6,7 @@
 
 The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. Exact public 0.5.0 later governed the 0.6.0 release through the ordinary standard repository lifecycle. On 2026-08-23, the separately governed `WO-HUP-002` transaction adopted exact public 0.6.0 as the standard root evaluator. No self-hosting installation profile, evaluator descriptor, or special promotion command was introduced. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
 
-Candidate source in this checkout reports version 0.21.0. The standard root is governed by exact public 0.20.0, adopted under `WO-HUP-024` and recorded in `.engineering-harness.toml`. The schema-4 lock retains that release's immutable public wheel and installed-payload digests and selects plugin ownership completed under `WO-PLG-025`. Candidate source remains development evidence; its version does not select the governing evaluator or grant release authority.
+Candidate source in this checkout reports version 0.21.0. The standard root is governed by exact public 0.20.1, adopted under `WO-HUP-025` and recorded in `.engineering-harness.toml`. The schema-4 lock retains that release's immutable public wheel and installed-payload digests and preserves plugin ownership. Candidate source remains development evidence; its version does not select the governing evaluator or grant release authority.
 
 In evaluator examples, `harnessctl` means the absolute Python executable of
 the repository's selected released evaluator followed by `-I -m se_harness`.
@@ -35,19 +35,26 @@ WO-HUP-021 applied 25 additions, 8 updates and two fragment retirements, leaving
 from AGENTS.md. The transaction and native-delivery evidence are retained under
 `docs/engineering/repository-harness-upgrade/evidence/`.
 
+The successor candidate defaults to external wheel resources and two repository
+selection files. Test current `init` from an independently installed wheel outside
+this checkout. Unit fixtures explicitly distinguish that layout from materialized
+legacy installations; do not make all CLI calls silently use the legacy fixture.
+The [migration procedure](harness-installation-and-upgrades.md#minimal-installation-successor-candidate)
+requires the prior selected wheel and reviewed native delivery before retirement.
+Candidate behavior does not adopt its layout into this development repository.
+
 ## Agent skills for this checkout
 
-This repository gets its agent skills and native instruction-delivery hook
-from its installed Verity Plane 0.2.0 selection. The public marketplace now
-offers plugin 0.2.2 with released evaluator 0.20.0, observed at
-`5662817f42994bd0dc9aabaa56891f9c298ab965` on 2026-09-29. Publication does not
-replace the user's existing local plugin selection or select a repository
-evaluator. WO-HUP-024 separately adopts released 0.20.0 in this checkout. WO-PLG-030 retains native qualification; WO-PLG-031 retains both
-public fresh-install and update routes and the exact-input native evidence
-comparison in its
-[confirmation evidence](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md).
-Use the [marketplace guide](../../release/plugin-marketplace/README.md) for
-the published package identity and installation commands.
+Agent skills and native instruction delivery come from each host's installed
+Verity Plane plugin. The public marketplace offers plugin 0.2.3 with released
+evaluator 0.20.1 at `556d0faf83c32fd188409c5ba191552fad1522e1`, observed on
+2026-10-01. Publication does not replace the user's local plugin or select a
+repository evaluator. WO-HUP-025 separately adopted 0.20.1 in this checkout.
+WO-RLS-029 retains both public fresh-install and update routes and the
+exact-input native evidence comparison in its
+[confirmation evidence](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md).
+Use the [plugin installation guide](plugin-installation-guide.md) for the
+published package identity and installation commands.
 WO-HUP-021 retains the exact package identities and local installation evidence.
 Its native rehearsal covers Windows Codex CLI startup and manual compaction,
 not Codex desktop UI or automatic threshold compaction. A clone needs its own

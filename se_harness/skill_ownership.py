@@ -87,6 +87,8 @@ def _prepare(target: Path, provider: str, plugin_root: Path | None) -> tuple[Pat
     if not _destination(root, LOCK_NAME).is_file():
         raise OwnershipError("initialize the repository before switching its skill provider")
     lock = load_lock(root)
+    if lock.get("schema") == 5:
+        raise OwnershipError("external resources use host-installed plugin skills; repository skill ownership does not apply")
     after = {**lock, "files": dict(lock["files"])}
     writes = {}
     changes = []

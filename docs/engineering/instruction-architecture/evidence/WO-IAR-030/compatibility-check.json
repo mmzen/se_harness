@@ -1,0 +1,41 @@
+{
+  "role": "Reproduction of released CI compatibility and candidate-runner behavior; candidate runner does not supply released qualification authority",
+  "candidate_commit": "6dd70f29cd43ffc230779d61ee1a7ced43a7a611",
+  "wheel_sha256": "e518c10d0fe34ae8d2864d7af5ecef0f84e0b94fe4c90afccc4f2d407b791f3b",
+  "results": [
+    {
+      "label": "released-0.20.0",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-c",
+        "import hashlib,json,sys\nfrom pathlib import Path\nfrom se_harness.candidate_acceptance import assess_candidate_wheel\nwheel,verifier,checkout=map(Path,sys.argv[1:4])\nresult=assess_candidate_wheel(wheel,candidate_commit=sys.argv[4],candidate_wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest(),verifier_wheel_sha256=hashlib.sha256(verifier.read_bytes()).hexdigest(),checkout_root=checkout)\nprint(json.dumps(result.to_dict()))\n",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install037-candidate-build\\dist\\se_harness-0.21.0-py3-none-any.whl",
+        "C:\\Users\\mathi\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\packages\\se_harness-0.20.0-py3-none-any.whl",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "6dd70f29cd43ffc230779d61ee1a7ced43a7a611"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 5, in <module>\n    result=assess_candidate_wheel(wheel,candidate_commit=sys.argv[4],candidate_wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest(),verifier_wheel_sha256=hashlib.sha256(verifier.read_bytes()).hexdigest(),checkout_root=checkout)\n  File \"C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Lib\\site-packages\\se_harness\\candidate_acceptance.py\", line 365, in assess_candidate_wheel\n    customized_file.write_bytes(customized_file.read_bytes() + b\"\\nRepository customization.\\n\")\n                                ~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 777, in read_bytes\n    with self.open(mode='rb', buffering=0) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 771, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\se-harness-acceptance-rzzgjzt6\\\\customized\\\\ENGINEERING_HARNESS.md'\n"
+    },
+    {
+      "label": "candidate-runner-behavior-test",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-install037-package-m3m4f3rr\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import hashlib,json,sys\nfrom pathlib import Path\nfrom se_harness.candidate_acceptance import assess_candidate_wheel\nwheel,verifier,checkout=map(Path,sys.argv[1:4])\nresult=assess_candidate_wheel(wheel,candidate_commit=sys.argv[4],candidate_wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest(),verifier_wheel_sha256=hashlib.sha256(verifier.read_bytes()).hexdigest(),checkout_root=checkout)\nprint(json.dumps(result.to_dict()))\n",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install037-candidate-build\\dist\\se_harness-0.21.0-py3-none-any.whl",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install037-candidate-build\\dist\\se_harness-0.21.0-py3-none-any.whl",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "6dd70f29cd43ffc230779d61ee1a7ced43a7a611"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "stdout": "{\"schema\": \"se-harness-functional-acceptance-v1\", \"verifier\": {\"version\": \"0.21.0\", \"wheel_sha256\": \"e518c10d0fe34ae8d2864d7af5ecef0f84e0b94fe4c90afccc4f2d407b791f3b\", \"contract_sha256\": \"a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75\"}, \"candidate\": {\"version\": \"0.21.0\", \"commit\": \"6dd70f29cd43ffc230779d61ee1a7ced43a7a611\", \"wheel_sha256\": \"e518c10d0fe34ae8d2864d7af5ecef0f84e0b94fe4c90afccc4f2d407b791f3b\"}, \"python\": {\"version\": \"3.14.6\"}, \"scenarios\": [{\"scenario_id\": \"installed-identity\", \"outcome\": \"passed\", \"output_sha256\": \"ee73b93c68ef8b4a8d4dfa9c41c1da1de5a838a5b501a2ec26a9ca4036009f3e\"}, {\"scenario_id\": \"init\", \"outcome\": \"passed\", \"output_sha256\": \"dc7ac015cea15c15e218ec6c61f8c01196da46c19eca0dfb466cf0e8e738c8df\"}, {\"scenario_id\": \"adopt\", \"outcome\": \"passed\", \"output_sha256\": \"dae406fa50b090a39ec515be15930d9bf75e41053577b2de8cc6f80effb4199b\"}, {\"scenario_id\": \"doctor\", \"outcome\": \"passed\", \"output_sha256\": \"de0bb58859c30947079ba132b44933ab67ba743fd3cb20f5dbbb471dc04bdf67\"}, {\"scenario_id\": \"validate\", \"outcome\": \"passed\", \"output_sha256\": \"1f03190d0cbe98e43e50c0f18db02d63b84b94cca95579a7fc6be22220a6a155\"}, {\"scenario_id\": \"dashboard\", \"outcome\": \"passed\", \"output_sha256\": \"e26898c90338bf80c872efd86a9c7c95ffb8fcee410686b83e57fcf960b5539a\"}, {\"scenario_id\": \"safe-upgrade\", \"outcome\": \"passed\", \"output_sha256\": \"510e75d5cdb18c43105c16805037e861ccd2763982239793d7a9ba48c9dd83b7\"}, {\"scenario_id\": \"customized-content-refusal\", \"outcome\": \"passed\", \"output_sha256\": \"db32c05704824b906927abcd28c4a11fd4a56662f810ca8db20eb19c44691ed8\"}, {\"scenario_id\": \"corrupted-integrity-refusal\", \"outcome\": \"passed\", \"output_sha256\": \"39944fc3556385575998ba4d55c6809c3716c84daa39a560f3dcce2e562ef217\"}, {\"scenario_id\": \"authority-denial\", \"outcome\": \"passed\", \"output_sha256\": \"327c070250491add271e20ab97d700feb01916e8b66cd39796f0e284fc763546\"}]}\n",
+      "stderr": ""
+    }
+  ]
+}
