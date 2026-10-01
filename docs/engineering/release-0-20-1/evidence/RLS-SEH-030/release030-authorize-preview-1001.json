@@ -1,0 +1,176 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "--set",
+    "RLS-SEH-030=released",
+    "--decision",
+    "RLS-SEH-030=release-owner",
+    "--reason",
+    "RLS-SEH-030=Human mmzen: I authorize release record RLS-SEH-030. Authorizes SE Harness 0.20.1 at verified candidate b9af631b850c495eace9807361ed3ec3e36a10b2 with unchanged reviewed release inputs, verified VREC-SEH-030 and passing bound-record two-build replay. Codex applies the human decision using the approved maintenance 0.19.0 role-label encoding; mmzen is the accountable release owner. Merge, publication, moving markers and adoption remain separate.",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 1,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "transition",
+      "outcome": "blocked"
+    },
+    "selection": {
+      "primary": "RLS-SEH-030",
+      "artifacts": [
+        "RLS-SEH-030"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+      "procedure_id": "PROC-REMEDIATE",
+      "status": "fail",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-REMEDIATE",
+      "current_step": "STEP-REMEDIATE-FOCUS",
+      "steps": [
+        {
+          "id": "STEP-REMEDIATE-FOCUS",
+          "kind": "command",
+          "gate_ids": [],
+          "effects": [
+            "Re-evaluated selected state for RLS-SEH-030."
+          ],
+          "non_effects": [
+            "Remediation does not expand scope or change state."
+          ],
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "RLS-SEH-030"
+          ]
+        }
+      ]
+    },
+    "state": {
+      "before": [],
+      "after": []
+    },
+    "findings": {
+      "scoped_blockers": [
+        {
+          "code": "WEX201",
+          "message": "proposed final graph is invalid [E009]: field 'authorized_by' must identify one of the record owners"
+        }
+      ],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "blocked",
+      "done": [],
+      "not_done": [
+        "The requested workflow operation remains incomplete."
+      ],
+      "blocked_by": [
+        "WEX201: proposed final graph is invalid [E009]: field 'authorized_by' must identify one of the record owners"
+      ],
+      "current_lifecycle_state": [
+        "No lifecycle state was changed."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-REMEDIATE",
+        "step_id": "STEP-REMEDIATE-FOCUS",
+        "action": "remediate"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "RLS-SEH-030"
+        ]
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-REMEDIATE",
+          "location": {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "if-a-procedure-is-blocked"
+          },
+          "prerequisites": [],
+          "steps": {
+            "STEP-REMEDIATE-FOCUS": {
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": []
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-REMEDIATE-FOCUS",
+          "location": {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "if-a-procedure-is-blocked"
+          },
+          "prerequisites": []
+        }
+      },
+      "formal_artifact_ids": [
+        "RLS-SEH-030"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "8e38aad1ba03dc85fb363a6af80e9faac06273331b49e8ede26a482291fe99cc"
+  },
+  "seconds": 9.352491099999952
+}
