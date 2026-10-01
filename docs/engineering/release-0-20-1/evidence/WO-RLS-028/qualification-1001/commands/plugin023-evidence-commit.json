@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "commit",
+    "-m",
+    "Retain package-source checks and exact release replay evidence",
+    "-m",
+    "Harness-Work-Order: WO-RLS-028"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": "[work/plugin-0-2-3 94a6d569] Retain package-source checks and exact release replay evidence\n 14 files changed, 2862 insertions(+), 8 deletions(-)\n create mode 100644 docs/engineering/release-0-20-1/evidence/RLS-SEH-030/bound-record-replay.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/RLS-SEH-030/delivery-plan-source.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/WO-RLS-028/plugin023-assembly-baseline-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/WO-RLS-028/plugin023-package-tests-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-approval-apply-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-approval-preview-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-review-prcheck-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-review-prcheck-final-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-review-preaction-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-review-preaction-retry-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/WO-RLS-028/source-preparation.json\n",
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  "seconds": 0.1594299000000774
+}

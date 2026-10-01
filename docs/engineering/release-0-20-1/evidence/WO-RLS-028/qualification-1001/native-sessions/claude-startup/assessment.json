@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "context_count": 1,
+  "expected_error": null,
+  "probe": null,
+  "model_response_assessed": false,
+  "context_sha256": [
+    "cd08a1a2cf622520c4a431d0cafccb17a1d8cf3524d57abbf39e82f85c8258ab"
+  ],
+  "replies": [],
+  "behavior": {
+    "available": true,
+    "may_implement": false,
+    "next_step": "Harness instructions (SE Harness 0.20.1, ENGINEERING_HARNESS.md) are in context, but implementation needs accepted formal definitions and an approved work order; next, run harnessctl check for lifecycle context and identify or create the governing work order per DEFINE_CHANGE.md before any code change."
+  },
+  "unchanged": true,
+  "session_id": "55d3b7f2-3df7-4aec-8e51-5b0295c56fdf",
+  "test_only_model": "host-default",
+  "saved_model_changed": false
+}

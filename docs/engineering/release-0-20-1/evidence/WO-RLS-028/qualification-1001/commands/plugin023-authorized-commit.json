@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "commit",
+    "-m",
+    "Retain the authorized 0.20.1 release decision and transport evidence",
+    "-m",
+    "Harness-Work-Order: WO-RLS-028"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": "[work/plugin-0-2-3 07bb5e5a] Retain the authorized 0.20.1 release decision and transport evidence\n 10 files changed, 23070 insertions(+), 6 deletions(-)\n create mode 100644 docs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-authorize-apply-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-authorize-corrected-preview-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-authorize-preview-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-main-released-validate-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-main-transport-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-main-validate-1001.json\n create mode 100644 docs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-owner-correction-1001.json\n",
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  "seconds": 0.1607603999998446
+}

@@ -1,0 +1,39 @@
+warning: unable to access 'C:\Users\mathi/.config/git/ignore': Permission denied
+
+
+
+
+
+
+
+{"accepted": false, "error": "forbidden payload destination: runtime/python.exe"}
+
+warning: unable to access 'C:\Users\mathi/.config/git/ignore': Permission denied
+
+
+
+
+
+
+
+{"accepted": false, "error": "forbidden payload destination: packages/candidate.whl"}
+
+warning: unable to access 'C:\Users\mathi/.config/git/ignore': Permission denied
+
+
+
+
+
+
+
+{"accepted": false, "error": "unsupported payload type: assets/dependency.whl"}
+
+warning: unable to access 'C:\Users\mathi/.config/git/ignore': Permission denied
+
+
+
+
+
+
+
+{"accepted": false, "error": "forbidden payload destination: bin/run.py"}

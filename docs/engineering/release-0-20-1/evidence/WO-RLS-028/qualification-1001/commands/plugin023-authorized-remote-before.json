@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:/Program Files/GitHub CLI/gh.exe",
+    "pr",
+    "view",
+    "510",
+    "--repo",
+    "mmzen/se_harness",
+    "--json",
+    "state,isDraft,headRefOid,baseRefOid,baseRefName"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "baseRefName": "release/0.20",
+    "baseRefOid": "18cd578e08092bce4d90fd2717606744d4f7f427",
+    "headRefOid": "94a6d569fa5b867d277f6a6a96de5a9111bd8d74",
+    "isDraft": true,
+    "state": "OPEN"
+  },
+  "seconds": 0.41511160000004566
+}

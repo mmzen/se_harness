@@ -1,0 +1,287 @@
+{
+  "checks": [
+    {
+      "extra_sources": {
+        "forbidden.txt": "78a83403fcb3b7a3fc1df1abbeb6dfad652c01e561efd9ba6985f7c75c44245a"
+      },
+      "fixture_revision": "3e05e54f863e19dad2f2587a22c0a3a1dbe49f36",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/claude-code/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/claude-code/hooks/hooks.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/codex/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/codex/hooks/hooks.json"
+          }
+        },
+        "name": "verity-plane",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "LICENSE": "LICENSE",
+          "runtime/python.exe": "forbidden.txt",
+          "scripts/inject_instructions.py": "plugins/verity-plane/common/scripts/inject_instructions.py",
+          "scripts/setup.py": "plugins/verity-plane/common/scripts/setup.py",
+          "skills/change/SKILL.md": "plugins/verity-plane/common/skills/change/SKILL.md",
+          "skills/change/references/artifacts.md": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+          "skills/change/references/authority.md": "plugins/verity-plane/common/skills/change/references/authority.md",
+          "skills/change/references/work-orders.md": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+          "skills/evidence/SKILL.md": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+          "skills/evidence/references/external-actions.md": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+          "skills/evidence/references/records.md": "plugins/verity-plane/common/skills/evidence/references/records.md",
+          "skills/harness-operator-brief/SKILL.md": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
+          "skills/harness-operator-brief/agents/openai.yaml": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+          "skills/harness-operator-brief/scripts/check_brief.py": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
+          "skills/harness-operator-brief/skill-contract.json": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
+          "skills/harness-orient/SKILL.md": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+          "skills/harness-orient/scripts/orient.py": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
+          "skills/harness-orient/skill-contract.json": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
+          "skills/setup/SKILL.md": "plugins/verity-plane/common/skills/setup/SKILL.md",
+          "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
+          "skills/setup/references/maintenance.md": "plugins/verity-plane/common/skills/setup/references/maintenance.md",
+          "skills/setup/references/repository.md": "plugins/verity-plane/common/skills/setup/references/repository.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "forbidden payload destination: runtime/python.exe"
+    },
+    {
+      "extra_sources": {
+        "forbidden.txt": "102855d599837ca8258d565736139b711e301989df39f506468076decfea1dac"
+      },
+      "fixture_revision": "dc17809c0bac921f243262459b9e31b67c5b6d13",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/claude-code/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/claude-code/hooks/hooks.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/codex/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/codex/hooks/hooks.json"
+          }
+        },
+        "name": "verity-plane",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "LICENSE": "LICENSE",
+          "packages/candidate.whl": "forbidden.txt",
+          "scripts/inject_instructions.py": "plugins/verity-plane/common/scripts/inject_instructions.py",
+          "scripts/setup.py": "plugins/verity-plane/common/scripts/setup.py",
+          "skills/change/SKILL.md": "plugins/verity-plane/common/skills/change/SKILL.md",
+          "skills/change/references/artifacts.md": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+          "skills/change/references/authority.md": "plugins/verity-plane/common/skills/change/references/authority.md",
+          "skills/change/references/work-orders.md": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+          "skills/evidence/SKILL.md": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+          "skills/evidence/references/external-actions.md": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+          "skills/evidence/references/records.md": "plugins/verity-plane/common/skills/evidence/references/records.md",
+          "skills/harness-operator-brief/SKILL.md": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
+          "skills/harness-operator-brief/agents/openai.yaml": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+          "skills/harness-operator-brief/scripts/check_brief.py": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
+          "skills/harness-operator-brief/skill-contract.json": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
+          "skills/harness-orient/SKILL.md": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+          "skills/harness-orient/scripts/orient.py": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
+          "skills/harness-orient/skill-contract.json": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
+          "skills/setup/SKILL.md": "plugins/verity-plane/common/skills/setup/SKILL.md",
+          "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
+          "skills/setup/references/maintenance.md": "plugins/verity-plane/common/skills/setup/references/maintenance.md",
+          "skills/setup/references/repository.md": "plugins/verity-plane/common/skills/setup/references/repository.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "forbidden payload destination: packages/candidate.whl"
+    },
+    {
+      "extra_sources": {
+        "forbidden.txt": "1c45ce3ae06d873ccd6d3c7e62bdad3e14c59af93b0d1f75c638911bb4a261e2"
+      },
+      "fixture_revision": "c7268fe9ec93c162b54b21c2bd80d52a8844ea9b",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/claude-code/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/claude-code/hooks/hooks.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/codex/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/codex/hooks/hooks.json"
+          }
+        },
+        "name": "verity-plane",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "LICENSE": "LICENSE",
+          "assets/dependency.whl": "forbidden.txt",
+          "scripts/inject_instructions.py": "plugins/verity-plane/common/scripts/inject_instructions.py",
+          "scripts/setup.py": "plugins/verity-plane/common/scripts/setup.py",
+          "skills/change/SKILL.md": "plugins/verity-plane/common/skills/change/SKILL.md",
+          "skills/change/references/artifacts.md": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+          "skills/change/references/authority.md": "plugins/verity-plane/common/skills/change/references/authority.md",
+          "skills/change/references/work-orders.md": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+          "skills/evidence/SKILL.md": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+          "skills/evidence/references/external-actions.md": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+          "skills/evidence/references/records.md": "plugins/verity-plane/common/skills/evidence/references/records.md",
+          "skills/harness-operator-brief/SKILL.md": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
+          "skills/harness-operator-brief/agents/openai.yaml": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+          "skills/harness-operator-brief/scripts/check_brief.py": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
+          "skills/harness-operator-brief/skill-contract.json": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
+          "skills/harness-orient/SKILL.md": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+          "skills/harness-orient/scripts/orient.py": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
+          "skills/harness-orient/skill-contract.json": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
+          "skills/setup/SKILL.md": "plugins/verity-plane/common/skills/setup/SKILL.md",
+          "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
+          "skills/setup/references/maintenance.md": "plugins/verity-plane/common/skills/setup/references/maintenance.md",
+          "skills/setup/references/repository.md": "plugins/verity-plane/common/skills/setup/references/repository.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "unsupported payload type: assets/dependency.whl"
+    },
+    {
+      "extra_sources": {
+        "forbidden.txt": "de2a7afbf6f7c62dc9b32bb3cd4461acdbd282a1ac2c5059db956c05f62e4ad5"
+      },
+      "fixture_revision": "f902505509efb813aba6694c5929aad3152e621f",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/claude-code/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/claude-code/hooks/hooks.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/codex/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/codex/hooks/hooks.json"
+          }
+        },
+        "name": "verity-plane",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "LICENSE": "LICENSE",
+          "bin/run.py": "forbidden.txt",
+          "scripts/inject_instructions.py": "plugins/verity-plane/common/scripts/inject_instructions.py",
+          "scripts/setup.py": "plugins/verity-plane/common/scripts/setup.py",
+          "skills/change/SKILL.md": "plugins/verity-plane/common/skills/change/SKILL.md",
+          "skills/change/references/artifacts.md": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+          "skills/change/references/authority.md": "plugins/verity-plane/common/skills/change/references/authority.md",
+          "skills/change/references/work-orders.md": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+          "skills/evidence/SKILL.md": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+          "skills/evidence/references/external-actions.md": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+          "skills/evidence/references/records.md": "plugins/verity-plane/common/skills/evidence/references/records.md",
+          "skills/harness-operator-brief/SKILL.md": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
+          "skills/harness-operator-brief/agents/openai.yaml": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+          "skills/harness-operator-brief/scripts/check_brief.py": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
+          "skills/harness-operator-brief/skill-contract.json": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
+          "skills/harness-orient/SKILL.md": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+          "skills/harness-orient/scripts/orient.py": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
+          "skills/harness-orient/skill-contract.json": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
+          "skills/setup/SKILL.md": "plugins/verity-plane/common/skills/setup/SKILL.md",
+          "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
+          "skills/setup/references/maintenance.md": "plugins/verity-plane/common/skills/setup/references/maintenance.md",
+          "skills/setup/references/repository.md": "plugins/verity-plane/common/skills/setup/references/repository.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "forbidden payload destination: bin/run.py"
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
+}

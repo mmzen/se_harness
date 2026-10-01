@@ -1,0 +1,57 @@
+Processing C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\plugin023-native-install-retry-1001\claude\profile\claude\plugins\cache\se-harness\verity-plane\0.2.3\packages\se_harness-0.20.1-py3-none-any.whl
+Installing collected packages: se-harness
+Successfully installed se-harness-0.20.1
+Evaluator Python: C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\plugin023-native-install-retry-1001\claude\profile\plugin-data\verity-plane\evaluator\Scripts\python.exe
+{
+  "checks": [
+    {
+      "detail": "required",
+      "name": "ENGINEERING_HARNESS.md",
+      "passed": false
+    },
+    {
+      "detail": ".engineering-harness.toml",
+      "name": "config",
+      "passed": false
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/ARTIFACT_AUTHORING.md",
+      "passed": false
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/QUALITY_GATES.json",
+      "passed": false
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/README.md",
+      "passed": false
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/WORKFLOW.json",
+      "passed": false
+    },
+    {
+      "detail": "required instruction file is missing: ENGINEERING_HARNESS.md",
+      "name": "instruction-discovery",
+      "passed": false
+    },
+    {
+      "detail": ".engineering-harness.lock",
+      "name": "lock",
+      "passed": false
+    },
+    {
+      "detail": "3.14.6",
+      "name": "python",
+      "passed": true
+    }
+  ],
+  "command": "doctor",
+  "outcome": "failed",
+  "schema": "se-harness-command-result-v1",
+  "warnings": []
+}

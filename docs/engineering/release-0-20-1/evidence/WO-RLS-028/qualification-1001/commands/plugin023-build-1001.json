@@ -1,0 +1,50 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1\\scripts\\build_plugin_marketplace.py",
+    "build",
+    "--repository",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "--revision",
+    "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab",
+    "--release-revision",
+    "489814dd15bff0b4f93151fab04acd69cec47d0c",
+    "--release-record",
+    "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+    "--expected-wheel-sha256",
+    "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+    "--wheel",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\se_harness-0.20.1-py3-none-any.whl",
+    "--evaluator-python",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "--output-directory",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-marketplace-1001"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "accepted": true,
+    "archives": {
+      "verity-plane-claude.zip": "9bc1030b8f1e8649e598516b670455ccd98dc6531eee7cb7289e5828bbd21c56",
+      "verity-plane-codex.zip": "b89ff58ed5b29db5e03af9ce3868f31f42a40f314939cd9fe8ca7f0fff3b39a7"
+    },
+    "claim": "Contents only; native host testing and publication remain separate.",
+    "evaluator": {
+      "archive": "se_harness-0.20.1-py3-none-any.whl",
+      "archive_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+      "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+      "release_record": "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+      "release_record_sha256": "29e700835b097dde4050bc648dcb9582db1712b265f088b09abdabaad9d89a34",
+      "release_revision": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+      "version": "0.20.1"
+    },
+    "identity_sha256": "b16b34132777e3f95dc71fdd7b2c13200dfe6d8d68ada94dd172d2ab43a9b94e",
+    "plugin_version": "0.2.3",
+    "source": {
+      "plan": "release/plugin-assembly.json",
+      "plan_sha256": "de1402ea173c138b2a342619c0074c0c8a83a60b0e1a7871bfb6bdffa90baa25",
+      "revision": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
+    }
+  },
+  "seconds": 7.360328599999775
+}

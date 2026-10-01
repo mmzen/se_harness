@@ -1,0 +1,49 @@
+
+
+{
+  "accepted": true,
+  "archives": {
+    "verity-plane-claude.zip": "9bc1030b8f1e8649e598516b670455ccd98dc6531eee7cb7289e5828bbd21c56",
+    "verity-plane-codex.zip": "b89ff58ed5b29db5e03af9ce3868f31f42a40f314939cd9fe8ca7f0fff3b39a7"
+  },
+  "claim": "Package contents only; no host support, release or publication decision.",
+  "evaluator": {
+    "archive": "se_harness-0.20.1-py3-none-any.whl",
+    "archive_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+    "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+    "release_record": "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+    "release_record_sha256": "29e700835b097dde4050bc648dcb9582db1712b265f088b09abdabaad9d89a34",
+    "release_revision": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+    "version": "0.20.1"
+  },
+  "schema": "se-harness-plugin-assembly-v1",
+  "source": {
+    "plan": "release/plugin-assembly.json",
+    "plan_sha256": "de1402ea173c138b2a342619c0074c0c8a83a60b0e1a7871bfb6bdffa90baa25",
+    "revision": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
+  }
+}
+
+{
+  "accepted": true,
+  "archives": {
+    "verity-plane-claude.zip": "9bc1030b8f1e8649e598516b670455ccd98dc6531eee7cb7289e5828bbd21c56",
+    "verity-plane-codex.zip": "b89ff58ed5b29db5e03af9ce3868f31f42a40f314939cd9fe8ca7f0fff3b39a7"
+  },
+  "claim": "Package contents only; no host support, release or publication decision.",
+  "evaluator": {
+    "archive": "se_harness-0.20.1-py3-none-any.whl",
+    "archive_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+    "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+    "release_record": "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+    "release_record_sha256": "29e700835b097dde4050bc648dcb9582db1712b265f088b09abdabaad9d89a34",
+    "release_revision": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+    "version": "0.20.1"
+  },
+  "schema": "se-harness-plugin-assembly-v1",
+  "source": {
+    "plan": "release/plugin-assembly.json",
+    "plan_sha256": "de1402ea173c138b2a342619c0074c0c8a83a60b0e1a7871bfb6bdffa90baa25",
+    "revision": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
+  }
+}

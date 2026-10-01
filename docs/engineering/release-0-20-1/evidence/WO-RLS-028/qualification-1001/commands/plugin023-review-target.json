@@ -1,0 +1,13 @@
+{
+  "head": "94a6d569fa5b867d277f6a6a96de5a9111bd8d74",
+  "base": "18cd578e08092bce4d90fd2717606744d4f7f427",
+  "base_branch": "release/0.20",
+  "branch": "work/plugin-0-2-3",
+  "repository": "mmzen/se_harness",
+  "repo_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "body_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\plugin023-review-body.md",
+  "body_sha256": "fb50199cf41618de039537c312d24af4633990280f8d8a881705d90d8e3fe5ee",
+  "pr_check": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\plugin023-review-prcheck-final.json",
+  "preaction": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\plugin023-review-preaction.json",
+  "title": "Prepare plugin 0.2.3 source for the 0.20.1 maintenance evaluator"
+}

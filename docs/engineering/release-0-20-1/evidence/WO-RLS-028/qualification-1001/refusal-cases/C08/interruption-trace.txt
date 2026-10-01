@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\maintenance-0-20-1\tests\plugin_integration\package_assembly\run_acceptance.py", line 222, in c08
+    pkg.build(assembly, output)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\maintenance-0-20-1\repository_tools\plugin_distribution.py", line 360, in build
+    _write(directory / path, raw)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\maintenance-0-20-1\tests\plugin_integration\package_assembly\run_acceptance.py", line 216, in interrupt
+    raise OSError("injected interruption after first copied file")
+OSError: injected interruption after first copied file

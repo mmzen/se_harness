@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "diff",
+    "--name-only",
+    "18cd578e08092bce4d90fd2717606744d4f7f427",
+    "HEAD"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "docs/engineering/release-0-20-1/README.md\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030-evaluator.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/bound-record-replay.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/build-manifest.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/delivery-plan-approved.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/delivery-plan-source.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/delivery-plan.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/preparation.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-authorize-apply-1001.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-authorize-corrected-preview-1001.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-authorize-preview-1001.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-main-released-validate-1001.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-main-transport-1001.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-main-validate-1001.json\ndocs/engineering/release-0-20-1/evidence/RLS-SEH-030/release030-owner-correction-1001.json\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/WO-RLS-028-handoff.md\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/WO-RLS-028-pre-action.md\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/plugin023-assembly-baseline-1001.json\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/plugin023-package-tests-1001.json\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-approval-apply-1001.json\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-approval-preview-1001.json\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-review-prcheck-1001.json\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-review-prcheck-final-1001.json\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-review-preaction-1001.json\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/release030-review-preaction-retry-1001.json\ndocs/engineering/release-0-20-1/evidence/WO-RLS-028/source-preparation.json\ndocs/engineering/release-0-20-1/releases/RLS-SEH-030.md\ndocs/engineering/release-0-20-1/verification/VER-RLS-028.md\ndocs/engineering/release-0-20-1/verification/VER-RLS-029.md\ndocs/engineering/release-0-20-1/work-orders/WO-RLS-028.md\ndocs/engineering/release-0-20-1/work-orders/WO-RLS-029.md\nplugins/verity-plane/claude-code/.claude-plugin/plugin.json\nplugins/verity-plane/claude-code/README.md\nplugins/verity-plane/codex/.codex-plugin/plugin.json\nplugins/verity-plane/codex/README.md\nrelease/plugin-marketplace/README.md\nrelease/plugin-marketplace/submissions/README.md\nrelease/plugin-marketplace/submissions/reviewer-test-cases.md\ntests/plugin_integration/package_assembly/test_refresh_guidance.py\n",
+    "stderr": ""
+  },
+  "seconds": 0.04543220000050496
+}

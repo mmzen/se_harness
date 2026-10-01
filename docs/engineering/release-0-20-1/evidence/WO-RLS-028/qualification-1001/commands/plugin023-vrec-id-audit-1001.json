@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "log",
+    "--all",
+    "--format=",
+    "--name-only",
+    "--",
+    "docs/engineering/*/verification-records/VREC-PLG-027.md"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": ""
+  },
+  "seconds": 0.46441950000007637
+}

@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "git",
+    "init",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001\\repo-claude"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001",
+  "exit_code": 0,
+  "stdout": "Initialized empty Git repository in C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/plugin023-native-1001/repo-claude/.git/\n",
+  "stderr": ""
+}

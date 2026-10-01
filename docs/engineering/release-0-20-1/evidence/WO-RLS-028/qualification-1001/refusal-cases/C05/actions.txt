@@ -1,0 +1,149 @@
+{
+  "case": "c05",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-refusal-scratch-1001\\variants",
+        "read-tree",
+        "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
+      ],
+      "duration_seconds": 0.114,
+      "exit_status": 0,
+      "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-refusal-scratch-1001\\variants",
+        "hash-object",
+        "-w",
+        "--stdin"
+      ],
+      "duration_seconds": 0.035,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "6bb08644156cbd6b52a479f83d3672d4924d523c\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-refusal-scratch-1001\\variants",
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "100644,6bb08644156cbd6b52a479f83d3672d4924d523c,release/plugin-assembly.json"
+      ],
+      "duration_seconds": 0.042,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-refusal-scratch-1001\\variants",
+        "write-tree"
+      ],
+      "duration_seconds": 0.048,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "5c8a1ec3a4b2ed05ee3357a1f84fb6253d813dae\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-refusal-scratch-1001\\variants",
+        "commit-tree",
+        "5c8a1ec3a4b2ed05ee3357a1f84fb6253d813dae",
+        "-p",
+        "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab",
+        "-m",
+        "Disposable negative assembly fixture"
+      ],
+      "duration_seconds": 0.037,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "d37ddec0dca8932fec54172a4ad8c124b52dacb5\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1\\scripts\\build_plugin_archives.py",
+        "build",
+        "--repository",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-refusal-scratch-1001\\variants",
+        "--revision",
+        "d37ddec0dca8932fec54172a4ad8c124b52dacb5",
+        "--plan",
+        "release/plugin-assembly.json",
+        "--release-revision",
+        "489814dd15bff0b4f93151fab04acd69cec47d0c",
+        "--release-record",
+        "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+        "--expected-wheel-sha256",
+        "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\se_harness-0.20.1-py3-none-any.whl",
+        "--evaluator-python",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "--output-directory",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-refusal-scratch-1001\\conflict"
+      ],
+      "duration_seconds": 3.122,
+      "exit_status": 1,
+      "stderr": "{\"accepted\": false, \"error\": \"conflicting output path: scripts/setup.py\"}\r\n",
+      "stdout": ""
+    }
+  ],
+  "runner_argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1\\tests\\plugin_integration\\package_assembly\\run_acceptance.py",
+    "--repository",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "--revision",
+    "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab",
+    "--release-revision",
+    "489814dd15bff0b4f93151fab04acd69cec47d0c",
+    "--release-record",
+    "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+    "--expected-wheel-sha256",
+    "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+    "--wheel",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\se_harness-0.20.1-py3-none-any.whl",
+    "--evaluator-python",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "--plan",
+    "release/plugin-assembly.json",
+    "--evidence-directory",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\plugin023-refusal-evidence-1001",
+    "--scratch-directory",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-refusal-scratch-1001"
+  ]
+}

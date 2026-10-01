@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "commit",
+    "-m",
+    "Prepare plugin 0.2.3 metadata and guidance for evaluator 0.20.1",
+    "-m",
+    "Harness-Work-Order: WO-RLS-028"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": "[work/plugin-0-2-3 7ac05f25] Prepare plugin 0.2.3 metadata and guidance for evaluator 0.20.1\n 8 files changed, 31 insertions(+), 28 deletions(-)\n",
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  "seconds": 0.17905919999998332
+}

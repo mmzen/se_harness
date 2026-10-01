@@ -1,0 +1,171 @@
+{
+  "evaluator": {
+    "archive": "se_harness-0.20.1-py3-none-any.whl",
+    "archive_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+    "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+    "release_record": "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+    "release_record_sha256": "29e700835b097dde4050bc648dcb9582db1712b265f088b09abdabaad9d89a34",
+    "release_revision": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+    "version": "0.20.1"
+  },
+  "files": {
+    ".codex-plugin/plugin.json": {
+      "bytes": 746,
+      "mode": 420,
+      "origin": "codex",
+      "sha256": "67fc4ab0d4303fcab1583fcb6e16df2e97a902e1238d76c2b5e46d3e81fdf7b2"
+    },
+    "LICENSE": {
+      "bytes": 35149,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    "README.md": {
+      "bytes": 2653,
+      "mode": 420,
+      "origin": "codex",
+      "sha256": "caf5c00c4523efaee09dabe517347f5a30cbf3626ae0f84c67c853934017f8b1"
+    },
+    "hooks/hooks.json": {
+      "bytes": 377,
+      "mode": 420,
+      "origin": "codex",
+      "sha256": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2"
+    },
+    "packages/se_harness-0.20.1-py3-none-any.whl": {
+      "bytes": 534217,
+      "mode": 420,
+      "origin": "evaluator",
+      "sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+    },
+    "scripts/inject_instructions.py": {
+      "bytes": 7095,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "98e47de370f0a54dff5b1f3f68bbea40739420da6b1d9197825f569c5b6932ba"
+    },
+    "scripts/setup.py": {
+      "bytes": 2282,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c"
+    },
+    "skills/change/SKILL.md": {
+      "bytes": 4031,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "626bbdbb5ff52994b8d89562916df424087351c2167c8a2c97e862f74fe22ffa"
+    },
+    "skills/change/references/artifacts.md": {
+      "bytes": 2461,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6"
+    },
+    "skills/change/references/authority.md": {
+      "bytes": 2546,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0"
+    },
+    "skills/change/references/work-orders.md": {
+      "bytes": 3068,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+    },
+    "skills/evidence/SKILL.md": {
+      "bytes": 3921,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "052dcc3502e72f6309974f7cf9bdd8194bbe52e517410a1f53ef2eff130f1f31"
+    },
+    "skills/evidence/references/external-actions.md": {
+      "bytes": 1672,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69"
+    },
+    "skills/evidence/references/records.md": {
+      "bytes": 5162,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c"
+    },
+    "skills/harness-operator-brief/SKILL.md": {
+      "bytes": 5677,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "d85dfdcda0e6237f7d11607ee32a73eb7b960f5154538d70f81be64c8457a50e"
+    },
+    "skills/harness-operator-brief/agents/openai.yaml": {
+      "bytes": 178,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4"
+    },
+    "skills/harness-operator-brief/scripts/check_brief.py": {
+      "bytes": 9175,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+    },
+    "skills/harness-operator-brief/skill-contract.json": {
+      "bytes": 4376,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+    },
+    "skills/harness-orient/SKILL.md": {
+      "bytes": 5129,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "103bf6dd5478b4bf6951e3f7d7d53715671dca179a209ba8900ca232c4fbbf4f"
+    },
+    "skills/harness-orient/scripts/orient.py": {
+      "bytes": 36425,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f"
+    },
+    "skills/harness-orient/skill-contract.json": {
+      "bytes": 2921,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+    },
+    "skills/setup/SKILL.md": {
+      "bytes": 1746,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "284966587c1884fc1369e9987be59c8ddca43ba9372733bca6fee8a1322abb86"
+    },
+    "skills/setup/references/environment.md": {
+      "bytes": 1086,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363"
+    },
+    "skills/setup/references/maintenance.md": {
+      "bytes": 2074,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb"
+    },
+    "skills/setup/references/repository.md": {
+      "bytes": 2774,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3"
+    }
+  },
+  "host": "codex",
+  "plugin": "verity-plane",
+  "schema": "se-harness-plugin-assembly-v1",
+  "source": {
+    "plan": "release/plugin-assembly.json",
+    "plan_sha256": "de1402ea173c138b2a342619c0074c0c8a83a60b0e1a7871bfb6bdffa90baa25",
+    "revision": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
+  }
+}

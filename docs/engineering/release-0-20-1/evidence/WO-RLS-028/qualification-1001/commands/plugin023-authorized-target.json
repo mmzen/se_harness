@@ -1,0 +1,8 @@
+{
+  "head": "07bb5e5a1a3ee4b6319e50ae3b7ee82aad2b3a42",
+  "parent": "94a6d569fa5b867d277f6a6a96de5a9111bd8d74",
+  "branch": "work/plugin-0-2-3",
+  "pr": "510",
+  "base": "18cd578e08092bce4d90fd2717606744d4f7f427",
+  "base_branch": "release/0.20"
+}

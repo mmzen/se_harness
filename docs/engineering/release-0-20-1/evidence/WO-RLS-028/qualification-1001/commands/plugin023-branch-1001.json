@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "git",
+    "switch",
+    "-c",
+    "work/plugin-0-2-3"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": "Switched to a new branch 'work/plugin-0-2-3'\n"
+  },
+  "seconds": 0.05584620000001905
+}

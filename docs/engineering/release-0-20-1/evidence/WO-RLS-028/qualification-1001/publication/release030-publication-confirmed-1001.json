@@ -1,0 +1,22 @@
+{
+  "release_record": "RLS-SEH-030",
+  "version": "0.20.1",
+  "formal_state": "released",
+  "publication": "confirmed",
+  "workflow": "https://github.com/mmzen/se_harness/actions/runs/36839014759",
+  "github": "https://github.com/mmzen/se_harness/releases/tag/v0.20.1",
+  "pypi": "https://pypi.org/project/se-harness/0.20.1/",
+  "demonstration": "https://www.verityplane.ai/",
+  "candidate": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+  "governance": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+  "public_distribution_hashes": "exact",
+  "public_install": "pass",
+  "demonstration_identity": "exact",
+  "remaining_delivery": [
+    "Plugin 0.2.3 assembly and qualification under WO-RLS-028",
+    "Marketplace publication and public-route observations",
+    "Documentation closeout",
+    "Separate latest/last promotion",
+    "Separate repository evaluator adoption"
+  ]
+}
