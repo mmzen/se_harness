@@ -2,7 +2,7 @@
 id = "WO-IAR-040"
 type = "work_order"
 title = "Correct the minimal-installer symlink refusal assertion"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -41,6 +41,13 @@ to = "in_progress"
 decided_at = "2026-10-01T18:09:05Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-01T18:16:43Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Completed the approved one-line test correction. Real Linux symlink check, 11-test minimal installer class, 1211-test Linux suite and 26-test Windows installer suite passed with recorded skips. Retained original CI and test-environment failures; passing complete scope and handoff. Human verification remains separate."
 +++
 
 # Correct the minimal-installer symlink refusal assertion

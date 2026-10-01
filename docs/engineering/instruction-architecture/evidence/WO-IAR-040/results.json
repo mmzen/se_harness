@@ -1,0 +1,278 @@
+{
+  "tested_commit": "7f86e37d00e9b5bc508564655e2594ffe5d9fc67",
+  "change": "tests/test_installer.py: expected ValueError replaced by installer.HarnessError; all other test statements unchanged.",
+  "original_ci": {
+    "summary": {
+      "candidate": "440307ea017576cb55e47fcd850c399f44ca35f4",
+      "working_tree": "clean",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python",
+        "scripts/run_tests.py",
+        "--workers",
+        "4",
+        "--scale",
+        "full",
+        "--timings",
+        "target/test-timings.json"
+      ],
+      "cwd": "/home/runner/work/se_harness/se_harness",
+      "checker": {
+        "version": "0.21.0",
+        "origin": "/home/runner/work/se_harness/se_harness/se_harness/__init__.py"
+      },
+      "started_at": "2026-10-01T18:01:38.485227+00:00",
+      "exit_code": 1,
+      "result": "fail",
+      "output_tail": "Evaluator Python: /tmp/simple-plugin-fitpu8v0/private/evaluators/0.0.0/21ff32e7afa082bcbbc15e8d70e9d2cd1064b44a8ab1ed5264f73e20d2e29343/bin/python\nEvaluator Python: /tmp/simple-plugin-fitpu8v0/private/evaluators/0.0.0/21ff32e7afa082bcbbc15e8d70e9d2cd1064b44a8ab1ed5264f73e20d2e29343/bin/python\n--workers must be at least 1\ndocs/notes/diagnostic-codes.md matches the source\nWEX_SCALE artifacts=100 validation=0.023887s focus=0.064641s plan=0.048628s\nWEX_SCALE artifacts=500 validation=0.098428s focus=0.146199s plan=0.156953s\nWEX_SCALE artifacts=1000 validation=0.187724s focus=0.211979s plan=0.328960s\n0.21.0\n======================================================================\nERROR: test_installer.MinimalInstallationTests.test_linked_parent_refuses_without_writes\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/se_harness/se_harness/tests/test_installer.py\", line 129, in test_linked_parent_refuses_without_writes\n    installer.plan_install(self.root, project_name=\"Minimal\", mode=\"init\", integrations=[\"pr\"])\n  File \"/home/runner/work/se_harness/se_harness/se_harness/installer.py\", line 452, in plan_install\n    destination = safe_destination(target, Path(relative))\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/se_harness/se_harness/se_harness/installer.py\", line 278, in safe_destination\n    raise HarnessError(f\"refusing to traverse a symlinked directory: {probe}\")\nse_harness.installer.HarnessError: refusing to traverse a symlinked directory: /tmp/minimal-install-11tffgut/repository/.github\n\n----------------------------------------------------------------------\nRan 1211 tests in 32.684s (180 classes, 4 workers)\n\nFAILED (errors=1, skipped=2)\n",
+      "raw": {
+        "file": "output.log",
+        "bytes": 1782,
+        "artifact": "candidate-source-raw",
+        "repository": "mmzen/se_harness",
+        "run_id": "36903728008",
+        "run_url": "https://github.com/mmzen/se_harness/actions/runs/36903728008",
+        "retention_days": 14,
+        "estimated_expiry": "2026-10-15T18:01:38.485227+00:00",
+        "availability": "local; upload not yet confirmed",
+        "download_command": [
+          "gh",
+          "run",
+          "download",
+          "36903728008",
+          "--repo",
+          "mmzen/se_harness",
+          "--name",
+          "candidate-source-raw"
+        ]
+      }
+    },
+    "pr_head": "d507c528a1a092469b0574b74cab93a4f163be40",
+    "note": "The job tested GitHub synthetic merge commit 440307ea017576cb55e47fcd850c399f44ca35f4 for this PR head.",
+    "artifact_observed": {
+      "id": 11183335159,
+      "node_id": "MDg6QXJ0aWZhY3QxMTE4MzMzNTE1OQ==",
+      "name": "candidate-source-raw",
+      "size_in_bytes": 2149,
+      "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11183335159",
+      "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11183335159/zip",
+      "expired": false,
+      "digest": "sha256:0550e94511d494f5fbe156c3a5ba9c9992f2fcf93f96cae895714a370c69e6fa",
+      "created_at": "2026-10-01T18:02:12Z",
+      "updated_at": "2026-10-01T18:02:12Z",
+      "expires_at": "2026-10-15T18:02:11Z",
+      "workflow_run": {
+        "id": 36903728008,
+        "repository_id": 1330601788,
+        "head_repository_id": 1330601788,
+        "head_branch": "work/reconcile-minimal-resources",
+        "head_sha": "d507c528a1a092469b0574b74cab93a4f163be40"
+      }
+    },
+    "download_succeeded": true
+  },
+  "source_export": {
+    "candidate_commit": "7f86e37d00e9b5bc508564655e2594ffe5d9fc67",
+    "archive": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\040-source.tar.gz",
+    "archive_sha256": "fb434366825956511086e6e216f427bed13bd5d2234261ef92d38f72745cb901",
+    "archive_bytes": 128822938
+  },
+  "linux": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/usr/bin/python3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "source_commit": "7f86e37d00e9b5bc508564655e2594ffe5d9fc67",
+    "tree_sha1": "b928f0517c91d77344848339db46ad58e2e3ea2c",
+    "focused": [
+      {
+        "label": "symlink-refusal",
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "tests.test_installer.MinimalInstallationTests.test_linked_parent_refuses_without_writes"
+        ],
+        "cwd": "/tmp/iar040-ppxshu0r/source",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "test_linked_parent_refuses_without_writes (tests.test_installer.MinimalInstallationTests.test_linked_parent_refuses_without_writes) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.077s\n\nOK\n",
+        "seconds": 0.39397923999786144
+      },
+      {
+        "label": "minimal-installer-class",
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "tests.test_installer.MinimalInstallationTests"
+        ],
+        "cwd": "/tmp/iar040-ppxshu0r/source",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "test_changed_preview_refuses_without_partial_writes (tests.test_installer.MinimalInstallationTests.test_changed_preview_refuses_without_partial_writes) ... ok\ntest_customized_seed_and_wrong_prior_wheel_refuse_before_writes (tests.test_installer.MinimalInstallationTests.test_customized_seed_and_wrong_prior_wheel_refuse_before_writes) ... ok\ntest_default_footprint_repeat_and_owner_bytes (tests.test_installer.MinimalInstallationTests.test_default_footprint_repeat_and_owner_bytes) ... ok\ntest_linked_parent_refuses_without_writes (tests.test_installer.MinimalInstallationTests.test_linked_parent_refuses_without_writes) ... ok\ntest_migration_requires_delivery_and_explicit_stock_seed_selection (tests.test_installer.MinimalInstallationTests.test_migration_requires_delivery_and_explicit_stock_seed_selection) ... ok\ntest_migration_rolls_back_after_removal_and_can_retry (tests.test_installer.MinimalInstallationTests.test_migration_rolls_back_after_removal_and_can_retry) ... ok\ntest_optional_integrations_are_explicit_and_preserve_owner_content (tests.test_installer.MinimalInstallationTests.test_optional_integrations_are_explicit_and_preserve_owner_content) ... ok\ntest_prior_wheel_is_one_snapshot_even_if_original_changes_after_hashing (tests.test_installer.MinimalInstallationTests.test_prior_wheel_is_one_snapshot_even_if_original_changes_after_hashing) ... ok\ntest_removed_owner_integration_stays_removed_unless_explicitly_selected (tests.test_installer.MinimalInstallationTests.test_removed_owner_integration_stays_removed_unless_explicitly_selected) ... ok\ntest_retirement_cannot_silently_ignore_a_retained_integration (tests.test_installer.MinimalInstallationTests.test_retirement_cannot_silently_ignore_a_retained_integration) ... ok\ntest_source_without_installed_resources_refuses_without_writes (tests.test_installer.MinimalInstallationTests.test_source_without_installed_resources_refuses_without_writes) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 4.848s\n\nOK\n",
+        "seconds": 5.114534854001249
+      }
+    ],
+    "full_suite": {
+      "label": "full-source-suite",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/run_tests.py",
+        "--workers",
+        "4",
+        "--scale",
+        "full",
+        "--timings",
+        "/tmp/iar040-ppxshu0r/test-timings-git.json"
+      ],
+      "cwd": "/tmp/iar040-ppxshu0r/source",
+      "exit_code": 0,
+      "stdout": "WEX_SCALE artifacts=100 validation=0.031125s focus=0.097068s plan=0.073698s\nWEX_SCALE artifacts=500 validation=0.140748s focus=0.240338s plan=0.324334s\nWEX_SCALE artifacts=1000 validation=0.290753s focus=0.400968s plan=0.568988s\n0.21.0\nEvaluator Python: /tmp/simple-plugin-f13ganab/private/evaluators/0.0.0/5d5e3d26e3f5e14be6adb370ed3e08a1126eafc3ce3bf305ae30d89f582aa720/bin/python\nEvaluator Python: /tmp/simple-plugin-f13ganab/private/evaluators/0.0.0/5d5e3d26e3f5e14be6adb370ed3e08a1126eafc3ce3bf305ae30d89f582aa720/bin/python\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1211 tests in 45.227s (180 classes, 4 workers)\n\nOK (skipped=4)\n",
+      "stderr": "--workers must be at least 1\n",
+      "seconds": 46.17523701099708
+    },
+    "declared_skips": [
+      {
+        "test": "plugin_integration.test_simple_plugin.SimplePluginTests.test_real_setup_create_reuse_and_repair",
+        "reason": "real local wheel supplied in installed acceptance"
+      },
+      {
+        "test": "test_hash_bound_integrity.LegacyNewlineRetirementTests.test_a_newline_variant_digest_no_longer_matches_any_materialization",
+        "reason": "the historical lock revision is unavailable"
+      },
+      {
+        "test": "test_hash_bound_integrity.LegacyNewlineRetirementTests.test_the_recorded_digest_is_a_newline_variant_of_the_historical_lock",
+        "reason": "the historical lock revision is unavailable"
+      },
+      {
+        "test": "test_report_output_safety.ReportOutputSafetyTests.test_windows_alias_spellings_cannot_bypass_report_output_protection",
+        "reason": "Windows namespace aliases only"
+      }
+    ]
+  },
+  "windows": {
+    "runtime": {
+      "version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "tests.test_installer"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": {
+      "stdout": "",
+      "stderr": "test_custom_or_duplicate_fragment_refuses_without_writes (tests.test_installer.InstructionMigrationTests.test_custom_or_duplicate_fragment_refuses_without_writes) ... ok\ntest_customized_seed_requires_exact_explicit_replacement (tests.test_installer.InstructionMigrationTests.test_customized_seed_requires_exact_explicit_replacement) ... ok\ntest_fresh_install_has_no_agents_or_claude_dependency (tests.test_installer.InstructionMigrationTests.test_fresh_install_has_no_agents_or_claude_dependency) ... ok\ntest_harness_only_files_may_be_removed (tests.test_installer.InstructionMigrationTests.test_harness_only_files_may_be_removed) ... ok\ntest_incomplete_replacement_collection_preserves_legacy_entry (tests.test_installer.InstructionMigrationTests.test_incomplete_replacement_collection_preserves_legacy_entry) ... ok\ntest_missing_or_stale_delivery_evidence_preserves_the_old_entry (tests.test_installer.InstructionMigrationTests.test_missing_or_stale_delivery_evidence_preserves_the_old_entry) ... ok\ntest_recognized_fragments_preserve_all_owner_bytes (tests.test_installer.InstructionMigrationTests.test_recognized_fragments_preserve_all_owner_bytes) ... ok\ntest_unrecognized_source_version_is_not_a_recognized_migration (tests.test_installer.InstructionMigrationTests.test_unrecognized_source_version_is_not_a_recognized_migration) ... ok\ntest_upgrade_cli_reports_delivery_refusal_without_writes (tests.test_installer.InstructionMigrationTests.test_upgrade_cli_reports_delivery_refusal_without_writes) ... ok\ntest_write_failure_rolls_back_and_same_migration_can_retry (tests.test_installer.InstructionMigrationTests.test_write_failure_rolls_back_and_same_migration_can_retry) ... ok\ntest_changed_preview_refuses_without_partial_writes (tests.test_installer.MinimalInstallationTests.test_changed_preview_refuses_without_partial_writes) ... ok\ntest_customized_seed_and_wrong_prior_wheel_refuse_before_writes (tests.test_installer.MinimalInstallationTests.test_customized_seed_and_wrong_prior_wheel_refuse_before_writes) ... ok\ntest_default_footprint_repeat_and_owner_bytes (tests.test_installer.MinimalInstallationTests.test_default_footprint_repeat_and_owner_bytes) ... ok\ntest_linked_parent_refuses_without_writes (tests.test_installer.MinimalInstallationTests.test_linked_parent_refuses_without_writes) ... skipped 'host cannot create symlinks'\ntest_migration_requires_delivery_and_explicit_stock_seed_selection (tests.test_installer.MinimalInstallationTests.test_migration_requires_delivery_and_explicit_stock_seed_selection) ... ok\ntest_migration_rolls_back_after_removal_and_can_retry (tests.test_installer.MinimalInstallationTests.test_migration_rolls_back_after_removal_and_can_retry) ... ok\ntest_optional_integrations_are_explicit_and_preserve_owner_content (tests.test_installer.MinimalInstallationTests.test_optional_integrations_are_explicit_and_preserve_owner_content) ... ok\ntest_prior_wheel_is_one_snapshot_even_if_original_changes_after_hashing (tests.test_installer.MinimalInstallationTests.test_prior_wheel_is_one_snapshot_even_if_original_changes_after_hashing) ... ok\ntest_removed_owner_integration_stays_removed_unless_explicitly_selected (tests.test_installer.MinimalInstallationTests.test_removed_owner_integration_stays_removed_unless_explicitly_selected) ... ok\ntest_retirement_cannot_silently_ignore_a_retained_integration (tests.test_installer.MinimalInstallationTests.test_retirement_cannot_silently_ignore_a_retained_integration) ... ok\ntest_source_without_installed_resources_refuses_without_writes (tests.test_installer.MinimalInstallationTests.test_source_without_installed_resources_refuses_without_writes) ... ok\ntest_018_preview_and_conversion_match_published_pointers_without_tracking_them (tests.test_installer.RetiredGuideTests.test_018_preview_and_conversion_match_published_pointers_without_tracking_them) ... ok\ntest_current_owner_seeds_preserve_stock_custom_and_absent_bytes (tests.test_installer.RetiredGuideTests.test_current_owner_seeds_preserve_stock_custom_and_absent_bytes) ... ok\ntest_new_install_omits_all_six_guides_and_keeps_current_instructions (tests.test_installer.RetiredGuideTests.test_new_install_omits_all_six_guides_and_keeps_current_instructions) ... ok\ntest_published_pointer_fixture_digests_match (tests.test_installer.RetiredGuideTests.test_published_pointer_fixture_digests_match) ... ok\ntest_unsafe_retired_destination_refuses_before_any_write (tests.test_installer.RetiredGuideTests.test_unsafe_retired_destination_refuses_before_any_write) ... ok\n\n----------------------------------------------------------------------\nRan 26 tests in 24.642s\n\nOK (skipped=1)\n"
+    },
+    "seconds": 25.05443980000564
+  },
+  "test_environment_recovery": [
+    "The first Linux full run used an exact source archive without Git metadata: 1201 tests, 2 failures, 10 errors, 6 skips. The symlink test and complete 11-test minimal installer class passed. All reported failures required repository Git context.",
+    "The first Git reconstruction detected one generated Python cache in its index and stopped before testing. No product file differed.",
+    "Only that generated cache was excluded from the index. The tree hash then equalled the original tree; the original commit object and shallow boundary were restored. The retry ran 1211 tests with zero failures/errors and four declared skips.",
+    "Linux uses Python 3.12.3; GitHub CI used Python 3.11.16. Updated CI on the corrected PR remains required."
+  ],
+  "comparison": {
+    "product_inputs": {
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "diff",
+        "--name-only",
+        "d507c528a1a092469b0574b74cab93a4f163be40",
+        "HEAD",
+        "--",
+        "se_harness",
+        "templates",
+        "plugins",
+        "repository_tools",
+        "scripts",
+        "pyproject.toml",
+        "release"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "exit_code": 0,
+      "result": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "seconds": 0.04712310000468278
+    },
+    "complete_implementation_diff": {
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "diff",
+        "--name-only",
+        "d507c528a1a092469b0574b74cab93a4f163be40",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "exit_code": 0,
+      "result": {
+        "stdout": "docs/engineering/instruction-architecture/work-orders/WO-IAR-040.md\ntests/test_installer.py\n",
+        "stderr": ""
+      },
+      "seconds": 0.03429760000290116
+    },
+    "prior_evidence": {
+      "prior_record": "VREC-IAR-020",
+      "prior_candidate": "cfbaa994d7af1982bed44bc2e38c60db83602a4e",
+      "bound_evidence_count": 56,
+      "raw_digests_unchanged": true,
+      "desktop_claim": "Still unverified; no new desktop evidence."
+    }
+  },
+  "local_raw_logs": [
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\020-ci-failed-log.json",
+      "sha256": "efb1448945dd59bc7db630f51262fba1c53839e75133ec0d022276420e18e50e"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\040-linux-tests.json",
+      "sha256": "52b4c66083d117bff0fb9685b88e0e2f2b45c9287d0855bd92ad0eae18bd9f1e"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\040-linux-git-tests.json",
+      "sha256": "5081483a1e59dc12b8a284d5e34d924e50596927798f9b8dc0bb59463a8c7635"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\040-linux-tree-comparison.json",
+      "sha256": "394000d752fb545493ac2e20c7c0d998be298e9f0a0c8418d75071c09169b194"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\040-linux-full-retry.json",
+      "sha256": "564859049bf656f06b9b3acbc9ab296a27c4aa77acbf9c945c47ee95dd088a45"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\040-windows-installer-tests.json",
+      "sha256": "e27f593db8ace4dec6f661ca143257d61fb01ab0d142e5c43153ace84a3b9587"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\040-linux-skip-inventory.json",
+      "sha256": "cb4253436e73672fa0ae539917c301ac797040d2d380a451db214b9cfff5325a"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\040-original-ci-artifacts.json",
+      "sha256": "4cc12b78376e62a663948e7ca33f299cd88fd7316f7fd988578ef030dacfab99"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\040-original-ci-download.json",
+      "sha256": "8ca6e3db5c4c210f8e33c4f4feb3c2fecaff80faa0b9639118e9ae2d19e7892e"
+    }
+  ],
+  "limits": [
+    "Codex Windows desktop remains unverified.",
+    "No native model sessions or installed package checks were rerun: production/package inputs are unchanged.",
+    "Four Linux skips and the Windows symlink skip are not passes.",
+    "No human verification, push, release or merge is inferred."
+  ]
+}
