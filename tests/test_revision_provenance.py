@@ -688,6 +688,41 @@ class RevisionCliTests(unittest.TestCase):
         report = json.loads(completed.stdout)
         self.assertIn("E012", {item["code"] for item in report["errors"]})
 
+    def test_captured_record_remains_valid_with_external_resource_selection(self) -> None:
+        self.initialize_candidate()
+        from se_harness import resources
+        from se_harness.integrity import EXTERNAL_RESOURCE_LAYOUT
+
+        lock_path = self.root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock.update(schema=5, resource_layout=EXTERNAL_RESOURCE_LAYOUT)
+        lock["files"] = {name: value for name, value in lock["files"].items()
+                         if name != "ENGINEERING_HARNESS.md" and not name.startswith("docs/engineering/")}
+        lock_path.write_text(json.dumps(lock) + "\n", encoding="utf-8")
+        config = self.root / ".engineering-harness.toml"
+        config.write_text(config.read_text(encoding="utf-8").replace(
+            "[harness]", f'[harness]\nresource_layout = "{EXTERNAL_RESOURCE_LAYOUT}"', 1,
+        ), encoding="utf-8")
+        git(self.root, "add", ".")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid",
+            "commit", "-m", "Select external resources in unit fixture")
+        with mock.patch.object(resources, "_installed_resource_root",
+                               return_value=REPOSITORY_ROOT / "templates/repository/standard"):
+            code, output, error = invoke(
+                "capture-verification", str(self.root), "--id", "VREC-001",
+                "--work-order", "WO-001", "--verification", "VER-001",
+                "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            )
+            self.assertEqual(0, code, output + error)
+            record = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+            before = record.read_bytes()
+            self.assertIn(b'status = "ready"', before)
+            result = validate_repository(self.root)
+            self.assertTrue(result.valid, result.errors)
+            code, output, error = invoke("check", str(self.root), "--artifact", "VREC-001", "--json")
+            self.assertEqual(0, code, output + error)
+            self.assertEqual(before, record.read_bytes())
+
     def test_explicit_domain_and_output_precedence_are_deterministic(self) -> None:
         self.initialize_candidate()
         explicit_output = "docs/engineering/governance/VREC-001.md"

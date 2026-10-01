@@ -11,6 +11,8 @@ from se_harness import __version__, resources
 from se_harness.artifact_layout import authoring_checklist, create_artifact
 from se_harness.evaluator_identity import installed_evaluator_identity
 from se_harness.engine.validate_engineering_artifacts import validate_repository
+from se_harness.engine.validation_core import Artifact
+from se_harness.engine.validation_evidence import _validate_evaluator_evidence_binding
 from se_harness.instruction_discovery import describe, load_catalog, locations
 from se_harness.integrity import EXTERNAL_RESOURCE_LAYOUT, HASH_ALGORITHM, HASH_MODE, validate_lock
 from se_harness.preflight import inspect_installation
@@ -18,7 +20,7 @@ from se_harness.workflow_result import machine_fields, restitution_digest
 from tests.artifact_support import create_base_chain, record_execution_approval
 from tests.cli_support import invoke
 from tests.fixture_support import standard_repository
-from tests.mutation_guard_support import patch_mutation_authority
+from tests.mutation_guard_support import patch_mutation_authority, trusted_mutation_authority
 
 
 TEMPLATES = Path(__file__).resolve().parents[1] / "templates/repository/standard"
@@ -101,6 +103,41 @@ class ResourceTests(unittest.TestCase):
         self.assertTrue(json.loads(output)["valid"])
         self.assertEqual(before, self.files())
         self.assertFalse((self.root / "docs").exists())
+
+    def test_external_evaluator_evidence_binding_validates_the_lock_before_identity(self):
+        authority = trusted_mutation_authority(self.root, operation="capture-verification")
+        relative = "docs/engineering/product/evidence/VREC-TST-001-evaluator.json"
+        evidence = self.root / relative
+        evidence.parent.mkdir(parents=True)
+        evidence.write_bytes(authority.evidence_bytes)
+        artifact = Artifact(self.root / "docs/engineering/product/verification-records/VREC-TST-001.md", {
+            "id": "VREC-TST-001", "evaluator_evidence_path": relative,
+            "evaluator_evidence_sha256": authority.evidence_sha256,
+        }, "")
+        valid = deepcopy(self.lock)
+        for problem in (None, "layout", "schema", "hash", "identity", "copied-policy"):
+            with self.subTest(problem=problem):
+                self.lock = deepcopy(valid)
+                if problem == "layout":
+                    self.lock["resource_layout"] = "unknown"
+                elif problem == "schema":
+                    self.lock["schema"] = 6
+                elif problem == "hash":
+                    self.lock["evaluator"]["payload_sha256"] = "invalid"
+                elif problem == "identity":
+                    self.lock["evaluator"]["payload_sha256"] = "0" * 64
+                elif problem == "copied-policy":
+                    self.lock["files"][resources.ENTRY] = {"mode": "seed", "state": "present"}
+                self.write_lock()
+                before = self.files()
+                errors = []
+                _validate_evaluator_evidence_binding(artifact, errors, self.root, required=True)
+                if problem is None:
+                    self.assertEqual([], errors)
+                else:
+                    self.assertTrue(errors)
+                    self.assertEqual({"E012"}, {error.code for error in errors})
+                self.assertEqual(before, self.files())
 
     def test_scaffold_previews_missing_parents_then_creates_only_the_requested_domain(self):
         before = self.files()
