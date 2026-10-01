@@ -1,0 +1,64 @@
+{
+  "tested_commit": "3f438bb894e4108fa369a9dc048d69f5e0c2e8ab",
+  "comparison": "git diff from tested commit through current index and working files",
+  "paths": [
+    "se_harness",
+    "templates/repository/standard",
+    "pyproject.toml",
+    "MANIFEST.in",
+    "README.md",
+    "LICENSE",
+    "plugins",
+    "repository_tools/plugin_distribution.py",
+    "tests",
+    "scripts",
+    "release/build-recipe.json",
+    "release/build-toolchain.lock"
+  ],
+  "changed_paths": [],
+  "observation": {
+    "argv": [
+      "C:\\Program Files\\Git\\cmd\\git.exe",
+      "diff",
+      "--name-only",
+      "3f438bb894e4108fa369a9dc048d69f5e0c2e8ab",
+      "--",
+      "se_harness",
+      "templates/repository/standard",
+      "pyproject.toml",
+      "MANIFEST.in",
+      "README.md",
+      "LICENSE",
+      "plugins",
+      "repository_tools/plugin_distribution.py",
+      "tests",
+      "scripts",
+      "release/build-recipe.json",
+      "release/build-toolchain.lock"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": {
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+    },
+    "seconds": 0.07006640000327025
+  },
+  "coverage": [
+    "WO-IAR-028",
+    "WO-IAR-029",
+    "WO-IAR-030",
+    "WO-IAR-034",
+    "WO-IAR-035",
+    "WO-IAR-036",
+    "WO-IAR-037",
+    "WO-IAR-038",
+    "WO-IAR-039"
+  ],
+  "verification_contracts": [
+    "VER-IAR-020",
+    "VER-IAR-021",
+    "VER-IAR-022"
+  ],
+  "known_gap": "Codex Windows desktop remains unverified under the human direction to continue. CLI/native results do not qualify desktop."
+}

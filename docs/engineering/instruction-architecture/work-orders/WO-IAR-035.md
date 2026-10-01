@@ -2,10 +2,10 @@
 id = "WO-IAR-035"
 type = "work_order"
 title = "Validate empty external-resource installations"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-30"
-updated = "2026-09-30"
+updated = "2026-10-01"
 
 [assurance]
 commit_bound_verification = "required"
@@ -42,6 +42,13 @@ to = "in_progress"
 decided_at = "2026-09-30T18:38:42Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-01T17:49:35Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Completed the approved local scope and retained integrated tests, review and complete Git handoff. Codex desktop remains explicitly unverified under the existing human instruction to continue; no assurance acceptance or external action is inferred."
 +++
 
 # Validate empty external-resource installations
