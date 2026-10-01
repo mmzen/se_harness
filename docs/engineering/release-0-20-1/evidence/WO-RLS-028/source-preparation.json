@@ -1,0 +1,39 @@
+{
+  "source_commit": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab",
+  "public_plugin_baseline": "7253d13b212ad6f7df670021290fea32e81d66de",
+  "plugin_version": "0.2.3",
+  "evaluator_version": "0.20.1",
+  "scope": "Both manifest version fields, five packaged guidance files and the candidate constants/contract reference in test_refresh_guidance.py. Shared runtime, hooks, skills, assembly plan and builder unchanged.",
+  "source_tests": {
+    "count": 32,
+    "passed": true,
+    "result": "plugin023-package-tests-1001.json"
+  },
+  "bound_replay": {
+    "run": "https://github.com/mmzen/se_harness/actions/runs/36821889856",
+    "governance_commit": "36e43655bf861837f8b87720daa7e2264d38e596",
+    "candidate": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+    "state": "exact",
+    "builds": [
+      {
+        "id": "a",
+        "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+      },
+      {
+        "id": "b",
+        "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+      }
+    ]
+  },
+  "prior_failures": "Review checks first refused missing pre-action and handoff headers; retained here beside passing retries. Packets provide bindings only, not completion or package qualification.",
+  "pending": [
+    "Human release decision and authorized evaluator publication",
+    "Independent public wheel observation",
+    "Marketplace assembly/check and native qualification",
+    "Human verification before marketplace publication",
+    "WO-RLS-029 public observations and closeout"
+  ],
+  "work_state": "in_progress"
+}

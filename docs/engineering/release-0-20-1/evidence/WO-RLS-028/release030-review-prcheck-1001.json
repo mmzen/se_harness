@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check-pr",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "--event",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-review-event-1001.json",
+    "--from-git",
+    "18cd578e08092bce4d90fd2717606744d4f7f427",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 2,
+  "result": {
+    "stdout": "",
+    "stderr": "harnessctl: pull-request check: WO-RLS-028: QGP-G4I-EVIDENCE: No readable evidence for WO-RLS-028, checkpoint handoff, and formal snapshot c483466c8f2d03af7f7571c8fefa5e19563eae7f289bdef5dbb41eaa75258ffc is available; write the header with harnessctl evidence . --artifact WO-RLS-028 --checkpoint handoff.\n"
+  },
+  "seconds": 10.940375300000028
+}

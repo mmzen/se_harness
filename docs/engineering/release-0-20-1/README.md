@@ -2,7 +2,8 @@
 
 Status: WO-RLS-027 is implemented and VREC-SEH-030 is verified. RLS-SEH-030
 is ready with the exact 0.20.1 build binding. WO-RLS-028 is in progress; WO-RLS-029 and both verification contracts are
-approved. Bound-record replay, release, publication and adoption remain pending.
+approved. Bound-record replay passed with two exact builds; release, publication and adoption
+remain pending.
 
 [DEC-IAR-004](../instruction-architecture/decisions/DEC-IAR-004.md) records
 mmzen's selected sequence: compatibility maintenance release, separate adoption,
@@ -36,7 +37,7 @@ remain separate decisions.
 This repository-owned index provides navigation. Formal authority comes from the
 linked artifacts, their typed relations and recorded lifecycle decisions.
 
-The [approved delivery plan](evidence/RLS-SEH-030/delivery-plan-approved.json)
-binds the known release identities and approved downstream assignments. Unknown
-package/source/public identities remain pending. The earlier
+The [approved delivery plan](evidence/RLS-SEH-030/delivery-plan-source.json)
+binds the known release identities and approved downstream assignments. The prepared
+plugin source is pinned; package and public identities remain pending. The earlier
 plan and all VREC-bound evidence remain unchanged.

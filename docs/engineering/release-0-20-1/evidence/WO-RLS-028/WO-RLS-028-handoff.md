@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-RLS-028"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "c483466c8f2d03af7f7571c8fefa5e19563eae7f289bdef5dbb41eaa75258ffc"
-rebound_at = "2026-10-01T05:51:31Z"
+formal_snapshot_sha256 = "2b8d11e004091357b3e5b07c745370a2182fb7b49d432938fd978b53c9712af4"
+rebound_at = "2026-10-01T05:55:02Z"
 ```
 
 # WO-RLS-028 handoff evidence
