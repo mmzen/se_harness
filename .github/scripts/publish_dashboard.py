@@ -307,6 +307,12 @@ def _locked_evaluator(lock: dict[str, Any]) -> dict[str, Any]:
     evaluator = lock.get("evaluator")
     if not isinstance(evaluator, dict):
         raise PublicationError("standard evaluator lock has no evaluator identity")
+    return evaluator
+
+
+def _evidence_locked_evaluator(lock: dict[str, Any]) -> dict[str, Any]:
+    """Require a valid identity before using either lock as evidence."""
+    evaluator = _locked_evaluator(lock)
     version = evaluator.get("version")
     archive = evaluator.get("archive_name")
     archive_digest = evaluator.get("archive_sha256")
@@ -441,7 +447,7 @@ def _validated_evaluator_binding(
         lock_text.encode("utf-8"),
         label=f"{selected_lock_commit}:.engineering-harness.lock",
     )
-    locked = _locked_evaluator(lock)
+    locked = _evidence_locked_evaluator(lock)
     expected = {
         "version": locked.get("version"),
         "payload_manifest": locked.get("payload_manifest"),
@@ -468,7 +474,7 @@ def _validated_evaluator_binding(
                     candidate_lock_text.encode("utf-8"),
                     label=f"{candidate}:.engineering-harness.lock",
                 )
-                candidate_evaluator = _locked_evaluator(candidate_lock)
+                candidate_evaluator = _evidence_locked_evaluator(candidate_lock)
                 candidate_matches = evaluator == {key: candidate_evaluator.get(key) for key in expected}
         if not candidate_matches:
             raise PublicationError(f"release record {record_id} evaluator evidence differs from the standard lock and candidate lock")
