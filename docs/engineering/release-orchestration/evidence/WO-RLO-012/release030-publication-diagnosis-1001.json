@@ -1,0 +1,41 @@
+{
+  "purpose": "Read-only component diagnosis; not a publication plan or lifecycle approval",
+  "head": "a0e91f65f7ead24a14d9a9c65d54ee9b05e9b7e0",
+  "release_record": "RLS-SEH-030",
+  "record_sha256": "3768876259e5c1c2b1ffd507d5da3feb484c269b437e296429c6282eb8e04934",
+  "version": "0.20.1",
+  "recorded_tag": null,
+  "checks": [
+    {
+      "name": "actual_resolve_plan",
+      "passed": false,
+      "error": "released record must declare version and tag"
+    },
+    {
+      "name": "evaluator_binding_at_actual_main_integration",
+      "passed": false,
+      "error": "release record RLS-SEH-030 evaluator evidence differs from the standard lock"
+    }
+  ],
+  "main_integration_evaluator": {
+    "archive_name": "se_harness-0.20.0-py3-none-any.whl",
+    "archive_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "88c26138f759af78b2d7eeed3d15f92b573ff264ea6a531b2c22dbbf1905130e",
+    "version": "0.20.0"
+  },
+  "candidate_evaluator": {
+    "archive_name": "se_harness-0.19.0-py3-none-any.whl",
+    "archive_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+    "version": "0.19.0"
+  },
+  "record_evaluator": {
+    "archive_name": "se_harness-0.19.0-py3-none-any.whl",
+    "archive_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+    "version": "0.19.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "baseline": "a0e91f65f7ead24a14d9a9c65d54ee9b05e9b7e0",
+  "checks": [
+    {
+      "path": "docs/engineering/release-0-20-1/verification-records/VREC-SEH-030.md",
+      "sha256": "7bcb3fe0ef72fcdc6c2a71d9f5e577cd232377a196526581e3ee6eb3857b43b7",
+      "byte_identical": true
+    },
+    {
+      "path": "docs/engineering/release-0-20-1/evidence/RLS-SEH-030-evaluator.json",
+      "sha256": "3d06ef9adf5b4bcb9bd9d9d93ae6ea13f35ec4f0ca9ab8338586e48254d39713",
+      "byte_identical": true
+    },
+    {
+      "path": "docs/engineering/release-0-20-1/evidence/VREC-SEH-030-evaluator.json",
+      "sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2",
+      "byte_identical": true
+    }
+  ],
+  "tag_change": "tag-correction.json"
+}

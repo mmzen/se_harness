@@ -1,0 +1,8 @@
+{
+  "human_instruction": "Ok i approve corrections",
+  "purpose": "Record the approved two-issue correction scope; these files were authored afterward, not previously byte-reviewed",
+  "files": {
+    "docs/engineering/release-orchestration/work-orders/WO-RLO-012.md": "fdb7b22e03681abd47e769145d27b352c08ba7da27aedb73703fb9e0f9144d09",
+    "docs/engineering/release-orchestration/verification/VER-RLO-009.md": "16e76da096733dce9b678a907d2d68ab973b9ac8a9d752f8affe8878d15522e1"
+  }
+}

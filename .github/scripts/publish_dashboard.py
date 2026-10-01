@@ -310,6 +310,34 @@ def _locked_evaluator(lock: dict[str, Any]) -> dict[str, Any]:
     return evaluator
 
 
+def _evidence_locked_evaluator(lock: dict[str, Any]) -> dict[str, Any]:
+    """Require a valid identity before using either lock as evidence."""
+    evaluator = _locked_evaluator(lock)
+    version = evaluator.get("version")
+    archive = evaluator.get("archive_name")
+    archive_digest = evaluator.get("archive_sha256")
+    if (
+        not isinstance(version, str)
+        or EVALUATOR_VERSION_PATTERN.fullmatch(version) is None
+        or evaluator.get("payload_manifest") != EVALUATOR_PAYLOAD_MANIFEST
+        or not isinstance(evaluator.get("payload_sha256"), str)
+        or re.fullmatch(r"[0-9a-f]{64}", evaluator["payload_sha256"]) is None
+        or "archive_name" not in evaluator
+        or "archive_sha256" not in evaluator
+        or (archive is None) != (archive_digest is None)
+        or (
+            archive is not None
+            and (
+                archive != f"se_harness-{version.replace('-', '_')}-py3-none-any.whl"
+                or not isinstance(archive_digest, str)
+                or re.fullmatch(r"[0-9a-f]{64}", archive_digest) is None
+            )
+        )
+    ):
+        raise PublicationError("standard evaluator lock has an invalid evaluator identity")
+    return evaluator
+
+
 def _validated_evaluator_binding(
     repository: Path,
     evidence_commit: str,
@@ -419,7 +447,7 @@ def _validated_evaluator_binding(
         lock_text.encode("utf-8"),
         label=f"{selected_lock_commit}:.engineering-harness.lock",
     )
-    locked = _locked_evaluator(lock)
+    locked = _evidence_locked_evaluator(lock)
     expected = {
         "version": locked.get("version"),
         "payload_manifest": locked.get("payload_manifest"),
@@ -428,7 +456,28 @@ def _validated_evaluator_binding(
         "archive_sha256": locked.get("archive_sha256"),
     }
     if evaluator != expected:
-        raise PublicationError(f"release record {record_id} evaluator evidence differs from the standard lock")
+        # Maintenance records can be prepared under the candidate's evaluator
+        # and integrated after main adopted another release. Keep their captured
+        # evidence; the exact candidate is already bound by the released RLS.
+        candidate = metadata.get("commit")
+        object_format = metadata.get("git_object_format")
+        candidate_matches = False
+        if (
+            metadata.get("status") == "released"
+            and isinstance(candidate, str)
+            and object_format in {"sha1", "sha256"}
+        ):
+            candidate = _validate_full_commit(candidate, object_format, "release candidate")
+            candidate_lock_text = _text_at(repository, candidate, ".engineering-harness.lock")
+            if candidate_lock_text is not None:
+                candidate_lock = _loads_json_bytes(
+                    candidate_lock_text.encode("utf-8"),
+                    label=f"{candidate}:.engineering-harness.lock",
+                )
+                candidate_evaluator = _evidence_locked_evaluator(candidate_lock)
+                candidate_matches = evaluator == {key: candidate_evaluator.get(key) for key in expected}
+        if not candidate_matches:
+            raise PublicationError(f"release record {record_id} evaluator evidence differs from the standard lock and candidate lock")
     return {"path": path, "sha256": digest}
 
 
@@ -493,7 +542,7 @@ def resolve_release(
             "--first-parent",
             "--reverse",
             "--format=%H",
-            '-G^status[[:space:]]*=[[:space:]]*"released"[[:space:]]*$',
+            '-G^(status[[:space:]]*=[[:space:]]*"released"[[:space:]]*$|tag[[:space:]]*=)',
             default_head,
             "--",
             "docs/engineering",

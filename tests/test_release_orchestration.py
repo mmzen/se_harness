@@ -124,6 +124,36 @@ class ReleaseArtifactDiscoveryTests(unittest.TestCase):
     def resolve(self):
         return RELEASE.resolve_plan(self.root, "RLS-TST-001", "refs/heads/main")
 
+    def test_maintenance_tag_correction_preserves_distribution_and_evidence(self) -> None:
+        self.fixture.maintenance_history(include_tag=False)
+        self.distribution["source_date_epoch"] = int(git(self.root, "show", "-s", "--format=%ct", self.fixture.candidate))
+        self.distribution["source_manifest_sha256"] = DISTRIBUTION.source_manifest_sha256(self.root, self.fixture.candidate)
+        self.record = self.fixture.release_record("RLS-TST-001").replace(
+            "\n+++\n", "\n[distribution]\n" + "\n".join(
+                f"{key} = {json.dumps(value)}" for key, value in self.distribution.items()
+            ) + "\n+++\n", 1,
+        )
+        complete = self.record
+        self.record = self.record.replace('tag = "v1.2.3"\n', "")
+        self.write_live_records()
+        self.fixture.commit("retain distribution before tag correction")
+        git(self.root, "update-ref", "refs/heads/main", "HEAD")
+        with self.assertRaisesRegex(RELEASE.ReleaseError, "must declare version and tag"):
+            self.resolve()
+        self.record = complete
+        self.write_live_records()
+        self.fixture.commit("record authorized tag correction")
+        corrected = git(self.root, "rev-parse", "HEAD")
+        git(self.root, "update-ref", "refs/heads/main", corrected)
+        result = self.resolve()
+        self.assertEqual(corrected, result.governance_commit)
+        self.assertEqual(self.fixture.candidate, result.candidate_commit)
+        self.assertEqual(self.fixture.evaluator_evidence_sha256, result.evaluator_evidence_sha256)
+        self.assertEqual(self.distribution["wheel_sha256"], result.wheel_sha256)
+        self.assertEqual(self.distribution["sdist_sha256"], result.sdist_sha256)
+        page = RELEASE.dashboard.resolve_release(self.root, "v1.2.3", default_ref="refs/heads/main")
+        self.assertEqual(result.governance_commit, page.governance_commit)
+
     def test_plugin_owned_governance_resolves_the_same_bound_release(self) -> None:
         lock = json.loads(git(self.root, "show", f"{self.fixture.governance}:.engineering-harness.lock"))
         lock.update(schema=4, skill_ownership={"provider": "plugin"})

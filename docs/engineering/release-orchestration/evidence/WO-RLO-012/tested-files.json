@@ -1,0 +1,11 @@
+{
+  "tested_code_commit": "49c3878ff6bc05168903b39d2b9158546aebaf96",
+  "sha256": {
+    ".github/scripts/publish_dashboard.py": "554171bb12e48f554184d622daaa5a6a5e83b7e5b0e3494045dbcd7439517edc",
+    ".github/scripts/publish_release.py": "ce88f16154fad1da8f3f112117ede4834b0c932a78fac34064a8340e95dc9af0",
+    "tests/test_dashboard_publication.py": "6ac13ab3a40542064034fddde834120df538348efa67d749916d56e905b777ed",
+    "tests/test_release_orchestration.py": "4fc30d0464b5dfba841ea038bfef4a4d661424364801326b4a8ceb3a6fa5f50c",
+    "docs/notes/developing-se-harness.md": "83be9e4b8638e1dc07dc32dcca1433538cd5918c58f34d4ada5a25b08c1abe52",
+    "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md": "29e700835b097dde4050bc648dcb9582db1712b265f088b09abdabaad9d89a34"
+  }
+}

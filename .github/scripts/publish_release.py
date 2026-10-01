@@ -140,7 +140,7 @@ def _integration_commit(
             "--first-parent",
             "--reverse",
             "--format=%H",
-            '-G^status[[:space:]]*=[[:space:]]*"released"[[:space:]]*$',
+            '-G^(status[[:space:]]*=[[:space:]]*"released"[[:space:]]*$|tag[[:space:]]*=)',
             default_head,
             "--",
             "docs/engineering",

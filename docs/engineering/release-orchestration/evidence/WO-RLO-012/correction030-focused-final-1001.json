@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_dashboard_publication",
+    "tests.test_release_orchestration"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 1,
+  "result": {
+    "stdout": "",
+    "stderr": "..F.F................................................................\n======================================================================\nFAIL: test_mismatch_unknown_field_and_retired_descriptor_are_rejected (tests.test_dashboard_publication.EvaluatorDescriptorTests.test_mismatch_unknown_field_and_retired_descriptor_are_rejected)\n----------------------------------------------------------------------\ndashboard_publication.PublicationError: standard evaluator lock has an invalid evaluator identity\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_dashboard_publication.py\", line 458, in test_mismatch_unknown_field_and_retired_descriptor_are_rejected\n    with self.assertRaisesRegex(PUBLICATION.PublicationError, \"versions differ\"):\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"versions differ\" does not match \"standard evaluator lock has an invalid evaluator identity\"\n\n======================================================================\nFAIL: test_plugin_owned_evaluator_rejects_invalid_inputs (tests.test_dashboard_publication.EvaluatorDescriptorTests.test_plugin_owned_evaluator_rejects_invalid_inputs) (changes={'evaluator': {'archive_name': 'se_harness-0.5.0-py3-none-any.whl', 'archive_sha256': None, 'payload_manifest': 'se-harness-installed-payload-v1', 'payload_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'version': '0.5.0'}})\n----------------------------------------------------------------------\ndashboard_publication.PublicationError: standard evaluator lock has an invalid evaluator identity\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_dashboard_publication.py\", line 438, in test_plugin_owned_evaluator_rejects_invalid_inputs\n    with self.assertRaisesRegex(PUBLICATION.PublicationError, message):\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"complete.*archive identity\" does not match \"standard evaluator lock has an invalid evaluator identity\"\n\n----------------------------------------------------------------------\nRan 69 tests in 48.533s\n\nFAILED (failures=2)\n"
+  },
+  "seconds": 48.93569860000025
+}

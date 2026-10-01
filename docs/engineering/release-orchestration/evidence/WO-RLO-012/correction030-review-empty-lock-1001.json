@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-X",
+    "utf8",
+    "-c",
+    "from tests.test_dashboard_publication import GitReleaseFixture, PUBLICATION, write, git\nf=GitReleaseFixture()\nf.setUp()\ntry:\n f.maintenance_history()\n write(f.root / \".engineering-harness.lock\", \"{\\\"schema\\\":3,\\\"evaluator\\\":{}}\")\n f.commit(\"malformed evaluator identity\")\n metadata=PUBLICATION._metadata_at(f.root, \"HEAD\", f.record_path)\n PUBLICATION._validated_evaluator_binding(f.root, \"HEAD\", metadata)\n raise AssertionError(\"REVIEW: empty main evaluator identity unexpectedly accepted\")\nfinally:\n f.tearDown()\n"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 1,
+  "result": {
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n    raise AssertionError(\"REVIEW: empty main evaluator identity unexpectedly accepted\")\nAssertionError: REVIEW: empty main evaluator identity unexpectedly accepted\n"
+  },
+  "seconds": 2.749162499999329
+}

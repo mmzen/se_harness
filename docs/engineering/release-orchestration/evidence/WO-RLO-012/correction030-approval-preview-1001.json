@@ -1,0 +1,377 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--set",
+    "WO-RLO-012=approved",
+    "--set",
+    "VER-RLO-009=approved",
+    "--decision",
+    "WO-RLO-012=mmzen",
+    "--decision",
+    "VER-RLO-009=mmzen",
+    "--reason",
+    "WO-RLO-012=Human mmzen: Ok i approve corrections. Applies the expressly approved two-issue publication correction under WO-RLO-012 and VER-RLO-009, authored to record that instruction; required commit-bound assurance applies to changed publisher checks. No claim of earlier review of these newly authored files. The verified 0.20.1 candidate, release decision and existing evidence remain preserved; only the missing tag binding is corrected. Verification acceptance and external actions remain separate.",
+    "--reason",
+    "VER-RLO-009=Human mmzen: Ok i approve corrections. Applies the expressly approved two-issue publication correction under WO-RLO-012 and VER-RLO-009, authored to record that instruction; required commit-bound assurance applies to changed publisher checks. No claim of earlier review of these newly authored files. The verified 0.20.1 candidate, release decision and existing evidence remain preserved; only the missing tag binding is corrected. Verification acceptance and external actions remain separate.",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "transition",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "VER-RLO-009",
+      "artifacts": [
+        "VER-RLO-009",
+        "WO-RLO-012"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "workflow_rule_id": "WFL-DEFINITION-COMPLETE",
+      "procedure_id": "PROC-DEFINITION-COMPLETE",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G1-DEFINITION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G1-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:VER-RLO-009"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G1-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:transition"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G1-AUTHORING",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "VER-RLO-009"
+                }
+              ],
+              "message": "VER-RLO-009 has no unfinished content or unresolved decision text."
+            },
+            {
+              "id": "QGP-G1-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:VER-RLO-009"
+                }
+              ],
+              "message": "No open decision blocks VER-RLO-009."
+            }
+          ]
+        },
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "VER-RLO-009"
+                }
+              ],
+              "message": "draft -> approved is a declared lifecycle edge for VER-RLO-009."
+            }
+          ]
+        },
+        {
+          "id": "QG-G3-WORK-AUTHORIZATION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G3-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:WO-RLO-012"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G3-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:transition"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G3-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:WO-RLO-012"
+                }
+              ],
+              "message": "No open decision blocks WO-RLO-012."
+            }
+          ]
+        },
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "WO-RLO-012"
+                }
+              ],
+              "message": "draft -> approved is a declared lifecycle edge for WO-RLO-012."
+            },
+            {
+              "id": "QGS-ASSURANCE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "WO-RLO-012"
+                }
+              ],
+              "message": "WO-RLO-012 classifies commit-bound verification as required."
+            }
+          ]
+        }
+      ]
+    },
+    "procedure": {
+      "id": "PROC-DEFINITION-COMPLETE",
+      "current_step": "STEP-DEFINITION-COMPLETE",
+      "steps": [
+        {
+          "id": "STEP-DEFINITION-COMPLETE",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G1-DEFINITION",
+            "QG-G2-ARCHITECTURE"
+          ],
+          "effects": [
+            "Permits a decision on VER-RLO-009 only."
+          ],
+          "non_effects": [
+            "Related definitions remain unchanged unless separately selected."
+          ],
+          "decision_right": "DR-DEFINITION-DECIDE",
+          "role": "definition-owner",
+          "artifact": "VER-RLO-009",
+          "decision": "whether the selected definition is complete",
+          "outcomes": [
+            "implemented",
+            "reject",
+            "stop"
+          ],
+          "response": "Decide the selected definition VER-RLO-009 only."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "VER-RLO-009",
+          "status": "draft"
+        },
+        {
+          "id": "WO-RLO-012",
+          "status": "draft"
+        }
+      ],
+      "after": [
+        {
+          "id": "VER-RLO-009",
+          "status": "approved"
+        },
+        {
+          "id": "WO-RLO-012",
+          "status": "approved"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": [
+        {
+          "id": "VER-RLO-009",
+          "path": "docs/engineering/release-orchestration/verification/VER-RLO-009.md",
+          "fields": [
+            "lifecycle_events",
+            "status",
+            "updated"
+          ]
+        },
+        {
+          "id": "WO-RLO-012",
+          "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-012.md",
+          "fields": [
+            "lifecycle_events",
+            "status",
+            "updated"
+          ]
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Planned 2 explicit lifecycle transition(s); no files were written."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VER-RLO-009 is approved."
+      ],
+      "decision_required": {
+        "decision_right": "DR-DEFINITION-DECIDE",
+        "role": "definition-owner",
+        "artifact": "VER-RLO-009",
+        "decision": "whether the selected definition is complete",
+        "outcomes": [
+          "implemented",
+          "reject",
+          "stop"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-DEFINITION-COMPLETE",
+        "step_id": "STEP-DEFINITION-COMPLETE",
+        "action": "whether the selected definition is complete"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "Decide the selected definition VER-RLO-009 only."
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-DEFINITION-COMPLETE",
+          "location": {
+            "file": "docs/engineering/harness/RECORD_STATE.md",
+            "heading": "complete-a-selected-definition"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ],
+          "steps": {
+            "STEP-DEFINITION-COMPLETE": {
+              "location": {
+                "file": "docs/engineering/harness/RECORD_STATE.md",
+                "heading": "complete-a-selected-definition"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-DEFINITION-COMPLETE",
+          "location": {
+            "file": "docs/engineering/harness/RECORD_STATE.md",
+            "heading": "complete-a-selected-definition"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "VER-RLO-009",
+        "WO-RLO-012"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "c4b9acc9221c793302c55b90e8249aeba0494519bd0c22af41e5f5d9002a5bc4"
+  },
+  "seconds": 30.305438200000026
+}
