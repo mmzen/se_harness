@@ -21,8 +21,8 @@
       "resolution": "Retained all installed byte hashes, exact fixture and host-version equality with VREC-PLG-027, plus current public hooks and four offline evaluator checks."
     },
     {
-      "finding": "The transported release index linked to DEC-IAR-004 absent from main.",
-      "resolution": "Linked its verified file at immutable merged maintenance commit 41bddd426ed63da213af01a8a9b4982b2f36c89e; no out-of-scope artifact import."
+      "finding": "The release index linked DEC-IAR-004, which is absent from both checked public branches.",
+      "resolution": "Linked the existing REL-SEH-032 compatibility-and-adoption section containing the accepted sequence. The failed lookup is retained; no missing artifact or target is claimed verified."
     }
   ],
   "complexity": "Uses existing marketplace commands, setup, native acceptance, document tests and closeout checker. No runtime, installer, plugin package or new repository tool changes.",

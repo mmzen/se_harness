@@ -6,9 +6,9 @@ WO-RLS-028 is implemented and VREC-PLG-027 is verified by mmzen. WO-RLS-029
 is in progress: both Windows CLIs pass public fresh-install and update checks.
 Documentation integration, release markers and adoption remain separate.
 
-[DEC-IAR-004](https://github.com/mmzen/se_harness/blob/41bddd426ed63da213af01a8a9b4982b2f36c89e/docs/engineering/instruction-architecture/decisions/DEC-IAR-004.md) records
-mmzen's selected sequence: compatibility maintenance release, separate adoption,
-then independent qualification of the minimal-layout successor.
+The [release contract](release/REL-SEH-032.md#compatibility-and-adoption)
+records the selected sequence: compatibility maintenance release, separate
+adoption, then independent qualification of the minimal-layout successor.
 
 | Artifact | Purpose |
 | --- | --- |
