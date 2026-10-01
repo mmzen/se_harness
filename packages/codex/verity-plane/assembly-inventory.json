@@ -1,19 +1,19 @@
 {
   "evaluator": {
-    "archive": "se_harness-0.20.0-py3-none-any.whl",
-    "archive_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
-    "payload_sha256": "88c26138f759af78b2d7eeed3d15f92b573ff264ea6a531b2c22dbbf1905130e",
-    "release_record": "docs/engineering/release-0-20-0/releases/RLS-SEH-029.md",
-    "release_record_sha256": "c34a8470c2a24c8b458a83b83914f0cb1337dd44915c25d4eec3d6219fd97042",
-    "release_revision": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db",
-    "version": "0.20.0"
+    "archive": "se_harness-0.20.1-py3-none-any.whl",
+    "archive_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+    "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+    "release_record": "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+    "release_record_sha256": "29e700835b097dde4050bc648dcb9582db1712b265f088b09abdabaad9d89a34",
+    "release_revision": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+    "version": "0.20.1"
   },
   "files": {
     ".codex-plugin/plugin.json": {
       "bytes": 746,
       "mode": 420,
       "origin": "codex",
-      "sha256": "3c43fd26b427094620c3704bbdb847fdd06dde943dababfdd544fac004f13616"
+      "sha256": "67fc4ab0d4303fcab1583fcb6e16df2e97a902e1238d76c2b5e46d3e81fdf7b2"
     },
     "LICENSE": {
       "bytes": 35149,
@@ -25,7 +25,7 @@
       "bytes": 2653,
       "mode": 420,
       "origin": "codex",
-      "sha256": "0982f98b16ceb3174331bd27d5e4f3d1f77b6280d6a4682cc502961ba4f1aa86"
+      "sha256": "caf5c00c4523efaee09dabe517347f5a30cbf3626ae0f84c67c853934017f8b1"
     },
     "hooks/hooks.json": {
       "bytes": 377,
@@ -33,11 +33,11 @@
       "origin": "codex",
       "sha256": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2"
     },
-    "packages/se_harness-0.20.0-py3-none-any.whl": {
-      "bytes": 533448,
+    "packages/se_harness-0.20.1-py3-none-any.whl": {
+      "bytes": 534217,
       "mode": 420,
       "origin": "evaluator",
-      "sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0"
+      "sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
     },
     "scripts/inject_instructions.py": {
       "bytes": 7095,
@@ -166,6 +166,6 @@
   "source": {
     "plan": "release/plugin-assembly.json",
     "plan_sha256": "de1402ea173c138b2a342619c0074c0c8a83a60b0e1a7871bfb6bdffa90baa25",
-    "revision": "7253d13b212ad6f7df670021290fea32e81d66de"
+    "revision": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
   }
 }
