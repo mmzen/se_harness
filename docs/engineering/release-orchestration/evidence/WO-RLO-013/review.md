@@ -31,3 +31,17 @@ The first combined PR check required a current handoff header (QGP-G4I-EVIDENCE)
 The released evidence command wrote the required headers at the approved paths.
 The original refusal and correction remain in the preparation receipts. Header
 creation does not supply the pending hosted replay or a completion decision.
+
+## Hosted correction result
+
+Manual run 36923251010 passed both legs at review commit
+73f6500bfdfabc3bae2d84974b9f3b9f45ac90b2. Its RLS-SEH-030 leg resolved the
+formal record and reproduced both bound distribution hashes from released
+candidate b9af631b850c495eace9807361ed3ec3e36a10b2. The complete qualification,
+replay, test summary and output are retained in hosted-replay.json. The earlier
+failure remains in the original evidence; no accepted hash or record was edited.
+
+The correction's implementation checks are complete. The later clean assurance
+candidate will retain these observations and completion state. Compare source
+identity, repeat the required exact-ref rehearsal and capture its actual result
+with the final candidate test command before requesting human verification.

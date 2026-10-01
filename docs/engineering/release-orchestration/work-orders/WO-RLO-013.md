@@ -2,7 +2,7 @@
 id = "WO-RLO-013"
 type = "work_order"
 title = "Select formal release records during build replay"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-10-01T20:31:19Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-01T20:44:15Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Select formal release records during build replay

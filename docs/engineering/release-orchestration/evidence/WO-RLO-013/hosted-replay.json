@@ -1,0 +1,978 @@
+{
+  "review_commit": "73f6500bfdfabc3bae2d84974b9f3b9f45ac90b2",
+  "run": {
+    "conclusion": "success",
+    "databaseId": 36923251010,
+    "event": "workflow_dispatch",
+    "headSha": "73f6500bfdfabc3bae2d84974b9f3b9f45ac90b2",
+    "jobs": [
+      {
+        "completedAt": "2026-10-01T20:40:29Z",
+        "conclusion": "success",
+        "databaseId": 110574217992,
+        "name": "Select release rehearsals",
+        "startedAt": "2026-10-01T20:40:08Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-01T20:40:10Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-01T20:40:09Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:23Z",
+            "conclusion": "success",
+            "name": "Check out the candidate",
+            "number": 2,
+            "startedAt": "2026-10-01T20:40:10Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:23Z",
+            "conclusion": "success",
+            "name": "Select Python 3.11",
+            "number": 3,
+            "startedAt": "2026-10-01T20:40:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:23Z",
+            "conclusion": "skipped",
+            "name": "Fetch the comparison commit",
+            "number": 4,
+            "startedAt": "2026-10-01T20:40:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:25Z",
+            "conclusion": "success",
+            "name": "Select relevant rehearsals and the release record",
+            "number": 5,
+            "startedAt": "2026-10-01T20:40:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:25Z",
+            "conclusion": "success",
+            "name": "Post Select Python 3.11",
+            "number": 9,
+            "startedAt": "2026-10-01T20:40:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:26Z",
+            "conclusion": "success",
+            "name": "Post Check out the candidate",
+            "number": 10,
+            "startedAt": "2026-10-01T20:40:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:26Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-10-01T20:40:26Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36923251010/job/110574217992"
+      },
+      {
+        "completedAt": "2026-10-01T20:42:30Z",
+        "conclusion": "success",
+        "databaseId": 110574382904,
+        "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+        "startedAt": "2026-10-01T20:40:33Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-01T20:40:35Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-01T20:40:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:40Z",
+            "conclusion": "success",
+            "name": "Check out the subject with full history",
+            "number": 2,
+            "startedAt": "2026-10-01T20:40:35Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:40Z",
+            "conclusion": "success",
+            "name": "Select the one trusted orchestration Python",
+            "number": 3,
+            "startedAt": "2026-10-01T20:40:40Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:40Z",
+            "conclusion": "success",
+            "name": "Validate the inputs",
+            "number": 4,
+            "startedAt": "2026-10-01T20:40:40Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:48Z",
+            "conclusion": "success",
+            "name": "Resolve the subject",
+            "number": 5,
+            "startedAt": "2026-10-01T20:40:40Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:02Z",
+            "conclusion": "success",
+            "name": "Qualify the exact candidate without publication credentials",
+            "number": 6,
+            "startedAt": "2026-10-01T20:40:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:25Z",
+            "conclusion": "success",
+            "name": "Replay the exact recipe twice",
+            "number": 7,
+            "startedAt": "2026-10-01T20:42:02Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:25Z",
+            "conclusion": "success",
+            "name": "Verify the rebuilt bundle against the record",
+            "number": 8,
+            "startedAt": "2026-10-01T20:42:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:25Z",
+            "conclusion": "success",
+            "name": "Prove the qualification left no checkout change",
+            "number": 9,
+            "startedAt": "2026-10-01T20:42:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:26Z",
+            "conclusion": "success",
+            "name": "Retain the candidate-controlled qualification result",
+            "number": 10,
+            "startedAt": "2026-10-01T20:42:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:27Z",
+            "conclusion": "success",
+            "name": "Transfer only verified inert release bytes",
+            "number": 11,
+            "startedAt": "2026-10-01T20:42:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:28Z",
+            "conclusion": "success",
+            "name": "Post Select the one trusted orchestration Python",
+            "number": 21,
+            "startedAt": "2026-10-01T20:42:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:28Z",
+            "conclusion": "success",
+            "name": "Post Check out the subject with full history",
+            "number": 22,
+            "startedAt": "2026-10-01T20:42:28Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:28Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "startedAt": "2026-10-01T20:42:28Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36923251010/job/110574382904"
+      },
+      {
+        "completedAt": "2026-10-01T20:41:18Z",
+        "conclusion": "success",
+        "databaseId": 110574383056,
+        "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+        "startedAt": "2026-10-01T20:40:35Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-01T20:40:37Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-01T20:40:36Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:45Z",
+            "conclusion": "success",
+            "name": "Check out the subject with full history",
+            "number": 2,
+            "startedAt": "2026-10-01T20:40:37Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:45Z",
+            "conclusion": "success",
+            "name": "Select the one trusted orchestration Python",
+            "number": 3,
+            "startedAt": "2026-10-01T20:40:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:45Z",
+            "conclusion": "success",
+            "name": "Validate the inputs",
+            "number": 4,
+            "startedAt": "2026-10-01T20:40:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:45Z",
+            "conclusion": "success",
+            "name": "Resolve the subject",
+            "number": 5,
+            "startedAt": "2026-10-01T20:40:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:40:45Z",
+            "conclusion": "skipped",
+            "name": "Qualify the exact candidate without publication credentials",
+            "number": 6,
+            "startedAt": "2026-10-01T20:40:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:41:13Z",
+            "conclusion": "success",
+            "name": "Replay the exact recipe twice",
+            "number": 7,
+            "startedAt": "2026-10-01T20:40:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:41:13Z",
+            "conclusion": "skipped",
+            "name": "Verify the rebuilt bundle against the record",
+            "number": 8,
+            "startedAt": "2026-10-01T20:41:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:41:14Z",
+            "conclusion": "success",
+            "name": "Prove the qualification left no checkout change",
+            "number": 9,
+            "startedAt": "2026-10-01T20:41:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:41:15Z",
+            "conclusion": "success",
+            "name": "Retain the candidate-controlled qualification result",
+            "number": 10,
+            "startedAt": "2026-10-01T20:41:14Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:41:15Z",
+            "conclusion": "skipped",
+            "name": "Transfer only verified inert release bytes",
+            "number": 11,
+            "startedAt": "2026-10-01T20:41:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:41:15Z",
+            "conclusion": "success",
+            "name": "Post Select the one trusted orchestration Python",
+            "number": 21,
+            "startedAt": "2026-10-01T20:41:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:41:15Z",
+            "conclusion": "success",
+            "name": "Post Check out the subject with full history",
+            "number": 22,
+            "startedAt": "2026-10-01T20:41:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:41:15Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "startedAt": "2026-10-01T20:41:15Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36923251010/job/110574383056"
+      },
+      {
+        "completedAt": "2026-10-01T20:42:37Z",
+        "conclusion": "success",
+        "databaseId": 110575189128,
+        "name": "Publication rehearsal",
+        "startedAt": "2026-10-01T20:42:34Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-01T20:42:34Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-01T20:42:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:35Z",
+            "conclusion": "success",
+            "name": "Report selected checks or a successful skip",
+            "number": 2,
+            "startedAt": "2026-10-01T20:42:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T20:42:35Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 3,
+            "startedAt": "2026-10-01T20:42:35Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36923251010/job/110575189128"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/mmzen/se_harness/actions/runs/36923251010"
+  },
+  "release_record_replay": {
+    "authority": "technical replay evidence only; no lifecycle or external-action authority",
+    "builds": [
+      {
+        "id": "a",
+        "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+      },
+      {
+        "id": "b",
+        "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+      }
+    ],
+    "candidate": {
+      "commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+      "source_date_epoch": 1790799840,
+      "source_manifest_sha256": "890eb07d32540fb81beba94f6db409c7cafe2abcd6b1889e1aa0ac1fd9baa846"
+    },
+    "expected": {
+      "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+      "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+    },
+    "manifest": {
+      "build_recipe": "release/build-recipe.json",
+      "build_recipe_schema": "se-harness-release-build-recipe/v1",
+      "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+      "checksums": "SHA256SUMS",
+      "checksums_content": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764  se_harness-0.20.1-py3-none-any.whl\na4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a  se_harness-0.20.1.tar.gz\n",
+      "checksums_sha256": "8ef1f3b9ce5a465f963e34e711deed624b9645d2f25824f23624bee089a8f0ac",
+      "commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+      "git_object_format": "sha1",
+      "schema": "se-harness-release-bundle/v2",
+      "sdist": "se_harness-0.20.1.tar.gz",
+      "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+      "source_date_epoch": 1790799840,
+      "source_manifest_sha256": "890eb07d32540fb81beba94f6db409c7cafe2abcd6b1889e1aa0ac1fd9baa846",
+      "version": "0.20.1",
+      "wheel": "se_harness-0.20.1-py3-none-any.whl",
+      "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+    },
+    "observations": [
+      {
+        "commands": [
+          [
+            "python",
+            "-m",
+            "pip",
+            "install",
+            "--disable-pip-version-check",
+            "--no-cache-dir",
+            "--only-binary=:all:",
+            "--require-hashes",
+            "--target",
+            "{toolchain_dir}",
+            "-r",
+            "{toolchain_lock}"
+          ],
+          [
+            "python",
+            "-m",
+            "build",
+            "--wheel",
+            "--sdist",
+            "--no-isolation",
+            "--outdir",
+            "{raw_output}",
+            "."
+          ],
+          [
+            "python",
+            "scripts/normalize_sdist.py",
+            "{raw_sdist}",
+            "{final_sdist}",
+            "--epoch",
+            "{source_date_epoch}"
+          ]
+        ],
+        "environment": {
+          "HOME": "/tmp/se-harness-home",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PATH": "/usr/local/bin:/usr/bin:/bin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1790799840",
+          "TZ": "UTC"
+        },
+        "observed": {
+          "architecture": "amd64",
+          "os": "linux",
+          "pointer_bits": 64,
+          "python_implementation": "CPython",
+          "python_version": "3.11.9"
+        },
+        "outputs": {
+          "se_harness-0.20.1-py3-none-any.whl": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+          "se_harness-0.20.1.tar.gz": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a"
+        },
+        "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+        "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+        "schema": "se-harness-release-build-producer/v1",
+        "toolchain": [
+          {
+            "name": "build",
+            "version": "1.3.0"
+          },
+          {
+            "name": "colorama",
+            "version": "0.4.6"
+          },
+          {
+            "name": "packaging",
+            "version": "26.3"
+          },
+          {
+            "name": "pip",
+            "version": "24.0"
+          },
+          {
+            "name": "pyproject-hooks",
+            "version": "1.2.0"
+          },
+          {
+            "name": "setuptools",
+            "version": "84.0.0"
+          },
+          {
+            "name": "wheel",
+            "version": "0.48.0"
+          }
+        ]
+      },
+      {
+        "commands": [
+          [
+            "python",
+            "-m",
+            "pip",
+            "install",
+            "--disable-pip-version-check",
+            "--no-cache-dir",
+            "--only-binary=:all:",
+            "--require-hashes",
+            "--target",
+            "{toolchain_dir}",
+            "-r",
+            "{toolchain_lock}"
+          ],
+          [
+            "python",
+            "-m",
+            "build",
+            "--wheel",
+            "--sdist",
+            "--no-isolation",
+            "--outdir",
+            "{raw_output}",
+            "."
+          ],
+          [
+            "python",
+            "scripts/normalize_sdist.py",
+            "{raw_sdist}",
+            "{final_sdist}",
+            "--epoch",
+            "{source_date_epoch}"
+          ]
+        ],
+        "environment": {
+          "HOME": "/tmp/se-harness-home",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PATH": "/usr/local/bin:/usr/bin:/bin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1790799840",
+          "TZ": "UTC"
+        },
+        "observed": {
+          "architecture": "amd64",
+          "os": "linux",
+          "pointer_bits": 64,
+          "python_implementation": "CPython",
+          "python_version": "3.11.9"
+        },
+        "outputs": {
+          "se_harness-0.20.1-py3-none-any.whl": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+          "se_harness-0.20.1.tar.gz": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a"
+        },
+        "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+        "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+        "schema": "se-harness-release-build-producer/v1",
+        "toolchain": [
+          {
+            "name": "build",
+            "version": "1.3.0"
+          },
+          {
+            "name": "colorama",
+            "version": "0.4.6"
+          },
+          {
+            "name": "packaging",
+            "version": "26.3"
+          },
+          {
+            "name": "pip",
+            "version": "24.0"
+          },
+          {
+            "name": "pyproject-hooks",
+            "version": "1.2.0"
+          },
+          {
+            "name": "setuptools",
+            "version": "84.0.0"
+          },
+          {
+            "name": "wheel",
+            "version": "0.48.0"
+          }
+        ]
+      }
+    ],
+    "producer": {
+      "architecture": "amd64",
+      "image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+      "os": "linux"
+    },
+    "recipe": {
+      "path": "release/build-recipe.json",
+      "schema": "se-harness-release-build-recipe/v1",
+      "sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc"
+    },
+    "release_record": "RLS-SEH-030",
+    "schema": "se-harness-release-build-replay/v1",
+    "state": "exact"
+  },
+  "retained_files": [
+    {
+      "file": "complete-candidate-qualification.json",
+      "sha256": "d6003e6fc9cfc4d52741c5622077986b6602e42c9f59260a8027733948a0c4ca",
+      "content": {
+        "authority": "evidence-only; no lifecycle or external action authorized",
+        "checks": [
+          {
+            "id": "CC001",
+            "message": "candidate runtime is bound to the checkout",
+            "passed": true,
+            "subject": "candidate-runtime"
+          },
+          {
+            "id": "CC002",
+            "message": "HEAD and tracked tree match the candidate",
+            "passed": true,
+            "subject": "candidate-commit"
+          },
+          {
+            "id": "CC003",
+            "message": "artifacts=1750; errors=0; warnings=52",
+            "passed": true,
+            "subject": "engineering-graph"
+          },
+          {
+            "id": "CC004",
+            "message": "target state is unchanged",
+            "passed": true,
+            "subject": "repository-state"
+          }
+        ],
+        "completion": "completed",
+        "evaluator": {
+          "candidate_commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+          "diagnostics": [],
+          "distribution": "se-harness",
+          "identity_sha256": "72a4e9401443d3171150de6015283f2e61a3697a89de5bbbb3c69714eb1f8cbd",
+          "isolated_python": false,
+          "pythonpath_present": false,
+          "role": "candidate-source",
+          "user_site_enabled": false,
+          "version": "0.20.1"
+        },
+        "independence": "candidate-controlled",
+        "operation": "complete-candidate",
+        "passed": true,
+        "schema": "se-harness-release-qualification-v1",
+        "target": {
+          "commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+          "identity_sha256": "32255838b705809e096518f51665382bb38f701f8655d725233e40b7a2a7d4ee",
+          "kind": "complete-candidate",
+          "tree": "83235b9c9f95123a95f240fa66103e118759c963"
+        }
+      }
+    },
+    {
+      "file": "qualification.json",
+      "sha256": "6c8e60ae58c006a41058cdd984da847f87ceb7106adb086f2c01871f0353ad9d",
+      "content": {
+        "files": [
+          "SHA256SUMS",
+          "se_harness-0.20.1-py3-none-any.whl",
+          "se_harness-0.20.1.tar.gz"
+        ],
+        "hashes": {
+          "SHA256SUMS": "8ef1f3b9ce5a465f963e34e711deed624b9645d2f25824f23624bee089a8f0ac",
+          "se_harness-0.20.1-py3-none-any.whl": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+          "se_harness-0.20.1.tar.gz": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a"
+        },
+        "state": "exact"
+      }
+    },
+    {
+      "file": "release-build-replay.json",
+      "sha256": "fde3f5ec79865228d97d8d96b57207c3fea0b0a4882d15b9a96ebbe51e6d3a7c",
+      "content": {
+        "authority": "technical replay evidence only; no lifecycle or external-action authority",
+        "builds": [
+          {
+            "id": "a",
+            "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+            "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+          },
+          {
+            "id": "b",
+            "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+            "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+          }
+        ],
+        "candidate": {
+          "commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+          "source_date_epoch": 1790799840,
+          "source_manifest_sha256": "890eb07d32540fb81beba94f6db409c7cafe2abcd6b1889e1aa0ac1fd9baa846"
+        },
+        "expected": {
+          "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+          "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+        },
+        "manifest": {
+          "build_recipe": "release/build-recipe.json",
+          "build_recipe_schema": "se-harness-release-build-recipe/v1",
+          "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+          "checksums": "SHA256SUMS",
+          "checksums_content": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764  se_harness-0.20.1-py3-none-any.whl\na4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a  se_harness-0.20.1.tar.gz\n",
+          "checksums_sha256": "8ef1f3b9ce5a465f963e34e711deed624b9645d2f25824f23624bee089a8f0ac",
+          "commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+          "git_object_format": "sha1",
+          "schema": "se-harness-release-bundle/v2",
+          "sdist": "se_harness-0.20.1.tar.gz",
+          "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+          "source_date_epoch": 1790799840,
+          "source_manifest_sha256": "890eb07d32540fb81beba94f6db409c7cafe2abcd6b1889e1aa0ac1fd9baa846",
+          "version": "0.20.1",
+          "wheel": "se_harness-0.20.1-py3-none-any.whl",
+          "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+        },
+        "observations": [
+          {
+            "commands": [
+              [
+                "python",
+                "-m",
+                "pip",
+                "install",
+                "--disable-pip-version-check",
+                "--no-cache-dir",
+                "--only-binary=:all:",
+                "--require-hashes",
+                "--target",
+                "{toolchain_dir}",
+                "-r",
+                "{toolchain_lock}"
+              ],
+              [
+                "python",
+                "-m",
+                "build",
+                "--wheel",
+                "--sdist",
+                "--no-isolation",
+                "--outdir",
+                "{raw_output}",
+                "."
+              ],
+              [
+                "python",
+                "scripts/normalize_sdist.py",
+                "{raw_sdist}",
+                "{final_sdist}",
+                "--epoch",
+                "{source_date_epoch}"
+              ]
+            ],
+            "environment": {
+              "HOME": "/tmp/se-harness-home",
+              "LANG": "C.UTF-8",
+              "LC_ALL": "C.UTF-8",
+              "PATH": "/usr/local/bin:/usr/bin:/bin",
+              "PYTHONDONTWRITEBYTECODE": "1",
+              "PYTHONHASHSEED": "0",
+              "SOURCE_DATE_EPOCH": "1790799840",
+              "TZ": "UTC"
+            },
+            "observed": {
+              "architecture": "amd64",
+              "os": "linux",
+              "pointer_bits": 64,
+              "python_implementation": "CPython",
+              "python_version": "3.11.9"
+            },
+            "outputs": {
+              "se_harness-0.20.1-py3-none-any.whl": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+              "se_harness-0.20.1.tar.gz": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a"
+            },
+            "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+            "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+            "schema": "se-harness-release-build-producer/v1",
+            "toolchain": [
+              {
+                "name": "build",
+                "version": "1.3.0"
+              },
+              {
+                "name": "colorama",
+                "version": "0.4.6"
+              },
+              {
+                "name": "packaging",
+                "version": "26.3"
+              },
+              {
+                "name": "pip",
+                "version": "24.0"
+              },
+              {
+                "name": "pyproject-hooks",
+                "version": "1.2.0"
+              },
+              {
+                "name": "setuptools",
+                "version": "84.0.0"
+              },
+              {
+                "name": "wheel",
+                "version": "0.48.0"
+              }
+            ]
+          },
+          {
+            "commands": [
+              [
+                "python",
+                "-m",
+                "pip",
+                "install",
+                "--disable-pip-version-check",
+                "--no-cache-dir",
+                "--only-binary=:all:",
+                "--require-hashes",
+                "--target",
+                "{toolchain_dir}",
+                "-r",
+                "{toolchain_lock}"
+              ],
+              [
+                "python",
+                "-m",
+                "build",
+                "--wheel",
+                "--sdist",
+                "--no-isolation",
+                "--outdir",
+                "{raw_output}",
+                "."
+              ],
+              [
+                "python",
+                "scripts/normalize_sdist.py",
+                "{raw_sdist}",
+                "{final_sdist}",
+                "--epoch",
+                "{source_date_epoch}"
+              ]
+            ],
+            "environment": {
+              "HOME": "/tmp/se-harness-home",
+              "LANG": "C.UTF-8",
+              "LC_ALL": "C.UTF-8",
+              "PATH": "/usr/local/bin:/usr/bin:/bin",
+              "PYTHONDONTWRITEBYTECODE": "1",
+              "PYTHONHASHSEED": "0",
+              "SOURCE_DATE_EPOCH": "1790799840",
+              "TZ": "UTC"
+            },
+            "observed": {
+              "architecture": "amd64",
+              "os": "linux",
+              "pointer_bits": 64,
+              "python_implementation": "CPython",
+              "python_version": "3.11.9"
+            },
+            "outputs": {
+              "se_harness-0.20.1-py3-none-any.whl": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+              "se_harness-0.20.1.tar.gz": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a"
+            },
+            "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+            "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+            "schema": "se-harness-release-build-producer/v1",
+            "toolchain": [
+              {
+                "name": "build",
+                "version": "1.3.0"
+              },
+              {
+                "name": "colorama",
+                "version": "0.4.6"
+              },
+              {
+                "name": "packaging",
+                "version": "26.3"
+              },
+              {
+                "name": "pip",
+                "version": "24.0"
+              },
+              {
+                "name": "pyproject-hooks",
+                "version": "1.2.0"
+              },
+              {
+                "name": "setuptools",
+                "version": "84.0.0"
+              },
+              {
+                "name": "wheel",
+                "version": "0.48.0"
+              }
+            ]
+          }
+        ],
+        "producer": {
+          "architecture": "amd64",
+          "image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+          "os": "linux"
+        },
+        "recipe": {
+          "path": "release/build-recipe.json",
+          "schema": "se-harness-release-build-recipe/v1",
+          "sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc"
+        },
+        "release_record": "RLS-SEH-030",
+        "schema": "se-harness-release-build-replay/v1",
+        "state": "exact"
+      }
+    },
+    {
+      "file": "release-test-evidence/output.log",
+      "sha256": "81135094db216c24d983907f6d7ac6541972eb138888eb98a0e817b11f7d9d62",
+      "content": "...............s..Evaluator Python: /tmp/simple-plugin-vcyd4an7/private/verity-plane/evaluator/bin/python\nEvaluator Python: /tmp/simple-plugin-vcyd4an7/private/verity-plane/evaluator/bin/python\n................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................s..............................................................................................--workers must be at least 1\n.docs/notes/diagnostic-codes.md matches the source\n0.20.1\n.............................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 1167 tests in 70.119s\n\nOK (skipped=2)\nWEX_SCALE artifacts=100 validation=0.012962s focus=0.037197s plan=0.028678s\nWEX_SCALE artifacts=500 validation=0.059280s focus=0.084493s plan=0.111543s\n"
+    },
+    {
+      "file": "release-test-evidence/summary.json",
+      "sha256": "7cd5129f628c627079501fa67fcf7ec8af5b533ccc91f1d8014a1cc56b162a3a",
+      "content": {
+        "candidate": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+        "working_tree": "clean",
+        "command": [
+          "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_*.py"
+        ],
+        "cwd": "/home/runner/work/_temp/candidate-checkout",
+        "checker": {
+          "version": "0.20.1",
+          "origin": "/home/runner/work/_temp/candidate-checkout/se_harness/__init__.py"
+        },
+        "started_at": "2026-10-01T20:40:51.701371+00:00",
+        "exit_code": 0,
+        "result": "pass",
+        "output_tail": "...............s..Evaluator Python: /tmp/simple-plugin-vcyd4an7/private/verity-plane/evaluator/bin/python\nEvaluator Python: /tmp/simple-plugin-vcyd4an7/private/verity-plane/evaluator/bin/python\n................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................s..............................................................................................--workers must be at least 1\n.docs/notes/diagnostic-codes.md matches the source\n0.20.1\n.............................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 1167 tests in 70.119s\n\nOK (skipped=2)\nWEX_SCALE artifacts=100 validation=0.012962s focus=0.037197s plan=0.028678s\nWEX_SCALE artifacts=500 validation=0.059280s focus=0.084493s plan=0.111543s\n",
+        "raw": {
+          "file": "output.log",
+          "bytes": 1695,
+          "artifact": "qualification-release-record-RLS-SEH-030",
+          "repository": "mmzen/se_harness",
+          "run_id": "36923251010",
+          "run_url": "https://github.com/mmzen/se_harness/actions/runs/36923251010",
+          "retention_days": 14,
+          "estimated_expiry": "2026-10-15T20:40:51.701371+00:00",
+          "availability": "local; upload not yet confirmed",
+          "download_command": [
+            "gh",
+            "run",
+            "download",
+            "36923251010",
+            "--repo",
+            "mmzen/se_harness",
+            "--name",
+            "qualification-release-record-RLS-SEH-030"
+          ]
+        }
+      }
+    }
+  ]
+}
