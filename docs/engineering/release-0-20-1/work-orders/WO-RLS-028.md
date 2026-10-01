@@ -2,10 +2,15 @@
 id = "WO-RLS-028"
 type = "work_order"
 title = "Prepare and qualify plugin 0.2.3 for evaluator 0.20.1"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-09-30"
-updated = "2026-09-30"
+updated = "2026-10-01"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Human mmzen approved the reviewed work-order and verification-contract pair with required commit-bound verification; later package and delivery decisions depend on the changed manifests, instructions and retained evidence."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = [
@@ -25,6 +30,21 @@ implements = ["REQ-PLG-002", "REQ-RLO-018"]
 specifications = ["SPEC-PLG-001", "SPEC-RLO-006"]
 verification = ["VER-RLS-028"]
 architecture = ["ARCH-PLG-001", "ADR-PLG-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-01T05:48:10Z"
+decided_by = "engineering-owner"
+reason = "Human mmzen approved the reviewed package and confirmed: Yes\u2014approve both 028 and 029 pairs. Approves WO-RLS-028, VER-RLS-028, WO-RLS-029 and VER-RLS-029, required commit-bound verification, the stated ordinary review-branch pushes/draft PRs and read-only CI rehearsals, and the existing 0.19.0 engineering-owner encoding retaining mmzen as the human decision-maker. Reviewed SHA256 cce8b7ae0c8e47f6b081f793cbbbcac07003d3acd1cbe302734f3e07a2cb3dbc; transition input SHA256 9cd48d6c1b071f17ffd3a0c5f9efecbae8368a44b858f320517074f4254333da. Only confirmed assurance metadata was added to work orders. Codex applies the matching decision. Human verification, merges, release, publication, release markers and adoption remain separate."
+scope_paths = ["plugins/verity-plane/codex/.codex-plugin/plugin.json", "plugins/verity-plane/claude-code/.claude-plugin/plugin.json", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "release/plugin-marketplace/README.md", "release/plugin-marketplace/submissions/README.md", "release/plugin-marketplace/submissions/reviewer-test-cases.md", "tests/plugin_integration/package_assembly/test_refresh_guidance.py", "docs/engineering/release-0-20-1/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-01T05:49:09Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed."
 +++
 
 # Prepare and qualify plugin 0.2.3 for evaluator 0.20.1

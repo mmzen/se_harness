@@ -2,13 +2,20 @@
 id = "VER-RLS-029"
 type = "verification"
 title = "Verify public plugin 0.2.3 and the 0.20.1 delivery claims"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-30"
-updated = "2026-09-30"
+updated = "2026-10-01"
 
 [relations]
 verifies = ["REQ-RLO-019", "REQ-RLO-020"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-01T05:48:10Z"
+decided_by = "engineering-owner"
+reason = "Human mmzen approved the reviewed package and confirmed: Yes\u2014approve both 028 and 029 pairs. Approves WO-RLS-028, VER-RLS-028, WO-RLS-029 and VER-RLS-029, required commit-bound verification, the stated ordinary review-branch pushes/draft PRs and read-only CI rehearsals, and the existing 0.19.0 engineering-owner encoding retaining mmzen as the human decision-maker. Reviewed SHA256 6f3c1cf5242699c0588bc5c80b3fb7e09defaeec6c7724829b1a994888838712; transition input SHA256 6f3c1cf5242699c0588bc5c80b3fb7e09defaeec6c7724829b1a994888838712. Only confirmed assurance metadata was added to work orders. Codex applies the matching decision. Human verification, merges, release, publication, release markers and adoption remain separate."
 +++
 
 # Verify public plugin 0.2.3 and the 0.20.1 delivery claims

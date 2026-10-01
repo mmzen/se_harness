@@ -2,13 +2,20 @@
 id = "VER-RLS-028"
 type = "verification"
 title = "Qualify the 0.2.3 maintenance marketplace package"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-30"
-updated = "2026-09-30"
+updated = "2026-10-01"
 
 [relations]
 verifies = ["REQ-PLG-002", "REQ-RLO-018"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-01T05:48:10Z"
+decided_by = "engineering-owner"
+reason = "Human mmzen approved the reviewed package and confirmed: Yes\u2014approve both 028 and 029 pairs. Approves WO-RLS-028, VER-RLS-028, WO-RLS-029 and VER-RLS-029, required commit-bound verification, the stated ordinary review-branch pushes/draft PRs and read-only CI rehearsals, and the existing 0.19.0 engineering-owner encoding retaining mmzen as the human decision-maker. Reviewed SHA256 5d7dcd3bd5a87ac88329743fd6226512c05c1715ee01c3918fe14e8d7aaee2c0; transition input SHA256 5d7dcd3bd5a87ac88329743fd6226512c05c1715ee01c3918fe14e8d7aaee2c0. Only confirmed assurance metadata was added to work orders. Codex applies the matching decision. Human verification, merges, release, publication, release markers and adoption remain separate."
 +++
 
 # Qualify the 0.2.3 maintenance marketplace package
