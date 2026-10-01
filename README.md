@@ -45,7 +45,7 @@ delivery steps.
 
 Observed public delivery (2026-10-01): Plugin **0.2.3** bundles released **SE Harness 0.20.1**. Public fresh-install and 0.2.2-to-0.2.3 update checks passed on both Windows CLIs. Native startup, manual compaction and resume evidence applies to the identical installed package, repository fixtures and host versions. See the [qualification and limits](docs/engineering/release-0-20-1/evidence/WO-RLS-029/README.md).
 
-Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
+Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. It does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
 
 This maintenance release keeps the existing repository instruction layout.
 The work to move instructions and templates into the plugin remains unreleased.

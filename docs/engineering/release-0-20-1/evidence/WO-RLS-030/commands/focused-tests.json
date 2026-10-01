@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_public_onboarding",
+    "tests.test_progressive_documentation",
+    "tests.plugin_integration.package_assembly.test_refresh_guidance",
+    "tests.test_release_delivery"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "0.21.0\n",
+    "stderr": "..........................................................s...\n----------------------------------------------------------------------\nRan 62 tests in 9.203s\n\nOK (skipped=1)\n"
+  },
+  "seconds": 9.65578000000096
+}

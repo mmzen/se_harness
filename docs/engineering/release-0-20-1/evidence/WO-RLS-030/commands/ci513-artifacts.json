@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "api",
+    "repos/mmzen/se_harness/actions/runs/36849457709/artifacts"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "total_count": 2,
+    "artifacts": [
+      {
+        "id": 11155012071,
+        "node_id": "MDg6QXJ0aWZhY3QxMTE1NTAxMjA3MQ==",
+        "name": "candidate-source-raw",
+        "size_in_bytes": 3207,
+        "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11155012071",
+        "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11155012071/zip",
+        "expired": false,
+        "digest": "sha256:40d0c690625183a47255242306c510609aae7a8a031978702a30d87af4a44d65",
+        "created_at": "2026-10-01T10:31:12Z",
+        "updated_at": "2026-10-01T10:31:12Z",
+        "expires_at": "2026-10-15T10:31:12Z",
+        "workflow_run": {
+          "id": 36849457709,
+          "repository_id": 1330601788,
+          "head_repository_id": 1330601788,
+          "head_branch": "work/public-marketplace-0-2-3",
+          "head_sha": "fe048340d39461cde161bfafd7f486b51a4c9ca6"
+        }
+      },
+      {
+        "id": 11154837920,
+        "node_id": "MDg6QXJ0aWZhY3QxMTE1NDgzNzkyMA==",
+        "name": "complete-candidate-qualification",
+        "size_in_bytes": 814,
+        "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11154837920",
+        "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11154837920/zip",
+        "expired": false,
+        "digest": "sha256:005d5c9cf697d1d184da27a765b258e6bc133f0cdddaab8bd7654d3a7f671e66",
+        "created_at": "2026-10-01T10:31:13Z",
+        "updated_at": "2026-10-01T10:31:13Z",
+        "expires_at": "2026-10-15T10:31:12Z",
+        "workflow_run": {
+          "id": 36849457709,
+          "repository_id": 1330601788,
+          "head_repository_id": 1330601788,
+          "head_branch": "work/public-marketplace-0-2-3",
+          "head_sha": "fe048340d39461cde161bfafd7f486b51a4c9ca6"
+        }
+      }
+    ]
+  },
+  "seconds": 0.4023281000008865
+}
