@@ -1,0 +1,2590 @@
+{
+  "ci-final": {
+    "argv": [
+      "C:/Program Files/GitHub CLI/gh.exe",
+      "pr",
+      "view",
+      "508",
+      "--repo",
+      "mmzen/se_harness",
+      "--json",
+      "number,url,state,isDraft,headRefOid,baseRefName,statusCheckRollup"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "baseRefName": "release/0.20",
+      "headRefOid": "ee0c807f6f2c415d610bf6994dfd806a840284ff",
+      "isDraft": true,
+      "number": 508,
+      "state": "OPEN",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:13:30Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039178/job/110077191474",
+          "name": "validate",
+          "startedAt": "2026-09-30T20:12:59Z",
+          "status": "COMPLETED",
+          "workflowName": "Engineering Harness"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:13:13Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039157/job/110077191017",
+          "name": "Predecessor evaluator assessment",
+          "startedAt": "2026-09-30T20:12:59Z",
+          "status": "COMPLETED",
+          "workflowName": "Predecessor Evaluator Assessment"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:13:09Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039806/job/110077193245",
+          "name": "Select release rehearsals",
+          "startedAt": "2026-09-30T20:12:59Z",
+          "status": "COMPLETED",
+          "workflowName": "Publication Rehearsal"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:14:03Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039185/job/110077191776",
+          "name": "Candidate source evidence",
+          "startedAt": "2026-09-30T20:12:59Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:14:01Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039806/job/110077274872",
+          "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+          "startedAt": "2026-09-30T20:13:14Z",
+          "status": "COMPLETED",
+          "workflowName": "Publication Rehearsal"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:14:35Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039185/job/110077630627",
+          "name": "Candidate package evidence",
+          "startedAt": "2026-09-30T20:14:06Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:13:09Z",
+          "conclusion": "SKIPPED",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039806/job/110077275868",
+          "name": "Rehearse the qualification of the release record",
+          "startedAt": "2026-09-30T20:13:10Z",
+          "status": "COMPLETED",
+          "workflowName": "Publication Rehearsal"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:15:53Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039185/job/110077841606",
+          "name": "Upgrade rehearsal (Linux)",
+          "startedAt": "2026-09-30T20:14:38Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:16:20Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039185/job/110077841795",
+          "name": "Upgrade rehearsal (Windows)",
+          "startedAt": "2026-09-30T20:14:38Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:14:07Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039806/job/110077620174",
+          "name": "Publication rehearsal",
+          "startedAt": "2026-09-30T20:14:04Z",
+          "status": "COMPLETED",
+          "workflowName": "Publication Rehearsal"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:16:50Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039185/job/110078556547",
+          "name": "Build deterministic integration package",
+          "startedAt": "2026-09-30T20:16:23Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:17:16Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039185/job/110078745574",
+          "name": "Verify integration package (Linux)",
+          "startedAt": "2026-09-30T20:16:54Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:17:34Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039185/job/110078745824",
+          "name": "Verify integration package (Windows)",
+          "startedAt": "2026-09-30T20:16:54Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-30T20:17:47Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36771039185/job/110079044049",
+          "name": "Retain verified integration package",
+          "startedAt": "2026-09-30T20:17:37Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        }
+      ],
+      "url": "https://github.com/mmzen/se_harness/pull/508"
+    },
+    "seconds": 0.818335400079377
+  },
+  "live-pr-check": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "check-pr",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+      "--event",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\live-pr-event.json",
+      "--from-git",
+      "7253d13b212ad6f7df670021290fea32e81d66de",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "changed_paths": [
+        "README.md",
+        "docs/engineering/release-0-20-1/README.md",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-027/WO-RLS-027-handoff.md",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-027/WO-RLS-027-pre-action.md",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-027/plan.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-027/review.md",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-027/tests.json",
+        "docs/engineering/release-0-20-1/release/REL-SEH-032.md",
+        "docs/engineering/release-0-20-1/specifications/SPEC-RLS-001.md",
+        "docs/engineering/release-0-20-1/verification/VER-RLS-027.md",
+        "docs/engineering/release-0-20-1/work-orders/WO-RLS-027.md",
+        "docs/notes/developing-se-harness.md",
+        "docs/notes/release-delivery-completion.md",
+        "docs/notes/release-qualification-roles.md",
+        "pyproject.toml",
+        "se_harness/__init__.py",
+        "se_harness/candidate_acceptance.py",
+        "tests/test_release_qualification.py"
+      ],
+      "command": "check-pr",
+      "outcome": "completed",
+      "schema": "se-harness-command-result-v1",
+      "status": "pass",
+      "work_orders": [
+        "WO-RLS-027"
+      ]
+    },
+    "seconds": 10.351197100011632
+  },
+  "candidate-artifacts": {
+    "argv": [
+      "C:/Program Files/GitHub CLI/gh.exe",
+      "api",
+      "repos/mmzen/se_harness/actions/runs/36771039185/artifacts"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "total_count": 8,
+      "artifacts": [
+        {
+          "id": 11124260846,
+          "node_id": "MDg6QXJ0aWZhY3QxMTEyNDI2MDg0Ng==",
+          "name": "candidate-wheel-non-promotable-79e773cbfcfe6469e125643236ed54378777a702",
+          "size_in_bytes": 516083,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124260846",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124260846/zip",
+          "expired": false,
+          "digest": "sha256:fd644d20c07794fa62885b5199439cd99b5f8a1af5a91adb882c6e3140a07029",
+          "created_at": "2026-09-30T20:13:59Z",
+          "updated_at": "2026-09-30T20:13:59Z",
+          "expires_at": "2026-10-01T20:13:58Z",
+          "workflow_run": {
+            "id": 36771039185,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/compatibility-0-20-1",
+            "head_sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff"
+          }
+        },
+        {
+          "id": 11124241012,
+          "node_id": "MDg6QXJ0aWZhY3QxMTEyNDI0MTAxMg==",
+          "name": "upgrade-rehearsal-Linux",
+          "size_in_bytes": 4932,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124241012",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124241012/zip",
+          "expired": false,
+          "digest": "sha256:e9446f0cbb14c58059dea6dbef2751eba6f1458287211751190a7ced00e9e410",
+          "created_at": "2026-09-30T20:15:36Z",
+          "updated_at": "2026-09-30T20:15:36Z",
+          "expires_at": "2026-10-14T20:15:35Z",
+          "workflow_run": {
+            "id": 36771039185,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/compatibility-0-20-1",
+            "head_sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff"
+          }
+        },
+        {
+          "id": 11124190744,
+          "node_id": "MDg6QXJ0aWZhY3QxMTEyNDE5MDc0NA==",
+          "name": "complete-candidate-qualification",
+          "size_in_bytes": 814,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124190744",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124190744/zip",
+          "expired": false,
+          "digest": "sha256:9a4eb293579c28734912b4150e632b927f58c6da9aeee56153fd9c6cc597e1d7",
+          "created_at": "2026-09-30T20:14:00Z",
+          "updated_at": "2026-09-30T20:14:00Z",
+          "expires_at": "2026-10-14T20:13:59Z",
+          "workflow_run": {
+            "id": 36771039185,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/compatibility-0-20-1",
+            "head_sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff"
+          }
+        },
+        {
+          "id": 11124090854,
+          "node_id": "MDg6QXJ0aWZhY3QxMTEyNDA5MDg1NA==",
+          "name": "candidate-source-raw",
+          "size_in_bytes": 1370,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124090854",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124090854/zip",
+          "expired": false,
+          "digest": "sha256:290a806d942e3aa02da0c85f100dc1dd40b76558380aaaab544fbc0bc812b57d",
+          "created_at": "2026-09-30T20:13:54Z",
+          "updated_at": "2026-09-30T20:13:54Z",
+          "expires_at": "2026-10-14T20:13:53Z",
+          "workflow_run": {
+            "id": 36771039185,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/compatibility-0-20-1",
+            "head_sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff"
+          }
+        },
+        {
+          "id": 11124046048,
+          "node_id": "MDg6QXJ0aWZhY3QxMTEyNDA0NjA0OA==",
+          "name": "candidate-package-qualification-0.19.0",
+          "size_in_bytes": 1023,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124046048",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11124046048/zip",
+          "expired": false,
+          "digest": "sha256:9a19b890a52666e20366c1cc8e2021b377284138345c1d2f5f86d1f1455c094c",
+          "created_at": "2026-09-30T20:14:31Z",
+          "updated_at": "2026-09-30T20:14:31Z",
+          "expires_at": "2026-10-14T20:14:31Z",
+          "workflow_run": {
+            "id": 36771039185,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/compatibility-0-20-1",
+            "head_sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff"
+          }
+        },
+        {
+          "id": 11123816830,
+          "node_id": "MDg6QXJ0aWZhY3QxMTEyMzgxNjgzMA==",
+          "name": "integration-package-staging-79e773cbfcfe6469e125643236ed54378777a702",
+          "size_in_bytes": 517071,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11123816830",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11123816830/zip",
+          "expired": false,
+          "digest": "sha256:bc05b26c5763f8e3cadf1b5dee5fae6e94f45db5a5187b3498baa9d07e31998a",
+          "created_at": "2026-09-30T20:16:48Z",
+          "updated_at": "2026-09-30T20:16:48Z",
+          "expires_at": "2026-10-01T20:16:47Z",
+          "workflow_run": {
+            "id": 36771039185,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/compatibility-0-20-1",
+            "head_sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff"
+          }
+        },
+        {
+          "id": 11123721923,
+          "node_id": "MDg6QXJ0aWZhY3QxMTEyMzcyMTkyMw==",
+          "name": "upgrade-rehearsal-Windows",
+          "size_in_bytes": 6069,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11123721923",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11123721923/zip",
+          "expired": false,
+          "digest": "sha256:ec7ea9c4579c93b6c507e24aa1d3ba6e192dc621fd854b478fc8809a507960ab",
+          "created_at": "2026-09-30T20:15:58Z",
+          "updated_at": "2026-09-30T20:15:58Z",
+          "expires_at": "2026-10-14T20:15:57Z",
+          "workflow_run": {
+            "id": 36771039185,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/compatibility-0-20-1",
+            "head_sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff"
+          }
+        },
+        {
+          "id": 11123512219,
+          "node_id": "MDg6QXJ0aWZhY3QxMTEyMzUxMjIxOQ==",
+          "name": "se-harness-integration-79e773cbfcfe6469e125643236ed54378777a702",
+          "size_in_bytes": 517071,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11123512219",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11123512219/zip",
+          "expired": false,
+          "digest": "sha256:def2f69f63c4b48b81b1cd42e80dff07e3a7ea8e97e5e33d7304018b73da5e6b",
+          "created_at": "2026-09-30T20:17:45Z",
+          "updated_at": "2026-09-30T20:17:45Z",
+          "expires_at": "2026-10-03T20:17:45Z",
+          "workflow_run": {
+            "id": 36771039185,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/compatibility-0-20-1",
+            "head_sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff"
+          }
+        }
+      ]
+    },
+    "seconds": 0.4258055000100285
+  },
+  "rehearsal-artifacts": {
+    "argv": [
+      "C:/Program Files/GitHub CLI/gh.exe",
+      "api",
+      "repos/mmzen/se_harness/actions/runs/36771039806/artifacts"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "total_count": 1,
+      "artifacts": [
+        {
+          "id": 11123975877,
+          "node_id": "MDg6QXJ0aWZhY3QxMTEyMzk3NTg3Nw==",
+          "name": "qualification-candidate-79e773cbfcfe6469e125643236ed54378777a702",
+          "size_in_bytes": 1595,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11123975877",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11123975877/zip",
+          "expired": false,
+          "digest": "sha256:2b03ec8e0313ec799700866e26db57f7d649fc2f73ebdf5a7fb9956b2a5e2795",
+          "created_at": "2026-09-30T20:13:58Z",
+          "updated_at": "2026-09-30T20:13:58Z",
+          "expires_at": "2026-10-14T20:13:57Z",
+          "workflow_run": {
+            "id": 36771039806,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/compatibility-0-20-1",
+            "head_sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff"
+          }
+        }
+      ]
+    },
+    "seconds": 0.49393230001442134
+  },
+  "rehearsal-progress-03": {
+    "argv": [
+      "C:/Program Files/GitHub CLI/gh.exe",
+      "run",
+      "view",
+      "36771039806",
+      "--repo",
+      "mmzen/se_harness",
+      "--json",
+      "status,conclusion,jobs"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "conclusion": "success",
+      "jobs": [
+        {
+          "completedAt": "2026-09-30T20:13:09Z",
+          "conclusion": "success",
+          "databaseId": 110077193245,
+          "name": "Select release rehearsals",
+          "startedAt": "2026-09-30T20:12:59Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-30T20:13:01Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-30T20:13:00Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:06Z",
+              "conclusion": "success",
+              "name": "Check out the candidate",
+              "number": 2,
+              "startedAt": "2026-09-30T20:13:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:06Z",
+              "conclusion": "success",
+              "name": "Select Python 3.11",
+              "number": 3,
+              "startedAt": "2026-09-30T20:13:06Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:06Z",
+              "conclusion": "success",
+              "name": "Fetch the comparison commit",
+              "number": 4,
+              "startedAt": "2026-09-30T20:13:06Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:07Z",
+              "conclusion": "success",
+              "name": "Select relevant rehearsals and the release record",
+              "number": 5,
+              "startedAt": "2026-09-30T20:13:06Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:07Z",
+              "conclusion": "success",
+              "name": "Post Select Python 3.11",
+              "number": 9,
+              "startedAt": "2026-09-30T20:13:07Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:07Z",
+              "conclusion": "success",
+              "name": "Post Check out the candidate",
+              "number": 10,
+              "startedAt": "2026-09-30T20:13:07Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:07Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 11,
+              "startedAt": "2026-09-30T20:13:07Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/mmzen/se_harness/actions/runs/36771039806/job/110077193245"
+        },
+        {
+          "completedAt": "2026-09-30T20:14:01Z",
+          "conclusion": "success",
+          "databaseId": 110077274872,
+          "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+          "startedAt": "2026-09-30T20:13:14Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-30T20:13:16Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-30T20:13:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:27Z",
+              "conclusion": "success",
+              "name": "Check out the subject with full history",
+              "number": 2,
+              "startedAt": "2026-09-30T20:13:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:27Z",
+              "conclusion": "success",
+              "name": "Select the one trusted orchestration Python",
+              "number": 3,
+              "startedAt": "2026-09-30T20:13:27Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:27Z",
+              "conclusion": "success",
+              "name": "Validate the inputs",
+              "number": 4,
+              "startedAt": "2026-09-30T20:13:27Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:28Z",
+              "conclusion": "success",
+              "name": "Resolve the subject",
+              "number": 5,
+              "startedAt": "2026-09-30T20:13:27Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:28Z",
+              "conclusion": "skipped",
+              "name": "Qualify the exact candidate without publication credentials",
+              "number": 6,
+              "startedAt": "2026-09-30T20:13:28Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:57Z",
+              "conclusion": "success",
+              "name": "Replay the exact recipe twice",
+              "number": 7,
+              "startedAt": "2026-09-30T20:13:28Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:57Z",
+              "conclusion": "skipped",
+              "name": "Verify the rebuilt bundle against the record",
+              "number": 8,
+              "startedAt": "2026-09-30T20:13:57Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:57Z",
+              "conclusion": "success",
+              "name": "Prove the qualification left no checkout change",
+              "number": 9,
+              "startedAt": "2026-09-30T20:13:57Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:58Z",
+              "conclusion": "success",
+              "name": "Retain the candidate-controlled qualification result",
+              "number": 10,
+              "startedAt": "2026-09-30T20:13:57Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:58Z",
+              "conclusion": "skipped",
+              "name": "Transfer only verified inert release bytes",
+              "number": 11,
+              "startedAt": "2026-09-30T20:13:58Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:58Z",
+              "conclusion": "success",
+              "name": "Post Select the one trusted orchestration Python",
+              "number": 21,
+              "startedAt": "2026-09-30T20:13:58Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:59Z",
+              "conclusion": "success",
+              "name": "Post Check out the subject with full history",
+              "number": 22,
+              "startedAt": "2026-09-30T20:13:58Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:13:59Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 23,
+              "startedAt": "2026-09-30T20:13:59Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/mmzen/se_harness/actions/runs/36771039806/job/110077274872"
+        },
+        {
+          "completedAt": "2026-09-30T20:13:09Z",
+          "conclusion": "skipped",
+          "databaseId": 110077275868,
+          "name": "Rehearse the qualification of the release record",
+          "startedAt": "2026-09-30T20:13:10Z",
+          "status": "completed",
+          "steps": [],
+          "url": "https://github.com/mmzen/se_harness/actions/runs/36771039806/job/110077275868"
+        },
+        {
+          "completedAt": "2026-09-30T20:14:07Z",
+          "conclusion": "success",
+          "databaseId": 110077620174,
+          "name": "Publication rehearsal",
+          "startedAt": "2026-09-30T20:14:04Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-30T20:14:05Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-30T20:14:05Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:14:05Z",
+              "conclusion": "success",
+              "name": "Report selected checks or a successful skip",
+              "number": 2,
+              "startedAt": "2026-09-30T20:14:05Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-30T20:14:05Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 3,
+              "startedAt": "2026-09-30T20:14:05Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/mmzen/se_harness/actions/runs/36771039806/job/110077620174"
+        }
+      ],
+      "status": "completed"
+    },
+    "seconds": 1.254005299997516
+  },
+  "rehearsal-commit": {
+    "argv": [
+      "C:/Program Files/GitHub CLI/gh.exe",
+      "api",
+      "repos/mmzen/se_harness/git/commits/79e773cbfcfe6469e125643236ed54378777a702"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "sha": "79e773cbfcfe6469e125643236ed54378777a702",
+      "node_id": "C_kwDOT09fPNoAKDc5ZTc3M2NiZmNmZTY0NjllMTI1NjQzMjM2ZWQ1NDM3ODc3N2E3MDI",
+      "url": "https://api.github.com/repos/mmzen/se_harness/git/commits/79e773cbfcfe6469e125643236ed54378777a702",
+      "html_url": "https://github.com/mmzen/se_harness/commit/79e773cbfcfe6469e125643236ed54378777a702",
+      "author": {
+        "name": "mmzen",
+        "email": "mathieu.meadele@gmail.com",
+        "date": "2026-09-30T20:12:54Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-09-30T20:12:54Z"
+      },
+      "tree": {
+        "sha": "1501dda221497f297db5c1af3c3d05c47bedd85c",
+        "url": "https://api.github.com/repos/mmzen/se_harness/git/trees/1501dda221497f297db5c1af3c3d05c47bedd85c"
+      },
+      "message": "Merge ee0c807f6f2c415d610bf6994dfd806a840284ff into 7253d13b212ad6f7df670021290fea32e81d66de",
+      "parents": [
+        {
+          "sha": "7253d13b212ad6f7df670021290fea32e81d66de",
+          "url": "https://api.github.com/repos/mmzen/se_harness/git/commits/7253d13b212ad6f7df670021290fea32e81d66de",
+          "html_url": "https://github.com/mmzen/se_harness/commit/7253d13b212ad6f7df670021290fea32e81d66de"
+        },
+        {
+          "sha": "ee0c807f6f2c415d610bf6994dfd806a840284ff",
+          "url": "https://api.github.com/repos/mmzen/se_harness/git/commits/ee0c807f6f2c415d610bf6994dfd806a840284ff",
+          "html_url": "https://github.com/mmzen/se_harness/commit/ee0c807f6f2c415d610bf6994dfd806a840284ff"
+        }
+      ],
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqvW1GCRC1aQ7uu5UhlAAAdyQQAAIkcENF1Odx3qq0eyjJunja\nUrcFunJQqU62tnxyYMhwhNWjCCEVgKqEaPRGZ0nqaY547z92gaBj91PynjLvf+hf\nDnpoocfYRfI+pW1mfWX9cyumFw9nsk87Y7a4GUhmZlp/01mZPmx55G4FNSlNnBSr\n7w+7VwiTDc3p+PhISOs6tzZHpKiFYe9JYB0E/ZVW+bFN8U/w11vpyk8KbmlKVajc\nN36Kjf678pQgaGT5ixixPNhzALDB1UT/6IrQefImhiN248lC5Mdev3UEZ5Wj9BKU\n3QeGW1z8vhVQw9xlFEqq6hRhSGskFqecE6NlTlEioFEUOHniISYyAUF2MICZEfj9\n7ebX8JcGFKLMv2ILoCQj3ygXMJxhWk6XRlUe8b3b2s/BdfswssvRvTswMZ0sX7PV\nJ2o1rpTipwA1PphQFtSD5mRHB8VFCfFS/hLz4DKjllUR6hLSqpW8pIRqTZnsTdOv\nd5560ZyesKbRRS0hUQrsUjzKB2cZxxAbjCVrW+DwjhTGH/XoaO80WpVke/+ePB83\nPH2A5lPznfpuJaMqIMp9XmofC9w3TdTG6xqxOlKXKAjK36V7MuzpdOBkIlhbsdcg\n5B1f3f9DCO7tngLmjKwv2cq2ubo6ClZrDYzgpqQB2qP6DrbhEpYbHdZwhzz3DBi2\nRdDm5phyEp0yHF1/01vp\n=gXE7\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 1501dda221497f297db5c1af3c3d05c47bedd85c\nparent 7253d13b212ad6f7df670021290fea32e81d66de\nparent ee0c807f6f2c415d610bf6994dfd806a840284ff\nauthor mmzen <mathieu.meadele@gmail.com> 1790799174 +0200\ncommitter GitHub <noreply@github.com> 1790799174 +0200\n\nMerge ee0c807f6f2c415d610bf6994dfd806a840284ff into 7253d13b212ad6f7df670021290fea32e81d66de\n",
+        "verified_at": "2026-09-30T20:12:54Z"
+      }
+    },
+    "seconds": 0.484726499998942
+  },
+  "external-delivery-receipt": {
+    "pr": "https://github.com/mmzen/se_harness/pull/508",
+    "draft": true,
+    "base_branch": "release/0.20",
+    "base_commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+    "branch": "work/compatibility-0-20-1",
+    "head": "ee0c807f6f2c415d610bf6994dfd806a840284ff",
+    "ci_commit": "79e773cbfcfe6469e125643236ed54378777a702",
+    "identical_trees": true,
+    "tree": "1501dda221497f297db5c1af3c3d05c47bedd85c",
+    "published_release": false,
+    "merged": false,
+    "manual_dispatch": false,
+    "build_replay": {
+      "authority": "technical replay evidence only; no lifecycle or external-action authority",
+      "builds": [
+        {
+          "id": "a",
+          "sdist_sha256": "8f66ba762fe089eca202eca6ccf117898687d57f2674c27a2a9e1ac809bbb966",
+          "wheel_sha256": "21b6e342f8f17ce875e942e942644fac75e3c9ffd8438dae04f3f03faeb1fb56"
+        },
+        {
+          "id": "b",
+          "sdist_sha256": "8f66ba762fe089eca202eca6ccf117898687d57f2674c27a2a9e1ac809bbb966",
+          "wheel_sha256": "21b6e342f8f17ce875e942e942644fac75e3c9ffd8438dae04f3f03faeb1fb56"
+        }
+      ],
+      "candidate": {
+        "commit": "79e773cbfcfe6469e125643236ed54378777a702",
+        "source_date_epoch": 1790799174,
+        "source_manifest_sha256": "ead48e790445d77d72eb89795ca93bded1590e9d10b59a89fbcef007e1c0b516"
+      },
+      "expected": {
+        "sdist_sha256": null,
+        "wheel_sha256": null
+      },
+      "manifest": {
+        "build_recipe": "release/build-recipe.json",
+        "build_recipe_schema": "se-harness-release-build-recipe/v1",
+        "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+        "checksums": "SHA256SUMS",
+        "checksums_content": "21b6e342f8f17ce875e942e942644fac75e3c9ffd8438dae04f3f03faeb1fb56  se_harness-0.20.1-py3-none-any.whl\n8f66ba762fe089eca202eca6ccf117898687d57f2674c27a2a9e1ac809bbb966  se_harness-0.20.1.tar.gz\n",
+        "checksums_sha256": "f7fcc73f2711c3a5cb1892720598e8fac0246cedf83a584eb4ab6db81c585f57",
+        "commit": "79e773cbfcfe6469e125643236ed54378777a702",
+        "git_object_format": "sha1",
+        "schema": "se-harness-release-bundle/v2",
+        "sdist": "se_harness-0.20.1.tar.gz",
+        "sdist_sha256": "8f66ba762fe089eca202eca6ccf117898687d57f2674c27a2a9e1ac809bbb966",
+        "source_date_epoch": 1790799174,
+        "source_manifest_sha256": "ead48e790445d77d72eb89795ca93bded1590e9d10b59a89fbcef007e1c0b516",
+        "version": "0.20.1",
+        "wheel": "se_harness-0.20.1-py3-none-any.whl",
+        "wheel_sha256": "21b6e342f8f17ce875e942e942644fac75e3c9ffd8438dae04f3f03faeb1fb56"
+      },
+      "observations": [
+        {
+          "commands": [
+            [
+              "python",
+              "-m",
+              "pip",
+              "install",
+              "--disable-pip-version-check",
+              "--no-cache-dir",
+              "--only-binary=:all:",
+              "--require-hashes",
+              "--target",
+              "{toolchain_dir}",
+              "-r",
+              "{toolchain_lock}"
+            ],
+            [
+              "python",
+              "-m",
+              "build",
+              "--wheel",
+              "--sdist",
+              "--no-isolation",
+              "--outdir",
+              "{raw_output}",
+              "."
+            ],
+            [
+              "python",
+              "scripts/normalize_sdist.py",
+              "{raw_sdist}",
+              "{final_sdist}",
+              "--epoch",
+              "{source_date_epoch}"
+            ]
+          ],
+          "environment": {
+            "HOME": "/tmp/se-harness-home",
+            "LANG": "C.UTF-8",
+            "LC_ALL": "C.UTF-8",
+            "PATH": "/usr/local/bin:/usr/bin:/bin",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "SOURCE_DATE_EPOCH": "1790799174",
+            "TZ": "UTC"
+          },
+          "observed": {
+            "architecture": "amd64",
+            "os": "linux",
+            "pointer_bits": 64,
+            "python_implementation": "CPython",
+            "python_version": "3.11.9"
+          },
+          "outputs": {
+            "se_harness-0.20.1-py3-none-any.whl": "21b6e342f8f17ce875e942e942644fac75e3c9ffd8438dae04f3f03faeb1fb56",
+            "se_harness-0.20.1.tar.gz": "8f66ba762fe089eca202eca6ccf117898687d57f2674c27a2a9e1ac809bbb966"
+          },
+          "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+          "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+          "schema": "se-harness-release-build-producer/v1",
+          "toolchain": [
+            {
+              "name": "build",
+              "version": "1.3.0"
+            },
+            {
+              "name": "colorama",
+              "version": "0.4.6"
+            },
+            {
+              "name": "packaging",
+              "version": "26.3"
+            },
+            {
+              "name": "pip",
+              "version": "24.0"
+            },
+            {
+              "name": "pyproject-hooks",
+              "version": "1.2.0"
+            },
+            {
+              "name": "setuptools",
+              "version": "84.0.0"
+            },
+            {
+              "name": "wheel",
+              "version": "0.48.0"
+            }
+          ]
+        },
+        {
+          "commands": [
+            [
+              "python",
+              "-m",
+              "pip",
+              "install",
+              "--disable-pip-version-check",
+              "--no-cache-dir",
+              "--only-binary=:all:",
+              "--require-hashes",
+              "--target",
+              "{toolchain_dir}",
+              "-r",
+              "{toolchain_lock}"
+            ],
+            [
+              "python",
+              "-m",
+              "build",
+              "--wheel",
+              "--sdist",
+              "--no-isolation",
+              "--outdir",
+              "{raw_output}",
+              "."
+            ],
+            [
+              "python",
+              "scripts/normalize_sdist.py",
+              "{raw_sdist}",
+              "{final_sdist}",
+              "--epoch",
+              "{source_date_epoch}"
+            ]
+          ],
+          "environment": {
+            "HOME": "/tmp/se-harness-home",
+            "LANG": "C.UTF-8",
+            "LC_ALL": "C.UTF-8",
+            "PATH": "/usr/local/bin:/usr/bin:/bin",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "SOURCE_DATE_EPOCH": "1790799174",
+            "TZ": "UTC"
+          },
+          "observed": {
+            "architecture": "amd64",
+            "os": "linux",
+            "pointer_bits": 64,
+            "python_implementation": "CPython",
+            "python_version": "3.11.9"
+          },
+          "outputs": {
+            "se_harness-0.20.1-py3-none-any.whl": "21b6e342f8f17ce875e942e942644fac75e3c9ffd8438dae04f3f03faeb1fb56",
+            "se_harness-0.20.1.tar.gz": "8f66ba762fe089eca202eca6ccf117898687d57f2674c27a2a9e1ac809bbb966"
+          },
+          "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+          "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+          "schema": "se-harness-release-build-producer/v1",
+          "toolchain": [
+            {
+              "name": "build",
+              "version": "1.3.0"
+            },
+            {
+              "name": "colorama",
+              "version": "0.4.6"
+            },
+            {
+              "name": "packaging",
+              "version": "26.3"
+            },
+            {
+              "name": "pip",
+              "version": "24.0"
+            },
+            {
+              "name": "pyproject-hooks",
+              "version": "1.2.0"
+            },
+            {
+              "name": "setuptools",
+              "version": "84.0.0"
+            },
+            {
+              "name": "wheel",
+              "version": "0.48.0"
+            }
+          ]
+        }
+      ],
+      "producer": {
+        "architecture": "amd64",
+        "image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+        "os": "linux"
+      },
+      "recipe": {
+        "path": "release/build-recipe.json",
+        "schema": "se-harness-release-build-recipe/v1",
+        "sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc"
+      },
+      "schema": "se-harness-release-build-replay/v1",
+      "state": "exact"
+    },
+    "check_pr": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check-pr",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+        "--event",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\live-pr-event.json",
+        "--from-git",
+        "7253d13b212ad6f7df670021290fea32e81d66de",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "result": {
+        "changed_paths": [
+          "README.md",
+          "docs/engineering/release-0-20-1/README.md",
+          "docs/engineering/release-0-20-1/evidence/WO-RLS-027/WO-RLS-027-handoff.md",
+          "docs/engineering/release-0-20-1/evidence/WO-RLS-027/WO-RLS-027-pre-action.md",
+          "docs/engineering/release-0-20-1/evidence/WO-RLS-027/plan.json",
+          "docs/engineering/release-0-20-1/evidence/WO-RLS-027/review.md",
+          "docs/engineering/release-0-20-1/evidence/WO-RLS-027/tests.json",
+          "docs/engineering/release-0-20-1/release/REL-SEH-032.md",
+          "docs/engineering/release-0-20-1/specifications/SPEC-RLS-001.md",
+          "docs/engineering/release-0-20-1/verification/VER-RLS-027.md",
+          "docs/engineering/release-0-20-1/work-orders/WO-RLS-027.md",
+          "docs/notes/developing-se-harness.md",
+          "docs/notes/release-delivery-completion.md",
+          "docs/notes/release-qualification-roles.md",
+          "pyproject.toml",
+          "se_harness/__init__.py",
+          "se_harness/candidate_acceptance.py",
+          "tests/test_release_qualification.py"
+        ],
+        "command": "check-pr",
+        "outcome": "completed",
+        "schema": "se-harness-command-result-v1",
+        "status": "pass",
+        "work_orders": [
+          "WO-RLS-027"
+        ]
+      },
+      "seconds": 10.351197100011632
+    },
+    "next": "Retain all hosted results; implementation completion and verification preparation remain separate from PR creation."
+  },
+  "retained_files": {
+    "candidate-package-qualification-0.19.0/candidate-package-qualification.json": {
+      "authority": "evidence-only; no lifecycle or external action authorized",
+      "checks": [
+        {
+          "id": "CP001",
+          "message": "released verifier identity is exact and isolated",
+          "passed": true,
+          "subject": "released-verifier"
+        },
+        {
+          "id": "CP002",
+          "message": "10 released-verifier scenarios passed",
+          "passed": true,
+          "subject": "candidate-wheel"
+        }
+      ],
+      "completion": "completed",
+      "evaluator": {
+        "diagnostics": [],
+        "distribution": "se-harness",
+        "entry_point_sha256": "31185b188e408767c084c4a5bc5d61a7c6829504f134aa5124732bdf0717f8ba",
+        "evaluator_archive_name": "se_harness-0.19.0-py3-none-any.whl",
+        "evaluator_archive_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+        "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+        "evaluator_payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+        "identity_sha256": "f115eee648330f3e82fbc1f5a64c1ed41b16fb0e8ef8f33b5005f3258055e943",
+        "isolated_python": true,
+        "pythonpath_present": false,
+        "role": "released-verifier",
+        "user_site_enabled": false,
+        "version": "0.19.0"
+      },
+      "independence": "released-verifier",
+      "operation": "candidate-package",
+      "passed": true,
+      "schema": "se-harness-release-qualification-v1",
+      "target": {
+        "acceptance_contract_sha256": "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75",
+        "commit": "79e773cbfcfe6469e125643236ed54378777a702",
+        "identity_sha256": "c01e5c3e844e8c152877625903ace21bfa0e0cd4ab940bbe46d8aed8f68920d1",
+        "kind": "candidate-package",
+        "version": "0.20.1",
+        "wheel_sha256": "b2bfee811fd021fb6756b23b7639a15060a33f50827d2479c3b1e40ba50fac4d"
+      }
+    },
+    "candidate-source-raw/output.log": "Evaluator Python: /tmp/simple-plugin-aknznvlh/private/verity-plane/evaluator/bin/python\nEvaluator Python: /tmp/simple-plugin-aknznvlh/private/verity-plane/evaluator/bin/python\n--workers must be at least 1\n0.20.1\nWEX_SCALE artifacts=100 validation=0.040188s focus=0.092927s plan=0.071346s\nWEX_SCALE artifacts=500 validation=0.177923s focus=0.259051s plan=0.311460s\nWEX_SCALE artifacts=1000 validation=0.341985s focus=0.438755s plan=0.614053s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1167 tests in 42.503s (178 classes, 4 workers)\n\nOK (skipped=2)\n",
+    "candidate-source-raw/summary.json": {
+      "candidate": "79e773cbfcfe6469e125643236ed54378777a702",
+      "working_tree": "clean",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python",
+        "scripts/run_tests.py",
+        "--workers",
+        "4",
+        "--scale",
+        "full",
+        "--timings",
+        "target/test-timings.json"
+      ],
+      "cwd": "/home/runner/work/se_harness/se_harness",
+      "checker": {
+        "version": "0.20.1",
+        "origin": "/home/runner/work/se_harness/se_harness/se_harness/__init__.py"
+      },
+      "started_at": "2026-09-30T20:13:10.055489+00:00",
+      "exit_code": 0,
+      "result": "pass",
+      "output_tail": "Evaluator Python: /tmp/simple-plugin-aknznvlh/private/verity-plane/evaluator/bin/python\nEvaluator Python: /tmp/simple-plugin-aknznvlh/private/verity-plane/evaluator/bin/python\n--workers must be at least 1\n0.20.1\nWEX_SCALE artifacts=100 validation=0.040188s focus=0.092927s plan=0.071346s\nWEX_SCALE artifacts=500 validation=0.177923s focus=0.259051s plan=0.311460s\nWEX_SCALE artifacts=1000 validation=0.341985s focus=0.438755s plan=0.614053s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1167 tests in 42.503s (178 classes, 4 workers)\n\nOK (skipped=2)\n",
+      "raw": {
+        "file": "output.log",
+        "bytes": 629,
+        "artifact": "candidate-source-raw",
+        "repository": "mmzen/se_harness",
+        "run_id": "36771039185",
+        "run_url": "https://github.com/mmzen/se_harness/actions/runs/36771039185",
+        "retention_days": 14,
+        "estimated_expiry": "2026-10-14T20:13:10.055489+00:00",
+        "availability": "local; upload not yet confirmed",
+        "download_command": [
+          "gh",
+          "run",
+          "download",
+          "36771039185",
+          "--repo",
+          "mmzen/se_harness",
+          "--name",
+          "candidate-source-raw"
+        ]
+      }
+    },
+    "complete-candidate-qualification/complete-candidate.json": {
+      "authority": "evidence-only; no lifecycle or external action authorized",
+      "checks": [
+        {
+          "id": "CC001",
+          "message": "candidate runtime is bound to the checkout",
+          "passed": true,
+          "subject": "candidate-runtime"
+        },
+        {
+          "id": "CC002",
+          "message": "HEAD and tracked tree match the candidate",
+          "passed": true,
+          "subject": "candidate-commit"
+        },
+        {
+          "id": "CC003",
+          "message": "artifacts=1750; errors=0; warnings=52",
+          "passed": true,
+          "subject": "engineering-graph"
+        },
+        {
+          "id": "CC004",
+          "message": "target state is unchanged",
+          "passed": true,
+          "subject": "repository-state"
+        }
+      ],
+      "completion": "completed",
+      "evaluator": {
+        "candidate_commit": "79e773cbfcfe6469e125643236ed54378777a702",
+        "diagnostics": [],
+        "distribution": "se-harness",
+        "identity_sha256": "ee9329d9439de343e2c04887cea143d377a11a217f1087f2681e013f6afdedbe",
+        "isolated_python": false,
+        "pythonpath_present": false,
+        "role": "candidate-source",
+        "user_site_enabled": false,
+        "version": "0.20.1"
+      },
+      "independence": "candidate-controlled",
+      "operation": "complete-candidate",
+      "passed": true,
+      "schema": "se-harness-release-qualification-v1",
+      "target": {
+        "commit": "79e773cbfcfe6469e125643236ed54378777a702",
+        "identity_sha256": "0d1e3661df09d73417c7407639114832e1916a1a643254f18fd5be921bb1ffd0",
+        "kind": "complete-candidate",
+        "tree": "1501dda221497f297db5c1af3c3d05c47bedd85c"
+      }
+    },
+    "integration-package-staging-79e773cbfcfe6469e125643236ed54378777a702/integration-manifest.json": {
+      "base_version": "0.20.1",
+      "build": {
+        "build": "1.2.2.post1",
+        "python": "3.11.16",
+        "setuptools": "75.8.0",
+        "source_date_epoch": 1790799174,
+        "wheel": "0.45.1"
+      },
+      "channel": "pr508",
+      "commit": "79e773cbfcfe6469e125643236ed54378777a702",
+      "distribution_kind": "integration-package",
+      "event": "pull_request",
+      "overlays": [
+        {
+          "after_sha256": "6230a83b126115e60e94a61ff55b99961b1a11814e406196d7952000c5b50abd",
+          "before_sha256": "2b4a3e6162d01f56de066e8b433aa93ee8c34e694aad92f6e1a9faae56d9c106",
+          "path": "pyproject.toml"
+        },
+        {
+          "after_sha256": "b8fea16a89c6d5afd3fe83681cd37315058124963b784c6ad99ae7d7a446d4c2",
+          "before_sha256": "94bf7d5acf81cb6329b79da5d9f5c9252912c08b79e909de5d0c0b8d0c103a4d",
+          "path": "se_harness/__init__.py"
+        }
+      ],
+      "promotable": false,
+      "pull_request": 508,
+      "ref": "refs/pull/508/merge",
+      "repository": "mmzen/se_harness",
+      "retention_days": 3,
+      "run": {
+        "attempt": 1,
+        "id": 36771039185,
+        "workflow": "SE Harness Candidate Evidence"
+      },
+      "schema": "se-harness-integration-package-v1",
+      "version": "0.20.1+pr508.g79e773cbfcfe",
+      "wheel": {
+        "filename": "se_harness-0.20.1+pr508.g79e773cbfcfe-py3-none-any.whl",
+        "sha256": "e6e6a427dde31b9c3b4bea46d46e125bada30c8c2866e4c80f7ced12b8e35b86",
+        "size": 536811
+      }
+    },
+    "se-harness-integration-79e773cbfcfe6469e125643236ed54378777a702/integration-manifest.json": {
+      "base_version": "0.20.1",
+      "build": {
+        "build": "1.2.2.post1",
+        "python": "3.11.16",
+        "setuptools": "75.8.0",
+        "source_date_epoch": 1790799174,
+        "wheel": "0.45.1"
+      },
+      "channel": "pr508",
+      "commit": "79e773cbfcfe6469e125643236ed54378777a702",
+      "distribution_kind": "integration-package",
+      "event": "pull_request",
+      "overlays": [
+        {
+          "after_sha256": "6230a83b126115e60e94a61ff55b99961b1a11814e406196d7952000c5b50abd",
+          "before_sha256": "2b4a3e6162d01f56de066e8b433aa93ee8c34e694aad92f6e1a9faae56d9c106",
+          "path": "pyproject.toml"
+        },
+        {
+          "after_sha256": "b8fea16a89c6d5afd3fe83681cd37315058124963b784c6ad99ae7d7a446d4c2",
+          "before_sha256": "94bf7d5acf81cb6329b79da5d9f5c9252912c08b79e909de5d0c0b8d0c103a4d",
+          "path": "se_harness/__init__.py"
+        }
+      ],
+      "promotable": false,
+      "pull_request": 508,
+      "ref": "refs/pull/508/merge",
+      "repository": "mmzen/se_harness",
+      "retention_days": 3,
+      "run": {
+        "attempt": 1,
+        "id": 36771039185,
+        "workflow": "SE Harness Candidate Evidence"
+      },
+      "schema": "se-harness-integration-package-v1",
+      "version": "0.20.1+pr508.g79e773cbfcfe",
+      "wheel": {
+        "filename": "se_harness-0.20.1+pr508.g79e773cbfcfe-py3-none-any.whl",
+        "sha256": "e6e6a427dde31b9c3b4bea46d46e125bada30c8c2866e4c80f7ced12b8e35b86",
+        "size": 536811
+      }
+    },
+    "upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-result.json": {
+      "failure": null,
+      "instruction_delivery": {
+        "input": "none",
+        "native_host_delivery": "not_assessed"
+      },
+      "lock": {
+        "canonical_sha256": "001e69451ce02c25e5847187fa3210082bcb83a9666bd027c863ea9c621aa22f",
+        "evaluator": {
+          "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+          "version": "0.20.1"
+        },
+        "schema": 4,
+        "tool_version": "0.20.1"
+      },
+      "overall_result": "pass",
+      "predecessor": {
+        "version": "0.19.0"
+      },
+      "schema": "se-harness-upgrade-rehearsal-v1",
+      "semantic_sha256": "001e69451ce02c25e5847187fa3210082bcb83a9666bd027c863ea9c621aa22f",
+      "steps": [
+        {
+          "argv": [
+            "D:\\a\\_temp\\predecessor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>\\repository"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "predecessor-doctor-before",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "2536e62340f1bb02d02b704a9748582074d6d451359e4ddfec9b779b8eaaf732"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "upgrade",
+            "<copy>\\repository",
+            "--json"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-upgrade-plan",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "8816bdd31cd3b62c383f6ac6ec8e1268cbef5bce1f1263a77126212b25c05bd4"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "upgrade",
+            "<copy>\\repository",
+            "--apply",
+            "--evidence-output",
+            "docs/engineering/evidence/upgrade-rehearsal-transaction.json"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-upgrade-apply",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "5faf2537d8534b4397bf435fa2dd724219aaf7a5d2ea90e59d16438aa140814b"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>\\repository"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-doctor-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "de118b0e487fb2ede0ff265b95d3d8b5cb194c13daf88b9fd6965ca8521a8d78"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "validate",
+            "<copy>\\repository"
+          ],
+          "exit_code": 0,
+          "expect": "any",
+          "id": "successor-validate-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "0e5d2d288cc32698a0bcdd71d58c9157b1890f6ac5289d84492d7e8ec887f9cb"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\predecessor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>\\repository"
+          ],
+          "exit_code": 1,
+          "expect": "failure",
+          "id": "predecessor-doctor-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "599b218f371027305a71e05bcb333292406dab95b1eb19a64fcd97683fa7e6bb"
+        }
+      ],
+      "successor": {
+        "version": "0.20.1"
+      },
+      "tolerated_diagnostics": [],
+      "validation": {
+        "artifacts": 1750,
+        "errors": 0,
+        "warnings": 52
+      }
+    },
+    "upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-timing.json": {
+      "complete": true,
+      "diagnostic_errors": [],
+      "identity": {
+        "GITHUB_JOB": "upgrade-rehearsal",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "36771039185",
+        "GITHUB_SHA": "79e773cbfcfe6469e125643236ed54378777a702",
+        "ImageOS": "win25-vs2026",
+        "ImageVersion": "20260922.246.2",
+        "REHEARSAL_HEAD_SHA": "ee0c807f6f2c415d610bf6994dfd806a840284ff",
+        "RUNNER_OS": "Windows"
+      },
+      "schema": "se-harness-upgrade-timing-v1",
+      "stages": [
+        {
+          "elapsed_seconds": 23.851799299999982,
+          "handover_result": "pass",
+          "id": "replay",
+          "parent": null,
+          "status": "finished"
+        },
+        {
+          "archive_bytes": 311808000,
+          "elapsed_seconds": 2.1112922000000367,
+          "id": "git-archive",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 6.051565299999993,
+          "entries": 14407,
+          "files": 12303,
+          "id": "archive-extraction",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.02514139999999543,
+          "exit_code": 0,
+          "id": "git-init",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.019113099999970018,
+          "exit_code": 0,
+          "id": "git-config-maintenance",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.018573999999944135,
+          "exit_code": 0,
+          "id": "git-config-gc",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.018593400000042948,
+          "exit_code": 0,
+          "id": "git-config-autocrlf",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.01778070000000298,
+          "exit_code": 0,
+          "id": "git-config-email",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.017977200000018456,
+          "exit_code": 0,
+          "id": "git-config-name",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.01742530000001352,
+          "exit_code": 0,
+          "id": "git-config-signing",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 7.569896500000027,
+          "exit_code": 0,
+          "id": "git-add",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.7764956999999981,
+          "exit_code": 0,
+          "id": "git-commit",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.02051219999998466,
+          "exit_code": 0,
+          "id": "git-storage-paths",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.1065653999999654,
+          "id": "predecessor-version",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.10365849999999455,
+          "id": "successor-version",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.9634715000000256,
+          "exit_code": 0,
+          "id": "predecessor-doctor-before",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.13722710000001825,
+          "exit_code": 0,
+          "id": "successor-upgrade-plan",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.22998970000003283,
+          "exit_code": 0,
+          "id": "successor-upgrade-apply",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.9894952000000217,
+          "exit_code": 0,
+          "id": "successor-doctor-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.8238885000000096,
+          "exit_code": 0,
+          "id": "successor-validate-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.9911212999999748,
+          "exit_code": 1,
+          "id": "predecessor-doctor-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.8114973000000418,
+          "id": "scratch-cleanup",
+          "parent": "replay",
+          "status": "finished"
+        }
+      ],
+      "storage": {
+        "git_directory": "D:/a/_temp/upgrade-rehearsal-o1s3r1rp/repository/.git",
+        "index_file": "D:/a/_temp/upgrade-rehearsal-o1s3r1rp/repository/.git/index",
+        "object_directory": "D:/a/_temp/upgrade-rehearsal-o1s3r1rp/repository/.git/objects",
+        "operational_repository": "D:\\a\\se_harness\\se_harness",
+        "python_default_temp": "C:\\Users\\runneradmin\\AppData\\Local\\Temp",
+        "repository_directory": "D:\\a\\_temp\\upgrade-rehearsal-o1s3r1rp\\repository",
+        "scratch_directory": "D:\\a\\_temp\\upgrade-rehearsal-o1s3r1rp",
+        "selection": "explicit",
+        "temp_environment": {
+          "RUNNER_TEMP": "D:\\a\\_temp",
+          "TEMP": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp",
+          "TMP": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp",
+          "TMPDIR": null
+        },
+        "workspace_root": "D:\\a\\_temp"
+      },
+      "unaccounted_seconds": 0.030517799999870476
+    },
+    "upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-result.json": {
+      "failure": null,
+      "instruction_delivery": {
+        "input": "none",
+        "native_host_delivery": "not_assessed"
+      },
+      "lock": {
+        "canonical_sha256": "001e69451ce02c25e5847187fa3210082bcb83a9666bd027c863ea9c621aa22f",
+        "evaluator": {
+          "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+          "version": "0.20.1"
+        },
+        "schema": 4,
+        "tool_version": "0.20.1"
+      },
+      "overall_result": "pass",
+      "predecessor": {
+        "version": "0.19.0"
+      },
+      "schema": "se-harness-upgrade-rehearsal-v1",
+      "semantic_sha256": "001e69451ce02c25e5847187fa3210082bcb83a9666bd027c863ea9c621aa22f",
+      "steps": [
+        {
+          "argv": [
+            "D:\\a\\_temp\\predecessor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>\\repository"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "predecessor-doctor-before",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "2536e62340f1bb02d02b704a9748582074d6d451359e4ddfec9b779b8eaaf732"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "upgrade",
+            "<copy>\\repository",
+            "--json"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-upgrade-plan",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "8816bdd31cd3b62c383f6ac6ec8e1268cbef5bce1f1263a77126212b25c05bd4"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "upgrade",
+            "<copy>\\repository",
+            "--apply",
+            "--evidence-output",
+            "docs/engineering/evidence/upgrade-rehearsal-transaction.json"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-upgrade-apply",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "5faf2537d8534b4397bf435fa2dd724219aaf7a5d2ea90e59d16438aa140814b"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>\\repository"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-doctor-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "de118b0e487fb2ede0ff265b95d3d8b5cb194c13daf88b9fd6965ca8521a8d78"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "validate",
+            "<copy>\\repository"
+          ],
+          "exit_code": 0,
+          "expect": "any",
+          "id": "successor-validate-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "0e5d2d288cc32698a0bcdd71d58c9157b1890f6ac5289d84492d7e8ec887f9cb"
+        },
+        {
+          "argv": [
+            "D:\\a\\_temp\\predecessor-env\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>\\repository"
+          ],
+          "exit_code": 1,
+          "expect": "failure",
+          "id": "predecessor-doctor-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "599b218f371027305a71e05bcb333292406dab95b1eb19a64fcd97683fa7e6bb"
+        }
+      ],
+      "successor": {
+        "version": "0.20.1"
+      },
+      "tolerated_diagnostics": [],
+      "validation": {
+        "artifacts": 1750,
+        "errors": 0,
+        "warnings": 52
+      }
+    },
+    "upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-timing.json": {
+      "complete": true,
+      "diagnostic_errors": [],
+      "identity": {
+        "GITHUB_JOB": "upgrade-rehearsal",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "36771039185",
+        "GITHUB_SHA": "79e773cbfcfe6469e125643236ed54378777a702",
+        "ImageOS": "win25-vs2026",
+        "ImageVersion": "20260922.246.2",
+        "REHEARSAL_HEAD_SHA": "ee0c807f6f2c415d610bf6994dfd806a840284ff",
+        "RUNNER_OS": "Windows"
+      },
+      "schema": "se-harness-upgrade-timing-v1",
+      "stages": [
+        {
+          "elapsed_seconds": 23.863802599999985,
+          "handover_result": "pass",
+          "id": "replay",
+          "parent": null,
+          "status": "finished"
+        },
+        {
+          "archive_bytes": 311808000,
+          "elapsed_seconds": 2.1465356000000497,
+          "id": "git-archive",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 6.09927110000001,
+          "entries": 14407,
+          "files": 12303,
+          "id": "archive-extraction",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.026201499999956468,
+          "exit_code": 0,
+          "id": "git-init",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.02389890000000605,
+          "exit_code": 0,
+          "id": "git-config-maintenance",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.019784200000003693,
+          "exit_code": 0,
+          "id": "git-config-gc",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.01911909999995487,
+          "exit_code": 0,
+          "id": "git-config-autocrlf",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.01854019999996126,
+          "exit_code": 0,
+          "id": "git-config-email",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.01803240000003825,
+          "exit_code": 0,
+          "id": "git-config-name",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.01848730000000387,
+          "exit_code": 0,
+          "id": "git-config-signing",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 7.583408800000029,
+          "exit_code": 0,
+          "id": "git-add",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.7898824999999761,
+          "exit_code": 0,
+          "id": "git-commit",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.01977169999997841,
+          "exit_code": 0,
+          "id": "git-storage-paths",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.10948589999998148,
+          "id": "predecessor-version",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.10831999999999198,
+          "id": "successor-version",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.989424500000041,
+          "exit_code": 0,
+          "id": "predecessor-doctor-before",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.13712639999999965,
+          "exit_code": 0,
+          "id": "successor-upgrade-plan",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.23305849999997008,
+          "exit_code": 0,
+          "id": "successor-upgrade-apply",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.9676077000000305,
+          "exit_code": 0,
+          "id": "successor-doctor-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.7783291999999733,
+          "exit_code": 0,
+          "id": "successor-validate-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.972603300000003,
+          "exit_code": 1,
+          "id": "predecessor-doctor-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.7522079000000303,
+          "id": "scratch-cleanup",
+          "parent": "replay",
+          "status": "finished"
+        }
+      ],
+      "storage": {
+        "git_directory": "D:/a/_temp/upgrade-rehearsal-9vunwcdb/repository/.git",
+        "index_file": "D:/a/_temp/upgrade-rehearsal-9vunwcdb/repository/.git/index",
+        "object_directory": "D:/a/_temp/upgrade-rehearsal-9vunwcdb/repository/.git/objects",
+        "operational_repository": "D:\\a\\se_harness\\se_harness",
+        "python_default_temp": "C:\\Users\\runneradmin\\AppData\\Local\\Temp",
+        "repository_directory": "D:\\a\\_temp\\upgrade-rehearsal-9vunwcdb\\repository",
+        "scratch_directory": "D:\\a\\_temp\\upgrade-rehearsal-9vunwcdb",
+        "selection": "explicit",
+        "temp_environment": {
+          "RUNNER_TEMP": "D:\\a\\_temp",
+          "TEMP": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp",
+          "TMP": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp",
+          "TMPDIR": null
+        },
+        "workspace_root": "D:\\a\\_temp"
+      },
+      "unaccounted_seconds": 0.03270589999999629
+    },
+    "upgrade-rehearsal-Windows/windows-check-evidence/output.log": "----------------------------------------------------------------------\nRan 6 tests in 0.941s\n\nOK (skipped=1)\n",
+    "upgrade-rehearsal-Windows/windows-check-evidence/summary.json": {
+      "candidate": "79e773cbfcfe6469e125643236ed54378777a702",
+      "working_tree": "clean",
+      "command": [
+        "C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_hash_bound_integrity.FreshCheckoutTests.test_checkout_preserves_raw_evidence_and_canonical_lock_identity",
+        "tests.test_interpreter_safety.InterpreterPathsTests",
+        "-q"
+      ],
+      "cwd": "D:\\a\\se_harness\\se_harness",
+      "checker": {
+        "version": "0.20.1",
+        "origin": "D:\\a\\se_harness\\se_harness\\se_harness\\__init__.py"
+      },
+      "started_at": "2026-09-30T20:15:55.924392+00:00",
+      "exit_code": 0,
+      "result": "pass",
+      "output_tail": "----------------------------------------------------------------------\r\nRan 6 tests in 0.941s\r\n\r\nOK (skipped=1)\r\n",
+      "raw": {
+        "file": "output.log",
+        "bytes": 113,
+        "artifact": "upgrade-rehearsal-Windows",
+        "repository": "mmzen/se_harness",
+        "run_id": "36771039185",
+        "run_url": "https://github.com/mmzen/se_harness/actions/runs/36771039185",
+        "retention_days": 14,
+        "estimated_expiry": "2026-10-14T20:15:55.924392+00:00",
+        "availability": "local; upload not yet confirmed",
+        "download_command": [
+          "gh",
+          "run",
+          "download",
+          "36771039185",
+          "--repo",
+          "mmzen/se_harness",
+          "--name",
+          "upgrade-rehearsal-Windows"
+        ]
+      }
+    },
+    "upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-result.json": {
+      "failure": null,
+      "instruction_delivery": {
+        "input": "none",
+        "native_host_delivery": "not_assessed"
+      },
+      "lock": {
+        "canonical_sha256": "001e69451ce02c25e5847187fa3210082bcb83a9666bd027c863ea9c621aa22f",
+        "evaluator": {
+          "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+          "version": "0.20.1"
+        },
+        "schema": 4,
+        "tool_version": "0.20.1"
+      },
+      "overall_result": "pass",
+      "predecessor": {
+        "version": "0.19.0"
+      },
+      "schema": "se-harness-upgrade-rehearsal-v1",
+      "semantic_sha256": "001e69451ce02c25e5847187fa3210082bcb83a9666bd027c863ea9c621aa22f",
+      "steps": [
+        {
+          "argv": [
+            "/home/runner/work/_temp/predecessor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>/repository"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "predecessor-doctor-before",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "df377d3164a857a46c5d4abd08c0f07bd90850be72aa33fc14fe11d068c7ebe7"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/successor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "upgrade",
+            "<copy>/repository",
+            "--json"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-upgrade-plan",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "8816bdd31cd3b62c383f6ac6ec8e1268cbef5bce1f1263a77126212b25c05bd4"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/successor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "upgrade",
+            "<copy>/repository",
+            "--apply",
+            "--evidence-output",
+            "docs/engineering/evidence/upgrade-rehearsal-transaction.json"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-upgrade-apply",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "5faf2537d8534b4397bf435fa2dd724219aaf7a5d2ea90e59d16438aa140814b"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/successor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>/repository"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-doctor-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "690a56deb10df0e2678b94e08d041589ae6db32d19665ce0ae824a1d03a3d131"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/successor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "validate",
+            "<copy>/repository"
+          ],
+          "exit_code": 0,
+          "expect": "any",
+          "id": "successor-validate-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "0e5d2d288cc32698a0bcdd71d58c9157b1890f6ac5289d84492d7e8ec887f9cb"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/predecessor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>/repository"
+          ],
+          "exit_code": 1,
+          "expect": "failure",
+          "id": "predecessor-doctor-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "c0296dc56483a7bc747c762bc6ae13247f8bab4a818ce3f691fe1ce5399e0655"
+        }
+      ],
+      "successor": {
+        "version": "0.20.1"
+      },
+      "tolerated_diagnostics": [],
+      "validation": {
+        "artifacts": 1750,
+        "errors": 0,
+        "warnings": 52
+      }
+    },
+    "upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-timing.json": {
+      "complete": true,
+      "diagnostic_errors": [],
+      "identity": {
+        "GITHUB_JOB": "upgrade-rehearsal",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "36771039185",
+        "GITHUB_SHA": "79e773cbfcfe6469e125643236ed54378777a702",
+        "ImageOS": "ubuntu24",
+        "ImageVersion": "20260920.314.1",
+        "REHEARSAL_HEAD_SHA": "ee0c807f6f2c415d610bf6994dfd806a840284ff",
+        "RUNNER_OS": "Linux"
+      },
+      "schema": "se-harness-upgrade-timing-v1",
+      "stages": [
+        {
+          "elapsed_seconds": 18.259551879000007,
+          "handover_result": "pass",
+          "id": "replay",
+          "parent": null,
+          "status": "finished"
+        },
+        {
+          "archive_bytes": 311808000,
+          "elapsed_seconds": 0.9587407030000037,
+          "id": "git-archive",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 3.3353321519999994,
+          "entries": 14407,
+          "files": 12303,
+          "id": "archive-extraction",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.004457434999999066,
+          "exit_code": 0,
+          "id": "git-init",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.002179732000001877,
+          "exit_code": 0,
+          "id": "git-config-maintenance",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.0021172340000035206,
+          "exit_code": 0,
+          "id": "git-config-gc",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.002066280000001086,
+          "exit_code": 0,
+          "id": "git-config-autocrlf",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.0020047249999990413,
+          "exit_code": 0,
+          "id": "git-config-email",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.0020180290000055834,
+          "exit_code": 0,
+          "id": "git-config-name",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.0020650069999987863,
+          "exit_code": 0,
+          "id": "git-config-signing",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 6.332274135999995,
+          "exit_code": 0,
+          "id": "git-add",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.30180383100000086,
+          "exit_code": 0,
+          "id": "git-commit",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.002189525999995112,
+          "exit_code": 0,
+          "id": "git-storage-paths",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.12448964100000381,
+          "id": "predecessor-version",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.1263155699999956,
+          "id": "successor-version",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.0250851999999995,
+          "exit_code": 0,
+          "id": "predecessor-doctor-before",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.15782925399999925,
+          "exit_code": 0,
+          "id": "successor-upgrade-plan",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.24675702700000102,
+          "exit_code": 0,
+          "id": "successor-upgrade-apply",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.0160965009999998,
+          "exit_code": 0,
+          "id": "successor-doctor-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.751578336999998,
+          "exit_code": 0,
+          "id": "successor-validate-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.01659167199999,
+          "exit_code": 1,
+          "id": "predecessor-doctor-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.8174447139999899,
+          "id": "scratch-cleanup",
+          "parent": "replay",
+          "status": "finished"
+        }
+      ],
+      "storage": {
+        "git_directory": "/home/runner/work/_temp/upgrade-rehearsal-h47_g19x/repository/.git",
+        "index_file": "/home/runner/work/_temp/upgrade-rehearsal-h47_g19x/repository/.git/index",
+        "object_directory": "/home/runner/work/_temp/upgrade-rehearsal-h47_g19x/repository/.git/objects",
+        "operational_repository": "/home/runner/work/se_harness/se_harness",
+        "python_default_temp": "/tmp",
+        "repository_directory": "/home/runner/work/_temp/upgrade-rehearsal-h47_g19x/repository",
+        "scratch_directory": "/home/runner/work/_temp/upgrade-rehearsal-h47_g19x",
+        "selection": "explicit",
+        "temp_environment": {
+          "RUNNER_TEMP": "/home/runner/work/_temp",
+          "TEMP": null,
+          "TMP": null,
+          "TMPDIR": null
+        },
+        "workspace_root": "/home/runner/work/_temp"
+      },
+      "unaccounted_seconds": 0.030115173000027085
+    },
+    "upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-result.json": {
+      "failure": null,
+      "instruction_delivery": {
+        "input": "none",
+        "native_host_delivery": "not_assessed"
+      },
+      "lock": {
+        "canonical_sha256": "001e69451ce02c25e5847187fa3210082bcb83a9666bd027c863ea9c621aa22f",
+        "evaluator": {
+          "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+          "version": "0.20.1"
+        },
+        "schema": 4,
+        "tool_version": "0.20.1"
+      },
+      "overall_result": "pass",
+      "predecessor": {
+        "version": "0.19.0"
+      },
+      "schema": "se-harness-upgrade-rehearsal-v1",
+      "semantic_sha256": "001e69451ce02c25e5847187fa3210082bcb83a9666bd027c863ea9c621aa22f",
+      "steps": [
+        {
+          "argv": [
+            "/home/runner/work/_temp/predecessor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>/repository"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "predecessor-doctor-before",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "df377d3164a857a46c5d4abd08c0f07bd90850be72aa33fc14fe11d068c7ebe7"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/successor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "upgrade",
+            "<copy>/repository",
+            "--json"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-upgrade-plan",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "8816bdd31cd3b62c383f6ac6ec8e1268cbef5bce1f1263a77126212b25c05bd4"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/successor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "upgrade",
+            "<copy>/repository",
+            "--apply",
+            "--evidence-output",
+            "docs/engineering/evidence/upgrade-rehearsal-transaction.json"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-upgrade-apply",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "5faf2537d8534b4397bf435fa2dd724219aaf7a5d2ea90e59d16438aa140814b"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/successor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>/repository"
+          ],
+          "exit_code": 0,
+          "expect": "success",
+          "id": "successor-doctor-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "690a56deb10df0e2678b94e08d041589ae6db32d19665ce0ae824a1d03a3d131"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/successor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "validate",
+            "<copy>/repository"
+          ],
+          "exit_code": 0,
+          "expect": "any",
+          "id": "successor-validate-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "0e5d2d288cc32698a0bcdd71d58c9157b1890f6ac5289d84492d7e8ec887f9cb"
+        },
+        {
+          "argv": [
+            "/home/runner/work/_temp/predecessor-env/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "doctor",
+            "<copy>/repository"
+          ],
+          "exit_code": 1,
+          "expect": "failure",
+          "id": "predecessor-doctor-after",
+          "outcome": "pass",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "c0296dc56483a7bc747c762bc6ae13247f8bab4a818ce3f691fe1ce5399e0655"
+        }
+      ],
+      "successor": {
+        "version": "0.20.1"
+      },
+      "tolerated_diagnostics": [],
+      "validation": {
+        "artifacts": 1750,
+        "errors": 0,
+        "warnings": 52
+      }
+    },
+    "upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-timing.json": {
+      "complete": true,
+      "diagnostic_errors": [],
+      "identity": {
+        "GITHUB_JOB": "upgrade-rehearsal",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "36771039185",
+        "GITHUB_SHA": "79e773cbfcfe6469e125643236ed54378777a702",
+        "ImageOS": "ubuntu24",
+        "ImageVersion": "20260920.314.1",
+        "REHEARSAL_HEAD_SHA": "ee0c807f6f2c415d610bf6994dfd806a840284ff",
+        "RUNNER_OS": "Linux"
+      },
+      "schema": "se-harness-upgrade-timing-v1",
+      "stages": [
+        {
+          "elapsed_seconds": 16.948400889,
+          "handover_result": "pass",
+          "id": "replay",
+          "parent": null,
+          "status": "finished"
+        },
+        {
+          "archive_bytes": 311808000,
+          "elapsed_seconds": 0.9709757819999965,
+          "id": "git-archive",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 3.297890357,
+          "entries": 14407,
+          "files": 12303,
+          "id": "archive-extraction",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.004071938999999247,
+          "exit_code": 0,
+          "id": "git-init",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.002058036000008201,
+          "exit_code": 0,
+          "id": "git-config-maintenance",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.0020045560000028217,
+          "exit_code": 0,
+          "id": "git-config-gc",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.0021047720000098025,
+          "exit_code": 0,
+          "id": "git-config-autocrlf",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.001957578999991938,
+          "exit_code": 0,
+          "id": "git-config-email",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.001973609000003762,
+          "exit_code": 0,
+          "id": "git-config-name",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.0020320579999975052,
+          "exit_code": 0,
+          "id": "git-config-signing",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 6.285450263000001,
+          "exit_code": 0,
+          "id": "git-add",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.32213056899999515,
+          "exit_code": 0,
+          "id": "git-commit",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.0023205869999998185,
+          "exit_code": 0,
+          "id": "git-storage-paths",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.13308001199999353,
+          "id": "predecessor-version",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.1405194430000023,
+          "id": "successor-version",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.0158809090000034,
+          "exit_code": 0,
+          "id": "predecessor-doctor-before",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.15377866199999346,
+          "exit_code": 0,
+          "id": "successor-upgrade-plan",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.26099954299999695,
+          "exit_code": 0,
+          "id": "successor-upgrade-apply",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.009882048999998,
+          "exit_code": 0,
+          "id": "successor-doctor-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.7120665479999957,
+          "exit_code": 0,
+          "id": "successor-validate-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 1.017028656000008,
+          "exit_code": 1,
+          "id": "predecessor-doctor-after",
+          "parent": "replay",
+          "status": "finished"
+        },
+        {
+          "elapsed_seconds": 0.5825339790000044,
+          "id": "scratch-cleanup",
+          "parent": "replay",
+          "status": "finished"
+        }
+      ],
+      "storage": {
+        "git_directory": "/home/runner/work/_temp/upgrade-rehearsal-ss3s05rt/repository/.git",
+        "index_file": "/home/runner/work/_temp/upgrade-rehearsal-ss3s05rt/repository/.git/index",
+        "object_directory": "/home/runner/work/_temp/upgrade-rehearsal-ss3s05rt/repository/.git/objects",
+        "operational_repository": "/home/runner/work/se_harness/se_harness",
+        "python_default_temp": "/tmp",
+        "repository_directory": "/home/runner/work/_temp/upgrade-rehearsal-ss3s05rt/repository",
+        "scratch_directory": "/home/runner/work/_temp/upgrade-rehearsal-ss3s05rt",
+        "selection": "explicit",
+        "temp_environment": {
+          "RUNNER_TEMP": "/home/runner/work/_temp",
+          "TEMP": null,
+          "TMP": null,
+          "TMPDIR": null
+        },
+        "workspace_root": "/home/runner/work/_temp"
+      },
+      "unaccounted_seconds": 0.02766098099999681
+    }
+  }
+}
