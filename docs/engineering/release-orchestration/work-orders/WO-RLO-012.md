@@ -2,7 +2,7 @@
 id = "WO-RLO-012"
 type = "work_order"
 title = "Correct publication provenance for the 0.20.1 maintenance release"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -47,6 +47,13 @@ to = "in_progress"
 decided_at = "2026-10-01T06:48:02Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-01T07:02:49Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Correct publication provenance for the 0.20.1 maintenance release

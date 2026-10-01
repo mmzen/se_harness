@@ -1,0 +1,48 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "preflight",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--work-order",
+    "WO-RLO-012",
+    "--phase",
+    "review",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "assurance": {
+      "commit_bound_verification": "required",
+      "decided_by": "mmzen",
+      "rationale": "The approved corrections change publication checks and the tag binding. Publication must rely on verification of the exact correction commit."
+    },
+    "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+    "background": [],
+    "diagnostics": [],
+    "phase": "review",
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/release-orchestration/intent/INT-RLO-001.md",
+      "docs/engineering/release-orchestration/capabilities/CAP-RLO-001.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-001.md",
+      "docs/engineering/release-orchestration/specifications/SPEC-RLO-001.md",
+      "docs/engineering/release-orchestration/architecture/ARCH-RLO-001.md",
+      "docs/engineering/release-orchestration/architecture/adr/ADR-RLO-001.md",
+      "docs/engineering/release-orchestration/verification/VER-RLO-009.md",
+      "docs/engineering/release-orchestration/work-orders/WO-RLO-012.md"
+    ],
+    "ready": true,
+    "schema": "se-harness-preflight-v2",
+    "skew": [],
+    "work_order": {
+      "id": "WO-RLO-012",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-012.md",
+      "status": "in_progress"
+    }
+  },
+  "seconds": 9.411055399999896
+}
