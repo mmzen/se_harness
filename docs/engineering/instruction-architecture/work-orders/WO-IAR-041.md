@@ -2,7 +2,7 @@
 id = "WO-IAR-041"
 type = "work_order"
 title = "Correct the plugin setup integrity fixture for minimal installation"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -41,6 +41,13 @@ to = "in_progress"
 decided_at = "2026-10-01T18:32:39Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-01T18:37:06Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Completed the exact reviewed plugin fixture correction. Original failure reproduced on Windows and Linux; all 11 real-wheel acceptance tests pass on each with no skips. Clean doctor passes and corrupted .gitattributes fails. Product inputs and prior evidence unchanged; validation, review, full scope and handoff pass. Human verification remains separate."
 +++
 
 # Correct the plugin setup integrity fixture for minimal installation
