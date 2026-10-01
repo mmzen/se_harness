@@ -1,0 +1,622 @@
+{
+  "work_order": "WO-IAR-030",
+  "candidate_commit": "c1bcbfb8e053ee8099e98b1dc34fcf547adc46eb",
+  "retention_base_commit": "a28cdc476fa2b51cb985efc1f6d85d45a4ddbc58",
+  "candidate_wheel_sha256": "66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d",
+  "authorization": {
+    "human": "mmzen",
+    "statement": "i authorize",
+    "scope": "Remaining Claude Code test sends candidate harness instructions and disposable fixture paths to Anthropic through the existing test profile; acknowledgement prompt only; hook telemetry supplies delivery evidence.",
+    "reply_to": "Explicit question in the preceding assistant final and asynchronous authorization prompt.",
+    "target_wheel_sha256": "66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d",
+    "no_assurance_or_publication": true
+  },
+  "assessment": {
+    "observations": [
+      {
+        "phase": "startup",
+        "exit_code": 0,
+        "complete_entry_observed": false,
+        "provider_errors": []
+      },
+      {
+        "phase": "resumed",
+        "exit_code": 1,
+        "complete_entry_observed": true,
+        "provider_errors": [
+          "API Error: Opus 5's safeguards flagged this message (https://www.anthropic.com/legal/aup). This sometimes happens with safe, normal conversations. Claude Code can't respond to this message with Opus 5.\n\nTry rephrasing the request in a new session or change your model.\n\nLearn more: https://support.claude.com/en/articles/16049681\n\nDetails: `[reasoning_extraction]`\n\nRequest ID: req_011Cfbs1RK4u6mcwrHNjZ3t6"
+        ]
+      }
+    ],
+    "expected_entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+    "repository_preserved": true,
+    "manual_compaction": "not_run_after_provider_refusal",
+    "automatic_compaction": "not_run_after_provider_refusal",
+    "authorization_gap_resolved": true,
+    "claim": "Native resume delivery observed; model-assisted recovery qualification did not pass."
+  },
+  "invocation": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-u",
+      "-X",
+      "utf8",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile021_native.py",
+      "claude",
+      "telemetry"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 1
+  },
+  "driver_sha256": "acf966121dcbd744bb4e86687178870d6dbbf3c507bddbfb5b3c1a89bbafe65f",
+  "raw_capture": {
+    "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\native-current-claude-telemetry.json",
+    "sha256": "20fe3c0262be20df456c70aa2c6dc59dcfa251318deab6200dee67231ee97379",
+    "encoding": "utf-8",
+    "text": "{\r\n  \"host\": \"claude\",\r\n  \"claims\": \"Native CLI/app-server only; desktop remains unverified.\",\r\n  \"commands\": [\r\n    {\r\n      \"label\": \"host-version\",\r\n      \"argv\": [\r\n        \"C:\\\\Users\\\\mathi\\\\.local\\\\bin\\\\claude.exe\",\r\n        \"--version\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 0,\r\n      \"stdout\": \"2.1.273 (Claude Code)\\n\",\r\n      \"stderr\": \"\"\r\n    },\r\n    {\r\n      \"label\": \"prepare-exact-evaluator\",\r\n      \"argv\": [\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.14-64\\\\python.exe\",\r\n        \"-I\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\package\\\\verity-plane\\\\scripts\\\\setup.py\",\r\n        \"--target\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\source\",\r\n        \"--data-root\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\",\r\n        \"--wheel\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\package\\\\verity-plane\\\\packages\\\\se_harness-0.21.0-py3-none-any.whl\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 1,\r\n      \"stdout\": \"Evaluator Python: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\\\evaluators\\\\0.21.0\\\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\\\Scripts\\\\python.exe\\n{\\n  \\\"checks\\\": [\\n    {\\n      \\\"detail\\\": \\\"required\\\",\\n      \\\"name\\\": \\\"ENGINEERING_HARNESS.md\\\",\\n      \\\"passed\\\": false\\n    },\\n    {\\n      \\\"detail\\\": \\\".engineering-harness.toml\\\",\\n      \\\"name\\\": \\\"config\\\",\\n      \\\"passed\\\": false\\n    },\\n    {\\n      \\\"detail\\\": \\\"required\\\",\\n      \\\"name\\\": \\\"docs/engineering/ARTIFACT_AUTHORING.md\\\",\\n      \\\"passed\\\": false\\n    },\\n    {\\n      \\\"detail\\\": \\\"required\\\",\\n      \\\"name\\\": \\\"docs/engineering/QUALITY_GATES.json\\\",\\n      \\\"passed\\\": false\\n    },\\n    {\\n      \\\"detail\\\": \\\"required\\\",\\n      \\\"name\\\": \\\"docs/engineering/README.md\\\",\\n      \\\"passed\\\": false\\n    },\\n    {\\n      \\\"detail\\\": \\\"required\\\",\\n      \\\"name\\\": \\\"docs/engineering/WORKFLOW.json\\\",\\n      \\\"passed\\\": false\\n    },\\n    {\\n      \\\"detail\\\": \\\"required instruction file is missing: ENGINEERING_HARNESS.md\\\",\\n      \\\"name\\\": \\\"instruction-discovery\\\",\\n      \\\"passed\\\": false\\n    },\\n    {\\n      \\\"detail\\\": \\\".engineering-harness.lock\\\",\\n      \\\"name\\\": \\\"lock\\\",\\n      \\\"passed\\\": false\\n    },\\n    {\\n      \\\"detail\\\": \\\"3.14.6\\\",\\n      \\\"name\\\": \\\"python\\\",\\n      \\\"passed\\\": true\\n    }\\n  ],\\n  \\\"command\\\": \\\"doctor\\\",\\n  \\\"outcome\\\": \\\"failed\\\",\\n  \\\"schema\\\": \\\"se-harness-command-result-v1\\\",\\n  \\\"warnings\\\": []\\n}\\n\",\r\n      \"stderr\": \"\"\r\n    },\r\n    {\r\n      \"label\": \"fixture-init\",\r\n      \"argv\": [\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\\\evaluators\\\\0.21.0\\\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\\\Scripts\\\\python.exe\",\r\n        \"-I\",\r\n        \"-m\",\r\n        \"se_harness\",\r\n        \"init\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\source\",\r\n        \"--project-name\",\r\n        \"Plugin qualification\",\r\n        \"--integration\",\r\n        \"git\",\r\n        \"--json\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 0,\r\n      \"stdout\": \"{\\n  \\\"changes\\\": [\\n    {\\n      \\\"action\\\": \\\"add\\\",\\n      \\\"path\\\": \\\".engineering-harness.lock\\\"\\n    },\\n    {\\n      \\\"action\\\": \\\"add\\\",\\n      \\\"path\\\": \\\".engineering-harness.toml\\\"\\n    },\\n    {\\n      \\\"action\\\": \\\"add\\\",\\n      \\\"path\\\": \\\".gitattributes\\\"\\n    }\\n  ],\\n  \\\"command\\\": \\\"init\\\",\\n  \\\"outcome\\\": \\\"completed\\\",\\n  \\\"schema\\\": \\\"se-harness-command-result-v1\\\",\\n  \\\"written\\\": true\\n}\\n\",\r\n      \"stderr\": \"\"\r\n    },\r\n    {\r\n      \"label\": \"fixture-git\",\r\n      \"argv\": [\r\n        \"git\",\r\n        \"-C\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\source\",\r\n        \"init\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 0,\r\n      \"stdout\": \"Initialized empty Git repository in C:/Users/mathi/AppData/Local/Temp/i30n-xe8uvjar/source/.git/\\n\",\r\n      \"stderr\": \"\"\r\n    },\r\n    {\r\n      \"label\": \"fixture-git\",\r\n      \"argv\": [\r\n        \"git\",\r\n        \"-C\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\source\",\r\n        \"add\",\r\n        \".\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 0,\r\n      \"stdout\": \"\",\r\n      \"stderr\": \"warning: in the working copy of '.engineering-harness.lock', LF will be replaced by CRLF the next time Git touches it\\nwarning: in the working copy of '.engineering-harness.toml', LF will be replaced by CRLF the next time Git touches it\\nwarning: in the working copy of '.gitattributes', LF will be replaced by CRLF the next time Git touches it\\n\"\r\n    },\r\n    {\r\n      \"label\": \"fixture-git\",\r\n      \"argv\": [\r\n        \"git\",\r\n        \"-C\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\source\",\r\n        \"-c\",\r\n        \"user.name=Fixture\",\r\n        \"-c\",\r\n        \"user.email=fixture@example.invalid\",\r\n        \"commit\",\r\n        \"-m\",\r\n        \"Disposable exact-wheel selection\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 0,\r\n      \"stdout\": \"[master (root-commit) 92b3b08] Disposable exact-wheel selection\\n 3 files changed, 33 insertions(+)\\n create mode 100644 .engineering-harness.lock\\n create mode 100644 .engineering-harness.toml\\n create mode 100644 .gitattributes\\n\",\r\n      \"stderr\": \"\"\r\n    },\r\n    {\r\n      \"label\": \"clone-after-startup\",\r\n      \"argv\": [\r\n        \"git\",\r\n        \"clone\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\source\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\\\\clone\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 0,\r\n      \"stdout\": \"\",\r\n      \"stderr\": \"Cloning into 'C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\\\\clone'...\\ndone.\\n\"\r\n    },\r\n    {\r\n      \"label\": \"activate-observed-session\",\r\n      \"argv\": [\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.14-64\\\\python.exe\",\r\n        \"-I\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\package\\\\verity-plane\\\\scripts\\\\activate.py\",\r\n        \"--host\",\r\n        \"claude\",\r\n        \"--session-id\",\r\n        \"362108e2-38f8-4da4-8c7f-b13e256606d6\",\r\n        \"--data-root\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\",\r\n        \"--target\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\\\\clone\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 0,\r\n      \"stdout\": \"{\\\"status\\\": \\\"available\\\", \\\"host\\\": \\\"claude\\\", \\\"session_id\\\": \\\"362108e2-38f8-4da4-8c7f-b13e256606d6\\\", \\\"content\\\": \\\"Host: claude; session_id: 362108e2-38f8-4da4-8c7f-b13e256606d6\\\\nPlugin data: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\iar-instruction-demo-bztgja2p\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\\\n\\\\nSelected checkout: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\i30n-xe8uvjar\\\\\\\\w\\\\\\\\clone\\\\nEntry resource: ENGINEERING_HARNESS.md\\\\nSelected release: 0.21.0; entry SHA-256: 9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990.\\\\nEvaluator Python: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\iar-instruction-demo-bztgja2p\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\\\\\evaluators\\\\\\\\0.21.0\\\\\\\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\\\\\\\Scripts\\\\\\\\python.exe\\\\nUse -I -m se_harness outside the checkout. Resolve instruction IDs through resources; formal artifacts against the checkout.\\\\n\\\\n# Engineering Harness for Plugin qualification\\\\n\\\\nThis repository uses SE Harness 0.21.0.\\\\n\\\\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\\\\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\\\\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\\\\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\\\\n\\\\n## Goals\\\\n\\\\nThis harness makes engineering authority explicit, limits execution to approved\\\\nscope, binds assurance and release claims to exact evidence, and gives every\\\\nactor the same deterministic next step. These goals are informative; the rules\\\\nbelow and the installed evaluator's machine policy are normative.\\\\n\\\\n## Policy / Global invariants\\\\n\\\\n### HRN-001 \\\\u2014 Formal authority\\\\n\\\\nFormal artifacts under `docs/engineering/` are the authoritative\\\\nrecords of product intent, requirements, architecture decisions, work authority,\\\\nverification contracts, risks, assurance decisions, and release decisions. Code,\\\\ntests, commits, tickets, dashboards, and conversation text are evidence or\\\\nobservations; they MUST NOT substitute for formal authority.\\\\n\\\\n### HRN-002 \\\\u2014 Change control\\\\n\\\\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\\\\nis approved. This preparation MUST NOT authorize implementation.\\\\n\\\\nAccepted formal artifacts MUST define the change before implementation starts.\\\\nOne or more approved work orders MUST authorize implementation. A valid\\\\nrepository-owned exception MAY remove the requirement for formal definitions,\\\\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\\\\n\\\\nAny required work orders MUST pass the required validation checks before\\\\nimplementation starts. The result MUST be verified against the accepted\\\\ndefinitions that apply. All required verification checks remain required.\\\\n\\\\n### HRN-003 \\\\u2014 Lifecycle authority\\\\n\\\\nArtifacts and the work itself MUST follow a strict lifecycle.\\\\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\\\\nstate changes and the next action. Actors MUST use its results when reporting\\\\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\\\\nrepository notes MUST NOT work out their own answers or change those results.\\\\n\\\\n### HRN-004 \\\\u2014 Bounded scope\\\\n\\\\nAn actor MUST select one clearly defined set of artifacts before\\\\nacting. This set defines the scope. Findings from unrelated work orders MUST\\\\nNOT be presented as findings about the selected scope. An issue outside the\\\\nscope MAY be reported only as an observation that has not been assessed, with\\\\nits artifact ID. It MUST NOT block the selected work unless a recorded\\\\ndependency or gate connects it to that work.\\\\n\\\\n### HRN-005 \\\\u2014 Explicit decisions\\\\n\\\\nEach decision MUST identify the accountable human or agent and the authority\\\\nused. Being a human or an agent does not by itself authorize an action.\\\\n\\\\nPreparing, inspecting, validating, or collecting evidence MUST NOT\\\\ncount as an authorized decision. A state change requires the exact artifact,\\\\nthe intended state, and the accountable actor. The required gates MUST pass,\\\\nand an explicit state transition MUST be applied.\\\\n\\\\n### HRN-006 \\\\u2014 Targeted transitions\\\\n\\\\nA state transition MUST change only the artifacts explicitly\\\\nselected by the accountable actor. The states of related artifacts MUST NOT\\\\nchange just because they are linked.\\\\n\\\\n### HRN-007 \\\\u2014 Repository ownership\\\\n\\\\n`AGENTS.md` MUST belong entirely to the repository owner and contain\\\\nno harness instructions. Repository-specific facts and commands belong in\\\\nthat file. The harness MUST NOT generate, track, or require that owner content.\\\\n\\\\n### HRN-008 \\\\u2014 Rule precedence\\\\n\\\\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\\\\nfor product, engineering, assurance, release, or external actions. They MUST\\\\nNOT remove, weaken, or contradict the harness rules.\\\\n\\\\nRepository owners MAY define exceptions through the supported exception\\\\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\\\\nthem to configure: whether formal definitions and work orders are required.\\\\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\\\\nNOT waive a harness rule.\\\\n\\\\n### HRN-009 \\\\u2014 Required checks\\\\n\\\\nManaged-file integrity checks, artifact graph checks, scope checks, and required\\\\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\\\\ncount as approval or acceptance of a risk.\\\\n\\\\n## Scope of these rules\\\\n\\\\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\\\\nagent performs or reports a governed lifecycle action. Reading, analysis, and\\\\nanswering questions need no work order when they change no lifecycle state,\\\\nexercise no decision right, and present no finding as a formal verdict.\\\\n\\\\nPreparing a proposed artifact package does not require an approved work\\\\norder. A human or agent MAY create and edit drafts, record risks and open\\\\nquestions, review the proposed content, and validate the package. These\\\\nactions MUST follow the authoring procedure and required checks. They MUST\\\\nNOT change an accepted definition, approve a work order, or start\\\\nimplementation. Decisions and lifecycle transitions follow their separate\\\\nauthority rules.\\\\n\\\\nBefore a lifecycle action, select the exact artifacts and read the governing\\\\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\\\\ncontext. It does not evaluate checkpoint gates or authorize work.\\\\n\\\\n## Using these instructions\\\\n\\\\nA human is a person; an agent is an automated system acting under granted\\\\nauthority. Approval, verification acceptance and release decisions require an\\\\nauthorized human. Agents may apply a matching recorded decision. Resolve the\\\\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\\\\nbefore obtaining or applying a decision.\\\\n\\\\n`harnessctl` means this repository's selected released evaluator, invoked through\\\\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\\\\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\\\\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\\\\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\\\\n\\\\nTransient working material stays in the conversation or temporary storage outside\\\\nthe repository, at the agent's discretion. It has no formal authority and SHALL\\\\nNOT be persisted in the repository. This rule covers working notes, not formal\\\\nartifacts or evidence required at a contract's prescribed durable location.\\\\n\\\\n## Read by task\\\\n\\\\nFor the external-resource layout, the files below are released resources outside\\\\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\\\\nand read its returned path and the required heading. Use instruction links\\\\nrelative to that resource location. Formal artifacts remain repository files.\\\\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\\\\nreturns this entry with the selected project and release. Repository-copy\\\\ninstallations continue to read their installed files.\\\\n\\\\nRead the selected file's entry conditions and current step. Read its required\\\\nreferences before the action they govern. A link alone does not require reading\\\\nits target. Do not load all procedures or future stages in advance.\\\\n\\\\n| Current need | Read first |\\\\n| --- | --- |\\\\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\\\\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\\\\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\\\\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\\\\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\\\\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\\\\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\\\\n\\\\nBefore the first eligible English explanation in a fresh context, read\\\\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\\\\nReuse it while retained in context. This applies to ordinary answers too.\\\\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\\\\nwhen changing or investigating their contracts. Use evaluator results in normal\\\\nwork. Missing instructions or an unknown returned procedure stop the affected\\\\naction: report the exact discovery gap in RESULTS.md.\\\\n\\\\n## After compaction\\\\n\\\\nRecover the repository, selected IDs, objective, existing authority and pending\\\\naction from the summary. For governed work, obtain fresh context through\\\\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\\\\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\\\\nuncertain writes or external effects before retrying. Resume only unapplied work.\\\\n\\\"}\\n\",\r\n      \"stderr\": \"\"\r\n    }\r\n  ],\r\n  \"stages\": [\r\n    {\r\n      \"phase\": \"startup\",\r\n      \"argv\": [\r\n        \"C:\\\\Users\\\\mathi\\\\.local\\\\bin\\\\claude.exe\",\r\n        \"--print\",\r\n        \"--verbose\",\r\n        \"--output-format\",\r\n        \"stream-json\",\r\n        \"--include-hook-events\",\r\n        \"--tools\",\r\n        \"\",\r\n        \"--strict-mcp-config\",\r\n        \"--permission-prompts\",\r\n        \"none\",\r\n        \"--setting-sources\",\r\n        \"project\",\r\n        \"--settings\",\r\n        \"{}\",\r\n        \"--plugin-dir\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\package\\\\verity-plane\",\r\n        \"--model\",\r\n        \"opus\",\r\n        \"--\",\r\n        \"This is a connectivity check. Do not use tools. Reply with PROBE_COMPLETE.\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 0,\r\n      \"session_id\": \"362108e2-38f8-4da4-8c7f-b13e256606d6\",\r\n      \"contexts\": [\r\n        \"Host: claude; session_id: 362108e2-38f8-4da4-8c7f-b13e256606d6\\nPlugin data: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\n# Select the working repository\\n\\nWhen asked to clone, clone to the intended destination, then activate that exact\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\n\\nUse the setup skill's activation procedure with the host, session_id and\\nplugin data supplied with this message. It immediately returns\\nthe selected instructions. Read that complete entry before governed work. If the\\nrepository has no harness selection or its evaluator is missing, use the setup\\nskill with an explicitly selected release, then activate again. Do not choose a\\nrelease or upgrade silently.\\n\\nSelection belongs only to this host session. A new session activates its own\\ncheckout. Switching or clearing affects only this session. Activation gives no\\napproval, verification or delivery authority; follow the selected release for\\nnew or resumed work and any requested push or pull request.\\n\"\r\n      ],\r\n      \"replies\": [\r\n        \"PROBE_COMPLETE\"\r\n      ],\r\n      \"events\": [\r\n        {\r\n          \"type\": \"system\",\r\n          \"subtype\": \"hook_response\",\r\n          \"hook_id\": \"064a991b-3fea-45e6-a1d9-2bd70861c190\",\r\n          \"hook_name\": \"SessionStart:startup\",\r\n          \"hook_event\": \"SessionStart\",\r\n          \"output\": \"{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"SessionStart\\\", \\\"additionalContext\\\": \\\"Host: claude; session_id: 362108e2-38f8-4da4-8c7f-b13e256606d6\\\\nPlugin data: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\iar-instruction-demo-bztgja2p\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\\\n\\\\n# Select the working repository\\\\n\\\\nWhen asked to clone, clone to the intended destination, then activate that exact\\\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\\\n\\\\nUse the setup skill's activation procedure with the host, session_id and\\\\nplugin data supplied with this message. It immediately returns\\\\nthe selected instructions. Read that complete entry before governed work. If the\\\\nrepository has no harness selection or its evaluator is missing, use the setup\\\\nskill with an explicitly selected release, then activate again. Do not choose a\\\\nrelease or upgrade silently.\\\\n\\\\nSelection belongs only to this host session. A new session activates its own\\\\ncheckout. Switching or clearing affects only this session. Activation gives no\\\\napproval, verification or delivery authority; follow the selected release for\\\\nnew or resumed work and any requested push or pull request.\\\\n\\\"}}\\r\\n\",\r\n          \"stdout\": \"{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"SessionStart\\\", \\\"additionalContext\\\": \\\"Host: claude; session_id: 362108e2-38f8-4da4-8c7f-b13e256606d6\\\\nPlugin data: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\iar-instruction-demo-bztgja2p\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\\\n\\\\n# Select the working repository\\\\n\\\\nWhen asked to clone, clone to the intended destination, then activate that exact\\\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\\\n\\\\nUse the setup skill's activation procedure with the host, session_id and\\\\nplugin data supplied with this message. It immediately returns\\\\nthe selected instructions. Read that complete entry before governed work. If the\\\\nrepository has no harness selection or its evaluator is missing, use the setup\\\\nskill with an explicitly selected release, then activate again. Do not choose a\\\\nrelease or upgrade silently.\\\\n\\\\nSelection belongs only to this host session. A new session activates its own\\\\ncheckout. Switching or clearing affects only this session. Activation gives no\\\\napproval, verification or delivery authority; follow the selected release for\\\\nnew or resumed work and any requested push or pull request.\\\\n\\\"}}\\r\\n\",\r\n          \"stderr\": \"\",\r\n          \"exit_code\": 0,\r\n          \"outcome\": \"success\",\r\n          \"uuid\": \"b9ecb7e4-3a0f-4b57-a9aa-60c47348f5d5\",\r\n          \"session_id\": \"362108e2-38f8-4da4-8c7f-b13e256606d6\"\r\n        },\r\n        {\r\n          \"type\": \"result\",\r\n          \"subtype\": \"success\",\r\n          \"is_error\": false,\r\n          \"result\": \"PROBE_COMPLETE\",\r\n          \"session_id\": \"362108e2-38f8-4da4-8c7f-b13e256606d6\",\r\n          \"usage\": {\r\n            \"input_tokens\": 2,\r\n            \"cache_creation_input_tokens\": 3759,\r\n            \"cache_read_input_tokens\": 0,\r\n            \"output_tokens\": 13,\r\n            \"output_tokens_details\": {\r\n              \"thinking_tokens\": 0\r\n            },\r\n            \"server_tool_use\": {\r\n              \"web_search_requests\": 0,\r\n              \"web_fetch_requests\": 0\r\n            },\r\n            \"service_tier\": \"standard\",\r\n            \"cache_creation\": {\r\n              \"ephemeral_1h_input_tokens\": 3759,\r\n              \"ephemeral_5m_input_tokens\": 0\r\n            },\r\n            \"inference_geo\": \"not_available\",\r\n            \"iterations\": [],\r\n            \"speed\": \"standard\"\r\n          }\r\n        }\r\n      ],\r\n      \"stderr\": \"\"\r\n    },\r\n    {\r\n      \"phase\": \"resumed\",\r\n      \"argv\": [\r\n        \"C:\\\\Users\\\\mathi\\\\.local\\\\bin\\\\claude.exe\",\r\n        \"--print\",\r\n        \"--verbose\",\r\n        \"--output-format\",\r\n        \"stream-json\",\r\n        \"--include-hook-events\",\r\n        \"--tools\",\r\n        \"\",\r\n        \"--strict-mcp-config\",\r\n        \"--permission-prompts\",\r\n        \"none\",\r\n        \"--setting-sources\",\r\n        \"project\",\r\n        \"--settings\",\r\n        \"{}\",\r\n        \"--plugin-dir\",\r\n        \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\package\\\\verity-plane\",\r\n        \"--model\",\r\n        \"opus\",\r\n        \"--resume\",\r\n        \"362108e2-38f8-4da4-8c7f-b13e256606d6\",\r\n        \"--\",\r\n        \"This is a connectivity check. Do not use tools. Reply with PROBE_COMPLETE.\"\r\n      ],\r\n      \"cwd\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\",\r\n      \"exit_code\": 1,\r\n      \"session_id\": \"362108e2-38f8-4da4-8c7f-b13e256606d6\",\r\n      \"contexts\": [\r\n        \"Host: claude; session_id: 362108e2-38f8-4da4-8c7f-b13e256606d6\\nPlugin data: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\nSelected checkout: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\\\\clone\\nEntry resource: ENGINEERING_HARNESS.md\\nSelected release: 0.21.0; entry SHA-256: 9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990.\\nEvaluator Python: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\\\evaluators\\\\0.21.0\\\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\\\Scripts\\\\python.exe\\nUse -I -m se_harness outside the checkout. Resolve instruction IDs through resources; formal artifacts against the checkout.\\n\\n# Engineering Harness for Plugin qualification\\n\\nThis repository uses SE Harness 0.21.0.\\n\\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\\n\\n## Goals\\n\\nThis harness makes engineering authority explicit, limits execution to approved\\nscope, binds assurance and release claims to exact evidence, and gives every\\nactor the same deterministic next step. These goals are informative; the rules\\nbelow and the installed evaluator's machine policy are normative.\\n\\n## Policy / Global invariants\\n\\n### HRN-001 — Formal authority\\n\\nFormal artifacts under `docs/engineering/` are the authoritative\\nrecords of product intent, requirements, architecture decisions, work authority,\\nverification contracts, risks, assurance decisions, and release decisions. Code,\\ntests, commits, tickets, dashboards, and conversation text are evidence or\\nobservations; they MUST NOT substitute for formal authority.\\n\\n### HRN-002 — Change control\\n\\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\\nis approved. This preparation MUST NOT authorize implementation.\\n\\nAccepted formal artifacts MUST define the change before implementation starts.\\nOne or more approved work orders MUST authorize implementation. A valid\\nrepository-owned exception MAY remove the requirement for formal definitions,\\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\\n\\nAny required work orders MUST pass the required validation checks before\\nimplementation starts. The result MUST be verified against the accepted\\ndefinitions that apply. All required verification checks remain required.\\n\\n### HRN-003 — Lifecycle authority\\n\\nArtifacts and the work itself MUST follow a strict lifecycle.\\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\\nstate changes and the next action. Actors MUST use its results when reporting\\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\\nrepository notes MUST NOT work out their own answers or change those results.\\n\\n### HRN-004 — Bounded scope\\n\\nAn actor MUST select one clearly defined set of artifacts before\\nacting. This set defines the scope. Findings from unrelated work orders MUST\\nNOT be presented as findings about the selected scope. An issue outside the\\nscope MAY be reported only as an observation that has not been assessed, with\\nits artifact ID. It MUST NOT block the selected work unless a recorded\\ndependency or gate connects it to that work.\\n\\n### HRN-005 — Explicit decisions\\n\\nEach decision MUST identify the accountable human or agent and the authority\\nused. Being a human or an agent does not by itself authorize an action.\\n\\nPreparing, inspecting, validating, or collecting evidence MUST NOT\\ncount as an authorized decision. A state change requires the exact artifact,\\nthe intended state, and the accountable actor. The required gates MUST pass,\\nand an explicit state transition MUST be applied.\\n\\n### HRN-006 — Targeted transitions\\n\\nA state transition MUST change only the artifacts explicitly\\nselected by the accountable actor. The states of related artifacts MUST NOT\\nchange just because they are linked.\\n\\n### HRN-007 — Repository ownership\\n\\n`AGENTS.md` MUST belong entirely to the repository owner and contain\\nno harness instructions. Repository-specific facts and commands belong in\\nthat file. The harness MUST NOT generate, track, or require that owner content.\\n\\n### HRN-008 — Rule precedence\\n\\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\\nfor product, engineering, assurance, release, or external actions. They MUST\\nNOT remove, weaken, or contradict the harness rules.\\n\\nRepository owners MAY define exceptions through the supported exception\\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\\nthem to configure: whether formal definitions and work orders are required.\\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\\nNOT waive a harness rule.\\n\\n### HRN-009 — Required checks\\n\\nManaged-file integrity checks, artifact graph checks, scope checks, and required\\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\\ncount as approval or acceptance of a risk.\\n\\n## Scope of these rules\\n\\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\\nagent performs or reports a governed lifecycle action. Reading, analysis, and\\nanswering questions need no work order when they change no lifecycle state,\\nexercise no decision right, and present no finding as a formal verdict.\\n\\nPreparing a proposed artifact package does not require an approved work\\norder. A human or agent MAY create and edit drafts, record risks and open\\nquestions, review the proposed content, and validate the package. These\\nactions MUST follow the authoring procedure and required checks. They MUST\\nNOT change an accepted definition, approve a work order, or start\\nimplementation. Decisions and lifecycle transitions follow their separate\\nauthority rules.\\n\\nBefore a lifecycle action, select the exact artifacts and read the governing\\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\\ncontext. It does not evaluate checkpoint gates or authorize work.\\n\\n## Using these instructions\\n\\nA human is a person; an agent is an automated system acting under granted\\nauthority. Approval, verification acceptance and release decisions require an\\nauthorized human. Agents may apply a matching recorded decision. Resolve the\\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\\nbefore obtaining or applying a decision.\\n\\n`harnessctl` means this repository's selected released evaluator, invoked through\\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\\n\\nTransient working material stays in the conversation or temporary storage outside\\nthe repository, at the agent's discretion. It has no formal authority and SHALL\\nNOT be persisted in the repository. This rule covers working notes, not formal\\nartifacts or evidence required at a contract's prescribed durable location.\\n\\n## Read by task\\n\\nFor the external-resource layout, the files below are released resources outside\\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\\nand read its returned path and the required heading. Use instruction links\\nrelative to that resource location. Formal artifacts remain repository files.\\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\\nreturns this entry with the selected project and release. Repository-copy\\ninstallations continue to read their installed files.\\n\\nRead the selected file's entry conditions and current step. Read its required\\nreferences before the action they govern. A link alone does not require reading\\nits target. Do not load all procedures or future stages in advance.\\n\\n| Current need | Read first |\\n| --- | --- |\\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\\n\\nBefore the first eligible English explanation in a fresh context, read\\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\\nReuse it while retained in context. This applies to ordinary answers too.\\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\\nwhen changing or investigating their contracts. Use evaluator results in normal\\nwork. Missing instructions or an unknown returned procedure stop the affected\\naction: report the exact discovery gap in RESULTS.md.\\n\\n## After compaction\\n\\nRecover the repository, selected IDs, objective, existing authority and pending\\naction from the summary. For governed work, obtain fresh context through\\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\\nuncertain writes or external effects before retrying. Resume only unapplied work.\\n\"\r\n      ],\r\n      \"replies\": [\r\n        \"API Error: Opus 5's safeguards flagged this message (https://www.anthropic.com/legal/aup). This sometimes happens with safe, normal conversations. Claude Code can't respond to this message with Opus 5.\\n\\nTry rephrasing the request in a new session or change your model.\\n\\nLearn more: https://support.claude.com/en/articles/16049681\\n\\nDetails: `[reasoning_extraction]`\\n\\nRequest ID: req_011Cfbs1RK4u6mcwrHNjZ3t6\"\r\n      ],\r\n      \"events\": [\r\n        {\r\n          \"type\": \"system\",\r\n          \"subtype\": \"hook_response\",\r\n          \"hook_id\": \"de0f3ef6-c7c3-4ae1-8c70-16c2d7600dc1\",\r\n          \"hook_name\": \"SessionStart:resume\",\r\n          \"hook_event\": \"SessionStart\",\r\n          \"output\": \"{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"SessionStart\\\", \\\"additionalContext\\\": \\\"Host: claude; session_id: 362108e2-38f8-4da4-8c7f-b13e256606d6\\\\nPlugin data: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\iar-instruction-demo-bztgja2p\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\\\n\\\\nSelected checkout: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\i30n-xe8uvjar\\\\\\\\w\\\\\\\\clone\\\\nEntry resource: ENGINEERING_HARNESS.md\\\\nSelected release: 0.21.0; entry SHA-256: 9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990.\\\\nEvaluator Python: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\iar-instruction-demo-bztgja2p\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\\\\\evaluators\\\\\\\\0.21.0\\\\\\\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\\\\\\\Scripts\\\\\\\\python.exe\\\\nUse -I -m se_harness outside the checkout. Resolve instruction IDs through resources; formal artifacts against the checkout.\\\\n\\\\n# Engineering Harness for Plugin qualification\\\\n\\\\nThis repository uses SE Harness 0.21.0.\\\\n\\\\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\\\\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\\\\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\\\\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\\\\n\\\\n## Goals\\\\n\\\\nThis harness makes engineering authority explicit, limits execution to approved\\\\nscope, binds assurance and release claims to exact evidence, and gives every\\\\nactor the same deterministic next step. These goals are informative; the rules\\\\nbelow and the installed evaluator's machine policy are normative.\\\\n\\\\n## Policy / Global invariants\\\\n\\\\n### HRN-001 \\\\u2014 Formal authority\\\\n\\\\nFormal artifacts under `docs/engineering/` are the authoritative\\\\nrecords of product intent, requirements, architecture decisions, work authority,\\\\nverification contracts, risks, assurance decisions, and release decisions. Code,\\\\ntests, commits, tickets, dashboards, and conversation text are evidence or\\\\nobservations; they MUST NOT substitute for formal authority.\\\\n\\\\n### HRN-002 \\\\u2014 Change control\\\\n\\\\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\\\\nis approved. This preparation MUST NOT authorize implementation.\\\\n\\\\nAccepted formal artifacts MUST define the change before implementation starts.\\\\nOne or more approved work orders MUST authorize implementation. A valid\\\\nrepository-owned exception MAY remove the requirement for formal definitions,\\\\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\\\\n\\\\nAny required work orders MUST pass the required validation checks before\\\\nimplementation starts. The result MUST be verified against the accepted\\\\ndefinitions that apply. All required verification checks remain required.\\\\n\\\\n### HRN-003 \\\\u2014 Lifecycle authority\\\\n\\\\nArtifacts and the work itself MUST follow a strict lifecycle.\\\\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\\\\nstate changes and the next action. Actors MUST use its results when reporting\\\\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\\\\nrepository notes MUST NOT work out their own answers or change those results.\\\\n\\\\n### HRN-004 \\\\u2014 Bounded scope\\\\n\\\\nAn actor MUST select one clearly defined set of artifacts before\\\\nacting. This set defines the scope. Findings from unrelated work orders MUST\\\\nNOT be presented as findings about the selected scope. An issue outside the\\\\nscope MAY be reported only as an observation that has not been assessed, with\\\\nits artifact ID. It MUST NOT block the selected work unless a recorded\\\\ndependency or gate connects it to that work.\\\\n\\\\n### HRN-005 \\\\u2014 Explicit decisions\\\\n\\\\nEach decision MUST identify the accountable human or agent and the authority\\\\nused. Being a human or an agent does not by itself authorize an action.\\\\n\\\\nPreparing, inspecting, validating, or collecting evidence MUST NOT\\\\ncount as an authorized decision. A state change requires the exact artifact,\\\\nthe intended state, and the accountable actor. The required gates MUST pass,\\\\nand an explicit state transition MUST be applied.\\\\n\\\\n### HRN-006 \\\\u2014 Targeted transitions\\\\n\\\\nA state transition MUST change only the artifacts explicitly\\\\nselected by the accountable actor. The states of related artifacts MUST NOT\\\\nchange just because they are linked.\\\\n\\\\n### HRN-007 \\\\u2014 Repository ownership\\\\n\\\\n`AGENTS.md` MUST belong entirely to the repository owner and contain\\\\nno harness instructions. Repository-specific facts and commands belong in\\\\nthat file. The harness MUST NOT generate, track, or require that owner content.\\\\n\\\\n### HRN-008 \\\\u2014 Rule precedence\\\\n\\\\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\\\\nfor product, engineering, assurance, release, or external actions. They MUST\\\\nNOT remove, weaken, or contradict the harness rules.\\\\n\\\\nRepository owners MAY define exceptions through the supported exception\\\\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\\\\nthem to configure: whether formal definitions and work orders are required.\\\\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\\\\nNOT waive a harness rule.\\\\n\\\\n### HRN-009 \\\\u2014 Required checks\\\\n\\\\nManaged-file integrity checks, artifact graph checks, scope checks, and required\\\\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\\\\ncount as approval or acceptance of a risk.\\\\n\\\\n## Scope of these rules\\\\n\\\\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\\\\nagent performs or reports a governed lifecycle action. Reading, analysis, and\\\\nanswering questions need no work order when they change no lifecycle state,\\\\nexercise no decision right, and present no finding as a formal verdict.\\\\n\\\\nPreparing a proposed artifact package does not require an approved work\\\\norder. A human or agent MAY create and edit drafts, record risks and open\\\\nquestions, review the proposed content, and validate the package. These\\\\nactions MUST follow the authoring procedure and required checks. They MUST\\\\nNOT change an accepted definition, approve a work order, or start\\\\nimplementation. Decisions and lifecycle transitions follow their separate\\\\nauthority rules.\\\\n\\\\nBefore a lifecycle action, select the exact artifacts and read the governing\\\\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\\\\ncontext. It does not evaluate checkpoint gates or authorize work.\\\\n\\\\n## Using these instructions\\\\n\\\\nA human is a person; an agent is an automated system acting under granted\\\\nauthority. Approval, verification acceptance and release decisions require an\\\\nauthorized human. Agents may apply a matching recorded decision. Resolve the\\\\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\\\\nbefore obtaining or applying a decision.\\\\n\\\\n`harnessctl` means this repository's selected released evaluator, invoked through\\\\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\\\\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\\\\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\\\\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\\\\n\\\\nTransient working material stays in the conversation or temporary storage outside\\\\nthe repository, at the agent's discretion. It has no formal authority and SHALL\\\\nNOT be persisted in the repository. This rule covers working notes, not formal\\\\nartifacts or evidence required at a contract's prescribed durable location.\\\\n\\\\n## Read by task\\\\n\\\\nFor the external-resource layout, the files below are released resources outside\\\\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\\\\nand read its returned path and the required heading. Use instruction links\\\\nrelative to that resource location. Formal artifacts remain repository files.\\\\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\\\\nreturns this entry with the selected project and release. Repository-copy\\\\ninstallations continue to read their installed files.\\\\n\\\\nRead the selected file's entry conditions and current step. Read its required\\\\nreferences before the action they govern. A link alone does not require reading\\\\nits target. Do not load all procedures or future stages in advance.\\\\n\\\\n| Current need | Read first |\\\\n| --- | --- |\\\\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\\\\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\\\\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\\\\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\\\\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\\\\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\\\\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\\\\n\\\\nBefore the first eligible English explanation in a fresh context, read\\\\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\\\\nReuse it while retained in context. This applies to ordinary answers too.\\\\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\\\\nwhen changing or investigating their contracts. Use evaluator results in normal\\\\nwork. Missing instructions or an unknown returned procedure stop the affected\\\\naction: report the exact discovery gap in RESULTS.md.\\\\n\\\\n## After compaction\\\\n\\\\nRecover the repository, selected IDs, objective, existing authority and pending\\\\naction from the summary. For governed work, obtain fresh context through\\\\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\\\\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\\\\nuncertain writes or external effects before retrying. Resume only unapplied work.\\\\n\\\"}}\\r\\n\",\r\n          \"stdout\": \"{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"SessionStart\\\", \\\"additionalContext\\\": \\\"Host: claude; session_id: 362108e2-38f8-4da4-8c7f-b13e256606d6\\\\nPlugin data: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\iar-instruction-demo-bztgja2p\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\\\n\\\\nSelected checkout: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\i30n-xe8uvjar\\\\\\\\w\\\\\\\\clone\\\\nEntry resource: ENGINEERING_HARNESS.md\\\\nSelected release: 0.21.0; entry SHA-256: 9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990.\\\\nEvaluator Python: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\iar-instruction-demo-bztgja2p\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\\\\\evaluators\\\\\\\\0.21.0\\\\\\\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\\\\\\\Scripts\\\\\\\\python.exe\\\\nUse -I -m se_harness outside the checkout. Resolve instruction IDs through resources; formal artifacts against the checkout.\\\\n\\\\n# Engineering Harness for Plugin qualification\\\\n\\\\nThis repository uses SE Harness 0.21.0.\\\\n\\\\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\\\\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\\\\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\\\\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\\\\n\\\\n## Goals\\\\n\\\\nThis harness makes engineering authority explicit, limits execution to approved\\\\nscope, binds assurance and release claims to exact evidence, and gives every\\\\nactor the same deterministic next step. These goals are informative; the rules\\\\nbelow and the installed evaluator's machine policy are normative.\\\\n\\\\n## Policy / Global invariants\\\\n\\\\n### HRN-001 \\\\u2014 Formal authority\\\\n\\\\nFormal artifacts under `docs/engineering/` are the authoritative\\\\nrecords of product intent, requirements, architecture decisions, work authority,\\\\nverification contracts, risks, assurance decisions, and release decisions. Code,\\\\ntests, commits, tickets, dashboards, and conversation text are evidence or\\\\nobservations; they MUST NOT substitute for formal authority.\\\\n\\\\n### HRN-002 \\\\u2014 Change control\\\\n\\\\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\\\\nis approved. This preparation MUST NOT authorize implementation.\\\\n\\\\nAccepted formal artifacts MUST define the change before implementation starts.\\\\nOne or more approved work orders MUST authorize implementation. A valid\\\\nrepository-owned exception MAY remove the requirement for formal definitions,\\\\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\\\\n\\\\nAny required work orders MUST pass the required validation checks before\\\\nimplementation starts. The result MUST be verified against the accepted\\\\ndefinitions that apply. All required verification checks remain required.\\\\n\\\\n### HRN-003 \\\\u2014 Lifecycle authority\\\\n\\\\nArtifacts and the work itself MUST follow a strict lifecycle.\\\\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\\\\nstate changes and the next action. Actors MUST use its results when reporting\\\\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\\\\nrepository notes MUST NOT work out their own answers or change those results.\\\\n\\\\n### HRN-004 \\\\u2014 Bounded scope\\\\n\\\\nAn actor MUST select one clearly defined set of artifacts before\\\\nacting. This set defines the scope. Findings from unrelated work orders MUST\\\\nNOT be presented as findings about the selected scope. An issue outside the\\\\nscope MAY be reported only as an observation that has not been assessed, with\\\\nits artifact ID. It MUST NOT block the selected work unless a recorded\\\\ndependency or gate connects it to that work.\\\\n\\\\n### HRN-005 \\\\u2014 Explicit decisions\\\\n\\\\nEach decision MUST identify the accountable human or agent and the authority\\\\nused. Being a human or an agent does not by itself authorize an action.\\\\n\\\\nPreparing, inspecting, validating, or collecting evidence MUST NOT\\\\ncount as an authorized decision. A state change requires the exact artifact,\\\\nthe intended state, and the accountable actor. The required gates MUST pass,\\\\nand an explicit state transition MUST be applied.\\\\n\\\\n### HRN-006 \\\\u2014 Targeted transitions\\\\n\\\\nA state transition MUST change only the artifacts explicitly\\\\nselected by the accountable actor. The states of related artifacts MUST NOT\\\\nchange just because they are linked.\\\\n\\\\n### HRN-007 \\\\u2014 Repository ownership\\\\n\\\\n`AGENTS.md` MUST belong entirely to the repository owner and contain\\\\nno harness instructions. Repository-specific facts and commands belong in\\\\nthat file. The harness MUST NOT generate, track, or require that owner content.\\\\n\\\\n### HRN-008 \\\\u2014 Rule precedence\\\\n\\\\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\\\\nfor product, engineering, assurance, release, or external actions. They MUST\\\\nNOT remove, weaken, or contradict the harness rules.\\\\n\\\\nRepository owners MAY define exceptions through the supported exception\\\\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\\\\nthem to configure: whether formal definitions and work orders are required.\\\\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\\\\nNOT waive a harness rule.\\\\n\\\\n### HRN-009 \\\\u2014 Required checks\\\\n\\\\nManaged-file integrity checks, artifact graph checks, scope checks, and required\\\\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\\\\ncount as approval or acceptance of a risk.\\\\n\\\\n## Scope of these rules\\\\n\\\\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\\\\nagent performs or reports a governed lifecycle action. Reading, analysis, and\\\\nanswering questions need no work order when they change no lifecycle state,\\\\nexercise no decision right, and present no finding as a formal verdict.\\\\n\\\\nPreparing a proposed artifact package does not require an approved work\\\\norder. A human or agent MAY create and edit drafts, record risks and open\\\\nquestions, review the proposed content, and validate the package. These\\\\nactions MUST follow the authoring procedure and required checks. They MUST\\\\nNOT change an accepted definition, approve a work order, or start\\\\nimplementation. Decisions and lifecycle transitions follow their separate\\\\nauthority rules.\\\\n\\\\nBefore a lifecycle action, select the exact artifacts and read the governing\\\\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\\\\ncontext. It does not evaluate checkpoint gates or authorize work.\\\\n\\\\n## Using these instructions\\\\n\\\\nA human is a person; an agent is an automated system acting under granted\\\\nauthority. Approval, verification acceptance and release decisions require an\\\\nauthorized human. Agents may apply a matching recorded decision. Resolve the\\\\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\\\\nbefore obtaining or applying a decision.\\\\n\\\\n`harnessctl` means this repository's selected released evaluator, invoked through\\\\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\\\\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\\\\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\\\\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\\\\n\\\\nTransient working material stays in the conversation or temporary storage outside\\\\nthe repository, at the agent's discretion. It has no formal authority and SHALL\\\\nNOT be persisted in the repository. This rule covers working notes, not formal\\\\nartifacts or evidence required at a contract's prescribed durable location.\\\\n\\\\n## Read by task\\\\n\\\\nFor the external-resource layout, the files below are released resources outside\\\\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\\\\nand read its returned path and the required heading. Use instruction links\\\\nrelative to that resource location. Formal artifacts remain repository files.\\\\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\\\\nreturns this entry with the selected project and release. Repository-copy\\\\ninstallations continue to read their installed files.\\\\n\\\\nRead the selected file's entry conditions and current step. Read its required\\\\nreferences before the action they govern. A link alone does not require reading\\\\nits target. Do not load all procedures or future stages in advance.\\\\n\\\\n| Current need | Read first |\\\\n| --- | --- |\\\\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\\\\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\\\\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\\\\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\\\\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\\\\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\\\\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\\\\n\\\\nBefore the first eligible English explanation in a fresh context, read\\\\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\\\\nReuse it while retained in context. This applies to ordinary answers too.\\\\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\\\\nwhen changing or investigating their contracts. Use evaluator results in normal\\\\nwork. Missing instructions or an unknown returned procedure stop the affected\\\\naction: report the exact discovery gap in RESULTS.md.\\\\n\\\\n## After compaction\\\\n\\\\nRecover the repository, selected IDs, objective, existing authority and pending\\\\naction from the summary. For governed work, obtain fresh context through\\\\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\\\\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\\\\nuncertain writes or external effects before retrying. Resume only unapplied work.\\\\n\\\"}}\\r\\n\",\r\n          \"stderr\": \"\",\r\n          \"exit_code\": 0,\r\n          \"outcome\": \"success\",\r\n          \"uuid\": \"1e8eaa09-4eff-4717-902a-f1011c74e402\",\r\n          \"session_id\": \"362108e2-38f8-4da4-8c7f-b13e256606d6\"\r\n        },\r\n        {\r\n          \"type\": \"result\",\r\n          \"subtype\": \"success\",\r\n          \"is_error\": true,\r\n          \"result\": \"API Error: Opus 5's safeguards flagged this message (https://www.anthropic.com/legal/aup). This sometimes happens with safe, normal conversations. Claude Code can't respond to this message with Opus 5.\\n\\nTry rephrasing the request in a new session or change your model.\\n\\nLearn more: https://support.claude.com/en/articles/16049681\\n\\nDetails: `[reasoning_extraction]`\\n\\nRequest ID: req_011Cfbs1RK4u6mcwrHNjZ3t6\",\r\n          \"session_id\": \"362108e2-38f8-4da4-8c7f-b13e256606d6\",\r\n          \"usage\": {\r\n            \"input_tokens\": 45,\r\n            \"cache_creation_input_tokens\": 3678,\r\n            \"cache_read_input_tokens\": 3759,\r\n            \"output_tokens\": 0,\r\n            \"output_tokens_details\": {\r\n              \"thinking_tokens\": 0\r\n            },\r\n            \"server_tool_use\": {\r\n              \"web_search_requests\": 0,\r\n              \"web_fetch_requests\": 0\r\n            },\r\n            \"service_tier\": \"standard\",\r\n            \"cache_creation\": {\r\n              \"ephemeral_1h_input_tokens\": 3678,\r\n              \"ephemeral_5m_input_tokens\": 0\r\n            },\r\n            \"inference_geo\": \"not_available\",\r\n            \"iterations\": [],\r\n            \"speed\": \"standard\"\r\n          }\r\n        }\r\n      ],\r\n      \"stderr\": \"\"\r\n    }\r\n  ],\r\n  \"passed\": false,\r\n  \"root\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\",\r\n  \"entry_sha256\": \"9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990\",\r\n  \"wheel\": {\r\n    \"version\": \"0.21.0\",\r\n    \"payload_manifest\": \"se-harness-installed-payload-v1\",\r\n    \"payload_sha256\": \"5782f29c8242fe0c60bc78110863cc2bdcd1a4050823d343da006f180824fe45\",\r\n    \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\",\r\n    \"archive_sha256\": \"66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\"\r\n  },\r\n  \"package_files\": {\r\n    \"DEVELOPMENT.md\": \"4ab483b07176be1c02e8e1fffbcee82e7dd6df8a9e6141425f9c6a13582f03a3\",\r\n    \"README.md\": \"81c3d80b8787e1e2b7abc811cd2f6626eba6670015bfcd1fab54f69aaf22937c\",\r\n    \".claude-plugin/plugin.json\": \"e5b9167dd9f6f3d911fc92bfb1acc4041d56c7c42570b5f566abdee21cc9ff9c\",\r\n    \"assets/bootstrap.md\": \"3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd\",\r\n    \"hooks/hooks.json\": \"677e2b7797c7f708589578559a3ea19d36c41cfe1dce05f3c39365ce5c395cf5\",\r\n    \"packages/se_harness-0.21.0-py3-none-any.whl\": \"66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\",\r\n    \"scripts/activate.py\": \"2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54\",\r\n    \"scripts/harness_runtime.py\": \"6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4\",\r\n    \"scripts/inject_instructions.py\": \"a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc\",\r\n    \"scripts/setup.py\": \"282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb\",\r\n    \"skills/change/SKILL.md\": \"7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0\",\r\n    \"skills/evidence/SKILL.md\": \"810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7\",\r\n    \"skills/harness-operator-brief/skill-contract.json\": \"e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52\",\r\n    \"skills/harness-operator-brief/SKILL.md\": \"3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3\",\r\n    \"skills/harness-orient/skill-contract.json\": \"8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627\",\r\n    \"skills/harness-orient/SKILL.md\": \"722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d\",\r\n    \"skills/setup/SKILL.md\": \"3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d\",\r\n    \"skills/setup/references/environment.md\": \"3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc\",\r\n    \"skills/setup/references/maintenance.md\": \"ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf\",\r\n    \"skills/setup/references/repository.md\": \"bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3\",\r\n    \"skills/harness-orient/scripts/orient.py\": \"4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f\",\r\n    \"skills/harness-operator-brief/agents/openai.yaml\": \"a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4\",\r\n    \"skills/harness-operator-brief/scripts/check_brief.py\": \"b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683\",\r\n    \"skills/evidence/references/external-actions.md\": \"ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69\",\r\n    \"skills/evidence/references/records.md\": \"462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c\",\r\n    \"skills/change/references/artifacts.md\": \"7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6\",\r\n    \"skills/change/references/authority.md\": \"967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0\",\r\n    \"skills/change/references/work-orders.md\": \"4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481\"\r\n  },\r\n  \"version\": \"2.1.273 (Claude Code)\",\r\n  \"bootstrap_data_lines\": [\r\n    \"Plugin data: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\",\r\n    \"plugin data supplied with this message. It immediately returns\"\r\n  ],\r\n  \"selection\": {\r\n    \"session_id\": \"362108e2-38f8-4da4-8c7f-b13e256606d6\",\r\n    \"data\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\",\r\n    \"repository\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-xe8uvjar\\\\w\\\\clone\",\r\n    \"before\": {\r\n      \".engineering-harness.lock\": \"1bd4733693339a7008cd197daf0bf39dbc2ee77e94b58209e597803642639ecf\",\r\n      \".engineering-harness.toml\": \"a57f58d65fdec6daddc427c44e2d107316501dbde7f3c71c592fedf00a30388b\",\r\n      \".gitattributes\": \"9e92bc177f9eb7756807a343ba182dac25102112b7921074a79d13f3ee17f128\"\r\n    }\r\n  },\r\n  \"error\": \"\"\r\n}\r\n"
+  },
+  "scope_check": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--artifact",
+      "WO-IAR-030",
+      "--checkpoint",
+      "scope",
+      "--changed-path",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-result.json",
+      "--changed-path",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-review.md",
+      "--changes-complete",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "schema": "se-harness-workflow-result-v2",
+      "digest_format": "machine-fields-v1",
+      "candidate": {},
+      "operation": {
+        "kind": "check",
+        "outcome": "completed"
+      },
+      "selection": {
+        "primary": "WO-IAR-030",
+        "artifacts": [
+          "WO-IAR-030"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [
+          "ADR-IAR-012",
+          "ARCH-IAR-012",
+          "CAP-DST-001",
+          "INT-DST-001",
+          "REQ-IAR-031",
+          "SPEC-IAR-016",
+          "VER-IAR-022"
+        ],
+        "dependencies": [],
+        "declared_paths": [
+          "docs/engineering/instruction-architecture/evidence/VREC-IAR-020-evaluator.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-030/",
+          "docs/engineering/instruction-architecture/verification-records/VREC-IAR-020.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-030.md",
+          "docs/notes/artifact-authoring.md",
+          "docs/notes/developing-se-harness.md",
+          "docs/notes/getting-started.md",
+          "docs/notes/harness-installation-and-upgrades.md",
+          "docs/notes/harnessctl-reference.md",
+          "docs/notes/plugin-installation-guide.md",
+          "docs/notes/plugin-marketplace-publication.md",
+          "GLOSSARY.md",
+          "README.md",
+          "release/plugin-marketplace/README.md",
+          "scripts/validate_release_distributions.py",
+          "se_harness/candidate_acceptance.py",
+          "se_harness/cli.py",
+          "se_harness/github_ci.py",
+          "se_harness/hash_bound.py",
+          "se_harness/installer.py",
+          "se_harness/integrity.py",
+          "se_harness/preflight.py",
+          "se_harness/skill_ownership.py",
+          "se_harness/skill_ownership_contract.json",
+          "templates/repository/standard/",
+          "tests/artifact_support.py",
+          "tests/plugin_integration/progressive_discovery/",
+          "tests/test_artifact_catalog.py",
+          "tests/test_hash_bound_integrity.py",
+          "tests/test_installer.py",
+          "tests/test_instruction_architecture.py",
+          "tests/test_resources.py",
+          "tests/test_skill_ownership.py",
+          "tests/test_workflow_documentation_contract.py"
+        ],
+        "changed_paths": [
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-result.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-review.md"
+        ],
+        "change_set_complete": true
+      },
+      "compliance": {
+        "checkpoint": "scope",
+        "workflow_rule_id": "WFL-WO-IMPLEMENT",
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4I-SCOPE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "WO-IAR-030:[execution_scope]"
+                  }
+                ],
+                "message": "WO-IAR-030 declares 34 normalized scope path(s); this inspection grants no execution authority."
+              },
+              {
+                "id": "QGP-G4I-COMPLETE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "declared-change-set:WO-IAR-030"
+                  }
+                ],
+                "message": "The caller explicitly asserted that the declared change set is complete."
+              },
+              {
+                "id": "QGP-G4I-PATHS",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "path",
+                    "reference": "declared-change-set:WO-IAR-030"
+                  }
+                ],
+                "message": "All 2 declared changed path(s) are within execution scope."
+              }
+            ]
+          }
+        ],
+        "formal_snapshot_sha256": "d7abe33fce43e5be20137fe63e1953ab0e103a09f3ceb26ea122d18ce4bceed5",
+        "change_set_source": "arguments"
+      },
+      "procedure": {
+        "id": "PROC-WO-IMPLEMENT",
+        "current_step": "STEP-WO-IMPLEMENT-PREVIEW",
+        "steps": [
+          {
+            "id": "STEP-WO-IMPLEMENT-CHECK",
+            "kind": "command",
+            "gate_ids": [
+              "QG-G4-IMPLEMENTATION-EVIDENCE"
+            ],
+            "effects": [
+              "Evaluated implementation handoff for WO-IAR-030."
+            ],
+            "non_effects": [
+              "A checkpoint does not complete or verify work."
+            ],
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-030",
+              "--checkpoint",
+              "handoff"
+            ],
+            "corrective": {
+              "QGP-G4I-STATUS": {
+                "kind": "escalation",
+                "decision_right": "DR-WO-START"
+              },
+              "QGP-G4I-GRAPH": {
+                "kind": "escalation",
+                "decision_right": "DR-REMEDIATION-SCOPE"
+              },
+              "QGP-G4I-INTEGRITY": {
+                "kind": "escalation",
+                "decision_right": "DR-REMEDIATION-SCOPE"
+              },
+              "QGP-G4I-SCOPE": {
+                "kind": "escalation",
+                "decision_right": "DR-WO-SELECT"
+              },
+              "QGP-G4I-COMPLETE": {
+                "kind": "command",
+                "argv": [
+                  "harnessctl",
+                  "check",
+                  ".",
+                  "--artifact",
+                  "WO-IAR-030",
+                  "--checkpoint",
+                  "handoff",
+                  "--from-git",
+                  "<base>"
+                ]
+              },
+              "QGP-G4I-PATHS": {
+                "kind": "escalation",
+                "decision_right": "DR-REMEDIATION-SCOPE"
+              },
+              "QGP-G4I-PREFLIGHT": {
+                "kind": "command",
+                "argv": [
+                  "harnessctl",
+                  "preflight",
+                  ".",
+                  "--work-order",
+                  "WO-IAR-030",
+                  "--phase",
+                  "review"
+                ]
+              },
+              "QGP-G4I-EVIDENCE": {
+                "kind": "command",
+                "argv": [
+                  "harnessctl",
+                  "evidence",
+                  ".",
+                  "--artifact",
+                  "WO-IAR-030",
+                  "--checkpoint",
+                  "handoff"
+                ]
+              },
+              "QGP-G4I-DECISION": {
+                "kind": "escalation",
+                "decision_right": "DR-DECISION-DISPOSE"
+              }
+            }
+          },
+          {
+            "id": "STEP-WO-IMPLEMENT-PREVIEW",
+            "kind": "command",
+            "gate_ids": [
+              "QG-G4-IMPLEMENTATION-EVIDENCE"
+            ],
+            "effects": [
+              "Plan completion of WO-IAR-030."
+            ],
+            "non_effects": [
+              "Completion does not verify, release or deliver the work."
+            ],
+            "argv": [
+              "harnessctl",
+              "transition",
+              ".",
+              "--set",
+              "WO-IAR-030=implemented",
+              "--decision",
+              "WO-IAR-030=delegated-executor"
+            ],
+            "corrective": {
+              "QGP-G4I-STATUS": {
+                "kind": "escalation",
+                "decision_right": "DR-WO-START"
+              },
+              "QGP-G4I-GRAPH": {
+                "kind": "escalation",
+                "decision_right": "DR-REMEDIATION-SCOPE"
+              },
+              "QGP-G4I-INTEGRITY": {
+                "kind": "escalation",
+                "decision_right": "DR-REMEDIATION-SCOPE"
+              },
+              "QGP-G4I-SCOPE": {
+                "kind": "escalation",
+                "decision_right": "DR-WO-SELECT"
+              },
+              "QGP-G4I-COMPLETE": {
+                "kind": "command",
+                "argv": [
+                  "harnessctl",
+                  "check",
+                  ".",
+                  "--artifact",
+                  "WO-IAR-030",
+                  "--checkpoint",
+                  "handoff",
+                  "--from-git",
+                  "<base>"
+                ]
+              },
+              "QGP-G4I-PATHS": {
+                "kind": "escalation",
+                "decision_right": "DR-REMEDIATION-SCOPE"
+              },
+              "QGP-G4I-PREFLIGHT": {
+                "kind": "command",
+                "argv": [
+                  "harnessctl",
+                  "preflight",
+                  ".",
+                  "--work-order",
+                  "WO-IAR-030",
+                  "--phase",
+                  "review"
+                ]
+              },
+              "QGP-G4I-EVIDENCE": {
+                "kind": "command",
+                "argv": [
+                  "harnessctl",
+                  "evidence",
+                  ".",
+                  "--artifact",
+                  "WO-IAR-030",
+                  "--checkpoint",
+                  "handoff"
+                ]
+              },
+              "QGP-G4I-DECISION": {
+                "kind": "escalation",
+                "decision_right": "DR-DECISION-DISPOSE"
+              }
+            }
+          },
+          {
+            "id": "STEP-WO-IMPLEMENT-APPLY",
+            "kind": "command",
+            "gate_ids": [
+              "QG-G4-IMPLEMENTATION-EVIDENCE"
+            ],
+            "effects": [
+              "Record completion of only WO-IAR-030 under its approved execution scope."
+            ],
+            "non_effects": [
+              "Completion does not verify, release or deliver the work."
+            ],
+            "argv": [
+              "harnessctl",
+              "transition",
+              ".",
+              "--set",
+              "WO-IAR-030=implemented",
+              "--decision",
+              "WO-IAR-030=delegated-executor",
+              "--apply"
+            ],
+            "corrective": {
+              "QGP-G4I-STATUS": {
+                "kind": "escalation",
+                "decision_right": "DR-WO-START"
+              },
+              "QGP-G4I-GRAPH": {
+                "kind": "escalation",
+                "decision_right": "DR-REMEDIATION-SCOPE"
+              },
+              "QGP-G4I-INTEGRITY": {
+                "kind": "escalation",
+                "decision_right": "DR-REMEDIATION-SCOPE"
+              },
+              "QGP-G4I-SCOPE": {
+                "kind": "escalation",
+                "decision_right": "DR-WO-SELECT"
+              },
+              "QGP-G4I-COMPLETE": {
+                "kind": "command",
+                "argv": [
+                  "harnessctl",
+                  "check",
+                  ".",
+                  "--artifact",
+                  "WO-IAR-030",
+                  "--checkpoint",
+                  "handoff",
+                  "--from-git",
+                  "<base>"
+                ]
+              },
+              "QGP-G4I-PATHS": {
+                "kind": "escalation",
+                "decision_right": "DR-REMEDIATION-SCOPE"
+              },
+              "QGP-G4I-PREFLIGHT": {
+                "kind": "command",
+                "argv": [
+                  "harnessctl",
+                  "preflight",
+                  ".",
+                  "--work-order",
+                  "WO-IAR-030",
+                  "--phase",
+                  "review"
+                ]
+              },
+              "QGP-G4I-EVIDENCE": {
+                "kind": "command",
+                "argv": [
+                  "harnessctl",
+                  "evidence",
+                  ".",
+                  "--artifact",
+                  "WO-IAR-030",
+                  "--checkpoint",
+                  "handoff"
+                ]
+              },
+              "QGP-G4I-DECISION": {
+                "kind": "escalation",
+                "decision_right": "DR-DECISION-DISPOSE"
+              }
+            }
+          }
+        ]
+      },
+      "state": {
+        "before": [
+          {
+            "id": "WO-IAR-030",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-IAR-030",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 54
+      },
+      "mutation": {
+        "writes": []
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Evaluated scope compliance for WO-IAR-030."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-030 is in_progress."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "transition",
+            ".",
+            "--set",
+            "WO-IAR-030=implemented",
+            "--decision",
+            "WO-IAR-030=delegated-executor"
+          ]
+        },
+        "alternatives": []
+      },
+      "instruction_discovery": {
+        "schema": "se-harness-instruction-discovery-v1",
+        "status": "available",
+        "agent_instructions": {
+          "entry": {
+            "file": "ENGINEERING_HARNESS.md",
+            "heading": "read-by-task"
+          },
+          "shared_prerequisites": [
+            {
+              "file": "docs/engineering/harness/COMMUNICATION.md",
+              "heading": "communication",
+              "when": "Before the first eligible English explanation in a fresh context."
+            },
+            {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "report-a-lifecycle-result",
+              "when": "Before reporting a lifecycle result."
+            }
+          ],
+          "procedure": {
+            "id": "PROC-WO-IMPLEMENT",
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "retain-the-implementation-evidence"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ],
+            "steps": {
+              "STEP-WO-IMPLEMENT-CHECK": {
+                "location": {
+                  "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                  "heading": "retain-the-implementation-evidence"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "authority-from-work-approval",
+                    "when": "Before using the selected work order's execution grant."
+                  }
+                ]
+              },
+              "STEP-WO-IMPLEMENT-PREVIEW": {
+                "location": {
+                  "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                  "heading": "record-implementation-completion"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "authority-from-work-approval",
+                    "when": "Before using the selected work order's execution grant."
+                  }
+                ]
+              },
+              "STEP-WO-IMPLEMENT-APPLY": {
+                "location": {
+                  "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                  "heading": "record-implementation-completion"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "authority-from-work-approval",
+                    "when": "Before using the selected work order's execution grant."
+                  }
+                ]
+              }
+            }
+          },
+          "current_step": {
+            "id": "STEP-WO-IMPLEMENT-PREVIEW",
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "record-implementation-completion"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          }
+        },
+        "formal_artifact_ids": [
+          "ADR-IAR-012",
+          "ARCH-IAR-012",
+          "CAP-DST-001",
+          "INT-DST-001",
+          "REQ-IAR-031",
+          "SPEC-IAR-016",
+          "VER-IAR-022",
+          "WO-IAR-030"
+        ],
+        "evaluator_only_inputs": [
+          "docs/engineering/WORKFLOW.json",
+          "docs/engineering/QUALITY_GATES.json"
+        ]
+      },
+      "result_sha256": "aefbbaf881d12e34f71f09c6006dcf59a708d05ac72a3a2dedd31af3d71ab2b7"
+    },
+    "seconds": 4.991288299999724
+  }
+}
