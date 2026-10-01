@@ -7,7 +7,6 @@ owners = ["release-owner"]
 created = "2026-09-30"
 updated = "2026-10-01"
 version = "0.20.1"
-tag = "v0.20.1"
 commit = "b9af631b850c495eace9807361ed3ec3e36a10b2"
 git_object_format = "sha1"
 prepared_at = "2026-09-30T20:52:14Z"

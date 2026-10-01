@@ -127,6 +127,77 @@ releases_work = ["WO-TST-001"]
         arguments.update(overrides)
         return PUBLICATION.resolve_release(**arguments)
 
+    def maintenance_history(self, *, include_tag: bool = True, upgrade_main: bool = True) -> None:
+        """Retain a maintenance candidate independently of main's evaluator."""
+        base = self.candidate
+        lock = json.loads(git(self.root, "show", f"{self.governance}:.engineering-harness.lock"))
+        git(self.root, "checkout", "-b", "maintenance-candidate", base)
+        write(self.root / ".engineering-harness.lock", json.dumps(lock))
+        self.commit("maintenance candidate with its selected evaluator")
+        self.candidate = git(self.root, "rev-parse", "HEAD")
+        git(self.root, "tag", "-f", "v1.2.3", self.candidate)
+        git(self.root, "checkout", "-b", "maintenance-integration", base)
+        if upgrade_main:
+            lock["evaluator"].update(
+                version="0.6.0", payload_sha256="c" * 64,
+                archive_name="se_harness-0.6.0-py3-none-any.whl", archive_sha256="d" * 64,
+            )
+        write(self.root / ".engineering-harness.lock", json.dumps(lock))
+        self.commit("select main's evaluator")
+        write(self.root / self.evaluator_evidence_path, self.evaluator_evidence)
+        record = self.release_record("RLS-TST-001")
+        if not include_tag:
+            record = record.replace('tag = "v1.2.3"\n', "")
+        write(self.root / self.record_path, record)
+        self.commit("integrate released maintenance record")
+        self.governance = git(self.root, "rev-parse", "HEAD")
+        git(self.root, "update-ref", "refs/heads/main", self.governance)
+
+    def test_authorized_tag_correction_selects_first_complete_binding(self) -> None:
+        self.maintenance_history(include_tag=False, upgrade_main=False)
+        incomplete = self.governance
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "found 0"):
+            self.resolve()
+        write(self.root / self.record_path, self.release_record("RLS-TST-001"))
+        self.commit("record authorized missing tag correction")
+        corrected = git(self.root, "rev-parse", "HEAD")
+        write(self.root / "unrelated.txt", "later work\n")
+        self.commit("later unrelated work")
+        git(self.root, "update-ref", "refs/heads/main", "HEAD")
+        result = self.resolve()
+        self.assertEqual(corrected, result.governance_commit)
+        self.assertNotEqual(incomplete, result.governance_commit)
+        self.assertEqual(self.candidate, result.candidate_commit)
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "not the release integration commit"):
+            self.resolve(governance_commit=incomplete)
+
+    def test_maintenance_evidence_matches_immutable_candidate_lock(self) -> None:
+        self.maintenance_history()
+        result = self.resolve()
+        self.assertEqual(self.governance, result.governance_commit)
+        self.assertEqual(self.candidate, result.candidate_commit)
+        self.assertEqual(self.evaluator_evidence_sha256, result.evaluator_evidence_sha256)
+
+    def test_maintenance_fallback_preserves_evidence_and_governance_checks(self) -> None:
+        self.maintenance_history()
+        metadata = PUBLICATION._metadata_at(self.root, "HEAD", self.record_path)
+        value = json.loads(self.evaluator_evidence)
+        value["evaluator"]["payload_sha256"] = "e" * 64
+        changed = json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n"
+        metadata["evaluator_evidence_sha256"] = sha256(changed.encode())
+        write(self.root / self.evaluator_evidence_path, changed)
+        self.commit("evidence identity matches neither lock")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "differs from the standard lock"):
+            PUBLICATION._validated_evaluator_binding(self.root, "HEAD", metadata)
+        metadata["evaluator_evidence_sha256"] = self.evaluator_evidence_sha256
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "evidence digest differs"):
+            PUBLICATION._validated_evaluator_binding(self.root, "HEAD", metadata)
+        write(self.root / self.evaluator_evidence_path, self.evaluator_evidence)
+        write(self.root / ".engineering-harness.lock", '{"schema": 4, "skill_ownership": {}}')
+        self.commit("malformed main lock is not a maintenance fallback")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "plugin ownership"):
+            PUBLICATION._validated_evaluator_binding(self.root, "HEAD", metadata)
+
     def test_resolver_selects_integration_commit_not_tag_or_later_head(self) -> None:
         result = self.resolve()
         self.assertEqual(self.candidate, result.candidate_commit)

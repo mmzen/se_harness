@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "scripts/validate_release_distributions.py",
+    "--root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--require-record",
+    "RLS-SEH-030"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "SE Harness release distribution validation: PASS (19 distribution-bearing records)\n",
+    "stderr": ""
+  },
+  "seconds": 4.234576100000595
+}
