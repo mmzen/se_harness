@@ -3,7 +3,7 @@
 Status: WO-RLS-027 is implemented and VREC-SEH-030 is verified. RLS-SEH-030
 is released by mmzen. Its 0.20.1 GitHub/PyPI packages and demonstration are published
 and independently observed. WO-RLS-028 is implemented after passing local package qualification and handoff.
-VREC-PLG-027 preparation follows for human verification.
+[VREC-PLG-027](verification-records/VREC-PLG-027.md) is ready for human verification.
 WO-RLS-029 remains approved, awaiting marketplace publication. Moving markers
 and repository adoption remain separate.
 
