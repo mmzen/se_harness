@@ -3,7 +3,9 @@
 Status: WO-RLS-027 is implemented and VREC-SEH-030 is verified. RLS-SEH-030
 is released by mmzen. Evaluator 0.20.1 and plugin 0.2.3 are published.
 WO-RLS-028 is implemented and VREC-PLG-027 is verified by mmzen. WO-RLS-029
-is in progress: both Windows CLIs pass public fresh-install and update checks.
+is implemented: both Windows CLIs pass public fresh-install and update checks.
+Its documentation and observation candidate awaits verification preparation
+and a separate human verification decision.
 Documentation integration, release markers and adoption remain separate.
 
 The [release contract](release/REL-SEH-032.md#compatibility-and-adoption)
@@ -19,7 +21,7 @@ adoption, then independent qualification of the minimal-layout successor.
 | [VREC-SEH-030](verification-records/VREC-SEH-030.md) | Human-verified candidate b9af631b850c495eace9807361ed3ec3e36a10b2. |
 | [RLS-SEH-030](releases/RLS-SEH-030.md) | Released 0.20.1 record with observed evaluator publication. |
 | [WO-RLS-028](work-orders/WO-RLS-028.md) / [VER-RLS-028](verification/VER-RLS-028.md) | Completed package qualification, accepted in VREC-PLG-027; separately authorized marketplace publication is observed. |
-| [WO-RLS-029](work-orders/WO-RLS-029.md) / [VER-RLS-029](verification/VER-RLS-029.md) | In progress: public fresh/update checks, current documentation and delivery closeout. |
+| [WO-RLS-029](work-orders/WO-RLS-029.md) / [VER-RLS-029](verification/VER-RLS-029.md) | Implemented: public fresh/update checks, current documentation and an honest incomplete closeout; human verification and delivery follow separately. |
 
 The published evaluator version is 0.20.1. The release/0.20 preparation baseline is
 7253d13b212ad6f7df670021290fea32e81d66de. Its installed root selects 0.19.0;

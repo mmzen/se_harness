@@ -2,7 +2,7 @@
 id = "WO-RLS-029"
 type = "work_order"
 title = "Confirm public 0.2.3 delivery and reconcile current documentation"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-30"
 updated = "2026-10-01"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-10-01T09:41:21Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-01T10:06:35Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Confirm public 0.2.3 delivery and reconcile current documentation

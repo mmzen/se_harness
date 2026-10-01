@@ -41,3 +41,10 @@ Documentation verification, authorized integration, public readback and release
 marker authorization remain separate. Overall delivery is incomplete until the
 five-surface closeout has matching evidence for every surface. The final receipt
 will be appended after its prerequisites; earlier VREC evidence is preserved.
+
+The [closeout result](delivery-result-public-v1.json) satisfies evaluator, marketplace
+and demonstration. Documentation is pending. Release markers still resolve to
+0.20.0 and therefore fail the expected 0.20.1 identity until separately authorized
+promotion. Both missing-marketplace and wrong-revision controls remain incomplete,
+as required. The 46 relevant tests have 45 passes and one Windows symlink-permission
+skip; all changed-document links pass.

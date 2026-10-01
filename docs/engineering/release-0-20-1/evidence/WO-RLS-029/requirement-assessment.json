@@ -1,0 +1,60 @@
+{
+  "reviewer": "Codex",
+  "verification": "VER-RLS-029",
+  "candidate_phase": "pass",
+  "overall_delivery": "incomplete",
+  "criteria": {
+    "REQ-RLO-019": {
+      "status": "pass for prepared candidate",
+      "evidence": [
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/publication.json",
+          "sha256": "690b735074413e518f5090b2c44ae77d6165d5996361b7d6a157dc04da398b55"
+        },
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/public-routes.json",
+          "sha256": "905d808315f24a5d306a2a0a5c2d2586875365b7b2190e3b372726430ed25f5b"
+        },
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/public-evaluator-identities.json",
+          "sha256": "6a392ab12862987939d62286002d4e5355762e3baa48e412c0fa54cf1f8e07b7"
+        },
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/public-native-recheck.json",
+          "sha256": "608745db335d86d4d6f89ba231bef0f8d06323843f0d3300346884a46db3a345"
+        },
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/review.json",
+          "sha256": "2911ebedb3fdf67f092ebf07fd98b8a1f38edaf5a87a9d209f49bd68324656a7"
+        },
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/commands/documentation-tests.json",
+          "sha256": "ede92b467721a4f24be272981d4cc55e43552b494feb5b0de603e66760dadb30"
+        }
+      ],
+      "remaining": "Human verification, documentation integration and public readback."
+    },
+    "REQ-RLO-020": {
+      "status": "pass for prepared candidate; final delivery pending",
+      "evidence": [
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/delivery-plan-public-v1.json",
+          "sha256": "a5d2cf5426e440ad95f1682d5bc21bf9b5f5a5672a3d978e52d2029929b5f64a"
+        },
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/delivery-observations-public-v1.json",
+          "sha256": "86fe8ccdce2c3a5590071e3c85074fa38e6a821df6299a2f3e0e3c340e4560f2"
+        },
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/delivery-result-public-v1.json",
+          "sha256": "0137c08eaef7bd7dc9695c3ee83e6b7d22933a0b3dc6ec4522e3bece63788443"
+        },
+        {
+          "path": "docs/engineering/release-0-20-1/evidence/WO-RLS-029/delivery-negative-checks.json",
+          "sha256": "5a626def4fba0bbd30468f1f95685e00b006b5c1c2a7e2712f3e7798351135b8"
+        }
+      ],
+      "remaining": "Separate latest/last decision/readback and append-only public documentation closeout. No overall-completion claim."
+    }
+  }
+}
