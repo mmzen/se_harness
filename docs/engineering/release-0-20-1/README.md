@@ -1,8 +1,8 @@
 # SE Harness 0.20.1 compatibility release
 
 Status: WO-RLS-027 is implemented and VREC-SEH-030 is verified. RLS-SEH-030
-is ready with the exact 0.20.1 build binding. WO-RLS-028 is in progress; WO-RLS-029 and both verification contracts are
-approved. Bound-record replay, release, publication and adoption remain pending.
+is released by mmzen with the exact 0.20.1 build binding. WO-RLS-028 is in progress; WO-RLS-029 and both verification contracts are
+approved. Bound-record replay passed. Publication and adoption remain pending.
 
 [DEC-IAR-004](../instruction-architecture/decisions/DEC-IAR-004.md) records
 mmzen's selected sequence: compatibility maintenance release, separate adoption,
@@ -15,7 +15,7 @@ then independent qualification of the minimal-layout successor.
 | [WO-RLS-027](work-orders/WO-RLS-027.md) | Bounded implementation, version metadata, listed documentation, local checks and verification preparation. |
 | [REL-SEH-032](release/REL-SEH-032.md) | Release membership, evidence, five-surface delivery and separate adoption. |
 | [VREC-SEH-030](verification-records/VREC-SEH-030.md) | Human-verified candidate b9af631b850c495eace9807361ed3ec3e36a10b2. |
-| [RLS-SEH-030](releases/RLS-SEH-030.md) | Ready 0.20.1 release record; no release decision applied. |
+| [RLS-SEH-030](releases/RLS-SEH-030.md) | Authorized 0.20.1 release record; publication remains separate. |
 | [WO-RLS-028](work-orders/WO-RLS-028.md) / [VER-RLS-028](verification/VER-RLS-028.md) | In progress: released-baseline plugin 0.2.3 source, governance transport and package qualification. |
 | [WO-RLS-029](work-orders/WO-RLS-029.md) / [VER-RLS-029](verification/VER-RLS-029.md) | Approved, awaiting publication: public fresh/update checks, current documentation and delivery closeout. |
 
