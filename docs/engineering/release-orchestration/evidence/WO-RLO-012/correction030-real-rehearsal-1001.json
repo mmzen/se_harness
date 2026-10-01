@@ -1,0 +1,51 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\correction030-rehearsal-1001\\.github\\scripts\\publish_release.py",
+    "resolve",
+    "--repository",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\correction030-rehearsal-1001",
+    "--default-ref",
+    "refs/heads/main",
+    "--release-record",
+    "RLS-SEH-030",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\correction030-resolved-plan-1001.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\correction030-rehearsal-1001",
+  "exit_code": 0,
+  "result": {
+    "build_recipe": "release/build-recipe.json",
+    "build_recipe_schema": "se-harness-release-build-recipe/v1",
+    "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+    "candidate_commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+    "checksums": "SHA256SUMS",
+    "checksums_sha256": "8ef1f3b9ce5a465f963e34e711deed624b9645d2f25824f23624bee089a8f0ac",
+    "distribution_schema": 2,
+    "evaluator_evidence_path": "docs/engineering/release-0-20-1/evidence/RLS-SEH-030-evaluator.json",
+    "evaluator_evidence_sha256": "3d06ef9adf5b4bcb9bd9d9d93ae6ea13f35ec4f0ca9ab8338586e48254d39713",
+    "git_object_format": "sha1",
+    "governance_commit": "73be272c7949a13477e53d4fa65db7ed8c9179b3",
+    "release_contract": "REL-SEH-032",
+    "release_record": "RLS-SEH-030",
+    "release_record_path": "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+    "released_at": "2026-10-01T06:01:59Z",
+    "released_work": [
+      "WO-RLS-027"
+    ],
+    "repository": "mmzen/se_harness",
+    "schema": "se-harness-release-plan/v2",
+    "sdist": "se_harness-0.20.1.tar.gz",
+    "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+    "source_date_epoch": 1790799840,
+    "source_manifest_sha256": "890eb07d32540fb81beba94f6db409c7cafe2abcd6b1889e1aa0ac1fd9baa846",
+    "tag": "v0.20.1",
+    "verification_records": [
+      "VREC-SEH-030"
+    ],
+    "version": "0.20.1",
+    "wheel": "se_harness-0.20.1-py3-none-any.whl",
+    "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+  },
+  "seconds": 100.89916900000026
+}

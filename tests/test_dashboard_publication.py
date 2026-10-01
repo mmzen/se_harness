@@ -193,6 +193,11 @@ releases_work = ["WO-TST-001"]
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "evidence digest differs"):
             PUBLICATION._validated_evaluator_binding(self.root, "HEAD", metadata)
         write(self.root / self.evaluator_evidence_path, self.evaluator_evidence)
+        for evaluator in ({}, {**value["evaluator"], "payload_sha256": "invalid"}):
+            write(self.root / ".engineering-harness.lock", json.dumps({"schema": 3, "evaluator": evaluator}))
+            self.commit("invalid main evaluator identity must not fall back")
+            with self.assertRaisesRegex(PUBLICATION.PublicationError, "invalid evaluator identity"):
+                PUBLICATION._validated_evaluator_binding(self.root, "HEAD", metadata)
         write(self.root / ".engineering-harness.lock", '{"schema": 4, "skill_ownership": {}}')
         self.commit("malformed main lock is not a maintenance fallback")
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "plugin ownership"):

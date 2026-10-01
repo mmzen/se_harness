@@ -307,6 +307,28 @@ def _locked_evaluator(lock: dict[str, Any]) -> dict[str, Any]:
     evaluator = lock.get("evaluator")
     if not isinstance(evaluator, dict):
         raise PublicationError("standard evaluator lock has no evaluator identity")
+    version = evaluator.get("version")
+    archive = evaluator.get("archive_name")
+    archive_digest = evaluator.get("archive_sha256")
+    if (
+        not isinstance(version, str)
+        or EVALUATOR_VERSION_PATTERN.fullmatch(version) is None
+        or evaluator.get("payload_manifest") != EVALUATOR_PAYLOAD_MANIFEST
+        or not isinstance(evaluator.get("payload_sha256"), str)
+        or re.fullmatch(r"[0-9a-f]{64}", evaluator["payload_sha256"]) is None
+        or "archive_name" not in evaluator
+        or "archive_sha256" not in evaluator
+        or (archive is None) != (archive_digest is None)
+        or (
+            archive is not None
+            and (
+                archive != f"se_harness-{version.replace('-', '_')}-py3-none-any.whl"
+                or not isinstance(archive_digest, str)
+                or re.fullmatch(r"[0-9a-f]{64}", archive_digest) is None
+            )
+        )
+    ):
+        raise PublicationError("standard evaluator lock has an invalid evaluator identity")
     return evaluator
 
 
@@ -434,7 +456,11 @@ def _validated_evaluator_binding(
         candidate = metadata.get("commit")
         object_format = metadata.get("git_object_format")
         candidate_matches = False
-        if metadata.get("status") == "released" and isinstance(candidate, str) and object_format in {"sha1", "sha256"}:
+        if (
+            metadata.get("status") == "released"
+            and isinstance(candidate, str)
+            and object_format in {"sha1", "sha256"}
+        ):
             candidate = _validate_full_commit(candidate, object_format, "release candidate")
             candidate_lock_text = _text_at(repository, candidate, ".engineering-harness.lock")
             if candidate_lock_text is not None:

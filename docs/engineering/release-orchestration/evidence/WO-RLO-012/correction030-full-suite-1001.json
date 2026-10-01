@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-X",
+    "utf8",
+    "scripts/run_tests.py",
+    "--workers",
+    "4"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-ujt1b7qk\\private\\evaluators\\0.0.0\\476feb619dd598305fb851c82e1b09175a87054be5fd2fe32c7205d7089f098d\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-ujt1b7qk\\private\\evaluators\\0.0.0\\476feb619dd598305fb851c82e1b09175a87054be5fd2fe32c7205d7089f098d\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.133615s focus=0.304664s plan=0.268413s\nWEX_SCALE artifacts=500 validation=0.599282s focus=0.791666s plan=1.100733s\ndocs/notes/diagnostic-codes.md matches the source\n0.21.0\n----------------------------------------------------------------------\nRan 1189 tests in 219.485s (179 classes, 4 workers)\n\nOK (skipped=18)\n",
+    "stderr": "--workers must be at least 1\n"
+  },
+  "seconds": 222.93066389999967
+}
