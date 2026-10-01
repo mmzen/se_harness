@@ -1,6 +1,6 @@
 # Verity Plane
 
-Verity Plane 0.2.2 exposes shared skills through the host's native skill discovery.
+Verity Plane 0.2.3 exposes shared skills through the host's native skill discovery.
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
@@ -11,10 +11,10 @@ It neither computes lifecycle authority nor upgrades the repository. Missing,
 changed, incompatible or oversized input is reported as a delivery gap.
 
 Release assembly for this package requires the independently published
-SE Harness 0.20.0 wheel and its matching released record. Source version
-metadata alone does not establish that publication. WO-PLG-030 governs exact
-0.2.2 package qualification; WO-PLG-031 governs public installation observations.
-Read their retained results before claiming support. Earlier 0.2.1 observations
+SE Harness 0.20.1 wheel and its matching released record. Source version
+metadata alone does not establish that publication. WO-RLS-028 governs exact
+0.2.3 package qualification; WO-RLS-029 governs public installation observations.
+Read their retained results before claiming support. Earlier 0.2.2 observations
 do not qualify these archives. Host and route claims remain limited to the
 observed versions; desktop UI, automatic threshold compaction and other
 platforms need their own evidence.
