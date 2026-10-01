@@ -125,7 +125,7 @@ class MinimalInstallationTests(unittest.TestCase):
             (self.root / ".github").symlink_to(outside, target_is_directory=True)
         except OSError:
             self.skipTest("host cannot create symlinks")
-        with self.assertRaisesRegex(ValueError, "linked|symlink"):
+        with self.assertRaisesRegex(installer.HarnessError, "linked|symlink"):
             installer.plan_install(self.root, project_name="Minimal", mode="init", integrations=["pr"])
         self.assertEqual([], list(outside.iterdir()))
         self.assertFalse((self.root / installer.CONFIG_NAME).exists())
