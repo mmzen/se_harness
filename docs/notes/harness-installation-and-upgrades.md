@@ -5,9 +5,9 @@
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
-This guide describes the 0.20.0 installation and instruction-delivery model. An existing
+This guide describes the 0.20.1 installation and instruction-delivery model. An existing
 repository keeps its installed evaluator and lock until an explicit upgrade.
-The SE Harness development repository adopted released 0.20.0 under WO-HUP-024.
+The SE Harness development repository adopted released 0.20.1 under WO-HUP-025.
 
 ## What is kept under control
 
@@ -51,13 +51,13 @@ copies are installed under the target's `scripts/` directory.
 
 ## Review and apply an upgrade
 
-Select the exact authorized release first. The example below targets 0.20.0;
-an existing 0.20.0 repository needs no upgrade just because source reports
+Select the exact authorized release first. The example below targets 0.20.1;
+an existing 0.20.1 repository needs no upgrade just because source reports
 0.21.0. Install the selected released package in the external environment,
 review the read-only plan, apply the authorized changes, then check the result:
 
 ```text
-"CHECKER" -m pip install "se-harness==0.20.0"
+"CHECKER" -m pip install "se-harness==0.20.1"
 "CHECKER" -I -m se_harness upgrade "REPO"
 "CHECKER" -I -m se_harness upgrade "REPO" --apply
 "CHECKER" -I -m se_harness doctor "REPO"
@@ -125,10 +125,11 @@ An upgrade preserves existing stock pointers and custom owner text. Current work
 and reads the selected guide under `docs/engineering/harness/`. Those pointers
 are navigation aids, not separate policy authorities.
 
-This repository adopted 0.20.0 under WO-HUP-024 and preserves its six existing
-owner pointers. Their removal remains a separate action after active-consumer
-and native-delivery checks. Development source is now 0.21.0; its version alone
-does not change any repository's selected evaluator.
+This repository adopted 0.20.1 under WO-HUP-025 after its earlier 0.20.0
+adoption under WO-HUP-024. The six legacy pointers were removed through
+separate cleanup work; this upgrade preserves their absence. Development source
+remains 0.21.0; its version alone does not change any repository's selected
+evaluator.
 
 ## Earlier migrations and retained history
 

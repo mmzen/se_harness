@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "base": "aeebcabf8e3ed958e0166dfe2754a2af2681a59d",
+  "method": "SHA-256 of every tracked file immediately before installer apply, compared after installer and approved owner edits; exact absent-path checks. No earlier file removed.",
+  "tracked_count": 12990,
+  "changed": [
+    ".engineering-harness.lock",
+    ".engineering-harness.toml",
+    ".github/workflows/engineering-harness.yml",
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/instruction-architecture/README.md",
+    "docs/engineering/repository-harness-upgrade/README.md",
+    "docs/notes/developing-se-harness.md",
+    "docs/notes/harness-installation-and-upgrades.md",
+    "tests/test_progressive_documentation.py"
+  ],
+  "unchanged_count": 12981,
+  "absent": [
+    "CLAUDE.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "docs/engineering/DECISION_RIGHTS.md",
+    "docs/engineering/QUALITY_GATES.md",
+    "docs/engineering/WORKFLOW.md",
+    "docs/engineering/TRACEABILITY.md",
+    "docs/engineering/TECHNICAL_COMMUNICATION.md"
+  ],
+  "development_version": "0.21.0",
+  "snapshot": {
+    "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption0201-evidence\\before-install-files.json",
+    "sha256": "c4a78f459ec24ce98447285b77929b5297039e15529897f201f79c6a1e22b6bf"
+  },
+  "installer_only": {
+    "passed": true,
+    "checked_files": 12990,
+    "changed": [
+      ".engineering-harness.lock",
+      ".engineering-harness.toml",
+      "ENGINEERING_HARNESS.md"
+    ],
+    "preserved_absence": [
+      "CLAUDE.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "docs/engineering/DECISION_RIGHTS.md",
+      "docs/engineering/QUALITY_GATES.md",
+      "docs/engineering/WORKFLOW.md",
+      "docs/engineering/TRACEABILITY.md",
+      "docs/engineering/TECHNICAL_COMMUNICATION.md"
+    ],
+    "baseline_receipt": "before-install-files.json"
+  }
+}

@@ -296,7 +296,7 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         installation = self.contents[NOTES_ROOT / "harness-installation-and-upgrades.md"]
         upgrade = installation.split("## Review and apply an upgrade\n", 1)[1]
         commands = (
-            '"CHECKER" -m pip install "se-harness==0.20.0"',
+            '"CHECKER" -m pip install "se-harness==0.20.1"',
             '"CHECKER" -I -m se_harness upgrade "REPO"',
             '"CHECKER" -I -m se_harness upgrade "REPO" --apply',
             '"CHECKER" -I -m se_harness doctor "REPO"',
