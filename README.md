@@ -55,11 +55,13 @@ See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-mar
 
 ## Successor candidate: fewer repository files
 
-The unreleased candidate stores instructions and templates in the evaluator wheel.
-Default initialization writes only configuration and lock files. Plugin activation
-selects the checkout and restores it after compaction or resume.
-See [minimal installation and migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-successor-candidate).
-Published evaluator 0.20.1 / plugin 0.2.3 keeps the existing layout.
+The [0.21.0 release preparation](docs/engineering/release-0-21-0/README.md)
+selects plugin 0.2.4. Both remain unpublished. Instructions and templates move
+into the evaluator wheel; initialization writes only configuration and lock files.
+Plugin activation restores the selected checkout after compaction or resume.
+Codex Windows desktop remains unverified.
+See [migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-successor-candidate).
+Published 0.20.1/0.2.3 keeps the existing layout.
 
 ## How it works today
 

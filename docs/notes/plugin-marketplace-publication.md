@@ -10,6 +10,14 @@ The [public installation evidence](../engineering/release-0-20-1/evidence/WO-RLS
 records the complete tree comparison and both hosts' fresh/update routes.
 Documentation integration and final closeout require their own observations.
 
+## Selected next delivery: 0.21.0 / 0.2.4
+
+[REL-SEH-033](../engineering/release-0-21-0/release/REL-SEH-033.md) governs the
+new release. WO-RLS-031 prepares the final evaluator candidate. After its wheel
+is independently public, WO-RLS-032 assembles and qualifies plugin 0.2.4;
+WO-RLS-033 owns public routes and current documentation. Neither version is
+published yet. Keep the observed 0.20.1/0.2.3 receipt above as history.
+
 ## Assemble committed inputs
 
 For any new assembly, first require the selected RLS to be released and its wheel to be independently
@@ -62,13 +70,15 @@ For a newly planned delivery, use the
 [release delivery handoff](release-delivery-completion.md#perform-and-retain-each-handoff).
 Evaluator publication leaves plugin assembly, qualification and separately
 authorized marketplace publication pending with an owner and next action.
-For this release the selected inputs are plugin 0.2.3 and public evaluator
-0.20.1. Track all five surfaces in the release delivery plan. Local package
+For the next delivery the selected inputs are plugin 0.2.4 and evaluator
+0.21.0. Wait for that evaluator's independent public availability before assembly.
+Track all five surfaces in the release delivery plan. Local package
 qualification does not close delivery or establish the public branch state.
 
 1. Run the declared package checks, host validators and local native installation
-   acceptance in fresh profiles. Follow VER-RLS-028 and retain actual evidence for the exact 0.2.3 packages.
-   Public fresh installation and update from 0.2.2 follow under VER-RLS-029.
+   acceptance in fresh profiles. Follow VER-RLS-031 and VER-IAR-021 for the
+   exact 0.2.4 packages. Public fresh installation and update from 0.2.3 follow
+   under VER-RLS-032. Keep required desktop evidence pending until assessed.
    Confirm the loaded package bytes, startup, manual compaction and resume. Do not alter real user profiles.
 2. Prepare the commit-bound verification record and obtain its owner decision.
    Resolve the applicable repository integration and external-action checkpoints.
@@ -80,9 +90,9 @@ qualification does not close delivery or establish the public branch state.
 4. Add the actual public Git marketplace in fresh Codex and Claude profiles,
    install verity-plane, and compare installed contents with the accepted package.
    Also test an existing public installation's update path on both hosts.
-   VER-RLS-029 governs these observations. Retain the public commit, active paths,
+   VER-RLS-032 governs these observations. Retain the public commit, active paths,
    installed hashes and native delivery before reporting public installation as checked.
-5. Update current availability claims through WO-RLS-029, obtain commit-bound
+5. Update current availability claims through WO-RLS-033, obtain commit-bound
    verification and separately authorized integration. Read the merged public
    documentation back before declaring overall delivery complete. Preserve the
    assembled source identity and earlier plan versions; bind observations to

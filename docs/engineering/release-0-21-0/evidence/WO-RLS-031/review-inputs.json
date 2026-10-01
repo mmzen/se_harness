@@ -1,0 +1,62 @@
+{
+  "human": "mmzen",
+  "human_reply": "Approve package and required verification",
+  "artifacts": [
+    {
+      "id": "REL-SEH-033",
+      "type": "release_contract",
+      "path": "docs/engineering/release-0-21-0/release/REL-SEH-033.md",
+      "sha256": "455a614c22e47dde59a2359e8250e2cf549f7407740c9619c5cec9424430ebf9",
+      "transition_sha256": "455a614c22e47dde59a2359e8250e2cf549f7407740c9619c5cec9424430ebf9",
+      "actor_encoding": "release-owner"
+    },
+    {
+      "id": "VER-RLS-030",
+      "type": "verification",
+      "path": "docs/engineering/release-0-21-0/verification/VER-RLS-030.md",
+      "sha256": "56589749ed8db0fcec6013eb396e033e2041acf1d61532fc13946af67f47ce51",
+      "transition_sha256": "56589749ed8db0fcec6013eb396e033e2041acf1d61532fc13946af67f47ce51",
+      "actor_encoding": "engineering-owner"
+    },
+    {
+      "id": "VER-RLS-031",
+      "type": "verification",
+      "path": "docs/engineering/release-0-21-0/verification/VER-RLS-031.md",
+      "sha256": "3b580cf1ba9d26b6abfca6c7fba4a9d1a1e390bfbddd270b21a0acb753f3252b",
+      "transition_sha256": "3b580cf1ba9d26b6abfca6c7fba4a9d1a1e390bfbddd270b21a0acb753f3252b",
+      "actor_encoding": "engineering-owner"
+    },
+    {
+      "id": "VER-RLS-032",
+      "type": "verification",
+      "path": "docs/engineering/release-0-21-0/verification/VER-RLS-032.md",
+      "sha256": "4afb0c1292f45d5b1ec58638ae411a2ae6c1258e8e5154e7c6402e473721e7a3",
+      "transition_sha256": "4afb0c1292f45d5b1ec58638ae411a2ae6c1258e8e5154e7c6402e473721e7a3",
+      "actor_encoding": "engineering-owner"
+    },
+    {
+      "id": "WO-RLS-031",
+      "type": "work_order",
+      "path": "docs/engineering/release-0-21-0/work-orders/WO-RLS-031.md",
+      "sha256": "4beb4a466ad2a5f76d55007e58799fa57669878755ad5c78a83530829babc6d3",
+      "transition_sha256": "b1cfba497c61d3f8ce46238843843d979766ff1676652ce772475ae7bd283128",
+      "actor_encoding": "engineering-owner"
+    },
+    {
+      "id": "WO-RLS-032",
+      "type": "work_order",
+      "path": "docs/engineering/release-0-21-0/work-orders/WO-RLS-032.md",
+      "sha256": "d3fec6f2510b899e68e3420a26a39c6008bd59c482affbf10a8dbc14f8e70bce",
+      "transition_sha256": "e34f1863f64a0da98b0aac5f7e40dc3d67d57a1c1bc84d9ba3735b54b888fb1d",
+      "actor_encoding": "engineering-owner"
+    },
+    {
+      "id": "WO-RLS-033",
+      "type": "work_order",
+      "path": "docs/engineering/release-0-21-0/work-orders/WO-RLS-033.md",
+      "sha256": "1e465a19bbafe7554631099df970d37e02b10eaa5c01108f8147f49d7227c8ce",
+      "transition_sha256": "5e935e115fc06e6e5170aeaca7694a69cfd3ae91a36a3b17c9dc5e7af96f8938",
+      "actor_encoding": "engineering-owner"
+    }
+  ]
+}

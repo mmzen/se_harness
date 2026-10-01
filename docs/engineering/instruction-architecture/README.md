@@ -13,9 +13,12 @@ separate 0.20.0 adoption under WO-HUP-024. The cleanup refinements were introduc
 [0.20.0 release](../release-0-20-0/README.md); subsequent cleanup records below
 retain their own scope and decisions.
 
-The plugin-owned instruction resources and minimal repository layout remain
-unreleased. DEC-IAR-004 selects compatibility release, separate adoption and
-then independent qualification of that successor.
+The external instruction resources and minimal layout are merged but unreleased.
+DEC-IAR-004's compatibility release and separate adoption have completed.
+[REL-SEH-033](../release-0-21-0/release/REL-SEH-033.md) now selects final 0.21.0
+qualification and plugin 0.2.4 delivery. Earlier VRECs retain their exact candidate
+claims. Codex Windows desktop evidence remains pending under VER-IAR-021.
+This release preparation does not remove the repository's installed root guide.
 
 ## Historical architecture packets
 
