@@ -1,0 +1,8 @@
+{
+  "candidate": "b5b46bf8790b5e6148176f37bd1e3c95832ab3c7",
+  "record_sha256": "3d5eeb67ff9679ed5d7490be4d4b69a1682794a1a5974586cd9cd8090fd6a080",
+  "evaluator_sha256": "5f2209f1d8d60901e7f8cf46ea5b62f7bb9705e4603c72f15489f9be90af2384",
+  "evidence_indexes_exact": true,
+  "human": "mmzen",
+  "decision": "I verify VREC-PLG-028 as assurance owner"
+}

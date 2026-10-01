@@ -2,7 +2,7 @@
 id = "VREC-PLG-028"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-029"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-20-1/evidence/VREC-PLG-027-evaluat
 evaluator_evidence_path = "docs/engineering/release-0-20-1/evidence/VREC-PLG-028-evaluator.json"
 evaluator_evidence_sha256 = "5f2209f1d8d60901e7f8cf46ea5b62f7bb9705e4603c72f15489f9be90af2384"
 
+verified_at = "2026-10-01T10:26:34Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLS-029"]
 conforms_to = ["VER-RLS-029"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-01T10:26:34Z"
+decided_by = "assurance-owner"
+reason = "Human mmzen: I verify VREC-PLG-028 as assurance owner. Decision covers exact candidate b5b46bf8790b5e6148176f37bd1e3c95832ab3c7 and unchanged retained evidence in the presented review. Reviewed VREC SHA256 3d5eeb67ff9679ed5d7490be4d4b69a1682794a1a5974586cd9cd8090fd6a080; evaluator evidence SHA256 5f2209f1d8d60901e7f8cf46ea5b62f7bb9705e4603c72f15489f9be90af2384. Codex applies the human decision using the selected released evaluator's assurance-owner label, retaining mmzen as the human decision-maker. Existing bounded review-branch push and draft PR authority remains valid; merge, release markers and adoption remain separate."
 +++
 
 # Verification Record Candidate
