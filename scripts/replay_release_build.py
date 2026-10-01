@@ -16,15 +16,19 @@ from repository_tools.release_distribution import (
     DISTRIBUTION_SCHEMA_V2,
     ReleaseDistributionError,
     read_release_record,
-    release_record_paths,
     validate_distribution_block,
     validate_record_distribution,
 )
 
 
 def _selected_record(repository: Path, artifact_id: str) -> tuple[Path, dict[str, object]]:
+    root = repository / "docs" / "engineering"
+    if not root.is_dir():
+        raise ReleaseDistributionError("repository has no docs/engineering directory")
     matches: list[tuple[Path, dict[str, object]]] = []
-    for path in release_record_paths(repository):
+    for path in sorted(root.glob("*/releases/RLS-*.md")):
+        if not path.is_file() or path.is_symlink():
+            continue
         try:
             metadata, _text, _lines, _closing = read_release_record(path)
         except ReleaseDistributionError:
