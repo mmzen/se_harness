@@ -1,0 +1,16 @@
+{
+  "record": "RLS-SEH-030",
+  "before_sha256": "51abaf44dd6843a03a1bf60a44ce351f97e384fb28c775bfaf11aed06cb0655f",
+  "after_sha256": "fab6c7a239963144857b7f7cac1d13903ae30eae3b83b4b08ca2e4b9c31efde9",
+  "changed_field": "owners",
+  "before": [
+    "Codex"
+  ],
+  "after": [
+    "release-owner"
+  ],
+  "human": "mmzen",
+  "decision": "I authorize release record RLS-SEH-030",
+  "basis": "Correct the unaccepted ready record to identify the accountable human release role already authorized in this conversation; retain Codex as prepared_by. All other bytes remain unchanged. Legacy 0.19.0 role encoding was approved in WO-RLS-028. No lifecycle state or prior history is changed by this metadata correction.",
+  "failed_preview": "release030-authorize-preview-1001.json: WEX201/E009; no writes"
+}
