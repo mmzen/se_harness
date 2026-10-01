@@ -8,8 +8,8 @@ entirely to the repository owner. The evaluator supplies lifecycle results and
 instruction discovery. [Plugin 0.2.3 public evidence](../release-0-20-1/evidence/WO-RLS-029/README.md)
 covers delivery of this maintenance package.
 
-This repository still selects evaluator 0.20.0 under WO-HUP-024. Adoption of
-0.20.1 is separate. The cleanup refinements were introduced in the
+This repository selects evaluator 0.20.1 under WO-HUP-025, following the
+separate 0.20.0 adoption under WO-HUP-024. The cleanup refinements were introduced in the
 [0.20.0 release](../release-0-20-0/README.md); subsequent cleanup records below
 retain their own scope and decisions.
 

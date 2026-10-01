@@ -1,5 +1,5 @@
 [harness]
-tool_version = "0.20.0"
+tool_version = "0.20.1"
 installed_at = "2026-08-11"
 project_name = "se_harness"
 
