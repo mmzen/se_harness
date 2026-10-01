@@ -3,7 +3,7 @@
 Status: WO-RLS-027 is implemented and VREC-SEH-030 is verified. RLS-SEH-030
 is released by mmzen. Its 0.20.1 GitHub/PyPI packages and demonstration are published
 and independently observed. WO-RLS-028 is implemented after passing local package qualification and handoff.
-[VREC-PLG-027](verification-records/VREC-PLG-027.md) is ready for human verification.
+[VREC-PLG-027](verification-records/VREC-PLG-027.md) is verified by mmzen as assurance owner.
 WO-RLS-029 remains approved, awaiting marketplace publication. Moving markers
 and repository adoption remain separate.
 
@@ -19,7 +19,7 @@ then independent qualification of the minimal-layout successor.
 | [REL-SEH-032](release/REL-SEH-032.md) | Release membership, evidence, five-surface delivery and separate adoption. |
 | [VREC-SEH-030](verification-records/VREC-SEH-030.md) | Human-verified candidate b9af631b850c495eace9807361ed3ec3e36a10b2. |
 | [RLS-SEH-030](releases/RLS-SEH-030.md) | Authorized 0.20.1 release record; published through the separately authorized workflow. |
-| [WO-RLS-028](work-orders/WO-RLS-028.md) / [VER-RLS-028](verification/VER-RLS-028.md) | Plugin 0.2.3 source, governance transport and local package qualification; human verification remains pending. |
+| [WO-RLS-028](work-orders/WO-RLS-028.md) / [VER-RLS-028](verification/VER-RLS-028.md) | Plugin 0.2.3 source, governance transport and local package qualification; VREC-PLG-027 is human-verified. |
 | [WO-RLS-029](work-orders/WO-RLS-029.md) / [VER-RLS-029](verification/VER-RLS-029.md) | Approved, awaiting publication: public fresh/update checks, current documentation and delivery closeout. |
 
 The published evaluator version is 0.20.1. The public release/0.20 baseline is

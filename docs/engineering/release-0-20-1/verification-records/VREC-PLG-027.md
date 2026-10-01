@@ -2,7 +2,7 @@
 id = "VREC-PLG-027"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-028"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-20-1/evidence/RLS-SEH-030/delivery
 evaluator_evidence_path = "docs/engineering/release-0-20-1/evidence/VREC-PLG-027-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-10-01T09:24:33Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLS-028"]
 conforms_to = ["VER-RLS-028"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-01T09:24:33Z"
+decided_by = "assurance-owner"
+reason = "Human mmzen: I verify VREC-PLG-027 as assurance owner. Decision covers exact candidate ba3e434fb864c701bbb1dada17f5a94bea30230d and unchanged retained evidence reviewed in PR #510 at f6188ec55896dfe8290893e6969a6bafe8e761c1. Reviewed VREC SHA256 e5c3aaa0ee265f755b4962f7db5d8c6c9732c6f69a491b3e43720a75a1e83523; evaluator evidence SHA256 e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2. Codex applies the human decision using the selected 0.19.0 assurance-owner encoding. Merge, marketplace publication, release markers and adoption remain separate."
 +++
 
 # Verification Record Candidate
