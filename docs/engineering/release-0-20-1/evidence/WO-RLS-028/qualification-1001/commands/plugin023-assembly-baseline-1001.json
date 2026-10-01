@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "git",
+    "diff",
+    "7253d13b212ad6f7df670021290fea32e81d66de",
+    "HEAD",
+    "--",
+    "plugins/verity-plane",
+    "release/plugin-assembly.json",
+    "release/plugin-marketplace",
+    "repository_tools/plugin_distribution.py",
+    "scripts/build_plugin_marketplace.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": ""
+  },
+  "seconds": 0.03270980000002055
+}

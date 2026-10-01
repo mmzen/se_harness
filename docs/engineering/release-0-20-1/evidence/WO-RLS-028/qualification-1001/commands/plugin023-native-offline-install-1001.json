@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "pip",
+    "install",
+    "--disable-pip-version-check",
+    "--no-index",
+    "--no-deps",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\se_harness-0.20.1-py3-none-any.whl"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001",
+  "exit_code": 0,
+  "stdout": "Processing C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\se_harness-0.20.1-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.20.1\n",
+  "stderr": ""
+}

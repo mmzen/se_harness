@@ -1,0 +1,40 @@
+{
+  "release_record": "RLS-SEH-030",
+  "version": "0.20.1",
+  "candidate": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+  "workflow": "https://github.com/mmzen/se_harness/actions/runs/36839014759",
+  "github_release": "https://github.com/mmzen/se_harness/releases/tag/v0.20.1",
+  "downloads": [
+    {
+      "url": "https://github.com/mmzen/se_harness/releases/download/v0.20.1/se_harness-0.20.1-py3-none-any.whl",
+      "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\github-se_harness-0.20.1-py3-none-any.whl",
+      "sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+      "bytes": 534217
+    },
+    {
+      "url": "https://github.com/mmzen/se_harness/releases/download/v0.20.1/se_harness-0.20.1.tar.gz",
+      "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\github-se_harness-0.20.1.tar.gz",
+      "sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+      "bytes": 785392
+    },
+    {
+      "url": "https://github.com/mmzen/se_harness/releases/download/v0.20.1/SHA256SUMS",
+      "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\github-SHA256SUMS",
+      "sha256": "8ef1f3b9ce5a465f963e34e711deed624b9645d2f25824f23624bee089a8f0ac",
+      "bytes": 192
+    },
+    {
+      "url": "https://files.pythonhosted.org/packages/5a/f0/44f5671794acd6c73b2cdaa86fedac9782297b2d101fda6ea45fe14d6ba8/se_harness-0.20.1-py3-none-any.whl",
+      "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\se_harness-0.20.1-py3-none-any.whl",
+      "sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+      "bytes": 534217
+    },
+    {
+      "url": "https://files.pythonhosted.org/packages/ae/5d/bbb4adff8f24bd7fef5d0e954fc8d36d4651e953fa4ee862af966accb8f1/se_harness-0.20.1.tar.gz",
+      "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\se_harness-0.20.1.tar.gz",
+      "sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+      "bytes": 785392
+    }
+  ],
+  "status": "Exact public tag and independently downloaded GitHub/PyPI distribution bytes"
+}

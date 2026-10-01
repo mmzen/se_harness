@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "log",
+    "-5",
+    "--oneline"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "726d4534 Retain the authorized 0.20.1 release decision and transport evidence\n87c59917 Record mmzen release authorization for RLS-SEH-030\n36e43655 Retain review checkpoint packets for WO-RLS-028\na07af044 Record approved 0.20.1 delivery work and start package preparation\ndbfaad3c Prepare RLS-SEH-030 and downstream delivery drafts\n",
+    "stderr": ""
+  },
+  "seconds": 0.035129500000039116
+}

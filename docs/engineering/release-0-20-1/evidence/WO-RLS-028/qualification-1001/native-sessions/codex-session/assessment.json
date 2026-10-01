@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "phase": "startup",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001\\repo-codex\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.20.1",
+        "entry_sha256": "3a530bba07478450062e6e24705a28df82ae131b0fe76277beeb4446457db082",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "model_response_assessed": true,
+      "context_sha256": [
+        "d61c425655ef88921d6c7fad6041adcb57a6afdc8bded30cca6425e96c0b9249"
+      ],
+      "replies": [
+        "{\"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\plugin023-native-1001\\\\repo-codex\\\\ENGINEERING_HARNESS.md\", \"harness_version\": \"0.20.1\", \"entry_sha256\": \"3a530bba07478450062e6e24705a28df82ae131b0fe76277beeb4446457db082\", \"final_heading\": \"After compaction\", \"delivery_gap\": false, \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\", \"governed_action_allowed\": false}"
+      ]
+    },
+    {
+      "phase": "compact",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001\\repo-codex\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.20.1",
+        "entry_sha256": "3a530bba07478450062e6e24705a28df82ae131b0fe76277beeb4446457db082",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "model_response_assessed": true,
+      "context_sha256": [
+        "d61c425655ef88921d6c7fad6041adcb57a6afdc8bded30cca6425e96c0b9249"
+      ],
+      "replies": [
+        "{\"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\plugin023-native-1001\\\\repo-codex\\\\ENGINEERING_HARNESS.md\", \"harness_version\": \"0.20.1\", \"entry_sha256\": \"3a530bba07478450062e6e24705a28df82ae131b0fe76277beeb4446457db082\", \"final_heading\": \"After compaction\", \"delivery_gap\": false, \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\", \"governed_action_allowed\": false}"
+      ]
+    },
+    {
+      "phase": "resume",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001\\repo-codex\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.20.1",
+        "entry_sha256": "3a530bba07478450062e6e24705a28df82ae131b0fe76277beeb4446457db082",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "model_response_assessed": true,
+      "context_sha256": [
+        "d61c425655ef88921d6c7fad6041adcb57a6afdc8bded30cca6425e96c0b9249"
+      ],
+      "replies": [
+        "{\"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\plugin023-native-1001\\\\repo-codex\\\\ENGINEERING_HARNESS.md\", \"harness_version\": \"0.20.1\", \"entry_sha256\": \"3a530bba07478450062e6e24705a28df82ae131b0fe76277beeb4446457db082\", \"final_heading\": \"After compaction\", \"delivery_gap\": false, \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\", \"governed_action_allowed\": false}"
+      ]
+    }
+  ],
+  "profile": "existing disposable test profile",
+  "no_real_profile_changes": true,
+  "unchanged": true,
+  "thread_id": "01a0f6b5-a9ee-7901-a696-4a95802c5259"
+}

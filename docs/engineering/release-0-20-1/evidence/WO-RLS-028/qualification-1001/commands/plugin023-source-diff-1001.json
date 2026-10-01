@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "diff",
+    "--stat"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": " plugins/verity-plane/claude-code/.claude-plugin/plugin.json |  2 +-\n plugins/verity-plane/claude-code/README.md                  | 10 +++++-----\n plugins/verity-plane/codex/.codex-plugin/plugin.json        |  2 +-\n plugins/verity-plane/codex/README.md                        | 10 +++++-----\n release/plugin-marketplace/README.md                        |  8 ++++----\n release/plugin-marketplace/submissions/README.md            |  6 ++++--\n .../plugin-marketplace/submissions/reviewer-test-cases.md   | 13 +++++++------\n .../package_assembly/test_refresh_guidance.py               |  8 ++++----\n 8 files changed, 31 insertions(+), 28 deletions(-)\n",
+    "stderr": ""
+  },
+  "seconds": 0.09215519999997923
+}

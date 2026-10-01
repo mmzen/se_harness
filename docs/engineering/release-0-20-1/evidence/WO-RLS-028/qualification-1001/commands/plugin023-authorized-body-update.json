@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:/Program Files/GitHub CLI/gh.exe",
+    "pr",
+    "edit",
+    "510",
+    "--repo",
+    "mmzen/se_harness",
+    "--body-file",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\plugin023-authorized-body.md"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "https://github.com/mmzen/se_harness/pull/510\n",
+    "stderr": ""
+  },
+  "seconds": 1.5717091999999866
+}

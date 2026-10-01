@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py",
+    "--marketplace",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-marketplace-1001",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-install-1001",
+    "--codex",
+    "C:/Users/mathi/AppData/Local/OpenAI/Codex/bin/faa963e871dd422c/codex.exe",
+    "--claude",
+    "C:/Users/mathi/.local/bin/claude.exe",
+    "--expected-wheel-sha256",
+    "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+    "--expected-evaluator-version",
+    "0.20.1"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 1,
+  "result": {
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 32, in <module>\n    hosts = {\"codex\": args.codex.resolve(strict=True), \"claude\": args.claude.resolve(strict=True)}\n                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 938, in resolve\n    return self.with_segments(os.path.realpath(self, strict=strict))\n                              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen ntpath>\", line 696, in realpath\nFileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\OpenAI\\\\Codex\\\\bin\\\\faa963e871dd422c\\\\codex.exe'\n"
+  },
+  "seconds": 0.2034843000001274
+}

@@ -1,0 +1,38 @@
+{
+  "destination": "https://github.com/mmzen/se_harness.git",
+  "ref": "refs/heads/plugin-marketplace",
+  "expected_old_commit": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+  "prepared_commit": "556d0faf83c32fd188409c5ba191552fad1522e1",
+  "tree": "06f9827af86752e0801c38092f697e8f8645950e",
+  "retained_local_ref": "refs/heads/prepared/marketplace-0.2.3",
+  "source_commit": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab",
+  "released_governance_commit": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+  "plugin_version": "0.2.3",
+  "evaluator_version": "0.20.1",
+  "package_identity_sha256": "b16b34132777e3f95dc71fdd7b2c13200dfe6d8d68ada94dd172d2ab43a9b94e",
+  "file_count": 63,
+  "tree_matches_all_distribution_bytes": true,
+  "changed_paths": [
+    "M\tPACKAGE-IDENTITY.json",
+    "M\tREADME.md",
+    "M\tpackages/claude/verity-plane/.claude-plugin/plugin.json",
+    "M\tpackages/claude/verity-plane/README.md",
+    "M\tpackages/claude/verity-plane/assembly-inventory.json",
+    "R090\tpackages/claude/verity-plane/packages/se_harness-0.20.0-py3-none-any.whl\tpackages/claude/verity-plane/packages/se_harness-0.20.1-py3-none-any.whl",
+    "M\tpackages/codex/verity-plane/.codex-plugin/plugin.json",
+    "M\tpackages/codex/verity-plane/README.md",
+    "M\tpackages/codex/verity-plane/assembly-inventory.json",
+    "R090\tpackages/codex/verity-plane/packages/se_harness-0.20.0-py3-none-any.whl\tpackages/codex/verity-plane/packages/se_harness-0.20.1-py3-none-any.whl",
+    "M\tpackages/verity-plane-claude.zip",
+    "M\tpackages/verity-plane-codex.zip",
+    "M\tsubmissions/README.md",
+    "M\tsubmissions/reviewer-test-cases.md"
+  ],
+  "status": "Prepared locally; human verification and exact marketplace publication authorization remain pending.",
+  "push_argv": [
+    "git",
+    "push",
+    "origin",
+    "556d0faf83c32fd188409c5ba191552fad1522e1:refs/heads/plugin-marketplace"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "context_count": 2,
+  "expected_error": null,
+  "probe": null,
+  "model_response_assessed": false,
+  "context_sha256": [
+    "cd08a1a2cf622520c4a431d0cafccb17a1d8cf3524d57abbf39e82f85c8258ab",
+    "cd08a1a2cf622520c4a431d0cafccb17a1d8cf3524d57abbf39e82f85c8258ab"
+  ],
+  "replies": [],
+  "native_compact_callbacks": 1,
+  "full_compact_roots": [
+    true
+  ],
+  "unchanged": true,
+  "session_id": "10ec34cc-1692-4156-85a6-09dff28c50fc",
+  "test_only_model": "host-default",
+  "saved_model_changed": false
+}

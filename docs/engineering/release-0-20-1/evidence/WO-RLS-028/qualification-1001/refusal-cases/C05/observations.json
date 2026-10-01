@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "check": "codex own manifest",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "codex foreign manifest absent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "claude own manifest",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "claude foreign manifest absent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "extra_sources": {},
+      "fixture_revision": "d37ddec0dca8932fec54172a4ad8c124b52dacb5",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/claude-code/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/claude-code/hooks/hooks.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+            "README.md": "plugins/verity-plane/codex/README.md",
+            "hooks/hooks.json": "plugins/verity-plane/codex/hooks/hooks.json",
+            "scripts/setup.py": "plugins/verity-plane/common/scripts/setup.py"
+          }
+        },
+        "name": "verity-plane",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "LICENSE": "LICENSE",
+          "scripts/inject_instructions.py": "plugins/verity-plane/common/scripts/inject_instructions.py",
+          "scripts/setup.py": "plugins/verity-plane/common/scripts/setup.py",
+          "skills/change/SKILL.md": "plugins/verity-plane/common/skills/change/SKILL.md",
+          "skills/change/references/artifacts.md": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+          "skills/change/references/authority.md": "plugins/verity-plane/common/skills/change/references/authority.md",
+          "skills/change/references/work-orders.md": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+          "skills/evidence/SKILL.md": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+          "skills/evidence/references/external-actions.md": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+          "skills/evidence/references/records.md": "plugins/verity-plane/common/skills/evidence/references/records.md",
+          "skills/harness-operator-brief/SKILL.md": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
+          "skills/harness-operator-brief/agents/openai.yaml": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+          "skills/harness-operator-brief/scripts/check_brief.py": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
+          "skills/harness-operator-brief/skill-contract.json": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
+          "skills/harness-orient/SKILL.md": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+          "skills/harness-orient/scripts/orient.py": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
+          "skills/harness-orient/skill-contract.json": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
+          "skills/setup/SKILL.md": "plugins/verity-plane/common/skills/setup/SKILL.md",
+          "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
+          "skills/setup/references/maintenance.md": "plugins/verity-plane/common/skills/setup/references/maintenance.md",
+          "skills/setup/references/repository.md": "plugins/verity-plane/common/skills/setup/references/repository.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "conflicting output path: scripts/setup.py"
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
+}
