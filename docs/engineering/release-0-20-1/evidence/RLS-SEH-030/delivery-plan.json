@@ -1,0 +1,104 @@
+{
+  "schema": "se-harness-delivery-plan/v1",
+  "release": {
+    "contract": "REL-SEH-032",
+    "record": "RLS-SEH-030",
+    "version": "0.20.1",
+    "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+  },
+  "review": {
+    "by": "pending human mmzen review",
+    "reference": "Draft refinement under authorized RLS-SEH-030 preparation; WO-RLS-028, WO-RLS-029, VER-RLS-028 and VER-RLS-029 await approval. Earlier approved plan is preserved under evidence/WO-RLS-027/plan.json."
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/releases/tag/v0.20.1",
+      "work_reference": "WO-RLS-027 implementation and authorized RLS-SEH-030 preparation; WO-RLS-028 proposed governance transport. Release/publication decisions remain separate.",
+      "next_action": "Complete bound-record replay and approve downstream scope before the human release decision; then request exact publication authority.",
+      "disposition": "update",
+      "expected": {
+        "record": "RLS-SEH-030",
+        "version": "0.20.1",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a"
+      },
+      "required_observations": [
+        "publisher",
+        "public_install"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness#plugin-marketplace",
+      "work_reference": "WO-RLS-028 / VER-RLS-028 (draft): source and qualification; WO-RLS-029 / VER-RLS-029 (draft): public fresh/update readback.",
+      "next_action": "Approve the drafts; prepare 0.2.3 from public 0.2.2 source 7253d13b212ad6f7df670021290fea32e81d66de. Assemble only after the RLS-SEH-030 wheel is public, qualify, verify, then obtain exact marketplace publication authority.",
+      "disposition": "update",
+      "expected": {
+        "plugin_version": "0.2.3",
+        "source_commit": null,
+        "evaluator_version": "0.20.1",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "public_revision": null,
+        "codex_content_sha256": null,
+        "claude-code_content_sha256": null
+      },
+      "required_observations": [
+        "assembly",
+        "qualification",
+        "public_ref"
+      ],
+      "hosts": [
+        "codex",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/tree/main",
+      "work_reference": "WO-RLS-028 / VER-RLS-028 (draft): packaged guidance; WO-RLS-029 / VER-RLS-029 (draft): current-main documentation and public readback.",
+      "next_action": "Prepare packaged guidance under approved scope; reconcile current-main claims only after matching public observations, then obtain verification and integration.",
+      "disposition": "update",
+      "expected": {
+        "commit": null
+      },
+      "required_observations": [
+        "claims_review",
+        "links"
+      ]
+    },
+    {
+      "id": "demonstration",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://mmzen.github.io/se_harness/",
+      "work_reference": "WO-RLS-029 / VER-RLS-029 (draft): observe the separately authorized publisher deployment.",
+      "next_action": "After evaluator publication, retain deployed URL and provenance for the actual main-history governance commit.",
+      "disposition": "update",
+      "expected": {
+        "governance_commit": null
+      },
+      "required_observations": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "release_markers",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "Separate exact human marker authority; WO-RLS-029 / VER-RLS-029 (draft) retains readback.",
+      "next_action": "After the publication observation window, obtain exact latest/last authority; retain readback under the approved public-delivery work.",
+      "disposition": "update",
+      "expected": {
+        "latest": "v0.20.1",
+        "last": "b9af631b850c495eace9807361ed3ec3e36a10b2"
+      },
+      "required_observations": [
+        "authorization",
+        "readback"
+      ]
+    }
+  ]
+}
