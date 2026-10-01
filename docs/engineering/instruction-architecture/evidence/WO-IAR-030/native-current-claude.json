@@ -1,0 +1,145 @@
+{
+  "host": "claude",
+  "claims": "Native CLI/app-server only; desktop remains unverified.",
+  "commands": [
+    {
+      "label": "host-version",
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-ijo6db2n\\w",
+      "exit_code": 0,
+      "stdout": "2.1.273 (Claude Code)\n",
+      "stderr": ""
+    }
+  ],
+  "stages": [
+    {
+      "phase": "startup",
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "--print",
+        "--verbose",
+        "--output-format",
+        "stream-json",
+        "--include-hook-events",
+        "--tools",
+        "",
+        "--strict-mcp-config",
+        "--permission-prompts",
+        "none",
+        "--setting-sources",
+        "project",
+        "--settings",
+        "{}",
+        "--plugin-dir",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-ijo6db2n\\package\\verity-plane",
+        "--model",
+        "opus",
+        "--",
+        "Read-only native instruction delivery test. Do not call tools. Copy only the newest hook context as JSON: session_id, selected_checkout, harness_version, entry_sha256, final_heading, bootstrap, delivery_gap, may_implement=false. Delivery grants no lifecycle authority."
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-ijo6db2n\\w",
+      "exit_code": 0,
+      "session_id": "e41fc145-8709-4924-a672-841400922963",
+      "contexts": [
+        "Host: claude; session_id: e41fc145-8709-4924-a672-841400922963\nPlugin data: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\claude\\claude\\plugins\\data\\verity-plane-inline\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\n\n# Select the working repository\n\nWhen asked to clone, clone to the intended destination, then activate that exact\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\nwhen the intended repository is ambiguous. Do not scan child repositories.\n\nUse the setup skill's activation procedure with the host, session_id and\nplugin data supplied with this message. It immediately returns\nthe selected instructions. Read that complete entry before governed work. If the\nrepository has no harness selection or its evaluator is missing, use the setup\nskill with an explicitly selected release, then activate again. Do not choose a\nrelease or upgrade silently.\n\nSelection belongs only to this host session. A new session activates its own\ncheckout. Switching or clearing affects only this session. Activation gives no\napproval, verification or delivery authority; follow the selected release for\nnew or resumed work and any requested push or pull request.\n"
+      ],
+      "replies": [
+        "No tools called. Only a SessionStart hook has arrived; no activation has run, so most of the requested fields have no value in that context.\n\n```json\n{\n  \"session_id\": \"e41fc145-8709-4924-a672-841400922963\",\n  \"selected_checkout\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": \"# Select the working repository\",\n  \"bootstrap\": \"verity-plane:setup (scripts/activate.py in this plugin)\",\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}\n```\n\nNotes on the nulls and judgment calls:\n\n- `selected_checkout`, `harness_version`, `entry_sha256`, `delivery_gap` — not present in the hook context. Activation was never performed (and you asked me not to call tools), so there is no selected checkout, no release version, and no instruction entry to hash. The primary working directory `C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-ijo6db2n\\w` is not a git repository.\n- `final_heading` — the hook text contains one markdown heading, `# Select the working repository`. The later `# Environment` heading is harness-supplied environment info in the same turn rather than hook content; if you count it, the answer would be `# Environment`.\n- `bootstrap` — the hook has no field by that name; I mapped it to the only bootstrap-like directive present.\n- `may_implement` — taken verbatim from your instruction, not from the hook.\n\nConfirmed: delivery of this context grants no lifecycle authority — no approval, verification, or delivery rights, and I've made no selection or change."
+      ],
+      "events": [
+        {
+          "type": "system",
+          "subtype": "hook_response",
+          "hook_id": "016d360b-912c-4580-80c4-7fb5fe09811b",
+          "hook_name": "SessionStart:startup",
+          "hook_event": "SessionStart",
+          "output": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"Host: claude; session_id: e41fc145-8709-4924-a672-841400922963\\nPlugin data: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\n# Select the working repository\\n\\nWhen asked to clone, clone to the intended destination, then activate that exact\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\n\\nUse the setup skill's activation procedure with the host, session_id and\\nplugin data supplied with this message. It immediately returns\\nthe selected instructions. Read that complete entry before governed work. If the\\nrepository has no harness selection or its evaluator is missing, use the setup\\nskill with an explicitly selected release, then activate again. Do not choose a\\nrelease or upgrade silently.\\n\\nSelection belongs only to this host session. A new session activates its own\\ncheckout. Switching or clearing affects only this session. Activation gives no\\napproval, verification or delivery authority; follow the selected release for\\nnew or resumed work and any requested push or pull request.\\n\"}}\r\n",
+          "stdout": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"Host: claude; session_id: e41fc145-8709-4924-a672-841400922963\\nPlugin data: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\n# Select the working repository\\n\\nWhen asked to clone, clone to the intended destination, then activate that exact\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\n\\nUse the setup skill's activation procedure with the host, session_id and\\nplugin data supplied with this message. It immediately returns\\nthe selected instructions. Read that complete entry before governed work. If the\\nrepository has no harness selection or its evaluator is missing, use the setup\\nskill with an explicitly selected release, then activate again. Do not choose a\\nrelease or upgrade silently.\\n\\nSelection belongs only to this host session. A new session activates its own\\ncheckout. Switching or clearing affects only this session. Activation gives no\\napproval, verification or delivery authority; follow the selected release for\\nnew or resumed work and any requested push or pull request.\\n\"}}\r\n",
+          "stderr": "",
+          "exit_code": 0,
+          "outcome": "success",
+          "uuid": "44de7124-d1fa-41af-8767-37b72156d1c9",
+          "session_id": "e41fc145-8709-4924-a672-841400922963"
+        },
+        {
+          "type": "result",
+          "subtype": "success",
+          "is_error": false,
+          "result": "No tools called. Only a SessionStart hook has arrived; no activation has run, so most of the requested fields have no value in that context.\n\n```json\n{\n  \"session_id\": \"e41fc145-8709-4924-a672-841400922963\",\n  \"selected_checkout\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": \"# Select the working repository\",\n  \"bootstrap\": \"verity-plane:setup (scripts/activate.py in this plugin)\",\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}\n```\n\nNotes on the nulls and judgment calls:\n\n- `selected_checkout`, `harness_version`, `entry_sha256`, `delivery_gap` — not present in the hook context. Activation was never performed (and you asked me not to call tools), so there is no selected checkout, no release version, and no instruction entry to hash. The primary working directory `C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-ijo6db2n\\w` is not a git repository.\n- `final_heading` — the hook text contains one markdown heading, `# Select the working repository`. The later `# Environment` heading is harness-supplied environment info in the same turn rather than hook content; if you count it, the answer would be `# Environment`.\n- `bootstrap` — the hook has no field by that name; I mapped it to the only bootstrap-like directive present.\n- `may_implement` — taken verbatim from your instruction, not from the hook.\n\nConfirmed: delivery of this context grants no lifecycle authority — no approval, verification, or delivery rights, and I've made no selection or change.",
+          "session_id": "e41fc145-8709-4924-a672-841400922963",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 3818,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 1263,
+            "output_tokens_details": {
+              "thinking_tokens": 729
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 3818,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [],
+            "speed": "standard"
+          }
+        }
+      ],
+      "stderr": ""
+    }
+  ],
+  "passed": false,
+  "root": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-ijo6db2n",
+  "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+  "wheel": {
+    "version": "0.21.0",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "5782f29c8242fe0c60bc78110863cc2bdcd1a4050823d343da006f180824fe45",
+    "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+    "archive_sha256": "66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d"
+  },
+  "package_files": {
+    "DEVELOPMENT.md": "4ab483b07176be1c02e8e1fffbcee82e7dd6df8a9e6141425f9c6a13582f03a3",
+    "README.md": "81c3d80b8787e1e2b7abc811cd2f6626eba6670015bfcd1fab54f69aaf22937c",
+    ".claude-plugin/plugin.json": "e5b9167dd9f6f3d911fc92bfb1acc4041d56c7c42570b5f566abdee21cc9ff9c",
+    "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+    "hooks/hooks.json": "677e2b7797c7f708589578559a3ea19d36c41cfe1dce05f3c39365ce5c395cf5",
+    "packages/se_harness-0.21.0-py3-none-any.whl": "66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d",
+    "scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+    "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+    "scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+    "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+    "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+    "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+    "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+    "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+    "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+    "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+    "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+    "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+    "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+    "skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+    "skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+    "skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+    "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+    "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+    "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+    "skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+    "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+    "skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+  },
+  "version": "2.1.273 (Claude Code)",
+  "bootstrap_data_lines": [
+    "Plugin data: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\claude\\claude\\plugins\\data\\verity-plane-inline",
+    "plugin data supplied with this message. It immediately returns"
+  ],
+  "error": "('C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-se-harness', \"Host: claude; session_id: e41fc145-8709-4924-a672-841400922963\\nPlugin data: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\n# Select the working repository\\n\\nWhen asked to clone, clone to the intended destination, then activate that exact\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\n\\nUse the setup skill's activation procedure with the host, session_id and\\nplugin data supplied with this message. It immediately returns\\nthe selected instructions. Read that complete entry before governed work. If the\\nrepository has no harness selection or its evaluator is missing, use the setup\\nskill with an explicitly selected release, then activate again. Do not choose a\\nrelease or upgrade silently.\\n\\nSelection belongs only to this host session. A new session activates its own\\ncheckout. Switching or clearing affects only this session. Activation gives no\\napproval, verification or delivery authority; follow the selected release for\\nnew or resumed work and any requested push or pull request.\\n\")"
+}

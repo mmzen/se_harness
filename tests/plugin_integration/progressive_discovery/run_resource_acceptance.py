@@ -121,6 +121,17 @@ def main():
         ready=python.parent.parent/'ready.json';marker=ready.read_bytes();ready.unlink()
         assert 'delivery is unavailable' in hook('claude','claude-first','resume')
         ready.write_bytes(marker)
+        # Minimal selection permits delivery; healthy evidence readiness also
+        # requires the explicitly selected Git byte-preservation integration.
+        integration=[python,'-I','-m','se_harness','upgrade',repo,'--integration','git','--json']
+        run('git-integration-preview',integration)
+        assert before=={p.name:p.read_bytes() for p in repo.iterdir() if p.is_file()}
+        run('git-integration-apply',integration+['--apply'])
+        assert {p.name for p in repo.iterdir() if p.is_file()}==set(before)|{'.gitattributes'}
+        assert (repo/'.engineering-harness.toml').read_bytes()==before['.engineering-harness.toml']
+        integrated_lock=json.loads((repo/'.engineering-harness.lock').read_text(encoding='utf-8'))
+        assert integrated_lock['evaluator']==expected
+        assert set(integrated_lock['files'])=={'.gitattributes'}
         prepare(repo,wheel)
         assert '## After compaction' in hook('codex','codex-first','compact')
         # Controlled contention: no setup may modify an environment while its lock is held.
