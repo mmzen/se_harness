@@ -2,7 +2,7 @@
 id = "VREC-IAR-023"
 type = "verification_record"
 title = "Verification candidate for WO-IAR-041"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-041
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-023-evaluator.json"
 evaluator_evidence_sha256 = "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26"
 
+verified_at = "2026-10-01T18:54:14Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-IAR-041"]
 conforms_to = ["VER-IAR-022"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-01T18:54:14Z"
+decided_by = "mmzen"
+reason = "Human mmzen: I verify VREC-IAR-023 as assurance owner. Verifies candidate d6e4d0c565a903fa84d13a522f4702e8b2e005a9 for the bounded WO-IAR-041 plugin acceptance fixture correction. Retained original failures and the Codex Windows desktop limitation remain. Updated PR CI is still required before merge; no criterion is waived."
 +++
 
 # Verification Record Candidate
