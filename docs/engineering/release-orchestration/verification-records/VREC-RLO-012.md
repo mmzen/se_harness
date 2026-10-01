@@ -2,7 +2,7 @@
 id = "VREC-RLO-012"
 type = "verification_record"
 title = "Verification candidate for WO-RLO-012"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-orchestration/evidence/WO-RLO-012/RL
 evaluator_evidence_path = "docs/engineering/release-orchestration/evidence/VREC-RLO-012-evaluator.json"
 evaluator_evidence_sha256 = "5f2209f1d8d60901e7f8cf46ea5b62f7bb9705e4603c72f15489f9be90af2384"
 
+verified_at = "2026-10-01T07:41:45Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLO-012"]
 conforms_to = ["VER-RLO-009"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-01T07:41:45Z"
+decided_by = "mmzen"
+reason = "Human mmzen: I verify VREC-RLO-012 as assurance owner. Verification applies to correction candidate 5fa29b6058a10c129e5507767e2f99ff602e2f63 and the unchanged reviewed evidence. Ready record SHA-256: 718d2ef95b1eed0a9feda2c3acbc78ea4d01cb85b5efa7d945bd2e7a9085c53e. Only this verification decision is applied; push/PR, merge and publication remain separate."
 +++
 
 # Verification Record Candidate
