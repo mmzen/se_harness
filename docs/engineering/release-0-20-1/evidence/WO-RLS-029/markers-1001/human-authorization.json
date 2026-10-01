@@ -1,0 +1,14 @@
+{
+  "human": "mmzen",
+  "role": "release-owner",
+  "release_record": "RLS-SEH-030",
+  "source": "Direct human response in this conversation",
+  "answer": "Authorize latest and last",
+  "question": "Authorize the remaining release-marker actions for RLS-SEH-030 in mmzen/se_harness: mark GitHub release v0.20.1 as latest and move tag last from 7253d13b212ad6f7df670021290fea32e81d66de to the released commit b9af631b850c495eace9807361ed3ec3e36a10b2? REL-SEH-032 requires this separate authorization; the pre-action check passed.",
+  "repository": "mmzen/se_harness",
+  "latest": "v0.20.1",
+  "last_previous": "7253d13b212ad6f7df670021290fea32e81d66de",
+  "last_target": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+  "recorded_at": "2026-10-01T12:52:22.210253+00:00",
+  "limits": "Only these two marker changes. No immutable version tag, published package, repository adoption or additional merge is authorized."
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "release",
+    "edit",
+    "v0.20.1",
+    "--repo",
+    "mmzen/se_harness",
+    "--latest"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "https://github.com/mmzen/se_harness/releases/tag/v0.20.1\n",
+    "stderr": ""
+  },
+  "seconds": 0.8427283000019088
+}

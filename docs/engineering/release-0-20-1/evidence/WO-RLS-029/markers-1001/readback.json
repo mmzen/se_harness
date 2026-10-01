@@ -1,0 +1,10 @@
+{
+  "status": "pass",
+  "release_record": "RLS-SEH-030",
+  "latest": "v0.20.1",
+  "last": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+  "previous_last": "7253d13b212ad6f7df670021290fea32e81d66de",
+  "version_tag_unchanged": true,
+  "marketplace_revision": "556d0faf83c32fd188409c5ba191552fad1522e1",
+  "observed_at": "2026-10-01T12:52:34.457380+00:00"
+}
