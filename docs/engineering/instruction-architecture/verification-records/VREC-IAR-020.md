@@ -2,7 +2,7 @@
 id = "VREC-IAR-020"
 type = "verification_record"
 title = "Verification candidate for 9 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-028
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-020-evaluator.json"
 evaluator_evidence_sha256 = "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26"
 
+verified_at = "2026-10-01T17:56:52Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-IAR-028", "WO-IAR-029", "WO-IAR-030", "WO-IAR-034", "WO-IAR-035", "WO-IAR-036", "WO-IAR-037", "WO-IAR-038", "WO-IAR-039"]
 conforms_to = ["VER-IAR-020", "VER-IAR-021", "VER-IAR-022"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-01T17:56:52Z"
+decided_by = "mmzen"
+reason = "Human mmzen: i verify VREC-IAR-20. This records the verification decision for VREC-IAR-020 and candidate cfbaa994d7af1982bed44bc2e38c60db83602a4e as presented for assurance review. Codex Windows desktop remains explicitly unverified; this decision does not claim a desktop pass or waive that criterion."
 +++
 
 # Verification Record Candidate
