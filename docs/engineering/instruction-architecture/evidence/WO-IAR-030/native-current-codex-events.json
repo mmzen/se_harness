@@ -1,0 +1,802 @@
+{
+  "native-current-codex-events/native-events.jsonl": {
+    "sha256": "19af65a8622bdf3ad9d5613f4abbc83baf9601693ffca8a3b7a9df61257d2993",
+    "events": [
+      {
+        "at": "2026-10-01T16:11:22.062685+00:00",
+        "phase": "initialize",
+        "request": {
+          "method": "initialize",
+          "params": {
+            "clientInfo": {
+              "name": "iar_acceptance",
+              "version": "1.0"
+            },
+            "capabilities": {
+              "experimentalApi": true
+            }
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:11:22.284490+00:00",
+        "phase": "initialize",
+        "request": {
+          "method": "thread/start",
+          "params": {
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w",
+            "ephemeral": false,
+            "sandbox": "read-only",
+            "approvalPolicy": "on-request",
+            "config": {
+              "marketplaces.se-harness.source": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\marketplace",
+              "marketplaces.se-harness.source_type": "local",
+              "features.multi_agent": false
+            }
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:11:23.634724+00:00",
+        "phase": "startup",
+        "request": {
+          "method": "turn/start",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w",
+            "input": [
+              {
+                "type": "text",
+                "text": "Read-only native instruction delivery test. Do not call tools. Copy only the newest hook context as JSON: session_id, selected_checkout, harness_version, entry_sha256, final_heading, bootstrap, delivery_gap, may_implement=false. Delivery grants no lifecycle authority."
+              }
+            ]
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:11:26.385334+00:00",
+        "phase": "startup",
+        "notification": {
+          "method": "hook/started",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-1a74-7f02-a760-abfcec561911",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "running",
+              "statusMessage": null,
+              "startedAt": 1790871086,
+              "completedAt": null,
+              "durationMs": null,
+              "entries": []
+            }
+          },
+          "emittedAtMs": 1790871086385
+        }
+      },
+      {
+        "at": "2026-10-01T16:11:26.831582+00:00",
+        "phase": "startup",
+        "notification": {
+          "method": "hook/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-1a74-7f02-a760-abfcec561911",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "completed",
+              "statusMessage": null,
+              "startedAt": 1790871086,
+              "completedAt": 1790871086,
+              "durationMs": 455,
+              "entries": [
+                {
+                  "kind": "context",
+                  "text": "Host: codex; session_id: 01a0f83c-1534-7371-b5ea-0e048113451c\nPlugin data: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\n\n# Select the working repository\n\nWhen asked to clone, clone to the intended destination, then activate that exact\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\nwhen the intended repository is ambiguous. Do not scan child repositories.\n\nUse the setup skill's activation procedure with the host, session_id and\nplugin data supplied with this message. It immediately returns\nthe selected instructions. Read that complete entry before governed work. If the\nrepository has no harness selection or its evaluator is missing, use the setup\nskill with an explicitly selected release, then activate again. Do not choose a\nrelease or upgrade silently.\n\nSelection belongs only to this host session. A new session activates its own\ncheckout. Switching or clearing affects only this session. Activation gives no\napproval, verification or delivery authority; follow the selected release for\nnew or resumed work and any requested push or pull request.\n"
+                }
+              ]
+            }
+          },
+          "emittedAtMs": 1790871086831
+        }
+      },
+      {
+        "at": "2026-10-01T16:11:34.727746+00:00",
+        "phase": "startup",
+        "notification": {
+          "method": "item/completed",
+          "params": {
+            "item": {
+              "type": "agentMessage",
+              "id": "msg_0d1c179c5c40d354016abe8634814087d28d256d933313fcf5",
+              "text": "{\n  \"session_id\": \"01a0f83c-1534-7371-b5ea-0e048113451c\",\n  \"selected_checkout\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": null,\n  \"bootstrap\": null,\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}",
+              "phase": "final_answer",
+              "memoryCitation": null,
+              "delivery": null,
+              "questions": null
+            },
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-1a74-7f02-a760-abfcec561911",
+            "completedAtMs": 1790871094701
+          },
+          "emittedAtMs": 1790871094727
+        }
+      },
+      {
+        "at": "2026-10-01T16:11:34.831769+00:00",
+        "phase": "startup",
+        "notification": {
+          "method": "turn/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turn": {
+              "id": "01a0f83c-1a74-7f02-a760-abfcec561911",
+              "items": [
+                {
+                  "type": "agentMessage",
+                  "id": "msg_0d1c179c5c40d354016abe8634814087d28d256d933313fcf5",
+                  "text": "{\n  \"session_id\": \"01a0f83c-1534-7371-b5ea-0e048113451c\",\n  \"selected_checkout\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": null,\n  \"bootstrap\": null,\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}",
+                  "phase": "final_answer",
+                  "memoryCitation": null,
+                  "delivery": null,
+                  "questions": null
+                }
+              ],
+              "itemsView": "summary",
+              "status": "completed",
+              "error": null,
+              "startedAt": 1790871083,
+              "completedAt": 1790871094,
+              "durationMs": 11151
+            }
+          },
+          "emittedAtMs": 1790871094831
+        }
+      },
+      {
+        "at": "2026-10-01T16:11:47.190990+00:00",
+        "phase": "manual-compact",
+        "request": {
+          "method": "thread/compact/start",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c"
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:11:47.232457+00:00",
+        "phase": "manual-compact",
+        "notification": {
+          "method": "item/started",
+          "params": {
+            "item": {
+              "type": "contextCompaction",
+              "id": "01a0f83c-769f-7730-920a-6a6538531e52"
+            },
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-7678-7b32-b68b-ce7675c3fe7e",
+            "startedAtMs": 1790871107231
+          },
+          "emittedAtMs": 1790871107232
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:02.661506+00:00",
+        "phase": "manual-compact",
+        "notification": {
+          "method": "item/completed",
+          "params": {
+            "item": {
+              "type": "contextCompaction",
+              "id": "01a0f83c-769f-7730-920a-6a6538531e52"
+            },
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-7678-7b32-b68b-ce7675c3fe7e",
+            "completedAtMs": 1790871122649
+          },
+          "emittedAtMs": 1790871122661
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:02.677158+00:00",
+        "phase": "manual-compact",
+        "notification": {
+          "method": "turn/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turn": {
+              "id": "01a0f83c-7678-7b32-b68b-ce7675c3fe7e",
+              "items": [],
+              "itemsView": "notLoaded",
+              "status": "completed",
+              "error": null,
+              "startedAt": 1790871107,
+              "completedAt": 1790871122,
+              "durationMs": 15465
+            }
+          },
+          "emittedAtMs": 1790871122676
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:02.677845+00:00",
+        "phase": "after-manual",
+        "request": {
+          "method": "turn/start",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w",
+            "input": [
+              {
+                "type": "text",
+                "text": "Read-only native instruction delivery test. Do not call tools. Copy only the newest hook context as JSON: session_id, selected_checkout, harness_version, entry_sha256, final_heading, bootstrap, delivery_gap, may_implement=false. Delivery grants no lifecycle authority."
+              }
+            ]
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:02.884280+00:00",
+        "phase": "after-manual",
+        "notification": {
+          "method": "hook/started",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-b2f7-75a1-9139-ee3d3e1a5904",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "running",
+              "statusMessage": null,
+              "startedAt": 1790871122,
+              "completedAt": null,
+              "durationMs": null,
+              "entries": []
+            }
+          },
+          "emittedAtMs": 1790871122883
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:03.783448+00:00",
+        "phase": "after-manual",
+        "notification": {
+          "method": "hook/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-b2f7-75a1-9139-ee3d3e1a5904",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "completed",
+              "statusMessage": null,
+              "startedAt": 1790871122,
+              "completedAt": 1790871123,
+              "durationMs": 904,
+              "entries": [
+                {
+                  "kind": "context",
+                  "text": "Host: codex; session_id: 01a0f83c-1534-7371-b5ea-0e048113451c\nPlugin data: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\n\nSelected checkout: C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w\\clone\nEntry resource: ENGINEERING_HARNESS.md\nSelected release: 0.21.0; entry SHA-256: 9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990.\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\Scripts\\python.exe\nUse -I -m se_harness outside the checkout. Resolve instruction IDs through resources; formal artifacts against the checkout.\n\n# Engineering Harness for Plugin qualification\n\nThis repository uses SE Harness 0.21.0.\n\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\n\n## Goals\n\nThis harness makes engineering authority explicit, limits execution to approved\nscope, binds assurance and release claims to exact evidence, and gives every\nactor the same deterministic next step. These goals are informative; the rules\nbelow and the installed evaluator's machine policy are normative.\n\n## Policy / Global invariants\n\n### HRN-001 — Formal authority\n\nFormal artifacts under `docs/engineering/` are the authoritative\nrecords of product intent, requirements, architecture decisions, work authority,\nverification contracts, risks, assurance decisions, and release decisions. Code,\ntests, commits, tickets, dashboards, and conversation text are evidence or\nobservations; they MUST NOT substitute for formal authority.\n\n### HRN-002 — Change control\n\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\nis approved. This preparation MUST NOT authorize implementation.\n\nAccepted formal artifacts MUST define the change before implementation starts.\nOne or more approved work orders MUST authorize implementation. A valid\nrepository-owned exception MAY remove the requirement for formal definitions,\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\n\nAny required work orders MUST pass the required validation checks before\nimplementation starts. The result MUST be verified against the accepted\ndefinitions that apply. All required verification checks remain required.\n\n### HRN-003 — Lifecycle authority\n\nArtifacts and the work itself MUST follow a strict lifecycle.\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\nstate changes and the next action. Actors MUST use its results when reporting\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\nrepository notes MUST NOT work out their own answers or change those results.\n\n### HRN-004 — Bounded scope\n\nAn actor MUST select one clearly defined set of artifacts before\nacting. This set defines the scope. Findings from unrelated work orders MUST\nNOT be presented as findings about the selected scope. An issue outside the\nscope MAY be reported only as an observation that has not been assessed, with\nits artifact ID. It MUST NOT block the selected work unless a recorded\ndependency or gate connects it to that work.\n\n### HRN-005 — Explicit decisions\n\nEach decision MUST identify the accountable human or agent and the authority\nused. Being a human or an agent does not by itself authorize an action.\n\nPreparing, inspecting, validating, or collecting evidence MUST NOT\ncount as an authorized decision. A state change requires the exact artifact,\nthe intended state, and the accountable actor. The required gates MUST pass,\nand an explicit state transition MUST be applied.\n\n### HRN-006 — Targeted transitions\n\nA state transition MUST change only the artifacts explicitly\nselected by the accountable actor. The states of related artifacts MUST NOT\nchange just because they are linked.\n\n### HRN-007 — Repository ownership\n\n`AGENTS.md` MUST belong entirely to the repository owner and contain\nno harness instructions. Repository-specific facts and commands belong in\nthat file. The harness MUST NOT generate, track, or require that owner content.\n\n### HRN-008 — Rule precedence\n\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\nfor product, engineering, assurance, release, or external actions. They MUST\nNOT remove, weaken, or contradict the harness rules.\n\nRepository owners MAY define exceptions through the supported exception\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\nthem to configure: whether formal definitions and work orders are required.\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\nNOT waive a harness rule.\n\n### HRN-009 — Required checks\n\nManaged-file integrity checks, artifact graph checks, scope checks, and required\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\ncount as approval or acceptance of a risk.\n\n## Scope of these rules\n\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\nagent performs or reports a governed lifecycle action. Reading, analysis, and\nanswering questions need no work order when they change no lifecycle state,\nexercise no decision right, and present no finding as a formal verdict.\n\nPreparing a proposed artifact package does not require an approved work\norder. A human or agent MAY create and edit drafts, record risks and open\nquestions, review the proposed content, and validate the package. These\nactions MUST follow the authoring procedure and required checks. They MUST\nNOT change an accepted definition, approve a work order, or start\nimplementation. Decisions and lifecycle transitions follow their separate\nauthority rules.\n\nBefore a lifecycle action, select the exact artifacts and read the governing\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\ncontext. It does not evaluate checkpoint gates or authorize work.\n\n## Using these instructions\n\nA human is a person; an agent is an automated system acting under granted\nauthority. Approval, verification acceptance and release decisions require an\nauthorized human. Agents may apply a matching recorded decision. Resolve the\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\nbefore obtaining or applying a decision.\n\n`harnessctl` means this repository's selected released evaluator, invoked through\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\n\nTransient working material stays in the conversation or temporary storage outside\nthe repository, at the agent's discretion. It has no formal authority and SHALL\nNOT be persisted in the repository. This rule covers working notes, not formal\nartifacts or evidence required at a contract's prescribed durable location.\n\n## Read by task\n\nFor the external-resource layout, the files below are released resources outside\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\nand read its returned path and the required heading. Use instruction links\nrelative to that resource location. Formal artifacts remain repository files.\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\nreturns this entry with the selected project and release. Repository-copy\ninstallations continue to read their installed files.\n\nRead the selected file's entry conditions and current step. Read its required\nreferences before the action they govern. A link alone does not require reading\nits target. Do not load all procedures or future stages in advance.\n\n| Current need | Read first |\n| --- | --- |\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\n\nBefore the first eligible English explanation in a fresh context, read\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\nReuse it while retained in context. This applies to ordinary answers too.\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\nwhen changing or investigating their contracts. Use evaluator results in normal\nwork. Missing instructions or an unknown returned procedure stop the affected\naction: report the exact discovery gap in RESULTS.md.\n\n## After compaction\n\nRecover the repository, selected IDs, objective, existing authority and pending\naction from the summary. For governed work, obtain fresh context through\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\nuncertain writes or external effects before retrying. Resume only unapplied work.\n"
+                }
+              ]
+            }
+          },
+          "emittedAtMs": 1790871123783
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:12.177054+00:00",
+        "phase": "after-manual",
+        "notification": {
+          "method": "item/completed",
+          "params": {
+            "item": {
+              "type": "agentMessage",
+              "id": "msg_0d1c179c5c40d354016abe865799c487d294e5e7c556687f49",
+              "text": "{\n  \"session_id\": \"01a0f83c-1534-7371-b5ea-0e048113451c\",\n  \"selected_checkout\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-9d5tqazz\\\\w\\\\clone\",\n  \"harness_version\": \"0.21.0\",\n  \"entry_sha256\": \"9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990\",\n  \"final_heading\": \"After compaction\",\n  \"bootstrap\": null,\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}",
+              "phase": "final_answer",
+              "memoryCitation": null,
+              "delivery": null,
+              "questions": null
+            },
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-b2f7-75a1-9139-ee3d3e1a5904",
+            "completedAtMs": 1790871132149
+          },
+          "emittedAtMs": 1790871132176
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:12.265580+00:00",
+        "phase": "after-manual",
+        "notification": {
+          "method": "turn/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turn": {
+              "id": "01a0f83c-b2f7-75a1-9139-ee3d3e1a5904",
+              "items": [
+                {
+                  "type": "agentMessage",
+                  "id": "msg_0d1c179c5c40d354016abe865799c487d294e5e7c556687f49",
+                  "text": "{\n  \"session_id\": \"01a0f83c-1534-7371-b5ea-0e048113451c\",\n  \"selected_checkout\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-9d5tqazz\\\\w\\\\clone\",\n  \"harness_version\": \"0.21.0\",\n  \"entry_sha256\": \"9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990\",\n  \"final_heading\": \"After compaction\",\n  \"bootstrap\": null,\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}",
+                  "phase": "final_answer",
+                  "memoryCitation": null,
+                  "delivery": null,
+                  "questions": null
+                }
+              ],
+              "itemsView": "summary",
+              "status": "completed",
+              "error": null,
+              "startedAt": 1790871122,
+              "completedAt": 1790871132,
+              "durationMs": 9545
+            }
+          },
+          "emittedAtMs": 1790871132265
+        }
+      }
+    ]
+  },
+  "native-current-codex-events/automatic/native-events.jsonl": {
+    "sha256": "19cadfb1fe25d4c7953db87436382ab229be3664b07a7ad272ef25e66c9dec5d",
+    "events": [
+      {
+        "at": "2026-10-01T16:12:21.674979+00:00",
+        "phase": "initialize",
+        "request": {
+          "method": "initialize",
+          "params": {
+            "clientInfo": {
+              "name": "iar_acceptance",
+              "version": "1.0"
+            },
+            "capabilities": {
+              "experimentalApi": true
+            }
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:21.786905+00:00",
+        "phase": "automatic-resume",
+        "request": {
+          "method": "thread/resume",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w",
+            "excludeTurns": true,
+            "config": {
+              "marketplaces.se-harness.source": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\marketplace",
+              "marketplaces.se-harness.source_type": "local",
+              "features.multi_agent": false,
+              "model_auto_compact_token_limit": 1000
+            }
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:21.901960+00:00",
+        "phase": "automatic",
+        "request": {
+          "method": "turn/start",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w",
+            "input": [
+              {
+                "type": "text",
+                "text": "Read-only native instruction delivery test. Do not call tools. Copy only the newest hook context as JSON: session_id, selected_checkout, harness_version, entry_sha256, final_heading, bootstrap, delivery_gap, may_implement=false. Delivery grants no lifecycle authority."
+              }
+            ]
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:22.836255+00:00",
+        "phase": "automatic",
+        "notification": {
+          "method": "item/started",
+          "params": {
+            "item": {
+              "type": "contextCompaction",
+              "id": "01a0f83d-01b3-7fb1-81cd-ab8eaccfb27b"
+            },
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-fe2b-7d72-ab42-af8fa6f42ec3",
+            "startedAtMs": 1790871142835
+          },
+          "emittedAtMs": 1790871142836
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:56.155797+00:00",
+        "phase": "automatic",
+        "notification": {
+          "method": "item/completed",
+          "params": {
+            "item": {
+              "type": "contextCompaction",
+              "id": "01a0f83d-01b3-7fb1-81cd-ab8eaccfb27b"
+            },
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-fe2b-7d72-ab42-af8fa6f42ec3",
+            "completedAtMs": 1790871176143
+          },
+          "emittedAtMs": 1790871176155
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:56.702893+00:00",
+        "phase": "automatic",
+        "notification": {
+          "method": "hook/started",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-fe2b-7d72-ab42-af8fa6f42ec3",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "running",
+              "statusMessage": null,
+              "startedAt": 1790871176,
+              "completedAt": null,
+              "durationMs": null,
+              "entries": []
+            }
+          },
+          "emittedAtMs": 1790871176702
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:57.728710+00:00",
+        "phase": "automatic",
+        "notification": {
+          "method": "hook/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-fe2b-7d72-ab42-af8fa6f42ec3",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "completed",
+              "statusMessage": null,
+              "startedAt": 1790871176,
+              "completedAt": 1790871177,
+              "durationMs": 1038,
+              "entries": [
+                {
+                  "kind": "context",
+                  "text": "Host: codex; session_id: 01a0f83c-1534-7371-b5ea-0e048113451c\nPlugin data: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\n\nSelected checkout: C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w\\clone\nEntry resource: ENGINEERING_HARNESS.md\nSelected release: 0.21.0; entry SHA-256: 9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990.\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\Scripts\\python.exe\nUse -I -m se_harness outside the checkout. Resolve instruction IDs through resources; formal artifacts against the checkout.\n\n# Engineering Harness for Plugin qualification\n\nThis repository uses SE Harness 0.21.0.\n\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\n\n## Goals\n\nThis harness makes engineering authority explicit, limits execution to approved\nscope, binds assurance and release claims to exact evidence, and gives every\nactor the same deterministic next step. These goals are informative; the rules\nbelow and the installed evaluator's machine policy are normative.\n\n## Policy / Global invariants\n\n### HRN-001 — Formal authority\n\nFormal artifacts under `docs/engineering/` are the authoritative\nrecords of product intent, requirements, architecture decisions, work authority,\nverification contracts, risks, assurance decisions, and release decisions. Code,\ntests, commits, tickets, dashboards, and conversation text are evidence or\nobservations; they MUST NOT substitute for formal authority.\n\n### HRN-002 — Change control\n\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\nis approved. This preparation MUST NOT authorize implementation.\n\nAccepted formal artifacts MUST define the change before implementation starts.\nOne or more approved work orders MUST authorize implementation. A valid\nrepository-owned exception MAY remove the requirement for formal definitions,\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\n\nAny required work orders MUST pass the required validation checks before\nimplementation starts. The result MUST be verified against the accepted\ndefinitions that apply. All required verification checks remain required.\n\n### HRN-003 — Lifecycle authority\n\nArtifacts and the work itself MUST follow a strict lifecycle.\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\nstate changes and the next action. Actors MUST use its results when reporting\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\nrepository notes MUST NOT work out their own answers or change those results.\n\n### HRN-004 — Bounded scope\n\nAn actor MUST select one clearly defined set of artifacts before\nacting. This set defines the scope. Findings from unrelated work orders MUST\nNOT be presented as findings about the selected scope. An issue outside the\nscope MAY be reported only as an observation that has not been assessed, with\nits artifact ID. It MUST NOT block the selected work unless a recorded\ndependency or gate connects it to that work.\n\n### HRN-005 — Explicit decisions\n\nEach decision MUST identify the accountable human or agent and the authority\nused. Being a human or an agent does not by itself authorize an action.\n\nPreparing, inspecting, validating, or collecting evidence MUST NOT\ncount as an authorized decision. A state change requires the exact artifact,\nthe intended state, and the accountable actor. The required gates MUST pass,\nand an explicit state transition MUST be applied.\n\n### HRN-006 — Targeted transitions\n\nA state transition MUST change only the artifacts explicitly\nselected by the accountable actor. The states of related artifacts MUST NOT\nchange just because they are linked.\n\n### HRN-007 — Repository ownership\n\n`AGENTS.md` MUST belong entirely to the repository owner and contain\nno harness instructions. Repository-specific facts and commands belong in\nthat file. The harness MUST NOT generate, track, or require that owner content.\n\n### HRN-008 — Rule precedence\n\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\nfor product, engineering, assurance, release, or external actions. They MUST\nNOT remove, weaken, or contradict the harness rules.\n\nRepository owners MAY define exceptions through the supported exception\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\nthem to configure: whether formal definitions and work orders are required.\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\nNOT waive a harness rule.\n\n### HRN-009 — Required checks\n\nManaged-file integrity checks, artifact graph checks, scope checks, and required\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\ncount as approval or acceptance of a risk.\n\n## Scope of these rules\n\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\nagent performs or reports a governed lifecycle action. Reading, analysis, and\nanswering questions need no work order when they change no lifecycle state,\nexercise no decision right, and present no finding as a formal verdict.\n\nPreparing a proposed artifact package does not require an approved work\norder. A human or agent MAY create and edit drafts, record risks and open\nquestions, review the proposed content, and validate the package. These\nactions MUST follow the authoring procedure and required checks. They MUST\nNOT change an accepted definition, approve a work order, or start\nimplementation. Decisions and lifecycle transitions follow their separate\nauthority rules.\n\nBefore a lifecycle action, select the exact artifacts and read the governing\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\ncontext. It does not evaluate checkpoint gates or authorize work.\n\n## Using these instructions\n\nA human is a person; an agent is an automated system acting under granted\nauthority. Approval, verification acceptance and release decisions require an\nauthorized human. Agents may apply a matching recorded decision. Resolve the\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\nbefore obtaining or applying a decision.\n\n`harnessctl` means this repository's selected released evaluator, invoked through\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\n\nTransient working material stays in the conversation or temporary storage outside\nthe repository, at the agent's discretion. It has no formal authority and SHALL\nNOT be persisted in the repository. This rule covers working notes, not formal\nartifacts or evidence required at a contract's prescribed durable location.\n\n## Read by task\n\nFor the external-resource layout, the files below are released resources outside\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\nand read its returned path and the required heading. Use instruction links\nrelative to that resource location. Formal artifacts remain repository files.\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\nreturns this entry with the selected project and release. Repository-copy\ninstallations continue to read their installed files.\n\nRead the selected file's entry conditions and current step. Read its required\nreferences before the action they govern. A link alone does not require reading\nits target. Do not load all procedures or future stages in advance.\n\n| Current need | Read first |\n| --- | --- |\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\n\nBefore the first eligible English explanation in a fresh context, read\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\nReuse it while retained in context. This applies to ordinary answers too.\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\nwhen changing or investigating their contracts. Use evaluator results in normal\nwork. Missing instructions or an unknown returned procedure stop the affected\naction: report the exact discovery gap in RESULTS.md.\n\n## After compaction\n\nRecover the repository, selected IDs, objective, existing authority and pending\naction from the summary. For governed work, obtain fresh context through\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\nuncertain writes or external effects before retrying. Resume only unapplied work.\n"
+                }
+              ]
+            }
+          },
+          "emittedAtMs": 1790871177728
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:57.749000+00:00",
+        "phase": "automatic",
+        "notification": {
+          "method": "hook/started",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-fe2b-7d72-ab42-af8fa6f42ec3",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "running",
+              "statusMessage": null,
+              "startedAt": 1790871177,
+              "completedAt": null,
+              "durationMs": null,
+              "entries": []
+            }
+          },
+          "emittedAtMs": 1790871177748
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:58.633509+00:00",
+        "phase": "automatic",
+        "notification": {
+          "method": "hook/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-fe2b-7d72-ab42-af8fa6f42ec3",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "completed",
+              "statusMessage": null,
+              "startedAt": 1790871177,
+              "completedAt": 1790871178,
+              "durationMs": 886,
+              "entries": [
+                {
+                  "kind": "context",
+                  "text": "Host: codex; session_id: 01a0f83c-1534-7371-b5ea-0e048113451c\nPlugin data: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\n\nSelected checkout: C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w\\clone\nEntry resource: ENGINEERING_HARNESS.md\nSelected release: 0.21.0; entry SHA-256: 9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990.\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\Scripts\\python.exe\nUse -I -m se_harness outside the checkout. Resolve instruction IDs through resources; formal artifacts against the checkout.\n\n# Engineering Harness for Plugin qualification\n\nThis repository uses SE Harness 0.21.0.\n\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\n\n## Goals\n\nThis harness makes engineering authority explicit, limits execution to approved\nscope, binds assurance and release claims to exact evidence, and gives every\nactor the same deterministic next step. These goals are informative; the rules\nbelow and the installed evaluator's machine policy are normative.\n\n## Policy / Global invariants\n\n### HRN-001 — Formal authority\n\nFormal artifacts under `docs/engineering/` are the authoritative\nrecords of product intent, requirements, architecture decisions, work authority,\nverification contracts, risks, assurance decisions, and release decisions. Code,\ntests, commits, tickets, dashboards, and conversation text are evidence or\nobservations; they MUST NOT substitute for formal authority.\n\n### HRN-002 — Change control\n\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\nis approved. This preparation MUST NOT authorize implementation.\n\nAccepted formal artifacts MUST define the change before implementation starts.\nOne or more approved work orders MUST authorize implementation. A valid\nrepository-owned exception MAY remove the requirement for formal definitions,\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\n\nAny required work orders MUST pass the required validation checks before\nimplementation starts. The result MUST be verified against the accepted\ndefinitions that apply. All required verification checks remain required.\n\n### HRN-003 — Lifecycle authority\n\nArtifacts and the work itself MUST follow a strict lifecycle.\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\nstate changes and the next action. Actors MUST use its results when reporting\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\nrepository notes MUST NOT work out their own answers or change those results.\n\n### HRN-004 — Bounded scope\n\nAn actor MUST select one clearly defined set of artifacts before\nacting. This set defines the scope. Findings from unrelated work orders MUST\nNOT be presented as findings about the selected scope. An issue outside the\nscope MAY be reported only as an observation that has not been assessed, with\nits artifact ID. It MUST NOT block the selected work unless a recorded\ndependency or gate connects it to that work.\n\n### HRN-005 — Explicit decisions\n\nEach decision MUST identify the accountable human or agent and the authority\nused. Being a human or an agent does not by itself authorize an action.\n\nPreparing, inspecting, validating, or collecting evidence MUST NOT\ncount as an authorized decision. A state change requires the exact artifact,\nthe intended state, and the accountable actor. The required gates MUST pass,\nand an explicit state transition MUST be applied.\n\n### HRN-006 — Targeted transitions\n\nA state transition MUST change only the artifacts explicitly\nselected by the accountable actor. The states of related artifacts MUST NOT\nchange just because they are linked.\n\n### HRN-007 — Repository ownership\n\n`AGENTS.md` MUST belong entirely to the repository owner and contain\nno harness instructions. Repository-specific facts and commands belong in\nthat file. The harness MUST NOT generate, track, or require that owner content.\n\n### HRN-008 — Rule precedence\n\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\nfor product, engineering, assurance, release, or external actions. They MUST\nNOT remove, weaken, or contradict the harness rules.\n\nRepository owners MAY define exceptions through the supported exception\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\nthem to configure: whether formal definitions and work orders are required.\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\nNOT waive a harness rule.\n\n### HRN-009 — Required checks\n\nManaged-file integrity checks, artifact graph checks, scope checks, and required\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\ncount as approval or acceptance of a risk.\n\n## Scope of these rules\n\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\nagent performs or reports a governed lifecycle action. Reading, analysis, and\nanswering questions need no work order when they change no lifecycle state,\nexercise no decision right, and present no finding as a formal verdict.\n\nPreparing a proposed artifact package does not require an approved work\norder. A human or agent MAY create and edit drafts, record risks and open\nquestions, review the proposed content, and validate the package. These\nactions MUST follow the authoring procedure and required checks. They MUST\nNOT change an accepted definition, approve a work order, or start\nimplementation. Decisions and lifecycle transitions follow their separate\nauthority rules.\n\nBefore a lifecycle action, select the exact artifacts and read the governing\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\ncontext. It does not evaluate checkpoint gates or authorize work.\n\n## Using these instructions\n\nA human is a person; an agent is an automated system acting under granted\nauthority. Approval, verification acceptance and release decisions require an\nauthorized human. Agents may apply a matching recorded decision. Resolve the\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\nbefore obtaining or applying a decision.\n\n`harnessctl` means this repository's selected released evaluator, invoked through\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\n\nTransient working material stays in the conversation or temporary storage outside\nthe repository, at the agent's discretion. It has no formal authority and SHALL\nNOT be persisted in the repository. This rule covers working notes, not formal\nartifacts or evidence required at a contract's prescribed durable location.\n\n## Read by task\n\nFor the external-resource layout, the files below are released resources outside\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\nand read its returned path and the required heading. Use instruction links\nrelative to that resource location. Formal artifacts remain repository files.\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\nreturns this entry with the selected project and release. Repository-copy\ninstallations continue to read their installed files.\n\nRead the selected file's entry conditions and current step. Read its required\nreferences before the action they govern. A link alone does not require reading\nits target. Do not load all procedures or future stages in advance.\n\n| Current need | Read first |\n| --- | --- |\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\n\nBefore the first eligible English explanation in a fresh context, read\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\nReuse it while retained in context. This applies to ordinary answers too.\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\nwhen changing or investigating their contracts. Use evaluator results in normal\nwork. Missing instructions or an unknown returned procedure stop the affected\naction: report the exact discovery gap in RESULTS.md.\n\n## After compaction\n\nRecover the repository, selected IDs, objective, existing authority and pending\naction from the summary. For governed work, obtain fresh context through\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\nuncertain writes or external effects before retrying. Resume only unapplied work.\n"
+                }
+              ]
+            }
+          },
+          "emittedAtMs": 1790871178633
+        }
+      },
+      {
+        "at": "2026-10-01T16:13:06.973686+00:00",
+        "phase": "automatic",
+        "notification": {
+          "method": "item/completed",
+          "params": {
+            "item": {
+              "type": "agentMessage",
+              "id": "msg_063855c0d8655891016abe868e218487d2951bf124877410c5",
+              "text": "{\n  \"session_id\": \"01a0f83c-1534-7371-b5ea-0e048113451c\",\n  \"selected_checkout\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-9d5tqazz\\\\w\\\\clone\",\n  \"harness_version\": \"0.21.0\",\n  \"entry_sha256\": \"9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990\",\n  \"final_heading\": \"After compaction\",\n  \"bootstrap\": null,\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}",
+              "phase": "final_answer",
+              "memoryCitation": null,
+              "delivery": null,
+              "questions": null
+            },
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-fe2b-7d72-ab42-af8fa6f42ec3",
+            "completedAtMs": 1790871186954
+          },
+          "emittedAtMs": 1790871186973
+        }
+      },
+      {
+        "at": "2026-10-01T16:13:07.051751+00:00",
+        "phase": "automatic",
+        "notification": {
+          "method": "turn/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turn": {
+              "id": "01a0f83c-fe2b-7d72-ab42-af8fa6f42ec3",
+              "items": [
+                {
+                  "type": "agentMessage",
+                  "id": "msg_063855c0d8655891016abe868e218487d2951bf124877410c5",
+                  "text": "{\n  \"session_id\": \"01a0f83c-1534-7371-b5ea-0e048113451c\",\n  \"selected_checkout\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-9d5tqazz\\\\w\\\\clone\",\n  \"harness_version\": \"0.21.0\",\n  \"entry_sha256\": \"9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990\",\n  \"final_heading\": \"After compaction\",\n  \"bootstrap\": null,\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}",
+                  "phase": "final_answer",
+                  "memoryCitation": null,
+                  "delivery": null,
+                  "questions": null
+                }
+              ],
+              "itemsView": "summary",
+              "status": "completed",
+              "error": null,
+              "startedAt": 1790871141,
+              "completedAt": 1790871187,
+              "durationMs": 45089
+            }
+          },
+          "emittedAtMs": 1790871187051
+        }
+      }
+    ]
+  },
+  "native-current-codex-events/resume/native-events.jsonl": {
+    "sha256": "bb6ca1e18e7a8402cf79cd04ca99097fab6450b7dff57639e8d50be02e7dfd8a",
+    "events": [
+      {
+        "at": "2026-10-01T16:12:12.339015+00:00",
+        "phase": "initialize",
+        "request": {
+          "method": "initialize",
+          "params": {
+            "clientInfo": {
+              "name": "iar_acceptance",
+              "version": "1.0"
+            },
+            "capabilities": {
+              "experimentalApi": true
+            }
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:12.491471+00:00",
+        "phase": "resume",
+        "request": {
+          "method": "thread/resume",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w",
+            "excludeTurns": true,
+            "config": {
+              "marketplaces.se-harness.source": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\marketplace",
+              "marketplaces.se-harness.source_type": "local",
+              "features.multi_agent": false
+            }
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:12.613419+00:00",
+        "phase": "resumed",
+        "request": {
+          "method": "turn/start",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w",
+            "input": [
+              {
+                "type": "text",
+                "text": "Read-only native instruction delivery test. Do not call tools. Copy only the newest hook context as JSON: session_id, selected_checkout, harness_version, entry_sha256, final_heading, bootstrap, delivery_gap, may_implement=false. Delivery grants no lifecycle authority."
+              }
+            ]
+          }
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:14.249020+00:00",
+        "phase": "resumed",
+        "notification": {
+          "method": "hook/started",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-d9eb-7181-b4cb-55e7864456da",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "running",
+              "statusMessage": null,
+              "startedAt": 1790871134,
+              "completedAt": null,
+              "durationMs": null,
+              "entries": []
+            }
+          },
+          "emittedAtMs": 1790871134248
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:15.124618+00:00",
+        "phase": "resumed",
+        "notification": {
+          "method": "hook/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-d9eb-7181-b4cb-55e7864456da",
+            "run": {
+              "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "executionMode": "sync",
+              "scope": "thread",
+              "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\hooks\\hooks.json",
+              "source": "plugin",
+              "displayOrder": 0,
+              "status": "completed",
+              "statusMessage": null,
+              "startedAt": 1790871134,
+              "completedAt": 1790871135,
+              "durationMs": 905,
+              "entries": [
+                {
+                  "kind": "context",
+                  "text": "Host: codex; session_id: 01a0f83c-1534-7371-b5ea-0e048113451c\nPlugin data: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\n\nSelected checkout: C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-9d5tqazz\\w\\clone\nEntry resource: ENGINEERING_HARNESS.md\nSelected release: 0.21.0; entry SHA-256: 9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990.\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\66467146b32853ce87d7a782a9452aca8e20ead4ba4cb07837ec16c518aa784d\\Scripts\\python.exe\nUse -I -m se_harness outside the checkout. Resolve instruction IDs through resources; formal artifacts against the checkout.\n\n# Engineering Harness for Plugin qualification\n\nThis repository uses SE Harness 0.21.0.\n\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\n\n## Goals\n\nThis harness makes engineering authority explicit, limits execution to approved\nscope, binds assurance and release claims to exact evidence, and gives every\nactor the same deterministic next step. These goals are informative; the rules\nbelow and the installed evaluator's machine policy are normative.\n\n## Policy / Global invariants\n\n### HRN-001 — Formal authority\n\nFormal artifacts under `docs/engineering/` are the authoritative\nrecords of product intent, requirements, architecture decisions, work authority,\nverification contracts, risks, assurance decisions, and release decisions. Code,\ntests, commits, tickets, dashboards, and conversation text are evidence or\nobservations; they MUST NOT substitute for formal authority.\n\n### HRN-002 — Change control\n\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\nis approved. This preparation MUST NOT authorize implementation.\n\nAccepted formal artifacts MUST define the change before implementation starts.\nOne or more approved work orders MUST authorize implementation. A valid\nrepository-owned exception MAY remove the requirement for formal definitions,\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\n\nAny required work orders MUST pass the required validation checks before\nimplementation starts. The result MUST be verified against the accepted\ndefinitions that apply. All required verification checks remain required.\n\n### HRN-003 — Lifecycle authority\n\nArtifacts and the work itself MUST follow a strict lifecycle.\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\nstate changes and the next action. Actors MUST use its results when reporting\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\nrepository notes MUST NOT work out their own answers or change those results.\n\n### HRN-004 — Bounded scope\n\nAn actor MUST select one clearly defined set of artifacts before\nacting. This set defines the scope. Findings from unrelated work orders MUST\nNOT be presented as findings about the selected scope. An issue outside the\nscope MAY be reported only as an observation that has not been assessed, with\nits artifact ID. It MUST NOT block the selected work unless a recorded\ndependency or gate connects it to that work.\n\n### HRN-005 — Explicit decisions\n\nEach decision MUST identify the accountable human or agent and the authority\nused. Being a human or an agent does not by itself authorize an action.\n\nPreparing, inspecting, validating, or collecting evidence MUST NOT\ncount as an authorized decision. A state change requires the exact artifact,\nthe intended state, and the accountable actor. The required gates MUST pass,\nand an explicit state transition MUST be applied.\n\n### HRN-006 — Targeted transitions\n\nA state transition MUST change only the artifacts explicitly\nselected by the accountable actor. The states of related artifacts MUST NOT\nchange just because they are linked.\n\n### HRN-007 — Repository ownership\n\n`AGENTS.md` MUST belong entirely to the repository owner and contain\nno harness instructions. Repository-specific facts and commands belong in\nthat file. The harness MUST NOT generate, track, or require that owner content.\n\n### HRN-008 — Rule precedence\n\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\nfor product, engineering, assurance, release, or external actions. They MUST\nNOT remove, weaken, or contradict the harness rules.\n\nRepository owners MAY define exceptions through the supported exception\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\nthem to configure: whether formal definitions and work orders are required.\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\nNOT waive a harness rule.\n\n### HRN-009 — Required checks\n\nManaged-file integrity checks, artifact graph checks, scope checks, and required\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\ncount as approval or acceptance of a risk.\n\n## Scope of these rules\n\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\nagent performs or reports a governed lifecycle action. Reading, analysis, and\nanswering questions need no work order when they change no lifecycle state,\nexercise no decision right, and present no finding as a formal verdict.\n\nPreparing a proposed artifact package does not require an approved work\norder. A human or agent MAY create and edit drafts, record risks and open\nquestions, review the proposed content, and validate the package. These\nactions MUST follow the authoring procedure and required checks. They MUST\nNOT change an accepted definition, approve a work order, or start\nimplementation. Decisions and lifecycle transitions follow their separate\nauthority rules.\n\nBefore a lifecycle action, select the exact artifacts and read the governing\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\ncontext. It does not evaluate checkpoint gates or authorize work.\n\n## Using these instructions\n\nA human is a person; an agent is an automated system acting under granted\nauthority. Approval, verification acceptance and release decisions require an\nauthorized human. Agents may apply a matching recorded decision. Resolve the\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\nbefore obtaining or applying a decision.\n\n`harnessctl` means this repository's selected released evaluator, invoked through\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\n\nTransient working material stays in the conversation or temporary storage outside\nthe repository, at the agent's discretion. It has no formal authority and SHALL\nNOT be persisted in the repository. This rule covers working notes, not formal\nartifacts or evidence required at a contract's prescribed durable location.\n\n## Read by task\n\nFor the external-resource layout, the files below are released resources outside\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\nand read its returned path and the required heading. Use instruction links\nrelative to that resource location. Formal artifacts remain repository files.\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\nreturns this entry with the selected project and release. Repository-copy\ninstallations continue to read their installed files.\n\nRead the selected file's entry conditions and current step. Read its required\nreferences before the action they govern. A link alone does not require reading\nits target. Do not load all procedures or future stages in advance.\n\n| Current need | Read first |\n| --- | --- |\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\n\nBefore the first eligible English explanation in a fresh context, read\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\nReuse it while retained in context. This applies to ordinary answers too.\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\nwhen changing or investigating their contracts. Use evaluator results in normal\nwork. Missing instructions or an unknown returned procedure stop the affected\naction: report the exact discovery gap in RESULTS.md.\n\n## After compaction\n\nRecover the repository, selected IDs, objective, existing authority and pending\naction from the summary. For governed work, obtain fresh context through\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\nuncertain writes or external effects before retrying. Resume only unapplied work.\n"
+                }
+              ]
+            }
+          },
+          "emittedAtMs": 1790871135124
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:21.535819+00:00",
+        "phase": "resumed",
+        "notification": {
+          "method": "item/completed",
+          "params": {
+            "item": {
+              "type": "agentMessage",
+              "id": "msg_041190431896e265016abe8660af2887d2948c5464aa36e446",
+              "text": "{\n  \"session_id\": \"01a0f83c-1534-7371-b5ea-0e048113451c\",\n  \"selected_checkout\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-9d5tqazz\\\\w\\\\clone\",\n  \"harness_version\": \"0.21.0\",\n  \"entry_sha256\": \"9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990\",\n  \"final_heading\": \"After compaction\",\n  \"bootstrap\": null,\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}",
+              "phase": "final_answer",
+              "memoryCitation": null,
+              "delivery": null,
+              "questions": null
+            },
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turnId": "01a0f83c-d9eb-7181-b4cb-55e7864456da",
+            "completedAtMs": 1790871141502
+          },
+          "emittedAtMs": 1790871141535
+        }
+      },
+      {
+        "at": "2026-10-01T16:12:21.634624+00:00",
+        "phase": "resumed",
+        "notification": {
+          "method": "turn/completed",
+          "params": {
+            "threadId": "01a0f83c-1534-7371-b5ea-0e048113451c",
+            "turn": {
+              "id": "01a0f83c-d9eb-7181-b4cb-55e7864456da",
+              "items": [
+                {
+                  "type": "agentMessage",
+                  "id": "msg_041190431896e265016abe8660af2887d2948c5464aa36e446",
+                  "text": "{\n  \"session_id\": \"01a0f83c-1534-7371-b5ea-0e048113451c\",\n  \"selected_checkout\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-9d5tqazz\\\\w\\\\clone\",\n  \"harness_version\": \"0.21.0\",\n  \"entry_sha256\": \"9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990\",\n  \"final_heading\": \"After compaction\",\n  \"bootstrap\": null,\n  \"delivery_gap\": null,\n  \"may_implement\": false\n}",
+                  "phase": "final_answer",
+                  "memoryCitation": null,
+                  "delivery": null,
+                  "questions": null
+                }
+              ],
+              "itemsView": "summary",
+              "status": "completed",
+              "error": null,
+              "startedAt": 1790871132,
+              "completedAt": 1790871141,
+              "durationMs": 8946
+            }
+          },
+          "emittedAtMs": 1790871141634
+        }
+      }
+    ]
+  }
+}

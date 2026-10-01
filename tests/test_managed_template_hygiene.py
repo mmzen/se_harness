@@ -21,6 +21,9 @@ from se_harness.installer import (
 )
 from se_harness.integrity import canonical_sha256
 from tests.cli_support import invoke
+from tests.fixture_support import legacy_repository
+from unittest.mock import patch
+from se_harness.installer import template_root
 from tests.git_support import git_available
 from tests.mutation_guard_support import patch_mutation_authority
 
@@ -117,7 +120,8 @@ class GitignoreMarkerTests(unittest.TestCase):
 
     def test_init_writes_the_ignore_block_between_markers_git_reads_as_comments(self) -> None:
         target = self.root / "fresh"
-        code, _, error = invoke("init", str(target), "--project-name", "Markers")
+        with patch("se_harness.resources._installed_resource_root", return_value=template_root()):
+            code, _, error = invoke("init", str(target), "--project-name", "Markers", "--integration", "ci")
         self.assertEqual(0, code, error)
         ignore = (target / ".gitignore").read_text(encoding="utf-8")
         self.assertTrue(ignore.startswith(f"{ATTRIBUTE_BEGIN_MARKER}\n"), ignore)
@@ -138,7 +142,7 @@ class GitignoreMarkerTests(unittest.TestCase):
         """A target as released 0.16.0 left it: owner lines, then the block between HTML comments."""
 
         target = self.root / name
-        self.assertEqual(0, invoke("init", str(target), "--project-name", "Older")[0])
+        legacy_repository(target, "Older")
         ignore_path = target / ".gitignore"
         current = ignore_path.read_bytes()
         block = tracked_content("fragment", current)

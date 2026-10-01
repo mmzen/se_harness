@@ -312,13 +312,14 @@ def _validate_evaluator_evidence_binding(
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
         _evaluator_binding_error(artifact, errors, repository_root, f"cannot read standard evaluator lock: {exc}")
         return
-    if isinstance(lock, dict) and lock.get("schema") == 4:
+    if isinstance(lock, dict) and lock.get("schema") in {4, 5}:
         try:
             validate_lock(lock)
         except IntegrityError as exc:
-            _evaluator_binding_error(artifact, errors, repository_root, f"invalid plugin ownership lock: {exc}")
+            kind = "plugin ownership" if lock["schema"] == 4 else "external resource"
+            _evaluator_binding_error(artifact, errors, repository_root, f"invalid {kind} lock: {exc}")
             return
-    expected_evaluator = lock.get("evaluator") if isinstance(lock, dict) and lock.get("schema") in {3, 4} else None
+    expected_evaluator = lock.get("evaluator") if isinstance(lock, dict) and lock.get("schema") in {3, 4, 5} else None
     expected_fields = {"version", "payload_manifest", "payload_sha256", "archive_name", "archive_sha256"}
     if (
         not isinstance(expected_evaluator, dict)

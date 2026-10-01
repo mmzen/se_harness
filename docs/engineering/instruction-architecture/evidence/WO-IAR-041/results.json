@@ -1,0 +1,559 @@
+{
+  "tested_commit": "234029d16d9a1d47dfb304b320df1943ce873f41",
+  "base_commit": "7cd3711b3e499f7bbb961640f37c3d188a00b303",
+  "change": "The existing real-wheel plugin test explicitly initializes the optional Git integration, asserts .gitattributes exists, corrupts it, and checks the failing setup result names that file.",
+  "original_ci": {
+    "run": "36906203554",
+    "pr_head": "7cd3711b3e499f7bbb961640f37c3d188a00b303",
+    "linux_job": "https://github.com/mmzen/se_harness/actions/runs/36906203554/job/110518048972",
+    "windows_job": "https://github.com/mmzen/se_harness/actions/runs/36906203554/job/110518049071",
+    "failure": "test_real_setup_create_reuse_and_repair: AssertionError: 0 == 0 at test_simple_plugin.py:200",
+    "each_platform": {
+      "tests": 11,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    "ci_runtime": {
+      "linux": "3.11.16",
+      "windows": "3.11.9"
+    }
+  },
+  "local_results": {
+    "windows": {
+      "before": {
+        "phase": "before",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "steps": [
+          {
+            "label": "runtime",
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+              "-I",
+              "-c",
+              "import sys,platform,json;print(json.dumps(dict(python=sys.version,executable=sys.executable,platform=platform.platform())))"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+            "exit_code": 0,
+            "stdout": "{\"python\": \"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\", \"executable\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-final-_4zkl06z\\\\candidate-env\\\\Scripts\\\\python.exe\", \"platform\": \"Windows-11-10.0.26200-SP0\"}\n",
+            "stderr": "",
+            "seconds": 0.16474010000092676
+          },
+          {
+            "label": "installed-identity",
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+              "-I",
+              "-c",
+              "import json; from se_harness.evaluator_identity import installed_evaluator_identity; print(json.dumps(installed_evaluator_identity().to_lock()))"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+            "exit_code": 0,
+            "stdout": "{\"version\": \"0.21.0\", \"payload_manifest\": \"se-harness-installed-payload-v1\", \"payload_sha256\": \"c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac\", \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\", \"archive_sha256\": \"a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594\"}\n",
+            "stderr": "",
+            "seconds": 0.23061539999616798
+          },
+          {
+            "label": "real-wheel-acceptance",
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+              "-I",
+              "-B",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\plugin_integration\\test_simple_plugin.py",
+              "SimplePluginTests.test_real_setup_create_reuse_and_repair",
+              "-v"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+            "exit_code": 1,
+            "stdout": "",
+            "stderr": "test_real_setup_create_reuse_and_repair (__main__.SimplePluginTests.test_real_setup_create_reuse_and_repair) ... FAIL\n\n======================================================================\nFAIL: test_real_setup_create_reuse_and_repair (__main__.SimplePluginTests.test_real_setup_create_reuse_and_repair)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\plugin_integration\\test_simple_plugin.py\", line 200, in test_real_setup_create_reuse_and_repair\n    self.assertNotEqual(0, failed.returncode)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 == 0\n\n----------------------------------------------------------------------\nRan 1 test in 14.856s\n\nFAILED (failures=1)\n",
+            "seconds": 15.167546799995762
+          }
+        ],
+        "test_sha256": "54ddc132a20e53ae7c367d42ac404d206de66838cc380ec3a754f56cad28e30e",
+        "wheel_sha256": "a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594",
+        "passed": true,
+        "runtime": {
+          "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+          "executable": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "identity": {
+          "version": "0.21.0",
+          "payload_manifest": "se-harness-installed-payload-v1",
+          "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+          "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+          "archive_sha256": "a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594"
+        },
+        "expected_original_failure_reproduced": true
+      },
+      "after": {
+        "phase": "after",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "steps": [
+          {
+            "label": "runtime",
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+              "-I",
+              "-c",
+              "import sys,platform,json;print(json.dumps(dict(python=sys.version,executable=sys.executable,platform=platform.platform())))"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+            "exit_code": 0,
+            "stdout": "{\"python\": \"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\", \"executable\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-final-_4zkl06z\\\\candidate-env\\\\Scripts\\\\python.exe\", \"platform\": \"Windows-11-10.0.26200-SP0\"}\n",
+            "stderr": "",
+            "seconds": 0.14796660000138218
+          },
+          {
+            "label": "installed-identity",
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+              "-I",
+              "-c",
+              "import json; from se_harness.evaluator_identity import installed_evaluator_identity; print(json.dumps(installed_evaluator_identity().to_lock()))"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+            "exit_code": 0,
+            "stdout": "{\"version\": \"0.21.0\", \"payload_manifest\": \"se-harness-installed-payload-v1\", \"payload_sha256\": \"c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac\", \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\", \"archive_sha256\": \"a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594\"}\n",
+            "stderr": "",
+            "seconds": 0.2188901999979862
+          },
+          {
+            "label": "real-wheel-acceptance",
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+              "-I",
+              "-B",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\plugin_integration\\test_simple_plugin.py",
+              "-v"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+            "exit_code": 0,
+            "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-9d_onzyd\\private\\evaluators\\0.0.0\\7b3e2e386dc214d4de34ba9a657e43103ac27e9b4665b3837e9dd8ae95e10ad2\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-9d_onzyd\\private\\evaluators\\0.0.0\\7b3e2e386dc214d4de34ba9a657e43103ac27e9b4665b3837e9dd8ae95e10ad2\\Scripts\\python.exe\n",
+            "stderr": "test_development_archive_cannot_use_the_release_check_without_release_inputs (__main__.SimplePluginTests.test_development_archive_cannot_use_the_release_check_without_release_inputs) ... ok\ntest_development_build_accepts_windows_wheel_metadata (__main__.SimplePluginTests.test_development_build_accepts_windows_wheel_metadata) ... ok\ntest_development_build_uses_current_source_and_replaces_only_its_output (__main__.SimplePluginTests.test_development_build_uses_current_source_and_replaces_only_its_output) ... ok\ntest_development_wrapper_packages_both_host_hooks (__main__.SimplePluginTests.test_development_wrapper_packages_both_host_hooks) ... ok\ntest_invalid_hooks_leave_an_existing_development_output_unchanged (__main__.SimplePluginTests.test_invalid_hooks_leave_an_existing_development_output_unchanged) ... ok\ntest_real_setup_create_reuse_and_repair (__main__.SimplePluginTests.test_real_setup_create_reuse_and_repair) ... ok\ntest_setup_refuses_contention_and_partial_environment_without_running_code (__main__.SimplePluginTests.test_setup_refuses_contention_and_partial_environment_without_running_code) ... ok\ntest_setup_rejects_private_environment_in_the_checkout (__main__.SimplePluginTests.test_setup_rejects_private_environment_in_the_checkout) ... ok\ntest_setup_rejects_same_version_wheel_substitution_before_writes (__main__.SimplePluginTests.test_setup_rejects_same_version_wheel_substitution_before_writes) ... ok\ntest_setup_reports_missing_python_prerequisite_before_writes (__main__.SimplePluginTests.test_setup_reports_missing_python_prerequisite_before_writes) ... ok\ntest_setup_reuses_an_immutable_environment_and_preserves_checker_result (__main__.SimplePluginTests.test_setup_reuses_an_immutable_environment_and_preserves_checker_result) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 15.765s\n\nOK\n",
+            "seconds": 16.062900000004447
+          },
+          {
+            "label": "probe-init",
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "init",
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar041-doctor-ln6patkt\\repository",
+              "--project-name",
+              "Integrity probe",
+              "--integration",
+              "git"
+            ],
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar041-doctor-ln6patkt",
+            "exit_code": 0,
+            "stdout": "add        .engineering-harness.lock\nadd        .engineering-harness.toml\nadd        .gitattributes\nsummary: 3 files, 0 unchanged\ninstalled se-harness 0.21.0 in C:\\Users\\mathi\\AppData\\Local\\Temp\\iar041-doctor-ln6patkt\\repository\n",
+            "stderr": "",
+            "seconds": 0.9275666000030469
+          },
+          {
+            "label": "probe-clean-doctor",
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar041-doctor-ln6patkt\\repository",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar041-doctor-ln6patkt",
+            "exit_code": 0,
+            "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"unchanged\",\n      \"name\": \"integration:.gitattributes\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+            "stderr": "",
+            "seconds": 0.48259649999818066
+          },
+          {
+            "label": "probe-changed-doctor",
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar041-doctor-ln6patkt\\repository",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar041-doctor-ln6patkt",
+            "exit_code": 1,
+            "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"missing or changed\",\n      \"name\": \"integration:.gitattributes\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+            "stderr": "",
+            "seconds": 0.4566779000015231
+          }
+        ],
+        "test_sha256": "5e48f069255c01de587a060b92e3a438580e739daac9098e178dde96729a061e",
+        "wheel_sha256": "a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594",
+        "passed": true,
+        "runtime": {
+          "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+          "executable": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-final-_4zkl06z\\candidate-env\\Scripts\\python.exe",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "identity": {
+          "version": "0.21.0",
+          "payload_manifest": "se-harness-installed-payload-v1",
+          "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+          "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+          "archive_sha256": "a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594"
+        },
+        "doctor_refusal": {
+          "checks": [
+            {
+              "detail": ".engineering-harness.toml",
+              "name": "config",
+              "passed": true
+            },
+            {
+              "detail": "missing or changed",
+              "name": "integration:.gitattributes",
+              "passed": false
+            },
+            {
+              "detail": ".engineering-harness.lock",
+              "name": "lock",
+              "passed": true
+            },
+            {
+              "detail": "3.14.6",
+              "name": "python",
+              "passed": true
+            },
+            {
+              "detail": "selected wheel payload and declared instruction headings are available",
+              "name": "released-resources",
+              "passed": true
+            }
+          ],
+          "command": "doctor",
+          "outcome": "failed",
+          "schema": "se-harness-command-result-v1",
+          "warnings": []
+        }
+      }
+    },
+    "linux": {
+      "before": {
+        "phase": "before",
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "steps": [
+          {
+            "label": "runtime",
+            "argv": [
+              "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+              "-I",
+              "-c",
+              "import sys,platform,json;print(json.dumps(dict(python=sys.version,executable=sys.executable,platform=platform.platform())))"
+            ],
+            "cwd": "/tmp/iar040-ppxshu0r/source",
+            "exit_code": 0,
+            "stdout": "{\"python\": \"3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]\", \"executable\": \"/tmp/iar-final-d86mwy9w/candidate-env/bin/python\", \"platform\": \"Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39\"}\n",
+            "stderr": "",
+            "seconds": 0.03191824199893745
+          },
+          {
+            "label": "installed-identity",
+            "argv": [
+              "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+              "-I",
+              "-c",
+              "import json; from se_harness.evaluator_identity import installed_evaluator_identity; print(json.dumps(installed_evaluator_identity().to_lock()))"
+            ],
+            "cwd": "/tmp/iar040-ppxshu0r/source",
+            "exit_code": 0,
+            "stdout": "{\"version\": \"0.21.0\", \"payload_manifest\": \"se-harness-installed-payload-v1\", \"payload_sha256\": \"c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac\", \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\", \"archive_sha256\": \"a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594\"}\n",
+            "stderr": "",
+            "seconds": 0.11379206900164718
+          },
+          {
+            "label": "real-wheel-acceptance",
+            "argv": [
+              "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+              "-I",
+              "-B",
+              "/tmp/iar040-ppxshu0r/source/tests/plugin_integration/test_simple_plugin.py",
+              "SimplePluginTests.test_real_setup_create_reuse_and_repair",
+              "-v"
+            ],
+            "cwd": "/tmp/iar040-ppxshu0r/source",
+            "exit_code": 1,
+            "stdout": "",
+            "stderr": "test_real_setup_create_reuse_and_repair (__main__.SimplePluginTests.test_real_setup_create_reuse_and_repair) ... FAIL\n\n======================================================================\nFAIL: test_real_setup_create_reuse_and_repair (__main__.SimplePluginTests.test_real_setup_create_reuse_and_repair)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/iar040-ppxshu0r/source/tests/plugin_integration/test_simple_plugin.py\", line 200, in test_real_setup_create_reuse_and_repair\n    self.assertNotEqual(0, failed.returncode)\nAssertionError: 0 == 0\n\n----------------------------------------------------------------------\nRan 1 test in 4.598s\n\nFAILED (failures=1)\n",
+            "seconds": 4.7135031030047685
+          }
+        ],
+        "test_sha256": "54ddc132a20e53ae7c367d42ac404d206de66838cc380ec3a754f56cad28e30e",
+        "wheel_sha256": "a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594",
+        "passed": true,
+        "runtime": {
+          "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+          "executable": "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+          "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+        },
+        "identity": {
+          "version": "0.21.0",
+          "payload_manifest": "se-harness-installed-payload-v1",
+          "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+          "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+          "archive_sha256": "a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594"
+        },
+        "expected_original_failure_reproduced": true
+      },
+      "after": {
+        "phase": "after",
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "steps": [
+          {
+            "label": "runtime",
+            "argv": [
+              "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+              "-I",
+              "-c",
+              "import sys,platform,json;print(json.dumps(dict(python=sys.version,executable=sys.executable,platform=platform.platform())))"
+            ],
+            "cwd": "/tmp/iar040-ppxshu0r/source",
+            "exit_code": 0,
+            "stdout": "{\"python\": \"3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]\", \"executable\": \"/tmp/iar-final-d86mwy9w/candidate-env/bin/python\", \"platform\": \"Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39\"}\n",
+            "stderr": "",
+            "seconds": 0.026515350997215137
+          },
+          {
+            "label": "installed-identity",
+            "argv": [
+              "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+              "-I",
+              "-c",
+              "import json; from se_harness.evaluator_identity import installed_evaluator_identity; print(json.dumps(installed_evaluator_identity().to_lock()))"
+            ],
+            "cwd": "/tmp/iar040-ppxshu0r/source",
+            "exit_code": 0,
+            "stdout": "{\"version\": \"0.21.0\", \"payload_manifest\": \"se-harness-installed-payload-v1\", \"payload_sha256\": \"c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac\", \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\", \"archive_sha256\": \"a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594\"}\n",
+            "stderr": "",
+            "seconds": 0.12846296200586949
+          },
+          {
+            "label": "real-wheel-acceptance",
+            "argv": [
+              "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+              "-I",
+              "-B",
+              "/tmp/iar040-ppxshu0r/source/tests/plugin_integration/test_simple_plugin.py",
+              "-v"
+            ],
+            "cwd": "/tmp/iar040-ppxshu0r/source",
+            "exit_code": 0,
+            "stdout": "Evaluator Python: /tmp/simple-plugin-d4yy9rto/private/evaluators/0.0.0/19436069413f5dc5e60f8651019d59e97f514fd5d836b9a7624ad3cbf7aaf43f/bin/python\nEvaluator Python: /tmp/simple-plugin-d4yy9rto/private/evaluators/0.0.0/19436069413f5dc5e60f8651019d59e97f514fd5d836b9a7624ad3cbf7aaf43f/bin/python\n",
+            "stderr": "test_development_archive_cannot_use_the_release_check_without_release_inputs (__main__.SimplePluginTests.test_development_archive_cannot_use_the_release_check_without_release_inputs) ... ok\ntest_development_build_accepts_windows_wheel_metadata (__main__.SimplePluginTests.test_development_build_accepts_windows_wheel_metadata) ... ok\ntest_development_build_uses_current_source_and_replaces_only_its_output (__main__.SimplePluginTests.test_development_build_uses_current_source_and_replaces_only_its_output) ... ok\ntest_development_wrapper_packages_both_host_hooks (__main__.SimplePluginTests.test_development_wrapper_packages_both_host_hooks) ... ok\ntest_invalid_hooks_leave_an_existing_development_output_unchanged (__main__.SimplePluginTests.test_invalid_hooks_leave_an_existing_development_output_unchanged) ... ok\ntest_real_setup_create_reuse_and_repair (__main__.SimplePluginTests.test_real_setup_create_reuse_and_repair) ... ok\ntest_setup_refuses_contention_and_partial_environment_without_running_code (__main__.SimplePluginTests.test_setup_refuses_contention_and_partial_environment_without_running_code) ... ok\ntest_setup_rejects_private_environment_in_the_checkout (__main__.SimplePluginTests.test_setup_rejects_private_environment_in_the_checkout) ... ok\ntest_setup_rejects_same_version_wheel_substitution_before_writes (__main__.SimplePluginTests.test_setup_rejects_same_version_wheel_substitution_before_writes) ... ok\ntest_setup_reports_missing_python_prerequisite_before_writes (__main__.SimplePluginTests.test_setup_reports_missing_python_prerequisite_before_writes) ... ok\ntest_setup_reuses_an_immutable_environment_and_preserves_checker_result (__main__.SimplePluginTests.test_setup_reuses_an_immutable_environment_and_preserves_checker_result) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 4.974s\n\nOK\n",
+            "seconds": 5.084592442995927
+          },
+          {
+            "label": "probe-init",
+            "argv": [
+              "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "init",
+              "/tmp/iar041-doctor-33778js_/repository",
+              "--project-name",
+              "Integrity probe",
+              "--integration",
+              "git"
+            ],
+            "cwd": "/tmp/iar041-doctor-33778js_",
+            "exit_code": 0,
+            "stdout": "add        .engineering-harness.lock\nadd        .engineering-harness.toml\nadd        .gitattributes\nsummary: 3 files, 0 unchanged\ninstalled se-harness 0.21.0 in /tmp/iar041-doctor-33778js_/repository\n",
+            "stderr": "",
+            "seconds": 0.3372167720008292
+          },
+          {
+            "label": "probe-clean-doctor",
+            "argv": [
+              "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "/tmp/iar041-doctor-33778js_/repository",
+              "--json"
+            ],
+            "cwd": "/tmp/iar041-doctor-33778js_",
+            "exit_code": 0,
+            "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"unchanged\",\n      \"name\": \"integration:.gitattributes\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+            "stderr": "",
+            "seconds": 0.16757673599931877
+          },
+          {
+            "label": "probe-changed-doctor",
+            "argv": [
+              "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "/tmp/iar041-doctor-33778js_/repository",
+              "--json"
+            ],
+            "cwd": "/tmp/iar041-doctor-33778js_",
+            "exit_code": 1,
+            "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"missing or changed\",\n      \"name\": \"integration:.gitattributes\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+            "stderr": "",
+            "seconds": 0.1773404300038237
+          }
+        ],
+        "test_sha256": "5e48f069255c01de587a060b92e3a438580e739daac9098e178dde96729a061e",
+        "wheel_sha256": "a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594",
+        "passed": true,
+        "runtime": {
+          "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+          "executable": "/tmp/iar-final-d86mwy9w/candidate-env/bin/python",
+          "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+        },
+        "identity": {
+          "version": "0.21.0",
+          "payload_manifest": "se-harness-installed-payload-v1",
+          "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+          "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+          "archive_sha256": "a27a797bf2763f48006d28166d41e21437c8c4a935615a1b114e9ff278434594"
+        },
+        "doctor_refusal": {
+          "checks": [
+            {
+              "detail": ".engineering-harness.toml",
+              "name": "config",
+              "passed": true
+            },
+            {
+              "detail": "missing or changed",
+              "name": "integration:.gitattributes",
+              "passed": false
+            },
+            {
+              "detail": ".engineering-harness.lock",
+              "name": "lock",
+              "passed": true
+            },
+            {
+              "detail": "3.12.3",
+              "name": "python",
+              "passed": true
+            },
+            {
+              "detail": "selected wheel payload and declared instruction headings are available",
+              "name": "released-resources",
+              "passed": true
+            }
+          ],
+          "command": "doctor",
+          "outcome": "failed",
+          "schema": "se-harness-command-result-v1",
+          "warnings": []
+        }
+      }
+    }
+  },
+  "product_input_comparison": {
+    "argv": [
+      "C:\\Program Files\\Git\\cmd\\git.exe",
+      "diff",
+      "--name-only",
+      "3f438bb894e4108fa369a9dc048d69f5e0c2e8ab",
+      "HEAD",
+      "--",
+      "se_harness",
+      "templates",
+      "plugins",
+      "repository_tools",
+      "scripts",
+      "pyproject.toml",
+      "MANIFEST.in",
+      "release"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": {
+      "stdout": "",
+      "stderr": ""
+    },
+    "seconds": 0.03529559999878984
+  },
+  "linux_source_input_comparison": {
+    "argv": [
+      "C:\\Program Files\\Git\\cmd\\git.exe",
+      "diff",
+      "--name-only",
+      "7f86e37d00e9b5bc508564655e2594ffe5d9fc67",
+      "HEAD",
+      "--",
+      "se_harness",
+      "templates",
+      "plugins",
+      "repository_tools",
+      "scripts",
+      "pyproject.toml",
+      "MANIFEST.in",
+      "release",
+      "tests/plugin_integration/test_simple_plugin.py"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": {
+      "stdout": "",
+      "stderr": ""
+    },
+    "seconds": 0.03456239999650279
+  },
+  "linux_source_context": "Reused the disposable source export for 7f86e37d00e9b5bc508564655e2594ffe5d9fc67. Its product/test dependencies equal current source; the test file was replaced with exact corrected bytes for the after run. This is not a full-checkout test of all governance files.",
+  "reviewed_patch": {
+    "argv": [
+      "C:\\Program Files\\Git\\cmd\\git.exe",
+      "diff",
+      "--",
+      "tests/plugin_integration/test_simple_plugin.py"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": {
+      "stdout": "diff --git a/tests/plugin_integration/test_simple_plugin.py b/tests/plugin_integration/test_simple_plugin.py\nindex c5d7802f..d01d066e 100644\n--- a/tests/plugin_integration/test_simple_plugin.py\n+++ b/tests/plugin_integration/test_simple_plugin.py\n@@ -178,7 +178,7 @@ class SimplePluginTests(unittest.TestCase):\n     def test_real_setup_create_reuse_and_repair(self):\n         wheel = Path(os.environ['SE_HARNESS_TEST_PLUGIN_WHEEL']).resolve()\n         python = os.environ.get('SE_HARNESS_TEST_PLUGIN_PYTHON', sys.executable)\n-        subprocess.run([python, '-I', '-m', 'se_harness', 'init', str(self.target), '--project-name', 'Plugin fixture'], check=True,\n+        subprocess.run([python, '-I', '-m', 'se_harness', 'init', str(self.target), '--project-name', 'Plugin fixture', '--integration', 'git'], check=True,\n                        cwd=self.base, stdout=subprocess.PIPE, stderr=subprocess.PIPE)\n         argv = [python, '-I', str(SETUP), '--target', str(self.target), '--data-root', str(self.base/'private'), '--wheel', str(wheel)]\n         for attempt in range(2):\n@@ -195,10 +195,12 @@ class SimplePluginTests(unittest.TestCase):\n                 self.assertNotEqual(0, refused.returncode)\n                 self.assertFalse(package.exists())\n                 package.write_bytes(original)\n-        (self.target/'ENGINEERING_HARNESS.md').write_text('changed managed content')\n+        managed = self.target/'.gitattributes'\n+        self.assertTrue(managed.is_file())\n+        managed.write_text('changed managed content')\n         failed = subprocess.run(argv, cwd=self.base, capture_output=True)\n         self.assertNotEqual(0, failed.returncode)\n-        self.assertIn(b'ENGINEERING_HARNESS.md', failed.stdout)\n+        self.assertIn(b'.gitattributes', failed.stdout)\n \n \n if __name__ == '__main__':\n",
+      "stderr": ""
+    },
+    "seconds": 0.053931999995256774
+  },
+  "unchanged_prior_evidence_count": 61,
+  "local_raw_logs": [
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\022-upgrade-failure-log.json",
+      "sha256": "0d55b429c2e45aaee698c2a07a20319b69162879fbf096344e71bdacd4aab89b"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\041-windows-before.json",
+      "sha256": "7f7d2eb4b57fcf8ab7432c6cda5716c06a01092831ae38c200e7639f24c259a7"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\041-linux-before.json",
+      "sha256": "2aa4b3fb3a74b67556575ac936253cb8fc1c8b6521bb82558bdd19bf99171e34"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\041-windows-after.json",
+      "sha256": "a2390dc45a680d0776aee96e6d66ae091bc6f809ffdc0685db57ae4c5b62fdbb"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\041-linux-after.json",
+      "sha256": "97185638f321e1f713e95f55d3044d5f016c76deba1900f06411d12b3a3b3aeb"
+    }
+  ],
+  "limits": [
+    "Candidate wheel product inputs are unchanged; no new wheel or product qualification is claimed.",
+    "Full source suites and native model sessions were not rerun for this test-only correction.",
+    "Updated PR CI, including upgrade and downstream integration jobs, remains required before merge.",
+    "Codex Windows desktop remains unverified; no criterion is waived.",
+    "Human verification and delivery are separate."
+  ]
+}

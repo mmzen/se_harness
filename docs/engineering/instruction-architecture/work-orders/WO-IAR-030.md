@@ -2,10 +2,10 @@
 id = "WO-IAR-030"
 type = "work_order"
 title = "Deliver minimal installation and safe resource migration"
-status = "approved"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-30"
-updated = "2026-09-30"
+updated = "2026-10-01"
 
 [assurance]
 commit_bound_verification = "required"
@@ -63,6 +63,20 @@ decided_at = "2026-09-30T11:12:12Z"
 decided_by = "mmzen"
 reason = "Human mmzen: I confirm and approve. Approves the updated external-resource package and required commit-bound verification for WO-IAR-028, WO-IAR-029 and WO-IAR-030. Clarification confirmed: Ok for this plan; short bootstrap before cloning, immediate activation of the actual checkout, per-session recovery after compaction/resume and independent parallel sessions. DEC-IAR-003 separately records future release and separate adoption. Reviewed file SHA-256 79a1e2f0169fbf338322dcc1636fe0d9ec6072b54a2b58dd9726acc7cd93cd91. Only the confirmed assurance metadata and its explanatory paragraph were completed before preview."
 scope_paths = ["se_harness/installer.py", "se_harness/cli.py", "se_harness/preflight.py", "se_harness/skill_ownership.py", "se_harness/skill_ownership_contract.json", "se_harness/integrity.py", "se_harness/hash_bound.py", "se_harness/candidate_acceptance.py", "se_harness/github_ci.py", "templates/repository/standard/", "tests/test_installer.py", "tests/test_skill_ownership.py", "tests/test_hash_bound_integrity.py", "tests/test_artifact_catalog.py", "tests/test_workflow_documentation_contract.py", "tests/test_instruction_architecture.py", "tests/test_resources.py", "tests/plugin_integration/progressive_discovery/", "tests/artifact_support.py", "README.md", "GLOSSARY.md", "docs/notes/getting-started.md", "docs/notes/developing-se-harness.md", "release/plugin-marketplace/README.md", "scripts/validate_release_distributions.py", "docs/engineering/instruction-architecture/work-orders/WO-IAR-030.md", "docs/engineering/instruction-architecture/verification-records/VREC-IAR-020.md", "docs/engineering/instruction-architecture/evidence/VREC-IAR-020-evaluator.json", "docs/engineering/instruction-architecture/evidence/WO-IAR-030/", "docs/notes/harnessctl-reference.md", "docs/notes/harness-installation-and-upgrades.md", "docs/notes/artifact-authoring.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-30T18:02:48Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-01T17:49:35Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Completed the approved local scope and retained integrated tests, review and complete Git handoff. Codex desktop remains explicitly unverified under the existing human instruction to continue; no assurance acceptance or external action is inferred."
 +++
 
 # Deliver minimal installation and safe resource migration

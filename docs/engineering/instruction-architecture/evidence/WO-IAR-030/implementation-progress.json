@@ -1,0 +1,903 @@
+{
+  "kind": "implementation-progress; not a final verification record",
+  "work_order": "WO-IAR-030",
+  "candidate_commit": null,
+  "limitations": [
+    "Work is uncommitted and in progress.",
+    "Full suite has remaining known failures in the five files proposed under WO-IAR-036.",
+    "Final installed-wheel, native and commit-bound qualification remain required."
+  ],
+  "results": [
+    {
+      "label": "install030-integration-diagnostic-04",
+      "source_sha256": "9457e374e0cbf1973ca9c47d1a51bb8cbef77f297b5e4405713ae1e8e15b807d",
+      "result": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-X",
+          "utf8",
+          "scripts/run_tests.py"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "exit_code": 1,
+        "seconds": 180.126,
+        "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-lnufnni8\\private\\evaluators\\0.0.0\\5d952bb6f876048a7db98be1e3360ea69e91ee0f8c4c6158ac601dee678a3746\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-lnufnni8\\private\\evaluators\\0.0.0\\5d952bb6f876048a7db98be1e3360ea69e91ee0f8c4c6158ac601dee678a3746\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.188607s focus=0.485950s plan=0.419240s\nWEX_SCALE artifacts=500 validation=0.948315s focus=1.502166s plan=2.274873s\ndocs/notes/diagnostic-codes.md matches the source\n0.21.0\n======================================================================\nFAIL: test_public_onboarding.FreshConsumerDoctorTests.test_init_commit_doctor_exits_zero_on_a_crlf_checkout\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 329, in test_init_commit_doctor_exits_zero_on_a_crlf_checkout\n    self.assert_doctor_passes(\"true\")\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 314, in assert_doctor_passes\n    doctor = self.fresh_consumer_doctor(autocrlf)\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 303, in fresh_consumer_doctor\n    self.assertEqual(0, init.returncode, init.stdout + init.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 2 : harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nFAIL: test_public_onboarding.FreshConsumerDoctorTests.test_init_commit_doctor_exits_zero_on_an_lf_checkout\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 324, in test_init_commit_doctor_exits_zero_on_an_lf_checkout\n    self.assert_doctor_passes(\"false\")\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 314, in assert_doctor_passes\n    doctor = self.fresh_consumer_doctor(autocrlf)\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 303, in fresh_consumer_doctor\n    self.assertEqual(0, init.returncode, init.stdout + init.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 2 : harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nFAIL: test_cli_shape.RepositoryCommandShapeTests.test_init_dry_run_json_and_conflict_exit_code\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_cli_shape.py\", line 353, in test_init_dry_run_json_and_conflict_exit_code\n    code, payload, error = self.json_of(\"init\", str(fresh), \"--dry-run\", \"--json\")\n                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_cli_shape.py\", line 157, in json_of\n    self.assertTrue(output, f\"no stdout; stderr: {error}\")\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '' is not true : no stdout; stderr: harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nFAIL: test_legacy_release_evidence.ThisRepositoryTests.test_this_repository_validates_clean_with_no_w024\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_legacy_release_evidence.py\", line 115, in test_this_repository_validates_clean_with_no_w024\n    self.assertEqual([], report.errors)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: [] != [Diagnostic(path='docs/engineering/instruc[794 chars]ce')]\n\nSecond list contains 4 additional elements.\nFirst extra element 0:\nDiagnostic(path='docs/engineering/instruction-architecture/work-orders/WO-IAR-035.md', code='E006', message=\"artifact 'WO-IAR-035' relation 'implements' references unknown target 'REQ-xxx'\", plane='structure')\n\nDiff is 1126 characters long. Set self.maxDiff to None to see it.\n\n======================================================================\nFAIL: test_glossary.GlossaryTests.test_adopt_seeds_the_glossary_and_keeps_an_existing_one\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_glossary.py\", line 94, in test_adopt_seeds_the_glossary_and_keeps_an_existing_one\n    self.assertEqual(0, code, error + output)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 2 : harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nFAIL: test_dashboard_webui.DashboardWebUIContractTests.test_release_proof_fields_reach_the_summary_and_compact_topology\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_dashboard_webui.py\", line 435, in test_release_proof_fields_reach_the_summary_and_compact_topology\n    self.assertTrue(report.valid)\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: False is not true\n\n======================================================================\nFAIL: test_managed_template_texts.DraftedWorkOrderTests.test_a_drafted_work_order_carries_the_guidance_and_no_copied_sentence\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_managed_template_texts.py\", line 114, in test_a_drafted_work_order_carries_the_guidance_and_no_copied_sentence\n    self.assertEqual(0, code, error)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\nAssertionError: 0 != 2 : harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nERROR: test_harnessctl.HarnessCtlTests.test_harness_commands_execute_distribution_scripts_not_target_copies\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_harnessctl.py\", line 553, in test_harness_commands_execute_distribution_scripts_not_target_copies\n    self.assertEqual(0, invoke(\"validate\", str(target))[0])\n                        ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\cli_support.py\", line 30, in invoke\n    code = main(list(arguments))\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\cli.py\", line 1286, in main\n    return int(args.handler(args))\n               ~~~~~~~~~~~~^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\cli.py\", line 939, in <lambda>\n    handler=lambda args: _run_engine(\n                         ~~~~~~~~~~~^\n        Path(args.target),\n        ^^^^^^^^^^^^^^^^^^\n        validate_engineering_artifacts.main,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        [*([\"--json\"] if args.json else []), *([\"--advisories\"] if args.advisories else [])],\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\cli.py\", line 274, in _run_engine\n    return entry([\"--root\", str(target), *extra])\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\engine\\validate_engineering_artifacts.py\", line 219, in main\n    report = validate_repository(repository_root, artifact_root)\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\engine\\validate_engineering_artifacts.py\", line 197, in validate_repository\n    advisories=sorted(set(authoring_advisories)),\n                          ^^^^^^^^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'authoring_advisories' where it is not associated with a value\n\n======================================================================\nERROR: test_harnessctl.HarnessCtlTests.test_init_selects_resources_and_dashboard_is_explicit\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_harnessctl.py\", line 202, in test_init_selects_resources_and_dashboard_is_explicit\n    code, _, error = invoke(\"validate\", str(target))\n                     ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\cli_support.py\", line 30, in invoke\n    code = main(list(arguments))\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\cli.py\", line 1286, in main\n    return int(args.handler(args))\n               ~~~~~~~~~~~~^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\cli.py\", line 939, in <lambda>\n    handler=lambda args: _run_engine(\n                         ~~~~~~~~~~~^\n        Path(args.target),\n        ^^^^^^^^^^^^^^^^^^\n        validate_engineering_artifacts.main,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        [*([\"--json\"] if args.json else []), *([\"--advisories\"] if args.advisories else [])],\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\cli.py\", line 274, in _run_engine\n    return entry([\"--root\", str(target), *extra])\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\engine\\validate_engineering_artifacts.py\", line 219, in main\n    report = validate_repository(repository_root, artifact_root)\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\engine\\validate_engineering_artifacts.py\", line 197, in validate_repository\n    advisories=sorted(set(authoring_advisories)),\n                          ^^^^^^^^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'authoring_advisories' where it is not associated with a value\n\n======================================================================\nERROR: test_release_build.DeterministicSdistTests.test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_all_skill_cores_once\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_release_build.py\", line 371, in test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_all_skill_cores_once\n    (target / \".agents/skills\" / name / relative).read_bytes(),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 777, in read_bytes\n    with self.open(mode='rb', buffering=0) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 771, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\se-harness-non-promotable-ki6g99ub\\\\fresh-repository\\\\.agents\\\\skills\\\\harness-orient\\\\SKILL.md'\n\n----------------------------------------------------------------------\nRan 1192 tests in 178.477s (180 classes, 8 workers)\n\nFAILED (failures=7, errors=3, skipped=18)\n",
+        "stderr": "--workers must be at least 1\n"
+      }
+    },
+    {
+      "label": "install030-installer-boundaries-05",
+      "source_sha256": "d43bb6a8492dca7c001d1628fb337ae640f55bbdcd611c2c2e2f6d317428f8e1",
+      "result": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-X",
+          "utf8",
+          "-m",
+          "unittest",
+          "tests.test_installer",
+          "tests.test_hash_bound_integrity.AttributeEffectivenessTests"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "exit_code": 0,
+        "seconds": 28.356,
+        "stdout": "",
+        "stderr": ".............s....................\n----------------------------------------------------------------------\nRan 34 tests in 27.741s\n\nOK (skipped=1)\n"
+      }
+    },
+    {
+      "label": "install030-procedure-and-legacy-06",
+      "source_sha256": "29591cec9ac275984c8b99a676bc696430a2035cd9992fd01522f6e2e2ef6af7",
+      "result": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-X",
+          "utf8",
+          "-m",
+          "unittest",
+          "tests.test_resources",
+          "tests.test_instruction_architecture",
+          "tests.test_workflow_documentation_contract",
+          "tests.test_artifact_catalog",
+          "tests.test_harnessctl",
+          "tests.test_release_qualification",
+          "tests.test_standard_repository_lifecycle"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "exit_code": 0,
+        "seconds": 85.712,
+        "stdout": "",
+        "stderr": "......s..........................................................................s.............................................\n----------------------------------------------------------------------\nRan 127 tests in 85.275s\n\nOK (skipped=2)\n"
+      }
+    },
+    {
+      "label": "install030-full-stable-07",
+      "source_sha256": "5c9aee0713c3a8a0194c1a47a3a0756dd976883f3c14c9d1d5a708258e5b7bc1",
+      "result": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-X",
+          "utf8",
+          "scripts/run_tests.py"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "exit_code": 1,
+        "seconds": 154.417,
+        "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-oag59xx9\\private\\evaluators\\0.0.0\\c031f70d674e31f6c430a4fd905d8668734fcf3fb8a884816fdb875aec95f8cf\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-oag59xx9\\private\\evaluators\\0.0.0\\c031f70d674e31f6c430a4fd905d8668734fcf3fb8a884816fdb875aec95f8cf\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.161668s focus=0.426943s plan=0.365817s\nWEX_SCALE artifacts=500 validation=0.743311s focus=0.996325s plan=1.475486s\n0.21.0\n======================================================================\nFAIL: test_cli_shape.RepositoryCommandShapeTests.test_init_dry_run_json_and_conflict_exit_code\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_cli_shape.py\", line 353, in test_init_dry_run_json_and_conflict_exit_code\n    code, payload, error = self.json_of(\"init\", str(fresh), \"--dry-run\", \"--json\")\n                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_cli_shape.py\", line 157, in json_of\n    self.assertTrue(output, f\"no stdout; stderr: {error}\")\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '' is not true : no stdout; stderr: harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nFAIL: test_diagnostic_code_index.DiagnosticCodeIndexTests.test_the_check_mode_reports_the_verdict\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_diagnostic_code_index.py\", line 62, in test_the_check_mode_reports_the_verdict\n    self.assertEqual(0, main([\"--check\", \"--repository\", str(REPOSITORY_ROOT)]))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 1\n\n======================================================================\nFAIL: test_diagnostic_code_index.DiagnosticCodeIndexTests.test_the_committed_page_equals_the_regeneration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_diagnostic_code_index.py\", line 59, in test_the_committed_page_equals_the_regeneration\n    self.assertEqual(self.rendered, self.committed)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"<!--[3963 chars]001: cannot read artifact: {\u2026}` (+4 more) |\\n|[17547 chars] |\\n\" != \"<!--[3963 chars]001: artifact root does not exist` (+4 more) |[17550 chars] |\\n\"\nDiff is 22047 characters long. Set self.maxDiff to None to see it.\n\n======================================================================\nFAIL: test_glossary.GlossaryTests.test_adopt_seeds_the_glossary_and_keeps_an_existing_one\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_glossary.py\", line 94, in test_adopt_seeds_the_glossary_and_keeps_an_existing_one\n    self.assertEqual(0, code, error + output)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 2 : harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nFAIL: test_compatibility_windows.RetiredCodeRegistryTests.test_the_index_page_names_no_retired_code_and_matches_the_source\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_compatibility_windows.py\", line 81, in test_the_index_page_names_no_retired_code_and_matches_the_source\n    self.assertEqual(0, completed.returncode, completed.stdout + completed.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 1 : docs/notes/diagnostic-codes.md differs from the regeneration; run --write\n\n\n======================================================================\nFAIL: test_public_onboarding.FreshConsumerDoctorTests.test_init_commit_doctor_exits_zero_on_a_crlf_checkout\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 329, in test_init_commit_doctor_exits_zero_on_a_crlf_checkout\n    self.assert_doctor_passes(\"true\")\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 314, in assert_doctor_passes\n    doctor = self.fresh_consumer_doctor(autocrlf)\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 303, in fresh_consumer_doctor\n    self.assertEqual(0, init.returncode, init.stdout + init.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 2 : harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nFAIL: test_public_onboarding.FreshConsumerDoctorTests.test_init_commit_doctor_exits_zero_on_an_lf_checkout\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 324, in test_init_commit_doctor_exits_zero_on_an_lf_checkout\n    self.assert_doctor_passes(\"false\")\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 314, in assert_doctor_passes\n    doctor = self.fresh_consumer_doctor(autocrlf)\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_public_onboarding.py\", line 303, in fresh_consumer_doctor\n    self.assertEqual(0, init.returncode, init.stdout + init.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 2 : harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nFAIL: test_managed_template_texts.DraftedWorkOrderTests.test_a_drafted_work_order_carries_the_guidance_and_no_copied_sentence\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_managed_template_texts.py\", line 114, in test_a_drafted_work_order_carries_the_guidance_and_no_copied_sentence\n    self.assertEqual(0, code, error)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\nAssertionError: 0 != 2 : harnessctl: external resources require an installed evaluator wheel outside the checkout\n\n\n======================================================================\nERROR: test_release_build.DeterministicSdistTests.test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_all_skill_cores_once\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_release_build.py\", line 371, in test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_all_skill_cores_once\n    (target / \".agents/skills\" / name / relative).read_bytes(),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 777, in read_bytes\n    with self.open(mode='rb', buffering=0) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 771, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\se-harness-non-promotable-1gforbc0\\\\fresh-repository\\\\.agents\\\\skills\\\\harness-orient\\\\SKILL.md'\n\n----------------------------------------------------------------------\nRan 1201 tests in 152.851s (180 classes, 8 workers)\n\nFAILED (failures=8, errors=1, skipped=19)\n",
+        "stderr": "docs/notes/diagnostic-codes.md differs from the regeneration; run --write\n--workers must be at least 1\n"
+      }
+    },
+    {
+      "label": "install030-distribution-01",
+      "source_sha256": "a4d146d60d0a56199922578589601da5b55cb44e31a2e0bd0f0b1d81ee1ccdd8",
+      "result": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-X",
+          "utf8",
+          "scripts/validate_release_distributions.py",
+          "--root",
+          "."
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "exit_code": 0,
+        "seconds": 7.573,
+        "stdout": "SE Harness release distribution validation: PASS (18 distribution-bearing records)\n",
+        "stderr": ""
+      }
+    },
+    {
+      "label": "install030-exploratory-package-01",
+      "source_sha256": "0d352226d3f07288691261280679b259f530dab4005ff033f27ba7caf6e0c78d",
+      "result": {
+        "role": "non-promotable exploratory wheel fixture; dirty source snapshot, not a release or committed candidate qualification",
+        "candidate_commit": null,
+        "wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\se_harness-0.21.0-py3-none-any.whl",
+        "wheel_sha256": "beb2f1c4e93f06bd3a06bd53eb14160f691a83bb73fb8db22d4c9e29865549fd",
+        "inputs": {
+          "se_harness/__init__.py": "b4b14b7a0fe54d4d97c4c10c7c400024f9c70223f9e2fb3eb05b7402dac5cf18",
+          "se_harness/__main__.py": "151a077a78543e4a55a9f61b7da51109e78f3a091f0d57c70d5dcece8bef451e",
+          "se_harness/_process.py": "03b1ec9452c863dcbfd16af124e0581c4090abee70cbd357b77a79ce390942ed",
+          "se_harness/artifact_layout.py": "d5095db57d46edb88b17bded741ad2a7d2b0b934a40973f11eefa1774e4902a2",
+          "se_harness/candidate_acceptance.py": "ea5cbab9c4f5e7fcd9c0d4ca982c1fee424c0dab3694bd5c32c12e38dc5e1f3d",
+          "se_harness/cli.py": "203d3d129af5cbb104a498dd70638cf83feeaed81e586f3ec74d96408a7e811f",
+          "se_harness/codes.py": "fd70842ff5dd992a95ad788f5362a53236632145e56db30ba03e85f28d78f282",
+          "se_harness/decisions.py": "8182b35d7a24b0870c067ca3b47a6cbc8aeb17f0c392eaf07c3cea574a37fbd4",
+          "se_harness/engine/__init__.py": "111e9b2a872e4561381de80489f63583ebbe039f3bce8a0ed0f95aedd7498baf",
+          "se_harness/engine/dashboard_bundle.py": "87d1301cbd69576e99f84f604bee30225bf6dfbebc3dfd4bf97c54a5494bd85c",
+          "se_harness/engine/dashboard_snapshot.py": "818e4bcca3b6c54e04520d890734b02e5e5ce53dbe6d81b57c8e38b028a27993",
+          "se_harness/engine/generate_harness_dashboard.py": "b0641af7ac25742e13856787be685128afc4c11f2eca4b93d6a51cc4fae23b71",
+          "se_harness/engine/inspect_engineering_artifacts.py": "28eb70bbaef07340b137e410eadd86fd217083135b280e62bea41c62d0d75f68",
+          "se_harness/engine/validate_engineering_artifacts.py": "b8e27d61e9b9645769951c0bbd192515e4a32aba8f5c95440e6538ea00833cd5",
+          "se_harness/engine/validation_architecture.py": "79dc84fd97a9b4f479858ff3c14b8acb7ae94f0594c1b3032364b3e310f7536b",
+          "se_harness/engine/validation_authoring.py": "9605099288df8294e7b603175123f20698a44ce6d4f4fdf3b74dbe08f0faaf88",
+          "se_harness/engine/validation_core.py": "308ece0b64b52766f8f2591f08fed9bc2a3e9c121b3f3ebd6fda545a1c4b09bc",
+          "se_harness/engine/validation_decisions.py": "749daf39661f19326776d0d0d959e6047f3b40e47cf3b503d8e2d3a8673c7062",
+          "se_harness/engine/validation_evidence.py": "5f3ec263fe2e90621b4fbe643b28837d6fcabf672f4949298c023dc641ace916",
+          "se_harness/engine/validation_layout.py": "4eaa23fdbb07c9d2f5c77d6122e99d295e4b9d5e098c8d7690249c562248cf58",
+          "se_harness/engine/validation_lifecycle.py": "46034ee4d749f79c1e33e498b5c0b0f220d65f575b2f3ed89905f318ca2e279b",
+          "se_harness/engine/validation_report.py": "a0437e6eb97799b46a8889d8d6dfac6e542f916cca9ead922627ca16fb824dec",
+          "se_harness/engine/validation_revision.py": "a4badb67ef8ef07a8a432d4b327948a6db2ae357510fdfec472e0c7a405c8545",
+          "se_harness/evaluator_evidence.py": "068f05f9991896f4229018955ae5ad28409805f9bdf5314f2093f9e167eb480d",
+          "se_harness/evaluator_identity.py": "1a5976bd9a9c45e5237147edda0aef86df91d9315d0b55ecc7b0423393ee4ac0",
+          "se_harness/front_matter.py": "3a636d22337799f3fa94ddb230c2da8599f101bf8bd847009e3e4c26454ea0b3",
+          "se_harness/gate_source.py": "2ace7d8c3a8f1dff4056ac3b75f072054921b26b48567bfe5e56067554f8d298",
+          "se_harness/github_ci.py": "dbaf067f078b52046556f524263232aba5c24837b532e31c56921e053e5392b7",
+          "se_harness/hash_bound.py": "61f409422be2dcf3a0ba2bcb8601b9852c156356e43ca57a7246ad1aa32631d6",
+          "se_harness/hash_bound_classes.json": "6fe9e73d04d7aa222bd005775583d77744d9a2cdecd86905ef435610363c0aa0",
+          "se_harness/installer.py": "2adfbbbcfff88c9a314eeedf7308c248fc2ae1f2633aa96ffea4759d75ac4e7f",
+          "se_harness/instruction_discovery.json": "f88d88837930f74eea48259c64955ab36f54a08068e7fe7acfc5434f86ac7e54",
+          "se_harness/instruction_discovery.py": "c019707ee54992eb6deee1225a4abff4f83379f20ce2a2337555eca8870c546c",
+          "se_harness/integrity.py": "b253ec25ea8a4cf80be938c9e130c0f231b0a3641c145d460c2f7613d323843f",
+          "se_harness/interpreter_safety.py": "f8db7d1035c4174db66a5126f9ab07fb3411b0f3d5756665fbfc19f759698be5",
+          "se_harness/mutation_guard.py": "23874ce377486717e1664ec96a3940b925b99c9b806dcb751ef3e5eeb52e4829",
+          "se_harness/preflight.py": "fd0294213d121210f174695583f2d97b0eb1dfa24ad3427096dfc3c371fa019c",
+          "se_harness/provenance.py": "51c527dc7e63f78ac64cb84a6a605e71c74efe3fac4294590b8f0077bf44795d",
+          "se_harness/quality_gates_contract.json": "625bd6b8f1157fc836f19b24c12814f94af21ee87f9f49564aaa02f214b54ffb",
+          "se_harness/release_qualification.py": "c41f70b0a9e68492a76a7998fa830414134c062f5f777462918ec643f1433509",
+          "se_harness/release_unit.py": "de3de39d09ddf9e66132e2a912a174eb2365dfff9d9161b4f74e95822fd11df5",
+          "se_harness/repository_graph.py": "c50b784575e6da2961e0a316507ec8a1f1e1ea08bfdc0e6ac3b87ac10dd5db0d",
+          "se_harness/resources.py": "3507effea3fec852af733c120328396d12972ea3b30b91abec8d5af617443707",
+          "se_harness/risks.py": "78f62abb2da64109d62cc68b42ba807cfeeff980e830e0320e91ac4633e6968a",
+          "se_harness/runtime_identity.py": "ffea714dc2b1c15d5fb08730efe585080111c7572ac34756157bea995fdd4f7a",
+          "se_harness/skill_ownership.py": "34e0b724bf85d141ef7a1375f50d0908fd1eddcf9b38fe5d44e23214e003f8de",
+          "se_harness/skill_ownership_contract.json": "fd96f7c1161af5d767087f74015bb5a9cd9eb2586fe5ce5dc572c84345061ee2",
+          "se_harness/workflow.py": "aa50e4e9e0441f5c418009633b3dc961c1b07858028578336d02ff4588d7bb85",
+          "se_harness/workflow_change_set.py": "922dcc4f960cf6b46ec0c829dd60d2cc6bb5785601f89c1e057baaaa6cb92ca1",
+          "se_harness/workflow_compliance.py": "44a57c5ef87105ec9989028c509f6f5bce24ce79088bb6f88cd153ace2b166ef",
+          "se_harness/workflow_contract.json": "8e3abe782f38c8fd196e9ee9d225e2e5919fc7a8e2eccb905cb28184a9ba26b6",
+          "se_harness/workflow_contract.py": "ed7b80be88ed177f9d454632fd735d8b9eb16259c84f006c8f1436b55c7c71b3",
+          "se_harness/workflow_edges.py": "8ad4b1ec22c523a0a97e61d12a9bc41216e7205f519210242200a04155b591c0",
+          "se_harness/workflow_evidence_packet.py": "5b8101446514486011772e323c5342c0b7dfbc57bca4694c7463b87de4825991",
+          "se_harness/workflow_predicates.py": "e62a451a4c778a05aa1cba3a9cd293c808b64755ead3edeb4053b642a7c16295",
+          "se_harness/workflow_procedures.py": "089d74e4025bf1b1478ce282150c430f3759eb7595a572a37c2d430c0eb4656b",
+          "se_harness/workflow_result.py": "36914ae04ecc514d8833ae87f59eb102446db8fc7b5b5893dcf8b120961d1dd1",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/SKILL.md": "79091878d95ec4bedd019ca0f2aae402fa1781f3c5b7f18846078e10c780b9ce",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-orient/SKILL.md": "6368a89f46174805f0700d9c100cf2094c212210ef88f63dfff3d276971dbdfc",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.claude/skills/harness-orient/SKILL.md": "5714b379d1f7f4ea99e675f725e7fcd6bf134ac6aa06f6b98a1aed6855f4c69d",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.engineering-harness.toml.tpl": "4d1ecc3fde0a0c40440f7fd6694cd6fae096f94bfa0162f9c64b95f836a7374b",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed": "590564968dd8a5845173652d5d96a3018dfc7f6c2c08783e62b8e00e22023a4f",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/.github/workflows/engineering-harness.yml": "8712a4ff3f856ca384d13b8a5f941b8958b33543df3f3bf4edbfd2d75c32dd6e",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md": "a0dc549b6666b52ce4d496061f875b2d0e25f27eb7971a3b8f366bfa14bebb8b",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/AMEND_DEFINITIONS.md": "cf10afc976c28cc517a99bc5c15cfa1f8e5aef5b0a84c5fc031f27848059c1a6",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/ARTIFACTS.md": "c39f3d1623c8f2e0bae93e77a1643a957c4feb8429dd79a5df7d7b9bc62bb4e4",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/AUTHORITY.md": "582bdd61367121bce0e97456d6d418218dbaf71aeaa1b7f4fe78bd51e7ef36b6",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/AUTHORIZE_WORK.md": "add56fd479b1ee160b348ca0279fadcc6044fc4460f781e3398663fe8c518b12",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/COMMUNICATION.md": "ca3fd5cb272c59419faa93d126a4f8c320a31fa47bf44eceed9d1e4fafcde42e",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/CONTINUE.md": "e3e71c06cd3cfbeae967f3adef70d50754c053f674ba01a21bafb8b0db22f938",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DEFINE_CHANGE.md": "7f41ea6b62df110755524d88293019406d6cf6a238abc67e795db98234024f52",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md": "4895b8f0f1ad65474e02b26abc03069b8bf02431526634eb3c9c0c04012c128f",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DELIVER_RESULT.md": "dd357c71d839a9a4e3def66857c1768f812a07ee2f72f869cecf79c0375fd1ff",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md": "8193efcd72c72f83c1d369b434a70faf6b733df724196709de38aad7e981bf3e",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DRAFT_WORK_ORDERS.md": "9fcf342132fa541553642a6df3fea9c917b1ad1cce7e8f3587351db08d0b7dab",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/EXCEPTIONS.md": "924a1610b804bf2ca619bd28f634aa150bf54ea339337f70d645a2edc97c036e",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/EXECUTE_WORK.md": "efe36fe63c3de054207ac483a00a0c3697cfaa7109879326d5cd3355a6e6b980",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md": "8467bd0a7a16cbac0de573a0742daf65ae97257c8154639f937ea77da5cec792",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/migration/REFERENCE_MAP.md": "60b6d2f688eef0a33f2fd55cf963e9fa6441d79d5b863f15edb1bbc0f8cb80f8",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/PULL_REQUEST.md": "7ae7f7323db0fea5b7f32cd2f91c294c46982a630e5a9cac289b64c52e82a056",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RECORD_STATE.md": "9e20204fb2ff2defe3b807e1e81f190ffee9b0fb8cc1fdbee5aef39cdc3d54d7",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RELEASE.md": "86bf1819f886f5ce93e5064bde56ce3199e0f9f96e33b0c9057edf5fb54f626b",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RESULTS.md": "33102ecf549ec439fda9d3cd645c2904dafe292d48a444566820363df5a48abb",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RISKS_AND_DECISIONS.md": "d888eeb4890e6f3d331d20eaa8e32c4bf82d5f7f1eab9083653a684800f7f928",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/SETUP.md": "d67f886dca963d488eb5a714605e03710123f964a6b57fcb297d7ceb2dcbdfed",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/SKILL_PROVIDER.md": "89378054546e32a999fb05e03835471ed9fb2479a5b090bfec5b7e0a29a02479",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/UPGRADE.md": "145d69cff2355bb555222fbf2f391461d25b633909d98f15aa5b6f49ee3423f8",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/VERIFY_OUTCOME.md": "4dd9ecbd03cc6fedeb661efb60812371d4776382280b7382f5ad19a6d56e9d35",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/WORK_AND_EVIDENCE.md": "b6508bdf0a3158fe87d17e4695013af62cb186ba97112af94d18037d952cf236",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/QUALITY_GATES.json": "625bd6b8f1157fc836f19b24c12814f94af21ee87f9f49564aaa02f214b54ffb",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/README.md.seed": "9dc5532c55cf97ae12d56b241647017714b43efda492d3d39c6e6be57d2a8a28",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/ADR.template.md": "49f7c04e762686b6a220ff797be67573b1d61723af37aac153d01675e7ae8fc7",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/ARCHITECTURE.template.md": "60509271e63bcd3bbc255e4487514c56aec9d37c3ea8bdf77749f3d3722865c7",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/CAPABILITY.template.md": "f4a2e94d7537ec6c7f5a7bd30fd044d2c4ec4edb96cf954606d110e20920ad52",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/DECISION.template.md": "369f77d20f440f47496178e4c66f0f4ce830a4459c358f062c78e559770ecf9d",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/INTENT.template.md": "d6c11ae618923667b153996f5503bf66871d3d2861f445ea3f3f26bd1f2d7db7",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/OPERATING_CONTRACT.template.md": "8f2e617dc7585802ff6f12ec00257dd85b2c102ef39cd717a3c689dc6784b2c0",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/README.md": "817cb5aee4a999423d2f09c94fcb2deb43fe19244ec74dae0ffdeafb2aa27094",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/RELEASE_CONTRACT.template.md": "705e6108361563a9c08eb3414ffd7e18e7545195a0a056b6b17cf9ce5a19d052",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/RELEASE_RECORD.template.md": "322bf0eb407b7e6376ab868b56df707e6f5e52353e82bed372a717eb44bb8f16",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/REQUIREMENT.template.md": "6409a7a40cdcc10a8508a1a49f749d910a396c99be2ba951c3516792e1fe9e3c",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/RISK.template.md": "eb30ee6d38f8d47b7302ed73738f32f1bed203050ac46650b3f8c68f3d8d2093",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/SPECIFICATION.template.md": "53c4b5699bf8644a8b06ab73a67880cdbcaa6eaeba0af26437011ee1126d3273",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/VERIFICATION.template.md": "42bb84e91d87ef63cac28cb09d6805da22fb309d8784600ef88a21f814e7529a",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/VERIFICATION_RECORD.template.md": "e69abf1857c81214e73f4934bfe42bcd89ca7c6d899481565c08f2e1531ba540",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md": "453d3133e06f64afae8dde2c758ad7468c592f49c82b1c079d43f75fd4116cdf",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/WORKFLOW.json": "8e3abe782f38c8fd196e9ee9d225e2e5919fc7a8e2eccb905cb28184a9ba26b6",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/ENGINEERING_HARNESS.md.tpl": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/gitattributes.fragment": "e08c9f0b808d705bba94da8ab24dc1bf78757555da780496decba59abca7c44c",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/gitignore.fragment": "dd16f20efa12f0add4f38fc51010666c58ed8ff68ee73361b9934f62dac930f6",
+          "se_harness-0.21.0.data/data/share/se-harness/templates/repository/standard/GLOSSARY.md.seed": "b49b38a450a33373c3723ab70b4e7b506df17beed5299b506221fef71702147c"
+        },
+        "steps": [
+          {
+            "argv": [
+              "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+              "-I",
+              "-m",
+              "venv",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+            "exit_code": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\se_harness-0.21.0-py3-none-any.whl"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+            "exit_code": 0,
+            "stdout": "Processing .\\external-resources-proposal-20260930\\install030-exploratory-package-01\\se_harness-0.21.0-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.21.0\n",
+            "stderr": ""
+          }
+        ]
+      }
+    },
+    {
+      "label": "install030-packaged-smoke-01",
+      "source_sha256": "d86d388402cfa5506f28a6b3f3ddc6dc94c1d4b064d6c6c8d7c0caa7dd41a509",
+      "result": {
+        "role": "exploratory installed-wheel smoke; not a committed qualification or native delivery claim",
+        "passed": true,
+        "steps": [
+          {
+            "label": "minimal init",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "init",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\minimal",
+              "--project-name",
+              "Smoke",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 1.318,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "minimal validate without artifact directory",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "validate",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\minimal",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 0.461,
+            "stdout": "{\n  \"advisories\": [],\n  \"advisory_count\": 0,\n  \"artifact_count\": 0,\n  \"artifacts\": [],\n  \"error_count\": 0,\n  \"errors\": [],\n  \"plane_counts\": {\n    \"governance\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    },\n    \"maintenance\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    },\n    \"policy\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    },\n    \"structure\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    }\n  },\n  \"taxonomy\": \"se-harness-validation-taxonomy-v1\",\n  \"valid\": true,\n  \"warning_count\": 0,\n  \"warnings\": []\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "resource entry",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "resources",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\minimal",
+              "--resource",
+              "ENGINEERING_HARNESS.md",
+              "--content",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 0.467,
+            "stdout": "{\n  \"content\": \"# Engineering Harness for Smoke\\n\\nThis repository uses SE Harness 0.21.0.\\n\\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\\n\\n## Goals\\n\\nThis harness makes engineering authority explicit, limits execution to approved\\nscope, binds assurance and release claims to exact evidence, and gives every\\nactor the same deterministic next step. These goals are informative; the rules\\nbelow and the installed evaluator's machine policy are normative.\\n\\n## Policy / Global invariants\\n\\n### HRN-001 \\u2014 Formal authority\\n\\nFormal artifacts under `docs/engineering/` are the authoritative\\nrecords of product intent, requirements, architecture decisions, work authority,\\nverification contracts, risks, assurance decisions, and release decisions. Code,\\ntests, commits, tickets, dashboards, and conversation text are evidence or\\nobservations; they MUST NOT substitute for formal authority.\\n\\n### HRN-002 \\u2014 Change control\\n\\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\\nis approved. This preparation MUST NOT authorize implementation.\\n\\nAccepted formal artifacts MUST define the change before implementation starts.\\nOne or more approved work orders MUST authorize implementation. A valid\\nrepository-owned exception MAY remove the requirement for formal definitions,\\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\\n\\nAny required work orders MUST pass the required validation checks before\\nimplementation starts. The result MUST be verified against the accepted\\ndefinitions that apply. All required verification checks remain required.\\n\\n### HRN-003 \\u2014 Lifecycle authority\\n\\nArtifacts and the work itself MUST follow a strict lifecycle.\\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\\nstate changes and the next action. Actors MUST use its results when reporting\\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\\nrepository notes MUST NOT work out their own answers or change those results.\\n\\n### HRN-004 \\u2014 Bounded scope\\n\\nAn actor MUST select one clearly defined set of artifacts before\\nacting. This set defines the scope. Findings from unrelated work orders MUST\\nNOT be presented as findings about the selected scope. An issue outside the\\nscope MAY be reported only as an observation that has not been assessed, with\\nits artifact ID. It MUST NOT block the selected work unless a recorded\\ndependency or gate connects it to that work.\\n\\n### HRN-005 \\u2014 Explicit decisions\\n\\nEach decision MUST identify the accountable human or agent and the authority\\nused. Being a human or an agent does not by itself authorize an action.\\n\\nPreparing, inspecting, validating, or collecting evidence MUST NOT\\ncount as an authorized decision. A state change requires the exact artifact,\\nthe intended state, and the accountable actor. The required gates MUST pass,\\nand an explicit state transition MUST be applied.\\n\\n### HRN-006 \\u2014 Targeted transitions\\n\\nA state transition MUST change only the artifacts explicitly\\nselected by the accountable actor. The states of related artifacts MUST NOT\\nchange just because they are linked.\\n\\n### HRN-007 \\u2014 Repository ownership\\n\\n`AGENTS.md` MUST belong entirely to the repository owner and contain\\nno harness instructions. Repository-specific facts and commands belong in\\nthat file. The harness MUST NOT generate, track, or require that owner content.\\n\\n### HRN-008 \\u2014 Rule precedence\\n\\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\\nfor product, engineering, assurance, release, or external actions. They MUST\\nNOT remove, weaken, or contradict the harness rules.\\n\\nRepository owners MAY define exceptions through the supported exception\\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\\nthem to configure: whether formal definitions and work orders are required.\\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\\nNOT waive a harness rule.\\n\\n### HRN-009 \\u2014 Required checks\\n\\nManaged-file integrity checks, artifact graph checks, scope checks, and required\\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\\ncount as approval or acceptance of a risk.\\n\\n## Scope of these rules\\n\\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\\nagent performs or reports a governed lifecycle action. Reading, analysis, and\\nanswering questions need no work order when they change no lifecycle state,\\nexercise no decision right, and present no finding as a formal verdict.\\n\\nPreparing a proposed artifact package does not require an approved work\\norder. A human or agent MAY create and edit drafts, record risks and open\\nquestions, review the proposed content, and validate the package. These\\nactions MUST follow the authoring procedure and required checks. They MUST\\nNOT change an accepted definition, approve a work order, or start\\nimplementation. Decisions and lifecycle transitions follow their separate\\nauthority rules.\\n\\nBefore a lifecycle action, select the exact artifacts and read the governing\\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\\ncontext. It does not evaluate checkpoint gates or authorize work.\\n\\n## Using these instructions\\n\\nA human is a person; an agent is an automated system acting under granted\\nauthority. Approval, verification acceptance and release decisions require an\\nauthorized human. Agents may apply a matching recorded decision. Resolve the\\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\\nbefore obtaining or applying a decision.\\n\\n`harnessctl` means this repository's selected released evaluator, invoked through\\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\\n\\nTransient working material stays in the conversation or temporary storage outside\\nthe repository, at the agent's discretion. It has no formal authority and SHALL\\nNOT be persisted in the repository. This rule covers working notes, not formal\\nartifacts or evidence required at a contract's prescribed durable location.\\n\\n## Read by task\\n\\nFor the external-resource layout, the files below are released resources outside\\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\\nand read its returned path and the required heading. Use instruction links\\nrelative to that resource location. Formal artifacts remain repository files.\\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\\nreturns this entry with the selected project and release. Repository-copy\\ninstallations continue to read their installed files.\\n\\nRead the selected file's entry conditions and current step. Read its required\\nreferences before the action they govern. A link alone does not require reading\\nits target. Do not load all procedures or future stages in advance.\\n\\n| Current need | Read first |\\n| --- | --- |\\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\\n\\nBefore the first eligible English explanation in a fresh context, read\\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\\nReuse it while retained in context. This applies to ordinary answers too.\\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\\nwhen changing or investigating their contracts. Use evaluator results in normal\\nwork. Missing instructions or an unknown returned procedure stop the affected\\naction: report the exact discovery gap in RESULTS.md.\\n\\n## After compaction\\n\\nRecover the repository, selected IDs, objective, existing authority and pending\\naction from the summary. For governed work, obtain fresh context through\\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\\nuncertain writes or external effects before retrying. Resume only unapplied work.\\n\",\n  \"content_sha256\": \"60b26c8771dd5d047de1f6113094e4846bcae34309989314cca8bd2c90395216\",\n  \"release\": {\n    \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\",\n    \"archive_sha256\": \"beb2f1c4e93f06bd3a06bd53eb14160f691a83bb73fb8db22d4c9e29865549fd\",\n    \"payload_manifest\": \"se-harness-installed-payload-v1\",\n    \"payload_sha256\": \"e62ebca858403ddb3889567d1338f4a963645984c5470e38ecf5e820017d5a99\",\n    \"version\": \"0.21.0\"\n  },\n  \"resource_layout\": \"released-resources-v1\",\n  \"resources\": [\n    {\n      \"bytes\": 9146,\n      \"headings\": [\n        \"engineering-harness-for-project_name\",\n        \"goals\",\n        \"policy--global-invariants\",\n        \"hrn-001--formal-authority\",\n        \"hrn-002--change-control\",\n        \"hrn-003--lifecycle-authority\",\n        \"hrn-004--bounded-scope\",\n        \"hrn-005--explicit-decisions\",\n        \"hrn-006--targeted-transitions\",\n        \"hrn-007--repository-ownership\",\n        \"hrn-008--rule-precedence\",\n        \"hrn-009--required-checks\",\n        \"scope-of-these-rules\",\n        \"using-these-instructions\",\n        \"read-by-task\",\n        \"after-compaction\"\n      ],\n      \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\external-resources-proposal-20260930\\\\install030-exploratory-package-01\\\\environment\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\\\\ENGINEERING_HARNESS.md.tpl\",\n      \"resource\": \"ENGINEERING_HARNESS.md\",\n      \"sha256\": \"3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550\"\n    }\n  ],\n  \"schema\": \"se-harness-resources-v1\"\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "repeat init",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "init",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\minimal",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 0.934,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.toml\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "new Git checkout",
+            "argv": [
+              "C:/Program Files/Git/cmd/git.exe",
+              "-C",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\minimal",
+              "init",
+              "-q"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 0.077,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "label": "missing evidence attributes",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\minimal",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 1,
+            "seconds": 0.548,
+            "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unspecified, eol=unspecified; requires text eol=lf\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "explicit Git integration",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\minimal",
+              "--integration",
+              "git",
+              "--apply",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 1.667,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitattributes\"\n    }\n  ],\n  \"command\": \"upgrade\",\n  \"evidence_output\": null,\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "Git readiness",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\minimal",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 0.586,
+            "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"unchanged\",\n      \"name\": \"integration:.gitattributes\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"1 raw classes effective for 1 tracked paths\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "upgrade repeat",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\minimal",
+              "--apply",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 1.359,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".gitattributes\"\n    }\n  ],\n  \"command\": \"upgrade\",\n  \"evidence_output\": null,\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "released 0.20 legacy init",
+            "argv": [
+              "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "init",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\legacy",
+              "--project-name",
+              "Legacy",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 1.804,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-operator-brief/SKILL.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-operator-brief/scripts/check_brief.py\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-operator-brief/skill-contract.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-orient/scripts/orient.py\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-orient/skill-contract.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".claude/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitattributes\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".github/PULL_REQUEST_TEMPLATE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".github/workflows/engineering-harness.yml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitignore\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"ENGINEERING_HARNESS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"GLOSSARY.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/ARTIFACT_AUTHORING.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/QUALITY_GATES.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/WORKFLOW.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/AMEND_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/ARTIFACTS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/AUTHORITY.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/AUTHORIZE_WORK.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/COMMUNICATION.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/CONTINUE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DEFINE_CHANGE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DEFINITION_LINKS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DELIVER_RESULT.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DRAFT_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DRAFT_WORK_ORDERS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/EXCEPTIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/EXECUTE_WORK.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/PULL_REQUEST.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RECORD_STATE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RELEASE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RESULTS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RISKS_AND_DECISIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/SETUP.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/SKILL_PROVIDER.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/UPGRADE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/VERIFY_OUTCOME.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/WORK_AND_EVIDENCE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/migration/REFERENCE_MAP.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/ADR.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "real prior-wheel migration preview",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\legacy",
+              "--external-resources",
+              "--prior-wheel",
+              "C:\\Users\\mathi\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\packages\\se_harness-0.20.0-py3-none-any.whl",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 0,
+            "seconds": 0.673,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/SKILL.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/scripts/check_brief.py\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/skill-contract.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/scripts/orient.py\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/skill-contract.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".claude/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".gitattributes\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".github/PULL_REQUEST_TEMPLATE.md\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".github/workflows/engineering-harness.yml\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".gitignore\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"ENGINEERING_HARNESS.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"GLOSSARY.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/ARTIFACT_AUTHORING.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/QUALITY_GATES.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/README.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/WORKFLOW.json\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AMEND_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/ARTIFACTS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AUTHORITY.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AUTHORIZE_WORK.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/COMMUNICATION.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/CONTINUE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DEFINE_CHANGE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DEFINITION_LINKS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DELIVER_RESULT.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DRAFT_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DRAFT_WORK_ORDERS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/EXCEPTIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/EXECUTE_WORK.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/PULL_REQUEST.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RECORD_STATE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RELEASE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RESULTS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RISKS_AND_DECISIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/SETUP.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/SKILL_PROVIDER.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/UPGRADE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/VERIFY_OUTCOME.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/WORK_AND_EVIDENCE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/migration/REFERENCE_MAP.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/ADR.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"upgrade\",\n  \"instruction_delivery_required\": true,\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": false\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "missing native delivery evidence refuses",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\legacy",
+              "--external-resources",
+              "--prior-wheel",
+              "C:\\Users\\mathi\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\packages\\se_harness-0.20.0-py3-none-any.whl",
+              "--apply",
+              "--json"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 2,
+            "seconds": 1.205,
+            "stdout": "",
+            "stderr": "harnessctl: legacy entry retirement requires --instruction-delivery-evidence; no files were written\n"
+          }
+        ]
+      }
+    },
+    {
+      "label": "install030-linux-smoke-01",
+      "source_sha256": "061bd405f63cbbedfc494bb64e12a5e2f1a63ade165371ef8d2d28e0c30fe9d2",
+      "result": {
+        "role": "exploratory packaged installation; not committed qualification or native-delivery proof",
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "root": "/tmp/iar-install030-linux-63g35ao3",
+        "passed": true,
+        "steps": [
+          {
+            "label": "candidate environment",
+            "argv": [
+              "/usr/bin/python3",
+              "-I",
+              "-m",
+              "venv",
+              "--copies",
+              "/tmp/iar-install030-linux-63g35ao3/candidate"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 2.46,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "label": "candidate install",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "/tmp/iar-install030-linux-63g35ao3/se_harness-0.21.0-py3-none-any.whl"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.565,
+            "stdout": "Processing ./se_harness-0.21.0-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.21.0\n",
+            "stderr": ""
+          },
+          {
+            "label": "prior environment",
+            "argv": [
+              "/usr/bin/python3",
+              "-I",
+              "-m",
+              "venv",
+              "--copies",
+              "/tmp/iar-install030-linux-63g35ao3/prior"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 2.347,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "label": "prior install",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/prior/bin/python",
+              "-I",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "/tmp/iar-install030-linux-63g35ao3/se_harness-0.20.0-py3-none-any.whl"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.547,
+            "stdout": "Processing ./se_harness-0.20.0-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.20.0\n",
+            "stderr": ""
+          },
+          {
+            "label": "minimal init",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "init",
+              "/tmp/iar-install030-linux-63g35ao3/minimal",
+              "--project-name",
+              "Smoke",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.311,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "empty validation",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "validate",
+              "/tmp/iar-install030-linux-63g35ao3/minimal",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.147,
+            "stdout": "{\n  \"advisories\": [],\n  \"advisory_count\": 0,\n  \"artifact_count\": 0,\n  \"artifacts\": [],\n  \"error_count\": 0,\n  \"errors\": [],\n  \"plane_counts\": {\n    \"governance\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    },\n    \"maintenance\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    },\n    \"policy\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    },\n    \"structure\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    }\n  },\n  \"taxonomy\": \"se-harness-validation-taxonomy-v1\",\n  \"valid\": true,\n  \"warning_count\": 0,\n  \"warnings\": []\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "selected entry",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "resources",
+              "/tmp/iar-install030-linux-63g35ao3/minimal",
+              "--resource",
+              "ENGINEERING_HARNESS.md",
+              "--content",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.148,
+            "stdout": "{\n  \"content\": \"# Engineering Harness for Smoke\\n\\nThis repository uses SE Harness 0.21.0.\\n\\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\\n\\n## Goals\\n\\nThis harness makes engineering authority explicit, limits execution to approved\\nscope, binds assurance and release claims to exact evidence, and gives every\\nactor the same deterministic next step. These goals are informative; the rules\\nbelow and the installed evaluator's machine policy are normative.\\n\\n## Policy / Global invariants\\n\\n### HRN-001 \\u2014 Formal authority\\n\\nFormal artifacts under `docs/engineering/` are the authoritative\\nrecords of product intent, requirements, architecture decisions, work authority,\\nverification contracts, risks, assurance decisions, and release decisions. Code,\\ntests, commits, tickets, dashboards, and conversation text are evidence or\\nobservations; they MUST NOT substitute for formal authority.\\n\\n### HRN-002 \\u2014 Change control\\n\\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\\nis approved. This preparation MUST NOT authorize implementation.\\n\\nAccepted formal artifacts MUST define the change before implementation starts.\\nOne or more approved work orders MUST authorize implementation. A valid\\nrepository-owned exception MAY remove the requirement for formal definitions,\\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\\n\\nAny required work orders MUST pass the required validation checks before\\nimplementation starts. The result MUST be verified against the accepted\\ndefinitions that apply. All required verification checks remain required.\\n\\n### HRN-003 \\u2014 Lifecycle authority\\n\\nArtifacts and the work itself MUST follow a strict lifecycle.\\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\\nstate changes and the next action. Actors MUST use its results when reporting\\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\\nrepository notes MUST NOT work out their own answers or change those results.\\n\\n### HRN-004 \\u2014 Bounded scope\\n\\nAn actor MUST select one clearly defined set of artifacts before\\nacting. This set defines the scope. Findings from unrelated work orders MUST\\nNOT be presented as findings about the selected scope. An issue outside the\\nscope MAY be reported only as an observation that has not been assessed, with\\nits artifact ID. It MUST NOT block the selected work unless a recorded\\ndependency or gate connects it to that work.\\n\\n### HRN-005 \\u2014 Explicit decisions\\n\\nEach decision MUST identify the accountable human or agent and the authority\\nused. Being a human or an agent does not by itself authorize an action.\\n\\nPreparing, inspecting, validating, or collecting evidence MUST NOT\\ncount as an authorized decision. A state change requires the exact artifact,\\nthe intended state, and the accountable actor. The required gates MUST pass,\\nand an explicit state transition MUST be applied.\\n\\n### HRN-006 \\u2014 Targeted transitions\\n\\nA state transition MUST change only the artifacts explicitly\\nselected by the accountable actor. The states of related artifacts MUST NOT\\nchange just because they are linked.\\n\\n### HRN-007 \\u2014 Repository ownership\\n\\n`AGENTS.md` MUST belong entirely to the repository owner and contain\\nno harness instructions. Repository-specific facts and commands belong in\\nthat file. The harness MUST NOT generate, track, or require that owner content.\\n\\n### HRN-008 \\u2014 Rule precedence\\n\\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\\nfor product, engineering, assurance, release, or external actions. They MUST\\nNOT remove, weaken, or contradict the harness rules.\\n\\nRepository owners MAY define exceptions through the supported exception\\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\\nthem to configure: whether formal definitions and work orders are required.\\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\\nNOT waive a harness rule.\\n\\n### HRN-009 \\u2014 Required checks\\n\\nManaged-file integrity checks, artifact graph checks, scope checks, and required\\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\\ncount as approval or acceptance of a risk.\\n\\n## Scope of these rules\\n\\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\\nagent performs or reports a governed lifecycle action. Reading, analysis, and\\nanswering questions need no work order when they change no lifecycle state,\\nexercise no decision right, and present no finding as a formal verdict.\\n\\nPreparing a proposed artifact package does not require an approved work\\norder. A human or agent MAY create and edit drafts, record risks and open\\nquestions, review the proposed content, and validate the package. These\\nactions MUST follow the authoring procedure and required checks. They MUST\\nNOT change an accepted definition, approve a work order, or start\\nimplementation. Decisions and lifecycle transitions follow their separate\\nauthority rules.\\n\\nBefore a lifecycle action, select the exact artifacts and read the governing\\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\\ncontext. It does not evaluate checkpoint gates or authorize work.\\n\\n## Using these instructions\\n\\nA human is a person; an agent is an automated system acting under granted\\nauthority. Approval, verification acceptance and release decisions require an\\nauthorized human. Agents may apply a matching recorded decision. Resolve the\\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\\nbefore obtaining or applying a decision.\\n\\n`harnessctl` means this repository's selected released evaluator, invoked through\\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\\n\\nTransient working material stays in the conversation or temporary storage outside\\nthe repository, at the agent's discretion. It has no formal authority and SHALL\\nNOT be persisted in the repository. This rule covers working notes, not formal\\nartifacts or evidence required at a contract's prescribed durable location.\\n\\n## Read by task\\n\\nFor the external-resource layout, the files below are released resources outside\\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\\nand read its returned path and the required heading. Use instruction links\\nrelative to that resource location. Formal artifacts remain repository files.\\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\\nreturns this entry with the selected project and release. Repository-copy\\ninstallations continue to read their installed files.\\n\\nRead the selected file's entry conditions and current step. Read its required\\nreferences before the action they govern. A link alone does not require reading\\nits target. Do not load all procedures or future stages in advance.\\n\\n| Current need | Read first |\\n| --- | --- |\\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\\n\\nBefore the first eligible English explanation in a fresh context, read\\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\\nReuse it while retained in context. This applies to ordinary answers too.\\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\\nwhen changing or investigating their contracts. Use evaluator results in normal\\nwork. Missing instructions or an unknown returned procedure stop the affected\\naction: report the exact discovery gap in RESULTS.md.\\n\\n## After compaction\\n\\nRecover the repository, selected IDs, objective, existing authority and pending\\naction from the summary. For governed work, obtain fresh context through\\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\\nuncertain writes or external effects before retrying. Resume only unapplied work.\\n\",\n  \"content_sha256\": \"60b26c8771dd5d047de1f6113094e4846bcae34309989314cca8bd2c90395216\",\n  \"release\": {\n    \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\",\n    \"archive_sha256\": \"beb2f1c4e93f06bd3a06bd53eb14160f691a83bb73fb8db22d4c9e29865549fd\",\n    \"payload_manifest\": \"se-harness-installed-payload-v1\",\n    \"payload_sha256\": \"e62ebca858403ddb3889567d1338f4a963645984c5470e38ecf5e820017d5a99\",\n    \"version\": \"0.21.0\"\n  },\n  \"resource_layout\": \"released-resources-v1\",\n  \"resources\": [\n    {\n      \"bytes\": 9146,\n      \"headings\": [\n        \"engineering-harness-for-project_name\",\n        \"goals\",\n        \"policy--global-invariants\",\n        \"hrn-001--formal-authority\",\n        \"hrn-002--change-control\",\n        \"hrn-003--lifecycle-authority\",\n        \"hrn-004--bounded-scope\",\n        \"hrn-005--explicit-decisions\",\n        \"hrn-006--targeted-transitions\",\n        \"hrn-007--repository-ownership\",\n        \"hrn-008--rule-precedence\",\n        \"hrn-009--required-checks\",\n        \"scope-of-these-rules\",\n        \"using-these-instructions\",\n        \"read-by-task\",\n        \"after-compaction\"\n      ],\n      \"path\": \"/tmp/iar-install030-linux-63g35ao3/candidate/share/se-harness/templates/repository/standard/ENGINEERING_HARNESS.md.tpl\",\n      \"resource\": \"ENGINEERING_HARNESS.md\",\n      \"sha256\": \"3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550\"\n    }\n  ],\n  \"schema\": \"se-harness-resources-v1\"\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "repeat init",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "init",
+              "/tmp/iar-install030-linux-63g35ao3/minimal",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.316,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.toml\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "initialize Git",
+            "argv": [
+              "git",
+              "-C",
+              "/tmp/iar-install030-linux-63g35ao3/minimal",
+              "init",
+              "-q"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.03,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "label": "missing evidence attributes",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "/tmp/iar-install030-linux-63g35ao3/minimal",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 1,
+            "seconds": 0.167,
+            "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unspecified, eol=unspecified; requires text eol=lf\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "explicit Git setup",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "/tmp/iar-install030-linux-63g35ao3/minimal",
+              "--integration",
+              "git",
+              "--apply",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.471,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitattributes\"\n    }\n  ],\n  \"command\": \"upgrade\",\n  \"evidence_output\": null,\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "ready doctor",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "/tmp/iar-install030-linux-63g35ao3/minimal",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.16,
+            "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"unchanged\",\n      \"name\": \"integration:.gitattributes\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"1 raw classes effective for 1 tracked paths\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "linked integration refuses",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "init",
+              "/tmp/iar-install030-linux-63g35ao3/linked",
+              "--integration",
+              "pr",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 2,
+            "seconds": 0.169,
+            "stdout": "",
+            "stderr": "harnessctl: refusing to traverse a symlinked directory: /tmp/iar-install030-linux-63g35ao3/linked/.github\n"
+          },
+          {
+            "label": "published 0.20 init",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/prior/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "init",
+              "/tmp/iar-install030-linux-63g35ao3/legacy",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.603,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-operator-brief/SKILL.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-operator-brief/scripts/check_brief.py\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-operator-brief/skill-contract.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-orient/scripts/orient.py\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-orient/skill-contract.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".claude/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitattributes\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".github/PULL_REQUEST_TEMPLATE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".github/workflows/engineering-harness.yml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitignore\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"ENGINEERING_HARNESS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"GLOSSARY.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/ARTIFACT_AUTHORING.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/QUALITY_GATES.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/WORKFLOW.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/AMEND_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/ARTIFACTS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/AUTHORITY.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/AUTHORIZE_WORK.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/COMMUNICATION.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/CONTINUE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DEFINE_CHANGE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DEFINITION_LINKS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DELIVER_RESULT.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DRAFT_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DRAFT_WORK_ORDERS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/EXCEPTIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/EXECUTE_WORK.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/PULL_REQUEST.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RECORD_STATE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RELEASE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RESULTS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RISKS_AND_DECISIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/SETUP.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/SKILL_PROVIDER.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/UPGRADE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/VERIFY_OUTCOME.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/WORK_AND_EVIDENCE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/migration/REFERENCE_MAP.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/ADR.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "stock migration preview",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "/tmp/iar-install030-linux-63g35ao3/legacy",
+              "--external-resources",
+              "--prior-wheel",
+              "/tmp/iar-install030-linux-63g35ao3/se_harness-0.20.0-py3-none-any.whl",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.199,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/SKILL.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/scripts/check_brief.py\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/skill-contract.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/scripts/orient.py\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/skill-contract.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".claude/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".gitattributes\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".github/PULL_REQUEST_TEMPLATE.md\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".github/workflows/engineering-harness.yml\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".gitignore\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"ENGINEERING_HARNESS.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"GLOSSARY.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/ARTIFACT_AUTHORING.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/QUALITY_GATES.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/README.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/WORKFLOW.json\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AMEND_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/ARTIFACTS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AUTHORITY.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AUTHORIZE_WORK.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/COMMUNICATION.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/CONTINUE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DEFINE_CHANGE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DEFINITION_LINKS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DELIVER_RESULT.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DRAFT_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DRAFT_WORK_ORDERS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/EXCEPTIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/EXECUTE_WORK.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/PULL_REQUEST.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RECORD_STATE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RELEASE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RESULTS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RISKS_AND_DECISIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/SETUP.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/SKILL_PROVIDER.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/UPGRADE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/VERIFY_OUTCOME.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/WORK_AND_EVIDENCE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/migration/REFERENCE_MAP.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/ADR.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"upgrade\",\n  \"instruction_delivery_required\": true,\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": false\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "missing delivery refuses",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "/tmp/iar-install030-linux-63g35ao3/legacy",
+              "--external-resources",
+              "--prior-wheel",
+              "/tmp/iar-install030-linux-63g35ao3/se_harness-0.20.0-py3-none-any.whl",
+              "--apply",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 2,
+            "seconds": 0.387,
+            "stdout": "",
+            "stderr": "harnessctl: legacy entry retirement requires --instruction-delivery-evidence; no files were written\n"
+          },
+          {
+            "label": "customized seed preview",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "/tmp/iar-install030-linux-63g35ao3/legacy",
+              "--external-resources",
+              "--prior-wheel",
+              "/tmp/iar-install030-linux-63g35ao3/se_harness-0.20.0-py3-none-any.whl",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 0,
+            "seconds": 0.204,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/SKILL.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/scripts/check_brief.py\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/skill-contract.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/scripts/orient.py\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/skill-contract.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".claude/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".gitattributes\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".github/PULL_REQUEST_TEMPLATE.md\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".github/workflows/engineering-harness.yml\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".gitignore\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"ENGINEERING_HARNESS.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"GLOSSARY.md\"\n    },\n    {\n      \"action\": \"customized\",\n      \"path\": \"docs/engineering/ARTIFACT_AUTHORING.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/QUALITY_GATES.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/README.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/WORKFLOW.json\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AMEND_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/ARTIFACTS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AUTHORITY.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AUTHORIZE_WORK.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/COMMUNICATION.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/CONTINUE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DEFINE_CHANGE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DEFINITION_LINKS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DELIVER_RESULT.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DRAFT_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DRAFT_WORK_ORDERS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/EXCEPTIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/EXECUTE_WORK.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/PULL_REQUEST.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RECORD_STATE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RELEASE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RESULTS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RISKS_AND_DECISIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/SETUP.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/SKILL_PROVIDER.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/UPGRADE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/VERIFY_OUTCOME.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/WORK_AND_EVIDENCE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/migration/REFERENCE_MAP.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/ADR.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"upgrade\",\n  \"instruction_delivery_required\": true,\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": false\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "customized seed refuses",
+            "argv": [
+              "/tmp/iar-install030-linux-63g35ao3/candidate/bin/python",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "/tmp/iar-install030-linux-63g35ao3/legacy",
+              "--external-resources",
+              "--prior-wheel",
+              "/tmp/iar-install030-linux-63g35ao3/se_harness-0.20.0-py3-none-any.whl",
+              "--apply",
+              "--json"
+            ],
+            "cwd": "/tmp/iar-install030-linux-63g35ao3",
+            "exit_code": 1,
+            "seconds": 0.214,
+            "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/SKILL.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/scripts/check_brief.py\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-operator-brief/skill-contract.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/scripts/orient.py\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".agents/skills/harness-orient/skill-contract.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \".claude/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".gitattributes\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".github/PULL_REQUEST_TEMPLATE.md\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".github/workflows/engineering-harness.yml\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".gitignore\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"ENGINEERING_HARNESS.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"GLOSSARY.md\"\n    },\n    {\n      \"action\": \"customized\",\n      \"path\": \"docs/engineering/ARTIFACT_AUTHORING.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/QUALITY_GATES.json\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/README.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/WORKFLOW.json\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AMEND_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/ARTIFACTS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AUTHORITY.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/AUTHORIZE_WORK.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/COMMUNICATION.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/CONTINUE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DEFINE_CHANGE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DEFINITION_LINKS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DELIVER_RESULT.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DRAFT_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/DRAFT_WORK_ORDERS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/EXCEPTIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/EXECUTE_WORK.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/PULL_REQUEST.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RECORD_STATE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RELEASE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RESULTS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/RISKS_AND_DECISIONS.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/SETUP.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/SKILL_PROVIDER.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/UPGRADE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/VERIFY_OUTCOME.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/WORK_AND_EVIDENCE.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \"docs/engineering/harness/migration/REFERENCE_MAP.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/ADR.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"preserve\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"upgrade\",\n  \"customized\": [\n    \"docs/engineering/ARTIFACT_AUTHORING.md\"\n  ],\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": false\n}\n",
+            "stderr": ""
+          }
+        ],
+        "release": {
+          "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+          "archive_sha256": "beb2f1c4e93f06bd3a06bd53eb14160f691a83bb73fb8db22d4c9e29865549fd",
+          "payload_manifest": "se-harness-installed-payload-v1",
+          "payload_sha256": "e62ebca858403ddb3889567d1338f4a963645984c5470e38ecf5e820017d5a99",
+          "version": "0.21.0"
+        },
+        "entry_sha256": "60b26c8771dd5d047de1f6113094e4846bcae34309989314cca8bd2c90395216"
+      }
+    },
+    {
+      "label": "install030-dual-layout-runner-smoke-01",
+      "source_sha256": "75f838774fb3bd90f4faf449ee051b6c16fe8b6831e0ba101fa30fbeff3866de",
+      "result": {
+        "role": "exploratory test of the successor acceptance runner against both wheel layouts; zero commit is a synthetic test input, not verified source provenance or released-verifier qualification",
+        "passed": false,
+        "results": [
+          {
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-c",
+              "import hashlib,json,sys\nfrom pathlib import Path\nfrom se_harness.candidate_acceptance import assess_candidate_wheel\nwheel=Path(sys.argv[1]); verifier=Path(sys.argv[2])\nx=assess_candidate_wheel(wheel,candidate_commit=\"0\"*40,candidate_wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest(),verifier_wheel_sha256=hashlib.sha256(verifier.read_bytes()).hexdigest())\nprint(json.dumps(x.to_dict()))\n",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\se_harness-0.21.0-py3-none-any.whl",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\se_harness-0.21.0-py3-none-any.whl"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 5, in <module>\n    x=assess_candidate_wheel(wheel,candidate_commit=\"0\"*40,candidate_wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest(),verifier_wheel_sha256=hashlib.sha256(verifier.read_bytes()).hexdigest())\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Lib\\site-packages\\se_harness\\candidate_acceptance.py\", line 444, in assess_candidate_wheel\n    raise HarnessError(f\"candidate acceptance failed: {', '.join(failed)}\")\nse_harness.installer.HarnessError: candidate acceptance failed: installed-identity, dashboard\n"
+          },
+          {
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Scripts\\python.exe",
+              "-I",
+              "-c",
+              "import hashlib,json,sys\nfrom pathlib import Path\nfrom se_harness.candidate_acceptance import assess_candidate_wheel\nwheel=Path(sys.argv[1]); verifier=Path(sys.argv[2])\nx=assess_candidate_wheel(wheel,candidate_commit=\"0\"*40,candidate_wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest(),verifier_wheel_sha256=hashlib.sha256(verifier.read_bytes()).hexdigest())\nprint(json.dumps(x.to_dict()))\n",
+              "C:\\Users\\mathi\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\packages\\se_harness-0.20.0-py3-none-any.whl",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\se_harness-0.21.0-py3-none-any.whl"
+            ],
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01",
+            "exit_code": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 5, in <module>\n    x=assess_candidate_wheel(wheel,candidate_commit=\"0\"*40,candidate_wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest(),verifier_wheel_sha256=hashlib.sha256(verifier.read_bytes()).hexdigest())\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\install030-exploratory-package-01\\environment\\Lib\\site-packages\\se_harness\\candidate_acceptance.py\", line 444, in assess_candidate_wheel\n    raise HarnessError(f\"candidate acceptance failed: {', '.join(failed)}\")\nse_harness.installer.HarnessError: candidate acceptance failed: installed-identity\n"
+          }
+        ]
+      }
+    },
+    {
+      "label": "install030-line-ending-review",
+      "source_sha256": "664aa596dfe77130c23835bdb02e1c609d13a6f0c503a86511459670597e5bd1",
+      "result": {
+        "action": "Restore original LF convention in already-modified authorized files; no content changes",
+        "paths": [
+          "docs/notes/artifact-authoring.md",
+          "se_harness/candidate_acceptance.py",
+          "se_harness/engine/validate_engineering_artifacts.py",
+          "se_harness/hash_bound.py",
+          "se_harness/skill_ownership.py",
+          "templates/repository/standard/docs/engineering/harness/SETUP.md",
+          "templates/repository/standard/docs/engineering/harness/SKILL_PROVIDER.md",
+          "tests/fixture_support.py",
+          "tests/test_fixture_support.py",
+          "tests/test_hash_bound_integrity.py"
+        ]
+      }
+    }
+  ]
+}

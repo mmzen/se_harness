@@ -53,6 +53,14 @@ The work to move instructions and templates into the plugin remains unreleased.
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
 
+## Successor candidate: fewer repository files
+
+The unreleased candidate stores instructions and templates in the evaluator wheel.
+Default initialization writes only configuration and lock files. Plugin activation
+selects the checkout and restores it after compaction or resume.
+See [minimal installation and migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-successor-candidate).
+Published evaluator 0.20.1 / plugin 0.2.3 keeps the existing layout.
+
 ## How it works today
 
 1. **Define the change.** Record the desired outcome, requirements, design, and verification approach.

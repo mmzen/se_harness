@@ -70,8 +70,12 @@ claude plugin install verity-plane@se-harness
 ## Instruction delivery
 
 This package includes native startup and post-compaction instruction hooks.
-They read the selected repository's `ENGINEERING_HARNESS.md` and reject missing,
-changed or incompatible input. They grant no lifecycle authority and do not
+Published plugin 0.2.2 reads the selected repository's `ENGINEERING_HARNESS.md`.
+The successor adapter resolves the entry from its exact selected wheel for the
+external-resource layout, while retaining the repository-copy route for older
+selections. It bootstraps an unselected session and activates the actual checkout
+after cloning. See the [session procedure](../../docs/notes/plugin-installation-guide.md#successor-candidate-clone-activate-and-resume).
+Both routes reject missing, changed or incompatible selected input. They grant no lifecycle authority and do not
 enforce all tool calls. Python must be available to the hook launcher; Codex
 requires review and trust of the current hook definition. Confirm delivery
 before governed work. Repository-only skills do not install these hooks.

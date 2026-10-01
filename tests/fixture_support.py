@@ -1,12 +1,8 @@
-"""A per-session cache of freshly initialised standard repositories for test fixtures.
+"""Cached materialized legacy fixtures for tests of repository-owned layouts.
 
-`WO-TST-002` (`REQ-TST-003`, `SPEC-TST-001` TST-FIX). `harnessctl init` writes
-61 files with durable atomic writes and costs about 0.57 seconds; about three
-hundred tests ran it in `setUp`. `standard_repository()` runs it once per
-project name per test process and hands out `shutil.copytree` copies, which
-are byte-identical to a direct `init` (asserted by `tests/test_fixture_support.py`)
-and cost a few hundredths of a second. Fixtures that assert on `init` itself
-keep calling `init` directly.
+This helper explicitly selects the retained legacy installer. It does not
+intercept the CLI: tests of current initialization call the actual minimal init.
+Copies remain byte-identical to explicit legacy construction, per WO-TST-002.
 """
 
 from __future__ import annotations
@@ -19,7 +15,7 @@ import shutil
 import tempfile
 from pathlib import Path
 
-from tests.cli_support import invoke
+from se_harness.installer import _plan_legacy_install, apply_changes
 
 _SESSION: tempfile.TemporaryDirectory | None = None
 _CACHE: dict[str, Path] = {}
@@ -35,6 +31,13 @@ def _session_root() -> Path:
     return Path(_SESSION.name)
 
 
+def legacy_repository(destination: Path, project_name: str | None = None) -> Path:
+    """Materialize the supported repository-copy layout, only for legacy tests."""
+    changes, lock = _plan_legacy_install(destination, project_name=project_name, mode="init")
+    apply_changes(destination, changes, lock, allow_updates=False)
+    return destination
+
+
 def _initialise(project_name: str) -> Path:
     """One real `init` per project name per process; re-run if the cache directory has gone."""
 
@@ -42,9 +45,7 @@ def _initialise(project_name: str) -> Path:
     if cached is not None and cached.is_dir():
         return cached
     target = _session_root() / f"repository-{len(_INITIALISATIONS) + 1}"  # monotonic: a re-initialised name never collides
-    code, output, errors = invoke("init", str(target), "--project-name", project_name)
-    if code != 0:
-        raise RuntimeError(f"fixture init failed for {project_name!r} with exit code {code}: {errors.strip() or output.strip()}")
+    legacy_repository(target, project_name)
     _CACHE[project_name] = target
     _INITIALISATIONS.append(project_name)
     return target

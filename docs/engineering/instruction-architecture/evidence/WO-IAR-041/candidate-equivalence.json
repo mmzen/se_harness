@@ -1,0 +1,45 @@
+{
+  "tested_commit": "234029d16d9a1d47dfb304b320df1943ce873f41",
+  "paths": [
+    "se_harness",
+    "templates",
+    "plugins",
+    "repository_tools",
+    "scripts",
+    "tests",
+    "pyproject.toml",
+    "MANIFEST.in",
+    "README.md",
+    "LICENSE",
+    "release"
+  ],
+  "changed_paths": [],
+  "comparison": {
+    "argv": [
+      "C:\\Program Files\\Git\\cmd\\git.exe",
+      "diff",
+      "--name-only",
+      "234029d16d9a1d47dfb304b320df1943ce873f41",
+      "--",
+      "se_harness",
+      "templates",
+      "plugins",
+      "repository_tools",
+      "scripts",
+      "tests",
+      "pyproject.toml",
+      "MANIFEST.in",
+      "README.md",
+      "LICENSE",
+      "release"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": {
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+    },
+    "seconds": 0.16674179999972694
+  },
+  "meaning": "Only work completion and retained evidence are added after the tested implementation. Product and test bytes remain unchanged."
+}

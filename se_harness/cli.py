@@ -151,9 +151,9 @@ def _scan_repository(target: Path) -> bytes:
         "",
         "## Human decisions required",
         "",
-        "1. Record build, test, verification, ownership, and boundary facts in the owner-controlled region of `AGENTS.md`.",
+        "1. Record build, test, verification, ownership, and boundary facts in repository-owned `AGENTS.md`.",
         "2. Name the accountable owners for product intent, engineering, assurance, release, and operations.",
-        "3. Create and approve the first intent-to-verification artifact chain using `docs/engineering/templates/`.",
+        "3. Create and approve the first intent-to-verification artifact chain using `harnessctl create-artifact` and its returned authoring guidance.",
         "4. Select one bounded approved work order before implementation begins.",
         "5. Add repository-specific formatter, linter, test, security, build, release, and operating checks to the verification contract.",
         "",
@@ -163,14 +163,9 @@ def _scan_repository(target: Path) -> bytes:
 
 def _install(args: argparse.Namespace) -> int:
     target = Path(args.target)
-    # ECP-INS-002/003: the target's content selects the behaviour. An absent or
-    # empty target receives the complete harness; a target with content keeps
-    # its files, receives the bounded fragments and the adoption report.
-    existing = target.exists() and any(target.iterdir())
-    report = _scan_repository(target.resolve()) if existing else None
-    changes, old_lock = plan_install(target, project_name=args.project_name, mode="init", adoption_report=report)
+    changes, old_lock = plan_install(target, project_name=args.project_name, mode="init", integrations=args.integration)
     listed = [{"action": item.action, "path": item.path} for item in changes]
-    conflicts = [item.path for item in changes if item.action == "conflict"]
+    conflicts = [item.path for item in changes if item.action in {"conflict", "customized"}]
     if not args.json:
         print(format_plan(changes))
     if conflicts:
@@ -185,7 +180,7 @@ def _install(args: argparse.Namespace) -> int:
         if args.json:
             _print_json(_command_result("init", "completed", changes=listed, written=False))
         return 0
-    apply_changes(target.resolve(), changes, old_lock, allow_updates=False)
+    apply_changes(target.resolve(), changes, old_lock, allow_updates=False, integrations=args.integration)
     if args.json:
         _print_json(_command_result("init", "completed", changes=listed, written=True))
     else:
@@ -195,17 +190,19 @@ def _install(args: argparse.Namespace) -> int:
 
 def _upgrade(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
-    changes, old_lock = plan_install(target, project_name=None, mode="upgrade", replace_files=args.replace_file)
+    options = dict(external_resources=args.external_resources, integrations=args.integration,
+                   retire_files=args.retire_file, prior_wheel=Path(args.prior_wheel) if args.prior_wheel else None)
+    changes, old_lock = plan_install(target, project_name=None, mode="upgrade", replace_files=args.replace_file, **options)
     listed = [{"action": item.action, "path": item.path} for item in changes]
     if not args.json:
         print(format_plan(changes))
     if not args.apply:
         if args.json:
-            delivery_required = any(item.action == "remove" and item.path in {"AGENTS.md", "CLAUDE.md"} for item in changes)
+            delivery_required = any(item.action == "remove" and item.path in {"AGENTS.md", "CLAUDE.md", "ENGINEERING_HARNESS.md"} for item in changes)
             _print_json(_command_result("upgrade", "completed", changes=listed, written=False,
                                         instruction_delivery_required=delivery_required))
         return 0
-    blocked = [item.path for item in changes if item.action == "customized"]
+    blocked = [item.path for item in changes if item.action in {"customized", "conflict"}]
     if blocked:
         if args.json:
             _print_json(_command_result("upgrade", "failed", changes=listed, written=False, customized=blocked))
@@ -226,6 +223,7 @@ def _upgrade(args: argparse.Namespace) -> int:
         evidence_output=Path(args.evidence_output) if args.evidence_output else None,
         replace_files=args.replace_file,
         instruction_delivery_evidence=Path(args.instruction_delivery_evidence) if args.instruction_delivery_evidence else None,
+        **options,
     )
     if args.json:
         _print_json(_command_result(
@@ -929,6 +927,7 @@ def build_parser() -> argparse.ArgumentParser:
     init = commands.add_parser("init", help="install the standard harness into an absent, empty or existing repository")
     init.add_argument("target", nargs="?", default=".")
     init.add_argument("--project-name")
+    init.add_argument("--integration", action="append", default=[], choices=("git", "ci", "pr"), help="explicitly add Git evidence attributes, CI, or a PR template; repeat to select more")
     init.add_argument("--dry-run", action="store_true", help="report the complete plan without writing")
     init.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     init.set_defaults(handler=_install)
@@ -1128,8 +1127,12 @@ def build_parser() -> argparse.ArgumentParser:
     select_work.set_defaults(handler=_select_work_order)
 
     upgrade = commands.add_parser("upgrade", help="plan or apply safe harness upgrades")
+    upgrade.add_argument("--external-resources", action="store_true", help="explicitly migrate repository copies to the selected wheel resources")
+    upgrade.add_argument("--integration", action="append", default=[], choices=("git", "ci", "pr"), help="add the selected optional repository integration")
+    upgrade.add_argument("--retire-file", action="append", default=[], metavar="PATH", help="remove one recognized unchanged editable seed during resource migration")
+    upgrade.add_argument("--prior-wheel", metavar="PATH", help="exact previously selected wheel for stock-file recognition; read as data only")
     upgrade.add_argument("--replace-file", action="append", default=[], metavar="PATH", help="replace this editable seeded file with the current template; repeat for more files")
-    upgrade.add_argument("--instruction-delivery-evidence", metavar="PATH", help="reviewed native startup/compaction evidence bound to this upgrade; required before retiring AGENTS/CLAUDE harness fragments")
+    upgrade.add_argument("--instruction-delivery-evidence", metavar="PATH", help="reviewed native startup/compaction evidence bound to this upgrade; required before retiring a local instruction entry")
     upgrade.add_argument("target", nargs="?", default=".")
     upgrade.add_argument("--apply", action="store_true", help="apply safe changes; customized files remain untouched")
     upgrade.add_argument(

@@ -348,22 +348,36 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         self.assertEqual([], unbounded)
 
     def test_init_dry_run_json_and_conflict_exit_code(self) -> None:
+        from se_harness.installer import template_root
+
+        # Unit origin only; test_release_build exercises the installed wheel.
+        origin = mock.patch("se_harness.resources._installed_resource_root", return_value=template_root())
+        origin.start()
+        self.addCleanup(origin.stop)
         fresh = self.root / "fresh"
         fresh.mkdir()
         code, payload, error = self.json_of("init", str(fresh), "--dry-run", "--json")
         self.assertEqual(0, code, error)
         self.assertEqual(("init", "completed", False), (payload["command"], payload["outcome"], payload["written"]))
         self.assertTrue(all(set(item) == {"action", "path"} for item in payload["changes"]))
+        self.assertEqual({".engineering-harness.toml", ".engineering-harness.lock"},
+                         {item["path"] for item in payload["changes"]})
+        self.assertEqual([], list(fresh.iterdir()))
         (fresh / "AGENTS.md").write_text("owner content without markers\n", encoding="utf-8")
         (fresh / ".github").mkdir()
         (fresh / ".github" / "workflows").mkdir()
         (fresh / ".github" / "workflows" / "engineering-harness.yml").write_text("name: other\n", encoding="utf-8")
-        code, output, error = invoke("init", str(fresh), "--json")
-        if code == 1:
-            payload = json.loads(output)
-            self.assertEqual("failed", payload["outcome"])
-            self.assertTrue(payload["conflicts"])
-            self.assertEqual("", error)
+        (fresh / ".gitattributes").write_text(
+            "# se-harness:begin\nowner rule\n# se-harness:end\n", encoding="utf-8",
+        )
+        before = {p.relative_to(fresh): p.read_bytes() for p in fresh.rglob("*") if p.is_file()}
+        code, output, error = invoke("init", str(fresh), "--integration", "git", "--json")
+        self.assertEqual(1, code, error + output)
+        payload = json.loads(output)
+        self.assertEqual("failed", payload["outcome"])
+        self.assertTrue(payload["conflicts"])
+        self.assertEqual("", error)
+        self.assertEqual(before, {p.relative_to(fresh): p.read_bytes() for p in fresh.rglob("*") if p.is_file()})
 
 
 class MockedCommandShapeTests(unittest.TestCase):

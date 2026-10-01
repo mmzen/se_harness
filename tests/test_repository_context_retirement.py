@@ -170,18 +170,18 @@ class RepositoryContextRetirementTests(unittest.TestCase):
         self.assertNotEqual(BASELINE["preflight"]["schema"], payload["schema"])
         self.assertNotIn("repository_commands", json.dumps(payload))
 
-    def test_adoption_guidance_directs_operational_facts_to_the_owner_region(self) -> None:
+    def test_minimal_init_does_not_generate_a_repository_context_or_report(self) -> None:
         target = self.root / "guided"
         target.mkdir()
-        (target / "pyproject.toml").write_text("[project]\nname = \"guided\"\n", encoding="utf-8")
-        code, _, error = invoke("init", str(target), "--project-name", "Example")
+        owner = b"[project]\nname = 'guided'\n"
+        (target / "pyproject.toml").write_bytes(owner)
+        with mock.patch("se_harness.resources._installed_resource_root", return_value=template_root()):
+            code, _, error = invoke("init", str(target), "--project-name", "Example")
         self.assertEqual(0, code, error)
-        report = (target / "docs" / "engineering" / "ADOPTION_REPORT.md").read_text(encoding="utf-8")
-        steps = [line for line in report.splitlines() if line[:3] in {"1. ", "2. ", "3. ", "4. ", "5. "}]
-        self.assertEqual(["1. ", "2. ", "3. ", "4. ", "5. "], [line[:3] for line in steps])
-        self.assertIn("owner-controlled region of `AGENTS.md`", steps[0])
-        self.assertNotIn("CONTEXT", report)
-        self.assertNotIn(RETIRED_PATH, report)
+        self.assertEqual(owner, (target / "pyproject.toml").read_bytes())
+        self.assertFalse((target / "docs").exists())
+        self.assertEqual({"pyproject.toml", ".engineering-harness.toml", ".engineering-harness.lock"},
+                         {p.relative_to(target).as_posix() for p in target.rglob("*") if p.is_file()})
 
     def test_retired_diagnostic_family_is_absent_from_the_emitted_code_space(self) -> None:
         target = self.installed_target("codes")

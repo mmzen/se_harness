@@ -94,14 +94,19 @@ These rules hold on every subcommand (`WO-ECP-022`):
 ## Repository setup and inspection
 
 ```text
-harnessctl init [TARGET] [--project-name NAME] [--dry-run] [--json]
+harnessctl init [TARGET] [--project-name NAME] [--integration git|ci|pr] [--dry-run] [--json]
 harnessctl validate [TARGET] [--json] [--advisories]
 harnessctl inspect [TARGET] [--json] [--vocabulary-threshold N]
 harnessctl dashboard [TARGET] [--output PATH] [--json]
 harnessctl doctor [TARGET] [--json]
 ```
 
-`TARGET` defaults to the current directory. Installation resolves the complete destination plan before writing and fails closed on ordinary conflicts, unsafe traversal, and repository escape. Adoption observations are not approved product artifacts.
+`TARGET` defaults to the current directory. The successor candidate defaults to
+the two selection files, with no copied instructions, templates or adoption report.
+Repeat `--integration` for explicit Git evidence attributes, CI/output ignores,
+or a PR template. Installation resolves every destination before writing and
+refuses conflicts and linked or escaping paths. Published 0.20.0 retains its
+repository-copy behavior; these candidate options do not adopt a release.
 
 Validation reports deterministic errors and warnings but does not edit artifacts. Each finding names its assessment plane: `structure`, `governance`, configured `policy`, or non-blocking `maintenance`. Planes explain the finding source; they do not change severity, pass/fail behavior, or create a score.
 
@@ -120,7 +125,7 @@ The temporal reassessment observation `W-HEX-003` is deliberately narrow: it com
 
 For existing lifecycle queues and a closed set of actionable derived warning rules, inspection also reports deterministic suggested next steps. Each suggestion identifies its source, affected artifacts, action class, accountable role, and `automatic = false`. Suggestions contain no executable command and never assert eligibility or authority. Validator findings, informational observations, and unknown rules remain visible without guessed advice.
 
-Inspection ends with a vocabulary section. It counts the words of every artifact's statement and body with code removed, drops common English and the harness terms the managed instructions define, and names the project terms at or above `--vocabulary-threshold` occurrences (default 50, between 30 and 100) that have no entry in `GLOSSARY.md` at the repository root, and the entries whose term appears in no artifact. The glossary is repository content: the harness seeds it empty at installation and never rewrites it. The section is informational and never blocks.
+Inspection ends with a vocabulary section. It counts the words of every artifact's statement and body with code removed, drops common English and the harness terms the managed instructions define, and names the project terms at or above `--vocabulary-threshold` occurrences (default 50, between 30 and 100) that have no entry in `GLOSSARY.md` at the repository root, and the entries whose term appears in no artifact. The glossary is repository content. Published repository-copy installations seed it empty; minimal external-resource installation creates no glossary. Both routes preserve an existing glossary. The section is informational and never blocks.
 
 A successfully produced inspection exits zero even when formal validation failed or attention exists, so use `validate` when gate exit behavior is required. Inspection is repository-local derived evidence: it does not approve, authorize, verify, supersede, release, remediate, or independently govern the repository.
 
@@ -402,7 +407,7 @@ harnessctl scaffold-domain [TARGET] --domain DOMAIN [--title TITLE] [--dry-run] 
 harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE [--id ID] [--dry-run] [--quiet] [--json]
 ```
 
-Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. After creation it prints the created type's checklist from the installed `docs/engineering/ARTIFACT_AUTHORING.md`; `--quiet` suppresses it. Existing valid flat layouts remain discoverable and are not automatically migrated.
+Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. After creation it prints the created type's checklist from `docs/engineering/ARTIFACT_AUTHORING.md`, resolved in the selected wheel for the external layout or in the repository for a supported older layout; `--quiet` suppresses it. Existing valid flat layouts remain discoverable and are not automatically migrated.
 
 Without `--id`, `create-artifact` allocates the lowest free
 `TYPE-DOMAIN-NNN` across every local branch and tag and the working tree,
@@ -519,7 +524,7 @@ verification contracts. The RLS binds its exact candidate commit. Earlier
 records may be cited as supporting evidence at different commits; passing
 their individual checks cannot replace final integration verification.
 
-Before writing, the command proves the locked released evaluator including its wheel filename and SHA-256. It writes canonical normalized evaluator evidence and binds the evidence path and digest in the `status = "ready"` RLS. The record contains `prepared_at` and `prepared_by`; it omits `released_at` and `authorized_by` until a separate release transition. The managed `.gitattributes` fragment applies exactly `docs/engineering/**/evidence/*.json text eol=lf`, preserving canonical evidence bytes across supported checkouts so the raw SHA-256 survives. Independent validation and publication replay reject missing, changed, noncanonical, candidate-role, host-path-leaking, or lock-mismatched evidence. A rejected contract can support only its exact rejected RLS as terminal history and remains invalid for preparation, binding, release, publication, or credential-bearing use. The command does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
+Before writing, the command proves the locked released evaluator including its wheel filename and SHA-256. It writes canonical normalized evaluator evidence and binds the evidence path and digest in the `status = "ready"` RLS. The record contains `prepared_at` and `prepared_by`; it omits `released_at` and `authorized_by` until a separate release transition. For the external layout, explicitly select `--integration git` or establish an equivalent owner rule before evidence writes. The selected `.gitattributes` fragment applies exactly `docs/engineering/**/evidence/*.json text eol=lf`, preserving canonical evidence bytes across supported checkouts so the raw SHA-256 survives. Independent validation and publication replay reject missing, changed, noncanonical, candidate-role, host-path-leaking, or lock-mismatched evidence. A rejected contract can support only its exact rejected RLS as terminal history and remains invalid for preparation, binding, release, publication, or credential-bearing use. The command does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
 
 Only `ready` and `released` release records claim a version. Valid rejected records remain immutable audit history and do not prevent one correctly bound active successor for an unpublished version; a second active record still fails.
 
@@ -544,7 +549,22 @@ To capture while keeping local edits, add `--candidate-commit COMMIT` and put
 temporary checkout and retains the command result in the record. A failed test
 writes no record; uncommitted caller content is not used as tested evidence.
 
-## Editable files and lightweight identity (WO-KIS-003)
+## Explicit resource migration (successor candidate)
+
+```text
+harnessctl upgrade TARGET --external-resources --prior-wheel PRIOR_WHEEL [--retire-file PATH] [--integration git|ci|pr] [--json]
+```
+
+Preview first. Add `--apply` and `--instruction-delivery-evidence RECEIPT` to the
+same reviewed selection to retire its local entry. `--prior-wheel` must match
+the old selection; it is read as data to recognize stock bytes. Repeat
+`--retire-file` only for explicitly selected unchanged editable seeds. Customized
+instruction seeds refuse migration. Historical and owner files stay intact.
+See the [migration procedure and resource map](harness-installation-and-upgrades.md#migrate-a-repository-copy-installation).
+On an external-resource installation, `upgrade --integration git` previews the
+Git attributes needed before hash-bound evidence. Repeat with `--apply` to write.
+
+## Editable files and lightweight identity (repository-copy layouts)
 
 `harnessctl upgrade TARGET --replace-file PATH` previews replacement of one
 editable supplied file. Add `--apply` to write it; repeat the option for more

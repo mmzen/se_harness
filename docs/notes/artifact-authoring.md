@@ -3,6 +3,12 @@
 Write what someone needs to understand, implement and check the change. The harness
 does not count words, sentences or code references, and does not require `SHALL`.
 Candidate checklists live in `templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md`.
+
+For an external-resource installation, the checklist and templates stay in the
+selected wheel. `harnessctl resources REPO --resource docs/engineering/ARTIFACT_AUTHORING.md --json`
+returns its exact local path. `create-artifact` reads its selected template and
+writes only the requested draft and required parent directories. Repository-copy
+installations keep their selected release's existing authoring procedure.
 The installed root policies remain governed by the currently released checker.
 
 A requirement needs a non-empty statement and an acceptance condition: an example,

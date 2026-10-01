@@ -12,12 +12,12 @@ This page takes you from an empty environment to your first useful command in a 
 
 The installed copy of SE Harness that judges a repository is called the evaluator. It must run from a Python virtual environment *outside* the repository checkout, at the exact released version the repository pins in `.engineering-harness.toml`. This separation is deliberate: the code in the checkout is the thing being judged, so the judge cannot run from inside it. Running from the checkout is refused.
 
-For a fresh project selecting released 0.19.0, choose an absolute external
+For a fresh project selecting released 0.20.0, choose an absolute external
 environment directory `EVAL`. Run these commands from outside the checkout:
 
 ```text
 python -m venv "EVAL"
-"CHECKER" -m pip install "se-harness==0.19.0"
+"CHECKER" -m pip install "se-harness==0.20.0"
 "CHECKER" -I -m se_harness --version
 ```
 
@@ -38,6 +38,12 @@ before its first health check. Plugin installation, evaluator setup and
 repository adoption are separate operations; see the [plugin walkthrough](plugin-installation-guide.md).
 
 ## First health check: `doctor`
+
+The successor candidate has a [minimal installation](harness-installation-and-upgrades.md#minimal-installation-successor-candidate):
+two repository selection files, resources in the selected wheel, and explicit
+Git/CI/PR integrations. Use that procedure only for its selected release or
+disposable candidate qualification. The published 0.20.0 route above keeps its
+existing repository-copy layout until an authorized migration.
 
 From the external working directory:
 

@@ -21,7 +21,7 @@ from se_harness.candidate_acceptance import (
     ScenarioResult,
     assess_candidate_wheel,
 )
-from se_harness.installer import HarnessError, apply_changes, plan_install, tracked_content
+from se_harness.installer import _plan_legacy_install, HarnessError, apply_changes, plan_install, tracked_content
 from tests.skill_contract_support import build_skill_manifest
 from se_harness.integrity import canonical_sha256
 from tests.mutation_guard_support import patch_mutation_authority
@@ -53,7 +53,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     def test_standard_install_manages_all_canonical_cores_and_thin_host_surfaces(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
-            changes, old_lock = plan_install(target, project_name="Agentic Fixture", mode="init")
+            changes, old_lock = _plan_legacy_install(target, project_name="Agentic Fixture", mode="init")
             skill_changes = [item for item in changes if item.path.startswith(".agents/skills/")]
             self.assertEqual(
                 [
@@ -95,7 +95,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     def test_agents_only_upgrade_adds_host_surfaces_without_changing_orientation(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
-            changes, old_lock = plan_install(target, project_name="Phase 3 Fixture", mode="init")
+            changes, old_lock = _plan_legacy_install(target, project_name="Phase 3 Fixture", mode="init")
             phase3_only = [
                 item
                 for item in changes
@@ -130,7 +130,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     def test_standard_upgrade_reports_customized_skills_without_overwriting_them(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
-            changes, old_lock = plan_install(target, project_name="Agentic Fixture", mode="init")
+            changes, old_lock = _plan_legacy_install(target, project_name="Agentic Fixture", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
             customized_files = {}
             for relative in (
@@ -152,7 +152,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     def test_standard_upgrade_preserves_a_retired_customized_owner_pointer(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
-            changes, old_lock = plan_install(target, project_name="Policy Fixture", mode="init")
+            changes, old_lock = _plan_legacy_install(target, project_name="Policy Fixture", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
             policy = target / "docs/engineering/TECHNICAL_COMMUNICATION.md"
             released = REPOSITORY_ROOT / 'tests/fixtures/progressive-discovery/released-0.19.0/TECHNICAL_COMMUNICATION.md'
@@ -202,7 +202,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     )
 
     def install_root_with_leaving_set_paths(self, target: Path) -> dict[str, bytes]:
-        changes, old_lock = plan_install(target, project_name="Leaving Set", mode="init")
+        changes, old_lock = _plan_legacy_install(target, project_name="Leaving Set", mode="init")
         apply_changes(target, changes, old_lock, allow_updates=False)
         lock_path = target / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
@@ -267,7 +267,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     def test_standard_upgrade_retires_seed_and_missing_leaving_set_entries_silently(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
-            changes, old_lock = plan_install(target, project_name="Leaving Set", mode="init")
+            changes, old_lock = _plan_legacy_install(target, project_name="Leaving Set", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
             lock_path = target / ".engineering-harness.lock"
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
@@ -293,7 +293,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     def test_standard_upgrade_removes_a_leaving_set_fragment_block_preserving_owner_content(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
-            changes, old_lock = plan_install(target, project_name="Leaving Set", mode="init")
+            changes, old_lock = _plan_legacy_install(target, project_name="Leaving Set", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
             lock_path = target / ".engineering-harness.lock"
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
@@ -368,7 +368,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     def test_alpha_can_convert_legacy_controls_in_a_disposable_repository(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
-            changes, old_lock = plan_install(target, project_name="se_harness", mode="init")
+            changes, old_lock = _plan_legacy_install(target, project_name="se_harness", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
 
             legacy_paths = (
@@ -526,7 +526,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     def test_evaluator_evidence_bytes_are_portable_across_git_checkouts(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
-            changes, old_lock = plan_install(target, project_name="Attributes", mode="init")
+            changes, old_lock = _plan_legacy_install(target, project_name="Attributes", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
             # WO-HBI-005: the candidate fragment carries only the template-region
             # evaluator-evidence rule; the migration-protocol rules that only this
@@ -638,7 +638,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
     def test_standard_upgrade_restores_every_file_after_interrupted_apply(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
-            changes, old_lock = plan_install(target, project_name="Transaction", mode="init")
+            changes, old_lock = _plan_legacy_install(target, project_name="Transaction", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
 
             lock_path = target / ".engineering-harness.lock"

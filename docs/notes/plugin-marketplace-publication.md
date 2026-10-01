@@ -15,8 +15,12 @@ Documentation integration and final closeout require their own observations.
 For any new assembly, first require the selected RLS to be released and its wheel to be independently
 available from the public release. Compare the downloaded wheel SHA-256 with
 that record's distribution binding. A local candidate wheel does not satisfy
-this prerequisite. Use the checkout's selected released evaluator. The maintenance checkout
-selects 0.19.0; current main selects 0.20.0. This publication adopts neither.
+this prerequisite. Use the checkout's selected released evaluator. The maintenance
+checkout selects 0.19.0; current main selects 0.20.1 after WO-HUP-025.
+Publication does not change a repository's selection. A successor plugin may
+deliver external wheel resources and session activation; publication must
+qualify those exact package bytes and must not imply that existing repositories
+adopted the new layout.
 
 From the source checkout, replace every uppercase placeholder below. Read
 `RELEASE_COMMIT`, `RLS_PATH` and `WHEEL_SHA256` from the actual released record

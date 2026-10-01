@@ -178,7 +178,7 @@ class SimplePluginTests(unittest.TestCase):
     def test_real_setup_create_reuse_and_repair(self):
         wheel = Path(os.environ['SE_HARNESS_TEST_PLUGIN_WHEEL']).resolve()
         python = os.environ.get('SE_HARNESS_TEST_PLUGIN_PYTHON', sys.executable)
-        subprocess.run([python, '-I', '-m', 'se_harness', 'init', str(self.target), '--project-name', 'Plugin fixture'], check=True,
+        subprocess.run([python, '-I', '-m', 'se_harness', 'init', str(self.target), '--project-name', 'Plugin fixture', '--integration', 'git'], check=True,
                        cwd=self.base, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         argv = [python, '-I', str(SETUP), '--target', str(self.target), '--data-root', str(self.base/'private'), '--wheel', str(wheel)]
         for attempt in range(2):
@@ -195,10 +195,12 @@ class SimplePluginTests(unittest.TestCase):
                 self.assertNotEqual(0, refused.returncode)
                 self.assertFalse(package.exists())
                 package.write_bytes(original)
-        (self.target/'ENGINEERING_HARNESS.md').write_text('changed managed content')
+        managed = self.target/'.gitattributes'
+        self.assertTrue(managed.is_file())
+        managed.write_text('changed managed content')
         failed = subprocess.run(argv, cwd=self.base, capture_output=True)
         self.assertNotEqual(0, failed.returncode)
-        self.assertIn(b'ENGINEERING_HARNESS.md', failed.stdout)
+        self.assertIn(b'.gitattributes', failed.stdout)
 
 
 if __name__ == '__main__':
