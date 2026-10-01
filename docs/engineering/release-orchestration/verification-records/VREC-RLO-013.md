@@ -2,7 +2,7 @@
 id = "VREC-RLO-013"
 type = "verification_record"
 title = "Verification candidate for WO-RLO-013"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualifica
 evaluator_evidence_path = "docs/engineering/release-orchestration/evidence/VREC-RLO-013-evaluator.json"
 evaluator_evidence_sha256 = "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26"
 
+verified_at = "2026-10-01T21:03:47Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLO-013"]
 conforms_to = ["VER-RLO-010"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-01T21:03:47Z"
+decided_by = "assurance-owner"
+reason = "Human mmzen: I verify VREC-RLO-013. Accepts verification of WO-RLO-013 under VER-RLO-010 at candidate 931945180bbaa0d1932b055a426e5b7e407a83ce with reviewed ready record SHA256 b24fe38526d2720dffa715da75ad5aa55c4f47797904fd574f257c27065eaaff and evaluator evidence SHA256 18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26. Codex applies the actual human decision using the previously approved 0.20.1 assurance-owner compatibility label; mmzen remains the human decision-maker. This decision does not verify the aggregate v0.21.0 candidate or waive its desktop criterion."
 +++
 
 # Verification Record Candidate
