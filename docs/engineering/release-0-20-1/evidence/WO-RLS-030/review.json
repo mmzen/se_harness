@@ -1,0 +1,38 @@
+{
+  "reviewer": "Codex",
+  "work_order": "WO-RLS-030",
+  "verification": "VER-RLS-029",
+  "requirement": "REQ-RLO-019",
+  "result": "pass for prepared correction",
+  "implementation": "Exactly one sentence restored in README.md: It does not download the harness from PyPI.",
+  "tests_changed": false,
+  "complexity": "Restore the omitted clarification; reuse existing tests and tools. No new mechanism, package or behavior.",
+  "focused": {
+    "tests": 62,
+    "passed": 61,
+    "skipped": 1,
+    "evidence": "commands/focused-tests.json"
+  },
+  "source_regression": {
+    "tests": 1189,
+    "passed": 1171,
+    "skipped": 18,
+    "failures": 0,
+    "tested_commit": "0700cd0da99c4a732399c052f85f14eb1a0d2001",
+    "evidence": "full-source-summary.json",
+    "limits": "The existing parallel runner reports the aggregate skip count without individual reasons. The failing onboarding check and README bounds pass in the focused suite. CI will still assess the PR candidate."
+  },
+  "public_observations": "Prior verification evidence and exact public revision remain unchanged; observations retain their original times and support limits.",
+  "preserved": [
+    "WO-RLS-029 history",
+    "verified VREC-PLG-028 and its evidence",
+    "VER-RLS-029",
+    "published plugin/evaluator bytes"
+  ],
+  "pending": [
+    "Aggregate VREC-PLG-029 preparation and human decision",
+    "Authorized PR #513 update and new CI",
+    "Documentation merge and public delivery closeout",
+    "Separate latest/last authorization"
+  ]
+}

@@ -2,7 +2,7 @@
 id = "WO-RLS-030"
 type = "work_order"
 title = "Restore the README offline setup clarification"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
 updated = "2026-10-01"
@@ -40,6 +40,13 @@ to = "in_progress"
 decided_at = "2026-10-01T10:51:31Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-01T10:58:59Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Restore the README offline setup clarification
