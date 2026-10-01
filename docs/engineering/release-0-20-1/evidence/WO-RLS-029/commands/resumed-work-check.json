@@ -1,0 +1,335 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--artifact",
+    "WO-RLS-029",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "WO-RLS-029",
+      "artifacts": [
+        "WO-RLS-029"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "CAP-RLO-004",
+        "INT-RLO-001",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "SPEC-RLO-006",
+        "VER-RLS-029"
+      ],
+      "dependencies": [],
+      "declared_paths": [
+        "docs/engineering/instruction-architecture/README.md",
+        "docs/engineering/plugin-integration/README.md",
+        "docs/engineering/release-0-20-1/",
+        "docs/notes/developing-se-harness.md",
+        "docs/notes/plugin-installation-guide.md",
+        "docs/notes/plugin-marketplace-publication.md",
+        "docs/notes/release-delivery-completion.md",
+        "README.md",
+        "tests/plugin_integration/package_assembly/test_refresh_guidance.py",
+        "tests/test_progressive_documentation.py"
+      ],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "status": "not_assessable",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-WO-PREPARE-VREC",
+      "current_step": "STEP-WO-PREPARE-VREC-CAPTURE",
+      "steps": [
+        {
+          "id": "STEP-WO-PREPARE-VREC-CAPTURE",
+          "kind": "command",
+          "gate_ids": [
+            "QG-G4-CANDIDATE-READY"
+          ],
+          "effects": [
+            "Prepare one ready VREC using the selected approved inputs."
+          ],
+          "non_effects": [
+            "Substitute inspected record, verification and evidence inputs before running this command. Preparation does not verify WO-RLS-029."
+          ],
+          "argv": [
+            "harnessctl",
+            "capture-verification",
+            ".",
+            "--work-order",
+            "WO-RLS-029",
+            "--owner",
+            "delegated-executor",
+            "--id",
+            "VREC-...",
+            "--verification",
+            "VER-...",
+            "--evidence",
+            "..."
+          ],
+          "corrective": {
+            "QGP-G4C-STATUS": {
+              "kind": "response",
+              "value": "Resolve QGP-G4C-STATUS for WO-RLS-029 using the reported candidate-readiness failure, then retry preparation."
+            },
+            "QGP-G4C-GRAPH": {
+              "kind": "response",
+              "value": "Resolve QGP-G4C-GRAPH for WO-RLS-029 using the reported candidate-readiness failure, then retry preparation."
+            },
+            "QGP-G4C-INTEGRITY": {
+              "kind": "response",
+              "value": "Resolve QGP-G4C-INTEGRITY for WO-RLS-029 using the reported candidate-readiness failure, then retry preparation."
+            }
+          }
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "WO-RLS-029",
+          "status": "implemented"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-RLS-029",
+          "status": "implemented"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 54
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "WO-RLS-029 is implemented; no assurance decision was inferred."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "WO-RLS-029 is implemented."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-PREPARE-VREC",
+        "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "capture-verification",
+          ".",
+          "--work-order",
+          "WO-RLS-029",
+          "--owner",
+          "delegated-executor",
+          "--id",
+          "VREC-...",
+          "--verification",
+          "VER-...",
+          "--evidence",
+          "..."
+        ]
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-WO-PREPARE-VREC",
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "prepare-the-verification-record"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+              "heading": "verification-coverage",
+              "when": "Before preparing the verification record."
+            }
+          ],
+          "steps": {
+            "STEP-WO-PREPARE-VREC-CAPTURE": {
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "prepare-the-verification-record"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+                  "heading": "verification-coverage",
+                  "when": "Before preparing the verification record."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-WO-PREPARE-VREC-CAPTURE",
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "prepare-the-verification-record"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+              "heading": "verification-coverage",
+              "when": "Before preparing the verification record."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "CAP-RLO-004",
+        "INT-RLO-001",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "SPEC-RLO-006",
+        "VER-RLS-029",
+        "WO-RLS-029"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ],
+      "formal_artifacts": [
+        {
+          "id": "CAP-RLO-004",
+          "file": "docs/engineering/release-orchestration/capabilities/CAP-RLO-004.md"
+        },
+        {
+          "id": "INT-RLO-001",
+          "file": "docs/engineering/release-orchestration/intent/INT-RLO-001.md"
+        },
+        {
+          "id": "REQ-RLO-019",
+          "file": "docs/engineering/release-orchestration/requirements/REQ-RLO-019.md"
+        },
+        {
+          "id": "REQ-RLO-020",
+          "file": "docs/engineering/release-orchestration/requirements/REQ-RLO-020.md"
+        },
+        {
+          "id": "SPEC-RLO-006",
+          "file": "docs/engineering/release-orchestration/specifications/SPEC-RLO-006.md"
+        },
+        {
+          "id": "VER-RLS-029",
+          "file": "docs/engineering/release-0-20-1/verification/VER-RLS-029.md"
+        },
+        {
+          "id": "WO-RLS-029",
+          "file": "docs/engineering/release-0-20-1/work-orders/WO-RLS-029.md"
+        }
+      ]
+    },
+    "result_sha256": "3ce2c1f1b9fb097e3646dad41bc4596c2f9f0b2dead2043c159168b188b9750b",
+    "context": {
+      "reading_manifest": [
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/release-orchestration/intent/INT-RLO-001.md",
+        "docs/engineering/release-orchestration/capabilities/CAP-RLO-004.md",
+        "docs/engineering/release-orchestration/requirements/REQ-RLO-019.md",
+        "docs/engineering/release-orchestration/requirements/REQ-RLO-020.md",
+        "docs/engineering/release-orchestration/specifications/SPEC-RLO-006.md",
+        "docs/engineering/release-0-20-1/verification/VER-RLS-029.md",
+        "docs/engineering/release-0-20-1/work-orders/WO-RLS-029.md"
+      ],
+      "governing": [
+        "CAP-RLO-004",
+        "INT-RLO-001",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "SPEC-RLO-006",
+        "VER-RLS-029"
+      ],
+      "declared_paths": [
+        "README.md",
+        "docs/notes/plugin-installation-guide.md",
+        "docs/notes/plugin-marketplace-publication.md",
+        "docs/notes/developing-se-harness.md",
+        "docs/notes/release-delivery-completion.md",
+        "docs/engineering/plugin-integration/README.md",
+        "docs/engineering/instruction-architecture/README.md",
+        "docs/engineering/release-0-20-1/",
+        "tests/test_progressive_documentation.py",
+        "tests/plugin_integration/package_assembly/test_refresh_guidance.py"
+      ],
+      "state": {
+        "status": "implemented",
+        "family": "work_order"
+      },
+      "next": {
+        "argv": [
+          "harnessctl",
+          "capture-verification",
+          ".",
+          "--work-order",
+          "WO-RLS-029",
+          "--owner",
+          "delegated-executor",
+          "--id",
+          "VREC-...",
+          "--verification",
+          "VER-...",
+          "--evidence",
+          "..."
+        ],
+        "procedure_id": "PROC-WO-PREPARE-VREC",
+        "step_id": "STEP-WO-PREPARE-VREC-CAPTURE"
+      },
+      "decision_required": null
+    }
+  },
+  "seconds": 4.776281400001608
+}

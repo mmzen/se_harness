@@ -1,0 +1,46 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "preflight",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--work-order",
+    "WO-RLS-030",
+    "--phase",
+    "review",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "assurance": {
+      "commit_bound_verification": "required",
+      "decided_by": "mmzen",
+      "rationale": "Human mmzen approved required commit-bound verification for this README correction because current setup instructions are trusted information used by consumers and later integration decisions."
+    },
+    "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+    "background": [],
+    "diagnostics": [],
+    "phase": "review",
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/release-orchestration/intent/INT-RLO-001.md",
+      "docs/engineering/release-orchestration/capabilities/CAP-RLO-004.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-019.md",
+      "docs/engineering/release-orchestration/specifications/SPEC-RLO-006.md",
+      "docs/engineering/release-0-20-1/verification/VER-RLS-029.md",
+      "docs/engineering/release-0-20-1/work-orders/WO-RLS-030.md"
+    ],
+    "ready": true,
+    "schema": "se-harness-preflight-v2",
+    "skew": [],
+    "work_order": {
+      "id": "WO-RLS-030",
+      "path": "docs/engineering/release-0-20-1/work-orders/WO-RLS-030.md",
+      "status": "in_progress"
+    }
+  },
+  "seconds": 4.815352300000086
+}

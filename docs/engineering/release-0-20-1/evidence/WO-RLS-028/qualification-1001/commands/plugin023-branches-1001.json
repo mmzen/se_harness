@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "branch",
+    "-vv",
+    "--list",
+    "*plugin*",
+    "*release-0-20*"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "  work/plugin-0-2-2                   4dcc90e0 [origin/main: behind 56] Record human verification of VREC-PLG-025\n  work/plugin-0-2-3                   07bb5e5a Retain the authorized 0.20.1 release decision and transport evidence\n  work/plugin-resource-delivery       f768efc0 Record human verification of VREC-IAR-019\n  work/release-0-20-0                 a8c870d2 [origin/work/release-0-20-0] Record human authorization of release RLS-SEH-029\n  work/release-0-20-1-governance      a0e91f65 [origin/main: behind 7] Merge pull request #511 from mmzen/work/release-0-20-1-governance\n* work/release-0-20-1-preparation     726d4534 Retain the authorized 0.20.1 release decision and transport evidence\n  work/release-0-20-1-publication-fix 990ad140 docs(release): record VREC-RLO-012 assurance decision\n",
+    "stderr": ""
+  },
+  "seconds": 0.06297119999908318
+}

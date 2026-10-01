@@ -2,19 +2,20 @@
 
 ## Current instruction architecture
 
-Released SE Harness 0.20.0 uses a compact `ENGINEERING_HARNESS.md` entry and
+Public SE Harness 0.20.1 keeps the compact `ENGINEERING_HARNESS.md` entry and
 action-selected guides under `docs/engineering/harness/`. `AGENTS.md` belongs
-entirely to the repository owner. The released evaluator supplies lifecycle
-results and instruction discovery. This repository adopted that release under
-WO-HUP-024; source preparation does not change its selected evaluator.
+entirely to the repository owner. The evaluator supplies lifecycle results and
+instruction discovery. [Plugin 0.2.3 public evidence](../release-0-20-1/evidence/WO-RLS-029/README.md)
+covers delivery of this maintenance package.
 
-The [cleanup package](proposals/instruction-cleanup/README.md) is implemented
-and verified. Its instruction refinements and retirement of six default guide
-seeds are included in the published [0.20.0 release](../release-0-20-0/README.md).
-The [public plugin 0.2.2 evidence](../release-0-20-0/evidence/WO-PLG-031/README.md)
-confirms delivery of the corresponding instructions. WO-HUP-024 adopts
-0.20.0 in this repository. The six existing owner pointers are preserved; their
-removal remains a separate authorized stage after consumer and delivery checks.
+This repository still selects evaluator 0.20.0 under WO-HUP-024. Adoption of
+0.20.1 is separate. The cleanup refinements were introduced in the
+[0.20.0 release](../release-0-20-0/README.md); subsequent cleanup records below
+retain their own scope and decisions.
+
+The plugin-owned instruction resources and minimal repository layout remain
+unreleased. DEC-IAR-004 selects compatibility release, separate adoption and
+then independent qualification of that successor.
 
 ## Historical architecture packets
 

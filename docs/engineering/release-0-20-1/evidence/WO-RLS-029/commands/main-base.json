@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "rev-parse",
+    "HEAD"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "489814dd15bff0b4f93151fab04acd69cec47d0c\n",
+    "stderr": ""
+  },
+  "seconds": 0.03057210000042687
+}

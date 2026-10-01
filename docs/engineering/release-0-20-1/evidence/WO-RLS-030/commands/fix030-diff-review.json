@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "diff",
+    "fe048340d39461cde161bfafd7f486b51a4c9ca6",
+    "--",
+    "README.md",
+    "tests"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "diff --git a/README.md b/README.md\nindex 94946f08..9b5e394d 100644\n--- a/README.md\n+++ b/README.md\n@@ -45,7 +45,7 @@ delivery steps.\n \n Observed public delivery (2026-10-01): Plugin **0.2.3** bundles released **SE Harness 0.20.1**. Public fresh-install and 0.2.2-to-0.2.3 update checks passed on both Windows CLIs. Native startup, manual compaction and resume evidence applies to the identical installed package, repository fixtures and host versions. See the [qualification and limits](docs/engineering/release-0-20-1/evidence/WO-RLS-029/README.md).\n \n-Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n+Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. It does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n \n This maintenance release keeps the existing repository instruction layout.\n The work to move instructions and templates into the plugin remains unreleased.\n",
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  "seconds": 0.08429810000234284
+}

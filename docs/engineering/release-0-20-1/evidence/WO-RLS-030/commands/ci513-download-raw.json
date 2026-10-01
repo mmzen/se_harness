@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "run",
+    "download",
+    "36849457709",
+    "--repo",
+    "mmzen/se_harness",
+    "--name",
+    "candidate-source-raw",
+    "--dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-evidence-1001\\ci513-source-raw"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": ""
+  },
+  "seconds": 1.1624154999990424
+}

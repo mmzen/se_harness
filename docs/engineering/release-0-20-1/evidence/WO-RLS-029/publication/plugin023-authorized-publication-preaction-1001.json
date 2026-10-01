@@ -1,0 +1,291 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "--artifact",
+    "VREC-PLG-027",
+    "--checkpoint",
+    "pre-action",
+    "--procedure",
+    "PROC-REPOSITORY-INTEGRATION",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {
+      "commit": "ba3e434fb864c701bbb1dada17f5a94bea30230d",
+      "git_object_format": "sha1"
+    },
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "VREC-PLG-027",
+      "artifacts": [
+        "VREC-PLG-027"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "ADR-PLG-001",
+        "ARCH-PLG-001",
+        "CAP-DST-001",
+        "CAP-RLO-004",
+        "INT-DST-001",
+        "INT-RLO-001",
+        "REQ-PLG-002",
+        "REQ-RLO-018",
+        "SPEC-PLG-001",
+        "SPEC-RLO-006",
+        "VER-RLS-028",
+        "WO-RLS-028"
+      ],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-VREC-DELIVER",
+      "procedure_id": "PROC-REPOSITORY-INTEGRATION",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G4-VERIFIED-COVERAGE",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G4V-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:VREC-PLG-027"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G4V-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:pre-action"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G4V-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:VREC-PLG-027"
+                }
+              ],
+              "message": "No open decision blocks VREC-PLG-027."
+            }
+          ]
+        }
+      ],
+      "formal_snapshot_sha256": "1c7408e32adbf48a042d028d5b5706785729d70a390e761b489a02b3ee086153",
+      "change_set_source": "arguments"
+    },
+    "procedure": {
+      "id": "PROC-REPOSITORY-INTEGRATION",
+      "current_step": "STEP-REPOSITORY-INTEGRATION",
+      "steps": [
+        {
+          "id": "STEP-REPOSITORY-INTEGRATION",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G4-VERIFIED-COVERAGE"
+          ],
+          "effects": [
+            "Permits only the named repository action."
+          ],
+          "non_effects": [
+            "No action occurs from this decision request."
+          ],
+          "decision_right": "DR-DELIVERY-SELECT",
+          "role": "repository-owner",
+          "artifact": "VREC-PLG-027",
+          "decision": "the exact repository integration action",
+          "outcomes": [
+            "authorize",
+            "stop"
+          ],
+          "response": "Authorize the exact repository integration action for VREC-PLG-027: <action>."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "VREC-PLG-027",
+          "status": "verified"
+        }
+      ],
+      "after": [
+        {
+          "id": "VREC-PLG-027",
+          "status": "verified"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 52
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated pre-action compliance for VREC-PLG-027."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VREC-PLG-027 is verified."
+      ],
+      "decision_required": {
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner",
+        "artifact": "VREC-PLG-027",
+        "decision": "the exact repository integration action",
+        "outcomes": [
+          "authorize",
+          "stop"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-REPOSITORY-INTEGRATION",
+        "step_id": "STEP-REPOSITORY-INTEGRATION",
+        "action": "the exact repository integration action"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "Authorize the exact repository integration action for VREC-PLG-027: <action>."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+      ]
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-REPOSITORY-INTEGRATION",
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/PULL_REQUEST.md",
+              "heading": "check-a-governed-pull-request",
+              "when": "When the selected external action prepares or checks a pull request."
+            }
+          ],
+          "steps": {
+            "STEP-REPOSITORY-INTEGRATION": {
+              "location": {
+                "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                "heading": "confirm-authority-for-the-external-action"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                },
+                {
+                  "file": "docs/engineering/harness/PULL_REQUEST.md",
+                  "heading": "check-a-governed-pull-request",
+                  "when": "When the selected external action prepares or checks a pull request."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-REPOSITORY-INTEGRATION",
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/PULL_REQUEST.md",
+              "heading": "check-a-governed-pull-request",
+              "when": "When the selected external action prepares or checks a pull request."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "ADR-PLG-001",
+        "ARCH-PLG-001",
+        "CAP-DST-001",
+        "CAP-RLO-004",
+        "INT-DST-001",
+        "INT-RLO-001",
+        "REQ-PLG-002",
+        "REQ-RLO-018",
+        "SPEC-PLG-001",
+        "SPEC-RLO-006",
+        "VER-RLS-028",
+        "VREC-PLG-027",
+        "WO-RLS-028"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "33f18a10d83868a8c0b8b1c0463319e53b54e32835d6240ec9b47c39e9c6c4a1"
+  },
+  "seconds": 4.826395899999625
+}

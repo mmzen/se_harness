@@ -1,0 +1,1183 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--artifact",
+    "WO-RLS-029",
+    "--checkpoint",
+    "scope",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/VREC-PLG-027-evaluator.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/verification-records/VREC-PLG-027.md",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/RLS-SEH-030/delivery-plan-qualified.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/handoff.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/assessment.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/claude-assembly-inventory.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/codex-assembly-inventory.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/evidence-index.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/PACKAGE-IDENTITY.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/README.md",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-assembly-baseline-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authenticated-profile-claude-before-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authenticated-profile-codex-before-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-body-update.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-commit.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-event.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-handoff-bind.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-prcheck-final.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-prcheck.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-pre-action-bind.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-preaction.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-push.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-remote-before.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-stage.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-target.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-whitespace.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-branch-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-branches-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-build-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-check-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-complete-baseline-paths-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-distribution-commit-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-evidence-commit.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-evidence-stage.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fetch-parents-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-apply-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-doctor-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-git-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-ownership-apply-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-ownership-preview-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-preview-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-apply-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-doctor-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-git-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-ownership-apply-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-ownership-preview-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-preview-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-marketplace-identity-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-add-local-source-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-after-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-before-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-install-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-remove-prior-source-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-version-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-add-local-source-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-after-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-before-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-install-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-remove-prior-source-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-version-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-install-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-install-retry-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-offline-install-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-venv-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-package-regression-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-package-tests-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-previous-public-identity-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-refusal-acceptance-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-context-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-git-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-head-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-identity-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-source-paths-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-switch-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-create-pr.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-event.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-existing-pr.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-prcheck-final.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-prcheck.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-preaction.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-push.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-target.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-commit-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-diff-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-handoff-bind-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-preaction-bind-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-stage-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-validate-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-whitespace-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-unused-version-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-vrec-id-audit-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-worktrees-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-checker-version.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-checker-version.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-doctor.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-doctor.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-init-preview.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-init-preview.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-init.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-init.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-install.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-install.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-installed-list.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-installed-list.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-marketplace-add.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-marketplace-add.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-marketplace-validate.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-marketplace-validate.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-native-discovery.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-native-discovery.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-provider-preview.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-provider-preview.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-provider.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-provider.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-setup-empty-project.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-setup-empty-project.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-setup-repeat.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-setup-repeat.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-version.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-version.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-checker-version.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-checker-version.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-doctor.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-doctor.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-init-preview.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-init-preview.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-init.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-init.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-install.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-install.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-marketplace-add.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-marketplace-add.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-native-discovery.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-native-discovery.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-provider-preview.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-provider-preview.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-provider.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-provider.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-setup-empty-project.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-setup-empty-project.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-setup-repeat.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-setup-repeat.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-version.stderr",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-version.stdout",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/commands.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/progress.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/summary.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/fixture-identities.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/installations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/publication/public-install-qualification.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/publication/release-result.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/publication/release030-public-bytes-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/publication/release030-publication-confirmed-1001.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/case-summary.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/actions.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/claude-inventory.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/codex-inventory.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/independent-calculations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/observations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/stderr.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/stdout.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C02/actions.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C02/observations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C02/stderr.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C02/stdout.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C03/actions.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C03/observations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C03/stderr.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C03/stdout.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/actions.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/divergent-digests.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/observations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/stderr.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/stdout.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/actions.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/claude-listing.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/codex-listing.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/observations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/stderr.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/stdout.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/actions.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/observations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/sentinel-before-after.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/stderr.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/stdout.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/actions.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/before-inventory.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/independent-listing.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/observations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/omitted-inventory.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/stderr.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/stdout.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/actions.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/final-listing.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/interruption-trace.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/observations.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/partial-listing.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/stderr.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/stdout.txt",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-compact/assessment.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-compact/compact.events.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-compact/compact.hooks.log",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-compact/compact.invocation.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-resume/assessment.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-resume/resume.events.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-resume/resume.hooks.log",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-resume/resume.invocation.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-startup/assessment.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-startup/startup.events.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-startup/startup.hooks.log",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-startup/startup.invocation.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/codex-session/assessment.json",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/codex-session/native-events.jsonl",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/codex-session/resumed/native-events.jsonl",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/work-orders/WO-RLS-028.md",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/WO-RLS-028-handoff.md",
+    "--changed-path",
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/WO-RLS-028-pre-action.md",
+    "--changes-complete",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "WO-RLS-029",
+      "artifacts": [
+        "WO-RLS-029"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "CAP-RLO-004",
+        "INT-RLO-001",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "SPEC-RLO-006",
+        "VER-RLS-029"
+      ],
+      "dependencies": [],
+      "declared_paths": [
+        "docs/engineering/instruction-architecture/README.md",
+        "docs/engineering/plugin-integration/README.md",
+        "docs/engineering/release-0-20-1/",
+        "docs/notes/developing-se-harness.md",
+        "docs/notes/plugin-installation-guide.md",
+        "docs/notes/plugin-marketplace-publication.md",
+        "docs/notes/release-delivery-completion.md",
+        "README.md",
+        "tests/plugin_integration/package_assembly/test_refresh_guidance.py",
+        "tests/test_progressive_documentation.py"
+      ],
+      "changed_paths": [
+        "docs/engineering/release-0-20-1/evidence/RLS-SEH-030/delivery-plan-qualified.json",
+        "docs/engineering/release-0-20-1/evidence/VREC-PLG-027-evaluator.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/handoff.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/assessment.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/claude-assembly-inventory.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/codex-assembly-inventory.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-assembly-baseline-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authenticated-profile-claude-before-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authenticated-profile-codex-before-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-body-update.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-commit.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-event.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-handoff-bind.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-prcheck-final.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-prcheck.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-pre-action-bind.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-preaction.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-push.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-remote-before.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-stage.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-target.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-authorized-whitespace.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-branch-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-branches-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-build-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-check-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-complete-baseline-paths-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-distribution-commit-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-evidence-commit.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-evidence-stage.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fetch-parents-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-apply-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-doctor-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-git-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-ownership-apply-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-ownership-preview-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-claude-preview-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-apply-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-doctor-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-git-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-ownership-apply-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-ownership-preview-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-fixture-codex-preview-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-marketplace-identity-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-add-local-source-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-after-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-before-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-install-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-remove-prior-source-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-claude-version-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-add-local-source-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-after-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-before-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-install-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-remove-prior-source-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-codex-version-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-install-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-install-retry-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-offline-install-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-native-venv-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-package-regression-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-package-tests-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-previous-public-identity-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-refusal-acceptance-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-context-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-git-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-head-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-identity-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-source-paths-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-resume-switch-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-create-pr.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-event.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-existing-pr.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-prcheck-final.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-prcheck.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-preaction.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-push.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-review-target.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-commit-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-diff-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-handoff-bind-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-preaction-bind-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-stage-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-validate-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-source-whitespace-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-unused-version-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-vrec-id-audit-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/commands/plugin023-worktrees-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/evidence-index.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-checker-version.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-checker-version.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-doctor.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-doctor.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-init-preview.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-init-preview.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-init.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-init.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-install.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-install.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-installed-list.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-installed-list.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-marketplace-add.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-marketplace-add.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-marketplace-validate.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-marketplace-validate.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-native-discovery.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-native-discovery.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-provider-preview.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-provider-preview.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-provider.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-provider.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-setup-empty-project.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-setup-empty-project.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-setup-repeat.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-setup-repeat.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-version.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/claude-version.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-checker-version.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-checker-version.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-doctor.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-doctor.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-init-preview.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-init-preview.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-init.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-init.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-install.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-install.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-marketplace-add.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-marketplace-add.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-native-discovery.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-native-discovery.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-provider-preview.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-provider-preview.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-provider.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-provider.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-setup-empty-project.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-setup-empty-project.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-setup-repeat.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-setup-repeat.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-version.stderr",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/codex-version.stdout",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/commands.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/progress.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/fresh-install/summary.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-compact/assessment.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-compact/compact.events.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-compact/compact.hooks.log",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-compact/compact.invocation.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-resume/assessment.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-resume/resume.events.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-resume/resume.hooks.log",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-resume/resume.invocation.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-startup/assessment.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-startup/startup.events.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-startup/startup.hooks.log",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/claude-startup/startup.invocation.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/codex-session/assessment.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/codex-session/native-events.jsonl",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/codex-session/resumed/native-events.jsonl",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/fixture-identities.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/native-sessions/installations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/PACKAGE-IDENTITY.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/publication/public-install-qualification.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/publication/release-result.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/publication/release030-public-bytes-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/publication/release030-publication-confirmed-1001.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/README.md",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/actions.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/claude-inventory.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/codex-inventory.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/independent-calculations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/observations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/stderr.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C01/stdout.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C02/actions.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C02/observations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C02/stderr.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C02/stdout.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C03/actions.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C03/observations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C03/stderr.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C03/stdout.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/actions.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/divergent-digests.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/observations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/stderr.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C04/stdout.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/actions.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/claude-listing.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/codex-listing.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/observations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/stderr.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C05/stdout.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/actions.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/observations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/sentinel-before-after.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/stderr.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C06/stdout.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/actions.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/before-inventory.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/independent-listing.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/observations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/omitted-inventory.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/stderr.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C07/stdout.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/actions.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/final-listing.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/interruption-trace.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/observations.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/partial-listing.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/stderr.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/C08/stdout.txt",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/refusal-cases/case-summary.json",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/WO-RLS-028-handoff.md",
+        "docs/engineering/release-0-20-1/evidence/WO-RLS-028/WO-RLS-028-pre-action.md",
+        "docs/engineering/release-0-20-1/verification-records/VREC-PLG-027.md",
+        "docs/engineering/release-0-20-1/work-orders/WO-RLS-028.md"
+      ],
+      "change_set_complete": true
+    },
+    "compliance": {
+      "checkpoint": "scope",
+      "workflow_rule_id": "WFL-WO-IMPLEMENT",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G4I-SCOPE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "WO-RLS-029:[execution_scope]"
+                }
+              ],
+              "message": "WO-RLS-029 declares 10 normalized scope path(s); this inspection grants no execution authority."
+            },
+            {
+              "id": "QGP-G4I-COMPLETE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "declared-change-set:WO-RLS-029"
+                }
+              ],
+              "message": "The caller explicitly asserted that the declared change set is complete."
+            },
+            {
+              "id": "QGP-G4I-PATHS",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "path",
+                  "reference": "declared-change-set:WO-RLS-029"
+                }
+              ],
+              "message": "All 217 declared changed path(s) are within execution scope."
+            }
+          ]
+        }
+      ],
+      "formal_snapshot_sha256": "651d843ea1124a4e01797098faa70e59717ff0da947ca2365f7dd64929af1300",
+      "change_set_source": "arguments"
+    },
+    "procedure": {
+      "id": "PROC-WO-IMPLEMENT",
+      "current_step": "STEP-WO-IMPLEMENT-PREVIEW",
+      "steps": [
+        {
+          "id": "STEP-WO-IMPLEMENT-CHECK",
+          "kind": "command",
+          "gate_ids": [
+            "QG-G4-IMPLEMENTATION-EVIDENCE"
+          ],
+          "effects": [
+            "Evaluated implementation handoff for WO-RLS-029."
+          ],
+          "non_effects": [
+            "A checkpoint does not complete or verify work."
+          ],
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-RLS-029",
+            "--checkpoint",
+            "handoff"
+          ],
+          "corrective": {
+            "QGP-G4I-STATUS": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-START"
+            },
+            "QGP-G4I-GRAPH": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-INTEGRITY": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-SCOPE": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-SELECT"
+            },
+            "QGP-G4I-COMPLETE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-RLS-029",
+                "--checkpoint",
+                "handoff",
+                "--from-git",
+                "<base>"
+              ]
+            },
+            "QGP-G4I-PATHS": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-PREFLIGHT": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "preflight",
+                ".",
+                "--work-order",
+                "WO-RLS-029",
+                "--phase",
+                "review"
+              ]
+            },
+            "QGP-G4I-EVIDENCE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "evidence",
+                ".",
+                "--artifact",
+                "WO-RLS-029",
+                "--checkpoint",
+                "handoff"
+              ]
+            },
+            "QGP-G4I-DECISION": {
+              "kind": "escalation",
+              "decision_right": "DR-DECISION-DISPOSE"
+            }
+          }
+        },
+        {
+          "id": "STEP-WO-IMPLEMENT-PREVIEW",
+          "kind": "command",
+          "gate_ids": [
+            "QG-G4-IMPLEMENTATION-EVIDENCE"
+          ],
+          "effects": [
+            "Plan completion of WO-RLS-029."
+          ],
+          "non_effects": [
+            "Completion does not verify, release or deliver the work."
+          ],
+          "argv": [
+            "harnessctl",
+            "transition",
+            ".",
+            "--set",
+            "WO-RLS-029=implemented",
+            "--decision",
+            "WO-RLS-029=delegated-executor"
+          ],
+          "corrective": {
+            "QGP-G4I-STATUS": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-START"
+            },
+            "QGP-G4I-GRAPH": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-INTEGRITY": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-SCOPE": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-SELECT"
+            },
+            "QGP-G4I-COMPLETE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-RLS-029",
+                "--checkpoint",
+                "handoff",
+                "--from-git",
+                "<base>"
+              ]
+            },
+            "QGP-G4I-PATHS": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-PREFLIGHT": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "preflight",
+                ".",
+                "--work-order",
+                "WO-RLS-029",
+                "--phase",
+                "review"
+              ]
+            },
+            "QGP-G4I-EVIDENCE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "evidence",
+                ".",
+                "--artifact",
+                "WO-RLS-029",
+                "--checkpoint",
+                "handoff"
+              ]
+            },
+            "QGP-G4I-DECISION": {
+              "kind": "escalation",
+              "decision_right": "DR-DECISION-DISPOSE"
+            }
+          }
+        },
+        {
+          "id": "STEP-WO-IMPLEMENT-APPLY",
+          "kind": "command",
+          "gate_ids": [
+            "QG-G4-IMPLEMENTATION-EVIDENCE"
+          ],
+          "effects": [
+            "Record completion of only WO-RLS-029 under its approved execution scope."
+          ],
+          "non_effects": [
+            "Completion does not verify, release or deliver the work."
+          ],
+          "argv": [
+            "harnessctl",
+            "transition",
+            ".",
+            "--set",
+            "WO-RLS-029=implemented",
+            "--decision",
+            "WO-RLS-029=delegated-executor",
+            "--apply"
+          ],
+          "corrective": {
+            "QGP-G4I-STATUS": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-START"
+            },
+            "QGP-G4I-GRAPH": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-INTEGRITY": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-SCOPE": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-SELECT"
+            },
+            "QGP-G4I-COMPLETE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-RLS-029",
+                "--checkpoint",
+                "handoff",
+                "--from-git",
+                "<base>"
+              ]
+            },
+            "QGP-G4I-PATHS": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-PREFLIGHT": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "preflight",
+                ".",
+                "--work-order",
+                "WO-RLS-029",
+                "--phase",
+                "review"
+              ]
+            },
+            "QGP-G4I-EVIDENCE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "evidence",
+                ".",
+                "--artifact",
+                "WO-RLS-029",
+                "--checkpoint",
+                "handoff"
+              ]
+            },
+            "QGP-G4I-DECISION": {
+              "kind": "escalation",
+              "decision_right": "DR-DECISION-DISPOSE"
+            }
+          }
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "WO-RLS-029",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-RLS-029",
+          "status": "in_progress"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 54
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated scope compliance for WO-RLS-029."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "WO-RLS-029 is in_progress."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-RLS-029=implemented",
+          "--decision",
+          "WO-RLS-029=delegated-executor"
+        ]
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-WO-IMPLEMENT",
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "retain-the-implementation-evidence"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ],
+          "steps": {
+            "STEP-WO-IMPLEMENT-CHECK": {
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "retain-the-implementation-evidence"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            },
+            "STEP-WO-IMPLEMENT-PREVIEW": {
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "record-implementation-completion"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            },
+            "STEP-WO-IMPLEMENT-APPLY": {
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "record-implementation-completion"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-WO-IMPLEMENT-PREVIEW",
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "record-implementation-completion"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "CAP-RLO-004",
+        "INT-RLO-001",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "SPEC-RLO-006",
+        "VER-RLS-029",
+        "WO-RLS-029"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "1359427f1b1169391a33fc9d8c087d87f665ef322490c398f0cf91af71ab48a5"
+  },
+  "seconds": 5.2951087999990705
+}

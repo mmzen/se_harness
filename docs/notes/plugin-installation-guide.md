@@ -1,10 +1,10 @@
 # Install or update the Verity Plane plugin
 
-The public marketplace observed on 2026-09-29 is plugin 0.2.2 with released
-evaluator 0.20.0 at `5662817f42994bd0dc9aabaa56891f9c298ab965`.
-Public fresh-install and 0.2.1-to-0.2.2 update checks passed on both Windows CLIs.
-See the [public confirmation evidence](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
-for native-delivery evidence reuse, actual commands and limits.
+The public marketplace observed on 2026-10-01 is plugin 0.2.3 with released
+evaluator 0.20.1 at `556d0faf83c32fd188409c5ba191552fad1522e1`.
+Public fresh-install and 0.2.2-to-0.2.3 update checks passed on both Windows CLIs.
+See the [public confirmation evidence](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md)
+for commands, exact native-evidence comparisons and limits.
 Installing this plugin does not upgrade a project's selected harness.
 
 ## Select the distribution
@@ -16,12 +16,14 @@ For candidate qualification, maintainers use the
 to produce an external directory with both complete host packages. Do not install
 the incomplete host folders directly from development source.
 
-The [assembly README](../../release/plugin-marketplace/README.md) now targets the
-published 0.2.2 composition. Its package links resolve in the assembled distribution.
-For the currently observed public tree, check `PACKAGE-IDENTITY.json` for
-plugin 0.2.2, evaluator 0.20.0, the accepted source
-commit and wheel SHA-256
-`7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0`.
+The [assembly README](../../release/plugin-marketplace/README.md) describes
+development source. The published maintenance package uses the separately
+qualified source `7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab`.
+Read the [published distribution guide](https://github.com/mmzen/se_harness/blob/556d0faf83c32fd188409c5ba191552fad1522e1/README.md)
+for its commands. Its `PACKAGE-IDENTITY.json` names plugin 0.2.3, evaluator
+0.20.1 and wheel SHA-256
+`300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764`.
+The plugin-owned minimal layout remains unreleased.
 
 ## Install in a disposable profile
 
@@ -132,19 +134,21 @@ gap; stop the affected governed action and resolve it before continuing.
 
 ## Qualification limits
 
-WO-PLG-030 retains native Windows qualification of plugin 0.2.2.
-WO-PLG-031 confirms the public fresh-install and update routes on
-Codex 0.158.0-alpha.2.1 and Claude Code 2.1.273. All four installed packages
-match the verified distribution. The earlier startup, manual compaction,
-resume and boundary checks are reused after exact package, fixture and host
-version comparison. Public Claude startup was checked again; Codex hook
-registration was checked again and still requires the user's normal trust step.
+WO-RLS-028 retains native Windows qualification of plugin 0.2.3, accepted in
+VREC-PLG-027. WO-RLS-029 confirms public fresh installation and updates from
+the preserved public 0.2.2 package on Codex CLI 0.159.2 and Claude Code 2.1.273.
+All 26 packaged files match on each of the four routes. Offline setup and
+released-evaluator identity checks pass for all four installed packages.
 
-One Codex marketplace refresh timed out while cloning. Its old installation
-remained intact; repeating the same native refresh succeeded. Both attempts
-are retained. Long disposable paths used process-local Git long-path support.
+The accepted startup, manual compaction and resume traces are reused after
+exact package, fixture and host-version comparisons. Public Claude startup
+and public Codex hook registration were checked again. Registration alone
+does not prove execution; Codex still requires its normal hook trust step.
+
 Desktop UI, automatic threshold compaction and other operating systems need
 separate evidence. Model sessions require valid host authentication.
+The [earlier 0.2.2 delivery report](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
+preserves its original host versions, failures and results.
 
 Historical development checks with Codex 0.154.0-alpha.6.2, Claude Code 2.1.266
 and a development 0.18.0 checker remain in

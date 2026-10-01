@@ -38,12 +38,17 @@ claude plugin install verity-plane@se-harness
 
 Start a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.
 
-The [0.20.0 evaluator / 0.2.2 plugin release package](docs/engineering/release-0-20-0/README.md)
-is published. The [public delivery evidence](docs/engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
-records exact package identities, both Windows CLI install/update routes and
-the remaining documentation integration step.
+The [0.20.1 evaluator / 0.2.3 plugin release package](docs/engineering/release-0-20-1/README.md)
+is published. The [public delivery evidence](docs/engineering/release-0-20-1/evidence/WO-RLS-029/README.md)
+records the exact package, both Windows CLI install/update routes and remaining
+delivery steps.
 
-Observed public delivery (2026-09-29): Plugin **0.2.2** bundles released **SE Harness 0.20.0**. Public fresh-install and 0.2.1-to-0.2.2 update checks passed on both Windows CLIs. Native startup, manual compaction, resume and boundary evidence applies to the identical installed package and repository-fixture bytes. See the [qualification and limits](docs/engineering/release-0-20-0/evidence/WO-PLG-031/README.md). Its startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
+Observed public delivery (2026-10-01): Plugin **0.2.3** bundles released **SE Harness 0.20.1**. Public fresh-install and 0.2.2-to-0.2.3 update checks passed on both Windows CLIs. Native startup, manual compaction and resume evidence applies to the identical installed package, repository fixtures and host versions. See the [qualification and limits](docs/engineering/release-0-20-1/evidence/WO-RLS-029/README.md).
+
+Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. It does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
+
+This maintenance release keeps the existing repository instruction layout.
+The work to move instructions and templates into the plugin remains unreleased.
 
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 

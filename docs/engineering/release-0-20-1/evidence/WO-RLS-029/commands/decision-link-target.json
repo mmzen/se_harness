@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "cat-file",
+    "-t",
+    "41bddd426ed63da213af01a8a9b4982b2f36c89e:docs/engineering/instruction-architecture/decisions/DEC-IAR-004.md"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 128,
+  "result": {
+    "stdout": "",
+    "stderr": "fatal: path 'docs/engineering/instruction-architecture/decisions/DEC-IAR-004.md' does not exist in '41bddd426ed63da213af01a8a9b4982b2f36c89e'\n"
+  },
+  "seconds": 0.03664980000030482
+}

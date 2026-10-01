@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "git",
+    "push",
+    "--porcelain",
+    "origin",
+    "07bb5e5a1a3ee4b6319e50ae3b7ee82aad2b3a42:refs/heads/work/plugin-0-2-3"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": "To https://github.com/mmzen/se_harness.git\n \t07bb5e5a1a3ee4b6319e50ae3b7ee82aad2b3a42:refs/heads/work/plugin-0-2-3\t94a6d569..07bb5e5a\nDone\n",
+    "stderr": ""
+  },
+  "seconds": 2.3057714999999916
+}

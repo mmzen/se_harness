@@ -1,0 +1,28 @@
+{
+  "work_order": "WO-RLS-028",
+  "verification": "VER-RLS-028",
+  "source_commit": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab",
+  "release_revision": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+  "release_record": "RLS-SEH-030",
+  "plugin_version": "0.2.3",
+  "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+  "package_identity_sha256": "b16b34132777e3f95dc71fdd7b2c13200dfe6d8d68ada94dd172d2ab43a9b94e",
+  "distribution_commit": "556d0faf83c32fd188409c5ba191552fad1522e1",
+  "marketplace_parent": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+  "checks": {
+    "package_tests": 32,
+    "refusal_cases": 8,
+    "builder_check": "pass",
+    "fresh_native_install": "pass",
+    "codex_startup_compact_resume": "pass",
+    "claude_startup_compact_resume": "pass",
+    "complete_distribution_tree_files": 63
+  },
+  "limits": [
+    "Windows Codex CLI and Claude Code only; desktop and automatic compaction unverified.",
+    "Local package qualification; public marketplace fresh/update observations belong to WO-RLS-029.",
+    "Current source remains the approved maintenance baseline; no unreleased main plugin behavior or repository adoption."
+  ],
+  "retained_failure": "Initial native-install invocation used the removed Codex executable path. It failed before host installation. Retry used the observed current executable and a fresh output. A sandbox-only fixture launch was also refused before mutation; the permitted normal-account run passed.",
+  "publication": "Prepared locally; no marketplace push performed."
+}

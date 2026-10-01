@@ -1,0 +1,35 @@
+{
+  "candidate": "0700cd0da99c4a732399c052f85f14eb1a0d2001",
+  "working_tree": "clean",
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full",
+    "--timings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-evidence-1001\\fix030-test-timings.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "checker": {
+    "version": "0.21.0",
+    "origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\se_harness\\__init__.py"
+  },
+  "started_at": "2026-10-01T10:52:33.257739+00:00",
+  "exit_code": 0,
+  "result": "pass",
+  "output_tail": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-kftipj8e\\private\\evaluators\\0.0.0\\13a46c494d6fa3cda744f5825e24109a5adc6a838c0ce85fc895dc8409f3244a\\Scripts\\python.exe\r\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-kftipj8e\\private\\evaluators\\0.0.0\\13a46c494d6fa3cda744f5825e24109a5adc6a838c0ce85fc895dc8409f3244a\\Scripts\\python.exe\r\n--workers must be at least 1\r\n0.21.0\r\ndocs/notes/diagnostic-codes.md matches the source\r\nWEX_SCALE artifacts=100 validation=0.120518s focus=0.274892s plan=0.221021s\r\nWEX_SCALE artifacts=500 validation=0.521553s focus=0.677856s plan=0.955859s\r\nWEX_SCALE artifacts=1000 validation=1.100955s focus=1.229512s plan=1.976120s\r\n----------------------------------------------------------------------\r\nRan 1189 tests in 210.794s (179 classes, 4 workers)\r\n\r\nOK (skipped=18)\r\n",
+  "raw": {
+    "file": "output.log",
+    "bytes": 835,
+    "artifact": "local-WO-RLS-030-source",
+    "repository": null,
+    "run_id": null,
+    "run_url": null,
+    "retention_days": 14,
+    "estimated_expiry": "2026-10-15T10:52:33.257739+00:00",
+    "availability": "local only",
+    "download_command": null
+  }
+}

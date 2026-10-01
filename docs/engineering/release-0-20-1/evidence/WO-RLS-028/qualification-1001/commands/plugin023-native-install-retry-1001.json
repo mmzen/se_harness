@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py",
+    "--marketplace",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-marketplace-1001",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-install-retry-1001",
+    "--codex",
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\de8a38d2100ae498\\codex.exe",
+    "--claude",
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--expected-wheel-sha256",
+    "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+    "--expected-evaluator-version",
+    "0.20.1"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "codex-version 0\ncodex-marketplace-add 0\ncodex-install 0\ncodex-native-discovery 0\ncodex-setup-empty-project 1\ncodex-checker-version 0\ncodex-init-preview 0\ncodex-init 0\ncodex-provider-preview 0\ncodex-provider 0\ncodex-doctor 0\ncodex-setup-repeat 0\nclaude-version 0\nclaude-marketplace-validate 0\nclaude-marketplace-add 0\nclaude-install 0\nclaude-installed-list 0\nclaude-native-discovery 0\nclaude-setup-empty-project 1\nclaude-checker-version 0\nclaude-init-preview 0\nclaude-init 0\nclaude-provider-preview 0\nclaude-provider 0\nclaude-doctor 0\nclaude-setup-repeat 0\n{\n  \"result\": \"passed\",\n  \"platform\": \"win32\",\n  \"python\": \"3.14.6\",\n  \"hosts\": [\n    {\n      \"host\": \"codex\",\n      \"version\": \"codex-cli 0.159.2\",\n      \"checker\": \"0.20.1\",\n      \"route\": \"persistent native marketplace installation\",\n      \"skills\": [\n        \"change\",\n        \"evidence\",\n        \"harness-operator-brief\",\n        \"harness-orient\",\n        \"setup\"\n      ],\n      \"result\": \"passed\",\n      \"installed_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\plugin023-native-install-retry-1001\\\\codex\\\\profile\\\\codex\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.3\",\n      \"compared_files\": 26\n    },\n    {\n      \"host\": \"claude\",\n      \"version\": \"2.1.273 (Claude Code)\",\n      \"checker\": \"0.20.1\",\n      \"route\": \"persistent native marketplace installation\",\n      \"skills\": [\n        \"change\",\n        \"evidence\",\n        \"harness-operator-brief\",\n        \"harness-orient\",\n        \"setup\"\n      ],\n      \"result\": \"passed\",\n      \"installed_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\plugin023-native-install-retry-1001\\\\claude\\\\profile\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.3\",\n      \"compared_files\": 26\n    }\n  ],\n  \"install_only\": false,\n  \"source\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\plugin023-marketplace-1001\",\n  \"ref\": null,\n  \"commands\": 26,\n  \"limits\": \"Fresh Windows profiles; no model calls, official portal validation, or changes to real host settings. Public Git use is recorded by source/ref.\"\n}\n",
+    "stderr": ""
+  },
+  "seconds": 38.592703499998606
+}

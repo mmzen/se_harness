@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "status",
+    "--short",
+    "--branch"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "## HEAD (no branch)\n",
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  "seconds": 0.09677879999981087
+}

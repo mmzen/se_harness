@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "list",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001",
+  "exit_code": 0,
+  "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.2\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.2\",\n    \"installedAt\": \"2026-09-29T19:07:17.997Z\",\n    \"lastUpdated\": \"2026-09-29T19:07:17.997Z\"\n  }\n]\n",
+  "stderr": ""
+}

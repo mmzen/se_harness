@@ -1,0 +1,288 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--artifact",
+    "VREC-PLG-029",
+    "--checkpoint",
+    "transition",
+    "--target",
+    "verified",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {
+      "commit": "b158be509ac0e65651e2e5436420051c9b886057",
+      "git_object_format": "sha1"
+    },
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "VREC-PLG-029",
+      "artifacts": [
+        "VREC-PLG-029"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "CAP-RLO-004",
+        "INT-RLO-001",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "SPEC-RLO-006",
+        "VER-RLS-029",
+        "WO-RLS-029",
+        "WO-RLS-030"
+      ],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "workflow_rule_id": "WFL-VREC-DECIDE",
+      "procedure_id": "PROC-VREC-DECIDE",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G4-ASSURANCE-DECISION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G4A-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:VREC-PLG-029"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G4A-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:transition"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G4A-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:VREC-PLG-029"
+                }
+              ],
+              "message": "No open decision blocks VREC-PLG-029."
+            }
+          ]
+        },
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "VREC-PLG-029"
+                }
+              ],
+              "message": "ready -> verified is a declared lifecycle edge for VREC-PLG-029."
+            }
+          ]
+        }
+      ],
+      "formal_snapshot_sha256": "eadf4743f4bbd21e865078fe54140035f77d348901c04022b4f34e79642bd81c",
+      "change_set_source": "arguments"
+    },
+    "procedure": {
+      "id": "PROC-VREC-DECIDE",
+      "current_step": "STEP-VREC-DECIDE",
+      "steps": [
+        {
+          "id": "STEP-VREC-DECIDE",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G4-ASSURANCE-DECISION"
+          ],
+          "effects": [
+            "Permits an explicit decision on VREC-PLG-029 only."
+          ],
+          "non_effects": [
+            "Referenced work orders remain unchanged."
+          ],
+          "decision_right": "DR-VREC-DECIDE",
+          "role": "assurance-owner",
+          "artifact": "VREC-PLG-029",
+          "decision": "whether the retained evidence verifies the exact candidate",
+          "outcomes": [
+            "verified",
+            "reject",
+            "supersede"
+          ],
+          "response": "I verify VREC-PLG-029 as assurance owner."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "VREC-PLG-029",
+          "status": "ready"
+        }
+      ],
+      "after": [
+        {
+          "id": "VREC-PLG-029",
+          "status": "ready"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 54
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated transition compliance for VREC-PLG-029."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VREC-PLG-029 is ready."
+      ],
+      "decision_required": {
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-PLG-029",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-VREC-DECIDE",
+        "step_id": "STEP-VREC-DECIDE",
+        "action": "whether the retained evidence verifies the exact candidate"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "I verify VREC-PLG-029 as assurance owner."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-VREC-REJECT.",
+        "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+      ]
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-VREC-DECIDE",
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "obtain-the-humans-verification-decision"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ],
+          "steps": {
+            "STEP-VREC-DECIDE": {
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-VREC-DECIDE",
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "obtain-the-humans-verification-decision"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "CAP-RLO-004",
+        "INT-RLO-001",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "SPEC-RLO-006",
+        "VER-RLS-029",
+        "VREC-PLG-029",
+        "WO-RLS-029",
+        "WO-RLS-030"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "7b0dff72bb797388634c75a39bc8a4b601c9796c411f3c593401858c484e92bb"
+  },
+  "seconds": 4.752618399998028
+}

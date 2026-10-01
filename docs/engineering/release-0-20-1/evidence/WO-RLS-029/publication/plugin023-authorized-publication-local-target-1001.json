@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "show",
+    "--no-patch",
+    "--format=%H %T %P",
+    "556d0faf83c32fd188409c5ba191552fad1522e1"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "556d0faf83c32fd188409c5ba191552fad1522e1 06f9827af86752e0801c38092f697e8f8645950e 5662817f42994bd0dc9aabaa56891f9c298ab965\n",
+    "stderr": ""
+  },
+  "seconds": 0.06030639999880805
+}

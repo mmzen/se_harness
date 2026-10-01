@@ -1,0 +1,14 @@
+{
+  "compared_to_commit": "fe048340d39461cde161bfafd7f486b51a4c9ca6",
+  "protected_records_unchanged": {
+    "docs/engineering/release-0-20-1/verification-records/VREC-PLG-028.md": "ac5dea45109c5ebbfda3dc7056cfe33fd88eadab44b36d471a6b1653446085d7",
+    "docs/engineering/release-0-20-1/work-orders/WO-RLS-029.md": "08426e801d3758638346b136e14de4c011333a2cfccbeafd9bfa025803d9422c",
+    "docs/engineering/release-0-20-1/verification/VER-RLS-029.md": "83b181f704445e6b74c57f06073b3365f7d2f07a3d9c698eb7c35c45ef8029ec"
+  },
+  "indexes_checked": {
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-029/evidence-index.json": 149,
+    "docs/engineering/release-0-20-1/evidence/WO-RLS-028/qualification-1001/evidence-index.json": 210
+  },
+  "evidence_bytes": "exact",
+  "reuse_reason": "Only README setup prose changes; published packages, installed file inventories, repository fixtures, captured host versions and native transcripts remain unchanged. Prior observations apply at their recorded times; no new native execution is inferred."
+}

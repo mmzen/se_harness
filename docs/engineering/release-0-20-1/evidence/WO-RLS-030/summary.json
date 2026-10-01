@@ -1,0 +1,25 @@
+{
+  "baseline_commit": "fe048340d39461cde161bfafd7f486b51a4c9ca6",
+  "implementation_test_commit": "0700cd0da99c4a732399c052f85f14eb1a0d2001",
+  "candidate_source_version": "0.21.0",
+  "governing_evaluator": "0.20.0",
+  "failed_ci": {
+    "run": "https://github.com/mmzen/se_harness/actions/runs/36849457709",
+    "pull_request_head": "fe048340d39461cde161bfafd7f486b51a4c9ca6",
+    "tested_merge_commit": "a5f2850f84b271cf8112f1d1f8825880ebc83387",
+    "artifact_id": 11155012071,
+    "expires_at": "2026-10-15T10:31:12Z",
+    "downloaded": true,
+    "download_receipt": "commands/ci513-download-raw.json",
+    "metadata_receipt": "commands/ci513-artifacts.json"
+  },
+  "local_full_regression": {
+    "summary": "full-source-summary.json",
+    "raw_log_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-evidence-1001\\fix030-source-raw\\output.log",
+    "raw_sha256": "8f23390488c4d20bb4b81c2ad9a3f39a0c2cf8d198d1780d0786ac817f5ed3c1",
+    "raw_bytes": 835,
+    "availability": "local only; not a hosted CI artifact"
+  },
+  "assessment": "review.json",
+  "frozen_evidence": "Prior candidate, records and evidence bytes are preserved. Later lifecycle/evidence-only commits will be compared to the tested source before aggregate capture."
+}

@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--artifact",
+    "WO-RLS-029",
+    "--checkpoint",
+    "pre-action",
+    "--procedure",
+    "PROC-REPOSITORY-INTEGRATION",
+    "--from-git",
+    "489814dd15bff0b4f93151fab04acd69cec47d0c",
+    "--change-set-complete",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 2,
+  "result": {
+    "stdout": "",
+    "stderr": "usage: harnessctl [-h] [--version]\n                  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...\nharnessctl: error: unrecognized arguments: --change-set-complete\n"
+  },
+  "seconds": 0.29953359999854
+}

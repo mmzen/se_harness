@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "gh",
+    "api",
+    "repos/mmzen/se_harness/releases/latest",
+    "--jq",
+    "{tag: .tag_name, id: .id, url: .html_url}"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "id": 399435871,
+    "tag": "v0.20.0",
+    "url": "https://github.com/mmzen/se_harness/releases/tag/v0.20.0"
+  },
+  "seconds": 0.4242787999992288
+}

@@ -1,0 +1,121 @@
+{
+  "host": "codex",
+  "kind": "update",
+  "host_version": "codex-cli 0.159.2",
+  "profile": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+  "source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+  "observed_at": "2026-10-01T09:43:40.680980+00:00",
+  "starting_version": "0.2.2",
+  "starting_revision": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+  "starting_source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+  "starting_plugin": {
+    "pluginId": "verity-plane@se-harness",
+    "name": "verity-plane",
+    "marketplaceName": "se-harness",
+    "version": "0.2.2",
+    "installed": true,
+    "enabled": true,
+    "source": {
+      "source": "local",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh\\profiles\\codex\\codex\\.tmp\\marketplaces\\se-harness\\packages\\codex\\verity-plane"
+    },
+    "marketplaceSource": {
+      "sourceType": "git",
+      "source": "https://github.com/mmzen/se_harness.git"
+    },
+    "installPolicy": "AVAILABLE",
+    "authPolicy": "ON_INSTALL"
+  },
+  "starting_installed_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2",
+  "starting_files": {
+    "assembly-inventory.json": "77c41494075bbb71658cc498c708df82b9d03d917c9056e81a1cb703c0d9123b",
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "README.md": "0982f98b16ceb3174331bd27d5e4f3d1f77b6280d6a4682cc502961ba4f1aa86",
+    ".codex-plugin/plugin.json": "3c43fd26b427094620c3704bbdb847fdd06dde943dababfdd544fac004f13616",
+    "hooks/hooks.json": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2",
+    "packages/se_harness-0.20.0-py3-none-any.whl": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+    "scripts/inject_instructions.py": "98e47de370f0a54dff5b1f3f68bbea40739420da6b1d9197825f569c5b6932ba",
+    "scripts/setup.py": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c",
+    "skills/change/SKILL.md": "626bbdbb5ff52994b8d89562916df424087351c2167c8a2c97e862f74fe22ffa",
+    "skills/evidence/SKILL.md": "052dcc3502e72f6309974f7cf9bdd8194bbe52e517410a1f53ef2eff130f1f31",
+    "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+    "skills/harness-operator-brief/SKILL.md": "d85dfdcda0e6237f7d11607ee32a73eb7b960f5154538d70f81be64c8457a50e",
+    "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+    "skills/harness-orient/SKILL.md": "103bf6dd5478b4bf6951e3f7d7d53715671dca179a209ba8900ca232c4fbbf4f",
+    "skills/setup/SKILL.md": "284966587c1884fc1369e9987be59c8ddca43ba9372733bca6fee8a1322abb86",
+    "skills/setup/references/environment.md": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363",
+    "skills/setup/references/maintenance.md": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb",
+    "skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+    "skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+    "skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+    "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+    "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+    "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+    "skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+    "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+    "skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+  },
+  "starting_method": "Preserved actual public installation from WO-PLG-031, with exact installed inventory checked before update.",
+  "status": "pass",
+  "revision": "556d0faf83c32fd188409c5ba191552fad1522e1",
+  "marketplace": {
+    "name": "se-harness",
+    "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh\\profiles\\codex\\codex\\.tmp\\marketplaces\\se-harness",
+    "marketplaceSource": {
+      "sourceType": "git",
+      "source": "https://github.com/mmzen/se_harness.git"
+    }
+  },
+  "plugin": {
+    "pluginId": "verity-plane@se-harness",
+    "name": "verity-plane",
+    "marketplaceName": "se-harness",
+    "version": "0.2.3",
+    "installed": true,
+    "enabled": true,
+    "source": {
+      "source": "local",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh\\profiles\\codex\\codex\\.tmp\\marketplaces\\se-harness\\packages\\codex\\verity-plane"
+    },
+    "marketplaceSource": {
+      "sourceType": "git",
+      "source": "https://github.com/mmzen/se_harness.git"
+    },
+    "installPolicy": "AVAILABLE",
+    "authPolicy": "ON_INSTALL"
+  },
+  "installed_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.3",
+  "files": {
+    "assembly-inventory.json": "1a38583255dea792c411805bdda46e8e4fd48f0e99cd5eab920130a159e1f93d",
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "README.md": "caf5c00c4523efaee09dabe517347f5a30cbf3626ae0f84c67c853934017f8b1",
+    ".codex-plugin/plugin.json": "67fc4ab0d4303fcab1583fcb6e16df2e97a902e1238d76c2b5e46d3e81fdf7b2",
+    "hooks/hooks.json": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2",
+    "packages/se_harness-0.20.1-py3-none-any.whl": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+    "scripts/inject_instructions.py": "98e47de370f0a54dff5b1f3f68bbea40739420da6b1d9197825f569c5b6932ba",
+    "scripts/setup.py": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c",
+    "skills/change/SKILL.md": "626bbdbb5ff52994b8d89562916df424087351c2167c8a2c97e862f74fe22ffa",
+    "skills/evidence/SKILL.md": "052dcc3502e72f6309974f7cf9bdd8194bbe52e517410a1f53ef2eff130f1f31",
+    "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+    "skills/harness-operator-brief/SKILL.md": "d85dfdcda0e6237f7d11607ee32a73eb7b960f5154538d70f81be64c8457a50e",
+    "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+    "skills/harness-orient/SKILL.md": "103bf6dd5478b4bf6951e3f7d7d53715671dca179a209ba8900ca232c4fbbf4f",
+    "skills/setup/SKILL.md": "284966587c1884fc1369e9987be59c8ddca43ba9372733bca6fee8a1322abb86",
+    "skills/setup/references/environment.md": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363",
+    "skills/setup/references/maintenance.md": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb",
+    "skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+    "skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+    "skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+    "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+    "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+    "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+    "skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+    "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+    "skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+  },
+  "content_sha256": "966f8ff5d8da9a4f0e92648eae52ff817a4a9b25c8f0ea78f3eaa73a0ce007fe",
+  "plugin_version": "0.2.3",
+  "evaluator_version": "0.20.1",
+  "all_installed_bytes_match": true,
+  "active_method": "Native debug prompt-input"
+}

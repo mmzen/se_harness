@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-RLS-028"
 checkpoint = "pre-action"
-formal_snapshot_sha256 = "b770a8dd7f1f866a83916cb70f3bb6ec876abb6a57a9a249eba1d889adf9b6ce"
-rebound_at = "2026-10-01T06:05:07Z"
+formal_snapshot_sha256 = "ee023b7cfad847548514b6ff4ad1fac31593de9b095d74492e4a296af7875688"
+rebound_at = "2026-10-01T09:15:14Z"
 ```
 
 # WO-RLS-028 pre-action evidence

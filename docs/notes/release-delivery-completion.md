@@ -256,3 +256,15 @@ The tests include the actual failure pattern: evaluator publication passes while
 the required marketplace update remains absent. That case returns incomplete
 and retains the marketplace owner and next action. Live public qualification
 belongs to the subsequent marketplace work and its verification contract.
+
+## Current 0.20.1 delivery
+
+The [release package](../engineering/release-0-20-1/README.md) selects plugin
+0.2.3 with evaluator 0.20.1. WO-RLS-028 qualified the package, accepted in
+VREC-PLG-027. Its separately authorized marketplace publication is observed at
+`556d0faf83c32fd188409c5ba191552fad1522e1`.
+[WO-RLS-029 evidence](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md)
+records public installation/update checks and current documentation review.
+Read its latest closeout result for remaining surfaces. Publication, public
+documentation integration, latest/last promotion and repository adoption are
+separate actions; none is inferred from a passing package test.

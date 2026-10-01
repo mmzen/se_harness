@@ -1,0 +1,10 @@
+{
+  "before_commit": "fe048340d39461cde161bfafd7f486b51a4c9ca6",
+  "before_sha256": "9aa4597b59fcdf733f6d901b562ee25e44a81a6214bac2864ed3c5ed5d120d33",
+  "after_sha256": "73f9aade16a7dc45debcff02ed35beededd266b711d7dc069e96b47d7f50a73f",
+  "inserted_sentence": "It does not download the harness from PyPI.",
+  "candidate_version": "0.21.0",
+  "governing_evaluator": "0.20.0",
+  "public_plugin": "0.2.3",
+  "public_evaluator": "0.20.1"
+}

@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "ls-remote",
+    "origin",
+    "refs/heads/plugin-marketplace",
+    "refs/heads/main",
+    "refs/heads/work/public-marketplace-0-2-3"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "489814dd15bff0b4f93151fab04acd69cec47d0c\trefs/heads/main\n556d0faf83c32fd188409c5ba191552fad1522e1\trefs/heads/plugin-marketplace\nfe048340d39461cde161bfafd7f486b51a4c9ca6\trefs/heads/work/public-marketplace-0-2-3\n",
+    "stderr": ""
+  },
+  "seconds": 0.742415799999435
+}

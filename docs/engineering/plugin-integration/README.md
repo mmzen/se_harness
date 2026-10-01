@@ -1,14 +1,18 @@
 # Plugin integration
 
-## Current public package: plugin 0.2.2
+## Current public package: plugin 0.2.3
 
-The [0.20.0 release package](../release-0-20-0/README.md) is published with
-plugin 0.2.2 at `5662817f42994bd0dc9aabaa56891f9c298ab965`. VREC-PLG-025
-verified package qualification. [WO-PLG-031 evidence](../release-0-20-0/evidence/WO-PLG-031/README.md)
-records the public file comparison, fresh installs and updates from 0.2.1 on
-both Windows CLIs, and native evidence applicability. Documentation integration
-and final delivery readback remain pending in that report. Repository adoption
-is separate.
+The [0.20.1 release package](../release-0-20-1/README.md) is published with
+plugin 0.2.3 at `556d0faf83c32fd188409c5ba191552fad1522e1`.
+VREC-PLG-027 verifies local package qualification.
+[WO-RLS-029 evidence](../release-0-20-1/evidence/WO-RLS-029/README.md) records
+the public file comparison, fresh installs, updates from 0.2.2, offline setup
+and native-evidence applicability on both Windows CLIs. Current documentation
+integration and final closeout remain separate steps. Repository adoption and
+the plugin-owned minimal layout remain separate work.
+
+The [0.2.2 public delivery report](../release-0-20-0/evidence/WO-PLG-031/README.md)
+retains that version's observations unchanged.
 
 ## Historical marketplace refresh for plugin 0.2.1
 

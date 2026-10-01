@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "marketplace",
+    "list",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001",
+  "observed_at": "2026-10-01T09:43:25.124440+00:00",
+  "exit_code": 0,
+  "stdout": "[\n  {\n    \"name\": \"se-harness\",\n    \"source\": \"github\",\n    \"repo\": \"mmzen/se_harness\",\n    \"ref\": \"plugin-marketplace\",\n    \"installLocation\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public023-fresh-1001\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\marketplaces\\\\se-harness\"\n  }\n]\n",
+  "stderr": ""
+}

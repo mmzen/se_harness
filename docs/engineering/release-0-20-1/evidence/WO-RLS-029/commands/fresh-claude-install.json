@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "install",
+    "verity-plane@se-harness",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001",
+  "observed_at": "2026-10-01T09:43:24.422760+00:00",
+  "exit_code": 0,
+  "stdout": "{\"command\":\"install\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Successfully installed plugin: verity-plane@se-harness (scope: user)\"}\n",
+  "stderr": ""
+}

@@ -1,0 +1,44 @@
+{
+  "candidate": "a5f2850f84b271cf8112f1d1f8825880ebc83387",
+  "working_tree": "clean",
+  "command": [
+    "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full",
+    "--timings",
+    "target/test-timings.json"
+  ],
+  "cwd": "/home/runner/work/se_harness/se_harness",
+  "checker": {
+    "version": "0.21.0",
+    "origin": "/home/runner/work/se_harness/se_harness/se_harness/__init__.py"
+  },
+  "started_at": "2026-10-01T10:30:18.116839+00:00",
+  "exit_code": 1,
+  "result": "fail",
+  "output_tail": "e using your host's CLI:\\n\\n**Codex**\\n\\n```sh\\ncodex plugin marketplace add mmzen/se_harness --ref plugin-marketplace\\ncodex plugin add verity-plane@se-harness\\n```\\n\\n**Claude Code**\\n\\n```sh\\nclaude plugin marketplace add mmzen/se_harness@plugin-marketplace\\nclaude plugin install verity-plane@se-harness\\n```\\n\\nStart a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.\\n\\nThe [0.20.1 evaluator / 0.2.3 plugin release package](docs/engineering/release-0-20-1/README.md)\\nis published. The [public delivery evidence](docs/engineering/release-0-20-1/evidence/WO-RLS-029/README.md)\\nrecords the exact package, both Windows CLI install/update routes and remaining\\ndelivery steps.\\n\\nObserved public delivery (2026-10-01): Plugin **0.2.3** bundles released **SE Harness 0.20.1**. Public fresh-install and 0.2.2-to-0.2.3 update checks passed on both Windows CLIs. Native startup, manual compaction and resume evidence applies to the identical installed package, repository fixtures and host versions. See the [qualification and limits](docs/engineering/release-0-20-1/evidence/WO-RLS-029/README.md).\\n\\nStartup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\\n\\nThis maintenance release keeps the existing repository instruction layout.\\nThe work to move instructions and templates into the plugin remains unreleased.\\n\\nSee the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).\\n\\n\"\n\n----------------------------------------------------------------------\nRan 1189 tests in 52.829s (179 classes, 4 workers)\n\nFAILED (failures=1, skipped=2)\n",
+  "raw": {
+    "file": "output.log",
+    "bytes": 3479,
+    "artifact": "candidate-source-raw",
+    "repository": "mmzen/se_harness",
+    "run_id": "36849457709",
+    "run_url": "https://github.com/mmzen/se_harness/actions/runs/36849457709",
+    "retention_days": 14,
+    "estimated_expiry": "2026-10-15T10:30:18.116839+00:00",
+    "availability": "local; upload not yet confirmed",
+    "download_command": [
+      "gh",
+      "run",
+      "download",
+      "36849457709",
+      "--repo",
+      "mmzen/se_harness",
+      "--name",
+      "candidate-source-raw"
+    ]
+  }
+}

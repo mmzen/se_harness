@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "ls-remote",
+    "origin",
+    "refs/heads/plugin-marketplace"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "5662817f42994bd0dc9aabaa56891f9c298ab965\trefs/heads/plugin-marketplace\n",
+    "stderr": ""
+  },
+  "seconds": 0.8362443000005442
+}

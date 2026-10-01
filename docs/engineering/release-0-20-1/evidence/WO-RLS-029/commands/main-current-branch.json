@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "switch",
+    "-c",
+    "work/public-marketplace-0-2-3",
+    "origin/main"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "branch 'work/public-marketplace-0-2-3' set up to track 'origin/main'.\n",
+    "stderr": "Switched to a new branch 'work/public-marketplace-0-2-3'\n"
+  },
+  "seconds": 0.12855839999974705
+}

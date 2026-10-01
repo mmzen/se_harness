@@ -1,0 +1,27 @@
+{
+  "changes": [
+    {
+      "action": "remove",
+      "path": ".agents/skills/harness-orient"
+    },
+    {
+      "action": "remove",
+      "path": ".agents/skills/harness-operator-brief"
+    },
+    {
+      "action": "remove",
+      "path": ".claude/skills/harness-orient"
+    },
+    {
+      "action": "update",
+      "path": ".engineering-harness.lock"
+    }
+  ],
+  "command": "skill-ownership",
+  "outcome": "applied",
+  "passed": true,
+  "provider": "plugin",
+  "schema": "se-harness-command-result-v1",
+  "target": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-install-retry-1001\\claude\\project",
+  "written": true
+}

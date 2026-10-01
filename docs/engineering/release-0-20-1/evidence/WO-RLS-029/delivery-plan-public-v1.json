@@ -1,0 +1,107 @@
+{
+  "schema": "se-harness-delivery-plan/v1",
+  "release": {
+    "contract": "REL-SEH-032",
+    "record": "RLS-SEH-030",
+    "version": "0.20.1",
+    "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+  },
+  "review": {
+    "by": "mmzen",
+    "reference": "2026-10-01 conversation approval of the reviewed package, clarified as: Yes\u2014approve both 028 and 029 pairs. Recorded in the four selected lifecycle histories. Earlier delivery-plan.json and WO-RLS-027/plan.json remain unchanged. Qualification revision records observed identities under the same approved scope; it grants no new publication decision."
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/releases/tag/v0.20.1",
+      "work_reference": "WO-RLS-027 implementation and authorized RLS-SEH-030 preparation; WO-RLS-028 approved governance transport. Release/publication decisions remain separate.",
+      "next_action": "Published and independently observed; retain immutable 0.20.1 identity.",
+      "disposition": "update",
+      "expected": {
+        "record": "RLS-SEH-030",
+        "version": "0.20.1",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a"
+      },
+      "required_observations": [
+        "publisher",
+        "public_install"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness#plugin-marketplace",
+      "work_reference": "WO-RLS-028 / VER-RLS-028: source and qualification; WO-RLS-029 / VER-RLS-029: public fresh/update readback.",
+      "next_action": "Public fresh/update routes pass. Retain these observations and complete documentation review.",
+      "disposition": "update",
+      "expected": {
+        "plugin_version": "0.2.3",
+        "source_commit": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab",
+        "evaluator_version": "0.20.1",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "public_revision": "556d0faf83c32fd188409c5ba191552fad1522e1",
+        "codex_content_sha256": "966f8ff5d8da9a4f0e92648eae52ff817a4a9b25c8f0ea78f3eaa73a0ce007fe",
+        "claude-code_content_sha256": "4ff7409eb9315fca3df8ca23eda3c358434016269ab59fa2160ca38adac9697a"
+      },
+      "required_observations": [
+        "assembly",
+        "qualification",
+        "public_ref",
+        "native_startup_compaction"
+      ],
+      "hosts": [
+        "codex",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/tree/main",
+      "work_reference": "WO-RLS-028 / VER-RLS-028: packaged guidance; WO-RLS-029 / VER-RLS-029: current-main documentation and public readback.",
+      "next_action": "Human verification, authorized integration and append-only public documentation readback under WO-RLS-029.",
+      "disposition": "update",
+      "expected": {
+        "commit": "54d59ab5353f60674e84bbb26b85b942bb8750eb"
+      },
+      "required_observations": [
+        "claims_review",
+        "links"
+      ]
+    },
+    {
+      "id": "demonstration",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://mmzen.github.io/se_harness/",
+      "work_reference": "WO-RLS-029 / VER-RLS-029: observe the separately authorized publisher deployment.",
+      "next_action": "The publisher deployed matching provenance; retain the public observation in downstream closeout.",
+      "disposition": "update",
+      "expected": {
+        "governance_commit": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+        "release_record": "RLS-SEH-030"
+      },
+      "required_observations": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "release_markers",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "Separate exact human marker authority; WO-RLS-029 / VER-RLS-029 retains readback.",
+      "next_action": "After the publication observation window, obtain exact latest/last authority; retain readback under the approved public-delivery work.",
+      "disposition": "update",
+      "expected": {
+        "latest": "v0.20.1",
+        "last": "b9af631b850c495eace9807361ed3ec3e36a10b2"
+      },
+      "required_observations": [
+        "authorization",
+        "readback"
+      ]
+    }
+  ],
+  "binding_note": "This revision preserves approved scope and dispositions, retains the qualified expected package identities and names the reviewed local documentation commit. Current documentation integration and release-marker decisions remain pending; no completed delivery is inferred."
+}
