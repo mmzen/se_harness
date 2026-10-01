@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "skill-ownership",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001\\repo-claude",
+    "--provider",
+    "plugin",
+    "--plugin-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-marketplace-1001\\packages\\claude\\verity-plane",
+    "--json",
+    "--apply"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-1001",
+  "exit_code": 0,
+  "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-orient\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-operator-brief\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".claude/skills/harness-orient\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    }\n  ],\n  \"command\": \"skill-ownership\",\n  \"outcome\": \"applied\",\n  \"passed\": true,\n  \"provider\": \"plugin\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"target\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\plugin023-native-1001\\\\repo-claude\",\n  \"written\": true\n}\n",
+  "stderr": ""
+}

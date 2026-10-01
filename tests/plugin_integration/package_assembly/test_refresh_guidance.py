@@ -11,11 +11,11 @@ ROOT = Path(__file__).resolve().parents[3]
 # Candidate identities come from approved REL-SEH-031, not candidate output.
 PLUGIN = "0.2.2"
 CANDIDATE_EVALUATOR = "0.20.0"
-# Published identities come from RLS-SEH-029 and independent public readback.
-EVALUATOR = "0.20.0"
-WHEEL_SHA = "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0"
-RELEASE = "docs/engineering/release-0-20-0/releases/RLS-SEH-029.md"
-OBSERVATION = "docs/engineering/release-0-20-0/evidence/WO-PLG-031/publication.json"
+# Published identities come from RLS-SEH-030 and independent public readback.
+EVALUATOR = "0.20.1"
+WHEEL_SHA = "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+RELEASE = "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md"
+OBSERVATION = "docs/engineering/release-0-20-1/evidence/WO-RLS-029/publication.json"
 
 
 def selected_inputs():
@@ -36,7 +36,7 @@ def identity_findings(inputs):
         findings.append("candidate manifest version")
     release = inputs["release"]
     if (release.get("id"), release.get("status"), release.get("version")) != (
-            "RLS-SEH-029", "released", EVALUATOR):
+            "RLS-SEH-030", "released", EVALUATOR):
         findings.append("released evaluator selection")
     distribution = release.get("distribution", {})
     if (distribution.get("wheel"), distribution.get("wheel_sha256")) != (

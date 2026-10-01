@@ -1,0 +1,85 @@
+{
+  "checks": [
+    {
+      "check": "files copied before interruption",
+      "expected": 1,
+      "observed": 1
+    },
+    {
+      "check": "check accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "check accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {
+        "codex/verity-plane/.codex-plugin/plugin.json": "67fc4ab0d4303fcab1583fcb6e16df2e97a902e1238d76c2b5e46d3e81fdf7b2"
+      },
+      "rejection": "incomplete or extra output files: ['claude/verity-plane/.claude-plugin/plugin.json', 'claude/verity-plane/LICENSE', 'claude/verity-plane/README.md', 'claude/verity-plane/assembly-inventory.json', 'claude/verity-plane/hooks/hooks.json', 'claude/verity-plane/packages/se_harness-0.20.1-py3-none-any.whl', 'claude/verity-plane/scripts/inject_instructions.py', 'claude/verity-plane/scripts/setup.py', 'claude/verity-plane/skills/change/SKILL.md', 'claude/verity-plane/skills/change/references/artifacts.md', 'claude/verity-plane/skills/change/references/authority.md', 'claude/verity-plane/skills/change/references/work-orders.md', 'claude/verity-plane/skills/evidence/SKILL.md', 'claude/verity-plane/skills/evidence/references/external-actions.md', 'claude/verity-plane/skills/evidence/references/records.md', 'claude/verity-plane/skills/harness-operator-brief/SKILL.md', 'claude/verity-plane/skills/harness-operator-brief/agents/openai.yaml', 'claude/verity-plane/skills/harness-operator-brief/scripts/check_brief.py', 'claude/verity-plane/skills/harness-operator-brief/skill-contract.json', 'claude/verity-plane/skills/harness-orient/SKILL.md', 'claude/verity-plane/skills/harness-orient/scripts/orient.py', 'claude/verity-plane/skills/harness-orient/skill-contract.json', 'claude/verity-plane/skills/setup/SKILL.md', 'claude/verity-plane/skills/setup/references/environment.md', 'claude/verity-plane/skills/setup/references/maintenance.md', 'claude/verity-plane/skills/setup/references/repository.md', 'codex/verity-plane/LICENSE', 'codex/verity-plane/README.md', 'codex/verity-plane/assembly-inventory.json', 'codex/verity-plane/hooks/hooks.json', 'codex/verity-plane/packages/se_harness-0.20.1-py3-none-any.whl', 'codex/verity-plane/scripts/inject_instructions.py', 'codex/verity-plane/scripts/setup.py', 'codex/verity-plane/skills/change/SKILL.md', 'codex/verity-plane/skills/change/references/artifacts.md', 'codex/verity-plane/skills/change/references/authority.md', 'codex/verity-plane/skills/change/references/work-orders.md', 'codex/verity-plane/skills/evidence/SKILL.md', 'codex/verity-plane/skills/evidence/references/external-actions.md', 'codex/verity-plane/skills/evidence/references/records.md', 'codex/verity-plane/skills/harness-operator-brief/SKILL.md', 'codex/verity-plane/skills/harness-operator-brief/agents/openai.yaml', 'codex/verity-plane/skills/harness-operator-brief/scripts/check_brief.py', 'codex/verity-plane/skills/harness-operator-brief/skill-contract.json', 'codex/verity-plane/skills/harness-orient/SKILL.md', 'codex/verity-plane/skills/harness-orient/scripts/orient.py', 'codex/verity-plane/skills/harness-orient/skill-contract.json', 'codex/verity-plane/skills/setup/SKILL.md', 'codex/verity-plane/skills/setup/references/environment.md', 'codex/verity-plane/skills/setup/references/maintenance.md', 'codex/verity-plane/skills/setup/references/repository.md', 'verity-plane-claude.zip', 'verity-plane-codex.zip']"
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {
+        "codex/verity-plane/.codex-plugin/plugin.json": "67fc4ab0d4303fcab1583fcb6e16df2e97a902e1238d76c2b5e46d3e81fdf7b2"
+      },
+      "rejection": "output already exists; inspect it or retry in a fresh directory"
+    },
+    {
+      "check": "same-directory retry preserves partial bytes",
+      "expected": {
+        "codex/verity-plane/.codex-plugin/plugin.json": "67fc4ab0d4303fcab1583fcb6e16df2e97a902e1238d76c2b5e46d3e81fdf7b2"
+      },
+      "observed": {
+        "codex/verity-plane/.codex-plugin/plugin.json": "67fc4ab0d4303fcab1583fcb6e16df2e97a902e1238d76c2b5e46d3e81fdf7b2"
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "build accepted flag",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "check accepted exit",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "check accepted flag",
+      "expected": true,
+      "observed": true
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    1,
+    1,
+    0,
+    0
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
+}

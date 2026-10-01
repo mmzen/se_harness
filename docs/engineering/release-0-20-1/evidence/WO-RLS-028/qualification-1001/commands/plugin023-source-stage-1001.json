@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "git",
+    "add",
+    "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+    "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+    "plugins/verity-plane/codex/README.md",
+    "plugins/verity-plane/claude-code/README.md",
+    "release/plugin-marketplace",
+    "tests/plugin_integration/package_assembly/test_refresh_guidance.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  "seconds": 0.07456789999991997
+}

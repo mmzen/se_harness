@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "details",
+    "verity-plane@se-harness"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+  "observed_at": "2026-10-01T09:43:30.454905+00:00",
+  "exit_code": 0,
+  "stdout": "verity-plane 0.2.3\n  Description: Use SE Harness skills for repository setup, governed changes and verification evidence.\n  Source: verity-plane@se-harness\n\nComponent inventory\n  Skills (5)  change, evidence, harness-operator-brief, harness-orient, setup\n  Agents (0)\n  Hooks (1)  SessionStart  (harness-only \u2014 no model context cost)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~331 tok   added to every session\n\nPer-component (rounded)\n  component               always-on  on-invoke\n  change                        ~70       ~940\n  evidence                      ~60       ~910\n  harness-operator-brief        ~80      ~1.3k\n  harness-orient                ~80      ~1.2k\n  setup                         ~40       ~390\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.\n",
+  "stderr": ""
+}

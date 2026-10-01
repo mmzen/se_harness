@@ -1,0 +1,24 @@
+verity-plane 0.2.3
+  Description: Use SE Harness skills for repository setup, governed changes and verification evidence.
+  Source: verity-plane@se-harness
+
+Component inventory
+  Skills (5)  change, evidence, harness-operator-brief, harness-orient, setup
+  Agents (0)
+  Hooks (1)  SessionStart  (harness-only — no model context cost)
+  MCP servers (0)
+  LSP servers (0)
+
+Projected token cost
+  Always-on:   ~331 tok   added to every session
+
+Per-component (rounded)
+  component               always-on  on-invoke
+  change                        ~70       ~940
+  evidence                      ~60       ~910
+  harness-operator-brief        ~80      ~1.3k
+  harness-orient                ~80      ~1.2k
+  setup                         ~40       ~390
+
+  On-invoke cost is paid each time a skill or agent fires.
+  Token counts are estimates and may differ from actual usage.

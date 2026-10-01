@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "worktree",
+    "list",
+    "--porcelain"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "worktree C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness\nHEAD 6dd70f29cd43ffc230779d61ee1a7ced43a7a611\nbranch refs/heads/work/minimal-resource-install\n\nworktree C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/adopt019-verification\nHEAD 0b40d1a1eb6994508fd9d629c0bdca16e2c6e0c2\ndetached\n\nworktree C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/identityfix-verification\nHEAD b09556ad4234c7001a4647c5522c84b5db1bc0e9\ndetached\n\nworktree C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/maintenance-0-20-1\nHEAD 726d4534fc8aa992f36c8a911d57de84a36a44cf\nbranch refs/heads/work/release-0-20-1-preparation\n\nworktree C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/pubfix-verification\nHEAD 8ac5a9d0aafb4f15b54f8907b081eb2c84e25d33\ndetached\n\nworktree C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/release030-main\nHEAD 489814dd15bff0b4f93151fab04acd69cec47d0c\ndetached\n\n",
+    "stderr": ""
+  },
+  "seconds": 0.03595399999903748
+}

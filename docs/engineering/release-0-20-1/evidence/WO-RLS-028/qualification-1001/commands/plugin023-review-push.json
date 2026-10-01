@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "git",
+    "push",
+    "--porcelain",
+    "origin",
+    "94a6d569fa5b867d277f6a6a96de5a9111bd8d74:refs/heads/work/plugin-0-2-3"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": "To https://github.com/mmzen/se_harness.git\n*\t94a6d569fa5b867d277f6a6a96de5a9111bd8d74:refs/heads/work/plugin-0-2-3\t[new branch]\nDone\n",
+    "stderr": "remote: \nremote: Create a pull request for 'work/plugin-0-2-3' on GitHub by visiting:        \nremote:      https://github.com/mmzen/se_harness/pull/new/work/plugin-0-2-3        \nremote: \n"
+  },
+  "seconds": 2.2069678000000295
+}

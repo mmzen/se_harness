@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--version"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001",
+  "observed_at": "2026-10-01T09:43:21.844211+00:00",
+  "exit_code": 0,
+  "stdout": "2.1.273 (Claude Code)\n",
+  "stderr": ""
+}

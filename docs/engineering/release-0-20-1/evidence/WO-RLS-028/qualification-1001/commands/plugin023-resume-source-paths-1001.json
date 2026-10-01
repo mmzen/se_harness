@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+    "diff",
+    "--name-only",
+    "7253d13b212ad6f7df670021290fea32e81d66de",
+    "HEAD",
+    "--",
+    "plugins/verity-plane",
+    "release/plugin-assembly.json",
+    "release/plugin-marketplace",
+    "repository_tools/plugin_distribution.py",
+    "scripts/build_plugin_marketplace.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json\nplugins/verity-plane/claude-code/README.md\nplugins/verity-plane/codex/.codex-plugin/plugin.json\nplugins/verity-plane/codex/README.md\nrelease/plugin-marketplace/README.md\nrelease/plugin-marketplace/submissions/README.md\nrelease/plugin-marketplace/submissions/reviewer-test-cases.md\n",
+    "stderr": ""
+  },
+  "seconds": 0.034693899999183486
+}

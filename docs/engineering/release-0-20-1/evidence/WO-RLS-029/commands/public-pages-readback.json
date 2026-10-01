@@ -1,0 +1,20 @@
+{
+  "url": "https://www.verityplane.ai/publication-manifest.json",
+  "observed_at": "2026-10-01T09:48:17.243392+00:00",
+  "response_sha256": "f68b215f4c85f6878f651436bdd0762b199927cd64797921409bc19ce4ebd37b",
+  "resource_files_count": 2662,
+  "provenance": {
+    "bundle_manifest_sha256": "c44749dc715a882ecb4c6a19fe0f2e9c658a7a0146d734a050b0458a1e3db00f",
+    "candidate_commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+    "derived_non_authoritative": true,
+    "generated_dashboard_sha256": "aa7c23803cc81088c3621e6ad3dd6f84eb54c0a8e9d169bd76a4c397cb6f3a4c",
+    "generation_summary_sha256": "88cb6bdcde8b4c259876b9ba543c8fe13754d183e760f66bdf8699732d5d8f4d",
+    "governance_commit": "489814dd15bff0b4f93151fab04acd69cec47d0c",
+    "published_dashboard_sha256": "df0c5a3863f02fe7baf661b01156e6a5cbe699800138345f22cde607fa010021",
+    "release_record": "RLS-SEH-030",
+    "release_tag": "v0.20.1",
+    "repository": "mmzen/se_harness",
+    "schema": "se-harness-pages-publication-v1",
+    "version": "0.20.1"
+  }
+}

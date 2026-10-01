@@ -1,22 +1,22 @@
 # Prepare and publish the Verity Plane marketplace
 
-The [0.20.0 release package](../engineering/release-0-20-0/README.md) selects
-plugin 0.2.2. WO-PLG-030 covers assembly, qualification and preparation of the
-marketplace commit. WO-PLG-031 covers public observations and current claims.
-Their verification contracts and the selected external-action procedure govern
-delivery. These commands grant no approval. Plugin 0.2.2 with evaluator 0.20.0
-is now public at `5662817f42994bd0dc9aabaa56891f9c298ab965`.
-The [public readback and installation evidence](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
-compares all 63 public files with the verified distribution. Current-document
-integration and the final closeout receipt remain separate steps.
+The [0.20.1 release package](../engineering/release-0-20-1/README.md) selects
+plugin 0.2.3. WO-RLS-028 covers assembly and local qualification, verified in
+VREC-PLG-027. WO-RLS-029 covers public observations and current documentation.
+Their verification contracts and separate external decisions govern delivery.
+Plugin 0.2.3 with evaluator 0.20.1 is public at
+`556d0faf83c32fd188409c5ba191552fad1522e1`.
+The [public installation evidence](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md)
+records the complete tree comparison and both hosts' fresh/update routes.
+Documentation integration and final closeout require their own observations.
 
 ## Assemble committed inputs
 
 For any new assembly, first require the selected RLS to be released and its wheel to be independently
 available from the public release. Compare the downloaded wheel SHA-256 with
 that record's distribution binding. A local candidate wheel does not satisfy
-this prerequisite. The repository's own governing evaluator stays at 0.19.0
-until a separate adoption.
+this prerequisite. Use the checkout's selected released evaluator. The maintenance checkout
+selects 0.19.0; current main selects 0.20.0. This publication adopts neither.
 
 From the source checkout, replace every uppercase placeholder below. Read
 `RELEASE_COMMIT`, `RLS_PATH` and `WHEEL_SHA256` from the actual released record
@@ -58,15 +58,14 @@ For a newly planned delivery, use the
 [release delivery handoff](release-delivery-completion.md#perform-and-retain-each-handoff).
 Evaluator publication leaves plugin assembly, qualification and separately
 authorized marketplace publication pending with an owner and next action.
-For this release the selected inputs are plugin 0.2.2 and public evaluator
-0.20.0. Track all five surfaces in the release delivery plan. Local package
+For this release the selected inputs are plugin 0.2.3 and public evaluator
+0.20.1. Track all five surfaces in the release delivery plan. Local package
 qualification does not close delivery or establish the public branch state.
 
 1. Run the declared package checks, host validators and local native installation
-   acceptance in fresh profiles. Follow VER-PLG-028 and retain actual evidence for the exact 0.2.2 packages.
-   Public fresh installation and update from 0.2.1 follow under VER-PLG-029.
-   Confirm the loaded package bytes, startup, manual compaction, repository
-   switch and missing/mismatched root handling. Do not alter real user profiles.
+   acceptance in fresh profiles. Follow VER-RLS-028 and retain actual evidence for the exact 0.2.3 packages.
+   Public fresh installation and update from 0.2.2 follow under VER-RLS-029.
+   Confirm the loaded package bytes, startup, manual compaction and resume. Do not alter real user profiles.
 2. Prepare the commit-bound verification record and obtain its owner decision.
    Resolve the applicable repository integration and external-action checkpoints.
 3. Publish the accepted distribution tree at the root of
@@ -77,9 +76,9 @@ qualification does not close delivery or establish the public branch state.
 4. Add the actual public Git marketplace in fresh Codex and Claude profiles,
    install verity-plane, and compare installed contents with the accepted package.
    Also test an existing public installation's update path on both hosts.
-   VER-PLG-029 governs these observations. Retain the public commit, active paths,
+   VER-RLS-029 governs these observations. Retain the public commit, active paths,
    installed hashes and native delivery before reporting public installation as checked.
-5. Update current availability claims through WO-PLG-031, obtain commit-bound
+5. Update current availability claims through WO-RLS-029, obtain commit-bound
    verification and separately authorized integration. Read the merged public
    documentation back before declaring overall delivery complete. Preserve the
    assembled source identity and earlier plan versions; bind observations to
@@ -91,6 +90,12 @@ The normal developer build remains available through
 `scripts/build_plugin_archives.py develop` and is labeled development-only.
 
 ## Previous public delivery
+
+Plugin 0.2.2 with evaluator 0.20.0 was published at
+`5662817f42994bd0dc9aabaa56891f9c298ab965`. Its
+[public receipt](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
+is retained unchanged. The 0.2.3 update checks start from that preserved package.
+
 
 The separately authorized 2026-09-29 publication advanced plugin-marketplace
 from `ed68b30c88043773be929540b7b10ae537957c2d` to

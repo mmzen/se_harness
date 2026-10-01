@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "update",
+    "verity-plane@se-harness",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+  "observed_at": "2026-10-01T09:43:29.549522+00:00",
+  "exit_code": 0,
+  "stdout": "{\"command\":\"update\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Plugin \\\"verity-plane\\\" updated from 0.2.2 to 0.2.3 for scope user. Restart to apply changes.\",\"updateOutcome\":\"updated\",\"oldVersion\":\"0.2.2\",\"newVersion\":\"0.2.3\"}\n",
+  "stderr": ""
+}

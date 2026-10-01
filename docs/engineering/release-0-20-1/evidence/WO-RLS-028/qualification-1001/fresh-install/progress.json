@@ -1,0 +1,34 @@
+[
+  {
+    "host": "codex",
+    "version": "codex-cli 0.159.2",
+    "checker": "0.20.1",
+    "route": "persistent native marketplace installation",
+    "skills": [
+      "change",
+      "evidence",
+      "harness-operator-brief",
+      "harness-orient",
+      "setup"
+    ],
+    "result": "passed",
+    "installed_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-install-retry-1001\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.3",
+    "compared_files": 26
+  },
+  {
+    "host": "claude",
+    "version": "2.1.273 (Claude Code)",
+    "checker": "0.20.1",
+    "route": "persistent native marketplace installation",
+    "skills": [
+      "change",
+      "evidence",
+      "harness-operator-brief",
+      "harness-orient",
+      "setup"
+    ],
+    "result": "passed",
+    "installed_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-native-install-retry-1001\\claude\\profile\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.3",
+    "compared_files": 26
+  }
+]

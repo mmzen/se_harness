@@ -1,0 +1,43 @@
+{
+  "reviewer": "Codex",
+  "work_order": "WO-RLS-029",
+  "verification": "VER-RLS-029",
+  "status": "pass for prepared documentation and public observations",
+  "findings": [
+    {
+      "finding": "Current guides still named plugin 0.2.2 and evaluator 0.20.0 as the public package.",
+      "resolution": "Current claims now name observed 0.2.3/0.20.1, exact public revision and new receipt."
+    },
+    {
+      "finding": "Maintenance publication must not imply new plugin-owned instructions or repository adoption.",
+      "resolution": "Current guides distinguish the published maintenance package, selected 0.20.0 root and unreleased minimal-layout successor."
+    },
+    {
+      "finding": "Main development manifests and assembly guide still describe a separate source candidate.",
+      "resolution": "Preserved candidate constants and files; updated only the test public evaluator/record/receipt references."
+    },
+    {
+      "finding": "Native delivery may not be inferred from version labels or registration alone.",
+      "resolution": "Retained all installed byte hashes, exact fixture and host-version equality with VREC-PLG-027, plus current public hooks and four offline evaluator checks."
+    },
+    {
+      "finding": "The transported release index linked to DEC-IAR-004 absent from main.",
+      "resolution": "Linked its verified file at immutable merged maintenance commit 41bddd426ed63da213af01a8a9b4982b2f36c89e; no out-of-scope artifact import."
+    }
+  ],
+  "complexity": "Uses existing marketplace commands, setup, native acceptance, document tests and closeout checker. No runtime, installer, plugin package or new repository tool changes.",
+  "tests": {
+    "command_receipt": "commands/documentation-tests.json",
+    "total": 46,
+    "passed": 45,
+    "skipped": 1,
+    "skip_reason": "Existing symlink-escape test skips when Windows does not permit symlink creation; no changed test was skipped."
+  },
+  "pending": [
+    "Human verification of this documentation candidate",
+    "Documentation integration and public readback",
+    "Separate latest/last marker decision and readback",
+    "Overall five-surface closeout"
+  ],
+  "protected_inputs": "Public bytes, frozen VRECs and release records preserved. Main RLS publication correction retained; latest verified maintenance package history transported unchanged."
+}

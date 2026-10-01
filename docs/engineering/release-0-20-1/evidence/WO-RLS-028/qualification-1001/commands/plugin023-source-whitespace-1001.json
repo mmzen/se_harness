@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "diff",
+    "--check"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\maintenance-0-20-1",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": ""
+  },
+  "seconds": 0.08815509999999449
+}

@@ -1,0 +1,13 @@
+{
+  "repository": "mmzen/se_harness",
+  "ref": "plugin-marketplace",
+  "commit": "556d0faf83c32fd188409c5ba191552fad1522e1",
+  "expected_previous": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+  "plugin_version": "0.2.3",
+  "evaluator_version": "0.20.1",
+  "file_count": 63,
+  "all_qualified_bytes_match": true,
+  "independent_checkout": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\plugin023-public-1001",
+  "human_authorization": "Human mmzen: I authorize plugin 0.2.3 marketplace publication.",
+  "public_host_installation": "pending WO-RLS-029"
+}

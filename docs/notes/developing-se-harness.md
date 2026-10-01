@@ -256,14 +256,18 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 
 ## Release sequences
 
-The [0.20.0 release package](../engineering/release-0-20-0/README.md) and plugin
-0.2.2 are published. VREC-PLG-025 covers package qualification; the public
-marketplace readback matches that exact distribution. WO-PLG-031 confirms both
-public install/update routes and reconciles current documentation. Its
-[delivery report](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
-keeps documentation integration and final readback pending until observed.
-A green evaluator publisher alone does not establish complete delivery.
+The [0.20.1 release package](../engineering/release-0-20-1/README.md) and plugin
+0.2.3 are published. VREC-PLG-027 covers local package qualification; the
+public marketplace at `556d0faf83c32fd188409c5ba191552fad1522e1` matches that
+distribution. WO-RLS-029 checks public installation and update on both Windows
+CLIs and reconciles current documentation. Its
+[delivery report](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md)
+keeps documentation integration, release markers and final readback explicit.
+The evaluator publisher alone does not establish complete delivery.
 
+This is a maintenance package from the released plugin baseline. Keep
+unreleased plugin-owned resources and the minimal layout out of its source.
+Adopting 0.20.1 and qualifying the successor are separate work.
 
 Owner content moved here from the retired repository-context document under `WO-ADS-002`. It grants no authority; every step below runs only under the approved work order or release record it names.
 

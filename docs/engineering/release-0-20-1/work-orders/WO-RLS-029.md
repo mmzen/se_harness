@@ -2,7 +2,7 @@
 id = "WO-RLS-029"
 type = "work_order"
 title = "Confirm public 0.2.3 delivery and reconcile current documentation"
-status = "approved"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-09-30"
 updated = "2026-10-01"
@@ -38,6 +38,13 @@ decided_at = "2026-10-01T05:48:10Z"
 decided_by = "engineering-owner"
 reason = "Human mmzen approved the reviewed package and confirmed: Yes\u2014approve both 028 and 029 pairs. Approves WO-RLS-028, VER-RLS-028, WO-RLS-029 and VER-RLS-029, required commit-bound verification, the stated ordinary review-branch pushes/draft PRs and read-only CI rehearsals, and the existing 0.19.0 engineering-owner encoding retaining mmzen as the human decision-maker. Reviewed SHA256 74f6ed84c045d9e557f7b79c76f5bdb7b2861eaf33250f22d8cbd7cd26e550a5; transition input SHA256 eabc0d95cbf1066200077a8ae3baae96c820270c825c8092e9a38d03c571bb1e. Only confirmed assurance metadata was added to work orders. Codex applies the matching decision. Human verification, merges, release, publication, release markers and adoption remain separate."
 scope_paths = ["README.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md", "docs/notes/developing-se-harness.md", "docs/notes/release-delivery-completion.md", "docs/engineering/plugin-integration/README.md", "docs/engineering/instruction-architecture/README.md", "docs/engineering/release-0-20-1/", "tests/test_progressive_documentation.py", "tests/plugin_integration/package_assembly/test_refresh_guidance.py"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-01T09:41:21Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Confirm public 0.2.3 delivery and reconcile current documentation

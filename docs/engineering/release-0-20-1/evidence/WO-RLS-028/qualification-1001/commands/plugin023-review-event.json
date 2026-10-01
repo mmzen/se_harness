@@ -1,0 +1,5 @@
+{
+  "pull_request": {
+    "body": "Harness-Work-Orders: WO-RLS-027, WO-RLS-028\n\nPrepare Verity Plane 0.2.3 from the public 0.2.2 source baseline for the separately released 0.20.1 evaluator. Update both manifest versions, five packaged guidance files and the existing guidance test's candidate constants. Runtime, hooks, skills and builder behavior remain unchanged.\n\nIncludes the release-preparation history in #509. The exact package source is `7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab`; later commits retain evidence only.\n\nValidation: 32 package/guidance tests pass; formal validation has zero errors. RLS-SEH-030's hosted replay rebuilt its exact candidate twice and matched both locked archive digests. Results, including initial review-check refusals and corrected retries, are retained in the release-0-20-1 domain.\n\nWO-RLS-028 remains in progress. Independent public-wheel download, marketplace assembly, native host qualification and human verification remain pending. WO-RLS-029 is approved and waits for marketplace publication. This draft makes no public availability or completion claim.\n"
+  }
+}

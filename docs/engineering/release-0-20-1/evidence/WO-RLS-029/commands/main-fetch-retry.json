@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "fetch",
+    "origin",
+    "main"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": "From https://github.com/mmzen/se_harness\n * branch              main       -> FETCH_HEAD\n"
+  },
+  "seconds": 0.6956074999998236
+}

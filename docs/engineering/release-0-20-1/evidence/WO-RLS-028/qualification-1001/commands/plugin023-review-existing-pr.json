@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:/Program Files/GitHub CLI/gh.exe",
+    "pr",
+    "list",
+    "--repo",
+    "mmzen/se_harness",
+    "--head",
+    "work/plugin-0-2-3",
+    "--state",
+    "all",
+    "--json",
+    "number,url,state"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": [],
+  "seconds": 0.44779189999985647
+}
