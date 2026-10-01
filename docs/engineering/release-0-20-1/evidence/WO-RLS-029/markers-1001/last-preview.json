@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Program Files\\Git\\cmd\\git.exe",
+    "push",
+    "--dry-run",
+    "--force-with-lease=refs/tags/last:7253d13b212ad6f7df670021290fea32e81d66de",
+    "origin",
+    "b9af631b850c495eace9807361ed3ec3e36a10b2:refs/tags/last"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": "To https://github.com/mmzen/se_harness.git\n + 7253d13b...b9af631b b9af631b850c495eace9807361ed3ec3e36a10b2 -> last (forced update)\n"
+  },
+  "seconds": 1.2790972000002512
+}

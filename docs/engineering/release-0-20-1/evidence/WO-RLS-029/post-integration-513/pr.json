@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "pr",
+    "view",
+    "513",
+    "--repo",
+    "mmzen/se_harness",
+    "--json",
+    "url,state,mergedAt,mergeCommit,headRefOid,baseRefName"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "baseRefName": "main",
+    "headRefOid": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+    "mergeCommit": {
+      "oid": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9"
+    },
+    "mergedAt": "2026-10-01T12:47:15Z",
+    "state": "MERGED",
+    "url": "https://github.com/mmzen/se_harness/pull/513"
+  },
+  "seconds": 0.4907322999970347
+}

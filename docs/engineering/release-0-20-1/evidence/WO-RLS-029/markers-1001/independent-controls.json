@@ -1,0 +1,5 @@
+{
+  "host_control": "This exact script and external mutation are submitted through exec_command require_escalated to the host automatic approval reviewer.",
+  "provider_control": "GitHub authenticated repository permissions are checked before mutation; the Git last update uses an exact expected-old-object lease.",
+  "limitation": "The retained human decision and harness check are not independent enforcement themselves."
+}

@@ -1,0 +1,298 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--artifact",
+    "RLS-SEH-030",
+    "--checkpoint",
+    "pre-action",
+    "--procedure",
+    "PROC-EXTERNAL-ACTION",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {
+      "commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+      "git_object_format": "sha1"
+    },
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "RLS-SEH-030",
+      "artifacts": [
+        "RLS-SEH-030"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "ADR-REB-009",
+        "ADR-SHB-002",
+        "ARCH-REB-009",
+        "ARCH-SHB-002",
+        "CAP-REB-001",
+        "CAP-RLO-004",
+        "CAP-SHB-001",
+        "INT-REB-001",
+        "INT-RLO-001",
+        "INT-SHB-001",
+        "REL-SEH-032",
+        "REQ-REB-020",
+        "REQ-REB-031",
+        "REQ-RLO-018",
+        "REQ-RLO-020",
+        "REQ-SHB-008",
+        "SPEC-REB-010",
+        "SPEC-REB-016",
+        "SPEC-RLO-006",
+        "SPEC-RLS-001",
+        "SPEC-SHB-002",
+        "VER-RLS-027",
+        "VREC-SEH-030",
+        "WO-RLS-027"
+      ],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-RLS-EXTERNAL",
+      "procedure_id": "PROC-EXTERNAL-ACTION",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G5-EXTERNAL-ACTION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G5E-STATUS",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "RLS-SEH-030"
+                }
+              ],
+              "message": "RLS-SEH-030 status is released."
+            },
+            {
+              "id": "QGP-G5E-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:RLS-SEH-030"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G5E-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:pre-action"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            }
+          ]
+        }
+      ],
+      "formal_snapshot_sha256": "40e81eba26e862767d351ce309810c49927b794add11fa44542d0c7c57be80ac",
+      "change_set_source": "arguments"
+    },
+    "procedure": {
+      "id": "PROC-EXTERNAL-ACTION",
+      "current_step": "STEP-EXTERNAL-ACTION",
+      "steps": [
+        {
+          "id": "STEP-EXTERNAL-ACTION",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G5-EXTERNAL-ACTION"
+          ],
+          "effects": [
+            "Permits only the exact named external action."
+          ],
+          "non_effects": [
+            "Release status alone performs no external action."
+          ],
+          "decision_right": "DR-EXTERNAL-ACTION",
+          "role": "accountable external-action owner",
+          "artifact": "RLS-SEH-030",
+          "decision": "the exact tag, publication, deployment, or operating action",
+          "outcomes": [
+            "authorize",
+            "stop"
+          ],
+          "response": "Authorize this exact external action for RLS-SEH-030: <action and target>."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "RLS-SEH-030",
+          "status": "released"
+        }
+      ],
+      "after": [
+        {
+          "id": "RLS-SEH-030",
+          "status": "released"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 54
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated pre-action compliance for RLS-SEH-030."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "RLS-SEH-030 is released."
+      ],
+      "decision_required": {
+        "decision_right": "DR-EXTERNAL-ACTION",
+        "role": "accountable external-action owner",
+        "artifact": "RLS-SEH-030",
+        "decision": "the exact tag, publication, deployment, or operating action",
+        "outcomes": [
+          "authorize",
+          "stop"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-EXTERNAL-ACTION",
+        "step_id": "STEP-EXTERNAL-ACTION",
+        "action": "the exact tag, publication, deployment, or operating action"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "Authorize this exact external action for RLS-SEH-030: <action and target>."
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-EXTERNAL-ACTION",
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ],
+          "steps": {
+            "STEP-EXTERNAL-ACTION": {
+              "location": {
+                "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                "heading": "confirm-authority-for-the-external-action"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-EXTERNAL-ACTION",
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "ADR-REB-009",
+        "ADR-SHB-002",
+        "ARCH-REB-009",
+        "ARCH-SHB-002",
+        "CAP-REB-001",
+        "CAP-RLO-004",
+        "CAP-SHB-001",
+        "INT-REB-001",
+        "INT-RLO-001",
+        "INT-SHB-001",
+        "REL-SEH-032",
+        "REQ-REB-020",
+        "REQ-REB-031",
+        "REQ-RLO-018",
+        "REQ-RLO-020",
+        "REQ-SHB-008",
+        "RLS-SEH-030",
+        "SPEC-REB-010",
+        "SPEC-REB-016",
+        "SPEC-RLO-006",
+        "SPEC-RLS-001",
+        "SPEC-SHB-002",
+        "VER-RLS-027",
+        "VREC-SEH-030",
+        "WO-RLS-027"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "e4e49b51c88aea08a866bbcb955210f5147c9dcb0501756b5977eb1f0bf661bf"
+  },
+  "seconds": 4.593458400002419
+}

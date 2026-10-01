@@ -1,0 +1,108 @@
+{
+  "status": "pass",
+  "observed_at": "2026-10-01T12:49:08.549631+00:00",
+  "pull_request": {
+    "baseRefName": "main",
+    "headRefOid": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+    "mergeCommit": {
+      "oid": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9"
+    },
+    "mergedAt": "2026-10-01T12:47:15Z",
+    "state": "MERGED",
+    "url": "https://github.com/mmzen/se_harness/pull/513"
+  },
+  "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+  "documents": [
+    {
+      "path": "README.md",
+      "sha256": "73f9aade16a7dc45debcff02ed35beededd266b711d7dc069e96b47d7f50a73f",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/README.md"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/README.md",
+      "sha256": "dc6c099a8440b003dc88356093444ca0e00a7d87d75ce6470aa15cd48d995adc",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/docs/engineering/instruction-architecture/README.md"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/README.md",
+      "sha256": "9fc4aaa24419f137e3415315e41ef76f7d16330df9e813d2c1ff49b0c338637b",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/docs/engineering/plugin-integration/README.md"
+    },
+    {
+      "path": "docs/engineering/release-0-20-1/README.md",
+      "sha256": "3d69339487757e0f7680a91451876bfe947eb30925f27bfb019142c8a88557ff",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/docs/engineering/release-0-20-1/README.md"
+    },
+    {
+      "path": "docs/notes/developing-se-harness.md",
+      "sha256": "2e5d792ca1d9a987659f65ec20a018aba110109aeb62bde5988d15b847c6557f",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/docs/notes/developing-se-harness.md"
+    },
+    {
+      "path": "docs/notes/plugin-installation-guide.md",
+      "sha256": "b387b78087c2b8f9ceb4e1e36e982f655866a663276d3fae5f1a5852d1d6591b",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/docs/notes/plugin-installation-guide.md"
+    },
+    {
+      "path": "docs/notes/plugin-marketplace-publication.md",
+      "sha256": "c193371ab766149e255e79884994bfa7ca53273888776efa34b2691ef68a1b90",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/docs/notes/plugin-marketplace-publication.md"
+    },
+    {
+      "path": "docs/notes/release-delivery-completion.md",
+      "sha256": "427e1ec3f901c82a5c4bdb31124dc41e0da64090dc53a0c0111904a354ddceea",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/docs/notes/release-delivery-completion.md"
+    },
+    {
+      "path": "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
+      "sha256": "29e700835b097dde4050bc648dcb9582db1712b265f088b09abdabaad9d89a34",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/docs/engineering/release-0-20-1/releases/RLS-SEH-030.md"
+    },
+    {
+      "path": "docs/engineering/release-0-20-1/verification-records/VREC-PLG-029.md",
+      "sha256": "00bb1297b594af4e24329efa03ef5d52f2fe45fb8e8ee9b989fb5c8c34578173",
+      "reviewed_head": "abf91be569ed00d19e41d803a0ffc3d72cd811cd",
+      "merged_commit": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "observed_main": "d7c91e88d90ed538594edece6bd9f66b5b7d75a9",
+      "byte_identical": true,
+      "source": "https://github.com/mmzen/se_harness/blob/d7c91e88d90ed538594edece6bd9f66b5b7d75a9/docs/engineering/release-0-20-1/verification-records/VREC-PLG-029.md"
+    }
+  ],
+  "method": "Fetched public origin/main; compared Git blob bytes to reviewed head and merged commit."
+}
