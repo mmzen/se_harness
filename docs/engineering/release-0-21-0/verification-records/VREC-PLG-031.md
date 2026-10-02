@@ -2,7 +2,7 @@
 id = "VREC-PLG-031"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-033"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-21-0/decisions/DEC-RLS-003.md", "d
 evaluator_evidence_path = "docs/engineering/release-0-21-0/evidence/VREC-PLG-031-evaluator.json"
 evaluator_evidence_sha256 = "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26"
 
+verified_at = "2026-10-02T07:26:55Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLS-033"]
 conforms_to = ["VER-RLS-032"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-02T07:26:55Z"
+decided_by = "assurance-owner"
+reason = "Human mmzen: I verify VREC-PLG-031 as assurance owner. Applies to candidate e6737a5493cc8c6236b54a32f30edc9418399629 and its unchanged retained evidence, including accepted unverified Claude and Codex Windows desktop omissions in DEC-RLS-003 and DEC-RLS-004. Codex applies the human decision using the selected evaluator assurance-owner encoding."
 +++
 
 # Verification Record Candidate
