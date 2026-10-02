@@ -1,0 +1,202 @@
+{
+  "schema": "release022-initial-checks-v1",
+  "candidate": "b5610f5f857cd4fb5683c856e091af56c5115ecf",
+  "windows": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "scripts/run_tests.py",
+        "--workers",
+        "4",
+        "--scale",
+        "full"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "exit_code": 1,
+      "seconds": 258.67,
+      "scale": "full",
+      "stdout": {
+        "local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\windows-full-initial.stdout.txt",
+        "sha256": "b639ae35359e5763d8b2b77c7c9d184425c914097a24222ec6484dd0b87fb481",
+        "bytes": 5451,
+        "tail": "]}, \"handoff\": {\"kind\": \"check\", \"outcome\": \"completed\"}, \"planned\": {\"automatic_matches\": [], \"coverage\": \"covered\", \"explicit_matches\": [{\"path\": \"docs/cli.md\", \"scope_entry\": \"docs/cli.md\"}, {\"path\": \"docs/procedure.md\", \"scope_entry\": \"docs/procedure.md\"}, {\"path\": \"templates/work.md\", \"scope_entry\": \"templates/work.md\"}, {\"path\": \"tests/test_guidance.py\", \"scope_entry\": \"tests/test_guidance.py\"}], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/cli.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"uncovered_paths\": []}, \"record\": {\"commit\": \"33895621648b6a26c147e0976f3b541790413144\", \"id\": \"VREC-001\", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\r\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-0ygrdody\\private\\evaluators\\0.0.0\\3d73d636eb07de2c1064f311a18c8acf5997e46ca19cebd06fc03763b83059b3\\Scripts\\python.exe\r\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-0ygrdody\\private\\evaluators\\0.0.0\\3d73d636eb07de2c1064f311a18c8acf5997e46ca19cebd06fc03763b83059b3\\Scripts\\python.exe\r\nWEX_SCALE artifacts=100 validation=0.131664s focus=0.352718s plan=0.261963s\r\nWEX_SCALE artifacts=500 validation=0.599472s focus=0.830585s plan=1.272398s\r\nWEX_SCALE artifacts=1000 validation=1.337756s focus=1.611229s plan=2.824164s\r\n0.22.0\r\ndocs/notes/diagnostic-codes.md matches the source\r\n======================================================================\r\nFAIL: test_public_onboarding.PublicOnboardingTests.test_root_is_a_bounded_human_entry_point\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_public_onboarding.py\", line 51, in test_root_is_a_bounded_human_entry_point\r\n    self.assertLessEqual(len(self.readme.split()), 650)\r\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: 725 not less than or equal to 650\r\n\r\n----------------------------------------------------------------------\r\nRan 1255 tests in 257.118s (185 classes, 4 workers)\r\n\r\nFAILED (failures=1, skipped=22)\r\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\windows-full-initial.stderr.txt",
+        "sha256": "697e7bfe46c133456519d600a8da0eeb85a5a7e6ed6cb2579e3cd715acc9e887",
+        "bytes": 30,
+        "tail": "--workers must be at least 1\r\n"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_public_onboarding.PublicOnboardingTests",
+        "tests.plugin_integration.package_assembly.test_refresh_guidance"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "exit_code": 0,
+      "seconds": 0.4,
+      "scale": "full",
+      "stdout": {
+        "local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\readme-correction.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "tail": ""
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\readme-correction.stderr.txt",
+        "sha256": "72f8e5ea39e9acfb256e72915b4ad88c9721617101bad8ca2e894e8bdea4cbb7",
+        "bytes": 126,
+        "tail": "......................\r\n----------------------------------------------------------------------\r\nRan 22 tests in 0.151s\r\n\r\nOK\r\n"
+      }
+    }
+  ],
+  "linux": {
+    "candidate": "b5610f5f857cd4fb5683c856e091af56c5115ecf",
+    "passed": false,
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "local_raw": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\linux-b5610f5f857c.json",
+    "raw_sha256": "6fc152cc924824e2a462b4e9a44b582c8b6e2dbc1770db4d2f0e72693a37eade",
+    "commands": [
+      {
+        "label": "clone",
+        "argv": [
+          "git",
+          "clone",
+          "--branch",
+          "work/release-0-22-0",
+          "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/release022/linux-b5610f5f857c.bundle",
+          "/tmp/release022-dvj5ku6j/source"
+        ],
+        "cwd": "/tmp/release022-dvj5ku6j",
+        "exit_code": 0,
+        "seconds": 9.69,
+        "stdout": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tail": ""
+        },
+        "stderr": {
+          "sha256": "534553c6bc06839ff50800e984791de36fd05a0c6ad8c58782ae38dc35928dd3",
+          "tail": "Cloning into '/tmp/release022-dvj5ku6j/source'...\nUpdating files:  56% (7741/13599)\nUpdating files:  57% (7752/13599)\nUpdating files:  58% (7888/13599)\nUpdating files:  59% (8024/13599)\nUpdating files:  60% (8160/13599)\nUpdating files:  61% (8296/13599)\nUpdating files:  62% (8432/13599)\nUpdating files:  63% (8568/13599)\nUpdating files:  64% (8704/13599)\nUpdating files:  65% (8840/13599)\nUpdating files:  66% (8976/13599)\nUpdating files:  67% (9112/13599)\nUpdating files:  68% (9248/13599)\nUpdating files:  69% (9384/13599)\nUpdating files:  70% (9520/13599)\nUpdating files:  71% (9656/13599)\nUpdating files:  72% (9792/13599)\nUpdating files:  73% (9928/13599)\nUpdating files:  74% (10064/13599)\nUpdating files:  75% (10200/13599)\nUpdating files:  76% (10336/13599)\nUpdating files:  77% (10472/13599)\nUpdating files:  78% (10608/13599)\nUpdating files:  79% (10744/13599)\nUpdating files:  80% (10880/13599)\nUpdating files:  81% (11016/13599)\nUpdating files:  82% (11152/13599)\nUpdating files:  83% (11288/13599)\nUpdating files:  84% (11424/13599)\nUpdating files:  85% (11560/13599)\nUpdating files:  86% (11696/13599)\nUpdating files:  87% (11832/13599)\nUpdating files:  88% (11968/13599)\nUpdating files:  89% (12104/13599)\nUpdating files:  90% (12240/13599)\nUpdating files:  91% (12376/13599)\nUpdating files:  92% (12512/13599)\nUpdating files:  93% (12648/13599)\nUpdating files:  94% (12784/13599)\nUpdating files:  94% (12830/13599)\nUpdating files:  95% (12920/13599)\nUpdating files:  96% (13056/13599)\nUpdating files:  97% (13192/13599)\nUpdating files:  98% (13328/13599)\nUpdating files:  99% (13464/13599)\nUpdating files: 100% (13599/13599)\nUpdating files: 100% (13599/13599), done.\n"
+        }
+      },
+      {
+        "label": "source-origin",
+        "argv": [
+          "git",
+          "remote",
+          "set-url",
+          "origin",
+          "https://github.com/mmzen/se_harness.git"
+        ],
+        "cwd": "/tmp/release022-dvj5ku6j/source",
+        "exit_code": 0,
+        "seconds": 0.0,
+        "stdout": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tail": ""
+        },
+        "stderr": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tail": ""
+        }
+      },
+      {
+        "label": "identity",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/release022-dvj5ku6j/source",
+        "exit_code": 0,
+        "seconds": 0.0,
+        "stdout": {
+          "sha256": "d5192de9b97bff43f62e52c1fda91c8f52a2690eeeba6e97b8deceb8012b3fdd",
+          "tail": "b5610f5f857cd4fb5683c856e091af56c5115ecf\n"
+        },
+        "stderr": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tail": ""
+        }
+      },
+      {
+        "label": "venv",
+        "argv": [
+          "/usr/bin/python3",
+          "-m",
+          "venv",
+          "/tmp/release022-dvj5ku6j/runtime"
+        ],
+        "cwd": "/tmp/release022-dvj5ku6j",
+        "exit_code": 0,
+        "seconds": 3.54,
+        "stdout": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tail": ""
+        },
+        "stderr": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tail": ""
+        }
+      },
+      {
+        "label": "install-released-evaluator",
+        "argv": [
+          "/tmp/release022-dvj5ku6j/runtime/bin/python",
+          "-m",
+          "pip",
+          "install",
+          "--no-index",
+          "--no-deps",
+          "/mnt/c/Users/mathi/.codex/plugins/cache/se-harness/verity-plane/0.2.4/packages/se_harness-0.21.0-py3-none-any.whl"
+        ],
+        "cwd": "/tmp/release022-dvj5ku6j",
+        "exit_code": 0,
+        "seconds": 0.87,
+        "stdout": {
+          "sha256": "46ae1228cf32d55a5812f63fd7601913efdff13c0d938dcf393a4b4c04d96139",
+          "tail": "Processing /mnt/c/Users/mathi/.codex/plugins/cache/se-harness/verity-plane/0.2.4/packages/se_harness-0.21.0-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.21.0\n"
+        },
+        "stderr": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tail": ""
+        }
+      },
+      {
+        "label": "full",
+        "argv": [
+          "/tmp/release022-dvj5ku6j/runtime/bin/python",
+          "-B",
+          "scripts/run_tests.py",
+          "--workers",
+          "4",
+          "--scale",
+          "full"
+        ],
+        "cwd": "/tmp/release022-dvj5ku6j/source",
+        "exit_code": 1,
+        "seconds": 79.48,
+        "stdout": {
+          "sha256": "89143cfc37570b6aa71a56c4950a337da5c13dc2364dda35285291f47bd22b8e",
+          "tail": "/VREC-001-evaluator.json\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}, {\"path\": \"docs/engineering/product/verification-records/VREC-001.md\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}], \"coverage\": \"covered\", \"explicit_matches\": [], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"docs/engineering/product/verification-records/VREC-001.md\"], \"uncovered_paths\": []}, \"handoff\": {\"kind\": \"check\", \"outcome\": \"completed\"}, \"planned\": {\"automatic_matches\": [], \"coverage\": \"covered\", \"explicit_matches\": [{\"path\": \"docs/cli.md\", \"scope_entry\": \"docs/cli.md\"}, {\"path\": \"docs/procedure.md\", \"scope_entry\": \"docs/procedure.md\"}, {\"path\": \"templates/work.md\", \"scope_entry\": \"templates/work.md\"}, {\"path\": \"tests/test_guidance.py\", \"scope_entry\": \"tests/test_guidance.py\"}], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/cli.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"uncovered_paths\": []}, \"record\": {\"commit\": \"bd1e73eadfe71c30f36e921947050d7a25f9cd93\", \"id\": \"VREC-001\", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\nWEX_SCALE artifacts=100 validation=0.063954s focus=0.169815s plan=0.111893s\nWEX_SCALE artifacts=500 validation=0.277446s focus=0.416286s plan=0.515462s\nWEX_SCALE artifacts=1000 validation=0.458828s focus=0.683556s plan=0.891311s\ndocs/notes/diagnostic-codes.md matches the source\n======================================================================\nFAIL: test_public_onboarding.PublicOnboardingTests.test_root_is_a_bounded_human_entry_point\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/release022-dvj5ku6j/source/tests/test_public_onboarding.py\", line 51, in test_root_is_a_bounded_human_entry_point\n    self.assertLessEqual(len(self.readme.split()), 650)\nAssertionError: 725 not less than or equal to 650\n\n----------------------------------------------------------------------\nRan 1255 tests in 78.100s (185 classes, 4 workers)\n\nFAILED (failures=1, skipped=2)\n"
+        },
+        "stderr": {
+          "sha256": "0ae5ab307bed36434c28a9c8f8a94fe40cc90b4b0059441977994e22cc0e4f49",
+          "tail": "--workers must be at least 1\n"
+        }
+      }
+    ]
+  },
+  "finding": "The README reached 725 words. Both full source runs failed the unchanged 650-word boundary; no other test failed. The corrected working README passes the 22 targeted onboarding/refresh checks. Full reruns and hosted exact-candidate qualification remain pending.",
+  "raw_availability": "Local transient logs exist at the named paths. No remote raw-log upload or durable availability is claimed."
+}
