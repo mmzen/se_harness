@@ -2,7 +2,7 @@
 
 This repository-owned builder does not import candidate evaluator code, install
 anything, authenticate a release owner, or establish host support. The caller
-selects a trusted released record and an independently obtained wheel digest.
+selects released-record or candidate-build provenance and independent digests.
 """
 from __future__ import annotations
 
@@ -232,6 +232,64 @@ def prepare(repository: Path, revision: str, plan_path: str, release_revision: s
     name = f"se_harness-{version}-py3-none-any.whl"
     if distribution.get("wheel") != name or distribution.get("wheel_sha256") != expected_wheel_sha256:
         raise AssemblyError("released wheel identity disagrees with independently expected archive")
+    return _assemble(repository, revision, plan_path, version, expected_wheel_sha256,
+                     wheel, evaluator_python, {"release_revision": release_revision,
+                     "release_record": release_record, "release_record_sha256": digest(record_raw)})
+
+
+def prepare_candidate(repository: Path, revision: str, plan_path: str,
+                      manifest: Path, expected_manifest_sha256: str,
+                      expected_wheel_sha256: str, wheel: Path,
+                      evaluator_python: Path) -> Assembly:
+    """Stage exact candidate bytes before assurance or release decisions.
+
+    The retained build manifest supplies provenance, not approval. Freeze its
+    bytes before using the existing repository distribution validator. Later
+    publication compares this same payload with the independently public wheel.
+    """
+    from repository_tools.release_distribution import read_bundle_manifest, ReleaseDistributionError
+
+    repository = repository.resolve(strict=True)
+    revision = _revision(repository, revision)
+    if (not manifest.is_file() or manifest.is_symlink()
+            or manifest.stat().st_size > 128 * 1024):
+        raise AssemblyError("candidate manifest must be a bounded regular file")
+    raw = manifest.read_bytes()
+    if not re.fullmatch(r"[0-9a-f]{64}", expected_manifest_sha256) or digest(raw) != expected_manifest_sha256:
+        raise AssemblyError("candidate manifest SHA-256 mismatch")
+    value = _json(raw)
+    if value.get("schema") != "se-harness-release-bundle/v2":
+        raise AssemblyError("candidate staging requires a recipe-bound schema-2 manifest")
+    version = value.get("version")
+    if not isinstance(version, str) or not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", version):
+        raise AssemblyError("select a stable candidate evaluator version")
+    object_format = _git(repository, "rev-parse", "--show-object-format").decode().strip()
+    epoch = int(_git(repository, "show", "-s", "--format=%ct", revision).strip())
+    try:
+        with tempfile.TemporaryDirectory(prefix="plugin-candidate-") as temporary:
+            frozen = Path(temporary) / "manifest.json"
+            frozen.write_bytes(raw)
+            distribution = read_bundle_manifest(frozen, version=version, commit=revision,
+                                                git_object_format=object_format,
+                                                source_date_epoch=epoch, repository=repository)
+    except ReleaseDistributionError as exc:
+        raise AssemblyError(str(exc)) from exc
+    source_hash = digest(_git(repository, "ls-tree", "-r", "-z", "--full-tree", revision))
+    if distribution.source_manifest_sha256 != source_hash:
+        raise AssemblyError("candidate manifest source tree differs from selected commit")
+    if distribution.wheel_sha256 != expected_wheel_sha256:
+        raise AssemblyError("candidate wheel identity differs from independently expected archive")
+    return _assemble(repository, revision, plan_path, version, expected_wheel_sha256,
+                     wheel, evaluator_python, {"candidate_commit": revision,
+                     "candidate_manifest_sha256": expected_manifest_sha256,
+                     "provenance": "candidate-build; no assurance or publication decision"})
+
+
+def _assemble(repository: Path, revision: str, plan_path: str, version: str,
+              expected_wheel_sha256: str, wheel: Path, evaluator_python: Path,
+              provenance: dict) -> Assembly:
+    """Shared inert payload assembly; callers establish distinct provenance."""
+    name = f"se_harness-{version}-py3-none-any.whl"
     if wheel.name != name or not wheel.is_file() or wheel.is_symlink() or wheel.stat().st_size > MAX_FILE:
         raise AssemblyError(f"missing or invalid released wheel: {wheel.name}")
     wheel_bytes = wheel.read_bytes()
@@ -282,8 +340,7 @@ def prepare(repository: Path, revision: str, plan_path: str, release_revision: s
         files[host] = dict(sorted(entries.items()))
     return Assembly(plan["name"], {"revision": revision, "plan": plan_path, "plan_sha256": digest(plan_raw)},
                     {"version": version, "archive": name, "archive_sha256": expected_wheel_sha256,
-                     "payload_sha256": payload, "release_revision": release_revision,
-                     "release_record": release_record, "release_record_sha256": digest(record_raw)}, files)
+                     "payload_sha256": payload, **provenance}, files)
 
 
 def _safe_directory(path: Path) -> None:

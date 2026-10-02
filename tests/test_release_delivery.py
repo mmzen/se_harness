@@ -44,6 +44,69 @@ class ReleaseDeliveryTests(unittest.TestCase):
     def row(self, result, name):
         return next(row for row in result["surfaces"] if row["id"] == name)
 
+    def complete_route(self):
+        self.plan = json.loads((FIXTURE.parent / 'complete-release/plan.json').read_text())
+        for wanted, observed in zip(self.plan['surfaces'], self.observed['surfaces']):
+            observed['source'] = wanted['destination']
+            observed['identity'] = dict(wanted['expected'])
+            if wanted['id'] == 'demonstration':
+                observed['identity']['governance_commit'] = 'a' * 40
+                observed['evidence']['deployment'] = self.observed['release']['evidence']
+            for route in observed.get('routes', []):
+                route.update(source=wanted['destination'], revision=wanted['expected']['public_revision'],
+                             evaluator_version='1.2.3', wheel_sha256='1' * 64)
+        self.observed['release']['record'] = 'RLS-TST-001'
+
+    def test_complete_route_preserves_legacy_and_requires_explicit_selection(self):
+        self.complete_route()
+        DELIVERY.validate_plan(self.plan)
+        self.plan['schema'] = DELIVERY.PLAN_SCHEMA
+        with self.assertRaises(DELIVERY.InvalidInput):
+            DELIVERY.validate_plan(self.plan)
+
+    def test_complete_route_refuses_changed_targets_and_unprepared_inputs(self):
+        self.complete_route()
+        for change in ('action', 'destination', 'candidate', 'parent', 'host', 'pending', 'documentation'):
+            with self.subTest(change=change):
+                saved = copy.deepcopy(self.plan)
+                if change == 'action': self.plan['complete_release']['actions'].append('other-release')
+                if change == 'destination': self.plan['surfaces'][1]['destination'] += '-other'
+                if change == 'candidate': self.plan['complete_release']['candidate_commit'] = 'e' * 40
+                if change == 'parent': self.plan['complete_release']['marketplace']['parent'] = 'c' * 40
+                if change == 'host': self.plan['surfaces'][1]['hosts'] = ['codex']
+                if change == 'pending': self.plan['surfaces'][0]['expected']['version'] = None
+                if change == 'documentation': self.plan['complete_release']['documentation'] = {'../escape': 'a' * 64}
+                with self.assertRaises(DELIVERY.InvalidInput): DELIVERY.validate_plan(self.plan)
+                self.plan = saved
+
+    def test_marker_readiness_does_not_claim_completion_or_hide_host_failure(self):
+        self.complete_route()
+        self.observed['surfaces'].pop()
+        self.save()
+        result, code = DELIVERY.assess(self.root/'plan.json', self.root/'observations.json', self.root,
+                                      governance_commit='a'*40, before_markers=True)
+        self.assertEqual((0, 'ready_for_markers'), (code, result['status']))
+        self.assertEqual('pending', self.row(result, 'release_markers')['status'])
+        self.observed['surfaces'][1]['routes'][0]['status'] = 'pending'
+        self.save()
+        result, code = DELIVERY.assess(self.root/'plan.json', self.root/'observations.json', self.root,
+                                      governance_commit='a'*40, before_markers=True)
+        self.assertEqual((1, 'incomplete'), (code, result['status']))
+
+    def test_complete_route_needs_resolved_governance_and_exact_plan_bytes(self):
+        self.complete_route()
+        result, code = self.assess()
+        self.assertEqual(2, code)
+        self.save()
+        result, code = DELIVERY.assess(self.root/'plan.json', self.root/'observations.json', self.root,
+                                      governance_commit='a'*40)
+        self.assertEqual((0, 'complete'), (code, result['status']))
+        self.observed['plan_sha256'] = '0'*64
+        self.save(rebind=False)
+        result, code = DELIVERY.assess(self.root/'plan.json', self.root/'observations.json', self.root,
+                                      governance_commit='a'*40)
+        self.assertEqual(1, code)
+
     def test_checked_in_example_is_complete_without_rewriting(self):
         result, code = DELIVERY.assess(FIXTURE / "plan.json", FIXTURE / "observations.json", FIXTURE)
         self.assertEqual((code, result["status"], result["input_status"]), (0, "complete", "valid"))

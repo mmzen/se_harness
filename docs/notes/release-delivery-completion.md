@@ -1,6 +1,6 @@
 # Complete a release delivery
 
-Use this procedure for newly planned SE Harness deliveries. A **surface** is
+Use this procedure for SE Harness deliveries. A **surface** is
 one public package, route or instruction set that users need. The five surfaces
 are the evaluator, marketplace, current documentation, demonstration and release
 markers. Account for all five, including those that remain unchanged.
@@ -11,9 +11,163 @@ establish that the marketplace or current instructions are ready. Historical
 RLS records and their evidence keep their original meaning.
 
 This is repository-owned operating guidance under
-[SPEC-RLO-006](../engineering/release-orchestration/specifications/SPEC-RLO-006.md).
+[SPEC-RLO-006](../engineering/release-orchestration/specifications/SPEC-RLO-006.md)
+and the explicitly selected complete-release route in
+[SPEC-RLO-007](../engineering/release-orchestration/specifications/SPEC-RLO-007.md).
 It grants no approval, publication right or lifecycle transition. Use the
 selected released evaluator and its procedures for those decisions.
+
+## One approval for the complete release
+
+**Availability:** This source implements a future route. It is not active in the
+released 0.21.0 evaluator or plugin 0.2.4. Release and adopt the supporting product
+first. Apply the separately reviewed provider configuration before offering this
+route as ready. Existing releases keep their original decisions and procedures.
+
+**Input:** A verified candidate, exact evaluator distributions, both qualified
+plugin packages, documentation, demonstration inputs and operational readiness.
+
+**Output:** One human decision covering the frozen delivery plan. The agent carries
+out its listed actions and retains a report of all five surfaces. An unavailable
+required check leaves delivery incomplete; it does not create a new permission request.
+
+### Prepare before requesting approval
+
+1. Build the exact candidate with the existing pinned release recipe. Retain its
+   schema-2 bundle manifest and wheel. Use [candidate staging](plugin-marketplace-publication.md#stage-before-release-approval)
+   to prepare both host plugins from those inputs, without requiring publication.
+2. Qualify those exact packages and obtain all required human verification. Prepare
+   the ready RLS and bind its distributions through the existing commands. Include
+   the final VREC(s) in that RLS. Stage and review versioned documentation and the
+   demonstration inputs. Do not defer candidate assurance until after publication.
+3. Prepare the marketplace commit as one ordinary child of the observed public
+   `plugin-marketplace` tip. Its complete tree is the checked staged output. Retain
+   it on a review staging ref accessible to the publisher, under the release
+   preparation work order's branch authority. This does not publish the marketplace.
+4. Prepare a `se-harness-delivery-plan/v2` supporting file in the release evidence
+   directory. The [synthetic example](../../tests/fixtures/release_delivery/complete-release/plan.json)
+   shows its fields; none of that example's identities is a real release input.
+   Fill every expected identity from retained evidence. No field may remain `null`.
+5. Select `[delivery] route = "complete-release"` in the release contract before
+   its approval. This repository-owned selection does not change portable lifecycle
+   semantics. The complete plan names the repository, candidate, actions, marketplace
+   parent/commit/tree, package identity digest, exact documentation file hashes,
+   previous marker values, decision/receipt paths, readiness evidence and observations.
+   Both host content identities are the SHA-256 of their `assembly-inventory.json` bytes.
+6. For demonstration governance, use `release-governance`: the publisher resolves
+   this reviewed rule to the first main commit containing the released RLS. Other
+   identities are fixed before approval. `previous_last` is the existing Git ref
+   object ID, including a tag object ID when `last` is annotated; it is not its peeled commit.
+7. Retain the readiness JSON and its digest in the plan. It names `candidate_commit`,
+   `verification_records`, `qualification: "passed"` and `controls_ready: true`, with
+   references to the actual qualification and control evidence. These fields are
+   a reviewed summary, not proof of their own truth. Missing host credentials,
+   assurance or provider controls prevents the ready claim. Required public-route
+   checks still occur after publication; they are separate from candidate assurance.
+8. Commit the prepared plan and ready RLS. Record this review commit separately;
+   placing its own commit ID inside the plan would create a circular identity.
+   Freeze the complete plan bytes and their SHA-256. Present their digest and the
+   review commit in the final request.
+
+### Obtain and apply the one decision
+
+Lead with **“Approve the complete release”**, evaluator and plugin versions, then
+name the outputs: version tag, GitHub release, PyPI, marketplace, documentation,
+demonstration, maintenance line and latest/last. Include the bounded release-only
+PR integrations and receipt paths. Summarize verification and limitations and link
+the plan, candidate and staged package. Confirm the human holds the listed rights.
+
+After the matching response, apply the RLS transition through the selected released
+evaluator. Record the actual human and the plan digest/reference in its reason.
+Add this repository-owned binding to the RLS under that same decision:
+
+```toml
+[delivery]
+plan = "docs/engineering/DOMAIN/evidence/WORK/plan.json"
+sha256 = "COMPLETE_PLAN_SHA256"
+decided_by = "ACTUAL_HUMAN"
+decision_reference = "RETAINED_HUMAN_RESPONSE_REFERENCE"
+review_commit = "FULL_PRE_APPROVAL_REVIEW_COMMIT"
+```
+
+These placeholders are not valid inputs. The binding must match the real decision;
+neither a table, a username nor arbitrary prose authenticates a human grant.
+The human-reviewed PR and existing repository protections preserve that boundary.
+
+Before integrating, compare the release-only diff with the frozen plan. The existing
+publisher's `check-integration` command accepts the retained envelope (`plan` object,
+`sha256`, `decided_by`, `decision_reference`, `path`, `review_commit`) and exact Git
+base/head. It permits only the named files, unchanged artifact bodies and one appended
+matching release decision. With `--receipts`, only the named evidence JSON files may
+change; each must retain `release_record`, `candidate_commit` and `plan_sha256`.
+
+```text
+python .github/scripts/publish_release.py check-integration --repository . --envelope ENVELOPE_JSON --base BASE --head HEAD
+```
+
+The command checks the diff; it does not grant permission or merge. Under the already
+recorded integration grant, push the reviewed branch and merge its PR only after
+required checks pass. Match the merge to the exact checked head (`gh pr merge NUMBER
+--squash --match-head-commit HEAD`); do not use an administrator bypass. Review changed
+base content before retry. No unrelated source edit belongs in a release decision commit.
+
+### Execute and resume delivery
+
+Dispatch `publish-pypi.yml` from `main` with its existing single `release_record`
+input. The resolver requires matching REL/RLS selection, frozen plan bytes, the
+reviewed decision diff, verified records, readiness evidence and prepared package
+identity. Legacy RLS inputs continue through their original publisher.
+
+For the complete route, the workflow checks provider controls before publishing.
+It runs the existing qualification, immutable GitHub/PyPI publication, maintenance
+reconciliation and Pages deployment. It independently downloads the public wheel
+and checks its digest before promoting the exact staged marketplace commit. It
+executes no staged plugin or candidate code with publication credentials.
+
+The agent then runs the required public fresh/update tests using the public ref.
+Retain their actual observations, documentation checks and Pages provenance at
+the plan's paths. Integrate only the named receipt files under the same approval,
+using `check-integration --receipts` and the protected PR procedure. Do not ask for
+permission again just because the next action uses a different provider.
+
+Rerun the same workflow. The delivery checker requires all non-marker observations
+before marker promotion. It reports `ready_for_markers`, never `complete`, at that
+boundary. Missing authentication or a failed public check keeps the affected step
+pending. Required host tests are not replaced by static inventory comparisons.
+
+Exact completed steps are read back and left in place. A failed or uncertain write
+is inspected before retry. A moved marketplace parent, different public wheel,
+changed plan or unexpected marker stops the affected write. `last` uses an exact
+Git lease. GitHub's latest-release API has no compare-and-swap operation; the job
+serializes complete-release writes, checks the old value and reads back the result.
+Outside writers must not change markers during this operation.
+
+Integrate the marker receipt and updated observations through the same permitted
+receipt path, then run `continue-delivery --stage report`. The resulting
+`delivery-result.json` is the existing five-surface completion report. The earlier
+`release-result.json` records the publisher's stage snapshot and may still show
+pending downstream evidence. Retain the final report and link every observed
+destination; do not equate the release decision with public delivery.
+
+### Activation and recovery
+
+The [WO-RLO-016 review](../engineering/release-orchestration/evidence/WO-RLO-016/README.md)
+contains the observed controls and exact reviewer-only proposal. It does not apply
+that change. Before activation, verify and integrate this implementation, release
+and separately adopt its evaluator/plugin, then confirm PyPI's Trusted Publisher
+binding and the prepared before/after configuration. Obtain the owner's decision
+on that exact one-time change. It is not repeated for each later release.
+
+If live settings differ from the retained snapshot, stop and refresh the review.
+Recovery restores the prior reviewer list while preserving the main-only branch
+policy, OIDC binding and repository protections. Read back every control. No
+release uses this review to bypass a still-required provider approval.
+
+## Legacy delivery route
+
+The following procedure remains applicable to contracts that did not select the
+complete-release route. Its later assembly and separate grants are historical
+constraints, not extra prompts for a matching complete-release approval.
 
 ## Prepare the delivery plan
 

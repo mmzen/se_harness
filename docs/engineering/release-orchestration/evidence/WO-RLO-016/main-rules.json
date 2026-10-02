@@ -1,0 +1,80 @@
+{
+  "command": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "api",
+    "repos/mmzen/se_harness/rulesets/20693381"
+  ],
+  "observed_at": "2026-10-02T20:40:00.977369+00:00",
+  "exit_code": 0,
+  "result": {
+    "id": 20693381,
+    "name": "main basic protection",
+    "target": "branch",
+    "source_type": "Repository",
+    "source": "mmzen/se_harness",
+    "enforcement": "active",
+    "conditions": {
+      "ref_name": {
+        "exclude": [],
+        "include": [
+          "~DEFAULT_BRANCH"
+        ]
+      }
+    },
+    "rules": [
+      {
+        "type": "deletion"
+      },
+      {
+        "type": "non_fast_forward"
+      },
+      {
+        "type": "pull_request",
+        "parameters": {
+          "required_approving_review_count": 0,
+          "dismiss_stale_reviews_on_push": false,
+          "required_reviewers": [],
+          "require_code_owner_review": false,
+          "require_last_push_approval": false,
+          "required_review_thread_resolution": false,
+          "require_extra_approval_for_unattributed_changes": false,
+          "allowed_merge_methods": [
+            "merge"
+          ]
+        }
+      },
+      {
+        "type": "required_status_checks",
+        "parameters": {
+          "strict_required_status_checks_policy": false,
+          "do_not_enforce_on_create": false,
+          "required_status_checks": [
+            {
+              "context": "validate",
+              "integration_id": 15368
+            }
+          ]
+        }
+      }
+    ],
+    "node_id": "RRS_lACqUmVwb3NpdG9yec5PT188zgE7wYU",
+    "created_at": "2026-08-11T13:52:02.098+02:00",
+    "updated_at": "2026-09-02T16:01:45.248+02:00",
+    "bypass_actors": [
+      {
+        "actor_id": 5,
+        "actor_type": "RepositoryRole",
+        "bypass_mode": "pull_request"
+      }
+    ],
+    "current_user_can_bypass": "pull_requests_only",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/mmzen/se_harness/rulesets/20693381"
+      },
+      "html": {
+        "href": "https://github.com/mmzen/se_harness/rules/20693381"
+      }
+    }
+  }
+}

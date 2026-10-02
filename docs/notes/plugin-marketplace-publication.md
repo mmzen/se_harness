@@ -12,11 +12,11 @@ Documentation integration and delivery closeout remain pending. Claude native se
 
 ## Assemble committed inputs
 
-For any new assembly, first require the selected RLS to be released and its wheel to be independently
+For the legacy `build` path, first require the selected RLS to be released and its wheel to be independently
 available from the public release. Compare the downloaded wheel SHA-256 with
 that record's distribution binding. A local candidate wheel does not satisfy
-this prerequisite. Use the checkout's selected released evaluator. The maintenance
-checkout selects 0.19.0; current main selects 0.20.1 after WO-HUP-025.
+this prerequisite. Use the checkout's selected released evaluator; resolve its
+actual version and absolute path from the selected repository context.
 Publication does not change a repository's selection. A successor plugin may
 deliver external wheel resources and session activation; publication must
 qualify those exact package bytes and must not imply that existing repositories
@@ -56,9 +56,40 @@ The native builder's inventories and archives remain intact under `packages/`.
 Both host packages include LICENSE through the shared committed plan. Catalogs
 and instructions come from the same source commit; no output overlay is needed.
 
+## Stage before release approval
+
+The future [complete-release route](release-delivery-completion.md#one-approval-for-the-complete-release)
+uses `stage` and `check-stage` before publication. They take the retained candidate's
+schema-2 build manifest, its independently retained digest and the exact wheel.
+The builder checks the commit, Git source tree, build recipe and wheel identity.
+It writes the same native formats and marketplace layout as the released-input
+path. Staging grants no assurance, host-support or publication decision.
+
+```text
+python scripts/build_plugin_marketplace.py stage --repository . --revision CANDIDATE_COMMIT --candidate-manifest BUNDLE_JSON --expected-manifest-sha256 MANIFEST_SHA256 --expected-wheel-sha256 WHEEL_SHA256 --wheel CANDIDATE_WHEEL --evaluator-python EVALUATOR_PYTHON --output-directory NEW_OUTPUT
+python scripts/build_plugin_marketplace.py check-stage --repository . --revision CANDIDATE_COMMIT --candidate-manifest BUNDLE_JSON --expected-manifest-sha256 MANIFEST_SHA256 --expected-wheel-sha256 WHEEL_SHA256 --wheel CANDIDATE_WHEEL --evaluator-python EVALUATOR_PYTHON --output-directory NEW_OUTPUT
+```
+
+Use absolute paths for the manifest, wheel, evaluator Python and fresh output.
+The released evaluator runs outside the checkout to compute canonical payload
+identity. The candidate wheel is inspected as inert bytes. `--dry-run` is not
+an option here; `check-stage` compares the existing output without replacing it.
+
+Complete the required package/host qualification and human verification before
+the final complete-release request. Prepare its exact marketplace child commit
+and retain it on the authorized staging ref. Candidate provenance stays in the
+inventories. The later RLS decision and public receipts reference those identities;
+they do not rewrite or requalify the package merely because governance changed.
+
+After evaluator publication, the existing publisher compares the independently
+downloaded public wheel, rechecks every staged file and its parent/tree, and
+promotes that commit to `plugin-marketplace`. Matching retries make no new commit.
+Unexpected branch movement stops promotion. Public fresh/update checks remain
+required after promotion and before delivery can be complete.
+
 ## Check and deliver
 
-For a newly planned delivery, use the
+For a legacy delivery, use the
 [release delivery handoff](release-delivery-completion.md#perform-and-retain-each-handoff).
 Evaluator publication leaves plugin assembly, qualification and separately
 authorized marketplace publication pending with an owner and next action.

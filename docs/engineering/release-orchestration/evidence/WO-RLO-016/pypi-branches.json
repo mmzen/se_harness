@@ -1,0 +1,20 @@
+{
+  "command": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "api",
+    "repos/mmzen/se_harness/environments/pypi/deployment-branch-policies"
+  ],
+  "observed_at": "2026-10-02T20:40:00.143249+00:00",
+  "exit_code": 0,
+  "result": {
+    "total_count": 1,
+    "branch_policies": [
+      {
+        "id": 57065399,
+        "node_id": "MDE2OkdhdGVCcmFuY2hQb2xpY3k1NzA2NTM5OQ==",
+        "name": "main",
+        "type": "branch"
+      }
+    ]
+  }
+}

@@ -49,7 +49,7 @@ def _job_blocks(workflow: str) -> dict[str, str]:
     """Split the `jobs:` mapping into {job_id: block text} without a YAML parser."""
 
     body = workflow.split("\njobs:\n", 1)[1]
-    names = [(m.start(), m.group(1)) for m in re.finditer(r"(?m)^  ([a-z][a-z0-9-]*):$", body)]
+    names = [(m.start(), m.group(1)) for m in re.finditer(r"(?m)^  ([a-z][a-z0-9_-]*):$", body)]
     blocks = {}
     for index, (start, name) in enumerate(names):
         end = names[index + 1][0] if index + 1 < len(names) else len(body)

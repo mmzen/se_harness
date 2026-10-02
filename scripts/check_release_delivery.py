@@ -14,6 +14,9 @@ from urllib.parse import urlsplit
 
 
 PLAN_SCHEMA = "se-harness-delivery-plan/v1"
+COMPLETE_PLAN_SCHEMA = "se-harness-delivery-plan/v2"
+COMPLETE_ACTIONS = {"release-integration", "version-tag", "github-release", "pypi",
+                    "maintenance-line", "marketplace", "documentation", "pages", "latest", "last", "receipts"}
 OBSERVATIONS_SCHEMA = "se-harness-delivery-observations/v1"
 RESULT_SCHEMA = "se-harness-delivery-result/v1"
 SURFACES = ("evaluator", "marketplace", "documentation", "demonstration", "release_markers")
@@ -98,7 +101,8 @@ def read_json(path, schema):
     require(len(raw) <= MAX_JSON_BYTES, f"{path}: JSON exceeds 2 MiB")
     value = json.loads(raw.decode("utf-8"), object_pairs_hook=no_duplicates, parse_constant=invalid_constant)
     object_value(value, str(path))
-    require(value.get("schema") == schema, f"{path}: unsupported schema; expected {schema}")
+    accepted = {PLAN_SCHEMA, COMPLETE_PLAN_SCHEMA} if schema == PLAN_SCHEMA else {schema}
+    require(value.get("schema") in accepted, f"{path}: unsupported schema; expected {schema}")
     return value, hashlib.sha256(raw).hexdigest()
 
 
@@ -117,6 +121,7 @@ def surface_map(value, location, complete=False):
 
 
 def validate_plan(plan):
+    require(plan.get("schema") in {PLAN_SCHEMA, COMPLETE_PLAN_SCHEMA}, "unsupported delivery plan schema")
     release = object_value(plan.get("release"), "release")
     for field in ("contract", "record", "version"):
         text_value(release.get(field), "release." + field)
@@ -147,7 +152,9 @@ def validate_plan(plan):
                 text_value(value, name + ".expected." + key)
                 if key.endswith("sha256"):
                     digest_value(value, name + ".expected." + key)
-                if key.endswith("commit") or key == "public_revision" or (name == "release_markers" and key == "last"):
+                derived = (plan.get("schema") == COMPLETE_PLAN_SCHEMA and name == "demonstration"
+                           and key == "governance_commit" and value == "release-governance")
+                if not derived and (key.endswith("commit") or key == "public_revision" or (name == "release_markers" and key == "last")):
                     require(re.fullmatch(r"[0-9a-f]{40}", value), name + ".expected." + key + ": expected full commit ID")
         minimum = REQUIRED_EVIDENCE[name] if disposition == "update" else {"readback", "compatibility"} if disposition == "unchanged" else {"deferral"}
         required = unique_strings(surface.get("required_observations"), name + ".required_observations")
@@ -165,7 +172,82 @@ def validate_plan(plan):
             for field, release_field in keys.items():
                 require(surfaces[surface]["expected"][field] == release[release_field],
                         f"{surface}.expected.{field}: disagrees with selected release")
+    if plan["schema"] == COMPLETE_PLAN_SCHEMA:
+        validate_complete_release(plan, surfaces)
+    else:
+        require("complete_release" not in plan, "legacy plan cannot declare complete-release authority")
     return surfaces
+
+
+def repository_path(value, location):
+    text_value(value, location)
+    require(not any(c in value for c in ("\\", ":", "\x00")) and
+            not any(p in {"", ".", ".."} for p in value.split("/")), location + ": unsafe repository path")
+    return value
+
+
+def commit_value(value, location):
+    require(isinstance(value, str) and re.fullmatch(r"[0-9a-f]{40}", value), location + ": expected full commit ID")
+    return value
+
+
+def validate_complete_release(plan, surfaces):
+    """Validate a reviewed envelope, not the identity or authority of its author."""
+    value = object_value(plan.get("complete_release"), "complete_release")
+    require(set(value) == {"repository", "candidate_commit", "actions", "marketplace", "markers",
+                           "integration", "readiness", "observations", "evidence_root", "documentation"}, "complete_release: unexpected field set")
+    require(value["repository"] == "mmzen/se_harness", "complete_release: unsupported repository")
+    commit_value(value["candidate_commit"], "candidate_commit")
+    require(unique_strings(value["actions"], "actions") == COMPLETE_ACTIONS, "complete_release: incomplete or extra action")
+    require(all(s["disposition"] == "update" for s in surfaces.values()), "complete release requires all five updated surfaces")
+    require(all(v is not None for s in surfaces.values() for v in s["expected"].values()), "complete release has unresolved identities")
+    require(set(surfaces["marketplace"]["hosts"]) == {"codex", "claude-code"}, "complete release needs both hosts")
+    expected_destinations = {
+        "evaluator": "https://pypi.org/project/se-harness/" + plan["release"]["version"] + "/",
+        "marketplace": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+        "documentation": "https://github.com/mmzen/se_harness/tree/main",
+        "demonstration": "https://mmzen.github.io/se_harness/",
+        "release_markers": "https://github.com/mmzen/se_harness",
+    }
+    for name, destination in expected_destinations.items():
+        require(surfaces[name]["destination"] == destination, name + ": unapproved destination")
+    docs = object_value(value["documentation"], "documentation")
+    require(bool(docs), "documentation: exact reviewed files are required")
+    for path, digest in docs.items():
+        repository_path(path, "documentation path")
+        require(path == "README.md" or path.startswith("docs/"), "documentation: unsupported path")
+        digest_value(digest, "documentation file digest")
+    market = object_value(value["marketplace"], "complete_release.marketplace")
+    require(set(market) == {"parent", "commit", "tree", "identity_sha256"}, "marketplace: unexpected field set")
+    for key in ("parent", "commit", "tree"):
+        commit_value(market[key], "marketplace." + key)
+    digest_value(market["identity_sha256"], "marketplace.identity_sha256")
+    require(market["parent"] != market["commit"], "marketplace must be a new child commit")
+    require(surfaces["marketplace"]["expected"]["public_revision"] == market["commit"], "marketplace revision differs")
+    require(surfaces["marketplace"]["expected"]["source_commit"] == value["candidate_commit"], "marketplace source differs")
+    markers = object_value(value["markers"], "markers")
+    require(set(markers) == {"previous_latest", "previous_last"}, "markers: unexpected field set")
+    if markers["previous_last"] is not None:
+        commit_value(markers["previous_last"], "markers.previous_last")
+    if markers["previous_latest"] is not None:
+        require(isinstance(markers["previous_latest"], str) and re.fullmatch(r"v[0-9]+\.[0-9]+\.[0-9]+", markers["previous_latest"]), "invalid previous_latest")
+    require(surfaces["release_markers"]["expected"] == {"latest": "v" + plan["release"]["version"], "last": value["candidate_commit"]}, "marker targets differ")
+    integration = object_value(value["integration"], "integration")
+    require(set(integration) == {"decision_paths", "receipt_paths"}, "integration: unexpected field set")
+    for key in ("decision_paths", "receipt_paths"):
+        paths = unique_strings(integration[key], "integration." + key)
+        for path in paths:
+            repository_path(path, "integration path")
+            require(path.startswith("docs/engineering/"), "integration limited to formal decision and evidence paths")
+            if key == "receipt_paths":
+                require("/evidence/" in path and path.endswith(".json"), "receipt must be a named evidence JSON file")
+    readiness = object_value(value["readiness"], "readiness")
+    require(set(readiness) == {"path", "sha256"}, "readiness: unexpected field set")
+    repository_path(readiness["path"], "readiness.path")
+    digest_value(readiness["sha256"], "readiness.sha256")
+    for key in ("observations", "evidence_root"):
+        repository_path(value[key], key)
+        require(value[key].startswith("docs/engineering/") and "/evidence/" in value[key], key + ": must be retained evidence")
 
 
 def issue(code, location, message, **details):
@@ -247,7 +329,7 @@ def check_routes(surface, observed, root):
     return findings
 
 
-def assess(plan_path, observations_path, evidence_root):
+def assess(plan_path, observations_path, evidence_root, *, governance_commit=None, before_markers=False):
     result = {"schema": RESULT_SCHEMA, "status": "incomplete", "input_status": "valid",
               "authority": "derived operational evidence; no lifecycle transition",
               "limitation": LIMITATION, "formal_release": None, "evaluator_publication": "unobserved",
@@ -255,6 +337,12 @@ def assess(plan_path, observations_path, evidence_root):
     try:
         plan, plan_digest = read_json(plan_path, PLAN_SCHEMA)
         surfaces = validate_plan(plan)
+        if plan["schema"] == COMPLETE_PLAN_SCHEMA:
+            commit_value(governance_commit, "resolved release governance commit")
+            if surfaces["demonstration"]["expected"]["governance_commit"] == "release-governance":
+                surfaces["demonstration"]["expected"]["governance_commit"] = governance_commit
+        else:
+            require(not before_markers, "legacy report cannot authorize marker continuation")
         observations, _ = read_json(observations_path, OBSERVATIONS_SCHEMA)
         result["plan_sha256"] = plan_digest
         result["observed_at"] = timestamp(observations.get("observed_at"), "observed_at")
@@ -302,9 +390,12 @@ def assess(plan_path, observations_path, evidence_root):
             result["surfaces"].append(row)
             if name == "evaluator":
                 result["evaluator_publication"] = status
-        if not result["findings"] and all(row["status"] == "satisfied" for row in result["surfaces"]):
+        assessed = [row for row in result["surfaces"] if not (before_markers and row["id"] == "release_markers")]
+        if before_markers and not result["findings"] and all(row["status"] == "satisfied" for row in assessed):
+            result["status"] = "ready_for_markers"
+        elif not result["findings"] and all(row["status"] == "satisfied" for row in result["surfaces"]):
             result["status"] = "complete"
-        return result, 0 if result["status"] == "complete" else 1
+        return result, 0 if result["status"] in {"complete", "ready_for_markers"} else 1
     except (InvalidInput, OSError, ValueError, RecursionError) as error:
         result["input_status"] = "invalid"
         result["findings"].append(issue("invalid_input", "input", str(error)))
@@ -329,9 +420,12 @@ def main(argv=None):
     parser.add_argument("--plan", type=Path, required=True)
     parser.add_argument("--observations", type=Path, required=True)
     parser.add_argument("--evidence-root", type=Path, required=True)
+    parser.add_argument("--governance-commit", help="Resolved release integration commit for a v2 plan")
+    parser.add_argument("--before-markers", action="store_true", help="Report marker readiness; never report complete")
     parser.add_argument("--json", action="store_true", help="JSON on stdout; human report on stderr")
     args = parser.parse_args(argv)
-    result, code = assess(args.plan, args.observations, args.evidence_root)
+    result, code = assess(args.plan, args.observations, args.evidence_root,
+                          governance_commit=args.governance_commit, before_markers=args.before_markers)
     if args.json:
         print(json.dumps(result, indent=2, ensure_ascii=True))
         print(render(result), file=sys.stderr)

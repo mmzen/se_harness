@@ -385,7 +385,7 @@
       "id": "PROC-RLS-DECIDE",
       "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
       "steps": [
-        {"id": "STEP-RLS-DECIDE", "kind": "decision", "decision_right": "DR-RLS-DECIDE", "role": "release-owner", "artifact": "{artifact_id}", "decision": "whether the exact candidate is authorized for release", "outcomes": ["released", "reject"], "response": "I authorize release record {artifact_id}.", "gate_ids": ["QG-G5-RELEASE-DECISION"], "effects": ["Permits an explicit decision on {artifact_id} only."], "non_effects": ["Release status performs no external action."]}
+        {"id": "STEP-RLS-DECIDE", "kind": "decision", "decision_right": "DR-RLS-DECIDE", "role": "release-owner", "artifact": "{artifact_id}", "decision": "whether to authorize the exact release and, when explicitly selected, its reviewed complete delivery plan", "outcomes": ["released", "reject"], "response": "Authorize release record {artifact_id}; when complete delivery is selected, explicitly include its reviewed plan and listed external actions.", "gate_ids": ["QG-G5-RELEASE-DECISION"], "effects": ["Permits the selected RLS decision; one explicit complete-release response may also supply its listed external rights."], "non_effects": ["Release status performs no external action."]}
       ]
     },
     {
@@ -399,7 +399,7 @@
       "id": "PROC-EXTERNAL-ACTION",
       "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
       "steps": [
-        {"id": "STEP-EXTERNAL-ACTION", "kind": "decision", "decision_right": "DR-EXTERNAL-ACTION", "role": "accountable external-action owner", "artifact": "{artifact_id}", "decision": "the exact tag, publication, deployment, or operating action", "outcomes": ["authorize", "stop"], "response": "Authorize this exact external action for {artifact_id}: <action and target>.", "gate_ids": ["QG-G5-EXTERNAL-ACTION"], "effects": ["Permits only the exact named external action."], "non_effects": ["Release status alone performs no external action."]}
+        {"id": "STEP-EXTERNAL-ACTION", "kind": "decision", "decision_right": "DR-EXTERNAL-ACTION", "role": "accountable external-action owner", "artifact": "{artifact_id}", "decision": "use matching existing authority for the exact external action, or obtain only the missing grant", "outcomes": ["authorize", "stop"], "response": "Reuse the matching complete-release or external-action authorization for {artifact_id}; request only an uncovered action and target.", "gate_ids": ["QG-G5-EXTERNAL-ACTION"], "effects": ["Permits only the exact named external action."], "non_effects": ["Release status alone performs no external action."]}
       ]
     },
     {

@@ -9,6 +9,22 @@ from se_harness.workflow_procedures import ProcedureError, resolve_procedure
 
 
 class WorkflowProcedureTests(unittest.TestCase):
+    def test_complete_release_reuses_authority_without_combining_effects(self) -> None:
+        _, _, _, procedures, _ = load_validated_contracts()
+        release = resolve_procedure(procedures, "PROC-RLS-DECIDE", {"artifact_id": "RLS-ABC-001"})["steps"][0]
+        external = resolve_procedure(procedures, "PROC-EXTERNAL-ACTION", {"artifact_id": "RLS-ABC-001"})["steps"][0]
+        self.assertEqual("DR-RLS-DECIDE", release["decision_right"])
+        self.assertEqual("DR-EXTERNAL-ACTION", external["decision_right"])
+        self.assertIn("explicitly include its reviewed plan", release["response"])
+        self.assertIn("Reuse the matching", external["response"])
+        self.assertIn("request only an uncovered action", external["response"])
+        self.assertEqual(["QG-G5-RELEASE-DECISION"], release["gate_ids"])
+        self.assertEqual(["QG-G5-EXTERNAL-ACTION"], external["gate_ids"])
+        self.assertIn("Release status performs no external action.", release["non_effects"])
+        self.assertIn("Release status alone performs no external action.", external["non_effects"])
+        self.assertNotIn("argv", release)
+        self.assertNotIn("argv", external)
+
     def test_review_publication_does_not_borrow_integration_authority(self) -> None:
         _, _, rules, procedures, _ = load_validated_contracts()
         self.assertIn("PROC-REVIEW-PUBLISH", rules["WFL-VREC-DECIDE"]["alternative_procedure_ids"])

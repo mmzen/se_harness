@@ -27,8 +27,16 @@ or a new approval of the original transaction.
 If reviewed content or evidence is unavailable, do not guess equivalence.
 Report the missing input or right and one specific recovery. Recheck readiness
 and gates after recovery; reuse the unchanged decision when it still applies.
-Do not extend an assurance decision to merging, or a release decision to
-publication.
+Do not extend an assurance decision to merging, or a release-only decision to
+publication. When the selected released policy supports complete-release
+authority and the reviewed contract and plan explicitly select it, one actual
+human response may cover the release decision and every listed external action.
+Follow its `AUTHORITY.md#complete-release-authority` procedure. Compare the frozen
+plan digest, candidate, payloads, destinations and conditions before each action.
+Reuse the same matching grant across providers, pauses and retries. A bare RLS
+state, invented decision reference or changed plan cannot supply that authority.
+An older selected release retains its own supported rules; candidate policy
+cannot authorize its own rollout.
 
 ## External actions
 

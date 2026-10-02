@@ -92,6 +92,9 @@ Verity Plane Explorer shows the connections between requirements, work, evidence
 
 ## Go further
 
+[Complete-release procedure](docs/notes/release-delivery-completion.md#one-approval-for-the-complete-release)
+for maintainers: requires product release, adoption and provider activation.
+
 - [Start with the checker](docs/notes/getting-started.md)
 - [Install or upgrade a project](docs/notes/harness-installation-and-upgrades.md)
 - [Understand the model](docs/notes/harness-overview.md)
