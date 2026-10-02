@@ -42,7 +42,7 @@ The [0.21.0 evaluator / 0.2.4 plugin release package](docs/engineering/release-0
 is published. The [public observations and limits](docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
 separate package installation, native session evidence and remaining delivery work.
 
-Observed public delivery (2026-10-02): Plugin **0.2.4** bundles released **SE Harness 0.21.0**. Public fresh-install and 0.2.3-to-0.2.4 update checks passed on Codex CLI 0.159.2 and Claude Code 2.1.273. All 29 installed files match on each route. Offline setup and evaluator identity checks passed. These installation results do not establish native startup or compaction behavior.
+Observed public delivery (2026-10-02): Plugin **0.2.4** bundles released **SE Harness 0.21.0**. Public fresh-install and 0.2.3-to-0.2.4 update checks passed on Codex CLI 0.159.2 and Claude Code 2.1.273. All 29 installed files match on each route. Offline setup and evaluator identity checks passed. Separate exact-public-byte Codex CLI/app-server tests passed startup, activation, manual and automatic compaction, and resume in the existing trusted disposable profile. Fresh profiles still require normal hook trust.
 
 Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. It does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
 
@@ -56,9 +56,9 @@ See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-mar
 Instructions and templates now live in the selected evaluator wheel; default
 initialization writes only configuration and lock files.
 Plugin activation restores the selected checkout after compaction or resume.
-Claude exact-release native qualification and Codex Windows desktop remain
-unverified. DEC-RLS-002 accepts those gaps for WO-RLS-032 only; public-route
-native evidence under WO-RLS-033 remains pending. This repository still uses 0.20.1.
+Claude native session tests remain unverified, with their WO-RLS-033 omission
+accepted in DEC-RLS-003. Codex Windows desktop remains unverified; DEC-RLS-004
+awaits its separate disposition. This repository still uses 0.20.1.
 See [migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-0210).
 The published package retains its original pre-publication README wording;
 the current source guide records the observed release status.

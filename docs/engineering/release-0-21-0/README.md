@@ -32,7 +32,7 @@ existing tools; no new product requirement, framework or approval artifact is ad
 
 ## Qualification limits
 
-Claude exact-release native qualification and Codex Windows desktop remain unverified. DEC-RLS-002 accepts these gaps for WO-RLS-032 only; public-route native assessment under WO-RLS-033 remains pending.
+Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 awaits its separate disposition.
 DEC-RLS-001 records the earlier evaluator-release desktop deviation. Neither
 decision establishes missing native evidence or changes the repository selection.
 
@@ -41,7 +41,7 @@ decision establishes missing native evidence or changes the repository selection
 Independent public marketplace readback matches all 69 qualified files. Fresh
 installation and updates from 0.2.3 match all 29 installed files on both Windows
 CLIs. Offline setup and exact evaluator identity checks pass on all four routes.
-Overall delivery remains incomplete while native public-route assessment,
+Overall delivery remains incomplete while the desktop evidence decision,
 documentation verification/integration/readback and separately authorized release
 marker observations remain outstanding. Published package bytes and historical
 release evidence are unchanged.

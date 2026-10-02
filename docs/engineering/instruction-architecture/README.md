@@ -16,7 +16,7 @@ retain their own scope and decisions.
 
 The external instruction resources and minimal layout are published in 0.21.0.
 DEC-IAR-004's compatibility release and separate adoption remain historical steps.
-Earlier VRECs retain their exact candidate claims. Claude exact-release native qualification and Codex Windows desktop remain unverified. DEC-RLS-002 accepts these gaps for WO-RLS-032 only; public-route native assessment under WO-RLS-033 remains pending.
+Earlier VRECs retain their exact candidate claims. Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 awaits its separate disposition.
 Publication does not remove this repository's installed root guide; adoption is separate.
 
 ## Historical architecture packets

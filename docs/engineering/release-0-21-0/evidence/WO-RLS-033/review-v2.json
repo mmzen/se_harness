@@ -1,0 +1,19 @@
+{
+  "reviewer": "Codex",
+  "previous_review": "review.json",
+  "changes": [
+    "Recorded the exact human Claude decision through the evaluator: DEC-RLS-003 decided accept, RISK-RLS-003 accepted.",
+    "Retained the original unverified Claude results and passing package/bootstrap observations.",
+    "Ran exact-public-byte Codex CLI startup, activation, manual/automatic compaction and resume in the existing trusted disposable profile. All passed; prior plugin restored. Both public installation inventories and host version match.",
+    "Prepared DEC-RLS-004 for the separate outstanding Codex Windows desktop boundary. No disposition inferred.",
+    "Updated current documentation status without rewriting earlier decisions or evidence."
+  ],
+  "validation": "28 documentation tests passed; artifact validation has zero errors.",
+  "remaining": [
+    "Desktop evidence decision DEC-RLS-004.",
+    "Commit-bound verification, human acceptance, authorized integration and public document readback.",
+    "Published package README text still retains its qualified pre-publication wording.",
+    "Release markers remain on 0.20.1; no authorization or mutation inferred."
+  ],
+  "unverified_is_not_passed": true
+}

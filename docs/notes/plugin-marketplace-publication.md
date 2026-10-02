@@ -8,8 +8,8 @@ separately authorized marketplace publication at
 
 [WO-RLS-033 observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
 record passing public fresh installs and updates from 0.2.3 on both Windows CLIs.
-Native public-route criteria, documentation integration and delivery closeout remain
-pending. Claude exact-release native qualification and Codex Windows desktop remain unverified. DEC-RLS-002 accepts these gaps for WO-RLS-032 only; public-route native assessment under WO-RLS-033 remains pending.
+The desktop evidence decision, documentation integration and delivery closeout
+remain pending. Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 awaits its separate disposition.
 
 ## Assemble committed inputs
 

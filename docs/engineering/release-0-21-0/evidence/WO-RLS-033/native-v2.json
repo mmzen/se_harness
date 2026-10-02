@@ -1,0 +1,36 @@
+{
+  "status": "partially qualified",
+  "public_revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+  "codex": {
+    "status": "pass",
+    "host_version": "codex-cli 0.159.2",
+    "evidence": "public-codex-native.json",
+    "stages": [
+      "native bootstrap startup",
+      "explicit activation of cloned minimal-layout repository",
+      "manual compaction",
+      "resume",
+      "automatic compaction"
+    ],
+    "method": "Exact public-distribution files tested in the existing trusted authenticated disposable profile; all 29 files and host version equal both independently installed public routes. No trust or authentication metadata changed. Prior plugin installation restored. Fresh/update profiles still require normal hook trust.",
+    "desktop": "unverified"
+  },
+  "claude": {
+    "status": "unverified",
+    "gap_disposition": "accepted",
+    "decision": "DEC-RLS-003",
+    "risk": "RISK-RLS-003",
+    "passing_observations": [
+      "fresh/update exact bytes",
+      "offline setup and evaluator identity",
+      "native init-only bootstrap"
+    ],
+    "missing": [
+      "authenticated native startup",
+      "activation",
+      "compaction",
+      "resume"
+    ]
+  },
+  "remaining": "DEC-RLS-004 desktop evidence boundary awaits human disposition. All human assurance and external actions remain separate."
+}

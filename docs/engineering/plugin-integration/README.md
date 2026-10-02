@@ -6,10 +6,10 @@ The [0.21.0 release package](../release-0-21-0/README.md) is published with
 plugin 0.2.4 at `7e366438165a40a14783bac650a2887e7ec8bc75`.
 VREC-PLG-030 verifies local qualification. [WO-RLS-033 observations](../release-0-21-0/evidence/WO-RLS-033/README.md)
 record public byte comparison, fresh installation, updates from 0.2.3 and offline
-setup on both Windows CLIs. Native public-route qualification and current
-documentation integration remain separate outstanding steps.
+setup on both Windows CLIs. The desktop evidence decision and current documentation integration remain
+separate outstanding steps.
 
-Claude exact-release native qualification and Codex Windows desktop remain unverified. DEC-RLS-002 accepts these gaps for WO-RLS-032 only; public-route native assessment under WO-RLS-033 remains pending.
+Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 awaits its separate disposition.
 
 The [0.2.3 delivery evidence](../release-0-20-1/evidence/WO-RLS-029/README.md) and
 [0.2.2 report](../release-0-20-0/evidence/WO-PLG-031/README.md) retain their original

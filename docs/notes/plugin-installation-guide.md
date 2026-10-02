@@ -11,9 +11,9 @@ Installing this plugin does not upgrade a project's selected harness.
 
 The [release package](../engineering/release-0-21-0/README.md) records public
 evaluator 0.21.0 and plugin 0.2.4. VREC-PLG-030 verifies local qualification.
-Claude exact-release native qualification and Codex Windows desktop remain
-unverified under DEC-RLS-002, which applies only to WO-RLS-032. Public-route
-native criteria under WO-RLS-033 remain pending.
+DEC-RLS-003 accepts the missing Claude native session tests for WO-RLS-033;
+Claude remains unverified. Exact public-package Codex CLI tests pass. Codex
+Windows desktop remains unverified, pending the separate DEC-RLS-004 decision.
 
 ## Select the distribution
 
@@ -152,9 +152,11 @@ Package installation and skill listing do not prove native hook execution.
 
 VREC-PLG-030 retains exact-package Codex CLI/app-server qualification, including
 manual and automatic compaction, resume, selection isolation and repeated work.
-The public-route native assessment remains pending under VER-RLS-032. Claude
-native qualification and Codex Windows desktop remain unverified; DEC-RLS-002
-does not waive this work order's public-route criteria.
+Fresh native Codex tests of the exact public bytes also pass startup, activation,
+manual and automatic compaction, and resume. They use the existing trusted
+disposable profile; its 29 files and host version match both public installation
+routes. Fresh profiles still need normal hook trust. DEC-RLS-003 accepts only
+the missing Claude session tests. Desktop remains unverified under DEC-RLS-004.
 
 Model sessions require usable host authentication. The
 [0.2.3 evidence](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md)

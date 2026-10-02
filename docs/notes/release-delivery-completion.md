@@ -263,7 +263,9 @@ The [release package](../engineering/release-0-21-0/README.md) records released
 RLS-SEH-031 and separately published plugin 0.2.4 at
 `7e366438165a40a14783bac650a2887e7ec8bc75`. VREC-PLG-030 verifies local package
 qualification. WO-RLS-033 retains passing public fresh/update package and setup
-observations, current documentation corrections and the remaining native criteria.
+observations, current documentation corrections and native test boundaries.
+Codex CLI session checks pass; DEC-RLS-003 accepts missing Claude tests, which
+remain unverified. The desktop evidence decision remains pending in DEC-RLS-004.
 Overall delivery remains incomplete. The existing 0.20.1 receipts stay intact.
 
 ## Historical 0.20.1 delivery

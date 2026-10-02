@@ -78,9 +78,9 @@ selections. It bootstraps an unselected session and activates the actual checkou
 after cloning. Follow the packaged activation procedure for
 [Codex](packages/codex/verity-plane/skills/setup/SKILL.md#activate-the-checkout) or
 [Claude Code](packages/claude/verity-plane/skills/setup/SKILL.md#activate-the-checkout).
-Claude exact-release native qualification and Codex Windows desktop remain
-unverified. Their accepted qualification gaps do not establish public-route
-native results or verified desktop support.
+Exact public-package Codex CLI session checks pass. Claude session tests remain
+unverified, with their WO-RLS-033 omission accepted in DEC-RLS-003. Codex Windows
+desktop remains unverified, pending the separate DEC-RLS-004 decision.
 Both routes reject missing, changed or incompatible selected input. They grant no lifecycle authority and do not
 enforce all tool calls. Python must be available to the hook launcher; Codex
 requires review and trust of the current hook definition. Confirm delivery
