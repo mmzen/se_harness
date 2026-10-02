@@ -2,7 +2,7 @@
 id = "WO-RLS-034"
 type = "work_order"
 title = "Prepare and publish evaluator 0.22.0"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-03"
 updated = "2026-10-02"
@@ -56,6 +56,13 @@ to = "in_progress"
 decided_at = "2026-10-02T22:09:33Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T22:33:55Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Prepare and publish evaluator 0.22.0
