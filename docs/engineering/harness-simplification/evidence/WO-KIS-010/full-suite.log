@@ -1,0 +1,60 @@
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-au2im5fj\private\evaluators\0.0.0\ebfe0408e45583c3446d03f6d758f6754144e3ba067c1ab6c9b00be7a2d4d910\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-au2im5fj\private\evaluators\0.0.0\ebfe0408e45583c3446d03f6d758f6754144e3ba067c1ab6c9b00be7a2d4d910\Scripts\python.exe
+WEX_SCALE artifacts=100 validation=0.121214s focus=0.303075s plan=0.234578s
+WEX_SCALE artifacts=500 validation=0.548785s focus=0.718623s plan=1.070517s
+0.21.1
+{"approved_scope_unchanged": true, "candidate": "2517a163a7a3c135299f5762e22e3794e0a8867d", "changed_paths": ["docs/cli.md", "docs/engineering/product/evidence/WO-PRD-001/handoff.json", "docs/engineering/product/evidence/WO-PRD-001/review.md", "docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md", "docs/engineering/product/work-orders/WO-PRD-001.md", "docs/procedure.md", "templates/work.md", "tests/test_guidance.py"], "corrected_exit": 0, "demonstration": "instruction-change", "detected_omission": ["tests/test_guidance.py"], "expansion_blocked_by": ["QGP-G4I-PATHS: WEX201: changed path is outside execution scope: unrelated/new.py"], "generated_outputs": {"automatic_matches": [{"path": "docs/engineering/product/evidence/VREC-001-evaluator.json", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}, {"path": "docs/engineering/product/verification-records/VREC-001.md", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}], "coverage": "covered", "explicit_matches": [], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/engineering/product/evidence/VREC-001-evaluator.json", "docs/engineering/product/verification-records/VREC-001.md"], "uncovered_paths": []}, "handoff": {"kind": "check", "outcome": "completed"}, "planned": {"automatic_matches": [], "coverage": "covered", "explicit_matches": [{"path": "docs/cli.md", "scope_entry": "docs/cli.md"}, {"path": "docs/procedure.md", "scope_entry": "docs/procedure.md"}, {"path": "templates/work.md", "scope_entry": "templates/work.md"}, {"path": "tests/test_guidance.py", "scope_entry": "tests/test_guidance.py"}], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/cli.md", "docs/procedure.md", "templates/work.md", "tests/test_guidance.py"], "uncovered_paths": []}, "record": {"commit": "2517a163a7a3c135299f5762e22e3794e0a8867d", "id": "VREC-001", "status": "ready"}, "regression_exit": 1, "work_order_count": 1}
+======================================================================
+FAIL: test_diagnostic_code_index.DiagnosticCodeIndexTests.test_the_check_mode_reports_the_verdict
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_diagnostic_code_index.py", line 62, in test_the_check_mode_reports_the_verdict
+    self.assertEqual(0, main(["--check", "--repository", str(REPOSITORY_ROOT)]))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_diagnostic_code_index.DiagnosticCodeIndexTests.test_the_committed_page_equals_the_regeneration
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_diagnostic_code_index.py", line 59, in test_the_committed_page_equals_the_regeneration
+    self.assertEqual(self.rendered, self.committed)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "<!--[14133 chars]` (+26 more) |\n| `WEX201` | `Generate the dia[7380 chars] |\n" != "<!--[14133 chars]` (+24 more) |\n| `WEX201` | `Generate the dia[7380 chars] |\n"
+Diff is 22794 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_compatibility_windows.RetiredCodeRegistryTests.test_the_index_page_names_no_retired_code_and_matches_the_source
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_compatibility_windows.py", line 81, in test_the_index_page_names_no_retired_code_and_matches_the_source
+    self.assertEqual(0, completed.returncode, completed.stdout + completed.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : docs/notes/diagnostic-codes.md differs from the regeneration; run --write
+
+
+======================================================================
+FAIL: test_scope_preparation.ScopeDemonstrationTests.test_bug_fix_reaches_verification_without_an_extra_work_order
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 299, in test_bug_fix_reaches_verification_without_an_extra_work_order
+    self.demonstrate("bug-fix", {
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+        "src/parser.py": "def parse(text, prefix=''):\n    return int(text.removeprefix(prefix))\n",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<12 lines>...
+        "tests/test_number.py": "import unittest\n",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 260, in demonstrate
+    self.assertNotEqual(0, regression.returncode, "The example must reproduce the old behavior's failure.")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : The example must reproduce the old behavior's failure.
+
+----------------------------------------------------------------------
+Ran 1233 tests in 228.450s (184 classes, 4 workers)
+
+FAILED (failures=4, skipped=22)
+docs/notes/diagnostic-codes.md differs from the regeneration; run --write
+--workers must be at least 1

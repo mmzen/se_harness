@@ -1,0 +1,37 @@
+{"approved_scope_unchanged": true, "candidate": "c57e36bea8bdf4529ba7b1ad1268dff79c100a09", "changed_paths": ["docs/engineering/product/evidence/WO-PRD-001/handoff.json", "docs/engineering/product/evidence/WO-PRD-001/review.md", "docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md", "docs/engineering/product/work-orders/WO-PRD-001.md", "fixtures/number.txt", "src/caller.py", "src/parser.py", "tests/test_number.py"], "corrected_exit": 0, "demonstration": "bug-fix", "detected_omission": ["tests/test_number.py"], "expansion_blocked_by": ["QGP-G4I-PATHS: WEX201: changed path is outside execution scope: unrelated/new.py"], "generated_outputs": {"automatic_matches": [{"path": "docs/engineering/product/evidence/VREC-001-evaluator.json", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}, {"path": "docs/engineering/product/verification-records/VREC-001.md", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}], "coverage": "covered", "explicit_matches": [], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/engineering/product/evidence/VREC-001-evaluator.json", "docs/engineering/product/verification-records/VREC-001.md"], "uncovered_paths": []}, "handoff": {"kind": "check", "outcome": "completed"}, "planned": {"automatic_matches": [], "coverage": "covered", "explicit_matches": [{"path": "fixtures/number.txt", "scope_entry": "fixtures/number.txt"}, {"path": "src/caller.py", "scope_entry": "src/caller.py"}, {"path": "src/parser.py", "scope_entry": "src/parser.py"}, {"path": "tests/test_number.py", "scope_entry": "tests/test_number.py"}], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["fixtures/number.txt", "src/caller.py", "src/parser.py", "tests/test_number.py"], "uncovered_paths": []}, "record": {"commit": "c57e36bea8bdf4529ba7b1ad1268dff79c100a09", "id": "VREC-001", "status": "ready"}, "regression_exit": 1, "work_order_count": 1}
+{"approved_scope_unchanged": true, "candidate": "aa42c2624a2d1f23cb1be05fff05ab6d2ffad080", "changed_paths": ["docs/cli.md", "docs/engineering/product/evidence/WO-PRD-001/handoff.json", "docs/engineering/product/evidence/WO-PRD-001/review.md", "docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md", "docs/engineering/product/work-orders/WO-PRD-001.md", "docs/procedure.md", "templates/work.md", "tests/test_guidance.py"], "corrected_exit": 0, "demonstration": "instruction-change", "detected_omission": ["tests/test_guidance.py"], "expansion_blocked_by": ["QGP-G4I-PATHS: WEX201: changed path is outside execution scope: unrelated/new.py"], "generated_outputs": {"automatic_matches": [{"path": "docs/engineering/product/evidence/VREC-001-evaluator.json", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}, {"path": "docs/engineering/product/verification-records/VREC-001.md", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}], "coverage": "covered", "explicit_matches": [], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/engineering/product/evidence/VREC-001-evaluator.json", "docs/engineering/product/verification-records/VREC-001.md"], "uncovered_paths": []}, "handoff": {"kind": "check", "outcome": "completed"}, "planned": {"automatic_matches": [], "coverage": "covered", "explicit_matches": [{"path": "docs/cli.md", "scope_entry": "docs/cli.md"}, {"path": "docs/procedure.md", "scope_entry": "docs/procedure.md"}, {"path": "templates/work.md", "scope_entry": "templates/work.md"}, {"path": "tests/test_guidance.py", "scope_entry": "tests/test_guidance.py"}], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/cli.md", "docs/procedure.md", "templates/work.md", "tests/test_guidance.py"], "uncovered_paths": []}, "record": {"commit": "aa42c2624a2d1f23cb1be05fff05ab6d2ffad080", "id": "VREC-001", "status": "ready"}, "regression_exit": 1, "work_order_count": 1}
+.s.............docs/notes/diagnostic-codes.md differs from the regeneration; run --write
+FF..........F.
+======================================================================
+FAIL: test_the_check_mode_reports_the_verdict (tests.test_diagnostic_code_index.DiagnosticCodeIndexTests.test_the_check_mode_reports_the_verdict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_diagnostic_code_index.py", line 62, in test_the_check_mode_reports_the_verdict
+    self.assertEqual(0, main(["--check", "--repository", str(REPOSITORY_ROOT)]))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_the_committed_page_equals_the_regeneration (tests.test_diagnostic_code_index.DiagnosticCodeIndexTests.test_the_committed_page_equals_the_regeneration)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_diagnostic_code_index.py", line 59, in test_the_committed_page_equals_the_regeneration
+    self.assertEqual(self.rendered, self.committed)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "<!--[14432 chars]` (+18 more) |\n| `WEX220` | `WEX220`; `WEX220[7081 chars] |\n" != "<!--[14432 chars]` (+16 more) |\n| `WEX220` | `WEX220`; `WEX220[7081 chars] |\n"
+Diff is 22417 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_the_index_page_names_no_retired_code_and_matches_the_source (tests.test_compatibility_windows.RetiredCodeRegistryTests.test_the_index_page_names_no_retired_code_and_matches_the_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_compatibility_windows.py", line 81, in test_the_index_page_names_no_retired_code_and_matches_the_source
+    self.assertEqual(0, completed.returncode, completed.stdout + completed.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : docs/notes/diagnostic-codes.md differs from the regeneration; run --write
+
+
+----------------------------------------------------------------------
+Ran 29 tests in 22.078s
+
+FAILED (failures=3, skipped=1)

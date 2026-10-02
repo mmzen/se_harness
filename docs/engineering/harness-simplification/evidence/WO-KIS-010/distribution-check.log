@@ -1,0 +1,3 @@
+Command: C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\python.exe -B -X utf8 scripts/validate_release_distributions.py --root .
+Exit: 0
+SE Harness release distribution validation: PASS (21 distribution-bearing records)

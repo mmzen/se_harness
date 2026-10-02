@@ -162,7 +162,8 @@ supplied for the same artifact contents and target states.
 
 **Actions:**
 
-1. Present the selected artifacts and proposed state for each one.
+1. Present one concise request for the coherent package using the decision
+   card below. Identify the selected artifacts and proposed state for each.
 2. Present the scope, verification obligations, proposed assurance classification,
    its rationale, and unresolved findings.
 3. Identify the human accountable for each requested decision.
@@ -176,6 +177,26 @@ supplied for the same artifact contents and target states.
    interpret a request for revision as a terminal rejection.
 
 **Harness command:** None. A command result cannot supply the human decision.
+
+**Decision card:**
+
+- **Approval requested:** Name the decision and useful outcome in ordinary
+  language. Use "Approve implementation" for implementation authority;
+  verification acceptance and publication need their own decision wording.
+- **Why:** State the problem this change solves.
+- **What changes:** Summarize the bounded changes, including supporting work.
+- **What success looks like:** State the observable result and required checks.
+- **Important limit:** State material uncertainty or an unresolved boundary,
+  when one exists. Do not hide it behind a passing coverage report.
+- **Your approval permits:** State the exact permitted actions and any
+  separate acceptance or external-action decision relevant to this request.
+- **Review details:** Link the exact definitions, work orders and verification
+  contracts, their proposed states and their reviewed revisions.
+
+Offer "Approve implementation" and "Request changes" when implementation is
+the decision. The human need not type artifact IDs or CLI commands. Bind the
+answer to the displayed package and permission. Reuse an actual prior decision
+while its reviewed inputs still match; do not ask for the same authority again.
 
 **Completion:** Each selected artifact has an explicit human decision or
 remains pending. Pending artifacts are not included in an approval transaction.

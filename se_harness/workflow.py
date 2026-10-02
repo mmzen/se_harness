@@ -116,6 +116,7 @@ def project_selected(
     artifact_id: str | None = None,
     *,
     include_background: bool = False,
+    planned_paths: Iterable[str] | None = None,
 ) -> dict[str, Any]:
     """Project the selected artifact's rule, procedure, next step and execution context; evaluate no gate.
 
@@ -129,6 +130,8 @@ def project_selected(
     root = ensure_target(repository, must_exist=True)
     _, report = validated_repository(root)
     catalog = artifact_catalog(report)
+    if planned_paths is not None and artifact_id is None:
+        raise HarnessError("--planned-path requires an explicit --artifact work order")
     if artifact_id is None:
         candidates = sorted(
             item.artifact_id
@@ -145,6 +148,8 @@ def project_selected(
         raise HarnessError(f"unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in PRIMARY_TYPES:
         raise HarnessError("check accepts only WO, VREC, RLS, or DEC artifacts")
+    if planned_paths is not None and primary.artifact_type != "work_order":
+        raise HarnessError("--planned-path applies only to a work order")
     governing, dependencies = project_scope(catalog, primary)
     scope_paths = {
         catalog[item].path.resolve()
@@ -227,6 +232,10 @@ def project_selected(
             for key, item in sorted(catalog.items())
             if key in selected or item.path.relative_to(root).as_posix() in paths
         ]
+    if planned_paths is not None:
+        from se_harness.scope_preparation import assess_planned_paths
+
+        result["scope"]["preparation"] = assess_planned_paths(root, primary, catalog, planned_paths)
     result["result_sha256"] = restitution_digest(result)
     return result
 

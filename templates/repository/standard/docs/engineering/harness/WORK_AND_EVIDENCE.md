@@ -51,6 +51,38 @@ MUST link back to active capabilities (CAP) and intents (INT). It MUST also
 have selected active specifications (SPEC) and verification contracts (VER).
 Reuse existing artifacts where their scope applies.
 
+A work order should cover one complete bounded outcome, including its
+foreseeable tests, documentation and retained evidence. Use exact file paths
+by default. Use a narrow existing component directory when the affected
+files belong to that component. A matching directory does not authorize
+unrelated behavior.
+
+Prepare this scope through
+[Draft work orders](DRAFT_WORK_ORDERS.md#prepare-work-orders-wo-linking-the-definitions-scope-planned-work-and-verification-requirements).
+Do not split predictable supporting changes into extra work orders merely
+because they use different file types. A genuine expansion after approval
+still needs the applicable human decision; preserve the approved history.
+
+## Generated outputs
+
+Existing scope rules admit the selected work order's own file, records that
+directly verify or release that work order, and those records' declared
+evaluator-evidence paths. This does not admit those records' parent directories.
+The selected work order's own packet directory is also already admitted by
+the existing scope rules; the planning report identifies that separate rule.
+
+List other planned evidence, review and log destinations explicitly in the
+work order's scope unless an existing rule covers them. A neighboring file
+or a record linked only to another work order is not automatically admitted.
+The conditional rule for recording risks during execution remains unchanged;
+it is not a blanket admission of future files during preparation.
+
+If a future record's ID is not allocated, mark its destination as unresolved
+and explain the relationship rule expected to cover it. Do not create a
+record or invent an ID to complete the plan. Once the evaluator prepares
+the record, assess its actual returned record and evidence paths. An
+unresolved destination is not an already covered file.
+
 ## Assurance classification
 
 Each work order (WO) in `approved` or

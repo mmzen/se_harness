@@ -1,0 +1,14 @@
+--- docs/notes/diagnostic-codes.md
++++ docs/notes/diagnostic-codes.md
+@@ -252,9 +252,9 @@
+ | --- | --- |
+ | `WEX001` | `WEX001` |
+ | `WEX190` | `WEX190` |
+-| `WEX200` | `WEX200`; `WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete` (+24 more) |
++| `WEX200` | `WEX200`; `WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete` (+26 more) |
+ | `WEX201` | `Generate the diagnostic-code index note from the candidate source. `WO-TCM-003` (`REQ-TCM-005`, `SPEC-TCM-002…`; `WEX201` (+2 more) |
+-| `WEX210` | `Generate the diagnostic-code index note from the candidate source. `WO-TCM-003` (`REQ-TCM-005`, `SPEC-TCM-002…`; `WEX210` (+16 more) |
++| `WEX210` | `Generate the diagnostic-code index note from the candidate source. `WO-TCM-003` (`REQ-TCM-005`, `SPEC-TCM-002…`; `WEX210` (+18 more) |
+ | `WEX220` | `WEX220`; `WEX220: procedure {…} has no steps` (+2 more) |
+ | `WEX221` | `WEX221`; `WEX221: optional procedure parameter {…} has an invalid value` (+8 more) |
+ | `WEX230` | `A schema-2 result or restitution that does not hold (WEX230); a `ValueError` to its callers.`; `WEX230` (+16 more) |

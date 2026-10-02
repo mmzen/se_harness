@@ -28,11 +28,17 @@ unresolved decisions (DEC).
 
 **Actions:**
 
-1. Divide the planned work into bounded units that can each be authorized and
-   verified. Assign each unit its governing definitions and scope.
+1. Inspect the implementation and follow its callers, references and consumers.
+   Check tests and fixtures, instructions and documentation, packaging and CI,
+   and verification outputs where they apply. Keep the working inventory in
+   the conversation or temporary storage outside the repository.
+   Group each complete, independently verifiable outcome into one bounded
+   work order with its necessary supporting changes.
 2. Select an existing work order (WO) in `draft` for a unit only if its scope
    matches. Otherwise, create a new work order (WO) with the commands below.
-3. Complete each draft using the field table below.
+3. Complete each draft using the field table below. In Expected change
+   surface, name the inspected paths and give a short reason for each.
+   Explain non-applicable areas and unknown destinations briefly.
 4. Check that every selected requirement (REQ) has the specification (SPEC)
    and verification contract (VER) coverage defined in [Complete work scope](WORK_AND_EVIDENCE.md#complete-work-scope).
 5. Apply `## work_order` → `### Checklist` in
@@ -49,6 +55,12 @@ unresolved decisions (DEC).
    Report unrelated findings separately. Retain findings that need a decision
    or an accepted-definition amendment as unresolved dependencies.
 10. Run the selected-work check below for each proposed work order (WO).
+    Supply every planned file from Expected change surface with
+    `--planned-path`. Inspect `scope.preparation`: resolve uncovered or
+    invalid paths in the draft before requesting approval. A successful
+    command exit does not establish coverage or a complete impact analysis.
+    Explain future generated destinations using
+    [Generated outputs](WORK_AND_EVIDENCE.md#generated-outputs).
 11. Present the outcome, scope, artifact IDs and paths, validation results,
     unresolved decisions (DEC), and unapplied amendments. Include the
     evaluator's reported next action for each selected work order (WO).
@@ -58,7 +70,7 @@ unresolved decisions (DEC).
 | `Objective` | The outcome this work order (WO) will deliver. |
 | `In scope` / `Out of scope` | The boundaries from [Define the limits of the change](DEFINE_CHANGE.md#define-the-limits-of-the-change) assigned to this work order (WO). |
 | `Constraints` | The conditions from [Define the limits of the change](DEFINE_CHANGE.md#define-the-limits-of-the-change) that apply to this work. |
-| `Expected change surface` | The planned changes by file or component. |
+| `Expected change surface` | Inspected planned paths, the reason for each, and unresolved destinations. |
 | `[execution_scope].paths` | Exact repository-relative files or component directories ending in `/`. Use forward slashes; no wildcards, absolute paths, or `..`. |
 | `Authorized decision envelope` | What the implementer may decide and what requires another accountable decision. |
 | `Required verification` / `Evidence to record` | The checks and retained outputs defined in [Define how the result will be verified](DRAFT_DEFINITIONS.md#define-how-the-result-will-be-verified). |
@@ -94,6 +106,22 @@ Inspect each proposed work order (WO) using its actual ID:
 ```text
 harnessctl check REPO --artifact WO-ID --json
 ```
+
+To assess the proposed file list, repeat `--planned-path` for every file:
+
+```text
+harnessctl check REPO --artifact WO-ID --planned-path PATH --planned-path ANOTHER-PATH --json
+```
+
+This option is available only when the selected released evaluator supports
+it. If it is unavailable, report that version gap; do not run candidate
+source to govern the repository.
+
+The optional planning view evaluates no checkpoint. It reports explicit
+scope matches, existing automatic admission, uncovered paths and invalid
+declarations. It does not inspect dependencies for the agent, prove that
+the supplied list is complete, or turn planned paths into observed changes.
+Do not combine it with checkpoint or actual-change inputs.
 
 Validation does not approve the change. The checkpoint-free `check` reports
 lifecycle context without evaluating checkpoint gates.

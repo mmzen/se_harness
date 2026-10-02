@@ -132,6 +132,7 @@ be rewritten to adopt these checklists.
 - In scope and out of scope are both stated; the decision envelope says what the implementer may and may not decide.
 - Stop conditions and the completion report format are stated.
 - Is every planned change needed for the agreed outcome? Include removal or adjustment of obsolete behavior, tests and instructions within the approved scope.
+- Inspect supporting paths before approval and assess the supplied plan through [Draft work orders](harness/DRAFT_WORK_ORDERS.md#prepare-work-orders-wo-linking-the-definitions-scope-planned-work-and-verification-requirements). Keep reasons in Expected change surface; do not add a separate planning artifact.
 
 ## Review of implemented changes
 

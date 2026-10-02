@@ -1,0 +1,101 @@
+test_bug_fix_reaches_verification_without_an_extra_work_order (tests.test_scope_preparation.ScopeDemonstrationTests.test_bug_fix_reaches_verification_without_an_extra_work_order) ... ERROR
+test_instruction_change_reaches_verification_without_an_extra_work_order (tests.test_scope_preparation.ScopeDemonstrationTests.test_instruction_change_reaches_verification_without_an_extra_work_order) ... ERROR
+
+======================================================================
+ERROR: test_bug_fix_reaches_verification_without_an_extra_work_order (tests.test_scope_preparation.ScopeDemonstrationTests.test_bug_fix_reaches_verification_without_an_extra_work_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 287, in test_bug_fix_reaches_verification_without_an_extra_work_order
+    self.demonstrate("bug-fix", {
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+        "src/parser.py": "def parse(text):\n    return int(text.removeprefix('#'))\n",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        ),
+        ^^
+    })
+    ^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 241, in demonstrate
+    self.command("transition", "--set", "WO-001=approved", "--decision", "WO-001=Fixture human",
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "--reason", "WO-001=Approve this temporary fixture scope and required verification.", "--apply")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 211, in command
+    code, output, error = invoke(args[0], str(self.root), *args[1:], "--json")
+                          ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\cli_support.py", line 30, in invoke
+    code = main(list(arguments))
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\se_harness\cli.py", line 1300, in main
+    return int(args.handler(args))
+               ~~~~~~~~~~~~^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\se_harness\cli.py", line 619, in _transition
+    plan = plan_transition(
+        Path(args.target),
+    ...<3 lines>...
+        apply=args.apply,
+    )
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\se_harness\workflow.py", line 500, in plan_transition
+    inputs = tuple(
+             ^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\se_harness\workflow.py", line 501, in <genexpr>
+    PlannedInput(path=path, original=path.read_bytes())
+                                     ~~~~~~~~~~~~~~~^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 777, in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmpmb4uwozz\\docs\\engineering\\product\\evidence\\WO-001\\review.md'
+
+======================================================================
+ERROR: test_instruction_change_reaches_verification_without_an_extra_work_order (tests.test_scope_preparation.ScopeDemonstrationTests.test_instruction_change_reaches_verification_without_an_extra_work_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 300, in test_instruction_change_reaches_verification_without_an_extra_work_order
+    self.demonstrate("instruction-change", {
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+        "docs/procedure.md": "# Prepare work\nInspect dependencies and use --planned-path before approval.\n",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        ),
+        ^^
+    })
+    ^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 241, in demonstrate
+    self.command("transition", "--set", "WO-001=approved", "--decision", "WO-001=Fixture human",
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "--reason", "WO-001=Approve this temporary fixture scope and required verification.", "--apply")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 211, in command
+    code, output, error = invoke(args[0], str(self.root), *args[1:], "--json")
+                          ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\cli_support.py", line 30, in invoke
+    code = main(list(arguments))
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\se_harness\cli.py", line 1300, in main
+    return int(args.handler(args))
+               ~~~~~~~~~~~~^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\se_harness\cli.py", line 619, in _transition
+    plan = plan_transition(
+        Path(args.target),
+    ...<3 lines>...
+        apply=args.apply,
+    )
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\se_harness\workflow.py", line 500, in plan_transition
+    inputs = tuple(
+             ^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\se_harness\workflow.py", line 501, in <genexpr>
+    PlannedInput(path=path, original=path.read_bytes())
+                                     ~~~~~~~~~~~~~~~^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 777, in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmpl4mv0m6n\\docs\\engineering\\product\\evidence\\WO-001\\review.md'
+
+----------------------------------------------------------------------
+Ran 2 tests in 3.628s
+
+FAILED (errors=2)
