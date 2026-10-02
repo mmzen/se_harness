@@ -92,14 +92,12 @@ Verity Plane Explorer shows the connections between requirements, work, evidence
 
 ## Go further
 
-[Complete-release procedure](docs/notes/release-delivery-completion.md#one-approval-for-the-complete-release)
-for maintainers: requires product release, adoption and provider activation.
-
 - [Start with the checker](docs/notes/getting-started.md)
 - [Install or upgrade a project](docs/notes/harness-installation-and-upgrades.md)
 - [Understand the model](docs/notes/harness-overview.md)
 - [Follow a complete example](docs/notes/harness-lineage-example.md)
 - [Look up a command](docs/notes/harnessctl-reference.md)
 - [Develop and contribute](docs/notes/developing-se-harness.md)
+- [Future complete-release procedure](docs/notes/release-delivery-completion.md#one-approval-for-the-complete-release)
 
 [Report an issue](https://github.com/mmzen/se_harness/issues) · [Releases](https://github.com/mmzen/se_harness/releases) · [License](LICENSE)
