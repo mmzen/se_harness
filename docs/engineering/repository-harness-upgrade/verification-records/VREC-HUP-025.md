@@ -2,7 +2,7 @@
 id = "VREC-HUP-025"
 type = "verification_record"
 title = "Verification candidate for 3 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-025-evaluator.json"
 evaluator_evidence_sha256 = "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157"
 
+verified_at = "2026-10-02T09:04:35Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HUP-003", "WO-HUP-005", "WO-HUP-026"]
 conforms_to = ["VER-HUP-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-02T09:04:35Z"
+decided_by = "mmzen"
+reason = "Human mmzen: I verify VREC-HUP-025 as assurance owner. Accepts the exact candidate 0493d73371fc9ce801354456abc5e70352ec6d19 and its 105 retained evidence files. Reviewed ready-record SHA256 0da76c8a5889ba32b59c469cea54c40b7dd659fb1eb51ef302680e30dcfb7a51. Hosted CI remains required before integration; this decision grants no push, PR or merge authority."
 +++
 
 # Verification Record Candidate
