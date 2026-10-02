@@ -69,6 +69,36 @@ check MUST NOT count as a human decision. A rejection MUST include a non-empty
 reason. Supersession MUST name exactly one eligible successor. The decision
 and its resulting state MUST remain specific to the selected artifact.
 
+## Complete-release authority
+
+When the selected release contract and reviewed delivery plan explicitly select
+complete release delivery, one human response MAY supply the release decision
+and authorization for every external action listed in that plan. The human MUST
+hold each applicable right. Keep the release decision and observed external
+effects as separate records; one response does not perform those actions.
+
+Before requesting that response, prepare all deliverables and complete required
+checks and human verification. Present the exact release record, candidate,
+versions, payload identities, destinations, required integration, recovery rules
+and known limitations. Retain the complete reviewed plan's SHA-256 with the
+actual human decision. Use the existing release record and evidence locations.
+
+An agent MUST reuse this authority while the exact plan and conditions still
+match. A change of provider, a pause or a resumed session does not require another
+approval. Check current gates and provider controls before each external action.
+Inspect uncertain results before retrying. A changed plan, candidate, destination
+or scope needs a new decision; a failed check must be resolved, not approved away.
+
+The plan MAY cover future governance commits only through an explicit bounded
+rule: approved base content plus the recorded decision or specified receipts,
+allowed paths and a named protected destination. Compare the exact resulting
+diff before integration. This does not authorize unrelated work or bypass checks.
+
+A released state alone grants no external authority. Older decisions keep their
+original scope; do not add a complete-release grant after the fact. A plan, actor
+label or passing evaluator result cannot authenticate a human decision. If the
+contract or plan does not select this route, use its existing separate authority.
+
 ## Delegation and separation
 
 A human decision right may be delegated only to another human who is permitted

@@ -1,0 +1,51 @@
+{
+  "status": "proposal only; not applied",
+  "endpoint": "PUT /repos/mmzen/se_harness/environments/pypi",
+  "before": {
+    "wait_timer": 0,
+    "prevent_self_review": false,
+    "reviewers": [
+      {
+        "type": "User",
+        "id": 8011340
+      }
+    ],
+    "deployment_branch_policy": {
+      "protected_branches": false,
+      "custom_branch_policies": true
+    }
+  },
+  "after": {
+    "wait_timer": 0,
+    "prevent_self_review": false,
+    "reviewers": [],
+    "deployment_branch_policy": {
+      "protected_branches": false,
+      "custom_branch_policies": true
+    }
+  },
+  "recovery": {
+    "wait_timer": 0,
+    "prevent_self_review": false,
+    "reviewers": [
+      {
+        "type": "User",
+        "id": 8011340
+      }
+    ],
+    "deployment_branch_policy": {
+      "protected_branches": false,
+      "custom_branch_policies": true
+    }
+  },
+  "unchanged": [
+    "OIDC Trusted Publisher",
+    "main-only deployment branch policy",
+    "workflow permissions",
+    "main protections",
+    "existing admin-bypass setting"
+  ],
+  "unobserved": [
+    "PyPI Trusted Publisher binding (authenticated PyPI settings unavailable through the GitHub API)"
+  ]
+}

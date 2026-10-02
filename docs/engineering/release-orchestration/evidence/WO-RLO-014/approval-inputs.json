@@ -1,0 +1,109 @@
+{
+  "decision": "Human repository owner mmzen answered \"Approve package, verification and review PR\" to the exact package review for WO-RLO-014/015/016 and their governing definitions, with required commit-bound verification under VER-RLO-011. This authorizes bounded implementation, local checks and commits, completion and verification preparation, ordinary review-branch push and draft PR from work/complete-release-approval to mmzen/se_harness:main, and its later verification-decision update. Human verification acceptance, merge, actual releases and the exact live configuration change remain separate. The selected released evaluator 0.21.0 governs this work.",
+  "artifacts": [
+    {
+      "id": "ADR-RLO-006",
+      "path": "docs/engineering/release-orchestration/architecture/adr/ADR-RLO-006.md",
+      "status": "draft",
+      "sha256": "177e61ee2ea85ec7cb601b0c07cb35c582f699ca0470f42081570d6c441a119a",
+      "proposed_target": "approved",
+      "transition_input_sha256": "177e61ee2ea85ec7cb601b0c07cb35c582f699ca0470f42081570d6c441a119a"
+    },
+    {
+      "id": "ARCH-RLO-006",
+      "path": "docs/engineering/release-orchestration/architecture/ARCH-RLO-006.md",
+      "status": "draft",
+      "sha256": "d96c6475636a3c5f9be258e146f2c1bf519abbe1ddc6d360d3eeb4ff01fac40e",
+      "proposed_target": "approved",
+      "transition_input_sha256": "d96c6475636a3c5f9be258e146f2c1bf519abbe1ddc6d360d3eeb4ff01fac40e"
+    },
+    {
+      "id": "CAP-RLO-005",
+      "path": "docs/engineering/release-orchestration/capabilities/CAP-RLO-005.md",
+      "status": "draft",
+      "sha256": "1efd723f295e041c90059c97b8733013aa8d3bd86704dc6606f5dad3cdf02c82",
+      "proposed_target": "approved",
+      "transition_input_sha256": "1efd723f295e041c90059c97b8733013aa8d3bd86704dc6606f5dad3cdf02c82"
+    },
+    {
+      "id": "INT-RLO-002",
+      "path": "docs/engineering/release-orchestration/intent/INT-RLO-002.md",
+      "status": "draft",
+      "sha256": "eb64ed23c340939eae43e1c3be7a5ab2e2a0d74cfd869c6aa1531b85161baf6d",
+      "proposed_target": "approved",
+      "transition_input_sha256": "eb64ed23c340939eae43e1c3be7a5ab2e2a0d74cfd869c6aa1531b85161baf6d"
+    },
+    {
+      "id": "REQ-RLO-021",
+      "path": "docs/engineering/release-orchestration/requirements/REQ-RLO-021.md",
+      "status": "draft",
+      "sha256": "e260c16044bb3809aee69f738811b5ed27a5eeae07e564f8520f0a4f441a1305",
+      "proposed_target": "approved",
+      "transition_input_sha256": "e260c16044bb3809aee69f738811b5ed27a5eeae07e564f8520f0a4f441a1305"
+    },
+    {
+      "id": "REQ-RLO-022",
+      "path": "docs/engineering/release-orchestration/requirements/REQ-RLO-022.md",
+      "status": "draft",
+      "sha256": "de834769dda665532c833e2998fe34008067a17e7e133a45cbcfdd549309d0a4",
+      "proposed_target": "approved",
+      "transition_input_sha256": "de834769dda665532c833e2998fe34008067a17e7e133a45cbcfdd549309d0a4"
+    },
+    {
+      "id": "REQ-RLO-023",
+      "path": "docs/engineering/release-orchestration/requirements/REQ-RLO-023.md",
+      "status": "draft",
+      "sha256": "291490d95ee43565cdf7079156ca2048354cd0c174afed5fb35542f57fbf644c",
+      "proposed_target": "approved",
+      "transition_input_sha256": "291490d95ee43565cdf7079156ca2048354cd0c174afed5fb35542f57fbf644c"
+    },
+    {
+      "id": "RISK-RLO-001",
+      "path": "docs/engineering/release-orchestration/risks/RISK-RLO-001.md",
+      "status": "raised",
+      "sha256": "d571357c59afc1dc5261a128c7a88875039759554fe60ddb2342980b96ea21a5",
+      "proposed_target": null,
+      "transition_input_sha256": "d571357c59afc1dc5261a128c7a88875039759554fe60ddb2342980b96ea21a5"
+    },
+    {
+      "id": "SPEC-RLO-007",
+      "path": "docs/engineering/release-orchestration/specifications/SPEC-RLO-007.md",
+      "status": "draft",
+      "sha256": "878250c45356d9439584c858cc2c72b9e107e30121879f98e1cd0e8288c9f7a9",
+      "proposed_target": "approved",
+      "transition_input_sha256": "878250c45356d9439584c858cc2c72b9e107e30121879f98e1cd0e8288c9f7a9"
+    },
+    {
+      "id": "VER-RLO-011",
+      "path": "docs/engineering/release-orchestration/verification/VER-RLO-011.md",
+      "status": "draft",
+      "sha256": "cccf71c49b14afbf83d5e9fb01addf7cdbe84b8210bc98b76b008e82cb54dca6",
+      "proposed_target": "approved",
+      "transition_input_sha256": "cccf71c49b14afbf83d5e9fb01addf7cdbe84b8210bc98b76b008e82cb54dca6"
+    },
+    {
+      "id": "WO-RLO-014",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-014.md",
+      "status": "draft",
+      "sha256": "00268034c4244d941e2e1dbace590515952d8fb28e0d2ea1a3b93401c435bc29",
+      "proposed_target": "approved",
+      "transition_input_sha256": "82e820327d4e58620ee3a8e10af619e34ed6fcd66f25228b0e6e5a92a1e152b1"
+    },
+    {
+      "id": "WO-RLO-015",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-015.md",
+      "status": "draft",
+      "sha256": "f4a079479f2191d6c238fd4af5e3ed3b13d73f365dc5b95140d4cfe52f2e8b4c",
+      "proposed_target": "approved",
+      "transition_input_sha256": "f8e4d0c322d45eca4626b8380a5037397445427a2ed91197286d26ee2532596e"
+    },
+    {
+      "id": "WO-RLO-016",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-016.md",
+      "status": "draft",
+      "sha256": "e98ff622b5b35765587bbdf34e5728a02952c680363d2973aec0c81206adad05",
+      "proposed_target": "approved",
+      "transition_input_sha256": "17177d4b199ba8910ffc8bb0ccaddf67dd3e4d219094aa8a70d173eb7fb79d5e"
+    }
+  ]
+}

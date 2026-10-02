@@ -116,21 +116,34 @@ def compose(repository, assembly, output, *, check=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=("build", "check"))
+    parser.add_argument("action", choices=("build", "check", "stage", "check-stage"))
     parser.add_argument("--repository", type=Path, default=Path("."))
     parser.add_argument("--revision", required=True)
     parser.add_argument("--plan", default="release/plugin-assembly.json")
-    parser.add_argument("--release-revision", required=True)
-    parser.add_argument("--release-record", required=True)
+    parser.add_argument("--release-revision")
+    parser.add_argument("--release-record")
+    parser.add_argument("--candidate-manifest", type=Path)
+    parser.add_argument("--expected-manifest-sha256")
     parser.add_argument("--expected-wheel-sha256", required=True)
     parser.add_argument("--wheel", required=True, type=Path)
     parser.add_argument("--evaluator-python", required=True, type=Path)
     parser.add_argument("--output-directory", required=True, type=Path)
     args = parser.parse_args()
     try:
-        assembly = pkg.prepare(args.repository, args.revision, args.plan, args.release_revision,
-                               args.release_record, args.expected_wheel_sha256, args.wheel, args.evaluator_python)
-        result = compose(args.repository, assembly, args.output_directory, check=args.action == "check")
+        if args.action in {"stage", "check-stage"}:
+            if (args.release_revision or args.release_record or not args.candidate_manifest
+                    or not args.expected_manifest_sha256):
+                raise pkg.AssemblyError("staging needs a candidate manifest and its digest, without release-record inputs")
+            assembly = pkg.prepare_candidate(args.repository, args.revision, args.plan,
+                args.candidate_manifest, args.expected_manifest_sha256, args.expected_wheel_sha256,
+                args.wheel, args.evaluator_python)
+        else:
+            if (not args.release_revision or not args.release_record or args.candidate_manifest
+                    or args.expected_manifest_sha256):
+                raise pkg.AssemblyError("released assembly needs release-record inputs, without a candidate manifest")
+            assembly = pkg.prepare(args.repository, args.revision, args.plan, args.release_revision,
+                                   args.release_record, args.expected_wheel_sha256, args.wheel, args.evaluator_python)
+        result = compose(args.repository, assembly, args.output_directory, check=args.action in {"check", "check-stage"})
     except (pkg.AssemblyError, OSError, ValueError, KeyError, zipfile.BadZipFile, subprocess.SubprocessError) as exc:
         print(json.dumps({"accepted": False, "error": str(exc)}), file=sys.stderr)
         return 1

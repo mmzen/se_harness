@@ -98,5 +98,6 @@ Verity Plane Explorer shows the connections between requirements, work, evidence
 - [Follow a complete example](docs/notes/harness-lineage-example.md)
 - [Look up a command](docs/notes/harnessctl-reference.md)
 - [Develop and contribute](docs/notes/developing-se-harness.md)
+- [Future complete-release procedure](docs/notes/release-delivery-completion.md#one-approval-for-the-complete-release)
 
 [Report an issue](https://github.com/mmzen/se_harness/issues) · [Releases](https://github.com/mmzen/se_harness/releases) · [License](LICENSE)

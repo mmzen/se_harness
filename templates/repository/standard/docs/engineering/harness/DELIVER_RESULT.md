@@ -122,6 +122,9 @@ destination, current gates, and any existing human authorization.
 **Actions:**
 
 1. Match the supplied authorization to the action, identity, and destination.
+   A matching complete-release approval may cover all listed delivery actions;
+   use [Complete-release authority](AUTHORITY.md#complete-release-authority).
+   Compare the frozen plan digest and the actual decision, not just RLS status.
 2. Obtain the exact missing human decision if no matching authorization exists.
 3. Run the selected procedure's pre-action check with the command below.
 4. Check required CI, repository protection, and destination controls using
@@ -176,6 +179,12 @@ and gate results from [Confirm authority for the external action](DELIVER_RESULT
 3. Retain the returned operation ID, URL, version, commit, or other result identifier.
 4. If the response is uncertain, inspect the destination before retrying.
    Continue only effects known not to have occurred.
+5. For complete release delivery, continue every remaining listed action under
+   the same matching authority. Recheck its prerequisites and public results.
+   Keep successful stages; report failures or missing required observations as
+   incomplete delivery. Promote moving release markers only after the plan's
+   required delivery checks pass. A completed publication is not proof that all
+   other outputs were delivered.
 
 **Harness command:** None performs the external delivery. Use the project's
 specified Git, hosting, package-registry, or deployment tools. No generic

@@ -1,0 +1,98 @@
+{
+  "purpose": "Exact draft bytes presented for human review; no approval claimed",
+  "base_commit": "745884fd6c6b7dd0c7185b7427efcf9bd33c7e0d",
+  "artifacts": [
+    {
+      "id": "ADR-RLO-006",
+      "path": "docs/engineering/release-orchestration/architecture/adr/ADR-RLO-006.md",
+      "status": "draft",
+      "sha256": "177e61ee2ea85ec7cb601b0c07cb35c582f699ca0470f42081570d6c441a119a",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "ARCH-RLO-006",
+      "path": "docs/engineering/release-orchestration/architecture/ARCH-RLO-006.md",
+      "status": "draft",
+      "sha256": "d96c6475636a3c5f9be258e146f2c1bf519abbe1ddc6d360d3eeb4ff01fac40e",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "CAP-RLO-005",
+      "path": "docs/engineering/release-orchestration/capabilities/CAP-RLO-005.md",
+      "status": "draft",
+      "sha256": "1efd723f295e041c90059c97b8733013aa8d3bd86704dc6606f5dad3cdf02c82",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "INT-RLO-002",
+      "path": "docs/engineering/release-orchestration/intent/INT-RLO-002.md",
+      "status": "draft",
+      "sha256": "eb64ed23c340939eae43e1c3be7a5ab2e2a0d74cfd869c6aa1531b85161baf6d",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "REQ-RLO-021",
+      "path": "docs/engineering/release-orchestration/requirements/REQ-RLO-021.md",
+      "status": "draft",
+      "sha256": "e260c16044bb3809aee69f738811b5ed27a5eeae07e564f8520f0a4f441a1305",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "REQ-RLO-022",
+      "path": "docs/engineering/release-orchestration/requirements/REQ-RLO-022.md",
+      "status": "draft",
+      "sha256": "de834769dda665532c833e2998fe34008067a17e7e133a45cbcfdd549309d0a4",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "REQ-RLO-023",
+      "path": "docs/engineering/release-orchestration/requirements/REQ-RLO-023.md",
+      "status": "draft",
+      "sha256": "291490d95ee43565cdf7079156ca2048354cd0c174afed5fb35542f57fbf644c",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "RISK-RLO-001",
+      "path": "docs/engineering/release-orchestration/risks/RISK-RLO-001.md",
+      "status": "raised",
+      "sha256": "d571357c59afc1dc5261a128c7a88875039759554fe60ddb2342980b96ea21a5",
+      "proposed_target": null
+    },
+    {
+      "id": "SPEC-RLO-007",
+      "path": "docs/engineering/release-orchestration/specifications/SPEC-RLO-007.md",
+      "status": "draft",
+      "sha256": "878250c45356d9439584c858cc2c72b9e107e30121879f98e1cd0e8288c9f7a9",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "VER-RLO-011",
+      "path": "docs/engineering/release-orchestration/verification/VER-RLO-011.md",
+      "status": "draft",
+      "sha256": "cccf71c49b14afbf83d5e9fb01addf7cdbe84b8210bc98b76b008e82cb54dca6",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "WO-RLO-014",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-014.md",
+      "status": "draft",
+      "sha256": "00268034c4244d941e2e1dbace590515952d8fb28e0d2ea1a3b93401c435bc29",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "WO-RLO-015",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-015.md",
+      "status": "draft",
+      "sha256": "f4a079479f2191d6c238fd4af5e3ed3b13d73f365dc5b95140d4cfe52f2e8b4c",
+      "proposed_target": "approved"
+    },
+    {
+      "id": "WO-RLO-016",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-016.md",
+      "status": "draft",
+      "sha256": "e98ff622b5b35765587bbdf34e5728a02952c680363d2973aec0c81206adad05",
+      "proposed_target": "approved"
+    }
+  ],
+  "pending_assurance": "Confirm required commit-bound verification for WO-RLO-014/015/016; then add the confirmed classification and actual human to their assurance tables before transition preview."
+}

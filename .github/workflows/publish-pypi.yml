@@ -47,6 +47,7 @@ jobs:
       sdist_sha256: ${{ steps.plan.outputs.sdist_sha256 }}
       checksums: ${{ steps.plan.outputs.checksums }}
       checksums_sha256: ${{ steps.plan.outputs.checksums_sha256 }}
+      complete_delivery: ${{ steps.plan.outputs.complete_delivery }}
     steps:
       - name: Check out trusted main history
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -130,6 +131,18 @@ jobs:
             --release-record "$RELEASE_RECORD" \
             --output "$RUNNER_TEMP/release-plan.json" \
             --github-output "$GITHUB_OUTPUT"
+
+      - name: Check complete-release provider controls before publication
+        if: steps.plan.outputs.complete_delivery == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_RECORD: ${{ inputs.release_record }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .github/scripts/publish_release.py continue-delivery \
+            --repository "$GITHUB_WORKSPACE" --release-record "$RELEASE_RECORD" \
+            --stage controls --output "$RUNNER_TEMP/complete-controls.json"
 
       - name: Retain the canonical release plan
         if: success()
@@ -218,18 +231,13 @@ jobs:
           CANDIDATE_COMMIT: ${{ needs.resolve.outputs.candidate_commit }}
           RELEASED_AT: ${{ needs.resolve.outputs.released_at }}
           RELEASE_RECORD: ${{ inputs.release_record }}
+          PLAN: ${{ runner.temp }}/transfer/release-plan-${{ inputs.release_record }}/release-plan.json
         shell: bash
         run: |
           set -euo pipefail
           ref_json="$RUNNER_TEMP/tag-ref.json"
-          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" >"$ref_json" 2>/dev/null; then
-            object_sha="$(jq -r '.object.sha' "$ref_json")"
-            object_type="$(jq -r '.object.type' "$ref_json")"
-            if [[ "$object_type" = tag ]]; then
-              object_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$object_sha" --jq '.object.sha')"
-            fi
-            test "$object_sha" = "$CANDIDATE_COMMIT"
-          else
+          python .github/scripts/publish_release.py observe-tag --plan "$PLAN" --output "$ref_json"
+          if [[ "$(jq -r '.state' "$ref_json")" = absent ]]; then
             tag_object="$(jq -n --arg tag "$TAG" --arg message "SE Harness $TAG ($RELEASE_RECORD)" \
               --arg object "$CANDIDATE_COMMIT" --arg date "$RELEASED_AT" \
               '{tag:$tag,message:$message,object:$object,type:"commit",tagger:{name:"SE Harness release automation",email:"release-automation@users.noreply.github.com",date:$date}}' \
@@ -250,9 +258,7 @@ jobs:
         run: |
           set -euo pipefail
           metadata="$RUNNER_TEMP/github-release.json"
-          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,isDraft,isPrerelease,assets >"$metadata" 2>/dev/null; then
-            printf '{"absent":true}\n' >"$metadata"
-          fi
+          python .github/scripts/publish_release.py observe-github --plan "$PLAN" --output "$metadata"
           state="$(python .github/scripts/publish_release.py classify-github --plan "$PLAN" --metadata "$metadata" | jq -r '.state')"
           if [[ "$state" = absent ]]; then
             python .github/scripts/publish_release.py notes --plan "$PLAN" --output "$RUNNER_TEMP/release-notes.md"
@@ -389,13 +395,66 @@ jobs:
       release_record: ${{ inputs.release_record }}
       governance_commit: ${{ needs.resolve.outputs.governance_commit }}
 
+  marketplace:
+    name: Promote the approved marketplace commit
+    needs: [resolve, pypi]
+    if: needs.resolve.outputs.complete_delivery == 'true'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: se-harness-complete-delivery
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - name: Check out trusted main and retained staging refs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Select Python 3.11
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Independently obtain the public wheel without executing it
+        env:
+          VERSION: ${{ needs.resolve.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip download --disable-pip-version-check --no-cache-dir \
+            --only-binary=:all: --no-deps --index-url https://pypi.org/simple \
+            --dest "$RUNNER_TEMP/public-wheel" "se-harness==$VERSION"
+      - name: Reconcile and promote the exact staged tree
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_RECORD: ${{ inputs.release_record }}
+          WHEEL: ${{ needs.resolve.outputs.wheel }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .github/scripts/publish_release.py continue-delivery \
+            --repository "$GITHUB_WORKSPACE" --release-record "$RELEASE_RECORD" \
+            --stage marketplace --public-wheel "$RUNNER_TEMP/public-wheel/$WHEEL" \
+            --apply --output "$RUNNER_TEMP/marketplace-result.json"
+      - name: Retain the marketplace readback
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: marketplace-result-${{ inputs.release_record }}
+          path: ${{ runner.temp }}/marketplace-result.json
+          if-no-files-found: warn
+          retention-days: 90
+
   observe:
     name: Retain public release observations
     if: always() && needs.resolve.result == 'success'
-    needs: [resolve, qualify, github_release, pypi, pages]
+    needs: [resolve, qualify, github_release, pypi, pages, marketplace]
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      public_result: ${{ steps.public.outcome }}
     steps:
       - name: Check out trusted reporting code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -473,6 +532,7 @@ jobs:
           PAGES_RESULT: ${{ needs.pages.result }}
           PAGES_URL: ${{ needs.pages.outputs.url }}
           PUBLIC_RESULT: ${{ steps.public.outcome }}
+          MARKETPLACE_RESULT: ${{ needs.marketplace.result }}
           WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         shell: bash
         run: |
@@ -482,6 +542,9 @@ jobs:
             --arg pypi "$PYPI_RESULT" --arg pypi_url "$PYPI_URL" --arg pages "$PAGES_RESULT" --arg pages_url "$PAGES_URL" \
             --arg public_install "$PUBLIC_RESULT" --arg workflow_url "$WORKFLOW_URL" \
             '{resolution:{state:"exact",workflow_url:$workflow_url},qualification:{state:(if $qualification=="success" then "exact" else "failed" end)},github:{state:(if $github=="success" then "exact" else "failed" end),url:$github_url,maintenance_branch:(if $maintenance_branch=="" then null else $maintenance_branch end),maintenance_state:(if $maintenance_state=="" then "not_run" else $maintenance_state end)},pypi:{state:(if $pypi=="success" then "exact" else "failed" end),url:$pypi_url},pages:{state:(if $pages=="success" then "exact" else "failed" end),url:$pages_url},public_install:{state:(if $public_install=="success" then "exact" else "failed" end)}}' >"$RUNNER_TEMP/stages.json"
+          jq --arg state "$MARKETPLACE_RESULT" '.marketplace={state:(if $state=="success" then "exact" else "not_run" end)}' \
+            "$RUNNER_TEMP/stages.json" >"$RUNNER_TEMP/all-stages.json"
+          mv "$RUNNER_TEMP/all-stages.json" "$RUNNER_TEMP/stages.json"
           python .github/scripts/publish_release.py result --plan "$RUNNER_TEMP/plan/release-plan.json" --stages "$RUNNER_TEMP/stages.json" --output "$RUNNER_TEMP/release-result.json"
           {
             printf '### SE Harness release transaction\n\n'
@@ -501,4 +564,57 @@ jobs:
             ${{ runner.temp }}/release-result.json
             ${{ runner.temp }}/public-install-qualification.json
           if-no-files-found: error
+          retention-days: 90
+
+  complete_delivery:
+    name: Finish under the recorded complete-release approval
+    needs: [resolve, marketplace, observe, pages, pypi]
+    if: needs.resolve.outputs.complete_delivery == 'true' && needs.observe.outputs.public_result == 'success'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: se-harness-complete-delivery
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - name: Check out trusted main and retained observations
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Select Python 3.11
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Promote markers only after every required public observation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_RECORD: ${{ inputs.release_record }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .github/scripts/publish_release.py continue-delivery \
+            --repository "$GITHUB_WORKSPACE" --release-record "$RELEASE_RECORD" \
+            --stage markers --apply --output "$RUNNER_TEMP/marker-result.json"
+      - name: Assess all five surfaces and retained receipts
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_RECORD: ${{ inputs.release_record }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .github/scripts/publish_release.py continue-delivery \
+            --repository "$GITHUB_WORKSPACE" --release-record "$RELEASE_RECORD" \
+            --stage report --output "$RUNNER_TEMP/delivery-result.json"
+      - name: Retain complete or pending delivery
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: complete-delivery-${{ inputs.release_record }}
+          path: |
+            ${{ runner.temp }}/marker-result.json
+            ${{ runner.temp }}/delivery-result.json
+          if-no-files-found: warn
           retention-days: 90

@@ -8,7 +8,7 @@ import hashlib
 import io
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import stat
 import subprocess
 import sys
@@ -20,6 +20,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 from repository_tools import plugin_distribution as pkg
+from repository_tools.release_distribution import create_manifest
 
 
 def git(root, *args):
@@ -110,6 +111,56 @@ class PackageAssemblyTests(unittest.TestCase):
         self.wheel.write_bytes(synthetic_wheel() + b"changed")
         with self.assertRaisesRegex(pkg.AssemblyError, "SHA-256 mismatch"):
             self.prepare()
+        self.assertFalse(self.out.exists())
+
+    def candidate_inputs(self):
+        # Candidate staging cannot depend on any existing release record.
+        (self.repo / "release.md").unlink()
+        self.write("release/build-recipe.json", (ROOT / "release/build-recipe.json").read_bytes())
+        self.write("release/build-toolchain.lock", (ROOT / "release/build-toolchain.lock").read_bytes())
+        self.commit_plan()
+        sdist = self.base / "se_harness-1.2.3.tar.gz"
+        sdist.write_bytes(b"synthetic candidate sdist; never executed")
+        value = create_manifest(self.repo, self.revision, "1.2.3", self.wheel, sdist,
+                                build_recipe=PurePosixPath("release/build-recipe.json"))
+        manifest = self.base / "candidate.json"
+        manifest.write_bytes(pkg.json_bytes(value))
+        return dict(repository=self.repo, revision=self.revision, plan_path="plan.json",
+                    manifest=manifest, expected_manifest_sha256=pkg.digest(manifest.read_bytes()),
+                    expected_wheel_sha256=self.sha, wheel=self.wheel,
+                    evaluator_python=Path(sys.executable).absolute())
+
+    def test_stages_both_hosts_before_release_and_keeps_payload_after_decision(self):
+        args = self.candidate_inputs()
+        assembly = pkg.prepare_candidate(**args)
+        original = pkg.build(assembly, self.out)
+        for host in pkg.HOSTS:
+            self.assertEqual(assembly.files[host][f"packages/{self.wheel.name}"][0], self.wheel.read_bytes())
+        self.assertNotIn("release_record", assembly.evaluator)
+        self.assertEqual(assembly.evaluator["candidate_commit"], self.revision)
+        # Later governance history does not alter the frozen staging inputs.
+        self.write("release.md", '+++\nstatus = "released"\n+++\n')
+        self.commit_plan()
+        self.assertEqual(pkg.accept(pkg.prepare_candidate(**args), self.out)["archives"], original["archives"])
+
+    def test_candidate_staging_refuses_changed_manifest_source_and_wheel(self):
+        args = self.candidate_inputs()
+        with self.assertRaisesRegex(pkg.AssemblyError, "manifest SHA-256 mismatch"):
+            pkg.prepare_candidate(**{**args, "expected_manifest_sha256": "0" * 64})
+        with self.assertRaisesRegex(pkg.AssemblyError, "candidate wheel identity"):
+            pkg.prepare_candidate(**{**args, "expected_wheel_sha256": "0" * 64})
+        value = json.loads(args["manifest"].read_bytes())
+        for field, bad, message in [("commit", "0" * 40, "commit does not match"),
+                                    ("source_manifest_sha256", "0" * 64, "source tree differs"),
+                                    ("build_recipe_sha256", "0" * 64, "recipe differs")]:
+            changed = {**value, field: bad}
+            args["manifest"].write_bytes(pkg.json_bytes(changed))
+            with self.subTest(field=field), self.assertRaisesRegex(pkg.AssemblyError, message):
+                pkg.prepare_candidate(**{**args, "expected_manifest_sha256": pkg.digest(args["manifest"].read_bytes())})
+        args["manifest"].write_bytes(pkg.json_bytes(value))
+        self.wheel.write_bytes(self.wheel.read_bytes() + b"different published bytes")
+        with self.assertRaisesRegex(pkg.AssemblyError, "SHA-256 mismatch"):
+            pkg.prepare_candidate(**args)
         self.assertFalse(self.out.exists())
 
     def test_committed_instruction_hooks_are_validated_before_assembly(self):

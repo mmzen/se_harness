@@ -1,0 +1,38 @@
+{
+  "command": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "api",
+    "repos/mmzen/se_harness/environments/pypi"
+  ],
+  "observed_at": "2026-10-02T20:39:59.728334+00:00",
+  "exit_code": 0,
+  "result": {
+    "name": "pypi",
+    "updated_at": "2026-08-11T14:05:27Z",
+    "can_admins_bypass": true,
+    "deployment_branch_policy": {
+      "protected_branches": false,
+      "custom_branch_policies": true
+    },
+    "protection_rules": [
+      {
+        "id": 62393540,
+        "node_id": "GA_kwDOT09fPM4DuAzE",
+        "type": "required_reviewers",
+        "prevent_self_review": false,
+        "reviewers": [
+          {
+            "type": "User",
+            "id": 8011340,
+            "login": "mmzen"
+          }
+        ]
+      },
+      {
+        "id": 62393717,
+        "node_id": "GA_kwDOT09fPM4DuA11",
+        "type": "branch_policy"
+      }
+    ]
+  }
+}

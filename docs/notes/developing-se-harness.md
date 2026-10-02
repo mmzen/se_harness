@@ -262,6 +262,19 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 
 ## Release sequences
 
+The prospective [complete-release route](release-delivery-completion.md#one-approval-for-the-complete-release)
+prepares and verifies the evaluator, plugin packages and other delivery inputs
+before one final approval. It adds exact marketplace promotion, public-route
+checks and latest/last recovery to the existing publisher. Select it explicitly
+in the REL and frozen delivery plan. It requires a released/adopted supporting
+evaluator/plugin and the reviewed provider configuration; source implementation
+alone does not activate it or widen historical release decisions.
+
+For that route, reuse the recorded approval for every listed action and retry.
+Follow the linked procedure for exact inputs, bounded decision/receipt integration
+and completion. The older sequences below retain their meaning for contracts
+that did not select it, including their separately required provider decisions.
+
 Published [0.21.0 / plugin 0.2.4](../engineering/release-0-21-0/README.md)
 is bound by RLS-SEH-031 and its verified candidate. WO-RLS-032/033 retain
 marketplace delivery and public observations, including accepted unverified

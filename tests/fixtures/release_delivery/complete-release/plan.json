@@ -1,0 +1,147 @@
+{
+  "schema": "se-harness-delivery-plan/v2",
+  "release": {
+    "contract": "REL-TST-001",
+    "record": "RLS-TST-001",
+    "version": "1.2.3",
+    "wheel_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "review": {
+    "by": "Example human",
+    "reference": "synthetic review; no actual authority"
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "owner": "Example owner",
+      "disposition": "update",
+      "destination": "https://pypi.org/project/se-harness/1.2.3/",
+      "work_reference": "WO-EXAMPLE-001",
+      "next_action": "Retain the reviewed closeout report",
+      "expected": {
+        "record": "RLS-TST-001",
+        "version": "1.2.3",
+        "wheel_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "required_observations": [
+        "publisher",
+        "public_install"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "owner": "Example owner",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+      "work_reference": "WO-EXAMPLE-001",
+      "next_action": "Retain the reviewed closeout report",
+      "expected": {
+        "plugin_version": "0.2.1",
+        "source_commit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "evaluator_version": "1.2.3",
+        "wheel_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "public_revision": "cccccccccccccccccccccccccccccccccccccccc",
+        "codex_content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "claude-code_content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "required_observations": [
+        "assembly",
+        "qualification",
+        "public_ref"
+      ],
+      "hosts": [
+        "codex",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation",
+      "owner": "Example owner",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness/tree/main",
+      "work_reference": "WO-EXAMPLE-001",
+      "next_action": "Retain the reviewed closeout report",
+      "expected": {
+        "commit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "required_observations": [
+        "claims_review",
+        "links"
+      ]
+    },
+    {
+      "id": "demonstration",
+      "owner": "Example owner",
+      "disposition": "update",
+      "destination": "https://mmzen.github.io/se_harness/",
+      "work_reference": "WO-EXAMPLE-001",
+      "next_action": "Retain the reviewed closeout report",
+      "expected": {
+        "governance_commit": "release-governance"
+      },
+      "required_observations": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "release_markers",
+      "owner": "Example owner",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "WO-EXAMPLE-001",
+      "next_action": "Retain the reviewed closeout report",
+      "expected": {
+        "latest": "v1.2.3",
+        "last": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "required_observations": [
+        "authorization",
+        "readback"
+      ]
+    }
+  ],
+  "complete_release": {
+    "repository": "mmzen/se_harness",
+    "candidate_commit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "actions": [
+      "release-integration",
+      "version-tag",
+      "github-release",
+      "pypi",
+      "maintenance-line",
+      "marketplace",
+      "documentation",
+      "pages",
+      "latest",
+      "last",
+      "receipts"
+    ],
+    "marketplace": {
+      "parent": "dddddddddddddddddddddddddddddddddddddddd",
+      "commit": "cccccccccccccccccccccccccccccccccccccccc",
+      "tree": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "identity_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    "markers": {
+      "previous_latest": "v1.2.2",
+      "previous_last": "dddddddddddddddddddddddddddddddddddddddd"
+    },
+    "integration": {
+      "decision_paths": [
+        "docs/engineering/releases/RLS-TST-001.md"
+      ],
+      "receipt_paths": [
+        "docs/engineering/example/evidence/release/receipt.json"
+      ]
+    },
+    "readiness": {
+      "path": "docs/engineering/example/evidence/release/readiness.json",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "observations": "docs/engineering/example/evidence/release/observations.json",
+    "evidence_root": "docs/engineering/example/evidence/release",
+    "documentation": {
+      "README.md": "2222222222222222222222222222222222222222222222222222222222222222"
+    }
+  }
+}

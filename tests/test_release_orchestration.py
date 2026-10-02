@@ -9,6 +9,8 @@ import sys
 import tempfile
 import unittest
 import zipfile
+from copy import deepcopy
+from dataclasses import replace, asdict
 from unittest import mock
 from pathlib import Path, PurePosixPath
 
@@ -836,6 +838,288 @@ class ReleaseStateTests(unittest.TestCase):
         self.assertIn("no formal lifecycle transition", result["authority"])
 
 
+class CompleteReleaseTests(unittest.TestCase):
+    """ONE02/04/05/06/07: inert Git payloads and an independently fixed provider model."""
+
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        self.value = json.loads((REPOSITORY_ROOT/'tests/fixtures/release_delivery/complete-release/plan.json').read_text())
+        self.envelope = {'plan': self.value, 'sha256': 'f'*64, 'decided_by': 'Example human',
+                         'decision_reference': 'synthetic approval only', 'path': 'plan.json', 'review_commit': 'a'*40}
+        self.selected = replace(plan(), schema='se-harness-release-plan/v3', complete_delivery=self.envelope)
+        self.latest = 'v1.2.2'
+        self.last = 'd'*40
+        self.market = 'd'*40
+        self.calls = []
+        self.pushes = []
+        self.ready = {'status': 'ready_for_markers', 'plan_sha256': 'f'*64}
+
+    def request(self, method, path, payload):
+        self.calls.append((method, path, payload))
+        suffix = path.split('/repos/mmzen/se_harness/', 1)[1]
+        values = {
+            'releases/tags/v1.2.3': {'id': 7, 'tag_name': 'v1.2.3', 'draft': False, 'prerelease': False},
+            'releases/latest': {'tag_name': self.latest} if self.latest else None,
+            'git/ref/tags/last': {'ref':'refs/tags/last','object':{'type':'commit','sha':self.last}} if self.last else None,
+            'git/ref/heads/plugin-marketplace': {'ref':'refs/heads/plugin-marketplace','object':{'type':'commit','sha':self.market}} if self.market else None,
+            'environments/pypi': {'protection_rules':[{'type':'branch_policy'}],
+                                  'deployment_branch_policy':{'protected_branches':False,'custom_branch_policies':True}},
+            'environments/pypi/deployment-branch-policies': {'branch_policies':[{'name':'main','type':'branch'}]},
+        }
+        if method == 'PATCH' and suffix == 'releases/7':
+            self.assertEqual({'make_latest':'true'}, payload)
+            self.latest = 'v1.2.3'
+            return RELEASE.maintenance.ApiResponse(200, {})
+        self.assertEqual('GET', method)
+        self.assertIn(suffix, values)
+        value = values[suffix]
+        return RELEASE.maintenance.ApiResponse(404 if value is None else 200, value)
+
+    def push(self, ref, target, expected, moving):
+        self.pushes.append((ref,target,expected,moving))
+        if ref == 'refs/tags/last':
+            self.assertEqual(self.last, expected)
+            self.assertTrue(moving)
+            self.last = target
+        else:
+            self.assertEqual('refs/heads/plugin-marketplace', ref)
+            self.assertEqual(self.market, expected)
+            self.assertFalse(moving)
+            self.market = target
+
+    def make_marketplace(self):
+        git(self.root, 'init', '-b', 'main')
+        git(self.root, 'config', 'user.name', 'Fixture')
+        git(self.root, 'config', 'user.email', 'fixture@example.invalid')
+        write(self.root/'old.txt', 'previous marketplace')
+        git(self.root, 'add', '.')
+        git(self.root, 'commit', '-m', 'previous marketplace')
+        parent = git(self.root, 'rev-parse', 'HEAD')
+        (self.root/'old.txt').unlink()
+        files = {}
+        wheel = b'inert approved wheel fixture'
+        wheel_hash = hashlib.sha256(wheel).hexdigest()
+        for host, label in [('codex','codex'),('claude','claude-code')]:
+            prefix = f'packages/{host}/verity-plane/'
+            for path, raw in [(prefix+'packages/'+self.selected.wheel,wheel), (prefix+'assembly-inventory.json', (host+' inventory').encode())]:
+                target = self.root/path
+                target.parent.mkdir(parents=True,exist_ok=True)
+                target.write_bytes(raw)
+                files[path] = hashlib.sha256(raw).hexdigest()
+            self.value['surfaces'][1]['expected'][label+'_content_sha256'] = files[prefix+'assembly-inventory.json']
+        identity = {'name':'verity-plane','plugin_version':'0.2.1','source':{'revision':self.selected.candidate_commit},
+                    'evaluator':{'version':'1.2.3','candidate_commit':self.selected.candidate_commit,'archive_sha256':wheel_hash},'files':files}
+        raw = json.dumps(identity).encode()
+        (self.root/'PACKAGE-IDENTITY.json').write_bytes(raw)
+        git(self.root,'add','.')
+        git(self.root,'commit','-m','prepared inert payload')
+        target = git(self.root,'rev-parse','HEAD')
+        self.value['complete_release']['marketplace'] = {'parent':parent,'commit':target,
+               'tree':git(self.root,'rev-parse','HEAD^{tree}'),'identity_sha256':hashlib.sha256(raw).hexdigest()}
+        self.value['surfaces'][1]['expected']['public_revision'] = target
+        self.selected = replace(self.selected,wheel_sha256=wheel_hash)
+        self.market = parent
+        public = self.root/self.selected.wheel
+        public.write_bytes(wheel)
+        return public
+
+    def test_marketplace_promotes_approved_bytes_then_replays_without_writing(self):
+        public = self.make_marketplace()
+        result = RELEASE.promote_marketplace(self.root,self.selected,public,self.request,self.push,apply=True)
+        self.assertEqual('exact',result['state'])
+        self.assertEqual(1,len(self.pushes))
+        RELEASE.promote_marketplace(self.root,self.selected,public,self.request,self.push,apply=True)
+        self.assertEqual(1,len(self.pushes))
+        public.write_bytes(b'different public wheel')
+        with self.assertRaisesRegex(RELEASE.ReleaseError,'public wheel'):
+            RELEASE.promote_marketplace(self.root,self.selected,public,self.request,self.push,apply=True)
+        self.assertEqual(1,len(self.pushes))
+
+    def test_marketplace_ref_conflict_and_uncertain_write_are_not_repeated(self):
+        public = self.make_marketplace()
+        self.market = 'e'*40
+        with self.assertRaisesRegex(RELEASE.ReleaseError,'unexpected ref'):
+            RELEASE.promote_marketplace(self.root,self.selected,public,self.request,self.push,apply=True)
+        self.assertFalse(self.pushes)
+        self.market = self.value['complete_release']['marketplace']['parent']
+        def interrupted(*args):
+            self.push(*args)
+            raise OSError('transport lost after remote accepted write')
+        with self.assertRaises(OSError):
+            RELEASE.promote_marketplace(self.root,self.selected,public,self.request,interrupted,apply=True)
+        RELEASE.promote_marketplace(self.root,self.selected,public,self.request,self.push,apply=True)
+        self.assertEqual(1,len(self.pushes))
+
+    def test_changed_parent_inventory_and_extra_file_refuse_without_remote_writes(self):
+        public = self.make_marketplace()
+        for field in ('parent','tree','identity_sha256'):
+            original = self.value['complete_release']['marketplace'][field]
+            self.value['complete_release']['marketplace'][field] = '0'*len(original)
+            with self.assertRaises(RELEASE.ReleaseError):
+                RELEASE.promote_marketplace(self.root,self.selected,public,self.request,self.push,apply=True)
+            self.value['complete_release']['marketplace'][field] = original
+        self.assertFalse(self.calls)
+        self.assertFalse(self.pushes)
+
+    def test_markers_wait_for_all_checks_and_reject_legacy(self):
+        self.market = 'c'*40
+        for assessment in ({'status':'incomplete','plan_sha256':'f'*64}, {'status':'ready_for_markers','plan_sha256':'0'*64}):
+            with self.assertRaisesRegex(RELEASE.ReleaseError,'incomplete'):
+                RELEASE.promote_markers(self.selected,assessment,self.request,self.push,apply=True)
+        with self.assertRaisesRegex(RELEASE.ReleaseError,'no complete-release'):
+            RELEASE.promote_markers(plan(),self.ready,self.request,self.push,apply=True)
+        self.assertFalse(self.calls)
+        self.assertFalse(self.pushes)
+
+    def test_marker_resume_after_each_boundary_keeps_one_approval(self):
+        self.market = 'c'*40
+        # Crash after latest changes: the next run must leave latest alone.
+        def interrupted(ref, target, expected, moving):
+            raise OSError('last not written')
+        with self.assertRaises(OSError):
+            RELEASE.promote_markers(self.selected,self.ready,self.request,interrupted,apply=True)
+        self.assertEqual('v1.2.3',self.latest)
+        result = RELEASE.promote_markers(self.selected,self.ready,self.request,self.push,apply=True)
+        self.assertEqual(('exact','exact'),(result['latest'],result['last']))
+        RELEASE.promote_markers(self.selected,self.ready,self.request,self.push,apply=True)
+        self.assertEqual(1,len([c for c in self.calls if c[0]=='PATCH']))
+        self.assertEqual(1,len(self.pushes))
+
+    def test_marker_conflict_unknown_or_moved_marketplace_stops_before_writes(self):
+        self.market = 'c'*40
+        for key in ('latest','last','market'):
+            old = getattr(self,key)
+            setattr(self,key,'e'*40)
+            with self.assertRaises(RELEASE.ReleaseError):
+                RELEASE.promote_markers(self.selected,self.ready,self.request,self.push,apply=True)
+            setattr(self,key,old)
+        def unknown(*args): return RELEASE.maintenance.ApiResponse(503,{})
+        with self.assertRaisesRegex(RELEASE.ReleaseError,'unknown result'):
+            RELEASE.promote_markers(self.selected,self.ready,unknown,self.push,apply=True)
+        self.assertFalse(self.pushes)
+        self.assertFalse([c for c in self.calls if c[0]=='PATCH'])
+
+    def test_provider_control_changes_do_not_become_approval_prompts(self):
+        self.assertEqual('main',RELEASE.controls_snapshot(self.request)['allowed_ref'])
+        original = self.request
+        def guarded(method,path,payload):
+            response = original(method,path,payload)
+            if path.endswith('/pypi'):
+                response.payload['protection_rules'].append({'type':'required_reviewers','reviewers':[{'type':'User','id':1}]})
+            return response
+        with self.assertRaisesRegex(RELEASE.ReleaseError,'activation is not ready'):
+            RELEASE.controls_snapshot(guarded)
+        self.assertFalse([c for c in self.calls if c[0]!='GET'])
+
+    def test_unknown_github_state_is_not_absence(self):
+        for tag_only in (True,False):
+            for status in (401,403,429,500,503):
+                with self.subTest(tag_only=tag_only,status=status):
+                    request=lambda *args: RELEASE.maintenance.ApiResponse(status,{})
+                    with self.assertRaisesRegex(RELEASE.ReleaseError,'unknown result'):
+                        RELEASE.observe_github(self.selected,request,tag_only=tag_only)
+        request=lambda *args: RELEASE.maintenance.ApiResponse(404,{})
+        self.assertEqual({'state':'absent'},RELEASE.observe_github(self.selected,request,tag_only=True))
+        self.assertEqual({'absent':True},RELEASE.observe_github(self.selected,request))
+
+    def test_legacy_plan_read_and_new_result_never_infer_full_delivery(self):
+        old = asdict(plan())
+        old.pop('complete_delivery')
+        path = self.root/'old-plan.json'
+        path.write_text(json.dumps(old))
+        self.assertIsNone(RELEASE.read_plan(path).complete_delivery)
+        old['complete_delivery'] = self.envelope
+        path.write_text(json.dumps(old))
+        with self.assertRaisesRegex(RELEASE.ReleaseError,'legacy'):
+            RELEASE.read_plan(path)
+        result = RELEASE.release_result(self.selected,{n:{'state':'exact'} for n in ('resolution','qualification','github','pypi','pages','public_install')})
+        self.assertEqual('incomplete',result['delivery'])
+        self.assertEqual('not_run',result['stages']['marketplace']['state'])
+
+    def test_only_the_recorded_decision_can_change_in_integration(self):
+        git(self.root,'init','-b','main')
+        git(self.root,'config','user.name','Fixture')
+        git(self.root,'config','user.email','fixture@example.invalid')
+        path = self.value['complete_release']['integration']['decision_paths'][0]
+        ready = '+++\nid="RLS-TST-001"\nstatus="ready"\nversion="1.2.3"\n+++\n\nFixed body\n'
+        write(self.root/path,ready)
+        git(self.root,'add','.')
+        git(self.root,'commit','-m','reviewed content')
+        base = git(self.root,'rev-parse','HEAD')
+        released = ready.replace('status="ready"','status="released"').replace('\n+++\n','\n[[lifecycle_events]]\nfrom="ready"\nto="released"\ndecided_by="Example human"\n+++\n')
+        write(self.root/path,released)
+        git(self.root,'add','.')
+        git(self.root,'commit','-m','record decision')
+        head = git(self.root,'rev-parse','HEAD')
+        self.assertEqual([path],RELEASE.verify_integration(self.root,base,head,self.envelope))
+        write(self.root/path,released.replace('1.2.3','1.2.4'))
+        git(self.root,'add','.')
+        git(self.root,'commit','-m','wrong version')
+        with self.assertRaisesRegex(RELEASE.ReleaseError,'accepted artifact content'):
+            RELEASE.verify_integration(self.root,base,git(self.root,'rev-parse','HEAD'),self.envelope)
+
+    def test_resolver_binds_one_real_git_review_and_refuses_later_plan_changes(self):
+        fixture = dashboard_tests.GitReleaseFixture()
+        fixture.setUp()
+        self.addCleanup(fixture.tearDown)
+        self.selected = replace(self.selected,candidate_commit=fixture.candidate)
+        self.make_marketplace()
+        market = self.value['complete_release']['marketplace']
+        git(fixture.root,'fetch',str(self.root),market['commit'])
+        lock = git(fixture.root,'show',fixture.governance+':.engineering-harness.lock')
+        git(fixture.root,'checkout','-b','complete-route',fixture.candidate)
+        write(fixture.root/'.engineering-harness.lock',lock)
+        write(fixture.root/fixture.evaluator_evidence_path,fixture.evaluator_evidence)
+        value = self.value
+        value['release']['wheel_sha256'] = self.selected.wheel_sha256
+        value['complete_release']['candidate_commit'] = fixture.candidate
+        value['complete_release']['integration']['decision_paths'] = [fixture.record_path]
+        value['complete_release']['documentation'] = {'README.md':hashlib.sha256(b'candidate\n').hexdigest()}
+        value['surfaces'][0]['expected']['wheel_sha256'] = self.selected.wheel_sha256
+        value['surfaces'][1]['expected'].update(source_commit=fixture.candidate,wheel_sha256=self.selected.wheel_sha256)
+        value['surfaces'][2]['expected']['commit'] = fixture.candidate
+        value['surfaces'][4]['expected']['last'] = fixture.candidate
+        readiness = {'candidate_commit':fixture.candidate,'controls_ready':True,'qualification':'passed','verification_records':['VREC-TST-001']}
+        readiness_raw = json.dumps(readiness)+'\n'
+        value['complete_release']['readiness']['sha256'] = hashlib.sha256(readiness_raw.encode()).hexdigest()
+        write(fixture.root/value['complete_release']['readiness']['path'],readiness_raw)
+        plan_path = 'docs/engineering/example/evidence/release/plan.json'
+        raw = json.dumps(value)+'\n'
+        write(fixture.root/plan_path,raw)
+        distribution = distribution_values()
+        distribution.update(wheel_sha256=self.selected.wheel_sha256,
+           checksums_sha256=hashlib.sha256(checksum_manifest_bytes('1.2.3',self.selected.wheel_sha256,distribution['sdist_sha256'])).hexdigest(),
+           source_date_epoch=int(git(fixture.root,'show','-s','--format=%ct',fixture.candidate)),
+           source_manifest_sha256=DISTRIBUTION.source_manifest_sha256(fixture.root,fixture.candidate))
+        ready = fixture.release_record('RLS-TST-001').replace('status = "released"','status = "ready"')
+        ready = ready.replace('\n+++\n','\n[distribution]\n'+'\n'.join(f'{k} = {json.dumps(v)}' for k,v in distribution.items())+'\n+++\n',1)
+        write(fixture.root/fixture.record_path,ready)
+        for artifact_id, artifact_type in [('REL-TST-001','release_contract'),('WO-TST-001','work_order'),('VREC-TST-001','verification_record')]:
+            extra = '\n[delivery]\nroute="complete-release"\n' if artifact_type=='release_contract' else ''
+            write(fixture.root/f'docs/engineering/example/{artifact_id}.md',f'+++\nid="{artifact_id}"\ntype="{artifact_type}"\nstatus="verified"\ncommit="{fixture.candidate}"\ngit_object_format="sha1"\n{extra}+++\n')
+        fixture.commit('prepared and reviewed complete package')
+        review = git(fixture.root,'rev-parse','HEAD')
+        binding = {'plan':plan_path,'sha256':hashlib.sha256(raw.encode()).hexdigest(),'decided_by':'Example human',
+                   'decision_reference':'synthetic fixture approval','review_commit':review}
+        released = ready.replace('status = "ready"','status = "released"').replace('authorized_by = "release-owner"', 'authorized_by = "Example human"').replace('\n+++\n',
+            '\n[delivery]\n'+'\n'.join(f'{k}={json.dumps(v)}' for k,v in binding.items())+
+            '\n[[lifecycle_events]]\nfrom="ready"\nto="released"\ndecided_by="Example human"\n+++\n',1)
+        write(fixture.root/fixture.record_path,released)
+        fixture.commit('apply one complete release decision')
+        git(fixture.root,'update-ref','refs/heads/main','HEAD')
+        resolved = RELEASE.resolve_plan(fixture.root,'RLS-TST-001','refs/heads/main')
+        self.assertEqual('se-harness-release-plan/v3',resolved.schema)
+        self.assertEqual(binding['sha256'],resolved.complete_delivery['sha256'])
+        self.assertEqual(market['commit'],resolved.complete_delivery['plan']['complete_release']['marketplace']['commit'])
+        (fixture.root/plan_path).write_bytes((' '+raw).encode())
+        fixture.commit('unauthorized byte change after approval')
+        git(fixture.root,'update-ref','refs/heads/main','HEAD')
+        with self.assertRaisesRegex(RELEASE.ReleaseError,'plan digest differs'):
+            RELEASE.resolve_plan(fixture.root,'RLS-TST-001','refs/heads/main')
+
+
 class ReleaseWorkflowPolicyTests(unittest.TestCase):
     """The lane definitions and the resolver script read as text (TST-HYG-011): SPEC-REB-013 rules 4
     to 6 fix the publication, Pages and dashboard-publisher surfaces, SPEC-DPG-001 rule 8 the Pages
@@ -857,6 +1141,19 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("github.ref == 'refs/heads/main'", self.workflow)
         self.assertIn("      name: pypi\n", self.workflow)
         self.assertIn("pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33", self.workflow)
+
+    def test_complete_delivery_is_explicit_and_never_executes_candidate_with_credentials(self):
+        market = self.workflow.split('  marketplace:\n',1)[1].split('  observe:\n',1)[0]
+        finish = self.workflow.split('  complete_delivery:\n',1)[1]
+        self.assertIn("needs.resolve.outputs.complete_delivery == 'true'",market)
+        self.assertIn('needs: [resolve, pypi]',market)
+        self.assertIn('ref: main',market)
+        self.assertIn('--stage marketplace --public-wheel',market)
+        for forbidden in ('pip install','check-stage','build_plugin_marketplace','id-token: write','secrets.'):
+            self.assertNotIn(forbidden,market)
+        self.assertIn("needs.observe.outputs.public_result == 'success'",finish)
+        self.assertIn('--stage markers --apply',finish)
+        self.assertIn('--stage report',finish)
 
     def test_candidate_and_privileged_jobs_are_separate(self) -> None:
         # WO-CIP-002: the qualification is one reusable definition invoked here and by the

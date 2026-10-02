@@ -84,9 +84,19 @@ verified coverage, version, and accountable human's release authority.
 
 1. Present the candidate, included work, verification coverage, version,
    constraints, rollback conditions, and required release evidence.
+   If the contract and delivery plan select complete release delivery, follow
+   [Complete-release authority](AUTHORITY.md#complete-release-authority). Finish
+   required deliverable preparation and human verification before this request.
+   Show one concise request: "Approve the complete release", its versions,
+   delivery actions, verification summary, limitations and a link to the exact
+   plan. Include payload digests, destinations, marker targets and any bounded
+   release-only integration in that plan.
 2. Run the transition gate check for the intended target state.
 3. Obtain the accountable human's decision on the selected release record
    (RLS). Reuse a matching decision already supplied.
+   For complete delivery, the same response explicitly covers its listed external
+   actions. Retain the actual human, decision reference and reviewed plan digest.
+   Do not rewrite the plan when public observations arrive; retain them separately.
 4. Retain a rejection reason when applicable.
 
 **Harness command:**
@@ -100,8 +110,9 @@ The evaluator determines legality. A passed check does not supply approval.
 
 **Completion:** The release decision is explicit, or remains pending.
 
-**Later use:** [Record the release decision, when required](RELEASE.md#record-the-release-decision-when-required) records that decision. It does not extend to publication
-or deployment unless the exact external action is separately authorized.
+**Later use:** [Record the release decision, when required](RELEASE.md#record-the-release-decision-when-required) records that decision. Execute listed delivery actions
+under the same complete-release authorization when their conditions still match.
+Otherwise obtain only the exact external authority that is missing.
 
 ### Record the release decision, when required
 
@@ -133,6 +144,12 @@ harnessctl check REPO --artifact RLS-ID --json
 For rejection, add `--reason "RLS-ID=Rejection reason"` to both transition
 commands. Related verification records (VREC) and work orders (WO) are not
 transitioned automatically.
+
+For a complete-release decision, use the existing `--reason` input to retain the
+actual human decision reference and reviewed delivery-plan path and SHA-256.
+This is retained evidence of the supplied decision, not permission derived by
+parsing arbitrary reason text. Preserve the referenced plan bytes for each later
+authority comparison. No new approval file or lifecycle state is needed.
 
 **Completion:** The release decision is recorded or explicitly refused.
 No Git tag, publication, or deployment has been performed by this transition.

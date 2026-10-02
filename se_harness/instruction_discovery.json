@@ -458,6 +458,11 @@
           "file": "docs/engineering/harness/AUTHORITY.md",
           "heading": "decision-rights",
           "when": "Before obtaining or applying an accountable decision."
+        },
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "complete-release-authority",
+          "when": "When the selected release contract and reviewed plan explicitly select complete release delivery."
         }
       ],
       "steps": {
@@ -471,6 +476,11 @@
               "file": "docs/engineering/harness/AUTHORITY.md",
               "heading": "decision-rights",
               "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "complete-release-authority",
+              "when": "When the selected release contract and reviewed plan explicitly select complete release delivery."
             }
           ]
         }
@@ -514,6 +524,11 @@
           "file": "docs/engineering/harness/AUTHORITY.md",
           "heading": "decision-rights",
           "when": "Before obtaining or applying an accountable decision."
+        },
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "complete-release-authority",
+          "when": "When the selected release contract and reviewed plan explicitly select complete release delivery."
         }
       ],
       "steps": {
@@ -527,6 +542,11 @@
               "file": "docs/engineering/harness/AUTHORITY.md",
               "heading": "decision-rights",
               "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "complete-release-authority",
+              "when": "When the selected release contract and reviewed plan explicitly select complete release delivery."
             }
           ]
         }

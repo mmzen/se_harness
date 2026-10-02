@@ -1,0 +1,25 @@
+{
+  "command": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "api",
+    "repos/mmzen/se_harness/environments/github-pages"
+  ],
+  "observed_at": "2026-10-02T20:40:00.565468+00:00",
+  "exit_code": 0,
+  "result": {
+    "name": "github-pages",
+    "updated_at": "2026-08-16T11:17:28Z",
+    "can_admins_bypass": true,
+    "deployment_branch_policy": {
+      "protected_branches": false,
+      "custom_branch_policies": true
+    },
+    "protection_rules": [
+      {
+        "id": 62846453,
+        "node_id": "GA_kwDOT09fPM4DvvX1",
+        "type": "branch_policy"
+      }
+    ]
+  }
+}

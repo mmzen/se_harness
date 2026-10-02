@@ -26,6 +26,15 @@ the recorded candidate, replays its recipe, and checks the recorded hashes.
 On a PR, the earlier record comes from its base commit. If no suitable record
 exists, that leg is skipped with an explanation.
 
+When the earlier-record leg is selected, the same rehearsal also runs the
+complete-delivery fixture tests. These use disposable Git repositories, inert
+package bytes and simulated provider responses. They exercise frozen approval
+bindings, both host payloads, all five surfaces, interrupted marketplace/marker
+writes, conflicting refs, unknown responses and unavailable public checks. They
+reuse the publisher and delivery checker; they do not create another build lane.
+The summary fails if this recovery rehearsal fails. No fixture calls a live
+publication API or claims native host qualification.
+
 Before release, explicitly run both legs:
 
 ```bash
