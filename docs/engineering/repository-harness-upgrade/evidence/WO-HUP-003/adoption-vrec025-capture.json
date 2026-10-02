@@ -1,0 +1,526 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "capture-verification",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--id",
+    "VREC-HUP-025",
+    "--verification",
+    "VER-HUP-003",
+    "--owner",
+    "Codex",
+    "--domain",
+    "repository-harness-upgrade",
+    "--candidate-commit",
+    "0493d73371fc9ce801354456abc5e70352ec6d19",
+    "--json",
+    "--work-order",
+    "WO-HUP-003",
+    "--work-order",
+    "WO-HUP-005",
+    "--work-order",
+    "WO-HUP-026",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003-evaluator-upgrade.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/README.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/WO-HUP-003-handoff.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/acceptance-assessment.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/adoption-combined-handoff-final.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/adoption-completion-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/adoption-completion-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/apply-current-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/apply-final-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/apply-target-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/approval-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/approval-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/approve-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/approved-implementation-digests.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/approved-scope.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/combined-handoff.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/compact-trace.jsonl",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/corrected-distribution.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/corrected-doctor.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/corrected-root-qualification.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/corrected-root-result.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/corrected-source-summary.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/corrected-validation.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/correction-scope-escalation.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/current-doctor.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/current-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/distribution-checks.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/implemented-readback.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/instruction-delivery.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/local-check-summary.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/migration-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/migration-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/native-delivery-v2.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/native-delivery.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/native-receipt-check.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/native-review-accepted.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/native-review.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/planned-entry.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/postapply-authoring-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/postapply-doctor.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/postapply-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/postapply-noop.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/postapply-qualification.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/postapply-validation.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/preapply-files.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/predecessor-assessment-refused.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/preservation.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/rehearsal-doctor.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/rehearsal-preparation.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/relative-evidence-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/relative-evidence-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/review-inputs.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/reviewed-migration-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/source-cli-smoke.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/stable-draft-regressions.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/start-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/start-preflight.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/start-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/started-focus.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/startup-trace.jsonl",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/target-doctor-before.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/target-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/README.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/WO-HUP-005-handoff.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/corrected-predecessor-facts.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/corrected-targeted-tests.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/correction-approval-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/correction-approval-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/correction-patch-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/correction-patch-check.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/correction-proposal-audit.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/correction-review-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/correction-start-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/correction-start-preflight.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/correction-start-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/implemented-readback.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-005/reviewed-correction.patch",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/README.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/WO-HUP-026-handoff.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/WO-HUP-026-proposed.patch",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/implemented-readback.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/preservation-after-correction.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-actual-assessment-result.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-actual-assessment.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-actual-doctor.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-actual-focused-tests.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-actual-qualification.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-actual-root-result.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-actual-validation.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-approval-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-approval-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-approved-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-cli-smoke.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-distribution.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-proposed-assessment-result.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-proposed-assessment.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-proposed-tests-v2.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-proposed-tests.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-resume-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-review-identity.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-scope-before-patch.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-start-apply.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-start-preflight.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/schema5-start-preview.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-026/source-checks.json",
+    "--test-command",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--scale",
+    "full",
+    "--timings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\exact-candidate-test-timings.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {
+      "commit": "0493d73371fc9ce801354456abc5e70352ec6d19",
+      "git_object_format": "sha1"
+    },
+    "operation": {
+      "kind": "capture-verification",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "VREC-HUP-025",
+      "artifacts": [
+        "VREC-HUP-025"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "ADR-IAR-012",
+        "ADR-REB-011",
+        "ARCH-IAR-012",
+        "ARCH-REB-011",
+        "CAP-DST-001",
+        "CAP-REB-001",
+        "INT-DST-001",
+        "INT-REB-001",
+        "REQ-IAR-031",
+        "REQ-REB-027",
+        "SPEC-IAR-016",
+        "SPEC-REB-012",
+        "VER-HUP-003",
+        "WO-HUP-003",
+        "WO-HUP-005",
+        "WO-HUP-026"
+      ],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-VREC-DECIDE",
+      "procedure_id": "PROC-VREC-DECIDE",
+      "status": "not_assessable",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-VREC-DECIDE",
+      "current_step": "STEP-VREC-DECIDE",
+      "steps": [
+        {
+          "id": "STEP-VREC-DECIDE",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G4-ASSURANCE-DECISION"
+          ],
+          "effects": [
+            "Permits an explicit decision on VREC-HUP-025 only."
+          ],
+          "non_effects": [
+            "Referenced work orders remain unchanged."
+          ],
+          "decision_right": "DR-VREC-DECIDE",
+          "role": "assurance-owner",
+          "artifact": "VREC-HUP-025",
+          "decision": "whether the retained evidence verifies the exact candidate",
+          "outcomes": [
+            "verified",
+            "reject",
+            "supersede"
+          ],
+          "response": "I verify VREC-HUP-025 as assurance owner."
+        }
+      ]
+    },
+    "state": {
+      "before": [],
+      "after": [
+        {
+          "id": "VREC-HUP-025",
+          "status": "ready"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": [
+        {
+          "id": "VREC-HUP-025",
+          "path": "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-025.md",
+          "fields": [
+            "artifact_snapshot_sha256",
+            "commit",
+            "created",
+            "evaluator_evidence_path",
+            "evaluator_evidence_sha256",
+            "evidence_paths",
+            "git_object_format",
+            "id",
+            "owners",
+            "prepared_at",
+            "prepared_by",
+            "relations",
+            "status",
+            "title",
+            "type",
+            "updated",
+            "worktree_state"
+          ]
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Prepared ready verification record VREC-HUP-025 at docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-025.md."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VREC-HUP-025 is ready; referenced work orders were not changed."
+      ],
+      "decision_required": {
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-HUP-025",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-VREC-DECIDE",
+        "step_id": "STEP-VREC-DECIDE",
+        "action": "whether the retained evidence verifies the exact candidate"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "I verify VREC-HUP-025 as assurance owner."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-VREC-REJECT.",
+        "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+      ]
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v2",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task",
+          "source": "released-resource",
+          "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context.",
+            "source": "released-resource",
+            "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result.",
+            "source": "released-resource",
+            "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e"
+          }
+        ],
+        "procedure": {
+          "id": "PROC-VREC-DECIDE",
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "obtain-the-humans-verification-decision",
+            "source": "released-resource",
+            "sha256": "8f75da8dd0f8886de5609fc9fe174037139c2b535b68516af3937029fedd0872"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision.",
+              "source": "released-resource",
+              "sha256": "5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16"
+            }
+          ],
+          "steps": {
+            "STEP-VREC-DECIDE": {
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision",
+                "source": "released-resource",
+                "sha256": "8f75da8dd0f8886de5609fc9fe174037139c2b535b68516af3937029fedd0872"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision.",
+                  "source": "released-resource",
+                  "sha256": "5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16"
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-VREC-DECIDE",
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "obtain-the-humans-verification-decision",
+            "source": "released-resource",
+            "sha256": "8f75da8dd0f8886de5609fc9fe174037139c2b535b68516af3937029fedd0872"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision.",
+              "source": "released-resource",
+              "sha256": "5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16"
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "ADR-IAR-012",
+        "ADR-REB-011",
+        "ARCH-IAR-012",
+        "ARCH-REB-011",
+        "CAP-DST-001",
+        "CAP-REB-001",
+        "INT-DST-001",
+        "INT-REB-001",
+        "REQ-IAR-031",
+        "REQ-REB-027",
+        "SPEC-IAR-016",
+        "SPEC-REB-012",
+        "VER-HUP-003",
+        "VREC-HUP-025",
+        "WO-HUP-003",
+        "WO-HUP-005",
+        "WO-HUP-026"
+      ],
+      "evaluator_only_inputs": [
+        {
+          "source": "released-resource",
+          "file": "docs/engineering/WORKFLOW.json",
+          "sha256": "310b35d4f07a071258d220d1c3d751f603c4eee74cea83467f7ba2f74b594516"
+        },
+        {
+          "source": "released-resource",
+          "file": "docs/engineering/QUALITY_GATES.json",
+          "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+        }
+      ],
+      "release": {
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+        "version": "0.21.0"
+      },
+      "formal_artifact_source": "repository"
+    },
+    "result_sha256": "ce022bb413d8ef22119bdea612cc8212f02479e3d31aef31c570b706ed260c2e"
+  },
+  "seconds": 188.07559879999826
+}
