@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--print",
+    "--verbose",
+    "--output-format",
+    "stream-json",
+    "--include-hook-events",
+    "--tools",
+    "",
+    "--strict-mcp-config",
+    "--permission-prompts",
+    "none",
+    "--debug-file",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-evidence-1002\\fresh-claude-native\\public-bootstrap.debug.log",
+    "--init-only"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-evidence-1002\\fresh-claude-native",
+  "exit_code": 0,
+  "before": {},
+  "after": {
+    "public-bootstrap.debug.log": "2c93ee4d65accc8a6025ae908401e4e08337e1b83da24b36b528573d90973ab6",
+    "public-bootstrap.events.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "public-bootstrap.hooks.log": "aed9942d803dcdb6f0f60d77ec4286d605840c63bb41f818730e3ff223641e12"
+  },
+  "stderr_bytes": 0
+}

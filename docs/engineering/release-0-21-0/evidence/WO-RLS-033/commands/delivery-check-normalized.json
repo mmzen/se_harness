@@ -1,0 +1,396 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\scripts\\check_release_delivery.py",
+    "--plan",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\release-0-21-0\\evidence\\WO-RLS-033\\plan.json",
+    "--observations",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\release-0-21-0\\evidence\\WO-RLS-033\\observations-v2.json",
+    "--evidence-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 1,
+  "result": {
+    "schema": "se-harness-delivery-result/v1",
+    "status": "incomplete",
+    "input_status": "valid",
+    "authority": "derived operational evidence; no lifecycle transition",
+    "limitation": "Assesses supplied, retained observations only. Does not independently run host tests, authenticate human reviews, or establish live public state. Grants no lifecycle or external authority.",
+    "formal_release": {
+      "record": "RLS-SEH-031",
+      "status": "released",
+      "source": "https://github.com/mmzen/se_harness/blob/66baa640eea3946bd041ac09e419e300fafef017/docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+      "observed_at": "2026-10-02T06:56:06.661774+00:00",
+      "evidence": [
+        {
+          "path": "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+          "sha256": "05df27a5da59afcb6edcbb07193ca61989551f54180cadf16a06fca64b82ea4c"
+        }
+      ]
+    },
+    "evaluator_publication": "satisfied",
+    "observed_at": "2026-10-02T06:56:06.661774+00:00",
+    "surfaces": [
+      {
+        "id": "evaluator",
+        "disposition": "update",
+        "status": "satisfied",
+        "owner": "mmzen",
+        "next_action": "Retain already published evaluator readback in public-evaluator.json; public package hashes and Windows isolated installation passed.",
+        "expected": {
+          "record": "RLS-SEH-031",
+          "version": "0.21.0",
+          "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+        },
+        "observation": {
+          "id": "evaluator",
+          "status": "pass",
+          "identity": {
+            "record": "RLS-SEH-031",
+            "version": "0.21.0",
+            "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+          },
+          "source": "https://github.com/mmzen/se_harness/releases/tag/v0.21.0",
+          "observed_at": "2026-10-02T06:56:06.661774+00:00",
+          "evidence": {
+            "publisher": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+                "sha256": "085641e1212e4ff08f2839cf95da0da79856f3328a38aed901dde1e34385ce6a"
+              },
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-pypi.json",
+                "sha256": "96383f322cebae748f3701f66a1655988aa741f1b1e32c5479ded80f0c5aae5d"
+              }
+            ],
+            "public_install": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+                "sha256": "085641e1212e4ff08f2839cf95da0da79856f3328a38aed901dde1e34385ce6a"
+              }
+            ]
+          }
+        },
+        "findings": []
+      },
+      {
+        "id": "marketplace",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen",
+        "next_action": "Complete the required native public-route observations or obtain an applicable formal resolution; installation-only passes do not satisfy them.",
+        "expected": {
+          "plugin_version": "0.2.4",
+          "source_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+          "evaluator_version": "0.21.0",
+          "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+          "public_revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+          "codex_content_sha256": "5af0bad7f43c9fb951864866927637b8dabc3c359ad9ece9d735da91ff6bc9dd",
+          "claude-code_content_sha256": "e0a494c1ac3ac0aa63775ff09d461c3ffc63e354db3647396f5fc2baf08ea63b"
+        },
+        "observation": {
+          "id": "marketplace",
+          "status": "pending",
+          "identity": {
+            "plugin_version": "0.2.4",
+            "source_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+            "evaluator_version": "0.21.0",
+            "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+            "public_revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+            "codex_content_sha256": "5af0bad7f43c9fb951864866927637b8dabc3c359ad9ece9d735da91ff6bc9dd",
+            "claude-code_content_sha256": "e0a494c1ac3ac0aa63775ff09d461c3ffc63e354db3647396f5fc2baf08ea63b"
+          },
+          "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+          "observed_at": "2026-10-02T06:56:06.661774+00:00",
+          "evidence": {
+            "assembly": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/publication.json",
+                "sha256": "7bb6af684744a9d6ec4b9afbf0f1fd40b53d7bea80d63516df3acbca562c1bd9"
+              }
+            ],
+            "qualification": [
+              {
+                "path": "docs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md",
+                "sha256": "be6e175e1e660f9e62dc3a24f77712226b2791bf887e3973bad328cad500988d"
+              }
+            ],
+            "public_ref": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/publication.json",
+                "sha256": "7bb6af684744a9d6ec4b9afbf0f1fd40b53d7bea80d63516df3acbca562c1bd9"
+              }
+            ],
+            "native_startup_compaction": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native.json",
+                "sha256": "47ba3cf9534ffcd67349637c28b214c20731362d7438e6cbf7e6648f62ea69a1"
+              }
+            ],
+            "codex_fresh_install": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+                "sha256": "e1d92d184938e962322f992cdba221c0217547559763c070e28a627a2aa42923"
+              }
+            ],
+            "codex_update": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+                "sha256": "e1d92d184938e962322f992cdba221c0217547559763c070e28a627a2aa42923"
+              }
+            ],
+            "claude-code_fresh_install": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+                "sha256": "e1d92d184938e962322f992cdba221c0217547559763c070e28a627a2aa42923"
+              }
+            ],
+            "claude-code_update": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+                "sha256": "e1d92d184938e962322f992cdba221c0217547559763c070e28a627a2aa42923"
+              }
+            ]
+          },
+          "pending_reason": "Package routes pass; required authenticated native matrix remains pending. See native.json. Qualification deviation DEC-RLS-002 applies only to WO-RLS-032.",
+          "routes": [
+            {
+              "host": "codex",
+              "host_version": "codex-cli 0.159.2",
+              "kind": "fresh",
+              "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+              "revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+              "plugin_version": "0.2.4",
+              "content_sha256": "5af0bad7f43c9fb951864866927637b8dabc3c359ad9ece9d735da91ff6bc9dd",
+              "evaluator_version": "0.21.0",
+              "status": "pass",
+              "observed_at": "2026-10-02T06:43:29.399268+00:00",
+              "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+              "evidence": [
+                {
+                  "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+                  "sha256": "e1d92d184938e962322f992cdba221c0217547559763c070e28a627a2aa42923"
+                }
+              ],
+              "reported_source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+              "source_normalization": "Retained CLI marketplace readback identifies github repository mmzen/se_harness and ref plugin-marketplace; Codex reports https://github.com/mmzen/se_harness.git. The report URL omitted the optional .git suffix. Original route receipts are unchanged."
+            },
+            {
+              "host": "codex",
+              "host_version": "codex-cli 0.159.2",
+              "kind": "update",
+              "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+              "revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+              "plugin_version": "0.2.4",
+              "content_sha256": "5af0bad7f43c9fb951864866927637b8dabc3c359ad9ece9d735da91ff6bc9dd",
+              "evaluator_version": "0.21.0",
+              "status": "pass",
+              "observed_at": "2026-10-02T06:43:27.910567+00:00",
+              "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+              "evidence": [
+                {
+                  "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+                  "sha256": "e1d92d184938e962322f992cdba221c0217547559763c070e28a627a2aa42923"
+                }
+              ],
+              "starting_version": "0.2.3",
+              "starting_source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+              "reported_source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+              "source_normalization": "Retained CLI marketplace readback identifies github repository mmzen/se_harness and ref plugin-marketplace; Codex reports https://github.com/mmzen/se_harness.git. The report URL omitted the optional .git suffix. Original route receipts are unchanged."
+            },
+            {
+              "host": "claude-code",
+              "host_version": "2.1.273 (Claude Code)",
+              "kind": "fresh",
+              "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+              "revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+              "plugin_version": "0.2.4",
+              "content_sha256": "e0a494c1ac3ac0aa63775ff09d461c3ffc63e354db3647396f5fc2baf08ea63b",
+              "evaluator_version": "0.21.0",
+              "status": "pass",
+              "observed_at": "2026-10-02T06:43:28.537703+00:00",
+              "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+              "evidence": [
+                {
+                  "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+                  "sha256": "e1d92d184938e962322f992cdba221c0217547559763c070e28a627a2aa42923"
+                }
+              ],
+              "reported_source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+              "source_normalization": "Retained CLI marketplace readback identifies github repository mmzen/se_harness and ref plugin-marketplace; Codex reports https://github.com/mmzen/se_harness.git. The report URL omitted the optional .git suffix. Original route receipts are unchanged."
+            },
+            {
+              "host": "claude-code",
+              "host_version": "2.1.273 (Claude Code)",
+              "kind": "update",
+              "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+              "revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+              "plugin_version": "0.2.4",
+              "content_sha256": "e0a494c1ac3ac0aa63775ff09d461c3ffc63e354db3647396f5fc2baf08ea63b",
+              "evaluator_version": "0.21.0",
+              "status": "pass",
+              "observed_at": "2026-10-02T06:43:28.367135+00:00",
+              "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+              "evidence": [
+                {
+                  "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+                  "sha256": "e1d92d184938e962322f992cdba221c0217547559763c070e28a627a2aa42923"
+                }
+              ],
+              "starting_version": "0.2.3",
+              "starting_source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+              "reported_source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+              "source_normalization": "Retained CLI marketplace readback identifies github repository mmzen/se_harness and ref plugin-marketplace; Codex reports https://github.com/mmzen/se_harness.git. The report URL omitted the optional .git suffix. Original route receipts are unchanged."
+            }
+          ]
+        },
+        "findings": [
+          {
+            "code": "pending",
+            "location": "marketplace",
+            "message": "Surface has not passed"
+          }
+        ]
+      },
+      {
+        "id": "documentation",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen",
+        "next_action": "Complete required evidence, prepare commit-bound verification, obtain human acceptance and authorized integration, then read back public documents. Published package README correction remains separate.",
+        "expected": {
+          "commit": null
+        },
+        "observation": {
+          "id": "documentation",
+          "status": "pending",
+          "identity": {
+            "commit": null
+          },
+          "source": "https://github.com/mmzen/se_harness",
+          "observed_at": "2026-10-02T06:56:06.661774+00:00",
+          "evidence": {
+            "claims_review": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/review.json",
+                "sha256": "7458f71c0238a20152f17bb17d3d7a6abaa7e532b0b66f4c5de4fc45b6b9b1e3"
+              }
+            ],
+            "links": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/documentation-tests-corrected.json",
+                "sha256": "0938f68e25553b4bd448af3892a57d1be620f43d1a38d00d4849bb0c952265c7"
+              }
+            ]
+          },
+          "pending_reason": "Local corrections and 28 tests pass; candidate verification and public integration/readback are pending. Published package README wording is unchanged."
+        },
+        "findings": [
+          {
+            "code": "pending",
+            "location": "documentation",
+            "message": "Surface has not passed"
+          },
+          {
+            "code": "pending",
+            "location": "documentation.identity.commit",
+            "message": "Expected identity is not yet selected"
+          }
+        ]
+      },
+      {
+        "id": "demonstration",
+        "disposition": "update",
+        "status": "satisfied",
+        "owner": "mmzen",
+        "next_action": "Retain matching deployed 0.21.0 provenance.",
+        "expected": {
+          "governance_commit": "66baa640eea3946bd041ac09e419e300fafef017"
+        },
+        "observation": {
+          "id": "demonstration",
+          "status": "pass",
+          "identity": {
+            "governance_commit": "66baa640eea3946bd041ac09e419e300fafef017"
+          },
+          "source": "https://mmzen.github.io/se_harness/",
+          "observed_at": "2026-10-02T06:56:06.661774+00:00",
+          "evidence": {
+            "deployment": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-pages.json",
+                "sha256": "8421bd65b990ce6a6a96e79608562d66ad6413fadc815cb87b0f1c3afb02963e"
+              }
+            ]
+          }
+        },
+        "findings": []
+      },
+      {
+        "id": "release_markers",
+        "disposition": "update",
+        "status": "failed",
+        "owner": "mmzen",
+        "next_action": "After the publication observation window, obtain exact latest/last authority and retain target readback.",
+        "expected": {
+          "latest": "v0.21.0",
+          "last": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775"
+        },
+        "observation": {
+          "id": "release_markers",
+          "status": "pending",
+          "identity": {
+            "latest": "v0.20.1",
+            "last": "b9af631b850c495eace9807361ed3ec3e36a10b2"
+          },
+          "source": "https://github.com/mmzen/se_harness",
+          "observed_at": "2026-10-02T06:56:06.661774+00:00",
+          "evidence": {
+            "readback": [
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-latest.json",
+                "sha256": "e727dbdd710fa34c9b258b1621a142a64b65a4ac0e384601d87e239179730350"
+              },
+              {
+                "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-markers.json",
+                "sha256": "ec634662232b70004d712e3a2607aa7bb139426977aa48b4a5d8363a76426615"
+              }
+            ]
+          },
+          "pending_reason": "Observed markers remain on 0.20.1. Exact 0.21.0 marker movement requires its separate human authorization."
+        },
+        "findings": [
+          {
+            "code": "pending",
+            "location": "release_markers",
+            "message": "Surface has not passed"
+          },
+          {
+            "code": "mismatch",
+            "location": "release_markers.identity.latest",
+            "message": "Identity differs",
+            "expected": "v0.21.0",
+            "observed": "v0.20.1"
+          },
+          {
+            "code": "mismatch",
+            "location": "release_markers.identity.last",
+            "message": "Identity differs",
+            "expected": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+            "observed": "b9af631b850c495eace9807361ed3ec3e36a10b2"
+          },
+          {
+            "code": "missing",
+            "location": "release_markers.evidence.authorization",
+            "message": "Retained evidence is required"
+          }
+        ]
+      }
+    ],
+    "findings": [],
+    "plan_sha256": "280b519cd5216b0b95fa2f81c556714d0e7a50bce8c9b71ab1eb05a438e6db93"
+  },
+  "seconds": 0.19558869999855233
+}

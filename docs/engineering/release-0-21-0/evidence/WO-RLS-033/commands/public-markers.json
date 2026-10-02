@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Program Files\\Git\\cmd\\git.exe",
+    "ls-remote",
+    "origin",
+    "refs/tags/last",
+    "refs/tags/last^{}",
+    "refs/heads/plugin-marketplace"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "7e366438165a40a14783bac650a2887e7ec8bc75\trefs/heads/plugin-marketplace\nb9af631b850c495eace9807361ed3ec3e36a10b2\trefs/tags/last\n",
+    "stderr": ""
+  },
+  "seconds": 0.640685599999415
+}

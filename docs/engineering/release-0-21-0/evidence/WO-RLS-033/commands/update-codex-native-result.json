@@ -1,0 +1,41 @@
+{
+  "host": "codex",
+  "kind": "update",
+  "observation": "Native hooks/list registration only",
+  "hook_registration": {
+    "data": [
+      {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-evidence-1002\\update-codex-native",
+        "hooks": [
+          {
+            "key": "verity-plane@se-harness:hooks/hooks.json:session_start:0:0",
+            "eventName": "sessionStart",
+            "handlerType": "command",
+            "command": "python \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.4/scripts/inject_instructions.py\" --host codex",
+            "async": false,
+            "matcher": "^(startup|resume|clear|compact)$",
+            "timeoutSec": 10,
+            "statusMessage": null,
+            "additionalContextLimit": 5000,
+            "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.4\\hooks\\hooks.json",
+            "source": "plugin",
+            "pluginId": "verity-plane@se-harness",
+            "displayOrder": 0,
+            "enabled": true,
+            "isManaged": false,
+            "currentHash": "sha256:f297274c31689e31abb00ae43e22a718a8e6242311442e65d5007f4d618839ff",
+            "trustStatus": "untrusted"
+          }
+        ],
+        "warnings": [],
+        "errors": []
+      }
+    ]
+  },
+  "registration_passed": true,
+  "native_delivery_assessed": false,
+  "model_session_assessed": false,
+  "public_commit": "7e366438165a40a14783bac650a2887e7ec8bc75",
+  "host_version": "codex-cli 0.159.2",
+  "limits": "No activation, compaction or resume pass inferred; authenticated native matrix remains pending."
+}

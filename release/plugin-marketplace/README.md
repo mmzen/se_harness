@@ -1,21 +1,21 @@
 # Verity Plane marketplace
 
 Verity Plane brings SE Harness setup, orientation, change and evidence workflows
-to Codex and Claude Code. Plugin **0.2.4** selects **SE Harness 0.21.0** and five
-skills, including an explicitly requested operator brief. These are the approved
-release inputs; they are not published yet. Release assembly requires the
-independently public 0.21.0 wheel and its released record. The currently public
-maintenance package remains plugin 0.2.3 with evaluator 0.20.1.
+to Codex and Claude Code. Plugin **0.2.4** bundles released **SE Harness 0.21.0**
+and five skills, including an explicitly requested operator brief. It is public at
+`7e366438165a40a14783bac650a2887e7ec8bc75`, assembled from source
+`4031f0fa4b5c4a95651bd928a110d8b2d94f9775` and the independently public wheel.
+This source guide corrects pre-publication wording retained in the original
+published package. It does not change that package's source identity or bytes.
 
 ## Install from Git
 
 These commands select the `plugin-marketplace` distribution branch of
 `mmzen/se_harness`. The development branch contains assembly inputs; install the
-complete distribution branch. Before expecting this version from Git, check that
+complete distribution branch. Check that
 the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.4, evaluator 0.21.0 and
-the accepted source commit. This guide is also an assembly input: its presence
-in the source repository does not establish publication. Until the public ref
-matches, use the local distribution below for candidate qualification.
+the accepted source commit above. Public readback matched all 69 qualified files.
+Package installation, native session delivery and repository adoption are separate.
 
 **Codex**
 
@@ -78,8 +78,9 @@ selections. It bootstraps an unselected session and activates the actual checkou
 after cloning. Follow the packaged activation procedure for
 [Codex](packages/codex/verity-plane/skills/setup/SKILL.md#activate-the-checkout) or
 [Claude Code](packages/claude/verity-plane/skills/setup/SKILL.md#activate-the-checkout).
-Native qualification must match this package. Codex Windows desktop evidence
-remains unverified; no desktop support claim follows from the CLI results.
+Claude exact-release native qualification and Codex Windows desktop remain
+unverified. Their accepted qualification gaps do not establish public-route
+native results or verified desktop support.
 Both routes reject missing, changed or incompatible selected input. They grant no lifecycle authority and do not
 enforce all tool calls. Python must be available to the hook launcher; Codex
 requires review and trust of the current hook definition. Confirm delivery

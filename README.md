@@ -38,30 +38,30 @@ claude plugin install verity-plane@se-harness
 
 Start a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.
 
-The [0.20.1 evaluator / 0.2.3 plugin release package](docs/engineering/release-0-20-1/README.md)
-is published. The [public delivery evidence](docs/engineering/release-0-20-1/evidence/WO-RLS-029/README.md)
-records the exact package, both Windows CLI install/update routes and remaining
-delivery steps.
+The [0.21.0 evaluator / 0.2.4 plugin release package](docs/engineering/release-0-21-0/README.md)
+is published. The [public observations and limits](docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
+separate package installation, native session evidence and remaining delivery work.
 
-Observed public delivery (2026-10-01): Plugin **0.2.3** bundles released **SE Harness 0.20.1**. Public fresh-install and 0.2.2-to-0.2.3 update checks passed on both Windows CLIs. Native startup, manual compaction and resume evidence applies to the identical installed package, repository fixtures and host versions. See the [qualification and limits](docs/engineering/release-0-20-1/evidence/WO-RLS-029/README.md).
+Observed public delivery (2026-10-02): Plugin **0.2.4** bundles released **SE Harness 0.21.0**. Public fresh-install and 0.2.3-to-0.2.4 update checks passed on Codex CLI 0.159.2 and Claude Code 2.1.273. All 29 installed files match on each route. Offline setup and evaluator identity checks passed. These installation results do not establish native startup or compaction behavior.
 
 Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. It does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
 
-This maintenance release keeps the existing repository instruction layout.
-The work to move instructions and templates into the plugin remains unreleased.
+Existing repositories keep their selected release and layout until explicit adoption.
 
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
 
-## Successor candidate: fewer repository files
+## Released 0.21.0: fewer repository files
 
-The [0.21.0 release preparation](docs/engineering/release-0-21-0/README.md)
-selects plugin 0.2.4. Both remain unpublished. Instructions and templates move
-into the evaluator wheel; initialization writes only configuration and lock files.
+Instructions and templates now live in the selected evaluator wheel; default
+initialization writes only configuration and lock files.
 Plugin activation restores the selected checkout after compaction or resume.
-Codex Windows desktop remains unverified.
-See [migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-successor-candidate).
-Published 0.20.1/0.2.3 keeps the existing layout.
+Claude exact-release native qualification and Codex Windows desktop remain
+unverified. DEC-RLS-002 accepts those gaps for WO-RLS-032 only; public-route
+native evidence under WO-RLS-033 remains pending. This repository still uses 0.20.1.
+See [migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-0210).
+The published package retains its original pre-publication README wording;
+the current source guide records the observed release status.
 
 ## How it works today
 

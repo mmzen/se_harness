@@ -1,0 +1,69 @@
+{
+  "status": "pass",
+  "results": [
+    {
+      "status": "pass",
+      "host": "codex",
+      "kind": "fresh",
+      "public_revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+      "target": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\fresh-codex\\repository",
+      "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\fresh-codex\\data",
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\fresh-codex\\data\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "evaluator_version": "0.21.0",
+      "default_files": [
+        ".engineering-harness.lock",
+        ".engineering-harness.toml"
+      ],
+      "native_session_claim": false
+    },
+    {
+      "status": "pass",
+      "host": "codex",
+      "kind": "update",
+      "public_revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+      "target": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex\\repository",
+      "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex\\data",
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex\\data\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "evaluator_version": "0.21.0",
+      "default_files": [
+        ".engineering-harness.lock",
+        ".engineering-harness.toml"
+      ],
+      "native_session_claim": false
+    },
+    {
+      "status": "pass",
+      "host": "claude",
+      "kind": "fresh",
+      "public_revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+      "target": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\fresh-claude\\repository",
+      "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\fresh-claude\\data",
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\fresh-claude\\data\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "evaluator_version": "0.21.0",
+      "default_files": [
+        ".engineering-harness.lock",
+        ".engineering-harness.toml"
+      ],
+      "native_session_claim": false
+    },
+    {
+      "status": "pass",
+      "host": "claude",
+      "kind": "update",
+      "public_revision": "7e366438165a40a14783bac650a2887e7ec8bc75",
+      "target": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-claude\\repository",
+      "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-claude\\data",
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-claude\\data\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "evaluator_version": "0.21.0",
+      "default_files": [
+        ".engineering-harness.lock",
+        ".engineering-harness.toml"
+      ],
+      "native_session_claim": false
+    }
+  ]
+}

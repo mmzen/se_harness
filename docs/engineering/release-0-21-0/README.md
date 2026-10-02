@@ -1,10 +1,13 @@
-# Release 0.21.0 preparation
+# Release 0.21.0 delivery
 
-Human mmzen approved this package and required commit-bound verification on
-2026-10-01. WO-RLS-031 is in progress; WO-RLS-032/033 are approved and await their
-public inputs. The v0.21.0 publication request is retained. No final aggregate
-VREC, RLS, tag or public package has been created yet. This repository continues
-to use released evaluator 0.20.1.
+Human mmzen approved the package and required commit-bound verification.
+RLS-SEH-031 is released; evaluator 0.21.0 is published. VREC-PLG-030 verifies
+plugin 0.2.4 qualification, and the separately authorized marketplace update is
+public at `7e366438165a40a14783bac650a2887e7ec8bc75`. WO-RLS-033 is in progress.
+This repository continues to use released evaluator 0.20.1.
+
+[Current observations](evidence/WO-RLS-033/README.md) retain public package/setup
+results and the outstanding native, documentation and marker conditions.
 
 | Stage | Work order | Verification |
 | --- | --- | --- |
@@ -16,7 +19,7 @@ to use released evaluator 0.20.1.
 verification sequence and five delivery surfaces. Reuse accepted definitions and
 existing tools; no new product requirement, framework or approval artifact is added.
 
-## Review inputs
+## Historical preparation inputs
 
 - Proposed evaluator: 0.21.0. Proposed plugin: 0.2.4, after public maintenance 0.2.3.
 - Preparation base: f5f7c77c6eadfd7d6f1c68e136f1f7cc29cfc0a5.
@@ -27,18 +30,18 @@ existing tools; no new product requirement, framework or approval artifact is ad
   provider approval, marketplace publication and marker changes remain distinct.
 - Existing evaluator publication and repository-adoption requests are retained.
 
-## Unresolved qualification
+## Qualification limits
 
-VER-IAR-021 explicitly requires Codex Windows desktop native evidence. It remains
-unverified. CLI and app-server evidence do not substitute. This package keeps the
-criterion pending before release; it does not propose a waiver. Native checks may
-use existing authorized test authentication in disposable profiles.
+Claude exact-release native qualification and Codex Windows desktop remain unverified. DEC-RLS-002 accepts these gaps for WO-RLS-032 only; public-route native assessment under WO-RLS-033 remains pending.
+DEC-RLS-001 records the earlier evaluator-release desktop deviation. Neither
+decision establishes missing native evidence or changes the repository selection.
 
 ## Current observations
 
-On 2026-10-01, main is the merged implementation above. GitHub has no v0.21.0 tag
-or release; its latest release is v0.20.1. Existing VRECs accept their individual
-candidates. None is a final aggregate covering REL-SEH-033's complete member set.
-Current main host manifests still contain 0.2.2; the public 0.2.3 maintenance
-package is separate. WO-RLS-031 will select the new identity without rewriting
-either published package. Future build hashes and record IDs remain unallocated.
+Independent public marketplace readback matches all 69 qualified files. Fresh
+installation and updates from 0.2.3 match all 29 installed files on both Windows
+CLIs. Offline setup and exact evaluator identity checks pass on all four routes.
+Overall delivery remains incomplete while native public-route assessment,
+documentation verification/integration/readback and separately authorized release
+marker observations remain outstanding. Published package bytes and historical
+release evidence are unchanged.

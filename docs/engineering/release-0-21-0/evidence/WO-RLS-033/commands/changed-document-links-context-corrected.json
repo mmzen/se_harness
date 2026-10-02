@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-c",
+    "import json,re,posixpath\nfrom pathlib import Path\nfrom tests.plugin_integration.package_assembly.test_refresh_guidance import link_findings\nsources=json.loads('[\"README.md\", \"docs/engineering/README.md\", \"docs/engineering/instruction-architecture/README.md\", \"docs/engineering/plugin-integration/README.md\", \"docs/engineering/release-0-21-0/README.md\", \"docs/engineering/release-0-21-0/work-orders/WO-RLS-033.md\", \"docs/notes/developing-se-harness.md\", \"docs/notes/harness-installation-and-upgrades.md\", \"docs/notes/plugin-installation-guide.md\", \"docs/notes/plugin-marketplace-publication.md\", \"docs/notes/release-delivery-completion.md\", \"plugins/verity-plane/claude-code/README.md\", \"plugins/verity-plane/codex/README.md\"]')\nsources=[p for p in sources if not p.startswith('plugins/verity-plane/')]\nsources.append('docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md')\nfiles={p:Path(p).read_bytes() for p in sources}\nfor source in sources:\n for target in re.findall(r\"\\[[^]]*\\]\\(([^)]+)\\)\",files[source].decode()):\n  if re.match(r\"(?:https?://|mailto:|#)\",target):continue\n  p=posixpath.normpath(posixpath.join(posixpath.dirname(source),target.split('#')[0]))\n  if Path(p).is_file():files[p]=Path(p).read_bytes()\n  elif Path(p).is_dir():files[p]=b''\nfindings=link_findings(files,sources)\nprint(json.dumps({'sources':sources,'findings':findings,'passed':not findings}))\nraise SystemExit(bool(findings))\n"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "sources": [
+      "README.md",
+      "docs/engineering/README.md",
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/release-0-21-0/README.md",
+      "docs/engineering/release-0-21-0/work-orders/WO-RLS-033.md",
+      "docs/notes/developing-se-harness.md",
+      "docs/notes/harness-installation-and-upgrades.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "docs/notes/release-delivery-completion.md",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md"
+    ],
+    "findings": [],
+    "passed": true
+  },
+  "seconds": 0.24844319999829168
+}

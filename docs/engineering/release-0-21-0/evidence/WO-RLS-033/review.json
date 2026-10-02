@@ -1,0 +1,34 @@
+{
+  "reviewer": "Codex",
+  "scope": "WO-RLS-033 current documentation; local review, not human assurance",
+  "status": "pending required native evidence",
+  "resolved": [
+    {
+      "finding": "Source guides still claimed 0.21.0/0.2.4 was unpublished.",
+      "resolution": "Updated approved current guides to the observed public identities and retained native limits."
+    },
+    {
+      "finding": "Minimal setup paths and skill-copy instructions described the previous installation layout.",
+      "resolution": "Documented the returned immutable evaluator path, two-file init and separate adoption; four public packages passed these operations."
+    },
+    {
+      "finding": "One previous heading link failed after its title changed.",
+      "resolution": "Preserved explicit compatibility anchors and taught both approved documentation test helpers to recognize them. Original failed run and passing 28-test rerun retained."
+    }
+  ],
+  "unresolved": [
+    {
+      "finding": "Published package READMEs contain pre-publication wording.",
+      "effect": "Source corrections do not alter published package bytes. A later qualified publication is needed to correct the distributed text."
+    },
+    {
+      "finding": "docs/notes/getting-started.md still calls the minimal layout a successor candidate.",
+      "effect": "Outside WO-RLS-033 permitted paths; retained as an unassessed observation. Existing link remains valid through its compatibility anchor."
+    },
+    {
+      "finding": "Required native public-route matrix is incomplete.",
+      "effect": "Work remains in_progress; no verification acceptance or completion inferred."
+    }
+  ],
+  "simplicity": "Uses the existing native CLIs, setup helper, documentation checks and delivery checker. No product framework, runtime or policy change."
+}

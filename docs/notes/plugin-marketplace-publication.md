@@ -1,22 +1,15 @@
 # Prepare and publish the Verity Plane marketplace
 
-The [0.20.1 release package](../engineering/release-0-20-1/README.md) selects
-plugin 0.2.3. WO-RLS-028 covers assembly and local qualification, verified in
-VREC-PLG-027. WO-RLS-029 covers public observations and current documentation.
-Their verification contracts and separate external decisions govern delivery.
-Plugin 0.2.3 with evaluator 0.20.1 is public at
-`556d0faf83c32fd188409c5ba191552fad1522e1`.
-The [public installation evidence](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md)
-records the complete tree comparison and both hosts' fresh/update routes.
-Documentation integration and final closeout require their own observations.
+The [0.21.0 release package](../engineering/release-0-21-0/README.md) is published
+with plugin 0.2.4. VREC-PLG-030 verifies local package qualification. Human mmzen
+separately authorized marketplace publication at
+`7e366438165a40a14783bac650a2887e7ec8bc75`. Independent public readback matches all
+69 qualified files and the exact public evaluator 0.21.0 wheel.
 
-## Selected next delivery: 0.21.0 / 0.2.4
-
-[REL-SEH-033](../engineering/release-0-21-0/release/REL-SEH-033.md) governs the
-new release. WO-RLS-031 prepares the final evaluator candidate. After its wheel
-is independently public, WO-RLS-032 assembles and qualifies plugin 0.2.4;
-WO-RLS-033 owns public routes and current documentation. Neither version is
-published yet. Keep the observed 0.20.1/0.2.3 receipt above as history.
+[WO-RLS-033 observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
+record passing public fresh installs and updates from 0.2.3 on both Windows CLIs.
+Native public-route criteria, documentation integration and delivery closeout remain
+pending. Claude exact-release native qualification and Codex Windows desktop remain unverified. DEC-RLS-002 accepts these gaps for WO-RLS-032 only; public-route native assessment under WO-RLS-033 remains pending.
 
 ## Assemble committed inputs
 
@@ -70,8 +63,9 @@ For a newly planned delivery, use the
 [release delivery handoff](release-delivery-completion.md#perform-and-retain-each-handoff).
 Evaluator publication leaves plugin assembly, qualification and separately
 authorized marketplace publication pending with an owner and next action.
-For the next delivery the selected inputs are plugin 0.2.4 and evaluator
-0.21.0. Wait for that evaluator's independent public availability before assembly.
+For this delivery the published inputs are plugin 0.2.4 and evaluator
+0.21.0. The public-wheel prerequisite and authorized marketplace publication have
+completed; public-route qualification and documentation closeout remain separate.
 Track all five surfaces in the release delivery plan. Local package
 qualification does not close delivery or establish the public branch state.
 

@@ -2,23 +2,22 @@
 
 ## Current instruction architecture
 
-Public SE Harness 0.20.1 keeps the compact `ENGINEERING_HARNESS.md` entry and
-action-selected guides under `docs/engineering/harness/`. `AGENTS.md` belongs
-entirely to the repository owner. The evaluator supplies lifecycle results and
-instruction discovery. [Plugin 0.2.3 public evidence](../release-0-20-1/evidence/WO-RLS-029/README.md)
-covers delivery of this maintenance package.
+Public SE Harness 0.21.0 supplies the compact entry, conditional procedures and
+templates from its selected wheel. Default initialization writes two selection
+files. Plugin 0.2.4 supplies bootstrap and explicit per-session activation.
+`AGENTS.md` remains entirely repository-owned. The evaluator supplies lifecycle
+results and instruction discovery. [Public observations and limits](../release-0-21-0/evidence/WO-RLS-033/README.md)
+distinguish package installation from native delivery.
 
 This repository selects evaluator 0.20.1 under WO-HUP-025, following the
 separate 0.20.0 adoption under WO-HUP-024. The cleanup refinements were introduced in the
 [0.20.0 release](../release-0-20-0/README.md); subsequent cleanup records below
 retain their own scope and decisions.
 
-The external instruction resources and minimal layout are merged but unreleased.
-DEC-IAR-004's compatibility release and separate adoption have completed.
-[REL-SEH-033](../release-0-21-0/release/REL-SEH-033.md) now selects final 0.21.0
-qualification and plugin 0.2.4 delivery. Earlier VRECs retain their exact candidate
-claims. Codex Windows desktop evidence remains pending under VER-IAR-021.
-This release preparation does not remove the repository's installed root guide.
+The external instruction resources and minimal layout are published in 0.21.0.
+DEC-IAR-004's compatibility release and separate adoption remain historical steps.
+Earlier VRECs retain their exact candidate claims. Claude exact-release native qualification and Codex Windows desktop remain unverified. DEC-RLS-002 accepts these gaps for WO-RLS-032 only; public-route native assessment under WO-RLS-033 remains pending.
+Publication does not remove this repository's installed root guide; adoption is separate.
 
 ## Historical architecture packets
 
