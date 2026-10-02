@@ -2,7 +2,7 @@
 id = "WO-RLO-014"
 type = "work_order"
 title = "Implement complete-release authority and package preparation"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -75,6 +75,13 @@ to = "in_progress"
 decided_at = "2026-10-02T20:19:17Z"
 decided_by = "Codex agent"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Start approved implementation after passing start preflight; mmzen approved package, required verification and bounded review PR."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T21:11:51Z"
+decided_by = "Codex agent"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Implement complete-release authority and package preparation

@@ -2,6 +2,21 @@
   "archive": "implementation-checks.zip",
   "files": [
     {
+      "file": "completed-pr-scope.json",
+      "sha256": "38eafaa9b849b851efac8bc1252fb71b09bac9249ba2d17cf720167b65b12ad4",
+      "bytes": 5615
+    },
+    {
+      "file": "completion-applied.json",
+      "sha256": "75f9b90e112437295fd8212fd68455a46e4136ece6b6716ea783e5bfb3d68c31",
+      "bytes": 24230
+    },
+    {
+      "file": "completion-preview.json",
+      "sha256": "9bded1fe1c3b867e307d5a03b6b1bcf610284b634d17735e86fdc2ac3222f2e3",
+      "bytes": 24242
+    },
+    {
       "file": "final-recovery.run.json",
       "sha256": "4a1ecf5651bb11e413631608c94bd7cf6c942e8f3f7bb55f9eb68e23a95ec700",
       "bytes": 546
@@ -30,6 +45,26 @@
       "file": "linux-verification.json",
       "sha256": "8d20d295bfcc54f6829b13ef27a8bdb7cc8fcb53923dd37424fee42091d508f0",
       "bytes": 11599
+    },
+    {
+      "file": "preflight-review014.json",
+      "sha256": "11a08b867102e1d80056a6518b96270cf61327906ba7574ce907ffdd3b5e6268",
+      "bytes": 1508
+    },
+    {
+      "file": "preflight-review015.json",
+      "sha256": "927da0dfc06c23f19857fbb4fb1365fbed6bd749a8734e5e0b94c2b94aa9aa22",
+      "bytes": 1583
+    },
+    {
+      "file": "preflight-review016.json",
+      "sha256": "87a5354b69a82deb502f8249c2e6305248c380d7de3225384ff62bc1c3a6c6ea",
+      "bytes": 1433
+    },
+    {
+      "file": "projected-WO-RLO-016-handoff.json",
+      "sha256": "d851a64597f9537a080369ad63ee1b50f35b2ee8f4e7c9dd06bba58e45fbf085",
+      "bytes": 21959
     },
     {
       "file": "WO-RLO-016-approval.json",

@@ -1,0 +1,6 @@
+{
+  "human": "mmzen",
+  "response": "Approve correction and required verification",
+  "decision": "Human repository owner mmzen answered \"Approve correction and required verification\" to the exact WO-RLO-017 scope correction. This permits the selected evaluator fixed VREC-RLO-014 evaluator JSON destination, the matching record and correction evidence, required commit-bound verification under VER-RLO-011, and inclusion in existing draft PR #527 from work/complete-release-approval to mmzen/se_harness:main, including its later verification-decision update. Human verification, merge, actual releases and live provider changes remain separate.",
+  "reviewed_sha256": "a0d41a1e53a31f5c9956e6d0f113ac85cf1f90e50dbcff13305b4622c87836b6"
+}

@@ -2,7 +2,7 @@
 id = "WO-RLO-015"
 type = "work_order"
 title = "Automate complete delivery and safe recovery"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -74,6 +74,13 @@ to = "in_progress"
 decided_at = "2026-10-02T20:28:34Z"
 decided_by = "Codex agent"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Start under mmzen approved package; WO-RLO-014 staging interfaces implemented and 19 package tests pass."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T21:11:51Z"
+decided_by = "Codex agent"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Automate complete delivery and safe recovery

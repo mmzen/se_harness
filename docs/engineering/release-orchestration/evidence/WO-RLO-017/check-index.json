@@ -1,0 +1,90 @@
+{
+  "archive": "implementation-checks.zip",
+  "files": [
+    {
+      "file": "capture-output-scope.json",
+      "sha256": "782e4f19ea8dccb9947d7f5b0ec8e0e79d45bfa09551142f3af754953abea0cc",
+      "bytes": 19543
+    },
+    {
+      "file": "completed-pr-scope.json",
+      "sha256": "38eafaa9b849b851efac8bc1252fb71b09bac9249ba2d17cf720167b65b12ad4",
+      "bytes": 5615
+    },
+    {
+      "file": "completion-applied.json",
+      "sha256": "75f9b90e112437295fd8212fd68455a46e4136ece6b6716ea783e5bfb3d68c31",
+      "bytes": 24230
+    },
+    {
+      "file": "completion-preview.json",
+      "sha256": "9bded1fe1c3b867e307d5a03b6b1bcf610284b634d17735e86fdc2ac3222f2e3",
+      "bytes": 24242
+    },
+    {
+      "file": "correction-review-preflight.json",
+      "sha256": "2ff3f767efb1e76f9ee81b81eda1b676e0b4c14b102b8cbc861552931a4aaf03",
+      "bytes": 1564
+    },
+    {
+      "file": "correction-start-apply.json",
+      "sha256": "14e0792f59009bf3a87cf9b216cceedf6ad56200a9d91ae4d543baf7dcb909d7",
+      "bytes": 18217
+    },
+    {
+      "file": "correction-start-preflight.json",
+      "sha256": "470f565e705fd2fa5959ad904810639fd4d0819b90d65b0830813791130104c4",
+      "bytes": 1560
+    },
+    {
+      "file": "correction-start-preview.json",
+      "sha256": "2d842f517bfd7d68eea199bb345710f2c33e75632edfe87b8401dafaf33aeca8",
+      "bytes": 18229
+    },
+    {
+      "file": "output-approval-apply.json",
+      "sha256": "2c7d0bf165aad3cf358c2feda1c0893f806aa2f1df700a052319452c68feaf9a",
+      "bytes": 16026
+    },
+    {
+      "file": "output-approval-preview.json",
+      "sha256": "df20354242f8393cc0937b408ed61575e63bd58d9683881d7e910b2ecd87f432",
+      "bytes": 16038
+    },
+    {
+      "file": "output-correction-created.json",
+      "sha256": "2253c65dc4efdafa6591a2581a28783a503ca002137f4571e37161038293b6ba",
+      "bytes": 276
+    },
+    {
+      "file": "output-correction-preview.json",
+      "sha256": "321e26a55c0352f9d4aafa7413661f329fc0df32c715634188b45e4f6134b802",
+      "bytes": 308
+    },
+    {
+      "file": "output-correction-validation.json",
+      "sha256": "d04a39885c75f940c2847f198de76bd4cbef90deb22ff968e85a746e994d5766",
+      "bytes": 371467
+    },
+    {
+      "file": "preflight-review014.json",
+      "sha256": "11a08b867102e1d80056a6518b96270cf61327906ba7574ce907ffdd3b5e6268",
+      "bytes": 1508
+    },
+    {
+      "file": "preflight-review015.json",
+      "sha256": "927da0dfc06c23f19857fbb4fb1365fbed6bd749a8734e5e0b94c2b94aa9aa22",
+      "bytes": 1583
+    },
+    {
+      "file": "preflight-review016.json",
+      "sha256": "87a5354b69a82deb502f8249c2e6305248c380d7de3225384ff62bc1c3a6c6ea",
+      "bytes": 1433
+    },
+    {
+      "file": "projected-WO-RLO-017-handoff.json",
+      "sha256": "5765279f46a6e5e8ec4ec1f87ea07217d302cc997d6186515ac0cdf17b8f8eaa",
+      "bytes": 20016
+    }
+  ]
+}

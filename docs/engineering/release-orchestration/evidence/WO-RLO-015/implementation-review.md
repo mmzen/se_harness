@@ -25,14 +25,14 @@ The existing 0.21.0 evaluator continues to govern this work.
 | ONE02 | CompleteReleaseTests, delivery-plan tests and real Git resolver fixture pass. Legacy inputs retain their original route; changed plans, source, destination, action or human binding refuse. |
 | ONE03 | Staging/legacy package tests pass on Windows and Linux. Candidate source tree, recipe, manifest and wheel are checked without a released RLS. Both native formats remain unchanged. |
 | ONE04 | Inert Git marketplace fixtures pass exact-tree and public-wheel comparisons; later governance changes do not rebuild staged packages. Mismatches stop before writes. |
-| ONE05 | Existing publisher/qualification/maintenance/Pages tests and all five delivery-surface fixtures pass. The existing Publication Rehearsal now includes these credential-free delivery tests. Hosted PR checks are pending at this review snapshot. |
+| ONE05 | Existing publisher/qualification/maintenance/Pages tests and all five delivery-surface fixtures pass. The existing Publication Rehearsal now includes these credential-free delivery tests. All 19 hosted PR checks pass at `91542b8a1b3ed39096c8a6d8620be9003c1ba037`; see `hosted-ci.json`. |
 | ONE06 | Interrupted marketplace and marker tests preserve completed effects. Unknown HTTP responses are not treated as absence. Unexpected refs stop; matching replay does not duplicate writes. |
 | ONE07 | Workflow boundary tests pass. Candidate code stays outside credential jobs. The WO-RLO-016 directory contains read-only control snapshots and a reviewer-only proposal/recovery. Live PyPI account-side binding remains unverified. |
 | ONE08 | Legacy plan/record tests and incomplete observation fixtures pass. Marker readiness is distinct from full completion. The source guide states the separate release/adoption/activation prerequisites. |
 
 `implementation-checks.zip` and `check-index.json` retain raw results, commands,
 exits and digests, including failures. Linux tests at the source commit above pass
-the focused suite, package staging and full suite. Windows full source tests pass
+the focused suite (141 tests), package staging (34 tests) and full suite (1,255 tests, 2 skips). Windows full source tests pass
 (1,254 tests, 22 skips), with the subsequent provider-observation correction covered
 by 112 focused tests. Final capture will run tests again at its exact committed
 candidate. Platform skips remain visible in raw results.
@@ -72,3 +72,21 @@ GitHub latest-release updates have no compare-and-swap endpoint. The workflow
 serializes its complete-delivery writers and checks/readbacks the expected value;
 other writers must not move markers concurrently. `last` uses an exact Git lease.
 Historical grants and published bytes retain their original meaning.
+
+## Final preparation review
+
+All 19 hosted checks on the implementation/evidence commit `91542b8a1b3ed39096c8a6d8620be9003c1ba037` pass,
+including Windows/Linux upgrade and package rehearsals, candidate and historical
+release qualification, complete delivery/recovery rehearsal, validation and CodeQL.
+Later candidate changes contain only retained evidence and explicit lifecycle records.
+The final capture reruns the full suite at the exact candidate it records.
+
+The first handoff packet edit converted the generated header to CRLF. The evaluator
+refused it. Supported evidence rebinding restored the header; owner-authored prose
+now preserves its machine bytes and the combined handoff passes.
+
+The approved preparation scope also had the evaluator JSON in the wrong directory.
+The 0.21.0 evaluator has a fixed `evidence/VREC-RLO-014-evaluator.json` destination.
+The scope refusal is retained. Mmzen approved WO-RLO-017 and required verification
+to cover only that destination, its matching record and correction evidence. The
+earlier work orders and accepted definitions retain their original content/history.

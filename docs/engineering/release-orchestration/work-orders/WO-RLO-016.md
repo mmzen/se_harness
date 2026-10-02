@@ -2,7 +2,7 @@
 id = "WO-RLO-016"
 type = "work_order"
 title = "Prepare the provider configuration and rollout review"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -53,6 +53,13 @@ to = "in_progress"
 decided_at = "2026-10-02T20:19:17Z"
 decided_by = "Codex agent"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Start approved read-only configuration and rollout review after passing start preflight; no live setting change."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T21:11:51Z"
+decided_by = "Codex agent"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Prepare the provider configuration and rollout review
