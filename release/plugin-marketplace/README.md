@@ -1,16 +1,18 @@
 # Verity Plane marketplace
 
 Verity Plane brings SE Harness setup, orientation, change and evidence workflows
-to Codex and Claude Code. Plugin **0.2.2** selects **SE Harness 0.20.0** and five
-skills, including an explicitly requested operator brief. Release assembly
-requires that evaluator's independently published wheel and released record.
+to Codex and Claude Code. Plugin **0.2.4** selects **SE Harness 0.21.0** and five
+skills, including an explicitly requested operator brief. These are the approved
+release inputs; they are not published yet. Release assembly requires the
+independently public 0.21.0 wheel and its released record. The currently public
+maintenance package remains plugin 0.2.3 with evaluator 0.20.1.
 
 ## Install from Git
 
 These commands select the `plugin-marketplace` distribution branch of
 `mmzen/se_harness`. The development branch contains assembly inputs; install the
 complete distribution branch. Before expecting this version from Git, check that
-the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.2, evaluator 0.20.0 and
+the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.4, evaluator 0.21.0 and
 the accepted source commit. This guide is also an assembly input: its presence
 in the source repository does not establish publication. Until the public ref
 matches, use the local distribution below for candidate qualification.
@@ -70,11 +72,14 @@ claude plugin install verity-plane@se-harness
 ## Instruction delivery
 
 This package includes native startup and post-compaction instruction hooks.
-Published plugin 0.2.2 reads the selected repository's `ENGINEERING_HARNESS.md`.
-The successor adapter resolves the entry from its exact selected wheel for the
+Plugin 0.2.4 resolves the entry from its exact selected wheel for the
 external-resource layout, while retaining the repository-copy route for older
 selections. It bootstraps an unselected session and activates the actual checkout
-after cloning. See the [session procedure](../../docs/notes/plugin-installation-guide.md#successor-candidate-clone-activate-and-resume).
+after cloning. Follow the packaged activation procedure for
+[Codex](packages/codex/verity-plane/skills/setup/SKILL.md#activate-the-checkout) or
+[Claude Code](packages/claude/verity-plane/skills/setup/SKILL.md#activate-the-checkout).
+Native qualification must match this package. Codex Windows desktop evidence
+remains unverified; no desktop support claim follows from the CLI results.
 Both routes reject missing, changed or incompatible selected input. They grant no lifecycle authority and do not
 enforce all tool calls. Python must be available to the hook launcher; Codex
 requires review and trust of the current hook definition. Confirm delivery

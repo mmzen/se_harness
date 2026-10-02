@@ -14,6 +14,15 @@ the plugin-owned minimal layout remain separate work.
 The [0.2.2 public delivery report](../release-0-20-0/evidence/WO-PLG-031/README.md)
 retains that version's observations unchanged.
 
+## Approved next package: plugin 0.2.4
+
+The [0.21.0 release package](../release-0-21-0/README.md) selects the merged
+bootstrap, session activation and external-resource adapter. WO-RLS-031 updates
+the source manifests and qualifies the final candidate. WO-RLS-032 requires
+the public 0.21.0 wheel before marketplace assembly. WO-RLS-033 verifies actual
+public fresh/update routes. The new package is not published. Codex Windows
+desktop remains an unverified requirement, separate from native CLI evidence.
+
 ## Historical marketplace refresh for plugin 0.2.1
 
 [WO-PLG-026](work-orders/WO-PLG-026.md) prepares plugin 0.2.1 with the unchanged

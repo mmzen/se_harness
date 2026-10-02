@@ -7,8 +7,10 @@ is a separate, explicit `harnessctl upgrade --apply` operation.
 
 The published 0.20.1 layout and the successor candidate layout are separate.
 This repository uses released 0.20.1, adopted under WO-HUP-025. Candidate
-examples below are for qualification until a release and a separate
-adoption of the minimal layout are authorized.
+examples below are for qualification during the
+[0.21.0 release preparation](../engineering/release-0-21-0/README.md).
+Public release, native replacement-delivery review and the separately approved
+adoption must complete before applying this layout here.
 
 ## Minimal installation (successor candidate)
 

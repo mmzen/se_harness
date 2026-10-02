@@ -7,6 +7,15 @@ See the [public confirmation evidence](../engineering/release-0-20-1/evidence/WO
 for commands, exact native-evidence comparisons and limits.
 Installing this plugin does not upgrade a project's selected harness.
 
+## Next release: 0.21.0 / 0.2.4
+
+The [approved release package](../engineering/release-0-21-0/README.md) prepares
+evaluator 0.21.0 and plugin 0.2.4. They are not public yet. The public commands
+and legacy setup example below still describe 0.20.1/0.2.3. Candidate activation
+is described in the successor section. WO-RLS-032 qualifies the new package;
+WO-RLS-033 will check public fresh installation and update from 0.2.3 before
+current availability claims change. Codex Windows desktop evidence is pending.
+
 ## Select the distribution
 
 For the currently published tree, follow its

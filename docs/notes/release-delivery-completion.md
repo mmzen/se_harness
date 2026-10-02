@@ -257,6 +257,14 @@ the required marketplace update remains absent. That case returns incomplete
 and retains the marketplace owner and next action. Live public qualification
 belongs to the subsequent marketplace work and its verification contract.
 
+## Next 0.21.0 delivery
+
+The [approved release package](../engineering/release-0-21-0/README.md) assigns
+candidate preparation to WO-RLS-031, public-wheel plugin 0.2.4 qualification and
+marketplace delivery to WO-RLS-032, and public-route/documentation closeout to
+WO-RLS-033. All five surfaces require new matching observations. No publication
+or complete-delivery result is claimed. The existing 0.20.1 receipts stay intact.
+
 ## Current 0.20.1 delivery
 
 The [release package](../engineering/release-0-20-1/README.md) selects plugin

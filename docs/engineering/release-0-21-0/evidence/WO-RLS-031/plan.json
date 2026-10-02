@@ -1,0 +1,107 @@
+{
+  "schema": "se-harness-delivery-plan/v1",
+  "release": {
+    "contract": "REL-SEH-033",
+    "record": null,
+    "version": "0.21.0",
+    "wheel_sha256": null
+  },
+  "review": {
+    "by": "mmzen",
+    "reference": "Approved REL-SEH-033 and WO-RLS-031/032/033 on 2026-10-01: Approve package and required verification."
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness/releases/tag/v0.21.0",
+      "work_reference": "WO-RLS-031",
+      "next_action": "Qualify final C, obtain human verification and exact RLS decision, integrate then invoke the protected publisher.",
+      "expected": {
+        "record": null,
+        "version": "0.21.0",
+        "wheel_sha256": null
+      },
+      "required_observations": [
+        "publisher",
+        "public_install"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+      "work_reference": "WO-RLS-032",
+      "next_action": "After the public wheel, assemble and qualify exact plugin 0.2.4; obtain exact marketplace authority before descendant publication.",
+      "expected": {
+        "plugin_version": "0.2.4",
+        "source_commit": null,
+        "evaluator_version": "0.21.0",
+        "wheel_sha256": null,
+        "public_revision": null,
+        "codex_content_sha256": null,
+        "claude-code_content_sha256": null
+      },
+      "required_observations": [
+        "assembly",
+        "qualification",
+        "public_ref",
+        "codex_fresh_install",
+        "codex_update",
+        "claude-code_fresh_install",
+        "claude-code_update"
+      ],
+      "hosts": [
+        "codex",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "WO-RLS-033",
+      "next_action": "Verify public routes and update current claims; read merged public documents back.",
+      "expected": {
+        "commit": null
+      },
+      "required_observations": [
+        "claims_review",
+        "links"
+      ]
+    },
+    {
+      "id": "demonstration",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://mmzen.github.io/se_harness/",
+      "work_reference": "WO-RLS-033",
+      "next_action": "Observe the authorized released-RLS deployment and its exact provenance.",
+      "expected": {
+        "governance_commit": null
+      },
+      "required_observations": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "release_markers",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "WO-RLS-033",
+      "next_action": "After the publication observation window, obtain exact latest/last authority and retain target readback.",
+      "expected": {
+        "latest": "v0.21.0",
+        "last": null
+      },
+      "required_observations": [
+        "authorization",
+        "readback"
+      ]
+    }
+  ]
+}

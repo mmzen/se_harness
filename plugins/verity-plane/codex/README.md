@@ -1,6 +1,6 @@
 # Verity Plane
 
-Verity Plane 0.2.2 exposes shared skills through the host's native skill discovery.
+Verity Plane 0.2.4 exposes shared skills through the host's native skill discovery.
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
@@ -15,9 +15,12 @@ changed, incompatible or oversized input reports a delivery gap without fallback
 Setup retains separate immutable evaluator environments outside repositories.
 Activation immediately returns the complete entry; it grants no lifecycle authority.
 
-This source is under WO-IAR-029 qualification. Existing 0.2.2 publication evidence
-does not qualify the new adapter. Native desktop, automatic compaction, resume and
-parallel-session claims require their own retained observations in VER-IAR-021.
+This source is selected for the 0.21.0 release under REL-SEH-033. Plugin 0.2.4
+is not published yet; the current public maintenance package is 0.2.3 with
+evaluator 0.20.1. WO-RLS-031 checks the final candidate. WO-RLS-032 qualifies
+the package after the public 0.21.0 wheel exists. Native delivery, automatic
+compaction, resume and parallel sessions require matching VER-IAR-021 evidence.
+Codex Windows desktop remains unverified and is a pending release criterion.
 Development archives cannot establish release or marketplace eligibility.
 Python 3.11+ must be available to the hook launcher. Codex also requires the
 user to trust the plugin's reviewed hooks. Real host settings are not changed by

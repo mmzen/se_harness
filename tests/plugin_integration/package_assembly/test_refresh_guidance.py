@@ -1,4 +1,4 @@
-"""Check REL-SEH-031 candidate inputs and the separately observed public delivery."""
+"""Check REL-SEH-033 candidate inputs and the separately observed public delivery."""
 from copy import deepcopy
 import json
 import posixpath
@@ -8,9 +8,9 @@ import tomllib
 import unittest
 
 ROOT = Path(__file__).resolve().parents[3]
-# Candidate identities come from approved REL-SEH-031, not candidate output.
-PLUGIN = "0.2.2"
-CANDIDATE_EVALUATOR = "0.20.0"
+# Candidate identities come from approved REL-SEH-033, not candidate output.
+PLUGIN = "0.2.4"
+CANDIDATE_EVALUATOR = "0.21.0"
 # Published identities come from RLS-SEH-030 and independent public readback.
 EVALUATOR = "0.20.1"
 WHEEL_SHA = "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
