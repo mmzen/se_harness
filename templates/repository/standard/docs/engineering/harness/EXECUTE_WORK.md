@@ -246,7 +246,10 @@ harnessctl check REPO --artifact WO-ID --json
 blocked. Completion does not verify, release, or deliver the result.
 
 **Later use:** Work requiring commit-bound verification proceeds to
-“Verify the outcome.” An implemented work order (WO) classified `not_required`
+[Verify the outcome](VERIFY_OUTCOME.md#establish-the-verification-scope).
+After preparation, use the [verification request](VERIFY_OUTCOME.md#obtain-the-humans-verification-decision)
+when the ready record is eligible. The completion report introduces no
+additional human approval. An implemented work order (WO) classified `not_required`
 needs no new verification record (VREC); follow its actual next action and
 any separately authorized delivery instruction.
 
