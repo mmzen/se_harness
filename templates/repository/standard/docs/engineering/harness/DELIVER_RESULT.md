@@ -33,6 +33,13 @@ no external action.
 
 ## Procedure
 
+Publishing a branch and draft PR for human verification follows
+[Publish the review package](PULL_REQUEST.md#publish-the-review-package).
+Its declared `PROC-REVIEW-PUBLISH` path accepts a ready VREC and does not
+authorize merge. The later integration path retains its verified-coverage
+checks. Reuse the explicit publication grant from work approval while its
+scope and destination still match.
+
 ### Select the delivery action
 
 **Inputs:** The requested delivery, selected work or verification record,
@@ -134,7 +141,7 @@ harnessctl check REPO --artifact ARTIFACT-ID --checkpoint pre-action --procedure
 ```
 
 Use only the procedure selected by the evaluator or one of its declared
-alternatives, such as `PROC-REPOSITORY-INTEGRATION` or `PROC-EXTERNAL-ACTION`
+alternatives, such as `PROC-REVIEW-PUBLISH`, `PROC-REPOSITORY-INTEGRATION` or `PROC-EXTERNAL-ACTION`
 when offered. Include any further change-set inputs required by that procedure.
 This check does not authenticate a human decision or prove external controls.
 

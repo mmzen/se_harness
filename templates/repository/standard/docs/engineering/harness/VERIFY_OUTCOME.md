@@ -169,6 +169,12 @@ and evidence, or capture reports a specific refusal. Preparation is not verifica
 
 ### Obtain the human's verification decision
 
+For work delivered through a PR, first complete
+[Publish the review package](PULL_REQUEST.md#publish-the-review-package).
+Do not request verification before the exact remote review package is confirmed.
+Use the evaluator's declared review-publication alternative, not its later
+integration path. Local-only work does not acquire a PR requirement.
+
 **Inputs:** The ready verification record (VREC), candidate commit, evidence
 digests, assessment results, and accountable human's verification authority.
 
@@ -215,8 +221,11 @@ A passed check is not the human decision.
   when the evidence supports it.
 - **Your decision:** Explain that "Verify result" accepts this exact candidate
   against the agreed requirements. Merge and release remain separate decisions.
-- **Review details:** Identify the exact VREC and full candidate commit. Link
-  its governing work orders, verification contracts, assessment, and evidence.
+- **Review details:** For PR-based work, show the confirmed PR URL prominently.
+  Identify the exact VREC and full candidate commit. Link its governing work
+  orders, verification contracts, assessment, and evidence at the remote review
+  commit so the owner can read them without access to the workstation.
+  Local-only work uses its available review locations.
 
 Lead with ordinary language and keep the request proportionate to the work.
 Details may be linked, but material gaps and the decision's scope must be
@@ -283,7 +292,9 @@ the old record; do not rewrite its candidate or evidence to match a new result.
 **Completion:** The selected verification record (VREC) has the recorded
 decision. Referenced work orders (WO) and release records (RLS) remain unchanged.
 
-**Later use:** Eligible verified coverage supports the selected delivery path.
+**Later use:** For PR-based work, [Publish the verification decision](PULL_REQUEST.md#publish-the-verification-decision)
+as the final commit under the existing grant. Eligible verified coverage
+supports the selected delivery path.
 A rejection or supersession follows the evaluator's remediation or selection
 procedure; it does not authorize new implementation scope.
 

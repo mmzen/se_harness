@@ -122,6 +122,31 @@ remaining execution and report the missing historical grant and the lack of
 a supported amendment operation. Do not insert invented grant fields or
 rewrite the old approval.
 
+## Review publication authority
+
+For work delivered through a PR, request the review-publication grant explicitly
+with work approval. Name the selected work, destination repository, source
+branch and target branch. The grant covers pushing that bounded work and its
+evidence, creating or updating its draft PR, pushing the later recorded
+verification decision, and marking the PR ready after that decision is remote.
+One human reply may approve implementation and these publication actions.
+Ordinary work approval alone does not supply the publication grant.
+
+The final commit is not known at work approval. Before each external operation,
+resolve its full commit and check that the changed content, selected records,
+branch and destination remain within the granted scope. Preserve required
+gates and provider controls. Reuse the grant while those conditions match.
+Obtain only missing authority; a changed destination or scope is not covered.
+Record the actual grant in the existing decision envelope and transition reason,
+not a new authority file. Historical approvals keep their original meaning.
+
+Review publication leaves the VREC ready. It grants no verification, merge,
+force-push, release, tag or deployment authority. The human decides verification
+after the review package is accessible. Publishing that recorded decision uses
+the existing grant; it does not turn verification into permission to merge.
+Follow [Publish the review package](PULL_REQUEST.md#publish-the-review-package)
+and [Publish the verification decision](PULL_REQUEST.md#publish-the-verification-decision).
+
 <!-- Migration requirement: the released machine contract still contains
 legacy owner labels. Preserve its decision-right IDs and actual human
 identities. Update machine labels and their consumers in the governed release

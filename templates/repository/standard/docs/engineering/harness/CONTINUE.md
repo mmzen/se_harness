@@ -58,6 +58,7 @@ the released procedure IDs, not an independent rule for selecting one:
 | `PROC-FOCUS-SELECTED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |
 | `PROC-FOCUS-RELATED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |
 | `PROC-VREC-DECIDE` | [VERIFY_OUTCOME.md#obtain-the-humans-verification-decision](VERIFY_OUTCOME.md#obtain-the-humans-verification-decision) |
+| `PROC-REVIEW-PUBLISH` | [PULL_REQUEST.md#publish-the-review-package](PULL_REQUEST.md#publish-the-review-package) |
 | `PROC-VREC-REJECT` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |
 | `PROC-VREC-SUPERSEDE` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |
 | `PROC-DELIVERY-SELECT` | [DELIVER_RESULT.md#select-the-delivery-action](DELIVER_RESULT.md#select-the-delivery-action) |
@@ -99,6 +100,7 @@ maps selected identifiers; it does not select an action or authorize its executi
 | `STEP-FOCUS-SELECTED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |
 | `STEP-FOCUS-RELATED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |
 | `STEP-VREC-DECIDE` | [VERIFY_OUTCOME.md#obtain-the-humans-verification-decision](VERIFY_OUTCOME.md#obtain-the-humans-verification-decision) |
+| `STEP-REVIEW-PUBLISH` | [PULL_REQUEST.md#publish-the-review-package](PULL_REQUEST.md#publish-the-review-package) |
 | `STEP-VREC-REJECT` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |
 | `STEP-VREC-SUPERSEDE` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |
 | `STEP-DELIVERY-SELECT` | [DELIVER_RESULT.md#select-the-delivery-action](DELIVER_RESULT.md#select-the-delivery-action) |

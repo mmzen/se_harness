@@ -9,6 +9,20 @@ from se_harness.workflow_procedures import ProcedureError, resolve_procedure
 
 
 class WorkflowProcedureTests(unittest.TestCase):
+    def test_review_publication_does_not_borrow_integration_authority(self) -> None:
+        _, _, rules, procedures, _ = load_validated_contracts()
+        self.assertIn("PROC-REVIEW-PUBLISH", rules["WFL-VREC-DECIDE"]["alternative_procedure_ids"])
+        ready = resolve_procedure(procedures, "PROC-REVIEW-PUBLISH", {"artifact_id": "VREC-ABC-001"})
+        step = ready["steps"][0]
+        self.assertEqual("DR-DELIVERY-SELECT", step["decision_right"])
+        self.assertEqual(["QG-G4-ASSURANCE-DECISION"], step["gate_ids"])
+        self.assertIn("VREC-ABC-001", step["response"])
+        self.assertIn("obtain only missing authorization", step["response"])
+        self.assertNotIn("argv", step)
+        self.assertIn("The verification record remains ready.", step["non_effects"])
+        self.assertEqual(["QG-G4-VERIFIED-COVERAGE"],
+                         procedures["PROC-REPOSITORY-INTEGRATION"]["steps"][0]["gate_ids"])
+
     def test_standard_start_procedure_has_exact_order_and_argv(self) -> None:
         _, _, _, procedures, _ = load_validated_contracts()
         resolved = resolve_procedure(procedures, "PROC-WO-START", {"artifact_id": "WO-ABC-001"})

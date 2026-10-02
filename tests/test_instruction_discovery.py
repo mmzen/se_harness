@@ -22,8 +22,8 @@ class InstructionDiscoveryTests(unittest.TestCase):
     def test_catalogue_matches_all_released_procedures_and_typed_steps(self):
         _, _, _, procedures, _ = load_validated_contracts()
         catalog = discovery.load_catalog()
-        self.assertEqual(18, len(catalog["procedures"]))
-        self.assertEqual(23, sum(len(p["steps"]) for p in catalog["procedures"].values()))
+        self.assertEqual(19, len(catalog["procedures"]))
+        self.assertEqual(24, sum(len(p["steps"]) for p in catalog["procedures"].values()))
         discovery.validate_coverage(procedures)
         for procedure in catalog["procedures"].values():
             references = [procedure["location"], *procedure["prerequisites"]]
@@ -62,6 +62,21 @@ class InstructionDiscoveryTests(unittest.TestCase):
         for proc, step in [("PROC-UNKNOWN", "STEP-UNKNOWN"), ("PROC-WO-START", "STEP-UNKNOWN")]:
             with self.subTest(proc=proc, step=step), self.assertRaisesRegex(discovery.DiscoveryError, "no released reading location"):
                 discovery.describe({"id": proc, "current_step": step}, [])
+
+    def test_pr_verification_discovers_publication_before_the_decision(self):
+        catalog = discovery.load_catalog()["procedures"]
+        decision = catalog["PROC-VREC-DECIDE"]
+        for prerequisites in (decision["prerequisites"],
+                              decision["steps"]["STEP-VREC-DECIDE"]["prerequisites"]):
+            publication = next(p for p in prerequisites
+                               if p["heading"] == "publish-the-review-package")
+            self.assertEqual("docs/engineering/harness/PULL_REQUEST.md", publication["file"])
+            self.assertIn("work delivered through a pull request", publication["when"])
+        review = catalog["PROC-REVIEW-PUBLISH"]
+        self.assertEqual("publish-the-review-package", review["location"]["heading"])
+        self.assertEqual(review["location"], review["steps"]["STEP-REVIEW-PUBLISH"]["location"])
+        self.assertIn("review-publication-authority",
+                      [p["heading"] for p in review["prerequisites"]])
 
     def test_missing_step_mapping_refuses_contract_loading(self):
         value = discovery.load_catalog()

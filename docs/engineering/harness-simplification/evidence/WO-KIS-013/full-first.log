@@ -1,0 +1,30 @@
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-hz8jvvex\private\evaluators\0.0.0\b7c75eed4985c08f850859b97007e86658781464df2eb00893ab549eb7d3df65\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-hz8jvvex\private\evaluators\0.0.0\b7c75eed4985c08f850859b97007e86658781464df2eb00893ab549eb7d3df65\Scripts\python.exe
+--workers must be at least 1
+0.21.1
+{"approved_scope_unchanged": true, "candidate": "46a248a909d6db3a99ca25d01abe2c3bc95270d9", "changed_paths": ["docs/engineering/product/evidence/WO-PRD-001/handoff.json", "docs/engineering/product/evidence/WO-PRD-001/review.md", "docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md", "docs/engineering/product/work-orders/WO-PRD-001.md", "fixtures/number.txt", "src/caller.py", "src/parser.py", "tests/test_number.py"], "corrected_exit": 0, "demonstration": "bug-fix", "detected_omission": ["tests/test_number.py"], "expansion_blocked_by": ["QGP-G4I-PATHS: WEX201: changed path is outside execution scope: unrelated/new.py"], "generated_outputs": {"automatic_matches": [{"path": "docs/engineering/product/evidence/VREC-001-evaluator.json", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}, {"path": "docs/engineering/product/verification-records/VREC-001.md", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}], "coverage": "covered", "explicit_matches": [], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/engineering/product/evidence/VREC-001-evaluator.json", "docs/engineering/product/verification-records/VREC-001.md"], "uncovered_paths": []}, "handoff": {"kind": "check", "outcome": "completed"}, "planned": {"automatic_matches": [], "coverage": "covered", "explicit_matches": [{"path": "fixtures/number.txt", "scope_entry": "fixtures/number.txt"}, {"path": "src/caller.py", "scope_entry": "src/caller.py"}, {"path": "src/parser.py", "scope_entry": "src/parser.py"}, {"path": "tests/test_number.py", "scope_entry": "tests/test_number.py"}], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["fixtures/number.txt", "src/caller.py", "src/parser.py", "tests/test_number.py"], "uncovered_paths": []}, "record": {"commit": "46a248a909d6db3a99ca25d01abe2c3bc95270d9", "id": "VREC-001", "status": "ready"}, "regression_exit": 1, "work_order_count": 1}
+{"approved_scope_unchanged": true, "candidate": "b1b21be724ffca95f0611786264d77f9d18797bc", "changed_paths": ["docs/cli.md", "docs/engineering/product/evidence/WO-PRD-001/handoff.json", "docs/engineering/product/evidence/WO-PRD-001/review.md", "docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md", "docs/engineering/product/work-orders/WO-PRD-001.md", "docs/procedure.md", "templates/work.md", "tests/test_guidance.py"], "corrected_exit": 0, "demonstration": "instruction-change", "detected_omission": ["tests/test_guidance.py"], "expansion_blocked_by": ["QGP-G4I-PATHS: WEX201: changed path is outside execution scope: unrelated/new.py"], "generated_outputs": {"automatic_matches": [{"path": "docs/engineering/product/evidence/VREC-001-evaluator.json", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}, {"path": "docs/engineering/product/verification-records/VREC-001.md", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}], "coverage": "covered", "explicit_matches": [], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/engineering/product/evidence/VREC-001-evaluator.json", "docs/engineering/product/verification-records/VREC-001.md"], "uncovered_paths": []}, "handoff": {"kind": "check", "outcome": "completed"}, "planned": {"automatic_matches": [], "coverage": "covered", "explicit_matches": [{"path": "docs/cli.md", "scope_entry": "docs/cli.md"}, {"path": "docs/procedure.md", "scope_entry": "docs/procedure.md"}, {"path": "templates/work.md", "scope_entry": "templates/work.md"}, {"path": "tests/test_guidance.py", "scope_entry": "tests/test_guidance.py"}], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/cli.md", "docs/procedure.md", "templates/work.md", "tests/test_guidance.py"], "uncovered_paths": []}, "record": {"commit": "b1b21be724ffca95f0611786264d77f9d18797bc", "id": "VREC-001", "status": "ready"}, "regression_exit": 1, "work_order_count": 1}
+docs/notes/diagnostic-codes.md matches the source
+WEX_SCALE artifacts=100 validation=0.175363s focus=0.450171s plan=0.322527s
+WEX_SCALE artifacts=500 validation=0.748087s focus=1.044054s plan=1.467834s
+======================================================================
+FAIL: test_workflow_documentation_contract.WorkflowDocumentationContractTests.test_every_contract_reference_resolves_to_one_normative_owner
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_workflow_documentation_contract.py", line 105, in test_every_contract_reference_resolves_to_one_normative_owner
+    self.assertEqual(1,guide.count(f'`{pid}`'))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+ERROR: test_instruction_discovery.InstructionDiscoveryTests.test_human_index_uses_the_catalogue_destinations
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_instruction_discovery.py", line 122, in test_human_index_uses_the_catalogue_destinations
+    row = next(line for line in text.splitlines() if line.startswith(f"| `{sid}` |"))
+StopIteration
+
+----------------------------------------------------------------------
+Ran 1238 tests in 152.842s (184 classes, 8 workers)
+
+FAILED (failures=1, errors=1, skipped=22)

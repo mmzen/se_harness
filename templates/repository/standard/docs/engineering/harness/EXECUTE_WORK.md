@@ -247,8 +247,10 @@ blocked. Completion does not verify, release, or deliver the result.
 
 **Later use:** Work requiring commit-bound verification proceeds to
 [Verify the outcome](VERIFY_OUTCOME.md#establish-the-verification-scope).
-After preparation, use the [verification request](VERIFY_OUTCOME.md#obtain-the-humans-verification-decision)
-when the ready record is eligible. The completion report introduces no
+After preparation, PR-based work first follows [Publish the review package](PULL_REQUEST.md#publish-the-review-package).
+Then use the [verification request](VERIFY_OUTCOME.md#obtain-the-humans-verification-decision)
+when the ready record is eligible and its PR is confirmed. Local-only work
+uses that verification request without a PR. The completion report introduces no
 additional human approval. An implemented work order (WO) classified `not_required`
 needs no new verification record (VREC); follow its actual next action and
 any separately authorized delivery instruction.

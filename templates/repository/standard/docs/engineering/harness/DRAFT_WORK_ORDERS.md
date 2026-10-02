@@ -79,6 +79,12 @@ unresolved decisions (DEC).
 | `[assurance]` | `commit_bound_verification`, its `rationale`, and `decided_by`. Apply the classification rules in [Assurance classification](WORK_AND_EVIDENCE.md#assurance-classification). Record the human who confirmed the classification; an agent may propose it and record that human's decision. |
 | `[relations]` | `implements` → requirements (REQ); `specifications` → specifications (SPEC); `verification` → verification contracts (VER); `architecture` → applicable architectures (ARCH) and required architecture decisions (ADR). |
 
+For PR-based work, include the proposed [review-publication grant](AUTHORITY.md#review-publication-authority)
+in the decision envelope. Name its repository, source branch, target branch
+and selected work. Include both the ready-record publication and the later
+decision-only push in the expected scope. Present that grant explicitly with
+implementation approval; do not infer it from ordinary work authority.
+
 If the assurance classification has not been confirmed, present it as a
 proposal in the review handoff. Report the missing decision. Do not fill
 `decided_by` with the draft author's name or an example identity to satisfy
