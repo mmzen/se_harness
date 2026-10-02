@@ -2,7 +2,7 @@
 id = "WO-HUP-027"
 type = "work_order"
 title = "Complete CI compatibility with schema-5 adoption"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-10-02T09:24:58Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T09:34:10Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Complete CI compatibility with schema-5 adoption
