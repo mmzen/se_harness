@@ -1,0 +1,113 @@
+{
+  "observed_at": "2026-10-02T05:17:31.130010+00:00",
+  "baseline": "66baa640eea3946bd041ac09e419e300fafef017",
+  "source_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+  "build": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\scripts\\build_plugin_marketplace.py",
+      "build",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--revision",
+      "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "--release-revision",
+      "66baa640eea3946bd041ac09e419e300fafef017",
+      "--release-record",
+      "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+      "--expected-wheel-sha256",
+      "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "--wheel",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\se_harness-0.21.0-py3-none-any.whl",
+      "--evaluator-python",
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "--output-directory",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032-marketplace"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "accepted": true,
+      "archives": {
+        "verity-plane-claude.zip": "fb8a66abc14675a227feef8acd50ffbbcf63a0d42b077ece85f680bf1e08e366",
+        "verity-plane-codex.zip": "d9762ce9605b28a9b3f9e794bac04a9ccc54d0daa5842adc77b809a6f4a80737"
+      },
+      "claim": "Contents only; native host testing and publication remain separate.",
+      "evaluator": {
+        "archive": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+        "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+        "release_record": "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+        "release_record_sha256": "05df27a5da59afcb6edcbb07193ca61989551f54180cadf16a06fca64b82ea4c",
+        "release_revision": "66baa640eea3946bd041ac09e419e300fafef017",
+        "version": "0.21.0"
+      },
+      "identity_sha256": "74f0854eadfbe962105d1aba9b594ff2f1697cd038cb27c1a01b802c1fb8d890",
+      "plugin_version": "0.2.4",
+      "source": {
+        "plan": "release/plugin-assembly.json",
+        "plan_sha256": "b9dd5e39a89b91f855bd848f09985c502193b157d05cf7cc600e57b1325bfaac",
+        "revision": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775"
+      }
+    },
+    "seconds": 7.589495299999726
+  },
+  "independent_check": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\scripts\\build_plugin_marketplace.py",
+      "check",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--revision",
+      "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "--release-revision",
+      "66baa640eea3946bd041ac09e419e300fafef017",
+      "--release-record",
+      "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+      "--expected-wheel-sha256",
+      "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "--wheel",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\se_harness-0.21.0-py3-none-any.whl",
+      "--evaluator-python",
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "--output-directory",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032-marketplace"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "accepted": true,
+      "archives": {
+        "verity-plane-claude.zip": "fb8a66abc14675a227feef8acd50ffbbcf63a0d42b077ece85f680bf1e08e366",
+        "verity-plane-codex.zip": "d9762ce9605b28a9b3f9e794bac04a9ccc54d0daa5842adc77b809a6f4a80737"
+      },
+      "claim": "Contents only; native host testing and publication remain separate.",
+      "evaluator": {
+        "archive": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+        "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+        "release_record": "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+        "release_record_sha256": "05df27a5da59afcb6edcbb07193ca61989551f54180cadf16a06fca64b82ea4c",
+        "release_revision": "66baa640eea3946bd041ac09e419e300fafef017",
+        "version": "0.21.0"
+      },
+      "identity_sha256": "74f0854eadfbe962105d1aba9b594ff2f1697cd038cb27c1a01b802c1fb8d890",
+      "plugin_version": "0.2.4",
+      "source": {
+        "plan": "release/plugin-assembly.json",
+        "plan_sha256": "b9dd5e39a89b91f855bd848f09985c502193b157d05cf7cc600e57b1325bfaac",
+        "revision": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775"
+      }
+    },
+    "seconds": 7.130141999999978
+  },
+  "claude_manifest_validator": {
+    "exit_code": 0,
+    "stdout": "Validating plugin manifest: C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032-marketplace\\packages\\claude\\verity-plane\\.claude-plugin\\plugin.json\n\n√ Validation passed\n",
+    "stderr": ""
+  },
+  "meaning": "Exact package assembly checks pass. Native support and publication are not established."
+}

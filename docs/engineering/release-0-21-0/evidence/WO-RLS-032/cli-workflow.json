@@ -1,0 +1,127 @@
+{
+  "passed": true,
+  "observed_at": "2026-10-02T06:07:18.857567+00:00",
+  "host": "Codex CLI/app-server 0.159.2",
+  "plugin": "0.2.4",
+  "public_wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+  "package_identity": "74f0854eadfbe962105d1aba9b594ff2f1697cd038cb27c1a01b802c1fb8d890",
+  "fixtures": {
+    "successor": {
+      "passed": true,
+      "release": "0.21.0",
+      "candidate": "1e9d9167250a16ba75d4f1f8319eda90c4213204",
+      "baseline": "bd40b4dfbe9faba40fe7453d314acec90af6766e",
+      "work_order_state": "implemented",
+      "draft_state": "draft",
+      "start_count": 1,
+      "initial_start_actor": "codex",
+      "note_hex": "61667465720a",
+      "new_note_absent": true,
+      "clean": true,
+      "changed_paths": [
+        "docs/engineering/product/evidence/WO-FLW-001/exact-text-test.json",
+        "docs/engineering/product/evidence/WO-FLW-001/handoff.json",
+        "docs/engineering/product/evidence/WO-FLW-001/observations.md",
+        "docs/engineering/product/work-orders/WO-FLW-001.md",
+        "docs/engineering/product/work-orders/WO-FLW-002.md",
+        "notes/note.txt"
+      ],
+      "accepted_definitions_unchanged": true,
+      "remote_refs_empty": true,
+      "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rls032-flow\\successor-remote.git",
+      "head_ref": "refs/heads/workflow-demo",
+      "base_ref": "refs/heads/main",
+      "delivery_authority_identified": true,
+      "handoff_status": "pass",
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "WO-FLW-001 is implemented; its approved assurance classification requires no new VREC."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-FLW-001 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "step_id": "STEP-FOCUS-SELECTED",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-FLW-001"
+          ]
+        },
+        "alternatives": []
+      }
+    },
+    "legacy": {
+      "passed": true,
+      "release": "0.20.0",
+      "candidate": "6af00f9d6ff0de90617426f9682c69539a642f07",
+      "baseline": "b4f8a4fbb5d90745e3a12263c6b6dcb7eb798a27",
+      "work_order_state": "implemented",
+      "draft_state": "draft",
+      "start_count": 1,
+      "initial_start_actor": "fixture-executor",
+      "note_hex": "61667465720a",
+      "new_note_absent": true,
+      "clean": true,
+      "changed_paths": [
+        "docs/engineering/product/evidence/WO-FLW-001/exact-text-test.json",
+        "docs/engineering/product/evidence/WO-FLW-001/handoff.json",
+        "docs/engineering/product/evidence/WO-FLW-001/observations.md",
+        "docs/engineering/product/work-orders/WO-FLW-001.md",
+        "docs/engineering/product/work-orders/WO-FLW-002.md",
+        "notes/note.txt"
+      ],
+      "accepted_definitions_unchanged": true,
+      "remote_refs_empty": true,
+      "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rls032-flow\\legacy-remote.git",
+      "head_ref": "refs/heads/workflow-demo",
+      "base_ref": "refs/heads/main",
+      "delivery_authority_identified": true,
+      "handoff_status": "pass",
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "WO-FLW-001 is implemented; its approved assurance classification requires no new VREC."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-FLW-001 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "step_id": "STEP-FOCUS-SELECTED",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-FLW-001"
+          ]
+        },
+        "alternatives": []
+      }
+    }
+  },
+  "trace_sha256": "a6748d3ca6348c007391a3755a74134710682f411722cdf427deba3d8d8b20f8",
+  "limits": [
+    "Claude native and Codex desktop remain unverified under DEC-RLS-002.",
+    "No external push or PR was performed. Original disposable profile plugin 0.2.3 was restored."
+  ]
+}

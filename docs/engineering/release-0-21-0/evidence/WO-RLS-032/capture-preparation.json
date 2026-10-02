@@ -1,0 +1,1512 @@
+{
+  "meaning": "Post-candidate verification-preparation receipt; no product change or human verification. Earlier candidate evidence remains byte-identical.",
+  "candidate": "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+  "record_sha256": "680dd9b0719a64a76719248190c11cfa13aacb3614da9bed2542e6511aca0878",
+  "evaluator_evidence_sha256": "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26",
+  "candidate_inputs": [
+    {
+      "path": "docs/engineering/release-0-21-0/decisions/DEC-RLS-002.md",
+      "sha256": "beee0ee9f4faf02d416c5b495dd00203e566ecc9451a29812067b3da3d423350"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/VREC-SEH-031-evaluator.json",
+      "sha256": "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-hosted-receipt.json",
+      "sha256": "ed30e69e46e1dd2a594718b4a67597226ca43c2b70c7cb38c276349f1cc2a89b"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+      "sha256": "cf1e0ae4019bc1442585c9c91d8ee910f93424d9f7530da0fcc29af7a8391cca"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation-review.md",
+      "sha256": "73875098f94417d7a62b3c454676734d4233e0a22d8aaa4ac7fd61368a9d5b4a"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/README.md",
+      "sha256": "74603b5c20f0dd18946076dc647dd4b8538058bd012e1413e278335a7cc617bf"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/WO-RLS-032-handoff.md",
+      "sha256": "a650b96ee2a37339118c21bcb0a6990579871372a3e71c2f41279af30c6390a0"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow-traces.json",
+      "sha256": "a6748d3ca6348c007391a3755a74134710682f411722cdf427deba3d8d8b20f8"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow.json",
+      "sha256": "e3ab91bc9ea82eb0d21fb57813108dc5356c42086da87d629602d6be4a5ffca0"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-boundaries.json",
+      "sha256": "dfbf73a6ecb8ebe088be0fa34ab230ebde251dc2925cd8ea3102c56c7c8362b0"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-current.json",
+      "sha256": "7253958dbae4338dc119a67395a69aae9dd8ef095d60094407c45aea63f35efe"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-events.jsonl",
+      "sha256": "c9c93bb367a6215dceaa5bfa531cc6f65a6a755739bca8f16bf696b094c46a04"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/completion.json",
+      "sha256": "b09d4179f2156679dbc8fd928bd0e889798cc088bbfc1dc90ab6f20a360b5a64"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/continuation-review.md",
+      "sha256": "d2705458790f1c4974579ca90790fd9b85d50e44c8179c86e64e3cc794cf80ca"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/contract-assessment.md",
+      "sha256": "3c959e538c67838b1d7da6560e698262ab99ad24a33ad34e77ba6a731e7c8ea3"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/decision-acceptance.json",
+      "sha256": "99dba3e3d717f94e5d943c109e78c2d15e7ff4b0d31cc65815b4e843aa458878"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/delivery-plan.json",
+      "sha256": "b9b89d7aab408a523c67cf1f8cd1fbdfbe8832b33f2e1a59c81a1068ebb79d85"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/handoff.json",
+      "sha256": "439844b60e07512600fd0264c872afbba50a59b941fe8090bdb6bfd9f7a7d600"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/historical-native-comparison.json",
+      "sha256": "f7f3dad99582130efb8392823031f04be69cc355e24580c8e0f64dc11f354d4c"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/native-observations.json",
+      "sha256": "38bf3b86d7e47d42bc8ef05de065967956542b9ed239d5a60e1122c4867a8185"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-qualification.json",
+      "sha256": "e216629d5676b38a4c6320f650cbe959616f698a74368561f026ad8e8783d192"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-recheck.json",
+      "sha256": "599b3185ade46d32ed8fdd4646eaa93516fdcfb3e8ba45d2aecfd75162dd2558"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-linux.json",
+      "sha256": "476ac2b5baa07c1fa3cd0c5476754548b2f8369e26b06aa367ed00cf8ff0fba5"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-windows.json",
+      "sha256": "9661e25176e82ff9349fd7b6ac8805d9a2c97c3e9dd703a11237916537b2fe32"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+      "sha256": "085641e1212e4ff08f2839cf95da0da79856f3328a38aed901dde1e34385ce6a"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-review.md",
+      "sha256": "15e9394b38bff3ad3feef724796ddda6a5b5cd9e34fcb93f0e32529530b74de4"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/qualification-checks.json",
+      "sha256": "0f465ba389ee63e151340831c13e627d762dec64d1b66d4eee3bb54d9ea9fc5e"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/source-comparison.json",
+      "sha256": "fada68125415f190b5283d94a13b5278ea423a9789973e30a7f8dcda4275f24d"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/risks/RISK-RLS-002.md",
+      "sha256": "3d0e5e357fa62a638cf5a4d66b31357dfe08354548557fc7f60f5db89bac8599"
+    },
+    {
+      "path": "docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md",
+      "sha256": "10d4fb73be2dc45205182e2a6143adc234790a881747f62ae09fcb813ecd1bd8"
+    }
+  ],
+  "observations": {
+    "accept002-capture": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--id",
+        "VREC-PLG-030",
+        "--owner",
+        "Codex",
+        "--domain",
+        "release-0-21-0",
+        "--candidate-commit",
+        "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+        "--work-order",
+        "WO-RLS-032",
+        "--verification",
+        "VER-RLS-031",
+        "--verification",
+        "VER-IAR-021",
+        "--json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/decisions/DEC-RLS-002.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/VREC-SEH-031-evaluator.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-hosted-receipt.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/README.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/WO-RLS-032-handoff.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow-traces.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-boundaries.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-current.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-events.jsonl",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/completion.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/continuation-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/contract-assessment.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/decision-acceptance.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/delivery-plan.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/handoff.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/historical-native-comparison.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/native-observations.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-qualification.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-recheck.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-linux.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-windows.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/qualification-checks.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/source-comparison.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/risks/RISK-RLS-002.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md",
+        "--test-command",
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032_capture_checks.py",
+        "967d513d20348ca20f78b4b2d4235c33fc8748d4"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "capture-verification",
+          "outcome": "blocked"
+        },
+        "selection": {
+          "primary": "VREC-PLG-030",
+          "artifacts": [
+            "VREC-PLG-030"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+          "procedure_id": "PROC-REMEDIATE",
+          "status": "fail",
+          "gates": []
+        },
+        "procedure": {
+          "id": "PROC-REMEDIATE",
+          "current_step": "STEP-REMEDIATE-FOCUS",
+          "steps": [
+            {
+              "id": "STEP-REMEDIATE-FOCUS",
+              "kind": "command",
+              "gate_ids": [],
+              "effects": [
+                "Re-evaluated selected state for VREC-PLG-030."
+              ],
+              "non_effects": [
+                "Remediation does not expand scope or change state."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "VREC-PLG-030"
+              ]
+            }
+          ]
+        },
+        "state": {
+          "before": [],
+          "after": []
+        },
+        "findings": {
+          "scoped_blockers": [
+            {
+              "code": "WEX303",
+              "message": "candidate tests failed (exit 1): Traceback (most recent call last):??  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032_capture_checks.py\", line 10, in <module>??    trace=json.loads((evidence/'cli-workflow-traces.json').read_text())??                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^??  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 788, in read_text??    return f.read()??           ~~~~~~^^??  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\encodings\\cp1252.py\", line 23, in decode??    return codecs.charmap_decode(input,self.errors,decoding_table)[0]??           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^??UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 633258: character maps to <undefined>??"
+            }
+          ],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [],
+          "not_done": [
+            "The requested workflow operation remains incomplete."
+          ],
+          "blocked_by": [
+            "WEX303: candidate tests failed (exit 1): Traceback (most recent call last):??  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032_capture_checks.py\", line 10, in <module>??    trace=json.loads((evidence/'cli-workflow-traces.json').read_text())??                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^??  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 788, in read_text??    return f.read()??           ~~~~~~^^??  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\encodings\\cp1252.py\", line 23, in decode??    return codecs.charmap_decode(input,self.errors,decoding_table)[0]??           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^??UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 633258: character maps to <undefined>??"
+          ],
+          "current_lifecycle_state": [
+            "No lifecycle state was changed."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-REMEDIATE",
+            "step_id": "STEP-REMEDIATE-FOCUS",
+            "action": "remediate"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "VREC-PLG-030"
+            ]
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-REMEDIATE",
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": [],
+              "steps": {
+                "STEP-REMEDIATE-FOCUS": {
+                  "location": {
+                    "file": "docs/engineering/harness/RESULTS.md",
+                    "heading": "if-a-procedure-is-blocked"
+                  },
+                  "prerequisites": []
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-REMEDIATE-FOCUS",
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": []
+            }
+          },
+          "formal_artifact_ids": [
+            "VREC-PLG-030"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "7913fb79ebbd6e9f41c947a85359d1a1052d2369dc5697c3e343a6cc7d834de8"
+      },
+      "seconds": 25.958403399999952
+    },
+    "accept002-capture-retry": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--id",
+        "VREC-PLG-030",
+        "--owner",
+        "Codex",
+        "--domain",
+        "release-0-21-0",
+        "--candidate-commit",
+        "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+        "--work-order",
+        "WO-RLS-032",
+        "--verification",
+        "VER-RLS-031",
+        "--verification",
+        "VER-IAR-021",
+        "--json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/decisions/DEC-RLS-002.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/VREC-SEH-031-evaluator.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-hosted-receipt.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/README.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/WO-RLS-032-handoff.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow-traces.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-boundaries.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-current.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-events.jsonl",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/completion.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/continuation-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/contract-assessment.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/decision-acceptance.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/delivery-plan.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/handoff.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/historical-native-comparison.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/native-observations.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-qualification.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-recheck.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-linux.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-windows.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/qualification-checks.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/source-comparison.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/risks/RISK-RLS-002.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md",
+        "--test-command",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032_capture_checks.py",
+        "967d513d20348ca20f78b4b2d4235c33fc8748d4"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "capture-verification",
+          "outcome": "blocked"
+        },
+        "selection": {
+          "primary": "VREC-PLG-030",
+          "artifacts": [
+            "VREC-PLG-030"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+          "procedure_id": "PROC-REMEDIATE",
+          "status": "fail",
+          "gates": []
+        },
+        "procedure": {
+          "id": "PROC-REMEDIATE",
+          "current_step": "STEP-REMEDIATE-FOCUS",
+          "steps": [
+            {
+              "id": "STEP-REMEDIATE-FOCUS",
+              "kind": "command",
+              "gate_ids": [],
+              "effects": [
+                "Re-evaluated selected state for VREC-PLG-030."
+              ],
+              "non_effects": [
+                "Remediation does not expand scope or change state."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "VREC-PLG-030"
+              ]
+            }
+          ]
+        },
+        "state": {
+          "before": [],
+          "after": []
+        },
+        "findings": {
+          "scoped_blockers": [
+            {
+              "code": "WEX303",
+              "message": "candidate tests failed (exit 1): :??  File \"C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-6lc51tbb\\checkout\\tests\\plugin_integration\\package_assembly\\test_package_assembly.py\", line 212, in test_unsafe_paths_preserve_outside_sentinel??    with self.subTest(path=path), self.assertRaisesRegex(pkg.AssemblyError, \"unsafe path\"):??                                  ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^??AssertionError: \"unsafe path\" does not match \"released evaluator could not compute canonical wheel payload SHA-256\"????======================================================================??FAIL: test_unsafe_paths_preserve_outside_sentinel (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_unsafe_paths_preserve_outside_sentinel) (path='scripts//name.py')??----------------------------------------------------------------------??repository_tools.plugin_distribution.AssemblyError: released evaluator could not compute canonical wheel payload SHA-256????During handling of the above exception, another exception occurred:????Traceback (most recent call last):??  File \"C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-6lc51tbb\\checkout\\tests\\plugin_integration\\package_assembly\\test_package_assembly.py\", line 212, in test_unsafe_paths_preserve_outside_sentinel??    with self.subTest(path=path), self.assertRaisesRegex(pkg.AssemblyError, \"unsafe path\"):??                                  ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^??AssertionError: \"unsafe path\" does not match \"released evaluator could not compute canonical wheel payload SHA-256\"????----------------------------------------------------------------------??Ran 45 tests in 24.089s????FAILED (failures=23, errors=9, skipped=2)??Traceback (most recent call last):??  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032_capture_checks.py\", line 24, in <module>??    assert r.returncode==0??           ^^^^^^^^^^^^^^^??AssertionError??"
+            }
+          ],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [],
+          "not_done": [
+            "The requested workflow operation remains incomplete."
+          ],
+          "blocked_by": [
+            "WEX303: candidate tests failed (exit 1): :??  File \"C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-6lc51tbb\\checkout\\tests\\plugin_integration\\package_assembly\\test_package_assembly.py\", line 212, in test_unsafe_paths_preserve_outside_sentinel??    with self.subTest(path=path), self.assertRaisesRegex(pkg.AssemblyError, \"unsafe path\"):??                                  ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^??AssertionError: \"unsafe path\" does not match \"released evaluator could not compute canonical wheel payload SHA-256\"????======================================================================??FAIL: test_unsafe_paths_preserve_outside_sentinel (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_unsafe_paths_preserve_outside_sentinel) (path='scripts//name.py')??----------------------------------------------------------------------??repository_tools.plugin_distribution.AssemblyError: released evaluator could not compute canonical wheel payload SHA-256????During handling of the above exception, another exception occurred:????Traceback (most recent call last):??  File \"C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-6lc51tbb\\checkout\\tests\\plugin_integration\\package_assembly\\test_package_assembly.py\", line 212, in test_unsafe_paths_preserve_outside_sentinel??    with self.subTest(path=path), self.assertRaisesRegex(pkg.AssemblyError, \"unsafe path\"):??                                  ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^??AssertionError: \"unsafe path\" does not match \"released evaluator could not compute canonical wheel payload SHA-256\"????----------------------------------------------------------------------??Ran 45 tests in 24.089s????FAILED (failures=23, errors=9, skipped=2)??Traceback (most recent call last):??  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032_capture_checks.py\", line 24, in <module>??    assert r.returncode==0??           ^^^^^^^^^^^^^^^??AssertionError??"
+          ],
+          "current_lifecycle_state": [
+            "No lifecycle state was changed."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-REMEDIATE",
+            "step_id": "STEP-REMEDIATE-FOCUS",
+            "action": "remediate"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "VREC-PLG-030"
+            ]
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-REMEDIATE",
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": [],
+              "steps": {
+                "STEP-REMEDIATE-FOCUS": {
+                  "location": {
+                    "file": "docs/engineering/harness/RESULTS.md",
+                    "heading": "if-a-procedure-is-blocked"
+                  },
+                  "prerequisites": []
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-REMEDIATE-FOCUS",
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": []
+            }
+          },
+          "formal_artifact_ids": [
+            "VREC-PLG-030"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "7913fb79ebbd6e9f41c947a85359d1a1052d2369dc5697c3e343a6cc7d834de8"
+      },
+      "seconds": 48.81899080000039
+    },
+    "accept003-identity": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "--identity",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 2,
+      "result": {
+        "stdout": "",
+        "stderr": "usage: harnessctl [-h] [--version]\n                  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...\nharnessctl: error: the following arguments are required: command\n"
+      },
+      "seconds": 0.31530990000010206
+    },
+    "accept003-identity-correct": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.20.1",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--evaluator-payload-sha256",
+        "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+        "--evaluator-wheel-sha256",
+        "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "result": {
+        "candidate_commit": null,
+        "checkout_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "diagnostics": [],
+        "distribution_origin": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Lib\\site-packages",
+        "entry_point_origin": null,
+        "evaluator_archive_name": "se_harness-0.20.1-py3-none-any.whl",
+        "evaluator_archive_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+        "evaluator_payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+        "evaluator_wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "expected_root": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator",
+        "harness_version": "0.20.1",
+        "isolated_python": true,
+        "module_origin": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Lib\\site-packages\\se_harness\\runtime_identity.py",
+        "passed": true,
+        "python_binary_position": "within-expected-root",
+        "python_entry_is_link": false,
+        "python_executable": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "python_version": "3.14.6",
+        "pythonpath_present": false,
+        "role": "released-evaluator",
+        "schema": "se-harness-runtime-identity-v4",
+        "template_origin": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\share\\se-harness\\templates\\repository\\standard",
+        "user_site_enabled": false
+      },
+      "seconds": 0.33076640000035695
+    },
+    "accept003-capture-inputs": {
+      "argv": [
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--id",
+        "VREC-PLG-030",
+        "--owner",
+        "Codex",
+        "--domain",
+        "release-0-21-0",
+        "--candidate-commit",
+        "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+        "--work-order",
+        "WO-RLS-032",
+        "--verification",
+        "VER-RLS-031",
+        "--verification",
+        "VER-IAR-021",
+        "--json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/decisions/DEC-RLS-002.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/VREC-SEH-031-evaluator.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-hosted-receipt.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/README.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/WO-RLS-032-handoff.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow-traces.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-boundaries.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-current.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-events.jsonl",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/completion.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/continuation-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/contract-assessment.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/decision-acceptance.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/delivery-plan.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/handoff.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/historical-native-comparison.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/native-observations.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-qualification.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-recheck.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-linux.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-windows.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/qualification-checks.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/source-comparison.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/risks/RISK-RLS-002.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md",
+        "--test-command",
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032_capture_checks_v2.py",
+        "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+        "cdd276756922eac0d195b6b3d12494372b8b39289eb8cd11bafdacaedece475c",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\accept003-test-output.json"
+      ],
+      "driver_source": "\"\"\"Candidate checks for WO-RLS-032; no native tests or external actions.\"\"\"\nfrom pathlib import Path\nimport hashlib,json,os,subprocess,sys\nroot=Path.cwd()\nexpected=sys.argv[1]\ngit=r'C:\\Program Files\\Git\\cmd\\git.exe'\nhead=subprocess.check_output([git,'-c','safe.directory='+root.as_posix(),'rev-parse','HEAD'],text=True).strip()\nassert head==expected,(head,expected)\nevidence=root/'docs/engineering/release-0-21-0/evidence/WO-RLS-032'\ntrace=json.loads((evidence/'cli-workflow-traces.json').read_text())\nself_entry=next(x for x in trace['sources'] if x['path']=='runner/rls032_capture_checks.py')\nassert hashlib.sha256(Path(__file__).with_name('rls032_capture_checks.py').read_bytes()).hexdigest()==self_entry['sha256']\nassert hashlib.sha256(Path(__file__).read_bytes()).hexdigest()==sys.argv[2]\na=json.loads((evidence/'package-qualification.json').read_text())\nassert a['independent_check']['result']['accepted']\nfor name in ('portable-windows.json','portable-linux.json'):\n    assert json.loads((evidence/name).read_text())['result']['passed']\nfor name in ('codex-native-current.json','codex-native-boundaries.json'):\n    assert json.loads((evidence/name).read_text())['report']['passed']\nassert json.loads((evidence/'cli-workflow.json').read_text())['passed']\nenv=os.environ.copy();env.pop('PYTHONPATH',None);env['PYTHONNOUSERSITE']='1'\npython='C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\plugin-data\\\\verity-plane\\\\evaluator\\\\Scripts\\\\python.exe'\nargs=[python,'-B','-m','unittest','tests.plugin_integration.progressive_discovery.test_delivery','tests.plugin_integration.progressive_discovery.test_activation','tests.plugin_integration.test_simple_plugin','tests.plugin_integration.package_assembly.test_package_assembly']\nr=subprocess.run(args,cwd=root,env=env,capture_output=True,text=True,encoding='utf-8',errors='replace')\nreceipt={'argv':args,'cwd':str(root),'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr}\nPath(sys.argv[3]).write_text(json.dumps(receipt,indent=2),encoding='utf-8')\nprint(r.stdout);print(r.stderr,file=sys.stderr)\nassert r.returncode==0\nprint(json.dumps({'candidate':head,'package_identity':a['independent_check']['result']['identity_sha256'],'checks':'Existing focused package/activation/delivery suites and retained exact-package evidence binding','limits':'Claude exact-package native and Codex Windows desktop remain unverified under DEC-RLS-002. No human verification or marketplace publication.'}))\n",
+      "driver_sha256": "cdd276756922eac0d195b6b3d12494372b8b39289eb8cd11bafdacaedece475c",
+      "runtime_correction": "Use installed released evaluator interpreter required by isolated canonical hash tests. Product source and assertions unchanged; UTF-8 explicit."
+    },
+    "accept003-test-output": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.plugin_integration.progressive_discovery.test_delivery",
+        "tests.plugin_integration.progressive_discovery.test_activation",
+        "tests.plugin_integration.test_simple_plugin",
+        "tests.plugin_integration.package_assembly.test_package_assembly"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-s_zopn01\\checkout",
+      "exit_code": 0,
+      "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-q7pbtzcr\\private\\evaluators\\0.0.0\\2c4d2c0fea33b0f463083765e78ea461e776022134890a8b2995358c9e6762ae\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-q7pbtzcr\\private\\evaluators\\0.0.0\\2c4d2c0fea33b0f463083765e78ea461e776022134890a8b2995358c9e6762ae\\Scripts\\python.exe\n",
+      "stderr": "......s...............s......................\n----------------------------------------------------------------------\nRan 45 tests in 47.058s\n\nOK (skipped=2)\n"
+    },
+    "accept003-capture": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--id",
+        "VREC-PLG-030",
+        "--owner",
+        "Codex",
+        "--domain",
+        "release-0-21-0",
+        "--candidate-commit",
+        "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+        "--work-order",
+        "WO-RLS-032",
+        "--verification",
+        "VER-RLS-031",
+        "--verification",
+        "VER-IAR-021",
+        "--json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/decisions/DEC-RLS-002.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/VREC-SEH-031-evaluator.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-hosted-receipt.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/README.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/WO-RLS-032-handoff.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow-traces.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-boundaries.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-current.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-events.jsonl",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/completion.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/continuation-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/contract-assessment.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/decision-acceptance.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/delivery-plan.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/handoff.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/historical-native-comparison.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/native-observations.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-qualification.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-recheck.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-linux.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-windows.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/qualification-checks.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/source-comparison.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/risks/RISK-RLS-002.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md",
+        "--test-command",
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032_capture_checks_v2.py",
+        "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+        "cdd276756922eac0d195b6b3d12494372b8b39289eb8cd11bafdacaedece475c",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\accept003-test-output.json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {
+          "commit": "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+          "git_object_format": "sha1"
+        },
+        "operation": {
+          "kind": "capture-verification",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "VREC-PLG-030",
+          "artifacts": [
+            "VREC-PLG-030"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "ADR-IAR-012",
+            "ADR-PLG-001",
+            "ARCH-IAR-012",
+            "ARCH-PLG-001",
+            "CAP-DST-001",
+            "CAP-IAR-002",
+            "CAP-RLO-004",
+            "INT-DST-001",
+            "INT-IAR-001",
+            "INT-RLO-001",
+            "REQ-IAR-030",
+            "REQ-PLG-002",
+            "REQ-RLO-018",
+            "SPEC-IAR-016",
+            "SPEC-PLG-001",
+            "SPEC-RLO-006",
+            "VER-IAR-021",
+            "VER-RLS-031",
+            "WO-RLS-032"
+          ],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-VREC-DECIDE",
+          "procedure_id": "PROC-VREC-DECIDE",
+          "status": "not_assessable",
+          "gates": []
+        },
+        "procedure": {
+          "id": "PROC-VREC-DECIDE",
+          "current_step": "STEP-VREC-DECIDE",
+          "steps": [
+            {
+              "id": "STEP-VREC-DECIDE",
+              "kind": "decision",
+              "gate_ids": [
+                "QG-G4-ASSURANCE-DECISION"
+              ],
+              "effects": [
+                "Permits an explicit decision on VREC-PLG-030 only."
+              ],
+              "non_effects": [
+                "Referenced work orders remain unchanged."
+              ],
+              "decision_right": "DR-VREC-DECIDE",
+              "role": "assurance-owner",
+              "artifact": "VREC-PLG-030",
+              "decision": "whether the retained evidence verifies the exact candidate",
+              "outcomes": [
+                "verified",
+                "reject",
+                "supersede"
+              ],
+              "response": "I verify VREC-PLG-030 as assurance owner."
+            }
+          ]
+        },
+        "state": {
+          "before": [],
+          "after": [
+            {
+              "id": "VREC-PLG-030",
+              "status": "ready"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": [
+            {
+              "id": "VREC-PLG-030",
+              "path": "docs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md",
+              "fields": [
+                "artifact_snapshot_sha256",
+                "commit",
+                "created",
+                "evaluator_evidence_path",
+                "evaluator_evidence_sha256",
+                "evidence_paths",
+                "git_object_format",
+                "id",
+                "owners",
+                "prepared_at",
+                "prepared_by",
+                "relations",
+                "status",
+                "title",
+                "type",
+                "updated",
+                "worktree_state"
+              ]
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Prepared ready verification record VREC-PLG-030 at docs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "VREC-PLG-030 is ready; referenced work orders were not changed."
+          ],
+          "decision_required": {
+            "decision_right": "DR-VREC-DECIDE",
+            "role": "assurance-owner",
+            "artifact": "VREC-PLG-030",
+            "decision": "whether the retained evidence verifies the exact candidate",
+            "outcomes": [
+              "verified",
+              "reject",
+              "supersede"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-VREC-DECIDE",
+            "step_id": "STEP-VREC-DECIDE",
+            "action": "whether the retained evidence verifies the exact candidate"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "I verify VREC-PLG-030 as assurance owner."
+          },
+          "alternatives": [
+            "Use complete alternative procedure PROC-VREC-REJECT.",
+            "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+          ]
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-VREC-DECIDE",
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ],
+              "steps": {
+                "STEP-VREC-DECIDE": {
+                  "location": {
+                    "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                    "heading": "obtain-the-humans-verification-decision"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "decision-rights",
+                      "when": "Before obtaining or applying an accountable decision."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-VREC-DECIDE",
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "ADR-IAR-012",
+            "ADR-PLG-001",
+            "ARCH-IAR-012",
+            "ARCH-PLG-001",
+            "CAP-DST-001",
+            "CAP-IAR-002",
+            "CAP-RLO-004",
+            "INT-DST-001",
+            "INT-IAR-001",
+            "INT-RLO-001",
+            "REQ-IAR-030",
+            "REQ-PLG-002",
+            "REQ-RLO-018",
+            "SPEC-IAR-016",
+            "SPEC-PLG-001",
+            "SPEC-RLO-006",
+            "VER-IAR-021",
+            "VER-RLS-031",
+            "VREC-PLG-030",
+            "WO-RLS-032"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "6a571d5eaf451f2a6dd238ca1c61d9c322c835e2f6d0e98947183b5eae14c168"
+      },
+      "seconds": 92.97845790000065
+    },
+    "accept003-verification-gates": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--artifact",
+        "VREC-PLG-030",
+        "--checkpoint",
+        "transition",
+        "--target",
+        "verified",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {
+          "commit": "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+          "git_object_format": "sha1"
+        },
+        "operation": {
+          "kind": "check",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "VREC-PLG-030",
+          "artifacts": [
+            "VREC-PLG-030"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "ADR-IAR-012",
+            "ADR-PLG-001",
+            "ARCH-IAR-012",
+            "ARCH-PLG-001",
+            "CAP-DST-001",
+            "CAP-IAR-002",
+            "CAP-RLO-004",
+            "INT-DST-001",
+            "INT-IAR-001",
+            "INT-RLO-001",
+            "REQ-IAR-030",
+            "REQ-PLG-002",
+            "REQ-RLO-018",
+            "SPEC-IAR-016",
+            "SPEC-PLG-001",
+            "SPEC-RLO-006",
+            "VER-IAR-021",
+            "VER-RLS-031",
+            "WO-RLS-032"
+          ],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "transition",
+          "workflow_rule_id": "WFL-VREC-DECIDE",
+          "procedure_id": "PROC-VREC-DECIDE",
+          "status": "pass",
+          "gates": [
+            {
+              "id": "QG-G4-ASSURANCE-DECISION",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G4A-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:VREC-PLG-030"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G4A-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:transition"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G4A-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:VREC-PLG-030"
+                    }
+                  ],
+                  "message": "No open decision blocks VREC-PLG-030."
+                }
+              ]
+            },
+            {
+              "id": "QG-STRUCTURAL",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGS-EDGE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "VREC-PLG-030"
+                    }
+                  ],
+                  "message": "ready -> verified is a declared lifecycle edge for VREC-PLG-030."
+                }
+              ]
+            }
+          ],
+          "formal_snapshot_sha256": "bbb59661a9370297b576a2e72002c05b2d1767c8b646e0c5a5d0f31f93c2099e",
+          "change_set_source": "arguments"
+        },
+        "procedure": {
+          "id": "PROC-VREC-DECIDE",
+          "current_step": "STEP-VREC-DECIDE",
+          "steps": [
+            {
+              "id": "STEP-VREC-DECIDE",
+              "kind": "decision",
+              "gate_ids": [
+                "QG-G4-ASSURANCE-DECISION"
+              ],
+              "effects": [
+                "Permits an explicit decision on VREC-PLG-030 only."
+              ],
+              "non_effects": [
+                "Referenced work orders remain unchanged."
+              ],
+              "decision_right": "DR-VREC-DECIDE",
+              "role": "assurance-owner",
+              "artifact": "VREC-PLG-030",
+              "decision": "whether the retained evidence verifies the exact candidate",
+              "outcomes": [
+                "verified",
+                "reject",
+                "supersede"
+              ],
+              "response": "I verify VREC-PLG-030 as assurance owner."
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "VREC-PLG-030",
+              "status": "ready"
+            }
+          ],
+          "after": [
+            {
+              "id": "VREC-PLG-030",
+              "status": "ready"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 56
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Evaluated transition compliance for VREC-PLG-030."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "VREC-PLG-030 is ready."
+          ],
+          "decision_required": {
+            "decision_right": "DR-VREC-DECIDE",
+            "role": "assurance-owner",
+            "artifact": "VREC-PLG-030",
+            "decision": "whether the retained evidence verifies the exact candidate",
+            "outcomes": [
+              "verified",
+              "reject",
+              "supersede"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-VREC-DECIDE",
+            "step_id": "STEP-VREC-DECIDE",
+            "action": "whether the retained evidence verifies the exact candidate"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "I verify VREC-PLG-030 as assurance owner."
+          },
+          "alternatives": [
+            "Use complete alternative procedure PROC-VREC-REJECT.",
+            "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+          ]
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-VREC-DECIDE",
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ],
+              "steps": {
+                "STEP-VREC-DECIDE": {
+                  "location": {
+                    "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                    "heading": "obtain-the-humans-verification-decision"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "decision-rights",
+                      "when": "Before obtaining or applying an accountable decision."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-VREC-DECIDE",
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "ADR-IAR-012",
+            "ADR-PLG-001",
+            "ARCH-IAR-012",
+            "ARCH-PLG-001",
+            "CAP-DST-001",
+            "CAP-IAR-002",
+            "CAP-RLO-004",
+            "INT-DST-001",
+            "INT-IAR-001",
+            "INT-RLO-001",
+            "REQ-IAR-030",
+            "REQ-PLG-002",
+            "REQ-RLO-018",
+            "SPEC-IAR-016",
+            "SPEC-PLG-001",
+            "SPEC-RLO-006",
+            "VER-IAR-021",
+            "VER-RLS-031",
+            "VREC-PLG-030",
+            "WO-RLS-032"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "3fd07fff77069caf9d0391b0e7f928053439372accaa68b3d3ca1ceec5ac7c3d"
+      },
+      "seconds": 4.7670170999999755
+    }
+  },
+  "corrections": [
+    "First capture stopped on cp1252 decoding. Explicit UTF-8 used thereafter.",
+    "Second capture ran tests under a Python without installed se-harness. Package-assembly tests require an installed released evaluator for their isolated canonical hash subprocess.",
+    "Third capture retains the same candidate and tests, uses released 0.20.1 test interpreter and a revised external driver with its source SHA-256 in the captured command. No assertion or product code was changed.",
+    "An identity probe mistakenly used --identity; the corrected identity subcommand passed. No write resulted from that syntax error."
+  ],
+  "limits": [
+    "Claude exact-release native qualification remains unverified under accepted DEC-RLS-002.",
+    "Codex Windows desktop remains unverified under accepted DEC-RLS-002.",
+    "The 45-test capture skipped platform symlink creation and the optional real-wheel setup test. Exact-wheel setup and portable acceptance are separately retained in the candidate evidence.",
+    "Marketplace publication, public-route checks under WO-RLS-033, release markers and adoption remain separate."
+  ],
+  "git_preparation": {
+    "initial": {
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "exit_code": 2,
+      "result": {
+        "stdout": "docs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:43: trailing whitespace.\n+Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-q7pbtzcr\\private\\evaluators\\0.0.0\\2c4d2c0fea33b0f463083765e78ea461e776022134890a8b2995358c9e6762ae\\Scripts\\python.exe\ndocs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:44: trailing whitespace.\n+Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-q7pbtzcr\\private\\evaluators\\0.0.0\\2c4d2c0fea33b0f463083765e78ea461e776022134890a8b2995358c9e6762ae\\Scripts\\python.exe\ndocs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:45: trailing whitespace.\n+\ndocs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:46: trailing whitespace.\n+{\"candidate\": \"967d513d20348ca20f78b4b2d4235c33fc8748d4\", \"package_identity\": \"74f0854eadfbe962105d1aba9b594ff2f1697cd038cb27c1a01b802c1fb8d890\", \"checks\": \"Existing focused package/activation/delivery suites and retained exact-package evidence binding\", \"limits\": \"Claude exact-package native and Codex Windows desktop remain unverified under DEC-RLS-002. No human verification or marketplace publication.\"}\ndocs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:47: trailing whitespace.\n+......s...............s......................\ndocs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:48: trailing whitespace.\n+----------------------------------------------------------------------\ndocs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:49: trailing whitespace.\n+Ran 45 tests in 47.058s\ndocs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:50: trailing whitespace.\n+\ndocs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:51: trailing whitespace.\n+OK (skipped=2)\ndocs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md:52: trailing whitespace.\n+\n",
+        "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+      },
+      "seconds": 0.044152000000394764
+    },
+    "crlf_aware": {
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "-c",
+        "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "exit_code": 0,
+      "result": {
+        "stdout": "",
+        "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+      },
+      "seconds": 0.1291464999994787
+    },
+    "reason": "The generated record retains CRLF bytes inside captured test output. Preserve those protected bytes; use a per-command whitespace check that recognizes CR at line endings. No persistent Git setting changed."
+  }
+}

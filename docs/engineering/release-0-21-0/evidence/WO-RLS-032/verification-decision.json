@@ -1,0 +1,697 @@
+{
+  "human": "mmzen",
+  "decision": "I verify VREC-PLG-030 as assurance owner",
+  "candidate": "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+  "input_review": {
+    "human": "mmzen",
+    "response": "I verify VREC-PLG-030 as assurance owner",
+    "candidate": "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+    "record_sha256": "680dd9b0719a64a76719248190c11cfa13aacb3614da9bed2542e6511aca0878",
+    "evaluator_evidence_sha256": "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26",
+    "candidate_inputs": [
+      {
+        "path": "docs/engineering/release-0-21-0/decisions/DEC-RLS-002.md",
+        "sha256": "beee0ee9f4faf02d416c5b495dd00203e566ecc9451a29812067b3da3d423350"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/VREC-SEH-031-evaluator.json",
+        "sha256": "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-hosted-receipt.json",
+        "sha256": "ed30e69e46e1dd2a594718b4a67597226ca43c2b70c7cb38c276349f1cc2a89b"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+        "sha256": "cf1e0ae4019bc1442585c9c91d8ee910f93424d9f7530da0fcc29af7a8391cca"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation-review.md",
+        "sha256": "73875098f94417d7a62b3c454676734d4233e0a22d8aaa4ac7fd61368a9d5b4a"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/README.md",
+        "sha256": "74603b5c20f0dd18946076dc647dd4b8538058bd012e1413e278335a7cc617bf"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/WO-RLS-032-handoff.md",
+        "sha256": "a650b96ee2a37339118c21bcb0a6990579871372a3e71c2f41279af30c6390a0"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow-traces.json",
+        "sha256": "a6748d3ca6348c007391a3755a74134710682f411722cdf427deba3d8d8b20f8"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow.json",
+        "sha256": "e3ab91bc9ea82eb0d21fb57813108dc5356c42086da87d629602d6be4a5ffca0"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-boundaries.json",
+        "sha256": "dfbf73a6ecb8ebe088be0fa34ab230ebde251dc2925cd8ea3102c56c7c8362b0"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-current.json",
+        "sha256": "7253958dbae4338dc119a67395a69aae9dd8ef095d60094407c45aea63f35efe"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-events.jsonl",
+        "sha256": "c9c93bb367a6215dceaa5bfa531cc6f65a6a755739bca8f16bf696b094c46a04"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/completion.json",
+        "sha256": "b09d4179f2156679dbc8fd928bd0e889798cc088bbfc1dc90ab6f20a360b5a64"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/continuation-review.md",
+        "sha256": "d2705458790f1c4974579ca90790fd9b85d50e44c8179c86e64e3cc794cf80ca"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/contract-assessment.md",
+        "sha256": "3c959e538c67838b1d7da6560e698262ab99ad24a33ad34e77ba6a731e7c8ea3"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/decision-acceptance.json",
+        "sha256": "99dba3e3d717f94e5d943c109e78c2d15e7ff4b0d31cc65815b4e843aa458878"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/delivery-plan.json",
+        "sha256": "b9b89d7aab408a523c67cf1f8cd1fbdfbe8832b33f2e1a59c81a1068ebb79d85"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/handoff.json",
+        "sha256": "439844b60e07512600fd0264c872afbba50a59b941fe8090bdb6bfd9f7a7d600"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/historical-native-comparison.json",
+        "sha256": "f7f3dad99582130efb8392823031f04be69cc355e24580c8e0f64dc11f354d4c"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/native-observations.json",
+        "sha256": "38bf3b86d7e47d42bc8ef05de065967956542b9ed239d5a60e1122c4867a8185"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-qualification.json",
+        "sha256": "e216629d5676b38a4c6320f650cbe959616f698a74368561f026ad8e8783d192"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-recheck.json",
+        "sha256": "599b3185ade46d32ed8fdd4646eaa93516fdcfb3e8ba45d2aecfd75162dd2558"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-linux.json",
+        "sha256": "476ac2b5baa07c1fa3cd0c5476754548b2f8369e26b06aa367ed00cf8ff0fba5"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-windows.json",
+        "sha256": "9661e25176e82ff9349fd7b6ac8805d9a2c97c3e9dd703a11237916537b2fe32"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+        "sha256": "085641e1212e4ff08f2839cf95da0da79856f3328a38aed901dde1e34385ce6a"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-review.md",
+        "sha256": "15e9394b38bff3ad3feef724796ddda6a5b5cd9e34fcb93f0e32529530b74de4"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/qualification-checks.json",
+        "sha256": "0f465ba389ee63e151340831c13e627d762dec64d1b66d4eee3bb54d9ea9fc5e"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/evidence/WO-RLS-032/source-comparison.json",
+        "sha256": "fada68125415f190b5283d94a13b5278ea423a9789973e30a7f8dcda4275f24d"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/risks/RISK-RLS-002.md",
+        "sha256": "3d0e5e357fa62a638cf5a4d66b31357dfe08354548557fc7f60f5db89bac8599"
+      },
+      {
+        "path": "docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md",
+        "sha256": "10d4fb73be2dc45205182e2a6143adc234790a881747f62ae09fcb813ecd1bd8"
+      }
+    ]
+  },
+  "preview": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "transition",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--set",
+      "VREC-PLG-030=verified",
+      "--decision",
+      "VREC-PLG-030=assurance-owner",
+      "--reason",
+      "VREC-PLG-030=Human mmzen: I verify VREC-PLG-030 as assurance owner. Exact candidate 967d513d20348ca20f78b4b2d4235c33fc8748d4 and reviewed evidence digests are unchanged. DEC-RLS-002 retains the accepted Claude native and Codex Windows desktop unverified gaps for WO-RLS-032/plugin 0.2.4 only. Codex applies the recorded human decision using the released evaluator assurance-owner label. No marketplace publication authority is inferred.",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "schema": "se-harness-workflow-result-v2",
+      "digest_format": "machine-fields-v1",
+      "candidate": {
+        "commit": "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+        "git_object_format": "sha1"
+      },
+      "operation": {
+        "kind": "transition",
+        "outcome": "completed"
+      },
+      "selection": {
+        "primary": "VREC-PLG-030",
+        "artifacts": [
+          "VREC-PLG-030"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [],
+        "dependencies": [],
+        "declared_paths": [],
+        "changed_paths": [],
+        "change_set_complete": false
+      },
+      "compliance": {
+        "checkpoint": "transition",
+        "workflow_rule_id": "WFL-VREC-DELIVER",
+        "procedure_id": "PROC-DELIVERY-SELECT",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-ASSURANCE-DECISION",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4A-GRAPH",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "formal-graph:VREC-PLG-030"
+                  }
+                ],
+                "message": "The selected formal graph is valid."
+              },
+              {
+                "id": "QGP-G4A-INTEGRITY",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "repository-integrity:transition"
+                  }
+                ],
+                "message": "No repository-integrity blocker prevents selected evaluation."
+              },
+              {
+                "id": "QGP-G4A-DECISION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "decision-register:VREC-PLG-030"
+                  }
+                ],
+                "message": "No open decision blocks VREC-PLG-030."
+              }
+            ]
+          },
+          {
+            "id": "QG-STRUCTURAL",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGS-EDGE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "VREC-PLG-030"
+                  }
+                ],
+                "message": "ready -> verified is a declared lifecycle edge for VREC-PLG-030."
+              }
+            ]
+          }
+        ]
+      },
+      "procedure": {
+        "id": "PROC-DELIVERY-SELECT",
+        "current_step": "STEP-DELIVERY-SELECT",
+        "steps": [
+          {
+            "id": "STEP-DELIVERY-SELECT",
+            "kind": "decision",
+            "gate_ids": [
+              "QG-G4-VERIFIED-COVERAGE"
+            ],
+            "effects": [
+              "Selects one delivery path."
+            ],
+            "non_effects": [
+              "Selection performs no repository or release action."
+            ],
+            "decision_right": "DR-DELIVERY-SELECT",
+            "role": "repository-owner or release-owner",
+            "artifact": "VREC-PLG-030",
+            "decision": "which separately authorized delivery path to select",
+            "outcomes": [
+              "repository-integration",
+              "release-preparation",
+              "stop"
+            ],
+            "response": "Select one separately authorized delivery path for VREC-PLG-030."
+          }
+        ]
+      },
+      "state": {
+        "before": [
+          {
+            "id": "VREC-PLG-030",
+            "status": "ready"
+          }
+        ],
+        "after": [
+          {
+            "id": "VREC-PLG-030",
+            "status": "verified"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "mutation": {
+        "writes": [
+          {
+            "id": "VREC-PLG-030",
+            "path": "docs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md",
+            "fields": [
+              "lifecycle_events",
+              "status",
+              "updated",
+              "verified_at",
+              "verified_by"
+            ]
+          }
+        ]
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Planned 1 explicit lifecycle transition(s); no files were written."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "VREC-PLG-030 is verified."
+        ],
+        "decision_required": {
+          "decision_right": "DR-DELIVERY-SELECT",
+          "role": "repository-owner or release-owner",
+          "artifact": "VREC-PLG-030",
+          "decision": "which separately authorized delivery path to select",
+          "outcomes": [
+            "repository-integration",
+            "release-preparation",
+            "stop"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-DELIVERY-SELECT",
+          "step_id": "STEP-DELIVERY-SELECT",
+          "action": "which separately authorized delivery path to select"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Select one separately authorized delivery path for VREC-PLG-030."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+        ]
+      },
+      "instruction_discovery": {
+        "schema": "se-harness-instruction-discovery-v1",
+        "status": "available",
+        "agent_instructions": {
+          "entry": {
+            "file": "ENGINEERING_HARNESS.md",
+            "heading": "read-by-task"
+          },
+          "shared_prerequisites": [
+            {
+              "file": "docs/engineering/harness/COMMUNICATION.md",
+              "heading": "communication",
+              "when": "Before the first eligible English explanation in a fresh context."
+            },
+            {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "report-a-lifecycle-result",
+              "when": "Before reporting a lifecycle result."
+            }
+          ],
+          "procedure": {
+            "id": "PROC-DELIVERY-SELECT",
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ],
+            "steps": {
+              "STEP-DELIVERY-SELECT": {
+                "location": {
+                  "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                  "heading": "select-the-delivery-action"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "decision-rights",
+                    "when": "Before obtaining or applying an accountable decision."
+                  }
+                ]
+              }
+            }
+          },
+          "current_step": {
+            "id": "STEP-DELIVERY-SELECT",
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        },
+        "formal_artifact_ids": [
+          "VREC-PLG-030"
+        ],
+        "evaluator_only_inputs": [
+          "docs/engineering/WORKFLOW.json",
+          "docs/engineering/QUALITY_GATES.json"
+        ]
+      },
+      "result_sha256": "2849422ad0ced64976c00452c29cf784df0eb92854709a173f7e77f9970ed1f7"
+    },
+    "seconds": 10.513588499999969
+  },
+  "applied": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "transition",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--set",
+      "VREC-PLG-030=verified",
+      "--decision",
+      "VREC-PLG-030=assurance-owner",
+      "--reason",
+      "VREC-PLG-030=Human mmzen: I verify VREC-PLG-030 as assurance owner. Exact candidate 967d513d20348ca20f78b4b2d4235c33fc8748d4 and reviewed evidence digests are unchanged. DEC-RLS-002 retains the accepted Claude native and Codex Windows desktop unverified gaps for WO-RLS-032/plugin 0.2.4 only. Codex applies the recorded human decision using the released evaluator assurance-owner label. No marketplace publication authority is inferred.",
+      "--json",
+      "--apply"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "schema": "se-harness-workflow-result-v2",
+      "digest_format": "machine-fields-v1",
+      "candidate": {
+        "commit": "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+        "git_object_format": "sha1"
+      },
+      "operation": {
+        "kind": "transition",
+        "outcome": "completed"
+      },
+      "selection": {
+        "primary": "VREC-PLG-030",
+        "artifacts": [
+          "VREC-PLG-030"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [],
+        "dependencies": [],
+        "declared_paths": [],
+        "changed_paths": [],
+        "change_set_complete": false
+      },
+      "compliance": {
+        "checkpoint": "transition",
+        "workflow_rule_id": "WFL-VREC-DELIVER",
+        "procedure_id": "PROC-DELIVERY-SELECT",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-ASSURANCE-DECISION",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4A-GRAPH",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "formal-graph:VREC-PLG-030"
+                  }
+                ],
+                "message": "The selected formal graph is valid."
+              },
+              {
+                "id": "QGP-G4A-INTEGRITY",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "repository-integrity:transition"
+                  }
+                ],
+                "message": "No repository-integrity blocker prevents selected evaluation."
+              },
+              {
+                "id": "QGP-G4A-DECISION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "decision-register:VREC-PLG-030"
+                  }
+                ],
+                "message": "No open decision blocks VREC-PLG-030."
+              }
+            ]
+          },
+          {
+            "id": "QG-STRUCTURAL",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGS-EDGE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "VREC-PLG-030"
+                  }
+                ],
+                "message": "ready -> verified is a declared lifecycle edge for VREC-PLG-030."
+              }
+            ]
+          }
+        ]
+      },
+      "procedure": {
+        "id": "PROC-DELIVERY-SELECT",
+        "current_step": "STEP-DELIVERY-SELECT",
+        "steps": [
+          {
+            "id": "STEP-DELIVERY-SELECT",
+            "kind": "decision",
+            "gate_ids": [
+              "QG-G4-VERIFIED-COVERAGE"
+            ],
+            "effects": [
+              "Selects one delivery path."
+            ],
+            "non_effects": [
+              "Selection performs no repository or release action."
+            ],
+            "decision_right": "DR-DELIVERY-SELECT",
+            "role": "repository-owner or release-owner",
+            "artifact": "VREC-PLG-030",
+            "decision": "which separately authorized delivery path to select",
+            "outcomes": [
+              "repository-integration",
+              "release-preparation",
+              "stop"
+            ],
+            "response": "Select one separately authorized delivery path for VREC-PLG-030."
+          }
+        ]
+      },
+      "state": {
+        "before": [
+          {
+            "id": "VREC-PLG-030",
+            "status": "ready"
+          }
+        ],
+        "after": [
+          {
+            "id": "VREC-PLG-030",
+            "status": "verified"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "mutation": {
+        "writes": [
+          {
+            "id": "VREC-PLG-030",
+            "path": "docs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md",
+            "fields": [
+              "lifecycle_events",
+              "status",
+              "updated",
+              "verified_at",
+              "verified_by"
+            ]
+          }
+        ]
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Applied 1 explicit lifecycle transition(s) atomically."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "VREC-PLG-030 is verified."
+        ],
+        "decision_required": {
+          "decision_right": "DR-DELIVERY-SELECT",
+          "role": "repository-owner or release-owner",
+          "artifact": "VREC-PLG-030",
+          "decision": "which separately authorized delivery path to select",
+          "outcomes": [
+            "repository-integration",
+            "release-preparation",
+            "stop"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-DELIVERY-SELECT",
+          "step_id": "STEP-DELIVERY-SELECT",
+          "action": "which separately authorized delivery path to select"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Select one separately authorized delivery path for VREC-PLG-030."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+        ]
+      },
+      "instruction_discovery": {
+        "schema": "se-harness-instruction-discovery-v1",
+        "status": "available",
+        "agent_instructions": {
+          "entry": {
+            "file": "ENGINEERING_HARNESS.md",
+            "heading": "read-by-task"
+          },
+          "shared_prerequisites": [
+            {
+              "file": "docs/engineering/harness/COMMUNICATION.md",
+              "heading": "communication",
+              "when": "Before the first eligible English explanation in a fresh context."
+            },
+            {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "report-a-lifecycle-result",
+              "when": "Before reporting a lifecycle result."
+            }
+          ],
+          "procedure": {
+            "id": "PROC-DELIVERY-SELECT",
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ],
+            "steps": {
+              "STEP-DELIVERY-SELECT": {
+                "location": {
+                  "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                  "heading": "select-the-delivery-action"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "decision-rights",
+                    "when": "Before obtaining or applying an accountable decision."
+                  }
+                ]
+              }
+            }
+          },
+          "current_step": {
+            "id": "STEP-DELIVERY-SELECT",
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        },
+        "formal_artifact_ids": [
+          "VREC-PLG-030"
+        ],
+        "evaluator_only_inputs": [
+          "docs/engineering/WORKFLOW.json",
+          "docs/engineering/QUALITY_GATES.json"
+        ]
+      },
+      "result_sha256": "2849422ad0ced64976c00452c29cf784df0eb92854709a173f7e77f9970ed1f7"
+    },
+    "seconds": 15.26764009999988
+  },
+  "verified_record_sha256": "be6e175e1e660f9e62dc3a24f77712226b2791bf887e3973bad328cad500988d",
+  "limits": "DEC-RLS-002 accepted gaps remain unverified. This records verification only; no push, PR, marketplace publication, markers or adoption."
+}

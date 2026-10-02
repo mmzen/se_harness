@@ -1,0 +1,602 @@
+{
+  "status": "pending",
+  "codex_first_attempt": {
+    "host": "codex",
+    "claims": "Native CLI/app-server only; desktop remains unverified.",
+    "commands": [
+      {
+        "label": "host-version",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+          "--version"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-bd5r13jp\\w",
+        "exit_code": 0,
+        "stdout": "codex-cli 0.159.2\n",
+        "stderr": ""
+      },
+      {
+        "label": "installed-before",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+          "plugin",
+          "list",
+          "--marketplace",
+          "se-harness",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-bd5r13jp\\w",
+        "exit_code": 0,
+        "stdout": "{\n  \"installed\": [],\n  \"available\": []\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "install-test-package",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+          "-c",
+          "marketplaces.se-harness.source=\"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-bd5r13jp\\\\marketplace\"",
+          "plugin",
+          "add",
+          "verity-plane@se-harness",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-bd5r13jp\\w",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "Error: failed to load configured marketplace snapshot(s):\n- `se-harness` at C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032-native-profiles\\profiles\\codex\\codex\\.tmp/marketplaces\\se-harness: marketplace root does not contain a supported manifest\n"
+      }
+    ],
+    "stages": [],
+    "passed": false,
+    "root": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-bd5r13jp",
+    "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+    "wheel": {
+      "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+      "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+      "version": "0.21.0"
+    },
+    "package_files": {
+      "assembly-inventory.json": "1d26a818a3d2dd96fe7a378e529c02cca94104f144713061d60fb9facf514329",
+      "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "README.md": "21922abc1633930c62172f4696f9d2207cabc2fd0a060bb5a6a4f9aa98462530",
+      ".codex-plugin/plugin.json": "d645ca7a01f4175f9dea06bb6cfb073f73263e5276163dae673b33f1ab3a28a0",
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "hooks/hooks.json": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2",
+      "packages/se_harness-0.21.0-py3-none-any.whl": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+      "skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+      "skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+      "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+      "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+      "skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+    },
+    "version": "codex-cli 0.159.2",
+    "error": "('install-test-package', '', 'Error: failed to load configured marketplace snapshot(s):\\n- `se-harness` at C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\rls032-native-profiles\\\\profiles\\\\codex\\\\codex\\\\.tmp/marketplaces\\\\se-harness: marketplace root does not contain a supported manifest\\n')"
+  },
+  "codex_registered_attempt": {
+    "host": "codex",
+    "claims": "Native CLI/app-server only; desktop remains unverified.",
+    "commands": [
+      {
+        "label": "host-version",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+          "--version"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-2oxt5_on\\w",
+        "exit_code": 0,
+        "stdout": "codex-cli 0.159.2\n",
+        "stderr": ""
+      },
+      {
+        "label": "installed-before",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+          "plugin",
+          "list",
+          "--marketplace",
+          "se-harness",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-2oxt5_on\\w",
+        "exit_code": 0,
+        "stdout": "{\n  \"installed\": [],\n  \"available\": []\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "add-test-marketplace",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+          "plugin",
+          "marketplace",
+          "add",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-2oxt5_on\\marketplace",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-2oxt5_on\\w",
+        "exit_code": 0,
+        "stdout": "{\n  \"marketplaceName\": \"se-harness\",\n  \"installedRoot\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-2oxt5_on\\\\marketplace\",\n  \"alreadyAdded\": false\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "install-test-package",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+          "-c",
+          "marketplaces.se-harness.source=\"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-2oxt5_on\\\\marketplace\"",
+          "plugin",
+          "add",
+          "verity-plane@se-harness",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-2oxt5_on\\w",
+        "exit_code": 0,
+        "stdout": "{\n  \"pluginId\": \"verity-plane@se-harness\",\n  \"name\": \"verity-plane\",\n  \"marketplaceName\": \"se-harness\",\n  \"version\": \"0.2.4\",\n  \"installedPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\rls032-native-profiles\\\\profiles\\\\codex\\\\codex\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.4\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+        "stderr": ""
+      }
+    ],
+    "stages": [
+      {
+        "phase": "startup",
+        "contexts": [],
+        "replies": [
+          "{\n  \"session_id\": null,\n  \"selected_checkout\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": null,\n  \"bootstrap\": null,\n  \"delivery_gap\": \"No hook context was delivered.\",\n  \"may_implement\": false\n}"
+        ]
+      }
+    ],
+    "passed": false,
+    "root": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-2oxt5_on",
+    "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+    "wheel": {
+      "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+      "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+      "version": "0.21.0"
+    },
+    "package_files": {
+      "assembly-inventory.json": "1d26a818a3d2dd96fe7a378e529c02cca94104f144713061d60fb9facf514329",
+      "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "README.md": "21922abc1633930c62172f4696f9d2207cabc2fd0a060bb5a6a4f9aa98462530",
+      ".codex-plugin/plugin.json": "d645ca7a01f4175f9dea06bb6cfb073f73263e5276163dae673b33f1ab3a28a0",
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "hooks/hooks.json": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2",
+      "packages/se_harness-0.21.0-py3-none-any.whl": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+      "skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+      "skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+      "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+      "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+      "skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+    },
+    "version": "codex-cli 0.159.2",
+    "error": ""
+  },
+  "codex_hook_inventory": {
+    "data": [
+      {
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-2oxt5_on\\w",
+        "hooks": [
+          {
+            "key": "verity-plane@se-harness:hooks/hooks.json:session_start:0:0",
+            "eventName": "sessionStart",
+            "handlerType": "command",
+            "command": "python \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032-native-profiles\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.4/scripts/inject_instructions.py\" --host codex",
+            "async": false,
+            "matcher": "^(startup|resume|clear|compact)$",
+            "timeoutSec": 10,
+            "statusMessage": null,
+            "additionalContextLimit": 5000,
+            "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032-native-profiles\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.4\\hooks\\hooks.json",
+            "source": "plugin",
+            "pluginId": "verity-plane@se-harness",
+            "displayOrder": 0,
+            "enabled": true,
+            "isManaged": false,
+            "currentHash": "sha256:f297274c31689e31abb00ae43e22a718a8e6242311442e65d5007f4d618839ff",
+            "trustStatus": "untrusted"
+          }
+        ],
+        "warnings": [],
+        "errors": []
+      }
+    ]
+  },
+  "claude_attempt": {
+    "host": "claude",
+    "claims": "Native CLI/app-server only; desktop remains unverified.",
+    "commands": [
+      {
+        "label": "host-version",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "--version"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-advtexx7\\w",
+        "exit_code": 0,
+        "stdout": "2.1.273 (Claude Code)\n",
+        "stderr": ""
+      }
+    ],
+    "stages": [
+      {
+        "phase": "fresh-startup",
+        "started_at": "2026-10-02T05:12:45.858363+00:00",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "--print",
+          "--verbose",
+          "--output-format",
+          "stream-json",
+          "--include-hook-events",
+          "--tools",
+          "",
+          "--strict-mcp-config",
+          "--permission-prompts",
+          "none",
+          "--setting-sources",
+          "project",
+          "--settings",
+          "{}",
+          "--plugin-dir",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-advtexx7\\package\\verity-plane",
+          "--model",
+          "sonnet"
+        ],
+        "stdin": "In Python, what does sorted([3, 1, 2]) return? Answer in one sentence. Do not use tools.",
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-advtexx7\\w",
+        "environment_overrides": {},
+        "exit_code": 1,
+        "session_id": "5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a",
+        "contexts": [
+          "Host: claude; session_id: 5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\nPlugin data: C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032-native-profiles\\profiles\\claude\\claude\\plugins\\data\\verity-plane-inline\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\n\n# Select the working repository\n\nWhen asked to clone, clone to the intended destination, then activate that exact\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\nwhen the intended repository is ambiguous. Do not scan child repositories.\n\nUse the setup skill's activation procedure with the host, session_id and\nplugin data supplied with this message. It immediately returns\nthe selected instructions. Read that complete entry before governed work. If the\nrepository has no harness selection or its evaluator is missing, use the setup\nskill with an explicitly selected release, then activate again. Do not choose a\nrelease or upgrade silently.\n\nSelection belongs only to this host session. A new session activates its own\ncheckout. Switching or clearing affects only this session. Activation gives no\napproval, verification or delivery authority; follow the selected release for\nnew or resumed work and any requested push or pull request.\n"
+        ],
+        "events": [
+          {
+            "type": "system",
+            "subtype": "hook_response",
+            "hook_id": "2456f8a9-47cd-45dc-811f-a6d05eda27cf",
+            "hook_name": "SessionStart:startup",
+            "hook_event": "SessionStart",
+            "output": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"Host: claude; session_id: 5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\\nPlugin data: C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\rls032-native-profiles\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\n# Select the working repository\\n\\nWhen asked to clone, clone to the intended destination, then activate that exact\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\n\\nUse the setup skill's activation procedure with the host, session_id and\\nplugin data supplied with this message. It immediately returns\\nthe selected instructions. Read that complete entry before governed work. If the\\nrepository has no harness selection or its evaluator is missing, use the setup\\nskill with an explicitly selected release, then activate again. Do not choose a\\nrelease or upgrade silently.\\n\\nSelection belongs only to this host session. A new session activates its own\\ncheckout. Switching or clearing affects only this session. Activation gives no\\napproval, verification or delivery authority; follow the selected release for\\nnew or resumed work and any requested push or pull request.\\n\"}}\r\n",
+            "stdout": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"Host: claude; session_id: 5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\\nPlugin data: C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\rls032-native-profiles\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\n# Select the working repository\\n\\nWhen asked to clone, clone to the intended destination, then activate that exact\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\n\\nUse the setup skill's activation procedure with the host, session_id and\\nplugin data supplied with this message. It immediately returns\\nthe selected instructions. Read that complete entry before governed work. If the\\nrepository has no harness selection or its evaluator is missing, use the setup\\nskill with an explicitly selected release, then activate again. Do not choose a\\nrelease or upgrade silently.\\n\\nSelection belongs only to this host session. A new session activates its own\\ncheckout. Switching or clearing affects only this session. Activation gives no\\napproval, verification or delivery authority; follow the selected release for\\nnew or resumed work and any requested push or pull request.\\n\"}}\r\n",
+            "stderr": "",
+            "exit_code": 0,
+            "outcome": "success",
+            "uuid": "81b92155-08b8-4b8d-a56c-0efbbc24aa25",
+            "session_id": "5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a"
+          },
+          {
+            "type": "system",
+            "subtype": "init",
+            "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-advtexx7\\w",
+            "session_id": "5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a",
+            "tools": [],
+            "mcp_servers": [],
+            "model": "claude-sonnet-5",
+            "permissionMode": "default",
+            "slash_commands": [
+              "deep-research",
+              "verity-plane:change",
+              "verity-plane:evidence",
+              "verity-plane:harness-operator-brief",
+              "verity-plane:harness-orient",
+              "verity-plane:setup",
+              "dataviz",
+              "update-config",
+              "verify",
+              "debug",
+              "code-review",
+              "simplify",
+              "batch",
+              "fewer-permission-prompts",
+              "doctor",
+              "loop",
+              "schedule",
+              "claude-api",
+              "workflow-authoring",
+              "run",
+              "run-skill-generator",
+              "agents",
+              "auto-mode-setup",
+              "autocompact",
+              "clear",
+              "color",
+              "compact",
+              "config",
+              "output-style",
+              "context",
+              "effort",
+              "fast",
+              "heapdump",
+              "init",
+              "mcp",
+              "model",
+              "__remote-workflow",
+              "workflow-launch-exec",
+              "reload-plugins",
+              "reload-skills",
+              "rename",
+              "security-review",
+              "usage",
+              "insights",
+              "recap",
+              "goal",
+              "list-agents",
+              "team-onboarding"
+            ],
+            "terminal_slash_commands": [
+              "doctor",
+              "color",
+              "reload-plugins"
+            ],
+            "apiKeySource": "none",
+            "claude_code_version": "2.1.273",
+            "output_style": "default",
+            "agents": [
+              "claude",
+              "Explore",
+              "general-purpose",
+              "Plan",
+              "statusline-setup"
+            ],
+            "skills": [
+              "deep-research",
+              "verity-plane:change",
+              "verity-plane:evidence",
+              "verity-plane:harness-operator-brief",
+              "verity-plane:harness-orient",
+              "verity-plane:setup",
+              "dataviz",
+              "update-config",
+              "verify",
+              "debug",
+              "code-review",
+              "simplify",
+              "batch",
+              "fewer-permission-prompts",
+              "doctor",
+              "loop",
+              "schedule",
+              "claude-api",
+              "workflow-authoring",
+              "run",
+              "run-skill-generator"
+            ],
+            "plugins": [
+              {
+                "name": "verity-plane",
+                "path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-advtexx7\\package\\verity-plane",
+                "source": "verity-plane@inline",
+                "version": "0.2.4"
+              }
+            ],
+            "capabilities": [
+              "interrupt_receipt_v1",
+              "interrupt_cancel_queued_v1",
+              "msg_lifecycle_v1"
+            ],
+            "analytics_disabled": true,
+            "product_feedback_disabled": true,
+            "uuid": "708b4d02-afa7-4b5b-80cb-5f0840d1c2ea",
+            "memory_paths": {
+              "auto": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls032-native-profiles\\profiles\\claude\\claude\\projects\\C--Users-mathi-AppData-Local-Temp-i30n-advtexx7-w\\memory\\"
+            },
+            "messaging_socket_path": "\\\\.\\pipe\\LOCAL\\cc-msg-fc28dc677031bade9ada587aa3c58b58",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "powershell_path": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+          },
+          {
+            "duration_api_ms": 0,
+            "stop_reason": "stop_sequence",
+            "session_id": "5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a",
+            "total_cost_usd": 0,
+            "usage": {
+              "output_tokens_details": {
+                "thinking_tokens": 0
+              },
+              "input_tokens": 0,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 0,
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "",
+              "iterations": [],
+              "speed": "standard"
+            },
+            "modelUsage": {},
+            "permission_denials": [],
+            "terminal_reason": "api_error",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": true,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "Failed to authenticate: OAuth session expired and could not be refreshed",
+            "type": "result",
+            "duration_ms": 885,
+            "uuid": "db3da474-1804-4bd2-918d-2e89e7fab88f",
+            "queued_turn_count": 0,
+            "result_index": 0
+          }
+        ],
+        "replies": [
+          "Failed to authenticate: OAuth session expired and could not be refreshed"
+        ],
+        "models": [
+          "claude-sonnet-5"
+        ],
+        "provider_errors": [
+          "Failed to authenticate: OAuth session expired and could not be refreshed"
+        ],
+        "compaction_triggers": [],
+        "stdout": "{\"type\":\"system\",\"subtype\":\"hook_started\",\"hook_id\":\"2456f8a9-47cd-45dc-811f-a6d05eda27cf\",\"hook_name\":\"SessionStart:startup\",\"hook_event\":\"SessionStart\",\"uuid\":\"25a7e39e-c26c-4d04-9d81-ce6e3c54a36e\",\"session_id\":\"5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\"}\n{\"type\":\"system\",\"subtype\":\"hook_response\",\"hook_id\":\"2456f8a9-47cd-45dc-811f-a6d05eda27cf\",\"hook_name\":\"SessionStart:startup\",\"hook_event\":\"SessionStart\",\"output\":\"{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"SessionStart\\\", \\\"additionalContext\\\": \\\"Host: claude; session_id: 5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\\\\nPlugin data: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\Documents\\\\\\\\Codex\\\\\\\\2026-09-20\\\\\\\\verity-plane-plugin-verity-plane-se\\\\\\\\work\\\\\\\\rls032-native-profiles\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\\\n\\\\n# Select the working repository\\\\n\\\\nWhen asked to clone, clone to the intended destination, then activate that exact\\\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\\\n\\\\nUse the setup skill's activation procedure with the host, session_id and\\\\nplugin data supplied with this message. It immediately returns\\\\nthe selected instructions. Read that complete entry before governed work. If the\\\\nrepository has no harness selection or its evaluator is missing, use the setup\\\\nskill with an explicitly selected release, then activate again. Do not choose a\\\\nrelease or upgrade silently.\\\\n\\\\nSelection belongs only to this host session. A new session activates its own\\\\ncheckout. Switching or clearing affects only this session. Activation gives no\\\\napproval, verification or delivery authority; follow the selected release for\\\\nnew or resumed work and any requested push or pull request.\\\\n\\\"}}\\r\\n\",\"stdout\":\"{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"SessionStart\\\", \\\"additionalContext\\\": \\\"Host: claude; session_id: 5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\\\\nPlugin data: C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\Documents\\\\\\\\Codex\\\\\\\\2026-09-20\\\\\\\\verity-plane-plugin-verity-plane-se\\\\\\\\work\\\\\\\\rls032-native-profiles\\\\\\\\profiles\\\\\\\\claude\\\\\\\\claude\\\\\\\\plugins\\\\\\\\data\\\\\\\\verity-plane-inline\\\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\\\n\\\\n# Select the working repository\\\\n\\\\nWhen asked to clone, clone to the intended destination, then activate that exact\\\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\\\n\\\\nUse the setup skill's activation procedure with the host, session_id and\\\\nplugin data supplied with this message. It immediately returns\\\\nthe selected instructions. Read that complete entry before governed work. If the\\\\nrepository has no harness selection or its evaluator is missing, use the setup\\\\nskill with an explicitly selected release, then activate again. Do not choose a\\\\nrelease or upgrade silently.\\\\n\\\\nSelection belongs only to this host session. A new session activates its own\\\\ncheckout. Switching or clearing affects only this session. Activation gives no\\\\napproval, verification or delivery authority; follow the selected release for\\\\nnew or resumed work and any requested push or pull request.\\\\n\\\"}}\\r\\n\",\"stderr\":\"\",\"exit_code\":0,\"outcome\":\"success\",\"uuid\":\"81b92155-08b8-4b8d-a56c-0efbbc24aa25\",\"session_id\":\"5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\"}\n{\"type\":\"system\",\"subtype\":\"init\",\"cwd\":\"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-advtexx7\\\\w\",\"session_id\":\"5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\",\"tools\":[],\"mcp_servers\":[],\"model\":\"claude-sonnet-5\",\"permissionMode\":\"default\",\"slash_commands\":[\"deep-research\",\"verity-plane:change\",\"verity-plane:evidence\",\"verity-plane:harness-operator-brief\",\"verity-plane:harness-orient\",\"verity-plane:setup\",\"dataviz\",\"update-config\",\"verify\",\"debug\",\"code-review\",\"simplify\",\"batch\",\"fewer-permission-prompts\",\"doctor\",\"loop\",\"schedule\",\"claude-api\",\"workflow-authoring\",\"run\",\"run-skill-generator\",\"agents\",\"auto-mode-setup\",\"autocompact\",\"clear\",\"color\",\"compact\",\"config\",\"output-style\",\"context\",\"effort\",\"fast\",\"heapdump\",\"init\",\"mcp\",\"model\",\"__remote-workflow\",\"workflow-launch-exec\",\"reload-plugins\",\"reload-skills\",\"rename\",\"security-review\",\"usage\",\"insights\",\"recap\",\"goal\",\"list-agents\",\"team-onboarding\"],\"terminal_slash_commands\":[\"doctor\",\"color\",\"reload-plugins\"],\"apiKeySource\":\"none\",\"claude_code_version\":\"2.1.273\",\"output_style\":\"default\",\"agents\":[\"claude\",\"Explore\",\"general-purpose\",\"Plan\",\"statusline-setup\"],\"skills\":[\"deep-research\",\"verity-plane:change\",\"verity-plane:evidence\",\"verity-plane:harness-operator-brief\",\"verity-plane:harness-orient\",\"verity-plane:setup\",\"dataviz\",\"update-config\",\"verify\",\"debug\",\"code-review\",\"simplify\",\"batch\",\"fewer-permission-prompts\",\"doctor\",\"loop\",\"schedule\",\"claude-api\",\"workflow-authoring\",\"run\",\"run-skill-generator\"],\"plugins\":[{\"name\":\"verity-plane\",\"path\":\"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\i30n-advtexx7\\\\package\\\\verity-plane\",\"source\":\"verity-plane@inline\",\"version\":\"0.2.4\"}],\"capabilities\":[\"interrupt_receipt_v1\",\"interrupt_cancel_queued_v1\",\"msg_lifecycle_v1\"],\"analytics_disabled\":true,\"product_feedback_disabled\":true,\"uuid\":\"708b4d02-afa7-4b5b-80cb-5f0840d1c2ea\",\"memory_paths\":{\"auto\":\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\rls032-native-profiles\\\\profiles\\\\claude\\\\claude\\\\projects\\\\C--Users-mathi-AppData-Local-Temp-i30n-advtexx7-w\\\\memory\\\\\"},\"messaging_socket_path\":\"\\\\\\\\.\\\\pipe\\\\LOCAL\\\\cc-msg-fc28dc677031bade9ada587aa3c58b58\",\"fast_mode_state\":\"off\",\"fast_mode_disabled_reason\":\"sdk_opt_in_required\",\"powershell_path\":\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\"}\n{\"type\":\"system\",\"subtype\":\"api_retry\",\"attempt\":1,\"max_retries\":10,\"retry_delay_ms\":571,\"error_status\":401,\"error\":\"authentication_failed\",\"session_id\":\"5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\",\"uuid\":\"8095287b-1ebb-4eb3-ad44-73395465c17f\"}\n{\"type\":\"assistant\",\"message\":{\"diagnostics\":null,\"id\":\"84afd785-3a3c-4f87-b29c-43aa20673b07\",\"container\":null,\"model\":\"<synthetic>\",\"role\":\"assistant\",\"stop_details\":null,\"stop_reason\":\"stop_sequence\",\"stop_sequence\":\"\",\"type\":\"message\",\"usage\":{\"output_tokens_details\":null,\"input_tokens\":0,\"output_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":null,\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":null,\"iterations\":null,\"speed\":null},\"content\":[{\"type\":\"text\",\"text\":\"Failed to authenticate: OAuth session expired and could not be refreshed\"}],\"context_management\":null},\"parent_tool_use_id\":null,\"session_id\":\"5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\",\"uuid\":\"c17b025c-dabb-48b4-b550-37ca493eaef4\",\"timestamp\":\"2026-10-02T05:12:47.562Z\",\"error\":\"authentication_failed\",\"is_api_error_message\":true}\n{\"duration_api_ms\":0,\"stop_reason\":\"stop_sequence\",\"session_id\":\"5d8ab279-8ab2-4b72-9d26-ae3f2ee71f5a\",\"total_cost_usd\":0,\"usage\":{\"output_tokens_details\":{\"thinking_tokens\":0},\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[],\"speed\":\"standard\"},\"modelUsage\":{},\"permission_denials\":[],\"terminal_reason\":\"api_error\",\"fast_mode_state\":\"off\",\"fast_mode_disabled_reason\":\"sdk_opt_in_required\",\"subagent_stats\":{\"spawned\":0,\"requested\":{\"background\":0,\"foreground\":0,\"unset\":0},\"started_in_background\":0,\"max_depth\":0,\"spawned_by_subagents\":0,\"completed\":0,\"failed\":0,\"killed\":{\"parent\":0,\"user\":0,\"system\":0},\"refused\":{\"depth_limit\":0,\"concurrency_limit\":0,\"budget\":0},\"by_type\":{}},\"is_error\":true,\"num_turns\":1,\"subtype\":\"success\",\"api_error_status\":null,\"result\":\"Failed to authenticate: OAuth session expired and could not be refreshed\",\"type\":\"result\",\"duration_ms\":885,\"uuid\":\"db3da474-1804-4bd2-918d-2e89e7fab88f\",\"queued_turn_count\":0,\"result_index\":0}\n",
+        "stderr": ""
+      }
+    ],
+    "passed": false,
+    "root": "C:\\Users\\mathi\\AppData\\Local\\Temp\\i30n-advtexx7",
+    "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+    "wheel": {
+      "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+      "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+      "version": "0.21.0"
+    },
+    "package_files": {
+      "assembly-inventory.json": "959781cd0ea2c06e47095c2b6bbb4a50a10d1e11f7bc68d0ba3cc8de472548f0",
+      "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "README.md": "21922abc1633930c62172f4696f9d2207cabc2fd0a060bb5a6a4f9aa98462530",
+      ".claude-plugin/plugin.json": "aecf6ca576848d38db14c3052d72c90c8b8c1d929d781b7cad4a8ca1b8804071",
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "hooks/hooks.json": "677e2b7797c7f708589578559a3ea19d36c41cfe1dce05f3c39365ce5c395cf5",
+      "packages/se_harness-0.21.0-py3-none-any.whl": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+      "skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+      "skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+      "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+      "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+      "skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+    },
+    "authorization": "Human mmzen: Approve package and required verification, including WO-RLS-032/VER-RLS-031; qualify the final release inputs with existing authorized disposable test profiles.",
+    "diagnostic_changes": [
+      "new native session and disposable checkout",
+      "ordinary code/data questions instead of metadata/acknowledgement probes",
+      "documented auto-compact window only; no percentage override"
+    ],
+    "started_at": "2026-10-02T05:12:45.829746+00:00",
+    "source_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+    "repository_head": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+    "timing_documentation": "https://code.claude.com/docs/en/model-config#set-the-auto-compact-window",
+    "version": "2.1.273 (Claude Code)",
+    "error": "{'phase': 'fresh-startup', 'exit_code': 1, 'errors': ['Failed to authenticate: OAuth session expired and could not be refreshed']}",
+    "completed_at": "2026-10-02T05:12:47.633708+00:00"
+  },
+  "authentication_status_commands": {
+    "codex": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+        "login",
+        "status"
+      ],
+      "exit_code": 0,
+      "loggedIn": true
+    },
+    "claude": {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "auth",
+        "status",
+        "--json"
+      ],
+      "exit_code": 0,
+      "loggedIn": true,
+      "authMethod": "claude.ai"
+    }
+  },
+  "findings": [
+    "Codex exact package installed and is discoverable; native hook is untrusted, so startup delivered no context. No trust bypass used.",
+    "Claude status reports logged in, but the actual authenticated request reports expired OAuth and failed refresh. Live evidence remains pending.",
+    "Fresh-profile Codex marketplace registration initially failed, corrected with native marketplace add. Original failure retained.",
+    "Codex Windows desktop is unverified. DEC-RLS-001 applies to WO-RLS-031 only; it is not extended to WO-RLS-032."
+  ],
+  "next_actions": [
+    "Human signs in to Claude Code in the disposable profile.",
+    "Human reviews and trusts the exact Codex hook through the native host.",
+    "Resume exact-package native matrix and retain actual outcomes.",
+    "Obtain required desktop evidence or a separately authorized formal resolution."
+  ],
+  "probe_sources": {
+    "rls032_native_codex.py": {
+      "sha256": "995ef58661e58d8bea61c99c06a0bec6f076ae4f3c9e4c14fd7c37642e0eb3d7",
+      "content": "\"\"\"Temporary exact-wheel native probes; only disposable profiles and fixtures.\"\"\"\nfrom pathlib import Path\nimport sys,json,subprocess,hashlib,os,base64,zipfile,io,tempfile,re,datetime\nWORK=Path(__file__).resolve().parent\nOUT=WORK/'reconcile-minimal-20261001'\nsys.path.insert(0,str(WORK/'iar-demo-tools'))\nfrom run_demo import child_env\nfrom acceptance_native import Codex,extract_codex,save\nBASE=WORK/'rls032-native-profiles'\nEXES=json.loads((OUT/'native-current-inventory.json').read_text())\nEXES['codex']['executable']=r'C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe'\nmode=sys.argv[1]\nif mode=='inputs':\n    fixture=Path(json.loads((OUT/'release021-adapter-inputs.json').read_text())['fixture'])\n    inputs={host:base64.b64encode((fixture/'packages'/('verity-plane-'+host+'.zip')).read_bytes()).decode() for host in ['codex','claude']}\n    inputs['marketplace']=json.loads((WORK/'release030-main/release/plugin-marketplace/.agents/plugins/marketplace.json').read_text())\n    inputs['expected']=json.loads((OUT/'release021-qualification-wheel-expected.json').read_text())['evaluator']\n    save(OUT/'rls032-native-inputs.json',inputs)\n    raise SystemExit(0)\nreport={'host':mode,'claims':'Native CLI/app-server only; desktop remains unverified.','commands':[],'stages':[],'passed':False}\ndest=OUT/('rls032-native-'+mode+(('-'+sys.argv[2]) if len(sys.argv)>2 else '')+'.json');assert not dest.exists()\nenv=child_env(BASE,mode)\nroot=Path(tempfile.mkdtemp(prefix='i30n-'));parent=root/'w';parent.mkdir()\nreport['root']=str(root)\ninputs=json.loads((OUT/'rls032-native-inputs.json').read_text());expected=inputs['expected']\npackage=root/'package'\nwith zipfile.ZipFile(io.BytesIO(base64.b64decode(inputs[mode]))) as z:\n    assert all(not Path(n).is_absolute() and '..' not in Path(n).parts for n in z.namelist())\n    z.extractall(package)\nplugin=package/'verity-plane';wheel=plugin/'packages'/expected['archive_name']\nassert hashlib.sha256(wheel.read_bytes()).hexdigest()==expected['archive_sha256']\nwith zipfile.ZipFile(wheel) as z:\n    n=next(n for n in z.namelist() if n.endswith('/ENGINEERING_HARNESS.md.tpl'))\n    entry=z.read(n).decode().replace('{{PROJECT_NAME}}','Plugin qualification').replace('{{HARNESS_VERSION}}','0.21.0')\ndigest=hashlib.sha256(entry.encode()).hexdigest();report['entry_sha256']=digest;report['wheel']=expected\nreport['package_files']={p.relative_to(plugin).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in plugin.rglob('*') if p.is_file()}\ndef flush():save(dest,report)\ndef run(label,argv,allowed=(0,),use_env=env):\n    argv=list(map(str,argv));r=subprocess.run(argv,cwd=parent,env=use_env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=180)\n    report['commands'].append({'label':label,'argv':argv,'cwd':str(parent),'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr});flush()\n    assert r.returncode in allowed,(label,r.stdout[-1200:],r.stderr[-1200:])\n    return r.stdout\ndef assess(contexts):\n    assert any(c.endswith(entry) and digest in c for c in contexts),[c[:180] for c in contexts]\ndef prepare_and_activate(session,data):\n    remote=root/'source';remote.mkdir()\n    raw=run('prepare-exact-evaluator',[sys.executable,'-I',plugin/'scripts/setup.py','--target',remote,'--data-root',data,'--wheel',wheel],allowed=(1,2))\n    found=re.search(r'^Evaluator Python: (.+)$',raw,re.M);assert found\n    py=Path(found[1].strip())\n    run('fixture-init',[py,'-I','-m','se_harness','init',remote,'--project-name','Plugin qualification','--integration','git','--json'])\n    for args in [['init'],['add','.'],['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-m','Disposable exact-wheel selection']]:\n        run('fixture-git',['git','-C',remote,*args])\n    repo=parent/'clone'\n    run('clone-after-startup',['git','clone',remote,repo]);assert not (repo/'ENGINEERING_HARNESS.md').exists()\n    before={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in repo.iterdir() if p.is_file()}\n    activation=json.loads(run('activate-observed-session',[sys.executable,'-I',plugin/'scripts/activate.py','--host',mode,'--session-id',session,'--data-root',data,'--target',repo]))\n    assert activation['status']=='available';assess([activation['content']])\n    report['selection']={'session_id':session,'data':str(data),'repository':str(repo),'before':before}\n    return repo,before\nprobe='Read-only native instruction delivery test. Do not call tools. Copy only the newest hook context as JSON: session_id, selected_checkout, harness_version, entry_sha256, final_heading, bootstrap, delivery_gap, may_implement=false. Delivery grants no lifecycle authority.'\nif mode=='claude':\n    probe='This is a connectivity check. Do not use tools. Reply with PROBE_COMPLETE.'\nclient=None;restore=None\ntry:\n    report['version']=run('host-version',[EXES[mode]['executable'],'--version']).strip()\n    if mode=='codex':\n        exe=EXES[mode]['executable']\n        installed=json.loads(run('installed-before',[exe,'plugin','list','--marketplace','se-harness','--json']))['installed']\n        assert installed==[], 'Expected a fresh isolated plugin profile'\n        restore=None\n        market=root/'marketplace';(market/'.agents/plugins').mkdir(parents=True)\n        import shutil\n        shutil.copytree(plugin,market/'packages/codex/verity-plane')\n        save(market/'.agents/plugins/marketplace.json',inputs['marketplace'])\n        run('add-test-marketplace',[exe,'plugin','marketplace','add',str(market),'--json'])\n        run('install-test-package',[exe,'-c','marketplaces.se-harness.source='+json.dumps(str(market)),'plugin','add','verity-plane@se-harness','--json'])\n        cache=Path(env['CODEX_HOME'])/'plugins/cache/se-harness/verity-plane/0.2.4'\n        assert all((cache/p).is_file() and hashlib.sha256((cache/p).read_bytes()).hexdigest()==h for p,h in report['package_files'].items())\n        events=OUT/'rls032-native-codex-events';events.mkdir()\n        manifest={'demo':str(BASE),'host_executables':{'codex':exe}}\n        client=Codex(manifest,events)\n        config={'marketplaces.se-harness.source':str(market),'marketplaces.se-harness.source_type':'local','features.multi_agent':False}\n        thread=client.rpc('thread/start',{'cwd':str(parent),'ephemeral':False,'sandbox':'read-only','approvalPolicy':'on-request','config':config})['thread']['id']\n        def turn(phase):\n            client.phase=phase;offset=len(client.events)\n            client.rpc('turn/start',{'threadId':thread,'cwd':str(parent),'input':[{'type':'text','text':probe}]});client.wait_turn(thread)\n            contexts,replies=extract_codex(client.events[offset:]);report['stages'].append({'phase':phase,'contexts':contexts,'replies':replies});flush()\n            print(json.dumps({'host':mode,'phase':phase,'contexts':len(contexts)}),flush=True)\n            return contexts\n        contexts=turn('startup');assert any('# Select the working repository' in c for c in contexts)\n        data=Path(env['CODEX_HOME'])/'plugins/data/verity-plane-se-harness'\n        assert any(str(data) in c and thread in c for c in contexts)\n        repo,before=prepare_and_activate(thread,data)\n        client.phase='manual-compact';offset=len(client.events)\n        client.rpc('thread/compact/start',{'threadId':thread});client.wait_turn(thread)\n        contexts,_=extract_codex(client.events[offset:]);contexts+=turn('after-manual');assess(contexts)\n        client.close();client=None\n        resume=events/'resume';resume.mkdir();client=Codex(manifest,resume);client.phase='resume'\n        client.rpc('thread/resume',{'threadId':thread,'cwd':str(parent),'excludeTurns':True,'config':config})\n        contexts=turn('resumed');all_contexts,_=extract_codex(client.events);assess(all_contexts)\n        client.close();client=None\n        auto=events/'automatic';auto.mkdir();client=Codex(manifest,auto);client.phase='automatic-resume'\n        client.rpc('thread/resume',{'threadId':thread,'cwd':str(parent),'excludeTurns':True,'config':dict(config,model_auto_compact_token_limit=1000)})\n        contexts=turn('automatic');assess(contexts)\n        assert any(e.get('notification',{}).get('params',{}).get('item',{}).get('type')=='contextCompaction' for e in client.events)\n        report['automatic_compaction_observed']=True\n    else:\n        def claude(phase,session=None,auto=False):\n            argv=[EXES[mode]['executable'],'--print','--verbose','--output-format','stream-json','--include-hook-events','--tools','','--strict-mcp-config','--permission-prompts','none','--setting-sources','project','--settings','{}','--plugin-dir',str(plugin),'--model','opus']\n            if session:argv+=['--resume',session]\n            argv+=['--','/compact' if phase=='manual-compact' else probe]\n            local=dict(env)\n            if auto:local.update(CLAUDE_AUTOCOMPACT_PCT_OVERRIDE='1',CLAUDE_CODE_AUTO_COMPACT_WINDOW='100000')\n            r=subprocess.run(argv,cwd=parent,env=local,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=240)\n            events=[];contexts=[];replies=[];ident=None\n            for line in r.stdout.splitlines():\n                try:e=json.loads(line)\n                except ValueError:continue\n                if e.get('session_id'):ident=e['session_id']\n                if e.get('subtype')=='hook_response':\n                    events.append(e)\n                    try:c=json.loads(e.get('output','{}')).get('hookSpecificOutput',{}).get('additionalContext')\n                    except ValueError:c=None\n                    if c:contexts.append(c)\n                if e.get('subtype')=='compact_boundary':events.append(e)\n                if e.get('type')=='assistant':replies += [c['text'] for c in e.get('message',{}).get('content',[]) if c.get('type')=='text']\n                if e.get('type')=='result':events.append({k:e.get(k) for k in ['type','subtype','is_error','result','session_id','usage']})\n            report['stages'].append({'phase':phase,'argv':argv,'cwd':str(parent),'exit_code':r.returncode,'session_id':ident,'contexts':contexts,'replies':replies,'events':events,'stderr':r.stderr});flush()\n            print(json.dumps({'host':mode,'phase':phase,'exit_code':r.returncode,'contexts':len(contexts)}),flush=True)\n            assert r.returncode==0 and ident\n            return ident,contexts,events\n        session,contexts,_=claude('startup');assert any('# Select the working repository' in c for c in contexts)\n        # Use the exact data root delivered by the native hook, not a guessed host identity.\n        text='\\n'.join(contexts)\n        matches=re.findall(r'(?m)^.*(?:[Pp]lugin data|CLAUDE_PLUGIN_DATA|--data-root).*$' ,text)\n        report['bootstrap_data_lines']=matches;flush()\n        declared=re.findall(r'(?m)^Plugin data: (.+)$',text);assert len(declared)==1\n        data=Path(declared[0])\n        assert data.is_relative_to(Path(env['CLAUDE_CONFIG_DIR'])/'plugins/data') and session in text\n        repo,before=prepare_and_activate(session,data)\n        _,contexts,_=claude('resumed',session);assess(contexts)\n        _,contexts,_=claude('manual-compact',session);assess(contexts)\n        _,contexts,events=claude('automatic',session,True);assess(contexts)\n        assert any(e.get('subtype')=='compact_boundary' and e.get('compact_metadata',{}).get('trigger')=='auto' for e in events)\n        report['automatic_compaction_observed']=True\n    assert before=={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in repo.iterdir() if p.is_file()}\n    report['repository_preserved']=True;report['passed']=True\nexcept Exception as exc:\n    report['error']=str(exc)\nfinally:\n    if client:client.close()\n    if restore:\n        run('restore-test-profile-package',[EXES[mode]['executable'],'-c','marketplaces.se-harness.source='+json.dumps(restore),'plugin','add','verity-plane@se-harness','--json'])\n        report['restored']=json.loads(run('installed-after',[EXES[mode]['executable'],'plugin','list','--marketplace','se-harness','--json']))['installed']\n        assert report['restored']==installed\n    flush()\nprint(json.dumps({'host':mode,'passed':report['passed'],'error':report.get('error'),'report':str(dest)}),flush=True)\nraise SystemExit(0 if report['passed'] else 1)\n"
+    },
+    "rls032_native_claude.py": {
+      "sha256": "287700ca839357a29b84a01b209e376cb6392405234e8a12690693e3f89fdb88",
+      "content": "\"\"\"Temporary exact-wheel native probes; only disposable profiles and fixtures.\"\"\"\nfrom pathlib import Path\nimport sys,json,subprocess,hashlib,os,base64,zipfile,io,tempfile,re,datetime\nWORK=Path(__file__).resolve().parent\nOUT=WORK/'reconcile-minimal-20261001'\nsys.path.insert(0,str(WORK/'iar-demo-tools'))\nfrom run_demo import child_env\nfrom acceptance_native import Codex,extract_codex,save\nBASE=WORK/'rls032-native-profiles'\nEXES=json.loads((OUT/'native-current-inventory.json').read_text())\nmode=sys.argv[1]\nif mode=='inputs':\n    fixture=Path(json.loads((OUT/'release021-adapter-inputs.json').read_text())['fixture'])\n    inputs={host:base64.b64encode((fixture/'packages'/('verity-plane-'+host+'.zip')).read_bytes()).decode() for host in ['codex','claude']}\n    inputs['marketplace']=json.loads((WORK/'release030-main/release/plugin-marketplace/.agents/plugins/marketplace.json').read_text())\n    inputs['expected']=json.loads((OUT/'release021-qualification-wheel-expected.json').read_text())['evaluator']\n    save(OUT/'rls032-native-inputs.json',inputs)\n    raise SystemExit(0)\nreport={'host':mode,'claims':'Native CLI/app-server only; desktop remains unverified.','commands':[],'stages':[],'passed':False}\ndest=OUT/('rls032-native-'+mode+(('-'+sys.argv[2]) if len(sys.argv)>2 else '')+'.json');assert not dest.exists()\nenv=child_env(BASE,mode)\nroot=Path(tempfile.mkdtemp(prefix='i30n-'));parent=root/'w';parent.mkdir()\nreport['root']=str(root)\ninputs=json.loads((OUT/'rls032-native-inputs.json').read_text());expected=inputs['expected']\npackage=root/'package'\nwith zipfile.ZipFile(io.BytesIO(base64.b64decode(inputs[mode]))) as z:\n    assert all(not Path(n).is_absolute() and '..' not in Path(n).parts for n in z.namelist())\n    z.extractall(package)\nplugin=package/'verity-plane';wheel=plugin/'packages'/expected['archive_name']\nassert hashlib.sha256(wheel.read_bytes()).hexdigest()==expected['archive_sha256']\nwith zipfile.ZipFile(wheel) as z:\n    n=next(n for n in z.namelist() if n.endswith('/ENGINEERING_HARNESS.md.tpl'))\n    entry=z.read(n).decode().replace('{{PROJECT_NAME}}','Plugin qualification').replace('{{HARNESS_VERSION}}','0.21.0')\ndigest=hashlib.sha256(entry.encode()).hexdigest();report['entry_sha256']=digest;report['wheel']=expected\nreport['package_files']={p.relative_to(plugin).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in plugin.rglob('*') if p.is_file()}\ndef flush():save(dest,report)\ndef run(label,argv,allowed=(0,),use_env=env):\n    argv=list(map(str,argv));r=subprocess.run(argv,cwd=parent,env=use_env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=180)\n    report['commands'].append({'label':label,'argv':argv,'cwd':str(parent),'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr});flush()\n    assert r.returncode in allowed,(label,r.stdout[-1200:],r.stderr[-1200:])\n    return r.stdout\ndef assess(contexts):\n    assert any(c.endswith(entry) and digest in c for c in contexts),[c[:180] for c in contexts]\ndef prepare_and_activate(session,data):\n    remote=root/'source';remote.mkdir()\n    raw=run('prepare-exact-evaluator',[sys.executable,'-I',plugin/'scripts/setup.py','--target',remote,'--data-root',data,'--wheel',wheel],allowed=(1,2))\n    found=re.search(r'^Evaluator Python: (.+)$',raw,re.M);assert found\n    py=Path(found[1].strip())\n    run('fixture-init',[py,'-I','-m','se_harness','init',remote,'--project-name','Plugin qualification','--integration','git','--json'])\n    for args in [['init'],['add','.'],['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-m','Disposable exact-wheel selection']]:\n        run('fixture-git',['git','-C',remote,*args])\n    repo=parent/'clone'\n    run('clone-after-startup',['git','clone',remote,repo]);assert not (repo/'ENGINEERING_HARNESS.md').exists()\n    before={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in repo.iterdir() if p.is_file()}\n    activation=json.loads(run('activate-observed-session',[sys.executable,'-I',plugin/'scripts/activate.py','--host',mode,'--session-id',session,'--data-root',data,'--target',repo]))\n    assert activation['status']=='available';assess([activation['content']])\n    report['selection']={'session_id':session,'data':str(data),'repository':str(repo),'before':before}\n    return repo,before\n\n# Fresh-session recovery: ordinary read-only prompts, unchanged candidate/model.\nreport['authorization'] = 'Human mmzen: Approve package and required verification, including WO-RLS-032/VER-RLS-031; qualify the final release inputs with existing authorized disposable test profiles.'\nreport['diagnostic_changes'] = ['new native session and disposable checkout', 'ordinary code/data questions instead of metadata/acknowledgement probes', 'documented auto-compact window only; no percentage override']\nreport['started_at'] = datetime.datetime.now(datetime.timezone.utc).isoformat()\nreport['source_commit'] = '4031f0fa4b5c4a95651bd928a110d8b2d94f9775'\nreport['repository_head'] = report['source_commit']\nreport['timing_documentation'] = 'https://code.claude.com/docs/en/model-config#set-the-auto-compact-window'\nrepo=None;before=None\n\ndef native(phase,prompt,session=None):\n    argv=[EXES['claude']['executable'],'--print','--verbose','--output-format','stream-json','--include-hook-events','--tools','','--strict-mcp-config','--permission-prompts','none','--setting-sources','project','--settings','{}','--plugin-dir',str(plugin),'--model','sonnet']\n    if session: argv += ['--resume',session]\n    local=dict(env)\n    overrides={'CLAUDE_CODE_AUTO_COMPACT_WINDOW':'100000'} if session else {}\n    local.update(overrides)\n    started=datetime.datetime.now(datetime.timezone.utc).isoformat()\n    try:\n        r=subprocess.run(argv,input=prompt,cwd=parent,env=local,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=240)\n        stdout,stderr,rc=r.stdout,r.stderr,r.returncode\n    except subprocess.TimeoutExpired as exc:\n        stdout=exc.stdout or '';stderr=exc.stderr or ''\n        if isinstance(stdout,bytes):stdout=stdout.decode('utf-8',errors='replace')\n        if isinstance(stderr,bytes):stderr=stderr.decode('utf-8',errors='replace')\n        rc=124\n    contexts=[];events=[];replies=[];ident=None;models=[]\n    for line in stdout.splitlines():\n        try:e=json.loads(line)\n        except ValueError:continue\n        if e.get('session_id'):ident=e['session_id']\n        if e.get('type')=='system' and e.get('subtype')=='init':\n            models.append(e.get('model'));events.append(e)\n        if e.get('subtype')=='hook_response':\n            events.append(e)\n            try:c=json.loads(e.get('output','{}')).get('hookSpecificOutput',{}).get('additionalContext')\n            except ValueError:c=None\n            if c:contexts.append(c)\n        if e.get('subtype')=='compact_boundary':events.append(e)\n        if e.get('type')=='assistant':replies += [c['text'] for c in e.get('message',{}).get('content',[]) if c.get('type')=='text']\n        if e.get('type')=='result':events.append(e)\n    errors=[e.get('result') for e in events if e.get('is_error')]\n    triggers=[e.get('compact_metadata',{}).get('trigger') for e in events if e.get('subtype')=='compact_boundary']\n    stage={'phase':phase,'started_at':started,'argv':argv,'stdin':prompt,'cwd':str(parent),'environment_overrides':overrides,'exit_code':rc,'session_id':ident,'contexts':contexts,'events':events,'replies':replies,'models':models,'provider_errors':errors,'compaction_triggers':triggers,'stdout':stdout,'stderr':stderr}\n    report['stages'].append(stage);flush()\n    print(json.dumps({'phase':phase,'exit_code':rc,'model':models,'compaction_triggers':triggers,'errors':errors}),flush=True)\n    assert rc==0 and ident and not errors,{'phase':phase,'exit_code':rc,'errors':errors}\n    if session:assert ident==session,('session changed',ident,session)\n    return ident,contexts,events\n\ntry:\n    report['version']=run('host-version',[EXES['claude']['executable'],'--version']).strip()\n    assert report['version']=='2.1.273 (Claude Code)', 'Host version changed: inspect before qualifying'\n    session,contexts,_=native('fresh-startup','In Python, what does sorted([3, 1, 2]) return? Answer in one sentence. Do not use tools.')\n    assert any('# Select the working repository' in c for c in contexts)\n    text='\\n'.join(contexts)\n    declared=re.findall(r'(?m)^Plugin data: (.+)$',text);assert len(declared)==1\n    data=Path(declared[0]);assert data.is_relative_to(Path(env['CLAUDE_CONFIG_DIR'])/'plugins/data') and session in text\n    repo,before=prepare_and_activate(session,data)\n    _,contexts,events=native('fresh-selected-code-review','Review this Python function for empty-list behavior: def average(values): return sum(values) / len(values). State the edge case and one suitable correction in two sentences. Do not use tools or edit files.',session)\n    assess(contexts)\n    report['automatic_compaction_observed']=False\n    # Bounded ordinary analysis of generated, non-sensitive inventory data.\n    # Distinct batches grow conversation context; no manual compact command is used.\n    for batch in range(1,7):\n        rows=['sku,category,quantity,unit_price']\n        categories=['notebook','pencil','folder','envelope']\n        for i in range(1600):\n            index=(batch-1)*1600+i\n            rows.append(f'SKU-{index:06d},{categories[i%4]},{1+i%40},{1+i%12}.{i%100:02d}')\n        prompt=('Check this synthetic stationery inventory CSV without using tools or editing files. '\n                'Report the column names, the first and last SKU, and whether quantities contain a negative value. '\n                'Keep the answer to three short bullets.\\n\\n'+'\\n'.join(rows))\n        _,contexts,events=native('inventory-batch-'+str(batch),prompt,session)\n        assess(contexts)\n        if any(e.get('subtype')=='compact_boundary' and e.get('compact_metadata',{}).get('trigger')=='auto' for e in events):\n            report['automatic_compaction_observed']=True\n            break\n    if not report['automatic_compaction_observed']:\n        _,contexts,events=native('automatic-final-observation','Give one sentence explaining why an empty input list needs explicit handling in an average function. Do not use tools or edit files.',session)\n        assess(contexts)\n        report['automatic_compaction_observed']=any(e.get('subtype')=='compact_boundary' and e.get('compact_metadata',{}).get('trigger')=='auto' for e in events)\n    assert report['automatic_compaction_observed'],'Bounded run ended without a native automatic-compaction event'\n    _,contexts,_=native('after-automatic','What is the average of [2, 4, 6]? Answer in one sentence. Do not use tools or edit files.',session)\n    assess(contexts)\n    report['passed']=True\nexcept Exception as exc:\n    report['error']=str(exc)\nfinally:\n    if repo is not None:\n        after={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in repo.iterdir() if p.is_file()}\n        report['repository_preserved']=before==after\n        if not report['repository_preserved']:report['passed']=False\n    report['completed_at']=datetime.datetime.now(datetime.timezone.utc).isoformat()\n    flush()\nprint(json.dumps({'passed':report['passed'],'error':report.get('error'),'report':str(dest)}),flush=True)\nraise SystemExit(0 if report['passed'] else 1)\n"
+    }
+  }
+}

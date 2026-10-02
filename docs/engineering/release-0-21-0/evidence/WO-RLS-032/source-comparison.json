@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Program Files\\Git\\cmd\\git.exe",
+    "diff",
+    "--name-only",
+    "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+    "HEAD"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "docs/engineering/release-0-21-0/decisions/DEC-RLS-002.md\ndocs/engineering/release-0-21-0/evidence/RLS-SEH-031-evaluator.json\ndocs/engineering/release-0-21-0/evidence/VREC-SEH-031-evaluator.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-031/bound-record-replay.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-031/capture-preparation.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-031/final-build-manifest.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-031/final-hosted-receipt.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation-review.md\ndocs/engineering/release-0-21-0/evidence/WO-RLS-031/release-authorization.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-031/release-preparation.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-031/release-review.md\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/README.md\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-boundaries.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-current.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-events.jsonl\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/continuation-review.md\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/historical-native-comparison.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/native-observations.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/package-qualification.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-linux.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-windows.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json\ndocs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-review.md\ndocs/engineering/release-0-21-0/releases/RLS-SEH-031.md\ndocs/engineering/release-0-21-0/risks/RISK-RLS-002.md\ndocs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md\ndocs/engineering/release-0-21-0/work-orders/WO-RLS-032.md\n",
+    "stderr": ""
+  },
+  "seconds": 0.07045079999988957
+}

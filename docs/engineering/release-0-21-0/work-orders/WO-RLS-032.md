@@ -2,10 +2,10 @@
 id = "WO-RLS-032"
 type = "work_order"
 title = "Qualify and deliver plugin 0.2.4 after evaluator publication"
-status = "approved"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
-updated = "2026-10-01"
+updated = "2026-10-02"
 
 [assurance]
 commit_bound_verification = "required"
@@ -30,6 +30,20 @@ decided_at = "2026-10-01T19:53:49Z"
 decided_by = "engineering-owner"
 reason = "Human mmzen: Approve package and required verification. Approves REL-SEH-033, WO-RLS-031/032/033 and VER-RLS-030/031/032, required commit-bound verification, plugin 0.2.4, ordinary release-review branch push/draft PR and read-only CI rehearsals. Existing v0.21.0 publication authorization is retained. Final-candidate verification, exact RLS decision and unresolved desktop evidence remain separate. Reviewed SHA256 d3fec6f2510b899e68e3420a26a39c6008bd59c482affbf10a8dbc14f8e70bce; transition-input SHA256 e34f1863f64a0da98b0aac5f7e40dc3d67d57a1c1bc84d9ba3735b54b888fb1d. Only confirmed work-order assurance metadata was added. Codex applies the human decision using the selected evaluator role-label encoding; mmzen is the decision-maker."
 scope_paths = ["docs/engineering/release-0-21-0/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-02T05:10:49Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T06:09:26Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Local exact-package qualification completed; DEC-RLS-002 accepts only the retained Claude native and Codex Windows desktop gaps. Human verification, marketplace publication and public readback remain separate."
 +++
 
 # Qualify and deliver plugin 0.2.4 after evaluator publication
