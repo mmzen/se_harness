@@ -2,8 +2,8 @@
 id = "RLS-SEH-031"
 type = "release_record"
 title = "Release candidate 0.21.0"
-status = "ready"
-owners = ["Codex"]
+status = "released"
+owners = ["release-owner"]
 created = "2026-10-02"
 updated = "2026-10-02"
 version = "0.21.0"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-21-0/evidence/RLS-SEH-031-
 evaluator_evidence_sha256 = "e5148d268c5741a14613a371672929daa845983733cf8ee1439f3f3b60b4bb8b"
 tag = "v0.21.0"
 
+released_at = "2026-10-02T04:51:54Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-033"]
 includes_verification = ["VREC-SEH-031"]
 releases_work = ["WO-IAR-028", "WO-IAR-029", "WO-IAR-030", "WO-IAR-031", "WO-IAR-033", "WO-IAR-034", "WO-IAR-035", "WO-IAR-036", "WO-IAR-037", "WO-IAR-039", "WO-IAR-040", "WO-IAR-041", "WO-RLS-031"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-10-02T04:51:54Z"
+decided_by = "release-owner"
+reason = "Human mmzen: I authorize release record RLS-SEH-031. Authorizes the exact 0.21.0 release record at candidate 4031f0fa4b5c4a95651bd928a110d8b2d94f9775 with tag v0.21.0, verified VREC-SEH-031 coverage and the recorded schema-2 distribution binding. Reviewed ready record SHA256 063a260cd9737e82c27ff9e6d6f122423b7e750b38aef56d5020a67af0e7721c; evaluator evidence SHA256 e5148d268c5741a14613a371672929daa845983733cf8ee1439f3f3b60b4bb8b. Bound-record replay 36965921824 reproduced both archive hashes. DEC-RLS-001 and RISK-RLS-001 retain the accepted unverified desktop limitation. Codex applies the actual human decision using the previously approved 0.20.1 release-owner compatibility label; mmzen remains the human decision-maker. Original v0.21.0 publication authority remains retained after integration and provider controls. This does not authorize merge, marketplace publication, latest/last movement or adoption. Corrected only the unaccepted ready record owners from Codex to release-owner for this actual human release decision; prepared_by remains Codex. Corrected transition input SHA256 1464bf4b0a2258d55f7c2c4420bdf65cb4152a27ab4edd4a24badda2b21dd057. All other release fields and evidence bytes remain unchanged."
 +++
 
 # Release Record Candidate
