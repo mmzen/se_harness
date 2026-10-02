@@ -51,6 +51,17 @@ Existing repositories need explicit adoption to change their selection or layout
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
 
+## In preparation: 0.22.0 / plugin 0.2.5
+
+The [approved release package](docs/engineering/release-0-22-0/README.md) brings
+clearer approval and verification requests, a review PR before verification,
+and complete-release preparation and recovery. These versions are not yet public.
+Current public installation still selects the observed 0.21.0 / 0.2.4 delivery above.
+
+The single-approval release route requires this supporting release to be
+published and adopted, then its reviewed provider configuration to be applied.
+This repository remains governed by 0.21.0 during release preparation.
+
 ## Released 0.21.0: fewer repository files
 
 Instructions and templates now live in the selected evaluator wheel; default

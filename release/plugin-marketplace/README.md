@@ -1,20 +1,22 @@
 # Verity Plane marketplace
 
 Verity Plane brings SE Harness setup, orientation, change and evidence workflows
-to Codex and Claude Code. Plugin **0.2.4** bundles released **SE Harness 0.21.0**
-and five skills, including an explicitly requested operator brief. It is public at
-`7e366438165a40a14783bac650a2887e7ec8bc75`, assembled from source
-`4031f0fa4b5c4a95651bd928a110d8b2d94f9775` and the independently public wheel.
-This source guide corrects pre-publication wording retained in the original
-published package. It does not change that package's source identity or bytes.
+to Codex and Claude Code. Plugin **0.2.5** targets **SE Harness 0.22.0** and five
+shared skills, including an explicitly requested operator brief.
+
+This source is part of the approved 0.22.0 release preparation. It does not prove
+public availability. A released assembly must contain the exact independently
+public evaluator wheel. Its PACKAGE-IDENTITY.json and assembly inventories record
+the actual source, wheel and package digests. Use those identities when comparing
+the installed package. Plugin updates do not adopt a repository's evaluator.
 
 ## Install from Git
 
 These commands select the `plugin-marketplace` distribution branch of
 `mmzen/se_harness`. The development branch contains assembly inputs; install the
 complete distribution branch. Check that
-the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.4, evaluator 0.21.0 and
-the accepted source commit above. Public readback matched all 69 qualified files.
+the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.5, evaluator 0.22.0 and
+the expected qualified source commit before claiming this new delivery.
 Package installation, native session delivery and repository adoption are separate.
 
 **Codex**
@@ -72,15 +74,15 @@ claude plugin install verity-plane@se-harness
 ## Instruction delivery
 
 This package includes native startup and post-compaction instruction hooks.
-Plugin 0.2.4 resolves the entry from its exact selected wheel for the
+Plugin 0.2.5 resolves the entry from its exact selected wheel for the
 external-resource layout, while retaining the repository-copy route for older
 selections. It bootstraps an unselected session and activates the actual checkout
 after cloning. Follow the packaged activation procedure for
 [Codex](packages/codex/verity-plane/skills/setup/SKILL.md#activate-the-checkout) or
 [Claude Code](packages/claude/verity-plane/skills/setup/SKILL.md#activate-the-checkout).
-Exact public-package Codex CLI session checks pass. Claude session tests remain
-unverified, with their WO-RLS-033 omission accepted in DEC-RLS-003. Codex Windows
-desktop remains unverified, with its WO-RLS-033 omission accepted in DEC-RLS-004.
+Native host qualification belongs to this exact release's evidence. Confirm
+startup, compaction and resume for the actual loaded inputs. CLI observations
+do not establish desktop support; older release-specific omissions do not apply.
 Both routes reject missing, changed or incompatible selected input. They grant no lifecycle authority and do not
 enforce all tool calls. Python must be available to the hook launcher; Codex
 requires review and trust of the current hook definition. Confirm delivery

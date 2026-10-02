@@ -17,6 +17,12 @@ and the explicitly selected complete-release route in
 It grants no approval, publication right or lifecycle transition. Use the
 selected released evaluator and its procedures for those decisions.
 
+The [approved 0.22.0 / 0.2.5 release](../engineering/release-0-22-0/README.md)
+prepares the supporting product. WO-RLS-034 owns evaluator preparation;
+WO-RLS-035/036 own marketplace publication and public closeout. This rollout
+uses selected evaluator 0.21.0 and the existing delivery route. Subsequent
+adoption and the reviewed provider configuration activate the new route below.
+
 ## One approval for the complete release
 
 **Availability:** This source implements a future route. It is not active in the

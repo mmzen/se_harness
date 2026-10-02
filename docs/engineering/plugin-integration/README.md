@@ -1,5 +1,12 @@
 # Plugin integration
 
+## Next package: plugin 0.2.5
+
+The [approved 0.22.0 release package](../release-0-22-0/README.md) owns the
+next evaluator/plugin delivery. WO-RLS-035 qualifies and publishes both host
+packages; WO-RLS-036 checks public installation/update and current guidance.
+The observations below belong to the existing public package.
+
 ## Current public package: plugin 0.2.4
 
 The [0.21.0 release package](../release-0-21-0/README.md) is published with

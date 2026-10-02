@@ -1,6 +1,6 @@
 # Verity Plane
 
-Verity Plane 0.2.4 exposes shared skills through the host's native skill discovery.
+Verity Plane 0.2.5 exposes shared skills through the host's native skill discovery.
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
@@ -15,11 +15,11 @@ changed, incompatible or oversized input reports a delivery gap without fallback
 Setup retains separate immutable evaluator environments outside repositories.
 Activation immediately returns the complete entry; it grants no lifecycle authority.
 
-Plugin 0.2.4 with evaluator 0.21.0 is published at
-`7e366438165a40a14783bac650a2887e7ec8bc75`. VREC-PLG-030 verifies the qualified
-package with the accepted native host gaps below. Source documentation corrections
-do not rewrite the original published package or its inventory.
-Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 accepts that omission for WO-RLS-033.
+Plugin 0.2.5 targets evaluator 0.22.0. This source belongs to the approved
+release preparation; package identity and public availability require the
+qualified assembly and publication readbacks. The assembly inventory identifies
+the exact wheel and shared source. Earlier package verification or accepted
+native-host omissions do not qualify this release.
 
 Development archives cannot establish release or marketplace eligibility.
 Python 3.11+ must be available to the hook launcher. Codex also requires the

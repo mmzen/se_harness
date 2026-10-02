@@ -1,5 +1,14 @@
 # Prepare and publish the Verity Plane marketplace
 
+## Current release work
+
+[REL-SEH-034](../engineering/release-0-22-0/release/REL-SEH-034.md) prepares
+evaluator 0.22.0 and plugin 0.2.5. WO-RLS-035 qualifies and publishes the new
+marketplace; WO-RLS-036 verifies public fresh and 0.2.4-to-0.2.5 update routes.
+Use VER-RLS-034/035 and VER-IAR-021 for this delivery. No 0.21.0-specific native
+omission is carried forward. The public observations below identify the prior
+package. The new single-approval route remains subject to its rollout boundary.
+
 The [0.21.0 release package](../engineering/release-0-21-0/README.md) is published
 with plugin 0.2.4. VREC-PLG-030 verifies local package qualification. Human mmzen
 separately authorized marketplace publication at
@@ -93,16 +102,16 @@ For a legacy delivery, use the
 [release delivery handoff](release-delivery-completion.md#perform-and-retain-each-handoff).
 Evaluator publication leaves plugin assembly, qualification and separately
 authorized marketplace publication pending with an owner and next action.
-For this delivery the published inputs are plugin 0.2.4 and evaluator
+For the prior delivery the published inputs are plugin 0.2.4 and evaluator
 0.21.0. The public-wheel prerequisite and authorized marketplace publication have
 completed; public-route qualification and documentation closeout remain separate.
 Track all five surfaces in the release delivery plan. Local package
 qualification does not close delivery or establish the public branch state.
 
 1. Run the declared package checks, host validators and local native installation
-   acceptance in fresh profiles. Follow VER-RLS-031 and VER-IAR-021 for the
-   exact 0.2.4 packages. Public fresh installation and update from 0.2.3 follow
-   under VER-RLS-032. Keep desktop results unverified under the accepted DEC-RLS-004 boundary.
+   acceptance in fresh profiles. For 0.2.5, follow VER-RLS-034 and VER-IAR-021.
+   Public fresh installation and update from 0.2.4 follow under VER-RLS-035.
+   Earlier accepted omissions remain limited to their recorded scope.
    Confirm the loaded package bytes, startup, manual compaction and resume. Do not alter real user profiles.
 2. Prepare the commit-bound verification record and obtain its owner decision.
    Resolve the applicable repository integration and external-action checkpoints.
@@ -114,9 +123,9 @@ qualification does not close delivery or establish the public branch state.
 4. Add the actual public Git marketplace in fresh Codex and Claude profiles,
    install verity-plane, and compare installed contents with the accepted package.
    Also test an existing public installation's update path on both hosts.
-   VER-RLS-032 governs these observations. Retain the public commit, active paths,
+   VER-RLS-035 governs these observations. Retain the public commit, active paths,
    installed hashes and native delivery before reporting public installation as checked.
-5. Update current availability claims through WO-RLS-033, obtain commit-bound
+5. Update current availability claims through WO-RLS-036, obtain commit-bound
    verification and separately authorized integration. Read the merged public
    documentation back before declaring overall delivery complete. Preserve the
    assembled source identity and earlier plan versions; bind observations to

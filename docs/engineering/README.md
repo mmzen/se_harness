@@ -4,6 +4,9 @@
 
 ## Product and governance domains
 
+- [release-0-22-0/](release-0-22-0/README.md): approved release preparation for
+  evaluator 0.22.0 and plugin 0.2.5, including all five delivery surfaces.
+
 - [release-0-21-0/](release-0-21-0/README.md): approved 0.21.0 final qualification,
   published evaluator and plugin 0.2.4; public-route and documentation closeout remain in progress.
 
