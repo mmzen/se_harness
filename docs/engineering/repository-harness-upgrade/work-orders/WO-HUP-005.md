@@ -2,7 +2,7 @@
 id = "WO-HUP-005"
 type = "work_order"
 title = "Complete documentation and test compatibility for 0.21.0 adoption"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -54,6 +54,13 @@ to = "in_progress"
 decided_at = "2026-10-02T08:35:48Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T08:57:30Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Complete documentation and test compatibility for 0.21.0 adoption

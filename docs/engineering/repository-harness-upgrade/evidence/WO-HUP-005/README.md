@@ -22,3 +22,11 @@ with an unconditional pass, and no new resolver or test framework is introduced.
 
 Combined handoff, clean-candidate transition assessment and verification capture
 are recorded separately. This document records no human verification or delivery.
+
+## Implementation completion
+
+All three selected work orders (WO-HUP-003, WO-HUP-005 and WO-HUP-026)
+are implemented through one passing explicit transition. The combined handoff
+and completion results are retained under ../WO-HUP-003/. The next step is
+VREC-HUP-025 capture for the complete clean candidate. Verification acceptance
+and hosted integration checks remain outstanding.

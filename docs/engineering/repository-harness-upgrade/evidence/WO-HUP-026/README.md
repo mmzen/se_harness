@@ -22,6 +22,17 @@ and released-root qualification pass. Validation reports zero errors and 58
 unrelated warnings. The initial failing prototype fixture and corrected prototype
 results remain available; prototype evidence is not the actual committed assessment.
 
-The remaining steps are the actual clean-commit predecessor assessment, combined
-handoff, implementation completion and capture of VREC-HUP-025. Human verification
+The actual script assessment passes on clean commit
+568d8d97f674c8abff4d7f56abb1902e16540e8e against the original main base.
+It proves the public 0.21.0 identity and original upgrade transaction; see
+schema5-actual-assessment-result.json. The earlier refusal remains retained.
+Combined handoff, implementation completion and VREC-HUP-025 capture follow. Human verification
 and external actions remain separate. Hosted checks remain required before integration.
+
+## Implementation completion
+
+All three selected work orders (WO-HUP-003, WO-HUP-005 and WO-HUP-026)
+are implemented through one passing explicit transition. The combined handoff
+and completion results are retained under ../WO-HUP-003/. The next step is
+VREC-HUP-025 capture for the complete clean candidate. Verification acceptance
+and hosted integration checks remain outstanding.

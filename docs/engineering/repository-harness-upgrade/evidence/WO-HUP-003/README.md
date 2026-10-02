@@ -53,3 +53,19 @@ and 4. See predecessor-assessment-refused.json. Human mmzen approved WO-HUP-026 
 correction is applied. All 32 focused tests and 1,218 full-scale tests pass;
 see ../WO-HUP-026/source-checks.json. The actual committed assessment follows.
 WO-HUP-003 and WO-HUP-005 remain in progress; VREC-HUP-025 is not prepared.
+
+## Corrected assessment
+
+WO-HUP-026 is approved and in progress. Its actual corrected script passes on
+clean commit 568d8d97f674c8abff4d7f56abb1902e16540e8e. See
+../WO-HUP-026/schema5-actual-assessment-result.json. This resolves the retained
+original schema-5 refusal. The evaluator remains released 0.21.0; development
+source is 0.21.1. Verification preparation follows the combined handoff.
+
+## Implementation completion
+
+All three selected work orders (WO-HUP-003, WO-HUP-005 and WO-HUP-026)
+are implemented through one passing explicit transition. The combined handoff
+and completion results are retained under ../WO-HUP-003/. The next step is
+VREC-HUP-025 capture for the complete clean candidate. Verification acceptance
+and hosted integration checks remain outstanding.

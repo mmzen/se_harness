@@ -2,7 +2,7 @@
 id = "WO-HUP-003"
 type = "work_order"
 title = "Adopt released 0.21.0 and retire copied harness resources"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
 updated = "2026-10-02"
@@ -97,6 +97,13 @@ to = "in_progress"
 decided_at = "2026-10-02T07:56:19Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T08:57:30Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Adopt released 0.21.0 and retire copied harness resources
