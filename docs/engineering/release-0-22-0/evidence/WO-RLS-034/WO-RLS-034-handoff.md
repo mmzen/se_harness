@@ -30,3 +30,14 @@ verification and bounded review pushes/PRs; the work order retains that decision
 The diff stays within the approved paths. Provider-setting changes and repository
 adoption are excluded. Public 0.21.0 / plugin 0.2.4 claims retain their historical
 limits; the 0.22.0 / 0.2.5 availability is explicitly pending.
+
+## Completed qualification
+
+The corrected full suites pass on Windows and Linux. Installed wheel and named
+source-distribution checks pass. The two local upgrade runs match both hosted
+platforms. All review CI and both manual release rehearsal legs pass.
+qualification-review.md assesses each contract and retains material limitations;
+qualification-assessment.json and qualification-raw.zip retain exact inputs,
+commands and original failures. Earlier pending statements above describe the
+first draft-review snapshot. The final clean-candidate replay and capture follow
+implementation completion; human verification and release remain pending.

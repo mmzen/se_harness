@@ -1,0 +1,433 @@
+{
+  "assessed_commit": "2c5becd195a2bb910fead659bc2f2131ca3b7ef6",
+  "members": [
+    {
+      "id": "WO-KIS-010",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-010.md",
+      "state": "implemented",
+      "verification": [
+        "VER-KIS-004"
+      ]
+    },
+    {
+      "id": "WO-KIS-011",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-011.md",
+      "state": "implemented",
+      "verification": [
+        "VER-KIS-004"
+      ]
+    },
+    {
+      "id": "WO-KIS-012",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-012.md",
+      "state": "implemented",
+      "verification": [
+        "VER-KIS-005"
+      ]
+    },
+    {
+      "id": "WO-KIS-013",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-013.md",
+      "state": "implemented",
+      "verification": [
+        "VER-KIS-006"
+      ]
+    },
+    {
+      "id": "WO-KIS-014",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-014.md",
+      "state": "implemented",
+      "verification": [
+        "VER-KIS-006"
+      ]
+    },
+    {
+      "id": "WO-RLO-014",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-014.md",
+      "state": "implemented",
+      "verification": [
+        "VER-RLO-011"
+      ]
+    },
+    {
+      "id": "WO-RLO-015",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-015.md",
+      "state": "implemented",
+      "verification": [
+        "VER-RLO-011"
+      ]
+    },
+    {
+      "id": "WO-RLO-016",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-016.md",
+      "state": "implemented",
+      "verification": [
+        "VER-RLO-011"
+      ]
+    },
+    {
+      "id": "WO-RLO-017",
+      "path": "docs/engineering/release-orchestration/work-orders/WO-RLO-017.md",
+      "state": "implemented",
+      "verification": [
+        "VER-RLO-011"
+      ]
+    },
+    {
+      "id": "WO-RLS-034",
+      "path": "docs/engineering/release-0-22-0/work-orders/WO-RLS-034.md",
+      "state": "in_progress",
+      "verification": [
+        "VER-RLS-033"
+      ]
+    }
+  ],
+  "verifications": [
+    "VER-KIS-004",
+    "VER-KIS-005",
+    "VER-KIS-006",
+    "VER-RLO-011",
+    "VER-RLS-033"
+  ],
+  "governing_evaluator": "0.21.0",
+  "candidate_version": "0.22.0",
+  "plugin_version": "0.2.5",
+  "windows": {
+    "argv": [
+      "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/run_tests.py",
+      "--workers",
+      "4",
+      "--scale",
+      "full"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "seconds": 262.99,
+    "scale": "full",
+    "stdout": "windows-full-corrected.stdout.txt",
+    "stderr": "windows-full-corrected.stderr.txt"
+  },
+  "linux_source_passed": true,
+  "linux_distribution_retry_passed": true,
+  "package_passed": true,
+  "package_limits": [
+    "A direct local .tar.gz installation fails initialization because the PEP 610 archive reader accepts wheel provenance only. That reader is unchanged from v0.21.0. The sdist selected by name/version from a local index passes init, doctor and validate. No direct-sdist support or defect correction is claimed.",
+    "Initial bare identity invocation lacked required role/version/root arguments; corrected invocation passes. Original command results remain retained.",
+    "Qualification builds are non-promotable. Exact release bytes remain bound by the separate pinned two-build replay."
+  ],
+  "non_promotable_qualification_wheel_sha256": "d76acdd67ff5180e226e461c8df54765f720408f3e61511783d46a8f370a16e1",
+  "manual_rehearsal": {
+    "url": "https://github.com/mmzen/se_harness/actions/runs/37072015539",
+    "event": "workflow_dispatch",
+    "headSha": "2c5becd195a2bb910fead659bc2f2131ca3b7ef6",
+    "conclusion": "success"
+  },
+  "equivalence_to_previous_integration": {
+    "prior_commit": "7e7071d80eb22f43436807479972fee85905de43",
+    "paths": [
+      "se_harness",
+      "templates",
+      "plugins/verity-plane/common",
+      "tests",
+      ".github/workflows",
+      "repository_tools"
+    ],
+    "changed_paths": [
+      "se_harness/__init__.py",
+      "tests/plugin_integration/package_assembly/test_refresh_guidance.py"
+    ],
+    "assessment": "Only release version and candidate-version documentation expectations differ. Current full tests exercise combined behavior. Historical illustrative reviews remain supporting inspection evidence; final assurance is new."
+  },
+  "raw_archive": {
+    "path": "qualification-raw.zip",
+    "sha256": "23f3e7312c73fc56aecccdbfa62d7809b8f16fc1c515e24ebb7d86ea2d449556",
+    "bytes": 113608,
+    "entries": [
+      {
+        "path": "release022/current-validation.json",
+        "bytes": 372924,
+        "sha256": "024f4e770809811b11469cb1c935f90c8daf9e23f9be33ee79359f3a283e2f62"
+      },
+      {
+        "path": "release022/distributions.run.json",
+        "bytes": 574,
+        "sha256": "0fb30701e3df1310ebcfed0d62d07ad4d037464839f9afc776c079b6af2784ed"
+      },
+      {
+        "path": "release022/distributions.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "release022/distributions.stdout.txt",
+        "bytes": 84,
+        "sha256": "1f74fa7ec6175c26e7574bcefbfd8e062a6172626c52c0da2f32633befe73edc"
+      },
+      {
+        "path": "release022/focused-docs.run.json",
+        "bytes": 728,
+        "sha256": "eba7fa5d5c64eca8387d37004874b8f606e1b3e013b4ca55207c96c9c32b9e0b"
+      },
+      {
+        "path": "release022/focused-docs.stderr.txt",
+        "bytes": 169,
+        "sha256": "a5abcd61f546cf47dde01c83d2d6741311f91f9be57d29a5891b8b4d6fc176bf"
+      },
+      {
+        "path": "release022/focused-docs.stdout.txt",
+        "bytes": 8,
+        "sha256": "fb598f4d300045284da98a53b6e11fce2530b00e034cee6dff2a7765c8edd7d9"
+      },
+      {
+        "path": "release022/initial-ci-evidence/candidate-package-qualification-0.21.0/candidate-package-qualification.json",
+        "bytes": 1748,
+        "sha256": "1fc29a1d4de53bf3025a6e4a06267af00b24beb13f0ceafb2ab29f5219c84aee"
+      },
+      {
+        "path": "release022/initial-ci-evidence/candidate-source-raw/output.log",
+        "bytes": 4740,
+        "sha256": "ae8fe782bbc46b8ad04bbb1a8a29da0d747c23e2b21b6c0b3790270ff1bdb5db"
+      },
+      {
+        "path": "release022/initial-ci-evidence/candidate-source-raw/summary.json",
+        "bytes": 3322,
+        "sha256": "72e1d4842928dd6da849ffd794f87b8e8148c2aa2d40830b9be4a4a3eb6e84ea"
+      },
+      {
+        "path": "release022/initial-ci-evidence/complete-candidate-qualification/complete-candidate.json",
+        "bytes": 1519,
+        "sha256": "d464dbc447846ad47484cb72a000427134b43f6f3b5b89b00a49eb7ef7e0954d"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-result.json",
+        "bytes": 3878,
+        "sha256": "49ff435adc38fd4f89ab96870ba67d0a9d28000b15ddaaa3cd5d2f06f79802cb"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-timing.json",
+        "bytes": 4966,
+        "sha256": "d392060e0e9a429ed5fced67ebf024ba28c1d9db19a022462569d31b16449032"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-result.json",
+        "bytes": 3878,
+        "sha256": "49ff435adc38fd4f89ab96870ba67d0a9d28000b15ddaaa3cd5d2f06f79802cb"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-timing.json",
+        "bytes": 4959,
+        "sha256": "9cede9a07ce83420a810ed2dc57a1b8e9d42ece99e906236c8162f20a3c0f69f"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-result.json",
+        "bytes": 3884,
+        "sha256": "ca573d22d2041fe4a368db8b06313b074ad059c6ea607a49431d2c7ce0ec320a"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-timing.json",
+        "bytes": 4979,
+        "sha256": "0cc464069871f9c560313658ad3522073a65abfd762964dfc9d7e6b7f4d41342"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-result.json",
+        "bytes": 3884,
+        "sha256": "ca573d22d2041fe4a368db8b06313b074ad059c6ea607a49431d2c7ce0ec320a"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-timing.json",
+        "bytes": 4979,
+        "sha256": "0384b335fe1a753cb45b79c33496316741bfc6dc7fd91b3a9d48fc75a122a827"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Windows/windows-check-evidence/output.log",
+        "bytes": 113,
+        "sha256": "626ba9cced49760fbb05897a3e23c91e052b54ec476c59ab54951278f02d5890"
+      },
+      {
+        "path": "release022/initial-ci-evidence/upgrade-rehearsal-Windows/windows-check-evidence/summary.json",
+        "bytes": 1365,
+        "sha256": "a7037a3f19b5397701432d7306eadd0dc1a102c6650bbe3330076f7ed7892c10"
+      },
+      {
+        "path": "release022/initial-hosted-candidate/release-build-replay.json",
+        "bytes": 7097,
+        "sha256": "9b0ae46bbb110b3d573e7303bfe8de17d0f508b01ba58ddd23cc6be858c8f7a1"
+      },
+      {
+        "path": "release022/initial-hosted-record/complete-candidate-qualification.json",
+        "bytes": 1519,
+        "sha256": "4fe31a63866e7a4df28a56a2aa91a1672b4192d2f6e3e9e6e9df5bec8b8c4817"
+      },
+      {
+        "path": "release022/initial-hosted-record/qualification.json",
+        "bytes": 446,
+        "sha256": "80e4f7f7e56ea7f059e65b1bb6dd7a31483b39140b0829d3d517d053c2737b9c"
+      },
+      {
+        "path": "release022/initial-hosted-record/release-build-replay.json",
+        "bytes": 7256,
+        "sha256": "f2574e25535fbe3fb87b6835bba335e4c7fc5c386be2ebddc412d8e062649b25"
+      },
+      {
+        "path": "release022/initial-hosted-record/release-test-evidence/output.log",
+        "bytes": 1862,
+        "sha256": "4162217bf2a5c077bee77dba507632cff01d699f04a6d2dddc74c9c6d7245e99"
+      },
+      {
+        "path": "release022/initial-hosted-record/release-test-evidence/summary.json",
+        "bytes": 3036,
+        "sha256": "5ea514c5ce77977957c321f6ef2348018b1521ad3926e8567cbecfb848aeace5"
+      },
+      {
+        "path": "release022/initial-manual-run.json",
+        "bytes": 15927,
+        "sha256": "78c4bcbaf3cd7712822cc21a81ebfbb4c0f0d6346b942ac8938486f01d9f1101"
+      },
+      {
+        "path": "release022/initial-pr-ci-complete.json",
+        "bytes": 9705,
+        "sha256": "340129d8b93f0f9492aeda876d3bebc95a6f00e9cbaa20fcb639e180d98246e6"
+      },
+      {
+        "path": "release022/initial-pr-ci.json",
+        "bytes": 9700,
+        "sha256": "520430dd9a8c2c6e9fe9a9d2071038ba155bea2e16f4e4d1b7724b6dae493f69"
+      },
+      {
+        "path": "release022/integrity-check.json",
+        "bytes": 16341,
+        "sha256": "cf684aa9e4581e7812712827b26ba18e3644cbdef3cfb37649b5d300c1af08d7"
+      },
+      {
+        "path": "release022/linux-2c5becd195a2-history-retry.json",
+        "bytes": 2565,
+        "sha256": "0c45814ab8494f2ee8b9b56227a0a3341f76c028c368f01921a8f9e6c178c032"
+      },
+      {
+        "path": "release022/linux-2c5becd195a2.json",
+        "bytes": 11062,
+        "sha256": "83c1e96d56863c1505ec7b9c48324daac9a4730f3542710a4abf638ddbd9b2af"
+      },
+      {
+        "path": "release022/linux-b5610f5f857c.json",
+        "bytes": 10346,
+        "sha256": "6fc152cc924824e2a462b4e9a44b582c8b6e2dbc1770db4d2f0e72693a37eade"
+      },
+      {
+        "path": "release022/package-checks/upgrade-safe-1/upgrade-rehearsal-result.json",
+        "bytes": 4530,
+        "sha256": "028d3e1b5d6633e5b8f8801f64872bfdbb7755742edac43fbcb3a113a5118425"
+      },
+      {
+        "path": "release022/package-checks/upgrade-safe-2/upgrade-rehearsal-result.json",
+        "bytes": 4530,
+        "sha256": "028d3e1b5d6633e5b8f8801f64872bfdbb7755742edac43fbcb3a113a5118425"
+      },
+      {
+        "path": "release022/package-checks-direct-sdist-attempt.json",
+        "bytes": 54362,
+        "sha256": "ea29611885fb3f99aaad5ff63a1a39082e03adf252cf6788ecfcd8d5c11d7ba5"
+      },
+      {
+        "path": "release022/package-checks-final.json",
+        "bytes": 74385,
+        "sha256": "057242742ba1478a0c32bcbe3f53a0274dbaea2223d9c0854169502e03f69dbb"
+      },
+      {
+        "path": "release022/package-checks-first-attempt.json",
+        "bytes": 8390,
+        "sha256": "0bfe6321f6a11b9beca4f0639ab5a5f2afa2f445db6bca12f4a357ed72c6726f"
+      },
+      {
+        "path": "release022/package-checks-progress.json",
+        "bytes": 52212,
+        "sha256": "13eee519841ef41016fcc6fd2eff50ab898e4b1f2d84995ea92e4467d9fafa29"
+      },
+      {
+        "path": "release022/package-checks.json",
+        "bytes": 54362,
+        "sha256": "ea29611885fb3f99aaad5ff63a1a39082e03adf252cf6788ecfcd8d5c11d7ba5"
+      },
+      {
+        "path": "release022/package-resume-progress.json",
+        "bytes": 73881,
+        "sha256": "1d84f7e6465590c90c994a168ec59375677207a1f865f7b6da986f6dd1fe7b90"
+      },
+      {
+        "path": "release022/readme-correction.run.json",
+        "bytes": 665,
+        "sha256": "dcd7085b22c162c59dd8380b38fdbbd8f6ec3506189e2444cdd8718fc60a98ed"
+      },
+      {
+        "path": "release022/readme-correction.stderr.txt",
+        "bytes": 126,
+        "sha256": "72f8e5ea39e9acfb256e72915b4ad88c9721617101bad8ca2e894e8bdea4cbb7"
+      },
+      {
+        "path": "release022/readme-correction.stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "release022/windows-full-corrected.run.json",
+        "bytes": 605,
+        "sha256": "967cf169c5df94eec93f61c304d6333fc322e208673da796bffd346dfba76cd1"
+      },
+      {
+        "path": "release022/windows-full-corrected.stderr.txt",
+        "bytes": 30,
+        "sha256": "697e7bfe46c133456519d600a8da0eeb85a5a7e6ed6cb2579e3cd715acc9e887"
+      },
+      {
+        "path": "release022/windows-full-corrected.stdout.txt",
+        "bytes": 4800,
+        "sha256": "0b21de0edcdd7801211efbe4f21c57c49d860d9fb6c0fba54fb691114b9ebadc"
+      },
+      {
+        "path": "release022/windows-full-initial.run.json",
+        "bytes": 601,
+        "sha256": "89b8f749ad7b8e0469d858216e0a4b07661512ee6a0a61f0a5cc8a77d14683b5"
+      },
+      {
+        "path": "release022/windows-full-initial.stderr.txt",
+        "bytes": 30,
+        "sha256": "697e7bfe46c133456519d600a8da0eeb85a5a7e6ed6cb2579e3cd715acc9e887"
+      },
+      {
+        "path": "release022/windows-full-initial.stdout.txt",
+        "bytes": 5451,
+        "sha256": "b639ae35359e5763d8b2b77c7c9d184425c914097a24222ec6484dd0b87fb481"
+      },
+      {
+        "path": "release022_linux.py",
+        "bytes": 3428,
+        "sha256": "99636b47ea7216d4fb642d493e741d2c084cceb383103177101db54abfe5fa45"
+      },
+      {
+        "path": "release022_linux_history.py",
+        "bytes": 1827,
+        "sha256": "b4f2d68f37ea1f58f5e33886620986f16e20be5957ce186deb751c83068afbca"
+      },
+      {
+        "path": "release022_package_checks.py",
+        "bytes": 5411,
+        "sha256": "1e3cf0ea8c59d62a55f6fc5ad996734fae72409b82bf60d9ea6adde49b9e7020"
+      },
+      {
+        "path": "release022_package_resume.py",
+        "bytes": 4329,
+        "sha256": "9b086d66b6ba41cd48198663181adc28e58fca2cabe230a6a28cee5e91b1fa21"
+      },
+      {
+        "path": "release022_test.py",
+        "bytes": 988,
+        "sha256": "8e8e87e876632d5645f9ddcc719e2cc3009805ccd6d4d13828f314e566d11f31"
+      }
+    ]
+  },
+  "pending": "Record implementation completion, freeze candidate, run exact-candidate replay and aggregate verification capture. No human verification or release decision has been recorded."
+}
