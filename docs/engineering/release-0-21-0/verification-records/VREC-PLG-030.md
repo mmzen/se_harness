@@ -2,7 +2,7 @@
 id = "VREC-PLG-030"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-032"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-21-0/decisions/DEC-RLS-002.md", "d
 evaluator_evidence_path = "docs/engineering/release-0-21-0/evidence/VREC-PLG-030-evaluator.json"
 evaluator_evidence_sha256 = "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26"
 
+verified_at = "2026-10-02T06:20:35Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLS-032"]
 conforms_to = ["VER-IAR-021", "VER-RLS-031"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-02T06:20:35Z"
+decided_by = "assurance-owner"
+reason = "Human mmzen: I verify VREC-PLG-030 as assurance owner. Exact candidate 967d513d20348ca20f78b4b2d4235c33fc8748d4 and reviewed evidence digests are unchanged. DEC-RLS-002 retains the accepted Claude native and Codex Windows desktop unverified gaps for WO-RLS-032/plugin 0.2.4 only. Codex applies the recorded human decision using the released evaluator assurance-owner label. No marketplace publication authority is inferred."
 +++
 
 # Verification Record Candidate
