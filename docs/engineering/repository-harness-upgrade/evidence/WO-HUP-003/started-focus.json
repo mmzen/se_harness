@@ -1,0 +1,724 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--artifact",
+    "WO-HUP-003",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "WO-HUP-003",
+      "artifacts": [
+        "WO-HUP-003"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "ADR-IAR-012",
+        "ADR-REB-011",
+        "ARCH-IAR-012",
+        "ARCH-REB-011",
+        "CAP-DST-001",
+        "CAP-REB-001",
+        "INT-DST-001",
+        "INT-REB-001",
+        "REQ-IAR-031",
+        "REQ-REB-027",
+        "SPEC-IAR-016",
+        "SPEC-REB-012",
+        "VER-HUP-003"
+      ],
+      "dependencies": [],
+      "declared_paths": [
+        ".engineering-harness.lock",
+        ".engineering-harness.toml",
+        ".github/workflows/engineering-harness.yml",
+        "docs/engineering/ARTIFACT_AUTHORING.md",
+        "docs/engineering/harness/AMEND_DEFINITIONS.md",
+        "docs/engineering/harness/ARTIFACTS.md",
+        "docs/engineering/harness/AUTHORITY.md",
+        "docs/engineering/harness/AUTHORIZE_WORK.md",
+        "docs/engineering/harness/COMMUNICATION.md",
+        "docs/engineering/harness/CONTINUE.md",
+        "docs/engineering/harness/DEFINE_CHANGE.md",
+        "docs/engineering/harness/DEFINITION_LINKS.md",
+        "docs/engineering/harness/DELIVER_RESULT.md",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md",
+        "docs/engineering/harness/DRAFT_WORK_ORDERS.md",
+        "docs/engineering/harness/EXCEPTIONS.md",
+        "docs/engineering/harness/EXECUTE_WORK.md",
+        "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+        "docs/engineering/harness/migration/REFERENCE_MAP.md",
+        "docs/engineering/harness/PULL_REQUEST.md",
+        "docs/engineering/harness/RECORD_STATE.md",
+        "docs/engineering/harness/RELEASE.md",
+        "docs/engineering/harness/RESULTS.md",
+        "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+        "docs/engineering/harness/SETUP.md",
+        "docs/engineering/harness/SKILL_PROVIDER.md",
+        "docs/engineering/harness/UPGRADE.md",
+        "docs/engineering/harness/VERIFY_OUTCOME.md",
+        "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+        "docs/engineering/instruction-architecture/README.md",
+        "docs/engineering/QUALITY_GATES.json",
+        "docs/engineering/README.md",
+        "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-025-evaluator.json",
+        "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003-evaluator-upgrade.json",
+        "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/",
+        "docs/engineering/repository-harness-upgrade/README.md",
+        "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-025.md",
+        "docs/engineering/repository-harness-upgrade/verification/VER-HUP-003.md",
+        "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-003.md",
+        "docs/engineering/self-hosting-boundary/SELF_HOSTING.md",
+        "docs/engineering/templates/ADR.template.md",
+        "docs/engineering/templates/ARCHITECTURE.template.md",
+        "docs/engineering/templates/CAPABILITY.template.md",
+        "docs/engineering/templates/DECISION.template.md",
+        "docs/engineering/templates/INTENT.template.md",
+        "docs/engineering/templates/OPERATING_CONTRACT.template.md",
+        "docs/engineering/templates/README.md",
+        "docs/engineering/templates/RELEASE_CONTRACT.template.md",
+        "docs/engineering/templates/RELEASE_RECORD.template.md",
+        "docs/engineering/templates/REQUIREMENT.template.md",
+        "docs/engineering/templates/RISK.template.md",
+        "docs/engineering/templates/SPECIFICATION.template.md",
+        "docs/engineering/templates/VERIFICATION.template.md",
+        "docs/engineering/templates/VERIFICATION_RECORD.template.md",
+        "docs/engineering/templates/WORK_ORDER.template.md",
+        "docs/engineering/WORKFLOW.json",
+        "docs/notes/developing-se-harness.md",
+        "docs/notes/harness-installation-and-upgrades.md",
+        "ENGINEERING_HARNESS.md",
+        "README.md",
+        "tests/test_progressive_documentation.py"
+      ],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-WO-IMPLEMENT",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "status": "not_assessable",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-WO-IMPLEMENT",
+      "current_step": "STEP-WO-IMPLEMENT-CHECK",
+      "steps": [
+        {
+          "id": "STEP-WO-IMPLEMENT-CHECK",
+          "kind": "command",
+          "gate_ids": [
+            "QG-G4-IMPLEMENTATION-EVIDENCE"
+          ],
+          "effects": [
+            "Evaluated implementation handoff for WO-HUP-003."
+          ],
+          "non_effects": [
+            "A checkpoint does not complete or verify work."
+          ],
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-HUP-003",
+            "--checkpoint",
+            "handoff"
+          ],
+          "corrective": {
+            "QGP-G4I-STATUS": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-START"
+            },
+            "QGP-G4I-GRAPH": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-INTEGRITY": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-SCOPE": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-SELECT"
+            },
+            "QGP-G4I-COMPLETE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-HUP-003",
+                "--checkpoint",
+                "handoff",
+                "--from-git",
+                "<base>"
+              ]
+            },
+            "QGP-G4I-PATHS": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-PREFLIGHT": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "preflight",
+                ".",
+                "--work-order",
+                "WO-HUP-003",
+                "--phase",
+                "review"
+              ]
+            },
+            "QGP-G4I-EVIDENCE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "evidence",
+                ".",
+                "--artifact",
+                "WO-HUP-003",
+                "--checkpoint",
+                "handoff"
+              ]
+            },
+            "QGP-G4I-DECISION": {
+              "kind": "escalation",
+              "decision_right": "DR-DECISION-DISPOSE"
+            }
+          }
+        },
+        {
+          "id": "STEP-WO-IMPLEMENT-PREVIEW",
+          "kind": "command",
+          "gate_ids": [
+            "QG-G4-IMPLEMENTATION-EVIDENCE"
+          ],
+          "effects": [
+            "Plan completion of WO-HUP-003."
+          ],
+          "non_effects": [
+            "Completion does not verify, release or deliver the work."
+          ],
+          "argv": [
+            "harnessctl",
+            "transition",
+            ".",
+            "--set",
+            "WO-HUP-003=implemented",
+            "--decision",
+            "WO-HUP-003=delegated-executor"
+          ],
+          "corrective": {
+            "QGP-G4I-STATUS": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-START"
+            },
+            "QGP-G4I-GRAPH": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-INTEGRITY": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-SCOPE": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-SELECT"
+            },
+            "QGP-G4I-COMPLETE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-HUP-003",
+                "--checkpoint",
+                "handoff",
+                "--from-git",
+                "<base>"
+              ]
+            },
+            "QGP-G4I-PATHS": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-PREFLIGHT": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "preflight",
+                ".",
+                "--work-order",
+                "WO-HUP-003",
+                "--phase",
+                "review"
+              ]
+            },
+            "QGP-G4I-EVIDENCE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "evidence",
+                ".",
+                "--artifact",
+                "WO-HUP-003",
+                "--checkpoint",
+                "handoff"
+              ]
+            },
+            "QGP-G4I-DECISION": {
+              "kind": "escalation",
+              "decision_right": "DR-DECISION-DISPOSE"
+            }
+          }
+        },
+        {
+          "id": "STEP-WO-IMPLEMENT-APPLY",
+          "kind": "command",
+          "gate_ids": [
+            "QG-G4-IMPLEMENTATION-EVIDENCE"
+          ],
+          "effects": [
+            "Record completion of only WO-HUP-003 under its approved execution scope."
+          ],
+          "non_effects": [
+            "Completion does not verify, release or deliver the work."
+          ],
+          "argv": [
+            "harnessctl",
+            "transition",
+            ".",
+            "--set",
+            "WO-HUP-003=implemented",
+            "--decision",
+            "WO-HUP-003=delegated-executor",
+            "--apply"
+          ],
+          "corrective": {
+            "QGP-G4I-STATUS": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-START"
+            },
+            "QGP-G4I-GRAPH": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-INTEGRITY": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-SCOPE": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-SELECT"
+            },
+            "QGP-G4I-COMPLETE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-HUP-003",
+                "--checkpoint",
+                "handoff",
+                "--from-git",
+                "<base>"
+              ]
+            },
+            "QGP-G4I-PATHS": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-PREFLIGHT": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "preflight",
+                ".",
+                "--work-order",
+                "WO-HUP-003",
+                "--phase",
+                "review"
+              ]
+            },
+            "QGP-G4I-EVIDENCE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "evidence",
+                ".",
+                "--artifact",
+                "WO-HUP-003",
+                "--checkpoint",
+                "handoff"
+              ]
+            },
+            "QGP-G4I-DECISION": {
+              "kind": "escalation",
+              "decision_right": "DR-DECISION-DISPOSE"
+            }
+          }
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "WO-HUP-003",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-HUP-003",
+          "status": "in_progress"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 57
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Projected the selected scope for WO-HUP-003."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "WO-HUP-003 is in_progress."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-CHECK",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-HUP-003",
+          "--checkpoint",
+          "handoff"
+        ]
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-WO-IMPLEMENT",
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "retain-the-implementation-evidence"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ],
+          "steps": {
+            "STEP-WO-IMPLEMENT-CHECK": {
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "retain-the-implementation-evidence"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            },
+            "STEP-WO-IMPLEMENT-PREVIEW": {
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "record-implementation-completion"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            },
+            "STEP-WO-IMPLEMENT-APPLY": {
+              "location": {
+                "file": "docs/engineering/harness/EXECUTE_WORK.md",
+                "heading": "record-implementation-completion"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "authority-from-work-approval",
+                  "when": "Before using the selected work order's execution grant."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-WO-IMPLEMENT-CHECK",
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "retain-the-implementation-evidence"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "ADR-IAR-012",
+        "ADR-REB-011",
+        "ARCH-IAR-012",
+        "ARCH-REB-011",
+        "CAP-DST-001",
+        "CAP-REB-001",
+        "INT-DST-001",
+        "INT-REB-001",
+        "REQ-IAR-031",
+        "REQ-REB-027",
+        "SPEC-IAR-016",
+        "SPEC-REB-012",
+        "VER-HUP-003",
+        "WO-HUP-003"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ],
+      "formal_artifacts": [
+        {
+          "id": "ADR-IAR-012",
+          "file": "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-012.md"
+        },
+        {
+          "id": "ADR-REB-011",
+          "file": "docs/engineering/released-evaluator-boundary/architecture/adr/ADR-REB-011.md"
+        },
+        {
+          "id": "ARCH-IAR-012",
+          "file": "docs/engineering/instruction-architecture/architecture/ARCH-IAR-012.md"
+        },
+        {
+          "id": "ARCH-REB-011",
+          "file": "docs/engineering/released-evaluator-boundary/architecture/ARCH-REB-011.md"
+        },
+        {
+          "id": "CAP-DST-001",
+          "file": "docs/engineering/harness-distribution/capabilities/CAP-DST-001.md"
+        },
+        {
+          "id": "CAP-REB-001",
+          "file": "docs/engineering/released-evaluator-boundary/capabilities/CAP-REB-001.md"
+        },
+        {
+          "id": "INT-DST-001",
+          "file": "docs/engineering/harness-distribution/intent/INT-DST-001.md"
+        },
+        {
+          "id": "INT-REB-001",
+          "file": "docs/engineering/released-evaluator-boundary/intent/INT-REB-001.md"
+        },
+        {
+          "id": "REQ-IAR-031",
+          "file": "docs/engineering/instruction-architecture/requirements/REQ-IAR-031.md"
+        },
+        {
+          "id": "REQ-REB-027",
+          "file": "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-027.md"
+        },
+        {
+          "id": "SPEC-IAR-016",
+          "file": "docs/engineering/instruction-architecture/specifications/SPEC-IAR-016.md"
+        },
+        {
+          "id": "SPEC-REB-012",
+          "file": "docs/engineering/released-evaluator-boundary/specifications/SPEC-REB-012.md"
+        },
+        {
+          "id": "VER-HUP-003",
+          "file": "docs/engineering/repository-harness-upgrade/verification/VER-HUP-003.md"
+        },
+        {
+          "id": "WO-HUP-003",
+          "file": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-003.md"
+        }
+      ]
+    },
+    "result_sha256": "e8df0114c34382369df7abe8f57824f288bb04d4e70a6272b6399611bc3419a5",
+    "context": {
+      "reading_manifest": [
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/harness-distribution/intent/INT-DST-001.md",
+        "docs/engineering/released-evaluator-boundary/intent/INT-REB-001.md",
+        "docs/engineering/harness-distribution/capabilities/CAP-DST-001.md",
+        "docs/engineering/released-evaluator-boundary/capabilities/CAP-REB-001.md",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-031.md",
+        "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-027.md",
+        "docs/engineering/instruction-architecture/specifications/SPEC-IAR-016.md",
+        "docs/engineering/released-evaluator-boundary/specifications/SPEC-REB-012.md",
+        "docs/engineering/instruction-architecture/architecture/ARCH-IAR-012.md",
+        "docs/engineering/released-evaluator-boundary/architecture/ARCH-REB-011.md",
+        "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-012.md",
+        "docs/engineering/released-evaluator-boundary/architecture/adr/ADR-REB-011.md",
+        "docs/engineering/repository-harness-upgrade/verification/VER-HUP-003.md",
+        "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-003.md"
+      ],
+      "governing": [
+        "ADR-IAR-012",
+        "ADR-REB-011",
+        "ARCH-IAR-012",
+        "ARCH-REB-011",
+        "CAP-DST-001",
+        "CAP-REB-001",
+        "INT-DST-001",
+        "INT-REB-001",
+        "REQ-IAR-031",
+        "REQ-REB-027",
+        "SPEC-IAR-016",
+        "SPEC-REB-012",
+        "VER-HUP-003"
+      ],
+      "declared_paths": [
+        ".engineering-harness.toml",
+        ".engineering-harness.lock",
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/QUALITY_GATES.json",
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/harness/AMEND_DEFINITIONS.md",
+        "docs/engineering/harness/ARTIFACTS.md",
+        "docs/engineering/harness/AUTHORITY.md",
+        "docs/engineering/harness/AUTHORIZE_WORK.md",
+        "docs/engineering/harness/COMMUNICATION.md",
+        "docs/engineering/harness/CONTINUE.md",
+        "docs/engineering/harness/DEFINE_CHANGE.md",
+        "docs/engineering/harness/DEFINITION_LINKS.md",
+        "docs/engineering/harness/DELIVER_RESULT.md",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md",
+        "docs/engineering/harness/DRAFT_WORK_ORDERS.md",
+        "docs/engineering/harness/EXCEPTIONS.md",
+        "docs/engineering/harness/EXECUTE_WORK.md",
+        "docs/engineering/harness/PULL_REQUEST.md",
+        "docs/engineering/harness/RECORD_STATE.md",
+        "docs/engineering/harness/RELEASE.md",
+        "docs/engineering/harness/RESULTS.md",
+        "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+        "docs/engineering/harness/SETUP.md",
+        "docs/engineering/harness/SKILL_PROVIDER.md",
+        "docs/engineering/harness/UPGRADE.md",
+        "docs/engineering/harness/VERIFY_OUTCOME.md",
+        "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+        "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+        "docs/engineering/harness/migration/REFERENCE_MAP.md",
+        "docs/engineering/ARTIFACT_AUTHORING.md",
+        "docs/engineering/templates/ADR.template.md",
+        "docs/engineering/templates/ARCHITECTURE.template.md",
+        "docs/engineering/templates/CAPABILITY.template.md",
+        "docs/engineering/templates/DECISION.template.md",
+        "docs/engineering/templates/INTENT.template.md",
+        "docs/engineering/templates/OPERATING_CONTRACT.template.md",
+        "docs/engineering/templates/README.md",
+        "docs/engineering/templates/RELEASE_CONTRACT.template.md",
+        "docs/engineering/templates/RELEASE_RECORD.template.md",
+        "docs/engineering/templates/REQUIREMENT.template.md",
+        "docs/engineering/templates/RISK.template.md",
+        "docs/engineering/templates/SPECIFICATION.template.md",
+        "docs/engineering/templates/VERIFICATION.template.md",
+        "docs/engineering/templates/VERIFICATION_RECORD.template.md",
+        "docs/engineering/templates/WORK_ORDER.template.md",
+        "README.md",
+        ".github/workflows/engineering-harness.yml",
+        "docs/notes/developing-se-harness.md",
+        "docs/notes/harness-installation-and-upgrades.md",
+        "docs/engineering/README.md",
+        "docs/engineering/self-hosting-boundary/SELF_HOSTING.md",
+        "docs/engineering/repository-harness-upgrade/README.md",
+        "docs/engineering/instruction-architecture/README.md",
+        "tests/test_progressive_documentation.py",
+        "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-003.md",
+        "docs/engineering/repository-harness-upgrade/verification/VER-HUP-003.md",
+        "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003/",
+        "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-003-evaluator-upgrade.json",
+        "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-025.md",
+        "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-025-evaluator.json"
+      ],
+      "state": {
+        "status": "in_progress",
+        "family": "work_order"
+      },
+      "next": {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-HUP-003",
+          "--checkpoint",
+          "handoff"
+        ],
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-CHECK"
+      },
+      "decision_required": null
+    }
+  },
+  "seconds": 5.118914300001052
+}

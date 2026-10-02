@@ -5,10 +5,10 @@
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
-SE Harness 0.21.0 and plugin 0.2.4 are public. This repository still uses
-released 0.20.1, adopted under WO-HUP-025. Publication does not change that
-selection. Native replacement-delivery review and separately approved adoption
-are required before applying the minimal layout here. See the
+SE Harness 0.21.0 and plugin 0.2.4 are public. This repository adopts released
+0.21.0 and the external-resource layout under WO-HUP-003, after review of native
+Codex CLI startup and compaction. The 44 selected resource copies retire through
+the installer. Publication alone never changes a repository selection. See the
 [release observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md).
 
 <a id="minimal-installation-successor-candidate"></a>
@@ -34,6 +34,28 @@ The lookup returns the selected release, content, paths and byte identities.
 Read only the requested instructions. It also works without a plugin and offline
 when the exact wheel is already installed. Missing resources require explicit
 setup. Source code and a newer plugin are never substitute policy sources.
+
+### Read selected instructions
+
+Run the selected released evaluator from outside the checkout. `CHECKER` and
+`REPO` have the meanings given above. To read the compact entry:
+
+```text
+"CHECKER" -I -m se_harness resources "REPO" --resource ENGINEERING_HARNESS.md --content --json
+```
+
+For a procedure, replace `RESOURCE` with its exact resource ID, for example
+`docs/engineering/harness/ARTIFACTS.md`:
+
+```text
+"CHECKER" -I -m se_harness resources "REPO" --resource RESOURCE --json
+```
+
+Read the returned file path and the heading named by the referring guide.
+A resource ID is not a path inside this checkout. Resolve instruction links
+relative to the returned resource location. Formal artifacts remain repository
+files. Read only the material needed for the selected task. Missing or invalid
+resources require explicit setup; do not substitute checkout source templates.
 
 ### Optional repository integrations
 
@@ -148,7 +170,8 @@ permissions, branch protection or publishing credentials.
 
 The compact root needs native delivery through a compatible, enabled and trusted
 host plugin. A successful installation or doctor check does not prove that the
-host injected it. See [setup](../engineering/harness/SETUP.md).
+host injected it. Use the selected release's `docs/engineering/harness/SETUP.md`
+procedure. For the external-resource layout, follow [resource lookup](#read-selected-instructions).
 
 The evaluator's executable scripts ship inside its package. No executable
 copies are installed under the target's `scripts/` directory.
@@ -188,7 +211,7 @@ root and review native startup and post-compaction traces. Pass the resulting
 repository-bound receipt with `--instruction-delivery-evidence PATH` on apply.
 Missing or stale evidence leaves the old blocks unchanged. Canonical old guides
 become compatibility pointers; customized guides require an explicit plan.
-See [the upgrade procedure](../engineering/harness/UPGRADE.md#legacy-entry-delivery-evidence).
+Resolve `docs/engineering/harness/UPGRADE.md` with `harnessctl resources REPO --resource docs/engineering/harness/UPGRADE.md --json`, then read `legacy-entry-delivery-evidence` at the returned path.
 The installer preserves owner bytes outside the old blocks. An approved separate
 owner edit is needed to remove harness prose previously copied into that region.
 
@@ -225,13 +248,14 @@ effective values, wherever their rule is written.
 ## Published release and candidate differences
 
 Released 0.20.0 omits the six obsolete guide seeds from fresh installations.
-An upgrade preserves existing stock pointers and custom owner text. Current work starts at [ENGINEERING_HARNESS.md](../../ENGINEERING_HARNESS.md#read-by-task)
-and reads the selected guide under `docs/engineering/harness/`. Those pointers
+An upgrade preserves existing stock pointers and custom owner text. Current work
+resolves `ENGINEERING_HARNESS.md` through `harnessctl resources`, then resolves
+the selected guide from the same released wheel. Those older pointers
 are navigation aids, not separate policy authorities.
 
-This repository adopted 0.20.1 under WO-HUP-025 after its earlier 0.20.0
-adoption under WO-HUP-024. The six legacy pointers were removed through
-separate cleanup work; this upgrade preserves their absence. Development source
+This repository adopted 0.21.0 under WO-HUP-003 after 0.20.1 under WO-HUP-025
+and 0.20.0 under WO-HUP-024. The six legacy pointers were removed through
+separate cleanup work; the resource migration preserves their absence. Development source
 remains 0.21.0; its version alone does not change any repository's selected
 evaluator.
 

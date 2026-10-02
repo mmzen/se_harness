@@ -1,0 +1,18 @@
+{
+  "pyproject.toml": "f9b511eaeab2737217fc6671cb0118e76d27b11d57bbde1924628e2603a0358a",
+  "se_harness/__init__.py": "0f4071691c5cdf48b95dc07143b2bbfc06ed8d973d5649f2673f34869bf81cb3",
+  "tests/test_artifact_catalog.py": "908ca9a69de53c40fb82f6d04610e2c02499bf6c618784fb11a65f9eb04c09a2",
+  "tests/test_instruction_architecture.py": "5b3189b7e1ae4448dca56147275b569231dc86f86982104541954fdf6aa3b1ba",
+  "tests/test_progressive_documentation.py": "0b7c69a7d3d2751a318053d5b2b120474e63bd6ac2a825f1141bc0fe0d16ee87",
+  "docs/notes/agentic-execution-host-adapters.md": "df3da24ba6542e6dab898d1595e75b40534d7ae6244a5c4d57e8fca719c57194",
+  "docs/notes/developing-se-harness.md": "49fdeb8d937816b461e35385fc367a3ede24516e61c260542db0a8dbb0c64262",
+  "docs/notes/harness-operational-phasing.md": "f57c9df3c34fc50698be38e26df4ebba02d13a5fc4a91de87e5a0e203097801a",
+  "docs/notes/harness-overview.md": "7c2a2c3ff945dbbb41e72dca9ad211128fecbe45b964baa4207511258e0d6348",
+  "docs/notes/harness-uml-model.md": "5742199031eb6360df8d5d25f01ec60039df1e668e670fce166e74109fbad6b3",
+  "docs/notes/harnessctl-reference.md": "1826b8e789e3550847e9f4f5aab0a8d303dda7a118df613936834fec463ef1f3",
+  "docs/notes/README.md": "b1c8d1f463161d3110d5ac66a383b19caba2fdc39f64022a0eacf96123c346ab",
+  "docs/notes/technical-communication.md": "eb656034fb230b33db34a61d4ddc59a7c9dd54d27e1c790381c4e28c9d8f6040",
+  ".engineering-harness.lock": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+  ".engineering-harness.toml": "539d431527a64f4f617f1653dfea3158b466078be799d2ae30db91f50f533010",
+  ".github/workflows/engineering-harness.yml": "effe8f9e7e69be4d1396743034f6bf625d213fe60a4874429a28f7a49beb29c9"
+}

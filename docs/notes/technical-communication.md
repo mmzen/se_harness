@@ -2,7 +2,7 @@
 
 <!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-SE Harness installs one managed technical-communication policy. It helps agents
+The selected SE Harness release supplies one technical-communication policy. It helps agents
 write direct English prose without changing engineering authority or technical
 meaning.
 
@@ -38,7 +38,7 @@ This checkout uses the Verity Plane plugin installed in the selected agent host.
 The tracked shared sources are
 [`harness-operator-brief`](../../plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md)
 and [`harness-orient`](../../plugins/verity-plane/common/skills/harness-orient/SKILL.md).
-Default repository-owned installations receive the
+Legacy repository-owned installations receive the
 [brief skill template](../../templates/repository/standard/.agents/skills/harness-operator-brief/SKILL.md)
 under `.agents/skills/`. See [contributor setup and restoration](developing-se-harness.md#agent-skills-for-this-checkout)
 for the provider choice. Invoke `harness-operator-brief` explicitly and supply:
@@ -70,8 +70,8 @@ The policy and brief skill do not:
 - prove that prose is technically correct or semantically equivalent; or
 - claim ASD-STE100 compliance.
 
-The managed policy at
-[COMMUNICATION.md](../engineering/harness/COMMUNICATION.md#communication) is authoritative for these
+The selected released policy at
+[COMMUNICATION.md](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/COMMUNICATION.md`, heading `communication`) is authoritative for these
 communication rules. The skill and this note only explain and apply that policy.
 
 ## Contributor checks

@@ -86,7 +86,7 @@ Dated review packets, decision aids, and superseded guidance, kept for the decis
 
 ## Know what is authoritative
 
-- **SE Harness guarantees and managed policy:** start at [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md), which routes to the exact procedure and supporting section needed for the selected task.
+- **SE Harness guarantees and managed policy:** start at [`ENGINEERING_HARNESS.md`](harness-installation-and-upgrades.md#read-selected-instructions) (resource `ENGINEERING_HARNESS.md`), which routes to the exact procedure and supporting section needed for the selected task.
 - **Configurable harness policy:** `.engineering-harness.toml` selects supported enforcement settings.
 - **Repository-specific control:** the entirely repository-owned [`AGENTS.md`](../../AGENTS.md), product artifacts, build commands, Git strategy, hosting controls, and local agent instructions belong to the repository and its accountable owners.
 - **Illustrations:** the notes in this directory help readers understand the model but do not authorize work or override managed policy.

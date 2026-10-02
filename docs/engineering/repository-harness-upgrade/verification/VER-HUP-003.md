@@ -2,13 +2,20 @@
 id = "VER-HUP-003"
 type = "verification"
 title = "Verify adoption of released 0.21.0 external resources"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-10-01"
-updated = "2026-10-01"
+updated = "2026-10-02"
 
 [relations]
 verifies = ["REQ-REB-027", "REQ-IAR-031"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-02T07:55:47Z"
+decided_by = "engineering-owner"
+reason = "Human mmzen: I confirm. Confirms refreshed WO-HUP-003 and VER-HUP-003, required commit-bound verification and the sixteen listed editable-file retirements. Scope includes the 28 managed-copy retirements and Codex CLI native rehearsal. Exact native-delivery trace review remains required before installer apply; verification acceptance and external actions remain separate. Reviewed SHA256 a3a939a248237c77d661aaca5401852a6fe0de401316035d607f81c2b1ff6530; transition input SHA256 a3a939a248237c77d661aaca5401852a6fe0de401316035d607f81c2b1ff6530. Codex applies the human decision with the selected evaluator role-label encoding; mmzen remains the decision-maker."
 +++
 
 # Verify adoption of released 0.21.0 external resources
@@ -22,13 +29,15 @@ remain historical. This contract verifies adoption in this repository. It does
 not repeat product qualification or grant release authority.
 
 Obtain the target identity from the published v0.21.0 release and its authorized
-release record. Match the wheel and installed payload before use. No v0.21.0
-release or tag was available when this draft was prepared on 2026-10-01.
-Do not fill that gap with a development build or an invented digest.
+release record. Match the wheel and installed payload before use. The published release is RLS-SEH-031 at
+`4031f0fa4b5c4a95651bd928a110d8b2d94f9775`. The target wheel SHA-256 is
+`13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789`;
+the payload SHA-256 is
+`c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac`.
 
 Compare owner files and formal history against the actual pre-apply snapshot.
 The preparation base is main at
-`f5f7c77c6eadfd7d6f1c68e136f1f7cc29cfc0a5`; refresh it after publication.
+`695d6773dc86f25691a9799e969bcca014207837`; repeat the preview if the selected inputs change.
 
 ## Requirement-to-evidence matrix
 
@@ -61,8 +70,10 @@ evaluator. Obtain exact arguments from the relevant released command help.
 Use existing tests and release evidence for failure behavior; no new product
 test framework is required for this adoption.
 
-Native evidence must record the host and plugin versions actually used. State
-which host is the configured replacement. CLI or app-server evidence does not
+Native evidence must record the host and plugin versions actually used. Use Codex CLI with released plugin 0.2.4 as the proposed configured
+replacement. Retain exact repository-bound native startup and compaction traces.
+A temporary registration in the disposable test profile must be restored after
+the rehearsal; do not change credentials, hook trust or desktop configuration. CLI or app-server evidence does not
 verify the Windows desktop client. If the intended replacement cannot supply
 the required native evidence, retain the old entry and report the gap.
 
@@ -81,8 +92,10 @@ or reuse the product-release verification record as adoption evidence.
 
 ## Residual uncertainty
 
-This draft records no passing result. Publication, compatible plugin delivery,
-the actual migration preview and native replacement traces are pending inputs.
+Public evaluator/plugin identities and the no-write migration preview are
+confirmed. This draft records no completed adoption or verification verdict.
+Native replacement traces for this exact repository and their human review
+remain pending. Accepted release omissions do not waive this adoption criterion.
 Codex Windows desktop delivery remains unverified. Adoption does not itself
 publish or update a plugin, waive that limitation, authorize a merge or change
 release markers. Required commit-bound assurance is proposed for human review.

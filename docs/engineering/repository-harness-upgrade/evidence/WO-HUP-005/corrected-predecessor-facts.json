@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "repository_tools.evaluator_facts",
+    "derive",
+    "--repository",
+    ".",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "candidate_version": "0.21.1",
+    "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+    "schema": "se-harness-evaluator-facts-v1",
+    "version": "0.21.0",
+    "wheel": "se_harness-0.21.0-py3-none-any.whl",
+    "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+  },
+  "seconds": 0.31727540000065346
+}

@@ -2,13 +2,17 @@
 
 <!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This is non-authoritative operator guidance. Installed managed files, the
+> This is non-authoritative operator guidance. The selected released resources,
 > exact released evaluator, formal artifact state, and accountable decisions
 > remain authoritative.
 
 ## Repository provider and plugin provider
 
-The repository provider supplies two portable skill cores:
+The 0.21.0 external-resource layout creates no repository skill copies. Use the
+host plugin for skill delivery; the selected released evaluator supplies policy.
+The repository-provider description below applies to retained legacy layouts.
+
+In the legacy repository-copy layout, the repository provider supplies two portable skill cores:
 `harness-orient` and `harness-operator-brief`. Codex discovers their copies in
 `.agents/skills/`. The supplied Claude Code adapter is for `harness-orient`;
 it loads the same-name canonical core instead of duplicating its procedure.
@@ -43,7 +47,7 @@ Missing or incompatible inputs stop the affected skill operation.
 
 ## Installation and upgrades
 
-Under repository ownership, these skill copies are editable supplied files.
+In the legacy layout, repository-owned skill copies are editable supplied files.
 The selected released installer maintains their inventory; existing repositories
 receive changes through the explicit upgrade procedure. They are not additional
 locked lifecycle policies.
@@ -56,7 +60,7 @@ a host plugin, change the evaluator version or approve any engineering work.
 
 Follow [contributor setup and restoration](developing-se-harness.md#agent-skills-for-this-checkout)
 and [installation and safe upgrades](harness-installation-and-upgrades.md).
-The selected repository's [provider procedure](../engineering/harness/SKILL_PROVIDER.md)
+The selected repository's [provider procedure](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/SKILL_PROVIDER.md`)
 governs the change.
 
 ## Retired writing skills

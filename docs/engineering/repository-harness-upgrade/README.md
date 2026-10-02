@@ -3,7 +3,19 @@
 This domain governs separately authorized standard-root evaluator upgrades and
 their bounded post-adoption qualification.
 
-## Current adoption: 0.20.1
+## Current adoption: 0.21.0
+
+WO-HUP-003 adopts the public wheel bound by RLS-SEH-031 under VER-HUP-003.
+The reviewed transaction selects external resources, retires 28 managed copies
+and 16 explicitly selected editable copies, and preserves owner files and formal
+history. CI selects 0.21.0. Product source templates remain for package builds.
+
+See the [transaction](evidence/WO-HUP-003-evaluator-upgrade.json) and
+[adoption evidence](evidence/WO-HUP-003/README.md). Native Codex CLI startup and
+compaction were reviewed before apply. Claude and Codex desktop delivery remain
+unverified. Exact-candidate verification and integration remain separate.
+
+## Previous adoption: 0.20.1
 
 WO-HUP-025 adopts the public wheel released under RLS-SEH-030, with verification
 contract VER-HUP-023. The installer updates the selected version, root

@@ -170,7 +170,7 @@ A work order omits its `architecture` relation when no active architecture
 addresses any implemented requirement. When architecture applies, the work
 order selects every applicable architecture and each ADR its decision
 assessment requires. The authoritative
-[artifact applicability catalog](../engineering/harness/ARTIFACTS.md#artifact-types)
+[artifact applicability catalog](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/ARTIFACTS.md`, heading `artifact-types`)
 defines the complete required, omission and reuse rules for every type.
 
 Since the 0.4.1 version of this note, a work order gained three tables:
@@ -295,7 +295,7 @@ the decision.
 A complete graph proves that the required relations are declared. It does
 not prove that the statements are good, that the evidence is persuasive, or
 that a human approved a transition. Those judgments belong to the
-human and agent [decision rights](../engineering/harness/AUTHORITY.md#decision-rights).
+human and agent [decision rights](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/AUTHORITY.md`, heading `decision-rights`).
 
 If a policy and an executable check disagree, stop and report the
 difference. Neither this diagram nor an implementation detail resolves

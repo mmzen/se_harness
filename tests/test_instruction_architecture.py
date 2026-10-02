@@ -749,8 +749,10 @@ class OwnerInstructionRegionTests(unittest.TestCase):
                 self.assertNotIn(claim, self.text.lower())
 
     def test_evaluator_setup_is_discovered_outside_owner_instructions(self) -> None:
-        router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        setup = (REPOSITORY_ROOT / "docs/engineering/harness/SETUP.md").read_text(encoding="utf-8")
+        # Candidate-source assets are separate from the adopted released resources.
+        standard = REPOSITORY_ROOT / "templates/repository/standard"
+        router = (standard / "ENGINEERING_HARNESS.md.tpl").read_text(encoding="utf-8")
+        setup = (standard / "docs/engineering/harness/SETUP.md").read_text(encoding="utf-8")
         self.assertIn("docs/engineering/harness/SETUP.md", router)
         self.assertIn("outside the checkout", router)
         self.assertIn("-I -m se_harness", setup)

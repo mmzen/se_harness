@@ -1,0 +1,24 @@
+{
+  "schema": "adoption-proposed-correction-review-v1",
+  "assessment": "Read-only audit of proposed files outside checkout; implementation tests not claimed.",
+  "passed": true,
+  "findings": [],
+  "current_guide_count": 12,
+  "released_resource_references": 16,
+  "python_syntax": "pass",
+  "proposed_files": [
+    "pyproject.toml",
+    "se_harness/__init__.py",
+    "tests/test_artifact_catalog.py",
+    "tests/test_instruction_architecture.py",
+    "tests/test_progressive_documentation.py",
+    "docs/notes/agentic-execution-host-adapters.md",
+    "docs/notes/developing-se-harness.md",
+    "docs/notes/harness-operational-phasing.md",
+    "docs/notes/harness-overview.md",
+    "docs/notes/harness-uml-model.md",
+    "docs/notes/harnessctl-reference.md",
+    "docs/notes/README.md",
+    "docs/notes/technical-communication.md"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "upgrade",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "changes": [
+      {
+        "action": "unchanged",
+        "path": ".engineering-harness.lock"
+      },
+      {
+        "action": "unchanged",
+        "path": ".engineering-harness.toml"
+      },
+      {
+        "action": "unchanged",
+        "path": ".gitattributes"
+      },
+      {
+        "action": "unchanged",
+        "path": ".github/PULL_REQUEST_TEMPLATE.md"
+      },
+      {
+        "action": "unchanged",
+        "path": ".github/workflows/engineering-harness.yml"
+      },
+      {
+        "action": "unchanged",
+        "path": ".gitignore"
+      }
+    ],
+    "command": "upgrade",
+    "instruction_delivery_required": false,
+    "outcome": "completed",
+    "schema": "se-harness-command-result-v1",
+    "written": false
+  },
+  "seconds": 0.548291999999492
+}
