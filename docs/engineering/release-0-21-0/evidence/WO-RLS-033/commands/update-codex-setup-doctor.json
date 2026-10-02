@@ -1,0 +1,42 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex\\data\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "doctor",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex\\repository",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex",
+  "exit_code": 0,
+  "result": {
+    "checks": [
+      {
+        "detail": ".engineering-harness.toml",
+        "name": "config",
+        "passed": true
+      },
+      {
+        "detail": ".engineering-harness.lock",
+        "name": "lock",
+        "passed": true
+      },
+      {
+        "detail": "3.14.6",
+        "name": "python",
+        "passed": true
+      },
+      {
+        "detail": "selected wheel payload and declared instruction headings are available",
+        "name": "released-resources",
+        "passed": true
+      }
+    ],
+    "command": "doctor",
+    "outcome": "completed",
+    "schema": "se-harness-command-result-v1",
+    "warnings": []
+  },
+  "seconds": 0.4756463000012445
+}

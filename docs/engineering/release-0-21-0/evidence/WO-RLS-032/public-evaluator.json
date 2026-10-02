@@ -1,0 +1,137 @@
+{
+  "expected_identity": {
+    "evaluator": {
+      "version": "0.21.0",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+      "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+      "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+    },
+    "source": "RLS-SEH-031 public download and released-evaluator assembly check"
+  },
+  "public_archives": [
+    {
+      "file": "se_harness-0.21.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/52/51/8b8bfa6d5007904b9df23b999daee83a74ae518b496c9f9e9a3058358a1e/se_harness-0.21.0-py3-none-any.whl",
+      "sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "bytes": 544479
+    },
+    {
+      "file": "se_harness-0.21.0.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/10/aa/0e0e2aafcde9367cdeec29672bdef2b82f080be925ee38df6bd1180b190f/se_harness-0.21.0.tar.gz",
+      "sha256": "f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b",
+      "bytes": 804555
+    }
+  ],
+  "public_install": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "pip",
+      "install",
+      "--disable-pip-version-check",
+      "--no-index",
+      "--no-deps",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\se_harness-0.21.0-py3-none-any.whl"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "stdout": "Processing .\\reconcile-minimal-20261001\\rls031-public-readback\\se_harness-0.21.0-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.21.0\n",
+      "stderr": ""
+    },
+    "seconds": 2.443616600000041
+  },
+  "public_version": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "--version"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "stdout": "0.21.0\n",
+      "stderr": ""
+    },
+    "seconds": 0.28455269999994925
+  },
+  "publisher": {
+    "authority": "derived operational evidence; no formal lifecycle transition",
+    "release": {
+      "build_recipe": "release/build-recipe.json",
+      "build_recipe_schema": "se-harness-release-build-recipe/v1",
+      "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+      "candidate_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "checksums": "SHA256SUMS",
+      "checksums_sha256": "5a19fbe2b516631a15cd0eb5d6258e95c68478fa800e2cc5b6e9ed05c3d76b3a",
+      "distribution_schema": 2,
+      "evaluator_evidence_path": "docs/engineering/release-0-21-0/evidence/RLS-SEH-031-evaluator.json",
+      "evaluator_evidence_sha256": "e5148d268c5741a14613a371672929daa845983733cf8ee1439f3f3b60b4bb8b",
+      "git_object_format": "sha1",
+      "governance_commit": "66baa640eea3946bd041ac09e419e300fafef017",
+      "release_contract": "REL-SEH-033",
+      "release_record": "RLS-SEH-031",
+      "release_record_path": "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+      "released_at": "2026-10-02T04:51:54Z",
+      "released_work": [
+        "WO-IAR-028",
+        "WO-IAR-029",
+        "WO-IAR-030",
+        "WO-IAR-031",
+        "WO-IAR-033",
+        "WO-IAR-034",
+        "WO-IAR-035",
+        "WO-IAR-036",
+        "WO-IAR-037",
+        "WO-IAR-039",
+        "WO-IAR-040",
+        "WO-IAR-041",
+        "WO-RLS-031"
+      ],
+      "repository": "mmzen/se_harness",
+      "schema": "se-harness-release-plan/v2",
+      "sdist": "se_harness-0.21.0.tar.gz",
+      "sdist_sha256": "f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b",
+      "source_date_epoch": 1790915026,
+      "source_manifest_sha256": "326a77de837da64bf2a06948169787c86823c010ddcbeedbcb520fb23c8fec1b",
+      "tag": "v0.21.0",
+      "verification_records": [
+        "VREC-SEH-031"
+      ],
+      "version": "0.21.0",
+      "wheel": "se_harness-0.21.0-py3-none-any.whl",
+      "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+    },
+    "schema": "se-harness-release-result/v1",
+    "stages": {
+      "github": {
+        "maintenance_branch": "release/0.21",
+        "maintenance_state": "created",
+        "state": "exact",
+        "url": "https://github.com/mmzen/se_harness/releases/tag/v0.21.0"
+      },
+      "pages": {
+        "state": "exact",
+        "url": "https://www.verityplane.ai/"
+      },
+      "public_install": {
+        "state": "exact"
+      },
+      "pypi": {
+        "state": "exact",
+        "url": "https://pypi.org/project/se-harness/0.21.0/"
+      },
+      "qualification": {
+        "state": "exact"
+      },
+      "resolution": {
+        "state": "exact",
+        "workflow_url": "https://github.com/mmzen/se_harness/actions/runs/36967152230"
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_progressive_documentation",
+    "tests.plugin_integration.package_assembly.test_refresh_guidance"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "0.21.0\n",
+    "stderr": "............................\n----------------------------------------------------------------------\nRan 28 tests in 0.735s\n\nOK\n"
+  },
+  "seconds": 1.0820126999988133
+}

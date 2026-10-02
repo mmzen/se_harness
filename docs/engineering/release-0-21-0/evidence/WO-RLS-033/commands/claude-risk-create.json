@@ -1,0 +1,46 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "raise-risk",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--domain",
+    "release-0-21-0",
+    "--title",
+    "Unverified Claude public-route native sessions in plugin 0.2.4",
+    "--description",
+    "Public fresh installation and update of plugin 0.2.4 on Claude Code pass exact-byte and offline setup checks. Native init-only bootstrap passes, but authenticated startup, activation, compaction and resume tests remain unavailable. Undetected Claude-specific delivery or session recovery defects may remain.",
+    "--action",
+    "Retain Claude results as unverified with accepted residual risk for WO-RLS-033 only; restore authentication and perform the native matrix before a later release or a claim of verified Claude support.",
+    "--owner",
+    "mmzen",
+    "--threatens",
+    "WO-RLS-033",
+    "--with-decision",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "changes": [
+      {
+        "action": "create",
+        "path": "docs/engineering/release-0-21-0/risks/RISK-RLS-003.md"
+      },
+      {
+        "action": "create",
+        "path": "docs/engineering/release-0-21-0/decisions/DEC-RLS-003.md"
+      }
+    ],
+    "command": "raise-risk",
+    "decision": "DEC-RLS-003",
+    "dry_run": false,
+    "outcome": "completed",
+    "risk": "RISK-RLS-003",
+    "schema": "se-harness-command-result-v1",
+    "score": null
+  },
+  "seconds": 14.31100460000016
+}

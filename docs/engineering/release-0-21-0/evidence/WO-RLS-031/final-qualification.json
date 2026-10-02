@@ -1,0 +1,99 @@
+{
+  "assessed_tree_commit": "2666e419b61927a8e88b6f2b2758bff03b67cc8b",
+  "governing_evaluator": "0.20.1",
+  "candidate_version": "0.21.0",
+  "plugin_version": "0.2.4",
+  "input_comparisons": [
+    {
+      "prior_commit": "2b7d318fd00e955edfec0443d5d7158891a41509",
+      "paths": [
+        "se_harness",
+        "templates",
+        "pyproject.toml",
+        "plugins",
+        "release/plugin-assembly.json"
+      ],
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "diff",
+        "--name-only",
+        "2b7d318fd00e955edfec0443d5d7158891a41509",
+        "HEAD",
+        "--",
+        "se_harness",
+        "templates",
+        "pyproject.toml",
+        "plugins",
+        "release/plugin-assembly.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "prior_commit": "3f438bb894e4108fa369a9dc048d69f5e0c2e8ab",
+      "paths": [
+        "se_harness",
+        "templates",
+        "pyproject.toml",
+        "plugins/verity-plane/common"
+      ],
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "diff",
+        "--name-only",
+        "3f438bb894e4108fa369a9dc048d69f5e0c2e8ab",
+        "HEAD",
+        "--",
+        "se_harness",
+        "templates",
+        "pyproject.toml",
+        "plugins/verity-plane/common"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "prior_commit": "e79368c677541d7092129a853e8b39157865ace9",
+      "paths": [
+        "plugins/verity-plane/common",
+        "plugins/verity-plane/codex/hooks",
+        "plugins/verity-plane/claude-code/hooks",
+        "se_harness/resources.py",
+        "se_harness/runtime_identity.py",
+        "templates/repository/standard/ENGINEERING_HARNESS.md.tpl"
+      ],
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "diff",
+        "--name-only",
+        "e79368c677541d7092129a853e8b39157865ace9",
+        "HEAD",
+        "--",
+        "plugins/verity-plane/common",
+        "plugins/verity-plane/codex/hooks",
+        "plugins/verity-plane/claude-code/hooks",
+        "se_harness/resources.py",
+        "se_harness/runtime_identity.py",
+        "templates/repository/standard/ENGINEERING_HARNESS.md.tpl"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "fresh_codex_driver": {
+    "sha256": "d922d3ef9400a3b8fd11d0ed14ba8f18cfdf0bf9940a2eadd6c05de34492652b",
+    "source": "\"\"\"Temporary exact-wheel native probes; only disposable profiles and fixtures.\"\"\"\nfrom pathlib import Path\nimport sys,json,subprocess,hashlib,os,base64,zipfile,io,tempfile,re,datetime\nWORK=Path(__file__).resolve().parent\nOUT=WORK/'reconcile-minimal-20261001'\nsys.path.insert(0,str(WORK/'iar-demo-tools'))\nfrom run_demo import child_env\nfrom acceptance_native import Codex,extract_codex,save\nBASE=Path(json.loads((WORK/'iar-demo-tools/prepared-demo.json').read_text())['demo'])\nEXES=json.loads((OUT/'native-current-inventory.json').read_text())\nEXES['codex']['executable']=r'C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe'\nmode=sys.argv[1]\nif mode=='inputs':\n    fixture=Path(json.loads((OUT/'release021-adapter-inputs.json').read_text())['fixture'])\n    inputs={host:base64.b64encode((fixture/'packages'/('verity-plane-'+host+'.zip')).read_bytes()).decode() for host in ['codex','claude']}\n    inputs['marketplace']=json.loads((WORK/'release030-main/release/plugin-marketplace/.agents/plugins/marketplace.json').read_text())\n    inputs['expected']=json.loads((OUT/'release021-qualification-wheel-expected.json').read_text())['evaluator']\n    save(OUT/'release021-native-inputs.json',inputs)\n    raise SystemExit(0)\nreport={'host':mode,'claims':'Native CLI/app-server only; desktop remains unverified.','commands':[],'stages':[],'passed':False}\ndest=OUT/('rls031-final-native-'+mode+(('-'+sys.argv[2]) if len(sys.argv)>2 else '')+'.json');assert not dest.exists()\nenv=child_env(BASE,mode)\nroot=Path(tempfile.mkdtemp(prefix='i30n-'));parent=root/'w';parent.mkdir()\nreport['root']=str(root)\ninputs=json.loads((OUT/'release021-native-inputs.json').read_text());expected=inputs['expected']\npackage=root/'package'\nwith zipfile.ZipFile(io.BytesIO(base64.b64decode(inputs[mode]))) as z:\n    assert all(not Path(n).is_absolute() and '..' not in Path(n).parts for n in z.namelist())\n    z.extractall(package)\nplugin=package/'verity-plane';wheel=plugin/'packages'/expected['archive_name']\nassert hashlib.sha256(wheel.read_bytes()).hexdigest()==expected['archive_sha256']\nwith zipfile.ZipFile(wheel) as z:\n    n=next(n for n in z.namelist() if n.endswith('/ENGINEERING_HARNESS.md.tpl'))\n    entry=z.read(n).decode().replace('{{PROJECT_NAME}}','Plugin qualification').replace('{{HARNESS_VERSION}}','0.21.0')\ndigest=hashlib.sha256(entry.encode()).hexdigest();report['entry_sha256']=digest;report['wheel']=expected\nreport['package_files']={p.relative_to(plugin).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in plugin.rglob('*') if p.is_file()}\ndef flush():save(dest,report)\ndef run(label,argv,allowed=(0,),use_env=env):\n    argv=list(map(str,argv));r=subprocess.run(argv,cwd=parent,env=use_env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=180)\n    report['commands'].append({'label':label,'argv':argv,'cwd':str(parent),'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr});flush()\n    assert r.returncode in allowed,(label,r.stdout[-1200:],r.stderr[-1200:])\n    return r.stdout\ndef assess(contexts):\n    assert any(c.endswith(entry) and digest in c for c in contexts),[c[:180] for c in contexts]\ndef prepare_and_activate(session,data):\n    remote=root/'source';remote.mkdir()\n    raw=run('prepare-exact-evaluator',[sys.executable,'-I',plugin/'scripts/setup.py','--target',remote,'--data-root',data,'--wheel',wheel],allowed=(1,2))\n    found=re.search(r'^Evaluator Python: (.+)$',raw,re.M);assert found\n    py=Path(found[1].strip())\n    run('fixture-init',[py,'-I','-m','se_harness','init',remote,'--project-name','Plugin qualification','--integration','git','--json'])\n    for args in [['init'],['add','.'],['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-m','Disposable exact-wheel selection']]:\n        run('fixture-git',['git','-C',remote,*args])\n    repo=parent/'clone'\n    run('clone-after-startup',['git','clone',remote,repo]);assert not (repo/'ENGINEERING_HARNESS.md').exists()\n    before={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in repo.iterdir() if p.is_file()}\n    activation=json.loads(run('activate-observed-session',[sys.executable,'-I',plugin/'scripts/activate.py','--host',mode,'--session-id',session,'--data-root',data,'--target',repo]))\n    assert activation['status']=='available';assess([activation['content']])\n    report['selection']={'session_id':session,'data':str(data),'repository':str(repo),'before':before}\n    return repo,before\nprobe='Read-only native instruction delivery test. Do not call tools. Copy only the newest hook context as JSON: session_id, selected_checkout, harness_version, entry_sha256, final_heading, bootstrap, delivery_gap, may_implement=false. Delivery grants no lifecycle authority.'\nif mode=='claude':\n    probe='This is a connectivity check. Do not use tools. Reply with PROBE_COMPLETE.'\nclient=None;restore=None\ntry:\n    report['version']=run('host-version',[EXES[mode]['executable'],'--version']).strip()\n    if mode=='codex':\n        exe=EXES[mode]['executable']\n        installed=json.loads(run('installed-before',[exe,'plugin','list','--marketplace','se-harness','--json']))['installed']\n        assert len(installed)==1 and installed[0]['pluginId']=='verity-plane@se-harness'\n        restore=installed[0]['marketplaceSource']['source'];report['restore_marketplace']=restore\n        market=root/'marketplace';(market/'.agents/plugins').mkdir(parents=True)\n        import shutil\n        shutil.copytree(plugin,market/'packages/codex/verity-plane')\n        save(market/'.agents/plugins/marketplace.json',inputs['marketplace'])\n        run('install-test-package',[exe,'-c','marketplaces.se-harness.source='+json.dumps(str(market)),'plugin','add','verity-plane@se-harness','--json'])\n        cache=Path(env['CODEX_HOME'])/'plugins/cache/se-harness/verity-plane/0.2.4'\n        assert all((cache/p).is_file() and hashlib.sha256((cache/p).read_bytes()).hexdigest()==h for p,h in report['package_files'].items())\n        events=OUT/'rls031-final-native-codex-events';events.mkdir()\n        manifest={'demo':str(BASE),'host_executables':{'codex':exe}}\n        client=Codex(manifest,events)\n        config={'marketplaces.se-harness.source':str(market),'marketplaces.se-harness.source_type':'local','features.multi_agent':False}\n        thread=client.rpc('thread/start',{'cwd':str(parent),'ephemeral':False,'sandbox':'read-only','approvalPolicy':'on-request','config':config})['thread']['id']\n        def turn(phase):\n            client.phase=phase;offset=len(client.events)\n            client.rpc('turn/start',{'threadId':thread,'cwd':str(parent),'input':[{'type':'text','text':probe}]});client.wait_turn(thread)\n            contexts,replies=extract_codex(client.events[offset:]);report['stages'].append({'phase':phase,'contexts':contexts,'replies':replies});flush()\n            print(json.dumps({'host':mode,'phase':phase,'contexts':len(contexts)}),flush=True)\n            return contexts\n        contexts=turn('startup');assert any('# Select the working repository' in c for c in contexts)\n        data=Path(env['CODEX_HOME'])/'plugins/data/verity-plane-se-harness'\n        assert any(str(data) in c and thread in c for c in contexts)\n        repo,before=prepare_and_activate(thread,data)\n        client.phase='manual-compact';offset=len(client.events)\n        client.rpc('thread/compact/start',{'threadId':thread});client.wait_turn(thread)\n        contexts,_=extract_codex(client.events[offset:]);contexts+=turn('after-manual');assess(contexts)\n        client.close();client=None\n        resume=events/'resume';resume.mkdir();client=Codex(manifest,resume);client.phase='resume'\n        client.rpc('thread/resume',{'threadId':thread,'cwd':str(parent),'excludeTurns':True,'config':config})\n        contexts=turn('resumed');all_contexts,_=extract_codex(client.events);assess(all_contexts)\n        client.close();client=None\n        auto=events/'automatic';auto.mkdir();client=Codex(manifest,auto);client.phase='automatic-resume'\n        client.rpc('thread/resume',{'threadId':thread,'cwd':str(parent),'excludeTurns':True,'config':dict(config,model_auto_compact_token_limit=1000)})\n        contexts=turn('automatic');assess(contexts)\n        assert any(e.get('notification',{}).get('params',{}).get('item',{}).get('type')=='contextCompaction' for e in client.events)\n        report['automatic_compaction_observed']=True\n    else:\n        def claude(phase,session=None,auto=False):\n            argv=[EXES[mode]['executable'],'--print','--verbose','--output-format','stream-json','--include-hook-events','--tools','','--strict-mcp-config','--permission-prompts','none','--setting-sources','project','--settings','{}','--plugin-dir',str(plugin),'--model','opus']\n            if session:argv+=['--resume',session]\n            argv+=['--','/compact' if phase=='manual-compact' else probe]\n            local=dict(env)\n            if auto:local.update(CLAUDE_AUTOCOMPACT_PCT_OVERRIDE='1',CLAUDE_CODE_AUTO_COMPACT_WINDOW='100000')\n            r=subprocess.run(argv,cwd=parent,env=local,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=240)\n            events=[];contexts=[];replies=[];ident=None\n            for line in r.stdout.splitlines():\n                try:e=json.loads(line)\n                except ValueError:continue\n                if e.get('session_id'):ident=e['session_id']\n                if e.get('subtype')=='hook_response':\n                    events.append(e)\n                    try:c=json.loads(e.get('output','{}')).get('hookSpecificOutput',{}).get('additionalContext')\n                    except ValueError:c=None\n                    if c:contexts.append(c)\n                if e.get('subtype')=='compact_boundary':events.append(e)\n                if e.get('type')=='assistant':replies += [c['text'] for c in e.get('message',{}).get('content',[]) if c.get('type')=='text']\n                if e.get('type')=='result':events.append({k:e.get(k) for k in ['type','subtype','is_error','result','session_id','usage']})\n            report['stages'].append({'phase':phase,'argv':argv,'cwd':str(parent),'exit_code':r.returncode,'session_id':ident,'contexts':contexts,'replies':replies,'events':events,'stderr':r.stderr});flush()\n            print(json.dumps({'host':mode,'phase':phase,'exit_code':r.returncode,'contexts':len(contexts)}),flush=True)\n            assert r.returncode==0 and ident\n            return ident,contexts,events\n        session,contexts,_=claude('startup');assert any('# Select the working repository' in c for c in contexts)\n        # Use the exact data root delivered by the native hook, not a guessed host identity.\n        text='\\n'.join(contexts)\n        matches=re.findall(r'(?m)^.*(?:[Pp]lugin data|CLAUDE_PLUGIN_DATA|--data-root).*$' ,text)\n        report['bootstrap_data_lines']=matches;flush()\n        declared=re.findall(r'(?m)^Plugin data: (.+)$',text);assert len(declared)==1\n        data=Path(declared[0])\n        assert data.is_relative_to(Path(env['CLAUDE_CONFIG_DIR'])/'plugins/data') and session in text\n        repo,before=prepare_and_activate(session,data)\n        _,contexts,_=claude('resumed',session);assess(contexts)\n        _,contexts,_=claude('manual-compact',session);assess(contexts)\n        _,contexts,events=claude('automatic',session,True);assess(contexts)\n        assert any(e.get('subtype')=='compact_boundary' and e.get('compact_metadata',{}).get('trigger')=='auto' for e in events)\n        report['automatic_compaction_observed']=True\n    assert before=={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in repo.iterdir() if p.is_file()}\n    report['repository_preserved']=True;report['passed']=True\nexcept Exception as exc:\n    report['error']=str(exc)\nfinally:\n    if client:client.close()\n    if restore:\n        run('restore-test-profile-package',[EXES[mode]['executable'],'-c','marketplaces.se-harness.source='+json.dumps(restore),'plugin','add','verity-plane@se-harness','--json'])\n        report['restored']=json.loads(run('installed-after',[EXES[mode]['executable'],'plugin','list','--marketplace','se-harness','--json']))['installed']\n        assert report['restored']==installed\n    flush()\nprint(json.dumps({'host':mode,'passed':report['passed'],'error':report.get('error'),'report':str(dest)}),flush=True)\nraise SystemExit(0 if report['passed'] else 1)\n"
+  },
+  "native_report_sha256": "99074cfa6dd832e38d83ab5e11439406e082eafb49d1cdc75a52b14b7d71bc1f",
+  "native_events_sha256": "0a27980498d8e6ac0dc89cbe7bc76ab23e7f382cf1e0691d206180252d1ef8c3",
+  "desktop": {
+    "result": "unverified",
+    "decision": "DEC-RLS-001",
+    "risk": "RISK-RLS-001",
+    "disposition": "accepted deviation for this release only"
+  },
+  "pending": "Exact final committed candidate rehearsal and aggregate capture; no human verification or release decision supplied."
+}

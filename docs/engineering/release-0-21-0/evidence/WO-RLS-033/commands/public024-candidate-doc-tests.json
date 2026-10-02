@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_public_onboarding",
+    "tests.test_progressive_documentation",
+    "tests.plugin_integration.package_assembly.test_refresh_guidance",
+    "tests.test_release_delivery"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 1,
+  "result": {
+    "stdout": "0.21.0\n",
+    "stderr": "..............F...........................................s...\n======================================================================\nFAIL: test_root_is_a_bounded_human_entry_point (tests.test_public_onboarding.PublicOnboardingTests.test_root_is_a_bounded_human_entry_point)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_public_onboarding.py\", line 51, in test_root_is_a_bounded_human_entry_point\n    self.assertLessEqual(len(self.readme.split()), 650)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 683 not less than or equal to 650\n\n----------------------------------------------------------------------\nRan 62 tests in 6.058s\n\nFAILED (failures=1, skipped=1)\n"
+  },
+  "seconds": 6.4668052999986685
+}

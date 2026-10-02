@@ -20,6 +20,7 @@ from pathlib import Path
 from unittest import mock
 
 from repository_tools import release_build as BUILD
+from scripts import replay_release_build as REPLAY
 from se_harness import __version__
 from se_harness.evaluator_identity import canonical_payload_manifest
 from tests.git_support import git
@@ -930,6 +931,70 @@ class HostIndependentCandidateSourceTests(unittest.TestCase):
                 with self.assertRaisesRegex(BUILD.BuildRecipeError, "declared source mode set"):
                     self.producer(Path(temporary), events)
             self.assertEqual(["modes"], events)
+
+
+class ReplayRecordSelectionTests(unittest.TestCase):
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+
+    def write_record(self, relative: str) -> Path:
+        path = self.root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(
+            b'+++\nid = "RLS-TEST-001"\ntype = "release_record"\n'
+            b'status = "released"\n+++\n\n# Preserved release record\n'
+        )
+        return path
+
+    def test_formal_record_is_selected_without_counting_its_evidence_copy(self) -> None:
+        record = self.write_record("docs/engineering/release-test/releases/RLS-TEST-001.md")
+        evidence = self.write_record("docs/engineering/release-test/evidence/released-record.md")
+        before = {path: path.read_bytes() for path in (record, evidence)}
+
+        selected, metadata = REPLAY._selected_record(self.root, "RLS-TEST-001")
+
+        self.assertEqual(record, selected)
+        self.assertEqual("RLS-TEST-001", metadata["id"])
+        self.assertEqual(before, {path: path.read_bytes() for path in before})
+
+    def test_evidence_copy_cannot_supply_a_missing_formal_record(self) -> None:
+        evidence = self.write_record("docs/engineering/release-test/evidence/released-record.md")
+        before = evidence.read_bytes()
+
+        with self.assertRaisesRegex(REPLAY.ReleaseDistributionError, "found 0"):
+            REPLAY._selected_record(self.root, "RLS-TEST-001")
+
+        self.assertEqual(before, evidence.read_bytes())
+
+    def test_duplicate_formal_records_remain_ambiguous(self) -> None:
+        records = [
+            self.write_record(f"docs/engineering/{domain}/releases/RLS-TEST-001.md")
+            for domain in ("release-one", "release-two")
+        ]
+        before = {path: path.read_bytes() for path in records}
+
+        with self.assertRaisesRegex(REPLAY.ReleaseDistributionError, "found 2"):
+            REPLAY._selected_record(self.root, "RLS-TEST-001")
+
+        self.assertEqual(before, {path: path.read_bytes() for path in before})
+
+    def test_symlink_cannot_supply_a_formal_record(self) -> None:
+        evidence = self.write_record("docs/engineering/release-test/evidence/released-record.md")
+        link = self.root / "docs/engineering/release-test/releases/RLS-TEST-001.md"
+        link.parent.mkdir(parents=True)
+        before = evidence.read_bytes()
+        try:
+            link.symlink_to(evidence)
+        except (OSError, NotImplementedError) as exc:
+            self.skipTest(f"symlink creation unavailable: {exc}")
+
+        with self.assertRaisesRegex(REPLAY.ReleaseDistributionError, "found 0"):
+            REPLAY._selected_record(self.root, "RLS-TEST-001")
+
+        self.assertEqual(before, evidence.read_bytes())
+        self.assertTrue(link.is_symlink())
 
 
 class ReplayWorkflowTests(unittest.TestCase):

@@ -5,12 +5,15 @@
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
-The published 0.20.1 layout and the successor candidate layout are separate.
-This repository uses released 0.20.1, adopted under WO-HUP-025. Candidate
-examples below are for qualification until a release and a separate
-adoption of the minimal layout are authorized.
+SE Harness 0.21.0 and plugin 0.2.4 are public. This repository still uses
+released 0.20.1, adopted under WO-HUP-025. Publication does not change that
+selection. Native replacement-delivery review and separately approved adoption
+are required before applying the minimal layout here. See the
+[release observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md).
 
-## Minimal installation (successor candidate)
+<a id="minimal-installation-successor-candidate"></a>
+
+## Minimal installation (0.21.0)
 
 The selected wheel holds the entry, procedures, policy and templates outside
 the checkout. Default `init` writes exactly `.engineering-harness.toml` and
@@ -102,10 +105,10 @@ successful repeated setup changes nothing.
 | `WORKFLOW.json`, `QUALITY_GATES.json` | Selected evaluator inputs; agents use returned lifecycle results. |
 | Formal artifacts and evidence | Remain in the repository with unchanged historical bytes. |
 
-See [session activation](plugin-installation-guide.md#successor-candidate-clone-activate-and-resume)
+See [session activation](plugin-installation-guide.md#clone-activate-and-resume)
 for cloning after startup, repeated work and parallel sessions.
 
-## Published 0.20.1 installation
+## Existing 0.20.1 installation
 
 The remainder of this guide describes the supported repository-copy layout.
 An existing repository keeps that layout until an explicit resource migration.
@@ -153,8 +156,8 @@ copies are installed under the target's `scripts/` directory.
 ## Review and apply an upgrade
 
 Select the exact authorized release first. The example below targets 0.20.1;
-an existing 0.20.1 repository needs no upgrade just because source reports
-0.21.0. Install the selected released package in the external environment,
+an existing 0.20.1 repository needs no upgrade merely because 0.21.0 is public.
+Install the selected released package in the external environment,
 review the read-only plan, apply the authorized changes, then check the result:
 
 ```text

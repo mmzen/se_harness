@@ -4,6 +4,9 @@
 
 ## Product and governance domains
 
+- [release-0-21-0/](release-0-21-0/README.md): approved 0.21.0 final qualification,
+  published evaluator and plugin 0.2.4; public-route and documentation closeout remain in progress.
+
 - [harness-simplification/](harness-simplification/README.md): accepted codebase KISS review, seven bounded work orders covering all 38 simplification candidates and seven retained protections.
 
 - [plugin-integration/](plugin-integration/README.md): compatibility probes for native coding-agent plugins, introduced through separate bounded work orders.

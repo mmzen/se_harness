@@ -1,0 +1,760 @@
+{
+  "candidate": {},
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "a663d9bfde98fbca14d0b7407576c1a5f922d86fe699b93f775490281a913da5",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-RLS-033"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-RLS-033 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-RLS-033"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-RLS-033:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-RLS-033 has recorded execution approval for its 15 scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-RLS-033"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-RLS-033"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 176 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-RLS-033:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-RLS-033"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/release-0-21-0/evidence/WO-RLS-033/WO-RLS-033-handoff.md.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-RLS-033"
+              }
+            ],
+            "id": "QGP-G4I-DECISION",
+            "message": "No open decision blocks WO-RLS-033.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "digest_format": "machine-fields-v1",
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 57
+  },
+  "instruction_discovery": {
+    "agent_instructions": {
+      "current_step": {
+        "id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "record-implementation-completion"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "when": "Before using the selected work order's execution grant."
+          }
+        ]
+      },
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task"
+      },
+      "procedure": {
+        "id": "PROC-WO-IMPLEMENT",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "retain-the-implementation-evidence"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "when": "Before using the selected work order's execution grant."
+          }
+        ],
+        "steps": {
+          "STEP-WO-IMPLEMENT-APPLY": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "record-implementation-completion"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          },
+          "STEP-WO-IMPLEMENT-CHECK": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "retain-the-implementation-evidence"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          },
+          "STEP-WO-IMPLEMENT-PREVIEW": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "record-implementation-completion"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          }
+        }
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context."
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result."
+        }
+      ]
+    },
+    "evaluator_only_inputs": [
+      "docs/engineering/WORKFLOW.json",
+      "docs/engineering/QUALITY_GATES.json"
+    ],
+    "formal_artifact_ids": [
+      "CAP-RLO-004",
+      "INT-RLO-001",
+      "REQ-RLO-019",
+      "REQ-RLO-020",
+      "SPEC-RLO-006",
+      "VER-RLS-032",
+      "WO-RLS-033"
+    ],
+    "schema": "se-harness-instruction-discovery-v1",
+    "status": "available"
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-PREVIEW",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-RLS-033",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-RLS-033",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-RLS-033",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-RLS-033",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-RLS-033."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-RLS-033=implemented",
+          "--decision",
+          "WO-RLS-033=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-RLS-033",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-RLS-033",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-RLS-033",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Plan completion of WO-RLS-033."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "kind": "command",
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ]
+      },
+      {
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-RLS-033=implemented",
+          "--decision",
+          "WO-RLS-033=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-RLS-033",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-RLS-033",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-RLS-033",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Record completion of only WO-RLS-033 under its approved execution scope."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-APPLY",
+        "kind": "command",
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-RLS-033=implemented",
+        "--decision",
+        "WO-RLS-033=delegated-executor"
+      ],
+      "kind": "command"
+    },
+    "current_lifecycle_state": [
+      "WO-RLS-033 is in_progress."
+    ],
+    "decision_required": null,
+    "done": [
+      "Evaluated handoff compliance for WO-RLS-033."
+    ],
+    "next": {
+      "action": "Run the bound command",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-PREVIEW"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "41a23df70d22596629a2f9ed4f87e950e54733234cae3587e0c357b9cbc157f1",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/README.md",
+      "docs/engineering/release-0-21-0/decisions/DEC-RLS-003.md",
+      "docs/engineering/release-0-21-0/decisions/DEC-RLS-004.md",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-receipt.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/checks-candidate.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/checks-v2.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/checks-v3.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/checks.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/accept-claude-focus.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/accept-claude-identity.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/accepted-gap-documentation-tests.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/accepted-gap-validation.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/changed-document-links-context-corrected.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/changed-document-links.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-accept-apply.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-accept-preview.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-accepted-focus.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-decision-validation.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-risk-create.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-risk-preview.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-scope-final.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/delivery-check-accepted-claude.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/delivery-check-normalized.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/delivery-check.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accept-apply.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accept-focus.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accept-identity.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accept-preview.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accepted-focus.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-decision-create.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-decision-preview.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-proposal-validation.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/documentation-tests-corrected.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/documentation-tests.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/documentation-validation.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/final-focus.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/final-scope.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-active.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-add.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-before.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-install.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-native-result.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-revision-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-route.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-doctor.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-identity.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-init-preview.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-init.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-initial.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-resources.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-result.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-reuse.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-source-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-version.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-active.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-add.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-before.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-install.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-native-result.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-revision-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-route.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-doctor.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-identity.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-init-preview.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-init.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-initial.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-resources.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-result.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-reuse.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-source-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-version.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/full-diff-check.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-latest.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-markers.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-pages.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-pypi.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-candidate-doc-tests-corrected.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-candidate-doc-tests-final.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-candidate-doc-tests.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-context.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-preflight.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-review-preflight.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-scope.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-start-apply.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-start-preview.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-started.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/resume-focus.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/resume-identity.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/scope-complete.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-active.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-before.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-native-result.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-refresh.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-revision-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-revision-before.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-route.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-doctor.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-identity.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-init-preview.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-init.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-initial.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-resources.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-result.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-reuse.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-source-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-source-before.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-update.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-version.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-active.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-before.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-native-result.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-refresh.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-revision-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-revision-before.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-route.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-doctor.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-identity.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-init-preview.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-init.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-initial.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-resources.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-result.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-reuse.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-source-after.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-source-before.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-update.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-version.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/handoff.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/link-review.md",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native-v2.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native-v3.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/codex-public/automatic/native-events.jsonl",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/codex-public/native-events.jsonl",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/codex-public/resume/native-events.jsonl",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/fresh/public-bootstrap.events.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/fresh/public-bootstrap.hooks.log",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/fresh/public-bootstrap.invocation.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/update/public-bootstrap.events.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/update/public-bootstrap.hooks.log",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/update/public-bootstrap.invocation.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/observations-candidate.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/observations-v2.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/observations-v3.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/observations.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/plan-candidate.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/plan.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/public-codex-native.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/publication.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/requirement-assessment.md",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/review-v2.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/review.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/setup.json",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-033/WO-RLS-033-handoff.md",
+      "docs/engineering/release-0-21-0/README.md",
+      "docs/engineering/release-0-21-0/risks/RISK-RLS-003.md",
+      "docs/engineering/release-0-21-0/work-orders/WO-RLS-033.md",
+      "docs/notes/developing-se-harness.md",
+      "docs/notes/harness-installation-and-upgrades.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "docs/notes/release-delivery-completion.md",
+      "plugins/verity-plane/claude-code/README.md",
+      "plugins/verity-plane/codex/README.md",
+      "README.md",
+      "release/plugin-marketplace/README.md",
+      "tests/plugin_integration/package_assembly/test_refresh_guidance.py",
+      "tests/test_progressive_documentation.py"
+    ],
+    "declared_paths": [
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/README.md",
+      "docs/engineering/release-0-21-0/",
+      "docs/notes/developing-se-harness.md",
+      "docs/notes/harness-installation-and-upgrades.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "docs/notes/release-delivery-completion.md",
+      "plugins/verity-plane/claude-code/README.md",
+      "plugins/verity-plane/codex/README.md",
+      "README.md",
+      "release/plugin-marketplace/README.md",
+      "tests/plugin_integration/package_assembly/test_refresh_guidance.py",
+      "tests/test_progressive_documentation.py"
+    ],
+    "dependencies": [],
+    "governing": [
+      "CAP-RLO-004",
+      "INT-RLO-001",
+      "REQ-RLO-019",
+      "REQ-RLO-020",
+      "SPEC-RLO-006",
+      "VER-RLS-032"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-RLS-033"
+    ],
+    "primary": "WO-RLS-033"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-RLS-033",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-RLS-033",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

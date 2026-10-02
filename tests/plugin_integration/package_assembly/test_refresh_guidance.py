@@ -1,4 +1,4 @@
-"""Check REL-SEH-031 candidate inputs and the separately observed public delivery."""
+"""Check REL-SEH-033 candidate inputs and the separately observed public delivery."""
 from copy import deepcopy
 import json
 import posixpath
@@ -8,14 +8,14 @@ import tomllib
 import unittest
 
 ROOT = Path(__file__).resolve().parents[3]
-# Candidate identities come from approved REL-SEH-031, not candidate output.
-PLUGIN = "0.2.2"
-CANDIDATE_EVALUATOR = "0.20.0"
-# Published identities come from RLS-SEH-030 and independent public readback.
-EVALUATOR = "0.20.1"
-WHEEL_SHA = "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
-RELEASE = "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md"
-OBSERVATION = "docs/engineering/release-0-20-1/evidence/WO-RLS-029/publication.json"
+# Candidate identities come from approved REL-SEH-033, not candidate output.
+PLUGIN = "0.2.4"
+CANDIDATE_EVALUATOR = "0.21.0"
+# Published identities come from RLS-SEH-031 and independent public readback.
+EVALUATOR = "0.21.0"
+WHEEL_SHA = "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+RELEASE = "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md"
+OBSERVATION = "docs/engineering/release-0-21-0/evidence/WO-RLS-033/publication.json"
 
 
 def selected_inputs():
@@ -36,7 +36,7 @@ def identity_findings(inputs):
         findings.append("candidate manifest version")
     release = inputs["release"]
     if (release.get("id"), release.get("status"), release.get("version")) != (
-            "RLS-SEH-030", "released", EVALUATOR):
+            "RLS-SEH-031", "released", EVALUATOR):
         findings.append("released evaluator selection")
     distribution = release.get("distribution", {})
     if (distribution.get("wheel"), distribution.get("wheel_sha256")) != (
@@ -72,8 +72,10 @@ def link_findings(files, sources):
             if resolved not in files:
                 findings.append(f"{source}: missing file {target}")
             elif anchor:
-                headings = re.findall(r"(?m)^#{1,6}\s+(.+?)\s*$", files[resolved].decode("utf-8"))
+                target_content = files[resolved].decode("utf-8")
+                headings = re.findall(r"(?m)^#{1,6}\s+(.+?)\s*$", target_content)
                 anchors = {re.sub(r"[^\w\s-]", "", title.lower()).replace(" ", "-") for title in headings}
+                anchors.update(re.findall(r'<a id="([^"]+)"></a>', target_content))
                 if anchor not in anchors:
                     findings.append(f"{source}: missing heading {target}")
     return findings

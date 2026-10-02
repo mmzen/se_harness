@@ -1,0 +1,1527 @@
+{
+  "rls031-final-ready-record-review": {
+    "record": {
+      "id": "VREC-SEH-031",
+      "type": "verification_record",
+      "title": "Verification candidate for 13 work orders",
+      "status": "ready",
+      "owners": [
+        "Codex"
+      ],
+      "created": "2026-10-02",
+      "updated": "2026-10-02",
+      "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "git_object_format": "sha1",
+      "worktree_state": "clean",
+      "prepared_at": "2026-10-02T04:38:04Z",
+      "prepared_by": "Codex",
+      "artifact_snapshot_sha256": "e8422cc5ae166c2b2b205173f5fdae9b457e0a567bb987b269a3074f98112b67",
+      "evidence_paths": [
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-028/WO-IAR-028-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-028/implementation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/WO-IAR-029-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-traces.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/handoff.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/implementation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-tests.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-traces.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-preparation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/WO-IAR-030-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-result.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/compatibility-check.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/final-integrated-assessment.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/implementation-progress.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude-data-root.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex-events.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/WO-IAR-031-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/combined-handoff.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/governance-checks.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/WO-IAR-033-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/governance-checks.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/handoff.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/implementation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-034/WO-IAR-034-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-034/regression-progress.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-035/WO-IAR-035-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-035/review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-035/validation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-036/WO-IAR-036-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-036/review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-036/tests.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-037/WO-IAR-037-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-037/review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-037/tests.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/WO-IAR-039-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/candidate-equivalence.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/completion.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/qualification.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-preparation.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/WO-IAR-040-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/candidate-equivalence.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/handoff.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/results.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/review.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/WO-IAR-041-handoff.md",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/candidate-equivalence.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/handoff.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/results.json",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/review.md",
+        "docs/engineering/release-0-21-0/decisions/DEC-RLS-001.md",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-handoff.md",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-pre-action.md",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/desktop-qualification-disposition.md",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-codex.json",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-events.json",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.json",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/local-checks.json",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/native-codex-events.json",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-manifest.json",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-replay.json",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/plan.json",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation.md",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-observations.json",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-status.md",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/review-inputs.json",
+        "docs/engineering/release-0-21-0/risks/RISK-RLS-001.md"
+      ],
+      "evaluator_evidence_path": "docs/engineering/release-0-21-0/evidence/VREC-SEH-031-evaluator.json",
+      "evaluator_evidence_sha256": "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26",
+      "relations": {
+        "verifies_work_order": [
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ],
+        "conforms_to": [
+          "VER-IAR-020",
+          "VER-IAR-021",
+          "VER-IAR-022",
+          "VER-RLS-030"
+        ]
+      }
+    },
+    "record_sha256": "a79abad3cc6425f40345c8f40242643463d86765d8b2f6620a1699946dd99a52",
+    "explicit_evidence_count": 89,
+    "evidence_digests_preserved": true
+  },
+  "rls031-final-capture-isolated-inputs": {
+    "argv": [
+      "capture-verification",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--id",
+      "VREC-SEH-031",
+      "--owner",
+      "Codex",
+      "--domain",
+      "release-0-21-0",
+      "--candidate-commit",
+      "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "--json",
+      "--work-order",
+      "WO-IAR-028",
+      "--work-order",
+      "WO-IAR-029",
+      "--work-order",
+      "WO-IAR-030",
+      "--work-order",
+      "WO-IAR-031",
+      "--work-order",
+      "WO-IAR-033",
+      "--work-order",
+      "WO-IAR-034",
+      "--work-order",
+      "WO-IAR-035",
+      "--work-order",
+      "WO-IAR-036",
+      "--work-order",
+      "WO-IAR-037",
+      "--work-order",
+      "WO-IAR-039",
+      "--work-order",
+      "WO-IAR-040",
+      "--work-order",
+      "WO-IAR-041",
+      "--work-order",
+      "WO-RLS-031",
+      "--verification",
+      "VER-IAR-020",
+      "--verification",
+      "VER-IAR-021",
+      "--verification",
+      "VER-IAR-022",
+      "--verification",
+      "VER-RLS-030",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-028/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-028/WO-IAR-028-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-traces.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-tests.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-traces.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-preparation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/WO-IAR-029-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-result.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/compatibility-check.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/final-integrated-assessment.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/implementation-progress.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude-data-root.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex-events.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/WO-IAR-030-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/combined-handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/governance-checks.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/WO-IAR-031-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-033/governance-checks.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-033/handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-033/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-033/WO-IAR-033-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-034/regression-progress.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-034/WO-IAR-034-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-035/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-035/validation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-035/WO-IAR-035-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-036/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-036/tests.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-036/WO-IAR-036-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-037/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-037/tests.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-037/WO-IAR-037-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/candidate-equivalence.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/completion.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/qualification.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-preparation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/WO-IAR-039-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/candidate-equivalence.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/results.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/WO-IAR-040-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/candidate-equivalence.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/results.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/WO-IAR-041-handoff.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/decisions/DEC-RLS-001.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/desktop-qualification-disposition.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-codex.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-events.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/local-checks.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/native-codex-events.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-manifest.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-replay.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/plan.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-observations.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-status.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/review-inputs.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-handoff.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-pre-action.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/risks/RISK-RLS-001.md",
+      "--test-command",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+      "-B",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031_capture_checks.py",
+      "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-final-hosted-receipt-isolated.json",
+      "ed30e69e46e1dd2a594718b4a67597226ca43c2b70c7cb38c276349f1cc2a89b"
+    ],
+    "receipt_sha256": "ed30e69e46e1dd2a594718b4a67597226ca43c2b70c7cb38c276349f1cc2a89b"
+  },
+  "rls031-final-capture-isolated": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "capture-verification",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--id",
+      "VREC-SEH-031",
+      "--owner",
+      "Codex",
+      "--domain",
+      "release-0-21-0",
+      "--candidate-commit",
+      "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "--json",
+      "--work-order",
+      "WO-IAR-028",
+      "--work-order",
+      "WO-IAR-029",
+      "--work-order",
+      "WO-IAR-030",
+      "--work-order",
+      "WO-IAR-031",
+      "--work-order",
+      "WO-IAR-033",
+      "--work-order",
+      "WO-IAR-034",
+      "--work-order",
+      "WO-IAR-035",
+      "--work-order",
+      "WO-IAR-036",
+      "--work-order",
+      "WO-IAR-037",
+      "--work-order",
+      "WO-IAR-039",
+      "--work-order",
+      "WO-IAR-040",
+      "--work-order",
+      "WO-IAR-041",
+      "--work-order",
+      "WO-RLS-031",
+      "--verification",
+      "VER-IAR-020",
+      "--verification",
+      "VER-IAR-021",
+      "--verification",
+      "VER-IAR-022",
+      "--verification",
+      "VER-RLS-030",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-028/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-028/WO-IAR-028-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-traces.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-tests.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-traces.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-preparation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-029/WO-IAR-029-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-result.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/compatibility-check.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/final-integrated-assessment.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/implementation-progress.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude-data-root.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex-events.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-030/WO-IAR-030-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/combined-handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/governance-checks.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/WO-IAR-031-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-033/governance-checks.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-033/handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-033/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-033/WO-IAR-033-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-034/regression-progress.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-034/WO-IAR-034-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-035/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-035/validation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-035/WO-IAR-035-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-036/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-036/tests.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-036/WO-IAR-036-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-037/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-037/tests.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-037/WO-IAR-037-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/candidate-equivalence.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/completion.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/qualification.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-preparation.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-039/WO-IAR-039-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/candidate-equivalence.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/results.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-040/WO-IAR-040-handoff.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/candidate-equivalence.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/handoff.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/results.json",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/review.md",
+      "--evidence",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-041/WO-IAR-041-handoff.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/decisions/DEC-RLS-001.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/desktop-qualification-disposition.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-codex.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-events.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/local-checks.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/native-codex-events.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-manifest.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-replay.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/plan.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-observations.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-status.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/review-inputs.json",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-handoff.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-pre-action.md",
+      "--evidence",
+      "docs/engineering/release-0-21-0/risks/RISK-RLS-001.md",
+      "--test-command",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+      "-B",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031_capture_checks.py",
+      "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-final-hosted-receipt-isolated.json",
+      "ed30e69e46e1dd2a594718b4a67597226ca43c2b70c7cb38c276349f1cc2a89b"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "schema": "se-harness-workflow-result-v2",
+      "digest_format": "machine-fields-v1",
+      "candidate": {
+        "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "git_object_format": "sha1"
+      },
+      "operation": {
+        "kind": "capture-verification",
+        "outcome": "completed"
+      },
+      "selection": {
+        "primary": "VREC-SEH-031",
+        "artifacts": [
+          "VREC-SEH-031"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [
+          "ADR-DST-001",
+          "ADR-IAR-012",
+          "ADR-PLG-001",
+          "ARCH-DST-001",
+          "ARCH-IAR-012",
+          "ARCH-PLG-001",
+          "CAP-DST-001",
+          "CAP-IAR-002",
+          "CAP-RLO-004",
+          "INT-DST-001",
+          "INT-IAR-001",
+          "INT-RLO-001",
+          "REQ-DST-006",
+          "REQ-IAR-029",
+          "REQ-IAR-030",
+          "REQ-IAR-031",
+          "REQ-PLG-002",
+          "REQ-RLO-018",
+          "REQ-RLO-020",
+          "SPEC-DST-001",
+          "SPEC-IAR-016",
+          "SPEC-PLG-001",
+          "SPEC-RLO-006",
+          "VER-IAR-020",
+          "VER-IAR-021",
+          "VER-IAR-022",
+          "VER-RLS-030",
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ],
+        "dependencies": [],
+        "declared_paths": [],
+        "changed_paths": [],
+        "change_set_complete": false
+      },
+      "compliance": {
+        "checkpoint": "pre-action",
+        "workflow_rule_id": "WFL-VREC-DECIDE",
+        "procedure_id": "PROC-VREC-DECIDE",
+        "status": "not_assessable",
+        "gates": []
+      },
+      "procedure": {
+        "id": "PROC-VREC-DECIDE",
+        "current_step": "STEP-VREC-DECIDE",
+        "steps": [
+          {
+            "id": "STEP-VREC-DECIDE",
+            "kind": "decision",
+            "gate_ids": [
+              "QG-G4-ASSURANCE-DECISION"
+            ],
+            "effects": [
+              "Permits an explicit decision on VREC-SEH-031 only."
+            ],
+            "non_effects": [
+              "Referenced work orders remain unchanged."
+            ],
+            "decision_right": "DR-VREC-DECIDE",
+            "role": "assurance-owner",
+            "artifact": "VREC-SEH-031",
+            "decision": "whether the retained evidence verifies the exact candidate",
+            "outcomes": [
+              "verified",
+              "reject",
+              "supersede"
+            ],
+            "response": "I verify VREC-SEH-031 as assurance owner."
+          }
+        ]
+      },
+      "state": {
+        "before": [],
+        "after": [
+          {
+            "id": "VREC-SEH-031",
+            "status": "ready"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "mutation": {
+        "writes": [
+          {
+            "id": "VREC-SEH-031",
+            "path": "docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md",
+            "fields": [
+              "artifact_snapshot_sha256",
+              "commit",
+              "created",
+              "evaluator_evidence_path",
+              "evaluator_evidence_sha256",
+              "evidence_paths",
+              "git_object_format",
+              "id",
+              "owners",
+              "prepared_at",
+              "prepared_by",
+              "relations",
+              "status",
+              "title",
+              "type",
+              "updated",
+              "worktree_state"
+            ]
+          }
+        ]
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Prepared ready verification record VREC-SEH-031 at docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "VREC-SEH-031 is ready; referenced work orders were not changed."
+        ],
+        "decision_required": {
+          "decision_right": "DR-VREC-DECIDE",
+          "role": "assurance-owner",
+          "artifact": "VREC-SEH-031",
+          "decision": "whether the retained evidence verifies the exact candidate",
+          "outcomes": [
+            "verified",
+            "reject",
+            "supersede"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-VREC-DECIDE",
+          "step_id": "STEP-VREC-DECIDE",
+          "action": "whether the retained evidence verifies the exact candidate"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "I verify VREC-SEH-031 as assurance owner."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-VREC-REJECT.",
+          "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+        ]
+      },
+      "instruction_discovery": {
+        "schema": "se-harness-instruction-discovery-v1",
+        "status": "available",
+        "agent_instructions": {
+          "entry": {
+            "file": "ENGINEERING_HARNESS.md",
+            "heading": "read-by-task"
+          },
+          "shared_prerequisites": [
+            {
+              "file": "docs/engineering/harness/COMMUNICATION.md",
+              "heading": "communication",
+              "when": "Before the first eligible English explanation in a fresh context."
+            },
+            {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "report-a-lifecycle-result",
+              "when": "Before reporting a lifecycle result."
+            }
+          ],
+          "procedure": {
+            "id": "PROC-VREC-DECIDE",
+            "location": {
+              "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+              "heading": "obtain-the-humans-verification-decision"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ],
+            "steps": {
+              "STEP-VREC-DECIDE": {
+                "location": {
+                  "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                  "heading": "obtain-the-humans-verification-decision"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "decision-rights",
+                    "when": "Before obtaining or applying an accountable decision."
+                  }
+                ]
+              }
+            }
+          },
+          "current_step": {
+            "id": "STEP-VREC-DECIDE",
+            "location": {
+              "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+              "heading": "obtain-the-humans-verification-decision"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        },
+        "formal_artifact_ids": [
+          "ADR-DST-001",
+          "ADR-IAR-012",
+          "ADR-PLG-001",
+          "ARCH-DST-001",
+          "ARCH-IAR-012",
+          "ARCH-PLG-001",
+          "CAP-DST-001",
+          "CAP-IAR-002",
+          "CAP-RLO-004",
+          "INT-DST-001",
+          "INT-IAR-001",
+          "INT-RLO-001",
+          "REQ-DST-006",
+          "REQ-IAR-029",
+          "REQ-IAR-030",
+          "REQ-IAR-031",
+          "REQ-PLG-002",
+          "REQ-RLO-018",
+          "REQ-RLO-020",
+          "SPEC-DST-001",
+          "SPEC-IAR-016",
+          "SPEC-PLG-001",
+          "SPEC-RLO-006",
+          "VER-IAR-020",
+          "VER-IAR-021",
+          "VER-IAR-022",
+          "VER-RLS-030",
+          "VREC-SEH-031",
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ],
+        "evaluator_only_inputs": [
+          "docs/engineering/WORKFLOW.json",
+          "docs/engineering/QUALITY_GATES.json"
+        ]
+      },
+      "result_sha256": "b0684a53670eef21127c7b1c5fb4b7056b99c4a28d6a30c3facc3476379b8b1e"
+    },
+    "seconds": 210.73393029999988
+  },
+  "rls031-final-assurance-gates": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--artifact",
+      "VREC-SEH-031",
+      "--checkpoint",
+      "transition",
+      "--target",
+      "verified",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "schema": "se-harness-workflow-result-v2",
+      "digest_format": "machine-fields-v1",
+      "candidate": {
+        "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "git_object_format": "sha1"
+      },
+      "operation": {
+        "kind": "check",
+        "outcome": "completed"
+      },
+      "selection": {
+        "primary": "VREC-SEH-031",
+        "artifacts": [
+          "VREC-SEH-031"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [
+          "ADR-DST-001",
+          "ADR-IAR-012",
+          "ADR-PLG-001",
+          "ARCH-DST-001",
+          "ARCH-IAR-012",
+          "ARCH-PLG-001",
+          "CAP-DST-001",
+          "CAP-IAR-002",
+          "CAP-RLO-004",
+          "INT-DST-001",
+          "INT-IAR-001",
+          "INT-RLO-001",
+          "REQ-DST-006",
+          "REQ-IAR-029",
+          "REQ-IAR-030",
+          "REQ-IAR-031",
+          "REQ-PLG-002",
+          "REQ-RLO-018",
+          "REQ-RLO-020",
+          "SPEC-DST-001",
+          "SPEC-IAR-016",
+          "SPEC-PLG-001",
+          "SPEC-RLO-006",
+          "VER-IAR-020",
+          "VER-IAR-021",
+          "VER-IAR-022",
+          "VER-RLS-030",
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ],
+        "dependencies": [],
+        "declared_paths": [],
+        "changed_paths": [],
+        "change_set_complete": false
+      },
+      "compliance": {
+        "checkpoint": "transition",
+        "workflow_rule_id": "WFL-VREC-DECIDE",
+        "procedure_id": "PROC-VREC-DECIDE",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-ASSURANCE-DECISION",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4A-GRAPH",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "formal-graph:VREC-SEH-031"
+                  }
+                ],
+                "message": "The selected formal graph is valid."
+              },
+              {
+                "id": "QGP-G4A-INTEGRITY",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "repository-integrity:transition"
+                  }
+                ],
+                "message": "No repository-integrity blocker prevents selected evaluation."
+              },
+              {
+                "id": "QGP-G4A-DECISION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "decision-register:VREC-SEH-031"
+                  }
+                ],
+                "message": "No open decision blocks VREC-SEH-031."
+              }
+            ]
+          },
+          {
+            "id": "QG-STRUCTURAL",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGS-EDGE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "VREC-SEH-031"
+                  }
+                ],
+                "message": "ready -> verified is a declared lifecycle edge for VREC-SEH-031."
+              }
+            ]
+          }
+        ],
+        "formal_snapshot_sha256": "90af4354149963169b7f0d4e202f4c386ad257a2ef6868255bad2af6d98d2d63",
+        "change_set_source": "arguments"
+      },
+      "procedure": {
+        "id": "PROC-VREC-DECIDE",
+        "current_step": "STEP-VREC-DECIDE",
+        "steps": [
+          {
+            "id": "STEP-VREC-DECIDE",
+            "kind": "decision",
+            "gate_ids": [
+              "QG-G4-ASSURANCE-DECISION"
+            ],
+            "effects": [
+              "Permits an explicit decision on VREC-SEH-031 only."
+            ],
+            "non_effects": [
+              "Referenced work orders remain unchanged."
+            ],
+            "decision_right": "DR-VREC-DECIDE",
+            "role": "assurance-owner",
+            "artifact": "VREC-SEH-031",
+            "decision": "whether the retained evidence verifies the exact candidate",
+            "outcomes": [
+              "verified",
+              "reject",
+              "supersede"
+            ],
+            "response": "I verify VREC-SEH-031 as assurance owner."
+          }
+        ]
+      },
+      "state": {
+        "before": [
+          {
+            "id": "VREC-SEH-031",
+            "status": "ready"
+          }
+        ],
+        "after": [
+          {
+            "id": "VREC-SEH-031",
+            "status": "ready"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 54
+      },
+      "mutation": {
+        "writes": []
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Evaluated transition compliance for VREC-SEH-031."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "VREC-SEH-031 is ready."
+        ],
+        "decision_required": {
+          "decision_right": "DR-VREC-DECIDE",
+          "role": "assurance-owner",
+          "artifact": "VREC-SEH-031",
+          "decision": "whether the retained evidence verifies the exact candidate",
+          "outcomes": [
+            "verified",
+            "reject",
+            "supersede"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-VREC-DECIDE",
+          "step_id": "STEP-VREC-DECIDE",
+          "action": "whether the retained evidence verifies the exact candidate"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "I verify VREC-SEH-031 as assurance owner."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-VREC-REJECT.",
+          "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+        ]
+      },
+      "instruction_discovery": {
+        "schema": "se-harness-instruction-discovery-v1",
+        "status": "available",
+        "agent_instructions": {
+          "entry": {
+            "file": "ENGINEERING_HARNESS.md",
+            "heading": "read-by-task"
+          },
+          "shared_prerequisites": [
+            {
+              "file": "docs/engineering/harness/COMMUNICATION.md",
+              "heading": "communication",
+              "when": "Before the first eligible English explanation in a fresh context."
+            },
+            {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "report-a-lifecycle-result",
+              "when": "Before reporting a lifecycle result."
+            }
+          ],
+          "procedure": {
+            "id": "PROC-VREC-DECIDE",
+            "location": {
+              "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+              "heading": "obtain-the-humans-verification-decision"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ],
+            "steps": {
+              "STEP-VREC-DECIDE": {
+                "location": {
+                  "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                  "heading": "obtain-the-humans-verification-decision"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "decision-rights",
+                    "when": "Before obtaining or applying an accountable decision."
+                  }
+                ]
+              }
+            }
+          },
+          "current_step": {
+            "id": "STEP-VREC-DECIDE",
+            "location": {
+              "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+              "heading": "obtain-the-humans-verification-decision"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        },
+        "formal_artifact_ids": [
+          "ADR-DST-001",
+          "ADR-IAR-012",
+          "ADR-PLG-001",
+          "ARCH-DST-001",
+          "ARCH-IAR-012",
+          "ARCH-PLG-001",
+          "CAP-DST-001",
+          "CAP-IAR-002",
+          "CAP-RLO-004",
+          "INT-DST-001",
+          "INT-IAR-001",
+          "INT-RLO-001",
+          "REQ-DST-006",
+          "REQ-IAR-029",
+          "REQ-IAR-030",
+          "REQ-IAR-031",
+          "REQ-PLG-002",
+          "REQ-RLO-018",
+          "REQ-RLO-020",
+          "SPEC-DST-001",
+          "SPEC-IAR-016",
+          "SPEC-PLG-001",
+          "SPEC-RLO-006",
+          "VER-IAR-020",
+          "VER-IAR-021",
+          "VER-IAR-022",
+          "VER-RLS-030",
+          "VREC-SEH-031",
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ],
+        "evaluator_only_inputs": [
+          "docs/engineering/WORKFLOW.json",
+          "docs/engineering/QUALITY_GATES.json"
+        ]
+      },
+      "result_sha256": "0c2bfd161970616020de035c9928ea7c3a8acf3d8a4ec34c162b010825cc6e74"
+    },
+    "seconds": 6.931053499999962
+  },
+  "rls031-final-pr-ci3": {
+    "argv": [
+      "C:\\Program Files\\GitHub CLI\\gh.exe",
+      "pr",
+      "view",
+      "517",
+      "--repo",
+      "mmzen/se_harness",
+      "--json",
+      "headRefOid,statusCheckRollup"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "headRefOid": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:25:36Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964442615/job/110705007614",
+          "name": "Analyze (actions)",
+          "startedAt": "2026-10-02T04:24:55Z",
+          "status": "COMPLETED",
+          "workflowName": "CodeQL"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:25:32Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445439/job/110705013799",
+          "name": "validate",
+          "startedAt": "2026-10-02T04:24:57Z",
+          "status": "COMPLETED",
+          "workflowName": "Engineering Harness"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:25:11Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445494/job/110705014123",
+          "name": "Predecessor evaluator assessment",
+          "startedAt": "2026-10-02T04:24:57Z",
+          "status": "COMPLETED",
+          "workflowName": "Predecessor Evaluator Assessment"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:25:10Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445789/job/110705014860",
+          "name": "Select release rehearsals",
+          "startedAt": "2026-10-02T04:24:58Z",
+          "status": "COMPLETED",
+          "workflowName": "Publication Rehearsal"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:26:11Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705014140",
+          "name": "Candidate source evidence",
+          "startedAt": "2026-10-02T04:24:57Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:25:59Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964442615/job/110705007698",
+          "name": "Analyze (javascript-typescript)",
+          "startedAt": "2026-10-02T04:24:57Z",
+          "status": "COMPLETED",
+          "workflowName": "CodeQL"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:26:11Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964442615/job/110705007714",
+          "name": "Analyze (python)",
+          "startedAt": "2026-10-02T04:24:56Z",
+          "status": "COMPLETED",
+          "workflowName": "CodeQL"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:25:54Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445789/job/110705072629",
+          "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+          "startedAt": "2026-10-02T04:25:13Z",
+          "status": "COMPLETED",
+          "workflowName": "Publication Rehearsal"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:26:33Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705301318",
+          "name": "Candidate package evidence",
+          "startedAt": "2026-10-02T04:26:14Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:25:10Z",
+          "conclusion": "SKIPPED",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445789/job/110705074773",
+          "name": "Rehearse the qualification of the release record",
+          "startedAt": "2026-10-02T04:25:10Z",
+          "status": "COMPLETED",
+          "workflowName": "Publication Rehearsal"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:27:43Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705382047",
+          "name": "Upgrade rehearsal (Linux)",
+          "startedAt": "2026-10-02T04:26:36Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:28:36Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705382079",
+          "name": "Upgrade rehearsal (Windows)",
+          "startedAt": "2026-10-02T04:26:37Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:25:59Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445789/job/110705236688",
+          "name": "Publication rehearsal",
+          "startedAt": "2026-10-02T04:25:56Z",
+          "status": "COMPLETED",
+          "workflowName": "Publication Rehearsal"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:29:10Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705838387",
+          "name": "Build deterministic integration package",
+          "startedAt": "2026-10-02T04:28:40Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:29:38Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705960275",
+          "name": "Verify integration package (Linux)",
+          "startedAt": "2026-10-02T04:29:13Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:30:09Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705960181",
+          "name": "Verify integration package (Windows)",
+          "startedAt": "2026-10-02T04:29:13Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:30:22Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110706174683",
+          "name": "Retain verified integration package",
+          "startedAt": "2026-10-02T04:30:12Z",
+          "status": "COMPLETED",
+          "workflowName": "SE Harness Candidate Evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-02T04:25:29Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/mmzen/se_harness/runs/110705137289",
+          "name": "CodeQL",
+          "startedAt": "2026-10-02T04:25:27Z",
+          "status": "COMPLETED",
+          "workflowName": ""
+        }
+      ]
+    },
+    "seconds": 0.6296184000000267
+  },
+  "rls031-capture-test-observations": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "se_harness",
+        "qualify",
+        "complete-candidate",
+        ".",
+        "--candidate-commit",
+        "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-ilmz3qb6\\checkout",
+      "exit_code": 0,
+      "stdout": "{\n  \"authority\": \"evidence-only; no lifecycle or external action authorized\",\n  \"checks\": [\n    {\n      \"id\": \"CC001\",\n      \"message\": \"candidate runtime is bound to the checkout\",\n      \"passed\": true,\n      \"subject\": \"candidate-runtime\"\n    },\n    {\n      \"id\": \"CC002\",\n      \"message\": \"HEAD and tracked tree match the candidate\",\n      \"passed\": true,\n      \"subject\": \"candidate-commit\"\n    },\n    {\n      \"id\": \"CC003\",\n      \"message\": \"artifacts=1824; errors=0; warnings=54\",\n      \"passed\": true,\n      \"subject\": \"engineering-graph\"\n    },\n    {\n      \"id\": \"CC004\",\n      \"message\": \"target state is unchanged\",\n      \"passed\": true,\n      \"subject\": \"repository-state\"\n    }\n  ],\n  \"completion\": \"completed\",\n  \"evaluator\": {\n    \"candidate_commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"diagnostics\": [],\n    \"distribution\": \"se-harness\",\n    \"identity_sha256\": \"1b4f4b23e40033591ef667f1bc4eecd585bee231439bc50ce5b4d3859ba55e26\",\n    \"isolated_python\": false,\n    \"pythonpath_present\": false,\n    \"role\": \"candidate-source\",\n    \"user_site_enabled\": false,\n    \"version\": \"0.21.0\"\n  },\n  \"independence\": \"candidate-controlled\",\n  \"operation\": \"complete-candidate\",\n  \"passed\": true,\n  \"schema\": \"se-harness-release-qualification-v1\",\n  \"target\": {\n    \"commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"identity_sha256\": \"5ac53fb5850f394b34ff3ecba7d0106eae661b489f8134f9ad38c5ab60bfbd0c\",\n    \"kind\": \"complete-candidate\",\n    \"tree\": \"5c80454245d2eee89431c80103aef3009af6f8df\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+        "-B",
+        "scripts/run_tests.py",
+        "--scale",
+        "full"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-ilmz3qb6\\checkout",
+      "exit_code": 0,
+      "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-q646aex1\\private\\evaluators\\0.0.0\\3c5b55b24adb049b7f903ebd08f774290c14db1c4ef02873ee0ece41ff56e5b2\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-q646aex1\\private\\evaluators\\0.0.0\\3c5b55b24adb049b7f903ebd08f774290c14db1c4ef02873ee0ece41ff56e5b2\\Scripts\\python.exe\ndocs/notes/diagnostic-codes.md matches the source\n0.21.0\nWEX_SCALE artifacts=100 validation=0.159358s focus=0.399852s plan=0.329239s\nWEX_SCALE artifacts=500 validation=0.764721s focus=1.014692s plan=1.482891s\nWEX_SCALE artifacts=1000 validation=1.486653s focus=1.741079s plan=2.956343s\n----------------------------------------------------------------------\nRan 1215 tests in 150.595s (181 classes, 8 workers)\n\nOK (skipped=21)\n",
+      "stderr": "--workers must be at least 1\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+        "-B",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-ilmz3qb6\\checkout",
+      "exit_code": 0,
+      "stdout": "SE Harness release distribution validation: PASS (20 distribution-bearing records)\n",
+      "stderr": ""
+    }
+  ],
+  "rls031-final-version-reservation": {
+    "url": "https://pypi.org/pypi/se-harness/0.21.0/json",
+    "http_status": 404
+  },
+  "rls031-final-version-tags": {
+    "argv": [
+      "C:\\Program Files\\Git\\cmd\\git.exe",
+      "ls-remote",
+      "--tags",
+      "origin",
+      "refs/tags/v0.21.0",
+      "refs/tags/plugin-v0.2.4"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": {
+      "stdout": "",
+      "stderr": ""
+    },
+    "seconds": 0.6615478999999596
+  }
+}

@@ -1,14 +1,14 @@
 # Prepare and publish the Verity Plane marketplace
 
-The [0.20.1 release package](../engineering/release-0-20-1/README.md) selects
-plugin 0.2.3. WO-RLS-028 covers assembly and local qualification, verified in
-VREC-PLG-027. WO-RLS-029 covers public observations and current documentation.
-Their verification contracts and separate external decisions govern delivery.
-Plugin 0.2.3 with evaluator 0.20.1 is public at
-`556d0faf83c32fd188409c5ba191552fad1522e1`.
-The [public installation evidence](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md)
-records the complete tree comparison and both hosts' fresh/update routes.
-Documentation integration and final closeout require their own observations.
+The [0.21.0 release package](../engineering/release-0-21-0/README.md) is published
+with plugin 0.2.4. VREC-PLG-030 verifies local package qualification. Human mmzen
+separately authorized marketplace publication at
+`7e366438165a40a14783bac650a2887e7ec8bc75`. Independent public readback matches all
+69 qualified files and the exact public evaluator 0.21.0 wheel.
+
+[WO-RLS-033 observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
+record passing public fresh installs and updates from 0.2.3 on both Windows CLIs.
+Documentation integration and delivery closeout remain pending. Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 accepts that omission for WO-RLS-033.
 
 ## Assemble committed inputs
 
@@ -62,13 +62,16 @@ For a newly planned delivery, use the
 [release delivery handoff](release-delivery-completion.md#perform-and-retain-each-handoff).
 Evaluator publication leaves plugin assembly, qualification and separately
 authorized marketplace publication pending with an owner and next action.
-For this release the selected inputs are plugin 0.2.3 and public evaluator
-0.20.1. Track all five surfaces in the release delivery plan. Local package
+For this delivery the published inputs are plugin 0.2.4 and evaluator
+0.21.0. The public-wheel prerequisite and authorized marketplace publication have
+completed; public-route qualification and documentation closeout remain separate.
+Track all five surfaces in the release delivery plan. Local package
 qualification does not close delivery or establish the public branch state.
 
 1. Run the declared package checks, host validators and local native installation
-   acceptance in fresh profiles. Follow VER-RLS-028 and retain actual evidence for the exact 0.2.3 packages.
-   Public fresh installation and update from 0.2.2 follow under VER-RLS-029.
+   acceptance in fresh profiles. Follow VER-RLS-031 and VER-IAR-021 for the
+   exact 0.2.4 packages. Public fresh installation and update from 0.2.3 follow
+   under VER-RLS-032. Keep desktop results unverified under the accepted DEC-RLS-004 boundary.
    Confirm the loaded package bytes, startup, manual compaction and resume. Do not alter real user profiles.
 2. Prepare the commit-bound verification record and obtain its owner decision.
    Resolve the applicable repository integration and external-action checkpoints.
@@ -80,9 +83,9 @@ qualification does not close delivery or establish the public branch state.
 4. Add the actual public Git marketplace in fresh Codex and Claude profiles,
    install verity-plane, and compare installed contents with the accepted package.
    Also test an existing public installation's update path on both hosts.
-   VER-RLS-029 governs these observations. Retain the public commit, active paths,
+   VER-RLS-032 governs these observations. Retain the public commit, active paths,
    installed hashes and native delivery before reporting public installation as checked.
-5. Update current availability claims through WO-RLS-029, obtain commit-bound
+5. Update current availability claims through WO-RLS-033, obtain commit-bound
    verification and separately authorized integration. Read the merged public
    documentation back before declaring overall delivery complete. Preserve the
    assembled source identity and earlier plan versions; bind observations to

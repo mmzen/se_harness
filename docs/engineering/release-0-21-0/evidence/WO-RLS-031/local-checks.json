@@ -1,0 +1,188 @@
+{
+  "kind": "pre-commit local qualification observations",
+  "base": "f5f7c77c6eadfd7d6f1c68e136f1f7cc29cfc0a5",
+  "candidate_commit": null,
+  "note": "Worktree checks before the review commit, not a final commit-bound VREC. The first full failure is preserved with its correction. Hosted exact-commit checks and native criteria remain pending.",
+  "tested_inputs": {
+    "README.md": "f48f2a1763b5552b84efe6ac5930ea446ebe3b9354206fb278aaa48f3bed0561",
+    "plugins/verity-plane/codex/.codex-plugin/plugin.json": "d645ca7a01f4175f9dea06bb6cfb073f73263e5276163dae673b33f1ab3a28a0",
+    "plugins/verity-plane/claude-code/.claude-plugin/plugin.json": "aecf6ca576848d38db14c3052d72c90c8b8c1d929d781b7cad4a8ca1b8804071",
+    "tests/plugin_integration/package_assembly/test_refresh_guidance.py": "d48237202a59b5844b44c3a1d2b08168fa69aa2cc04c7bf9be1f9c7c5ed3e907"
+  },
+  "checks": [
+    {
+      "label": "release021-focused-guidance",
+      "receipt_sha256": "d7620a1c82797c718d07b327d13c96c25a226ea98e9672559d8d7fc73f663cb1",
+      "observation": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "tests/plugin_integration/package_assembly/test_refresh_guidance.py"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "exit_code": 0,
+        "result": {
+          "stdout": "",
+          "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.169s\n\nOK\n"
+        },
+        "seconds": 0.37044829999649664
+      }
+    },
+    {
+      "label": "release021-focused-documentation",
+      "receipt_sha256": "228e5cf9a87116a9c9f1dd2f6a24a2c330a90780dc876bd9f528eba80dc7e467",
+      "observation": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_progressive_documentation.py"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "exit_code": 0,
+        "result": {
+          "stdout": "0.21.0\n",
+          "stderr": "....................\n----------------------------------------------------------------------\nRan 20 tests in 0.603s\n\nOK\n"
+        },
+        "seconds": 0.9246415999950841
+      }
+    },
+    {
+      "label": "release021-focused-delivery",
+      "receipt_sha256": "116fc945eef88429a096000dddef1ac729314060997cb569aefefbffd166d886",
+      "observation": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_release_delivery.py"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "exit_code": 0,
+        "result": {
+          "stdout": "",
+          "stderr": "..............s...\n----------------------------------------------------------------------\nRan 18 tests in 0.965s\n\nOK (skipped=1)\n"
+        },
+        "seconds": 1.2646672999981092
+      }
+    },
+    {
+      "label": "release021-focused-distribution",
+      "receipt_sha256": "bbb2b38ded6191ac7ced3e9e0bf83ce5c5e71c0ea5a2259fafa80d11b16202bd",
+      "observation": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "scripts/validate_release_distributions.py",
+          "--root",
+          "."
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "exit_code": 0,
+        "result": {
+          "stdout": "SE Harness release distribution validation: PASS (20 distribution-bearing records)\n",
+          "stderr": ""
+        },
+        "seconds": 4.552126899994619
+      }
+    },
+    {
+      "label": "release021-full-source",
+      "receipt_sha256": "66e4c0bd23df84b9c93a4d68a9f91d92bd1ed57fe7d3163265c3732703cff58a",
+      "observation": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "scripts/run_tests.py",
+          "--scale",
+          "full"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "exit_code": 1,
+        "result": {
+          "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-i6_h2dx5\\private\\evaluators\\0.0.0\\a4a372136dadcdb0da46da6edee668bb716e6babc4751094df7eccff7f44222e\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-i6_h2dx5\\private\\evaluators\\0.0.0\\a4a372136dadcdb0da46da6edee668bb716e6babc4751094df7eccff7f44222e\\Scripts\\python.exe\n0.21.0\nWEX_SCALE artifacts=100 validation=0.163746s focus=0.410346s plan=0.344274s\nWEX_SCALE artifacts=500 validation=0.774534s focus=1.000734s plan=1.531010s\nWEX_SCALE artifacts=1000 validation=1.542998s focus=1.858921s plan=3.064752s\ndocs/notes/diagnostic-codes.md matches the source\n======================================================================\nFAIL: test_public_onboarding.PublicOnboardingTests.test_root_is_a_bounded_human_entry_point\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_public_onboarding.py\", line 51, in test_root_is_a_bounded_human_entry_point\n    self.assertLessEqual(len(self.readme.split()), 650)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 671 not less than or equal to 650\n\n----------------------------------------------------------------------\nRan 1211 tests in 142.100s (180 classes, 8 workers)\n\nFAILED (failures=1, skipped=20)\n",
+          "stderr": "--workers must be at least 1\n"
+        },
+        "seconds": 143.65067799999815
+      }
+    },
+    {
+      "label": "release021-onboarding-retry",
+      "receipt_sha256": "6148c1fc425e069ffd4be0ed723b40b111da099d138fbff72b33b4d3e8bd1e6f",
+      "observation": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_public_onboarding.py"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "exit_code": 0,
+        "result": {
+          "stdout": "",
+          "stderr": "................\n----------------------------------------------------------------------\nRan 16 tests in 4.318s\n\nOK\n"
+        },
+        "seconds": 4.575342999996792
+      }
+    },
+    {
+      "label": "release021-documentation-retry",
+      "receipt_sha256": "dfcace1246563cf657c4b0720c0b4b2a3d52d50ede07930a864ef834e24fcacb",
+      "observation": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_progressive_documentation.py"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "exit_code": 0,
+        "result": {
+          "stdout": "0.21.0\n",
+          "stderr": "....................\n----------------------------------------------------------------------\nRan 20 tests in 0.532s\n\nOK\n"
+        },
+        "seconds": 0.8622632999977213
+      }
+    },
+    {
+      "label": "release021-full-source-retry",
+      "receipt_sha256": "ecb8afc7f5f8e1b3afc9db4008e4641d983ff86504ccfb63fe7f315e6afdaa92",
+      "observation": {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "scripts/run_tests.py",
+          "--scale",
+          "full"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "exit_code": 0,
+        "result": {
+          "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-0im4owmm\\private\\evaluators\\0.0.0\\809ddd024877faaf20a748ad788a58ec3c21fe6069454e1a163389260d1d5324\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-0im4owmm\\private\\evaluators\\0.0.0\\809ddd024877faaf20a748ad788a58ec3c21fe6069454e1a163389260d1d5324\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.163580s focus=0.423436s plan=0.366841s\nWEX_SCALE artifacts=500 validation=0.817030s focus=1.064794s plan=1.633943s\nWEX_SCALE artifacts=1000 validation=1.810595s focus=1.857872s plan=3.195301s\ndocs/notes/diagnostic-codes.md matches the source\n0.21.0\n----------------------------------------------------------------------\nRan 1211 tests in 144.989s (180 classes, 8 workers)\n\nOK (skipped=20)\n",
+          "stderr": "--workers must be at least 1\n"
+        },
+        "seconds": 146.4575599000018
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+    "plugin",
+    "marketplace",
+    "list",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001",
+  "observed_at": "2026-10-02T06:44:01.081526+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"marketplaces\": [\n    {\n      \"name\": \"se-harness\",\n      \"root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public023-fresh-1001\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\",\n      \"marketplaceSource\": {\n        \"sourceType\": \"git\",\n        \"source\": \"https://github.com/mmzen/se_harness.git\"\n      }\n    }\n  ]\n}\n",
+  "stderr": ""
+}

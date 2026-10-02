@@ -1,0 +1,618 @@
+{
+  "scope": "WO-RLS-032 separately authorized marketplace publication and independent public byte comparison. Later delivery observation; does not rewrite the verified candidate or claim native public-route testing.",
+  "observations": {
+    "publish024-identity": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.20.1",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--evaluator-payload-sha256",
+        "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+        "--evaluator-wheel-sha256",
+        "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "result": {
+        "candidate_commit": null,
+        "checkout_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "diagnostics": [],
+        "distribution_origin": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Lib\\site-packages",
+        "entry_point_origin": null,
+        "evaluator_archive_name": "se_harness-0.20.1-py3-none-any.whl",
+        "evaluator_archive_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+        "evaluator_payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
+        "evaluator_wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+        "expected_root": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator",
+        "harness_version": "0.20.1",
+        "isolated_python": true,
+        "module_origin": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Lib\\site-packages\\se_harness\\runtime_identity.py",
+        "passed": true,
+        "python_binary_position": "within-expected-root",
+        "python_entry_is_link": false,
+        "python_executable": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "python_version": "3.14.6",
+        "pythonpath_present": false,
+        "role": "released-evaluator",
+        "schema": "se-harness-runtime-identity-v4",
+        "template_origin": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\share\\se-harness\\templates\\repository\\standard",
+        "user_site_enabled": false
+      },
+      "seconds": 0.34810100000140665
+    },
+    "publish024-preaction": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--artifact",
+        "VREC-PLG-030",
+        "--checkpoint",
+        "pre-action",
+        "--procedure",
+        "PROC-REPOSITORY-INTEGRATION",
+        "--from-git",
+        "66baa640eea3946bd041ac09e419e300fafef017",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {
+          "commit": "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+          "git_object_format": "sha1"
+        },
+        "operation": {
+          "kind": "check",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "VREC-PLG-030",
+          "artifacts": [
+            "VREC-PLG-030"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "ADR-IAR-012",
+            "ADR-PLG-001",
+            "ARCH-IAR-012",
+            "ARCH-PLG-001",
+            "CAP-DST-001",
+            "CAP-IAR-002",
+            "CAP-RLO-004",
+            "INT-DST-001",
+            "INT-IAR-001",
+            "INT-RLO-001",
+            "REQ-IAR-030",
+            "REQ-PLG-002",
+            "REQ-RLO-018",
+            "SPEC-IAR-016",
+            "SPEC-PLG-001",
+            "SPEC-RLO-006",
+            "VER-IAR-021",
+            "VER-RLS-031",
+            "WO-RLS-032"
+          ],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [
+            "docs/engineering/release-0-21-0/decisions/DEC-RLS-002.md",
+            "docs/engineering/release-0-21-0/evidence/VREC-PLG-030-evaluator.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/capture-preparation.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow-traces.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/cli-workflow.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-boundaries.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-current.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/codex-native-events.jsonl",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/completion.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/continuation-review.md",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/contract-assessment.md",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/decision-acceptance.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/delivery-plan.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/handoff.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/historical-native-comparison.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/native-observations.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-qualification.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-recheck.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-linux.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/portable-windows.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-review.md",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/qualification-checks.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/README.md",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/source-comparison.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/verification-decision.json",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/verification-review.md",
+            "docs/engineering/release-0-21-0/evidence/WO-RLS-032/WO-RLS-032-handoff.md",
+            "docs/engineering/release-0-21-0/risks/RISK-RLS-002.md",
+            "docs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md",
+            "docs/engineering/release-0-21-0/work-orders/WO-RLS-032.md"
+          ],
+          "change_set_complete": true
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-VREC-DELIVER",
+          "procedure_id": "PROC-REPOSITORY-INTEGRATION",
+          "status": "pass",
+          "gates": [
+            {
+              "id": "QG-G4-VERIFIED-COVERAGE",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G4V-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:VREC-PLG-030"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G4V-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:pre-action"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G4V-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:VREC-PLG-030"
+                    }
+                  ],
+                  "message": "No open decision blocks VREC-PLG-030."
+                }
+              ]
+            }
+          ],
+          "formal_snapshot_sha256": "e91d76a6e136ab80971d9fe9496379e61757fe5125b1ba91496dfb5604a64f85",
+          "change_set_source": "git"
+        },
+        "procedure": {
+          "id": "PROC-REPOSITORY-INTEGRATION",
+          "current_step": "STEP-REPOSITORY-INTEGRATION",
+          "steps": [
+            {
+              "id": "STEP-REPOSITORY-INTEGRATION",
+              "kind": "decision",
+              "gate_ids": [
+                "QG-G4-VERIFIED-COVERAGE"
+              ],
+              "effects": [
+                "Permits only the named repository action."
+              ],
+              "non_effects": [
+                "No action occurs from this decision request."
+              ],
+              "decision_right": "DR-DELIVERY-SELECT",
+              "role": "repository-owner",
+              "artifact": "VREC-PLG-030",
+              "decision": "the exact repository integration action",
+              "outcomes": [
+                "authorize",
+                "stop"
+              ],
+              "response": "Authorize the exact repository integration action for VREC-PLG-030: <action>."
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "VREC-PLG-030",
+              "status": "verified"
+            }
+          ],
+          "after": [
+            {
+              "id": "VREC-PLG-030",
+              "status": "verified"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 56
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Evaluated pre-action compliance for VREC-PLG-030."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "VREC-PLG-030 is verified."
+          ],
+          "decision_required": {
+            "decision_right": "DR-DELIVERY-SELECT",
+            "role": "repository-owner",
+            "artifact": "VREC-PLG-030",
+            "decision": "the exact repository integration action",
+            "outcomes": [
+              "authorize",
+              "stop"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-REPOSITORY-INTEGRATION",
+            "step_id": "STEP-REPOSITORY-INTEGRATION",
+            "action": "the exact repository integration action"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "Authorize the exact repository integration action for VREC-PLG-030: <action>."
+          },
+          "alternatives": [
+            "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+          ]
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-REPOSITORY-INTEGRATION",
+              "location": {
+                "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                "heading": "confirm-authority-for-the-external-action"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                },
+                {
+                  "file": "docs/engineering/harness/PULL_REQUEST.md",
+                  "heading": "check-a-governed-pull-request",
+                  "when": "When the selected external action prepares or checks a pull request."
+                }
+              ],
+              "steps": {
+                "STEP-REPOSITORY-INTEGRATION": {
+                  "location": {
+                    "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                    "heading": "confirm-authority-for-the-external-action"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "decision-rights",
+                      "when": "Before obtaining or applying an accountable decision."
+                    },
+                    {
+                      "file": "docs/engineering/harness/PULL_REQUEST.md",
+                      "heading": "check-a-governed-pull-request",
+                      "when": "When the selected external action prepares or checks a pull request."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-REPOSITORY-INTEGRATION",
+              "location": {
+                "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                "heading": "confirm-authority-for-the-external-action"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                },
+                {
+                  "file": "docs/engineering/harness/PULL_REQUEST.md",
+                  "heading": "check-a-governed-pull-request",
+                  "when": "When the selected external action prepares or checks a pull request."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "ADR-IAR-012",
+            "ADR-PLG-001",
+            "ARCH-IAR-012",
+            "ARCH-PLG-001",
+            "CAP-DST-001",
+            "CAP-IAR-002",
+            "CAP-RLO-004",
+            "INT-DST-001",
+            "INT-IAR-001",
+            "INT-RLO-001",
+            "REQ-IAR-030",
+            "REQ-PLG-002",
+            "REQ-RLO-018",
+            "SPEC-IAR-016",
+            "SPEC-PLG-001",
+            "SPEC-RLO-006",
+            "VER-IAR-021",
+            "VER-RLS-031",
+            "VREC-PLG-030",
+            "WO-RLS-032"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "b33654d100a42fa8aa82f15ac7223b8f45ffdf0410e141bf152969d3c78a6285"
+      },
+      "seconds": 5.141216300000451
+    },
+    "publish024-receipt": {
+      "observed_at": "2026-10-02T06:40:37.640393+00:00",
+      "human": "mmzen",
+      "decision": "I authorize plugin 0.2.4 marketplace publication",
+      "plan": {
+        "destination": "https://github.com/mmzen/se_harness.git",
+        "ref": "refs/heads/plugin-marketplace",
+        "expected_old_commit": "556d0faf83c32fd188409c5ba191552fad1522e1",
+        "prepared_commit": "7e366438165a40a14783bac650a2887e7ec8bc75",
+        "tree": "e3688ec9dccc3717665689d39b5ca0a9e6ff1287",
+        "retained_local_ref": "refs/heads/prepared/marketplace-0.2.4",
+        "merged_governance": "99bd19a50c9e41ef2107dbb99a4e4a61ea99fa13",
+        "verification": "VREC-PLG-030",
+        "verified_candidate": "967d513d20348ca20f78b4b2d4235c33fc8748d4",
+        "plugin_version": "0.2.4",
+        "evaluator_version": "0.21.0",
+        "package_identity_sha256": "74f0854eadfbe962105d1aba9b594ff2f1697cd038cb27c1a01b802c1fb8d890",
+        "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+        "source": {
+          "plan": "release/plugin-assembly.json",
+          "plan_sha256": "b9dd5e39a89b91f855bd848f09985c502193b157d05cf7cc600e57b1325bfaac",
+          "revision": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775"
+        },
+        "file_count": 69,
+        "all_commit_blobs_match_qualified_package": true,
+        "diff_stat": " PACKAGE-IDENTITY.json                              |  88 +++++----\n README.md                                          |  25 ++-\n .../claude/verity-plane/.claude-plugin/plugin.json |   2 +-\n packages/claude/verity-plane/README.md             |  42 ++--\n .../claude/verity-plane/assembly-inventory.json    |  84 ++++----\n packages/claude/verity-plane/assets/bootstrap.md   |  17 ++\n ...-any.whl => se_harness-0.21.0-py3-none-any.whl} | Bin 534217 -> 544479 bytes\n packages/claude/verity-plane/scripts/activate.py   |  55 ++++++\n .../claude/verity-plane/scripts/harness_runtime.py | 215 +++++++++++++++++++++\n .../verity-plane/scripts/inject_instructions.py    | 128 +++++++-----\n packages/claude/verity-plane/scripts/setup.py      |  64 ++++--\n .../claude/verity-plane/skills/change/SKILL.md     |  18 +-\n .../claude/verity-plane/skills/evidence/SKILL.md   |  16 +-\n .../skills/harness-operator-brief/SKILL.md         |   5 +\n .../verity-plane/skills/harness-orient/SKILL.md    |  16 +-\n packages/claude/verity-plane/skills/setup/SKILL.md |  45 +++--\n .../skills/setup/references/environment.md         |  34 ++--\n .../skills/setup/references/maintenance.md         |  18 +-\n .../codex/verity-plane/.codex-plugin/plugin.json   |   2 +-\n packages/codex/verity-plane/README.md              |  42 ++--\n .../codex/verity-plane/assembly-inventory.json     |  84 ++++----\n packages/codex/verity-plane/assets/bootstrap.md    |  17 ++\n ...-any.whl => se_harness-0.21.0-py3-none-any.whl} | Bin 534217 -> 544479 bytes\n packages/codex/verity-plane/scripts/activate.py    |  55 ++++++\n .../codex/verity-plane/scripts/harness_runtime.py  | 215 +++++++++++++++++++++\n .../verity-plane/scripts/inject_instructions.py    | 128 +++++++-----\n packages/codex/verity-plane/scripts/setup.py       |  64 ++++--\n packages/codex/verity-plane/skills/change/SKILL.md |  18 +-\n .../codex/verity-plane/skills/evidence/SKILL.md    |  16 +-\n .../skills/harness-operator-brief/SKILL.md         |   5 +\n .../verity-plane/skills/harness-orient/SKILL.md    |  16 +-\n packages/codex/verity-plane/skills/setup/SKILL.md  |  45 +++--\n .../skills/setup/references/environment.md         |  34 ++--\n .../skills/setup/references/maintenance.md         |  18 +-\n packages/verity-plane-claude.zip                   | Bin 571950 -> 590728 bytes\n packages/verity-plane-codex.zip                    | Bin 572208 -> 590979 bytes\n submissions/README.md                              |   6 +-\n submissions/reviewer-test-cases.md                 |  13 +-\n 38 files changed, 1264 insertions(+), 386 deletions(-)\n",
+        "controls": {
+          "id": 23468315,
+          "name": "plugin-marketplace protection",
+          "target": "branch",
+          "source_type": "Repository",
+          "source": "mmzen/se_harness",
+          "enforcement": "active",
+          "conditions": {
+            "ref_name": {
+              "exclude": [],
+              "include": [
+                "refs/heads/plugin-marketplace"
+              ]
+            }
+          },
+          "rules": [
+            {
+              "type": "deletion"
+            },
+            {
+              "type": "non_fast_forward"
+            }
+          ],
+          "node_id": "RRS_lACqUmVwb3NpdG9yec5PT188zgFmGRs",
+          "created_at": "2026-09-15T18:31:02.287+02:00",
+          "updated_at": "2026-09-29T10:29:30.215+02:00",
+          "bypass_actors": [],
+          "current_user_can_bypass": "never",
+          "_links": {
+            "self": {
+              "href": "https://api.github.com/repos/mmzen/se_harness/rulesets/23468315"
+            },
+            "html": {
+              "href": "https://github.com/mmzen/se_harness/rules/23468315"
+            }
+          }
+        },
+        "push_argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "push",
+          "origin",
+          "7e366438165a40a14783bac650a2887e7ec8bc75:refs/heads/plugin-marketplace"
+        ],
+        "status": "Prepared locally; exact publication authorization pending.",
+        "limits": [
+          "Claude native exact-release qualification and Codex Windows desktop remain unverified under DEC-RLS-002.",
+          "Public fresh/update checks and documentation remain under WO-RLS-033.",
+          "No marketplace publication, tag movement or adoption performed."
+        ]
+      },
+      "controls": {
+        "id": 23468315,
+        "name": "plugin-marketplace protection",
+        "target": "branch",
+        "source_type": "Repository",
+        "source": "mmzen/se_harness",
+        "enforcement": "active",
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "refs/heads/plugin-marketplace"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "deletion"
+          },
+          {
+            "type": "non_fast_forward"
+          }
+        ],
+        "node_id": "RRS_lACqUmVwb3NpdG9yec5PT188zgFmGRs",
+        "created_at": "2026-09-15T18:31:02.287+02:00",
+        "updated_at": "2026-09-29T10:29:30.215+02:00",
+        "bypass_actors": [],
+        "current_user_can_bypass": "never",
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/mmzen/se_harness/rulesets/23468315"
+          },
+          "html": {
+            "href": "https://github.com/mmzen/se_harness/rules/23468315"
+          }
+        }
+      },
+      "before": {
+        "stdout": "556d0faf83c32fd188409c5ba191552fad1522e1\trefs/heads/plugin-marketplace\n",
+        "stderr": ""
+      },
+      "push": {
+        "stdout": "",
+        "stderr": "To https://github.com/mmzen/se_harness.git\n   556d0faf..7e366438  7e366438165a40a14783bac650a2887e7ec8bc75 -> plugin-marketplace\n"
+      },
+      "after": {
+        "stdout": "7e366438165a40a14783bac650a2887e7ec8bc75\trefs/heads/plugin-marketplace\n",
+        "stderr": ""
+      },
+      "status": "Published; independent public archive comparison follows."
+    },
+    "publish024-public-readback": {
+      "observed_at": "2026-10-02T06:40:53.081566+00:00",
+      "result": "pass",
+      "url": "https://codeload.github.com/mmzen/se_harness/tar.gz/refs/heads/plugin-marketplace",
+      "resolved_url": "https://codeload.github.com/mmzen/se_harness/tar.gz/refs/heads/plugin-marketplace",
+      "http_status": 200,
+      "public_commit": "7e366438165a40a14783bac650a2887e7ec8bc75",
+      "plugin_version": "0.2.4",
+      "evaluator_version": "0.21.0",
+      "package_identity_sha256": "74f0854eadfbe962105d1aba9b594ff2f1697cd038cb27c1a01b802c1fb8d890",
+      "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "file_count": 69,
+      "files": {
+        ".agents/plugins/marketplace.json": "2458652eb2a49a1af96f10807b5a247ccb8d73627e62c87d463dd2f3b62720ce",
+        ".claude-plugin/marketplace.json": "908271dc7853989c88400d2d555291337a88610f510f85df4e66dc26ad1449f4",
+        ".gitattributes": "a5bc2bc45b459a9e271ed0b4fafbe15e5b5a531ce71df37ec8481df84ffe50b9",
+        "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+        "PACKAGE-IDENTITY.json": "74f0854eadfbe962105d1aba9b594ff2f1697cd038cb27c1a01b802c1fb8d890",
+        "README.md": "8fb33bcd46b38b7bee5c8cf8aa3acb6261dda711eec42c854841e07d6d06c236",
+        "packages/claude/verity-plane/.claude-plugin/plugin.json": "aecf6ca576848d38db14c3052d72c90c8b8c1d929d781b7cad4a8ca1b8804071",
+        "packages/claude/verity-plane/LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+        "packages/claude/verity-plane/README.md": "21922abc1633930c62172f4696f9d2207cabc2fd0a060bb5a6a4f9aa98462530",
+        "packages/claude/verity-plane/assembly-inventory.json": "959781cd0ea2c06e47095c2b6bbb4a50a10d1e11f7bc68d0ba3cc8de472548f0",
+        "packages/claude/verity-plane/assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+        "packages/claude/verity-plane/hooks/hooks.json": "677e2b7797c7f708589578559a3ea19d36c41cfe1dce05f3c39365ce5c395cf5",
+        "packages/claude/verity-plane/packages/se_harness-0.21.0-py3-none-any.whl": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+        "packages/claude/verity-plane/scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+        "packages/claude/verity-plane/scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+        "packages/claude/verity-plane/scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+        "packages/claude/verity-plane/scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+        "packages/claude/verity-plane/skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+        "packages/claude/verity-plane/skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+        "packages/claude/verity-plane/skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+        "packages/claude/verity-plane/skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481",
+        "packages/claude/verity-plane/skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+        "packages/claude/verity-plane/skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+        "packages/claude/verity-plane/skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+        "packages/claude/verity-plane/skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+        "packages/claude/verity-plane/skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+        "packages/claude/verity-plane/skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+        "packages/claude/verity-plane/skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+        "packages/claude/verity-plane/skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+        "packages/claude/verity-plane/skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+        "packages/claude/verity-plane/skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+        "packages/claude/verity-plane/skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+        "packages/claude/verity-plane/skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+        "packages/claude/verity-plane/skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+        "packages/claude/verity-plane/skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+        "packages/codex/verity-plane/.codex-plugin/plugin.json": "d645ca7a01f4175f9dea06bb6cfb073f73263e5276163dae673b33f1ab3a28a0",
+        "packages/codex/verity-plane/LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+        "packages/codex/verity-plane/README.md": "21922abc1633930c62172f4696f9d2207cabc2fd0a060bb5a6a4f9aa98462530",
+        "packages/codex/verity-plane/assembly-inventory.json": "1d26a818a3d2dd96fe7a378e529c02cca94104f144713061d60fb9facf514329",
+        "packages/codex/verity-plane/assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+        "packages/codex/verity-plane/hooks/hooks.json": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2",
+        "packages/codex/verity-plane/packages/se_harness-0.21.0-py3-none-any.whl": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+        "packages/codex/verity-plane/scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+        "packages/codex/verity-plane/scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+        "packages/codex/verity-plane/scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+        "packages/codex/verity-plane/scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+        "packages/codex/verity-plane/skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+        "packages/codex/verity-plane/skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+        "packages/codex/verity-plane/skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+        "packages/codex/verity-plane/skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481",
+        "packages/codex/verity-plane/skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+        "packages/codex/verity-plane/skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+        "packages/codex/verity-plane/skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+        "packages/codex/verity-plane/skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+        "packages/codex/verity-plane/skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+        "packages/codex/verity-plane/skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+        "packages/codex/verity-plane/skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+        "packages/codex/verity-plane/skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+        "packages/codex/verity-plane/skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+        "packages/codex/verity-plane/skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+        "packages/codex/verity-plane/skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+        "packages/codex/verity-plane/skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+        "packages/codex/verity-plane/skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+        "packages/codex/verity-plane/skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+        "packages/verity-plane-claude.zip": "fb8a66abc14675a227feef8acd50ffbbcf63a0d42b077ece85f680bf1e08e366",
+        "packages/verity-plane-codex.zip": "d9762ce9605b28a9b3f9e794bac04a9ccc54d0daa5842adc77b809a6f4a80737",
+        "submissions/README.md": "803222cd0c4391704babdeff023f2a49d175762f52e644865761040d96e544cf",
+        "submissions/reviewer-test-cases.md": "6ac86289404c7cd045906d9fdeaab6da3426ec470685891026eea61e12f8f499",
+        "submissions/verity-plane-logo.png": "38356603c1fe30a53f02d615b988d6c3d150e7894c5988e431287023cda9e870"
+      },
+      "all_public_bytes_match_verified_distribution": true,
+      "archive_sha256": "6bb2200ea1bb1c76ff72d6a11c7fa83f0ca897a9146822efa8b98805db0751a0",
+      "archive_bytes": 2436478,
+      "expected_source": "Previously verified local package inventory; not derived from downloaded bytes.",
+      "native_public_installation_claim": false,
+      "pending_work_order": "WO-RLS-033"
+    }
+  },
+  "limits": [
+    "Claude exact-release native qualification and Codex Windows desktop remain unverified under DEC-RLS-002.",
+    "Public native fresh/update routes and current documentation remain under WO-RLS-033.",
+    "No release markers or repository adoption changed."
+  ]
+}

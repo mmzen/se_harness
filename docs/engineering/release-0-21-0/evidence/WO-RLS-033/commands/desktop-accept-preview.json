@@ -1,0 +1,212 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "decide",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--artifact",
+    "DEC-RLS-004",
+    "--option",
+    "accept",
+    "--decision",
+    "mmzen",
+    "--reason",
+    "Human mmzen: I accept. Accepts the reviewed DEC-RLS-004 Codex Windows desktop evidence gap for WO-RLS-033 and public plugin 0.2.4 only. Desktop results remain unverified; no VREC acceptance, external action, marker update or adoption is implied.",
+    "--revisit",
+    "Before the next plugin release, before claiming verified Codex Windows desktop support, or before adoption depending on verified desktop delivery, whichever occurs first.",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "transition",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "DEC-RLS-004",
+      "artifacts": [
+        "DEC-RLS-004"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "workflow_rule_id": "WFL-DEC-CLOSED",
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "DEC-RLS-004"
+                }
+              ],
+              "message": "open -> decided is a declared lifecycle edge for DEC-RLS-004."
+            }
+          ]
+        }
+      ]
+    },
+    "procedure": {
+      "id": "PROC-FOCUS-SELECTED",
+      "current_step": "STEP-FOCUS-SELECTED",
+      "steps": [
+        {
+          "id": "STEP-FOCUS-SELECTED",
+          "kind": "command",
+          "gate_ids": [],
+          "effects": [
+            "Projected selected state for DEC-RLS-004."
+          ],
+          "non_effects": [
+            "Focus changes no lifecycle state."
+          ],
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "DEC-RLS-004"
+          ]
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "DEC-RLS-004",
+          "status": "open"
+        }
+      ],
+      "after": [
+        {
+          "id": "DEC-RLS-004",
+          "status": "decided"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": [
+        {
+          "id": "DEC-RLS-004",
+          "path": "docs/engineering/release-0-21-0/decisions/DEC-RLS-004.md",
+          "fields": [
+            "disposition",
+            "lifecycle_events",
+            "status",
+            "updated"
+          ]
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Planned 1 explicit lifecycle transition(s); no files were written."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "DEC-RLS-004 is decided and terminal."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-FOCUS-SELECTED",
+        "step_id": "STEP-FOCUS-SELECTED",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "DEC-RLS-004"
+        ]
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-FOCUS-SELECTED",
+          "location": {
+            "file": "docs/engineering/harness/CONTINUE.md",
+            "heading": "continue-selected-work"
+          },
+          "prerequisites": [],
+          "steps": {
+            "STEP-FOCUS-SELECTED": {
+              "location": {
+                "file": "docs/engineering/harness/CONTINUE.md",
+                "heading": "continue-selected-work"
+              },
+              "prerequisites": []
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-FOCUS-SELECTED",
+          "location": {
+            "file": "docs/engineering/harness/CONTINUE.md",
+            "heading": "continue-selected-work"
+          },
+          "prerequisites": []
+        }
+      },
+      "formal_artifact_ids": [
+        "DEC-RLS-004"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "e7d02bb1e1d2820556ee3b0c1ae8de19f49abb5e0ad3831d865ad07882ee9793"
+  },
+  "seconds": 15.684916399999565
+}

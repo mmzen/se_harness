@@ -1,0 +1,276 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--artifact",
+    "DEC-RLS-004",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "DEC-RLS-004",
+      "artifacts": [
+        "DEC-RLS-004"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "REL-SEH-033",
+        "SPEC-RLO-006",
+        "VER-RLS-032",
+        "WO-RLS-033"
+      ],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-DEC-OPEN",
+      "procedure_id": "PROC-DEC-DISPOSE",
+      "status": "not_assessable",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-DEC-DISPOSE",
+      "current_step": "STEP-DEC-DISPOSE",
+      "steps": [
+        {
+          "id": "STEP-DEC-DISPOSE",
+          "kind": "decision",
+          "gate_ids": [],
+          "effects": [
+            "Records the selected option verbatim as the disposition of DEC-RLS-004 only."
+          ],
+          "non_effects": [
+            "The artifacts DEC-RLS-004 concerns or blocks are not changed by the disposition."
+          ],
+          "decision_right": "DR-DECISION-DISPOSE",
+          "role": "owner of the blocked artifact, or of the departed specification for a deviation",
+          "artifact": "DEC-RLS-004",
+          "decision": "which declared option answers the pending decision",
+          "outcomes": [
+            "decided",
+            "deferred",
+            "withdrawn"
+          ],
+          "response": "harnessctl decide . --artifact DEC-RLS-004 --option OPTION-ID --decision ROLE --reason TEXT"
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "DEC-RLS-004",
+          "status": "open"
+        }
+      ],
+      "after": [
+        {
+          "id": "DEC-RLS-004",
+          "status": "open"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 57
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Projected the pending decision DEC-RLS-004."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "DEC-RLS-004 is open; the artifacts it blocks cannot change state until it is disposed."
+      ],
+      "decision_required": {
+        "decision_right": "DR-DECISION-DISPOSE",
+        "role": "owner of the blocked artifact, or of the departed specification for a deviation",
+        "artifact": "DEC-RLS-004",
+        "decision": "which declared option answers the pending decision",
+        "outcomes": [
+          "decided",
+          "deferred",
+          "withdrawn"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-DEC-DISPOSE",
+        "step_id": "STEP-DEC-DISPOSE",
+        "action": "which declared option answers the pending decision"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "harnessctl decide . --artifact DEC-RLS-004 --option OPTION-ID --decision ROLE --reason TEXT"
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-DEC-DISPOSE",
+          "location": {
+            "file": "docs/engineering/harness/AUTHORIZE_WORK.md",
+            "heading": "resolve-approval-blockers"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+              "heading": "blocking-decisions",
+              "when": "Before disposing the selected blocking decision."
+            }
+          ],
+          "steps": {
+            "STEP-DEC-DISPOSE": {
+              "location": {
+                "file": "docs/engineering/harness/AUTHORIZE_WORK.md",
+                "heading": "resolve-approval-blockers"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                },
+                {
+                  "file": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+                  "heading": "blocking-decisions",
+                  "when": "Before disposing the selected blocking decision."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-DEC-DISPOSE",
+          "location": {
+            "file": "docs/engineering/harness/AUTHORIZE_WORK.md",
+            "heading": "resolve-approval-blockers"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+              "heading": "blocking-decisions",
+              "when": "Before disposing the selected blocking decision."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "DEC-RLS-004",
+        "REL-SEH-033",
+        "SPEC-RLO-006",
+        "VER-RLS-032",
+        "WO-RLS-033"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ],
+      "formal_artifacts": [
+        {
+          "id": "DEC-RLS-004",
+          "file": "docs/engineering/release-0-21-0/decisions/DEC-RLS-004.md"
+        },
+        {
+          "id": "REL-SEH-033",
+          "file": "docs/engineering/release-0-21-0/release/REL-SEH-033.md"
+        },
+        {
+          "id": "SPEC-RLO-006",
+          "file": "docs/engineering/release-orchestration/specifications/SPEC-RLO-006.md"
+        },
+        {
+          "id": "VER-RLS-032",
+          "file": "docs/engineering/release-0-21-0/verification/VER-RLS-032.md"
+        },
+        {
+          "id": "WO-RLS-033",
+          "file": "docs/engineering/release-0-21-0/work-orders/WO-RLS-033.md"
+        }
+      ]
+    },
+    "result_sha256": "8f766d7aad625a62a8207c3e35d1d6ee0145febbbfac6c00d1dc9b630f268a90",
+    "context": {
+      "reading_manifest": [],
+      "governing": [
+        "REL-SEH-033",
+        "SPEC-RLO-006",
+        "VER-RLS-032",
+        "WO-RLS-033"
+      ],
+      "declared_paths": [],
+      "state": {
+        "status": "open",
+        "family": "decision"
+      },
+      "next": {
+        "argv": [],
+        "procedure_id": "PROC-DEC-DISPOSE",
+        "step_id": "STEP-DEC-DISPOSE"
+      },
+      "decision_required": {
+        "decision_right": "DR-DECISION-DISPOSE",
+        "role": "owner of the blocked artifact, or of the departed specification for a deviation",
+        "artifact": "DEC-RLS-004",
+        "decision": "which declared option answers the pending decision",
+        "outcomes": [
+          "decided",
+          "deferred",
+          "withdrawn"
+        ]
+      }
+    }
+  },
+  "seconds": 4.8796358999989025
+}

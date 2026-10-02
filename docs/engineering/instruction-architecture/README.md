@@ -2,20 +2,22 @@
 
 ## Current instruction architecture
 
-Public SE Harness 0.20.1 keeps the compact `ENGINEERING_HARNESS.md` entry and
-action-selected guides under `docs/engineering/harness/`. `AGENTS.md` belongs
-entirely to the repository owner. The evaluator supplies lifecycle results and
-instruction discovery. [Plugin 0.2.3 public evidence](../release-0-20-1/evidence/WO-RLS-029/README.md)
-covers delivery of this maintenance package.
+Public SE Harness 0.21.0 supplies the compact entry, conditional procedures and
+templates from its selected wheel. Default initialization writes two selection
+files. Plugin 0.2.4 supplies bootstrap and explicit per-session activation.
+`AGENTS.md` remains entirely repository-owned. The evaluator supplies lifecycle
+results and instruction discovery. [Public observations and limits](../release-0-21-0/evidence/WO-RLS-033/README.md)
+distinguish package installation from native delivery.
 
 This repository selects evaluator 0.20.1 under WO-HUP-025, following the
 separate 0.20.0 adoption under WO-HUP-024. The cleanup refinements were introduced in the
 [0.20.0 release](../release-0-20-0/README.md); subsequent cleanup records below
 retain their own scope and decisions.
 
-The plugin-owned instruction resources and minimal repository layout remain
-unreleased. DEC-IAR-004 selects compatibility release, separate adoption and
-then independent qualification of that successor.
+The external instruction resources and minimal layout are published in 0.21.0.
+DEC-IAR-004's compatibility release and separate adoption remain historical steps.
+Earlier VRECs retain their exact candidate claims. Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 accepts that omission for WO-RLS-033.
+Publication does not remove this repository's installed root guide; adoption is separate.
 
 ## Historical architecture packets
 
