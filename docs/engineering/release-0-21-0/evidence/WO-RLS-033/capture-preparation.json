@@ -1,0 +1,894 @@
+{
+  "candidate": "e6737a5493cc8c6236b54a32f30edc9418399629",
+  "meaning": "Post-candidate preparation receipts; no human verification.",
+  "receipts": {
+    "capture-VREC-PLG-031": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--id",
+        "VREC-PLG-031",
+        "--work-order",
+        "WO-RLS-033",
+        "--verification",
+        "VER-RLS-032",
+        "--owner",
+        "Codex",
+        "--domain",
+        "release-0-21-0",
+        "--candidate-commit",
+        "e6737a5493cc8c6236b54a32f30edc9418399629",
+        "--json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/decisions/DEC-RLS-003.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/decisions/DEC-RLS-004.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/package-qualification.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/public-evaluator.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-032/publication-receipt.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/checks-candidate.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/checks-v2.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/checks-v3.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/checks.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/accept-claude-focus.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/accept-claude-identity.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/accepted-gap-documentation-tests.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/accepted-gap-validation.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/changed-document-links-context-corrected.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/changed-document-links.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-accept-apply.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-accept-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-accepted-focus.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-decision-validation.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-risk-create.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-risk-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/claude-scope-final.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/delivery-candidate-check.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/delivery-check-accepted-claude.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/delivery-check-normalized.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/delivery-check.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accept-apply.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accept-focus.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accept-identity.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accept-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-accepted-focus.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-decision-create.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-decision-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/desktop-proposal-validation.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/documentation-tests-corrected.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/documentation-tests.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/documentation-validation.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/final-focus.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/final-scope.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-active.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-add.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-before.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-install.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-native-result.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-revision-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-route.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-doctor.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-identity.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-init-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-init.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-initial.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-resources.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-result.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-setup-reuse.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-source-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-claude-version.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-active.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-add.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-before.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-install.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-native-result.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-revision-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-route.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-doctor.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-identity.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-init-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-init.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-initial.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-resources.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-result.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-setup-reuse.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-source-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/fresh-codex-version.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/full-diff-check.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-latest.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-markers.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-pages.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public-pypi.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-candidate-doc-tests-corrected.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-candidate-doc-tests-final.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-candidate-doc-tests.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-complete-apply.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-complete-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-context.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-handoff-evidence.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-handoff.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-implemented.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-preflight.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-review-preflight.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-scope.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-start-apply.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-start-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/public024-started.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/resume-focus.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/resume-identity.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/scope-complete.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-active.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-before.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-native-result.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-refresh.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-revision-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-revision-before.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-route.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-doctor.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-identity.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-init-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-init.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-initial.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-resources.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-result.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-setup-reuse.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-source-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-source-before.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-update.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-claude-version.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-active.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-before.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-native-result.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-refresh.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-revision-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-revision-before.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-route.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-doctor.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-identity.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-init-preview.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-init.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-initial.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-resources.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-result.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-setup-reuse.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-source-after.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-source-before.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-update.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/commands/update-codex-version.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/evidence-index.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/handoff.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/link-review.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/codex-public/automatic/native-events.jsonl",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/codex-public/native-events.jsonl",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/codex-public/resume/native-events.jsonl",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/fresh/public-bootstrap.events.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/fresh/public-bootstrap.hooks.log",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/fresh/public-bootstrap.invocation.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/update/public-bootstrap.events.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/update/public-bootstrap.hooks.log",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native/update/public-bootstrap.invocation.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native-v2.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native-v3.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/native.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/observations-candidate.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/observations-v2.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/observations-v3.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/observations.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/plan-candidate.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/plan.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/public-codex-native.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/publication.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/requirement-assessment.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/review-v2.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/review.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/routes.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/setup.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/WO-RLS-033-handoff.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/risks/RISK-RLS-003.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/verification-records/VREC-PLG-030.md",
+        "--test-command",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "import hashlib,json,pathlib,subprocess,sys\nroot=pathlib.Path.cwd()\ncandidate=sys.argv[1]\nassert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==candidate\nindex=root/sys.argv[2]\nassert hashlib.sha256(index.read_bytes()).hexdigest()==sys.argv[3]\nentries=json.loads(index.read_text())\nfor name,digest in entries.items():\n    p=root/name\n    assert p.resolve().is_relative_to(root.resolve()) and hashlib.sha256(p.read_bytes()).hexdigest()==digest,name\nnative=json.loads((root/'docs/engineering/release-0-21-0/evidence/WO-RLS-033/public-codex-native.json').read_text())\nassert native['passed'] and native['automatic_compaction_observed'] and native['repository_preserved']\nprint(json.dumps({'candidate':candidate,'retained_evidence_files':len(entries),'retained_bytes':'exact','native_results':'Codex CLI pass; Claude and desktop remain unverified under accepted deviations'}),flush=True)\nraise SystemExit(subprocess.run([sys.executable,'-B','-X','utf8','-m','unittest','tests.test_public_onboarding','tests.test_progressive_documentation','tests.plugin_integration.package_assembly.test_refresh_guidance','tests.test_release_delivery']).returncode)\n",
+        "e6737a5493cc8c6236b54a32f30edc9418399629",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-033/evidence-index.json",
+        "bf41df98cb8d68ce4b93632f77ea6de7d2b4de538c39d34122a02c263ee9b58e"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {
+          "commit": "e6737a5493cc8c6236b54a32f30edc9418399629",
+          "git_object_format": "sha1"
+        },
+        "operation": {
+          "kind": "capture-verification",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "VREC-PLG-031",
+          "artifacts": [
+            "VREC-PLG-031"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "CAP-RLO-004",
+            "INT-RLO-001",
+            "REQ-RLO-019",
+            "REQ-RLO-020",
+            "SPEC-RLO-006",
+            "VER-RLS-032",
+            "WO-RLS-033"
+          ],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-VREC-DECIDE",
+          "procedure_id": "PROC-VREC-DECIDE",
+          "status": "not_assessable",
+          "gates": []
+        },
+        "procedure": {
+          "id": "PROC-VREC-DECIDE",
+          "current_step": "STEP-VREC-DECIDE",
+          "steps": [
+            {
+              "id": "STEP-VREC-DECIDE",
+              "kind": "decision",
+              "gate_ids": [
+                "QG-G4-ASSURANCE-DECISION"
+              ],
+              "effects": [
+                "Permits an explicit decision on VREC-PLG-031 only."
+              ],
+              "non_effects": [
+                "Referenced work orders remain unchanged."
+              ],
+              "decision_right": "DR-VREC-DECIDE",
+              "role": "assurance-owner",
+              "artifact": "VREC-PLG-031",
+              "decision": "whether the retained evidence verifies the exact candidate",
+              "outcomes": [
+                "verified",
+                "reject",
+                "supersede"
+              ],
+              "response": "I verify VREC-PLG-031 as assurance owner."
+            }
+          ]
+        },
+        "state": {
+          "before": [],
+          "after": [
+            {
+              "id": "VREC-PLG-031",
+              "status": "ready"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": [
+            {
+              "id": "VREC-PLG-031",
+              "path": "docs/engineering/release-0-21-0/verification-records/VREC-PLG-031.md",
+              "fields": [
+                "artifact_snapshot_sha256",
+                "commit",
+                "created",
+                "evaluator_evidence_path",
+                "evaluator_evidence_sha256",
+                "evidence_paths",
+                "git_object_format",
+                "id",
+                "owners",
+                "prepared_at",
+                "prepared_by",
+                "relations",
+                "status",
+                "title",
+                "type",
+                "updated",
+                "worktree_state"
+              ]
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Prepared ready verification record VREC-PLG-031 at docs/engineering/release-0-21-0/verification-records/VREC-PLG-031.md."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "VREC-PLG-031 is ready; referenced work orders were not changed."
+          ],
+          "decision_required": {
+            "decision_right": "DR-VREC-DECIDE",
+            "role": "assurance-owner",
+            "artifact": "VREC-PLG-031",
+            "decision": "whether the retained evidence verifies the exact candidate",
+            "outcomes": [
+              "verified",
+              "reject",
+              "supersede"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-VREC-DECIDE",
+            "step_id": "STEP-VREC-DECIDE",
+            "action": "whether the retained evidence verifies the exact candidate"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "I verify VREC-PLG-031 as assurance owner."
+          },
+          "alternatives": [
+            "Use complete alternative procedure PROC-VREC-REJECT.",
+            "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+          ]
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-VREC-DECIDE",
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ],
+              "steps": {
+                "STEP-VREC-DECIDE": {
+                  "location": {
+                    "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                    "heading": "obtain-the-humans-verification-decision"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "decision-rights",
+                      "when": "Before obtaining or applying an accountable decision."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-VREC-DECIDE",
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "CAP-RLO-004",
+            "INT-RLO-001",
+            "REQ-RLO-019",
+            "REQ-RLO-020",
+            "SPEC-RLO-006",
+            "VER-RLS-032",
+            "VREC-PLG-031",
+            "WO-RLS-033"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "649396f4db63191fd787337c3dfbfb2f6895cc11040654d4c45da2601af011c4"
+      },
+      "seconds": 53.10261290000017
+    },
+    "public024-vrec-gates": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--artifact",
+        "VREC-PLG-031",
+        "--checkpoint",
+        "transition",
+        "--target",
+        "verified",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {
+          "commit": "e6737a5493cc8c6236b54a32f30edc9418399629",
+          "git_object_format": "sha1"
+        },
+        "operation": {
+          "kind": "check",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "VREC-PLG-031",
+          "artifacts": [
+            "VREC-PLG-031"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "CAP-RLO-004",
+            "INT-RLO-001",
+            "REQ-RLO-019",
+            "REQ-RLO-020",
+            "SPEC-RLO-006",
+            "VER-RLS-032",
+            "WO-RLS-033"
+          ],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "transition",
+          "workflow_rule_id": "WFL-VREC-DECIDE",
+          "procedure_id": "PROC-VREC-DECIDE",
+          "status": "pass",
+          "gates": [
+            {
+              "id": "QG-G4-ASSURANCE-DECISION",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G4A-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:VREC-PLG-031"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G4A-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:transition"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G4A-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:VREC-PLG-031"
+                    }
+                  ],
+                  "message": "No open decision blocks VREC-PLG-031."
+                }
+              ]
+            },
+            {
+              "id": "QG-STRUCTURAL",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGS-EDGE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "VREC-PLG-031"
+                    }
+                  ],
+                  "message": "ready -> verified is a declared lifecycle edge for VREC-PLG-031."
+                }
+              ]
+            }
+          ],
+          "formal_snapshot_sha256": "d3b80eba7004d1f67a4349a8b07e3adb5684a98d2af100e8f86f3a15f5dfd505",
+          "change_set_source": "arguments"
+        },
+        "procedure": {
+          "id": "PROC-VREC-DECIDE",
+          "current_step": "STEP-VREC-DECIDE",
+          "steps": [
+            {
+              "id": "STEP-VREC-DECIDE",
+              "kind": "decision",
+              "gate_ids": [
+                "QG-G4-ASSURANCE-DECISION"
+              ],
+              "effects": [
+                "Permits an explicit decision on VREC-PLG-031 only."
+              ],
+              "non_effects": [
+                "Referenced work orders remain unchanged."
+              ],
+              "decision_right": "DR-VREC-DECIDE",
+              "role": "assurance-owner",
+              "artifact": "VREC-PLG-031",
+              "decision": "whether the retained evidence verifies the exact candidate",
+              "outcomes": [
+                "verified",
+                "reject",
+                "supersede"
+              ],
+              "response": "I verify VREC-PLG-031 as assurance owner."
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "VREC-PLG-031",
+              "status": "ready"
+            }
+          ],
+          "after": [
+            {
+              "id": "VREC-PLG-031",
+              "status": "ready"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 57
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Evaluated transition compliance for VREC-PLG-031."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "VREC-PLG-031 is ready."
+          ],
+          "decision_required": {
+            "decision_right": "DR-VREC-DECIDE",
+            "role": "assurance-owner",
+            "artifact": "VREC-PLG-031",
+            "decision": "whether the retained evidence verifies the exact candidate",
+            "outcomes": [
+              "verified",
+              "reject",
+              "supersede"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-VREC-DECIDE",
+            "step_id": "STEP-VREC-DECIDE",
+            "action": "whether the retained evidence verifies the exact candidate"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "I verify VREC-PLG-031 as assurance owner."
+          },
+          "alternatives": [
+            "Use complete alternative procedure PROC-VREC-REJECT.",
+            "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+          ]
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-VREC-DECIDE",
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ],
+              "steps": {
+                "STEP-VREC-DECIDE": {
+                  "location": {
+                    "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                    "heading": "obtain-the-humans-verification-decision"
+                  },
+                  "prerequisites": [
+                    {
+                      "file": "docs/engineering/harness/AUTHORITY.md",
+                      "heading": "decision-rights",
+                      "when": "Before obtaining or applying an accountable decision."
+                    }
+                  ]
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-VREC-DECIDE",
+              "location": {
+                "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+                "heading": "obtain-the-humans-verification-decision"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          },
+          "formal_artifact_ids": [
+            "CAP-RLO-004",
+            "INT-RLO-001",
+            "REQ-RLO-019",
+            "REQ-RLO-020",
+            "SPEC-RLO-006",
+            "VER-RLS-032",
+            "VREC-PLG-031",
+            "WO-RLS-033"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "a71f1e4076244ec09b335c4ecacc3bc6064a9fd071d5a4d2712d02703af15d42"
+      },
+      "seconds": 4.82233990000168
+    }
+  }
+}
