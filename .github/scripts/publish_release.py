@@ -472,6 +472,25 @@ def classify_ref(actual: str | None, expected_parent: str | None, target: str) -
     raise ReleaseError("unexpected ref movement; approved parent no longer matches")
 
 
+def observe_github(plan: ReleasePlan, request, *, tag_only=False) -> dict:
+    """Only an explicit 404 is absent. Transport/auth/provider failures stop writes."""
+    if tag_only:
+        value = _api(request, "GET", "git/ref/tags/" + plan.tag, absent=True)
+        if value is None:
+            return {"state": "absent"}
+        _require(value.get("ref") == "refs/tags/" + plan.tag, "version ref differs")
+        obj = value.get("object", {})
+        if obj.get("type") == "tag":
+            obj = _api(request, "GET", "git/tags/" + str(obj.get("sha"))).get("object", {})
+        _require(obj.get("type") == "commit" and obj.get("sha") == plan.candidate_commit, "immutable version tag differs")
+        return {"state": "exact"}
+    value = _api(request, "GET", "releases/tags/" + plan.tag, absent=True)
+    if value is None:
+        return {"absent": True}
+    return {"tagName": value.get("tag_name"), "isDraft": value.get("draft"),
+            "isPrerelease": value.get("prerelease"), "assets": value.get("assets")}
+
+
 def _remote_ref(request, ref: str) -> str | None:
     value = _api(request, "GET", "git/ref/" + ref, absent=True)
     if value is None:
@@ -846,6 +865,8 @@ def _github_outputs(path: Path, value: dict[str, Any]) -> None:
 
 def _emit(value: Any, output: Path | None, github_output: Path | None) -> None:
     payload = asdict(value) if hasattr(value, "__dataclass_fields__") else value
+    if isinstance(value, ReleasePlan) and value.complete_delivery is None:
+        payload.pop("complete_delivery", None)
     if output is not None:
         _write_json(output, payload)
     if github_output is not None:
@@ -894,6 +915,10 @@ def build_parser() -> argparse.ArgumentParser:
     github.add_argument("--metadata", type=Path, required=True)
     github.add_argument("--output", type=Path)
     github.add_argument("--github-output", type=Path)
+    for name in ("observe-github", "observe-tag"):
+        observe = commands.add_parser(name)
+        observe.add_argument("--plan", type=Path, required=True)
+        observe.add_argument("--output", type=Path, required=True)
     notes = commands.add_parser("notes")
     notes.add_argument("--plan", type=Path, required=True)
     notes.add_argument("--output", type=Path, required=True)
@@ -946,6 +971,9 @@ def main(argv: Iterable[str] | None = None) -> int:
             _emit(resume_github(read_plan(args.plan), args.directory, _read_json(args.metadata)), None, None)
         elif args.command == "classify-github":
             _emit(classify_github(read_plan(args.plan), _read_json(args.metadata)), args.output, args.github_output)
+        elif args.command in {"observe-github", "observe-tag"}:
+            request = maintenance.github_request(os.environ.get("GH_TOKEN", ""))
+            _emit(observe_github(read_plan(args.plan), request, tag_only=args.command == "observe-tag"), args.output, None)
         elif args.command == "notes":
             args.output.write_text(release_notes(read_plan(args.plan)), encoding="utf-8", newline="\n")
         elif args.command == "result":

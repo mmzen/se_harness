@@ -231,18 +231,13 @@ jobs:
           CANDIDATE_COMMIT: ${{ needs.resolve.outputs.candidate_commit }}
           RELEASED_AT: ${{ needs.resolve.outputs.released_at }}
           RELEASE_RECORD: ${{ inputs.release_record }}
+          PLAN: ${{ runner.temp }}/transfer/release-plan-${{ inputs.release_record }}/release-plan.json
         shell: bash
         run: |
           set -euo pipefail
           ref_json="$RUNNER_TEMP/tag-ref.json"
-          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" >"$ref_json" 2>/dev/null; then
-            object_sha="$(jq -r '.object.sha' "$ref_json")"
-            object_type="$(jq -r '.object.type' "$ref_json")"
-            if [[ "$object_type" = tag ]]; then
-              object_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$object_sha" --jq '.object.sha')"
-            fi
-            test "$object_sha" = "$CANDIDATE_COMMIT"
-          else
+          python .github/scripts/publish_release.py observe-tag --plan "$PLAN" --output "$ref_json"
+          if [[ "$(jq -r '.state' "$ref_json")" = absent ]]; then
             tag_object="$(jq -n --arg tag "$TAG" --arg message "SE Harness $TAG ($RELEASE_RECORD)" \
               --arg object "$CANDIDATE_COMMIT" --arg date "$RELEASED_AT" \
               '{tag:$tag,message:$message,object:$object,type:"commit",tagger:{name:"SE Harness release automation",email:"release-automation@users.noreply.github.com",date:$date}}' \
@@ -263,9 +258,7 @@ jobs:
         run: |
           set -euo pipefail
           metadata="$RUNNER_TEMP/github-release.json"
-          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,isDraft,isPrerelease,assets >"$metadata" 2>/dev/null; then
-            printf '{"absent":true}\n' >"$metadata"
-          fi
+          python .github/scripts/publish_release.py observe-github --plan "$PLAN" --output "$metadata"
           state="$(python .github/scripts/publish_release.py classify-github --plan "$PLAN" --metadata "$metadata" | jq -r '.state')"
           if [[ "$state" = absent ]]; then
             python .github/scripts/publish_release.py notes --plan "$PLAN" --output "$RUNNER_TEMP/release-notes.md"

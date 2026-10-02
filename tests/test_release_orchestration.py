@@ -1013,6 +1013,17 @@ class CompleteReleaseTests(unittest.TestCase):
             RELEASE.controls_snapshot(guarded)
         self.assertFalse([c for c in self.calls if c[0]!='GET'])
 
+    def test_unknown_github_state_is_not_absence(self):
+        for tag_only in (True,False):
+            for status in (401,403,429,500,503):
+                with self.subTest(tag_only=tag_only,status=status):
+                    request=lambda *args: RELEASE.maintenance.ApiResponse(status,{})
+                    with self.assertRaisesRegex(RELEASE.ReleaseError,'unknown result'):
+                        RELEASE.observe_github(self.selected,request,tag_only=tag_only)
+        request=lambda *args: RELEASE.maintenance.ApiResponse(404,{})
+        self.assertEqual({'state':'absent'},RELEASE.observe_github(self.selected,request,tag_only=True))
+        self.assertEqual({'absent':True},RELEASE.observe_github(self.selected,request))
+
     def test_legacy_plan_read_and_new_result_never_infer_full_delivery(self):
         old = asdict(plan())
         old.pop('complete_delivery')
