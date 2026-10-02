@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_instruction_architecture",
+    "tests.test_progressive_instruction_discovery",
+    "tests.test_workflow_documentation_contract"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "runtime_version": "Python 3.14.6",
+  "platform": "Windows",
+  "started_at": "2026-10-02T14:25:51.3516536Z",
+  "finished_at": "2026-10-02T14:26:26.5320376Z",
+  "exit_code": 0,
+  "environment": {
+    "git core.longpaths": "true",
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "output": "instruction-tests-final.log",
+  "reason": "Rerun after review clarified that a blocked verification does not remove explicit rejection or supersession."
+}

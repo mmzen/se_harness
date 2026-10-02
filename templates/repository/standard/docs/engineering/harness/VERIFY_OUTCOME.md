@@ -180,7 +180,8 @@ digests, assessment results, and accountable human's verification authority.
 
 **Actions:**
 
-1. Present the record, full candidate commit, evidence, and unresolved findings.
+1. Prepare the concise verification request below for the exact record,
+   candidate, evidence, and unresolved findings.
 2. For verification or rejection, evaluate the proposed target with the
    command below. Supersession gates are evaluated with the selected successor
    in [Record the verification decision](VERIFY_OUTCOME.md#record-the-verification-decision)'s transition preview.
@@ -201,6 +202,41 @@ Use `verified` or `rejected` for `TARGET`. The evaluator determines whether
 that edge is legal. Supersession needs the successor input accepted by
 `transition --reason`, which this check command does not accept.
 A passed check is not the human decision.
+
+**Verification request:**
+
+- **Verification requested - [outcome]:** Name the useful result being assessed.
+- **Delivered:** Describe the behavior delivered against the agreed outcome.
+- **Evidence:** Summarize the requirement results and meaningful checks. Link
+  the requirement-by-requirement assessment and retained evidence. Test counts
+  support the explanation; they do not replace it.
+- **Limits:** State material failures, skipped or unavailable checks, unassessed
+  criteria, and residual uncertainty. Say that no material gaps are known only
+  when the evidence supports it.
+- **Your decision:** Explain that "Verify result" accepts this exact candidate
+  against the agreed requirements. Merge and release remain separate decisions.
+- **Review details:** Identify the exact VREC and full candidate commit. Link
+  its governing work orders, verification contracts, assessment, and evidence.
+
+Lead with ordinary language and keep the request proportionate to the work.
+Details may be linked, but material gaps and the decision's scope must be
+visible in the request. Keep passed, failed, and not-assessed results distinct.
+An accepted risk needs its recorded decision reference; otherwise it remains
+unresolved. Do not silently bundle risk acceptance or waive required checks.
+
+Offer "Verify result" and "Request corrections" when verification is eligible.
+If verification is blocked, report the blocker and evaluator's next action
+instead of offering acceptance.
+The human need not type IDs or commands. Bind an unambiguous "I verify" or
+"Verify result" to the displayed record, candidate, and evidence before applying
+the decision. Clarify an ambiguous reply. Reassess changed inputs under action 4;
+silence or implementation approval does not supply verification acceptance.
+
+"Request corrections" leaves the decision pending; it is not a terminal
+rejection. Follow [Assess the verification evidence](VERIFY_OUTCOME.md#assess-the-verification-evidence)
+to identify the correction and eligible execution authority. A completed work
+order does not become executable again. An explicit rejection or supersession
+still follows action 5 and [Record the verification decision](VERIFY_OUTCOME.md#record-the-verification-decision).
 
 **Completion:** The exact verification decision is known, or the record remains
 pending. No implementation actor infers acceptance from their own passing tests.
