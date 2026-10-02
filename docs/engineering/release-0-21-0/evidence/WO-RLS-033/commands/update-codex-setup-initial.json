@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-I",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.4\\scripts\\setup.py",
+    "--target",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex\\repository",
+    "--data-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex\\data",
+    "--wheel",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.4\\packages\\se_harness-0.21.0-py3-none-any.whl"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex",
+  "exit_code": 1,
+  "result": {
+    "stdout": "Processing C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.4\\packages\\se_harness-0.21.0-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.21.0\nEvaluator Python: C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\update-codex\\data\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe\n{\n  \"checks\": [\n    {\n      \"detail\": \"required\",\n      \"name\": \"ENGINEERING_HARNESS.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/ARTIFACT_AUTHORING.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/README.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required instruction file is missing: ENGINEERING_HARNESS.md\",\n      \"name\": \"instruction-discovery\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  "seconds": 11.260570799999186
+}

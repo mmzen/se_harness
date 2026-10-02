@@ -212,7 +212,9 @@ class ProgressiveDocumentationTests(unittest.TestCase):
                 resolved = (source.parent / target).resolve() if target else source
                 if not resolved.is_file():
                     continue  # the link test reports a missing file
-                headings = {slug(line) for line in resolved.read_text(encoding="utf-8").splitlines() if line.startswith("#")}
+                target_text = resolved.read_text(encoding="utf-8")
+                headings = {slug(line) for line in target_text.splitlines() if line.startswith("#")}
+                headings.update(re.findall(r'<a id="([^"]+)"></a>', target_text))
                 with self.subTest(source=source.name, anchor=raw_target):
                     self.assertIn(anchor, headings)
 

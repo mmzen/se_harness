@@ -1,0 +1,14 @@
+{
+  "host": "claude",
+  "kind": "update",
+  "session": null,
+  "contexts": [
+    "Host: claude; session_id: [REDACTED] data: C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001\\profiles\\claude\\claude\\plugins\\data\\verity-plane-se-harness\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\n\n# Select the working repository\n\nWhen asked to clone, clone to the intended destination, then activate that exact\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\nwhen the intended repository is ambiguous. Do not scan child repositories.\n\nUse the setup skill's activation procedure with the host, session_id and\nplugin data supplied with this message. It immediately returns\nthe selected instructions. Read that complete entry before governed work. If the\nrepository has no harness selection or its evaluator is missing, use the setup\nskill with an explicitly selected release, then activate again. Do not choose a\nrelease or upgrade silently.\n\nSelection belongs only to this host session. A new session activates its own\ncheckout. Switching or clearing affects only this session. Activation gives no\napproval, verification or delivery authority; follow the selected release for\nnew or resumed work and any requested push or pull request.\n"
+  ],
+  "observation": "Native init-only bootstrap callback; no authenticated model session",
+  "bootstrap_passed": true,
+  "model_session_assessed": false,
+  "public_commit": "7e366438165a40a14783bac650a2887e7ec8bc75",
+  "host_version": "2.1.273 (Claude Code)",
+  "limits": "No activation, compaction or resume pass inferred; authenticated native matrix remains pending."
+}

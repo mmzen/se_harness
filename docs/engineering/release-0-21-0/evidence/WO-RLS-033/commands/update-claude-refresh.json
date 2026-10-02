@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "marketplace",
+    "update",
+    "se-harness"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public023-fresh-1001",
+  "observed_at": "2026-10-02T06:43:29.114632+00:00",
+  "exit_code": 0,
+  "stdout": "Updating marketplace: se-harness...Refreshing marketplace cache (timeout: 120s)\u2026\n\u221a Successfully updated marketplace: se-harness\n",
+  "stderr": ""
+}

@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe",
+    "--version"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-fresh-1002",
+  "observed_at": "2026-10-02T06:43:29.366951+00:00",
+  "exit_code": 0,
+  "stdout": "codex-cli 0.159.2\n",
+  "stderr": ""
+}

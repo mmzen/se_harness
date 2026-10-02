@@ -1,27 +1,19 @@
 # Plugin integration
 
-## Current public package: plugin 0.2.3
+## Current public package: plugin 0.2.4
 
-The [0.20.1 release package](../release-0-20-1/README.md) is published with
-plugin 0.2.3 at `556d0faf83c32fd188409c5ba191552fad1522e1`.
-VREC-PLG-027 verifies local package qualification.
-[WO-RLS-029 evidence](../release-0-20-1/evidence/WO-RLS-029/README.md) records
-the public file comparison, fresh installs, updates from 0.2.2, offline setup
-and native-evidence applicability on both Windows CLIs. Current documentation
-integration and final closeout remain separate steps. Repository adoption and
-the plugin-owned minimal layout remain separate work.
+The [0.21.0 release package](../release-0-21-0/README.md) is published with
+plugin 0.2.4 at `7e366438165a40a14783bac650a2887e7ec8bc75`.
+VREC-PLG-030 verifies local qualification. [WO-RLS-033 observations](../release-0-21-0/evidence/WO-RLS-033/README.md)
+record public byte comparison, fresh installation, updates from 0.2.3 and offline
+setup on both Windows CLIs. Current documentation integration remains outstanding. Native omissions are
+accepted deviations, not passed tests.
 
-The [0.2.2 public delivery report](../release-0-20-0/evidence/WO-PLG-031/README.md)
-retains that version's observations unchanged.
+Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 accepts that omission for WO-RLS-033.
 
-## Approved next package: plugin 0.2.4
-
-The [0.21.0 release package](../release-0-21-0/README.md) selects the merged
-bootstrap, session activation and external-resource adapter. WO-RLS-031 updates
-the source manifests and qualifies the final candidate. WO-RLS-032 requires
-the public 0.21.0 wheel before marketplace assembly. WO-RLS-033 verifies actual
-public fresh/update routes. The new package is not published. Codex Windows
-desktop remains an unverified requirement, separate from native CLI evidence.
+The [0.2.3 delivery evidence](../release-0-20-1/evidence/WO-RLS-029/README.md) and
+[0.2.2 report](../release-0-20-0/evidence/WO-PLG-031/README.md) retain their original
+identities and outcomes. Publication does not adopt a repository's evaluator.
 
 ## Historical marketplace refresh for plugin 0.2.1
 

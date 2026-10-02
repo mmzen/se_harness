@@ -1,0 +1,20 @@
+{
+  "url": "https://pypi.org/pypi/se-harness/0.21.0/json",
+  "observed_at": "2026-10-02T06:54:42.043310+00:00",
+  "response_sha256": "502c0c520a0c2c16705f9adb4798f5923432ad0ce32bffa731a6f6ef66fa7c3b",
+  "result": {
+    "version": "0.21.0",
+    "files": [
+      {
+        "filename": "se_harness-0.21.0-py3-none-any.whl",
+        "sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+        "url": "https://files.pythonhosted.org/packages/52/51/8b8bfa6d5007904b9df23b999daee83a74ae518b496c9f9e9a3058358a1e/se_harness-0.21.0-py3-none-any.whl"
+      },
+      {
+        "filename": "se_harness-0.21.0.tar.gz",
+        "sha256": "f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b",
+        "url": "https://files.pythonhosted.org/packages/10/aa/0e0e2aafcde9367cdeec29672bdef2b82f080be925ee38df6bd1180b190f/se_harness-0.21.0.tar.gz"
+      }
+    ]
+  }
+}

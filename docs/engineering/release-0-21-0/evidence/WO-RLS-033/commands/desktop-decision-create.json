@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "create-artifact",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--domain",
+    "release-0-21-0",
+    "--type",
+    "decision",
+    "--id",
+    "DEC-RLS-004",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "changes": [
+      {
+        "action": "create",
+        "path": "docs/engineering/release-0-21-0/decisions/DEC-RLS-004.md"
+      }
+    ],
+    "command": "create-artifact",
+    "dry_run": false,
+    "outcome": "completed",
+    "schema": "se-harness-command-result-v1"
+  },
+  "seconds": 5.87166470000011
+}

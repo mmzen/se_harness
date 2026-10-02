@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\fresh-claude\\data\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "init",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\fresh-claude\\repository",
+    "--project-name",
+    "Public plugin fixture",
+    "--dry-run",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-setup-1002\\fresh-claude",
+  "exit_code": 0,
+  "result": {
+    "changes": [
+      {
+        "action": "add",
+        "path": ".engineering-harness.lock"
+      },
+      {
+        "action": "add",
+        "path": ".engineering-harness.toml"
+      }
+    ],
+    "command": "init",
+    "outcome": "completed",
+    "schema": "se-harness-command-result-v1",
+    "written": false
+  },
+  "seconds": 0.5241580000001704
+}

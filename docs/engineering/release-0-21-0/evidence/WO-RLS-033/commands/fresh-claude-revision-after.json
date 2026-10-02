@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/public024-fresh-1002/profiles/claude/claude/plugins/marketplaces/se-harness",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-fresh-1002\\profiles\\claude\\claude\\plugins\\marketplaces\\se-harness",
+    "rev-parse",
+    "HEAD"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-fresh-1002",
+  "observed_at": "2026-10-02T06:43:31.852066+00:00",
+  "exit_code": 0,
+  "stdout": "7e366438165a40a14783bac650a2887e7ec8bc75\n",
+  "stderr": ""
+}

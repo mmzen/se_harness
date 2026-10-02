@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_progressive_documentation",
+    "tests.plugin_integration.package_assembly.test_refresh_guidance"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 1,
+  "result": {
+    "stdout": "0.21.0\n",
+    "stderr": "..................F.........\n======================================================================\nFAIL: test_refreshed_source_routes_resolve_files_and_headings (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_refreshed_source_routes_resolve_files_and_headings)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_progressive_documentation.py\", line 326, in test_refreshed_source_routes_resolve_files_and_headings\n    self.assertEqual([], link_findings(files, sources))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: [] != ['docs/notes/getting-started.md: missing h[81 chars]ate']\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\n'docs/notes/getting-started.md: missing heading harness-installation-and-upgrades.md#minimal-installation-successor-candidate'\n\n- []\n+ ['docs/notes/getting-started.md: missing heading '\n+  'harness-installation-and-upgrades.md#minimal-installation-successor-candidate']\n\n----------------------------------------------------------------------\nRan 28 tests in 0.725s\n\nFAILED (failures=1)\n"
+  },
+  "seconds": 1.1109392999987904
+}

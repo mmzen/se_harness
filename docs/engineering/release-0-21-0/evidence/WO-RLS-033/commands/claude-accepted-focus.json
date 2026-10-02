@@ -1,0 +1,239 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--artifact",
+    "DEC-RLS-003",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "DEC-RLS-003",
+      "artifacts": [
+        "DEC-RLS-003"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "REL-SEH-033",
+        "RISK-RLS-003",
+        "SPEC-RLO-006",
+        "VER-RLS-032",
+        "WO-RLS-033"
+      ],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-DEC-CLOSED",
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "status": "not_assessable",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-FOCUS-SELECTED",
+      "current_step": "STEP-FOCUS-SELECTED",
+      "steps": [
+        {
+          "id": "STEP-FOCUS-SELECTED",
+          "kind": "command",
+          "gate_ids": [],
+          "effects": [
+            "Projected selected state for DEC-RLS-003."
+          ],
+          "non_effects": [
+            "Focus changes no lifecycle state."
+          ],
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "DEC-RLS-003"
+          ]
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "DEC-RLS-003",
+          "status": "decided"
+        }
+      ],
+      "after": [
+        {
+          "id": "DEC-RLS-003",
+          "status": "decided"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 57
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Projected the disposed decision DEC-RLS-003."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "DEC-RLS-003 is decided and terminal."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-FOCUS-SELECTED",
+        "step_id": "STEP-FOCUS-SELECTED",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "DEC-RLS-003"
+        ]
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-FOCUS-SELECTED",
+          "location": {
+            "file": "docs/engineering/harness/CONTINUE.md",
+            "heading": "continue-selected-work"
+          },
+          "prerequisites": [],
+          "steps": {
+            "STEP-FOCUS-SELECTED": {
+              "location": {
+                "file": "docs/engineering/harness/CONTINUE.md",
+                "heading": "continue-selected-work"
+              },
+              "prerequisites": []
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-FOCUS-SELECTED",
+          "location": {
+            "file": "docs/engineering/harness/CONTINUE.md",
+            "heading": "continue-selected-work"
+          },
+          "prerequisites": []
+        }
+      },
+      "formal_artifact_ids": [
+        "DEC-RLS-003",
+        "REL-SEH-033",
+        "RISK-RLS-003",
+        "SPEC-RLO-006",
+        "VER-RLS-032",
+        "WO-RLS-033"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ],
+      "formal_artifacts": [
+        {
+          "id": "DEC-RLS-003",
+          "file": "docs/engineering/release-0-21-0/decisions/DEC-RLS-003.md"
+        },
+        {
+          "id": "REL-SEH-033",
+          "file": "docs/engineering/release-0-21-0/release/REL-SEH-033.md"
+        },
+        {
+          "id": "RISK-RLS-003",
+          "file": "docs/engineering/release-0-21-0/risks/RISK-RLS-003.md"
+        },
+        {
+          "id": "SPEC-RLO-006",
+          "file": "docs/engineering/release-orchestration/specifications/SPEC-RLO-006.md"
+        },
+        {
+          "id": "VER-RLS-032",
+          "file": "docs/engineering/release-0-21-0/verification/VER-RLS-032.md"
+        },
+        {
+          "id": "WO-RLS-033",
+          "file": "docs/engineering/release-0-21-0/work-orders/WO-RLS-033.md"
+        }
+      ]
+    },
+    "result_sha256": "2d4b488c9c10741d7110e47bf5eb7bbb3369d5c18ec62221c45b6de6d4bdd90a",
+    "context": {
+      "reading_manifest": [],
+      "governing": [
+        "REL-SEH-033",
+        "RISK-RLS-003",
+        "SPEC-RLO-006",
+        "VER-RLS-032",
+        "WO-RLS-033"
+      ],
+      "declared_paths": [],
+      "state": {
+        "status": "decided",
+        "family": "decision"
+      },
+      "next": {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "DEC-RLS-003"
+        ],
+        "procedure_id": "PROC-FOCUS-SELECTED",
+        "step_id": "STEP-FOCUS-SELECTED"
+      },
+      "decision_required": null
+    }
+  },
+  "seconds": 4.904809900001055
+}

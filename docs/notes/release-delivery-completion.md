@@ -257,15 +257,18 @@ the required marketplace update remains absent. That case returns incomplete
 and retains the marketplace owner and next action. Live public qualification
 belongs to the subsequent marketplace work and its verification contract.
 
-## Next 0.21.0 delivery
+## Current 0.21.0 delivery
 
-The [approved release package](../engineering/release-0-21-0/README.md) assigns
-candidate preparation to WO-RLS-031, public-wheel plugin 0.2.4 qualification and
-marketplace delivery to WO-RLS-032, and public-route/documentation closeout to
-WO-RLS-033. All five surfaces require new matching observations. No publication
-or complete-delivery result is claimed. The existing 0.20.1 receipts stay intact.
+The [release package](../engineering/release-0-21-0/README.md) records released
+RLS-SEH-031 and separately published plugin 0.2.4 at
+`7e366438165a40a14783bac650a2887e7ec8bc75`. VREC-PLG-030 verifies local package
+qualification. WO-RLS-033 retains passing public fresh/update package and setup
+observations, current documentation corrections and native test boundaries.
+Codex CLI session checks pass; DEC-RLS-003 accepts missing Claude tests, which
+remain unverified. DEC-RLS-004 accepts the desktop omission for WO-RLS-033.
+Overall delivery remains incomplete. The existing 0.20.1 receipts stay intact.
 
-## Current 0.20.1 delivery
+## Historical 0.20.1 delivery
 
 The [release package](../engineering/release-0-20-1/README.md) selects plugin
 0.2.3 with evaluator 0.20.1. WO-RLS-028 qualified the package, accepted in

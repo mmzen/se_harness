@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "marketplace",
+    "list",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public024-fresh-1002",
+  "observed_at": "2026-10-02T06:43:28.537719+00:00",
+  "exit_code": 0,
+  "stdout": "[]\n",
+  "stderr": ""
+}
