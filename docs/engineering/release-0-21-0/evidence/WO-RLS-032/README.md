@@ -3,6 +3,10 @@
 WO-RLS-032 is in progress. This evidence does not complete the work order,
 prepare a ready VREC, verify the package or authorize marketplace publication.
 
+The [continuation review](continuation-review.md) adds passing exact-package Codex
+native observations and the pending decision DEC-RLS-002. Earlier failed attempts
+remain below and in their original evidence.
+
 ## Exact inputs
 
 - Approved plugin source: `4031f0fa4b5c4a95651bd928a110d8b2d94f9775`.
