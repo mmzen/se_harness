@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "repository_tools.diagnostic_code_index",
+    "--write"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "output": "regeneration.log",
+  "inspection": "Only WEX200 additional-message count 24 to 26 and WEX210 count 16 to 18 changed. Subsequent --check returned exit 0."
+}

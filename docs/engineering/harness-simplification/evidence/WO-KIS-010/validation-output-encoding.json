@@ -1,0 +1,19 @@
+{
+  "note": "Complete original evaluator output retained as lossless gzip; no diagnostic or artifact was removed.",
+  "files": [
+    {
+      "file": "released-validation.json.gz",
+      "original_file": "released-validation.json",
+      "original_bytes": 366398,
+      "original_sha256": "cbbc03b9bd5c51d454b1f37f1a75731b214a7320b62018b7524d5e92364c5272",
+      "compressed_sha256": "6e57ab5aa68799a6e95d56c4e178ec9e29f9614f74ea11d020e3a47766814d6b"
+    },
+    {
+      "file": "final-validation.json.gz",
+      "original_file": "final-validation.json",
+      "original_bytes": 366584,
+      "original_sha256": "c70332ec9b76be15fd48405249d12e69334d73c2f70f718481472f44400364ce",
+      "compressed_sha256": "30ce70b7de8ff2253207a044ef1bf3bbbaf603eda1469b2bc895080afdecd589"
+    }
+  ]
+}

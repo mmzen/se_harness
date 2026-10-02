@@ -1,0 +1,557 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "REQ-KIS-010",
+    "artifacts": [
+      "REQ-KIS-010",
+      "SPEC-KIS-004",
+      "VER-KIS-004",
+      "WO-KIS-010"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-DEFINITION-COMPLETE",
+    "procedure_id": "PROC-DEFINITION-COMPLETE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-KIS-010"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-KIS-010"
+              }
+            ],
+            "message": "REQ-KIS-010 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-KIS-010"
+              }
+            ],
+            "message": "No open decision blocks REQ-KIS-010."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-KIS-010"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-KIS-010."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:SPEC-KIS-004"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-KIS-004"
+              }
+            ],
+            "message": "SPEC-KIS-004 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:SPEC-KIS-004"
+              }
+            ],
+            "message": "No open decision blocks SPEC-KIS-004."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-KIS-004"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for SPEC-KIS-004."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VER-KIS-004"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-KIS-004"
+              }
+            ],
+            "message": "VER-KIS-004 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VER-KIS-004"
+              }
+            ],
+            "message": "No open decision blocks VER-KIS-004."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-KIS-004"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for VER-KIS-004."
+          }
+        ]
+      },
+      {
+        "id": "QG-G3-WORK-AUTHORIZATION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G3-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-KIS-010"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G3-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G3-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-KIS-010"
+              }
+            ],
+            "message": "No open decision blocks WO-KIS-010."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-010"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for WO-KIS-010."
+          },
+          {
+            "id": "QGS-ASSURANCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-010"
+              }
+            ],
+            "message": "WO-KIS-010 classifies commit-bound verification as required."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-DEFINITION-COMPLETE",
+    "current_step": "STEP-DEFINITION-COMPLETE",
+    "steps": [
+      {
+        "id": "STEP-DEFINITION-COMPLETE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G1-DEFINITION",
+          "QG-G2-ARCHITECTURE"
+        ],
+        "effects": [
+          "Permits a decision on REQ-KIS-010 only."
+        ],
+        "non_effects": [
+          "Related definitions remain unchanged unless separately selected."
+        ],
+        "decision_right": "DR-DEFINITION-DECIDE",
+        "role": "definition-owner",
+        "artifact": "REQ-KIS-010",
+        "decision": "whether the selected definition is complete",
+        "outcomes": [
+          "implemented",
+          "reject",
+          "stop"
+        ],
+        "response": "Decide the selected definition REQ-KIS-010 only."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "REQ-KIS-010",
+        "status": "draft"
+      },
+      {
+        "id": "SPEC-KIS-004",
+        "status": "draft"
+      },
+      {
+        "id": "VER-KIS-004",
+        "status": "draft"
+      },
+      {
+        "id": "WO-KIS-010",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "REQ-KIS-010",
+        "status": "approved"
+      },
+      {
+        "id": "SPEC-KIS-004",
+        "status": "approved"
+      },
+      {
+        "id": "VER-KIS-004",
+        "status": "approved"
+      },
+      {
+        "id": "WO-KIS-010",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "REQ-KIS-010",
+        "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-010.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "SPEC-KIS-004",
+        "path": "docs/engineering/harness-simplification/specifications/SPEC-KIS-004.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "VER-KIS-004",
+        "path": "docs/engineering/harness-simplification/verification/VER-KIS-004.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "WO-KIS-010",
+        "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-010.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 4 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "REQ-KIS-010 is approved."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DEFINITION-DECIDE",
+      "role": "definition-owner",
+      "artifact": "REQ-KIS-010",
+      "decision": "whether the selected definition is complete",
+      "outcomes": [
+        "implemented",
+        "reject",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DEFINITION-COMPLETE",
+      "step_id": "STEP-DEFINITION-COMPLETE",
+      "action": "whether the selected definition is complete"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Decide the selected definition REQ-KIS-010 only."
+    },
+    "alternatives": []
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v2",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task",
+        "source": "released-resource",
+        "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context.",
+          "source": "released-resource",
+          "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result.",
+          "source": "released-resource",
+          "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e"
+        }
+      ],
+      "procedure": {
+        "id": "PROC-DEFINITION-COMPLETE",
+        "location": {
+          "file": "docs/engineering/harness/RECORD_STATE.md",
+          "heading": "complete-a-selected-definition",
+          "source": "released-resource",
+          "sha256": "0495c7cd684545b53e3e3f9c12f00334ca1d739bba52d95212a0eb361116cfc2"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision.",
+            "source": "released-resource",
+            "sha256": "5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16"
+          }
+        ],
+        "steps": {
+          "STEP-DEFINITION-COMPLETE": {
+            "location": {
+              "file": "docs/engineering/harness/RECORD_STATE.md",
+              "heading": "complete-a-selected-definition",
+              "source": "released-resource",
+              "sha256": "0495c7cd684545b53e3e3f9c12f00334ca1d739bba52d95212a0eb361116cfc2"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision.",
+                "source": "released-resource",
+                "sha256": "5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16"
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-DEFINITION-COMPLETE",
+        "location": {
+          "file": "docs/engineering/harness/RECORD_STATE.md",
+          "heading": "complete-a-selected-definition",
+          "source": "released-resource",
+          "sha256": "0495c7cd684545b53e3e3f9c12f00334ca1d739bba52d95212a0eb361116cfc2"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision.",
+            "source": "released-resource",
+            "sha256": "5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16"
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "REQ-KIS-010",
+      "SPEC-KIS-004",
+      "VER-KIS-004",
+      "WO-KIS-010"
+    ],
+    "evaluator_only_inputs": [
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/WORKFLOW.json",
+        "sha256": "310b35d4f07a071258d220d1c3d751f603c4eee74cea83467f7ba2f74b594516"
+      },
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/QUALITY_GATES.json",
+        "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+      }
+    ],
+    "release": {
+      "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+      "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+      "version": "0.21.0"
+    },
+    "formal_artifact_source": "repository"
+  },
+  "result_sha256": "a87e40f858141f7341b9bf9d36b7241dd1cdf6e6dec8d8ceba9b7086715c18d2"
+}

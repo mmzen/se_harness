@@ -371,11 +371,14 @@ def _render_selected_result(result: dict, args: argparse.Namespace) -> str:
     return render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result)
 
 
-def _project(target: str, artifact: str | None, *, include_background: bool, json_output: bool) -> int:
+def _project(target: str, artifact: str | None, *, include_background: bool, json_output: bool, planned_paths: list[str] | None = None) -> int:
     """The checkpoint-less projection with its execution context (ECP-ONE-001 to -003, ECP-CTX-001 to -003)."""
 
     try:
-        result = project_selected(Path(target), artifact, include_background=include_background)
+        result = project_selected(
+            Path(target), artifact, include_background=include_background,
+            **({"planned_paths": planned_paths} if planned_paths is not None else {}),
+        )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         code, message = _split_code(exc, WEX210)
         result = failed_result("check", artifact, message, code=code, repository_blocker=isinstance(exc, RepositoryWorkflowError))
@@ -396,11 +399,18 @@ def _check_projection(args: argparse.Namespace) -> int:
         ("--pull-request-body", args.pull_request_body),
     ):
         if value:
+            if args.planned_path is not None:
+                raise CodedError(WEX210, f"--planned-path cannot be combined with {option}")
             raise CodedError(WEX210, f"{option} requires --checkpoint")
-    return _project(args.target, args.artifact, include_background=args.include_background, json_output=args.json)
+    return _project(
+        args.target, args.artifact, include_background=args.include_background,
+        json_output=args.json, planned_paths=args.planned_path,
+    )
 
 
 def _check(args: argparse.Namespace) -> int:
+    if args.planned_path is not None and args.checkpoint is not None:
+        raise CodedError(WEX210, "--planned-path cannot be combined with --checkpoint")
     if args.checkpoint is None:
         return _check_projection(args)
     if args.artifact is None:
@@ -1009,6 +1019,10 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument(
         "--changed-path", action="append", default=[],
         help="normalized repository-relative changed path; repeat for the declared set",
+    )
+    check.add_argument(
+        "--planned-path", action="append",
+        help="assess one proposed file against an explicit work order; repeat for the plan, with no checkpoint; coverage is not approval or proof of a complete plan",
     )
     check.add_argument(
         "--changes-complete", action="store_true",

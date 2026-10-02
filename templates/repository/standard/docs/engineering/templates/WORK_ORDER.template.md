@@ -67,7 +67,12 @@ What may the implementation agent decide locally?
 
 ## Expected change surface
 
-Use components rather than guessed files when the code has not yet been inspected.
+Inspect the affected implementation and supporting paths before approval,
+using the selected released DRAFT_WORK_ORDERS.md procedure. Name each planned
+path and its reason here. Include necessary tests, documentation and evidence.
+Explain non-applicable areas and unresolved generated destinations briefly.
+Use narrow existing component directories only when their scope is justified.
+Keep the working inventory transient; this section retains the reviewed plan.
 
 ## Required verification
 

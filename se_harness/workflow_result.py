@@ -261,6 +261,21 @@ def render_human(result: Mapping[str, Any]) -> str:
     scope = result.get("scope", {})
     changed = [_text(item) for item in scope.get("changed_paths", [])]
     lines.extend(["", "Change set", *([f"- {item}" for item in changed] or ["None."]), f"complete: {'true' if scope.get('change_set_complete') else 'false'}"])
+    preparation = scope.get("preparation")
+    if preparation is not None:
+        lines.extend([
+            "", "Planned-path coverage",
+            f"Coverage: {_text(preparation['coverage'])}",
+            "Only the supplied plan was assessed. No approval, gate result or proof of complete impact analysis.",
+        ])
+        for item in preparation["explicit_matches"]:
+            lines.append(f"- {_text(item['path'])}: explicit scope {_text(item['scope_entry'])}")
+        for item in preparation["automatic_matches"]:
+            lines.append(f"- {_text(item['path'])}: {_text(item['rule'])} for {_text(item['work_order'])}")
+        for path in preparation["uncovered_paths"]:
+            lines.append(f"- {_text(path)}: uncovered")
+        for problem in preparation["invalid_declarations"]:
+            lines.append(f"- Invalid declaration: {_text(problem)}")
     gate_lines = [
         f"{_text(predicate.get('id', ''))}: {_text(predicate.get('status', ''))}"
         for gate in result.get("compliance", {}).get("gates", [])

@@ -193,6 +193,7 @@ harnessctl evidence [TARGET] --artifact WO-... --checkpoint start|pre-action|tra
   [--rebound-at RFC3339] [--json]
 harnessctl pr-body [TARGET] --artifact WO-... [--json]
 harnessctl check [TARGET] [--artifact WO-...|VREC-...|RLS-...] [--json] [--include-background]  # without a checkpoint: the projection
+harnessctl check [TARGET] --artifact WO-... --planned-path PATH [--planned-path PATH ...] [--json]
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
   --checkpoint start|pre-action|transition|handoff|scope [--target STATE] \  # with a checkpoint:
   [--procedure PROC-...] [--from-git BASE | --changed-path PATH ... \
@@ -220,6 +221,41 @@ lifecycle dependencies. It uses the ordered recommendation registry in
 duplicate-capture recommendation. Unrelated repository findings remain a
 background count; `--include-background` expands categories without making
 them selected-scope work.
+
+The optional `--planned-path` view assesses proposed files before approval.
+It requires an explicit work order and no checkpoint. Repeat the option for
+each repository-relative file in the plan; the file need not exist yet.
+Existing calls without this option are unchanged.
+
+The schema-2 result adds `scope.preparation`: `planned_paths`, `coverage`
+(`covered`, `uncovered` or `invalid`), `explicit_matches` with the matching
+`scope_entry`, `automatic_matches` with the existing admission rule,
+`uncovered_paths`, `invalid_declarations` and
+`impact_analysis: "not_assessed"`. These machine fields participate in the
+result digest. The human report lists coverage and each path's reason.
+
+The normal lifecycle projection, next action, exit meaning and gate fields
+are preserved. **Exit zero does not mean the plan is covered.** Inspect
+`scope.preparation.coverage` and resolve uncovered or invalid paths before
+requesting approval. Coverage cannot prove that the agent found every
+affected file. Planning writes nothing and does not populate actual changed
+paths, assert completeness, evaluate gates or authorize work.
+
+The selected WO file and existing directly linked VREC/RLS records and their
+declared evaluator evidence use their existing exact-path admission rules.
+The selected WO's own packet directory is reported separately under its
+existing admission rule.
+An unallocated future record has no assessable path; explain its expected
+relationship rule and check the actual destination after preparation.
+Other review/log evidence needs explicit scope unless an existing rule covers
+it. A neighboring file is not admitted by a generated record's directory.
+
+Do not combine planned paths with `--checkpoint`, `--target`, `--procedure`,
+`--changed-path`, `--changes-complete`, `--change-manifest`, `--from-git`
+or `--pull-request-body`. Invalid selection, malformed paths, case duplicates,
+directory inputs and repository escapes are refused through normal diagnostics.
+This option must be used with a released evaluator that provides it; candidate
+source tests do not change the repository's selected evaluator.
 
 With a checkpoint, `check` resolves the first matching rule, its typed `PROC-*` procedure, and its
 `QG-*` gates; `--checkpoint scope` evaluates only the scope predicates of

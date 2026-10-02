@@ -1,0 +1,47 @@
+Command: C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\python.exe -B -X utf8 -m se_harness check --help
+Exit: 0
+usage: harnessctl check [-h] [--artifact ARTIFACT]
+                        [--checkpoint {start,pre-action,transition,handoff,scope}]
+                        [--include-background] [--target TARGET_STATE]
+                        [--procedure PROCEDURE] [--changed-path CHANGED_PATH]
+                        [--planned-path PLANNED_PATH] [--changes-complete]
+                        [--change-manifest CHANGE_MANIFEST] [--from-git BASE]
+                        [--pull-request-body PULL_REQUEST_BODY] [--json]
+                        [target]
+
+positional arguments:
+  target
+
+options:
+  -h, --help            show this help message and exit
+  --artifact ARTIFACT   one selected WO, VREC, or RLS ID; without a checkpoint
+                        it defaults to the single in_progress work order
+  --checkpoint {start,pre-action,transition,handoff,scope}
+                        fixed stateless evaluation checkpoint; omitted, check
+                        projects the selected scope and evaluates no gate
+  --include-background  with no checkpoint, list unrelated findings by
+                        category instead of one count
+  --target TARGET_STATE
+                        target lifecycle state; required for and limited to
+                        the transition checkpoint
+  --procedure PROCEDURE
+                        optional procedure override, limited to declared
+                        alternatives; otherwise selected automatically
+  --changed-path CHANGED_PATH
+                        normalized repository-relative changed path; repeat
+                        for the declared set
+  --planned-path PLANNED_PATH
+                        assess one proposed file against an explicit work
+                        order; repeat for the plan, with no checkpoint;
+                        coverage is not approval or proof of a complete plan
+  --changes-complete    assert that repeated changed paths are complete; this
+                        is evidence, not trusted proof
+  --change-manifest CHANGE_MANIFEST
+                        in-repository se-harness-change-set-v1 JSON; exclusive
+                        with changed-path options
+  --from-git BASE       derive the complete change set from Git against BASE;
+                        exclusive with the changed-path options
+  --pull-request-body PULL_REQUEST_BODY
+                        UTF-8 pull-request body file; reports W-ADS-001 when
+                        its work-order trailer carries a carriage return
+  --json                emit se-harness-workflow-result-v2 JSON

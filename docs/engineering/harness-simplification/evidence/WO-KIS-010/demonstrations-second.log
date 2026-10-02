@@ -1,0 +1,107 @@
+test_bug_fix_reaches_verification_without_an_extra_work_order (tests.test_scope_preparation.ScopeDemonstrationTests.test_bug_fix_reaches_verification_without_an_extra_work_order) ... FAIL
+test_instruction_change_reaches_verification_without_an_extra_work_order (tests.test_scope_preparation.ScopeDemonstrationTests.test_instruction_change_reaches_verification_without_an_extra_work_order) ... FAIL
+
+======================================================================
+FAIL: test_bug_fix_reaches_verification_without_an_extra_work_order (tests.test_scope_preparation.ScopeDemonstrationTests.test_bug_fix_reaches_verification_without_an_extra_work_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 287, in test_bug_fix_reaches_verification_without_an_extra_work_order
+    self.demonstrate("bug-fix", {
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+        "src/parser.py": "def parse(text):\n    return int(text.removeprefix('#'))\n",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        ),
+        ^^
+    })
+    ^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 243, in demonstrate
+    self.command("preflight", "--work-order", "WO-001", "--phase", "start")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 212, in command
+    self.assertEqual(0, code, output + error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : {
+  "assurance": {
+    "commit_bound_verification": "unknown",
+    "decided_by": "",
+    "rationale": ""
+  },
+  "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+  "background": [],
+  "diagnostics": [
+    {
+      "code": "W001",
+      "message": "invalid work-order ID",
+      "path": "WO-001"
+    }
+  ],
+  "phase": "start",
+  "reading_manifest": [
+    "ENGINEERING_HARNESS.md"
+  ],
+  "ready": false,
+  "schema": "se-harness-preflight-v2",
+  "skew": [],
+  "work_order": {
+    "id": "WO-001",
+    "path": "",
+    "status": "unknown"
+  }
+}
+
+
+======================================================================
+FAIL: test_instruction_change_reaches_verification_without_an_extra_work_order (tests.test_scope_preparation.ScopeDemonstrationTests.test_instruction_change_reaches_verification_without_an_extra_work_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 300, in test_instruction_change_reaches_verification_without_an_extra_work_order
+    self.demonstrate("instruction-change", {
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+        "docs/procedure.md": "# Prepare work\nInspect dependencies and use --planned-path before approval.\n",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        ),
+        ^^
+    })
+    ^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 243, in demonstrate
+    self.command("preflight", "--work-order", "WO-001", "--phase", "start")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_scope_preparation.py", line 212, in command
+    self.assertEqual(0, code, output + error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : {
+  "assurance": {
+    "commit_bound_verification": "unknown",
+    "decided_by": "",
+    "rationale": ""
+  },
+  "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+  "background": [],
+  "diagnostics": [
+    {
+      "code": "W001",
+      "message": "invalid work-order ID",
+      "path": "WO-001"
+    }
+  ],
+  "phase": "start",
+  "reading_manifest": [
+    "ENGINEERING_HARNESS.md"
+  ],
+  "ready": false,
+  "schema": "se-harness-preflight-v2",
+  "skew": [],
+  "work_order": {
+    "id": "WO-001",
+    "path": "",
+    "status": "unknown"
+  }
+}
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.301s
+
+FAILED (failures=2)
