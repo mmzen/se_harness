@@ -1,6 +1,7 @@
 # Public 0.21.0 / plugin 0.2.4 delivery observations
 
-WO-RLS-033 is in progress. The marketplace is public at
+WO-RLS-033 implementation and public observations are prepared for the required
+commit-bound verification. See the work-order record for its current state. The marketplace is public at
 `7e366438165a40a14783bac650a2887e7ec8bc75`. Its 69 files match the qualified
 package; see [publication.json](publication.json).
 
@@ -38,7 +39,7 @@ Source documentation corrections do not alter those published bytes.
 The [requirement assessment](requirement-assessment.md), [updated review](review-v2.json) and [initial review](review.json) retain the correction and unresolved findings. All
 61 executed documentation, onboarding and delivery tests pass (one additional test is skipped); the original failed link check is also retained.
 
-The [current delivery check](checks-v3.json) reports valid inputs and incomplete
+The [current delivery check](checks-candidate.json) reports valid inputs and incomplete
 delivery. Evaluator publication and Pages provenance are satisfied. Marketplace
 native gaps remain unverified under accepted deviations; documentation integration
 remains pending. The first check
