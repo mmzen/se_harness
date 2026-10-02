@@ -10,7 +10,7 @@ to a throwaway directory whose lock is the released predecessor's, and then:
    other than `E012` on a `ready` record, the one consequence a root change
    has on records prepared under the previous evaluator;
 4. the predecessor's `doctor` must now fail (it no longer owns the root);
-5. the resulting lock must preserve supported repository or plugin ownership
+5. the resulting lock must preserve supported repository, plugin or external-resource ownership
    and name the successor's version and installed-payload digest
    (`WO-ECP-039`, `SPEC-ECP-025`).
 
@@ -285,6 +285,12 @@ def _snapshot(root: Path) -> dict[str, tuple[str, str]]:
 def _ownership(lock: dict[str, Any]) -> str | None:
     schema = lock.get("schema")
     if type(schema) is not int:
+        return None
+    if schema == 5:
+        if lock.get("resource_layout") == "released-resources-v1" and "skill_ownership" not in lock:
+            return "external-resources"
+        return None
+    if "resource_layout" in lock:
         return None
     if schema == 3 and "skill_ownership" not in lock:
         return "repository"

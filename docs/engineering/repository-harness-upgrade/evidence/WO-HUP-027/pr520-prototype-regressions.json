@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-prototype-tests.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": "test_exact_selected_wheel_is_accepted (pr520_proposed.AdoptedEvaluatorWheelTests.test_exact_selected_wheel_is_accepted) ... ok\ntest_incomplete_ambiguous_or_changed_wheel_is_rejected (pr520_proposed.AdoptedEvaluatorWheelTests.test_incomplete_ambiguous_or_changed_wheel_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 1.159s\n\nOK\n"
+  },
+  "seconds": 1.4411168000006
+}

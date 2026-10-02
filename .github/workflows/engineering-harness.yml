@@ -35,10 +35,24 @@ jobs:
       - name: Install the exact released evaluator
         shell: bash
         run: |
+          python -m pip download --disable-pip-version-check --no-deps \
+            --only-binary=:all: --dest "$RUNNER_TEMP/se-harness-wheel" \
+            "se-harness==$SE_HARNESS_VERSION"
+          python - "$RUNNER_TEMP/se-harness-wheel" "$SE_HARNESS_VERSION" <<'PY'
+          import hashlib, json, pathlib, sys
+
+          selected = json.loads(pathlib.Path(".engineering-harness.lock").read_text())["evaluator"]
+          wheels = list(pathlib.Path(sys.argv[1]).glob("*.whl"))
+          assert selected["version"] == sys.argv[2], "selected evaluator version differs"
+          assert len(wheels) == 1, "expected exactly one evaluator wheel"
+          wheel = wheels[0]
+          assert wheel.name == selected["archive_name"], "selected evaluator wheel name differs"
+          assert hashlib.sha256(wheel.read_bytes()).hexdigest() == selected["archive_sha256"], "selected evaluator wheel digest differs"
+          PY
           python -m venv "$RUNNER_TEMP/se-harness-env"
           "$RUNNER_TEMP/se-harness-env/bin/python" -m pip install \
-            --disable-pip-version-check --no-deps --only-binary=:all: \
-            "se-harness==$SE_HARNESS_VERSION"
+            --disable-pip-version-check --no-deps --no-index \
+            "$RUNNER_TEMP/se-harness-wheel/"*.whl
       - name: Read the live pull-request body
         if: github.event_name == 'pull_request'
         shell: bash

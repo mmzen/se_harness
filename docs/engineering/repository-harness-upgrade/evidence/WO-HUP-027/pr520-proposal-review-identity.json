@@ -1,0 +1,12 @@
+{
+  "schema": "pr520-proposal-review-v1",
+  "wo": "WO-HUP-027",
+  "state": "draft",
+  "proposed_patch_sha256": "44c92fb2d3f4845e9c8de2dbeac05f964d4e98d089787c74c872906c08555751",
+  "work_order_sha256": "a2b5ef5207baf04e5f2997206852d4bdcc81c2037d202699d2c67ad7e4a1a26f",
+  "wheel_validation_tests": 2,
+  "rehearsal_tests": 39,
+  "actual_replays": 2,
+  "semantic_sha256": "354078b8c689d92e80ef7e2f1428835c1bbffb9d70e07a175b1c77a38c25be01",
+  "implementation_applied": false
+}

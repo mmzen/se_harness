@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--scale",
+    "full",
+    "--timings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\wo027-full-timings.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-ufkitrnz\\private\\evaluators\\0.0.0\\f422e7cea7e894eb63396240110ab22da5b0f347c8d1d89f4ce01ac8705afbec\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-ufkitrnz\\private\\evaluators\\0.0.0\\f422e7cea7e894eb63396240110ab22da5b0f347c8d1d89f4ce01ac8705afbec\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.190777s focus=0.463723s plan=0.362196s\nWEX_SCALE artifacts=500 validation=0.827671s focus=1.082767s plan=1.596022s\nWEX_SCALE artifacts=1000 validation=1.497117s focus=1.786048s plan=3.012711s\ndocs/notes/diagnostic-codes.md matches the source\n0.21.1\n----------------------------------------------------------------------\nRan 1222 tests in 159.680s (182 classes, 8 workers)\n\nOK (skipped=21)\n",
+    "stderr": "--workers must be at least 1\n"
+  },
+  "seconds": 161.14844839999932
+}

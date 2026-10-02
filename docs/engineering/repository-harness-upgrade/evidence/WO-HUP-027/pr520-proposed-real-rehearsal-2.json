@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-proposal\\repository_tools\\upgrade_rehearsal.py",
+    "--repository",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--predecessor-python",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+    "--successor-python",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\pr520-ci-probe\\successor\\Scripts\\python.exe",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\pr520-ci-probe\\rehearsal-2",
+    "--workspace",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\pr520-ci-probe\\scratch",
+    "--timings"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "stdout": "upgrade rehearsal: PASS (0.21.0 -> 0.21.1)\nsemantic_sha256: 354078b8c689d92e80ef7e2f1428835c1bbffb9d70e07a175b1c77a38c25be01\n",
+    "stderr": "upgrade timing: start replay\nupgrade timing: start git-archive\nupgrade timing: end git-archive: 3.014472s (finished)\nupgrade timing: start archive-extraction\nupgrade timing: end archive-extraction: 22.091367s (finished)\nupgrade timing: start git-init\nupgrade timing: end git-init: 0.051139s (finished)\nupgrade timing: start git-config-maintenance\nupgrade timing: end git-config-maintenance: 0.029524s (finished)\nupgrade timing: start git-config-gc\nupgrade timing: end git-config-gc: 0.030153s (finished)\nupgrade timing: start git-config-autocrlf\nupgrade timing: end git-config-autocrlf: 0.032154s (finished)\nupgrade timing: start git-config-email\nupgrade timing: end git-config-email: 0.050161s (finished)\nupgrade timing: start git-config-name\nupgrade timing: end git-config-name: 0.028545s (finished)\nupgrade timing: start git-config-signing\nupgrade timing: end git-config-signing: 0.029492s (finished)\nupgrade timing: start git-add\nupgrade timing: end git-add: 37.609093s (finished)\nupgrade timing: start git-commit\nupgrade timing: end git-commit: 10.331371s (finished)\nupgrade timing: start git-storage-paths\nupgrade timing: end git-storage-paths: 0.031405s (finished)\nupgrade timing: start predecessor-version\nupgrade timing: end predecessor-version: 0.305001s (finished)\nupgrade timing: start successor-version\nupgrade timing: end successor-version: 0.304844s (finished)\nupgrade timing: start predecessor-doctor-before\nupgrade timing: end predecessor-doctor-before: 14.391853s (finished)\nupgrade timing: start successor-upgrade-plan\nupgrade timing: end successor-upgrade-plan: 0.543532s (finished)\nupgrade timing: start successor-upgrade-apply\nupgrade timing: end successor-upgrade-apply: 1.430901s (finished)\nupgrade timing: start successor-doctor-after\nupgrade timing: end successor-doctor-after: 2.884725s (finished)\nupgrade timing: start successor-validate-after\nupgrade timing: end successor-validate-after: 5.604431s (finished)\nupgrade timing: start predecessor-doctor-after\nupgrade timing: end predecessor-doctor-after: 2.451559s (finished)\nupgrade timing: start scratch-cleanup\nupgrade timing: end scratch-cleanup: 11.496433s (finished)\nupgrade timing: end replay: 112.829345s (finished)\n"
+  },
+  "seconds": 113.0725452000006
+}

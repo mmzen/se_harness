@@ -1,0 +1,6 @@
+{
+  ".github/workflows/engineering-harness.yml": "cad685e8b74657f1b89cdcd1f88a515e086f298791575eecf384e8b9f224278e",
+  "repository_tools/upgrade_rehearsal.py": "1f98a867338832af74eb608a4438f8f1612147f2192aaa2f55f823bea8b4fef2",
+  "tests/test_ci_pipeline.py": "2e381e3c1c2ac52fa4cc9dda457c3da91dc3246d62eec812afb9729a000a94df",
+  "tests/test_upgrade_rehearsal.py": "84132d64b4ba50d1736644a63e6e3694466e610e6b20e81110e9b61430298691"
+}
