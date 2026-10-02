@@ -2,7 +2,7 @@
 id = "VREC-HUP-026"
 type = "verification_record"
 title = "Verification candidate for WO-HUP-027"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-026-evaluator.json"
 evaluator_evidence_sha256 = "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157"
 
+verified_at = "2026-10-02T09:41:15Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HUP-027"]
 conforms_to = ["VER-HUP-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-02T09:41:15Z"
+decided_by = "mmzen"
+reason = "Human mmzen: I verify VREC-HUP-026 as assurance owner. Applies to candidate 6a9c8dababcc3e0542e0e709b394f3c0b3afafef and ready record SHA256 ea927809f23f77e879a31b70ea8a334af8bd4bb97b954275f207ae6297381570. Existing push/PR authority permits updating PR #520 after this decision; no merge or release authority is inferred."
 +++
 
 # Verification Record Candidate
