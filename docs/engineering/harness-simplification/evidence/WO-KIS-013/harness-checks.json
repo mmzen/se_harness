@@ -1,0 +1,170 @@
+{
+  "preflight": [
+    {
+      "result": {
+        "assurance": {
+          "commit_bound_verification": "required",
+          "decided_by": "mmzen",
+          "rationale": "Human review and external publication depend on these workflow and authority instructions; verification must bind their exact implemented candidate."
+        },
+        "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+        "background": [],
+        "diagnostics": [],
+        "phase": "review",
+        "reading_manifest": [
+          "docs/engineering/harness-simplification/intent/INT-KIS-001.md",
+          "docs/engineering/harness-simplification/intent/INT-KIS-003.md",
+          "docs/engineering/harness-simplification/capabilities/CAP-KIS-001.md",
+          "docs/engineering/harness-simplification/capabilities/CAP-KIS-003.md",
+          "docs/engineering/harness-simplification/requirements/REQ-KIS-012.md",
+          "docs/engineering/harness-simplification/specifications/SPEC-KIS-006.md",
+          "docs/engineering/harness-simplification/verification/VER-KIS-006.md",
+          "docs/engineering/harness-simplification/work-orders/WO-KIS-013.md"
+        ],
+        "ready": true,
+        "schema": "se-harness-preflight-v2",
+        "skew": [],
+        "work_order": {
+          "id": "WO-KIS-013",
+          "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-013.md",
+          "status": "in_progress"
+        }
+      },
+      "argv": [
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--work-order",
+        "WO-KIS-013",
+        "--phase",
+        "review",
+        "--json"
+      ]
+    },
+    {
+      "result": {
+        "assurance": {
+          "commit_bound_verification": "required",
+          "decided_by": "mmzen",
+          "rationale": "Agents rely on the procedure index to discover governed instructions; verification must cover the two index additions with WO-KIS-013."
+        },
+        "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+        "background": [],
+        "diagnostics": [],
+        "phase": "review",
+        "reading_manifest": [
+          "docs/engineering/harness-simplification/intent/INT-KIS-001.md",
+          "docs/engineering/harness-simplification/intent/INT-KIS-003.md",
+          "docs/engineering/harness-simplification/capabilities/CAP-KIS-001.md",
+          "docs/engineering/harness-simplification/capabilities/CAP-KIS-003.md",
+          "docs/engineering/harness-simplification/requirements/REQ-KIS-012.md",
+          "docs/engineering/harness-simplification/specifications/SPEC-KIS-006.md",
+          "docs/engineering/harness-simplification/verification/VER-KIS-006.md",
+          "docs/engineering/harness-simplification/work-orders/WO-KIS-014.md"
+        ],
+        "ready": true,
+        "schema": "se-harness-preflight-v2",
+        "skew": [],
+        "work_order": {
+          "id": "WO-KIS-014",
+          "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-014.md",
+          "status": "in_progress"
+        }
+      },
+      "argv": [
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--work-order",
+        "WO-KIS-014",
+        "--phase",
+        "review",
+        "--json"
+      ]
+    }
+  ],
+  "evaluator": "0.21.0",
+  "invocation_prefix": [
+    "-I",
+    "-m",
+    "se_harness"
+  ],
+  "validation": {
+    "argv": [
+      "validate",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--json"
+    ],
+    "warning_count": 58,
+    "error_count": 0,
+    "errors": [],
+    "result_sha256": "b8fe1726f356185cf034b07f59bafabd887947247e8b22b90ccacda25d6f3703",
+    "advisory_count": 0
+  },
+  "python": "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+  "doctor": {
+    "outcome": "completed",
+    "argv": [
+      "doctor",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--json"
+    ],
+    "checks": [
+      {
+        "detail": ".engineering-harness.toml",
+        "name": "config",
+        "passed": true
+      },
+      {
+        "detail": "unchanged",
+        "name": "integration:.gitattributes",
+        "passed": true
+      },
+      {
+        "detail": "unchanged",
+        "name": "integration:.github/PULL_REQUEST_TEMPLATE.md",
+        "passed": true
+      },
+      {
+        "detail": "unchanged",
+        "name": "integration:.github/workflows/engineering-harness.yml",
+        "passed": true
+      },
+      {
+        "detail": "unchanged",
+        "name": "integration:.gitignore",
+        "passed": true
+      },
+      {
+        "detail": ".engineering-harness.lock",
+        "name": "lock",
+        "passed": true
+      },
+      {
+        "detail": "3.14.6",
+        "name": "python",
+        "passed": true
+      },
+      {
+        "detail": "selected wheel payload and declared instruction headings are available",
+        "name": "released-resources",
+        "passed": true
+      },
+      {
+        "detail": "2 file formats declared; consuming formats validate their own fields",
+        "name": "hash-bound-class-declared",
+        "passed": true
+      },
+      {
+        "detail": "1 raw classes effective for 276 tracked paths",
+        "name": "hash-bound-attribute-effective",
+        "passed": true
+      },
+      {
+        "detail": "one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1",
+        "name": "hash-bound-mode-consistent",
+        "passed": true
+      }
+    ],
+    "result_sha256": "f6e5e0fea66f044e7cb70a90eeeb3fbd31ec2227f6b95e7af74f86d7dc9df992"
+  },
+  "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main"
+}

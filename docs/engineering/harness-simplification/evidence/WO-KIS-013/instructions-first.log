@@ -1,0 +1,22 @@
+..F......E.............................................
+======================================================================
+ERROR: test_human_index_uses_the_catalogue_destinations (tests.test_instruction_discovery.InstructionDiscoveryTests.test_human_index_uses_the_catalogue_destinations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_instruction_discovery.py", line 122, in test_human_index_uses_the_catalogue_destinations
+    row = next(line for line in text.splitlines() if line.startswith(f"| `{sid}` |"))
+StopIteration
+
+======================================================================
+FAIL: test_every_contract_reference_resolves_to_one_normative_owner (tests.test_workflow_documentation_contract.WorkflowDocumentationContractTests.test_every_contract_reference_resolves_to_one_normative_owner)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\release030-main\tests\test_workflow_documentation_contract.py", line 105, in test_every_contract_reference_resolves_to_one_normative_owner
+    self.assertEqual(1,guide.count(f'`{pid}`'))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 55 tests in 37.425s
+
+FAILED (failures=1, errors=1)

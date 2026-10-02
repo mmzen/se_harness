@@ -209,6 +209,11 @@
       },
       "prerequisites": [
         {
+          "file": "docs/engineering/harness/PULL_REQUEST.md",
+          "heading": "publish-the-review-package",
+          "when": "Before requesting human verification for work delivered through a pull request."
+        },
+        {
           "file": "docs/engineering/harness/AUTHORITY.md",
           "heading": "decision-rights",
           "when": "Before obtaining or applying an accountable decision."
@@ -222,9 +227,52 @@
           },
           "prerequisites": [
             {
+              "file": "docs/engineering/harness/PULL_REQUEST.md",
+              "heading": "publish-the-review-package",
+              "when": "Before requesting human verification for work delivered through a pull request."
+            },
+            {
               "file": "docs/engineering/harness/AUTHORITY.md",
               "heading": "decision-rights",
               "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-REVIEW-PUBLISH": {
+      "location": {
+        "file": "docs/engineering/harness/PULL_REQUEST.md",
+        "heading": "publish-the-review-package"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "review-publication-authority",
+          "when": "Before reusing or requesting the bounded review-publication grant."
+        },
+        {
+          "file": "docs/engineering/harness/DELIVER_RESULT.md",
+          "heading": "confirm-authority-for-the-external-action",
+          "when": "Before an external branch or pull-request write."
+        }
+      ],
+      "steps": {
+        "STEP-REVIEW-PUBLISH": {
+          "location": {
+            "file": "docs/engineering/harness/PULL_REQUEST.md",
+            "heading": "publish-the-review-package"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "review-publication-authority",
+              "when": "Before reusing or requesting the bounded review-publication grant."
+            },
+            {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "confirm-authority-for-the-external-action",
+              "when": "Before an external branch or pull-request write."
             }
           ]
         }

@@ -142,6 +142,72 @@ paths = ["src/"]
 
 
 class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
+    def test_ready_vrec_can_publish_review_but_cannot_select_integration(self) -> None:
+        path = self.ready_vrec()
+        before = path.read_bytes()
+        code, output, error = invoke(
+            "check", str(self.root), "--artifact", "VREC-001",
+            "--checkpoint", "pre-action", "--procedure", "PROC-REVIEW-PUBLISH", "--json")
+        self.assertEqual(0, code, error + output)
+        result = json.loads(output)
+        self.assertEqual("pass", result["compliance"]["status"])
+        self.assertEqual("PROC-REVIEW-PUBLISH", result["restitution"]["next"]["procedure_id"])
+        self.assertEqual("publish-the-review-package",
+                         result["instruction_discovery"]["agent_instructions"]["current_step"]["location"]["heading"])
+        self.assertEqual(before, path.read_bytes())
+        code, output, error = invoke(
+            "check", str(self.root), "--artifact", "VREC-001",
+            "--checkpoint", "pre-action", "--procedure", "PROC-REPOSITORY-INTEGRATION", "--json")
+        self.assertNotEqual(0, code)
+        self.assertIn("WEX220", output + error)
+        self.assertEqual(before, path.read_bytes())
+
+    def test_review_route_is_not_available_for_non_ready_records(self) -> None:
+        path = self.ready_vrec()
+        original = path.read_text(encoding="utf-8")
+        for status in ("verified", "rejected", "superseded"):
+            with self.subTest(status=status):
+                # State fixtures only; no decision on production artifacts.
+                path.write_text(original.replace('status = "ready"', f'status = "{status}"', 1),
+                                encoding="utf-8")
+                code, output, error = invoke(
+                    "check", str(self.root), "--artifact", "VREC-001",
+                    "--checkpoint", "pre-action", "--procedure", "PROC-REVIEW-PUBLISH", "--json")
+                self.assertNotEqual(0, code)
+                self.assertIn("WEX220", output + error)
+
+    def test_review_and_decision_commits_preserve_the_captured_candidate(self) -> None:
+        # Local Git demonstration; provider observations and the human decision
+        # are simulated by the existing fixture authority.
+        git(self.root, "init", "-q", "-b", "main")
+        git(self.root, "add", "-A")
+        git(self.root, "commit", "-q", "-m", "implementation candidate")
+        candidate = git(self.root, "rev-parse", "HEAD")
+        path = self.ready_vrec()
+        path.write_text(path.read_text(encoding="utf-8").replace('a' * 40, candidate),
+                        encoding="utf-8")
+        relative = path.relative_to(self.root).as_posix()
+        git(self.root, "add", relative)
+        git(self.root, "commit", "-q", "-m", "prepare ready verification record")
+        review_head = git(self.root, "rev-parse", "HEAD")
+        before = tomllib.loads(path.read_text(encoding="utf-8").split("+++", 2)[1])
+        code, output, error = invoke(
+            "transition", str(self.root), "--set", "VREC-001=verified",
+            "--decision", "VREC-001=quality-owner", "--apply", "--json")
+        self.assertEqual(0, code, error + output)
+        self.assertEqual(relative, git(self.root, "diff", "--name-only", review_head))
+        git(self.root, "add", relative)
+        git(self.root, "commit", "-q", "-m", "record human verification")
+        decision_head = git(self.root, "rev-parse", "HEAD")
+        after = tomllib.loads(path.read_text(encoding="utf-8").split("+++", 2)[1])
+        self.assertEqual(3, len({candidate, review_head, decision_head}))
+        self.assertEqual(candidate, after["commit"])
+        for key in ("artifact_snapshot_sha256", "evidence_paths", "relations", "prepared_at"):
+            self.assertEqual(before[key], after[key], key)
+        self.assertEqual("verified", after["status"])
+        self.assertEqual(relative, git(self.root, "diff", "--name-only", review_head, decision_head))
+        self.assertEqual("", git(self.root, "status", "--porcelain"))
+
     def test_check_projects_only_selected_governing_chain(self) -> None:
         code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--json")
         self.assertEqual(0, code, error)

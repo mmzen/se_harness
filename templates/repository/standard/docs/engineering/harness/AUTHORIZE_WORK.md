@@ -181,8 +181,10 @@ supplied for the same artifact contents and target states.
 **Decision card:**
 
 - **Approval requested:** Name the decision and useful outcome in ordinary
-  language. Use "Approve implementation" for implementation authority;
-  verification acceptance and publication need their own decision wording.
+  language. Use "Approve implementation" for local implementation authority.
+  For PR-based work, use "Approve implementation and review publication" and
+  describe the bounded grant from [Review publication authority](AUTHORITY.md#review-publication-authority).
+  Verification acceptance and merge remain separate decisions.
 - **Why:** State the problem this change solves.
 - **What changes:** Summarize the bounded changes, including supporting work.
 - **What success looks like:** State the observable result and required checks.
@@ -194,7 +196,10 @@ supplied for the same artifact contents and target states.
   contracts, their proposed states and their reviewed revisions.
 
 Offer "Approve implementation" and "Request changes" when implementation is
-the decision. The human need not type artifact IDs or CLI commands. Bind the
+the decision. When the described grant includes review publication, offer
+"Approve implementation and review publication" instead. Name the repository,
+source branch, target branch, draft PR and later verification-decision push
+in "Your approval permits." The human need not type artifact IDs or CLI commands. Bind the
 answer to the displayed package and permission. Reuse an actual prior decision
 while its reviewed inputs still match; do not ask for the same authority again.
 

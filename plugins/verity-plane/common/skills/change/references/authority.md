@@ -40,3 +40,14 @@ that coverage. Stop the affected mutation when a required control is missing.
 
 Skill instructions and host hook coverage are not independent
 enforcement of every shell, API or credential path.
+
+When the selected released policy supports a bounded review-publication grant,
+apply its `AUTHORITY.md#review-publication-authority` procedure. A human may
+explicitly grant publication of the approved work to a named branch and PR,
+including the later recorded verification decision, with implementation approval.
+The future commit need not exist at approval; resolve its full identity before
+each write and compare its content, selected records and destination with that
+grant. Reuse matching authority without a second push/PR request. Preserve
+current gates and independent provider controls. This grants no verification,
+merge, force-push or release authority and does not expand historical approvals.
+An older selected release must use its own supported policy and procedures.

@@ -160,7 +160,7 @@
     {
       "id": "WFL-VREC-DECIDE",
       "procedure_id": "PROC-VREC-DECIDE",
-      "alternative_procedure_ids": ["PROC-VREC-REJECT", "PROC-VREC-SUPERSEDE"],
+      "alternative_procedure_ids": ["PROC-REVIEW-PUBLISH", "PROC-VREC-REJECT", "PROC-VREC-SUPERSEDE"],
       "selector": {"artifact_types": ["verification_record"], "statuses": ["ready"]},
       "gate_ids": ["QG-G4-ASSURANCE-DECISION"],
       "decision_right": "DR-VREC-DECIDE",
@@ -337,6 +337,13 @@
       "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
       "steps": [
         {"id": "STEP-VREC-DECIDE", "kind": "decision", "decision_right": "DR-VREC-DECIDE", "role": "assurance-owner", "artifact": "{artifact_id}", "decision": "whether the retained evidence verifies the exact candidate", "outcomes": ["verified", "reject", "supersede"], "response": "I verify {artifact_id} as assurance owner.", "gate_ids": ["QG-G4-ASSURANCE-DECISION"], "effects": ["Permits an explicit decision on {artifact_id} only."], "non_effects": ["Referenced work orders remain unchanged."]}
+      ]
+    },
+    {
+      "id": "PROC-REVIEW-PUBLISH",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-REVIEW-PUBLISH", "kind": "decision", "decision_right": "DR-DELIVERY-SELECT", "role": "repository-owner", "artifact": "{artifact_id}", "decision": "the bounded branch and draft PR publication for review before verification", "outcomes": ["authorize", "stop"], "response": "Use matching review-publication authority for {artifact_id}; obtain only missing authorization for the exact branch and draft PR.", "gate_ids": ["QG-G4-ASSURANCE-DECISION"], "effects": ["Permits only the authorized review publication; confirm the remote package before requesting verification."], "non_effects": ["The verification record remains ready.", "No push, PR, verification, merge or release occurs from this result."]}
       ]
     },
     {
