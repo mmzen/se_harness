@@ -58,7 +58,7 @@ initialization writes only configuration and lock files.
 Plugin activation restores the selected checkout after compaction or resume.
 Claude native session tests remain unverified, with their WO-RLS-033 omission
 accepted in DEC-RLS-003. Codex Windows desktop remains unverified; DEC-RLS-004
-accepts that omission for WO-RLS-033. This repository still uses 0.20.1.
+accepts that omission for WO-RLS-033. This repository now uses 0.21.0.
 See [migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-0210).
 The published package retains its original pre-publication README wording;
 the current source guide records the observed release status.

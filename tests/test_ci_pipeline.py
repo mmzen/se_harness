@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shutil
@@ -195,6 +196,49 @@ class TriggerPolicyTests(unittest.TestCase):
         # inputs; nothing the body carries becomes an input of check.
         self.assertIn("HARNESS_BASE_SHA: ${{ github.event.pull_request.base.sha }}", template)
         self.assertIn('git fetch --depth=1 origin "$HARNESS_BASE_SHA"', template)
+
+
+class AdoptedEvaluatorWheelTests(unittest.TestCase):
+    """The adopted archive identity must survive CI installation."""
+
+    def run_wheel_check(self, case: str) -> subprocess.CompletedProcess:
+        workflow = (WORKFLOWS / "engineering-harness.yml").read_text(encoding="utf-8")
+        install = workflow.split("      - name: Install the exact released evaluator\n", 1)[1].split("      - name:", 1)[0]
+        source = install.split("<<'PY'\n", 1)[1].split("          PY\n", 1)[0]
+        source = "\n".join(line[10:] if line.startswith("          ") else line for line in source.splitlines())
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            wheels = root / "wheels"
+            wheels.mkdir()
+            name = "se_harness-0.21.0-py3-none-any.whl"
+            content = b"selected wheel fixture"
+            selected = {"version": "0.21.0", "archive_name": name, "archive_sha256": hashlib.sha256(content).hexdigest()}
+            (wheels / name).write_bytes(content)
+            if case == "corrupt":
+                (wheels / name).write_bytes(b"changed bytes")
+            elif case == "missing":
+                (wheels / name).unlink()
+            elif case == "multiple":
+                (wheels / "unexpected.whl").write_bytes(content)
+            elif case == "wrong-name":
+                selected["archive_name"] = "other.whl"
+            elif case == "path-escape":
+                selected["archive_name"] = "../" + name
+            elif case == "wrong-version":
+                selected["version"] = "0.20.1"
+            elif case == "missing-identity":
+                selected.pop("archive_sha256")
+            (root / ".engineering-harness.lock").write_text(json.dumps({"evaluator": selected}), encoding="utf-8")
+            return subprocess.run([sys.executable, "-I", "-c", source, str(wheels), "0.21.0"], cwd=root, capture_output=True, text=True)
+
+    def test_exact_selected_wheel_is_accepted(self) -> None:
+        result = self.run_wheel_check("valid")
+        self.assertEqual(0, result.returncode, result.stderr)
+
+    def test_incomplete_ambiguous_or_changed_wheel_is_rejected(self) -> None:
+        for case in ("corrupt", "missing", "multiple", "wrong-name", "path-escape", "wrong-version", "missing-identity"):
+            with self.subTest(case=case):
+                self.assertNotEqual(0, self.run_wheel_check(case).returncode)
 
 
 class OneBuildPerWorkflowTests(unittest.TestCase):

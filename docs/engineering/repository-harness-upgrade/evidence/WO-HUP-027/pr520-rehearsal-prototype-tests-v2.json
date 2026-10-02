@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-rehearsal-prototype-tests.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": ".......................................\n----------------------------------------------------------------------\nRan 39 tests in 106.149s\n\nOK\n"
+  },
+  "seconds": 106.54077139999936
+}

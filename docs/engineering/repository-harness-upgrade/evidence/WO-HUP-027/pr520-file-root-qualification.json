@@ -1,0 +1,43 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\pr520-ci-probe\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "qualify",
+    "released-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\pr520-ci-probe\\root-qualification.json",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 1,
+  "result": {
+    "authority": "evidence-only; no lifecycle or external action authorized",
+    "checks": [
+      {
+        "id": "RQ001",
+        "message": "Git observation failed: rev-parse --verify",
+        "passed": false,
+        "subject": "qualification-input"
+      }
+    ],
+    "completion": "completed",
+    "evaluator": {
+      "identity_sha256": "e84ca6b6ccfcb719bec8ec69d7f70c61c3f9b71aa4262b1b7f18bdf046faff4d",
+      "role": "released-evaluator",
+      "status": "unbound"
+    },
+    "independence": "released-evaluator",
+    "operation": "released-root",
+    "passed": false,
+    "schema": "se-harness-release-qualification-v1",
+    "target": {
+      "identity_sha256": "8db8449f89bb7e66bed8a90354a0e24823b37a51cef8e34ce5cf3eaf152210ed",
+      "kind": "released-root",
+      "status": "unbound"
+    }
+  },
+  "seconds": 0.3295060000018566
+}

@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-S",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\scripts\\validate_governor_transition.py",
+    "assess",
+    "--repository",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--base-revision",
+    "695d6773dc86f25691a9799e969bcca014207837",
+    "--default-branch-ref",
+    "refs/remotes/origin/main",
+    "--evaluator-python",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+    "--evaluator-entry-point",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\harnessctl.exe",
+    "--evaluator-wheel",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\se_harness-0.21.0-py3-none-any.whl",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\predecessor-assessment-result.json",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 1,
+  "result": {
+    "applied": false,
+    "diagnostics": [],
+    "error": "target lock schema is unsupported (minimum schema 3)",
+    "passed": false,
+    "phase": "assess",
+    "schema": "se-harness-governor-transition-v1"
+  },
+  "seconds": 0.5776027000010799
+}

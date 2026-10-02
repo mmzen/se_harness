@@ -47,7 +47,7 @@ This does not guarantee that a decision is wise. It makes the claim attributable
 | Release record | A separate release-owner decision tied to the same candidate commit. |
 
 The [simplified UML model](harness-uml-model.md) shows the relationships at a glance.
-The authoritative [artifact applicability catalog](../engineering/harness/ARTIFACTS.md#artifact-types) defines every standard formal type, its purpose and when it is needed. The linked definition and evidence guides explain permitted relations; decision rights are defined in AUTHORITY.md.
+The authoritative [artifact applicability catalog](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/ARTIFACTS.md`, heading `artifact-types`) defines every standard formal type, its purpose and when it is needed. The linked definition and evidence guides explain permitted relations; decision rights are defined in AUTHORITY.md.
 
 ## How it fits into a change
 
@@ -104,4 +104,4 @@ Green tests are evidence. A generated dashboard is a derived view. Human decisio
 - Read [operational phasing](harness-operational-phasing.md) for timing and decision points.
 - Read the [illustrative branching model](harness-branching-model.md) for one possible Git mapping.
 - Read the [practical example](harness-lineage-example.md) for an end-to-end interaction and commands.
-- Before doing real work, follow the authoritative route from [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md).
+- Before doing real work, follow the authoritative route from [`ENGINEERING_HARNESS.md`](harness-installation-and-upgrades.md#read-selected-instructions) (resource `ENGINEERING_HARNESS.md`).

@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "identity",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 2,
+  "result": {
+    "stdout": "",
+    "stderr": "usage: harnessctl identity [-h]\n                           --role {released-evaluator,candidate-source,candidate-package}\n                           --expected-version EXPECTED_VERSION\n                           --expected-root EXPECTED_ROOT\n                           [--checkout-root CHECKOUT_ROOT]\n                           [--candidate-commit CANDIDATE_COMMIT]\n                           [--evaluator-payload-sha256 EVALUATOR_PAYLOAD_SHA256]\n                           [--evaluator-wheel-sha256 EVALUATOR_WHEEL_SHA256]\n                           [--entry-point ENTRY_POINT]\n                           [--require-isolated-python] [--require-entry-point]\n                           [--json]\nharnessctl identity: error: the following arguments are required: --role, --expected-version, --expected-root\n"
+  },
+  "seconds": 0.5240302000020165
+}

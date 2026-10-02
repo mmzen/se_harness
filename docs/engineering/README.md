@@ -1,6 +1,6 @@
 # SE Harness Engineering Artifact Index
 
-> Repository-owned index for the standard governed `se_harness` repository. Shared workflow, decision rights, quality gates, and traceability policy are routed from `ENGINEERING_HARNESS.md` and remain managed separately.
+> Repository-owned index for the standard governed `se_harness` repository. Shared instructions and templates resolve from the selected released evaluator wheel. Use `harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json` for its entry; formal artifacts remain here.
 
 ## Product and governance domains
 
@@ -65,7 +65,7 @@
 
 ## Repository-specific engineering documentation
 
-- `templates/`: non-authoritative starting points for new formal artifacts.
+- Artifact templates: non-authoritative released resources, consumed directly by `harnessctl create-artifact`; no template copies are maintained here.
 - `../notes/`: non-authoritative progressive explanations for human readers from conceptual overview through practical usage.
 
 Formal artifacts use TOML front matter between `+++` delimiters. Stable IDs and declared typed relations establish authority independent of file paths. Evidence, templates, generated dashboards, source, commits, and this index remain non-authoritative unless referenced by the applicable formal record.

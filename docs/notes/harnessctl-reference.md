@@ -5,10 +5,10 @@
 > This is a non-authoritative reference to command syntax, actors and side
 > effects. The selected released evaluator computes lifecycle states, allowed
 > transitions, gates and next actions. Start with
-> [ENGINEERING_HARNESS.md](../../ENGINEERING_HARNESS.md#read-by-task), then use
-> [CONTINUE.md](../engineering/harness/CONTINUE.md#continue-selected-work),
-> [decision rights](../engineering/harness/AUTHORITY.md#decision-rights) and
-> [results](../engineering/harness/RESULTS.md#report-a-lifecycle-result) when directed.
+> [ENGINEERING_HARNESS.md](harness-installation-and-upgrades.md#read-selected-instructions) (resource `ENGINEERING_HARNESS.md`, heading `read-by-task`), then use
+> [CONTINUE.md](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/CONTINUE.md`, heading `continue-selected-work`),
+> [decision rights](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/AUTHORITY.md`, heading `decision-rights`) and
+> [results](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/RESULTS.md`, heading `report-a-lifecycle-result`) when directed.
 
 ## Invocation
 

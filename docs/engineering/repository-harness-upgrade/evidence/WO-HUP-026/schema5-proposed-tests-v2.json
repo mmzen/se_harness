@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "-c",
+    "import runpy,sys; sys.path.insert(0, 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\release030-main'); runpy.run_path('C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\adoption021-evidence\\\\schema5-proposal\\\\tests\\\\test_governor_transition.py', run_name=\"__main__\")"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": "...................s.s..........\n----------------------------------------------------------------------\nRan 32 tests in 60.408s\n\nOK (skipped=2)\n"
+  },
+  "seconds": 60.69410919999791
+}

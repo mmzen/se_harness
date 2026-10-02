@@ -1,0 +1,28 @@
+{
+  "schema": "adoption-source-suite-summary-v1",
+  "passed": true,
+  "tests": 1215,
+  "skipped": 21,
+  "scale": "full",
+  "seconds": 153.547,
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--scale",
+    "full",
+    "--timings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\corrected-test-timings.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "raw_log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\corrected-full-source-suite.json",
+  "raw_log_sha256": "c1d755406febc41a7004667866343ce1c88dd1307e7453c152f6418d5872e35c",
+  "implementation_digests": "approved-implementation-digests.json",
+  "notes": [
+    "The 21 skips are retained platform/host conditions, not waived adoption criteria.",
+    "The stderr --workers must be at least 1 comes from the runner negative-input test; suite exit is zero.",
+    "Prior failing run is retained in local-check-summary.json and its raw-log reference.",
+    "Exact clean-candidate testing and capture follow completion."
+  ]
+}

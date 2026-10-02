@@ -3,10 +3,10 @@
 <!-- Target expertise: 6/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 > This note explains timing. Start with the installed
-> [task router](../../ENGINEERING_HARNESS.md#read-by-task). Its current guides explain
-> [decision rights](../engineering/harness/AUTHORITY.md#decision-rights),
-> [gates](../engineering/harness/RESULTS.md#gates) and the
-> [artifact model](../engineering/harness/ARTIFACTS.md#artifact-data-model).
+> [task router](harness-installation-and-upgrades.md#read-selected-instructions) (resource `ENGINEERING_HARNESS.md`, heading `read-by-task`). Its current guides explain
+> [decision rights](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/AUTHORITY.md`, heading `decision-rights`),
+> [gates](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/RESULTS.md`, heading `gates`) and the
+> [artifact model](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/ARTIFACTS.md`, heading `artifact-data-model`).
 
 ## Lifecycle at a glance
 
@@ -85,7 +85,7 @@ The coding agent normally operates these commands; the accountable human makes t
 ## Formal gates versus Explorer readiness
 
 Use the exact `QG-*` gate IDs and predicate results returned by the selected
-evaluator. The [gate guide](../engineering/harness/RESULTS.md#gates) explains their meaning. The G0-G5 portions group related gates for reporting and do not
+evaluator. The [gate guide](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/RESULTS.md`, heading `gates`) explains their meaning. The G0-G5 portions group related gates for reporting and do not
 replace those IDs.
 
 Harness Explorer uses G0-G5 labels for a differently grouped, derived

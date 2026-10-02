@@ -9,21 +9,22 @@ files. Plugin 0.2.4 supplies bootstrap and explicit per-session activation.
 results and instruction discovery. [Public observations and limits](../release-0-21-0/evidence/WO-RLS-033/README.md)
 distinguish package installation from native delivery.
 
-This repository selects evaluator 0.20.1 under WO-HUP-025, following the
-separate 0.20.0 adoption under WO-HUP-024. The cleanup refinements were introduced in the
+This repository selects released evaluator 0.21.0 with external resources under
+WO-HUP-003. WO-HUP-025 and WO-HUP-024 retain the earlier 0.20.1 and 0.20.0 adoptions. The cleanup refinements were introduced in the
 [0.20.0 release](../release-0-20-0/README.md); subsequent cleanup records below
 retain their own scope and decisions.
 
 The external instruction resources and minimal layout are published in 0.21.0.
 DEC-IAR-004's compatibility release and separate adoption remain historical steps.
 Earlier VRECs retain their exact candidate claims. Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 accepts that omission for WO-RLS-033.
-Publication does not remove this repository's installed root guide; adoption is separate.
+WO-HUP-003 separately retires this repository's copied entry and resources after
+reviewed native Codex CLI delivery. Owner instructions and historical artifacts remain.
 
 ## Historical architecture packets
 
 The sections below retain earlier packet summaries. References to an AGENTS
 managed region or procedures owned by WORKFLOW.md describe those earlier
-contracts; they do not route current work. Read the current root's task router.
+contracts; they do not route current work. Read the selected wheel's entry and task router through `harnessctl resources`.
 `WO-IAR-001` retains the original bounded implementation evidence. Its acceptance
 does not supply authority for later revisions.
 

@@ -1,0 +1,305 @@
+--- a/docs/notes/README.md
++++ b/docs/notes/README.md
+@@ -86,7 +86,7 @@
+ 
+ ## Know what is authoritative
+ 
+-- **SE Harness guarantees and managed policy:** start at [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md), which routes to the exact procedure and supporting section needed for the selected task.
++- **SE Harness guarantees and managed policy:** start at [`ENGINEERING_HARNESS.md`](harness-installation-and-upgrades.md#read-selected-instructions) (resource `ENGINEERING_HARNESS.md`), which routes to the exact procedure and supporting section needed for the selected task.
+ - **Configurable harness policy:** `.engineering-harness.toml` selects supported enforcement settings.
+ - **Repository-specific control:** the entirely repository-owned [`AGENTS.md`](../../AGENTS.md), product artifacts, build commands, Git strategy, hosting controls, and local agent instructions belong to the repository and its accountable owners.
+ - **Illustrations:** the notes in this directory help readers understand the model but do not authorize work or override managed policy.
+--- a/docs/notes/harness-overview.md
++++ b/docs/notes/harness-overview.md
+@@ -47,7 +47,7 @@
+ | Release record | A separate release-owner decision tied to the same candidate commit. |
+ 
+ The [simplified UML model](harness-uml-model.md) shows the relationships at a glance.
+-The authoritative [artifact applicability catalog](../engineering/harness/ARTIFACTS.md#artifact-types) defines every standard formal type, its purpose and when it is needed. The linked definition and evidence guides explain permitted relations; decision rights are defined in AUTHORITY.md.
++The authoritative [artifact applicability catalog](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/ARTIFACTS.md`, heading `artifact-types`) defines every standard formal type, its purpose and when it is needed. The linked definition and evidence guides explain permitted relations; decision rights are defined in AUTHORITY.md.
+ 
+ ## How it fits into a change
+ 
+@@ -104,4 +104,4 @@
+ - Read [operational phasing](harness-operational-phasing.md) for timing and decision points.
+ - Read the [illustrative branching model](harness-branching-model.md) for one possible Git mapping.
+ - Read the [practical example](harness-lineage-example.md) for an end-to-end interaction and commands.
+-- Before doing real work, follow the authoritative route from [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md).
++- Before doing real work, follow the authoritative route from [`ENGINEERING_HARNESS.md`](harness-installation-and-upgrades.md#read-selected-instructions) (resource `ENGINEERING_HARNESS.md`).
+--- a/docs/notes/harness-uml-model.md
++++ b/docs/notes/harness-uml-model.md
+@@ -170,7 +170,7 @@
+ addresses any implemented requirement. When architecture applies, the work
+ order selects every applicable architecture and each ADR its decision
+ assessment requires. The authoritative
+-[artifact applicability catalog](../engineering/harness/ARTIFACTS.md#artifact-types)
++[artifact applicability catalog](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/ARTIFACTS.md`, heading `artifact-types`)
+ defines the complete required, omission and reuse rules for every type.
+ 
+ Since the 0.4.1 version of this note, a work order gained three tables:
+@@ -295,7 +295,7 @@
+ A complete graph proves that the required relations are declared. It does
+ not prove that the statements are good, that the evidence is persuasive, or
+ that a human approved a transition. Those judgments belong to the
+-human and agent [decision rights](../engineering/harness/AUTHORITY.md#decision-rights).
++human and agent [decision rights](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/AUTHORITY.md`, heading `decision-rights`).
+ 
+ If a policy and an executable check disagree, stop and report the
+ difference. Neither this diagram nor an implementation detail resolves
+--- a/docs/notes/harness-operational-phasing.md
++++ b/docs/notes/harness-operational-phasing.md
+@@ -3,10 +3,10 @@
+ <!-- Target expertise: 6/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+ 
+ > This note explains timing. Start with the installed
+-> [task router](../../ENGINEERING_HARNESS.md#read-by-task). Its current guides explain
+-> [decision rights](../engineering/harness/AUTHORITY.md#decision-rights),
+-> [gates](../engineering/harness/RESULTS.md#gates) and the
+-> [artifact model](../engineering/harness/ARTIFACTS.md#artifact-data-model).
++> [task router](harness-installation-and-upgrades.md#read-selected-instructions) (resource `ENGINEERING_HARNESS.md`, heading `read-by-task`). Its current guides explain
++> [decision rights](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/AUTHORITY.md`, heading `decision-rights`),
++> [gates](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/RESULTS.md`, heading `gates`) and the
++> [artifact model](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/ARTIFACTS.md`, heading `artifact-data-model`).
+ 
+ ## Lifecycle at a glance
+ 
+@@ -85,7 +85,7 @@
+ ## Formal gates versus Explorer readiness
+ 
+ Use the exact `QG-*` gate IDs and predicate results returned by the selected
+-evaluator. The [gate guide](../engineering/harness/RESULTS.md#gates) explains their meaning. The G0-G5 portions group related gates for reporting and do not
++evaluator. The [gate guide](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/RESULTS.md`, heading `gates`) explains their meaning. The G0-G5 portions group related gates for reporting and do not
+ replace those IDs.
+ 
+ Harness Explorer uses G0-G5 labels for a differently grouped, derived
+--- a/docs/notes/harnessctl-reference.md
++++ b/docs/notes/harnessctl-reference.md
+@@ -5,10 +5,10 @@
+ > This is a non-authoritative reference to command syntax, actors and side
+ > effects. The selected released evaluator computes lifecycle states, allowed
+ > transitions, gates and next actions. Start with
+-> [ENGINEERING_HARNESS.md](../../ENGINEERING_HARNESS.md#read-by-task), then use
+-> [CONTINUE.md](../engineering/harness/CONTINUE.md#continue-selected-work),
+-> [decision rights](../engineering/harness/AUTHORITY.md#decision-rights) and
+-> [results](../engineering/harness/RESULTS.md#report-a-lifecycle-result) when directed.
++> [ENGINEERING_HARNESS.md](harness-installation-and-upgrades.md#read-selected-instructions) (resource `ENGINEERING_HARNESS.md`, heading `read-by-task`), then use
++> [CONTINUE.md](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/CONTINUE.md`, heading `continue-selected-work`),
++> [decision rights](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/AUTHORITY.md`, heading `decision-rights`) and
++> [results](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/RESULTS.md`, heading `report-a-lifecycle-result`) when directed.
+ 
+ ## Invocation
+ 
+--- a/docs/notes/technical-communication.md
++++ b/docs/notes/technical-communication.md
+@@ -2,7 +2,7 @@
+ 
+ <!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+ 
+-SE Harness installs one managed technical-communication policy. It helps agents
++The selected SE Harness release supplies one technical-communication policy. It helps agents
+ write direct English prose without changing engineering authority or technical
+ meaning.
+ 
+@@ -38,7 +38,7 @@
+ The tracked shared sources are
+ [`harness-operator-brief`](../../plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md)
+ and [`harness-orient`](../../plugins/verity-plane/common/skills/harness-orient/SKILL.md).
+-Default repository-owned installations receive the
++Legacy repository-owned installations receive the
+ [brief skill template](../../templates/repository/standard/.agents/skills/harness-operator-brief/SKILL.md)
+ under `.agents/skills/`. See [contributor setup and restoration](developing-se-harness.md#agent-skills-for-this-checkout)
+ for the provider choice. Invoke `harness-operator-brief` explicitly and supply:
+@@ -70,8 +70,8 @@
+ - prove that prose is technically correct or semantically equivalent; or
+ - claim ASD-STE100 compliance.
+ 
+-The managed policy at
+-[COMMUNICATION.md](../engineering/harness/COMMUNICATION.md#communication) is authoritative for these
++The selected released policy at
++[COMMUNICATION.md](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/COMMUNICATION.md`, heading `communication`) is authoritative for these
+ communication rules. The skill and this note only explain and apply that policy.
+ 
+ ## Contributor checks
+--- a/docs/notes/agentic-execution-host-adapters.md
++++ b/docs/notes/agentic-execution-host-adapters.md
+@@ -2,13 +2,17 @@
+ 
+ <!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+ 
+-> This is non-authoritative operator guidance. Installed managed files, the
++> This is non-authoritative operator guidance. The selected released resources,
+ > exact released evaluator, formal artifact state, and accountable decisions
+ > remain authoritative.
+ 
+ ## Repository provider and plugin provider
+ 
+-The repository provider supplies two portable skill cores:
++The 0.21.0 external-resource layout creates no repository skill copies. Use the
++host plugin for skill delivery; the selected released evaluator supplies policy.
++The repository-provider description below applies to retained legacy layouts.
++
++In the legacy repository-copy layout, the repository provider supplies two portable skill cores:
+ `harness-orient` and `harness-operator-brief`. Codex discovers their copies in
+ `.agents/skills/`. The supplied Claude Code adapter is for `harness-orient`;
+ it loads the same-name canonical core instead of duplicating its procedure.
+@@ -43,7 +47,7 @@
+ 
+ ## Installation and upgrades
+ 
+-Under repository ownership, these skill copies are editable supplied files.
++In the legacy layout, repository-owned skill copies are editable supplied files.
+ The selected released installer maintains their inventory; existing repositories
+ receive changes through the explicit upgrade procedure. They are not additional
+ locked lifecycle policies.
+@@ -56,7 +60,7 @@
+ 
+ Follow [contributor setup and restoration](developing-se-harness.md#agent-skills-for-this-checkout)
+ and [installation and safe upgrades](harness-installation-and-upgrades.md).
+-The selected repository's [provider procedure](../engineering/harness/SKILL_PROVIDER.md)
++The selected repository's [provider procedure](harness-installation-and-upgrades.md#read-selected-instructions) (resource `docs/engineering/harness/SKILL_PROVIDER.md`)
+ governs the change.
+ 
+ ## Retired writing skills
+--- a/tests/test_progressive_documentation.py
++++ b/tests/test_progressive_documentation.py
+@@ -147,9 +147,10 @@
+         self.assertIn("omits its `architecture` relation", model)
+         self.assertNotIn("Current limitation", model)
+         self.assertIn(
+-            "../engineering/harness/ARTIFACTS.md#artifact-types",
++            "docs/engineering/harness/ARTIFACTS.md",
+             model,
+         )
++        self.assertIn("`artifact-types`", model)
+ 
+     def test_active_public_command_contract_uses_six_commands(self) -> None:
+         distribution = REPOSITORY_ROOT / "docs" / "engineering" / "harness-distribution"
+--- a/tests/test_artifact_catalog.py
++++ b/tests/test_artifact_catalog.py
+@@ -12,13 +12,16 @@
+ _registry = load_evaluator_module("artifact_layout_registry")
+ ARTIFACT_DIRECTORIES = _registry.ARTIFACT_DIRECTORIES
+ ARTIFACT_PREFIXES = _registry.ARTIFACT_PREFIXES
++# Source tests inspect product assets. Adopted resource identity is checked by
++# the released evaluator, separately from candidate-source tests.
++STANDARD_ROOT = REPOSITORY_ROOT / "templates/repository/standard"
+ LEGACY_ROOT = REPOSITORY_ROOT / "tests/fixtures/progressive-discovery/released-0.18.0"
+ 
+ 
+ class ArtifactCatalogTests(unittest.TestCase):
+     @classmethod
+     def setUpClass(cls) -> None:
+-        cls.guide = (REPOSITORY_ROOT / "docs/engineering/harness/ARTIFACTS.md").read_text(encoding="utf-8")
++        cls.guide = (STANDARD_ROOT / "docs/engineering/harness/ARTIFACTS.md").read_text(encoding="utf-8")
+         cls.types = cls.guide.split("## Artifact types", 1)[1].split("## Artifact locations", 1)[0]
+ 
+     def catalog_rows(self) -> list[list[str]]:
+@@ -46,14 +49,15 @@
+         self.assertIn("Reuse an existing active artifact", self.types)
+ 
+     def test_router_and_human_notes_reach_the_current_catalog(self) -> None:
+-        router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
+-        define = (REPOSITORY_ROOT / "docs/engineering/harness/DEFINE_CHANGE.md").read_text(encoding="utf-8")
++        router = (STANDARD_ROOT / "ENGINEERING_HARNESS.md.tpl").read_text(encoding="utf-8")
++        define = (STANDARD_ROOT / "docs/engineering/harness/DEFINE_CHANGE.md").read_text(encoding="utf-8")
+         self.assertIn("docs/engineering/harness/DEFINE_CHANGE.md", router)
+         self.assertIn("ARTIFACTS.md", define)
+         for note in ("harness-overview.md", "harness-uml-model.md"):
+             content = (REPOSITORY_ROOT / "docs/notes" / note).read_text(encoding="utf-8")
+             with self.subTest(note=note):
+-                self.assertIn("../engineering/harness/ARTIFACTS.md#artifact-types", content)
++                self.assertIn("docs/engineering/harness/ARTIFACTS.md", content)
++                self.assertIn("`artifact-types`", content)
+                 self.assertNotIn("<!-- artifact-catalog:begin -->", content)
+ 
+     def test_legacy_catalog_remains_bound_to_its_released_fixture(self) -> None:
+@@ -73,7 +77,7 @@
+                      "WORKFLOW.md", "TRACEABILITY.md", "TECHNICAL_COMMUNICATION.md"):
+             with self.subTest(retired=name):
+                 self.assertFalse((REPOSITORY_ROOT / "docs/engineering" / name).exists())
+-        guides = REPOSITORY_ROOT / "docs/engineering/harness"
++        guides = STANDARD_ROOT / "docs/engineering/harness"
+         for source, destination, heading in (
+             ("DEFINE_CHANGE.md", "ARTIFACTS.md", "## Artifact types"),
+             ("DEFINE_CHANGE.md", "DEFINITION_LINKS.md", "## Links between definitions"),
+@@ -82,31 +86,23 @@
+             with self.subTest(destination=destination):
+                 self.assertIn(destination, (guides / source).read_text(encoding="utf-8"))
+                 self.assertIn(heading, (guides / destination).read_text(encoding="utf-8"))
+-        router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
++        router = (STANDARD_ROOT / "ENGINEERING_HARNESS.md.tpl").read_text(encoding="utf-8")
+         self.assertIn("MUST be the only source of truth", router)
+         self.assertIn("docs/engineering/harness/CONTINUE.md", router)
+         self.assertIn("docs/engineering/harness/COMMUNICATION.md", router)
+-        results = (REPOSITORY_ROOT / "docs/engineering/harness/RESULTS.md").read_text(encoding="utf-8")
++        results = (STANDARD_ROOT / "docs/engineering/harness/RESULTS.md").read_text(encoding="utf-8")
+         self.assertIn("The result controls the reported scope", results)
+         self.assertIn("Do not invent an effect, authority", results)
+         self.assertIn("Machine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs", router)
+ 
+     def test_work_order_template_expresses_conditional_architecture(self) -> None:
+         relative = "docs/engineering/templates/WORK_ORDER.template.md"
+-        template = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")
+-        candidate = (REPOSITORY_ROOT / "templates/repository/standard" / relative).read_text(encoding="utf-8")
++        template = (STANDARD_ROOT / relative).read_text(encoding="utf-8")
+         metadata = tomllib.loads(template.split("+++", 2)[1])
+         self.assertNotIn("architecture", metadata["relations"])
+         self.assertNotIn("delegation", metadata)
+-        # Installed templates follow the selected released evaluator. Candidate
+-        # authoring prompts may evolve before that release is adopted here.
+-        candidate_metadata = tomllib.loads(candidate.split("+++", 2)[1])
+-        self.assertNotIn("architecture", candidate_metadata["relations"])
+-        self.assertNotIn("delegation", candidate_metadata)
+-        self.assertEqual(metadata["relations"], candidate_metadata["relations"])
+-        self.assertEqual(metadata["execution_scope"], candidate_metadata["execution_scope"])
+-        self.assertIn("<actual human who confirmed the assurance classification>", candidate)
+-        self.assertIn("docs/engineering/harness/AUTHORITY.md#authority-from-work-approval", candidate)
++        self.assertIn("<actual human who confirmed the assurance classification>", template)
++        self.assertIn("docs/engineering/harness/AUTHORITY.md#authority-from-work-approval", template)
+         self.assertIn("Omit the `architecture` relation only when no active architecture addresses any implemented requirement.", template)
+         self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", template)
+ 
+--- a/tests/test_instruction_architecture.py
++++ b/tests/test_instruction_architecture.py
+@@ -749,8 +749,10 @@
+                 self.assertNotIn(claim, self.text.lower())
+ 
+     def test_evaluator_setup_is_discovered_outside_owner_instructions(self) -> None:
+-        router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
+-        setup = (REPOSITORY_ROOT / "docs/engineering/harness/SETUP.md").read_text(encoding="utf-8")
++        # Candidate-source assets are separate from the adopted released resources.
++        standard = REPOSITORY_ROOT / "templates/repository/standard"
++        router = (standard / "ENGINEERING_HARNESS.md.tpl").read_text(encoding="utf-8")
++        setup = (standard / "docs/engineering/harness/SETUP.md").read_text(encoding="utf-8")
+         self.assertIn("docs/engineering/harness/SETUP.md", router)
+         self.assertIn("outside the checkout", router)
+         self.assertIn("-I -m se_harness", setup)
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -4,7 +4,7 @@
+ 
+ [project]
+ name = "se-harness"
+-version = "0.21.0"
++version = "0.21.1"
+ description = "A repository-native, specification-driven software-engineering harness"
+ readme = "README.md"
+ license = { file = "LICENSE" }
+--- a/se_harness/__init__.py
++++ b/se_harness/__init__.py
+@@ -1,3 +1,3 @@
+ """Reusable software-engineering harness distribution."""
+ 
+-__version__ = "0.21.0"
++__version__ = "0.21.1"
+--- a/docs/notes/developing-se-harness.md
++++ b/docs/notes/developing-se-harness.md
+@@ -6,7 +6,7 @@
+ 
+ The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. Exact public 0.5.0 later governed the 0.6.0 release through the ordinary standard repository lifecycle. On 2026-08-23, the separately governed `WO-HUP-002` transaction adopted exact public 0.6.0 as the standard root evaluator. No self-hosting installation profile, evaluator descriptor, or special promotion command was introduced. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
+ 
+-Candidate source in this checkout reports version 0.21.0. The repository is governed by independently installed public 0.21.0, adopted under `WO-HUP-003`. The schema-5 lock selects external wheel resources and retains the public wheel and payload digests. Candidate source remains development evidence even when its version matches the released evaluator.
++Candidate source in this checkout reports development version 0.21.1; it is not a published release. The repository is governed by independently installed public 0.21.0, adopted under `WO-HUP-003`. The schema-5 lock selects external wheel resources and retains the public wheel and payload digests. Candidate source remains development evidence even when its version matches the released evaluator.
+ 
+ In evaluator examples, `harnessctl` means the absolute Python executable of
+ the repository's selected released evaluator followed by `-I -m se_harness`.

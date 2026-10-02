@@ -1,0 +1,165 @@
+{
+  "purpose": "Retained raw diagnostic logs, including original failures; index links are not automatically followed by capture. Required concise results are retained separately.",
+  "logs": [
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-candidate-artifact-list.json",
+      "sha256": "680b530e0ac506dd786958892c0ec5982f0c757114e72105588c8d208102d0b2",
+      "bytes": 5835
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-candidate-failed-log.json",
+      "sha256": "62626871955309b4deeb10df552d4a7a498c683090630110f1821d96d36e526b",
+      "bytes": 26839
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-candidate-wheel-download.json",
+      "sha256": "4db3e8eb465e90845a942bfa9ee9a23c53d4cfda50e46b754d9bb992cc240089",
+      "bytes": 605
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-ci-failed-log.json",
+      "sha256": "d1323dcfea67c413822868db156082dc54d1dc52f3dec285088750a28a533a78",
+      "bytes": 3299
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-ci-failure-status.json",
+      "sha256": "0c9f1ecfd6a456fc3f057ba9ac72bb18cff4e4809127350039f6117628ef930b",
+      "bytes": 6746
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-ci-latest-status.json",
+      "sha256": "c4ea66d2aac52b9f44acb798dba9445ada13af401e2ceb746f9da994f55b5b54",
+      "bytes": 7305
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-correction-id-preview.json",
+      "sha256": "f086b1fdbd56f10150ae9594f7b642b640d262fa916bff1af337f29de8467464",
+      "bytes": 979
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-create-wo027.json",
+      "sha256": "46e9eb77299d09c7a68a052090a96e778e010c6d24562870cce934863cadf770",
+      "bytes": 959
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-current-focus-confirmed.json",
+      "sha256": "636463ac5c70ef7dba3e32a77ed68cd48593d503f493e903827c38808b49b29a",
+      "bytes": 10254
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-current-wo026.json",
+      "sha256": "f270a6460d53dde52314d78cf37fa65409a23d1354c3e396e53eb310e509baec",
+      "bytes": 12554
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-draft-focus.json",
+      "sha256": "7ab2ffafba6740694b77c8c0bc581c266e0117a78ad83f2bc0824cb92b460d29",
+      "bytes": 10070
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-draft-validation.json",
+      "sha256": "8a0cb17afb2ca26097f5b901803aaff8bec2efe761e55c1b847161374db9e945",
+      "bytes": 377390
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-expanded-draft-focus.json",
+      "sha256": "d8cf3af530976ffc674c787f4436d581249c426af283cf5cb85655b528eb6652",
+      "bytes": 10254
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-expanded-draft-validation.json",
+      "sha256": "599c426e307523b2ae589ae8f3874f3913b1bf616bb2bed23595c4f5b807c76f",
+      "bytes": 377390
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-file-check-pr.json",
+      "sha256": "70eb48e2d89139f5a4f6b7117d74bd98490864af6a6267d7ce77bbdabf60db52",
+      "bytes": 16134
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-file-install.json",
+      "sha256": "06d193c1da18a92f76dedb60ca893cb46311c12b84b22efb795e4f10639ef703",
+      "bytes": 993
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-file-root-qualification-local.json",
+      "sha256": "7a18a16750994b43512e22a39eabad1f2adf1ad3bcdbe7d09607adbcfeb37c6a",
+      "bytes": 2759
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-file-root-qualification.json",
+      "sha256": "e4d56a9e2625fe34e243cad7536bbad23dbc32dbee322d3838e80d97215c87b5",
+      "bytes": 1499
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-index-install.json",
+      "sha256": "4c9bc5e4b32dfc192677e96b4c8a17d8a796b2e4d071b7c11ef87b08c9f4547d",
+      "bytes": 882
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-index-reproduction.json",
+      "sha256": "bf806c643e65be549840ab0efa6e6f552aaa4dff65170792fa640ad0f1b7cac3",
+      "bytes": 895
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-preapproval-git-status.json",
+      "sha256": "f8a7ac55bd7d8b41261ef37d049c9527f61f809fef9a30991aa4f5eb93ce3af8",
+      "bytes": 666
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-probe-venv.json",
+      "sha256": "1407b28bccfd774f04538536dd80662a6b78519efabcec23e5d7acbfd5432899",
+      "bytes": 453
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-proposal-review-identity.json",
+      "sha256": "ecbdf5e3642ae06ff3db643732958c85ea761c62835475c23446cfd85754457a",
+      "bytes": 486
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-proposed-real-rehearsal-1.json",
+      "sha256": "f9e455095b9610c4dbd261120f439fb4577c92c17d25b2be15e298539c1e903b",
+      "bytes": 3739
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-proposed-real-rehearsal-2.json",
+      "sha256": "7392a6ce7d1f359174b4621ae3a60907236c1fcabf940e251e83a5a063d80f0d",
+      "bytes": 3739
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-prototype-regressions.json",
+      "sha256": "f2ca06020098b507fde9b7483cc49dd47ccd943177a63f34693cdda10f9693b8",
+      "bytes": 912
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-public-wheel-download.json",
+      "sha256": "debcb6bc77067dbcb478a7447a4110aa1d332966fe0f09806967ba71868dd0b6",
+      "bytes": 960
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-rehearsal-prototype-tests-v2.json",
+      "sha256": "88302bf78cfea930a1f16364ea04f61fd4da8a20983d0ce4a67f31eae314ee4a",
+      "bytes": 694
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-rehearsal-prototype-tests.json",
+      "sha256": "4b86f08e64d079fee05324488583784c7ca88651e12c5769cf2c54ebc4b2b64a",
+      "bytes": 5261
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-selected-entry-confirmed.json",
+      "sha256": "99345844a30b8d14ed0741a8048a6a5ac00b39fb79e1c33df10a12bf186c3cc3",
+      "bytes": 11577
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-successor-install.json",
+      "sha256": "38c1097b7480d9e24433b99fa965ee71349ebe29ba7fe489b0bdd0d449d8d7b9",
+      "bytes": 805
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\pr520-successor-venv.json",
+      "sha256": "1f4cae1493192e313b0ff614bdb4d77032385ac1357da180cdfefd1caa1c980d",
+      "bytes": 451
+    }
+  ]
+}

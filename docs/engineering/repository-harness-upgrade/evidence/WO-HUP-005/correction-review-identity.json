@@ -1,0 +1,21 @@
+{
+  "work_order_sha256": "f65151e3e6b0820a836e12e15adbdc60c584111183f305eff5490c7ce570b7f3",
+  "patch_sha256": "b6530151079174c9b3bfe4b95bc7b1a6723b19fc08e33742f41aaba6752aa318",
+  "review_sha256": "5c44321a5e85f57a93c00079ba75314bbfd04293418633b5f252f1425afe59d9",
+  "status": "awaiting human approval",
+  "reviewed_paths": [
+    "pyproject.toml",
+    "se_harness/__init__.py",
+    "tests/test_artifact_catalog.py",
+    "tests/test_instruction_architecture.py",
+    "tests/test_progressive_documentation.py",
+    "docs/notes/agentic-execution-host-adapters.md",
+    "docs/notes/developing-se-harness.md",
+    "docs/notes/harness-operational-phasing.md",
+    "docs/notes/harness-overview.md",
+    "docs/notes/harness-uml-model.md",
+    "docs/notes/harnessctl-reference.md",
+    "docs/notes/README.md",
+    "docs/notes/technical-communication.md"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+    "-I",
+    "-c",
+    "import sys,json\nfrom pathlib import Path\nfrom se_harness.instruction_discovery import validate_delivery_evidence\nprint(json.dumps(validate_delivery_evidence(Path(sys.argv[1]),Path(sys.argv[2]),Path(sys.argv[3]).read_bytes(),Path(sys.argv[4]).read_bytes())))",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\repository-harness-upgrade\\evidence\\WO-HUP-003\\instruction-delivery.json",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\repository-harness-upgrade\\evidence\\WO-HUP-003\\planned-entry.md",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\.engineering-harness.lock"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "schema": "se-harness-native-instruction-delivery-v1",
+    "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "target_version": "0.21.0",
+    "prior_lock_sha256": "7a07913cfa217f71d26bda20e535f1f94b632ad99c6c59612955c23fa59c481b",
+    "entry_sha256": "aff67d60eea312f4325804e1df3ed52d4af17ddcb336cc3f9d3784c5de7f515d",
+    "host": "codex",
+    "host_version": "codex-cli 0.159.2",
+    "evidence_sha256": "c789ede8c9b1b7ee84d96c8966b67452b356e7e1930d563155db1803b81e67dc"
+  },
+  "seconds": 0.16604019999977027
+}

@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\pr520-ci-probe\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check-pr",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--event",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\adoption-pr-live-event.json",
+    "--from-git",
+    "695d6773dc86f25691a9799e969bcca014207837",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 2,
+  "result": {
+    "stdout": "",
+    "stderr": "harnessctl: pull-request check: WO-HUP-003: selected evaluator archive_name does not match installed resources\n"
+  },
+  "seconds": 5.728255599999102
+}

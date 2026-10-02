@@ -1,0 +1,48 @@
+{
+  "schema": "adoption-local-check-summary-v1",
+  "work_order": "WO-HUP-003",
+  "state": "in_progress",
+  "implementation_complete": false,
+  "verification_record_prepared": false,
+  "passed": [
+    "released 0.21.0 identity",
+    "doctor",
+    "artifact validation",
+    "released-root qualification",
+    "no-op upgrade preview",
+    "resource lookup and artifact authoring preview",
+    "distribution validation",
+    "CLI smoke"
+  ],
+  "full_suite": {
+    "passed": false,
+    "tests": 1209,
+    "failures": 18,
+    "errors": 4,
+    "skipped": 21,
+    "raw_log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\full-source-suite.json",
+    "raw_log_sha256": "b2c1f03669733caf60b3bc56e61d24d87bdabcf23ec4f0836c9489fa889c9547",
+    "findings": [
+      "Obsolete local guide links",
+      "Two source test modules read retired instruction copies",
+      "PRE008: development and released versions both 0.21.0",
+      "Two tests observed the briefly incomplete WO-HUP-005 draft; all three tests in those classes pass on the stable draft"
+    ]
+  },
+  "scope_correction": {
+    "artifact": "WO-HUP-005",
+    "status": "draft",
+    "verification_proposed": "required; combined VREC-HUP-025",
+    "implementation_applied": false,
+    "version_choice": "Human mmzen selected development source 0.21.1 without publication; evaluator stays 0.21.0"
+  },
+  "remaining": [
+    "Approve and execute bounded correction",
+    "Rerun required checks on stable candidate",
+    "Predecessor assessment at clean committed candidate",
+    "Complete combined handoff",
+    "Prepare exact-candidate VREC-HUP-025",
+    "Human verification",
+    "Separately authorized push/PR and passing hosted checks before merge"
+  ]
+}

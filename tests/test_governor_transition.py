@@ -203,6 +203,93 @@ class GovernorTransitionTests(unittest.TestCase):
         self.assertEqual("lock", plan["transition"]["archive_source"])
         self.assertEqual("RLS-TST-001", plan["transition"]["trusted_release"]["id"])
 
+    def external_layout(self, fixture: RepositoryFixture) -> None:
+        path = fixture.root / ".engineering-harness.lock"
+        value = json.loads(path.read_bytes())
+        value.update(schema=5, resource_layout="released-resources-v1")
+        value.pop("skill_ownership", None)
+        write(path, canonical_json(value))
+        write(fixture.root / ".engineering-harness.toml",
+              config(value["tool_version"]) + b'resource_layout = "released-resources-v1"\n')
+
+    def test_external_resource_upgrade_keeps_release_and_transaction_binding(self) -> None:
+        for base_schema in (3, 4, 5):
+            with self.subTest(base_schema=base_schema):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    base = fixture.base()
+                    if base_schema == 4:
+                        _, plugin = ownership_locks()
+                        write(fixture.root / ".engineering-harness.lock", canonical_json(plugin))
+                    elif base_schema == 5:
+                        self.external_layout(fixture)
+                    if base_schema != 3:
+                        base = fixture.commit("selected predecessor layout")
+                    fixture.target(base)
+                    self.external_layout(fixture)
+                    head = fixture.commit("external target")
+                    plan = TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+                    self.assertTrue(plan["transition_required"])
+                    self.assertEqual(base_schema, plan["base"]["lock_schema"])
+                    self.assertEqual(5, plan["target"]["lock_schema"])
+                    self.assertEqual(head, plan["target"]["commit"])
+                    self.assertEqual("RLS-TST-001", plan["transition"]["trusted_release"]["id"])
+                    evidence = fixture.root / "docs/engineering/sample/evidence/evaluator-upgrade.json"
+                    value = json.loads(evidence.read_bytes())
+                    value["prior"]["lock_sha256"] = "0" * 64
+                    write(evidence, canonical_json(value))
+                    fixture.commit("wrong external transaction")
+                    with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "exactly one"):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_unchanged_external_root_needs_no_transition_but_drift_is_rejected(self) -> None:
+        temporary, fixture = self.fixture()
+        with temporary:
+            fixture.base()
+            self.external_layout(fixture)
+            base = fixture.commit("external base")
+            write(fixture.root / "notes.txt", b"ordinary change\n")
+            fixture.commit("ordinary change")
+            result = TRANSITION.assess(str(fixture.root), base, "refs/remotes/origin/main", None, None, None)
+            self.assertEqual("not_applicable", result["assessment"])
+            self.assertFalse(result["transition_required"])
+            path = fixture.root / ".engineering-harness.lock"
+            value = json.loads(path.read_bytes())
+            value["files"]["unrelated.txt"] = {"mode": "seed", "state": "present"}
+            write(path, canonical_json(value))
+            fixture.commit("unexplained lock change")
+            with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "same-version"):
+                TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_external_layout_requires_matching_selection_and_no_skill_ownership(self) -> None:
+        cases = [
+            (5, None, "released-resources-v1", False),
+            (5, "released-resources-v1", None, False),
+            (5, "other", "released-resources-v1", False),
+            (5, "released-resources-v1", "other", False),
+            (5, "released-resources-v1", "released-resources-v1", True),
+            (3, "released-resources-v1", "released-resources-v1", False),
+            (4, "released-resources-v1", "released-resources-v1", True),
+        ]
+        for schema, lock_layout, config_layout, ownership in cases:
+            with self.subTest(case=(schema, lock_layout, config_layout, ownership)):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    base = fixture.base()
+                    value = json.loads(lock("7.4.0", schema=schema, identity=evaluator("7.4.0")))
+                    if lock_layout is not None:
+                        value["resource_layout"] = lock_layout
+                    if ownership:
+                        value["skill_ownership"] = {"provider": "plugin"}
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(value))
+                    config_bytes = config("7.4.0")
+                    if config_layout is not None:
+                        config_bytes += f'resource_layout = "{config_layout}"\n'.encode()
+                    write(fixture.root / ".engineering-harness.toml", config_bytes)
+                    fixture.commit("invalid external selection")
+                    with self.assertRaises(TRANSITION.GovernorTransitionError):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
     def test_index_installed_target_takes_its_wheel_from_the_trusted_release(self) -> None:
         """SPEC-REB-012: a null archive pair is an index install; the released record
         binding the version supplies the wheel the assessment installs."""
@@ -319,7 +406,7 @@ class GovernorTransitionTests(unittest.TestCase):
                     self.assertFalse(TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")["transition_required"])
 
     def test_schema_and_provider_errors_are_rejected(self) -> None:
-        cases = [(schema, {"provider": "plugin"}) for schema in (1, 2, 5, "4", 4.0)]
+        cases = [(schema, {"provider": "plugin"}) for schema in (1, 2, 5, 6, "4", 4.0)]
         cases += [(4, value) for value in (None, [], {}, {"provider": "repository"})]
         cases.append((3, {"provider": "plugin"}))
         for schema, binding in cases:

@@ -1,0 +1,23 @@
+{
+  "base": "695d6773dc86f25691a9799e969bcca014207837",
+  "artifacts": [
+    {
+      "id": "WO-HUP-003",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\repository-harness-upgrade\\work-orders\\WO-HUP-003.md",
+      "sha256": "af45f1183a249cb3e9188699cbaca582c03e9cd38fe14111f0eef3ae856e6f6a"
+    },
+    {
+      "id": "VER-HUP-003",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\repository-harness-upgrade\\verification\\VER-HUP-003.md",
+      "sha256": "a3a939a248237c77d661aaca5401852a6fe0de401316035d607f81c2b1ff6530"
+    }
+  ],
+  "preview_sha256": "e3b58b322f9875aef87f402c66c90ab9fc4d71d4aa5e05a29a387fddaa613c9f",
+  "counts": {
+    "update": 2,
+    "unchanged": 4,
+    "remove": 44,
+    "preserve": 2
+  },
+  "changed_paths_in_scope": true
+}

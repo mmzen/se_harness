@@ -1,0 +1,268 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "upgrade",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--external-resources",
+    "--prior-wheel",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\compatibility-0201-evidence\\release030-public-downloads-1001\\se_harness-0.20.1-py3-none-any.whl",
+    "--retire-file",
+    "docs/engineering/ARTIFACT_AUTHORING.md",
+    "--retire-file",
+    "docs/engineering/templates/ADR.template.md",
+    "--retire-file",
+    "docs/engineering/templates/ARCHITECTURE.template.md",
+    "--retire-file",
+    "docs/engineering/templates/CAPABILITY.template.md",
+    "--retire-file",
+    "docs/engineering/templates/DECISION.template.md",
+    "--retire-file",
+    "docs/engineering/templates/INTENT.template.md",
+    "--retire-file",
+    "docs/engineering/templates/OPERATING_CONTRACT.template.md",
+    "--retire-file",
+    "docs/engineering/templates/README.md",
+    "--retire-file",
+    "docs/engineering/templates/RELEASE_CONTRACT.template.md",
+    "--retire-file",
+    "docs/engineering/templates/RELEASE_RECORD.template.md",
+    "--retire-file",
+    "docs/engineering/templates/REQUIREMENT.template.md",
+    "--retire-file",
+    "docs/engineering/templates/RISK.template.md",
+    "--retire-file",
+    "docs/engineering/templates/SPECIFICATION.template.md",
+    "--retire-file",
+    "docs/engineering/templates/VERIFICATION.template.md",
+    "--retire-file",
+    "docs/engineering/templates/VERIFICATION_RECORD.template.md",
+    "--retire-file",
+    "docs/engineering/templates/WORK_ORDER.template.md",
+    "--evidence-output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\repository-harness-upgrade\\evidence\\WO-HUP-003-evaluator-upgrade.json",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "changes": [
+      {
+        "action": "update",
+        "path": ".engineering-harness.lock"
+      },
+      {
+        "action": "update",
+        "path": ".engineering-harness.toml"
+      },
+      {
+        "action": "unchanged",
+        "path": ".gitattributes"
+      },
+      {
+        "action": "unchanged",
+        "path": ".github/PULL_REQUEST_TEMPLATE.md"
+      },
+      {
+        "action": "unchanged",
+        "path": ".github/workflows/engineering-harness.yml"
+      },
+      {
+        "action": "unchanged",
+        "path": ".gitignore"
+      },
+      {
+        "action": "remove",
+        "path": "ENGINEERING_HARNESS.md"
+      },
+      {
+        "action": "preserve",
+        "path": "GLOSSARY.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/ARTIFACT_AUTHORING.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/QUALITY_GATES.json"
+      },
+      {
+        "action": "preserve",
+        "path": "docs/engineering/README.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/WORKFLOW.json"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/AMEND_DEFINITIONS.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/ARTIFACTS.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/AUTHORITY.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/AUTHORIZE_WORK.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/COMMUNICATION.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/CONTINUE.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/DEFINE_CHANGE.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/DEFINITION_LINKS.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/DELIVER_RESULT.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/DRAFT_DEFINITIONS.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/DRAFT_WORK_ORDERS.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/EXCEPTIONS.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/EXECUTE_WORK.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/PULL_REQUEST.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/RECORD_STATE.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/RELEASE.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/RESULTS.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/RISKS_AND_DECISIONS.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/SETUP.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/SKILL_PROVIDER.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/UPGRADE.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/VERIFY_OUTCOME.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/WORK_AND_EVIDENCE.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/harness/migration/REFERENCE_MAP.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/ADR.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/ARCHITECTURE.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/CAPABILITY.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/DECISION.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/INTENT.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/OPERATING_CONTRACT.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/README.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/RELEASE_CONTRACT.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/RELEASE_RECORD.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/REQUIREMENT.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/RISK.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/SPECIFICATION.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/VERIFICATION.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/VERIFICATION_RECORD.template.md"
+      },
+      {
+        "action": "remove",
+        "path": "docs/engineering/templates/WORK_ORDER.template.md"
+      }
+    ],
+    "command": "upgrade",
+    "instruction_delivery_required": true,
+    "outcome": "completed",
+    "schema": "se-harness-command-result-v1",
+    "written": false
+  },
+  "seconds": 0.6039362999999867
+}

@@ -47,6 +47,7 @@ class FakeEvaluators:
     four_number_summary: bool = False
     lock_schema: object = 3
     lock_ownership: object = ABSENT
+    lock_resource_layout: object = ABSENT
     lock_version: str | None = None
     lock_payload: str | None = None
     calls: list[list[str]] = field(default_factory=list)
@@ -101,6 +102,9 @@ class FakeEvaluators:
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
             lock["schema"] = self.lock_schema
             lock.pop("skill_ownership", None)
+            lock.pop("resource_layout", None)
+            if self.lock_resource_layout is not ABSENT:
+                lock["resource_layout"] = self.lock_resource_layout
             if self.lock_ownership is not ABSENT:
                 lock["skill_ownership"] = self.lock_ownership
             lock["tool_version"] = self.lock_version or self.successor_version
@@ -155,11 +159,14 @@ class UpgradeRehearsalTests(unittest.TestCase):
             output=self.output, runner=fake, workspace=self.workspace,
         )
 
-    def set_initial_ownership(self, schema, ownership=ABSENT) -> None:
+    def set_initial_ownership(self, schema, ownership=ABSENT, resource_layout=ABSENT) -> None:
         path = self.repository / ".engineering-harness.lock"
         lock = json.loads(path.read_text(encoding="utf-8"))
         lock["schema"] = schema
         lock.pop("skill_ownership", None)
+        lock.pop("resource_layout", None)
+        if resource_layout is not ABSENT:
+            lock["resource_layout"] = resource_layout
         if ownership is not ABSENT:
             lock["skill_ownership"] = ownership
         path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
@@ -182,6 +189,46 @@ class UpgradeRehearsalTests(unittest.TestCase):
                 self.assertEqual(result["lock"]["canonical_sha256"], result["semantic_sha256"])
                 self.assertEqual(before, (self.repository / ".engineering-harness.lock").read_bytes())
                 self.assertEqual("", git(self.repository, "status", "--porcelain"))
+
+    def test_external_resource_handover_preserves_layout_and_identity_checks(self) -> None:
+        self.set_initial_ownership(5, resource_layout="released-resources-v1")
+        before = (self.repository / ".engineering-harness.lock").read_bytes()
+        for index, overrides in enumerate(({}, {"lock_version": "0.9.0"}, {"lock_payload": "c" * 64})):
+            with self.subTest(overrides=overrides):
+                self.output = self.output.with_name(f"external-{index}")
+                result = self.run_rehearsal(FakeEvaluators(lock_schema=5, lock_resource_layout="released-resources-v1", **overrides))
+                self.assertEqual("fail" if overrides else "pass", result["overall_result"], result["failure"])
+                self.assertEqual(before, (self.repository / ".engineering-harness.lock").read_bytes())
+                if not overrides:
+                    self.assertEqual(5, result["lock"]["schema"])
+                    self.assertEqual(result["lock"]["canonical_sha256"], result["semantic_sha256"])
+                    self.assertEqual(6, len(result["steps"]))
+
+    def test_external_layout_refuses_invalid_records_and_ownership_switch(self) -> None:
+        cases = ((5, ABSENT, "other"), (5, {"provider": "plugin"}, "released-resources-v1"),
+                 (3, ABSENT, "released-resources-v1"), (4, {"provider": "plugin"}, "released-resources-v1"),
+                 (6, ABSENT, "released-resources-v1"))
+        for stage in ("exported", "resulting"):
+            for index, (schema, ownership, layout) in enumerate(cases):
+                with self.subTest(stage=stage, case=index):
+                    self.output = self.output.with_name(f"external-invalid-{stage}-{index}")
+                    if stage == "exported":
+                        self.set_initial_ownership(schema, ownership, layout)
+                        fake = FakeEvaluators(lock_schema=5, lock_resource_layout="released-resources-v1")
+                    else:
+                        self.set_initial_ownership(5, resource_layout="released-resources-v1")
+                        fake = FakeEvaluators(lock_schema=schema, lock_ownership=ownership, lock_resource_layout=layout)
+                    result = self.run_rehearsal(fake)
+                    self.assertEqual("fail", result["overall_result"])
+                    self.assertIn(f"the {stage} lock has unsupported ownership", result["failure"])
+                    self.assertIsNone(result["semantic_sha256"])
+        for index, (initial, resulting) in enumerate(((5, 3), (3, 5))):
+            with self.subTest(initial=initial):
+                self.set_initial_ownership(initial, resource_layout="released-resources-v1" if initial == 5 else ABSENT)
+                self.output = self.output.with_name(f"external-switch-{index}")
+                result = self.run_rehearsal(FakeEvaluators(lock_schema=resulting, lock_resource_layout="released-resources-v1" if resulting == 5 else ABSENT))
+                self.assertEqual("fail", result["overall_result"])
+                self.assertIn("changes skill ownership", result["failure"])
 
     def test_unsupported_ownership_fails_for_initial_and_resulting_locks(self) -> None:
         cases = ((2, ABSENT), (5, ABSENT), (3.0, ABSENT), ("4", {"provider": "plugin"}),

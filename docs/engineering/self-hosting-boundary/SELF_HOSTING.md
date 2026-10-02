@@ -7,10 +7,12 @@ This guide supersedes the former specialized self-hosting operating model. The f
 The `se_harness` implementation checkout is a standard governed repository:
 
 - `.engineering-harness.toml` selects the exact released evaluator version and ordinary repository policy.
-- `.github/workflows/engineering-harness.yml` is the standard managed released-evaluator workflow.
-- `.engineering-harness.lock` protects the standard managed installation.
+- `.github/workflows/engineering-harness.yml` is the owner-maintained released-evaluator workflow, pinned to 0.21.0 under WO-HUP-003.
+- `.engineering-harness.lock` binds the selected 0.21.0 wheel resources and retained integrations with schema 5. Shared instructions and templates live outside the checkout.
 - `.github/workflows/candidate-evidence.yml` is repository-owned CI for candidate source and package evidence.
-- Candidate execution never changes formal lifecycle state or root managed controls.
+- Candidate execution never changes formal lifecycle state or the released-resource selection.
+
+Resolve the entry with `harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`. Read only the selected procedures returned by the evaluator. WO-HUP-003 retires the copied entry and resources after review of matching Codex CLI startup and compaction traces.
 
 There is no active governor descriptor, protected implementation-repository class, packaged migration data, role-specific reusable workflow, or `reconcile-governor` command.
 

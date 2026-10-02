@@ -147,9 +147,10 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         self.assertIn("omits its `architecture` relation", model)
         self.assertNotIn("Current limitation", model)
         self.assertIn(
-            "../engineering/harness/ARTIFACTS.md#artifact-types",
+            "docs/engineering/harness/ARTIFACTS.md",
             model,
         )
+        self.assertIn("`artifact-types`", model)
 
     def test_active_public_command_contract_uses_six_commands(self) -> None:
         distribution = REPOSITORY_ROOT / "docs" / "engineering" / "harness-distribution"

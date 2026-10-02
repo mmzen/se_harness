@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "tests.test_legacy_release_evidence.ThisRepositoryTests",
+    "tests.test_dashboard_webui.RequirementProjectionTests",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "result": {
+    "stdout": "",
+    "stderr": "test_the_retired_machinery_is_absent_from_the_validator (tests.test_legacy_release_evidence.ThisRepositoryTests.test_the_retired_machinery_is_absent_from_the_validator) ... ok\ntest_this_repository_validates_clean_with_no_w024 (tests.test_legacy_release_evidence.ThisRepositoryTests.test_this_repository_validates_clean_with_no_w024) ... ok\ntest_array_verification_method_projects_as_a_joined_string (tests.test_dashboard_webui.RequirementProjectionTests.test_array_verification_method_projects_as_a_joined_string) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 18.555s\n\nOK\n"
+  },
+  "seconds": 18.93184519999886
+}

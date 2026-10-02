@@ -224,8 +224,14 @@ def _root_identity(root: Path, revision: str, label: str) -> tuple[dict[str, Any
         raise GovernorTransitionError(
             f"{label} lock predates the schema-3 floor; remove the stale lock and re-adopt with harnessctl init"
         )
-    if type(schema) is not int or schema not in (3, 4):
+    if type(schema) is not int or schema not in (3, 4, 5):
         raise GovernorTransitionError(f"{label} lock schema is unsupported (minimum schema 3)")
+    if schema == 5:
+        if (lock.get("resource_layout") != "released-resources-v1"
+                or harness.get("resource_layout") != "released-resources-v1"):
+            raise GovernorTransitionError(f"{label} external resource layout is invalid")
+    elif "resource_layout" in lock or "resource_layout" in harness:
+        raise GovernorTransitionError(f"{label} external resources require lock schema 5")
     ownership = lock.get("skill_ownership")
     if schema == 4:
         if not isinstance(ownership, dict) or ownership.get("provider") != "plugin":

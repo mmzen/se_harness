@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "create-artifact",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--domain",
+    "repository-harness-upgrade",
+    "--type",
+    "work_order",
+    "--dry-run",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "allocated_id": "WO-HUP-005",
+    "changes": [
+      {
+        "action": "create",
+        "path": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-005.md"
+      }
+    ],
+    "command": "create-artifact",
+    "dry_run": true,
+    "outcome": "completed",
+    "schema": "se-harness-command-result-v1"
+  },
+  "seconds": 6.039696099998764
+}

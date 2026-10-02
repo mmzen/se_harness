@@ -1,0 +1,74 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\pr520-ci-probe\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "qualify",
+    "released-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\pr520-ci-probe\\root-qualification-local.json",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "authority": "evidence-only; no lifecycle or external action authorized",
+    "checks": [
+      {
+        "id": "RR001",
+        "message": "runtime matches the target root lock",
+        "passed": true,
+        "subject": "released-evaluator"
+      },
+      {
+        "id": "RR002",
+        "message": "11/11 managed checks passed",
+        "passed": true,
+        "subject": "managed-root"
+      },
+      {
+        "id": "RR003",
+        "message": "artifacts=1839; errors=0; warnings=58",
+        "passed": true,
+        "subject": "engineering-graph"
+      },
+      {
+        "id": "RR004",
+        "message": "target state is unchanged",
+        "passed": true,
+        "subject": "repository-state"
+      }
+    ],
+    "completion": "completed",
+    "evaluator": {
+      "diagnostics": [],
+      "distribution": "se-harness",
+      "entry_point_sha256": "2b55fe62efcc27454ece3eb26f2a7496fb2d635f8c1603d89ff854846078879e",
+      "evaluator_archive_name": "se_harness-0.21.0-py3-none-any.whl",
+      "evaluator_archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+      "evaluator_payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+      "identity_sha256": "9f8a8d05158635714809be89b15bf8f134b05603271c3e6e5685c0d90a18a8c3",
+      "isolated_python": true,
+      "pythonpath_present": false,
+      "role": "released-evaluator",
+      "user_site_enabled": false,
+      "version": "0.21.0"
+    },
+    "independence": "released-evaluator",
+    "operation": "released-root",
+    "passed": true,
+    "schema": "se-harness-release-qualification-v1",
+    "target": {
+      "head": "bab13d4a626a80e5a5bdc8bab7aa1658527d74e6",
+      "identity_sha256": "4ba222da93dc92f1f0c79eff66b8723cd484e573e50fe4dcc08bc2f6b074e55d",
+      "kind": "released-root",
+      "lock_schema": 5,
+      "lock_sha256": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+      "tree": "c5cbe7757f5eb23e2ccab9e6b31dae64c05ad8d8"
+    }
+  },
+  "seconds": 6.19055699999808
+}
