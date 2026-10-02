@@ -1,0 +1,2323 @@
+{
+  "review_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+  "run": {
+    "conclusion": "success",
+    "databaseId": 36964442551,
+    "event": "workflow_dispatch",
+    "headSha": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+    "jobs": [
+      {
+        "completedAt": "2026-10-02T04:25:07Z",
+        "conclusion": "success",
+        "databaseId": 110705009107,
+        "name": "Select release rehearsals",
+        "startedAt": "2026-10-02T04:24:56Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-02T04:24:57Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-02T04:24:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:03Z",
+            "conclusion": "success",
+            "name": "Check out the candidate",
+            "number": 2,
+            "startedAt": "2026-10-02T04:24:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:03Z",
+            "conclusion": "success",
+            "name": "Select Python 3.11",
+            "number": 3,
+            "startedAt": "2026-10-02T04:25:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:03Z",
+            "conclusion": "skipped",
+            "name": "Fetch the comparison commit",
+            "number": 4,
+            "startedAt": "2026-10-02T04:25:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:03Z",
+            "conclusion": "success",
+            "name": "Select relevant rehearsals and the release record",
+            "number": 5,
+            "startedAt": "2026-10-02T04:25:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:04Z",
+            "conclusion": "success",
+            "name": "Post Select Python 3.11",
+            "number": 9,
+            "startedAt": "2026-10-02T04:25:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:04Z",
+            "conclusion": "success",
+            "name": "Post Check out the candidate",
+            "number": 10,
+            "startedAt": "2026-10-02T04:25:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:04Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-10-02T04:25:04Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36964442551/job/110705009107"
+      },
+      {
+        "completedAt": "2026-10-02T04:25:58Z",
+        "conclusion": "success",
+        "databaseId": 110705064155,
+        "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+        "startedAt": "2026-10-02T04:25:11Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-02T04:25:13Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-02T04:25:12Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:19Z",
+            "conclusion": "success",
+            "name": "Check out the subject with full history",
+            "number": 2,
+            "startedAt": "2026-10-02T04:25:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:19Z",
+            "conclusion": "success",
+            "name": "Select the one trusted orchestration Python",
+            "number": 3,
+            "startedAt": "2026-10-02T04:25:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:19Z",
+            "conclusion": "success",
+            "name": "Validate the inputs",
+            "number": 4,
+            "startedAt": "2026-10-02T04:25:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:19Z",
+            "conclusion": "success",
+            "name": "Resolve the subject",
+            "number": 5,
+            "startedAt": "2026-10-02T04:25:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:19Z",
+            "conclusion": "skipped",
+            "name": "Qualify the exact candidate without publication credentials",
+            "number": 6,
+            "startedAt": "2026-10-02T04:25:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:54Z",
+            "conclusion": "success",
+            "name": "Replay the exact recipe twice",
+            "number": 7,
+            "startedAt": "2026-10-02T04:25:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:54Z",
+            "conclusion": "skipped",
+            "name": "Verify the rebuilt bundle against the record",
+            "number": 8,
+            "startedAt": "2026-10-02T04:25:54Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:54Z",
+            "conclusion": "success",
+            "name": "Prove the qualification left no checkout change",
+            "number": 9,
+            "startedAt": "2026-10-02T04:25:54Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:55Z",
+            "conclusion": "success",
+            "name": "Retain the candidate-controlled qualification result",
+            "number": 10,
+            "startedAt": "2026-10-02T04:25:54Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:55Z",
+            "conclusion": "skipped",
+            "name": "Transfer only verified inert release bytes",
+            "number": 11,
+            "startedAt": "2026-10-02T04:25:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:55Z",
+            "conclusion": "success",
+            "name": "Post Select the one trusted orchestration Python",
+            "number": 21,
+            "startedAt": "2026-10-02T04:25:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:56Z",
+            "conclusion": "success",
+            "name": "Post Check out the subject with full history",
+            "number": 22,
+            "startedAt": "2026-10-02T04:25:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:56Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "startedAt": "2026-10-02T04:25:56Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36964442551/job/110705064155"
+      },
+      {
+        "completedAt": "2026-10-02T04:28:04Z",
+        "conclusion": "success",
+        "databaseId": 110705064241,
+        "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+        "startedAt": "2026-10-02T04:25:10Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-02T04:25:12Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-02T04:25:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:17Z",
+            "conclusion": "success",
+            "name": "Check out the subject with full history",
+            "number": 2,
+            "startedAt": "2026-10-02T04:25:12Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:17Z",
+            "conclusion": "success",
+            "name": "Select the one trusted orchestration Python",
+            "number": 3,
+            "startedAt": "2026-10-02T04:25:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:18Z",
+            "conclusion": "success",
+            "name": "Validate the inputs",
+            "number": 4,
+            "startedAt": "2026-10-02T04:25:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:25:30Z",
+            "conclusion": "success",
+            "name": "Resolve the subject",
+            "number": 5,
+            "startedAt": "2026-10-02T04:25:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:27:30Z",
+            "conclusion": "success",
+            "name": "Qualify the exact candidate without publication credentials",
+            "number": 6,
+            "startedAt": "2026-10-02T04:25:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:27:56Z",
+            "conclusion": "success",
+            "name": "Replay the exact recipe twice",
+            "number": 7,
+            "startedAt": "2026-10-02T04:27:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:27:57Z",
+            "conclusion": "success",
+            "name": "Verify the rebuilt bundle against the record",
+            "number": 8,
+            "startedAt": "2026-10-02T04:27:56Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:27:57Z",
+            "conclusion": "success",
+            "name": "Prove the qualification left no checkout change",
+            "number": 9,
+            "startedAt": "2026-10-02T04:27:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:27:58Z",
+            "conclusion": "success",
+            "name": "Retain the candidate-controlled qualification result",
+            "number": 10,
+            "startedAt": "2026-10-02T04:27:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:28:00Z",
+            "conclusion": "success",
+            "name": "Transfer only verified inert release bytes",
+            "number": 11,
+            "startedAt": "2026-10-02T04:27:58Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:28:00Z",
+            "conclusion": "success",
+            "name": "Post Select the one trusted orchestration Python",
+            "number": 21,
+            "startedAt": "2026-10-02T04:28:00Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:28:01Z",
+            "conclusion": "success",
+            "name": "Post Check out the subject with full history",
+            "number": 22,
+            "startedAt": "2026-10-02T04:28:00Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:28:01Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "startedAt": "2026-10-02T04:28:01Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36964442551/job/110705064241"
+      },
+      {
+        "completedAt": "2026-10-02T04:28:09Z",
+        "conclusion": "success",
+        "databaseId": 110705715978,
+        "name": "Publication rehearsal",
+        "startedAt": "2026-10-02T04:28:07Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-02T04:28:08Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-02T04:28:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:28:08Z",
+            "conclusion": "success",
+            "name": "Report selected checks or a successful skip",
+            "number": 2,
+            "startedAt": "2026-10-02T04:28:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-02T04:28:08Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 3,
+            "startedAt": "2026-10-02T04:28:08Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36964442551/job/110705715978"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/mmzen/se_harness/actions/runs/36964442551"
+  },
+  "candidate_replay": {
+    "authority": "technical replay evidence only; no lifecycle or external-action authority",
+    "builds": [
+      {
+        "id": "a",
+        "sdist_sha256": "f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b",
+        "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+      },
+      {
+        "id": "b",
+        "sdist_sha256": "f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b",
+        "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+      }
+    ],
+    "candidate": {
+      "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "source_date_epoch": 1790915026,
+      "source_manifest_sha256": "326a77de837da64bf2a06948169787c86823c010ddcbeedbcb520fb23c8fec1b"
+    },
+    "expected": {
+      "sdist_sha256": null,
+      "wheel_sha256": null
+    },
+    "manifest": {
+      "build_recipe": "release/build-recipe.json",
+      "build_recipe_schema": "se-harness-release-build-recipe/v1",
+      "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+      "checksums": "SHA256SUMS",
+      "checksums_content": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789  se_harness-0.21.0-py3-none-any.whl\nf1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b  se_harness-0.21.0.tar.gz\n",
+      "checksums_sha256": "5a19fbe2b516631a15cd0eb5d6258e95c68478fa800e2cc5b6e9ed05c3d76b3a",
+      "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "git_object_format": "sha1",
+      "schema": "se-harness-release-bundle/v2",
+      "sdist": "se_harness-0.21.0.tar.gz",
+      "sdist_sha256": "f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b",
+      "source_date_epoch": 1790915026,
+      "source_manifest_sha256": "326a77de837da64bf2a06948169787c86823c010ddcbeedbcb520fb23c8fec1b",
+      "version": "0.21.0",
+      "wheel": "se_harness-0.21.0-py3-none-any.whl",
+      "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+    },
+    "observations": [
+      {
+        "commands": [
+          [
+            "python",
+            "-m",
+            "pip",
+            "install",
+            "--disable-pip-version-check",
+            "--no-cache-dir",
+            "--only-binary=:all:",
+            "--require-hashes",
+            "--target",
+            "{toolchain_dir}",
+            "-r",
+            "{toolchain_lock}"
+          ],
+          [
+            "python",
+            "-m",
+            "build",
+            "--wheel",
+            "--sdist",
+            "--no-isolation",
+            "--outdir",
+            "{raw_output}",
+            "."
+          ],
+          [
+            "python",
+            "scripts/normalize_sdist.py",
+            "{raw_sdist}",
+            "{final_sdist}",
+            "--epoch",
+            "{source_date_epoch}"
+          ]
+        ],
+        "environment": {
+          "HOME": "/tmp/se-harness-home",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PATH": "/usr/local/bin:/usr/bin:/bin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1790915026",
+          "TZ": "UTC"
+        },
+        "observed": {
+          "architecture": "amd64",
+          "os": "linux",
+          "pointer_bits": 64,
+          "python_implementation": "CPython",
+          "python_version": "3.11.9"
+        },
+        "outputs": {
+          "se_harness-0.21.0-py3-none-any.whl": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+          "se_harness-0.21.0.tar.gz": "f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b"
+        },
+        "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+        "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+        "schema": "se-harness-release-build-producer/v1",
+        "toolchain": [
+          {
+            "name": "build",
+            "version": "1.3.0"
+          },
+          {
+            "name": "colorama",
+            "version": "0.4.6"
+          },
+          {
+            "name": "packaging",
+            "version": "26.3"
+          },
+          {
+            "name": "pip",
+            "version": "24.0"
+          },
+          {
+            "name": "pyproject-hooks",
+            "version": "1.2.0"
+          },
+          {
+            "name": "setuptools",
+            "version": "84.0.0"
+          },
+          {
+            "name": "wheel",
+            "version": "0.48.0"
+          }
+        ]
+      },
+      {
+        "commands": [
+          [
+            "python",
+            "-m",
+            "pip",
+            "install",
+            "--disable-pip-version-check",
+            "--no-cache-dir",
+            "--only-binary=:all:",
+            "--require-hashes",
+            "--target",
+            "{toolchain_dir}",
+            "-r",
+            "{toolchain_lock}"
+          ],
+          [
+            "python",
+            "-m",
+            "build",
+            "--wheel",
+            "--sdist",
+            "--no-isolation",
+            "--outdir",
+            "{raw_output}",
+            "."
+          ],
+          [
+            "python",
+            "scripts/normalize_sdist.py",
+            "{raw_sdist}",
+            "{final_sdist}",
+            "--epoch",
+            "{source_date_epoch}"
+          ]
+        ],
+        "environment": {
+          "HOME": "/tmp/se-harness-home",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PATH": "/usr/local/bin:/usr/bin:/bin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1790915026",
+          "TZ": "UTC"
+        },
+        "observed": {
+          "architecture": "amd64",
+          "os": "linux",
+          "pointer_bits": 64,
+          "python_implementation": "CPython",
+          "python_version": "3.11.9"
+        },
+        "outputs": {
+          "se_harness-0.21.0-py3-none-any.whl": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+          "se_harness-0.21.0.tar.gz": "f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b"
+        },
+        "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+        "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+        "schema": "se-harness-release-build-producer/v1",
+        "toolchain": [
+          {
+            "name": "build",
+            "version": "1.3.0"
+          },
+          {
+            "name": "colorama",
+            "version": "0.4.6"
+          },
+          {
+            "name": "packaging",
+            "version": "26.3"
+          },
+          {
+            "name": "pip",
+            "version": "24.0"
+          },
+          {
+            "name": "pyproject-hooks",
+            "version": "1.2.0"
+          },
+          {
+            "name": "setuptools",
+            "version": "84.0.0"
+          },
+          {
+            "name": "wheel",
+            "version": "0.48.0"
+          }
+        ]
+      }
+    ],
+    "producer": {
+      "architecture": "amd64",
+      "image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+      "os": "linux"
+    },
+    "recipe": {
+      "path": "release/build-recipe.json",
+      "schema": "se-harness-release-build-recipe/v1",
+      "sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc"
+    },
+    "schema": "se-harness-release-build-replay/v1",
+    "state": "exact"
+  },
+  "release_record_replay": {
+    "authority": "technical replay evidence only; no lifecycle or external-action authority",
+    "builds": [
+      {
+        "id": "a",
+        "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+      },
+      {
+        "id": "b",
+        "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+        "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+      }
+    ],
+    "candidate": {
+      "commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+      "source_date_epoch": 1790799840,
+      "source_manifest_sha256": "890eb07d32540fb81beba94f6db409c7cafe2abcd6b1889e1aa0ac1fd9baa846"
+    },
+    "expected": {
+      "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+      "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+    },
+    "manifest": {
+      "build_recipe": "release/build-recipe.json",
+      "build_recipe_schema": "se-harness-release-build-recipe/v1",
+      "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+      "checksums": "SHA256SUMS",
+      "checksums_content": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764  se_harness-0.20.1-py3-none-any.whl\na4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a  se_harness-0.20.1.tar.gz\n",
+      "checksums_sha256": "8ef1f3b9ce5a465f963e34e711deed624b9645d2f25824f23624bee089a8f0ac",
+      "commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+      "git_object_format": "sha1",
+      "schema": "se-harness-release-bundle/v2",
+      "sdist": "se_harness-0.20.1.tar.gz",
+      "sdist_sha256": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a",
+      "source_date_epoch": 1790799840,
+      "source_manifest_sha256": "890eb07d32540fb81beba94f6db409c7cafe2abcd6b1889e1aa0ac1fd9baa846",
+      "version": "0.20.1",
+      "wheel": "se_harness-0.20.1-py3-none-any.whl",
+      "wheel_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+    },
+    "observations": [
+      {
+        "commands": [
+          [
+            "python",
+            "-m",
+            "pip",
+            "install",
+            "--disable-pip-version-check",
+            "--no-cache-dir",
+            "--only-binary=:all:",
+            "--require-hashes",
+            "--target",
+            "{toolchain_dir}",
+            "-r",
+            "{toolchain_lock}"
+          ],
+          [
+            "python",
+            "-m",
+            "build",
+            "--wheel",
+            "--sdist",
+            "--no-isolation",
+            "--outdir",
+            "{raw_output}",
+            "."
+          ],
+          [
+            "python",
+            "scripts/normalize_sdist.py",
+            "{raw_sdist}",
+            "{final_sdist}",
+            "--epoch",
+            "{source_date_epoch}"
+          ]
+        ],
+        "environment": {
+          "HOME": "/tmp/se-harness-home",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PATH": "/usr/local/bin:/usr/bin:/bin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1790799840",
+          "TZ": "UTC"
+        },
+        "observed": {
+          "architecture": "amd64",
+          "os": "linux",
+          "pointer_bits": 64,
+          "python_implementation": "CPython",
+          "python_version": "3.11.9"
+        },
+        "outputs": {
+          "se_harness-0.20.1-py3-none-any.whl": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+          "se_harness-0.20.1.tar.gz": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a"
+        },
+        "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+        "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+        "schema": "se-harness-release-build-producer/v1",
+        "toolchain": [
+          {
+            "name": "build",
+            "version": "1.3.0"
+          },
+          {
+            "name": "colorama",
+            "version": "0.4.6"
+          },
+          {
+            "name": "packaging",
+            "version": "26.3"
+          },
+          {
+            "name": "pip",
+            "version": "24.0"
+          },
+          {
+            "name": "pyproject-hooks",
+            "version": "1.2.0"
+          },
+          {
+            "name": "setuptools",
+            "version": "84.0.0"
+          },
+          {
+            "name": "wheel",
+            "version": "0.48.0"
+          }
+        ]
+      },
+      {
+        "commands": [
+          [
+            "python",
+            "-m",
+            "pip",
+            "install",
+            "--disable-pip-version-check",
+            "--no-cache-dir",
+            "--only-binary=:all:",
+            "--require-hashes",
+            "--target",
+            "{toolchain_dir}",
+            "-r",
+            "{toolchain_lock}"
+          ],
+          [
+            "python",
+            "-m",
+            "build",
+            "--wheel",
+            "--sdist",
+            "--no-isolation",
+            "--outdir",
+            "{raw_output}",
+            "."
+          ],
+          [
+            "python",
+            "scripts/normalize_sdist.py",
+            "{raw_sdist}",
+            "{final_sdist}",
+            "--epoch",
+            "{source_date_epoch}"
+          ]
+        ],
+        "environment": {
+          "HOME": "/tmp/se-harness-home",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PATH": "/usr/local/bin:/usr/bin:/bin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1790799840",
+          "TZ": "UTC"
+        },
+        "observed": {
+          "architecture": "amd64",
+          "os": "linux",
+          "pointer_bits": 64,
+          "python_implementation": "CPython",
+          "python_version": "3.11.9"
+        },
+        "outputs": {
+          "se_harness-0.20.1-py3-none-any.whl": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
+          "se_harness-0.20.1.tar.gz": "a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a"
+        },
+        "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+        "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+        "schema": "se-harness-release-build-producer/v1",
+        "toolchain": [
+          {
+            "name": "build",
+            "version": "1.3.0"
+          },
+          {
+            "name": "colorama",
+            "version": "0.4.6"
+          },
+          {
+            "name": "packaging",
+            "version": "26.3"
+          },
+          {
+            "name": "pip",
+            "version": "24.0"
+          },
+          {
+            "name": "pyproject-hooks",
+            "version": "1.2.0"
+          },
+          {
+            "name": "setuptools",
+            "version": "84.0.0"
+          },
+          {
+            "name": "wheel",
+            "version": "0.48.0"
+          }
+        ]
+      }
+    ],
+    "producer": {
+      "architecture": "amd64",
+      "image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+      "os": "linux"
+    },
+    "recipe": {
+      "path": "release/build-recipe.json",
+      "schema": "se-harness-release-build-recipe/v1",
+      "sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc"
+    },
+    "release_record": "RLS-SEH-030",
+    "schema": "se-harness-release-build-replay/v1",
+    "state": "exact"
+  },
+  "record_qualification": {
+    "authority": "evidence-only; no lifecycle or external action authorized",
+    "checks": [
+      {
+        "id": "CC001",
+        "message": "candidate runtime is bound to the checkout",
+        "passed": true,
+        "subject": "candidate-runtime"
+      },
+      {
+        "id": "CC002",
+        "message": "HEAD and tracked tree match the candidate",
+        "passed": true,
+        "subject": "candidate-commit"
+      },
+      {
+        "id": "CC003",
+        "message": "artifacts=1750; errors=0; warnings=52",
+        "passed": true,
+        "subject": "engineering-graph"
+      },
+      {
+        "id": "CC004",
+        "message": "target state is unchanged",
+        "passed": true,
+        "subject": "repository-state"
+      }
+    ],
+    "completion": "completed",
+    "evaluator": {
+      "candidate_commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+      "diagnostics": [],
+      "distribution": "se-harness",
+      "identity_sha256": "72a4e9401443d3171150de6015283f2e61a3697a89de5bbbb3c69714eb1f8cbd",
+      "isolated_python": false,
+      "pythonpath_present": false,
+      "role": "candidate-source",
+      "user_site_enabled": false,
+      "version": "0.20.1"
+    },
+    "independence": "candidate-controlled",
+    "operation": "complete-candidate",
+    "passed": true,
+    "schema": "se-harness-release-qualification-v1",
+    "target": {
+      "commit": "b9af631b850c495eace9807361ed3ec3e36a10b2",
+      "identity_sha256": "32255838b705809e096518f51665382bb38f701f8655d725233e40b7a2a7d4ee",
+      "kind": "complete-candidate",
+      "tree": "83235b9c9f95123a95f240fa66103e118759c963"
+    }
+  },
+  "linux_source": {
+    "passed": true,
+    "candidate_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+    "commands": [
+      {
+        "label": "before-clean",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain=v1",
+          "--untracked-files=all"
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "label": "restore-source-origin",
+        "argv": [
+          "git",
+          "remote",
+          "set-url",
+          "origin",
+          "https://github.com/mmzen/se_harness.git"
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "label": "head",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775\n",
+        "stderr": ""
+      },
+      {
+        "label": "identity",
+        "argv": [
+          "/usr/bin/python3",
+          "--version"
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "Python 3.12.3\n",
+        "stderr": ""
+      },
+      {
+        "label": "complete-candidate",
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "se_harness",
+          "qualify",
+          "complete-candidate",
+          ".",
+          "--candidate-commit",
+          "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+          "--json"
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "{\n  \"authority\": \"evidence-only; no lifecycle or external action authorized\",\n  \"checks\": [\n    {\n      \"id\": \"CC001\",\n      \"message\": \"candidate runtime is bound to the checkout\",\n      \"passed\": true,\n      \"subject\": \"candidate-runtime\"\n    },\n    {\n      \"id\": \"CC002\",\n      \"message\": \"HEAD and tracked tree match the candidate\",\n      \"passed\": true,\n      \"subject\": \"candidate-commit\"\n    },\n    {\n      \"id\": \"CC003\",\n      \"message\": \"artifacts=1824; errors=0; warnings=54\",\n      \"passed\": true,\n      \"subject\": \"engineering-graph\"\n    },\n    {\n      \"id\": \"CC004\",\n      \"message\": \"target state is unchanged\",\n      \"passed\": true,\n      \"subject\": \"repository-state\"\n    }\n  ],\n  \"completion\": \"completed\",\n  \"evaluator\": {\n    \"candidate_commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"diagnostics\": [],\n    \"distribution\": \"se-harness\",\n    \"identity_sha256\": \"1b4f4b23e40033591ef667f1bc4eecd585bee231439bc50ce5b4d3859ba55e26\",\n    \"isolated_python\": false,\n    \"pythonpath_present\": false,\n    \"role\": \"candidate-source\",\n    \"user_site_enabled\": false,\n    \"version\": \"0.21.0\"\n  },\n  \"independence\": \"candidate-controlled\",\n  \"operation\": \"complete-candidate\",\n  \"passed\": true,\n  \"schema\": \"se-harness-release-qualification-v1\",\n  \"target\": {\n    \"commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"identity_sha256\": \"5ac53fb5850f394b34ff3ecba7d0106eae661b489f8134f9ad38c5ab60bfbd0c\",\n    \"kind\": \"complete-candidate\",\n    \"tree\": \"5c80454245d2eee89431c80103aef3009af6f8df\"\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "full-source",
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/run_tests.py",
+          "--workers",
+          "2",
+          "--scale",
+          "full"
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "Evaluator Python: /tmp/simple-plugin-85vpc_1o/private/evaluators/0.0.0/061138946a3c25ffcaddd628ec576db614a56ff8c5256063bd07473d1cd71da4/bin/python\nEvaluator Python: /tmp/simple-plugin-85vpc_1o/private/evaluators/0.0.0/061138946a3c25ffcaddd628ec576db614a56ff8c5256063bd07473d1cd71da4/bin/python\nWEX_SCALE artifacts=100 validation=0.030965s focus=0.106223s plan=0.070548s\nWEX_SCALE artifacts=500 validation=0.145087s focus=0.248702s plan=0.336699s\nWEX_SCALE artifacts=1000 validation=0.315205s focus=0.410464s plan=0.676618s\ndocs/notes/diagnostic-codes.md matches the source\n0.21.0\n----------------------------------------------------------------------\nRan 1215 tests in 79.035s (181 classes, 2 workers)\n\nOK (skipped=2)\n",
+        "stderr": "--workers must be at least 1\n"
+      },
+      {
+        "label": "distributions",
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/validate_release_distributions.py",
+          "--root",
+          "."
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "SE Harness release distribution validation: FAIL\n- fatal: bad object b9af631b850c495eace9807361ed3ec3e36a10b2\n- fatal: bad object b9af631b850c495eace9807361ed3ec3e36a10b2\n"
+      },
+      {
+        "label": "historical-input",
+        "argv": [
+          "git",
+          "fetch",
+          "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/reconcile-minimal-20261001/rls031-maintenance.bundle",
+          "refs/tags/v0.20.1:refs/tags/v0.20.1"
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "From /mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/reconcile-minimal-20261001/rls031-maintenance.bundle\n * [new tag]           v0.20.1    -> v0.20.1\n"
+      },
+      {
+        "label": "head",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775\n",
+        "stderr": ""
+      },
+      {
+        "label": "distributions",
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/validate_release_distributions.py",
+          "--root",
+          "."
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "SE Harness release distribution validation: PASS (20 distribution-bearing records)\n",
+        "stderr": ""
+      },
+      {
+        "label": "clean",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain=v1",
+          "--untracked-files=all"
+        ],
+        "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "explanation": "The exact-candidate full suite passed. Distribution validation initially lacked the separate historical 0.20.1 commit; importing its existing tag bundle supplied that input, and distribution validation then passed. No source file changed."
+  },
+  "linux_attempts": [
+    {
+      "argv": [
+        "C:\\Windows\\System32\\wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "--exec",
+        "python3",
+        "-c",
+        "import json,pathlib,subprocess,sys,tempfile,os\no=json.load(sys.stdin);stage=pathlib.Path(tempfile.mkdtemp(prefix='rls031-source-'));source=stage/'source'\nenv=dict(os.environ,PYTHONNOUSERSITE='1',PIP_NO_INDEX='1');env.pop('PYTHONPATH',None)\nrows=[]\ndef run(label,argv,cwd):\n argv=list(map(str,argv));p=subprocess.run(argv,cwd=cwd,env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=1200)\n rows.append(dict(label=label,argv=argv,cwd=str(cwd),exit_code=p.returncode,stdout=p.stdout,stderr=p.stderr));assert p.returncode==0,(label,p.stderr[-3000:]);return p\nr={'candidate_commit':o['candidate'],'passed':False,'commands':rows}\ntry:\n run('clone',['git','-c','safe.directory='+o['repository'],'clone','--no-local','--no-checkout',o['repository'],source],stage)\n run('checkout',['git','checkout','--detach',o['candidate']],source)\n assert run('head',['git','rev-parse','HEAD'],source).stdout.strip()==o['candidate']\n run('identity',[sys.executable,'--version'],source)\n run('complete-candidate',[sys.executable,'-B','-m','se_harness','qualify','complete-candidate','.', '--candidate-commit',o['candidate'],'--json'],source)\n run('full-source',[sys.executable,'-B','scripts/run_tests.py','--scale','full'],source)\n run('distributions',[sys.executable,'-B','scripts/validate_release_distributions.py','--root','.'],source)\n assert not run('clean',['git','status','--porcelain=v1','--untracked-files=all'],source).stdout.strip()\n r['passed']=True\nexcept Exception as e:r['error']=str(e)\nprint(json.dumps(r));sys.exit(0 if r['passed'] else 1)\n"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "result": {
+        "candidate_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "passed": false,
+        "commands": [
+          {
+            "label": "clone",
+            "argv": [
+              "git",
+              "-c",
+              "safe.directory=/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/release030-main",
+              "clone",
+              "--no-local",
+              "--no-checkout",
+              "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/release030-main",
+              "/tmp/rls031-source-zmcnur7_/source"
+            ],
+            "cwd": "/tmp/rls031-source-zmcnur7_",
+            "exit_code": 128,
+            "stdout": "",
+            "stderr": "fatal: not a git repository: /mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/release030-main/C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness/.git/worktrees/release030-main\n"
+          }
+        ],
+        "error": "('clone', 'fatal: not a git repository: /mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/release030-main/C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness/.git/worktrees/release030-main\\n')"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Windows\\System32\\wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "--exec",
+        "python3",
+        "-c",
+        "import json,pathlib,subprocess,sys,tempfile,os\no=json.load(sys.stdin);stage=pathlib.Path(tempfile.mkdtemp(prefix='rls031-source-'));source=stage/'source'\nenv=dict(os.environ,PYTHONNOUSERSITE='1',PIP_NO_INDEX='1');env.pop('PYTHONPATH',None)\nrows=[]\ndef run(label,argv,cwd):\n argv=list(map(str,argv));p=subprocess.run(argv,cwd=cwd,env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=1200)\n rows.append(dict(label=label,argv=argv,cwd=str(cwd),exit_code=p.returncode,stdout=p.stdout,stderr=p.stderr));assert p.returncode==0,(label,p.stderr[-3000:]);return p\nr={'candidate_commit':o['candidate'],'passed':False,'commands':rows}\ntry:\n run('clone',['git','-c','safe.directory='+o['repository'],'clone','--no-local','--no-checkout',o['repository'],source],stage)\n run('checkout',['git','checkout','--detach',o['candidate']],source)\n assert run('head',['git','rev-parse','HEAD'],source).stdout.strip()==o['candidate']\n run('identity',[sys.executable,'--version'],source)\n run('complete-candidate',[sys.executable,'-B','-m','se_harness','qualify','complete-candidate','.', '--candidate-commit',o['candidate'],'--json'],source)\n run('full-source',[sys.executable,'-B','scripts/run_tests.py','--scale','full'],source)\n run('distributions',[sys.executable,'-B','scripts/validate_release_distributions.py','--root','.'],source)\n assert not run('clean',['git','status','--porcelain=v1','--untracked-files=all'],source).stdout.strip()\n r['passed']=True\nexcept Exception as e:r['error']=str(e)\nprint(json.dumps(r));sys.exit(0 if r['passed'] else 1)\n"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "result": {
+        "candidate_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "passed": false,
+        "commands": [
+          {
+            "label": "clone",
+            "argv": [
+              "git",
+              "-c",
+              "safe.directory=/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/reconcile-minimal-20261001/rls031-final-source.bundle",
+              "clone",
+              "--no-local",
+              "--no-checkout",
+              "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/reconcile-minimal-20261001/rls031-final-source.bundle",
+              "/tmp/rls031-source-8tkpvw8u/source"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u",
+            "exit_code": 0,
+            "stdout": "",
+            "stderr": "Cloning into '/tmp/rls031-source-8tkpvw8u/source'...\n"
+          },
+          {
+            "label": "checkout",
+            "argv": [
+              "git",
+              "checkout",
+              "--detach",
+              "4031f0fa4b5c4a95651bd928a110d8b2d94f9775"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 0,
+            "stdout": "",
+            "stderr": "HEAD is now at 4031f0fa Complete release qualification evidence for 0.21.0\n"
+          },
+          {
+            "label": "head",
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 0,
+            "stdout": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775\n",
+            "stderr": ""
+          },
+          {
+            "label": "identity",
+            "argv": [
+              "/usr/bin/python3",
+              "--version"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 0,
+            "stdout": "Python 3.12.3\n",
+            "stderr": ""
+          },
+          {
+            "label": "complete-candidate",
+            "argv": [
+              "/usr/bin/python3",
+              "-B",
+              "-m",
+              "se_harness",
+              "qualify",
+              "complete-candidate",
+              ".",
+              "--candidate-commit",
+              "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+              "--json"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 0,
+            "stdout": "{\n  \"authority\": \"evidence-only; no lifecycle or external action authorized\",\n  \"checks\": [\n    {\n      \"id\": \"CC001\",\n      \"message\": \"candidate runtime is bound to the checkout\",\n      \"passed\": true,\n      \"subject\": \"candidate-runtime\"\n    },\n    {\n      \"id\": \"CC002\",\n      \"message\": \"HEAD and tracked tree match the candidate\",\n      \"passed\": true,\n      \"subject\": \"candidate-commit\"\n    },\n    {\n      \"id\": \"CC003\",\n      \"message\": \"artifacts=1824; errors=0; warnings=54\",\n      \"passed\": true,\n      \"subject\": \"engineering-graph\"\n    },\n    {\n      \"id\": \"CC004\",\n      \"message\": \"target state is unchanged\",\n      \"passed\": true,\n      \"subject\": \"repository-state\"\n    }\n  ],\n  \"completion\": \"completed\",\n  \"evaluator\": {\n    \"candidate_commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"diagnostics\": [],\n    \"distribution\": \"se-harness\",\n    \"identity_sha256\": \"1b4f4b23e40033591ef667f1bc4eecd585bee231439bc50ce5b4d3859ba55e26\",\n    \"isolated_python\": false,\n    \"pythonpath_present\": false,\n    \"role\": \"candidate-source\",\n    \"user_site_enabled\": false,\n    \"version\": \"0.21.0\"\n  },\n  \"independence\": \"candidate-controlled\",\n  \"operation\": \"complete-candidate\",\n  \"passed\": true,\n  \"schema\": \"se-harness-release-qualification-v1\",\n  \"target\": {\n    \"commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"identity_sha256\": \"5ac53fb5850f394b34ff3ecba7d0106eae661b489f8134f9ad38c5ab60bfbd0c\",\n    \"kind\": \"complete-candidate\",\n    \"tree\": \"5c80454245d2eee89431c80103aef3009af6f8df\"\n  }\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "full-source",
+            "argv": [
+              "/usr/bin/python3",
+              "-B",
+              "scripts/run_tests.py",
+              "--scale",
+              "full"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 1,
+            "stdout": "Evaluator Python: /tmp/simple-plugin-7x8xj78b/private/evaluators/0.0.0/3dd7d5941eeb0f81c79f8103d9fcffdf943e988ae612f291472bcc63ed8e4c4e/bin/python\nEvaluator Python: /tmp/simple-plugin-7x8xj78b/private/evaluators/0.0.0/3dd7d5941eeb0f81c79f8103d9fcffdf943e988ae612f291472bcc63ed8e4c4e/bin/python\nWEX_SCALE artifacts=100 validation=0.046921s focus=0.137224s plan=0.106094s\nWEX_SCALE artifacts=500 validation=0.224994s focus=0.312181s plan=0.432712s\nWEX_SCALE artifacts=1000 validation=0.393373s focus=0.520732s plan=0.875999s\ndocs/notes/diagnostic-codes.md matches the source\n0.21.0\n======================================================================\nFAIL: test_dashboard_webui.DashboardWebUIContractTests.test_release_proof_fields_reach_the_summary_and_compact_topology\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/rls031-source-8tkpvw8u/source/tests/test_dashboard_webui.py\", line 450, in test_release_proof_fields_reach_the_summary_and_compact_topology\n    self.assertEqual(\"https://github.com/mmzen/se_harness\", summary[\"repository\"].get(\"source_url\"))\nAssertionError: 'https://github.com/mmzen/se_harness' != None\n\n----------------------------------------------------------------------\nRan 1215 tests in 32.272s (181 classes, 8 workers)\n\nFAILED (failures=1, skipped=2)\n",
+            "stderr": "--workers must be at least 1\n"
+          }
+        ],
+        "error": "('full-source', '--workers must be at least 1\\n')"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Windows\\System32\\wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "--exec",
+        "python3",
+        "-c",
+        "import json,pathlib,subprocess,sys,tempfile,os\no=json.load(sys.stdin);source=pathlib.Path(o['existing_source']);stage=source.parent\nenv=dict(os.environ,PYTHONNOUSERSITE='1',PIP_NO_INDEX='1');env.pop('PYTHONPATH',None)\nrows=[]\ndef run(label,argv,cwd):\n argv=list(map(str,argv));p=subprocess.run(argv,cwd=cwd,env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=1200)\n rows.append(dict(label=label,argv=argv,cwd=str(cwd),exit_code=p.returncode,stdout=p.stdout,stderr=p.stderr));assert p.returncode==0,(label,p.stderr[-3000:]);return p\nr={'candidate_commit':o['candidate'],'passed':False,'commands':rows}\ntry:\n assert not run('before-clean',['git','status','--porcelain=v1','--untracked-files=all'],source).stdout.strip()\n assert run('head',['git','rev-parse','HEAD'],source).stdout.strip()==o['candidate']\n run('identity',[sys.executable,'--version'],source)\n run('complete-candidate',[sys.executable,'-B','-m','se_harness','qualify','complete-candidate','.', '--candidate-commit',o['candidate'],'--json'],source)\n run('full-source',[sys.executable,'-B','scripts/run_tests.py','--workers','2','--scale','full'],source)\n run('distributions',[sys.executable,'-B','scripts/validate_release_distributions.py','--root','.'],source)\n assert not run('clean',['git','status','--porcelain=v1','--untracked-files=all'],source).stdout.strip()\n r['passed']=True\nexcept Exception as e:r['error']=str(e)\nprint(json.dumps(r));sys.exit(0 if r['passed'] else 1)\n"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "result": {
+        "candidate_commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "passed": false,
+        "commands": [
+          {
+            "label": "before-clean",
+            "argv": [
+              "git",
+              "status",
+              "--porcelain=v1",
+              "--untracked-files=all"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "label": "head",
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 0,
+            "stdout": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775\n",
+            "stderr": ""
+          },
+          {
+            "label": "identity",
+            "argv": [
+              "/usr/bin/python3",
+              "--version"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 0,
+            "stdout": "Python 3.12.3\n",
+            "stderr": ""
+          },
+          {
+            "label": "complete-candidate",
+            "argv": [
+              "/usr/bin/python3",
+              "-B",
+              "-m",
+              "se_harness",
+              "qualify",
+              "complete-candidate",
+              ".",
+              "--candidate-commit",
+              "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+              "--json"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 0,
+            "stdout": "{\n  \"authority\": \"evidence-only; no lifecycle or external action authorized\",\n  \"checks\": [\n    {\n      \"id\": \"CC001\",\n      \"message\": \"candidate runtime is bound to the checkout\",\n      \"passed\": true,\n      \"subject\": \"candidate-runtime\"\n    },\n    {\n      \"id\": \"CC002\",\n      \"message\": \"HEAD and tracked tree match the candidate\",\n      \"passed\": true,\n      \"subject\": \"candidate-commit\"\n    },\n    {\n      \"id\": \"CC003\",\n      \"message\": \"artifacts=1824; errors=0; warnings=54\",\n      \"passed\": true,\n      \"subject\": \"engineering-graph\"\n    },\n    {\n      \"id\": \"CC004\",\n      \"message\": \"target state is unchanged\",\n      \"passed\": true,\n      \"subject\": \"repository-state\"\n    }\n  ],\n  \"completion\": \"completed\",\n  \"evaluator\": {\n    \"candidate_commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"diagnostics\": [],\n    \"distribution\": \"se-harness\",\n    \"identity_sha256\": \"1b4f4b23e40033591ef667f1bc4eecd585bee231439bc50ce5b4d3859ba55e26\",\n    \"isolated_python\": false,\n    \"pythonpath_present\": false,\n    \"role\": \"candidate-source\",\n    \"user_site_enabled\": false,\n    \"version\": \"0.21.0\"\n  },\n  \"independence\": \"candidate-controlled\",\n  \"operation\": \"complete-candidate\",\n  \"passed\": true,\n  \"schema\": \"se-harness-release-qualification-v1\",\n  \"target\": {\n    \"commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"identity_sha256\": \"5ac53fb5850f394b34ff3ecba7d0106eae661b489f8134f9ad38c5ab60bfbd0c\",\n    \"kind\": \"complete-candidate\",\n    \"tree\": \"5c80454245d2eee89431c80103aef3009af6f8df\"\n  }\n}\n",
+            "stderr": ""
+          },
+          {
+            "label": "full-source",
+            "argv": [
+              "/usr/bin/python3",
+              "-B",
+              "scripts/run_tests.py",
+              "--workers",
+              "2",
+              "--scale",
+              "full"
+            ],
+            "cwd": "/tmp/rls031-source-8tkpvw8u/source",
+            "exit_code": 1,
+            "stdout": "WEX_SCALE artifacts=100 validation=0.030661s focus=0.096015s plan=0.067422s\nWEX_SCALE artifacts=500 validation=0.173842s focus=0.239465s plan=0.333838s\nWEX_SCALE artifacts=1000 validation=0.340784s focus=0.402033s plan=0.619225s\ndocs/notes/diagnostic-codes.md matches the source\nEvaluator Python: /tmp/simple-plugin-de3xbzyj/private/evaluators/0.0.0/90198851fb42a019bdadf32b3d9639c82b6cef8b0e51742da29b1f4247cf1ad0/bin/python\nEvaluator Python: /tmp/simple-plugin-de3xbzyj/private/evaluators/0.0.0/90198851fb42a019bdadf32b3d9639c82b6cef8b0e51742da29b1f4247cf1ad0/bin/python\n0.21.0\n======================================================================\nFAIL: test_dashboard_webui.DashboardWebUIContractTests.test_release_proof_fields_reach_the_summary_and_compact_topology\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/rls031-source-8tkpvw8u/source/tests/test_dashboard_webui.py\", line 450, in test_release_proof_fields_reach_the_summary_and_compact_topology\n    self.assertEqual(\"https://github.com/mmzen/se_harness\", summary[\"repository\"].get(\"source_url\"))\nAssertionError: 'https://github.com/mmzen/se_harness' != None\n\n----------------------------------------------------------------------\nRan 1215 tests in 78.704s (181 classes, 2 workers)\n\nFAILED (failures=1, skipped=2)\n",
+            "stderr": "--workers must be at least 1\n"
+          }
+        ],
+        "error": "('full-source', '--workers must be at least 1\\n')"
+      }
+    }
+  ],
+  "linux_driver_source": "from reconcile021 import *\nC='4031f0fa4b5c4a95651bd928a110d8b2d94f9775'\nprogram=r'''import json,pathlib,subprocess,sys,tempfile,os\no=json.load(sys.stdin);source=pathlib.Path(o['existing_source']);stage=source.parent\nenv=dict(os.environ,PYTHONNOUSERSITE='1',PIP_NO_INDEX='1');env.pop('PYTHONPATH',None)\nrows=[]\ndef run(label,argv,cwd):\n argv=list(map(str,argv));p=subprocess.run(argv,cwd=cwd,env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=1200)\n rows.append(dict(label=label,argv=argv,cwd=str(cwd),exit_code=p.returncode,stdout=p.stdout,stderr=p.stderr));assert p.returncode==0,(label,p.stderr[-3000:]);return p\nr={'candidate_commit':o['candidate'],'passed':False,'commands':rows}\ntry:\n assert not run('before-clean',['git','status','--porcelain=v1','--untracked-files=all'],source).stdout.strip()\n run('restore-source-origin',['git','remote','set-url','origin','https://github.com/mmzen/se_harness.git'],source)\n assert run('head',['git','rev-parse','HEAD'],source).stdout.strip()==o['candidate']\n run('identity',[sys.executable,'--version'],source)\n run('complete-candidate',[sys.executable,'-B','-m','se_harness','qualify','complete-candidate','.', '--candidate-commit',o['candidate'],'--json'],source)\n run('full-source',[sys.executable,'-B','scripts/run_tests.py','--workers','2','--scale','full'],source)\n run('distributions',[sys.executable,'-B','scripts/validate_release_distributions.py','--root','.'],source)\n assert not run('clean',['git','status','--porcelain=v1','--untracked-files=all'],source).stdout.strip()\n r['passed']=True\nexcept Exception as e:r['error']=str(e)\nprint(json.dumps(r));sys.exit(0 if r['passed'] else 1)\n'''\nrepo='/mnt/c/'+(OUT/'rls031-final-source.bundle').as_posix()[3:]\nargv=[r'C:\\Windows\\System32\\wsl.exe','-d','Ubuntu-24.04','--exec','python3','-c',program]\nprevious=json.loads((OUT/'rls031-final-linux-source-retry.json').read_text())['result']\nexisting=next(row['cwd'] for row in previous['commands'] if row['label']=='head')\np=subprocess.run(argv,input=json.dumps({'candidate':C,'repository':repo,'existing_source':existing}),cwd=WORK,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=1800)\ntry:r=json.loads(p.stdout)\nexcept ValueError:r={'stdout':p.stdout,'stderr':p.stderr}\nsave('rls031-final-linux-source-retry3',{'argv':argv,'cwd':str(WORK),'exit_code':p.returncode,'result':r})\nprint(json.dumps({'exit_code':p.returncode,'passed':r.get('passed'),'error':r.get('error'),'steps':[(v['label'],v['exit_code']) for v in r.get('commands',[])]}));assert p.returncode==0\n",
+  "capture_driver_source": "\"\"\"Transient aggregate capture driver: exact source tests and retained hosted checks.\"\"\"\nfrom pathlib import Path\nimport hashlib,json,subprocess,sys,os\ncandidate,receipt_name,expected_digest=sys.argv[1:]\nrows=[]\nenv=dict(os.environ,PYTHONNOUSERSITE='1');env.pop('PYTHONPATH',None)\nraw=Path(receipt_name).read_bytes()\nassert hashlib.sha256(raw).hexdigest()==expected_digest\no=json.loads(raw)\nassert o['review_commit']==candidate\nassert o['run']['headSha']==candidate and o['run']['event']=='workflow_dispatch'\nassert o['run']['status']=='completed' and o['run']['conclusion']=='success'\nreplay=o['candidate_replay']\nassert replay['candidate']['commit']==candidate\nassert replay['manifest']['commit']==candidate and replay['manifest']['version']=='0.21.0'\nassert replay['builds'][0]['wheel_sha256']==replay['builds'][1]['wheel_sha256']\nassert replay['builds'][0]['sdist_sha256']==replay['builds'][1]['sdist_sha256']\nold=o['release_record_replay']\nassert old['release_record']=='RLS-SEH-030' and old['state']=='exact'\nassert old['candidate']['commit']=='b9af631b850c495eace9807361ed3ec3e36a10b2'\nassert o['record_qualification']['passed']\nassert o['linux_source']['passed'] and o['linux_source']['candidate_commit']==candidate\nhead=subprocess.run(['git','rev-parse','HEAD'],check=True,capture_output=True,text=True).stdout.strip()\nassert head==candidate\nfor args in [['-m','se_harness','qualify','complete-candidate','.','--candidate-commit',candidate,'--json'],['scripts/run_tests.py','--scale','full'],['scripts/validate_release_distributions.py','--root','.']]:\n argv=[sys.executable,'-B',*args]\n p=subprocess.run(argv,env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=1200)\n rows.append({'argv':argv,'cwd':str(Path.cwd()),'exit_code':p.returncode,'stdout':p.stdout,'stderr':p.stderr})\n Path(receipt_name).with_name('rls031-capture-test-observations.json').write_text(json.dumps(rows,indent=2),encoding='utf-8')\n print(json.dumps({'argv':argv,'cwd':str(Path.cwd()),'exit_code':p.returncode}))\n print(p.stdout);print(p.stderr,file=sys.stderr)\n assert p.returncode==0\nprint(json.dumps({'candidate_commit':candidate,'hosted_receipt_sha256':expected_digest,'hosted_observation':o,'desktop':'Unverified; accepted deviation DEC-RLS-001 and accepted risk RISK-RLS-001 apply to this release only. No desktop pass claimed.','meaning':'Aggregate preparation evidence only. No human assurance decision, release decision, publication or adoption.'},ensure_ascii=False))\n",
+  "retained_files": {
+    "rls031-final-hosted-candidate/release-build-replay.json": {
+      "sha256": "f814726d67dfdbcea8bfda045051dd1c74853c67b502a4b126cff72372bc3234",
+      "text": "{\n  \"authority\": \"technical replay evidence only; no lifecycle or external-action authority\",\n  \"builds\": [\n    {\n      \"id\": \"a\",\n      \"sdist_sha256\": \"f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b\",\n      \"wheel_sha256\": \"13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\"\n    },\n    {\n      \"id\": \"b\",\n      \"sdist_sha256\": \"f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b\",\n      \"wheel_sha256\": \"13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\"\n    }\n  ],\n  \"candidate\": {\n    \"commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"source_date_epoch\": 1790915026,\n    \"source_manifest_sha256\": \"326a77de837da64bf2a06948169787c86823c010ddcbeedbcb520fb23c8fec1b\"\n  },\n  \"expected\": {\n    \"sdist_sha256\": null,\n    \"wheel_sha256\": null\n  },\n  \"manifest\": {\n    \"build_recipe\": \"release/build-recipe.json\",\n    \"build_recipe_schema\": \"se-harness-release-build-recipe/v1\",\n    \"build_recipe_sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\",\n    \"checksums\": \"SHA256SUMS\",\n    \"checksums_content\": \"13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789  se_harness-0.21.0-py3-none-any.whl\\nf1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b  se_harness-0.21.0.tar.gz\\n\",\n    \"checksums_sha256\": \"5a19fbe2b516631a15cd0eb5d6258e95c68478fa800e2cc5b6e9ed05c3d76b3a\",\n    \"commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"git_object_format\": \"sha1\",\n    \"schema\": \"se-harness-release-bundle/v2\",\n    \"sdist\": \"se_harness-0.21.0.tar.gz\",\n    \"sdist_sha256\": \"f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b\",\n    \"source_date_epoch\": 1790915026,\n    \"source_manifest_sha256\": \"326a77de837da64bf2a06948169787c86823c010ddcbeedbcb520fb23c8fec1b\",\n    \"version\": \"0.21.0\",\n    \"wheel\": \"se_harness-0.21.0-py3-none-any.whl\",\n    \"wheel_sha256\": \"13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\"\n  },\n  \"observations\": [\n    {\n      \"commands\": [\n        [\n          \"python\",\n          \"-m\",\n          \"pip\",\n          \"install\",\n          \"--disable-pip-version-check\",\n          \"--no-cache-dir\",\n          \"--only-binary=:all:\",\n          \"--require-hashes\",\n          \"--target\",\n          \"{toolchain_dir}\",\n          \"-r\",\n          \"{toolchain_lock}\"\n        ],\n        [\n          \"python\",\n          \"-m\",\n          \"build\",\n          \"--wheel\",\n          \"--sdist\",\n          \"--no-isolation\",\n          \"--outdir\",\n          \"{raw_output}\",\n          \".\"\n        ],\n        [\n          \"python\",\n          \"scripts/normalize_sdist.py\",\n          \"{raw_sdist}\",\n          \"{final_sdist}\",\n          \"--epoch\",\n          \"{source_date_epoch}\"\n        ]\n      ],\n      \"environment\": {\n        \"HOME\": \"/tmp/se-harness-home\",\n        \"LANG\": \"C.UTF-8\",\n        \"LC_ALL\": \"C.UTF-8\",\n        \"PATH\": \"/usr/local/bin:/usr/bin:/bin\",\n        \"PYTHONDONTWRITEBYTECODE\": \"1\",\n        \"PYTHONHASHSEED\": \"0\",\n        \"SOURCE_DATE_EPOCH\": \"1790915026\",\n        \"TZ\": \"UTC\"\n      },\n      \"observed\": {\n        \"architecture\": \"amd64\",\n        \"os\": \"linux\",\n        \"pointer_bits\": 64,\n        \"python_implementation\": \"CPython\",\n        \"python_version\": \"3.11.9\"\n      },\n      \"outputs\": {\n        \"se_harness-0.21.0-py3-none-any.whl\": \"13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\",\n        \"se_harness-0.21.0.tar.gz\": \"f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b\"\n      },\n      \"producer_image\": \"python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050\",\n      \"recipe_sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\",\n      \"schema\": \"se-harness-release-build-producer/v1\",\n      \"toolchain\": [\n        {\n          \"name\": \"build\",\n          \"version\": \"1.3.0\"\n        },\n        {\n          \"name\": \"colorama\",\n          \"version\": \"0.4.6\"\n        },\n        {\n          \"name\": \"packaging\",\n          \"version\": \"26.3\"\n        },\n        {\n          \"name\": \"pip\",\n          \"version\": \"24.0\"\n        },\n        {\n          \"name\": \"pyproject-hooks\",\n          \"version\": \"1.2.0\"\n        },\n        {\n          \"name\": \"setuptools\",\n          \"version\": \"84.0.0\"\n        },\n        {\n          \"name\": \"wheel\",\n          \"version\": \"0.48.0\"\n        }\n      ]\n    },\n    {\n      \"commands\": [\n        [\n          \"python\",\n          \"-m\",\n          \"pip\",\n          \"install\",\n          \"--disable-pip-version-check\",\n          \"--no-cache-dir\",\n          \"--only-binary=:all:\",\n          \"--require-hashes\",\n          \"--target\",\n          \"{toolchain_dir}\",\n          \"-r\",\n          \"{toolchain_lock}\"\n        ],\n        [\n          \"python\",\n          \"-m\",\n          \"build\",\n          \"--wheel\",\n          \"--sdist\",\n          \"--no-isolation\",\n          \"--outdir\",\n          \"{raw_output}\",\n          \".\"\n        ],\n        [\n          \"python\",\n          \"scripts/normalize_sdist.py\",\n          \"{raw_sdist}\",\n          \"{final_sdist}\",\n          \"--epoch\",\n          \"{source_date_epoch}\"\n        ]\n      ],\n      \"environment\": {\n        \"HOME\": \"/tmp/se-harness-home\",\n        \"LANG\": \"C.UTF-8\",\n        \"LC_ALL\": \"C.UTF-8\",\n        \"PATH\": \"/usr/local/bin:/usr/bin:/bin\",\n        \"PYTHONDONTWRITEBYTECODE\": \"1\",\n        \"PYTHONHASHSEED\": \"0\",\n        \"SOURCE_DATE_EPOCH\": \"1790915026\",\n        \"TZ\": \"UTC\"\n      },\n      \"observed\": {\n        \"architecture\": \"amd64\",\n        \"os\": \"linux\",\n        \"pointer_bits\": 64,\n        \"python_implementation\": \"CPython\",\n        \"python_version\": \"3.11.9\"\n      },\n      \"outputs\": {\n        \"se_harness-0.21.0-py3-none-any.whl\": \"13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\",\n        \"se_harness-0.21.0.tar.gz\": \"f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b\"\n      },\n      \"producer_image\": \"python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050\",\n      \"recipe_sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\",\n      \"schema\": \"se-harness-release-build-producer/v1\",\n      \"toolchain\": [\n        {\n          \"name\": \"build\",\n          \"version\": \"1.3.0\"\n        },\n        {\n          \"name\": \"colorama\",\n          \"version\": \"0.4.6\"\n        },\n        {\n          \"name\": \"packaging\",\n          \"version\": \"26.3\"\n        },\n        {\n          \"name\": \"pip\",\n          \"version\": \"24.0\"\n        },\n        {\n          \"name\": \"pyproject-hooks\",\n          \"version\": \"1.2.0\"\n        },\n        {\n          \"name\": \"setuptools\",\n          \"version\": \"84.0.0\"\n        },\n        {\n          \"name\": \"wheel\",\n          \"version\": \"0.48.0\"\n        }\n      ]\n    }\n  ],\n  \"producer\": {\n    \"architecture\": \"amd64\",\n    \"image\": \"python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050\",\n    \"os\": \"linux\"\n  },\n  \"recipe\": {\n    \"path\": \"release/build-recipe.json\",\n    \"schema\": \"se-harness-release-build-recipe/v1\",\n    \"sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\"\n  },\n  \"schema\": \"se-harness-release-build-replay/v1\",\n  \"state\": \"exact\"\n}\n"
+    },
+    "rls031-final-hosted-record/complete-candidate-qualification.json": {
+      "sha256": "d6003e6fc9cfc4d52741c5622077986b6602e42c9f59260a8027733948a0c4ca",
+      "text": "{\n  \"authority\": \"evidence-only; no lifecycle or external action authorized\",\n  \"checks\": [\n    {\n      \"id\": \"CC001\",\n      \"message\": \"candidate runtime is bound to the checkout\",\n      \"passed\": true,\n      \"subject\": \"candidate-runtime\"\n    },\n    {\n      \"id\": \"CC002\",\n      \"message\": \"HEAD and tracked tree match the candidate\",\n      \"passed\": true,\n      \"subject\": \"candidate-commit\"\n    },\n    {\n      \"id\": \"CC003\",\n      \"message\": \"artifacts=1750; errors=0; warnings=52\",\n      \"passed\": true,\n      \"subject\": \"engineering-graph\"\n    },\n    {\n      \"id\": \"CC004\",\n      \"message\": \"target state is unchanged\",\n      \"passed\": true,\n      \"subject\": \"repository-state\"\n    }\n  ],\n  \"completion\": \"completed\",\n  \"evaluator\": {\n    \"candidate_commit\": \"b9af631b850c495eace9807361ed3ec3e36a10b2\",\n    \"diagnostics\": [],\n    \"distribution\": \"se-harness\",\n    \"identity_sha256\": \"72a4e9401443d3171150de6015283f2e61a3697a89de5bbbb3c69714eb1f8cbd\",\n    \"isolated_python\": false,\n    \"pythonpath_present\": false,\n    \"role\": \"candidate-source\",\n    \"user_site_enabled\": false,\n    \"version\": \"0.20.1\"\n  },\n  \"independence\": \"candidate-controlled\",\n  \"operation\": \"complete-candidate\",\n  \"passed\": true,\n  \"schema\": \"se-harness-release-qualification-v1\",\n  \"target\": {\n    \"commit\": \"b9af631b850c495eace9807361ed3ec3e36a10b2\",\n    \"identity_sha256\": \"32255838b705809e096518f51665382bb38f701f8655d725233e40b7a2a7d4ee\",\n    \"kind\": \"complete-candidate\",\n    \"tree\": \"83235b9c9f95123a95f240fa66103e118759c963\"\n  }\n}\n"
+    },
+    "rls031-final-hosted-record/qualification.json": {
+      "sha256": "6c8e60ae58c006a41058cdd984da847f87ceb7106adb086f2c01871f0353ad9d",
+      "text": "{\n  \"files\": [\n    \"SHA256SUMS\",\n    \"se_harness-0.20.1-py3-none-any.whl\",\n    \"se_harness-0.20.1.tar.gz\"\n  ],\n  \"hashes\": {\n    \"SHA256SUMS\": \"8ef1f3b9ce5a465f963e34e711deed624b9645d2f25824f23624bee089a8f0ac\",\n    \"se_harness-0.20.1-py3-none-any.whl\": \"300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764\",\n    \"se_harness-0.20.1.tar.gz\": \"a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a\"\n  },\n  \"state\": \"exact\"\n}\n"
+    },
+    "rls031-final-hosted-record/release-build-replay.json": {
+      "sha256": "fde3f5ec79865228d97d8d96b57207c3fea0b0a4882d15b9a96ebbe51e6d3a7c",
+      "text": "{\n  \"authority\": \"technical replay evidence only; no lifecycle or external-action authority\",\n  \"builds\": [\n    {\n      \"id\": \"a\",\n      \"sdist_sha256\": \"a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a\",\n      \"wheel_sha256\": \"300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764\"\n    },\n    {\n      \"id\": \"b\",\n      \"sdist_sha256\": \"a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a\",\n      \"wheel_sha256\": \"300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764\"\n    }\n  ],\n  \"candidate\": {\n    \"commit\": \"b9af631b850c495eace9807361ed3ec3e36a10b2\",\n    \"source_date_epoch\": 1790799840,\n    \"source_manifest_sha256\": \"890eb07d32540fb81beba94f6db409c7cafe2abcd6b1889e1aa0ac1fd9baa846\"\n  },\n  \"expected\": {\n    \"sdist_sha256\": \"a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a\",\n    \"wheel_sha256\": \"300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764\"\n  },\n  \"manifest\": {\n    \"build_recipe\": \"release/build-recipe.json\",\n    \"build_recipe_schema\": \"se-harness-release-build-recipe/v1\",\n    \"build_recipe_sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\",\n    \"checksums\": \"SHA256SUMS\",\n    \"checksums_content\": \"300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764  se_harness-0.20.1-py3-none-any.whl\\na4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a  se_harness-0.20.1.tar.gz\\n\",\n    \"checksums_sha256\": \"8ef1f3b9ce5a465f963e34e711deed624b9645d2f25824f23624bee089a8f0ac\",\n    \"commit\": \"b9af631b850c495eace9807361ed3ec3e36a10b2\",\n    \"git_object_format\": \"sha1\",\n    \"schema\": \"se-harness-release-bundle/v2\",\n    \"sdist\": \"se_harness-0.20.1.tar.gz\",\n    \"sdist_sha256\": \"a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a\",\n    \"source_date_epoch\": 1790799840,\n    \"source_manifest_sha256\": \"890eb07d32540fb81beba94f6db409c7cafe2abcd6b1889e1aa0ac1fd9baa846\",\n    \"version\": \"0.20.1\",\n    \"wheel\": \"se_harness-0.20.1-py3-none-any.whl\",\n    \"wheel_sha256\": \"300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764\"\n  },\n  \"observations\": [\n    {\n      \"commands\": [\n        [\n          \"python\",\n          \"-m\",\n          \"pip\",\n          \"install\",\n          \"--disable-pip-version-check\",\n          \"--no-cache-dir\",\n          \"--only-binary=:all:\",\n          \"--require-hashes\",\n          \"--target\",\n          \"{toolchain_dir}\",\n          \"-r\",\n          \"{toolchain_lock}\"\n        ],\n        [\n          \"python\",\n          \"-m\",\n          \"build\",\n          \"--wheel\",\n          \"--sdist\",\n          \"--no-isolation\",\n          \"--outdir\",\n          \"{raw_output}\",\n          \".\"\n        ],\n        [\n          \"python\",\n          \"scripts/normalize_sdist.py\",\n          \"{raw_sdist}\",\n          \"{final_sdist}\",\n          \"--epoch\",\n          \"{source_date_epoch}\"\n        ]\n      ],\n      \"environment\": {\n        \"HOME\": \"/tmp/se-harness-home\",\n        \"LANG\": \"C.UTF-8\",\n        \"LC_ALL\": \"C.UTF-8\",\n        \"PATH\": \"/usr/local/bin:/usr/bin:/bin\",\n        \"PYTHONDONTWRITEBYTECODE\": \"1\",\n        \"PYTHONHASHSEED\": \"0\",\n        \"SOURCE_DATE_EPOCH\": \"1790799840\",\n        \"TZ\": \"UTC\"\n      },\n      \"observed\": {\n        \"architecture\": \"amd64\",\n        \"os\": \"linux\",\n        \"pointer_bits\": 64,\n        \"python_implementation\": \"CPython\",\n        \"python_version\": \"3.11.9\"\n      },\n      \"outputs\": {\n        \"se_harness-0.20.1-py3-none-any.whl\": \"300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764\",\n        \"se_harness-0.20.1.tar.gz\": \"a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a\"\n      },\n      \"producer_image\": \"python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050\",\n      \"recipe_sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\",\n      \"schema\": \"se-harness-release-build-producer/v1\",\n      \"toolchain\": [\n        {\n          \"name\": \"build\",\n          \"version\": \"1.3.0\"\n        },\n        {\n          \"name\": \"colorama\",\n          \"version\": \"0.4.6\"\n        },\n        {\n          \"name\": \"packaging\",\n          \"version\": \"26.3\"\n        },\n        {\n          \"name\": \"pip\",\n          \"version\": \"24.0\"\n        },\n        {\n          \"name\": \"pyproject-hooks\",\n          \"version\": \"1.2.0\"\n        },\n        {\n          \"name\": \"setuptools\",\n          \"version\": \"84.0.0\"\n        },\n        {\n          \"name\": \"wheel\",\n          \"version\": \"0.48.0\"\n        }\n      ]\n    },\n    {\n      \"commands\": [\n        [\n          \"python\",\n          \"-m\",\n          \"pip\",\n          \"install\",\n          \"--disable-pip-version-check\",\n          \"--no-cache-dir\",\n          \"--only-binary=:all:\",\n          \"--require-hashes\",\n          \"--target\",\n          \"{toolchain_dir}\",\n          \"-r\",\n          \"{toolchain_lock}\"\n        ],\n        [\n          \"python\",\n          \"-m\",\n          \"build\",\n          \"--wheel\",\n          \"--sdist\",\n          \"--no-isolation\",\n          \"--outdir\",\n          \"{raw_output}\",\n          \".\"\n        ],\n        [\n          \"python\",\n          \"scripts/normalize_sdist.py\",\n          \"{raw_sdist}\",\n          \"{final_sdist}\",\n          \"--epoch\",\n          \"{source_date_epoch}\"\n        ]\n      ],\n      \"environment\": {\n        \"HOME\": \"/tmp/se-harness-home\",\n        \"LANG\": \"C.UTF-8\",\n        \"LC_ALL\": \"C.UTF-8\",\n        \"PATH\": \"/usr/local/bin:/usr/bin:/bin\",\n        \"PYTHONDONTWRITEBYTECODE\": \"1\",\n        \"PYTHONHASHSEED\": \"0\",\n        \"SOURCE_DATE_EPOCH\": \"1790799840\",\n        \"TZ\": \"UTC\"\n      },\n      \"observed\": {\n        \"architecture\": \"amd64\",\n        \"os\": \"linux\",\n        \"pointer_bits\": 64,\n        \"python_implementation\": \"CPython\",\n        \"python_version\": \"3.11.9\"\n      },\n      \"outputs\": {\n        \"se_harness-0.20.1-py3-none-any.whl\": \"300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764\",\n        \"se_harness-0.20.1.tar.gz\": \"a4c38a50e3614cfe8b478f7903af3b829e9d605b864d0ba3caca3816f4f2464a\"\n      },\n      \"producer_image\": \"python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050\",\n      \"recipe_sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\",\n      \"schema\": \"se-harness-release-build-producer/v1\",\n      \"toolchain\": [\n        {\n          \"name\": \"build\",\n          \"version\": \"1.3.0\"\n        },\n        {\n          \"name\": \"colorama\",\n          \"version\": \"0.4.6\"\n        },\n        {\n          \"name\": \"packaging\",\n          \"version\": \"26.3\"\n        },\n        {\n          \"name\": \"pip\",\n          \"version\": \"24.0\"\n        },\n        {\n          \"name\": \"pyproject-hooks\",\n          \"version\": \"1.2.0\"\n        },\n        {\n          \"name\": \"setuptools\",\n          \"version\": \"84.0.0\"\n        },\n        {\n          \"name\": \"wheel\",\n          \"version\": \"0.48.0\"\n        }\n      ]\n    }\n  ],\n  \"producer\": {\n    \"architecture\": \"amd64\",\n    \"image\": \"python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050\",\n    \"os\": \"linux\"\n  },\n  \"recipe\": {\n    \"path\": \"release/build-recipe.json\",\n    \"schema\": \"se-harness-release-build-recipe/v1\",\n    \"sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\"\n  },\n  \"release_record\": \"RLS-SEH-030\",\n  \"schema\": \"se-harness-release-build-replay/v1\",\n  \"state\": \"exact\"\n}\n"
+    },
+    "rls031-final-hosted-record/release-test-evidence/output.log": {
+      "sha256": "e588a7fba5510f7a9466a542e1cfcb8e176a1979461f60c4359427b841b55d24",
+      "text": "...............s..Evaluator Python: /tmp/simple-plugin-hljl1yv4/private/verity-plane/evaluator/bin/python\nEvaluator Python: /tmp/simple-plugin-hljl1yv4/private/verity-plane/evaluator/bin/python\n................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................s..............................................................................................--workers must be at least 1\n.docs/notes/diagnostic-codes.md matches the source\n0.20.1\n.............................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 1167 tests in 114.768s\n\nOK (skipped=2)\nWEX_SCALE artifacts=100 validation=0.025775s focus=0.073425s plan=0.055147s\nWEX_SCALE artifacts=500 validation=0.117762s focus=0.166965s plan=0.213372s\n"
+    },
+    "rls031-final-hosted-record/release-test-evidence/summary.json": {
+      "sha256": "4628df31768073b759bd7be5f6f90b40a676973b2070f2fa27d043cfc77dac4e",
+      "text": "{\n  \"candidate\": \"b9af631b850c495eace9807361ed3ec3e36a10b2\",\n  \"working_tree\": \"clean\",\n  \"command\": [\n    \"/opt/hostedtoolcache/Python/3.11.16/x64/bin/python\",\n    \"-m\",\n    \"unittest\",\n    \"discover\",\n    \"-s\",\n    \"tests\",\n    \"-p\",\n    \"test_*.py\"\n  ],\n  \"cwd\": \"/home/runner/work/_temp/candidate-checkout\",\n  \"checker\": {\n    \"version\": \"0.20.1\",\n    \"origin\": \"/home/runner/work/_temp/candidate-checkout/se_harness/__init__.py\"\n  },\n  \"started_at\": \"2026-10-02T04:25:34.443950+00:00\",\n  \"exit_code\": 0,\n  \"result\": \"pass\",\n  \"output_tail\": \"...............s..Evaluator Python: /tmp/simple-plugin-hljl1yv4/private/verity-plane/evaluator/bin/python\\nEvaluator Python: /tmp/simple-plugin-hljl1yv4/private/verity-plane/evaluator/bin/python\\n................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................s..............................................................................................--workers must be at least 1\\n.docs/notes/diagnostic-codes.md matches the source\\n0.20.1\\n.............................................................................................................................................................................................................................................\\n----------------------------------------------------------------------\\nRan 1167 tests in 114.768s\\n\\nOK (skipped=2)\\nWEX_SCALE artifacts=100 validation=0.025775s focus=0.073425s plan=0.055147s\\nWEX_SCALE artifacts=500 validation=0.117762s focus=0.166965s plan=0.213372s\\n\",\n  \"raw\": {\n    \"file\": \"output.log\",\n    \"bytes\": 1696,\n    \"artifact\": \"qualification-release-record-RLS-SEH-030\",\n    \"repository\": \"mmzen/se_harness\",\n    \"run_id\": \"36964442551\",\n    \"run_url\": \"https://github.com/mmzen/se_harness/actions/runs/36964442551\",\n    \"retention_days\": 14,\n    \"estimated_expiry\": \"2026-10-16T04:25:34.443950+00:00\",\n    \"availability\": \"local; upload not yet confirmed\",\n    \"download_command\": [\n      \"gh\",\n      \"run\",\n      \"download\",\n      \"36964442551\",\n      \"--repo\",\n      \"mmzen/se_harness\",\n      \"--name\",\n      \"qualification-release-record-RLS-SEH-030\"\n    ]\n  }\n}\n"
+    }
+  },
+  "pr_ci": {
+    "headRefOid": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:25:36Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964442615/job/110705007614",
+        "name": "Analyze (actions)",
+        "startedAt": "2026-10-02T04:24:55Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:25:32Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445439/job/110705013799",
+        "name": "validate",
+        "startedAt": "2026-10-02T04:24:57Z",
+        "status": "COMPLETED",
+        "workflowName": "Engineering Harness"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:25:11Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445494/job/110705014123",
+        "name": "Predecessor evaluator assessment",
+        "startedAt": "2026-10-02T04:24:57Z",
+        "status": "COMPLETED",
+        "workflowName": "Predecessor Evaluator Assessment"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:25:10Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445789/job/110705014860",
+        "name": "Select release rehearsals",
+        "startedAt": "2026-10-02T04:24:58Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:26:11Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705014140",
+        "name": "Candidate source evidence",
+        "startedAt": "2026-10-02T04:24:57Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:25:59Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964442615/job/110705007698",
+        "name": "Analyze (javascript-typescript)",
+        "startedAt": "2026-10-02T04:24:57Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:26:11Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964442615/job/110705007714",
+        "name": "Analyze (python)",
+        "startedAt": "2026-10-02T04:24:56Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:25:54Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445789/job/110705072629",
+        "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+        "startedAt": "2026-10-02T04:25:13Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:26:33Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705301318",
+        "name": "Candidate package evidence",
+        "startedAt": "2026-10-02T04:26:14Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:25:10Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445789/job/110705074773",
+        "name": "Rehearse the qualification of the release record",
+        "startedAt": "2026-10-02T04:25:10Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:27:43Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705382047",
+        "name": "Upgrade rehearsal (Linux)",
+        "startedAt": "2026-10-02T04:26:36Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:28:36Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705382079",
+        "name": "Upgrade rehearsal (Windows)",
+        "startedAt": "2026-10-02T04:26:37Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:25:59Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445789/job/110705236688",
+        "name": "Publication rehearsal",
+        "startedAt": "2026-10-02T04:25:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:29:10Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705838387",
+        "name": "Build deterministic integration package",
+        "startedAt": "2026-10-02T04:28:40Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:29:38Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705960275",
+        "name": "Verify integration package (Linux)",
+        "startedAt": "2026-10-02T04:29:13Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:30:09Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110705960181",
+        "name": "Verify integration package (Windows)",
+        "startedAt": "2026-10-02T04:29:13Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "0001-01-01T00:00:00Z",
+        "conclusion": "",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/36964445503/job/110706174683",
+        "name": "Retain verified integration package",
+        "startedAt": "2026-10-02T04:30:12Z",
+        "status": "IN_PROGRESS",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-02T04:25:29Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/runs/110705137289",
+        "name": "CodeQL",
+        "startedAt": "2026-10-02T04:25:27Z",
+        "status": "COMPLETED",
+        "workflowName": ""
+      }
+    ]
+  },
+  "limits": "PR CI assesses its merge checkout. Manual pinned replay, Linux source clone and capture assess exact C. Initial Linux bundle clone needed its canonical origin URL restored; prior test failures remain retained.",
+  "linux_history_driver_source": "from reconcile021 import *\nold=json.loads((OUT/'rls031-final-linux-source-retry3.json').read_text())['result']\nsource=next(r['cwd'] for r in old['commands'] if r['label']=='head')\nbundle='/mnt/c/'+(OUT/'rls031-maintenance.bundle').as_posix()[3:]\nprogram=r'''import json,pathlib,subprocess,sys\no=json.load(sys.stdin);rows=[]\nfor label,argv in [('historical-input',['git','fetch',o['bundle'],'refs/tags/v0.20.1:refs/tags/v0.20.1']),('head',['git','rev-parse','HEAD']),('distributions',[sys.executable,'-B','scripts/validate_release_distributions.py','--root','.']),('clean',['git','status','--porcelain=v1','--untracked-files=all'])]:\n p=subprocess.run(argv,cwd=o['source'],capture_output=True,text=True,timeout=300);rows.append(dict(label=label,argv=argv,cwd=o['source'],exit_code=p.returncode,stdout=p.stdout,stderr=p.stderr))\n if p.returncode:break\nprint(json.dumps({'commands':rows,'passed':all(r['exit_code']==0 for r in rows) and len(rows)==4 and rows[1]['stdout'].strip()==o['candidate'] and not rows[-1]['stdout'].strip()}))\n'''\nargv=[r'C:\\Windows\\System32\\wsl.exe','-d','Ubuntu-24.04','--exec','python3','-c',program]\np=subprocess.run(argv,input=json.dumps({'source':source,'bundle':bundle,'candidate':old['candidate_commit']}),capture_output=True,text=True,timeout=600)\nr=json.loads(p.stdout);assert p.returncode==0\nsave('rls031-final-linux-history',{'argv':argv,'exit_code':p.returncode,'result':r})\nassert r['passed'];assert next(x for x in old['commands'] if x['label']=='full-source')['exit_code']==0\nsave('rls031-final-linux-assessment',{'passed':True,'candidate_commit':old['candidate_commit'],'commands':old['commands']+r['commands'],'explanation':'The exact-candidate full suite passed. Distribution validation initially lacked the separate historical 0.20.1 commit; importing its existing tag bundle supplied that input, and distribution validation then passed. No source file changed.'})\nprint('Linux source, historical distributions and clean state passed.')\n",
+  "capture_refusals": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--id",
+        "VREC-SEH-031",
+        "--owner",
+        "Codex",
+        "--domain",
+        "release-0-21-0",
+        "--candidate-commit",
+        "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "--json",
+        "--work-order",
+        "WO-IAR-028",
+        "--work-order",
+        "WO-IAR-029",
+        "--work-order",
+        "WO-IAR-030",
+        "--work-order",
+        "WO-IAR-031",
+        "--work-order",
+        "WO-IAR-033",
+        "--work-order",
+        "WO-IAR-034",
+        "--work-order",
+        "WO-IAR-035",
+        "--work-order",
+        "WO-IAR-036",
+        "--work-order",
+        "WO-IAR-037",
+        "--work-order",
+        "WO-IAR-039",
+        "--work-order",
+        "WO-IAR-040",
+        "--work-order",
+        "WO-IAR-041",
+        "--work-order",
+        "WO-RLS-031",
+        "--verification",
+        "VER-IAR-020",
+        "--verification",
+        "VER-IAR-021",
+        "--verification",
+        "VER-IAR-022",
+        "--verification",
+        "VER-RLS-030",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-028/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-028/WO-IAR-028-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-traces.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-tests.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-traces.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-preparation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/WO-IAR-029-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-result.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/compatibility-check.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/final-integrated-assessment.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/implementation-progress.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude-data-root.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex-events.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/WO-IAR-030-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/combined-handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/governance-checks.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/WO-IAR-031-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/governance-checks.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/WO-IAR-033-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-034/regression-progress.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-034/WO-IAR-034-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-035/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-035/validation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-035/WO-IAR-035-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-036/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-036/tests.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-036/WO-IAR-036-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-037/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-037/tests.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-037/WO-IAR-037-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/candidate-equivalence.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/completion.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/qualification.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-preparation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/WO-IAR-039-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/candidate-equivalence.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/results.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/WO-IAR-040-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/candidate-equivalence.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/results.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/WO-IAR-041-handoff.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/decisions/DEC-RLS-001.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/desktop-qualification-disposition.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-codex.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-events.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/local-checks.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/native-codex-events.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-manifest.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-replay.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/plan.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-observations.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-status.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/review-inputs.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-handoff.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-pre-action.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/risks/RISK-RLS-001.md",
+        "--test-command",
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031_capture_checks.py",
+        "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-final-hosted-receipt.json",
+        "8d175fa4986c4f72bae15528b15dfed9d799a1f51d06a4c81d7be6e995999fcb"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "capture-verification",
+          "outcome": "blocked"
+        },
+        "selection": {
+          "primary": "VREC-SEH-031",
+          "artifacts": [
+            "VREC-SEH-031"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+          "procedure_id": "PROC-REMEDIATE",
+          "status": "fail",
+          "gates": []
+        },
+        "procedure": {
+          "id": "PROC-REMEDIATE",
+          "current_step": "STEP-REMEDIATE-FOCUS",
+          "steps": [
+            {
+              "id": "STEP-REMEDIATE-FOCUS",
+              "kind": "command",
+              "gate_ids": [],
+              "effects": [
+                "Re-evaluated selected state for VREC-SEH-031."
+              ],
+              "non_effects": [
+                "Remediation does not expand scope or change state."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "VREC-SEH-031"
+              ]
+            }
+          ]
+        },
+        "state": {
+          "before": [],
+          "after": []
+        },
+        "findings": {
+          "scoped_blockers": [
+            {
+              "code": "WEX303",
+              "message": "candidate tests failed (exit 1): ??Traceback (most recent call last):??  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031_capture_checks.py\", line 28, in <module>??    assert p.returncode==0??           ^^^^^^^^^^^^^^^??AssertionError??"
+            }
+          ],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [],
+          "not_done": [
+            "The requested workflow operation remains incomplete."
+          ],
+          "blocked_by": [
+            "WEX303: candidate tests failed (exit 1): ??Traceback (most recent call last):??  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031_capture_checks.py\", line 28, in <module>??    assert p.returncode==0??           ^^^^^^^^^^^^^^^??AssertionError??"
+          ],
+          "current_lifecycle_state": [
+            "No lifecycle state was changed."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-REMEDIATE",
+            "step_id": "STEP-REMEDIATE-FOCUS",
+            "action": "remediate"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "VREC-SEH-031"
+            ]
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-REMEDIATE",
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": [],
+              "steps": {
+                "STEP-REMEDIATE-FOCUS": {
+                  "location": {
+                    "file": "docs/engineering/harness/RESULTS.md",
+                    "heading": "if-a-procedure-is-blocked"
+                  },
+                  "prerequisites": []
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-REMEDIATE-FOCUS",
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": []
+            }
+          },
+          "formal_artifact_ids": [
+            "VREC-SEH-031"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "0bc7f747278baa5a5251811b51293a1be9a18563a5cd275e1d3bb0c71a0f6aa9"
+      },
+      "seconds": 25.29871449999996
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--id",
+        "VREC-SEH-031",
+        "--owner",
+        "Codex",
+        "--domain",
+        "release-0-21-0",
+        "--candidate-commit",
+        "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "--json",
+        "--work-order",
+        "WO-IAR-028",
+        "--work-order",
+        "WO-IAR-029",
+        "--work-order",
+        "WO-IAR-030",
+        "--work-order",
+        "WO-IAR-031",
+        "--work-order",
+        "WO-IAR-033",
+        "--work-order",
+        "WO-IAR-034",
+        "--work-order",
+        "WO-IAR-035",
+        "--work-order",
+        "WO-IAR-036",
+        "--work-order",
+        "WO-IAR-037",
+        "--work-order",
+        "WO-IAR-039",
+        "--work-order",
+        "WO-IAR-040",
+        "--work-order",
+        "WO-IAR-041",
+        "--work-order",
+        "WO-RLS-031",
+        "--verification",
+        "VER-IAR-020",
+        "--verification",
+        "VER-IAR-021",
+        "--verification",
+        "VER-IAR-022",
+        "--verification",
+        "VER-RLS-030",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-028/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-028/WO-IAR-028-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow-traces.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/cli-workflow.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-tests.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/native-traces.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-preparation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/verification-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-029/WO-IAR-029-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-result.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-authorized-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-continuation.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/claude-fresh-recovery.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/compatibility-check.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/final-integrated-assessment.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/implementation-progress.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integrated-lifecycle-and-migration.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/integration-followup.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude-data-root.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-claude.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex-events.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/native-current-codex.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/reconciliation.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-030/WO-IAR-030-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/combined-handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/governance-checks.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/WO-IAR-031-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/governance-checks.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-033/WO-IAR-033-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-034/regression-progress.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-034/WO-IAR-034-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-035/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-035/validation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-035/WO-IAR-035-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-036/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-036/tests.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-036/WO-IAR-036-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-037/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-037/tests.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-037/WO-IAR-037-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/candidate-equivalence.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/completion.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/implementation.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/qualification.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-preparation.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/verification-review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-039/WO-IAR-039-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/candidate-equivalence.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/results.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-040/WO-IAR-040-handoff.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/candidate-equivalence.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/handoff.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/results.json",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/review.md",
+        "--evidence",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-041/WO-IAR-041-handoff.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/decisions/DEC-RLS-001.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/desktop-qualification-disposition.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-codex.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-native-events.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-qualification.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/local-checks.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/native-codex-events.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-manifest.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/pinned-build-replay.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/plan.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/preparation.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-observations.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/qualification-status.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/review-inputs.json",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-handoff.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/evidence/WO-RLS-031/WO-RLS-031-pre-action.md",
+        "--evidence",
+        "docs/engineering/release-0-21-0/risks/RISK-RLS-001.md",
+        "--test-command",
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031_capture_checks.py",
+        "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-final-hosted-receipt.json",
+        "8d175fa4986c4f72bae15528b15dfed9d799a1f51d06a4c81d7be6e995999fcb"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "capture-verification",
+          "outcome": "blocked"
+        },
+        "selection": {
+          "primary": "VREC-SEH-031",
+          "artifacts": [
+            "VREC-SEH-031"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [],
+          "dependencies": [],
+          "declared_paths": [],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+          "procedure_id": "PROC-REMEDIATE",
+          "status": "fail",
+          "gates": []
+        },
+        "procedure": {
+          "id": "PROC-REMEDIATE",
+          "current_step": "STEP-REMEDIATE-FOCUS",
+          "steps": [
+            {
+              "id": "STEP-REMEDIATE-FOCUS",
+              "kind": "command",
+              "gate_ids": [],
+              "effects": [
+                "Re-evaluated selected state for VREC-SEH-031."
+              ],
+              "non_effects": [
+                "Remediation does not expand scope or change state."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "VREC-SEH-031"
+              ]
+            }
+          ]
+        },
+        "state": {
+          "before": [],
+          "after": []
+        },
+        "findings": {
+          "scoped_blockers": [
+            {
+              "code": "WEX303",
+              "message": "candidate tests failed (exit 1): ??Traceback (most recent call last):??  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031_capture_checks.py\", line 31, in <module>??    assert p.returncode==0??           ^^^^^^^^^^^^^^^??AssertionError??"
+            }
+          ],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [],
+          "not_done": [
+            "The requested workflow operation remains incomplete."
+          ],
+          "blocked_by": [
+            "WEX303: candidate tests failed (exit 1): ??Traceback (most recent call last):??  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031_capture_checks.py\", line 31, in <module>??    assert p.returncode==0??           ^^^^^^^^^^^^^^^??AssertionError??"
+          ],
+          "current_lifecycle_state": [
+            "No lifecycle state was changed."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-REMEDIATE",
+            "step_id": "STEP-REMEDIATE-FOCUS",
+            "action": "remediate"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "VREC-SEH-031"
+            ]
+          },
+          "alternatives": []
+        },
+        "instruction_discovery": {
+          "schema": "se-harness-instruction-discovery-v1",
+          "status": "available",
+          "agent_instructions": {
+            "entry": {
+              "file": "ENGINEERING_HARNESS.md",
+              "heading": "read-by-task"
+            },
+            "shared_prerequisites": [
+              {
+                "file": "docs/engineering/harness/COMMUNICATION.md",
+                "heading": "communication",
+                "when": "Before the first eligible English explanation in a fresh context."
+              },
+              {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "report-a-lifecycle-result",
+                "when": "Before reporting a lifecycle result."
+              }
+            ],
+            "procedure": {
+              "id": "PROC-REMEDIATE",
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": [],
+              "steps": {
+                "STEP-REMEDIATE-FOCUS": {
+                  "location": {
+                    "file": "docs/engineering/harness/RESULTS.md",
+                    "heading": "if-a-procedure-is-blocked"
+                  },
+                  "prerequisites": []
+                }
+              }
+            },
+            "current_step": {
+              "id": "STEP-REMEDIATE-FOCUS",
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": []
+            }
+          },
+          "formal_artifact_ids": [
+            "VREC-SEH-031"
+          ],
+          "evaluator_only_inputs": [
+            "docs/engineering/WORKFLOW.json",
+            "docs/engineering/QUALITY_GATES.json"
+          ]
+        },
+        "result_sha256": "0bc7f747278baa5a5251811b51293a1be9a18563a5cd275e1d3bb0c71a0f6aa9"
+      },
+      "seconds": 23.96977630000015
+    },
+    [
+      {
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "-m",
+          "se_harness",
+          "qualify",
+          "complete-candidate",
+          ".",
+          "--candidate-commit",
+          "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-xcn6nmya\\checkout",
+        "exit_code": 1,
+        "stdout": "{\n  \"authority\": \"evidence-only; no lifecycle or external action authorized\",\n  \"checks\": [\n    {\n      \"id\": \"CC001\",\n      \"message\": \"candidate runtime identity failed\",\n      \"passed\": false,\n      \"subject\": \"candidate-runtime\"\n    },\n    {\n      \"id\": \"CC002\",\n      \"message\": \"HEAD and tracked tree match the candidate\",\n      \"passed\": true,\n      \"subject\": \"candidate-commit\"\n    },\n    {\n      \"id\": \"CC003\",\n      \"message\": \"not run after candidate identity failure\",\n      \"passed\": false,\n      \"subject\": \"engineering-graph\"\n    },\n    {\n      \"id\": \"CC004\",\n      \"message\": \"target state is unchanged\",\n      \"passed\": true,\n      \"subject\": \"repository-state\"\n    }\n  ],\n  \"completion\": \"completed\",\n  \"evaluator\": {\n    \"candidate_commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"diagnostics\": [\n      {\n        \"code\": \"RID009\",\n        \"message\": \"runtime enables user site-packages\",\n        \"subject\": \"user_site\"\n      },\n      {\n        \"code\": \"RID018\",\n        \"message\": \"source distribution metadata resolves outside the checkout\",\n        \"subject\": \"distribution_origin\"\n      }\n    ],\n    \"distribution\": \"se-harness\",\n    \"identity_sha256\": \"a98f0314232b4bc153c395fb3e41368506730c005193a3510fcfa36d120996e8\",\n    \"isolated_python\": false,\n    \"pythonpath_present\": false,\n    \"role\": \"candidate-source\",\n    \"user_site_enabled\": true,\n    \"version\": \"0.21.0\"\n  },\n  \"independence\": \"candidate-controlled\",\n  \"operation\": \"complete-candidate\",\n  \"passed\": false,\n  \"schema\": \"se-harness-release-qualification-v1\",\n  \"target\": {\n    \"commit\": \"4031f0fa4b5c4a95651bd928a110d8b2d94f9775\",\n    \"identity_sha256\": \"5ac53fb5850f394b34ff3ecba7d0106eae661b489f8134f9ad38c5ab60bfbd0c\",\n    \"kind\": \"complete-candidate\",\n    \"tree\": \"5c80454245d2eee89431c80103aef3009af6f8df\"\n  }\n}\n",
+        "stderr": ""
+      }
+    ]
+  ],
+  "capture_runtime": "Temporary clean Python 3.14 environment; user site disabled; no installed se-harness distribution. Earlier workstation metadata refusal preserved."
+}
