@@ -4,7 +4,7 @@ The public marketplace observed on 2026-10-02 is plugin 0.2.4 with released
 evaluator 0.21.0 at `7e366438165a40a14783bac650a2887e7ec8bc75`.
 Public fresh-install and 0.2.3-to-0.2.4 update checks passed on both Windows CLIs.
 See the [public observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
-for exact identities, commands and pending native-session criteria.
+for exact identities, commands and accepted native-session omissions.
 Installing this plugin does not upgrade a project's selected harness.
 
 ## Released 0.21.0 / 0.2.4
@@ -13,7 +13,7 @@ The [release package](../engineering/release-0-21-0/README.md) records public
 evaluator 0.21.0 and plugin 0.2.4. VREC-PLG-030 verifies local qualification.
 DEC-RLS-003 accepts the missing Claude native session tests for WO-RLS-033;
 Claude remains unverified. Exact public-package Codex CLI tests pass. Codex
-Windows desktop remains unverified, pending the separate DEC-RLS-004 decision.
+Windows desktop remains unverified, with its WO-RLS-033 omission accepted in DEC-RLS-004.
 
 ## Select the distribution
 

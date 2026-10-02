@@ -265,7 +265,7 @@ RLS-SEH-031 and separately published plugin 0.2.4 at
 qualification. WO-RLS-033 retains passing public fresh/update package and setup
 observations, current documentation corrections and native test boundaries.
 Codex CLI session checks pass; DEC-RLS-003 accepts missing Claude tests, which
-remain unverified. The desktop evidence decision remains pending in DEC-RLS-004.
+remain unverified. DEC-RLS-004 accepts the desktop omission for WO-RLS-033.
 Overall delivery remains incomplete. The existing 0.20.1 receipts stay intact.
 
 ## Historical 0.20.1 delivery

@@ -2,7 +2,7 @@
 id = "DEC-RLS-004"
 type = "decision"
 title = "Choose the Codex Windows desktop evidence boundary for public delivery"
-status = "open"
+status = "decided"
 owners = ["mmzen"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -24,6 +24,21 @@ label = "Keep WO-RLS-033 pending until desktop evidence or another formal resolu
 [relations]
 concerns = ["WO-RLS-033", "VER-RLS-032", "SPEC-RLO-006", "REL-SEH-033"]
 blocks = ["WO-RLS-033"]
+
+[disposition]
+option = "accept"
+label = "Accept only the remaining Codex Windows desktop evidence gap for WO-RLS-033 and plugin 0.2.4; keep the desktop unverified."
+decided_by = "mmzen"
+decided_at = "2026-10-02T07:18:45Z"
+reason = "Human mmzen: I accept. Accepts the reviewed DEC-RLS-004 Codex Windows desktop evidence gap for WO-RLS-033 and public plugin 0.2.4 only. Desktop results remain unverified; no VREC acceptance, external action, marker update or adoption is implied."
+revisit = "Before the next plugin release, before claiming verified Codex Windows desktop support, or before adoption depending on verified desktop delivery, whichever occurs first."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-10-02T07:18:45Z"
+decided_by = "mmzen"
+reason = "Human mmzen: I accept. Accepts the reviewed DEC-RLS-004 Codex Windows desktop evidence gap for WO-RLS-033 and public plugin 0.2.4 only. Desktop results remain unverified; no VREC acceptance, external action, marker update or adoption is implied."
 +++
 
 # Choose the Codex Windows desktop evidence boundary for public delivery

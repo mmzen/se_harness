@@ -38,15 +38,15 @@ claude plugin install verity-plane@se-harness
 
 Start a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.
 
-The [0.21.0 evaluator / 0.2.4 plugin release package](docs/engineering/release-0-21-0/README.md)
-is published. The [public observations and limits](docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
-separate package installation, native session evidence and remaining delivery work.
+The [0.21.0 / 0.2.4 release](docs/engineering/release-0-21-0/README.md) is published.
+[Public evidence](docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
+records checks, limits and remaining delivery work.
 
-Observed public delivery (2026-10-02): Plugin **0.2.4** bundles released **SE Harness 0.21.0**. Public fresh-install and 0.2.3-to-0.2.4 update checks passed on Codex CLI 0.159.2 and Claude Code 2.1.273. All 29 installed files match on each route. Offline setup and evaluator identity checks passed. Separate exact-public-byte Codex CLI/app-server tests passed startup, activation, manual and automatic compaction, and resume in the existing trusted disposable profile. Fresh profiles still require normal hook trust.
+Observed public delivery (2026-10-02): Plugin **0.2.4** bundles released **SE Harness 0.21.0**. Both Windows CLI fresh/update routes passed package and setup checks. Codex session tests passed startup, activation, compaction and resume. See the evidence above for exact identities and profile limits.
 
 Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. It does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
 
-Existing repositories keep their selected release and layout until explicit adoption.
+Existing repositories need explicit adoption to change their selection or layout.
 
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
@@ -58,7 +58,7 @@ initialization writes only configuration and lock files.
 Plugin activation restores the selected checkout after compaction or resume.
 Claude native session tests remain unverified, with their WO-RLS-033 omission
 accepted in DEC-RLS-003. Codex Windows desktop remains unverified; DEC-RLS-004
-awaits its separate disposition. This repository still uses 0.20.1.
+accepts that omission for WO-RLS-033. This repository still uses 0.20.1.
 See [migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-0210).
 The published package retains its original pre-publication README wording;
 the current source guide records the observed release status.

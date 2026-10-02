@@ -19,7 +19,7 @@ Plugin 0.2.4 with evaluator 0.21.0 is published at
 `7e366438165a40a14783bac650a2887e7ec8bc75`. VREC-PLG-030 verifies the qualified
 package with the accepted native host gaps below. Source documentation corrections
 do not rewrite the original published package or its inventory.
-Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 awaits its separate disposition.
+Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 accepts that omission for WO-RLS-033.
 
 Development archives cannot establish release or marketplace eligibility.
 Python 3.11+ must be available to the hook launcher. Codex also requires the

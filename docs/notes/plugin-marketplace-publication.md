@@ -8,8 +8,7 @@ separately authorized marketplace publication at
 
 [WO-RLS-033 observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
 record passing public fresh installs and updates from 0.2.3 on both Windows CLIs.
-The desktop evidence decision, documentation integration and delivery closeout
-remain pending. Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 awaits its separate disposition.
+Documentation integration and delivery closeout remain pending. Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 accepts that omission for WO-RLS-033.
 
 ## Assemble committed inputs
 
@@ -72,7 +71,7 @@ qualification does not close delivery or establish the public branch state.
 1. Run the declared package checks, host validators and local native installation
    acceptance in fresh profiles. Follow VER-RLS-031 and VER-IAR-021 for the
    exact 0.2.4 packages. Public fresh installation and update from 0.2.3 follow
-   under VER-RLS-032. Keep required desktop evidence pending until assessed.
+   under VER-RLS-032. Keep desktop results unverified under the accepted DEC-RLS-004 boundary.
    Confirm the loaded package bytes, startup, manual compaction and resume. Do not alter real user profiles.
 2. Prepare the commit-bound verification record and obtain its owner decision.
    Resolve the applicable repository integration and external-action checkpoints.
