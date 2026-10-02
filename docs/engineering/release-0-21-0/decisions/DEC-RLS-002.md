@@ -2,7 +2,7 @@
 id = "DEC-RLS-002"
 type = "decision"
 title = "Choose the native qualification boundary for plugin 0.2.4"
-status = "open"
+status = "decided"
 owners = ["mmzen"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -24,6 +24,21 @@ label = "Keep WO-RLS-032 incomplete until the missing native checks pass or anot
 [relations]
 concerns = ["RISK-RLS-002", "WO-RLS-032", "SPEC-IAR-016", "VER-IAR-021", "VER-RLS-031", "REL-SEH-033"]
 blocks = ["WO-RLS-032"]
+
+[disposition]
+option = "accept"
+label = "Accept only these two native qualification gaps for WO-RLS-032 and plugin 0.2.4; retain unverified results, risk and follow-up."
+decided_by = "mmzen"
+decided_at = "2026-10-02T05:35:12Z"
+reason = "I accept"
+revisit = "Before the next plugin release, before claiming either unverified host route is verified, or before adoption that relies on either unverified route, whichever occurs first."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-10-02T05:35:12Z"
+decided_by = "mmzen"
+reason = "I accept"
 +++
 
 # Choose the native qualification boundary for plugin 0.2.4

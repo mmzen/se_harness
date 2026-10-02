@@ -1,5 +1,15 @@
 # Plugin 0.2.4 qualification progress
 
+Local qualification is implemented under WO-RLS-032; verification preparation
+is the current next step. Marketplace publication has not occurred.
+
+The current [contract assessment](contract-assessment.md) supersedes the progress
+status below. DEC-RLS-002 is decided and RISK-RLS-002 is accepted. Both native
+Codex work-to-delivery fixtures passed; Claude native and Codex Windows desktop
+remain unverified. The earlier observations below are preserved as history.
+
+## Historical progress snapshot before DEC-RLS-002
+
 WO-RLS-032 is in progress. This evidence does not complete the work order,
 prepare a ready VREC, verify the package or authorize marketplace publication.
 

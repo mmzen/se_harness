@@ -2,7 +2,7 @@
 id = "WO-RLS-032"
 type = "work_order"
 title = "Qualify and deliver plugin 0.2.4 after evaluator publication"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
 updated = "2026-10-02"
@@ -37,6 +37,13 @@ to = "in_progress"
 decided_at = "2026-10-02T05:10:49Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T06:09:26Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Local exact-package qualification completed; DEC-RLS-002 accepts only the retained Claude native and Codex Windows desktop gaps. Human verification, marketplace publication and public readback remain separate."
 +++
 
 # Qualify and deliver plugin 0.2.4 after evaluator publication

@@ -16,8 +16,10 @@ Release record: RLS-SEH-031. Evaluator 0.21.0; plugin 0.2.4.
 | Codex archive | `d9762ce9605b28a9b3f9e794bac04a9ccc54d0daa5842adc77b809a6f4a80737` |
 | Claude archive | `fb8a66abc14675a227feef8acd50ffbbcf63a0d42b077ece85f680bf1e08e366` |
 
-Native qualification and desktop disposition remain pending. There is no ready
-package VREC and no human verification of these new assembly inputs. No new
+DEC-RLS-002 accepts the bounded Claude-native and Codex Windows desktop gaps;
+both remain unverified. Exact-package Codex CLI and portable qualification are
+assessed in contract-assessment.md. Verification preparation and the human
+verification decision remain separate; no human verification is inferred here. No new
 marketplace commit is proposed or published. Once the required checks and human
 verification pass, prepare the exact ordinary descendant commit and obtain its
 separate external authorization. Public fresh/update tests and current-source
