@@ -2,7 +2,7 @@
 id = "VREC-KIS-010"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex agent"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-simplification/evidence/WO-KIS-010/W
 evaluator_evidence_path = "docs/engineering/harness-simplification/evidence/VREC-KIS-010-evaluator.json"
 evaluator_evidence_sha256 = "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157"
 
+verified_at = "2026-10-02T12:52:27Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-KIS-010", "WO-KIS-011"]
 conforms_to = ["VER-KIS-004"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-02T12:52:27Z"
+decided_by = "mmzen"
+reason = "mmzen explicitly stated \"I verify VREC-KIS-010 as assurance owner.\" This accepts the retained evidence for candidate 600bf1cbfa1f249075d31db970e51f519137d090, covering WO-KIS-010 and WO-KIS-011 under VER-KIS-004. The reported local suite passed 1211 tests with 22 skips; hosted CI remains for integration. This records verification only, not push, PR, merge or release authorization."
 +++
 
 # Verification Record Candidate
