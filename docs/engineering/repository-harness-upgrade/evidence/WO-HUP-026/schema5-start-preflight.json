@@ -1,0 +1,47 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\reconcile-minimal-20261001\\rls031-public-readback\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "preflight",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "--work-order",
+    "WO-HUP-026",
+    "--phase",
+    "start",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "assurance": {
+      "commit_bound_verification": "required",
+      "decided_by": "mmzen",
+      "rationale": "Human mmzen approved the two-file schema-5 correction with required commit-bound verification in VREC-HUP-025; integration relies on this assessment of the exact evaluator transition."
+    },
+    "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+    "background": [],
+    "diagnostics": [],
+    "phase": "start",
+    "reading_manifest": [
+      "docs/engineering/harness-distribution/intent/INT-DST-001.md",
+      "docs/engineering/harness-distribution/capabilities/CAP-DST-001.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-031.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-016.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-012.md",
+      "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-012.md",
+      "docs/engineering/repository-harness-upgrade/verification/VER-HUP-003.md",
+      "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-026.md"
+    ],
+    "ready": true,
+    "schema": "se-harness-preflight-v2",
+    "skew": [],
+    "work_order": {
+      "id": "WO-HUP-026",
+      "path": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-026.md",
+      "status": "approved"
+    }
+  },
+  "seconds": 5.00222550000035
+}

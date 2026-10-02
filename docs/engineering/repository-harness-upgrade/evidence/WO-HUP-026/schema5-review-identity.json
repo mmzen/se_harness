@@ -1,0 +1,11 @@
+{
+  "work_order_sha256": "91890e5c8b23dadb4bd7b8e6005c4d98e4e793551e3312c5087ed5ecb98718b9",
+  "patch_sha256": "8ee8fb98c5add07e06054a56e8507a900ca642a88a2ede56b25bcf98e25070e5",
+  "status": "awaiting human approval",
+  "implementation_paths": [
+    "scripts/validate_governor_transition.py",
+    "tests/test_governor_transition.py"
+  ],
+  "review_sha256": "8f729b3c5a8f9f3f9fe8c6d414c8f5357c9d77e1900ad435cceaf50d9b59f412",
+  "prototype_test_receipt_sha256": "322b3fd0bebdf4b4be00ba3597c2956e9e84074d23100c5eebc9f5613e46e27f"
+}

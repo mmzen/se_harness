@@ -44,3 +44,12 @@ corrected-source-summary.json. All 49 focused tests also pass.
 The complete implementation handoff, clean-candidate predecessor assessment,
 exact-candidate capture and human verification remain pending. No push, PR or merge is implied by this local
 adoption. Historical preparation receipts retain the state observed at their time.
+
+## Predecessor assessment blocker
+
+The actual assessment of clean commit 9108c4f8f953c925aa6a99ee8f57f83c8ea8393a
+refused the schema-5 lock. The repository-owned script accepts only schemas 3
+and 4. See predecessor-assessment-refused.json. Human mmzen approved WO-HUP-026 and required verification. The exact two-file
+correction is applied. All 32 focused tests and 1,218 full-scale tests pass;
+see ../WO-HUP-026/source-checks.json. The actual committed assessment follows.
+WO-HUP-003 and WO-HUP-005 remain in progress; VREC-HUP-025 is not prepared.

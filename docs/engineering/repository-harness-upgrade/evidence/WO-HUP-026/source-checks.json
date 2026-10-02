@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\rls031-capture-python\\Scripts\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--scale",
+    "full",
+    "--timings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\schema5-actual-full-timings.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 0,
+  "seconds": 167.64881760000208,
+  "tests": 1218,
+  "skipped": 21,
+  "scale": "full",
+  "passed": true,
+  "raw_log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adoption021-evidence\\schema5-actual-full-suite.json",
+  "raw_log_sha256": "36f7e1027d25b9cb7898cbfb277f401b3015c8e846593cc9b7c395db0347a59b",
+  "result": {
+    "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-e_a18xfd\\private\\evaluators\\0.0.0\\1a018a3c18863880758ea177d0c9fd4735fc54d751f813887f206004aae4ef37\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-e_a18xfd\\private\\evaluators\\0.0.0\\1a018a3c18863880758ea177d0c9fd4735fc54d751f813887f206004aae4ef37\\Scripts\\python.exe\ndocs/notes/diagnostic-codes.md matches the source\nWEX_SCALE artifacts=100 validation=0.188667s focus=0.469719s plan=0.353259s\nWEX_SCALE artifacts=500 validation=0.833230s focus=1.135643s plan=1.700301s\nWEX_SCALE artifacts=1000 validation=1.659835s focus=1.963609s plan=3.181898s\n0.21.1\n----------------------------------------------------------------------\nRan 1218 tests in 166.073s (181 classes, 8 workers)\n\nOK (skipped=21)\n",
+    "stderr": "--workers must be at least 1\n"
+  },
+  "implementation_digests": {
+    "scripts/validate_governor_transition.py": "3e22cf8b7f7bca8c4f54aaafa77af60b27b65702d946b0a7ee24bb8857da0dfd",
+    "tests/test_governor_transition.py": "fcbf1bed3faaf4e25d1b24b42a4f6029902c16a7bad0589f7a1a59c419575be7"
+  }
+}
