@@ -2,7 +2,7 @@
 id = "VREC-RLO-014"
 type = "verification_record"
 title = "Verification candidate for 4 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex agent"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-orchestration/evidence/WO-RLO-014/WO
 evaluator_evidence_path = "docs/engineering/release-orchestration/evidence/VREC-RLO-014-evaluator.json"
 evaluator_evidence_sha256 = "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157"
 
+verified_at = "2026-10-02T21:51:49Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLO-014", "WO-RLO-015", "WO-RLO-016", "WO-RLO-017"]
 conforms_to = ["VER-RLO-011"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-02T21:51:49Z"
+decided_by = "mmzen"
+reason = "Human repository owner mmzen stated: I verify VREC-RLO-014 as assurance owner. Decision applies to candidate 7e7071d80eb22f43436807479972fee85905de43, reviewed ready-record SHA-256 29c0a55fa833b8185f8cc7fd48a3d631234921f167eb3713fd5caae98057a3a7 and its retained evidence, covering WO-RLO-014/015/016/017 under VER-RLO-011. The agent applies this human verification decision. Existing authorization covers the final decision push to PR #527; merge, release, adoption and live provider configuration remain separate."
 +++
 
 # Verification Record Candidate
