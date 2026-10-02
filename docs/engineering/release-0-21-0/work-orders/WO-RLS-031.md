@@ -2,10 +2,10 @@
 id = "WO-RLS-031"
 type = "work_order"
 title = "Prepare and qualify the integrated 0.21.0 release"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-01"
-updated = "2026-10-01"
+updated = "2026-10-02"
 
 [assurance]
 commit_bound_verification = "required"
@@ -54,6 +54,13 @@ to = "in_progress"
 decided_at = "2026-10-01T19:55:14Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-02T04:23:33Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Prepare and qualify the integrated 0.21.0 release
