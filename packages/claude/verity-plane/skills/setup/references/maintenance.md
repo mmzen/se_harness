@@ -4,13 +4,14 @@
 
 Read the target's selected harness version from `.engineering-harness.toml` and
 choose its matching released wheel. Rerun the existing [setup command](environment.md)
-in the same private data directory. It repairs the environment in place and runs
-the actual `doctor`. A failed final check remains a failure to resolve.
+using the plugin-data path supplied by the hook. Setup validates and reuses the
+matching immutable environment; it never repairs an environment in use. For an
+interrupted or damaged preparation, follow the recovery boundary in environment.md.
+A failed final doctor check remains a failure to resolve.
 
-One private environment can serve projects with different selected versions by
-reinstalling the matching wheel when switching projects. Do not assume the wheel
-last used for another project is compatible. No activation receipt is needed.
-A plugin update changes its skills, not the project's selected harness version.
+Distinct selected releases coexist. Switching projects uses activation; it does
+not reinstall either evaluator. A plugin update changes the adapter, not the
+project's selected harness version.
 
 ## Upgrade when requested
 
@@ -34,5 +35,6 @@ by [the provider switch](repository.md), not as owner-file conflicts.
 
 Report the selected version and final result. If installation is interrupted, rerun
 setup with the selected wheel. If upgrading fails, resolve the reported problem
-and retry the existing command; do not create a second environment or silently
-change the project's version to match whichever wheel happens to be installed.
+and retry the existing command; do not silently change the project's version to match whichever wheel happens to be installed.
+
+After a successful requested upgrade, activate the same checkout again to use its new selection.

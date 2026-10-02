@@ -1,19 +1,19 @@
 {
   "evaluator": {
-    "archive": "se_harness-0.20.1-py3-none-any.whl",
-    "archive_sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764",
-    "payload_sha256": "70d70f9912a3f40865e1bd50ffb1b377f2fb4c29f87575444cf3ae175be0896a",
-    "release_record": "docs/engineering/release-0-20-1/releases/RLS-SEH-030.md",
-    "release_record_sha256": "29e700835b097dde4050bc648dcb9582db1712b265f088b09abdabaad9d89a34",
-    "release_revision": "489814dd15bff0b4f93151fab04acd69cec47d0c",
-    "version": "0.20.1"
+    "archive": "se_harness-0.21.0-py3-none-any.whl",
+    "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+    "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+    "release_record": "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+    "release_record_sha256": "05df27a5da59afcb6edcbb07193ca61989551f54180cadf16a06fca64b82ea4c",
+    "release_revision": "66baa640eea3946bd041ac09e419e300fafef017",
+    "version": "0.21.0"
   },
   "files": {
     ".claude-plugin/plugin.json": {
       "bytes": 173,
       "mode": 420,
       "origin": "claude",
-      "sha256": "3a498543efac10829769d769ce4e559411c81c2b8a3b39111d27f9257b67a09a"
+      "sha256": "aecf6ca576848d38db14c3052d72c90c8b8c1d929d781b7cad4a8ca1b8804071"
     },
     "LICENSE": {
       "bytes": 35149,
@@ -22,10 +22,16 @@
       "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
     },
     "README.md": {
-      "bytes": 2653,
+      "bytes": 3055,
       "mode": 420,
       "origin": "claude",
-      "sha256": "caf5c00c4523efaee09dabe517347f5a30cbf3626ae0f84c67c853934017f8b1"
+      "sha256": "21922abc1633930c62172f4696f9d2207cabc2fd0a060bb5a6a4f9aa98462530"
+    },
+    "assets/bootstrap.md": {
+      "bytes": 970,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd"
     },
     "hooks/hooks.json": {
       "bytes": 339,
@@ -33,29 +39,41 @@
       "origin": "claude",
       "sha256": "677e2b7797c7f708589578559a3ea19d36c41cfe1dce05f3c39365ce5c395cf5"
     },
-    "packages/se_harness-0.20.1-py3-none-any.whl": {
-      "bytes": 534217,
+    "packages/se_harness-0.21.0-py3-none-any.whl": {
+      "bytes": 544479,
       "mode": 420,
       "origin": "evaluator",
-      "sha256": "300923b4ea800487a7b96822768ff5fbd5c428305ac670948aef404282349764"
+      "sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+    },
+    "scripts/activate.py": {
+      "bytes": 2649,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54"
+    },
+    "scripts/harness_runtime.py": {
+      "bytes": 9465,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4"
     },
     "scripts/inject_instructions.py": {
-      "bytes": 7095,
+      "bytes": 9211,
       "mode": 420,
       "origin": "shared",
-      "sha256": "98e47de370f0a54dff5b1f3f68bbea40739420da6b1d9197825f569c5b6932ba"
+      "sha256": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc"
     },
     "scripts/setup.py": {
-      "bytes": 2282,
+      "bytes": 4334,
       "mode": 420,
       "origin": "shared",
-      "sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c"
+      "sha256": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb"
     },
     "skills/change/SKILL.md": {
-      "bytes": 4031,
+      "bytes": 4587,
       "mode": 420,
       "origin": "shared",
-      "sha256": "626bbdbb5ff52994b8d89562916df424087351c2167c8a2c97e862f74fe22ffa"
+      "sha256": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0"
     },
     "skills/change/references/artifacts.md": {
       "bytes": 2461,
@@ -76,10 +94,10 @@
       "sha256": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
     },
     "skills/evidence/SKILL.md": {
-      "bytes": 3921,
+      "bytes": 4468,
       "mode": 420,
       "origin": "shared",
-      "sha256": "052dcc3502e72f6309974f7cf9bdd8194bbe52e517410a1f53ef2eff130f1f31"
+      "sha256": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7"
     },
     "skills/evidence/references/external-actions.md": {
       "bytes": 1672,
@@ -94,10 +112,10 @@
       "sha256": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c"
     },
     "skills/harness-operator-brief/SKILL.md": {
-      "bytes": 5677,
+      "bytes": 5997,
       "mode": 420,
       "origin": "shared",
-      "sha256": "d85dfdcda0e6237f7d11607ee32a73eb7b960f5154538d70f81be64c8457a50e"
+      "sha256": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3"
     },
     "skills/harness-operator-brief/agents/openai.yaml": {
       "bytes": 178,
@@ -118,10 +136,10 @@
       "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
     },
     "skills/harness-orient/SKILL.md": {
-      "bytes": 5129,
+      "bytes": 5676,
       "mode": 420,
       "origin": "shared",
-      "sha256": "103bf6dd5478b4bf6951e3f7d7d53715671dca179a209ba8900ca232c4fbbf4f"
+      "sha256": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d"
     },
     "skills/harness-orient/scripts/orient.py": {
       "bytes": 36425,
@@ -136,22 +154,22 @@
       "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
     },
     "skills/setup/SKILL.md": {
-      "bytes": 1746,
+      "bytes": 2904,
       "mode": 420,
       "origin": "shared",
-      "sha256": "284966587c1884fc1369e9987be59c8ddca43ba9372733bca6fee8a1322abb86"
+      "sha256": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d"
     },
     "skills/setup/references/environment.md": {
-      "bytes": 1086,
+      "bytes": 1703,
       "mode": 420,
       "origin": "shared",
-      "sha256": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363"
+      "sha256": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc"
     },
     "skills/setup/references/maintenance.md": {
-      "bytes": 2074,
+      "bytes": 2164,
       "mode": 420,
       "origin": "shared",
-      "sha256": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb"
+      "sha256": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf"
     },
     "skills/setup/references/repository.md": {
       "bytes": 2774,
@@ -165,7 +183,7 @@
   "schema": "se-harness-plugin-assembly-v1",
   "source": {
     "plan": "release/plugin-assembly.json",
-    "plan_sha256": "de1402ea173c138b2a342619c0074c0c8a83a60b0e1a7871bfb6bdffa90baa25",
-    "revision": "7ac05f25f008fa2e35ad1ae69ca3d84aa0c6ccab"
+    "plan_sha256": "b9dd5e39a89b91f855bd848f09985c502193b157d05cf7cc600e57b1325bfaac",
+    "revision": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775"
   }
 }

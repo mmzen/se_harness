@@ -1,9 +1,7 @@
 # Verity Plane catalog submission materials
 
-These materials accompany plugin 0.2.3 and its released SE Harness 0.20.1 wheel.
-Release assembly requires the independently published wheel bound by RLS-SEH-030.
-WO-RLS-028 owns qualification; WO-RLS-029 owns public-route observations.
-These materials are drafts for provider review. A Git marketplace installation does not
+These materials accompany plugin 0.2.1 and its released SE Harness 0.19.0 wheel.
+They are drafts for provider review. A Git marketplace installation does not
 establish approval or availability in a provider directory.
 
 ## Upload and source inputs

@@ -22,6 +22,11 @@ collection uses `docs/engineering/harness/COMMUNICATION.md`; older released
 roots select `docs/engineering/TECHNICAL_COMMUNICATION.md`. Use the installed
 root's choice and `skill-contract.json` for the requested output format.
 
+For `released-resources-v1`, the entry comes from session activation and the
+communication guide from the selected evaluator's `resources` command. Use its
+returned path or content; do not require a repository copy. Missing selection or
+resources requires setup outside this read-only skill before the brief continues.
+
 
 ## Plugin inputs and helper location
 
