@@ -1,0 +1,1595 @@
+{
+  "seh031-decision-reviewed": {
+    "record_sha256": "a79abad3cc6425f40345c8f40242643463d86765d8b2f6620a1699946dd99a52",
+    "candidate": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+    "evaluator_evidence_sha256": "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26",
+    "human": "mmzen",
+    "decision": "I verify VREC-SEH-031"
+  },
+  "seh031-decision-preview": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "transition",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--set",
+      "VREC-SEH-031=verified",
+      "--decision",
+      "VREC-SEH-031=assurance-owner",
+      "--reason",
+      "VREC-SEH-031=Human mmzen: I verify VREC-SEH-031. Accepts aggregate verification at candidate 4031f0fa4b5c4a95651bd928a110d8b2d94f9775 for all thirteen REL-SEH-033 work orders and VER-IAR-020/021/022 plus VER-RLS-030. Reviewed ready record SHA256 a79abad3cc6425f40345c8f40242643463d86765d8b2f6620a1699946dd99a52; evaluator evidence SHA256 18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26. DEC-RLS-001 and RISK-RLS-001 retain the separately accepted unverified Codex Windows desktop deviation. Codex applies the human decision using the previously approved 0.20.1 assurance-owner compatibility label; mmzen remains the decision-maker. This does not supply the later exact release-record decision, merge, marketplace or adoption authority.",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "schema": "se-harness-workflow-result-v2",
+      "digest_format": "machine-fields-v1",
+      "candidate": {
+        "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "git_object_format": "sha1"
+      },
+      "operation": {
+        "kind": "transition",
+        "outcome": "completed"
+      },
+      "selection": {
+        "primary": "VREC-SEH-031",
+        "artifacts": [
+          "VREC-SEH-031"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [],
+        "dependencies": [],
+        "declared_paths": [],
+        "changed_paths": [],
+        "change_set_complete": false
+      },
+      "compliance": {
+        "checkpoint": "transition",
+        "workflow_rule_id": "WFL-VREC-DELIVER",
+        "procedure_id": "PROC-DELIVERY-SELECT",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-ASSURANCE-DECISION",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4A-GRAPH",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "formal-graph:VREC-SEH-031"
+                  }
+                ],
+                "message": "The selected formal graph is valid."
+              },
+              {
+                "id": "QGP-G4A-INTEGRITY",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "repository-integrity:transition"
+                  }
+                ],
+                "message": "No repository-integrity blocker prevents selected evaluation."
+              },
+              {
+                "id": "QGP-G4A-DECISION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "decision-register:VREC-SEH-031"
+                  }
+                ],
+                "message": "No open decision blocks VREC-SEH-031."
+              }
+            ]
+          },
+          {
+            "id": "QG-STRUCTURAL",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGS-EDGE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "VREC-SEH-031"
+                  }
+                ],
+                "message": "ready -> verified is a declared lifecycle edge for VREC-SEH-031."
+              }
+            ]
+          }
+        ]
+      },
+      "procedure": {
+        "id": "PROC-DELIVERY-SELECT",
+        "current_step": "STEP-DELIVERY-SELECT",
+        "steps": [
+          {
+            "id": "STEP-DELIVERY-SELECT",
+            "kind": "decision",
+            "gate_ids": [
+              "QG-G4-VERIFIED-COVERAGE"
+            ],
+            "effects": [
+              "Selects one delivery path."
+            ],
+            "non_effects": [
+              "Selection performs no repository or release action."
+            ],
+            "decision_right": "DR-DELIVERY-SELECT",
+            "role": "repository-owner or release-owner",
+            "artifact": "VREC-SEH-031",
+            "decision": "which separately authorized delivery path to select",
+            "outcomes": [
+              "repository-integration",
+              "release-preparation",
+              "stop"
+            ],
+            "response": "Select one separately authorized delivery path for VREC-SEH-031."
+          }
+        ]
+      },
+      "state": {
+        "before": [
+          {
+            "id": "VREC-SEH-031",
+            "status": "ready"
+          }
+        ],
+        "after": [
+          {
+            "id": "VREC-SEH-031",
+            "status": "verified"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "mutation": {
+        "writes": [
+          {
+            "id": "VREC-SEH-031",
+            "path": "docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md",
+            "fields": [
+              "lifecycle_events",
+              "status",
+              "updated",
+              "verified_at",
+              "verified_by"
+            ]
+          }
+        ]
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Planned 1 explicit lifecycle transition(s); no files were written."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "VREC-SEH-031 is verified."
+        ],
+        "decision_required": {
+          "decision_right": "DR-DELIVERY-SELECT",
+          "role": "repository-owner or release-owner",
+          "artifact": "VREC-SEH-031",
+          "decision": "which separately authorized delivery path to select",
+          "outcomes": [
+            "repository-integration",
+            "release-preparation",
+            "stop"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-DELIVERY-SELECT",
+          "step_id": "STEP-DELIVERY-SELECT",
+          "action": "which separately authorized delivery path to select"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Select one separately authorized delivery path for VREC-SEH-031."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+        ]
+      },
+      "instruction_discovery": {
+        "schema": "se-harness-instruction-discovery-v1",
+        "status": "available",
+        "agent_instructions": {
+          "entry": {
+            "file": "ENGINEERING_HARNESS.md",
+            "heading": "read-by-task"
+          },
+          "shared_prerequisites": [
+            {
+              "file": "docs/engineering/harness/COMMUNICATION.md",
+              "heading": "communication",
+              "when": "Before the first eligible English explanation in a fresh context."
+            },
+            {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "report-a-lifecycle-result",
+              "when": "Before reporting a lifecycle result."
+            }
+          ],
+          "procedure": {
+            "id": "PROC-DELIVERY-SELECT",
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ],
+            "steps": {
+              "STEP-DELIVERY-SELECT": {
+                "location": {
+                  "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                  "heading": "select-the-delivery-action"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "decision-rights",
+                    "when": "Before obtaining or applying an accountable decision."
+                  }
+                ]
+              }
+            }
+          },
+          "current_step": {
+            "id": "STEP-DELIVERY-SELECT",
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        },
+        "formal_artifact_ids": [
+          "VREC-SEH-031"
+        ],
+        "evaluator_only_inputs": [
+          "docs/engineering/WORKFLOW.json",
+          "docs/engineering/QUALITY_GATES.json"
+        ]
+      },
+      "result_sha256": "c96761a007c5303c41688e479176e71cb54ea067df704b308083cfb40d17ad51"
+    },
+    "seconds": 10.49548290000007
+  },
+  "seh031-decision-apply": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "transition",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--set",
+      "VREC-SEH-031=verified",
+      "--decision",
+      "VREC-SEH-031=assurance-owner",
+      "--reason",
+      "VREC-SEH-031=Human mmzen: I verify VREC-SEH-031. Accepts aggregate verification at candidate 4031f0fa4b5c4a95651bd928a110d8b2d94f9775 for all thirteen REL-SEH-033 work orders and VER-IAR-020/021/022 plus VER-RLS-030. Reviewed ready record SHA256 a79abad3cc6425f40345c8f40242643463d86765d8b2f6620a1699946dd99a52; evaluator evidence SHA256 18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26. DEC-RLS-001 and RISK-RLS-001 retain the separately accepted unverified Codex Windows desktop deviation. Codex applies the human decision using the previously approved 0.20.1 assurance-owner compatibility label; mmzen remains the decision-maker. This does not supply the later exact release-record decision, merge, marketplace or adoption authority.",
+      "--json",
+      "--apply"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "schema": "se-harness-workflow-result-v2",
+      "digest_format": "machine-fields-v1",
+      "candidate": {
+        "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "git_object_format": "sha1"
+      },
+      "operation": {
+        "kind": "transition",
+        "outcome": "completed"
+      },
+      "selection": {
+        "primary": "VREC-SEH-031",
+        "artifacts": [
+          "VREC-SEH-031"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [],
+        "dependencies": [],
+        "declared_paths": [],
+        "changed_paths": [],
+        "change_set_complete": false
+      },
+      "compliance": {
+        "checkpoint": "transition",
+        "workflow_rule_id": "WFL-VREC-DELIVER",
+        "procedure_id": "PROC-DELIVERY-SELECT",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-ASSURANCE-DECISION",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4A-GRAPH",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "formal-graph:VREC-SEH-031"
+                  }
+                ],
+                "message": "The selected formal graph is valid."
+              },
+              {
+                "id": "QGP-G4A-INTEGRITY",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "repository-integrity:transition"
+                  }
+                ],
+                "message": "No repository-integrity blocker prevents selected evaluation."
+              },
+              {
+                "id": "QGP-G4A-DECISION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "decision-register:VREC-SEH-031"
+                  }
+                ],
+                "message": "No open decision blocks VREC-SEH-031."
+              }
+            ]
+          },
+          {
+            "id": "QG-STRUCTURAL",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGS-EDGE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "VREC-SEH-031"
+                  }
+                ],
+                "message": "ready -> verified is a declared lifecycle edge for VREC-SEH-031."
+              }
+            ]
+          }
+        ]
+      },
+      "procedure": {
+        "id": "PROC-DELIVERY-SELECT",
+        "current_step": "STEP-DELIVERY-SELECT",
+        "steps": [
+          {
+            "id": "STEP-DELIVERY-SELECT",
+            "kind": "decision",
+            "gate_ids": [
+              "QG-G4-VERIFIED-COVERAGE"
+            ],
+            "effects": [
+              "Selects one delivery path."
+            ],
+            "non_effects": [
+              "Selection performs no repository or release action."
+            ],
+            "decision_right": "DR-DELIVERY-SELECT",
+            "role": "repository-owner or release-owner",
+            "artifact": "VREC-SEH-031",
+            "decision": "which separately authorized delivery path to select",
+            "outcomes": [
+              "repository-integration",
+              "release-preparation",
+              "stop"
+            ],
+            "response": "Select one separately authorized delivery path for VREC-SEH-031."
+          }
+        ]
+      },
+      "state": {
+        "before": [
+          {
+            "id": "VREC-SEH-031",
+            "status": "ready"
+          }
+        ],
+        "after": [
+          {
+            "id": "VREC-SEH-031",
+            "status": "verified"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "mutation": {
+        "writes": [
+          {
+            "id": "VREC-SEH-031",
+            "path": "docs/engineering/release-0-21-0/verification-records/VREC-SEH-031.md",
+            "fields": [
+              "lifecycle_events",
+              "status",
+              "updated",
+              "verified_at",
+              "verified_by"
+            ]
+          }
+        ]
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Applied 1 explicit lifecycle transition(s) atomically."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "VREC-SEH-031 is verified."
+        ],
+        "decision_required": {
+          "decision_right": "DR-DELIVERY-SELECT",
+          "role": "repository-owner or release-owner",
+          "artifact": "VREC-SEH-031",
+          "decision": "which separately authorized delivery path to select",
+          "outcomes": [
+            "repository-integration",
+            "release-preparation",
+            "stop"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-DELIVERY-SELECT",
+          "step_id": "STEP-DELIVERY-SELECT",
+          "action": "which separately authorized delivery path to select"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Select one separately authorized delivery path for VREC-SEH-031."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+        ]
+      },
+      "instruction_discovery": {
+        "schema": "se-harness-instruction-discovery-v1",
+        "status": "available",
+        "agent_instructions": {
+          "entry": {
+            "file": "ENGINEERING_HARNESS.md",
+            "heading": "read-by-task"
+          },
+          "shared_prerequisites": [
+            {
+              "file": "docs/engineering/harness/COMMUNICATION.md",
+              "heading": "communication",
+              "when": "Before the first eligible English explanation in a fresh context."
+            },
+            {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "report-a-lifecycle-result",
+              "when": "Before reporting a lifecycle result."
+            }
+          ],
+          "procedure": {
+            "id": "PROC-DELIVERY-SELECT",
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ],
+            "steps": {
+              "STEP-DELIVERY-SELECT": {
+                "location": {
+                  "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                  "heading": "select-the-delivery-action"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "decision-rights",
+                    "when": "Before obtaining or applying an accountable decision."
+                  }
+                ]
+              }
+            }
+          },
+          "current_step": {
+            "id": "STEP-DELIVERY-SELECT",
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        },
+        "formal_artifact_ids": [
+          "VREC-SEH-031"
+        ],
+        "evaluator_only_inputs": [
+          "docs/engineering/WORKFLOW.json",
+          "docs/engineering/QUALITY_GATES.json"
+        ]
+      },
+      "result_sha256": "c96761a007c5303c41688e479176e71cb54ea067df704b308083cfb40d17ad51"
+    },
+    "seconds": 16.102413899999874
+  },
+  "seh031-release-prepare-inputs": {
+    "argv": [
+      "prepare-release",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--id",
+      "RLS-SEH-031",
+      "--release-contract",
+      "REL-SEH-033",
+      "--verification-record",
+      "VREC-SEH-031",
+      "--version",
+      "0.21.0",
+      "--tag",
+      "v0.21.0",
+      "--owner",
+      "Codex",
+      "--domain",
+      "release-0-21-0",
+      "--json",
+      "--work-order",
+      "WO-IAR-028",
+      "--work-order",
+      "WO-IAR-029",
+      "--work-order",
+      "WO-IAR-030",
+      "--work-order",
+      "WO-IAR-031",
+      "--work-order",
+      "WO-IAR-033",
+      "--work-order",
+      "WO-IAR-034",
+      "--work-order",
+      "WO-IAR-035",
+      "--work-order",
+      "WO-IAR-036",
+      "--work-order",
+      "WO-IAR-037",
+      "--work-order",
+      "WO-IAR-039",
+      "--work-order",
+      "WO-IAR-040",
+      "--work-order",
+      "WO-IAR-041",
+      "--work-order",
+      "WO-RLS-031"
+    ],
+    "authority": "Approved WO-RLS-031 and REL-SEH-033; original Publish v0.21.0 request; VREC-SEH-031 now verified by mmzen. Exact RLS release decision remains separate."
+  },
+  "seh031-release-prepare": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "prepare-release",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--id",
+      "RLS-SEH-031",
+      "--release-contract",
+      "REL-SEH-033",
+      "--verification-record",
+      "VREC-SEH-031",
+      "--version",
+      "0.21.0",
+      "--tag",
+      "v0.21.0",
+      "--owner",
+      "Codex",
+      "--domain",
+      "release-0-21-0",
+      "--json",
+      "--work-order",
+      "WO-IAR-028",
+      "--work-order",
+      "WO-IAR-029",
+      "--work-order",
+      "WO-IAR-030",
+      "--work-order",
+      "WO-IAR-031",
+      "--work-order",
+      "WO-IAR-033",
+      "--work-order",
+      "WO-IAR-034",
+      "--work-order",
+      "WO-IAR-035",
+      "--work-order",
+      "WO-IAR-036",
+      "--work-order",
+      "WO-IAR-037",
+      "--work-order",
+      "WO-IAR-039",
+      "--work-order",
+      "WO-IAR-040",
+      "--work-order",
+      "WO-IAR-041",
+      "--work-order",
+      "WO-RLS-031"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "schema": "se-harness-workflow-result-v2",
+      "digest_format": "machine-fields-v1",
+      "candidate": {
+        "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "git_object_format": "sha1"
+      },
+      "operation": {
+        "kind": "prepare-release",
+        "outcome": "completed"
+      },
+      "selection": {
+        "primary": "RLS-SEH-031",
+        "artifacts": [
+          "RLS-SEH-031"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [
+          "ADR-DST-001",
+          "ADR-IAR-012",
+          "ADR-PLG-001",
+          "ARCH-DST-001",
+          "ARCH-IAR-012",
+          "ARCH-PLG-001",
+          "CAP-DST-001",
+          "CAP-IAR-002",
+          "CAP-RLO-004",
+          "INT-DST-001",
+          "INT-IAR-001",
+          "INT-RLO-001",
+          "REL-SEH-033",
+          "REQ-DST-006",
+          "REQ-IAR-029",
+          "REQ-IAR-030",
+          "REQ-IAR-031",
+          "REQ-PLG-002",
+          "REQ-RLO-018",
+          "REQ-RLO-020",
+          "SPEC-DST-001",
+          "SPEC-IAR-016",
+          "SPEC-PLG-001",
+          "SPEC-RLO-006",
+          "VER-IAR-020",
+          "VER-IAR-021",
+          "VER-IAR-022",
+          "VER-RLS-030",
+          "VREC-SEH-031",
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ],
+        "dependencies": [],
+        "declared_paths": [],
+        "changed_paths": [],
+        "change_set_complete": false
+      },
+      "compliance": {
+        "checkpoint": "pre-action",
+        "workflow_rule_id": "WFL-RLS-DECIDE",
+        "procedure_id": "PROC-RLS-DECIDE",
+        "status": "not_assessable",
+        "gates": []
+      },
+      "procedure": {
+        "id": "PROC-RLS-DECIDE",
+        "current_step": "STEP-RLS-DECIDE",
+        "steps": [
+          {
+            "id": "STEP-RLS-DECIDE",
+            "kind": "decision",
+            "gate_ids": [
+              "QG-G5-RELEASE-DECISION"
+            ],
+            "effects": [
+              "Permits an explicit decision on RLS-SEH-031 only."
+            ],
+            "non_effects": [
+              "Release status performs no external action."
+            ],
+            "decision_right": "DR-RLS-DECIDE",
+            "role": "release-owner",
+            "artifact": "RLS-SEH-031",
+            "decision": "whether the exact candidate is authorized for release",
+            "outcomes": [
+              "released",
+              "reject"
+            ],
+            "response": "I authorize release record RLS-SEH-031."
+          }
+        ]
+      },
+      "state": {
+        "before": [],
+        "after": [
+          {
+            "id": "RLS-SEH-031",
+            "status": "ready"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "mutation": {
+        "writes": [
+          {
+            "id": "RLS-SEH-031",
+            "path": "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+            "fields": [
+              "commit",
+              "created",
+              "evaluator_evidence_path",
+              "evaluator_evidence_sha256",
+              "git_object_format",
+              "id",
+              "owners",
+              "prepared_at",
+              "prepared_by",
+              "relations",
+              "status",
+              "tag",
+              "title",
+              "type",
+              "updated",
+              "version"
+            ]
+          }
+        ]
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Prepared ready release record RLS-SEH-031 at docs/engineering/release-0-21-0/releases/RLS-SEH-031.md."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "RLS-SEH-031 is ready; included VRECs and work orders were not changed."
+        ],
+        "decision_required": {
+          "decision_right": "DR-RLS-DECIDE",
+          "role": "release-owner",
+          "artifact": "RLS-SEH-031",
+          "decision": "whether the exact candidate is authorized for release",
+          "outcomes": [
+            "released",
+            "reject"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-RLS-DECIDE",
+          "step_id": "STEP-RLS-DECIDE",
+          "action": "whether the exact candidate is authorized for release"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "I authorize release record RLS-SEH-031."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-RLS-REJECT."
+        ]
+      },
+      "instruction_discovery": {
+        "schema": "se-harness-instruction-discovery-v1",
+        "status": "available",
+        "agent_instructions": {
+          "entry": {
+            "file": "ENGINEERING_HARNESS.md",
+            "heading": "read-by-task"
+          },
+          "shared_prerequisites": [
+            {
+              "file": "docs/engineering/harness/COMMUNICATION.md",
+              "heading": "communication",
+              "when": "Before the first eligible English explanation in a fresh context."
+            },
+            {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "report-a-lifecycle-result",
+              "when": "Before reporting a lifecycle result."
+            }
+          ],
+          "procedure": {
+            "id": "PROC-RLS-DECIDE",
+            "location": {
+              "file": "docs/engineering/harness/RELEASE.md",
+              "heading": "obtain-the-release-decision-when-required"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ],
+            "steps": {
+              "STEP-RLS-DECIDE": {
+                "location": {
+                  "file": "docs/engineering/harness/RELEASE.md",
+                  "heading": "obtain-the-release-decision-when-required"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "decision-rights",
+                    "when": "Before obtaining or applying an accountable decision."
+                  }
+                ]
+              }
+            }
+          },
+          "current_step": {
+            "id": "STEP-RLS-DECIDE",
+            "location": {
+              "file": "docs/engineering/harness/RELEASE.md",
+              "heading": "obtain-the-release-decision-when-required"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        },
+        "formal_artifact_ids": [
+          "ADR-DST-001",
+          "ADR-IAR-012",
+          "ADR-PLG-001",
+          "ARCH-DST-001",
+          "ARCH-IAR-012",
+          "ARCH-PLG-001",
+          "CAP-DST-001",
+          "CAP-IAR-002",
+          "CAP-RLO-004",
+          "INT-DST-001",
+          "INT-IAR-001",
+          "INT-RLO-001",
+          "REL-SEH-033",
+          "REQ-DST-006",
+          "REQ-IAR-029",
+          "REQ-IAR-030",
+          "REQ-IAR-031",
+          "REQ-PLG-002",
+          "REQ-RLO-018",
+          "REQ-RLO-020",
+          "RLS-SEH-031",
+          "SPEC-DST-001",
+          "SPEC-IAR-016",
+          "SPEC-PLG-001",
+          "SPEC-RLO-006",
+          "VER-IAR-020",
+          "VER-IAR-021",
+          "VER-IAR-022",
+          "VER-RLS-030",
+          "VREC-SEH-031",
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ],
+        "evaluator_only_inputs": [
+          "docs/engineering/WORKFLOW.json",
+          "docs/engineering/QUALITY_GATES.json"
+        ]
+      },
+      "result_sha256": "b7534e5c4a368f88032183f43c9646cb222aaeebb72b7297fad8ce854c4cf603"
+    },
+    "seconds": 4.733860099999902
+  },
+  "seh031-bind-release": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "scripts/bind_release_distribution.py",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--release-record",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\release-0-21-0\\releases\\RLS-SEH-031.md",
+      "--manifest",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\release-0-21-0\\evidence\\WO-RLS-031\\final-build-manifest.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 1,
+    "result": {
+      "stdout": "",
+      "stderr": "release distribution binding: release record must be repository-relative\n"
+    },
+    "seconds": 0.27712339999993674
+  },
+  "seh031-bind-release-relative": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "scripts/bind_release_distribution.py",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--release-record",
+      "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+      "--manifest",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\release-0-21-0\\evidence\\WO-RLS-031\\final-build-manifest.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 1,
+    "result": {
+      "stdout": "",
+      "stderr": "release distribution binding: distribution manifest must be repository-relative\n"
+    },
+    "seconds": 0.2239700999998604
+  },
+  "seh031-bind-release-exact": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "scripts/bind_release_distribution.py",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--release-record",
+      "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
+      "--manifest",
+      "docs/engineering/release-0-21-0/evidence/WO-RLS-031/final-build-manifest.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": {
+      "stdout": "release distribution binding: bound: C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\docs\\engineering\\release-0-21-0\\releases\\RLS-SEH-031.md\n",
+      "stderr": ""
+    },
+    "seconds": 0.428650800000014
+  },
+  "seh031-bound-distribution-check": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "scripts/validate_release_distributions.py",
+      "--root",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--require-record",
+      "RLS-SEH-031"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": {
+      "stdout": "SE Harness release distribution validation: PASS (21 distribution-bearing records)\n",
+      "stderr": ""
+    },
+    "seconds": 6.3412169000002905
+  },
+  "seh031-ready-release-gates": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "--artifact",
+      "RLS-SEH-031",
+      "--checkpoint",
+      "transition",
+      "--target",
+      "released",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "schema": "se-harness-workflow-result-v2",
+      "digest_format": "machine-fields-v1",
+      "candidate": {
+        "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+        "git_object_format": "sha1"
+      },
+      "operation": {
+        "kind": "check",
+        "outcome": "completed"
+      },
+      "selection": {
+        "primary": "RLS-SEH-031",
+        "artifacts": [
+          "RLS-SEH-031"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [
+          "ADR-DST-001",
+          "ADR-IAR-012",
+          "ADR-PLG-001",
+          "ARCH-DST-001",
+          "ARCH-IAR-012",
+          "ARCH-PLG-001",
+          "CAP-DST-001",
+          "CAP-IAR-002",
+          "CAP-RLO-004",
+          "INT-DST-001",
+          "INT-IAR-001",
+          "INT-RLO-001",
+          "REL-SEH-033",
+          "REQ-DST-006",
+          "REQ-IAR-029",
+          "REQ-IAR-030",
+          "REQ-IAR-031",
+          "REQ-PLG-002",
+          "REQ-RLO-018",
+          "REQ-RLO-020",
+          "SPEC-DST-001",
+          "SPEC-IAR-016",
+          "SPEC-PLG-001",
+          "SPEC-RLO-006",
+          "VER-IAR-020",
+          "VER-IAR-021",
+          "VER-IAR-022",
+          "VER-RLS-030",
+          "VREC-SEH-031",
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ],
+        "dependencies": [],
+        "declared_paths": [],
+        "changed_paths": [],
+        "change_set_complete": false
+      },
+      "compliance": {
+        "checkpoint": "transition",
+        "workflow_rule_id": "WFL-RLS-DECIDE",
+        "procedure_id": "PROC-RLS-DECIDE",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G5-RELEASE-DECISION",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G5D-STATUS",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "RLS-SEH-031"
+                  }
+                ],
+                "message": "RLS-SEH-031 status is ready."
+              },
+              {
+                "id": "QGP-G5D-GRAPH",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "formal-graph:RLS-SEH-031"
+                  }
+                ],
+                "message": "The selected formal graph is valid."
+              },
+              {
+                "id": "QGP-G5D-INTEGRITY",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "repository-integrity:transition"
+                  }
+                ],
+                "message": "No repository-integrity blocker prevents selected evaluation."
+              },
+              {
+                "id": "QGP-G5D-DECISION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "decision-register:RLS-SEH-031"
+                  }
+                ],
+                "message": "No open decision blocks RLS-SEH-031."
+              }
+            ]
+          },
+          {
+            "id": "QG-STRUCTURAL",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGS-EDGE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "RLS-SEH-031"
+                  }
+                ],
+                "message": "ready -> released is a declared lifecycle edge for RLS-SEH-031."
+              },
+              {
+                "id": "QGS-VERIFIED-INCLUSION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "RLS-SEH-031"
+                  }
+                ],
+                "message": "Every verification record RLS-SEH-031 includes is verified."
+              }
+            ]
+          }
+        ],
+        "formal_snapshot_sha256": "dff5beb2e0ff1b78c1aef8838af9733d47a0d49a5b342d1be9211dcc0a0f34e5",
+        "change_set_source": "arguments"
+      },
+      "procedure": {
+        "id": "PROC-RLS-DECIDE",
+        "current_step": "STEP-RLS-DECIDE",
+        "steps": [
+          {
+            "id": "STEP-RLS-DECIDE",
+            "kind": "decision",
+            "gate_ids": [
+              "QG-G5-RELEASE-DECISION"
+            ],
+            "effects": [
+              "Permits an explicit decision on RLS-SEH-031 only."
+            ],
+            "non_effects": [
+              "Release status performs no external action."
+            ],
+            "decision_right": "DR-RLS-DECIDE",
+            "role": "release-owner",
+            "artifact": "RLS-SEH-031",
+            "decision": "whether the exact candidate is authorized for release",
+            "outcomes": [
+              "released",
+              "reject"
+            ],
+            "response": "I authorize release record RLS-SEH-031."
+          }
+        ]
+      },
+      "state": {
+        "before": [
+          {
+            "id": "RLS-SEH-031",
+            "status": "ready"
+          }
+        ],
+        "after": [
+          {
+            "id": "RLS-SEH-031",
+            "status": "ready"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 54
+      },
+      "mutation": {
+        "writes": []
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Evaluated transition compliance for RLS-SEH-031."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "RLS-SEH-031 is ready."
+        ],
+        "decision_required": {
+          "decision_right": "DR-RLS-DECIDE",
+          "role": "release-owner",
+          "artifact": "RLS-SEH-031",
+          "decision": "whether the exact candidate is authorized for release",
+          "outcomes": [
+            "released",
+            "reject"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-RLS-DECIDE",
+          "step_id": "STEP-RLS-DECIDE",
+          "action": "whether the exact candidate is authorized for release"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "I authorize release record RLS-SEH-031."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-RLS-REJECT."
+        ]
+      },
+      "instruction_discovery": {
+        "schema": "se-harness-instruction-discovery-v1",
+        "status": "available",
+        "agent_instructions": {
+          "entry": {
+            "file": "ENGINEERING_HARNESS.md",
+            "heading": "read-by-task"
+          },
+          "shared_prerequisites": [
+            {
+              "file": "docs/engineering/harness/COMMUNICATION.md",
+              "heading": "communication",
+              "when": "Before the first eligible English explanation in a fresh context."
+            },
+            {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "report-a-lifecycle-result",
+              "when": "Before reporting a lifecycle result."
+            }
+          ],
+          "procedure": {
+            "id": "PROC-RLS-DECIDE",
+            "location": {
+              "file": "docs/engineering/harness/RELEASE.md",
+              "heading": "obtain-the-release-decision-when-required"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ],
+            "steps": {
+              "STEP-RLS-DECIDE": {
+                "location": {
+                  "file": "docs/engineering/harness/RELEASE.md",
+                  "heading": "obtain-the-release-decision-when-required"
+                },
+                "prerequisites": [
+                  {
+                    "file": "docs/engineering/harness/AUTHORITY.md",
+                    "heading": "decision-rights",
+                    "when": "Before obtaining or applying an accountable decision."
+                  }
+                ]
+              }
+            }
+          },
+          "current_step": {
+            "id": "STEP-RLS-DECIDE",
+            "location": {
+              "file": "docs/engineering/harness/RELEASE.md",
+              "heading": "obtain-the-release-decision-when-required"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        },
+        "formal_artifact_ids": [
+          "ADR-DST-001",
+          "ADR-IAR-012",
+          "ADR-PLG-001",
+          "ARCH-DST-001",
+          "ARCH-IAR-012",
+          "ARCH-PLG-001",
+          "CAP-DST-001",
+          "CAP-IAR-002",
+          "CAP-RLO-004",
+          "INT-DST-001",
+          "INT-IAR-001",
+          "INT-RLO-001",
+          "REL-SEH-033",
+          "REQ-DST-006",
+          "REQ-IAR-029",
+          "REQ-IAR-030",
+          "REQ-IAR-031",
+          "REQ-PLG-002",
+          "REQ-RLO-018",
+          "REQ-RLO-020",
+          "RLS-SEH-031",
+          "SPEC-DST-001",
+          "SPEC-IAR-016",
+          "SPEC-PLG-001",
+          "SPEC-RLO-006",
+          "VER-IAR-020",
+          "VER-IAR-021",
+          "VER-IAR-022",
+          "VER-RLS-030",
+          "VREC-SEH-031",
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ],
+        "evaluator_only_inputs": [
+          "docs/engineering/WORKFLOW.json",
+          "docs/engineering/QUALITY_GATES.json"
+        ]
+      },
+      "result_sha256": "b668bfee276c27df376c02c49d8db51d3e013d35c5b2e1e3455f7928765bd724"
+    },
+    "seconds": 5.288147199999912
+  },
+  "seh031-bound-record-review-inputs": {
+    "record_sha256": "063a260cd9737e82c27ff9e6d6f122423b7e750b38aef56d5020a67af0e7721c",
+    "record": {
+      "id": "RLS-SEH-031",
+      "type": "release_record",
+      "title": "Release candidate 0.21.0",
+      "status": "ready",
+      "owners": [
+        "Codex"
+      ],
+      "created": "2026-10-02",
+      "updated": "2026-10-02",
+      "version": "0.21.0",
+      "commit": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+      "git_object_format": "sha1",
+      "prepared_at": "2026-10-02T04:43:14Z",
+      "prepared_by": "Codex",
+      "evaluator_evidence_path": "docs/engineering/release-0-21-0/evidence/RLS-SEH-031-evaluator.json",
+      "evaluator_evidence_sha256": "e5148d268c5741a14613a371672929daa845983733cf8ee1439f3f3b60b4bb8b",
+      "tag": "v0.21.0",
+      "distribution": {
+        "schema": 2,
+        "kind": "python-wheel-sdist",
+        "source_date_epoch": 1790915026,
+        "wheel": "se_harness-0.21.0-py3-none-any.whl",
+        "wheel_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+        "sdist": "se_harness-0.21.0.tar.gz",
+        "sdist_sha256": "f1db9d80acf8ee86ea53b53c64c0f4d25db6fd99c58f903dd841d13f95cca98b",
+        "checksums": "SHA256SUMS",
+        "checksums_sha256": "5a19fbe2b516631a15cd0eb5d6258e95c68478fa800e2cc5b6e9ed05c3d76b3a",
+        "source_manifest_sha256": "326a77de837da64bf2a06948169787c86823c010ddcbeedbcb520fb23c8fec1b",
+        "build_recipe_schema": "se-harness-release-build-recipe/v1",
+        "build_recipe": "release/build-recipe.json",
+        "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc"
+      },
+      "relations": {
+        "satisfies": [
+          "REL-SEH-033"
+        ],
+        "includes_verification": [
+          "VREC-SEH-031"
+        ],
+        "releases_work": [
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-033",
+          "WO-IAR-034",
+          "WO-IAR-035",
+          "WO-IAR-036",
+          "WO-IAR-037",
+          "WO-IAR-039",
+          "WO-IAR-040",
+          "WO-IAR-041",
+          "WO-RLS-031"
+        ]
+      }
+    },
+    "verification_sha256": "10d4fb73be2dc45205182e2a6143adc234790a881747f62ae09fcb813ecd1bd8",
+    "verification_status": "verified"
+  },
+  "seh031-bound-replay-status1": {
+    "argv": [
+      "C:\\Program Files\\GitHub CLI\\gh.exe",
+      "run",
+      "view",
+      "36965921824",
+      "--repo",
+      "mmzen/se_harness",
+      "--json",
+      "databaseId,headSha,event,status,conclusion,url,jobs"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "result": {
+      "conclusion": "success",
+      "databaseId": 36965921824,
+      "event": "workflow_dispatch",
+      "headSha": "6461f18e8c5717850fe7f6625114d2c70445c810",
+      "jobs": [
+        {
+          "completedAt": "2026-10-02T04:45:54Z",
+          "conclusion": "success",
+          "databaseId": 110709533429,
+          "name": "Replay exact candidate twice without credentials",
+          "startedAt": "2026-10-02T04:45:15Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-02T04:45:16Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-02T04:45:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-02T04:45:21Z",
+              "conclusion": "success",
+              "name": "Check out the selected review ref and full history",
+              "number": 2,
+              "startedAt": "2026-10-02T04:45:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-02T04:45:21Z",
+              "conclusion": "success",
+              "name": "Select the one trusted orchestration Python",
+              "number": 3,
+              "startedAt": "2026-10-02T04:45:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-02T04:45:21Z",
+              "conclusion": "success",
+              "name": "Validate the sole release-record input",
+              "number": 4,
+              "startedAt": "2026-10-02T04:45:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-02T04:45:24Z",
+              "conclusion": "success",
+              "name": "Validate the complete ready record and recipe binding",
+              "number": 5,
+              "startedAt": "2026-10-02T04:45:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-02T04:45:51Z",
+              "conclusion": "success",
+              "name": "Replay the ready record's exact bound recipe twice",
+              "number": 6,
+              "startedAt": "2026-10-02T04:45:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-02T04:45:52Z",
+              "conclusion": "success",
+              "name": "Retain bounded replay evidence",
+              "number": 7,
+              "startedAt": "2026-10-02T04:45:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-02T04:45:52Z",
+              "conclusion": "success",
+              "name": "Post Select the one trusted orchestration Python",
+              "number": 13,
+              "startedAt": "2026-10-02T04:45:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-02T04:45:52Z",
+              "conclusion": "success",
+              "name": "Post Check out the selected review ref and full history",
+              "number": 14,
+              "startedAt": "2026-10-02T04:45:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-02T04:45:52Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-10-02T04:45:52Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/mmzen/se_harness/actions/runs/36965921824/job/110709533429"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/36965921824"
+    },
+    "seconds": 1.1372323999999026
+  }
+}
