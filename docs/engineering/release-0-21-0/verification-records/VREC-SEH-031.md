@@ -2,7 +2,7 @@
 id = "VREC-SEH-031"
 type = "verification_record"
 title = "Verification candidate for 13 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-02"
 updated = "2026-10-02"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-028
 evaluator_evidence_path = "docs/engineering/release-0-21-0/evidence/VREC-SEH-031-evaluator.json"
 evaluator_evidence_sha256 = "18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26"
 
+verified_at = "2026-10-02T04:42:23Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-IAR-028", "WO-IAR-029", "WO-IAR-030", "WO-IAR-031", "WO-IAR-033", "WO-IAR-034", "WO-IAR-035", "WO-IAR-036", "WO-IAR-037", "WO-IAR-039", "WO-IAR-040", "WO-IAR-041", "WO-RLS-031"]
 conforms_to = ["VER-IAR-020", "VER-IAR-021", "VER-IAR-022", "VER-RLS-030"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-02T04:42:23Z"
+decided_by = "assurance-owner"
+reason = "Human mmzen: I verify VREC-SEH-031. Accepts aggregate verification at candidate 4031f0fa4b5c4a95651bd928a110d8b2d94f9775 for all thirteen REL-SEH-033 work orders and VER-IAR-020/021/022 plus VER-RLS-030. Reviewed ready record SHA256 a79abad3cc6425f40345c8f40242643463d86765d8b2f6620a1699946dd99a52; evaluator evidence SHA256 18b56762537c5fe223ee11f6cbc36ed445b69346394c54b176bc1e19f712dc26. DEC-RLS-001 and RISK-RLS-001 retain the separately accepted unverified Codex Windows desktop deviation. Codex applies the human decision using the previously approved 0.20.1 assurance-owner compatibility label; mmzen remains the decision-maker. This does not supply the later exact release-record decision, merge, marketplace or adoption authority."
 +++
 
 # Verification Record Candidate
