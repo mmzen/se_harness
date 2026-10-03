@@ -5,7 +5,7 @@ title = "Verify the owner-authorized Explorer dashboard revision"
 status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-19"
-updated = "2026-08-19"
+updated = "2026-10-03"
 
 [relations]
 verifies = ["REQ-DST-030", "REQ-DST-032", "REQ-DST-033", "REQ-DST-035", "REQ-DST-040", "REQ-DST-041", "REQ-DST-042", "REQ-DST-045", "REQ-DST-047", "REQ-DST-050", "REQ-DST-055"]
@@ -61,7 +61,7 @@ Verification derives expected semantics from the approved requirements, existing
 
 ## Performance and resilience checks
 
-- Measure `index.html <= 262144`, summary `<= 262144`, topology target `<= 2097152`, per-document `<= 262144`, and total projected content `<= 16777216` before compression.
+- Measure `index.html <= 262144`, summary `<= 262144`, topology target `<= 4194304`, per-document `<= 262144`, and total projected content `<= 16777216` before compression.
 - Repeat deterministic generation and transactional failure/rollback tests.
 - Confirm the 20-entry Lineage history, 100-node context bounds, density cap, request cache and retry boundaries remain bounded.
 
@@ -76,3 +76,25 @@ Retain authorization, attachment/final hashes and sizes, preflight manifest, cha
 ## Residual uncertainty
 
 Fragments improve deep linking but expose current presentation selection in the URL and browser history. They do not authenticate the host, preserve prior visits, or make a view authoritative. Browser/layout differences and the accepted CDN supply-chain risk remain bounded through explicit fallbacks and retained evidence.
+
+## Manual capacity revision — 2026-10-03
+
+mmzen authorized the 4 MiB target and the bounded manual amendment after reviewing
+the two-file correction and the affected definitions. This records the human's
+exception to the selected 0.21.0 amendment procedure's unsupported-command stop;
+it is not a revision operation performed by harnessctl. Lifecycle states,
+original decision history and all noncapacity rules are preserved.
+
+The exact accepted predecessor is the member `docs/engineering/harness-distribution/verification/VER-DST-017.md` of
+[accepted-predecessors.zip](../evidence/WO-DST-028/accepted-predecessors.zip),
+SHA-256 `9ff580b3cf13aa74e8ee6c91ca3d0fdbb50517788204297811a50e40bc694fe4`. The
+[amendment manifest](../evidence/WO-DST-028/amendment.json) links both versions
+and retains the owner's instruction. Earlier work keeps its original Git-bound
+definitions and evidence.
+
+The current target is 4,194,304 uncompressed UTF-8 bytes. Measurements and
+0.5.0/0.5.1 rollout statements from the earlier amendment describe its historical
+context. New work uses selected released 0.21.0 and the checks in VER-DST-030
+under WO-DST-028. All other payload budgets, complete topology data, integrity
+checks and publication boundaries remain unchanged. RLS-SEH-032's approved
+candidate and archives are not amended.

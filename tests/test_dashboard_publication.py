@@ -345,7 +345,7 @@ releases_work = ["WO-TST-001"]
                     assess()
         lock["skill_ownership"] = {"provider": "plugin", "historical_binding": {"path": "unused"}}
         self.assertEqual(self.evaluator_evidence_sha256, assess()["sha256"])
-        for schema in (2, 5, "4", 4.0):
+        for schema in (2, 6, "4", 4.0, "5", 5.0, True):
             with self.subTest(schema=schema):
                 lock["schema"] = schema
                 with self.assertRaisesRegex(PUBLICATION.PublicationError, "schema-3.*schema-4"):
@@ -354,6 +354,41 @@ releases_work = ["WO-TST-001"]
         write(self.root / self.evaluator_evidence_path, "{}\n")
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "evidence digest differs"):
             assess()
+
+
+    def test_external_resource_binding_preserves_checks_and_maintenance_fallback(self) -> None:
+        self.maintenance_history()
+        lock_path = self.root / ".engineering-harness.lock"
+        original = json.loads(lock_path.read_text(encoding="utf-8"))
+        original.update(schema=5, resource_layout="released-resources-v1")
+        metadata = PUBLICATION._metadata_at(self.root, "HEAD", self.record_path)
+
+        def assess(lock, record=metadata):
+            write(lock_path, json.dumps(lock))
+            git(self.root, "add", ".")
+            git(self.root, "commit", "--allow-empty", "-m", "assess external resource lock binding")
+            return PUBLICATION._validated_evaluator_binding(self.root, "HEAD", record)
+
+        self.assertEqual(self.evaluator_evidence_sha256, assess(original)["sha256"])
+        invalid = [
+            ({key: value for key, value in original.items() if key != "resource_layout"}, "released-resources-v1"),
+            *[({**original, "resource_layout": value}, "released-resources-v1")
+              for value in (None, "repository", {}, 5)],
+            *[({**original, "skill_ownership": value}, "skill_ownership")
+              for value in (None, {}, {"provider": "plugin"})],
+            ({**original, "evaluator": {}}, "invalid evaluator identity"),
+        ]
+        # The valid candidate lock must not hide an invalid main lock.
+        for lock, message in invalid:
+            with self.subTest(lock=lock):
+                with self.assertRaisesRegex(PUBLICATION.PublicationError, message):
+                    assess(lock)
+        for path in ("../evidence.json", "/docs/engineering/evidence/record.json"):
+            with self.subTest(path=path):
+                with self.assertRaisesRegex(PUBLICATION.PublicationError, "unsafe evaluator evidence path"):
+                    assess(original, {**metadata, "evaluator_evidence_path": path})
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "evidence digest differs"):
+            assess(original, {**metadata, "evaluator_evidence_sha256": "0" * 64})
 
 
 class EvaluatorDescriptorTests(unittest.TestCase):
@@ -422,7 +457,7 @@ class EvaluatorDescriptorTests(unittest.TestCase):
         original = json.loads(lock_path.read_text(encoding="utf-8"))
         invalid = [
             ({"schema": schema}, "schema-3.*schema-4")
-            for schema in (2, 5, "4", 4.0)
+            for schema in (2, 6, "4", 4.0, "5", 5.0, True)
         ] + [
             ({"schema": 4, "skill_ownership": ownership}, "plugin ownership")
             for ownership in (None, [], {}, {"provider": "repository"}, {"provider": 4})
@@ -434,6 +469,41 @@ class EvaluatorDescriptorTests(unittest.TestCase):
         for changes, message in invalid:
             with self.subTest(changes=changes):
                 lock = {**original, "schema": 4, "skill_ownership": {"provider": "plugin"}, **changes}
+                write(lock_path, json.dumps(lock))
+                with self.assertRaisesRegex(PUBLICATION.PublicationError, message):
+                    PUBLICATION.read_evaluator(self.root)
+
+    def test_external_resources_preserve_descriptor_and_refusals(self) -> None:
+        expected = PUBLICATION.read_evaluator(self.root)
+        lock_path = self.root / ".engineering-harness.lock"
+        original = json.loads(lock_path.read_text(encoding="utf-8"))
+        original.update(schema=5, resource_layout="released-resources-v1")
+        write(self.root / ".engineering-harness.toml",
+              '[harness]\ntool_version = "0.5.0"\nresource_layout = "released-resources-v1"\n')
+        write(lock_path, json.dumps(original))
+        self.assertEqual(expected, PUBLICATION.read_evaluator(self.root))
+        invalid = [
+            ({key: value for key, value in original.items() if key != "resource_layout"}, "released-resources-v1"),
+            *[({**original, "resource_layout": value}, "released-resources-v1")
+              for value in (None, "repository", {}, 5)],
+            *[({**original, "skill_ownership": value}, "skill_ownership")
+              for value in (None, {}, {"provider": "plugin"})],
+            ({**original, "hash_algorithm": "sha1"}, "integrity semantics"),
+            ({**original, "hash_mode": "unknown"}, "integrity semantics"),
+            ({**original, "tool_version": "0.4.1"}, "versions differ"),
+            ({**original, "evaluator": None}, "no evaluator identity"),
+            *[({**original, "evaluator": {**original["evaluator"], **changes}}, message)
+              for changes, message in (
+                  ({"version": "0.4.1"}, "versions differ"),
+                  ({"payload_sha256": "invalid"}, "payload SHA-256"),
+                  ({"archive_name": "other.whl"}, "wheel name"),
+                  ({"archive_sha256": None}, "complete.*archive identity"),
+                  ({"archive_sha256": "invalid"}, "wheel SHA-256"),
+                  ({"unexpected": "value"}, "unknown field"),
+              )],
+        ]
+        for lock, message in invalid:
+            with self.subTest(lock=lock):
                 write(lock_path, json.dumps(lock))
                 with self.assertRaisesRegex(PUBLICATION.PublicationError, message):
                     PUBLICATION.read_evaluator(self.root)

@@ -296,8 +296,13 @@ def _validated_release_record(metadata: dict[str, Any], path: str, tag: str) -> 
 
 def _locked_evaluator(lock: dict[str, Any]) -> dict[str, Any]:
     schema = lock.get("schema")
-    if type(schema) is not int or schema not in {3, 4}:
-        raise PublicationError("publication requires a schema-3 or schema-4 evaluator lock")
+    if type(schema) is not int or schema not in {3, 4, 5}:
+        raise PublicationError("publication requires a schema-3, schema-4 or schema-5 evaluator lock")
+    if schema == 5:
+        if lock.get("resource_layout") != "released-resources-v1":
+            raise PublicationError("schema-5 evaluator lock must select released-resources-v1")
+        if "skill_ownership" in lock:
+            raise PublicationError("schema-5 evaluator lock cannot declare skill_ownership")
     if schema == 4:
         ownership = lock.get("skill_ownership")
         # SPEC-PLG-021: older binding fields remain readable. Publication needs

@@ -5,7 +5,7 @@ title = "Verify topology headroom without boundary regression"
 status = "approved"
 owners = ["quality-owner", "security-owner", "repository-owner"]
 created = "2026-08-20"
-updated = "2026-08-20"
+updated = "2026-10-03"
 
 [relations]
 verifies = ["REQ-DST-062", "REQ-DST-063", "REQ-DST-064"]
@@ -21,22 +21,22 @@ Verification reads serialized output and public runtime identities rather than t
 
 | Requirement | Method | Case/evidence | Pass condition |
 |---|---|---|---|
-| REQ-DST-062 | exact constant and serialized-size tests | current repository, below/equal/above target fixtures | target is exactly 2,097,152; current repository passes; excess remains explicit and nontruncating |
+| REQ-DST-062 | exact constant and serialized-size tests | current repository, below/equal/above target fixtures | target is exactly 4,194,304; current repository passes; excess remains explicit and nontruncating |
 | REQ-DST-063 | repeat, cross-runtime, push and pull-request observations | Windows/default, Python 3.11, hosted branch and merge ref | identical inputs/history are deterministic; all executions use the same target; merge-ref acceptance passes |
-| REQ-DST-064 | origin, managed-integrity and unchanged-budget audit | external evaluator identity, doctor, candidate package install, changed paths | root remains exact public 0.5.0; candidate package carries 2 MiB; every other boundary is unchanged |
+| REQ-DST-064 | origin, managed-integrity and unchanged-budget audit | external evaluator identity, doctor, candidate package install, changed paths | root remains exact public 0.5.0; candidate package carries 4 MiB; every other boundary is unchanged |
 
 ## Acceptance scenarios
 
 - Reproduce baseline 525,689 > 524,288 on merged `af0eaa0` before implementation.
-- Generate the implemented current repository twice; recursively compare paths and bytes and prove topology is at most 2,097,152.
-- Exercise deterministic fixtures immediately below, equal to, and above 2,097,152 without allocating unbounded memory.
+- Generate the implemented current repository twice; recursively compare paths and bytes and prove topology is at most 4,194,304.
+- Exercise deterministic fixtures immediately below, equal to, and above 4,194,304 without allocating unbounded memory.
 - Run the exact candidate on a branch push and pull-request merge ref and retain both topology observations.
-- Install a nonpromotable candidate wheel into a disposable environment and initialize a standard repository whose installed generator declares 2,097,152.
+- Install a nonpromotable candidate wheel into a disposable environment and initialize a standard repository whose installed generator declares 4,194,304.
 - Run public-0.5.0 doctor on the implementation repository and prove the active root generator and lock remain unchanged.
 
 ## Property and invariant tests
 
-- `TOPOLOGY_ACCEPTANCE_BYTES == 2_097_152` in the candidate canonical template.
+- `TOPOLOGY_ACCEPTANCE_BYTES == 4_194_304` in the candidate canonical template.
 - `topology_target_exceeded` is true if and only if serialized topology bytes are greater than the target.
 - Topology nodes, relations, findings, revision provenance, detail descriptors, schemas, paths, ordering, and digests are unchanged for the same projection.
 - Shell, summary, per-document, and total-content constants remain exactly 262,144, 262,144, 262,144, and 16,777,216.
@@ -58,10 +58,10 @@ Verification reads serialized output and public runtime identities rather than t
 ## Performance and resilience checks
 
 - Record baseline and candidate topology bytes before compression and absolute/percentage headroom.
-- Assert current candidate topology remains below 2 MiB after adding this packet and its later VREC integration history.
+- Assert current candidate topology remains below 4 MiB after adding this packet and its later VREC integration history.
 - Retain repeat-generation digests and role totals.
 - Exercise above-target observation without failed bundle promotion or formal-graph error.
-- Treat a future approach to 2 MiB as a trigger for separately governed topology sharding, not silent threshold drift.
+- Treat a future approach to 4 MiB as a trigger for separately governed topology sharding, not silent threshold drift.
 
 ## Manual assessments
 
@@ -77,3 +77,25 @@ Retain owner approval, preflight manifests, baseline commit/graph/bytes, exact c
 ## Residual uncertainty
 
 Repository topology will continue to grow and valid Git integration history can increase provenance bytes. Two MiB provides substantial headroom but is not permanent proof against arbitrary growth. Static hosting, compression, browser hardware, and future graph shape remain environment-dependent; a later sharding decision requires separate authority.
+
+## Manual capacity revision — 2026-10-03
+
+mmzen authorized the 4 MiB target and the bounded manual amendment after reviewing
+the two-file correction and the affected definitions. This records the human's
+exception to the selected 0.21.0 amendment procedure's unsupported-command stop;
+it is not a revision operation performed by harnessctl. Lifecycle states,
+original decision history and all noncapacity rules are preserved.
+
+The exact accepted predecessor is the member `docs/engineering/harness-distribution/verification/VER-DST-020.md` of
+[accepted-predecessors.zip](../evidence/WO-DST-028/accepted-predecessors.zip),
+SHA-256 `e1001c47e80a70452b5554933e0ca15043a99a32d3b64c00c49a9f8012e3ee68`. The
+[amendment manifest](../evidence/WO-DST-028/amendment.json) links both versions
+and retains the owner's instruction. Earlier work keeps its original Git-bound
+definitions and evidence.
+
+The current target is 4,194,304 uncompressed UTF-8 bytes. Measurements and
+0.5.0/0.5.1 rollout statements from the earlier amendment describe its historical
+context. New work uses selected released 0.21.0 and the checks in VER-DST-030
+under WO-DST-028. All other payload budgets, complete topology data, integrity
+checks and publication boundaries remain unchanged. RLS-SEH-032's approved
+candidate and archives are not amended.

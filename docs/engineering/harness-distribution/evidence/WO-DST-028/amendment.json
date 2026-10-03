@@ -1,0 +1,93 @@
+{
+  "schema": "owner-recorded-capacity-amendment/v1",
+  "accountable_human": "mmzen",
+  "authorization": "Authorize manual amendment and correction (Recommended)",
+  "reviewed_question": "Authorize a bounded manual amendment to record the 4 MiB limit, preserve and link the previous accepted definitions, and implement the prepared two-file correction with required verification? The installed evaluator cannot record definition revisions. The approved 0.22.0 release candidate and archives would stay unchanged.",
+  "prior_target": 2097152,
+  "target": 4194304,
+  "work_order": "WO-DST-028",
+  "verification": "VER-DST-030",
+  "baseline": "dfa5786973602b3abf12542ae0645a6f82dea8d1",
+  "archive": "accepted-predecessors.zip",
+  "archive_sha256": "ba90ce2f7590d932f0544d650dda2c8d6054a2f9627d8cee4825ea0610ea8de6",
+  "revisions": [
+    {
+      "path": "docs/engineering/harness-distribution/requirements/REQ-DST-055.md",
+      "predecessor_member": "docs/engineering/harness-distribution/requirements/REQ-DST-055.md",
+      "predecessor_sha256": "b82e50a17d696b48100b4714c09ae037bd7cdfacf4ba9f67f43252d6b1f2caff",
+      "revision_sha256": "fc2a27f785d84901140c3444662dfb5000cc7cc4c20a6cf0805c5b2e1a556553",
+      "effect": "Required response: topology acceptance only."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/requirements/REQ-DST-062.md",
+      "predecessor_member": "docs/engineering/harness-distribution/requirements/REQ-DST-062.md",
+      "predecessor_sha256": "483ffad85da1f4196ee5fa72e93d72a8844454abf04072b9a02a4c01ac851832",
+      "revision_sha256": "4ae7c5583707c8212c66fbdee5bbe993b23c23d6aa33858b8fe0e85b4be470d5",
+      "effect": "Statement, Required response, Failure and boundary behavior, Constraints, Acceptance examples and Open decisions: 4 MiB replaces the active 2 MiB target. The owner explicitly selects a numerical increase after reassessment; topology partitioning is deferred."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/requirements/REQ-DST-063.md",
+      "predecessor_member": "docs/engineering/harness-distribution/requirements/REQ-DST-063.md",
+      "predecessor_sha256": "1bb8e913d0cde489c0e571216074e9a9247ae2f996545f44666d4d9747b8ceef",
+      "revision_sha256": "f8af97a314e38f4a6bc8723a2f2663652b993cd8afcec98e267c1730fd0bf150",
+      "effect": "Required response and Acceptance examples: the same 4 MiB applies across branch, PR merge and Windows/Linux."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/specifications/SPEC-DST-013.md",
+      "predecessor_member": "docs/engineering/harness-distribution/specifications/SPEC-DST-013.md",
+      "predecessor_sha256": "125635749212c3b2c06cd334eaf170861cdf1b1904606d58fe64cd63f1b0aae2",
+      "revision_sha256": "eed6881f3a09e290a433a2ca407b8bc122adf93bcd7b79244ed1694287fc59c2",
+      "effect": "Performance and capacity: topology target only."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/specifications/SPEC-DST-017.md",
+      "predecessor_member": "docs/engineering/harness-distribution/specifications/SPEC-DST-017.md",
+      "predecessor_sha256": "0a6d0f2a577404a5353765670f785236c6c378729bbaca289d2215b22eeb2412",
+      "revision_sha256": "8a2266ed1c6ee2795b4f75903504bc0763e096895e716ae27aa96cc2acb31720",
+      "effect": "Performance and capacity: topology target only."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/specifications/SPEC-DST-020.md",
+      "predecessor_member": "docs/engineering/harness-distribution/specifications/SPEC-DST-020.md",
+      "predecessor_sha256": "f868b0b35705b706ad99b1da3219e173a59c913daceb32cdee5e7fb1f098907e",
+      "revision_sha256": "79e55e0f3ab1f89f352ca8eb8c9eee0ffd94994e18e804489c9a63dc42c69709",
+      "effect": "Active target, constant, observation threshold and acceptance rule: 4 MiB. Historical baseline, old transition, rollout and observation statements remain historical."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/specifications/SPEC-DST-023.md",
+      "predecessor_member": "docs/engineering/harness-distribution/specifications/SPEC-DST-023.md",
+      "predecessor_sha256": "8cdbec94d6acf28daee32499c382a9b1fc956d49cf0a8da285f893a6f8556e70",
+      "revision_sha256": "f48bd107714965163096fe758dcb3e5b2da10c41554c16cfc21fdf3a39868fc1",
+      "effect": "Current topology target only; the recorded c065e3d measurement remains unchanged."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/verification/VER-DST-013.md",
+      "predecessor_member": "docs/engineering/harness-distribution/verification/VER-DST-013.md",
+      "predecessor_sha256": "2f5cac7990d87937b4e0091d408d7c2e5432f65b45c36c5b38a16c46178ae4e0",
+      "revision_sha256": "b38d5672cb8f8ca94f40efa08fbc02ca1c3d6cb2cb09bf0f9e912ae4cbedc688",
+      "effect": "Current repository topology bound only."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/verification/VER-DST-017.md",
+      "predecessor_member": "docs/engineering/harness-distribution/verification/VER-DST-017.md",
+      "predecessor_sha256": "9ff580b3cf13aa74e8ee6c91ca3d0fdbb50517788204297811a50e40bc694fe4",
+      "revision_sha256": "a97d476591b8b725909cd9e9560d54ab31efeaa3c0da189884ddc9891efefd82",
+      "effect": "Topology target only."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/verification/VER-DST-020.md",
+      "predecessor_member": "docs/engineering/harness-distribution/verification/VER-DST-020.md",
+      "predecessor_sha256": "e1001c47e80a70452b5554933e0ca15043a99a32d3b64c00c49a9f8012e3ee68",
+      "revision_sha256": "ea5e7a93a6f721766b5c15d903ff64575869781da266827095a814662d6dbb67",
+      "effect": "Active 4 MiB target, boundary tests and source/package proof. Old 0.5.0 measurements remain historical; selected 0.21.0 governs the new work."
+    },
+    {
+      "path": "docs/engineering/harness-distribution/architecture/ARCH-DST-013.md",
+      "predecessor_member": "docs/engineering/harness-distribution/architecture/ARCH-DST-013.md",
+      "predecessor_sha256": "7e4509af077d0da15f32cd954aef093d8bd6c7f1c076eb877ccd262b2cf0165a",
+      "revision_sha256": "ffbac912cdd4f87c142b485940c789bf9752598104d5faac6c953ec1ff56b352",
+      "effect": "Current numerical capacity only; single deferred topology and all trust boundaries remain unchanged."
+    }
+  ],
+  "limits": "Manual exception only for these listed revisions. No machine relation or lifecycle event is invented; no other amendment, waiver, verification acceptance, merge or release is inferred."
+}

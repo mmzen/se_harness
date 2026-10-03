@@ -1,0 +1,59 @@
+{
+  "observed_at": "2026-10-03T02:54:53.816071+00:00",
+  "baseline": "01ec43c86c9d30949295c07ac91c742be91e713a",
+  "observations": [
+    {
+      "label": "evaluator-descriptor",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        ".github/scripts/publish_dashboard.py",
+        "evaluator",
+        "--repository",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--output",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\schema5-descriptor-before.json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "dashboard publication: publication requires a schema-3 or schema-4 evaluator lock\n"
+    },
+    {
+      "label": "release-resolver",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        ".github/scripts/publish_release.py",
+        "resolve",
+        "--repository",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "--default-ref",
+        "refs/remotes/origin/main",
+        "--release-record",
+        "RLS-SEH-032",
+        "--output",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\schema5-resolver-before.json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "release orchestration: publication requires a schema-3 or schema-4 evaluator lock\n"
+    }
+  ],
+  "original_sha256": {
+    ".engineering-harness.lock": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+    ".engineering-harness.toml": "539d431527a64f4f617f1653dfea3158b466078be799d2ae30db91f50f533010",
+    "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md": "f44aa44cfb553d34d93d99d632baf179dbe28348686124f1128a6de9cb43e939",
+    "docs/engineering/release-0-22-0/verification-records/VREC-SEH-032.md": "4beb7b894d7ea0f24fc2bfa7ffb843378ad4056cbb9556b0432e4efff724c650",
+    "docs/engineering/release-0-22-0/evidence/RLS-SEH-032-evaluator.json": "3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721",
+    "docs/engineering/release-0-22-0/evidence/VREC-SEH-032-evaluator.json": "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157",
+    "docs/engineering/release-0-22-0/evidence/bundle.json": "4d3d2233b1ca50191c324ce8a2297d67048f313644d655791c0f46fa1f80fe0b"
+  },
+  "lock_schema": 5,
+  "effects": "Read-only diagnosis. No production workflow dispatched; no external publication or lifecycle transition."
+}

@@ -123,8 +123,8 @@ class DashboardWebUIContractTests(unittest.TestCase):
         # imported by the entry module; the literal is pinned where it is defined.
         bundle_text = (CANDIDATE_SCRIPTS / "dashboard_bundle.py").read_text(encoding="utf-8")
         candidate_text = (CANDIDATE_SCRIPTS / "generate_harness_dashboard.py").read_text(encoding="utf-8")
-        self.assertEqual(2_097_152, GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES)
-        self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", bundle_text)
+        self.assertEqual(4_194_304, GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES)
+        self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 4_194_304", bundle_text)
         if root_copy("scripts/generate_harness_dashboard.py") is not None:
             self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", MANAGED_GENERATOR.read_text(encoding="utf-8"))
         # The candidate evolves ahead of the released root copy between

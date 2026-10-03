@@ -5,8 +5,8 @@ title = "Provide durable demonstrator topology headroom"
 status = "approved"
 owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-20"
-updated = "2026-08-20"
-statement = "WHEN the SE Harness repository acceptance suite evaluates its compact Explorer topology, THE SYSTEM SHALL use a 2,097,152-byte UTF-8 acceptance target while continuing to report the exact observed size."
+updated = "2026-10-03"
+statement = "WHEN the SE Harness repository acceptance suite evaluates its compact Explorer topology, THE SYSTEM SHALL use a 4,194,304-byte UTF-8 acceptance target while continuing to report the exact observed size."
 verification_method = ["test"]
 verification_notes = "automated-performance-budget-test"
 
@@ -28,21 +28,21 @@ The deterministic progressive dashboard bundle has been generated for the SE Har
 
 ## Required response
 
-- Compare the compact topology resource against exactly 2,097,152 UTF-8 bytes before compression.
+- Compare the compact topology resource against exactly 4,194,304 UTF-8 bytes before compression.
 - Report the actual topology bytes, configured target, resource role totals, and `topology_target_exceeded` observation.
 - Keep target excess observational for general consumer generation while requiring the SE Harness repository acceptance fixture to remain at or below the target.
 - Preserve deterministic serialization so identical accepted inputs and Git history produce identical bytes.
 
 ## Failure and boundary behavior
 
-The SE Harness acceptance test fails when its topology exceeds 2,097,152 bytes. Consumer generation continues to report larger valid topology rather than misclassifying the formal graph as invalid. Exceeding this target does not weaken manifest size/digest verification or authorize silent truncation.
+The SE Harness acceptance test fails when its topology exceeds 4,194,304 bytes. Consumer generation continues to report larger valid topology rather than misclassifying the formal graph as invalid. Exceeding this target does not weaken manifest size/digest verification or authorize silent truncation.
 
 ## Constraints
 
 - The value is a repository acceptance target, not a universal consumer repository maximum and not an assurance score.
 - Measurements remain uncompressed UTF-8 bytes.
 - No topology field, relation, finding, readiness input, or provenance observation may be dropped to meet the target.
-- A future need beyond 2 MiB requires explicit reassessment of topology sharding rather than another implicit increase.
+- The owner explicitly selected the increase from 2 MiB to 4 MiB on 2026-10-03 after the current-repository limit was exceeded. Topology sharding is deferred. A future need beyond 4 MiB requires a new capacity assessment and decision; this amendment authorizes no automatic increase.
 
 ## Acceptance examples
 
@@ -52,11 +52,11 @@ The SE Harness acceptance test fails when its topology exceeds 2,097,152 bytes. 
 
 **When** the updated acceptance suite evaluates it,
 
-**Then** it passes against 2,097,152 bytes and reports both values.
+**Then** it passes against 4,194,304 bytes and reports both values.
 
 ### Example: future target excess
 
-**Given** a future SE Harness topology exceeds 2,097,152 bytes,
+**Given** a future SE Harness topology exceeds 4,194,304 bytes,
 
 **When** repository acceptance runs,
 
@@ -64,4 +64,26 @@ The SE Harness acceptance test fails when its topology exceeds 2,097,152 bytes. 
 
 ## Open decisions
 
-The proposed target is exactly 2 MiB. Approval accepts that target; implementation may not choose a different value.
+The owner authorized exactly 4 MiB on 2026-10-03. Implementation may not choose a different value.
+
+## Manual capacity revision — 2026-10-03
+
+mmzen authorized the 4 MiB target and the bounded manual amendment after reviewing
+the two-file correction and the affected definitions. This records the human's
+exception to the selected 0.21.0 amendment procedure's unsupported-command stop;
+it is not a revision operation performed by harnessctl. Lifecycle states,
+original decision history and all noncapacity rules are preserved.
+
+The exact accepted predecessor is the member `docs/engineering/harness-distribution/requirements/REQ-DST-062.md` of
+[accepted-predecessors.zip](../evidence/WO-DST-028/accepted-predecessors.zip),
+SHA-256 `483ffad85da1f4196ee5fa72e93d72a8844454abf04072b9a02a4c01ac851832`. The
+[amendment manifest](../evidence/WO-DST-028/amendment.json) links both versions
+and retains the owner's instruction. Earlier work keeps its original Git-bound
+definitions and evidence.
+
+The current target is 4,194,304 uncompressed UTF-8 bytes. Measurements and
+0.5.0/0.5.1 rollout statements from the earlier amendment describe its historical
+context. New work uses selected released 0.21.0 and the checks in VER-DST-030
+under WO-DST-028. All other payload budgets, complete topology data, integrity
+checks and publication boundaries remain unchanged. RLS-SEH-032's approved
+candidate and archives are not amended.

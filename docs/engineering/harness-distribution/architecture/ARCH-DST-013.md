@@ -5,7 +5,7 @@ title = "Apply capacity headroom within the existing progressive bundle"
 status = "approved"
 owners = ["technical-owner", "quality-owner", "security-owner"]
 created = "2026-08-20"
-updated = "2026-08-20"
+updated = "2026-10-03"
 
 [relations]
 addresses = ["REQ-DST-062", "REQ-DST-063", "REQ-DST-064"]
@@ -26,7 +26,7 @@ The bundle-v2 architecture intentionally keeps topology as one compact deferred 
 
 ## Components and responsibilities
 
-- The candidate standard-template generator owns the future 2 MiB target.
+- The candidate standard-template generator owns the future 4 MiB target.
 - Existing deterministic topology projection and serialization own actual bytes.
 - Candidate-source and package tests own exact constant and behavior qualification.
 - GitHub pull-request execution supplies integration-history observation.
@@ -47,7 +47,7 @@ Candidate template bytes never flow into the evaluator process or active managed
 ## Data and control flow
 
 1. Capture baseline graph and topology bytes on merged main.
-2. Approve the exact 2 MiB target and candidate/root boundary.
+2. Approve the exact 4 MiB target and candidate/root boundary.
 3. Run public-0.5.0 start preflight and read the complete manifest.
 4. Change the candidate template, aligned definitions, and focused tests only.
 5. Generate twice and compare deterministic resources.
@@ -93,3 +93,25 @@ Apply `VER-DST-020`, including exact constant assertions, current and boundary f
 ## Related ADRs
 
 No new ADR is required. `ADR-DST-010` already selects the one-resource compact deferred topology and explicitly defers sharding. This amendment accepts additional numerical headroom inside that selected design and introduces no new significant decision. The `no_significant_decision` assessment requires accountable technical-owner approval with the packet.
+
+## Manual capacity revision — 2026-10-03
+
+mmzen authorized the 4 MiB target and the bounded manual amendment after reviewing
+the two-file correction and the affected definitions. This records the human's
+exception to the selected 0.21.0 amendment procedure's unsupported-command stop;
+it is not a revision operation performed by harnessctl. Lifecycle states,
+original decision history and all noncapacity rules are preserved.
+
+The exact accepted predecessor is the member `docs/engineering/harness-distribution/architecture/ARCH-DST-013.md` of
+[accepted-predecessors.zip](../evidence/WO-DST-028/accepted-predecessors.zip),
+SHA-256 `7e4509af077d0da15f32cd954aef093d8bd6c7f1c076eb877ccd262b2cf0165a`. The
+[amendment manifest](../evidence/WO-DST-028/amendment.json) links both versions
+and retains the owner's instruction. Earlier work keeps its original Git-bound
+definitions and evidence.
+
+The current target is 4,194,304 uncompressed UTF-8 bytes. Measurements and
+0.5.0/0.5.1 rollout statements from the earlier amendment describe its historical
+context. New work uses selected released 0.21.0 and the checks in VER-DST-030
+under WO-DST-028. All other payload budgets, complete topology data, integrity
+checks and publication boundaries remain unchanged. RLS-SEH-032's approved
+candidate and archives are not amended.
