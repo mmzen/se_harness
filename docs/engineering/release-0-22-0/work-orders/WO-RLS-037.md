@@ -2,10 +2,15 @@
 id = "WO-RLS-037"
 type = "work_order"
 title = "Remove the duplicated README host-limit paragraph"
-status = "draft"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-03"
 updated = "2026-10-03"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Human mmzen confirmed required commit-bound verification because release closeout relies on the corrected public guidance."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = [
@@ -21,6 +26,28 @@ paths = [
 implements = ["REQ-DST-069"]
 specifications = ["SPEC-DST-024", "SPEC-DST-029"]
 verification = ["VER-RLS-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-03T06:13:32Z"
+decided_by = "mmzen"
+reason = "Human repository owner mmzen answered \"I approve\" to the reviewed WO-RLS-037 and VER-RLS-001 correction and required commit-bound verification. This approves only deletion of the second duplicate README host-limit paragraph, its required checks/evidence, and the described updates to existing PR #530. Human verification of the corrected candidate and merge remain separate. Reviewed SHA-256 d47ec6c13de28e4491dea9c1a5bd2ced45e15d75f62dc4701585be5320296368. Transition input SHA-256 67a2d3f1491705ae2ae4c59e8efd7bdc5794f7a1419608ebaa837fd323efd4dd. Codex applies the human decision; only the confirmed assurance fields were added before preview."
+scope_paths = ["README.md", "docs/engineering/release-0-22-0/work-orders/WO-RLS-037.md", "docs/engineering/release-0-22-0/verification/VER-RLS-001.md", "docs/engineering/release-0-22-0/verification-records/VREC-PLG-034.md", "docs/engineering/release-0-22-0/evidence/VREC-PLG-034-evaluator.json", "docs/engineering/release-0-22-0/evidence/WO-RLS-037/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-03T06:14:36Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-03T06:16:43Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Remove the duplicated README host-limit paragraph

@@ -2,13 +2,20 @@
 id = "VER-RLS-001"
 type = "verification"
 title = "Verify the bounded README length correction"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-10-03"
 updated = "2026-10-03"
 
 [relations]
 verifies = ["REQ-DST-069"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-03T06:13:32Z"
+decided_by = "mmzen"
+reason = "Human repository owner mmzen answered \"I approve\" to the reviewed WO-RLS-037 and VER-RLS-001 correction and required commit-bound verification. This approves only deletion of the second duplicate README host-limit paragraph, its required checks/evidence, and the described updates to existing PR #530. Human verification of the corrected candidate and merge remain separate. Reviewed SHA-256 b115f981416fa927ac06f66c10743aa71cbf3d49eae5ace0f958848b05fda312. Transition input SHA-256 b115f981416fa927ac06f66c10743aa71cbf3d49eae5ace0f958848b05fda312. Codex applies the human decision; only the confirmed assurance fields were added before preview."
 +++
 
 # Verify the bounded README length correction

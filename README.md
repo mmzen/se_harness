@@ -61,8 +61,6 @@ integration and final release-marker closeout remain in progress.
 
 Instructions and templates live in the evaluator wheel; initialization writes
 configuration and lock files. Activation restores the checkout after compaction.
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
-
 See [migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-0210).
 The published package retains its pre-publication README.
 

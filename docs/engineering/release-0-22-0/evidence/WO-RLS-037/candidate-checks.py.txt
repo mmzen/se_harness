@@ -1,0 +1,16 @@
+from pathlib import Path
+import hashlib,json,os,re,subprocess,sys
+root=Path.cwd()
+readme=(root/'README.md').read_bytes()
+proposal=json.loads((root/'docs/engineering/release-0-22-0/evidence/WO-RLS-037/proposal-checks.json').read_text())
+assert hashlib.sha256(readme).hexdigest()==proposal['proposed_sha256']
+text=readme.decode('utf-8')
+assert len(text.split())==648 and len(text.splitlines())<=200 and len(re.findall(r'(?m)^## ',text))<=7
+warning='Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.'
+assert text.count(warning)==1 and warning in text.split('## Fewer repository files')[0]
+argv=[sys.executable,'-B','-X','utf8','-m','unittest','tests.test_public_onboarding','tests.test_progressive_documentation','tests.plugin_integration.package_assembly.test_refresh_guidance']
+env=dict(os.environ,GIT_CONFIG_COUNT='2',GIT_CONFIG_KEY_0='core.longpaths',GIT_CONFIG_VALUE_0='true',GIT_CONFIG_KEY_1='core.autocrlf',GIT_CONFIG_VALUE_1='false')
+p=subprocess.run(argv,cwd=root,env=env,capture_output=True,text=True,encoding='utf-8')
+report={'argv':argv,'cwd':str(root),'python':sys.version,'exit_code':p.returncode,'readme_sha256':hashlib.sha256(readme).hexdigest(),'words':648,'lines':len(text.splitlines()),'level_two_headings':len(re.findall(r'(?m)^## ',text)),'host_warning_copies':text.count(warning),'stdout':p.stdout,'stderr':p.stderr}
+print(json.dumps(report,indent=2),flush=True)
+raise SystemExit(p.returncode)

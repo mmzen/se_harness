@@ -1,0 +1,34 @@
+{
+  "governing_evaluator": "0.21.0",
+  "validation": {
+    "errors": 0,
+    "warnings": 61
+  },
+  "tests": {
+    "passed": 44,
+    "evidence": "implementation-checks.json"
+  },
+  "scope_preflight_handoff": "pass",
+  "implementation": "Exact approved one-paragraph deletion; 648 words; first warning preserved.",
+  "source_ci": "Required before merge; original failure retained in ci-failure.json.",
+  "authority": "mmzen approved WO-RLS-037, VER-RLS-001, required commit-bound verification and existing review-PR updates; no assurance acceptance or merge inferred.",
+  "raw_archive": {
+    "path": "checks-raw.zip",
+    "sha256": "6da57fd5e0edf7b59aa8b8b73309a4692aacff95b738e94a447a68b3fe6e13be",
+    "entries": {
+      "approval-apply.json": "19e807ec38124c85ca22d9cdd16503b571a0df325adc28bb552fc337c5b09246",
+      "approval-inputs.json": "695c2c54e2b7dbff3197c7acf8dd50d8baa1023f215afa0c031ef9b5bad188b0",
+      "approval-preview.json": "f36388ce65d41183dd4f41ad81751a3d32ccf016b9399de68cb9a3eda6f8bd41",
+      "completion-apply.json": "886211a5da6fd0819a4f4eccc5b99c8d0b440d7269501f9bdd69cfd44024280d",
+      "completion-preview.json": "f55dedc9d649739ed5610b802a3312e4bbdc51ea4e13bc04697cbcdd10f2daa7",
+      "declared-scope.json": "d007a4344f0414d7954fcf6a07195579ea1e821438bd7ce6553a6c09511d7c76",
+      "handoff-header.json": "923a09ee81c446ecf4623628ea1ad3afae3f834573175b7a5ee2c51443dc593b",
+      "handoff.json": "5ea411f4965fd34fcc111391f3167df8507ae8b4efeb85b335ac657696c26c41",
+      "review-preflight.json": "20951075a3c1cd2c4ace161038037eb165ff19898b7ad6629498b246474b08b2",
+      "start-apply.json": "ee23555d87d75611591c47993961d5f3b52ba29b970461a366597d07d4c5141b",
+      "start-preflight.json": "6a35da5abe210d20f998d356c1da8fd9a0b0117525de3fc06b37d5f87e66d800",
+      "start-preview.json": "afe20a432660a9b1a88d62f44375423312026a25e6a9870837637c3ba974677c",
+      "validate.json": "1d216cb733afdf4ddd41676523eb845edfd4f08ae02343ebde50ab03b7ec8c3e"
+    }
+  }
+}
