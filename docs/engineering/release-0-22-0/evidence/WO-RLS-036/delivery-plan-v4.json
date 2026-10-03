@@ -1,0 +1,132 @@
+{
+  "schema": "se-harness-delivery-plan/v1",
+  "release": {
+    "contract": "REL-SEH-034",
+    "record": "RLS-SEH-032",
+    "version": "0.22.0",
+    "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+  },
+  "review": {
+    "by": "mmzen",
+    "reference": "Approved REL-SEH-034, WO-RLS-034/035/036 and VER-RLS-033/034/035 on 2026-10-03: Approve package and required verification. Retained request: prepare and execute the release. Current-release host omissions recorded by mmzen in DEC-RLS-005 and DEC-RLS-006."
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness/releases/tag/v0.22.0",
+      "work_reference": "WO-RLS-034",
+      "next_action": "Exact publication and public installation observed; preserve receipts.",
+      "expected": {
+        "record": "RLS-SEH-032",
+        "version": "0.22.0",
+        "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+      },
+      "required_observations": [
+        "publisher",
+        "public_install"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+      "work_reference": "WO-RLS-035",
+      "next_action": "Published exact packages; Codex CLI public fresh/update routes and setup passed. Preserve the explicit Claude and desktop omissions.",
+      "expected": {
+        "plugin_version": "0.2.5",
+        "source_commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+        "evaluator_version": "0.22.0",
+        "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+        "public_revision": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+        "codex_content_sha256": "5d804f8ee4f6bdd3ad9352badce52afb945a8035cc91576c0d83fa4cfce4e8a7",
+        "claude-code_content_sha256": "f43d2de547bb427242646c8af4694b7a6b4d951e246968ea23c00a5ea934ebd0"
+      },
+      "required_observations": [
+        "assembly",
+        "qualification",
+        "public_ref",
+        "codex_fresh_install",
+        "codex_update"
+      ],
+      "hosts": [
+        "codex"
+      ],
+      "distributed_hosts": [
+        "codex",
+        "claude-code"
+      ],
+      "host_coverage": "hosts lists required native public-route observations; distributed_hosts lists package contents. Both package inventories and public bytes must match.",
+      "inventory_method": "SHA-256 of UTF-8 JSON of all package-relative file SHA-256 values, sorted keys and compact separators. Independent qualification files supply expected values; native installed files are compared separately."
+    },
+    {
+      "id": "documentation",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "WO-RLS-036",
+      "next_action": "Merged guidance matches the verified content; retain the completed readback.",
+      "expected": {
+        "commit": "80df326d5dcd78f4a51ea29f7502cced7fc83e2c"
+      },
+      "required_observations": [
+        "claims_review",
+        "links"
+      ]
+    },
+    {
+      "id": "demonstration",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://mmzen.github.io/se_harness/",
+      "work_reference": "WO-RLS-036",
+      "next_action": "Observe the authorized released-RLS deployment and its exact provenance.",
+      "expected": {
+        "governance_commit": "01ec43c86c9d30949295c07ac91c742be91e713a"
+      },
+      "required_observations": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "release_markers",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "WO-RLS-036",
+      "next_action": "After documentation and required observations, apply the retained latest/last grant using exact targets and old-ref checks.",
+      "expected": {
+        "latest": "v0.22.0",
+        "last": "abbec12ac5524c8adfb28693f846dd59de88f759"
+      },
+      "required_observations": [
+        "authorization",
+        "readback"
+      ]
+    }
+  ],
+  "previous_plan": {
+    "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/delivery-plan-v3.json",
+    "sha256": "0dff7879ba5fab91b575768a496e9b34a5be49102b3fdf3277b311f6218d49f0"
+  },
+  "accepted_host_omissions": {
+    "decisions": {
+      "DEC-RLS-005": {
+        "path": "docs/engineering/release-0-22-0/decisions/DEC-RLS-005.md",
+        "sha256": "06fbf938c2a56ee26755cd00b69a8ad207419d385206ccbdd856e7a292da80b8"
+      },
+      "DEC-RLS-006": {
+        "path": "docs/engineering/release-0-22-0/decisions/DEC-RLS-006.md",
+        "sha256": "7a524b98803d6002c34989895a7fcf11b5c8d50e62fc17b03a7bdef11c0aa518"
+      }
+    },
+    "human_instruction": "you can continue, claude and codex desktop won\u2019t be tested: to be indicated.",
+    "claude_code": "Host installation/update and native session qualification not run / unverified. Earlier expired-authentication failure retained.",
+    "codex_windows_desktop": "Not run / unverified. Codex CLI is a separate tested surface.",
+    "scope": "Plugin 0.2.5 and evaluator 0.22.0 only; both distributed package byte checks remain required.",
+    "revisit": "Before the next plugin release or before claiming an omitted host route verified, whichever occurs first."
+  },
+  "identity_update": "Bind the previously pending documentation identity to PR #530 merge 80df326d5dcd78f4a51ea29f7502cced7fc83e2c; all released package identities and accepted host omissions are preserved."
+}

@@ -1,0 +1,253 @@
+{
+  "schema": "se-harness-delivery-observations/v1",
+  "plan_sha256": "77e4457f7e44b3970d64c382e39e864f4fdd8b05b7589c664de6224bf64d55f0",
+  "observed_at": "2026-10-03T06:48:57.484866+00:00",
+  "release": {
+    "record": "RLS-SEH-032",
+    "status": "released",
+    "source": "https://github.com/mmzen/se_harness/blob/01ec43c86c9d30949295c07ac91c742be91e713a/docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+    "observed_at": "2026-10-03T05:44:00.803545+00:00",
+    "evidence": [
+      {
+        "path": "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+        "sha256": "fa48d5096a3cd66c96a4ae4776f7babea6ffa781cd7a67ea11ff77c2b27b1d09"
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes.json",
+        "sha256": "c5c1a9b2710be7c56b2afe4e9b3787d4ca5da97dbed8b4a47285ab1e8e5da796"
+      }
+    ]
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "status": "pass",
+      "observed_at": "2026-10-03T05:44:00.803545+00:00",
+      "source": "https://github.com/mmzen/se_harness/releases/tag/v0.22.0",
+      "identity": {
+        "record": "RLS-SEH-032",
+        "version": "0.22.0",
+        "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+      },
+      "evidence": {
+        "publisher": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes.json",
+            "sha256": "c5c1a9b2710be7c56b2afe4e9b3787d4ca5da97dbed8b4a47285ab1e8e5da796"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes-raw.zip",
+            "sha256": "6d77c9d6241a74d051b401ef23c9ad53aedc141e6dfc188b5898b55f389adb1d"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/merged-readback.json",
+            "sha256": "5d33879d6b8902b9f98b2a9b0c22bba3b250ac83a2880a68fdf664ce97efc3d8"
+          }
+        ],
+        "public_install": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes.json",
+            "sha256": "c5c1a9b2710be7c56b2afe4e9b3787d4ca5da97dbed8b4a47285ab1e8e5da796"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes-raw.zip",
+            "sha256": "6d77c9d6241a74d051b401ef23c9ad53aedc141e6dfc188b5898b55f389adb1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "marketplace",
+      "status": "pass",
+      "observed_at": "2026-10-03T05:44:00.803545+00:00",
+      "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+      "identity": {
+        "plugin_version": "0.2.5",
+        "source_commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+        "evaluator_version": "0.22.0",
+        "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+        "public_revision": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+        "codex_content_sha256": "5d804f8ee4f6bdd3ad9352badce52afb945a8035cc91576c0d83fa4cfce4e8a7",
+        "claude-code_content_sha256": "f43d2de547bb427242646c8af4694b7a6b4d951e246968ea23c00a5ea934ebd0"
+      },
+      "evidence": {
+        "assembly": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/publication-receipt.json",
+            "sha256": "56c8a872196b4f046477a27735cb250eda9ebeb8960f33ac320956b387429af7"
+          }
+        ],
+        "qualification": [
+          {
+            "path": "docs/engineering/release-0-22-0/verification-records/VREC-PLG-032.md",
+            "sha256": "86afad166107ea4d11318f16f8eebf79ccc42f251d2ee46c6f50f018594df0fc"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-035/qualification-review.md",
+            "sha256": "8fbc53c4c1d65aa24e17f9f420a03edf33c9b14bde00f34605885ea8af9ab7e0"
+          }
+        ],
+        "public_ref": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-readback.json",
+            "sha256": "78365eee0902e3405e96dfef6c9aa09d2558b9ca64197e7eacb43f3b5010caf1"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/merged-readback.json",
+            "sha256": "5d33879d6b8902b9f98b2a9b0c22bba3b250ac83a2880a68fdf664ce97efc3d8"
+          }
+        ],
+        "codex_fresh_install": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes.json",
+            "sha256": "c5c1a9b2710be7c56b2afe4e9b3787d4ca5da97dbed8b4a47285ab1e8e5da796"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes-raw.zip",
+            "sha256": "6d77c9d6241a74d051b401ef23c9ad53aedc141e6dfc188b5898b55f389adb1d"
+          }
+        ],
+        "codex_update": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes.json",
+            "sha256": "c5c1a9b2710be7c56b2afe4e9b3787d4ca5da97dbed8b4a47285ab1e8e5da796"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes-raw.zip",
+            "sha256": "6d77c9d6241a74d051b401ef23c9ad53aedc141e6dfc188b5898b55f389adb1d"
+          }
+        ]
+      },
+      "routes": [
+        {
+          "host": "codex",
+          "host_version": "codex-cli 0.159.2",
+          "kind": "fresh",
+          "status": "pass",
+          "observed_at": "2026-10-03T05:38:42.730191+00:00",
+          "revision": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+          "plugin_version": "0.2.5",
+          "content_sha256": "5d804f8ee4f6bdd3ad9352badce52afb945a8035cc91576c0d83fa4cfce4e8a7",
+          "evaluator_version": "0.22.0",
+          "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+          "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "evidence": [
+            {
+              "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes.json",
+              "sha256": "c5c1a9b2710be7c56b2afe4e9b3787d4ca5da97dbed8b4a47285ab1e8e5da796"
+            },
+            {
+              "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes-raw.zip",
+              "sha256": "6d77c9d6241a74d051b401ef23c9ad53aedc141e6dfc188b5898b55f389adb1d"
+            }
+          ]
+        },
+        {
+          "host": "codex",
+          "host_version": "codex-cli 0.159.2",
+          "kind": "update",
+          "status": "pass",
+          "observed_at": "2026-10-03T05:39:19.807027+00:00",
+          "revision": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+          "plugin_version": "0.2.5",
+          "content_sha256": "5d804f8ee4f6bdd3ad9352badce52afb945a8035cc91576c0d83fa4cfce4e8a7",
+          "evaluator_version": "0.22.0",
+          "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+          "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "evidence": [
+            {
+              "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes.json",
+              "sha256": "c5c1a9b2710be7c56b2afe4e9b3787d4ca5da97dbed8b4a47285ab1e8e5da796"
+            },
+            {
+              "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes-raw.zip",
+              "sha256": "6d77c9d6241a74d051b401ef23c9ad53aedc141e6dfc188b5898b55f389adb1d"
+            }
+          ],
+          "starting_version": "0.2.4",
+          "starting_source": "https://github.com/mmzen/se_harness.git#plugin-marketplace"
+        }
+      ]
+    },
+    {
+      "id": "documentation",
+      "status": "pass",
+      "observed_at": "2026-10-03T06:48:34.873433+00:00",
+      "source": "https://github.com/mmzen/se_harness",
+      "identity": {
+        "commit": "80df326d5dcd78f4a51ea29f7502cced7fc83e2c"
+      },
+      "evidence": {
+        "claims_review": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/merged-readback.json",
+            "sha256": "5d33879d6b8902b9f98b2a9b0c22bba3b250ac83a2880a68fdf664ce97efc3d8"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/merged-readback-raw.zip",
+            "sha256": "b44d66111d3cd97c256aaef522642fb808159ac3c009dc13df0017de6ecb6cbb"
+          }
+        ],
+        "links": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/checks.json",
+            "sha256": "dcff56c06da7950c64528bac7ba13db2415157935f67545951f08c329f26469a"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/merged-readback.json",
+            "sha256": "5d33879d6b8902b9f98b2a9b0c22bba3b250ac83a2880a68fdf664ce97efc3d8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "demonstration",
+      "status": "pass",
+      "observed_at": "2026-10-03T05:44:00.803545+00:00",
+      "source": "https://mmzen.github.io/se_harness/",
+      "identity": {
+        "governance_commit": "01ec43c86c9d30949295c07ac91c742be91e713a"
+      },
+      "evidence": {
+        "deployment": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes.json",
+            "sha256": "c5c1a9b2710be7c56b2afe4e9b3787d4ca5da97dbed8b4a47285ab1e8e5da796"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/public-routes-raw.zip",
+            "sha256": "6d77c9d6241a74d051b401ef23c9ad53aedc141e6dfc188b5898b55f389adb1d"
+          },
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/merged-readback.json",
+            "sha256": "5d33879d6b8902b9f98b2a9b0c22bba3b250ac83a2880a68fdf664ce97efc3d8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "release_markers",
+      "status": "pending",
+      "observed_at": "2026-10-03T05:44:28.867899+00:00",
+      "source": "https://github.com/mmzen/se_harness",
+      "identity": {
+        "latest": "v0.21.0",
+        "last": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775"
+      },
+      "evidence": {
+        "authorization": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/marker-authority.json",
+            "sha256": "39a6f437732ed1eb7aa4984d04cd11e42f67d0c44be5f25941ae8a24cd56fae8"
+          }
+        ],
+        "readback": [
+          {
+            "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/markers-before.json",
+            "sha256": "a1d9a8e5977b07144437fffd1f3d5e919bbcba18fe10be3f037e7cbac6dfb3f8"
+          }
+        ]
+      }
+    }
+  ]
+}
