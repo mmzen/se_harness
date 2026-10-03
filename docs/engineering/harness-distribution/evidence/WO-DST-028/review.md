@@ -26,7 +26,7 @@ Pages rehearsal and exact archive replay remain retained under WO-RLO-018.
 The original 2 MiB failure remains retained. This evidence also retains the
 incorrect multi-ID scope invocation, the Linux clone-origin fixture failure and
 the hosted missing-handoff failure. The corrected local combined PR check passes.
-The final hosted governance rerun is pending; no human assurance is inferred.
+All hosted checks at e72ebc26f26dfde646835c2cb7fa0047776d828a now pass, including governance, both upgrade rehearsals, both integration-package installations and publication replay. See completion.json. No human assurance is inferred.
 
 Design review: a fixed value and the existing boundary tests meet the approved
 capacity need. No sharding, serializer, workflow, hard budget or dependency change
@@ -34,4 +34,4 @@ is needed. A further increase requires a new decision. The complete original
 predecessors are in accepted-predecessors.zip; amendment.json links their hashes.
 
 See execution.json for commands, runtimes, commits, results, measurements,
-availability and preservation hashes. Final VREC preparation remains pending.
+availability and preservation hashes. VREC-RLO-015 preparation follows the completion transitions and a fresh test of the exact committed candidate. Its later record supplies that exact candidate and result.

@@ -2,7 +2,7 @@
 id = "WO-RLO-018"
 type = "work_order"
 title = "Restore publication with the adopted schema-5 lock"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-10-03T03:04:44Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-03T03:54:10Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Restore publication with the adopted schema-5 lock
