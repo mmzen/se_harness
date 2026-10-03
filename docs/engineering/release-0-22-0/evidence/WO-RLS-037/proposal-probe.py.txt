@@ -1,0 +1,14 @@
+import hashlib,io,json,sys,unittest
+from release022_ctl import REPO,OUT
+sys.path.insert(0,str(REPO))
+from tests import test_public_onboarding as tests
+original=(REPO/'README.md').read_bytes()
+tests.README_PATH=OUT/'public025-proposed-README.md'
+stream=io.StringIO()
+result=unittest.TextTestRunner(stream=stream,verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(tests.PublicOnboardingTests))
+assert (REPO/'README.md').read_bytes()==original
+report={'purpose':'Pre-approval proposal check; existing PublicOnboardingTests read the proposed temporary README, with all other repository inputs unchanged. This is not a committed-candidate verification.','argv':sys.argv,'python':sys.executable,'original_readme_sha256':hashlib.sha256(original).hexdigest(),'proposed_readme_sha256':hashlib.sha256(tests.README_PATH.read_bytes()).hexdigest(),'tests_run':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skips':len(result.skipped),'output':stream.getvalue()}
+root=REPO/'docs/engineering/release-0-22-0/evidence/WO-RLS-037'
+(root/'proposal-test.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+print(json.dumps(report,indent=2))
+raise SystemExit(0 if result.wasSuccessful() else 1)

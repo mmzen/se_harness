@@ -2,7 +2,7 @@
 id = "VREC-PLG-033"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-036"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-22-0/decisions/DEC-RLS-005.md", "d
 evaluator_evidence_path = "docs/engineering/release-0-22-0/evidence/VREC-PLG-033-evaluator.json"
 evaluator_evidence_sha256 = "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157"
 
+verified_at = "2026-10-03T05:57:35Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLS-036"]
 conforms_to = ["VER-RLS-035"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-03T05:57:35Z"
+decided_by = "mmzen"
+reason = "Human mmzen stated: I verify VREC-PLG-033. This records the requested assurance decision on candidate 4798b2f9b4c8227a017bd455842a0acb8fa1eb99 and its unchanged reviewed evidence in PR #530. Claude Code and Codex Windows desktop remain untested under DEC-RLS-005/006. The separate CI run 37101342557 reports the README at 676 words against its 650-word limit; this decision does not waive that failed integration check or authorize a changed candidate. A bounded correction remains required before merge. Codex applies the recorded human decision; no merge or completed delivery is inferred."
 +++
 
 # Verification Record Candidate
