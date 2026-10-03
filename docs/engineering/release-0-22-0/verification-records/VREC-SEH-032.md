@@ -2,10 +2,10 @@
 id = "VREC-SEH-032"
 type = "verification_record"
 title = "Verification candidate for 10 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-02"
-updated = "2026-10-02"
+updated = "2026-10-03"
 commit = "abbec12ac5524c8adfb28693f846dd59de88f759"
 git_object_format = "sha1"
 worktree_state = "clean"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-simplification/evidence/WO-KIS-010/r
 evaluator_evidence_path = "docs/engineering/release-0-22-0/evidence/VREC-SEH-032-evaluator.json"
 evaluator_evidence_sha256 = "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157"
 
+verified_at = "2026-10-03T02:33:22Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-KIS-010", "WO-KIS-011", "WO-KIS-012", "WO-KIS-013", "WO-KIS-014", "WO-RLO-014", "WO-RLO-015", "WO-RLO-016", "WO-RLO-017", "WO-RLS-034"]
 conforms_to = ["VER-KIS-004", "VER-KIS-005", "VER-KIS-006", "VER-RLO-011", "VER-RLS-033"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-03T02:33:22Z"
+decided_by = "mmzen"
+reason = "mmzen explicitly stated I verify VREC-SEH-032 in this conversation, accepting the reviewed record at PR 528 commit 37b6abbadacc833169aae2b83ae943a730816147 (SHA256 0b8f87c1b893985aa3c213f90a30dc5418910fe6f3feb51ad0baa6f0b55e1ab9), candidate abbec12ac5524c8adfb28693f846dd59de88f759 and its unchanged retained evidence."
 +++
 
 # Verification Record Candidate
