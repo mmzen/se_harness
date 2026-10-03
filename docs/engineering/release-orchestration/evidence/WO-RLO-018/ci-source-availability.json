@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "observed_at": "2026-10-03T03:14:47.762627+00:00",
+    "argv": [
+      "C:\\Program Files\\GitHub CLI\\gh.exe",
+      "api",
+      "repos/mmzen/se_harness/actions/runs/37092393950/artifacts"
+    ],
+    "exit_code": 0,
+    "result": {
+      "total_count": 2,
+      "artifacts": [
+        {
+          "id": 11263141477,
+          "node_id": "MDg6QXJ0aWZhY3QxMTI2MzE0MTQ3Nw==",
+          "name": "candidate-source-raw",
+          "size_in_bytes": 2950,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263141477",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263141477/zip",
+          "expired": false,
+          "digest": "sha256:903717ba8a9f01d99df21533455485136deeaf7638c75a707c22e0785c632db9",
+          "created_at": "2026-10-03T03:13:17Z",
+          "updated_at": "2026-10-03T03:13:17Z",
+          "expires_at": "2026-10-17T03:13:17Z",
+          "workflow_run": {
+            "id": 37092393950,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/release-0-22-0-delivery",
+            "head_sha": "865b78a17903f82b37c55c165664c0d9318a70a7"
+          }
+        },
+        {
+          "id": 11263096554,
+          "node_id": "MDg6QXJ0aWZhY3QxMTI2MzA5NjU1NA==",
+          "name": "complete-candidate-qualification",
+          "size_in_bytes": 817,
+          "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263096554",
+          "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263096554/zip",
+          "expired": false,
+          "digest": "sha256:8af5b9cda65b1b790b373e1eda1feda8a90196fec58695e4c319c61a47929d6c",
+          "created_at": "2026-10-03T03:13:19Z",
+          "updated_at": "2026-10-03T03:13:19Z",
+          "expires_at": "2026-10-17T03:13:18Z",
+          "workflow_run": {
+            "id": 37092393950,
+            "repository_id": 1330601788,
+            "head_repository_id": 1330601788,
+            "head_branch": "work/release-0-22-0-delivery",
+            "head_sha": "865b78a17903f82b37c55c165664c0d9318a70a7"
+          }
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  "download": {
+    "observed_at": "2026-10-03T03:14:49.930571+00:00",
+    "argv": [
+      "C:\\Program Files\\GitHub CLI\\gh.exe",
+      "run",
+      "download",
+      "37092393950",
+      "--repo",
+      "mmzen/se_harness",
+      "--name",
+      "candidate-source-raw",
+      "--dir",
+      "work\\release022\\correction-ci-source"
+    ],
+    "exit_code": 0,
+    "result": "",
+    "stderr": ""
+  },
+  "raw_log_sha256": "d31e391f44a88601bfc5b4bd417df9fa9a779bc178518375f4969a043c419bde"
+}

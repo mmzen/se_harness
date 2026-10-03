@@ -1,0 +1,44 @@
+{
+  "candidate": "be8169eed2c383d1e3f9f886b5bcb94ca339bbbe",
+  "working_tree": "clean",
+  "command": [
+    "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full",
+    "--timings",
+    "target/test-timings.json"
+  ],
+  "cwd": "/home/runner/work/se_harness/se_harness",
+  "checker": {
+    "version": "0.22.0",
+    "origin": "/home/runner/work/se_harness/se_harness/se_harness/__init__.py"
+  },
+  "started_at": "2026-10-03T03:12:12.825659+00:00",
+  "exit_code": 1,
+  "result": "fail",
+  "output_tail": "ed-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}, {\"path\": \"docs/engineering/product/verification-records/VREC-001.md\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}], \"coverage\": \"covered\", \"explicit_matches\": [], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"docs/engineering/product/verification-records/VREC-001.md\"], \"uncovered_paths\": []}, \"handoff\": {\"kind\": \"check\", \"outcome\": \"completed\"}, \"planned\": {\"automatic_matches\": [], \"coverage\": \"covered\", \"explicit_matches\": [{\"path\": \"docs/cli.md\", \"scope_entry\": \"docs/cli.md\"}, {\"path\": \"docs/procedure.md\", \"scope_entry\": \"docs/procedure.md\"}, {\"path\": \"templates/work.md\", \"scope_entry\": \"templates/work.md\"}, {\"path\": \"tests/test_guidance.py\", \"scope_entry\": \"tests/test_guidance.py\"}], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/cli.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"uncovered_paths\": []}, \"record\": {\"commit\": \"de2283a28d65d92feb7b7982eb613cb01caab403\", \"id\": \"VREC-001\", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\n======================================================================\nFAIL: test_dashboard_webui.DashboardWebUIContractTests.test_progressive_bundle_is_deterministic_partitioned_and_bounded\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/se_harness/se_harness/tests/test_dashboard_webui.py\", line 779, in test_progressive_bundle_is_deterministic_partitioned_and_bounded\n    self.assertLessEqual(manifest[\"entrypoints\"][\"topology\"][\"bytes\"], GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES)\nAssertionError: 2099060 not less than or equal to 2097152\n\n----------------------------------------------------------------------\nRan 1259 tests in 63.022s (185 classes, 4 workers)\n\nFAILED (failures=1, skipped=2)\n",
+  "raw": {
+    "file": "output.log",
+    "bytes": 5378,
+    "artifact": "candidate-source-raw",
+    "repository": "mmzen/se_harness",
+    "run_id": "37092393950",
+    "run_url": "https://github.com/mmzen/se_harness/actions/runs/37092393950",
+    "retention_days": 14,
+    "estimated_expiry": "2026-10-17T03:12:12.825659+00:00",
+    "availability": "local; upload not yet confirmed",
+    "download_command": [
+      "gh",
+      "run",
+      "download",
+      "37092393950",
+      "--repo",
+      "mmzen/se_harness",
+      "--name",
+      "candidate-source-raw"
+    ]
+  }
+}

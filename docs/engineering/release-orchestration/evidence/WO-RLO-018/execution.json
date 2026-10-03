@@ -1,0 +1,570 @@
+{
+  "observed_at": "2026-10-03T03:15:52.614420+00:00",
+  "scope": "WO-RLO-018",
+  "status": "implementation present; completion and verification blocked by required topology acceptance test",
+  "implementation_commit": "73224164fd38cc2c52317bc468bd225774253677",
+  "source_sha256": {
+    ".github/scripts/publish_dashboard.py": "39635c059a7c9bd0bb39b457294bae7188c0e8392f043af92d45025efc142397",
+    "tests/test_dashboard_publication.py": "a3bd5163690e6d4f783ee4bd4d03fb7cb4693f784edfc55ecc10d690ac6836a9",
+    "tests/test_release_orchestration.py": "dabfd816ca3ef8ab5a7ccb26d6d31a33abdf2807b448b8208ca56f9e6d5c8d45"
+  },
+  "source_runtime_origin": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\se_harness\\__init__.py",
+  "windows_initial_failure": {
+    "argv": [
+      "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "tests.test_dashboard_publication",
+      "tests.test_release_orchestration"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 1,
+    "seconds": 67.99,
+    "scale": "full",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_tail": "",
+    "stderr_sha256": "a5c60dd42b4b717950879aaa649f6c293ffd9597524bcb4bf035d384a6700156",
+    "stderr_tail": "ss(original, {**metadata, \"evaluator_evidence_sha256\": \"0\" * 64})\n    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_dashboard_publication.py\", line 368, in assess\n    self.commit(\"assess external resource lock binding\")\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_dashboard_publication.py\", line 91, in commit\n    git(self.root, \"commit\", \"-m\", message)\n    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\git_support.py\", line 54, in git\n    completed = run_git(root, *arguments, check=check, env=env)\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\git_support.py\", line 36, in run_git\n    return subprocess.run(\n           ~~~~~~~~~~~~~~^\n        # Fixture cleanup must not race Git maintenance spawned by a commit.\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<4 lines>...\n        env={**os.environ, **IDENTITY, **(env or {})},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\subprocess.py\", line 578, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['git', '-C', 'C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\tmpl7blqfwh\\\\repository', '-c', 'commit.gpgsign=false', '-c', 'maintenance.auto=false', '-c', 'gc.auto=0', 'commit', '-m', 'assess external resource lock binding']' returned non-zero exit status 1.\n\n----------------------------------------------------------------------\nRan 85 tests in 67.484s\n\nFAILED (errors=2)\n"
+  },
+  "windows_focused": {
+    "argv": [
+      "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "tests.test_dashboard_publication",
+      "tests.test_release_orchestration"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "seconds": 89.19,
+    "scale": "full",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_tail": "",
+    "stderr_sha256": "71547fbed8dbb635a2706ee42be06a1486727124e5d36ebe6e0f03fd28de2c7b",
+    "stderr_tail": ".....................................................................................\n----------------------------------------------------------------------\nRan 85 tests in 88.703s\n\nOK\n"
+  },
+  "windows_full": {
+    "argv": [
+      "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/run_tests.py",
+      "--workers",
+      "4",
+      "--scale",
+      "full"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 1,
+    "seconds": 269.13,
+    "scale": "full",
+    "stdout_sha256": "a6fe173aa356cbad82d5b717998818fffddfca1754a69745551a31c515a28162",
+    "stdout_tail": "e\", \"work_order\": \"WO-PRD-001\"}], \"coverage\": \"covered\", \"explicit_matches\": [], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"docs/engineering/product/verification-records/VREC-001.md\"], \"uncovered_paths\": []}, \"handoff\": {\"kind\": \"check\", \"outcome\": \"completed\"}, \"planned\": {\"automatic_matches\": [], \"coverage\": \"covered\", \"explicit_matches\": [{\"path\": \"docs/cli.md\", \"scope_entry\": \"docs/cli.md\"}, {\"path\": \"docs/procedure.md\", \"scope_entry\": \"docs/procedure.md\"}, {\"path\": \"templates/work.md\", \"scope_entry\": \"templates/work.md\"}, {\"path\": \"tests/test_guidance.py\", \"scope_entry\": \"tests/test_guidance.py\"}], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/cli.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"uncovered_paths\": []}, \"record\": {\"commit\": \"41502b082e9ac66cb7f3ec061b67cc95a25f4b8b\", \"id\": \"VREC-001\", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\n0.22.0\n======================================================================\nFAIL: test_dashboard_webui.DashboardWebUIContractTests.test_progressive_bundle_is_deterministic_partitioned_and_bounded\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_dashboard_webui.py\", line 779, in test_progressive_bundle_is_deterministic_partitioned_and_bounded\n    self.assertLessEqual(manifest[\"entrypoints\"][\"topology\"][\"bytes\"], GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 2099060 not less than or equal to 2097152\n\n----------------------------------------------------------------------\nRan 1259 tests in 267.219s (185 classes, 4 workers)\n\nFAILED (failures=1, skipped=22)\n",
+    "stderr_sha256": "0ae5ab307bed36434c28a9c8f8a94fe40cc90b4b0059441977994e22cc0e4f49",
+    "stderr_tail": "--workers must be at least 1\n"
+  },
+  "linux": {
+    "candidate": "73224164fd38cc2c52317bc468bd225774253677",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "runtime": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "started": "2026-10-03T03:08:15.312144+00:00",
+    "commands": [
+      {
+        "label": "clone",
+        "argv": [
+          "git",
+          "clone",
+          "--branch",
+          "work/release-0-22-0-delivery",
+          "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/release022/correction-linux-73224164fd38.bundle",
+          "/tmp/rlo018-v7pygylr/source"
+        ],
+        "cwd": "/tmp/rlo018-v7pygylr",
+        "exit_code": 0,
+        "seconds": 14.8,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "d1fd51e030ce086d453ab3b3da9a3cb7aa4ca3556c23f309f78e340f705c0407",
+        "stderr_tail": " files:  46% (6268/13625)\nUpdating files:  47% (6404/13625)\nUpdating files:  48% (6540/13625)\nUpdating files:  49% (6677/13625)\nUpdating files:  50% (6813/13625)\nUpdating files:  51% (6949/13625)\nUpdating files:  52% (7085/13625)\nUpdating files:  53% (7222/13625)\nUpdating files:  54% (7358/13625)\nUpdating files:  55% (7494/13625)\nUpdating files:  56% (7630/13625)\nUpdating files:  57% (7767/13625)\nUpdating files:  58% (7903/13625)\nUpdating files:  59% (8039/13625)\nUpdating files:  60% (8175/13625)\nUpdating files:  61% (8312/13625)\nUpdating files:  62% (8448/13625)\nUpdating files:  63% (8584/13625)\nUpdating files:  64% (8720/13625)\nUpdating files:  65% (8857/13625)\nUpdating files:  66% (8993/13625)\nUpdating files:  67% (9129/13625)\nUpdating files:  68% (9265/13625)\nUpdating files:  68% (9337/13625)\nUpdating files:  69% (9402/13625)\nUpdating files:  70% (9538/13625)\nUpdating files:  71% (9674/13625)\nUpdating files:  72% (9810/13625)\nUpdating files:  73% (9947/13625)\nUpdating files:  74% (10083/13625)\nUpdating files:  75% (10219/13625)\nUpdating files:  76% (10355/13625)\nUpdating files:  77% (10492/13625)\nUpdating files:  78% (10628/13625)\nUpdating files:  79% (10764/13625)\nUpdating files:  80% (10900/13625)\nUpdating files:  80% (10989/13625)\nUpdating files:  81% (11037/13625)\nUpdating files:  82% (11173/13625)\nUpdating files:  83% (11309/13625)\nUpdating files:  84% (11445/13625)\nUpdating files:  85% (11582/13625)\nUpdating files:  86% (11718/13625)\nUpdating files:  87% (11854/13625)\nUpdating files:  88% (11990/13625)\nUpdating files:  89% (12127/13625)\nUpdating files:  90% (12263/13625)\nUpdating files:  91% (12399/13625)\nUpdating files:  92% (12535/13625)\nUpdating files:  93% (12672/13625)\nUpdating files:  94% (12808/13625)\nUpdating files:  95% (12944/13625)\nUpdating files:  96% (13080/13625)\nUpdating files:  97% (13217/13625)\nUpdating files:  98% (13353/13625)\nUpdating files:  99% (13489/13625)\nUpdating files: 100% (13625/13625)\nUpdating files: 100% (13625/13625), done.\n"
+      },
+      {
+        "label": "identity",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/rlo018-v7pygylr/source",
+        "exit_code": 0,
+        "seconds": 0.0,
+        "stdout_sha256": "c00b961257ac4844db5e8a05249fb52e2eb2853333f558a3cfcb37288866c4f6",
+        "stdout_tail": "73224164fd38cc2c52317bc468bd225774253677\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "focused",
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "tests.test_dashboard_publication",
+          "tests.test_release_orchestration"
+        ],
+        "cwd": "/tmp/rlo018-v7pygylr/source",
+        "exit_code": 0,
+        "seconds": 7.25,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "f54ec11f5c33d629fc26813024524639fabc2038b64abac792c70c362fa34327",
+        "stderr_tail": ".....................................................................................\n----------------------------------------------------------------------\nRan 85 tests in 6.776s\n\nOK\n"
+      }
+    ],
+    "passed": true
+  },
+  "real_descriptor": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      ".github/scripts/publish_dashboard.py",
+      "evaluator",
+      "--repository",
+      ".",
+      "--output",
+      "..\\release022\\correction-evaluator-descriptor.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "started": "2026-10-03T03:06:13.984821+00:00",
+    "runtime": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "scale": "full",
+    "exit_code": 0,
+    "seconds": 0.32,
+    "stdout_sha256": "d8ea29a6325fd096411bd744936d2ade9f709118f0acd057a474a21e3e72600f",
+    "stdout_tail": "{\"payload_manifest\": \"se-harness-installed-payload-v1\", \"payload_sha256\": \"c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac\", \"sha256\": \"13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\", \"tag\": \"v0.21.0\", \"url\": \"https://github.com/mmzen/se_harness/releases/download/v0.21.0/se_harness-0.21.0-py3-none-any.whl\", \"version\": \"0.21.0\", \"wheel\": \"se_harness-0.21.0-py3-none-any.whl\"}\n",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_tail": ""
+  },
+  "real_release_resolver": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      ".github/scripts/publish_release.py",
+      "resolve",
+      "--repository",
+      ".",
+      "--default-ref",
+      "refs/remotes/origin/main",
+      "--release-record",
+      "RLS-SEH-032",
+      "--output",
+      "..\\release022\\correction-publication-plan.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "started": "2026-10-03T03:06:14.464134+00:00",
+    "runtime": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "scale": "full",
+    "exit_code": 0,
+    "seconds": 99.35,
+    "stdout_sha256": "04b45f104f50843f262dbf4f439c83e757d20f9e27f1ca87970fa3596dcc8141",
+    "stdout_tail": "{\"build_recipe\": \"release/build-recipe.json\", \"build_recipe_schema\": \"se-harness-release-build-recipe/v1\", \"build_recipe_sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\", \"candidate_commit\": \"abbec12ac5524c8adfb28693f846dd59de88f759\", \"checksums\": \"SHA256SUMS\", \"checksums_sha256\": \"cbc4fca53d4c8d664716592a623e10d61bc28622580fc08ef348c4b304141c37\", \"distribution_schema\": 2, \"evaluator_evidence_path\": \"docs/engineering/release-0-22-0/evidence/RLS-SEH-032-evaluator.json\", \"evaluator_evidence_sha256\": \"3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721\", \"git_object_format\": \"sha1\", \"governance_commit\": \"01ec43c86c9d30949295c07ac91c742be91e713a\", \"release_contract\": \"REL-SEH-034\", \"release_record\": \"RLS-SEH-032\", \"release_record_path\": \"docs/engineering/release-0-22-0/releases/RLS-SEH-032.md\", \"released_at\": \"2026-10-03T02:42:25Z\", \"released_work\": [\"WO-KIS-010\", \"WO-KIS-011\", \"WO-KIS-012\", \"WO-KIS-013\", \"WO-KIS-014\", \"WO-RLO-014\", \"WO-RLO-015\", \"WO-RLO-016\", \"WO-RLO-017\", \"WO-RLS-034\"], \"repository\": \"mmzen/se_harness\", \"schema\": \"se-harness-release-plan/v2\", \"sdist\": \"se_harness-0.22.0.tar.gz\", \"sdist_sha256\": \"3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a\", \"source_date_epoch\": 1790980462, \"source_manifest_sha256\": \"8a8c0bd4ab3ba7125f18c19c8598f671b705dda6b5d70e8b74ea1dd430c2b2c3\", \"tag\": \"v0.22.0\", \"verification_records\": [\"VREC-SEH-032\"], \"version\": \"0.22.0\", \"wheel\": \"se_harness-0.22.0-py3-none-any.whl\", \"wheel_sha256\": \"44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4\"}\n",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_tail": ""
+  },
+  "release_plan": {
+    "build_recipe": "release/build-recipe.json",
+    "build_recipe_schema": "se-harness-release-build-recipe/v1",
+    "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+    "candidate_commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+    "checksums": "SHA256SUMS",
+    "checksums_sha256": "cbc4fca53d4c8d664716592a623e10d61bc28622580fc08ef348c4b304141c37",
+    "distribution_schema": 2,
+    "evaluator_evidence_path": "docs/engineering/release-0-22-0/evidence/RLS-SEH-032-evaluator.json",
+    "evaluator_evidence_sha256": "3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721",
+    "git_object_format": "sha1",
+    "governance_commit": "01ec43c86c9d30949295c07ac91c742be91e713a",
+    "release_contract": "REL-SEH-034",
+    "release_record": "RLS-SEH-032",
+    "release_record_path": "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+    "released_at": "2026-10-03T02:42:25Z",
+    "released_work": [
+      "WO-KIS-010",
+      "WO-KIS-011",
+      "WO-KIS-012",
+      "WO-KIS-013",
+      "WO-KIS-014",
+      "WO-RLO-014",
+      "WO-RLO-015",
+      "WO-RLO-016",
+      "WO-RLO-017",
+      "WO-RLS-034"
+    ],
+    "repository": "mmzen/se_harness",
+    "schema": "se-harness-release-plan/v2",
+    "sdist": "se_harness-0.22.0.tar.gz",
+    "sdist_sha256": "3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a",
+    "source_date_epoch": 1790980462,
+    "source_manifest_sha256": "8a8c0bd4ab3ba7125f18c19c8598f671b705dda6b5d70e8b74ea1dd430c2b2c3",
+    "tag": "v0.22.0",
+    "verification_records": [
+      "VREC-SEH-032"
+    ],
+    "version": "0.22.0",
+    "wheel": "se_harness-0.22.0-py3-none-any.whl",
+    "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+  },
+  "pages": {
+    "started": "2026-10-03T03:08:02.354445+00:00",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "runtime": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "commands": [
+      {
+        "label": "correction-identity",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+        "exit_code": 0,
+        "seconds": 0.04,
+        "stdout_sha256": "c00b961257ac4844db5e8a05249fb52e2eb2853333f558a3cfcb37288866c4f6",
+        "stdout_tail": "73224164fd38cc2c52317bc468bd225774253677\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "clone",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "clone",
+          "--no-hardlinks",
+          "--branch",
+          "work/release-0-22-0-delivery",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-pages-nzuvsqbm\\repository"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-pages-nzuvsqbm",
+        "exit_code": 0,
+        "seconds": 24.67,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "0a157043a91510d13d192eff34d201bdabd5ebcfbfb4884a4522f78a8306dc62",
+        "stderr_tail": "iles:  51% (6949/13625)\nUpdating files:  51% (7038/13625)\nUpdating files:  52% (7085/13625)\nUpdating files:  53% (7222/13625)\nUpdating files:  54% (7358/13625)\nUpdating files:  55% (7494/13625)\nUpdating files:  56% (7630/13625)\nUpdating files:  57% (7767/13625)\nUpdating files:  58% (7903/13625)\nUpdating files:  59% (8039/13625)\nUpdating files:  59% (8072/13625)\nUpdating files:  60% (8175/13625)\nUpdating files:  61% (8312/13625)\nUpdating files:  62% (8448/13625)\nUpdating files:  63% (8584/13625)\nUpdating files:  64% (8720/13625)\nUpdating files:  65% (8857/13625)\nUpdating files:  65% (8954/13625)\nUpdating files:  66% (8993/13625)\nUpdating files:  67% (9129/13625)\nUpdating files:  68% (9265/13625)\nUpdating files:  69% (9402/13625)\nUpdating files:  70% (9538/13625)\nUpdating files:  71% (9674/13625)\nUpdating files:  72% (9810/13625)\nUpdating files:  72% (9932/13625)\nUpdating files:  73% (9947/13625)\nUpdating files:  74% (10083/13625)\nUpdating files:  75% (10219/13625)\nUpdating files:  76% (10355/13625)\nUpdating files:  77% (10492/13625)\nUpdating files:  77% (10591/13625)\nUpdating files:  78% (10628/13625)\nUpdating files:  79% (10764/13625)\nUpdating files:  80% (10900/13625)\nUpdating files:  81% (11037/13625)\nUpdating files:  82% (11173/13625)\nUpdating files:  83% (11309/13625)\nUpdating files:  83% (11356/13625)\nUpdating files:  84% (11445/13625)\nUpdating files:  85% (11582/13625)\nUpdating files:  86% (11718/13625)\nUpdating files:  87% (11854/13625)\nUpdating files:  88% (11990/13625)\nUpdating files:  89% (12127/13625)\nUpdating files:  89% (12228/13625)\nUpdating files:  90% (12263/13625)\nUpdating files:  91% (12399/13625)\nUpdating files:  92% (12535/13625)\nUpdating files:  93% (12672/13625)\nUpdating files:  94% (12808/13625)\nUpdating files:  95% (12944/13625)\nUpdating files:  96% (13080/13625)\nUpdating files:  97% (13217/13625)\nUpdating files:  98% (13353/13625)\nUpdating files:  99% (13489/13625)\nUpdating files: 100% (13625/13625)\nUpdating files: 100% (13625/13625), done.\n"
+      },
+      {
+        "label": "select-real-main",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "update-ref",
+          "refs/remotes/origin/main",
+          "01ec43c86c9d30949295c07ac91c742be91e713a"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-pages-nzuvsqbm\\repository",
+        "exit_code": 0,
+        "seconds": 0.08,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "local-rehearsal-tag",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "tag",
+          "v0.22.0",
+          "abbec12ac5524c8adfb28693f846dd59de88f759"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-pages-nzuvsqbm\\repository",
+        "exit_code": 0,
+        "seconds": 0.07,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "pages-resolver",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          ".github/scripts/publish_dashboard.py",
+          "resolve",
+          "--repository",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-pages-nzuvsqbm\\repository",
+          "--tag",
+          "v0.22.0",
+          "--release-record",
+          "RLS-SEH-032",
+          "--default-ref",
+          "refs/remotes/origin/main",
+          "--output",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-pages-nzuvsqbm\\pages-plan.json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-pages-nzuvsqbm\\repository",
+        "exit_code": 0,
+        "seconds": 25.66,
+        "stdout_sha256": "6d16785e909334285f5cf5ff44d55ae74f4258756123c8f6d00f0d0982a8e1eb",
+        "stdout_tail": "{\"candidate_commit\": \"abbec12ac5524c8adfb28693f846dd59de88f759\", \"default_head\": \"01ec43c86c9d30949295c07ac91c742be91e713a\", \"evaluator_evidence_path\": \"docs/engineering/release-0-22-0/evidence/RLS-SEH-032-evaluator.json\", \"evaluator_evidence_sha256\": \"3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721\", \"git_object_format\": \"sha1\", \"governance_commit\": \"01ec43c86c9d30949295c07ac91c742be91e713a\", \"release_record\": \"RLS-SEH-032\", \"release_record_path\": \"docs/engineering/release-0-22-0/releases/RLS-SEH-032.md\", \"repository\": \"mmzen/se_harness\", \"tag\": \"v0.22.0\", \"version\": \"0.22.0\"}\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      }
+    ],
+    "passed": true,
+    "tag_scope": "Disposable local clone only. No network or publication.",
+    "correction_commit": "73224164fd38cc2c52317bc468bd225774253677",
+    "plan": {
+      "candidate_commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+      "default_head": "01ec43c86c9d30949295c07ac91c742be91e713a",
+      "evaluator_evidence_path": "docs/engineering/release-0-22-0/evidence/RLS-SEH-032-evaluator.json",
+      "evaluator_evidence_sha256": "3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721",
+      "git_object_format": "sha1",
+      "governance_commit": "01ec43c86c9d30949295c07ac91c742be91e713a",
+      "release_record": "RLS-SEH-032",
+      "release_record_path": "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+      "repository": "mmzen/se_harness",
+      "tag": "v0.22.0",
+      "version": "0.22.0"
+    }
+  },
+  "preservation": [
+    {
+      "path": ".engineering-harness.lock",
+      "before_sha256": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+      "after_sha256": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+      "unchanged": true
+    },
+    {
+      "path": ".engineering-harness.toml",
+      "before_sha256": "539d431527a64f4f617f1653dfea3158b466078be799d2ae30db91f50f533010",
+      "after_sha256": "539d431527a64f4f617f1653dfea3158b466078be799d2ae30db91f50f533010",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+      "before_sha256": "f44aa44cfb553d34d93d99d632baf179dbe28348686124f1128a6de9cb43e939",
+      "after_sha256": "f44aa44cfb553d34d93d99d632baf179dbe28348686124f1128a6de9cb43e939",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-0/verification-records/VREC-SEH-032.md",
+      "before_sha256": "4beb7b894d7ea0f24fc2bfa7ffb843378ad4056cbb9556b0432e4efff724c650",
+      "after_sha256": "4beb7b894d7ea0f24fc2bfa7ffb843378ad4056cbb9556b0432e4efff724c650",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-0/evidence/RLS-SEH-032-evaluator.json",
+      "before_sha256": "3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721",
+      "after_sha256": "3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-0/evidence/VREC-SEH-032-evaluator.json",
+      "before_sha256": "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157",
+      "after_sha256": "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-0/evidence/bundle.json",
+      "before_sha256": "4d3d2233b1ca50191c324ce8a2297d67048f313644d655791c0f46fa1f80fe0b",
+      "after_sha256": "4d3d2233b1ca50191c324ce8a2297d67048f313644d655791c0f46fa1f80fe0b",
+      "unchanged": true
+    }
+  ],
+  "topology_diagnosis": {
+    "commands": [
+      {
+        "label": "clone",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "clone",
+          "--no-hardlinks",
+          "--branch",
+          "work/release-0-22-0-delivery",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-topology-95mgvqib\\repository"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-topology-95mgvqib",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "d12abb2246fcf02d1fde477f58529019f182ae3c04fe5f314e5dc8ef6c9be449",
+        "stderr_tail": "files:  48% (6599/13627)\nUpdating files:  49% (6678/13627)\nUpdating files:  50% (6814/13627)\nUpdating files:  51% (6950/13627)\nUpdating files:  52% (7087/13627)\nUpdating files:  53% (7223/13627)\nUpdating files:  54% (7359/13627)\nUpdating files:  55% (7495/13627)\nUpdating files:  56% (7632/13627)\nUpdating files:  57% (7768/13627)\nUpdating files:  58% (7904/13627)\nUpdating files:  59% (8040/13627)\nUpdating files:  60% (8177/13627)\nUpdating files:  61% (8313/13627)\nUpdating files:  61% (8416/13627)\nUpdating files:  62% (8449/13627)\nUpdating files:  63% (8586/13627)\nUpdating files:  64% (8722/13627)\nUpdating files:  65% (8858/13627)\nUpdating files:  66% (8994/13627)\nUpdating files:  67% (9131/13627)\nUpdating files:  68% (9267/13627)\nUpdating files:  69% (9403/13627)\nUpdating files:  70% (9539/13627)\nUpdating files:  71% (9676/13627)\nUpdating files:  72% (9812/13627)\nUpdating files:  73% (9948/13627)\nUpdating files:  73% (9958/13627)\nUpdating files:  74% (10084/13627)\nUpdating files:  75% (10221/13627)\nUpdating files:  76% (10357/13627)\nUpdating files:  77% (10493/13627)\nUpdating files:  78% (10630/13627)\nUpdating files:  79% (10766/13627)\nUpdating files:  80% (10902/13627)\nUpdating files:  81% (11038/13627)\nUpdating files:  82% (11175/13627)\nUpdating files:  83% (11311/13627)\nUpdating files:  83% (11392/13627)\nUpdating files:  84% (11447/13627)\nUpdating files:  85% (11583/13627)\nUpdating files:  86% (11720/13627)\nUpdating files:  87% (11856/13627)\nUpdating files:  88% (11992/13627)\nUpdating files:  89% (12129/13627)\nUpdating files:  90% (12265/13627)\nUpdating files:  91% (12401/13627)\nUpdating files:  92% (12537/13627)\nUpdating files:  92% (12671/13627)\nUpdating files:  93% (12674/13627)\nUpdating files:  94% (12810/13627)\nUpdating files:  95% (12946/13627)\nUpdating files:  96% (13082/13627)\nUpdating files:  97% (13219/13627)\nUpdating files:  98% (13355/13627)\nUpdating files:  99% (13491/13627)\nUpdating files: 100% (13627/13627)\nUpdating files: 100% (13627/13627), done.\n"
+      },
+      {
+        "label": "checkout",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "checkout",
+          "--detach",
+          "01ec43c86c9d30949295c07ac91c742be91e713a"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-topology-95mgvqib\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "2015f8bf49dcad7355debad308eada5ca14f0f4da71734a4850b962a64d49680",
+        "stderr_tail": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nHEAD is now at 01ec43c8 Merge pull request #528 from mmzen/work/release-0-22-0\n"
+      },
+      {
+        "label": "measure",
+        "argv": [
+          "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "-c",
+          "import hashlib,json,subprocess\nfrom tests.test_dashboard_webui import GENERATOR,ROOT\nsnapshot,report,_=GENERATOR.generate_snapshot(ROOT)\nsnapshot['repository']={**snapshot['repository'],'revision':'a'*40}\n_,manifest,resources,observations=GENERATOR.build_dashboard_bundle(snapshot)\nentry=manifest['entrypoints']['topology']\nprint(json.dumps(dict(commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),valid=report.valid,artifacts=len(snapshot['artifacts']),relations=len(snapshot['relations']),topology=entry,target=GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES,excess=entry['bytes']-GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES,observations=observations)))\n"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-topology-95mgvqib\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "4cd556a483b28b92a83f047468e5136ee33db989b1811459e1f066a4c6c8f563",
+        "stdout_tail": "{\"commit\": \"01ec43c86c9d30949295c07ac91c742be91e713a\", \"valid\": true, \"artifacts\": 1881, \"relations\": 7176, \"topology\": {\"role\": \"topology\", \"schema\": \"harness-dashboard-topology-v2\", \"path\": \"data/topology/dae31764370560aaa1249840ff4bf3303323ddb7dfc749157e44a51b2ab3055f.json\", \"bytes\": 2097049, \"sha256\": \"dae31764370560aaa1249840ff4bf3303323ddb7dfc749157e44a51b2ab3055f\"}, \"target\": 2097152, \"excess\": -103, \"observations\": {\"role_bytes\": {\"artifact\": 15556314, \"evidence\": 8255152, \"readiness\": 3614520, \"summary\": 12313, \"topology\": 2097049}, \"role_counts\": {\"artifact\": 1881, \"evidence\": 892, \"readiness\": 1, \"summary\": 1, \"topology\": 1}, \"resource_count\": 2776, \"resource_bytes\": 29535348, \"largest_resource\": {\"role\": \"readiness\", \"schema\": \"harness-dashboard-readiness-v2\", \"path\": \"data/readiness/2e65e53b66fb3c6715d70bd96f60fd7f5ead3e32c4a0f806bb24eab6bc71c8dd.json\", \"bytes\": 3614520, \"sha256\": \"2e65e53b66fb3c6715d70bd96f60fd7f5ead3e32c4a0f806bb24eab6bc71c8dd\"}, \"topology_target_exceeded\": false}}\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "checkout",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "checkout",
+          "--detach",
+          "865b78a17903f82b37c55c165664c0d9318a70a7"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-topology-95mgvqib\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "a55a1d3ff3c593e39e646546f290615ed14025ab7e45f398b23c442dfe982fae",
+        "stderr_tail": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nPrevious HEAD position was 01ec43c8 Merge pull request #528 from mmzen/work/release-0-22-0\nHEAD is now at 865b78a1 Retain correction review scope evidence\n"
+      },
+      {
+        "label": "measure",
+        "argv": [
+          "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "-c",
+          "import hashlib,json,subprocess\nfrom tests.test_dashboard_webui import GENERATOR,ROOT\nsnapshot,report,_=GENERATOR.generate_snapshot(ROOT)\nsnapshot['repository']={**snapshot['repository'],'revision':'a'*40}\n_,manifest,resources,observations=GENERATOR.build_dashboard_bundle(snapshot)\nentry=manifest['entrypoints']['topology']\nprint(json.dumps(dict(commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),valid=report.valid,artifacts=len(snapshot['artifacts']),relations=len(snapshot['relations']),topology=entry,target=GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES,excess=entry['bytes']-GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES,observations=observations)))\n"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\rlo018-topology-95mgvqib\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "d54a911b93e91f6098db3cca6f8a0853cde80fefb9594e596369d33fb7a4da96",
+        "stdout_tail": "{\"commit\": \"865b78a17903f82b37c55c165664c0d9318a70a7\", \"valid\": true, \"artifacts\": 1883, \"relations\": 7182, \"topology\": {\"role\": \"topology\", \"schema\": \"harness-dashboard-topology-v2\", \"path\": \"data/topology/40ab04244f524d93780928c717af5023df38222810ed68976f23a88ba9343368.json\", \"bytes\": 2099060, \"sha256\": \"40ab04244f524d93780928c717af5023df38222810ed68976f23a88ba9343368\"}, \"target\": 2097152, \"excess\": 1908, \"observations\": {\"role_bytes\": {\"artifact\": 15568897, \"evidence\": 8246714, \"readiness\": 3617890, \"summary\": 12329, \"topology\": 2099060}, \"role_counts\": {\"artifact\": 1883, \"evidence\": 893, \"readiness\": 1, \"summary\": 1, \"topology\": 1}, \"resource_count\": 2779, \"resource_bytes\": 29544890, \"largest_resource\": {\"role\": \"readiness\", \"schema\": \"harness-dashboard-readiness-v2\", \"path\": \"data/readiness/1a240c86fcc87fcdc8557a60c09d38d1476312820b795b1391d7af84c2f8c1de.json\", \"bytes\": 3617890, \"sha256\": \"1a240c86fcc87fcdc8557a60c09d38d1476312820b795b1391d7af84c2f8c1de\"}, \"topology_target_exceeded\": true}}\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      }
+    ],
+    "measurements": [
+      {
+        "commit": "01ec43c86c9d30949295c07ac91c742be91e713a",
+        "valid": true,
+        "artifacts": 1881,
+        "relations": 7176,
+        "topology": {
+          "role": "topology",
+          "schema": "harness-dashboard-topology-v2",
+          "path": "data/topology/dae31764370560aaa1249840ff4bf3303323ddb7dfc749157e44a51b2ab3055f.json",
+          "bytes": 2097049,
+          "sha256": "dae31764370560aaa1249840ff4bf3303323ddb7dfc749157e44a51b2ab3055f"
+        },
+        "target": 2097152,
+        "excess": -103,
+        "observations": {
+          "role_bytes": {
+            "artifact": 15556314,
+            "evidence": 8255152,
+            "readiness": 3614520,
+            "summary": 12313,
+            "topology": 2097049
+          },
+          "role_counts": {
+            "artifact": 1881,
+            "evidence": 892,
+            "readiness": 1,
+            "summary": 1,
+            "topology": 1
+          },
+          "resource_count": 2776,
+          "resource_bytes": 29535348,
+          "largest_resource": {
+            "role": "readiness",
+            "schema": "harness-dashboard-readiness-v2",
+            "path": "data/readiness/2e65e53b66fb3c6715d70bd96f60fd7f5ead3e32c4a0f806bb24eab6bc71c8dd.json",
+            "bytes": 3614520,
+            "sha256": "2e65e53b66fb3c6715d70bd96f60fd7f5ead3e32c4a0f806bb24eab6bc71c8dd"
+          },
+          "topology_target_exceeded": false
+        }
+      },
+      {
+        "commit": "865b78a17903f82b37c55c165664c0d9318a70a7",
+        "valid": true,
+        "artifacts": 1883,
+        "relations": 7182,
+        "topology": {
+          "role": "topology",
+          "schema": "harness-dashboard-topology-v2",
+          "path": "data/topology/40ab04244f524d93780928c717af5023df38222810ed68976f23a88ba9343368.json",
+          "bytes": 2099060,
+          "sha256": "40ab04244f524d93780928c717af5023df38222810ed68976f23a88ba9343368"
+        },
+        "target": 2097152,
+        "excess": 1908,
+        "observations": {
+          "role_bytes": {
+            "artifact": 15568897,
+            "evidence": 8246714,
+            "readiness": 3617890,
+            "summary": 12329,
+            "topology": 2099060
+          },
+          "role_counts": {
+            "artifact": 1883,
+            "evidence": 893,
+            "readiness": 1,
+            "summary": 1,
+            "topology": 1
+          },
+          "resource_count": 2779,
+          "resource_bytes": 29544890,
+          "largest_resource": {
+            "role": "readiness",
+            "schema": "harness-dashboard-readiness-v2",
+            "path": "data/readiness/1a240c86fcc87fcdc8557a60c09d38d1476312820b795b1391d7af84c2f8c1de.json",
+            "bytes": 3617890,
+            "sha256": "1a240c86fcc87fcdc8557a60c09d38d1476312820b795b1391d7af84c2f8c1de"
+          },
+          "topology_target_exceeded": true
+        }
+      }
+    ],
+    "passed": true
+  },
+  "validation": {
+    "error_count": 0,
+    "warning_count": 60
+  },
+  "review": {
+    "implementation": "Seven added lines in the shared reader; both callers retain existing provenance validation. No new abstraction or caller changes.",
+    "initial_test_issue": "Two errors in one new test arose when unchanged fixture bytes caused git commit to refuse; allow-empty fixture commits fixed only that setup.",
+    "remaining": "The complete source suite fails the accepted current-repository topology budget. The failure is not waived, hidden or relabelled as pass. No completion transition or VREC capture is made."
+  }
+}
