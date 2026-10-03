@@ -2,7 +2,7 @@
 id = "VREC-RLS-002"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md
 evaluator_evidence_path = "docs/engineering/release-0-22-0/evidence/VREC-RLS-002-evaluator.json"
 evaluator_evidence_sha256 = "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905"
 
+verified_at = "2026-10-03T10:44:58Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLS-038", "WO-RLS-039"]
 conforms_to = ["VER-RLS-002", "VER-RLS-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-03T10:44:58Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied I verify VREC-RLS-002 to the published verification request in PR 533, exercising the assurance-owner decision for combined candidate 3d80556658ebabe7fd31f359e33058d5156ed7b9 under WO-RLS-038/039 and VER-RLS-002/003. Reviewed head bfeebf7451a679401cae724c642f084eb98ee5f1; all executed CI checks passed, with three release-rehearsal jobs skipped. Retained evidence and stated unverified areas are unchanged. Codex applies this exact human decision. Merge and release are not authorized by this verification."
 +++
 
 # Verification Record Candidate
