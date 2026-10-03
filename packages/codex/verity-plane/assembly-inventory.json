@@ -1,19 +1,19 @@
 {
   "evaluator": {
-    "archive": "se_harness-0.21.0-py3-none-any.whl",
-    "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
-    "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
-    "release_record": "docs/engineering/release-0-21-0/releases/RLS-SEH-031.md",
-    "release_record_sha256": "05df27a5da59afcb6edcbb07193ca61989551f54180cadf16a06fca64b82ea4c",
-    "release_revision": "66baa640eea3946bd041ac09e419e300fafef017",
-    "version": "0.21.0"
+    "archive": "se_harness-0.22.0-py3-none-any.whl",
+    "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+    "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+    "release_record": "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+    "release_record_sha256": "f44aa44cfb553d34d93d99d632baf179dbe28348686124f1128a6de9cb43e939",
+    "release_revision": "73abb4902fe819a6d4f11ce160dbe96a90249122",
+    "version": "0.22.0"
   },
   "files": {
     ".codex-plugin/plugin.json": {
       "bytes": 746,
       "mode": 420,
       "origin": "codex",
-      "sha256": "d645ca7a01f4175f9dea06bb6cfb073f73263e5276163dae673b33f1ab3a28a0"
+      "sha256": "d21a2cc070b6679fb21226c4cea8fed729ff52e05d41389f4ca63e959a887b37"
     },
     "LICENSE": {
       "bytes": 35149,
@@ -22,10 +22,10 @@
       "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
     },
     "README.md": {
-      "bytes": 3055,
+      "bytes": 2936,
       "mode": 420,
       "origin": "codex",
-      "sha256": "21922abc1633930c62172f4696f9d2207cabc2fd0a060bb5a6a4f9aa98462530"
+      "sha256": "cd3bcc597033754ad344f05c381d72b9947adae49538f7a3f23aac35f4e908c2"
     },
     "assets/bootstrap.md": {
       "bytes": 970,
@@ -39,11 +39,11 @@
       "origin": "codex",
       "sha256": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2"
     },
-    "packages/se_harness-0.21.0-py3-none-any.whl": {
-      "bytes": 544479,
+    "packages/se_harness-0.22.0-py3-none-any.whl": {
+      "bytes": 555145,
       "mode": 420,
       "origin": "evaluator",
-      "sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789"
+      "sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
     },
     "scripts/activate.py": {
       "bytes": 2649,
@@ -82,10 +82,10 @@
       "sha256": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6"
     },
     "skills/change/references/authority.md": {
-      "bytes": 2546,
+      "bytes": 3987,
       "mode": 420,
       "origin": "shared",
-      "sha256": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0"
+      "sha256": "e19371f8004782ebba8b3c2c07ed9b560890d9fcbd72b931d1ac59e2bce711ff"
     },
     "skills/change/references/work-orders.md": {
       "bytes": 3068,
@@ -100,10 +100,10 @@
       "sha256": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7"
     },
     "skills/evidence/references/external-actions.md": {
-      "bytes": 1672,
+      "bytes": 2159,
       "mode": 420,
       "origin": "shared",
-      "sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69"
+      "sha256": "5ef66907e1a07e67b0ed8dfc6b38646a3eae494c83827780d1a84330397de604"
     },
     "skills/evidence/references/records.md": {
       "bytes": 5162,
@@ -184,6 +184,6 @@
   "source": {
     "plan": "release/plugin-assembly.json",
     "plan_sha256": "b9dd5e39a89b91f855bd848f09985c502193b157d05cf7cc600e57b1325bfaac",
-    "revision": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775"
+    "revision": "abbec12ac5524c8adfb28693f846dd59de88f759"
   }
 }

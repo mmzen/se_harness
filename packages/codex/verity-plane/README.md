@@ -1,10 +1,10 @@
 # Verity Plane
 
-Verity Plane 0.2.4 exposes shared skills through the host's native skill discovery.
+Verity Plane 0.2.5 exposes shared skills through the host's native skill discovery.
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
-The candidate adapter delivers the selected release's compact entry at startup,
+The adapter delivers the selected release's compact entry at startup,
 compaction and resume. It restores a checkout selected for that host session,
 including one cloned below the host working directory. With no selection it
 provides a short bootstrap and the setup skill's activation inputs.
@@ -15,12 +15,12 @@ changed, incompatible or oversized input reports a delivery gap without fallback
 Setup retains separate immutable evaluator environments outside repositories.
 Activation immediately returns the complete entry; it grants no lifecycle authority.
 
-This source is selected for the 0.21.0 release under REL-SEH-033. Plugin 0.2.4
-is not published yet; the current public maintenance package is 0.2.3 with
-evaluator 0.20.1. WO-RLS-031 checks the final candidate. WO-RLS-032 qualifies
-the package after the public 0.21.0 wheel exists. Native delivery, automatic
-compaction, resume and parallel sessions require matching VER-IAR-021 evidence.
-Codex Windows desktop remains unverified and is a pending release criterion.
+Plugin 0.2.5 targets evaluator 0.22.0. This source belongs to the approved
+release preparation; package identity and public availability require the
+qualified assembly and publication readbacks. The assembly inventory identifies
+the exact wheel and shared source. Earlier package verification or accepted
+native-host omissions do not qualify this release.
+
 Development archives cannot establish release or marketplace eligibility.
 Python 3.11+ must be available to the hook launcher. Codex also requires the
 user to trust the plugin's reviewed hooks. Real host settings are not changed by

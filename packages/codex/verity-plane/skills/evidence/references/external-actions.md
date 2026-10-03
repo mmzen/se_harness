@@ -9,6 +9,13 @@ procedure's current gates. A changed commit, evidence, action or destination
 stops reuse of the earlier decision. Verification alone does not authorize a
 merge; a released record alone does not authorize publication.
 
+When the selected released policy supports complete-release authority, the human
+may authorize the exact reviewed delivery plan in the release response. Follow
+that policy and reuse the grant for its listed matching actions; do not demand
+another response for each provider. Preserve the plan digest and actual decision.
+The result of each external action remains separately observed evidence. Historical
+release-only decisions and an older selected policy do not gain new permissions.
+
 Agent merge or publication also requires demonstrated independent enforcement
 for that action and destination. Inspect the available control evidence and
 its coverage of the actual invocation path. A skill, hook configuration, actor
