@@ -2,7 +2,7 @@
 id = "WO-RLS-035"
 type = "work_order"
 title = "Qualify and publish plugin 0.2.5"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -37,6 +37,13 @@ to = "in_progress"
 decided_at = "2026-10-03T04:29:21Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-03T05:19:14Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Qualify and publish plugin 0.2.5

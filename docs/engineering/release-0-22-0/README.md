@@ -3,8 +3,9 @@
 ## Current delivery status
 
 Evaluator **0.22.0** is published on GitHub and PyPI under RLS-SEH-032.
-Plugin **0.2.5** qualification continues under WO-RLS-035. Marketplace
-publication and final public-delivery closeout remain outstanding.
+Plugin **0.2.5** qualification is ready for human verification under WO-RLS-035,
+with the limits in the [qualification review](evidence/WO-RLS-035/qualification-review.md).
+Marketplace publication and final public-delivery closeout remain outstanding.
 
 For this release, **Claude Code host tests and Codex Windows desktop tests are
 not run / unverified**. Human mmzen instructed continuation with these omissions

@@ -1,0 +1,389 @@
+{
+  "kind": "Qualification assessment for human verification; no acceptance or public marketplace claim",
+  "observed_at": "2026-10-03T05:17:18.333265+00:00",
+  "work_order": "WO-RLS-035",
+  "state": "in_progress",
+  "overall_qualification": "complete_with_recorded_host_omissions",
+  "marketplace_publication": "not_performed",
+  "release_record": "RLS-SEH-032",
+  "candidate_commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+  "governance_commit": "01ec43c86c9d30949295c07ac91c742be91e713a",
+  "governing_evaluator": "0.21.0",
+  "plugin_version": "0.2.5",
+  "evaluator": {
+    "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+    "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+    "distribution": "se-harness",
+    "entry_point_sha256": "303ff403d05c842b26de2f3dd17cfcafc6552b708292d545743fe1177d671177",
+    "identity_sha256": "bf2f3469c00ebfb480a3e403db45cadbeab61a3c0a69bba42c08475ba02d4d9e",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+    "role": "public-install",
+    "version": "0.22.0"
+  },
+  "package_identity_sha256": "b3ce06c6f4ac9bdfed7ffd26eb16683e260814c82d7dba188f78a0180c8a4e61",
+  "marketplace_parent_observed": "7e366438165a40a14783bac650a2887e7ec8bc75",
+  "host_inventory_sha256": {
+    "codex": "295399083213600e5cd3ad4e76ef490bb0fe0f9d9c82f8f9f997b2fc6171eee2",
+    "claude": "cfb1fcc7c2720590aa159887faf2f45afb2b212bb25fa68e237cd3b198ba64dc"
+  },
+  "checks": [
+    {
+      "name": "Released-input assembly and independent check",
+      "status": "passed",
+      "evidence": [
+        "plugin025-build.run.json",
+        "plugin025-check.run.json"
+      ]
+    },
+    {
+      "name": "Windows package/delivery unit tests using selected evaluator",
+      "status": "passed",
+      "tests": 62,
+      "skips": 2,
+      "evidence": [
+        "plugin025-unit-selected-windows.json"
+      ]
+    },
+    {
+      "name": "Linux package/delivery unit tests using selected evaluator",
+      "status": "passed",
+      "tests": 62,
+      "skips": 1,
+      "evidence": [
+        "plugin025-linux-prepared.json"
+      ]
+    },
+    {
+      "name": "Windows portable adapter checks, short data path",
+      "status": "passed",
+      "steps": 41,
+      "evidence": [
+        "portable-short-windows-report.json"
+      ]
+    },
+    {
+      "name": "Linux portable adapter checks",
+      "status": "passed",
+      "steps": 41,
+      "evidence": [
+        "plugin025-linux-prepared.json"
+      ]
+    },
+    {
+      "name": "Codex native bootstrap, activation, manual/automatic compaction, resume",
+      "status": "passed",
+      "host_version": "codex-cli 0.159.2",
+      "evidence": [
+        "plugin025-trusted-native-codex.json"
+      ]
+    },
+    {
+      "name": "Codex native interleaved sessions, release switch, clear and unavailable selection",
+      "status": "passed",
+      "error": null,
+      "evidence": [
+        "plugin025-boundaries-native-codex.json"
+      ]
+    },
+    {
+      "name": "Claude native authenticated qualification",
+      "status": "not_assessed",
+      "reason": "OAuth session expired and could not be refreshed",
+      "evidence": [
+        "plugin025-native-claude.json"
+      ],
+      "disposition": "Explicit current-release omission: DEC-RLS-005; public routes DEC-RLS-006."
+    },
+    {
+      "name": "Codex Windows desktop qualification",
+      "status": "not_assessed",
+      "reason": "No native desktop trace for the exact package; CLI results are not a substitute.",
+      "disposition": "Explicit current-release omission: DEC-RLS-005; public routes DEC-RLS-006."
+    },
+    {
+      "name": "Native repeated new/resumed work and delivery handoff",
+      "status": "passed",
+      "reason": "Observed in native Codex CLI on selected 0.22.0 and legacy 0.20.0 with completed new drafts, one start event, exact-text execution, handoff and delivery boundary.",
+      "evidence": [
+        "plugin025-workflow-assessment.json",
+        "workflow/successor-execute-3/report.json",
+        "workflow/legacy-execute/report.json"
+      ]
+    },
+    {
+      "name": "VREC-PLG-032 preparation and human verification",
+      "status": "pending_human_verification",
+      "reason": "This assessment is preparation evidence, not a human verdict."
+    }
+  ],
+  "preserved_failures": [
+    "Initial and second public-install attempts could not yet find 0.22.0 on the PyPI index. Third attempt independently installed and verified it.",
+    "The first Windows portable test used long workspace paths. Claude refused 10052 UTF-16 units against its existing 10000-unit bound. The identical package passed in a shorter temporary directory; no limit or policy was changed.",
+    "The first Linux unit run had no installed evaluator for the isolated payload-hash subprocess. A fresh isolated environment with exact selected 0.21.0 passed; source and assertions were unchanged.",
+    "Claude auth status reported logged in, but the actual request failed with expired OAuth. No refresh or waiver was inferred.",
+    "Native drafting initially put unconfirmed assurance in metadata; E019 refused the missing decided_by. The draft was corrected to retain the proposed classification in prose without inventing a decision.",
+    "One resumed native tool command contained undefined executable/repository values. The exact command was declined; it made no fixture changes. A new turn used explicit supplied paths.",
+    "The 0.22.0 start preview raised FileNotFoundError for the separate new draft's absent future evidence_paths file. The published evaluator was not changed. Keeping that future destination in the unapproved draft body, without a nonexistent retained-evidence reference, allowed the workflow to proceed. The original crash remains a release limitation."
+  ],
+  "windows_delivered_context_sizes": [
+    {
+      "label": "activate-codex-codex-first",
+      "utf16_units": 9852
+    },
+    {
+      "label": "codex-codex-first-compact",
+      "utf16_units": 9852
+    },
+    {
+      "label": "codex-codex-first-resume",
+      "utf16_units": 9852
+    },
+    {
+      "label": "activate-claude-claude-first",
+      "utf16_units": 9854
+    },
+    {
+      "label": "claude-claude-first-compact",
+      "utf16_units": 9854
+    },
+    {
+      "label": "claude-claude-first-resume",
+      "utf16_units": 9854
+    },
+    {
+      "label": "codex-codex-first-compact",
+      "utf16_units": 9852
+    },
+    {
+      "label": "activate-codex-parallel",
+      "utf16_units": 9849
+    },
+    {
+      "label": "codex-parallel-resume",
+      "utf16_units": 9849
+    },
+    {
+      "label": "claude-claude-first-compact",
+      "utf16_units": 9854
+    },
+    {
+      "label": "activate-claude-parallel",
+      "utf16_units": 9850
+    },
+    {
+      "label": "claude-parallel-resume",
+      "utf16_units": 9850
+    },
+    {
+      "label": "codex-codex-first-compact",
+      "utf16_units": 9852
+    },
+    {
+      "label": "codex-codex-first-compact",
+      "utf16_units": 9852
+    }
+  ],
+  "human_instruction": {
+    "text": "you can continue, claude and codex desktop won’t be tested: to be indicated.",
+    "decisions": [
+      "DEC-RLS-005",
+      "DEC-RLS-006"
+    ],
+    "meaning": "Omitted hosts remain not run / unverified. Separate human verification is still required."
+  },
+  "next_actions": [
+    "Prepare VREC-PLG-032 against the clean committed evidence candidate.",
+    "Publish its review PR before requesting human verification.",
+    "After verification, publish only the qualified marketplace descendant under matching existing authority.",
+    "Then perform WO-RLS-036 with the explicitly disclosed untested host routes."
+  ],
+  "raw_archive": {
+    "path": "raw.zip",
+    "sha256": "ac3e0b1059e6d6387c47882fbbcf3114362514e997cc0bce9c4b12e01d3f6078",
+    "entries": {
+      "assembly/PACKAGE-IDENTITY.json": "b3ce06c6f4ac9bdfed7ffd26eb16683e260814c82d7dba188f78a0180c8a4e61",
+      "assembly/packages/claude/verity-plane/assembly-inventory.json": "cfb1fcc7c2720590aa159887faf2f45afb2b212bb25fa68e237cd3b198ba64dc",
+      "assembly/packages/codex/verity-plane/assembly-inventory.json": "295399083213600e5cd3ad4e76ef490bb0fe0f9d9c82f8f9f997b2fc6171eee2",
+      "native/plugin025-boundaries-events/native-events.jsonl": "458f7cfc23e70093c631e0452da60ba9f36e7efdd2d55325a05361cc337345b4",
+      "native/plugin025-trusted-native-codex-events/automatic/native-events.jsonl": "56201b716f8ed4ebea72bf8520338641517df0639ede977d101a5f36c25d088a",
+      "native/plugin025-trusted-native-codex-events/native-events.jsonl": "6fb64d32f57a7926649aae20c77742c96c8929e3923d012d8f3abc0b880cd6db",
+      "native/plugin025-trusted-native-codex-events/resume/native-events.jsonl": "bd664032b5a9d64bf0e10a93f8b1d13b3961914988f6016e417b8623b534d32d",
+      "plugin025-adapter-short-windows.run.json": "0f9217abed09fbd9c7e9948be7fefe1cbdbe23fd14f92c6a1ebfc500ba65bb95",
+      "plugin025-adapter-windows.run.json": "3dcc4caa18db8ec93646d2af2a3c97d4d7f04c766d26549678dad396e0cadaf7",
+      "plugin025-auth-claude.json": "b952786aaf69941486fe9a2cd4efed800c505532d78bc396b397105e91b1d107",
+      "plugin025-auth-codex.json": "f9fe0b44ebf39566e3e61a6458ff8ad76493eaaf65f2ef56921cf2e5df7ba81b",
+      "plugin025-boundaries-native-codex.json": "7009e87dd29d1ce651155b776fa248e90dff1555af9e6c704549abd989ff5f21",
+      "plugin025-build.run.json": "6b0440d4a1ca7743457973f30f50e2848fb22ed0363619350b9910f09bbbb1e6",
+      "plugin025-check.run.json": "a0a395be3cc354550a7635e08a0e7941640d5a0d0f2e3d3f5093f09982c5ab57",
+      "plugin025-expected-identity.json": "de588c38ebb01cbbeff2a31bd9f48872a281e47797825fffc226e5b7ed11e4b7",
+      "plugin025-linux-prepared.json": "3488f09d858f7ef35957a200f97f84bdc134a25c545e80b211937941641fe899",
+      "plugin025-linux.json": "568e8648ce87ccf07ba9df5599d0a901d251c80d8478f9e36d5d59248e9303e4",
+      "plugin025-marketplace-parent.json": "ec8d32aa4acaca18247fd73c997c113a4b1e00477c3968fcf68e587f1dfec6b7",
+      "plugin025-native-claude.json": "76ca06fb5e9b3813a4373a50cedbbb6c940ae15f82f4fb7f0c4ff38f7423b980",
+      "plugin025-planned-scope.json": "eb68ca041c104c10b8cbdd1b4ff7fb5888c3dfff1d26120f9eda73a11093a3a6",
+      "plugin025-resume-context.json": "c12cef29ab3a715e463e8570f842140a7a74646e48b16e293cdc06f96a03cb51",
+      "plugin025-start-apply.json": "6606d0f80d510ab0d8624175ac89e27d9e066358e098c76ce646f4f8fe55ce4d",
+      "plugin025-start-preflight.json": "3d7f05a49188f187b71049b62588215475d0b59ee545b13b4308c680a8562636",
+      "plugin025-start-preview.json": "ae1e62c9788afd1449679066908325325831611db1b76cbd40b228112b6ca2b1",
+      "plugin025-trusted-native-codex.json": "f5ed41f3f779029bec6032a58106ee25798054b84841e0c60a01e8b0e35015c6",
+      "plugin025-unit-selected-windows.json": "1ae7180b7dc790036aafa4abd9a5f2f179c960d6fa1d2fae90674d8731457226",
+      "plugin025-unit-windows.run.json": "40116385e79913a06d2f489747f1c0e1c4c70f95581da893043c0977a1a83941",
+      "portable-long-windows-report.json": "3978b3b2a0ff15d963379f7eca519f077312e149dcd05a4602c1d864422e532b",
+      "portable-short-windows-report.json": "fdd426e49022a81b7f82b2ffbe202dda8289e57e3d50e62bd1b39f3cc2f38fff",
+      "probes/plugin025_linux.py": "9a6068ceb992032a82dff153aae9f85fcc656efe64de87deaea707f133c820db",
+      "probes/plugin025_native_boundaries.py": "cce8f6b92acebf66b0743c5053ebb74ed3262d55ba13c63887159168f2fbbbb1",
+      "probes/plugin025_native_claude.py": "bb994e3fd438db6adabbe61523c18b9be96dfaf14a526548641582f4fa893e24",
+      "probes/plugin025_native_codex.py": "3f55c67fb1802f51402932be020fc9eee22ce3dcc1cfa19396dee561893b1648",
+      "probes/plugin025_portable.py": "739da82f09360b76aa0425de93ff72b954fb7a7a2dd5b8e6f9ca832ba75a5eec",
+      "probes/plugin025_retain_progress.py": "decb9c21811883d8c3fdf3dd8a03ac0542a64e05ffa30d83f8f95c475f361197",
+      "probes/plugin025_unit_selected.py": "c08a5081725ff3d04fc45908363d8001ab5fac4623d9b888710bd3ff8c448054",
+      "production032-artifacts-final.json": "10333430aa3f9eaef62a01683b44afeb6d7978656f9d85a061c1bb7a149e7804",
+      "production032-observation-retry.json": "b6bbc3acdecbbb77f281b6ec131fc6eeb4f815d57e8878ab57d439cd2f78418a",
+      "production032-observation-retry3.json": "546c97d603f927ad6176b94b3ddc179f8e3de44dffc0b8857f2bdbc66bde325f",
+      "production032-observe-attempt2-only.log": "66895f29a32dbb2240e72ae184592ad225400f1678d5808fa2ec5d0049796434",
+      "production032-observe-log.json": "5ba8a3b8e49f4da316486c3dd2b38a44437b0f8aaae58257a7fa531925b0e6c8",
+      "production032-pypi-download.run.json": "96b6a04d2ebedbd16c1ae5170e5c1017438dd836f126a044e9cf20b9f145f696",
+      "production032-result-attempt3-receipt.json": "2dc292fac3b0ed24ae36afc0d5a70348d718d6aad67c9a1237d66c1a1b8525fa",
+      "production032-results-attempt3/public-install-qualification.json": "9d283a01b5d78b58074cdee640564d019c1c9abd440a8d1b05255df99bb2832c",
+      "production032-results-attempt3/release-result.json": "7151263f55644aad2491d874319c4b1b6582bdae9a538c6892ea7e9fef82fc1c",
+      "production032-results/release-result.json": "01b061398f317fa44d3dbeff9f43ce6294f24d6271013dc122b4ebcaff2912d0",
+      "production032-retry-result.json": "b25569f3d429c019b4ac7b62f106d59d8a17f2d9491bc9c745073a9d1442eb4e"
+    }
+  },
+  "transport_note": {
+    "reason": "The evaluator start write used CRLF. Normalize that record to LF for a minimal transport diff; preserve all fields, lifecycle history and body text.",
+    "before_sha256": "d4bc2ded0b0fefbdb60cd72c0be0ef6895b15b9e616a828fab49b1ba46ff7edc",
+    "after_sha256": "b33f4e8f1d297e121ceabccc81c36e434634e1538e54cf1e219a350591bad76f",
+    "initial_local_commit": "781ad4ae"
+  },
+  "previous_report": {
+    "path": "qualification.json",
+    "sha256": "51ce7dfb63e2cde6e711acd1a12a75cdff2756596b5fdcb168fe8640bc4265f1"
+  },
+  "native_workflow": {
+    "assessment": "plugin025-workflow-assessment.json",
+    "disposable_profile_restored": true,
+    "no_external_probe_publication": true,
+    "fixture_authority": "Synthetic test inputs only; no production approvals inferred.",
+    "open_follow_up": "RISK-RLS-006: missing draft evidence can crash an unrelated transition."
+  },
+  "delivery_plan": {
+    "path": "delivery-plan-v2.json",
+    "sha256": "b5b94013280c32abdbbae76c491fb481ccfc6e0cde1a245afe5b9eafe0ef38ca"
+  },
+  "additional_raw_archive": {
+    "path": "native-workflow-raw.zip",
+    "sha256": "6c84e30f94172a61cf38ba19a59eace3819c78f9279ee01eec42a2f9fb955967",
+    "entries": {
+      "plugin025-deviation-apply.json": "4c7455a8dcec1e08e03aee8af336b902c6b18b9dc627d57cf29d14d4590ce8fb",
+      "plugin025-deviation-preview.json": "fcf3551f6b51d67dacc2d3fdb010d3fa2f15eb9e62ea2012e89a81dab1d86948",
+      "plugin025-deviation-readback.json": "044aefed303a6330d1df05e386e238b617e2d45b3d2193543fa052352f835f3f",
+      "plugin025-disposition-validation.json": "91a5e495c29bd4c3965551d69942c080aaae4dcb0538fc6de1f90f428c3e55c9",
+      "plugin025-draft-evidence-risk-create.json": "a6666d29a0af32966485ae488e412e24aadb56ce559544285bcbda250689b429",
+      "plugin025-plan-boundary.json": "b9d3ff880cb7726a874f75cae3256c3987d2cd26c276d8afd44754935e38d0d8",
+      "plugin025-public-deviation-apply.json": "abd8b5ffee546a0c54257a59eeb915b9d55959b76bf6f347b59ce85548734fe7",
+      "plugin025-public-deviation-preview.json": "72eaaf7a96dded0b3b0364181afeb377462fcd7eba396b40ad5690ba78291c9c",
+      "plugin025-public-deviation-readback.json": "5728fd552d36361887e8f5d8fcd01a4262d8c826294f80903659fc4e07e0c260",
+      "plugin025-updated-scope.json": "1db6156a9cca6367f17b59495c725e5dcf111a26f8b985905cd60c074347c3dd",
+      "plugin025-workflow-assessment.json": "6207fff56fb2e2f0b9f30b5824e9b80b9edaf5fddea0163132f687b16d380557",
+      "probes/plugin025_assess_workflow.py": "2544d92a5f561f2d06d6c04b863f74e4e4ce326079cfa724b7757f38eec43638",
+      "probes/plugin025_capture.py": "39c2a8aefb12c7f9b7f665723731e68d5e1fd7929bcd636ff1ab4a9d632e579b",
+      "probes/plugin025_capture_checks.py": "a47cc7611d79930139948961118ce4478da392a9e7ea8d8185bb78cf097c2bd2",
+      "probes/plugin025_cli_walkthrough.py": "b4163c6313f795a9aea37703c3be9abb5594499cb619dc0e7341171ab256a636",
+      "probes/plugin025_disposition.py": "4ccb33582d45daf5aa5c436edb5cf67941e7de600e203b3e6620d890d03a3f4b",
+      "probes/plugin025_plan_boundary.py": "a8525d7f8963fd4390c9bec89ac21ce84b38c8c07eea02a7621a25804b1333c5",
+      "probes/plugin025_retain_final.py": "008acece71df25921f3d0cf9339872129ed7dfd5da0633772d563d25345aa639",
+      "probes/plugin025_review_command.py": "877294be29b71c2f066e28a98f7e9f53b4ff2a8ee30636b2a2c4e0625418ca1e",
+      "workflow/fixtures.json": "2128f72ecd43f1a8b565bfdefd6057671acd21322006658fb506d3aca5902088",
+      "workflow/installed-before.json": "73ce52ac191d5de68889cbec34a9c0b428bca335816277ce57ca5ee797a7df49",
+      "workflow/installed-file-checks.json": "34fdf493e40443104c2192d553516d6379dddc6bdca553d8e8c09466db3cd2b6",
+      "workflow/installed-install-first.json": "f4bce1010be6e4b36a1728a02879c7d0719c726a14726265d2e260288665cbbf",
+      "workflow/installed-restore.json": "73ce52ac191d5de68889cbec34a9c0b428bca335816277ce57ca5ee797a7df49",
+      "workflow/legacy-baseline.json": "a942a6711c4aaba33e4b685576d0bdf6a8549029ccf5c43de346e309a1a57ce2",
+      "workflow/legacy-bytes.json": "29c2dedde57c66e1681dc050190cc38b466ce033694dc2a271fa1890c02f1c27",
+      "workflow/legacy-commit.json": "fa2029d78aa1027a0ebe06eb57c43240779776d4e7350ed88f5b5b9e5b298db2",
+      "workflow/legacy-context.json": "674d1913ce2e2ad96283362fec3850e52e87d47b711f773c4a421185b4cd86ca",
+      "workflow/legacy-email.json": "49f33af86c0c48d94b846e1f987cbd9b88c0c4309d35d7f3abdde58d3fb51b31",
+      "workflow/legacy-execute/07cbc9b6947a176cf1c569666da824e104042a5667deaa80e13c02bace3c6d2f.decision.json": "70b3d982bbfabb64f19ff6167a0cd732e3a40c5bd15fa16d34eadd5bfdf9db17",
+      "workflow/legacy-execute/6bb0b0626e2b90d2d8db0bc75f4e6183521a62cda6327c3d6cb5bd32c2e413db.decision.json": "f862e4e471c8bcfda13eff478a0d6e4024f485bfabe625fa8b2661e75a28a13e",
+      "workflow/legacy-execute/74b0d9f7b9185bd824a99ca54b86bc0b28b72ac2d2584c39c1001f8217d7b562.decision.json": "a4919a8a625ddfedf318256596b41e2befdc7ab381f35a47ed982b37014b2d1d",
+      "workflow/legacy-execute/b2122b109c1941289f79e74947b5f081df54db27ebae34397fcb356c55c61d6f.decision.json": "ee8827fd67629e21123d954c442c84200db372abef64d4a241af3c2f37d4d302",
+      "workflow/legacy-execute/c6ca14ca3f6126985127c1b9647c19953035e9c655d6fd1a3af63fad6396264d.decision.json": "20267de427dd9a382ce8412cb9595fbfabee70f78756e5223b741231b91cb9eb",
+      "workflow/legacy-execute/d7ee3b4f05361ae6e9d4cc1a16a9046334b7706e7a3052a1a3880c5c0ca91cec.decision.json": "97afc7dbb821b960efc1cd1806bf545a983def06276fc28bac0dae8f8cbcb372",
+      "workflow/legacy-execute/de687c6cbeca945be3d28307637296a7afdbcf05287c907864ea1de079967050.decision.json": "03de20cc3d0b77c9b1743953d2fd39d232cd0a2f1eb4f4cb335167f70b372b42",
+      "workflow/legacy-execute/e2e5dd159179d3b842ef2e20b4dafc58427a94ebee3f6752bc215101bb73dc34.decision.json": "80efa55920b9bbaa301b99642e0d0e30a155b7fe0f56ace643bbec47d2ea8eed",
+      "workflow/legacy-execute/hooks.json": "0a05294a99c6dc155b5cc2d0ad2e59f166affd9275ddd9535ef6b49358abb697",
+      "workflow/legacy-execute/native-events.jsonl": "e7906de2c54d45e8b47444ebcbe9b08d5b8027872536b4dd95fc6c694d94d647",
+      "workflow/legacy-execute/report.json": "0344218e79c53683ad52c38e92861135780b1e6376a2e7fd049df6c5ac3cc9fe",
+      "workflow/legacy-fixture-effects.zip": "50c419bce25cd17c5f0536ebd539ecbd5bdc653c01ecff095a537ef70f2cabf3",
+      "workflow/legacy-independent.json": "bbb50aae9b21cd65cc6aa0057eb1c05f847c745cc8d757d20ada5e01b3ad307e",
+      "workflow/legacy-init.json": "7d4a166ab3ba80c9b9c71d8140a0babf5fb549d9de16c081f37d88a750f095f3",
+      "workflow/legacy-name.json": "33fe88e3de4cfab895970f5444fca6ead6621088206927a7232376c600bb5c93",
+      "workflow/legacy-origin.json": "7cee880d176e30e621eb22c49ff994839ca0b2b11b941a302faea3b2b88a49ed",
+      "workflow/legacy-preflight.json": "ed8fe20ec10ea38661ff32151c3c756e39d114d1082a5a6b6bba54cfbf531d74",
+      "workflow/legacy-remote-init.json": "58230e85a087b9387aeed5f9a97afcdcf203fe7fb17adbc04dae39ed84b7188d",
+      "workflow/legacy-seed.json": "ca18f012addd18dc00e6f617e99a406deee1e6cc7d477d5decf430cd708ae14c",
+      "workflow/legacy-stage.json": "ac38c9466bbc8d3bd4aa48e0f0ace0c4d9cb841e6e8786bee06c36d45f506120",
+      "workflow/legacy-validate.json": "2501eb8f1f89e39760bbf3d8c6260f22ddb7fbf4d1ca175b34b9624e15fb1e95",
+      "workflow/plugin-install-first.json": "b2715b223627a4d9d508b4e2a1474a1341c843a3f448fb823a4e5b1ea01a7aff",
+      "workflow/plugin-restore.json": "3f5bd92f54459547d2b50608f43cfd094e3f18ca49c53aafae56edf47890a74e",
+      "workflow/restore.json": "6745ac231978c3a8b31f231d3a02e4c8bce098cd95050236c2352eed88d235fa",
+      "workflow/session.json": "de65ca64d5f4d51b7079b3ff15461cb5c2c96dfcf5b5b221f5d8d66539986166",
+      "workflow/successor-baseline.json": "e8e1a1390d0bfa27a38c93e5498bf687edb3c3559e496810715fbd119257e4b2",
+      "workflow/successor-bytes.json": "53f21bf8d3448723a4455dc897da7ebee5afc5e44bd735dc518dd6e919332232",
+      "workflow/successor-commit.json": "af61b4629fede0d9861cf8cdddc45ed5b5dd5674bfad2bf6d57f5cc5b6ae973e",
+      "workflow/successor-context.json": "5a0b0e29ced122b2bea1d4b706e20cf615067e65639c9c173591938ff4c9350b",
+      "workflow/successor-email.json": "e05573f375b7ea320fa33f4655fa13049a100c49906a06af7a2b6101514eb17f",
+      "workflow/successor-execute-2/0045a96aed11a8df36fd074d01e81dc427017458d247a492c892000d0b8056ba.decision.json": "175ccb419ebee990e24632be68afafb186903cbd169de003f68ac5a7bc37ff7d",
+      "workflow/successor-execute-2/4cc1cb3b523da94ebf3b9dc3440037eb511a88813966625f71b73b0ed92e5631.decision.json": "e3a3cf9e5b00b4e8ce75cb98271654ca22d3be24994b7e3d6be4d66961844104",
+      "workflow/successor-execute-2/57b68346b511d6c7358623e15b8f36804101dec66682265f75108a5e752ec08a.decision.json": "a55cd95aa0b6bd3348ba903f03999777b0e70b7fda4e012426ab7b8abc457b2f",
+      "workflow/successor-execute-2/cf18b1f70b3be8bc5a4b7900f88b1ef29f09a64e934e12bfb6113d1b8d86b054.decision.json": "ba9d4ce96a3193ecf90e18b168d680f8416e5dfb7ba854253b3b7db49132a427",
+      "workflow/successor-execute-2/de41fed592c74b1b68cd1e679683611d5ca9185a403f7bce1c11e6d3c9bd8af6.decision.json": "59e4eac44bd5c6de9bdbbf2b5d374725ad14dca3d7b417a1e2ed4ee11a7be07d",
+      "workflow/successor-execute-2/hooks.json": "0a05294a99c6dc155b5cc2d0ad2e59f166affd9275ddd9535ef6b49358abb697",
+      "workflow/successor-execute-2/native-events.jsonl": "8179eea904b61e1f2849563a10075a7fd9973556c51d9aab47c2a66e5b68d35c",
+      "workflow/successor-execute-2/report.json": "1f319d51fdd8445fd783d872a497b03c94b88306d3f03c947725d81c591e7242",
+      "workflow/successor-execute-3/2088efdca1d4a63c614a98f6f36155a7e86815f4bf50236b3522a4d0bc91d726.decision.json": "9883dce3956f17b9b21a8937a6b8a750a820e23874b0c00fcbb93fe669b6e11c",
+      "workflow/successor-execute-3/36b7b65be0456516255504215cb1f02b0777c93b70c7b5bafb1ace9c05023dce.decision.json": "b11019c69a89ff3d29cc749c57443e45c2ae732cb47f75f72b9e89523b85d2d6",
+      "workflow/successor-execute-3/51a9b4bfbe96187015de407c02122ce4030cf009a77a04fcbc1b7a33c24be682.decision.json": "925470667b4d6032d20bb5da420eb3f582558356c588d92b302285b15efe287b",
+      "workflow/successor-execute-3/7b8ace06799153da75719e18820fbf6e77c802af31ee004ea0f4127501a6d16d.decision.json": "92f6a16cbeb32b78bb472495614429952664e3cce7b4791963c79b547b3c1a83",
+      "workflow/successor-execute-3/7d38e30766a7f61e52f45f05799bc6a41e8a1f9c416df830d54957ff0bf8bede.decision.json": "c495f63d71f3621b983832fb16ad978f86300483a3a3beb897319ff70a6b3ba6",
+      "workflow/successor-execute-3/afcfe9f0981eb5f409d182c35546c0608230dda66b37e6466f07c6ef5a5e7c78.decision.json": "c2f48e726accf874c348d970e4bba47d855817bf69ec89767b8ad5e9490638bc",
+      "workflow/successor-execute-3/e60ff22a390f3a1ac81869e0c376a375b96759c3509c6f70ade7d21eeacde5b5.decision.json": "14f159645028491bdc8b2af4869861afec6e7894a26c3e59b12f5d6cedef00b0",
+      "workflow/successor-execute-3/f517cb61bd04aa91bf14d21626c1c8db29e46f72c6f3a01b5906c3d19873e2f2.decision.json": "eca6b7432f3f161dced736f8ab71f8a827ddbc7dce2da4882ecd578303e96096",
+      "workflow/successor-execute-3/fdaa5b5e891ab81912f642e66cbc02ef93da064d2491886caf96831205e9d4fb.decision.json": "b567aa3e9e0b8635394cec51810ec322a2b09ef6b1fc46fa32031859fdaf2391",
+      "workflow/successor-execute-3/hooks.json": "0a05294a99c6dc155b5cc2d0ad2e59f166affd9275ddd9535ef6b49358abb697",
+      "workflow/successor-execute-3/native-events.jsonl": "0851b021b04bb510087ccd1db9e2aae35668faafa8277b7e21aa44aa1cd5859a",
+      "workflow/successor-execute-3/report.json": "05176146bf2f7bf805038a8816816a940784fd1fa45b04258db2519c921ee35f",
+      "workflow/successor-execute/b582cfd48448005af8466d423b908d4aa591a232c3775d0c0b150dcc3395b121.decision.json": "2868e3da43152ad00db43d522ddec4b326bfb7ce2722cfc24dbb88510a3f997a",
+      "workflow/successor-execute/hooks.json": "0a05294a99c6dc155b5cc2d0ad2e59f166affd9275ddd9535ef6b49358abb697",
+      "workflow/successor-execute/native-events.jsonl": "a8826928f93aea9253c6b923126164c86cc7993005947df361d3143d95db8710",
+      "workflow/successor-execute/report.json": "892f633db013d43841129394c6e36b941085ec3621737a22c5e645780e7bffe6",
+      "workflow/successor-fixture-effects.zip": "1bcd3c7c707e7541ee90ca8f0b0a0a80fb1e2b0000a18c772dc3a4b9127fff7b",
+      "workflow/successor-independent.json": "188349b938892921e8e3e20c0b3d5da0458ef34b14ad1db785394f32195366a5",
+      "workflow/successor-init.json": "d35999f89e9233f93b53156e4a33438aa1f0bdbd8c636efac1007cd94412d0a9",
+      "workflow/successor-name.json": "3970abb1612cd7b62f54414e79011e44c59386b9cbed0e48387365391b850c72",
+      "workflow/successor-origin.json": "b20c883b8bd1d1163ce59c94659656006f1c56c2f91c4642042b10c4b97832ee",
+      "workflow/successor-preflight.json": "0393e2ef1dd1a1fcda6452386715f521fa8428f92b7c83a3f0e5841c4f2eb2da",
+      "workflow/successor-proposal/11dcd170c1c78c570be292776ade5ee350fd7ea6d31cae098292c48fd04a37fe.decision.json": "7dadb8b7a8f4d5ea282062d43202a0e9a08c307336e98f28f853ed62dd5eff1a",
+      "workflow/successor-proposal/2c8c5b53235c2e87be56b5a61fd6b517d6f40a0f9b02cb67dd445e1bc40ec064.decision.json": "b9d593ac4a89bf8532efe7e03c880c393c9271065d434ad28af58598fc7480bd",
+      "workflow/successor-proposal/2e4b8a500f77e162ab96c10fe38bd9da92db4e128fd6110ddac186faa7eb910d.decision.json": "9552193e5cb027416e9b6014e8289cbc2e312eaa9ca34cffdcb94a2bcddcbd8c",
+      "workflow/successor-proposal/38c05eae27d70302fe514a51bb9b1d7ef7cf1d499c99b5ef6cb4d344fc6d1115.decision.json": "79e37682a38a4514111c7b7bffec6efb46f1a740d459dfa01ee0ca33f51a72d9",
+      "workflow/successor-proposal/42a1cac3ee4fef81aea5751a172e5c15952427572655c778920531673065ab83.decision.json": "fe4d2e4e3f62ab558a2765c3b79b80cf12a9564ce09795239cfae44b0b3e7b86",
+      "workflow/successor-proposal/58a401bd3655288e129a89bfcc7e2d147eaaefe8a1e7d1414b1fc5139782f912.decision.json": "4bdd08b5d9052417613bb1b03a323f79134c1e6b8c06043ac745936e850bca90",
+      "workflow/successor-proposal/7f4050afe5d2e21ccde9e9118641c591d4fbca9a13a2ee95552af3ef4a9671f3.decision.json": "acf1aa1456ef754b99b5aaae64439cc729517563f211ef5fac404fe111ec6212",
+      "workflow/successor-proposal/850af5cf792175e9364267681f0ca12b6f64b0932a2ed1e1ae26aa43ca2cdbc2.decision.json": "4bc7ad6daa9e077d95100b8488979bd47819cc56945535ad65ade47b41114d7f",
+      "workflow/successor-proposal/d282abff880696d926f9edc22e284555ea7575cae8ae60f10c7330ac1a75e11b.decision.json": "74626bddb310f8254ea53715f1315aded8af7300a1f1f5327cb146e32d1eb14c",
+      "workflow/successor-proposal/ea6dad07e99b46ecfa5cd718f4221ff2b7cdff685b3089710c94f733e28a726e.decision.json": "0bee1e670f27eeb372fb1754a724a55f13f985d002b2e1a22a63f69f3c857acc",
+      "workflow/successor-proposal/hooks.json": "0a05294a99c6dc155b5cc2d0ad2e59f166affd9275ddd9535ef6b49358abb697",
+      "workflow/successor-proposal/native-events.jsonl": "5445a8072223c55fe9aef01ff96d91c8b394899faa56de1f2c429d05a6fd3c69",
+      "workflow/successor-proposal/report.json": "8df352ee1fd4b2b6b9c5c6edf21ab2d96b979cfb5b60eb378ce46fbb2425e838",
+      "workflow/successor-remote-init.json": "2210e1892fe4af4649dc2186830ac2934cb7695dd5cfe752af21d508464b4440",
+      "workflow/successor-seed.json": "5923c949b8bf70579493b170b1faddb2723d1a65ec3c12fad990a6579dc2f6ef",
+      "workflow/successor-stage.json": "2a6c48cf66d2cdb2148e3cfe5ef2d4d15423f68308e138b786ec48becd1b3b0c",
+      "workflow/successor-upgrade-apply.json": "acdc9f82531365b9a3c80ebc3a90daf5e120bf3593a4a88018749af88fb3240c",
+      "workflow/successor-upgrade-preview.json": "8555ab82745fa206a759a5f12eda06945a7e27ff402a42e0ea8bb37dc75ef7d1",
+      "workflow/successor-validate.json": "2f213f6738650a5f864742898d4700168b3c90e55c97d8c1f7063e5638d30f76"
+    }
+  }
+}
