@@ -203,6 +203,49 @@ class GovernorTransitionTests(unittest.TestCase):
         self.assertEqual("lock", plan["transition"]["archive_source"])
         self.assertEqual("RLS-TST-001", plan["transition"]["trusted_release"]["id"])
 
+    def release_actor_base(self, fixture, authorizer, event_actor, *, omit=False):
+        base = fixture.base()
+        if authorizer == event_actor == "release-owner" and not omit:
+            return base
+        path = fixture.root / "docs/engineering/sample/releases/RLS-TST-001.md"
+        record = path.read_text(encoding="utf-8")
+        record = record.replace('authorized_by = "release-owner"',
+                                "" if omit else "authorized_by = " + json.dumps(authorizer))
+        record = record.replace('decided_by = "release-owner"',
+                                "decided_by = " + json.dumps(event_actor))
+        write(path, record)
+        return fixture.commit("record release decision identity")
+
+    def test_release_identity_accepts_matching_human_and_legacy_label(self):
+        for actor in ("mmzen", "Example human", "release-owner"):
+            with self.subTest(actor=actor):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    base = self.release_actor_base(fixture, actor, actor)
+                    fixture.target(base)
+                    plan = TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+                    self.assertEqual("RLS-TST-001", plan["transition"]["trusted_release"]["id"])
+
+    def test_release_identity_rejects_missing_empty_or_non_string_authorizer(self):
+        for actor, omit in (("mmzen", True), ("", False), ("   ", False), (7, False), (["mmzen"], False)):
+            with self.subTest(actor=actor, omit=omit):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    base = self.release_actor_base(fixture, actor, actor, omit=omit)
+                    fixture.target(base)
+                    with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "exactly one released distribution"):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_release_identity_rejects_mismatched_decision(self):
+        for authorizer, event_actor in (("mmzen", "other human"), ("release-owner", "mmzen"), ("mmzen", "release-owner")):
+            with self.subTest(authorizer=authorizer, event_actor=event_actor):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    base = self.release_actor_base(fixture, authorizer, event_actor)
+                    fixture.target(base)
+                    with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "exactly one released distribution"):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
     def external_layout(self, fixture: RepositoryFixture) -> None:
         path = fixture.root / ".engineering-harness.lock"
         value = json.loads(path.read_bytes())

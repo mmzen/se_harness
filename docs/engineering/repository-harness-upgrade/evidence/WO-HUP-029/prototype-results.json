@@ -1,0 +1,71 @@
+{
+  "kind": "Temporary proposal test; repository implementation unchanged",
+  "tests_run": 35,
+  "errors": 0,
+  "failures": 0,
+  "skipped": 2,
+  "before_output": "EE\n======================================================================\nERROR: test_release_identity_accepts_matching_human_and_legacy_label (tests.test_governor_transition.GovernorTransitionTests.test_release_identity_accepts_matching_human_and_legacy_label) (actor='mmzen')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_governor_transition.py\", line 226, in test_release_identity_accepts_matching_human_and_legacy_label\n    if base_schema != 3:\n           ^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\scripts\\validate_governor_transition.py\", line 526, in build_plan\n    trusted_release = _released_distribution(root, base_commit, str(target[\"version\"]))\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\scripts\\validate_governor_transition.py\", line 400, in _released_distribution\n    raise GovernorTransitionError(\n        \"trusted base must contain exactly one released distribution for the target version\"\n    )\nvalidate_governor_transition.GovernorTransitionError: trusted base must contain exactly one released distribution for the target version\n\n======================================================================\nERROR: test_release_identity_accepts_matching_human_and_legacy_label (tests.test_governor_transition.GovernorTransitionTests.test_release_identity_accepts_matching_human_and_legacy_label) (actor='Example human')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\tests\\test_governor_transition.py\", line 226, in test_release_identity_accepts_matching_human_and_legacy_label\n    if base_schema != 3:\n           ^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\scripts\\validate_governor_transition.py\", line 526, in build_plan\n    trusted_release = _released_distribution(root, base_commit, str(target[\"version\"]))\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main\\scripts\\validate_governor_transition.py\", line 400, in _released_distribution\n    raise GovernorTransitionError(\n        \"trusted base must contain exactly one released distribution for the target version\"\n    )\nvalidate_governor_transition.GovernorTransitionError: trusted base must contain exactly one released distribution for the target version\n\n----------------------------------------------------------------------\nRan 1 test in 3.180s\n\nFAILED (errors=2)\n",
+  "after_output": "...................s.s.............\n----------------------------------------------------------------------\nRan 35 tests in 73.841s\n\nOK (skipped=2)\n",
+  "real_adoption_plan": {
+    "schema": "se-harness-governor-transition-v1",
+    "phase": "plan",
+    "passed": true,
+    "applied": false,
+    "transition_required": true,
+    "object_format": "sha1",
+    "base_source": "event",
+    "base": {
+      "commit": "b9821e3a3ef3f821f36cc92da7fa4ce900f7e750",
+      "version": "0.21.0",
+      "lock_schema": 5,
+      "lock_sha256": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+      "canonical_lock_sha256": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+      "lock_materialization_sha256": {
+        "git": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+        "lf": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+        "crlf": "83e0c7e9e2915446e8a2cfef3f044fef08c4ce9262c8d0cbbd6c6bf13f8030c0"
+      },
+      "evaluator": {
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+        "version": "0.21.0"
+      }
+    },
+    "target": {
+      "commit": "e5bdb392ea97120ff950c9e160675418cd35fab8",
+      "version": "0.22.0",
+      "lock_schema": 5,
+      "lock_sha256": "b77b71ed0560bd308951332176c1db3c61897f34f435ceb5e55d1ad24d5af864",
+      "canonical_lock_sha256": "b77b71ed0560bd308951332176c1db3c61897f34f435ceb5e55d1ad24d5af864",
+      "lock_materialization_sha256": {
+        "git": "b77b71ed0560bd308951332176c1db3c61897f34f435ceb5e55d1ad24d5af864",
+        "lf": "b77b71ed0560bd308951332176c1db3c61897f34f435ceb5e55d1ad24d5af864",
+        "crlf": "1bf15e4a8a5a360035e825c979b6fde9ab56ef67203bae59f7f8de596419c4d1"
+      },
+      "evaluator": {
+        "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+        "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+        "version": "0.22.0"
+      }
+    },
+    "transition": {
+      "evidence_path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-028-evaluator-upgrade.json",
+      "evidence_sha256": "9a3459e8357b2a11cc01a0e8960c762e7cffe6054b1c3731c49b8a1926b64ce9",
+      "work_order": null,
+      "archive_source": "lock",
+      "trusted_release": {
+        "id": "RLS-SEH-032",
+        "path": "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+        "version": "0.22.0",
+        "tag": "v0.22.0",
+        "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+        "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+      }
+    },
+    "diagnostics": []
+  }
+}

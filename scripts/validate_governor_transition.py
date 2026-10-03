@@ -360,11 +360,13 @@ def _released_distribution(
         metadata = _metadata(_blob(root, base_revision, relative, relative), relative)
         distribution = metadata.get("distribution")
         events = metadata.get("lifecycle_events")
-        released = isinstance(events, list) and any(
+        authorizer = metadata.get("authorized_by")
+        released = (isinstance(authorizer, str) and bool(authorizer.strip())
+                    and isinstance(events, list)) and any(
             isinstance(event, dict)
             and event.get("from") == "ready"
             and event.get("to") == "released"
-            and event.get("decided_by") == "release-owner"
+            and event.get("decided_by") == authorizer
             for event in events
         )
         record_id = metadata.get("id")
@@ -372,7 +374,6 @@ def _released_distribution(
             metadata.get("type") != "release_record"
             or metadata.get("status") != "released"
             or metadata.get("version") != target_version
-            or metadata.get("authorized_by") != "release-owner"
             or metadata.get("tag") != f"v{target_version}"
             or not released
             or not isinstance(record_id, str)
