@@ -2,7 +2,7 @@
 id = "VREC-PLG-034"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-037"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-22-0/evidence/WO-RLS-037/WO-RLS-03
 evaluator_evidence_path = "docs/engineering/release-0-22-0/evidence/VREC-PLG-034-evaluator.json"
 evaluator_evidence_sha256 = "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157"
 
+verified_at = "2026-10-03T06:30:46Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLS-037"]
 conforms_to = ["VER-RLS-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-03T06:30:46Z"
+decided_by = "mmzen"
+reason = "Human assurance owner mmzen stated: I verify VREC-PLG-034. This records the requested assurance decision on the bounded README correction at candidate fc5f7356a82f5450fe21438ab8d4419ce10625e3 and its unchanged reviewed evidence in PR #530. All 44 required local tests passed, including the clean candidate capture. Separate full source CI on review head 00e68b8d1080485b0fb98d3bdd831deb52ea65f6 passed 1259 tests with 2 skips. Claude Code and Codex Windows desktop remain untested under DEC-RLS-005/006. Codex applies the recorded human decision; no merge, package requalification or completed release delivery is inferred."
 +++
 
 # Verification Record Candidate
