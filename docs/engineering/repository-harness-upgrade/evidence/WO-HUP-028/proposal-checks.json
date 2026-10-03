@@ -1,0 +1,98 @@
+{
+  "objective": "Proposed 0.22.0 repository adoption; no working-repository upgrade applied",
+  "base": "b9821e3a3ef3f821f36cc92da7fa4ce900f7e750",
+  "target_wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+  "installer_updates": [
+    ".engineering-harness.lock",
+    ".engineering-harness.toml"
+  ],
+  "source_version_proposal": "0.22.1, unpublished",
+  "rehearsal": {
+    "kind": "disposable planning rehearsal, not adoption of the working repository",
+    "base": "b9821e3a3ef3f821f36cc92da7fa4ce900f7e750",
+    "checkout": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ad022-rehearsal",
+    "prior_lock_sha256": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+    "target_version": "0.22.0",
+    "source_version_proposal": "0.22.1",
+    "upgrade": "passed",
+    "doctor": "passed",
+    "version_guard_before": "PRE008 reproduced",
+    "version_guard_after": "passed",
+    "formal_authority": "No work-order approval or implementation completion is inferred."
+  },
+  "checks": {
+    "upgrade": "pass in disposable checkout",
+    "doctor": "pass after disposable upgrade",
+    "repeat_preview": "all unchanged",
+    "resources": "available for 0.22.0",
+    "version_derivation_before": "PRE008: equal candidate and released versions",
+    "version_derivation_after": "pass with source 0.22.1",
+    "focused_tests": {
+      "ran": 111,
+      "skipped": 2,
+      "result": "pass"
+    },
+    "public_onboarding_tests": {
+      "ran": 16,
+      "skipped": 0,
+      "result": "pass"
+    },
+    "readme_words": 645,
+    "formal_validation_errors": 0,
+    "unrelated_existing_warnings": 61,
+    "preflight": "awaiting WO approval, VER approval and human assurance classification"
+  },
+  "retained_attempts": [
+    "Initial setup doctor also encountered per-process Git ownership restrictions; corrected safe.directory invocation leaves only the expected pre-upgrade version mismatch.",
+    "Initial focused invocation used two nonexistent test-module names and saw the expected stale development-version note. Correct module names and the proposed documentation updates pass."
+  ],
+  "reviewed_files": {
+    "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-028.md": "fd5793a291f80b96d06374fa57c1283bf431a2a832ae88f966d8d6ea01368fa6",
+    "docs/engineering/repository-harness-upgrade/verification/VER-HUP-005.md": "c396f2cfd3a93731f1c9297180fa0aa39eca473dafad39cf0effeae366f67728"
+  },
+  "raw_archive": "proposal-raw.zip",
+  "raw_archive_sha256": "639f75c8e37b87aca0210a44a88488776e626cf934d534c43afc7f092cb51858",
+  "raw_members": {
+    "create-ver-invocation.json": "debf19f4fe18e73964459adfb5af6329597601fe42f9d02ec5d7c000ef849907",
+    "create-ver-preview-invocation.json": "6bd496e76b494b4ddd287fab4ef1e52704fbcf23d9b53c20db254957d2963ba5",
+    "create-ver-preview.json": "a1d432e8ef397fcf4a83eedff0daeae32ff84169f6f083d374da36caa5d3e081",
+    "create-ver.json": "b5b087e7e223caa3f4eaf9150d876856f779c90b9e4585ba4113e9060527e05d",
+    "create-wo-invocation.json": "a99a8f6bc1e6a9d86790e2e10bafbd46bab071dac381bb1d93c27ee54552d2a1",
+    "create-wo-preview-invocation.json": "5e6b8bcfb1f52b682bd23347dc4e2cadfc149136852b5974012bcbda8d05e7f9",
+    "create-wo-preview.json": "86f437e0ce2af692b0486c11840506f5f1c6d2120d16ba14536225b1b150d23c",
+    "create-wo.json": "06851b3a3fbfa2d626a0b5c0e6d10535d937d6729e187dae79ce062ff7cd983b",
+    "proposal-context-invocation.json": "3820bd58f475bfd47fbec606d125522946d1bca066475da03ca89b3d024dca1e",
+    "proposal-context.json": "61ef0b6c679c3d8cd316a582a9ed813fb629eec9d46c82034eb945dbaa136095",
+    "proposal-preflight-invocation.json": "6f24c39385bd438125408542b903be50638467b20a6e99d0841596c374612bb4",
+    "proposal-preflight.json": "523b0196d103d3a06e3df282bd5b3766406ba8b13dd4dbd90d750ce68dba8b28",
+    "proposal-validate-invocation.json": "e2e4303120693b350ba8fcc998c937586a72f5e121a7a507a93b0874aa2f59c4",
+    "proposal-validate.json": "c8361472faca083681bf2b6f4fa7fd6e8542bebeb79023b5adf18fde90d6aee1",
+    "rehearsal-apply.json": "40fa15c07a184243199d66abe116afad407864850491e18183f92dafdfd75d5d",
+    "rehearsal-checkout.json": "a0d794217e5ae13b014260db1d5361798615e9c21a036d5b87e6ef388244f79a",
+    "rehearsal-clone.json": "9db9e0e5be241aa23802fdc46716f5c3b681d5c714298b31fd7da26bd5a21e19",
+    "rehearsal-derive-after.json": "d1fb6df8e76cb472eb55020257cdec0437a61740be0c6c21caab28ff6ef3fb40",
+    "rehearsal-derive-before.json": "e25452e035644c413d4106f85866b7bf10bc2138066a4a006966065ca8b5395a",
+    "rehearsal-doctor.json": "95ee4cecbfe2a823187da105ca61703c6949dc7bc7d5746b7102d8f893c318a3",
+    "rehearsal-focused-corrected.json": "ced615fce3d208e92b1873b82cd9f40bfd5a62a052c83117456dfbe9d0cde956",
+    "rehearsal-focused-tests.json": "51a55b790f19f0bfbdcb5b033c65f2f42a40b2f173dc033ef92dfed85d1b3f11",
+    "rehearsal-onboarding.json": "25f1029e51464f8cdf40ce546429b0b6bf34d9c1d2a76e956a303fd6d0aec5ff",
+    "rehearsal-repeat.json": "5f3500958c1e5a89200cf9a0f66e68f8f8d6364858e3ee30f700ef35c32ed323",
+    "rehearsal-resources.json": "618d7e9d5be522208640d0b6e46f48bec3214cf16db4fd61bcf79a70e53f177f",
+    "rehearsal-summary.json": "76a7accd7f84074c4a7e3153c2ba112678f58543de61edb7673b355867daf379",
+    "reserve-vrec-preview-invocation.json": "51e572cba6f25a03825e636f4a89056c544397c3d49dc5eed7291994d851490d",
+    "reserve-vrec-preview.json": "189b4d42c74658d26a4940a27b46f033a507f10bb78f4a26081b1f8fb1940019",
+    "setup.json": "dfef48b7d1e460d5baaee26e97a9128416663f071c0db5a5565f275f7e18bcdb",
+    "target-doctor-invocation.json": "a4b98dddcc7b32953af89b43155193f3ac417a9207780e6aa393f805da88c16a",
+    "target-doctor.json": "dde7c436cef32ab337b0cbbba7f94b4dcf8d258ef5c3f63129bc262e2080c913",
+    "target-preview-invocation.json": "aca11ddba95f8f6fe7879b493f0ce6ba40425b8cfe73dace757bdc451b02e24e",
+    "target-preview.json": "56b0cb1ee3bbbf08f0003b42f5055199a4d81ec977fa4bd5d04b8ae2cb3fc3e3"
+  },
+  "proposed_diff_sha256": "f5f7cf5ac19bcfe63b0521b0dee59c99bd4332728ad2943b0ff5d4b37988fb09",
+  "not_done": [
+    "Actual repository adoption",
+    "Full final-candidate suite and hosted CI",
+    "Human verification",
+    "Push/PR or merge",
+    "Host plugin update or provider configuration"
+  ]
+}

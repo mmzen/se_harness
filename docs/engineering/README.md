@@ -5,7 +5,7 @@
 ## Product and governance domains
 
 - [release-0-22-0/](release-0-22-0/README.md): published evaluator 0.22.0 and plugin 0.2.5;
-  [public checks and remaining closeout](release-0-22-0/evidence/WO-RLS-036/README.md) cover all five delivery surfaces.
+  [completed public delivery](release-0-22-0/evidence/WO-RLS-036/closeout.md) covers all five delivery surfaces.
 
 - [release-0-21-0/](release-0-21-0/README.md): approved 0.21.0 final qualification,
   published evaluator and plugin 0.2.4; public-route and documentation closeout remain in progress.

@@ -26,9 +26,8 @@ adoption and the reviewed provider configuration activate the new route below.
 ## One approval for the complete release
 
 **Availability:** Evaluator 0.22.0 and plugin 0.2.5 contain this route. This
-repository still selects 0.21.0, so the route is not active here. Adopt the
-supporting release and apply the separately reviewed provider configuration
-before offering this route as ready. Existing releases keep their original decisions and procedures.
+repository selects 0.22.0 under WO-HUP-028. Apply the separately reviewed
+provider configuration before offering the complete-release route as ready. Existing releases keep their original decisions and procedures.
 
 **Input:** A verified candidate, exact evaluator distributions, both qualified
 plugin packages, documentation, demonstration inputs and operational readiness.
@@ -423,8 +422,10 @@ Evaluator 0.22.0 and plugin 0.2.5 are public. The marketplace commit is
 `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. [Public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md)
 record exact package bytes, Codex CLI fresh/update routes and offline setup.
 Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
-Overall delivery is incomplete until documentation is verified, merged and read
-back, and the authorized latest/last promotion has been observed.
+[Final closeout](../engineering/release-0-22-0/evidence/WO-RLS-036/closeout.md)
+records all five surfaces satisfied, merged documentation readback, latest
+v0.22.0 and last at the exact released candidate. Repository adoption is
+separate from those completed publication observations.
 
 ## Historical 0.21.0 delivery
 

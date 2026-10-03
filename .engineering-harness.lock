@@ -1,10 +1,10 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.21.0-py3-none-any.whl",
-    "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+    "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+    "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
-    "version": "0.21.0"
+    "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+    "version": "0.22.0"
   },
   "files": {
     ".gitattributes": {
@@ -28,5 +28,5 @@
   "hash_mode": "utf8-text-lf-v1",
   "resource_layout": "released-resources-v1",
   "schema": 5,
-  "tool_version": "0.21.0"
+  "tool_version": "0.22.0"
 }

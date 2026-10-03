@@ -1,0 +1,334 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "blocked"
+  },
+  "selection": {
+    "primary": "VER-HUP-024",
+    "artifacts": [
+      "VER-HUP-024",
+      "WO-HUP-029"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+    "procedure_id": "PROC-FOCUS-SELECTED",
+    "status": "fail",
+    "gates": [
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VER-HUP-024"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-HUP-024"
+              }
+            ],
+            "message": "VER-HUP-024 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VER-HUP-024"
+              }
+            ],
+            "message": "No open decision blocks VER-HUP-024."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-HUP-024"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for VER-HUP-024."
+          }
+        ]
+      },
+      {
+        "id": "QG-G3-WORK-AUTHORIZATION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G3-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-HUP-029"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G3-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G3-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-HUP-029"
+              }
+            ],
+            "message": "No open decision blocks WO-HUP-029."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "fail",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HUP-029"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for WO-HUP-029."
+          },
+          {
+            "id": "QGS-ASSURANCE",
+            "status": "fail",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HUP-029"
+              }
+            ],
+            "message": "work order WO-HUP-029 requires a complete assurance classification before approval"
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-FOCUS-SELECTED",
+    "current_step": "STEP-FOCUS-SELECTED",
+    "steps": [
+      {
+        "id": "STEP-FOCUS-SELECTED",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected selected state for VER-HUP-024."
+        ],
+        "non_effects": [
+          "Focus changes no lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "VER-HUP-024"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VER-HUP-024",
+        "status": "draft"
+      },
+      {
+        "id": "WO-HUP-029",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "VER-HUP-024",
+        "status": "draft"
+      },
+      {
+        "id": "WO-HUP-029",
+        "status": "draft"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "blocked",
+    "done": [],
+    "not_done": [
+      "The selected transition operation remains incomplete."
+    ],
+    "blocked_by": [
+      "QGS-ASSURANCE: work order WO-HUP-029 requires a complete assurance classification before approval"
+    ],
+    "current_lifecycle_state": [
+      "No lifecycle state was changed."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "step_id": "STEP-FOCUS-SELECTED",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "VER-HUP-024"
+      ]
+    },
+    "alternatives": []
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v2",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task",
+        "source": "released-resource",
+        "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context.",
+          "source": "released-resource",
+          "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result.",
+          "source": "released-resource",
+          "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e"
+        }
+      ],
+      "procedure": {
+        "id": "PROC-FOCUS-SELECTED",
+        "location": {
+          "file": "docs/engineering/harness/CONTINUE.md",
+          "heading": "continue-selected-work",
+          "source": "released-resource",
+          "sha256": "7d5478fca5f80f996fc0a7a64627bbd2763401ff500a16671a592cb04394c304"
+        },
+        "prerequisites": [],
+        "steps": {
+          "STEP-FOCUS-SELECTED": {
+            "location": {
+              "file": "docs/engineering/harness/CONTINUE.md",
+              "heading": "continue-selected-work",
+              "source": "released-resource",
+              "sha256": "7d5478fca5f80f996fc0a7a64627bbd2763401ff500a16671a592cb04394c304"
+            },
+            "prerequisites": []
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-FOCUS-SELECTED",
+        "location": {
+          "file": "docs/engineering/harness/CONTINUE.md",
+          "heading": "continue-selected-work",
+          "source": "released-resource",
+          "sha256": "7d5478fca5f80f996fc0a7a64627bbd2763401ff500a16671a592cb04394c304"
+        },
+        "prerequisites": []
+      }
+    },
+    "formal_artifact_ids": [
+      "VER-HUP-024",
+      "WO-HUP-029"
+    ],
+    "evaluator_only_inputs": [
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/WORKFLOW.json",
+        "sha256": "00c222a9c71d95cb1162e6d6bacdb03cd9e43431303466077a85ceb8f921f0c2"
+      },
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/QUALITY_GATES.json",
+        "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+      }
+    ],
+    "release": {
+      "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+      "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+      "version": "0.22.0"
+    },
+    "formal_artifact_source": "repository"
+  },
+  "result_sha256": "9c85a96e8c8d0039c61fdec70e78c75d8d8da903e6d95ad18d7d3f0104a03b32"
+}

@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-03T07:15:41.296954+00:00",
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "scripts/validate_governor_transition.py",
+    "assess",
+    "--repository",
+    ".",
+    "--base-revision",
+    "b9821e3a3ef3f821f36cc92da7fa4ce900f7e750",
+    "--evaluator-python",
+    "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.0\\44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4\\Scripts\\python.exe",
+    "--evaluator-entry-point",
+    "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.0\\44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4\\Scripts\\harnessctl.exe",
+    "--evaluator-wheel",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\plugin025-marketplace\\packages\\codex\\verity-plane\\packages\\se_harness-0.22.0-py3-none-any.whl",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+  "exit_code": 1,
+  "seconds": 2.414,
+  "stdout": "{\"applied\":false,\"diagnostics\":[],\"error\":\"trusted base must contain exactly one released distribution for the target version\",\"passed\":false,\"phase\":\"assess\",\"schema\":\"se-harness-governor-transition-v1\"}\n",
+  "stderr": ""
+}
