@@ -1,0 +1,44 @@
+{
+  "tested_commit": "9c290cce29176c4d4c3bbcdef9919c02c7b658f5",
+  "base": "b9821e3a3ef3f821f36cc92da7fa4ce900f7e750",
+  "evaluator": "0.22.0",
+  "development_source": "0.22.1",
+  "full_suite": {
+    "ran": 1262,
+    "skipped": 22,
+    "exit_code": 0
+  },
+  "focused_suite": {
+    "ran": 35,
+    "skipped": 2,
+    "exit_code": 0
+  },
+  "predecessor_plan": "pass",
+  "predecessor_assessment": "pass",
+  "validation": {
+    "errors": 0,
+    "warnings": 61
+  },
+  "archive_sha256": "f30c45b6582f94b84def1768f146eac2d2251b6827a31f1b2c17294e338bac69",
+  "members": {
+    "correction-approved-preview.json": "c602c1b8e3ddfe050594a8213a4bff0483db2b68ae7b94458274abd60e68b46b",
+    "correction-approved-preview-invocation.json": "d1008406e8138a59a3909cb17771de35298f1860ac8f6d4183bdfd05d5b4ec8b",
+    "correction-approved-apply.json": "d004928d074f969b0d6b1511d9253b3e1ac5247495819bd7b06533d14f580d35",
+    "correction-approved-apply-invocation.json": "ca9b4b9dda9f07506463ea944483c9bf966796d5704e856cefe181eec9559734",
+    "correction-start-preflight.json": "18699c10fad1d9255d2eb27dd1f823de5aae38bf61e13c31815cb5a41587d604",
+    "correction-start-preflight-invocation.json": "a031edb475a5111ff11f229e7f9373633fe6ef8ec94311a5a896059b40d5d7ce",
+    "correction-start-preview.json": "0a4052398f23b78f0e2198b46c7ee378e84da9784f84cfb511e4cf6fefd13f8e",
+    "correction-start-preview-invocation.json": "0006cdb489317a43097577eaa2eee0cf8e0f013e14c45caa61b6c2366cf10458",
+    "correction-start-apply.json": "313e5c519cbb089f1c546a323a5b240e74c7d9b3370b953e39048e5ab3a55a62",
+    "correction-start-apply-invocation.json": "fa0942cd05b18b815236ea6754795bc7c8dd6c7a76b7d5a2d2ff02810a7647e6",
+    "correction-execution-scope.json": "9fc5c0552be19dd110da3dcce402716b812e5cdc4b64bdf7209a1acffddfb679",
+    "correction-execution-scope-invocation.json": "495a5ce3a77306935df23cd9a769dbd2e9eeaae49f1c9f104d7627246cc87455",
+    "correction-implementation-commit.json": "8c357871ed0054aa07e405ffe3d3640fcdd8342e826460bd095dd05008d12d03",
+    "corrected-predecessor-plan.json": "76c6218e37f37c8d43dba5caeed42b192827779ca4922d781304720dc1b4d797",
+    "corrected-predecessor-assessment.json": "7784e8d4a005b397b0d51ca1fd9d6b56c1338790b7833ec99b18bdb9e76f37f6",
+    "corrected-validate.json": "cbe185b8a157b87bb499f85a5c4449fe9ee6cfbd9aa19988ef0a7f262a950671",
+    "corrected-validate-invocation.json": "84461eba0b539d3f907eb5b2e078485bf9db31972559061ee8433483ef8c8ce8",
+    "fixture-native-corrected-full.json": "e6f07a02e4e01e6b274f1d04a389913bd559080b533858bd21c27079da5b3ea4",
+    "fixture-native-corrected-focused.json": "65404bcb23f015a036f6f2f1b16ea27fac5c7cdfe04aa799dea7fd83e2a28ab3"
+  }
+}

@@ -2,7 +2,7 @@
 id = "WO-HUP-028"
 type = "work_order"
 title = "Adopt released evaluator 0.22.0"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -54,6 +54,13 @@ to = "in_progress"
 decided_at = "2026-10-03T07:10:26Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Start the unchanged adoption scope under human mmzen approval recorded on 2026-10-03."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-03T07:35:58Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Adopt released evaluator 0.22.0
