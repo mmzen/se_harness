@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-10-03T06:49:43.731792+00:00",
+  "release_record": "RLS-SEH-032",
+  "latest": "v0.22.0",
+  "last": "abbec12ac5524c8adfb28693f846dd59de88f759",
+  "previous_latest": "v0.21.0",
+  "previous_last": "4031f0fa4b5c4a95651bd928a110d8b2d94f9775",
+  "last_update_control": "Git push used --force-with-lease=refs/tags/last:4031f0fa4b5c4a95651bd928a110d8b2d94f9775; no blind force or local tag rewrite.",
+  "authority": {
+    "path": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/marker-authority.json",
+    "sha256": "39a6f437732ed1eb7aa4984d04cd11e42f67d0c44be5f25941ae8a24cd56fae8"
+  },
+  "raw_archive": "marker-closeout-raw.zip",
+  "raw_archive_sha256": "0b7371b25978e28c45bd783ce4d3bacb82997997f1f47f8597733ec45e25c293",
+  "members": {
+    "delivery022-marker-preaction.json": "b6e73b1dd30825282b407a739918e26372da3b3e364e88bba5ce4b7186a37795",
+    "delivery022-latest-before.json": "fa29ed2411927327638262024dfe38a01d33e9e5edbd4e7bf41de9ebacf12ba8",
+    "delivery022-last-before.json": "5b3cd1a636cd33e4fedb358a37c3976b4b2c92f4462e73d262891ad53dbf903c",
+    "delivery022-rulesets.json": "2d69e693f37ccb1e06ab0d128de10cb2892a1c3b9808a3e45fc891a1d4af5ead",
+    "delivery022-latest-immediate.json": "8397a8a9f53aaf2eeaa9e14f4e0d72457c24797919ee53ecba3230433d8a7302",
+    "delivery022-release-immediate.json": "8d3deefcfcd3e9dca61d7ae179d0477bcdb3d4ad54d190e4ab7f37df2000169b",
+    "delivery022-last-immediate.json": "5eb06443f748367db35a10322fe49a99d12c1a2b4ddbb0ff773c1c774f95dd3b",
+    "delivery022-latest-apply.json": "5de38da1d8c0ba89f9f4d18a528a40599471a70dfa78850628a66ba9fe10b328",
+    "delivery022-latest-after.json": "9487c4ba51c591a973293878d1416297326b83d7f187b9d013bc37d02c884cd6",
+    "delivery022-latest-before-last.json": "c14789be00bf8f072f87f4a1f24258d0f164278ff19aedc4629b73908d1182c4",
+    "delivery022-last-lease-read.json": "40d663b489c3c616f965715ff1ce73a36cadcc0f0e9a2eafbad867b6e4979705",
+    "delivery022-last-apply.json": "0291de20b42d320ccf81499737dfae8f6e1ea972fc366cf9c67c302bb62e71db",
+    "delivery022-last-git-readback.json": "5f2b9036b3c21abfac1902d5dd691cd859d6aad712e42aa05eb7b1c7a872f38a",
+    "delivery022-last-after.json": "f42a25465fccc21884ca15fc1f33bcdfdff7f9d5aeb2632b75af158d36bd241e"
+  },
+  "result": "Both authorized marker changes succeeded and were read back. Published archives and version tag were not modified."
+}
