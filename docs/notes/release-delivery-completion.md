@@ -421,7 +421,14 @@ belongs to the subsequent marketplace work and its verification contract.
 Evaluator 0.22.0 and plugin 0.2.5 are public. The marketplace commit is
 `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. [Public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md)
 record exact package bytes, Codex CLI fresh/update routes and offline setup.
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+[Claude follow-up (2026-10-03)](../engineering/release-0-22-0/evidence/WO-RLS-038/README.md): on Windows, Claude Code 2.1.273
+passed public fresh installation and update from 0.2.4, plus startup, activation,
+resume, manual/automatic compaction and session-isolation checks for plugin 0.2.5
+and evaluator 0.22.0. The native test package matches all 29 public package files.
+Codex Windows desktop, the full Claude work-order walkthrough and the earlier
+long-path case remain unverified. DEC-RLS-007/008 record the bounded follow-up;
+the original release omissions and accepted risks under DEC-RLS-005/006 remain
+historical records.
 [Final closeout](../engineering/release-0-22-0/evidence/WO-RLS-036/closeout.md)
 records all five surfaces satisfied, merged documentation readback, latest
 v0.22.0 and last at the exact released candidate. Repository adoption is

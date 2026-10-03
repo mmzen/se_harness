@@ -9,7 +9,14 @@ installation passed. All 29 installed files match the qualified package.
 Offline setup, exact evaluator identity, two-file initialization, resource lookup
 and reuse passed on both routes.
 
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+[Claude follow-up (2026-10-03)](../engineering/release-0-22-0/evidence/WO-RLS-038/README.md): on Windows, Claude Code 2.1.273
+passed public fresh installation and update from 0.2.4, plus startup, activation,
+resume, manual/automatic compaction and session-isolation checks for plugin 0.2.5
+and evaluator 0.22.0. The native test package matches all 29 public package files.
+Codex Windows desktop, the full Claude work-order walkthrough and the earlier
+long-path case remain unverified. DEC-RLS-007/008 record the bounded follow-up;
+the original release omissions and accepted risks under DEC-RLS-005/006 remain
+historical records.
 
 See the [public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md).
 Installing a plugin does not upgrade a project's selected harness.
@@ -155,7 +162,14 @@ on the public routes. This is reuse of matching qualification evidence, not a
 claim that authenticated model sessions ran in the fresh or update profiles.
 Fresh profiles still need normal hook trust.
 
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+[Claude follow-up (2026-10-03)](../engineering/release-0-22-0/evidence/WO-RLS-038/README.md): on Windows, Claude Code 2.1.273
+passed public fresh installation and update from 0.2.4, plus startup, activation,
+resume, manual/automatic compaction and session-isolation checks for plugin 0.2.5
+and evaluator 0.22.0. The native test package matches all 29 public package files.
+Codex Windows desktop, the full Claude work-order walkthrough and the earlier
+long-path case remain unverified. DEC-RLS-007/008 record the bounded follow-up;
+the original release omissions and accepted risks under DEC-RLS-005/006 remain
+historical records.
 
 Model sessions require usable host authentication. The
 [0.2.3 evidence](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md)

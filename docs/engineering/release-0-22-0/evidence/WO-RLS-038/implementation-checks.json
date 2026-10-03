@@ -1,0 +1,591 @@
+{
+  "observed_at": "2026-10-03T09:51:17.943492+00:00",
+  "contract": "VER-RLS-002",
+  "work_order": "WO-RLS-038",
+  "checks": [
+    {
+      "name": "Archive and original-source byte preservation",
+      "status": "pass",
+      "archive_sha256": "b37fdae19d2b9e16ea8f50a78b101fb86ccf02febfcf238fc54c59f5b98f2730",
+      "entries": 26
+    },
+    {
+      "name": "Independent qualification and released-wheel identity",
+      "status": "pass",
+      "file_count": 29,
+      "public_revision": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+      "qualification_inventory_sha256": "cfb1fcc7c2720590aa159887faf2f45afb2b212bb25fa68e237cd3b198ba64dc",
+      "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+    },
+    {
+      "name": "Actual native compaction events and complete selected entries",
+      "status": "pass",
+      "compactions": [
+        {
+          "phase": "manual-compaction",
+          "trigger": "manual",
+          "hook": "SessionStart:compact",
+          "session": "9ed0a1d7-8c36-488a-bfce-bee6dda1fe5f"
+        },
+        {
+          "phase": "inventory-batch-3",
+          "trigger": "auto",
+          "hook": "SessionStart:compact",
+          "session": "9ed0a1d7-8c36-488a-bfce-bee6dda1fe5f"
+        },
+        {
+          "phase": "A-current-compaction",
+          "trigger": "manual",
+          "hook": "SessionStart:compact",
+          "session": "bee591c7-5dc2-4bd4-84d0-31e76b10d028"
+        },
+        {
+          "phase": "B-legacy-compaction",
+          "trigger": "manual",
+          "hook": "SessionStart:compact",
+          "session": "15f58250-e897-4ad1-903f-ecad39de79d2"
+        }
+      ]
+    },
+    {
+      "name": "Startup/resume, independent sessions, switch/clear and gap recovery",
+      "status": "pass",
+      "stages": 17,
+      "fixture_files_preserved": true
+    },
+    {
+      "name": "Historical decisions, risks, release and verification records unchanged",
+      "status": "pass",
+      "files_sha256": {
+        "docs/engineering/release-0-22-0/risks/RISK-RLS-004.md": "718d27e0077c25d4951c62e39df6375d93297ffa40a8943588077452b66bd391",
+        "docs/engineering/release-0-22-0/risks/RISK-RLS-005.md": "862b70073e0db8508b51a0f022d80b1bb346ff2c6947886e32974718576c5f63",
+        "docs/engineering/release-0-22-0/decisions/DEC-RLS-005.md": "06fbf938c2a56ee26755cd00b69a8ad207419d385206ccbdd856e7a292da80b8",
+        "docs/engineering/release-0-22-0/decisions/DEC-RLS-006.md": "7a524b98803d6002c34989895a7fcf11b5c8d50e62fc17b03a7bdef11c0aa518",
+        "docs/engineering/release-0-22-0/risks/RISK-RLS-006.md": "2d7633ca9e8f342f3c9126f8c5119629b7490ce23d9c1f8114cf49e613a8cba2",
+        "docs/engineering/release-0-22-0/verification-records/VREC-PLG-032.md": "86afad166107ea4d11318f16f8eebf79ccc42f251d2ee46c6f50f018594df0fc",
+        "docs/engineering/release-0-22-0/verification-records/VREC-PLG-033.md": "d578ea50e66d80a49d522b2472b8fc7d9a56c154a2f9dda05e67812ef83a37f6",
+        "docs/engineering/release-0-22-0/verification-records/VREC-PLG-034.md": "8a47448dde7fc311746192daf90ef866cb4841c52889236aa5777f5d57fe1136",
+        "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md": "fa48d5096a3cd66c96a4ae4776f7babea6ffa781cd7a67ea11ff77c2b27b1d09"
+      }
+    },
+    {
+      "name": "Local links in changed guides and evidence index",
+      "status": "pass",
+      "checked": 117,
+      "links": [
+        {
+          "source": "README.md",
+          "target": "docs/notes/README.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/README.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/plugin-installation-guide.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/engineering/release-0-22-0/README.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/engineering/release-0-22-0/evidence/WO-RLS-036/closeout.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/harness-installation-and-upgrades.md#minimal-installation-0210"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/images/harness-explorer-lineage.png"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/images/harness-explorer-virtual-twin.png"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/getting-started.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/harness-installation-and-upgrades.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/harness-overview.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/harness-lineage-example.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/harnessctl-reference.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/developing-se-harness.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/release-delivery-completion.md#one-approval-for-the-complete-release"
+        },
+        {
+          "source": "README.md",
+          "target": "LICENSE"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../release-0-22-0/evidence/WO-RLS-036/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../release-0-22-0/evidence/WO-RLS-036/closeout.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../release-0-22-0/evidence/WO-RLS-038/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../release-0-21-0/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../release-0-21-0/evidence/WO-RLS-033/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../release-0-20-1/evidence/WO-RLS-029/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../release-0-20-0/evidence/WO-PLG-031/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-026.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-026/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-027.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "specifications/SPEC-PLG-023.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "verification/VER-PLG-026.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-028.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-028/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "verification/VER-PLG-027.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-029.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-028/delivery-closeout.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-025.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-025/implementation.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "verification/VER-PLG-025.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../harness-distribution/specifications/SPEC-DST-029.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-024.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "verification/VER-PLG-024.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-024/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../../notes/developing-se-harness.md#agent-skills-for-this-checkout"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-023.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "specifications/SPEC-PLG-022.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "verification/VER-PLG-023.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../../notes/plugin-marketplace-publication.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "verification-records/VREC-PLG-017.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "verification-records/VREC-PLG-018.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../../notes/plugin-installation-guide.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-009/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-016/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-009.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-016.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-014.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../../notes/plugin-backlog-kiss-2026-09-14.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-022.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-022/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "specifications/SPEC-PLG-021.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../harness-simplification/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../../notes/plugin-definition-delivery-2026-09-08.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../../notes/plugin-ownership-migration-2026-09-12.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "specifications/SPEC-PLG-021.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-021/implementation/README.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "evidence/WO-RLS-036/closeout.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "evidence/WO-RLS-038/README.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "decisions/DEC-RLS-007.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "decisions/DEC-RLS-008.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "decisions/DEC-RLS-005.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "decisions/DEC-RLS-006.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "work-orders/WO-RLS-034.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "work-orders/WO-RLS-035.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "work-orders/WO-RLS-036.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "release/REL-SEH-034.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "verification/VER-RLS-033.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "verification/VER-RLS-034.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/README.md",
+          "target": "verification/VER-RLS-035.md"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "../engineering/release-0-22-0/evidence/WO-RLS-038/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "../engineering/release-0-22-0/evidence/WO-RLS-036/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "plugin-marketplace-publication.md#assemble-committed-inputs"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "../../release/plugin-marketplace/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "../../plugins/verity-plane/common/skills/setup/references/repository.md"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "../../plugins/verity-plane/common/skills/setup/references/maintenance.md"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "../engineering/release-0-22-0/evidence/WO-RLS-038/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "../engineering/release-0-20-1/evidence/WO-RLS-029/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "../engineering/release-0-20-0/evidence/WO-PLG-031/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "harness-installation-and-upgrades.md#minimal-installation-0210"
+        },
+        {
+          "source": "docs/notes/plugin-installation-guide.md",
+          "target": "../engineering/plugin-integration/evidence/WO-PLG-016/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-marketplace-publication.md",
+          "target": "../engineering/release-0-22-0/release/REL-SEH-034.md"
+        },
+        {
+          "source": "docs/notes/plugin-marketplace-publication.md",
+          "target": "../engineering/release-0-22-0/evidence/WO-RLS-036/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-marketplace-publication.md",
+          "target": "../engineering/release-0-22-0/evidence/WO-RLS-036/closeout.md"
+        },
+        {
+          "source": "docs/notes/plugin-marketplace-publication.md",
+          "target": "../engineering/release-0-22-0/evidence/WO-RLS-038/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-marketplace-publication.md",
+          "target": "release-delivery-completion.md#one-approval-for-the-complete-release"
+        },
+        {
+          "source": "docs/notes/plugin-marketplace-publication.md",
+          "target": "release-delivery-completion.md#perform-and-retain-each-handoff"
+        },
+        {
+          "source": "docs/notes/plugin-marketplace-publication.md",
+          "target": "../engineering/release-0-20-0/evidence/WO-PLG-031/README.md"
+        },
+        {
+          "source": "docs/notes/plugin-marketplace-publication.md",
+          "target": "../engineering/plugin-integration/evidence/WO-PLG-028/publication.json"
+        },
+        {
+          "source": "docs/notes/plugin-marketplace-publication.md",
+          "target": "../engineering/plugin-integration/evidence/WO-PLG-028/delivery-closeout.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-orchestration/specifications/SPEC-RLO-006.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-orchestration/specifications/SPEC-RLO-007.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-0-22-0/README.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "plugin-marketplace-publication.md#stage-before-release-approval"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../../tests/fixtures/release_delivery/complete-release/plan.json"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-orchestration/evidence/WO-RLO-016/README.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "developing-se-harness.md#release-sequences"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "plugin-marketplace-publication.md#check-and-deliver"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "plugin-marketplace-publication.md#assemble-committed-inputs"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-0-20-0/README.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-0-20-0/evidence/WO-PLG-031/README.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../../tests/fixtures/release_delivery/complete/"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-0-22-0/evidence/WO-RLS-036/README.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-0-22-0/evidence/WO-RLS-038/README.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-0-22-0/evidence/WO-RLS-036/closeout.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-0-21-0/README.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-0-20-1/README.md"
+        },
+        {
+          "source": "docs/notes/release-delivery-completion.md",
+          "target": "../engineering/release-0-20-1/evidence/WO-RLS-029/README.md"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md",
+          "target": "observations.json"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md",
+          "target": "observations-raw.zip"
+        },
+        {
+          "source": "docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md",
+          "target": "verification-review.md"
+        }
+      ]
+    },
+    {
+      "name": "Credential-value pattern scan of retained raw observations",
+      "status": "pass",
+      "scope": "Known secret-value patterns; no credential files included"
+    }
+  ],
+  "status": "pass",
+  "focused_tests": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "tests.test_progressive_documentation",
+      "tests.plugin_integration.package_assembly.test_refresh_guidance"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "result": "............................\n----------------------------------------------------------------------\nRan 28 tests in 0.615s\n\nOK",
+    "runtime": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "released_validation": {
+    "evaluator": "0.22.0",
+    "errors": 0,
+    "warnings": 61,
+    "warning_scope": "61 existing repository warnings; no new package warnings"
+  },
+  "archive": {
+    "path": "implementation-raw.zip",
+    "sha256": "8e23db2e4082d4616dcd7b8d43665017d59081884258cb9bb2169fc3a64587bf"
+  },
+  "preserved_attempts": [
+    "Initial start preview refused before mutation: --reason must use ID=VALUE; corrected preview/apply passed.",
+    "Initial substantive assessment found verification-review.md absent before its creation; the completed link assessment passed."
+  ],
+  "limits": [
+    "Codex Windows desktop not assessed",
+    "Full Claude author/execute/delivery walkthrough not assessed",
+    "Earlier long-path native failure not requalified",
+    "Native runs used --plugin-dir with tools disabled; separate public installation profiles matched package bytes",
+    "Original risks and acceptance records unchanged"
+  ],
+  "next": "Selected review preflight and Git-derived handoff, then exact clean candidate capture. Human acceptance remains separate."
+}

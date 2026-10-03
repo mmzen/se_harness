@@ -1,0 +1,248 @@
+{
+  "observed_at": "2026-10-03T08:10:51.706470+00:00",
+  "completed_at": "2026-10-03T08:11:32.548107+00:00",
+  "host_version": "2.1.273 (Claude Code)",
+  "model": [
+    "claude-sonnet-5"
+  ],
+  "plugin_version": "0.2.5",
+  "evaluator": {
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+    "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+    "version": "0.22.0",
+    "archive_name": "se_harness-0.22.0-py3-none-any.whl"
+  },
+  "source_commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+  "public_revision": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+  "entry_sha256": "f781edf5a424117a931d6bcaece33f013f03c6a8bfec8eac48c784c3aad781e9",
+  "file_count": 29,
+  "public_and_native_package_bytes_match": true,
+  "compaction_checks": [
+    {
+      "criterion": "manual compaction",
+      "status": "pass",
+      "phases": [
+        "manual-compaction"
+      ]
+    },
+    {
+      "criterion": "auto compaction",
+      "status": "pass",
+      "phases": [
+        "inventory-batch-3"
+      ]
+    }
+  ],
+  "boundary_checks": [
+    {
+      "phase": "A-bootstrap",
+      "exit_code": 0,
+      "session_id": "bee591c7-5dc2-4bd4-84d0-31e76b10d028",
+      "compaction_triggers": [],
+      "hook_names": [
+        "SessionStart:startup"
+      ]
+    },
+    {
+      "phase": "B-bootstrap",
+      "exit_code": 0,
+      "session_id": "15f58250-e897-4ad1-903f-ecad39de79d2",
+      "compaction_triggers": [],
+      "hook_names": [
+        "SessionStart:startup"
+      ]
+    },
+    {
+      "phase": "A-current-compaction",
+      "exit_code": 0,
+      "session_id": "bee591c7-5dc2-4bd4-84d0-31e76b10d028",
+      "compaction_triggers": [
+        "manual"
+      ],
+      "hook_names": [
+        "SessionStart:resume",
+        "SessionStart:compact"
+      ]
+    },
+    {
+      "phase": "B-legacy-compaction",
+      "exit_code": 0,
+      "session_id": "15f58250-e897-4ad1-903f-ecad39de79d2",
+      "compaction_triggers": [
+        "manual"
+      ],
+      "hook_names": [
+        "SessionStart:resume",
+        "SessionStart:compact"
+      ]
+    },
+    {
+      "phase": "B-current-after-switch",
+      "exit_code": 0,
+      "session_id": "15f58250-e897-4ad1-903f-ecad39de79d2",
+      "compaction_triggers": [],
+      "hook_names": [
+        "SessionStart:resume"
+      ]
+    },
+    {
+      "phase": "A-unchanged-after-switch",
+      "exit_code": 0,
+      "session_id": "bee591c7-5dc2-4bd4-84d0-31e76b10d028",
+      "compaction_triggers": [],
+      "hook_names": [
+        "SessionStart:resume"
+      ]
+    },
+    {
+      "phase": "B-cleared",
+      "exit_code": 0,
+      "session_id": "15f58250-e897-4ad1-903f-ecad39de79d2",
+      "compaction_triggers": [],
+      "hook_names": [
+        "SessionStart:resume"
+      ]
+    },
+    {
+      "phase": "A-unchanged-after-clear",
+      "exit_code": 0,
+      "session_id": "bee591c7-5dc2-4bd4-84d0-31e76b10d028",
+      "compaction_triggers": [],
+      "hook_names": [
+        "SessionStart:resume"
+      ]
+    },
+    {
+      "phase": "A-missing-checkout",
+      "exit_code": 0,
+      "session_id": "bee591c7-5dc2-4bd4-84d0-31e76b10d028",
+      "compaction_triggers": [],
+      "hook_names": [
+        "SessionStart:resume"
+      ]
+    },
+    {
+      "phase": "A-restored",
+      "exit_code": 0,
+      "session_id": "bee591c7-5dc2-4bd4-84d0-31e76b10d028",
+      "compaction_triggers": [],
+      "hook_names": [
+        "SessionStart:resume"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "test": "Fresh-session bootstrap before clone",
+      "status": "pass"
+    },
+    {
+      "test": "Exact repository activation after clone",
+      "status": "pass"
+    },
+    {
+      "test": "Resume from parent directory",
+      "status": "pass"
+    },
+    {
+      "test": "Manual compaction and exact entry reinjection",
+      "status": "pass"
+    },
+    {
+      "test": "Native automatic compaction and exact entry reinjection",
+      "status": "pass"
+    },
+    {
+      "test": "Resume after automatic compaction",
+      "status": "pass"
+    },
+    {
+      "test": "Two sessions with distinct release selections",
+      "status": "pass"
+    },
+    {
+      "test": "Explicit switch and clear preserve the other session",
+      "status": "pass"
+    },
+    {
+      "test": "Unavailable selected checkout reports delivery gap",
+      "status": "pass"
+    },
+    {
+      "test": "Restored checkout recovers exact instructions",
+      "status": "pass"
+    },
+    {
+      "test": "Public fresh install of plugin 0.2.5",
+      "status": "pass"
+    },
+    {
+      "test": "Public upgrade from plugin 0.2.4 to 0.2.5",
+      "status": "pass"
+    },
+    {
+      "test": "All 29 public package files match native test inputs",
+      "status": "pass"
+    },
+    {
+      "test": "Disposable fixture repository files preserved",
+      "status": "pass"
+    }
+  ],
+  "limitations": [
+    "Codex Windows desktop is not tested.",
+    "A complete Claude work-order authoring/execution/delivery walkthrough is not part of this run.",
+    "The earlier long-path native failure is not requalified by these short-path native fixtures.",
+    "Historical release records and accepted omissions remain unchanged."
+  ],
+  "status": "observed_passes_pending_followup_review",
+  "authority": "Human mmzen requested the tests, then authorized retention and preparation of linked follow-up decisions. No assurance acceptance or risk closure is inferred.",
+  "original_records": {
+    "base_commit": "7b6c969a7e6217ae41ff11a45cf584d48960461b",
+    "files_sha256": {
+      "docs/engineering/release-0-22-0/risks/RISK-RLS-004.md": "718d27e0077c25d4951c62e39df6375d93297ffa40a8943588077452b66bd391",
+      "docs/engineering/release-0-22-0/risks/RISK-RLS-005.md": "862b70073e0db8508b51a0f022d80b1bb346ff2c6947886e32974718576c5f63",
+      "docs/engineering/release-0-22-0/decisions/DEC-RLS-005.md": "06fbf938c2a56ee26755cd00b69a8ad207419d385206ccbdd856e7a292da80b8",
+      "docs/engineering/release-0-22-0/decisions/DEC-RLS-006.md": "7a524b98803d6002c34989895a7fcf11b5c8d50e62fc17b03a7bdef11c0aa518",
+      "docs/engineering/release-0-22-0/risks/RISK-RLS-006.md": "2d7633ca9e8f342f3c9126f8c5119629b7490ce23d9c1f8114cf49e613a8cba2",
+      "docs/engineering/release-0-22-0/verification-records/VREC-PLG-032.md": "86afad166107ea4d11318f16f8eebf79ccc42f251d2ee46c6f50f018594df0fc",
+      "docs/engineering/release-0-22-0/verification-records/VREC-PLG-033.md": "d578ea50e66d80a49d522b2472b8fc7d9a56c154a2f9dda05e67812ef83a37f6",
+      "docs/engineering/release-0-22-0/verification-records/VREC-PLG-034.md": "8a47448dde7fc311746192daf90ef866cb4841c52889236aa5777f5d57fe1136",
+      "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md": "fa48d5096a3cd66c96a4ae4776f7babea6ffa781cd7a67ea11ff77c2b27b1d09"
+    }
+  },
+  "raw_archive": {
+    "path": "observations-raw.zip",
+    "sha256": "b37fdae19d2b9e16ea8f50a78b101fb86ccf02febfcf238fc54c59f5b98f2730",
+    "entries": {
+      "native-delivery.json": "f39ff6ebd751d70748b08effaa27ae11be438984c839b8765a3a1b5fcece3a9e",
+      "native-boundaries.json": "be9954153884f8ebec7431a4e7b8815b752d2f139ae11ad22bfe2a6df9f9e1a0",
+      "assessment-original.json": "b76a4e14638ba96bd8b9782f7029a93a4a3b2f9828f07ac35a2690906e8cdb9a",
+      "drivers/native-delivery.py": "bb994e3fd438db6adabbe61523c18b9be96dfaf14a526548641582f4fa893e24",
+      "drivers/public-routes.py": "f178e9aa91ac2e30450aacf4796744e3ccebdc4bcd478f3d5562765c5945702b",
+      "drivers/native-boundaries.py": "f379bfedc043b8b7a79da3d375b108445c37b8888b1b4bbb652f564b1808ef84",
+      "routes/fresh-add.json": "e226f12f617681a822aef744ebe1935f00a6e48af9090668b1e3008ea72fa5ca",
+      "routes/fresh-after.json": "7abef9b6d2cda9a3516a3ee45a4e443cb979fc6a07f28f6ef3a9be698008c9a8",
+      "routes/fresh-before.json": "219de59be5325825247b41af1c124cf5d73582d101a1230f4b59aa75fa1be6b7",
+      "routes/fresh-details.json": "32ec8add9d23f09956612df160f030f11d5da3519d69601dca4416f86b46372b",
+      "routes/fresh-install.json": "2ec4740279cb33e397a36d141c2a70c62f8dbb0b6f610743542ff9f7d85acc56",
+      "routes/fresh-revision-selected.json": "e69fad255cc3b44cca44f2209654bd7f068b3be79e5e20ddbd3180575d08b5ae",
+      "routes/fresh-route.json": "e829e14369611f2f24fbecc331f046a0977738b98290ea88f7840d5bdff39e26",
+      "routes/fresh-source-selected.json": "7ca44d8c60743728880f977d98059303a58072bbb4c9083b3fa2982db1bc8ef2",
+      "routes/fresh-version.json": "57788788970dc449cfd20002600d863759e1d6afd4d4dddfdec2546aa66ddd27",
+      "routes/update-after.json": "4956c04f84b50dc72624cfbe83265088c928b56cdaf11649be4632223ad7377c",
+      "routes/update-before.json": "220a8c3003a01da289f7d70f1ed20b6f1a474fdf1e4fa6198c3e134aaf42be57",
+      "routes/update-details.json": "9e73dbfa9fdbb416c1a371ef20609cb1eddccd99dd67e7b5987bd8dbdc774f32",
+      "routes/update-refresh.json": "53c0ead24b55100bbb76bd2d8dc399a88122a1be028c9491b2828da599a50a88",
+      "routes/update-revision-before.json": "e3cf80cb30cc8152a7d410eb35b813bc231e7708692c302cc7f1ad7654ac64a7",
+      "routes/update-revision-selected.json": "b3be10b03c695028ed6831c6c50d865011b99e058caa68627bdb57abcebd3af7",
+      "routes/update-route.json": "da7c4ca0d8740e1d12fb5bac156d9bdd3e9ed4e88cfc96de26cf1d63511cd4de",
+      "routes/update-source-before.json": "2d5b7d667cb02bbe4f54cf36d12bf00fb838d6e2db971492a1ec0fe9245ea07b",
+      "routes/update-source-selected.json": "74d4759f012fb3cb9257683104800622e79ecf3773d89ff3a2ea70845773a313",
+      "routes/update-update.json": "a2996f19741cffe7cfa05e3866c33688925ff2ad94fc9dbede510e2b8518f3f4",
+      "routes/update-version.json": "adc5f68a6626ecb0dbe71067b1acc120265764ca35fc9da7217334d28dea4647"
+    }
+  },
+  "provenance_note": "The rerun reused the existing native qualification driver. Its retained historical authorization label is not a new release decision. This follow-up uses the later test/retention requests. The raw bytes are unchanged."
+}

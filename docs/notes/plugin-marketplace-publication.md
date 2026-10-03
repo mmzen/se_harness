@@ -9,11 +9,21 @@ independent public readback matches all 69 files and the exact released wheel.
 
 [WO-RLS-036 observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md)
 record Codex CLI public fresh installation, update from 0.2.4 and offline setup.
-Current guidance integration and release-marker closeout remain in progress.
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+The retained [delivery closeout](../engineering/release-0-22-0/evidence/WO-RLS-036/closeout.md)
+confirms guidance integration and release-marker completion.
 
-This rollout uses the existing delivery route under selected evaluator 0.21.0.
-The complete-release route still needs separate adoption and provider configuration.
+[Claude follow-up (2026-10-03)](../engineering/release-0-22-0/evidence/WO-RLS-038/README.md): on Windows, Claude Code 2.1.273
+passed public fresh installation and update from 0.2.4, plus startup, activation,
+resume, manual/automatic compaction and session-isolation checks for plugin 0.2.5
+and evaluator 0.22.0. The native test package matches all 29 public package files.
+Codex Windows desktop, the full Claude work-order walkthrough and the earlier
+long-path case remain unverified. DEC-RLS-007/008 record the bounded follow-up;
+the original release omissions and accepted risks under DEC-RLS-005/006 remain
+historical records.
+
+This rollout used the existing delivery route under selected evaluator 0.21.0.
+The repository now selects 0.22.0; the complete-release route still needs
+reviewed provider configuration.
 Earlier release records retain their original results and decisions.
 
 ## Assemble committed inputs
