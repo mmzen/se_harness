@@ -1,0 +1,11 @@
+{
+  "observed_at": "2026-10-03T10:04:23.231379+00:00",
+  "kind": "Proposal rehearsal only; original test reads transient proposed README via README_PATH; checkout README unchanged",
+  "test": "tests.test_public_onboarding.PublicOnboardingTests.test_root_is_a_bounded_human_entry_point",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "words_before": 690,
+  "words_proposed": 644,
+  "proposed_sha256": "a991e5946ad1252ff7ea1a346611954bca6c1536c6b9a4dd1f98c3d2e72a7282",
+  "exit_code": 0,
+  "output": "test_root_is_a_bounded_human_entry_point (tests.test_public_onboarding.PublicOnboardingTests.test_root_is_a_bounded_human_entry_point) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nOK\n"
+}

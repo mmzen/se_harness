@@ -1,0 +1,74 @@
+{
+  "observed_at": "2026-10-03T10:23:45.772767+00:00",
+  "work_order": "WO-RLS-039",
+  "contract": "VER-RLS-003",
+  "base": "f8f318008b99499af553e4400fdf59d938588b2d",
+  "readme_sha256": "a991e5946ad1252ff7ea1a346611954bca6c1536c6b9a4dd1f98c3d2e72a7282",
+  "words": 644,
+  "lines": 104,
+  "h2_headings": 7,
+  "approved_patch_matches": true,
+  "prior_evidence_and_records_unchanged": true,
+  "local_links_resolve": true,
+  "checks": [
+    {
+      "name": "focused",
+      "exit_code": 0,
+      "receipt": "correction-focused-tests.json",
+      "summary": "............................................\n----------------------------------------------------------------------\nRan 44 tests in 4.071s\n\nOK\n"
+    },
+    {
+      "name": "environment-recheck",
+      "exit_code": 0,
+      "receipt": "correction-environment-recheck.json",
+      "summary": "\n.\n----------------------------------------------------------------------\nRan 1 test in 4.673s\n\nOK\n"
+    },
+    {
+      "name": "full-recheck",
+      "exit_code": 0,
+      "receipt": "correction-full-recheck.json",
+      "summary": "eady\"}, \"regression_exit\": 1, \"work_order_count\": 1}\n{\"approved_scope_unchanged\": true, \"candidate\": \"a4fe12204c3af60cc4790d2c6f9686542732d8bf\", \"changed_paths\": [\"docs/cli.md\", \"docs/engineering/product/evidence/WO-PRD-001/handoff.json\", \"docs/engineering/product/evidence/WO-PRD-001/review.md\", \"docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md\", \"docs/engineering/product/work-orders/WO-PRD-001.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"corrected_exit\": 0, \"demonstration\": \"instruction-change\", \"detected_omission\": [\"tests/test_guidance.py\"], \"expansion_blocked_by\": [\"QGP-G4I-PATHS: WEX201: changed path is outside execution scope: unrelated/new.py\"], \"generated_outputs\": {\"automatic_matches\": [{\"path\": \"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}, {\"path\": \"docs/engineering/product/verification-records/VREC-001.md\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}], \"coverage\": \"covered\", \"explicit_matches\": [], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"docs/engineering/product/verification-records/VREC-001.md\"], \"uncovered_paths\": []}, \"handoff\": {\"kind\": \"check\", \"outcome\": \"completed\"}, \"planned\": {\"automatic_matches\": [], \"coverage\": \"covered\", \"explicit_matches\": [{\"path\": \"docs/cli.md\", \"scope_entry\": \"docs/cli.md\"}, {\"path\": \"docs/procedure.md\", \"scope_entry\": \"docs/procedure.md\"}, {\"path\": \"templates/work.md\", \"scope_entry\": \"templates/work.md\"}, {\"path\": \"tests/test_guidance.py\", \"scope_entry\": \"tests/test_guidance.py\"}], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/cli.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"uncovered_paths\": []}, \"record\": {\"commit\": \"a4fe12204c3af60cc4790d2c6f9686542732d8bf\", \"id\": \"VREC-001\", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\n----------------------------------------------------------------------\nRan 1262 tests in 227.054s (185 classes, 4 workers)\n\nOK (skipped=22)\n\n--workers must be at least 1\n"
+    }
+  ],
+  "initial_full_suite": {
+    "receipt": "correction-full-tests.json",
+    "result": "1262 tests, one release-plan digest error, 22 skips",
+    "cause": "The transient driver forced core.autocrlf=false for every test fixture. The affected fixture writes platform text then hashes LF strings and relies on normal Git normalization. The driver is corrected to leave normal Git configuration intact; no repository file, test or assertion changes."
+  },
+  "status": "pass",
+  "released_validation": {
+    "version": "0.22.0",
+    "errors": 0,
+    "warnings": 61
+  },
+  "diff_check": "pass",
+  "original_ci_failure": "ci-failure.log",
+  "archive": {
+    "path": "implementation-raw.zip",
+    "sha256": "00fef7fffb77ff52c5a85441872bb0f6141e1d8ea22da951ffb2b53e3aee4e69"
+  },
+  "reused_native_evidence": {
+    "completion-raw.zip": "b1fcca385e9de40859c6d67b3801fcf2a60031c2a312e38699a1cf5607f47f53",
+    "handoff.json": "3e7e338f1d293d1fa0181a061ef792e7093aac3a84a7498625afd09634a2f781",
+    "implementation-checks.json": "561a4c64889615b60ab840f7664441ea61025edac4822379719221b8a22bdb09",
+    "implementation-raw.zip": "8e23db2e4082d4616dcd7b8d43665017d59081884258cb9bb2169fc3a64587bf",
+    "observations-raw.zip": "b37fdae19d2b9e16ea8f50a78b101fb86ccf02febfcf238fc54c59f5b98f2730",
+    "observations.json": "bf6a1deb0dc5c11fc5dde697b3568e565051c46d9de71236cc4248d39666fcba",
+    "README.md": "bd43878a57156e84b2147240fffe8072eca6e3296937f20ccd950eae5209206f",
+    "verification-review.md": "61be1fcb775367084502759a56135dc71ae4cca405930d3216f62e7a8c9139d9",
+    "WO-RLS-038-handoff.md": "1dc0ffac79362ea8239b5774d1c349eddb2d91ed9fe9c162fb7782a4f5d37e5d"
+  },
+  "review": {
+    "REQ-DST-069": "Pass: 644 words, 104 physical lines, seven H2 headings; exact approved paragraph patch and links checked; all other README bytes preserved.",
+    "REQ-RLO-020": "Pass: Windows installation, update and session checks are bounded by the linked dated evidence. Codex desktop, the full Claude workflow and long paths remain unverified; historical decisions and accepted risks remain unchanged.",
+    "REQ-IAR-030 / REQ-RLO-019": "Reuse byte-identical WO-RLS-038 observations and assessment. No product, package, host or native input changed. This correction adds no host coverage."
+  },
+  "limitations": [
+    "Codex Windows desktop remains unverified",
+    "Full Claude author/work-order execution/delivery workflow remains unverified",
+    "Earlier long-path failure remains unverified",
+    "Native tests used --plugin-dir, disabled tools and short paths; installation profiles are linked by package byte identity",
+    "Original accepted risks and decisions remain unchanged"
+  ],
+  "ci": "The prior Linux README-budget failure is retained. New remote CI is required before reporting merge readiness."
+}
