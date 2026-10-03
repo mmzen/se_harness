@@ -1,13 +1,15 @@
 # Plugin integration
 
-## Next package: plugin 0.2.5
+## Current public package: plugin 0.2.5
 
-The [approved 0.22.0 release package](../release-0-22-0/README.md) owns the
-next evaluator/plugin delivery. WO-RLS-035 qualifies and publishes both host
-packages; WO-RLS-036 checks public installation/update and current guidance.
-The observations below belong to the existing public package.
+Evaluator 0.22.0 and both plugin 0.2.5 packages are public at
+`7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. VREC-PLG-032 verifies qualification.
+[WO-RLS-036 observations](../release-0-22-0/evidence/WO-RLS-036/README.md) record
+Codex CLI public fresh/update routes and offline setup. Current documentation
+integration and release-marker closeout remain in progress.
+Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
 
-## Current public package: plugin 0.2.4
+## Historical public package: plugin 0.2.4
 
 The [0.21.0 release package](../release-0-21-0/README.md) is published with
 plugin 0.2.4 at `7e366438165a40a14783bac650a2887e7ec8bc75`.

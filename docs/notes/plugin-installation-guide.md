@@ -1,26 +1,18 @@
 # Install or update the Verity Plane plugin
 
-## Preparing 0.22.0 / 0.2.5
+## Published 0.22.0 / 0.2.5
 
-The [approved successor package](../engineering/release-0-22-0/README.md) is in
-preparation. Its intended update route is 0.2.4 to 0.2.5, with evaluator 0.22.0.
-Use the observed public package below until the successor's public identities
-and checks are recorded. Installing a plugin does not adopt its evaluator.
+Plugin 0.2.5 with evaluator 0.22.0 is public at
+`7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. VREC-PLG-032 verifies local package qualification.
+Codex CLI fresh installation and update from the preserved public 0.2.4
+installation passed. All 29 installed files match the qualified package.
+Offline setup, exact evaluator identity, two-file initialization, resource lookup
+and reuse passed on both routes.
 
-The public marketplace observed on 2026-10-02 is plugin 0.2.4 with released
-evaluator 0.21.0 at `7e366438165a40a14783bac650a2887e7ec8bc75`.
-Public fresh-install and 0.2.3-to-0.2.4 update checks passed on both Windows CLIs.
-See the [public observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
-for exact identities, commands and accepted native-session omissions.
-Installing this plugin does not upgrade a project's selected harness.
+Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
 
-## Released 0.21.0 / 0.2.4
-
-The [release package](../engineering/release-0-21-0/README.md) records public
-evaluator 0.21.0 and plugin 0.2.4. VREC-PLG-030 verifies local qualification.
-DEC-RLS-003 accepts the missing Claude native session tests for WO-RLS-033;
-Claude remains unverified. Exact public-package Codex CLI tests pass. Codex
-Windows desktop remains unverified, with its WO-RLS-033 omission accepted in DEC-RLS-004.
+See the [public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md).
+Installing a plugin does not upgrade a project's selected harness.
 
 ## Select the distribution
 
@@ -33,10 +25,10 @@ the incomplete host folders directly from development source.
 
 The [assembly README](../../release/plugin-marketplace/README.md) describes the
 current source guidance. The public package uses qualified source
-`4031f0fa4b5c4a95651bd928a110d8b2d94f9775`. Its
-[distribution identity](https://github.com/mmzen/se_harness/blob/7e366438165a40a14783bac650a2887e7ec8bc75/PACKAGE-IDENTITY.json)
-names plugin 0.2.4, evaluator 0.21.0 and wheel SHA-256
-`13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789`.
+`abbec12ac5524c8adfb28693f846dd59de88f759`. Its
+[distribution identity](https://github.com/mmzen/se_harness/blob/7d30907f15bd7e06fb632e1ebf4e88e01b68726c/PACKAGE-IDENTITY.json)
+names plugin 0.2.5, evaluator 0.22.0 and wheel SHA-256
+`44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4`.
 The packaged READMEs retain their original pre-publication wording. Source
 corrections do not rewrite those qualified bytes; use this guide for current status.
 
@@ -114,7 +106,7 @@ new environment is `DATA/evaluators/VERSION/DIGEST/Scripts/python.exe`, where
 
 In PowerShell, prefix a quoted executable with `&`, for example
 `& "CHECKER" -I -m se_harness doctor "PROJECT" --json`.
-Read the preview before applying. The final doctor must pass. Default 0.21.0
+Read the preview before applying. The final doctor must pass. Default 0.22.0
 initialization creates only configuration and lock files. It creates no local
 skill copies, so a new minimal installation needs no skill-ownership switch.
 Existing repository-copy installations retain their selected release and use
@@ -145,25 +137,25 @@ Start a session in the connected project. Codex requires review and trust of
 the current hook definition. The hook launcher needs Python on PATH. Verify
 that the delivered context names the selected checkout, release and exact entry
 resource with its matching SHA-256 and final heading `After compaction`. On
-0.21.0 the entry comes from the selected wheel; older layouts use the repository's
+0.21.0 and later the entry comes from the selected wheel; older layouts use the repository's
 `ENGINEERING_HARNESS.md`. Repeat after manual
 compaction. A missing, changed or incompatible root must disclose a delivery
 gap; stop the affected governed action and resolve it before continuing.
 
 ## Qualification limits
 
-Public fresh/update observations use Codex CLI 0.159.2 and Claude Code 2.1.273.
-All 29 installed files match on each of the four routes. Offline setup, released
-evaluator identity, two-file initialization, resource lookup and reuse passed.
-Package installation and skill listing do not prove native hook execution.
+Public fresh/update observations use Codex CLI 0.159.2. Installed bytes and
+offline setup passed on both routes. Native debug prompt-input confirms skill
+discovery; it does not prove hook execution or a model session.
 
-VREC-PLG-030 retains exact-package Codex CLI/app-server qualification, including
-manual and automatic compaction, resume, selection isolation and repeated work.
-Fresh native Codex tests of the exact public bytes also pass startup, activation,
-manual and automatic compaction, and resume. They use the existing trusted
-disposable profile; its 29 files and host version match both public installation
-routes. Fresh profiles still need normal hook trust. DEC-RLS-003 accepts only
-the missing Claude session tests. Desktop remains unverified under DEC-RLS-004.
+VREC-PLG-032 retains exact-package Codex CLI/app-server qualification for startup,
+activation, manual and automatic compaction, resume, session isolation and repeated
+work. Those results apply to the same 29 file digests and host version observed
+on the public routes. This is reuse of matching qualification evidence, not a
+claim that authenticated model sessions ran in the fresh or update profiles.
+Fresh profiles still need normal hook trust.
+
+Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
 
 Model sessions require usable host authentication. The
 [0.2.3 evidence](../engineering/release-0-20-1/evidence/WO-RLS-029/README.md)
@@ -175,7 +167,7 @@ preserves its original host versions, failures and results.
 
 ## Clone, activate and resume
 
-This route is supplied by released plugin 0.2.4 with evaluator 0.21.0.
+This route is supplied by released plugin 0.2.5 with evaluator 0.22.0.
 Installation of the host plugin is separate from a repository's release selection.
 An existing repository continues to use its selected release after a plugin update.
 
@@ -185,7 +177,7 @@ An existing repository continues to use its selected release after a plugin upda
    actual resulting absolute path, including a selected worktree's path.
 3. Invoke the setup skill. Prepare any missing exact evaluator in the supplied
    external plugin-data directory. A project without selection needs explicit
-   initialization; the selected 0.21.0 default writes only its configuration and lock.
+   initialization; the selected 0.22.0 default writes only its configuration and lock.
 4. Activate the checkout with the helper below. Use the host-provided session ID
    and data directory. Do not invent an ID or copy it from another conversation.
 5. Read the complete returned entry before governed work. Follow its current

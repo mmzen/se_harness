@@ -4,11 +4,13 @@ Verity Plane brings SE Harness setup, orientation, change and evidence workflows
 to Codex and Claude Code. Plugin **0.2.5** targets **SE Harness 0.22.0** and five
 shared skills, including an explicitly requested operator brief.
 
-This source is part of the approved 0.22.0 release preparation. It does not prove
-public availability. A released assembly must contain the exact independently
-public evaluator wheel. Its PACKAGE-IDENTITY.json and assembly inventories record
-the actual source, wheel and package digests. Use those identities when comparing
-the installed package. Plugin updates do not adopt a repository's evaluator.
+Plugin 0.2.5 with evaluator 0.22.0 is published at
+`7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. Its PACKAGE-IDENTITY.json and assembly inventories
+record exact source, wheel and package digests. Use them to compare installed files.
+Source documentation updates do not replace the published package's original bytes.
+Plugin updates do not adopt a repository's evaluator.
+
+Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
 
 ## Install from Git
 

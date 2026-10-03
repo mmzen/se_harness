@@ -18,17 +18,17 @@ It grants no approval, publication right or lifecycle transition. Use the
 selected released evaluator and its procedures for those decisions.
 
 The [approved 0.22.0 / 0.2.5 release](../engineering/release-0-22-0/README.md)
-prepares the supporting product. WO-RLS-034 owns evaluator preparation;
+has published the supporting product. WO-RLS-034 owns evaluator preparation;
 WO-RLS-035/036 own marketplace publication and public closeout. This rollout
 uses selected evaluator 0.21.0 and the existing delivery route. Subsequent
 adoption and the reviewed provider configuration activate the new route below.
 
 ## One approval for the complete release
 
-**Availability:** This source implements a future route. It is not active in the
-released 0.21.0 evaluator or plugin 0.2.4. Release and adopt the supporting product
-first. Apply the separately reviewed provider configuration before offering this
-route as ready. Existing releases keep their original decisions and procedures.
+**Availability:** Evaluator 0.22.0 and plugin 0.2.5 contain this route. This
+repository still selects 0.21.0, so the route is not active here. Adopt the
+supporting release and apply the separately reviewed provider configuration
+before offering this route as ready. Existing releases keep their original decisions and procedures.
 
 **Input:** A verified candidate, exact evaluator distributions, both qualified
 plugin packages, documentation, demonstration inputs and operational readiness.
@@ -417,7 +417,16 @@ the required marketplace update remains absent. That case returns incomplete
 and retains the marketplace owner and next action. Live public qualification
 belongs to the subsequent marketplace work and its verification contract.
 
-## Current 0.21.0 delivery
+## Current 0.22.0 delivery
+
+Evaluator 0.22.0 and plugin 0.2.5 are public. The marketplace commit is
+`7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. [Public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md)
+record exact package bytes, Codex CLI fresh/update routes and offline setup.
+Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+Overall delivery is incomplete until documentation is verified, merged and read
+back, and the authorized latest/last promotion has been observed.
+
+## Historical 0.21.0 delivery
 
 The [release package](../engineering/release-0-21-0/README.md) records released
 RLS-SEH-031 and separately published plugin 0.2.4 at
