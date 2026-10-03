@@ -2,7 +2,7 @@
 id = "VREC-PLG-032"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-035"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-22-0/README.md", "docs/engineering
 evaluator_evidence_path = "docs/engineering/release-0-22-0/evidence/VREC-PLG-032-evaluator.json"
 evaluator_evidence_sha256 = "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157"
 
+verified_at = "2026-10-03T05:31:44Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLS-035"]
 conforms_to = ["VER-IAR-021", "VER-RLS-034"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-03T05:31:44Z"
+decided_by = "mmzen"
+reason = "Human mmzen stated: I verify VREC-PLG-032. This records the requested assurance decision on candidate 164286460d77c94e173ff12d9133ba95ef9c8692 and its unchanged reviewed evidence in PR #530. Claude Code and Codex Windows desktop remain untested under DEC-RLS-005/006. RISK-RLS-006 remains a raised defect with a tested workaround, not a fixed or separately accepted risk. Codex applies this human decision; no merge is inferred."
 +++
 
 # Verification Record Candidate
