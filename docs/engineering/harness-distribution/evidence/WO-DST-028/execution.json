@@ -1,0 +1,846 @@
+{
+  "observed_at": "2026-10-03T03:46:25.584072+00:00",
+  "implementation_commit": "22261f230eaa81534e67f88411b81fdf6a124eea",
+  "review_head": "af9f2acf15eb9a7ed8ddf27cdea086231f52eb55",
+  "status": "substantive local checks passed; final hosted governance rerun pending",
+  "windows_focused": {
+    "argv": [
+      "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "tests.test_dashboard_webui",
+      "tests.test_dashboard_publication",
+      "tests.test_release_orchestration"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "seconds": 167.81,
+    "scale": "full",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_tail": "",
+    "stderr_sha256": "7a2b14ce4723f805fb8fdc85d857b4c218dbe5e5b57020fc8520637b2a6dd762",
+    "stderr_tail": "........s..........................................................................................................\n----------------------------------------------------------------------\nRan 115 tests in 167.311s\n\nOK (skipped=1)\n"
+  },
+  "windows_full": {
+    "argv": [
+      "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/run_tests.py",
+      "--workers",
+      "4",
+      "--scale",
+      "full"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+    "exit_code": 0,
+    "seconds": 267.07,
+    "scale": "full",
+    "stdout_sha256": "f9e1a930c281d496fe9af4d76144bdf6bfb497805d1a6604d9932c6cc793fd0d",
+    "stdout_tail": ", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\n{\"approved_scope_unchanged\": true, \"candidate\": \"7662892c1bda68349a3eb6bfd4eef82262dba516\", \"changed_paths\": [\"docs/cli.md\", \"docs/engineering/product/evidence/WO-PRD-001/handoff.json\", \"docs/engineering/product/evidence/WO-PRD-001/review.md\", \"docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md\", \"docs/engineering/product/work-orders/WO-PRD-001.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"corrected_exit\": 0, \"demonstration\": \"instruction-change\", \"detected_omission\": [\"tests/test_guidance.py\"], \"expansion_blocked_by\": [\"QGP-G4I-PATHS: WEX201: changed path is outside execution scope: unrelated/new.py\"], \"generated_outputs\": {\"automatic_matches\": [{\"path\": \"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}, {\"path\": \"docs/engineering/product/verification-records/VREC-001.md\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}], \"coverage\": \"covered\", \"explicit_matches\": [], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"docs/engineering/product/verification-records/VREC-001.md\"], \"uncovered_paths\": []}, \"handoff\": {\"kind\": \"check\", \"outcome\": \"completed\"}, \"planned\": {\"automatic_matches\": [], \"coverage\": \"covered\", \"explicit_matches\": [{\"path\": \"docs/cli.md\", \"scope_entry\": \"docs/cli.md\"}, {\"path\": \"docs/procedure.md\", \"scope_entry\": \"docs/procedure.md\"}, {\"path\": \"templates/work.md\", \"scope_entry\": \"templates/work.md\"}, {\"path\": \"tests/test_guidance.py\", \"scope_entry\": \"tests/test_guidance.py\"}], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/cli.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"uncovered_paths\": []}, \"record\": {\"commit\": \"7662892c1bda68349a3eb6bfd4eef82262dba516\", \"id\": \"VREC-001\", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\nWEX_SCALE artifacts=100 validation=0.148952s focus=0.371034s plan=0.303523s\nWEX_SCALE artifacts=500 validation=0.631749s focus=0.874622s plan=1.236951s\nWEX_SCALE artifacts=1000 validation=1.274828s focus=1.697104s plan=2.761864s\ndocs/notes/diagnostic-codes.md matches the source\n0.22.0\n----------------------------------------------------------------------\nRan 1259 tests in 265.278s (185 classes, 4 workers)\n\nOK (skipped=22)\n",
+    "stderr_sha256": "0ae5ab307bed36434c28a9c8f8a94fe40cc90b4b0059441977994e22cc0e4f49",
+    "stderr_tail": "--workers must be at least 1\n"
+  },
+  "linux_initial": {
+    "candidate": "22261f230eaa81534e67f88411b81fdf6a124eea",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "runtime": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "started": "2026-10-03T03:39:25.035409+00:00",
+    "commands": [
+      {
+        "label": "clone",
+        "argv": [
+          "git",
+          "clone",
+          "--branch",
+          "work/release-0-22-0-delivery",
+          "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/release022/capacity-linux-22261f230eaa.bundle",
+          "/tmp/dst028-_t34gac7/source"
+        ],
+        "cwd": "/tmp/dst028-_t34gac7",
+        "exit_code": 0,
+        "seconds": 7.78,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "817623c18cc658565e7c179a53db607eeec529ec2df533a3e657886262097bc3",
+        "stderr_tail": "Cloning into '/tmp/dst028-_t34gac7/source'...\nUpdating files:  72% (9937/13636)\nUpdating files:  73% (9955/13636)\nUpdating files:  74% (10091/13636)\nUpdating files:  75% (10227/13636)\nUpdating files:  76% (10364/13636)\nUpdating files:  77% (10500/13636)\nUpdating files:  78% (10637/13636)\nUpdating files:  79% (10773/13636)\nUpdating files:  80% (10909/13636)\nUpdating files:  81% (11046/13636)\nUpdating files:  82% (11182/13636)\nUpdating files:  83% (11318/13636)\nUpdating files:  84% (11455/13636)\nUpdating files:  85% (11591/13636)\nUpdating files:  86% (11727/13636)\nUpdating files:  87% (11864/13636)\nUpdating files:  88% (12000/13636)\nUpdating files:  89% (12137/13636)\nUpdating files:  90% (12273/13636)\nUpdating files:  91% (12409/13636)\nUpdating files:  92% (12546/13636)\nUpdating files:  93% (12682/13636)\nUpdating files:  94% (12818/13636)\nUpdating files:  95% (12955/13636)\nUpdating files:  96% (13091/13636)\nUpdating files:  97% (13227/13636)\nUpdating files:  98% (13364/13636)\nUpdating files:  99% (13500/13636)\nUpdating files: 100% (13636/13636)\nUpdating files: 100% (13636/13636), done.\n"
+      },
+      {
+        "label": "identity",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/dst028-_t34gac7/source",
+        "exit_code": 0,
+        "seconds": 0.01,
+        "stdout_sha256": "f33247aa0760781c5f919cf514687f88708afe014cecd7263b819fb73575b0fd",
+        "stdout_tail": "22261f230eaa81534e67f88411b81fdf6a124eea\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "focused",
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "tests.test_dashboard_webui",
+          "tests.test_dashboard_publication",
+          "tests.test_release_orchestration"
+        ],
+        "cwd": "/tmp/dst028-_t34gac7/source",
+        "exit_code": 1,
+        "seconds": 33.91,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "ef47f7fe8799145a37da733fa0af6e99e8efa8c88089513ca3b199fe1c8c1f00",
+        "stderr_tail": "....................F..............................................................................................\n======================================================================\nFAIL: test_release_proof_fields_reach_the_summary_and_compact_topology (tests.test_dashboard_webui.DashboardWebUIContractTests.test_release_proof_fields_reach_the_summary_and_compact_topology)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/dst028-_t34gac7/source/tests/test_dashboard_webui.py\", line 450, in test_release_proof_fields_reach_the_summary_and_compact_topology\n    self.assertEqual(\"https://github.com/mmzen/se_harness\", summary[\"repository\"].get(\"source_url\"))\nAssertionError: 'https://github.com/mmzen/se_harness' != None\n\n----------------------------------------------------------------------\nRan 115 tests in 33.606s\n\nFAILED (failures=1)\n"
+      }
+    ],
+    "passed": false,
+    "error": "focused: ....................F..............................................................................................\n======================================================================\nFAIL: test_release_proof_fields_reach_the_summary_and_compact_topology (tests.test_dashboard_webui.DashboardWebUIContractTests.test_release_proof_fields_reach_the_summary_and_compact_topology)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/dst028-_t34gac7/source/tests/test_dashboard_webui.py\", line 450, in test_release_proof_fields_reach_the_summary_and_compact_topology\n    self.assertEqual(\"https://github.com/mmzen/se_harness\", summary[\"repository\"].get(\"source_url\"))\nAssertionError: 'https://github.com/mmzen/se_harness' != None\n\n----------------------------------------------------------------------\nRan 115 tests in 33.606s\n\nFAILED (failures=1)\n"
+  },
+  "linux_corrected": {
+    "candidate": "22261f230eaa81534e67f88411b81fdf6a124eea",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "runtime": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "started": "2026-10-03T03:40:48.402717+00:00",
+    "commands": [
+      {
+        "label": "clone",
+        "argv": [
+          "git",
+          "clone",
+          "--branch",
+          "work/release-0-22-0-delivery",
+          "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/release022/capacity-linux-22261f230eaa.bundle",
+          "/tmp/dst028-vo15xmox/source"
+        ],
+        "cwd": "/tmp/dst028-vo15xmox",
+        "exit_code": 0,
+        "seconds": 12.42,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "ea23600d4671fb33678c3198b8986ab85a58140ae2bbaa354d066dad96ea35ea",
+        "stderr_tail": "Cloning into '/tmp/dst028-vo15xmox/source'...\nUpdating files:  46% (6276/13636)\nUpdating files:  47% (6409/13636)\nUpdating files:  48% (6546/13636)\nUpdating files:  49% (6682/13636)\nUpdating files:  50% (6818/13636)\nUpdating files:  51% (6955/13636)\nUpdating files:  52% (7091/13636)\nUpdating files:  53% (7228/13636)\nUpdating files:  54% (7364/13636)\nUpdating files:  55% (7500/13636)\nUpdating files:  56% (7637/13636)\nUpdating files:  57% (7773/13636)\nUpdating files:  58% (7909/13636)\nUpdating files:  59% (8046/13636)\nUpdating files:  60% (8182/13636)\nUpdating files:  61% (8318/13636)\nUpdating files:  62% (8455/13636)\nUpdating files:  63% (8591/13636)\nUpdating files:  64% (8728/13636)\nUpdating files:  65% (8864/13636)\nUpdating files:  66% (9000/13636)\nUpdating files:  67% (9137/13636)\nUpdating files:  68% (9273/13636)\nUpdating files:  69% (9409/13636)\nUpdating files:  70% (9546/13636)\nUpdating files:  71% (9682/13636)\nUpdating files:  72% (9818/13636)\nUpdating files:  72% (9945/13636)\nUpdating files:  73% (9955/13636)\nUpdating files:  74% (10091/13636)\nUpdating files:  75% (10227/13636)\nUpdating files:  76% (10364/13636)\nUpdating files:  77% (10500/13636)\nUpdating files:  78% (10637/13636)\nUpdating files:  79% (10773/13636)\nUpdating files:  80% (10909/13636)\nUpdating files:  81% (11046/13636)\nUpdating files:  82% (11182/13636)\nUpdating files:  83% (11318/13636)\nUpdating files:  84% (11455/13636)\nUpdating files:  85% (11591/13636)\nUpdating files:  86% (11727/13636)\nUpdating files:  87% (11864/13636)\nUpdating files:  88% (12000/13636)\nUpdating files:  89% (12137/13636)\nUpdating files:  90% (12273/13636)\nUpdating files:  91% (12409/13636)\nUpdating files:  92% (12546/13636)\nUpdating files:  93% (12682/13636)\nUpdating files:  94% (12818/13636)\nUpdating files:  95% (12955/13636)\nUpdating files:  96% (13091/13636)\nUpdating files:  97% (13227/13636)\nUpdating files:  98% (13364/13636)\nUpdating files:  99% (13500/13636)\nUpdating files: 100% (13636/13636)\nUpdating files: 100% (13636/13636), done.\n"
+      },
+      {
+        "label": "restore-public-origin",
+        "argv": [
+          "git",
+          "remote",
+          "set-url",
+          "origin",
+          "https://github.com/mmzen/se_harness.git"
+        ],
+        "cwd": "/tmp/dst028-vo15xmox/source",
+        "exit_code": 0,
+        "seconds": 0.0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "identity",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/dst028-vo15xmox/source",
+        "exit_code": 0,
+        "seconds": 0.0,
+        "stdout_sha256": "f33247aa0760781c5f919cf514687f88708afe014cecd7263b819fb73575b0fd",
+        "stdout_tail": "22261f230eaa81534e67f88411b81fdf6a124eea\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "focused",
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "tests.test_dashboard_webui",
+          "tests.test_dashboard_publication",
+          "tests.test_release_orchestration"
+        ],
+        "cwd": "/tmp/dst028-vo15xmox/source",
+        "exit_code": 0,
+        "seconds": 59.55,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "d526e2c6a46b1130bf48f87a081c67102628ab704d93245fac1f384c60e4c829",
+        "stderr_tail": "...................................................................................................................\n----------------------------------------------------------------------\nRan 115 tests in 58.994s\n\nOK\n"
+      }
+    ],
+    "passed": true
+  },
+  "branch": {
+    "candidate": "22261f230eaa81534e67f88411b81fdf6a124eea",
+    "commands": [
+      {
+        "label": "clone",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "clone",
+          "--no-hardlinks",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-uf4jsnl_\\repository"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-uf4jsnl_",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "fa759836e6781fc65b796bc29782bb3ad39d7da73250c18d9a32039ca40f4fb1",
+        "stderr_tail": "5182/13636)\nUpdating files:  39% (5319/13636)\nUpdating files:  40% (5455/13636)\nUpdating files:  41% (5591/13636)\nUpdating files:  42% (5728/13636)\nUpdating files:  42% (5833/13636)\nUpdating files:  43% (5864/13636)\nUpdating files:  44% (6000/13636)\nUpdating files:  45% (6137/13636)\nUpdating files:  46% (6273/13636)\nUpdating files:  47% (6409/13636)\nUpdating files:  48% (6546/13636)\nUpdating files:  49% (6682/13636)\nUpdating files:  50% (6818/13636)\nUpdating files:  51% (6955/13636)\nUpdating files:  51% (6963/13636)\nUpdating files:  52% (7091/13636)\nUpdating files:  53% (7228/13636)\nUpdating files:  54% (7364/13636)\nUpdating files:  55% (7500/13636)\nUpdating files:  56% (7637/13636)\nUpdating files:  57% (7773/13636)\nUpdating files:  57% (7847/13636)\nUpdating files:  58% (7909/13636)\nUpdating files:  59% (8046/13636)\nUpdating files:  60% (8182/13636)\nUpdating files:  61% (8318/13636)\nUpdating files:  62% (8455/13636)\nUpdating files:  63% (8591/13636)\nUpdating files:  64% (8728/13636)\nUpdating files:  65% (8864/13636)\nUpdating files:  66% (9000/13636)\nUpdating files:  67% (9137/13636)\nUpdating files:  68% (9273/13636)\nUpdating files:  69% (9409/13636)\nUpdating files:  70% (9546/13636)\nUpdating files:  71% (9682/13636)\nUpdating files:  72% (9818/13636)\nUpdating files:  72% (9943/13636)\nUpdating files:  73% (9955/13636)\nUpdating files:  74% (10091/13636)\nUpdating files:  75% (10227/13636)\nUpdating files:  76% (10364/13636)\nUpdating files:  76% (10451/13636)\nUpdating files:  77% (10500/13636)\nUpdating files:  78% (10637/13636)\nUpdating files:  79% (10773/13636)\nUpdating files:  80% (10909/13636)\nUpdating files:  80% (10935/13636)\nUpdating files:  81% (11046/13636)\nUpdating files:  82% (11182/13636)\nUpdating files:  83% (11318/13636)\nUpdating files:  84% (11455/13636)\nUpdating files:  85% (11591/13636)\nUpdating files:  85% (11606/13636)\nUpdating files:  86% (11727/13636)\nUpdating files:  87% (11864/13636)\nUpdating files:  88% (12000/13636)\nUpdating files:  89% (12137/13636)\nUpdating files:  90% (12273/13636)\nUpdating files:  91% (12409/13636)\nUpdating files:  91% (12423/13636)\nUpdating files:  92% (12546/13636)\nUpdating files:  93% (12682/13636)\nUpdating files:  94% (12818/13636)\nUpdating files:  95% (12955/13636)\nUpdating files:  96% (13091/13636)\nUpdating files:  97% (13227/13636)\nUpdating files:  97% (13325/13636)\nUpdating files:  98% (13364/13636)\nUpdating files:  99% (13500/13636)\nUpdating files: 100% (13636/13636)\nUpdating files: 100% (13636/13636), done.\n"
+      },
+      {
+        "label": "checkout",
+        "argv": [
+          "git",
+          "checkout",
+          "--detach",
+          "22261f230eaa81534e67f88411b81fdf6a124eea"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-uf4jsnl_\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "72683d0844b48c96602a1607f2386a0e47ca31c6d62380335c865b34e330a756",
+        "stderr_tail": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nHEAD is now at 22261f23 Raise topology acceptance to the authorized 4 MiB target\n"
+      },
+      {
+        "label": "origin",
+        "argv": [
+          "git",
+          "remote",
+          "set-url",
+          "origin",
+          "https://github.com/mmzen/se_harness.git"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-uf4jsnl_\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "measure",
+        "argv": [
+          "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "-c",
+          "import hashlib,json,subprocess\nfrom tests.test_dashboard_webui import GENERATOR,ROOT\nsnapshot,report,_=GENERATOR.generate_snapshot(ROOT)\nassert report.valid\nsnapshot['repository']={**snapshot['repository'],'revision':'a'*40}\nfirst=GENERATOR.build_dashboard_bundle(snapshot);second=GENERATOR.build_dashboard_bundle(snapshot)\nassert first==second,'same snapshot/history produced different bytes'\n_,manifest,resources,observations=first\nentry=manifest['entrypoints']['topology'];target=GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES\nassert target==4194304 and entry['bytes']<=target\nprint(json.dumps(dict(commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),valid=report.valid,artifacts=len(snapshot['artifacts']),relations=len(snapshot['relations']),topology=entry,target=target,headroom_bytes=target-entry['bytes'],observations=observations,repeat_byte_identical=True,boundaries=[dict(bytes=n,exceeded=GENERATOR.topology_target_exceeded(n)) for n in (target-1,target,target+1)])))\n"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-uf4jsnl_\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "2081343f548b8bb479f0d198341f30efc5cf807b7f86c3f655a12039669ca23a",
+        "stdout_tail": "{\"commit\": \"22261f230eaa81534e67f88411b81fdf6a124eea\", \"valid\": true, \"artifacts\": 1885, \"relations\": 7189, \"topology\": {\"role\": \"topology\", \"schema\": \"harness-dashboard-topology-v2\", \"path\": \"data/topology/38ce32a10f94d0536aa2a6f8ef0c21b4180290c0cf779b09697651b7d36fa9f8.json\", \"bytes\": 2101199, \"sha256\": \"38ce32a10f94d0536aa2a6f8ef0c21b4180290c0cf779b09697651b7d36fa9f8\"}, \"target\": 4194304, \"headroom_bytes\": 2093105, \"observations\": {\"role_bytes\": {\"artifact\": 15594319, \"evidence\": 8223867, \"readiness\": 3622584, \"summary\": 12362, \"topology\": 2101199}, \"role_counts\": {\"artifact\": 1885, \"evidence\": 895, \"readiness\": 1, \"summary\": 1, \"topology\": 1}, \"resource_count\": 2783, \"resource_bytes\": 29554331, \"largest_resource\": {\"role\": \"readiness\", \"schema\": \"harness-dashboard-readiness-v2\", \"path\": \"data/readiness/4fa326d81770704ded9034c1d7101d06455a47dee389d18073d5e26f75c655c6.json\", \"bytes\": 3622584, \"sha256\": \"4fa326d81770704ded9034c1d7101d06455a47dee389d18073d5e26f75c655c6\"}, \"topology_target_exceeded\": false}, \"repeat_byte_identical\": true, \"boundaries\": [{\"bytes\": 4194303, \"exceeded\": false}, {\"bytes\": 4194304, \"exceeded\": false}, {\"bytes\": 4194305, \"exceeded\": true}]}\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      }
+    ],
+    "measurement": {
+      "commit": "22261f230eaa81534e67f88411b81fdf6a124eea",
+      "valid": true,
+      "artifacts": 1885,
+      "relations": 7189,
+      "topology": {
+        "role": "topology",
+        "schema": "harness-dashboard-topology-v2",
+        "path": "data/topology/38ce32a10f94d0536aa2a6f8ef0c21b4180290c0cf779b09697651b7d36fa9f8.json",
+        "bytes": 2101199,
+        "sha256": "38ce32a10f94d0536aa2a6f8ef0c21b4180290c0cf779b09697651b7d36fa9f8"
+      },
+      "target": 4194304,
+      "headroom_bytes": 2093105,
+      "observations": {
+        "role_bytes": {
+          "artifact": 15594319,
+          "evidence": 8223867,
+          "readiness": 3622584,
+          "summary": 12362,
+          "topology": 2101199
+        },
+        "role_counts": {
+          "artifact": 1885,
+          "evidence": 895,
+          "readiness": 1,
+          "summary": 1,
+          "topology": 1
+        },
+        "resource_count": 2783,
+        "resource_bytes": 29554331,
+        "largest_resource": {
+          "role": "readiness",
+          "schema": "harness-dashboard-readiness-v2",
+          "path": "data/readiness/4fa326d81770704ded9034c1d7101d06455a47dee389d18073d5e26f75c655c6.json",
+          "bytes": 3622584,
+          "sha256": "4fa326d81770704ded9034c1d7101d06455a47dee389d18073d5e26f75c655c6"
+        },
+        "topology_target_exceeded": false
+      },
+      "repeat_byte_identical": true,
+      "boundaries": [
+        {
+          "bytes": 4194303,
+          "exceeded": false
+        },
+        {
+          "bytes": 4194304,
+          "exceeded": false
+        },
+        {
+          "bytes": 4194305,
+          "exceeded": true
+        }
+      ]
+    },
+    "predecessors_verified": 11,
+    "release_preservation": [
+      {
+        "path": ".engineering-harness.lock",
+        "sha256": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+        "unchanged": true
+      },
+      {
+        "path": ".engineering-harness.toml",
+        "sha256": "539d431527a64f4f617f1653dfea3158b466078be799d2ae30db91f50f533010",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+        "sha256": "f44aa44cfb553d34d93d99d632baf179dbe28348686124f1128a6de9cb43e939",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/verification-records/VREC-SEH-032.md",
+        "sha256": "4beb7b894d7ea0f24fc2bfa7ffb843378ad4056cbb9556b0432e4efff724c650",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/evidence/RLS-SEH-032-evaluator.json",
+        "sha256": "3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/evidence/VREC-SEH-032-evaluator.json",
+        "sha256": "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/evidence/bundle.json",
+        "sha256": "4d3d2233b1ca50191c324ce8a2297d67048f313644d655791c0f46fa1f80fe0b",
+        "unchanged": true
+      }
+    ],
+    "passed": true
+  },
+  "merge": {
+    "candidate": "502615768113a6596f271764563de80cdf7d417d",
+    "commands": [
+      {
+        "label": "clone",
+        "argv": [
+          "C:\\Program Files\\Git\\cmd\\git.exe",
+          "clone",
+          "--no-hardlinks",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release030-main",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-px9fv1h_\\repository"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-px9fv1h_",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "3c78abce3a5ab6adc3d43043a7f8446b7583d37e0969e51251b2a9c7d51c50af",
+        "stderr_tail": " (4773/13637)\nUpdating files:  36% (4910/13637)\nUpdating files:  36% (4980/13637)\nUpdating files:  37% (5046/13637)\nUpdating files:  38% (5183/13637)\nUpdating files:  39% (5319/13637)\nUpdating files:  40% (5455/13637)\nUpdating files:  41% (5592/13637)\nUpdating files:  42% (5728/13637)\nUpdating files:  43% (5864/13637)\nUpdating files:  44% (6001/13637)\nUpdating files:  45% (6137/13637)\nUpdating files:  46% (6274/13637)\nUpdating files:  47% (6410/13637)\nUpdating files:  48% (6546/13637)\nUpdating files:  49% (6683/13637)\nUpdating files:  50% (6819/13637)\nUpdating files:  50% (6916/13637)\nUpdating files:  51% (6955/13637)\nUpdating files:  52% (7092/13637)\nUpdating files:  53% (7228/13637)\nUpdating files:  54% (7364/13637)\nUpdating files:  55% (7501/13637)\nUpdating files:  56% (7637/13637)\nUpdating files:  57% (7774/13637)\nUpdating files:  58% (7910/13637)\nUpdating files:  59% (8046/13637)\nUpdating files:  60% (8183/13637)\nUpdating files:  61% (8319/13637)\nUpdating files:  62% (8455/13637)\nUpdating files:  63% (8592/13637)\nUpdating files:  64% (8728/13637)\nUpdating files:  64% (8847/13637)\nUpdating files:  65% (8865/13637)\nUpdating files:  66% (9001/13637)\nUpdating files:  67% (9137/13637)\nUpdating files:  68% (9274/13637)\nUpdating files:  69% (9410/13637)\nUpdating files:  70% (9546/13637)\nUpdating files:  71% (9683/13637)\nUpdating files:  72% (9819/13637)\nUpdating files:  73% (9956/13637)\nUpdating files:  74% (10092/13637)\nUpdating files:  74% (10139/13637)\nUpdating files:  75% (10228/13637)\nUpdating files:  76% (10365/13637)\nUpdating files:  77% (10501/13637)\nUpdating files:  78% (10637/13637)\nUpdating files:  79% (10774/13637)\nUpdating files:  79% (10855/13637)\nUpdating files:  80% (10910/13637)\nUpdating files:  81% (11046/13637)\nUpdating files:  82% (11183/13637)\nUpdating files:  83% (11319/13637)\nUpdating files:  84% (11456/13637)\nUpdating files:  85% (11592/13637)\nUpdating files:  86% (11728/13637)\nUpdating files:  87% (11865/13637)\nUpdating files:  88% (12001/13637)\nUpdating files:  89% (12137/13637)\nUpdating files:  90% (12274/13637)\nUpdating files:  90% (12277/13637)\nUpdating files:  91% (12410/13637)\nUpdating files:  92% (12547/13637)\nUpdating files:  93% (12683/13637)\nUpdating files:  94% (12819/13637)\nUpdating files:  95% (12956/13637)\nUpdating files:  96% (13092/13637)\nUpdating files:  97% (13228/13637)\nUpdating files:  98% (13365/13637)\nUpdating files:  99% (13501/13637)\nUpdating files: 100% (13637/13637)\nUpdating files: 100% (13637/13637), done.\n"
+      },
+      {
+        "label": "checkout",
+        "argv": [
+          "git",
+          "checkout",
+          "--detach",
+          "502615768113a6596f271764563de80cdf7d417d"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-px9fv1h_\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "6b10c2dccf9d21ea0154bfb65a5218f2c8da5ca28b4ece069d041c8b54d56474",
+        "stderr_tail": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nHEAD is now at 50261576 Merge af9f2acf15eb9a7ed8ddf27cdea086231f52eb55 into 01ec43c86c9d30949295c07ac91c742be91e713a\n"
+      },
+      {
+        "label": "origin",
+        "argv": [
+          "git",
+          "remote",
+          "set-url",
+          "origin",
+          "https://github.com/mmzen/se_harness.git"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-px9fv1h_\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "measure",
+        "argv": [
+          "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.21.0\\13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789\\Scripts\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "-c",
+          "import hashlib,json,subprocess\nfrom tests.test_dashboard_webui import GENERATOR,ROOT\nsnapshot,report,_=GENERATOR.generate_snapshot(ROOT)\nassert report.valid\nsnapshot['repository']={**snapshot['repository'],'revision':'a'*40}\nfirst=GENERATOR.build_dashboard_bundle(snapshot);second=GENERATOR.build_dashboard_bundle(snapshot)\nassert first==second,'same snapshot/history produced different bytes'\n_,manifest,resources,observations=first\nentry=manifest['entrypoints']['topology'];target=GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES\nassert target==4194304 and entry['bytes']<=target\nprint(json.dumps(dict(commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),valid=report.valid,artifacts=len(snapshot['artifacts']),relations=len(snapshot['relations']),topology=entry,target=target,headroom_bytes=target-entry['bytes'],observations=observations,repeat_byte_identical=True,boundaries=[dict(bytes=n,exceeded=GENERATOR.topology_target_exceeded(n)) for n in (target-1,target,target+1)])))\n"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-measure-px9fv1h_\\repository",
+        "exit_code": 0,
+        "stdout_sha256": "959cd34fe5579fd5d80588604e235fff41e07732899ff68d61de244f1b275cd9",
+        "stdout_tail": "{\"commit\": \"502615768113a6596f271764563de80cdf7d417d\", \"valid\": true, \"artifacts\": 1885, \"relations\": 7189, \"topology\": {\"role\": \"topology\", \"schema\": \"harness-dashboard-topology-v2\", \"path\": \"data/topology/028732b9bcc382b161b12f001ae3d8315f6c7bd83d4ce897f5662cbb5dd0c72a.json\", \"bytes\": 2101199, \"sha256\": \"028732b9bcc382b161b12f001ae3d8315f6c7bd83d4ce897f5662cbb5dd0c72a\"}, \"target\": 4194304, \"headroom_bytes\": 2093105, \"observations\": {\"role_bytes\": {\"artifact\": 15595110, \"evidence\": 8224209, \"readiness\": 3622754, \"summary\": 12362, \"topology\": 2101199}, \"role_counts\": {\"artifact\": 1885, \"evidence\": 897, \"readiness\": 1, \"summary\": 1, \"topology\": 1}, \"resource_count\": 2785, \"resource_bytes\": 29555634, \"largest_resource\": {\"role\": \"readiness\", \"schema\": \"harness-dashboard-readiness-v2\", \"path\": \"data/readiness/7a89731d94bbe869dc29d184151be8299b00ecdcbdc47c132d4fed2c286b1fa9.json\", \"bytes\": 3622754, \"sha256\": \"7a89731d94bbe869dc29d184151be8299b00ecdcbdc47c132d4fed2c286b1fa9\"}, \"topology_target_exceeded\": false}, \"repeat_byte_identical\": true, \"boundaries\": [{\"bytes\": 4194303, \"exceeded\": false}, {\"bytes\": 4194304, \"exceeded\": false}, {\"bytes\": 4194305, \"exceeded\": true}]}\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      }
+    ],
+    "measurement": {
+      "commit": "502615768113a6596f271764563de80cdf7d417d",
+      "valid": true,
+      "artifacts": 1885,
+      "relations": 7189,
+      "topology": {
+        "role": "topology",
+        "schema": "harness-dashboard-topology-v2",
+        "path": "data/topology/028732b9bcc382b161b12f001ae3d8315f6c7bd83d4ce897f5662cbb5dd0c72a.json",
+        "bytes": 2101199,
+        "sha256": "028732b9bcc382b161b12f001ae3d8315f6c7bd83d4ce897f5662cbb5dd0c72a"
+      },
+      "target": 4194304,
+      "headroom_bytes": 2093105,
+      "observations": {
+        "role_bytes": {
+          "artifact": 15595110,
+          "evidence": 8224209,
+          "readiness": 3622754,
+          "summary": 12362,
+          "topology": 2101199
+        },
+        "role_counts": {
+          "artifact": 1885,
+          "evidence": 897,
+          "readiness": 1,
+          "summary": 1,
+          "topology": 1
+        },
+        "resource_count": 2785,
+        "resource_bytes": 29555634,
+        "largest_resource": {
+          "role": "readiness",
+          "schema": "harness-dashboard-readiness-v2",
+          "path": "data/readiness/7a89731d94bbe869dc29d184151be8299b00ecdcbdc47c132d4fed2c286b1fa9.json",
+          "bytes": 3622754,
+          "sha256": "7a89731d94bbe869dc29d184151be8299b00ecdcbdc47c132d4fed2c286b1fa9"
+        },
+        "topology_target_exceeded": false
+      },
+      "repeat_byte_identical": true,
+      "boundaries": [
+        {
+          "bytes": 4194303,
+          "exceeded": false
+        },
+        {
+          "bytes": 4194304,
+          "exceeded": false
+        },
+        {
+          "bytes": 4194305,
+          "exceeded": true
+        }
+      ]
+    },
+    "predecessors_verified": 11,
+    "release_preservation": [
+      {
+        "path": ".engineering-harness.lock",
+        "sha256": "fa37c1b26271c3dbd8a8b9c82e947dd4b119e564eb345f30cec25367daa133c6",
+        "unchanged": true
+      },
+      {
+        "path": ".engineering-harness.toml",
+        "sha256": "539d431527a64f4f617f1653dfea3158b466078be799d2ae30db91f50f533010",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+        "sha256": "f44aa44cfb553d34d93d99d632baf179dbe28348686124f1128a6de9cb43e939",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/verification-records/VREC-SEH-032.md",
+        "sha256": "4beb7b894d7ea0f24fc2bfa7ffb843378ad4056cbb9556b0432e4efff724c650",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/evidence/RLS-SEH-032-evaluator.json",
+        "sha256": "3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/evidence/VREC-SEH-032-evaluator.json",
+        "sha256": "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157",
+        "unchanged": true
+      },
+      {
+        "path": "docs/engineering/release-0-22-0/evidence/bundle.json",
+        "sha256": "4d3d2233b1ca50191c324ce8a2297d67048f313644d655791c0f46fa1f80fe0b",
+        "unchanged": true
+      }
+    ],
+    "passed": true
+  },
+  "package": {
+    "ci_run": 37094124519,
+    "ci_merge_candidate": "502615768113a6596f271764563de80cdf7d417d",
+    "wheel": "se_harness-0.22.0-py3-none-any.whl",
+    "wheel_sha256": "753142779e6383b4eaea27f656e5f60c4f66f1de969495f73c77aaf94be63f87",
+    "classification": "disposable non-promotable test wheel; not RLS-SEH-032 archive",
+    "commands": [
+      {
+        "label": "create-venv",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-m",
+          "venv",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-package-hewjnt0r\\venv"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-package-hewjnt0r",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_tail": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "install",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-package-hewjnt0r\\venv\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "pip",
+          "install",
+          "--no-index",
+          "--no-deps",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\capacity-ci-wheel\\se_harness-0.22.0-py3-none-any.whl"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-package-hewjnt0r",
+        "exit_code": 0,
+        "stdout_sha256": "621168f278eb9c70c94eefad072ccfea6b870c158033647d2e40215645e96bee",
+        "stdout_tail": "Processing C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release022\\capacity-ci-wheel\\se_harness-0.22.0-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.22.0\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      },
+      {
+        "label": "boundary",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-package-hewjnt0r\\venv\\Scripts\\python.exe",
+          "-I",
+          "-c",
+          "import json,sys\nfrom se_harness.engine import dashboard_bundle as b\nassert b.TOPOLOGY_ACCEPTANCE_BYTES==4194304\nobserved=[b.topology_target_exceeded(v) for v in (4194303,4194304,4194305)]\nassert observed==[False,False,True]\nprint(json.dumps(dict(runtime=sys.version,origin=b.__file__,target=b.TOPOLOGY_ACCEPTANCE_BYTES,boundary_bytes=[4194303,4194304,4194305],exceeded=observed)))\n"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-package-hewjnt0r",
+        "exit_code": 0,
+        "stdout_sha256": "5a4d92988c51f084bb88c1669a1765203905a89a666eab0925e4bc864b18e513",
+        "stdout_tail": "{\"runtime\": \"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\", \"origin\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\dst028-package-hewjnt0r\\\\venv\\\\Lib\\\\site-packages\\\\se_harness\\\\engine\\\\dashboard_bundle.py\", \"target\": 4194304, \"boundary_bytes\": [4194303, 4194304, 4194305], \"exceeded\": [false, false, true]}\n",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_tail": ""
+      }
+    ],
+    "source_matches_wheel": true,
+    "observation": {
+      "runtime": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "origin": "C:\\Users\\mathi\\AppData\\Local\\Temp\\dst028-package-hewjnt0r\\venv\\Lib\\site-packages\\se_harness\\engine\\dashboard_bundle.py",
+      "target": 4194304,
+      "boundary_bytes": [
+        4194303,
+        4194304,
+        4194305
+      ],
+      "exceeded": [
+        false,
+        false,
+        true
+      ]
+    },
+    "passed": true
+  },
+  "hosted_source": {
+    "candidate": "502615768113a6596f271764563de80cdf7d417d",
+    "working_tree": "clean",
+    "command": [
+      "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python",
+      "scripts/run_tests.py",
+      "--workers",
+      "4",
+      "--scale",
+      "full",
+      "--timings",
+      "target/test-timings.json"
+    ],
+    "cwd": "/home/runner/work/se_harness/se_harness",
+    "checker": {
+      "version": "0.22.0",
+      "origin": "/home/runner/work/se_harness/se_harness/se_harness/__init__.py"
+    },
+    "started_at": "2026-10-03T03:43:06.387003+00:00",
+    "exit_code": 0,
+    "result": "pass",
+    "output_tail": "oduct/evidence/WO-PRD-001/handoff.json\", \"docs/engineering/product/evidence/WO-PRD-001/review.md\", \"docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md\", \"docs/engineering/product/work-orders/WO-PRD-001.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"corrected_exit\": 0, \"demonstration\": \"instruction-change\", \"detected_omission\": [\"tests/test_guidance.py\"], \"expansion_blocked_by\": [\"QGP-G4I-PATHS: WEX201: changed path is outside execution scope: unrelated/new.py\"], \"generated_outputs\": {\"automatic_matches\": [{\"path\": \"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}, {\"path\": \"docs/engineering/product/verification-records/VREC-001.md\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}], \"coverage\": \"covered\", \"explicit_matches\": [], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"docs/engineering/product/verification-records/VREC-001.md\"], \"uncovered_paths\": []}, \"handoff\": {\"kind\": \"check\", \"outcome\": \"completed\"}, \"planned\": {\"automatic_matches\": [], \"coverage\": \"covered\", \"explicit_matches\": [{\"path\": \"docs/cli.md\", \"scope_entry\": \"docs/cli.md\"}, {\"path\": \"docs/procedure.md\", \"scope_entry\": \"docs/procedure.md\"}, {\"path\": \"templates/work.md\", \"scope_entry\": \"templates/work.md\"}, {\"path\": \"tests/test_guidance.py\", \"scope_entry\": \"tests/test_guidance.py\"}], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/cli.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"uncovered_paths\": []}, \"record\": {\"commit\": \"854807eef63d477091f1922dbabbb19e822c91ec\", \"id\": \"VREC-001\", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\n----------------------------------------------------------------------\nRan 1259 tests in 33.977s (185 classes, 4 workers)\n\nOK (skipped=2)\n",
+    "raw": {
+      "file": "output.log",
+      "bytes": 4740,
+      "artifact": "candidate-source-raw",
+      "repository": "mmzen/se_harness",
+      "run_id": "37094124519",
+      "run_url": "https://github.com/mmzen/se_harness/actions/runs/37094124519",
+      "retention_days": 14,
+      "estimated_expiry": "2026-10-17T03:43:06.387003+00:00",
+      "availability": "local; upload not yet confirmed",
+      "download_command": [
+        "gh",
+        "run",
+        "download",
+        "37094124519",
+        "--repo",
+        "mmzen/se_harness",
+        "--name",
+        "candidate-source-raw"
+      ]
+    }
+  },
+  "source_availability": {
+    "metadata": {
+      "observed_at": "2026-10-03T03:44:46.068604+00:00",
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/actions/runs/37094124519/artifacts"
+      ],
+      "exit_code": 0,
+      "result": {
+        "total_count": 4,
+        "artifacts": [
+          {
+            "id": 11263753574,
+            "node_id": "MDg6QXJ0aWZhY3QxMTI2Mzc1MzU3NA==",
+            "name": "candidate-wheel-non-promotable-502615768113a6596f271764563de80cdf7d417d",
+            "size_in_bytes": 537060,
+            "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263753574",
+            "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263753574/zip",
+            "expired": false,
+            "digest": "sha256:ad39cff48d2401eeda2e48d36a708c31b9b23fbcf69afaf7ae700a29f3638796",
+            "created_at": "2026-10-03T03:43:48Z",
+            "updated_at": "2026-10-03T03:43:48Z",
+            "expires_at": "2026-10-04T03:43:47Z",
+            "workflow_run": {
+              "id": 37094124519,
+              "repository_id": 1330601788,
+              "head_repository_id": 1330601788,
+              "head_branch": "work/release-0-22-0-delivery",
+              "head_sha": "af9f2acf15eb9a7ed8ddf27cdea086231f52eb55"
+            }
+          },
+          {
+            "id": 11263429255,
+            "node_id": "MDg6QXJ0aWZhY3QxMTI2MzQyOTI1NQ==",
+            "name": "candidate-source-raw",
+            "size_in_bytes": 2573,
+            "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263429255",
+            "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263429255/zip",
+            "expired": false,
+            "digest": "sha256:e341971603b67c562d3b48221f8cc3bce3c625d4093a0eee2c0c2096490ebbc1",
+            "created_at": "2026-10-03T03:43:43Z",
+            "updated_at": "2026-10-03T03:43:43Z",
+            "expires_at": "2026-10-17T03:43:42Z",
+            "workflow_run": {
+              "id": 37094124519,
+              "repository_id": 1330601788,
+              "head_repository_id": 1330601788,
+              "head_branch": "work/release-0-22-0-delivery",
+              "head_sha": "af9f2acf15eb9a7ed8ddf27cdea086231f52eb55"
+            }
+          },
+          {
+            "id": 11263329187,
+            "node_id": "MDg6QXJ0aWZhY3QxMTI2MzMyOTE4Nw==",
+            "name": "complete-candidate-qualification",
+            "size_in_bytes": 819,
+            "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263329187",
+            "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263329187/zip",
+            "expired": false,
+            "digest": "sha256:71be7a28af54d4819cc540bbb7eb3b6960516bc5985cf88c1eae735b789afc54",
+            "created_at": "2026-10-03T03:43:49Z",
+            "updated_at": "2026-10-03T03:43:49Z",
+            "expires_at": "2026-10-17T03:43:48Z",
+            "workflow_run": {
+              "id": 37094124519,
+              "repository_id": 1330601788,
+              "head_repository_id": 1330601788,
+              "head_branch": "work/release-0-22-0-delivery",
+              "head_sha": "af9f2acf15eb9a7ed8ddf27cdea086231f52eb55"
+            }
+          },
+          {
+            "id": 11263184457,
+            "node_id": "MDg6QXJ0aWZhY3QxMTI2MzE4NDQ1Nw==",
+            "name": "candidate-package-qualification-0.21.0",
+            "size_in_bytes": 1021,
+            "url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263184457",
+            "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/11263184457/zip",
+            "expired": false,
+            "digest": "sha256:c3279eb9739b71fe8d101a84a24b7e5d111b490ea04d24856f265ddeafc2182c",
+            "created_at": "2026-10-03T03:44:12Z",
+            "updated_at": "2026-10-03T03:44:12Z",
+            "expires_at": "2026-10-17T03:44:11Z",
+            "workflow_run": {
+              "id": 37094124519,
+              "repository_id": 1330601788,
+              "head_repository_id": 1330601788,
+              "head_branch": "work/release-0-22-0-delivery",
+              "head_sha": "af9f2acf15eb9a7ed8ddf27cdea086231f52eb55"
+            }
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    "download": {
+      "observed_at": "2026-10-03T03:44:47.215993+00:00",
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "run",
+        "download",
+        "37094124519",
+        "--repo",
+        "mmzen/se_harness",
+        "--name",
+        "candidate-source-raw",
+        "--dir",
+        "work\\release022\\capacity-ci-source"
+      ],
+      "exit_code": 0,
+      "result": "",
+      "stderr": ""
+    },
+    "log_sha256": "4d442fa58b32d237a74a8642ce4e3dd1fd06c14322d4798f92ae17cf4a358b0a"
+  },
+  "validation": {
+    "errors": 0,
+    "warnings": 60
+  },
+  "combined_pr": {
+    "changed_paths": [
+      ".github/scripts/publish_dashboard.py",
+      "docs/engineering/harness-distribution/architecture/ARCH-DST-013.md",
+      "docs/engineering/harness-distribution/evidence/WO-DST-028/WO-DST-028-pre-action.md",
+      "docs/engineering/harness-distribution/evidence/WO-DST-028/accepted-predecessors.zip",
+      "docs/engineering/harness-distribution/evidence/WO-DST-028/amendment.json",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-055.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-062.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-063.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-013.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-017.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-020.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-023.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-013.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-017.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-020.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-030.md",
+      "docs/engineering/harness-distribution/work-orders/WO-DST-028.md",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-018/WO-RLO-018-handoff.md",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-018/WO-RLO-018-pre-action.md",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-018/ci-source-availability.json",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-018/ci-source-summary.json",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-018/execution.json",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-018/preparation-review.md",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-018/publication-refusal.json",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-018/rehearsal.json",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-018/verification-review.md",
+      "docs/engineering/release-orchestration/verification/VER-RLO-012.md",
+      "docs/engineering/release-orchestration/work-orders/WO-RLO-018.md",
+      "se_harness/engine/dashboard_bundle.py",
+      "tests/test_dashboard_publication.py",
+      "tests/test_dashboard_webui.py",
+      "tests/test_release_orchestration.py",
+      "docs/engineering/harness-distribution/evidence/WO-DST-028/WO-DST-028-handoff.md"
+    ],
+    "command": "check-pr",
+    "outcome": "completed",
+    "schema": "se-harness-command-result-v1",
+    "status": "pass",
+    "work_orders": [
+      "WO-RLO-018",
+      "WO-DST-028"
+    ]
+  },
+  "prior_issues": {
+    "scope_invocation": {
+      "outcome": "blocked",
+      "done": [
+        "Evaluated scope compliance for WO-DST-028."
+      ],
+      "not_done": [
+        "The scope checkpoint did not pass."
+      ],
+      "blocked_by": [
+        "QGP-G4I-PATHS: WEX201: changed path is outside execution scope: .github/scripts/publish_dashboard.py"
+      ],
+      "current_lifecycle_state": [
+        "WO-DST-028 is in_progress."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-CHECK",
+        "action": "Escalate QGP-G4I-PATHS under DR-REMEDIATION-SCOPE"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "Escalate to the accountable owner under DR-REMEDIATION-SCOPE: WEX201: changed path is outside execution scope: .github/scripts/publish_dashboard.py"
+      },
+      "alternatives": []
+    },
+    "scope_recovery": "check accepts one work order. The actual complete diff was checked against both scopes through supported check-pr; no scope was broadened.",
+    "ci_handoff_failure": {
+      "observed_at": "2026-10-03T03:45:51.780289+00:00",
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "run",
+        "view",
+        "37094124487",
+        "--repo",
+        "mmzen/se_harness",
+        "--log-failed"
+      ],
+      "exit_code": 0,
+      "result": "validate\tCheck the selected work orders and combined PR scope\t\ufeff2026-10-03T03:43:10.3172974Z ##[group]Run git fetch --depth=1 origin \"$HARNESS_BASE_SHA\"\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3173434Z ^[[36;1mgit fetch --depth=1 origin \"$HARNESS_BASE_SHA\"^[[0m\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3173892Z ^[[36;1m\"$RUNNER_TEMP/se-harness-env/bin/python\" -I -m se_harness check-pr . \\^[[0m\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3174441Z ^[[36;1m  --event \"$RUNNER_TEMP/live-event.json\" --from-git \"$HARNESS_BASE_SHA\" --json^[[0m\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3237612Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3237948Z env:\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3238139Z   SE_HARNESS_VERSION: 0.21.0\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3238451Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3238880Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3239291Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3239666Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3240031Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3240459Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3240859Z   HARNESS_BASE_SHA: 01ec43c86c9d30949295c07ac91c742be91e713a\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.3241168Z ##[endgroup]\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.6641889Z From https://github.com/mmzen/se_harness\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:10.6642779Z  * branch            01ec43c86c9d30949295c07ac91c742be91e713a -> FETCH_HEAD\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:17.8405021Z harnessctl: pull-request check: WO-DST-028: QGP-G4I-EVIDENCE: No readable evidence for WO-DST-028, checkpoint handoff, and formal snapshot a25a43d31ba1c56ddcf95762ab948c72904dcce722ecfd44e55676bee4c8428d is available; write the header with harnessctl evidence . --artifact WO-DST-028 --checkpoint handoff.\nvalidate\tCheck the selected work orders and combined PR scope\t2026-10-03T03:43:17.8660959Z ##[error]Process completed with exit code 2.\n",
+      "stderr": ""
+    },
+    "handoff_recovery": "The push preceded the generated WO-DST-028 handoff header. The supported evidence command has now written it; combined local check-pr passes.",
+    "linux_fixture_recovery": "The disposable bundle clone had a local origin URL. Restore the real public origin metadata before the source-URL assertion; no product or test code changed."
+  }
+}
