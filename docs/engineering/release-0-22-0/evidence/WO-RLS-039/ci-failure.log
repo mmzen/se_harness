@@ -1,0 +1,33 @@
+Candidate source evidence	Run complete candidate-source regression	﻿2026-10-03T09:56:59.0874165Z ##[group]Run python scripts/record_evidence.py --candidate "$GITHUB_SHA" \
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0874624Z ^[[36;1mpython scripts/record_evidence.py --candidate "$GITHUB_SHA" \^[[0m
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0875050Z ^[[36;1m  --output "$RUNNER_TEMP/source-evidence" --artifact candidate-source-raw \^[[0m
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0875400Z ^[[36;1m  --retention-days 14 -- \^[[0m
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0875750Z ^[[36;1m  scripts/run_tests.py --workers 4 --scale full --timings target/test-timings.json^[[0m
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0933598Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0933894Z env:
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0934067Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0934256Z   PYTHONPATH: 
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0934483Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0934836Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0935183Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0935511Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0935857Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0936164Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:56:59.0936438Z ##[endgroup]
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5342667Z automatic_matches": [{"path": "docs/engineering/product/evidence/VREC-001-evaluator.json", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}, {"path": "docs/engineering/product/verification-records/VREC-001.md", "rule": "linked-record-or-evaluator-evidence", "work_order": "WO-PRD-001"}], "coverage": "covered", "explicit_matches": [], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/engineering/product/evidence/VREC-001-evaluator.json", "docs/engineering/product/verification-records/VREC-001.md"], "uncovered_paths": []}, "handoff": {"kind": "check", "outcome": "completed"}, "planned": {"automatic_matches": [], "coverage": "covered", "explicit_matches": [{"path": "docs/cli.md", "scope_entry": "docs/cli.md"}, {"path": "docs/procedure.md", "scope_entry": "docs/procedure.md"}, {"path": "templates/work.md", "scope_entry": "templates/work.md"}, {"path": "tests/test_guidance.py", "scope_entry": "tests/test_guidance.py"}], "impact_analysis": "not_assessed", "invalid_declarations": [], "planned_paths": ["docs/cli.md", "docs/procedure.md", "templates/work.md", "tests/test_guidance.py"], "uncovered_paths": []}, "record": {"commit": "16a66d41fda9bc40436502cd60cc47435946ad84", "id": "VREC-001", "status": "ready"}, "regression_exit": 1, "work_order_count": 1}
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5346143Z 0.22.1
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5346341Z ======================================================================
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5346750Z FAIL: test_public_onboarding.PublicOnboardingTests.test_root_is_a_bounded_human_entry_point
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5347163Z ----------------------------------------------------------------------
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5347478Z Traceback (most recent call last):
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5353285Z   File "/home/runner/work/se_harness/se_harness/tests/test_public_onboarding.py", line 51, in test_root_is_a_bounded_human_entry_point
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5353854Z     self.assertLessEqual(len(self.readme.split()), 650)
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5354165Z AssertionError: 690 not less than or equal to 650
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5354331Z 
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5354472Z ----------------------------------------------------------------------
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5354770Z Ran 1262 tests in 44.804s (185 classes, 4 workers)
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5354943Z 
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5355040Z FAILED (failures=1, skipped=2)
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5355168Z 
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5355300Z fail: /home/runner/work/_temp/source-evidence/summary.json
+Candidate source evidence	Run complete candidate-source regression	2026-10-03T09:57:45.5399457Z ##[error]Process completed with exit code 1.

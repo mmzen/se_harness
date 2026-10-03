@@ -40,7 +40,7 @@ Start a new task or session, then invoke **verity-plane:setup** with your projec
 
 Observed public delivery (2026-10-03): Plugin **0.2.5** bundles released **SE Harness 0.22.0**. Codex CLI fresh installation, update from 0.2.4 and offline setup passed. [Public evidence](docs/engineering/release-0-22-0/evidence/WO-RLS-036/README.md) records exact identities and limits.
 
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+[Claude follow-up](docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md): Windows installation, update and session checks passed. Codex desktop, the full Claude workflow and long paths remain unverified. Historical decisions and accepted risks are unchanged.
 
 Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. It does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
 

@@ -5,9 +5,18 @@
 Evaluator 0.22.0 and both plugin 0.2.5 packages are public at
 `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. VREC-PLG-032 verifies qualification.
 [WO-RLS-036 observations](../release-0-22-0/evidence/WO-RLS-036/README.md) record
-Codex CLI public fresh/update routes and offline setup. Current documentation
-integration and release-marker closeout remain in progress.
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+Codex CLI public fresh/update routes and offline setup. The retained
+[delivery closeout](../release-0-22-0/evidence/WO-RLS-036/closeout.md)
+confirms documentation integration and release-marker completion.
+
+[Claude follow-up (2026-10-03)](../release-0-22-0/evidence/WO-RLS-038/README.md): on Windows, Claude Code 2.1.273
+passed public fresh installation and update from 0.2.4, plus startup, activation,
+resume, manual/automatic compaction and session-isolation checks for plugin 0.2.5
+and evaluator 0.22.0. The native test package matches all 29 public package files.
+Codex Windows desktop, the full Claude work-order walkthrough and the earlier
+long-path case remain unverified. DEC-RLS-007/008 record the bounded follow-up;
+the original release omissions and accepted risks under DEC-RLS-005/006 remain
+historical records.
 
 ## Historical public package: plugin 0.2.4
 

@@ -3,21 +3,31 @@
 ## Current delivery status
 
 Evaluator **0.22.0** is published on GitHub and PyPI under RLS-SEH-032.
-Plugin **0.2.5** qualification is ready for human verification under WO-RLS-035,
-with the limits in the [qualification review](evidence/WO-RLS-035/qualification-review.md).
-Marketplace publication and final public-delivery closeout remain outstanding.
+Plugin **0.2.5** is public at `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`.
+The retained [delivery closeout](evidence/WO-RLS-036/closeout.md) records all five
+declared surfaces satisfied, including documentation integration and latest/last
+markers. That result uses the original release scope and accepted omissions.
 
-For this release, **Claude Code host tests and Codex Windows desktop tests are
-not run / unverified**. Human mmzen instructed continuation with these omissions
-disclosed. [DEC-RLS-005](decisions/DEC-RLS-005.md) covers qualification;
-[DEC-RLS-006](decisions/DEC-RLS-006.md) covers public installation/update checks.
-Their paired risks remain recorded. Earlier Claude authentication failure is
-retained; package checks and Codex CLI results do not verify these omitted hosts.
+## Claude follow-up — 2026-10-03
 
-The [current delivery plan](evidence/WO-RLS-035/delivery-plan-v2.json) retains
-both distributed packages and their byte checks. Its native public-route coverage
-names Codex CLI only. Revisit the omitted hosts before the next plugin release
-or before claiming either route verified.
+[WO-RLS-038 observations](evidence/WO-RLS-038/README.md) supplement that release
+evidence. On Windows, Claude Code 2.1.273 passed public fresh installation and
+update from 0.2.4, plus startup, activation after cloning, resume, manual/automatic
+compaction, session isolation and unavailable-checkout recovery. The native test
+package and both public routes contain the same 29 files for plugin 0.2.5 and
+evaluator 0.22.0. Native runs used `--plugin-dir` and short disposable paths.
+
+[DEC-RLS-007](decisions/DEC-RLS-007.md) and
+[DEC-RLS-008](decisions/DEC-RLS-008.md) record mmzen's decision to retain this
+tested subset. Codex Windows desktop, the full Claude work-order walkthrough
+and the earlier long-path case remain unverified. mmzen owns their follow-up
+before the next plugin release or any broader support claim.
+
+[DEC-RLS-005](decisions/DEC-RLS-005.md),
+[DEC-RLS-006](decisions/DEC-RLS-006.md), their accepted risks and all original
+verification/release evidence remain unchanged. The original expired-authentication
+failure remains historical evidence. These later passes do not close those risks,
+alter the release plan or supply a new human verification decision.
 
 ## Original preparation record
 
