@@ -173,6 +173,42 @@ class ReleaseArtifactDiscoveryTests(unittest.TestCase):
             self.assertEqual(self.fixture.evaluator_evidence_sha256, result.evaluator_evidence_sha256)
         self.assertEqual(self.distribution["wheel_sha256"], self.resolve().wheel_sha256)
 
+    def test_external_resources_resolve_first_integration_and_preserve_release_identity(self) -> None:
+        lock = json.loads(git(self.root, "show", f"{self.fixture.governance}:.engineering-harness.lock"))
+        lock.update(schema=5, resource_layout="released-resources-v1")
+        git(self.root, "checkout", "-b", "external-resource-governance", self.fixture.candidate)
+        write(self.root / ".engineering-harness.lock", json.dumps(lock))
+        write(self.root / self.fixture.evaluator_evidence_path, self.fixture.evaluator_evidence)
+        self.write_live_records()
+        self.fixture.commit("integrate release with external resources")
+        governance = git(self.root, "rev-parse", "HEAD")
+        write(self.root / "unrelated.txt", "later work\n")
+        self.fixture.commit("later unrelated work")
+        git(self.root, "update-ref", "refs/heads/main", "HEAD")
+        release = self.resolve()
+        pages = RELEASE.dashboard.resolve_release(self.root, "v1.2.3", default_ref="refs/heads/main")
+        for result in (release, pages):
+            self.assertEqual(governance, result.governance_commit)
+            self.assertEqual(self.fixture.candidate, result.candidate_commit)
+            self.assertEqual(self.fixture.evaluator_evidence_sha256, result.evaluator_evidence_sha256)
+            self.assertEqual("v1.2.3", result.tag)
+        for field in ("wheel_sha256", "sdist_sha256", "checksums_sha256", "source_manifest_sha256"):
+            self.assertEqual(self.distribution[field], getattr(release, field))
+
+    def test_external_resource_resolvers_refuse_invalid_governance_lock(self) -> None:
+        lock = json.loads(git(self.root, "show", f"{self.fixture.governance}:.engineering-harness.lock"))
+        git(self.root, "checkout", "-b", "invalid-external-resource-governance", self.fixture.candidate)
+        lock.update(schema=5, resource_layout="repository")
+        write(self.root / ".engineering-harness.lock", json.dumps(lock))
+        write(self.root / self.fixture.evaluator_evidence_path, self.fixture.evaluator_evidence)
+        self.write_live_records()
+        self.fixture.commit("invalid resource layout at release integration")
+        git(self.root, "update-ref", "refs/heads/main", "HEAD")
+        with self.assertRaisesRegex(RELEASE.dashboard.PublicationError, "released-resources-v1"):
+            self.resolve()
+        with self.assertRaisesRegex(RELEASE.dashboard.PublicationError, "released-resources-v1"):
+            RELEASE.dashboard.resolve_release(self.root, "v1.2.3", default_ref="refs/heads/main")
+
     def test_path_boundary_matches_the_validator_without_substring_exclusions(self) -> None:
         from se_harness.engine.validation_core import EXCLUDED_DIRECTORY_NAMES, _is_excluded
 
