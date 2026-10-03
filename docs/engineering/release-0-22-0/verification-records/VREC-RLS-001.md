@@ -2,7 +2,7 @@
 id = "VREC-RLS-001"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-038"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md
 evaluator_evidence_path = "docs/engineering/release-0-22-0/evidence/VREC-RLS-001-evaluator.json"
 evaluator_evidence_sha256 = "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905"
 
+verified_at = "2026-10-03T09:59:40Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLS-038"]
 conforms_to = ["VER-RLS-002"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-03T09:59:40Z"
+decided_by = "mmzen"
+reason = "Human assurance owner mmzen replied Verify result to the review request for VREC-RLS-001, candidate 54c75be99371d6facdd3c0225d8684f19b595082, published in PR 533 at review head e655910d90cc8ad34e8d6fd884e9866bb4a61cf8. Codex applies this exact verification decision. The disclosed desktop, full Claude workflow and long-path gaps remain; historical risks and release decisions are unchanged. Merge is separate."
 +++
 
 # Verification Record Candidate
