@@ -1,0 +1,246 @@
+{
+  "kind": "Qualification progress; no verification acceptance or release completion",
+  "observed_at": "2026-10-03T04:45:38.921867+00:00",
+  "work_order": "WO-RLS-035",
+  "state": "in_progress",
+  "overall_qualification": "pending",
+  "marketplace_publication": "not_performed",
+  "release_record": "RLS-SEH-032",
+  "candidate_commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+  "governance_commit": "01ec43c86c9d30949295c07ac91c742be91e713a",
+  "governing_evaluator": "0.21.0",
+  "plugin_version": "0.2.5",
+  "evaluator": {
+    "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+    "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+    "distribution": "se-harness",
+    "entry_point_sha256": "303ff403d05c842b26de2f3dd17cfcafc6552b708292d545743fe1177d671177",
+    "identity_sha256": "bf2f3469c00ebfb480a3e403db45cadbeab61a3c0a69bba42c08475ba02d4d9e",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+    "role": "public-install",
+    "version": "0.22.0"
+  },
+  "package_identity_sha256": "b3ce06c6f4ac9bdfed7ffd26eb16683e260814c82d7dba188f78a0180c8a4e61",
+  "marketplace_parent_observed": "7e366438165a40a14783bac650a2887e7ec8bc75",
+  "host_inventory_sha256": {
+    "codex": "295399083213600e5cd3ad4e76ef490bb0fe0f9d9c82f8f9f997b2fc6171eee2",
+    "claude": "cfb1fcc7c2720590aa159887faf2f45afb2b212bb25fa68e237cd3b198ba64dc"
+  },
+  "checks": [
+    {
+      "name": "Released-input assembly and independent check",
+      "status": "passed",
+      "evidence": [
+        "plugin025-build.run.json",
+        "plugin025-check.run.json"
+      ]
+    },
+    {
+      "name": "Windows package/delivery unit tests using selected evaluator",
+      "status": "passed",
+      "tests": 62,
+      "skips": 2,
+      "evidence": [
+        "plugin025-unit-selected-windows.json"
+      ]
+    },
+    {
+      "name": "Linux package/delivery unit tests using selected evaluator",
+      "status": "passed",
+      "tests": 62,
+      "skips": 1,
+      "evidence": [
+        "plugin025-linux-prepared.json"
+      ]
+    },
+    {
+      "name": "Windows portable adapter checks, short data path",
+      "status": "passed",
+      "steps": 41,
+      "evidence": [
+        "portable-short-windows-report.json"
+      ]
+    },
+    {
+      "name": "Linux portable adapter checks",
+      "status": "passed",
+      "steps": 41,
+      "evidence": [
+        "plugin025-linux-prepared.json"
+      ]
+    },
+    {
+      "name": "Codex native bootstrap, activation, manual/automatic compaction, resume",
+      "status": "passed",
+      "host_version": "codex-cli 0.159.2",
+      "evidence": [
+        "plugin025-trusted-native-codex.json"
+      ]
+    },
+    {
+      "name": "Codex native interleaved sessions, release switch, clear and unavailable selection",
+      "status": "passed",
+      "error": null,
+      "evidence": [
+        "plugin025-boundaries-native-codex.json"
+      ]
+    },
+    {
+      "name": "Claude native authenticated qualification",
+      "status": "pending",
+      "reason": "OAuth session expired and could not be refreshed",
+      "evidence": [
+        "plugin025-native-claude.json"
+      ]
+    },
+    {
+      "name": "Codex Windows desktop qualification",
+      "status": "pending",
+      "reason": "No native desktop trace for the exact package; CLI results are not a substitute."
+    },
+    {
+      "name": "Native repeated new/resumed work and delivery handoff",
+      "status": "pending",
+      "reason": "Not executed for the exact 0.22.0 resource and plugin 0.2.5 inputs; retain for qualification continuation."
+    },
+    {
+      "name": "VREC-PLG-032 preparation and human verification",
+      "status": "not_started",
+      "reason": "Required qualification remains incomplete."
+    }
+  ],
+  "preserved_failures": [
+    "Initial and second public-install attempts could not yet find 0.22.0 on the PyPI index. Third attempt independently installed and verified it.",
+    "The first Windows portable test used long workspace paths. Claude refused 10052 UTF-16 units against its existing 10000-unit bound. The identical package passed in a shorter temporary directory; no limit or policy was changed.",
+    "The first Linux unit run had no installed evaluator for the isolated payload-hash subprocess. A fresh isolated environment with exact selected 0.21.0 passed; source and assertions were unchanged.",
+    "Claude auth status reported logged in, but the actual request failed with expired OAuth. No refresh or waiver was inferred."
+  ],
+  "windows_delivered_context_sizes": [
+    {
+      "label": "activate-codex-codex-first",
+      "utf16_units": 9852
+    },
+    {
+      "label": "codex-codex-first-compact",
+      "utf16_units": 9852
+    },
+    {
+      "label": "codex-codex-first-resume",
+      "utf16_units": 9852
+    },
+    {
+      "label": "activate-claude-claude-first",
+      "utf16_units": 9854
+    },
+    {
+      "label": "claude-claude-first-compact",
+      "utf16_units": 9854
+    },
+    {
+      "label": "claude-claude-first-resume",
+      "utf16_units": 9854
+    },
+    {
+      "label": "codex-codex-first-compact",
+      "utf16_units": 9852
+    },
+    {
+      "label": "activate-codex-parallel",
+      "utf16_units": 9849
+    },
+    {
+      "label": "codex-parallel-resume",
+      "utf16_units": 9849
+    },
+    {
+      "label": "claude-claude-first-compact",
+      "utf16_units": 9854
+    },
+    {
+      "label": "activate-claude-parallel",
+      "utf16_units": 9850
+    },
+    {
+      "label": "claude-parallel-resume",
+      "utf16_units": 9850
+    },
+    {
+      "label": "codex-codex-first-compact",
+      "utf16_units": 9852
+    },
+    {
+      "label": "codex-codex-first-compact",
+      "utf16_units": 9852
+    }
+  ],
+  "human_instruction": {
+    "text": "Not now—keep those checks pending",
+    "meaning": "Claude authentication and Codex Windows desktop checks remain unverified. No risk acceptance, waiver or completion is recorded."
+  },
+  "next_actions": [
+    "Refresh disposable Claude profile authentication when the human is available.",
+    "Complete the remaining native qualification, including desktop and repeated-work handoff, for the exact package.",
+    "Finish WO-RLS-035 evidence and prepare/publish the verification review before asking for human verification.",
+    "Publish marketplace only after required qualification and human verification; then run WO-RLS-036 public checks and marker promotion."
+  ],
+  "raw_archive": {
+    "path": "raw.zip",
+    "sha256": "ac3e0b1059e6d6387c47882fbbcf3114362514e997cc0bce9c4b12e01d3f6078",
+    "entries": {
+      "assembly/PACKAGE-IDENTITY.json": "b3ce06c6f4ac9bdfed7ffd26eb16683e260814c82d7dba188f78a0180c8a4e61",
+      "assembly/packages/claude/verity-plane/assembly-inventory.json": "cfb1fcc7c2720590aa159887faf2f45afb2b212bb25fa68e237cd3b198ba64dc",
+      "assembly/packages/codex/verity-plane/assembly-inventory.json": "295399083213600e5cd3ad4e76ef490bb0fe0f9d9c82f8f9f997b2fc6171eee2",
+      "native/plugin025-boundaries-events/native-events.jsonl": "458f7cfc23e70093c631e0452da60ba9f36e7efdd2d55325a05361cc337345b4",
+      "native/plugin025-trusted-native-codex-events/automatic/native-events.jsonl": "56201b716f8ed4ebea72bf8520338641517df0639ede977d101a5f36c25d088a",
+      "native/plugin025-trusted-native-codex-events/native-events.jsonl": "6fb64d32f57a7926649aae20c77742c96c8929e3923d012d8f3abc0b880cd6db",
+      "native/plugin025-trusted-native-codex-events/resume/native-events.jsonl": "bd664032b5a9d64bf0e10a93f8b1d13b3961914988f6016e417b8623b534d32d",
+      "plugin025-adapter-short-windows.run.json": "0f9217abed09fbd9c7e9948be7fefe1cbdbe23fd14f92c6a1ebfc500ba65bb95",
+      "plugin025-adapter-windows.run.json": "3dcc4caa18db8ec93646d2af2a3c97d4d7f04c766d26549678dad396e0cadaf7",
+      "plugin025-auth-claude.json": "b952786aaf69941486fe9a2cd4efed800c505532d78bc396b397105e91b1d107",
+      "plugin025-auth-codex.json": "f9fe0b44ebf39566e3e61a6458ff8ad76493eaaf65f2ef56921cf2e5df7ba81b",
+      "plugin025-boundaries-native-codex.json": "7009e87dd29d1ce651155b776fa248e90dff1555af9e6c704549abd989ff5f21",
+      "plugin025-build.run.json": "6b0440d4a1ca7743457973f30f50e2848fb22ed0363619350b9910f09bbbb1e6",
+      "plugin025-check.run.json": "a0a395be3cc354550a7635e08a0e7941640d5a0d0f2e3d3f5093f09982c5ab57",
+      "plugin025-expected-identity.json": "de588c38ebb01cbbeff2a31bd9f48872a281e47797825fffc226e5b7ed11e4b7",
+      "plugin025-linux-prepared.json": "3488f09d858f7ef35957a200f97f84bdc134a25c545e80b211937941641fe899",
+      "plugin025-linux.json": "568e8648ce87ccf07ba9df5599d0a901d251c80d8478f9e36d5d59248e9303e4",
+      "plugin025-marketplace-parent.json": "ec8d32aa4acaca18247fd73c997c113a4b1e00477c3968fcf68e587f1dfec6b7",
+      "plugin025-native-claude.json": "76ca06fb5e9b3813a4373a50cedbbb6c940ae15f82f4fb7f0c4ff38f7423b980",
+      "plugin025-planned-scope.json": "eb68ca041c104c10b8cbdd1b4ff7fb5888c3dfff1d26120f9eda73a11093a3a6",
+      "plugin025-resume-context.json": "c12cef29ab3a715e463e8570f842140a7a74646e48b16e293cdc06f96a03cb51",
+      "plugin025-start-apply.json": "6606d0f80d510ab0d8624175ac89e27d9e066358e098c76ce646f4f8fe55ce4d",
+      "plugin025-start-preflight.json": "3d7f05a49188f187b71049b62588215475d0b59ee545b13b4308c680a8562636",
+      "plugin025-start-preview.json": "ae1e62c9788afd1449679066908325325831611db1b76cbd40b228112b6ca2b1",
+      "plugin025-trusted-native-codex.json": "f5ed41f3f779029bec6032a58106ee25798054b84841e0c60a01e8b0e35015c6",
+      "plugin025-unit-selected-windows.json": "1ae7180b7dc790036aafa4abd9a5f2f179c960d6fa1d2fae90674d8731457226",
+      "plugin025-unit-windows.run.json": "40116385e79913a06d2f489747f1c0e1c4c70f95581da893043c0977a1a83941",
+      "portable-long-windows-report.json": "3978b3b2a0ff15d963379f7eca519f077312e149dcd05a4602c1d864422e532b",
+      "portable-short-windows-report.json": "fdd426e49022a81b7f82b2ffbe202dda8289e57e3d50e62bd1b39f3cc2f38fff",
+      "probes/plugin025_linux.py": "9a6068ceb992032a82dff153aae9f85fcc656efe64de87deaea707f133c820db",
+      "probes/plugin025_native_boundaries.py": "cce8f6b92acebf66b0743c5053ebb74ed3262d55ba13c63887159168f2fbbbb1",
+      "probes/plugin025_native_claude.py": "bb994e3fd438db6adabbe61523c18b9be96dfaf14a526548641582f4fa893e24",
+      "probes/plugin025_native_codex.py": "3f55c67fb1802f51402932be020fc9eee22ce3dcc1cfa19396dee561893b1648",
+      "probes/plugin025_portable.py": "739da82f09360b76aa0425de93ff72b954fb7a7a2dd5b8e6f9ca832ba75a5eec",
+      "probes/plugin025_retain_progress.py": "decb9c21811883d8c3fdf3dd8a03ac0542a64e05ffa30d83f8f95c475f361197",
+      "probes/plugin025_unit_selected.py": "c08a5081725ff3d04fc45908363d8001ab5fac4623d9b888710bd3ff8c448054",
+      "production032-artifacts-final.json": "10333430aa3f9eaef62a01683b44afeb6d7978656f9d85a061c1bb7a149e7804",
+      "production032-observation-retry.json": "b6bbc3acdecbbb77f281b6ec131fc6eeb4f815d57e8878ab57d439cd2f78418a",
+      "production032-observation-retry3.json": "546c97d603f927ad6176b94b3ddc179f8e3de44dffc0b8857f2bdbc66bde325f",
+      "production032-observe-attempt2-only.log": "66895f29a32dbb2240e72ae184592ad225400f1678d5808fa2ec5d0049796434",
+      "production032-observe-log.json": "5ba8a3b8e49f4da316486c3dd2b38a44437b0f8aaae58257a7fa531925b0e6c8",
+      "production032-pypi-download.run.json": "96b6a04d2ebedbd16c1ae5170e5c1017438dd836f126a044e9cf20b9f145f696",
+      "production032-result-attempt3-receipt.json": "2dc292fac3b0ed24ae36afc0d5a70348d718d6aad67c9a1237d66c1a1b8525fa",
+      "production032-results-attempt3/public-install-qualification.json": "9d283a01b5d78b58074cdee640564d019c1c9abd440a8d1b05255df99bb2832c",
+      "production032-results-attempt3/release-result.json": "7151263f55644aad2491d874319c4b1b6582bdae9a538c6892ea7e9fef82fc1c",
+      "production032-results/release-result.json": "01b061398f317fa44d3dbeff9f43ce6294f24d6271013dc122b4ebcaff2912d0",
+      "production032-retry-result.json": "b25569f3d429c019b4ac7b62f106d59d8a17f2d9491bc9c745073a9d1442eb4e"
+    }
+  },
+  "transport_note": {
+    "reason": "The evaluator start write used CRLF. Normalize that record to LF for a minimal transport diff; preserve all fields, lifecycle history and body text.",
+    "before_sha256": "d4bc2ded0b0fefbdb60cd72c0be0ef6895b15b9e616a828fab49b1ba46ff7edc",
+    "after_sha256": "b33f4e8f1d297e121ceabccc81c36e434634e1538e54cf1e219a350591bad76f",
+    "initial_local_commit": "781ad4ae"
+  }
+}

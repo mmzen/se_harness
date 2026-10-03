@@ -1,0 +1,10 @@
+{
+  "error_count": 0,
+  "warning_count": 61,
+  "advisory_count": 0,
+  "errors": [],
+  "governing_evaluator": "0.21.0",
+  "scope": "Draft WO-RLS-037 and VER-RLS-001; no implementation approval.",
+  "raw_result_sha256": "89c47ce37830fcd45318f86837620330e094aa3aa4b86f4d7f0025e231625a8d",
+  "warnings": "61 existing repository warnings; no proposal errors."
+}

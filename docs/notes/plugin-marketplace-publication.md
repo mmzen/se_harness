@@ -1,23 +1,20 @@
 # Prepare and publish the Verity Plane marketplace
 
-## Current release work
+## Current public release
 
-[REL-SEH-034](../engineering/release-0-22-0/release/REL-SEH-034.md) prepares
-evaluator 0.22.0 and plugin 0.2.5. WO-RLS-035 qualifies and publishes the new
-marketplace; WO-RLS-036 verifies public fresh and 0.2.4-to-0.2.5 update routes.
-Use VER-RLS-034/035 and VER-IAR-021 for this delivery. No 0.21.0-specific native
-omission is carried forward. The public observations below identify the prior
-package. The new single-approval route remains subject to its rollout boundary.
+[REL-SEH-034](../engineering/release-0-22-0/release/REL-SEH-034.md) records the
+evaluator 0.22.0 / plugin 0.2.5 delivery. Human mmzen verified VREC-PLG-032.
+WO-RLS-035 published the qualified tree at `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`;
+independent public readback matches all 69 files and the exact released wheel.
 
-The [0.21.0 release package](../engineering/release-0-21-0/README.md) is published
-with plugin 0.2.4. VREC-PLG-030 verifies local package qualification. Human mmzen
-separately authorized marketplace publication at
-`7e366438165a40a14783bac650a2887e7ec8bc75`. Independent public readback matches all
-69 qualified files and the exact public evaluator 0.21.0 wheel.
+[WO-RLS-036 observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md)
+record Codex CLI public fresh installation, update from 0.2.4 and offline setup.
+Current guidance integration and release-marker closeout remain in progress.
+Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
 
-[WO-RLS-033 observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
-record passing public fresh installs and updates from 0.2.3 on both Windows CLIs.
-Documentation integration and delivery closeout remain pending. Claude native session tests remain unverified, with the WO-RLS-033 omission accepted in DEC-RLS-003. Exact public-package Codex CLI tests pass. Codex Windows desktop remains unverified; DEC-RLS-004 accepts that omission for WO-RLS-033.
+This rollout uses the existing delivery route under selected evaluator 0.21.0.
+The complete-release route still needs separate adoption and provider configuration.
+Earlier release records retain their original results and decisions.
 
 ## Assemble committed inputs
 

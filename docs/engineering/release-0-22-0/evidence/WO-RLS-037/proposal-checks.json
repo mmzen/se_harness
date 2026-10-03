@@ -1,0 +1,11 @@
+{
+  "scope": "Pre-approval inspection of a proposed README; no implementation applied.",
+  "source_commit": "1f81c87bf2b95bcb36207e1e81ab7f7745d65e0c",
+  "before_words": 676,
+  "proposed_words": 648,
+  "limit": 650,
+  "source_sha256": "fc50fc1f79ed2d4b68d7f3094282ccc1da4d069b8ff4585a814d79862b8506d6",
+  "proposed_sha256": "c3ffdb8d79d6eb8559941856e26d4bd1b983d4153367c847b0be945f0984909e",
+  "change": "Remove only the second exact copy of the host-limit paragraph. The first copy and every other byte of decoded LF content are preserved.",
+  "remaining_warning_count": 1
+}

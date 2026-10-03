@@ -2,10 +2,10 @@
 id = "WO-RLS-036"
 type = "work_order"
 title = "Complete public 0.22.0 delivery"
-status = "approved"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-03"
-updated = "2026-10-02"
+updated = "2026-10-03"
 
 [assurance]
 commit_bound_verification = "required"
@@ -44,6 +44,20 @@ decided_at = "2026-10-02T22:07:58Z"
 decided_by = "mmzen"
 reason = "Human repository owner mmzen answered \"Approve package and required verification\" to the reviewed evaluator 0.22.0 / plugin 0.2.5 package: REL-SEH-034, WO-RLS-034/035/036 and VER-RLS-033/034/035. This confirms required commit-bound verification and authorizes bounded preparation, qualification, review pushes/PRs and listed delivery work under the retained request \"Merged. Next: prepare and execute the release\". Human verification of exact results, the exact release-record decision and merge remain separate. Repository adoption and provider-setting changes are excluded. Selected released 0.21.0 governs; Codex applies the recorded human decision. Reviewed SHA-256 58736e0bf133ccbe4f97689ba4093ff96c1df43720d8d063964952e622d809c7; transition-input SHA-256 387419f7f5ae5585603b69c757361c5c72182f0074e12a5e6f19160dbf43a3ec. Only confirmed assurance fields were added."
 scope_paths = ["docs/engineering/release-0-22-0/", "README.md", "release/plugin-marketplace/README.md", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md", "docs/notes/developing-se-harness.md", "docs/notes/release-delivery-completion.md", "docs/notes/release-publication-rehearsal.md", "docs/notes/harness-installation-and-upgrades.md", "docs/notes/harnessctl-reference.md", "docs/engineering/plugin-integration/README.md", "docs/engineering/README.md", "tests/test_progressive_documentation.py", "tests/plugin_integration/package_assembly/test_refresh_guidance.py"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-03T05:37:29Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-03T05:47:59Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Complete public 0.22.0 delivery

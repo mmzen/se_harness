@@ -1,0 +1,46 @@
+{
+  "governing_evaluator": "0.21.0",
+  "unit_tests": {
+    "command": "python -B -X utf8 -m unittest tests.test_progressive_documentation tests.plugin_integration.package_assembly.test_refresh_guidance",
+    "passed": 28,
+    "exit_code": 0
+  },
+  "source_links": "All changed source-document link targets and anchors passed; packaged links covered by the existing tests.",
+  "validation": {
+    "errors": 0,
+    "warnings": 61
+  },
+  "preflight": "ready, no diagnostics",
+  "handoff": "passed against complete Git changes from 73abb4902fe819a6d4f11ce160dbe96a90249122",
+  "delivery": "intentionally incomplete: evaluator/marketplace/demonstration satisfied; current documentation and old latest/last outstanding",
+  "review": {
+    "scope": "Current publication/host-limit guidance, existing test identity expectations and retained delivery evidence only. No runtime or installer changes.",
+    "complexity": "Existing public installation commands, qualification evidence, delivery checker and documentation tests reused; no product abstraction or dependency added.",
+    "preserved": "Immutable published packages and VREC-PLG-032 evidence remain unchanged.",
+    "remaining": "Documentation verification/integration/readback and later latest/last promotion; no completed-delivery claim."
+  },
+  "raw_archive": {
+    "path": "checks-raw.zip",
+    "sha256": "0e7a758ad198c1ceaa926d851a9c73138bf77b3ed7c6522853f60d79ceb58f92",
+    "bytes": 51828,
+    "entries": {
+      "helpers/public025_checks.py": "e55def5596732472a95e4b217b26d2d51882601ba16746df83d9057d7de41e6d",
+      "helpers/public025_finalize_checks.py": "5a8eea9e0be4ff0d60cc30ec9d27de57a23074c6799bc029a63ccdb8619bbc53",
+      "helpers/public025_markers_observe.py": "ba9ca0ec5c4385a4b1fb69b0d8cacfe3d4579924a21647625718e25ea4b9a3b0",
+      "helpers/public025_plan.py": "90ae0653337521a552961cacaf47295fa51b44a7d436de560dc73db2bb8ae565",
+      "public025-completion-apply.json": "099a4c4e317a8d39ba2eb0a7d8eda5939fa3536bc3c6a7e3d4b3701728a603f7",
+      "public025-completion-preview.json": "db84ec8a27ff693274af1259fb01b1ee03e7ec7670b17d79239f3d7f78443ff8",
+      "public025-declared-scope.json": "ac66d7bac993a0e0ff4ba9cfbf21e4420f551478941e59e5bf6850146c8f7e83",
+      "public025-delivery-check-final.json": "02c2149ece94dbac51ef0c64d0b59d1e6e4125f2e6ad67b62493760ca9ad9b4e",
+      "public025-focused-checks.json": "d62ed5cd73992c287c73443199f21ac4e29cc60386d33c0b26c77cbd4805b0b2",
+      "public025-handoff-header.json": "9ca7db4819d6bcfaccfbffe5aa26dee9e1c960632f0784e120eeb19a51487817",
+      "public025-handoff.json": "2805e2fbf2b188cb89f8414bd1659889ed300b608ce06cfaff0ef450d49c17d8",
+      "public025-review-preflight.json": "0b6acd1c1ae18d5d0eb7e65f2091b1575a1c8489408286cbc0229c3a61e29baf",
+      "public025-start-apply.json": "e6875f05d8ec2ec990b517f6608677a1d2cffa8361a74ecba8f31d5b0a18ae7e",
+      "public025-start-preflight.json": "ccc7f291351f0b4ab9411e0a70fcadabdb696921a89d8335630bab7be4db4c62",
+      "public025-start-preview.json": "87c23f41e86f9b1f8516c3e22000620b932d4fdd74793889729005172d593d44",
+      "public025-validate.json": "1eb45d98723cc7541b60e1144e68e49bb4a98ddb3c7c3a162029efe8beba4235",
+      "review-and-recovery.json": "0654f03bcd47c799f2507c8037ed860ddaf5622e2a359c272f6b631425ae22c2"
+    }
+  }
+}

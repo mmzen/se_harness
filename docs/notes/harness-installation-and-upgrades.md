@@ -5,11 +5,12 @@
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
-SE Harness 0.21.0 and plugin 0.2.4 are public. This repository adopts released
-0.21.0 and the external-resource layout under WO-HUP-003, after review of native
-Codex CLI startup and compaction. The 44 selected resource copies retire through
-the installer. Publication alone never changes a repository selection. See the
-[release observations](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md).
+SE Harness 0.22.0 and plugin 0.2.5 are public. This repository remains on
+released evaluator 0.21.0 and the external-resource layout adopted under
+WO-HUP-003. That adoption retired 44 selected resource copies. Publication
+does not change the selection; adopting 0.22.0 requires separate approved work.
+See the [current public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md),
+including untested Claude Code and Codex Windows desktop routes.
 
 <a id="minimal-installation-successor-candidate"></a>
 

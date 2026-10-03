@@ -6,7 +6,7 @@
 
 The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. Exact public 0.5.0 later governed the 0.6.0 release through the ordinary standard repository lifecycle. On 2026-08-23, the separately governed `WO-HUP-002` transaction adopted exact public 0.6.0 as the standard root evaluator. No self-hosting installation profile, evaluator descriptor, or special promotion command was introduced. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
 
-Candidate source in this checkout reports release-candidate version 0.22.0; it is not a published release. The repository is governed by independently installed public 0.21.0, adopted under `WO-HUP-003`. The schema-5 lock selects external wheel resources and retains the public wheel and payload digests. Candidate source remains development evidence even when its version matches the released evaluator.
+Development source in this checkout reports 0.22.0; the exact release is public under RLS-SEH-032. Source execution does not establish released-evaluator identity. The repository is governed by independently installed public 0.21.0, adopted under `WO-HUP-003`. The schema-5 lock selects external wheel resources and retains the public wheel and payload digests. Candidate source remains development evidence even when its version matches the released evaluator.
 
 In evaluator examples, `harnessctl` means the absolute Python executable of
 the repository's selected released evaluator followed by `-I -m se_harness`.
@@ -46,12 +46,12 @@ Candidate behavior does not adopt its layout into this development repository.
 ## Agent skills for this checkout
 
 Agent skills and native instruction delivery come from each host's installed
-Verity Plane plugin. Public plugin 0.2.4 bundles evaluator 0.21.0 at marketplace
-commit `7e366438165a40a14783bac650a2887e7ec8bc75`. Plugin publication does not
-replace a user's local plugin or select a repository evaluator. WO-HUP-003
-separately adopts 0.21.0 here. WO-RLS-033 retains public route observations and
-accepted native test omissions in its
-[confirmation evidence](../engineering/release-0-21-0/evidence/WO-RLS-033/README.md).
+Verity Plane plugin. Public plugin 0.2.5 bundles evaluator 0.22.0 at marketplace
+commit `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. Publication does not update a user's local
+plugin or a repository's evaluator. WO-HUP-003 selected 0.21.0 here.
+[Current public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md)
+record Codex CLI routes and the explicitly untested Claude and desktop surfaces.
+
 Use the [plugin installation guide](plugin-installation-guide.md) for the
 published package identity and installation commands.
 WO-HUP-021 retains the exact package identities and local installation evidence.
@@ -262,11 +262,11 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 
 ## Release sequences
 
-The [approved 0.22.0 package](../engineering/release-0-22-0/README.md) prepares
-evaluator 0.22.0 and plugin 0.2.5 under selected 0.21.0. WO-RLS-034 owns final
-integration and evaluator publication; WO-RLS-035/036 own marketplace delivery
-and public closeout. Keep native evidence, final-candidate verification and the
-exact release-record decision visible. This rollout uses the existing route.
+The [0.22.0 package](../engineering/release-0-22-0/README.md) has published
+evaluator 0.22.0 and plugin 0.2.5 under selected evaluator 0.21.0. WO-RLS-035
+retains marketplace qualification/publication; WO-RLS-036 retains public-route
+checks, current guidance and the remaining delivery closeout. Repository adoption
+and provider configuration remain separate.
 
 The prospective [complete-release route](release-delivery-completion.md#one-approval-for-the-complete-release)
 prepares and verifies the evaluator, plugin packages and other delivery inputs

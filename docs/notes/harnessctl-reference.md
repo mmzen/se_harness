@@ -68,7 +68,7 @@ These rules hold on every subcommand (`WO-ECP-022`):
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
 | `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer; under `--json` an engine refusal exits 2 and a failed generation carries the engine's standard error in `error` |
-| `resources` | human or agent | read-only | resolve instructions and templates from the selected external resource package; successor candidate command, unavailable in the governing 0.20.0 evaluator |
+| `resources` | human or agent | read-only | resolve instructions and templates from the selected external resource package; available in the governing 0.21.0 evaluator and published 0.22.0 |
 | `doctor` | human or agent | read-only | inspect installation integrity, required supplied files and evaluator identity |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
@@ -131,12 +131,13 @@ A successfully produced inspection exits zero even when formal validation failed
 
 Dashboard defaults to `target/harness-dashboard/`; its generated files are derived evidence, not formal authority. The small `index.html` bootstrap verifies `dashboard-manifest.json`, then loads a summary, compact topology, readiness data, individual artifact details, and explicitly expanded evidence from digest-named static resources. Serve the directory from one HTTP origin, for example with `python -m http.server 8000 --directory target/harness-dashboard`; direct `file://` opening is intentionally rejected because progressive resource loading and integrity checks require an origin. Generation remains local and needs no application server, but publishing or sharing the directory exposes every manifest-declared artifact and evidence body; the command does not scan for secrets or redact repository material. Doctor checks the standard installed contract against `.engineering-harness.lock` and the current distribution.
 
-## Released resource lookup (successor candidate)
+<a id="released-resource-lookup-successor-candidate"></a>
 
-The 0.21.0 release provides this command for repositories selecting the
-`released-resources-v1` layout. It is unavailable in this repository's selected
-0.20.0 evaluator. Use the independently installed candidate only for candidate
-qualification; it does not govern this repository or adopt the new layout.
+## Released resource lookup
+
+Released 0.21.0 and 0.22.0 provide this command for repositories selecting the
+`released-resources-v1` layout. This repository uses its independently installed
+0.21.0 evaluator. Publishing 0.22.0 does not change that selection.
 
 ```text
 harnessctl resources [TARGET] [--resource RESOURCE-ID] [--content] [--json]
