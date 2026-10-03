@@ -2,10 +2,10 @@
 id = "WO-RLS-035"
 type = "work_order"
 title = "Qualify and publish plugin 0.2.5"
-status = "approved"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-03"
-updated = "2026-10-02"
+updated = "2026-10-03"
 
 [assurance]
 commit_bound_verification = "required"
@@ -30,6 +30,13 @@ decided_at = "2026-10-02T22:07:58Z"
 decided_by = "mmzen"
 reason = "Human repository owner mmzen answered \"Approve package and required verification\" to the reviewed evaluator 0.22.0 / plugin 0.2.5 package: REL-SEH-034, WO-RLS-034/035/036 and VER-RLS-033/034/035. This confirms required commit-bound verification and authorizes bounded preparation, qualification, review pushes/PRs and listed delivery work under the retained request \"Merged. Next: prepare and execute the release\". Human verification of exact results, the exact release-record decision and merge remain separate. Repository adoption and provider-setting changes are excluded. Selected released 0.21.0 governs; Codex applies the recorded human decision. Reviewed SHA-256 6888abc1d730c88512e8b578a25a700c7fb089f61e1a4ad47985c2cb9442a9f3; transition-input SHA-256 1cd29d3fec2a778e6a8bb555d424baed1b2f37e476374467e730607eb0c4a0cc. Only confirmed assurance fields were added."
 scope_paths = ["docs/engineering/release-0-22-0/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-03T04:29:21Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Qualify and publish plugin 0.2.5
