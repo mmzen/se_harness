@@ -1,5 +1,12 @@
 # Install or update the Verity Plane plugin
 
+## Preparing 0.22.0 / 0.2.5
+
+The [approved successor package](../engineering/release-0-22-0/README.md) is in
+preparation. Its intended update route is 0.2.4 to 0.2.5, with evaluator 0.22.0.
+Use the observed public package below until the successor's public identities
+and checks are recorded. Installing a plugin does not adopt its evaluator.
+
 The public marketplace observed on 2026-10-02 is plugin 0.2.4 with released
 evaluator 0.21.0 at `7e366438165a40a14783bac650a2887e7ec8bc75`.
 Public fresh-install and 0.2.3-to-0.2.4 update checks passed on both Windows CLIs.

@@ -38,30 +38,31 @@ claude plugin install verity-plane@se-harness
 
 Start a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.
 
-The [0.21.0 / 0.2.4 release](docs/engineering/release-0-21-0/README.md) is published.
-[Public evidence](docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md)
-records checks, limits and remaining delivery work.
-
-Observed public delivery (2026-10-02): Plugin **0.2.4** bundles released **SE Harness 0.21.0**. Both Windows CLI fresh/update routes passed package and setup checks. Codex session tests passed startup, activation, compaction and resume. See the evidence above for exact identities and profile limits.
+Observed public delivery (2026-10-02): Plugin **0.2.4** bundles released **SE Harness 0.21.0**. Windows CLI package/setup checks and Codex startup, activation, compaction and resume passed. [Public evidence](docs/engineering/release-0-21-0/evidence/WO-RLS-033/README.md) records identities and limits.
 
 Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. It does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
-
-Existing repositories need explicit adoption to change their selection or layout.
 
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
 
+### In preparation: 0.22.0 / plugin 0.2.5
+
+The [approved package](docs/engineering/release-0-22-0/README.md) brings clearer
+approval and verification requests, a PR before verification, and complete-release
+preparation and recovery. These versions are not yet public.
+
+The single-approval release route requires publication, separate adoption and
+reviewed provider configuration. This repository remains governed by 0.21.0.
+
 ## Released 0.21.0: fewer repository files
 
-Instructions and templates now live in the selected evaluator wheel; default
-initialization writes only configuration and lock files.
-Plugin activation restores the selected checkout after compaction or resume.
+Instructions and templates live in the evaluator wheel; initialization writes
+configuration and lock files. Activation restores the checkout after compaction.
 Claude native session tests remain unverified, with their WO-RLS-033 omission
 accepted in DEC-RLS-003. Codex Windows desktop remains unverified; DEC-RLS-004
-accepts that omission for WO-RLS-033. This repository now uses 0.21.0.
+accepts that omission for WO-RLS-033.
 See [migration](docs/notes/harness-installation-and-upgrades.md#minimal-installation-0210).
-The published package retains its original pre-publication README wording;
-the current source guide records the observed release status.
+The published package retains its pre-publication README.
 
 ## How it works today
 

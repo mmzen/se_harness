@@ -6,7 +6,7 @@
 
 The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. Exact public 0.5.0 later governed the 0.6.0 release through the ordinary standard repository lifecycle. On 2026-08-23, the separately governed `WO-HUP-002` transaction adopted exact public 0.6.0 as the standard root evaluator. No self-hosting installation profile, evaluator descriptor, or special promotion command was introduced. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
 
-Candidate source in this checkout reports development version 0.21.1; it is not a published release. The repository is governed by independently installed public 0.21.0, adopted under `WO-HUP-003`. The schema-5 lock selects external wheel resources and retains the public wheel and payload digests. Candidate source remains development evidence even when its version matches the released evaluator.
+Candidate source in this checkout reports release-candidate version 0.22.0; it is not a published release. The repository is governed by independently installed public 0.21.0, adopted under `WO-HUP-003`. The schema-5 lock selects external wheel resources and retains the public wheel and payload digests. Candidate source remains development evidence even when its version matches the released evaluator.
 
 In evaluator examples, `harnessctl` means the absolute Python executable of
 the repository's selected released evaluator followed by `-I -m se_harness`.
@@ -261,6 +261,12 @@ The versioned Git rule `docs/engineering/**/evidence/*.json text eol=lf` preserv
 Ordinary ready RLS records use the complete schema-3 evaluator identity in the current lock. A rejected contract cannot bind, prepare, release, publish, or authorize credentials, and only `ready` or `released` records are active version claims. Adopting public 0.6.0 remained separate from publication and was later performed through `WO-HUP-002`.
 
 ## Release sequences
+
+The [approved 0.22.0 package](../engineering/release-0-22-0/README.md) prepares
+evaluator 0.22.0 and plugin 0.2.5 under selected 0.21.0. WO-RLS-034 owns final
+integration and evaluator publication; WO-RLS-035/036 own marketplace delivery
+and public closeout. Keep native evidence, final-candidate verification and the
+exact release-record decision visible. This rollout uses the existing route.
 
 The prospective [complete-release route](release-delivery-completion.md#one-approval-for-the-complete-release)
 prepares and verifies the evaluator, plugin packages and other delivery inputs

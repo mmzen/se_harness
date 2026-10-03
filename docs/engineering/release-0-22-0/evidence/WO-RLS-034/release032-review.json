@@ -1,0 +1,79 @@
+{
+  "release_record": "RLS-SEH-032",
+  "state": "ready",
+  "record_sha256": "49ad1f26ea9cc90d1325e75904684454f29a83a75f954548870e15a79bccaaae",
+  "candidate": "abbec12ac5524c8adfb28693f846dd59de88f759",
+  "version": "0.22.0",
+  "tag": "v0.22.0",
+  "verification": {
+    "record": "VREC-SEH-032",
+    "status": "verified",
+    "by": "mmzen"
+  },
+  "released_work": [
+    "WO-KIS-010",
+    "WO-KIS-011",
+    "WO-KIS-012",
+    "WO-KIS-013",
+    "WO-KIS-014",
+    "WO-RLO-014",
+    "WO-RLO-015",
+    "WO-RLO-016",
+    "WO-RLO-017",
+    "WO-RLS-034"
+  ],
+  "distribution": {
+    "schema": 2,
+    "kind": "python-wheel-sdist",
+    "source_date_epoch": 1790980462,
+    "wheel": "se_harness-0.22.0-py3-none-any.whl",
+    "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+    "sdist": "se_harness-0.22.0.tar.gz",
+    "sdist_sha256": "3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a",
+    "checksums": "SHA256SUMS",
+    "checksums_sha256": "cbc4fca53d4c8d664716592a623e10d61bc28622580fc08ef348c4b304141c37",
+    "source_manifest_sha256": "8a8c0bd4ab3ba7125f18c19c8598f671b705dda6b5d70e8b74ea1dd430c2b2c3",
+    "build_recipe_schema": "se-harness-release-build-recipe/v1",
+    "build_recipe": "release/build-recipe.json",
+    "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc"
+  },
+  "bound_replay": {
+    "url": "https://github.com/mmzen/se_harness/actions/runs/37090350595",
+    "head": "bd3a165b9a2e89e84ba8b41dda9351b1f4d95710",
+    "conclusion": "success",
+    "report": "release032-build-replay.json",
+    "report_sha256": "4e46e4cb0888ad3d212fa70a05cba8a66e301008752a9fe3d1cf50830a229ded",
+    "two_builds_match_bound_bundle": true,
+    "remote_retention_days": 90
+  },
+  "validation": {
+    "errors": 0,
+    "warnings": 60,
+    "selected_warnings": [
+      {
+        "code": "W013",
+        "message": "artifact 'RLS-SEH-032' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-032.md'",
+        "path": "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md",
+        "plane": "maintenance"
+      },
+      {
+        "code": "W013",
+        "message": "artifact 'VREC-SEH-032' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-032.md'",
+        "path": "docs/engineering/release-0-22-0/verification-records/VREC-SEH-032.md",
+        "plane": "maintenance"
+      }
+    ]
+  },
+  "release_transition_gate": "pass",
+  "decision_required": {
+    "decision_right": "DR-RLS-DECIDE",
+    "role": "release-owner",
+    "artifact": "RLS-SEH-032",
+    "decision": "whether the exact candidate is authorized for release",
+    "outcomes": [
+      "released",
+      "reject"
+    ]
+  },
+  "external_publication": "not performed"
+}

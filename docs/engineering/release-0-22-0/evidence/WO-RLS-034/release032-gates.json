@@ -1,0 +1,405 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "RLS-SEH-032",
+    "artifacts": [
+      "RLS-SEH-032"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-DST-001",
+      "ADR-PLG-001",
+      "ADR-RLO-006",
+      "ARCH-DST-001",
+      "ARCH-PLG-001",
+      "ARCH-RLO-006",
+      "CAP-DST-001",
+      "CAP-KIS-001",
+      "CAP-KIS-003",
+      "CAP-RLO-004",
+      "CAP-RLO-005",
+      "INT-DST-001",
+      "INT-KIS-001",
+      "INT-KIS-003",
+      "INT-RLO-001",
+      "INT-RLO-002",
+      "REL-SEH-034",
+      "REQ-DST-006",
+      "REQ-KIS-010",
+      "REQ-KIS-011",
+      "REQ-KIS-012",
+      "REQ-PLG-002",
+      "REQ-RLO-018",
+      "REQ-RLO-020",
+      "REQ-RLO-021",
+      "REQ-RLO-022",
+      "REQ-RLO-023",
+      "SPEC-DST-001",
+      "SPEC-KIS-004",
+      "SPEC-KIS-005",
+      "SPEC-KIS-006",
+      "SPEC-PLG-001",
+      "SPEC-RLO-006",
+      "SPEC-RLO-007",
+      "VER-KIS-004",
+      "VER-KIS-005",
+      "VER-KIS-006",
+      "VER-RLO-011",
+      "VER-RLS-033",
+      "VREC-SEH-032",
+      "WO-KIS-010",
+      "WO-KIS-011",
+      "WO-KIS-012",
+      "WO-KIS-013",
+      "WO-KIS-014",
+      "WO-RLO-014",
+      "WO-RLO-015",
+      "WO-RLO-016",
+      "WO-RLO-017",
+      "WO-RLS-034"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-RLS-DECIDE",
+    "procedure_id": "PROC-RLS-DECIDE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G5-RELEASE-DECISION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G5D-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-032"
+              }
+            ],
+            "message": "RLS-SEH-032 status is ready."
+          },
+          {
+            "id": "QGP-G5D-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:RLS-SEH-032"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G5D-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G5D-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:RLS-SEH-032"
+              }
+            ],
+            "message": "No open decision blocks RLS-SEH-032."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-032"
+              }
+            ],
+            "message": "ready -> released is a declared lifecycle edge for RLS-SEH-032."
+          },
+          {
+            "id": "QGS-VERIFIED-INCLUSION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-032"
+              }
+            ],
+            "message": "Every verification record RLS-SEH-032 includes is verified."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "946c2777d3346a984fdfb438f65f7044a483af2b687200f03006efb13bdc39b2",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-RLS-DECIDE",
+    "current_step": "STEP-RLS-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-RLS-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G5-RELEASE-DECISION"
+        ],
+        "effects": [
+          "Permits an explicit decision on RLS-SEH-032 only."
+        ],
+        "non_effects": [
+          "Release status performs no external action."
+        ],
+        "decision_right": "DR-RLS-DECIDE",
+        "role": "release-owner",
+        "artifact": "RLS-SEH-032",
+        "decision": "whether the exact candidate is authorized for release",
+        "outcomes": [
+          "released",
+          "reject"
+        ],
+        "response": "I authorize release record RLS-SEH-032."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "RLS-SEH-032",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "RLS-SEH-032",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 57
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated transition compliance for RLS-SEH-032."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "RLS-SEH-032 is ready."
+    ],
+    "decision_required": {
+      "decision_right": "DR-RLS-DECIDE",
+      "role": "release-owner",
+      "artifact": "RLS-SEH-032",
+      "decision": "whether the exact candidate is authorized for release",
+      "outcomes": [
+        "released",
+        "reject"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-RLS-DECIDE",
+      "step_id": "STEP-RLS-DECIDE",
+      "action": "whether the exact candidate is authorized for release"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "I authorize release record RLS-SEH-032."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-RLS-REJECT."
+    ]
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v2",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task",
+        "source": "released-resource",
+        "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context.",
+          "source": "released-resource",
+          "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result.",
+          "source": "released-resource",
+          "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e"
+        }
+      ],
+      "procedure": {
+        "id": "PROC-RLS-DECIDE",
+        "location": {
+          "file": "docs/engineering/harness/RELEASE.md",
+          "heading": "obtain-the-release-decision-when-required",
+          "source": "released-resource",
+          "sha256": "1610330cc64c51a17cd8926c4d9b25b46f4a5092a656440387a4749e3a3dd402"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision.",
+            "source": "released-resource",
+            "sha256": "5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16"
+          }
+        ],
+        "steps": {
+          "STEP-RLS-DECIDE": {
+            "location": {
+              "file": "docs/engineering/harness/RELEASE.md",
+              "heading": "obtain-the-release-decision-when-required",
+              "source": "released-resource",
+              "sha256": "1610330cc64c51a17cd8926c4d9b25b46f4a5092a656440387a4749e3a3dd402"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision.",
+                "source": "released-resource",
+                "sha256": "5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16"
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-RLS-DECIDE",
+        "location": {
+          "file": "docs/engineering/harness/RELEASE.md",
+          "heading": "obtain-the-release-decision-when-required",
+          "source": "released-resource",
+          "sha256": "1610330cc64c51a17cd8926c4d9b25b46f4a5092a656440387a4749e3a3dd402"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision.",
+            "source": "released-resource",
+            "sha256": "5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16"
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "ADR-DST-001",
+      "ADR-PLG-001",
+      "ADR-RLO-006",
+      "ARCH-DST-001",
+      "ARCH-PLG-001",
+      "ARCH-RLO-006",
+      "CAP-DST-001",
+      "CAP-KIS-001",
+      "CAP-KIS-003",
+      "CAP-RLO-004",
+      "CAP-RLO-005",
+      "INT-DST-001",
+      "INT-KIS-001",
+      "INT-KIS-003",
+      "INT-RLO-001",
+      "INT-RLO-002",
+      "REL-SEH-034",
+      "REQ-DST-006",
+      "REQ-KIS-010",
+      "REQ-KIS-011",
+      "REQ-KIS-012",
+      "REQ-PLG-002",
+      "REQ-RLO-018",
+      "REQ-RLO-020",
+      "REQ-RLO-021",
+      "REQ-RLO-022",
+      "REQ-RLO-023",
+      "RLS-SEH-032",
+      "SPEC-DST-001",
+      "SPEC-KIS-004",
+      "SPEC-KIS-005",
+      "SPEC-KIS-006",
+      "SPEC-PLG-001",
+      "SPEC-RLO-006",
+      "SPEC-RLO-007",
+      "VER-KIS-004",
+      "VER-KIS-005",
+      "VER-KIS-006",
+      "VER-RLO-011",
+      "VER-RLS-033",
+      "VREC-SEH-032",
+      "WO-KIS-010",
+      "WO-KIS-011",
+      "WO-KIS-012",
+      "WO-KIS-013",
+      "WO-KIS-014",
+      "WO-RLO-014",
+      "WO-RLO-015",
+      "WO-RLO-016",
+      "WO-RLO-017",
+      "WO-RLS-034"
+    ],
+    "evaluator_only_inputs": [
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/WORKFLOW.json",
+        "sha256": "310b35d4f07a071258d220d1c3d751f603c4eee74cea83467f7ba2f74b594516"
+      },
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/QUALITY_GATES.json",
+        "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+      }
+    ],
+    "release": {
+      "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+      "archive_sha256": "13d401f5a0c94444dc3cf31c6f2863d23b77beb4b2c33756734b493606ad6789",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "c86a3301491e4ef4188ed98e2fcf8c67bf2c8184bc5e73e97e663f235c7894ac",
+      "version": "0.21.0"
+    },
+    "formal_artifact_source": "repository"
+  },
+  "result_sha256": "cc4fe43f06a18bb55fd07895e78a18da922f55b2662f6303a5c774926e0534fc"
+}

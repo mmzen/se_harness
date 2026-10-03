@@ -133,7 +133,7 @@ Dashboard defaults to `target/harness-dashboard/`; its generated files are deriv
 
 ## Released resource lookup (successor candidate)
 
-The 0.21.0 candidate adds this command for repositories selecting the
+The 0.21.0 release provides this command for repositories selecting the
 `released-resources-v1` layout. It is unavailable in this repository's selected
 0.20.0 evaluator. Use the independently installed candidate only for candidate
 qualification; it does not govern this repository or adopt the new layout.

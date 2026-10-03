@@ -1,0 +1,47 @@
+{
+  "decision": "Human repository owner mmzen answered \"Approve package and required verification\" to the reviewed evaluator 0.22.0 / plugin 0.2.5 package: REL-SEH-034, WO-RLS-034/035/036 and VER-RLS-033/034/035. This confirms required commit-bound verification and authorizes bounded preparation, qualification, review pushes/PRs and listed delivery work under the retained request \"Merged. Next: prepare and execute the release\". Human verification of exact results, the exact release-record decision and merge remain separate. Repository adoption and provider-setting changes are excluded. Selected released 0.21.0 governs; Codex applies the recorded human decision.",
+  "artifacts": [
+    {
+      "id": "REL-SEH-034",
+      "path": "docs/engineering/release-0-22-0/release/REL-SEH-034.md",
+      "reviewed_sha256": "a214fdab7c991d6a8900c8c1db1d196fc2db361edf3982f34da6f1fe8542305d",
+      "transition_input_sha256": "a214fdab7c991d6a8900c8c1db1d196fc2db361edf3982f34da6f1fe8542305d"
+    },
+    {
+      "id": "VER-RLS-033",
+      "path": "docs/engineering/release-0-22-0/verification/VER-RLS-033.md",
+      "reviewed_sha256": "6c3244490e617cb4b6cbe44b1363a792821823db7b5f1d15d2cdee2493b57adb",
+      "transition_input_sha256": "6c3244490e617cb4b6cbe44b1363a792821823db7b5f1d15d2cdee2493b57adb"
+    },
+    {
+      "id": "VER-RLS-034",
+      "path": "docs/engineering/release-0-22-0/verification/VER-RLS-034.md",
+      "reviewed_sha256": "969e20abac5a0be3a7ecd71874c7cb577f83ab97110c74b7c5ddf2fc4c860f7a",
+      "transition_input_sha256": "969e20abac5a0be3a7ecd71874c7cb577f83ab97110c74b7c5ddf2fc4c860f7a"
+    },
+    {
+      "id": "VER-RLS-035",
+      "path": "docs/engineering/release-0-22-0/verification/VER-RLS-035.md",
+      "reviewed_sha256": "642b5127238f8dcd5b792893438b3223b8274fe2447b2cda6e3070b96c200260",
+      "transition_input_sha256": "642b5127238f8dcd5b792893438b3223b8274fe2447b2cda6e3070b96c200260"
+    },
+    {
+      "id": "WO-RLS-034",
+      "path": "docs/engineering/release-0-22-0/work-orders/WO-RLS-034.md",
+      "reviewed_sha256": "f707db09c095ed580106502f77ce6b6aa9fdab7a76f2a12d50efb42919f03812",
+      "transition_input_sha256": "a4d8c5ab57608ecb954299beb0df12f69cde92ab39c9522a5a2a369944b23964"
+    },
+    {
+      "id": "WO-RLS-035",
+      "path": "docs/engineering/release-0-22-0/work-orders/WO-RLS-035.md",
+      "reviewed_sha256": "6888abc1d730c88512e8b578a25a700c7fb089f61e1a4ad47985c2cb9442a9f3",
+      "transition_input_sha256": "1cd29d3fec2a778e6a8bb555d424baed1b2f37e476374467e730607eb0c4a0cc"
+    },
+    {
+      "id": "WO-RLS-036",
+      "path": "docs/engineering/release-0-22-0/work-orders/WO-RLS-036.md",
+      "reviewed_sha256": "58736e0bf133ccbe4f97689ba4093ff96c1df43720d8d063964952e622d809c7",
+      "transition_input_sha256": "387419f7f5ae5585603b69c757361c5c72182f0074e12a5e6f19160dbf43a3ec"
+    }
+  ]
+}
