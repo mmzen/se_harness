@@ -1,4 +1,26 @@
-# Release 0.22.0 — preparation
+# Release 0.22.0
+
+## Current delivery status
+
+Evaluator **0.22.0** is published on GitHub and PyPI under RLS-SEH-032.
+Plugin **0.2.5** qualification continues under WO-RLS-035. Marketplace
+publication and final public-delivery closeout remain outstanding.
+
+For this release, **Claude Code host tests and Codex Windows desktop tests are
+not run / unverified**. Human mmzen instructed continuation with these omissions
+disclosed. [DEC-RLS-005](decisions/DEC-RLS-005.md) covers qualification;
+[DEC-RLS-006](decisions/DEC-RLS-006.md) covers public installation/update checks.
+Their paired risks remain recorded. Earlier Claude authentication failure is
+retained; package checks and Codex CLI results do not verify these omitted hosts.
+
+The [current delivery plan](evidence/WO-RLS-035/delivery-plan-v2.json) retains
+both distributed packages and their byte checks. Its native public-route coverage
+names Codex CLI only. Revisit the omitted hosts before the next plugin release
+or before claiming either route verified.
+
+## Original preparation record
+
+The following records the approved preparation plan and its original status.
 
 Prepare and deliver evaluator **0.22.0** and Verity Plane plugin **0.2.5**.
 The release includes clearer approval/verification requests, a review PR before
