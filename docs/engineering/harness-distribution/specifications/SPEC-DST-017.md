@@ -86,7 +86,7 @@ Repository content remains inert and untrusted. Route decoding cannot create HTM
 
 ## Performance and capacity
 
-The generated `index.html` hard limit is 262,144 UTF-8 bytes before compression. Summary, artifact/evidence source, and total-content limits remain unchanged. The current repository topology acceptance target is 2,097,152 UTF-8 bytes before compression. The new template requires no build step or runtime framework.
+The generated `index.html` hard limit is 262,144 UTF-8 bytes before compression. Summary, artifact/evidence source, and total-content limits remain unchanged. The current repository topology acceptance target is 4,194,304 UTF-8 bytes before compression. The new template requires no build step or runtime framework.
 
 ## Observability
 
@@ -106,3 +106,25 @@ Existing repositories receive the revision only through safe managed upgrade. Cu
 ## Explicitly unspecified decisions
 
 The supplied CSS values, markup order, copy, and local interaction details are accepted as implementation input. The implementation agent may update focused tests and formal compatibility wording and may make only the two route corrections explicitly authorized after browser review. Any other template-byte change requires further explicit owner permission.
+
+## Manual capacity revision — 2026-10-03
+
+mmzen authorized the 4 MiB target and the bounded manual amendment after reviewing
+the two-file correction and the affected definitions. This records the human's
+exception to the selected 0.21.0 amendment procedure's unsupported-command stop;
+it is not a revision operation performed by harnessctl. Lifecycle states,
+original decision history and all noncapacity rules are preserved.
+
+The exact accepted predecessor is the member `docs/engineering/harness-distribution/specifications/SPEC-DST-017.md` of
+[accepted-predecessors.zip](../evidence/WO-DST-028/accepted-predecessors.zip),
+SHA-256 `0a6d0f2a577404a5353765670f785236c6c378729bbaca289d2215b22eeb2412`. The
+[amendment manifest](../evidence/WO-DST-028/amendment.json) links both versions
+and retains the owner's instruction. Earlier work keeps its original Git-bound
+definitions and evidence.
+
+The current target is 4,194,304 uncompressed UTF-8 bytes. Measurements and
+0.5.0/0.5.1 rollout statements from the earlier amendment describe its historical
+context. New work uses selected released 0.21.0 and the checks in VER-DST-030
+under WO-DST-028. All other payload budgets, complete topology data, integrity
+checks and publication boundaries remain unchanged. RLS-SEH-032's approved
+candidate and archives are not amended.

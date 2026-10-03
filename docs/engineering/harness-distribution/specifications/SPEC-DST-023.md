@@ -272,7 +272,7 @@ repository write exists. The shell verifies every byte it parses.
 
 `index.html` at most 524,288 UTF-8 bytes (431,072 at this revision); summary
 at most 262,144; per-document 262,144 and total 16,777,216 unchanged;
-topology acceptance target 2,097,152 (1,337,400 observed at `c065e3d`). The
+topology acceptance target 4,194,304 (1,337,400 observed at `c065e3d`). The
 Overview issues no per-artifact request when `metrics` is present.
 
 Recorded deviation, accepted by the repository owner on 2026-09-01: the
@@ -318,3 +318,25 @@ anatomy are accepted as implementation input from the retained sources. The
 build tool's module layout, the Readiness markup, and screenshot viewports
 are the implementation agent's. Any change to a designed view outside the
 patch list is a new design round, not an implementation choice.
+
+## Manual capacity revision — 2026-10-03
+
+mmzen authorized the 4 MiB target and the bounded manual amendment after reviewing
+the two-file correction and the affected definitions. This records the human's
+exception to the selected 0.21.0 amendment procedure's unsupported-command stop;
+it is not a revision operation performed by harnessctl. Lifecycle states,
+original decision history and all noncapacity rules are preserved.
+
+The exact accepted predecessor is the member `docs/engineering/harness-distribution/specifications/SPEC-DST-023.md` of
+[accepted-predecessors.zip](../evidence/WO-DST-028/accepted-predecessors.zip),
+SHA-256 `8cdbec94d6acf28daee32499c382a9b1fc956d49cf0a8da285f893a6f8556e70`. The
+[amendment manifest](../evidence/WO-DST-028/amendment.json) links both versions
+and retains the owner's instruction. Earlier work keeps its original Git-bound
+definitions and evidence.
+
+The current target is 4,194,304 uncompressed UTF-8 bytes. Measurements and
+0.5.0/0.5.1 rollout statements from the earlier amendment describe its historical
+context. New work uses selected released 0.21.0 and the checks in VER-DST-030
+under WO-DST-028. All other payload budgets, complete topology data, integrity
+checks and publication boundaries remain unchanged. RLS-SEH-032's approved
+candidate and archives are not amended.

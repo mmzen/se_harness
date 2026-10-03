@@ -30,7 +30,7 @@ ARTIFACT_RESOURCE_SCHEMA = "harness-dashboard-artifact-v2"
 
 MAX_SUMMARY_BYTES = 262_144
 
-TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152
+TOPOLOGY_ACCEPTANCE_BYTES = 4_194_304
 
 
 def serialize_json(value: Any) -> str:

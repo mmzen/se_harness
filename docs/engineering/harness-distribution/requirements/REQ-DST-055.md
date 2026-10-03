@@ -5,7 +5,7 @@ title = "Keep the initial Explorer payload bounded and observable"
 status = "approved"
 owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-17"
-updated = "2026-08-19"
+updated = "2026-10-03"
 statement = "WHEN an Explorer bundle is generated and acceptance-tested, THE SYSTEM SHALL enforce fixed shell and initial-summary budgets, exclude deferred Markdown from the initial path, and report deterministic resource-size measurements without converting them into an assurance score."
 verification_method = ["test"]
 verification_notes = "automated-performance-budget-test"
@@ -33,7 +33,7 @@ The generated output must:
 - contain no artifact-body or evidence-body Markdown in `index.html`, summary, topology, or readiness resources;
 - retain the existing 262,144-byte per-source-document and 16,777,216-byte total projected-content bounds;
 - report every resource byte count plus totals by resource class in generation summary data;
-- test the current SE Harness demonstrator topology target at or below 2,097,152 UTF-8 bytes while reporting, rather than misclassifying, larger consumer topology as a repository-governance failure.
+- test the current SE Harness demonstrator topology target at or below 4,194,304 UTF-8 bytes while reporting, rather than misclassifying, larger consumer topology as a repository-governance failure.
 
 ## Failure and boundary behavior
 
@@ -64,3 +64,25 @@ Measurements use deterministic UTF-8 bytes before HTTP compression. Browser timi
 ## Open decisions
 
 None when approved.
+
+## Manual capacity revision — 2026-10-03
+
+mmzen authorized the 4 MiB target and the bounded manual amendment after reviewing
+the two-file correction and the affected definitions. This records the human's
+exception to the selected 0.21.0 amendment procedure's unsupported-command stop;
+it is not a revision operation performed by harnessctl. Lifecycle states,
+original decision history and all noncapacity rules are preserved.
+
+The exact accepted predecessor is the member `docs/engineering/harness-distribution/requirements/REQ-DST-055.md` of
+[accepted-predecessors.zip](../evidence/WO-DST-028/accepted-predecessors.zip),
+SHA-256 `b82e50a17d696b48100b4714c09ae037bd7cdfacf4ba9f67f43252d6b1f2caff`. The
+[amendment manifest](../evidence/WO-DST-028/amendment.json) links both versions
+and retains the owner's instruction. Earlier work keeps its original Git-bound
+definitions and evidence.
+
+The current target is 4,194,304 uncompressed UTF-8 bytes. Measurements and
+0.5.0/0.5.1 rollout statements from the earlier amendment describe its historical
+context. New work uses selected released 0.21.0 and the checks in VER-DST-030
+under WO-DST-028. All other payload budgets, complete topology data, integrity
+checks and publication boundaries remain unchanged. RLS-SEH-032's approved
+candidate and archives are not amended.

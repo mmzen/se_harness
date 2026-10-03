@@ -60,7 +60,7 @@ Verification treats the generated directory, manifest, bootstrap, and Pages inpu
 
 ## Performance and resilience checks
 
-- Measure UTF-8 bytes before compression: `index.html <= 524288`, summary `<= 262144`, and current repository topology `<= 2097152`.
+- Measure UTF-8 bytes before compression: `index.html <= 524288`, summary `<= 262144`, and current repository topology `<= 4194304`.
 - Retain 262,144-byte per-document and 16,777,216-byte total-content behavior with deterministic whole-document omission.
 - Record per-role counts/totals, largest resource, and full output size in generation summary without a score.
 - Generate larger consumer topology to prove target excess is observational while hard shell/content violations fail before promotion.
@@ -82,3 +82,25 @@ SHA-256 detects accidental or partial substitution only relative to the trusted 
 **The `index.html` measurement follows the 524,288-byte budget, proposed 2026-09-01
 under `WO-DST-023` (`SPEC-DST-013` amendment).** Every other measurement and check
 in this contract is unchanged.
+
+## Manual capacity revision — 2026-10-03
+
+mmzen authorized the 4 MiB target and the bounded manual amendment after reviewing
+the two-file correction and the affected definitions. This records the human's
+exception to the selected 0.21.0 amendment procedure's unsupported-command stop;
+it is not a revision operation performed by harnessctl. Lifecycle states,
+original decision history and all noncapacity rules are preserved.
+
+The exact accepted predecessor is the member `docs/engineering/harness-distribution/verification/VER-DST-013.md` of
+[accepted-predecessors.zip](../evidence/WO-DST-028/accepted-predecessors.zip),
+SHA-256 `2f5cac7990d87937b4e0091d408d7c2e5432f65b45c36c5b38a16c46178ae4e0`. The
+[amendment manifest](../evidence/WO-DST-028/amendment.json) links both versions
+and retains the owner's instruction. Earlier work keeps its original Git-bound
+definitions and evidence.
+
+The current target is 4,194,304 uncompressed UTF-8 bytes. Measurements and
+0.5.0/0.5.1 rollout statements from the earlier amendment describe its historical
+context. New work uses selected released 0.21.0 and the checks in VER-DST-030
+under WO-DST-028. All other payload budgets, complete topology data, integrity
+checks and publication boundaries remain unchanged. RLS-SEH-032's approved
+candidate and archives are not amended.
