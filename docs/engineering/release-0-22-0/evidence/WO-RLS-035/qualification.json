@@ -236,5 +236,11 @@
       "production032-results/release-result.json": "01b061398f317fa44d3dbeff9f43ce6294f24d6271013dc122b4ebcaff2912d0",
       "production032-retry-result.json": "b25569f3d429c019b4ac7b62f106d59d8a17f2d9491bc9c745073a9d1442eb4e"
     }
+  },
+  "transport_note": {
+    "reason": "The evaluator start write used CRLF. Normalize that record to LF for a minimal transport diff; preserve all fields, lifecycle history and body text.",
+    "before_sha256": "d4bc2ded0b0fefbdb60cd72c0be0ef6895b15b9e616a828fab49b1ba46ff7edc",
+    "after_sha256": "b33f4e8f1d297e121ceabccc81c36e434634e1538e54cf1e219a350591bad76f",
+    "initial_local_commit": "781ad4ae"
   }
 }
