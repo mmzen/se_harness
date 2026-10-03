@@ -53,9 +53,9 @@ The [release package](docs/engineering/release-0-22-0/README.md) brings clearer
 approval and verification requests, a PR before verification, and complete-release
 preparation and recovery. Evaluator 0.22.0 and plugin 0.2.5 are public.
 
-The single-approval release route still requires separate adoption and reviewed
-provider configuration. This repository remains governed by 0.21.0. Documentation
-integration and final release-marker closeout remain in progress.
+This repository selects released evaluator 0.22.0. The single-approval release
+route still requires reviewed provider configuration. [Delivery closeout](docs/engineering/release-0-22-0/evidence/WO-RLS-036/closeout.md)
+confirms documentation integration and the latest/last markers.
 
 ## Fewer repository files
 

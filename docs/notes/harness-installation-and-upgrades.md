@@ -5,12 +5,11 @@
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
-SE Harness 0.22.0 and plugin 0.2.5 are public. This repository remains on
-released evaluator 0.21.0 and the external-resource layout adopted under
-WO-HUP-003. That adoption retired 44 selected resource copies. Publication
-does not change the selection; adopting 0.22.0 requires separate approved work.
-See the [current public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md),
-including untested Claude Code and Codex Windows desktop routes.
+SE Harness 0.22.0 and plugin 0.2.5 are public. This repository selects
+released evaluator 0.22.0 under WO-HUP-028 and retains the external-resource
+layout introduced by WO-HUP-003. Updating a host plugin does not change a
+repository selection. Provider configuration for the single-approval release
+route remains separate.
 
 <a id="minimal-installation-successor-candidate"></a>
 
@@ -254,10 +253,11 @@ resolves `ENGINEERING_HARNESS.md` through `harnessctl resources`, then resolves
 the selected guide from the same released wheel. Those older pointers
 are navigation aids, not separate policy authorities.
 
-This repository adopted 0.21.0 under WO-HUP-003 after 0.20.1 under WO-HUP-025
+This repository adopts 0.22.0 under WO-HUP-028 after 0.21.0 under WO-HUP-003,
+0.20.1 under WO-HUP-025
 and 0.20.0 under WO-HUP-024. The six legacy pointers were removed through
 separate cleanup work; the resource migration preserves their absence. Development source
-remains 0.21.0; its version alone does not change any repository's selected
+advances to unpublished 0.22.1; its version alone does not change any repository's selected
 evaluator.
 
 ## Earlier migrations and retained history
