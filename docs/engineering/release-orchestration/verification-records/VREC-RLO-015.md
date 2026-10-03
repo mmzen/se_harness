@@ -2,7 +2,7 @@
 id = "VREC-RLO-015"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-distribution/evidence/WO-DST-028/WO-
 evaluator_evidence_path = "docs/engineering/release-orchestration/evidence/VREC-RLO-015-evaluator.json"
 evaluator_evidence_sha256 = "aba3bcc3d778a9209c591cce9beaa278b9dcebf58e091bd56fcc91b2225be157"
 
+verified_at = "2026-10-03T04:10:16Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-DST-028", "WO-RLO-018"]
 conforms_to = ["VER-DST-030", "VER-RLO-012"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-03T04:10:16Z"
+decided_by = "mmzen"
+reason = "mmzen stated: I verify VREV-RLO-015. In the immediate pending verification context, VREV is an evident typo for VREC-RLO-015. This records the human assurance decision on candidate 1c921f13307b99f25e5b5077441901587304e146 and its unchanged reviewed evidence; no merge or additional release decision is inferred."
 +++
 
 # Verification Record Candidate
