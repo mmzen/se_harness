@@ -2,7 +2,7 @@
 id = "VREC-HUP-027"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-03"
 updated = "2026-10-03"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-027-evaluator.json"
 evaluator_evidence_sha256 = "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905"
 
+verified_at = "2026-10-03T07:40:55Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HUP-028", "WO-HUP-029"]
 conforms_to = ["VER-HUP-005", "VER-HUP-024"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-03T07:40:55Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied \"Verify result\" to the displayed verification request for VREC-HUP-027 and candidate b4ee373dd3f5bfbfbfc8ad878f7e52ccb74cec5a in PR #532, with the requirement assessment, retained evidence and stated limits. This records that human assurance decision; merge remains separate and required CI must pass. Codex applies the unchanged decision under existing authority."
 +++
 
 # Verification Record Candidate
