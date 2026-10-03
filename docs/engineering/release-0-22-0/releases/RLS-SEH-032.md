@@ -2,8 +2,8 @@
 id = "RLS-SEH-032"
 type = "release_record"
 title = "Release candidate 0.22.0"
-status = "ready"
-owners = ["Codex"]
+status = "released"
+owners = ["mmzen"]
 created = "2026-10-03"
 updated = "2026-10-03"
 version = "0.22.0"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-22-0/evidence/RLS-SEH-032-
 evaluator_evidence_sha256 = "3f2d74a115f4f53d3b56d90b0ecab4de53d5d08270083f621ce861c4cfafc721"
 tag = "v0.22.0"
 
+released_at = "2026-10-03T02:42:25Z"
+authorized_by = "mmzen"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-034"]
 includes_verification = ["VREC-SEH-032"]
 releases_work = ["WO-KIS-010", "WO-KIS-011", "WO-KIS-012", "WO-KIS-013", "WO-KIS-014", "WO-RLO-014", "WO-RLO-015", "WO-RLO-016", "WO-RLO-017", "WO-RLS-034"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-10-03T02:42:25Z"
+decided_by = "mmzen"
+reason = "Human release owner mmzen explicitly stated I authorize release record RLS-SEH-032. This authorizes version 0.22.0, tag v0.22.0, candidate abbec12ac5524c8adfb28693f846dd59de88f759 and the unchanged verified coverage and bound archives reviewed at PR 528 commit 95195253e0c997b74fea50a9fafac466ca6085a5. Reviewed ready record SHA256 49ad1f26ea9cc90d1325e75904684454f29a83a75f954548870e15a79bccaaae. The original preview refused E009 because preparation assigned owners=[Codex]. Corrected only the unaccepted ready record owners to mmzen, the actual human release owner already identified in REL-SEH-034 and this explicit decision; prepared_by remains Codex. Corrected transition input SHA256 9e2d24be745326f90d141ed7ef794615f9f0f9118365dc64ee8230c7307997ea. All other record fields, candidate and retained evidence bytes are unchanged. VREC-SEH-032 is verified by mmzen; bound-record replay 37090350595 passed. Codex applies the human decision. Merge and provider reviewer actions remain separate under REL-SEH-034."
 +++
 
 # Release Record Candidate
