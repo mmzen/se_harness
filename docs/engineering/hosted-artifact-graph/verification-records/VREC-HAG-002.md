@@ -2,7 +2,7 @@
 id = "VREC-HAG-002"
 type = "verification_record"
 title = "Verification candidate for WO-HAG-003"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-04"
 updated = "2026-10-04"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/WO
 evaluator_evidence_path = "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-002-evaluator.json"
 evaluator_evidence_sha256 = "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905"
 
+verified_at = "2026-10-04T18:08:26Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HAG-003"]
 conforms_to = ["VER-HAG-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-04T18:08:26Z"
+decided_by = "mmzen"
+reason = "mmzen explicitly stated \"I verify VREC-HAG-002\" after publication of the review package in draft PR #535. This accepts the retained evidence for WO-HAG-003 at exact candidate 5355877faecf4039c3bf994f43ddc60fef922c50. Candidate and bound evidence are unchanged. This does not verify the hosted service, close DEC-HAG-001, or authorize merge, release or adoption."
 +++
 
 # Verification Record Candidate
