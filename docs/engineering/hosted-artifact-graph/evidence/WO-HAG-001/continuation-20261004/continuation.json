@@ -1,0 +1,90 @@
+{
+  "kind": "partial-implementation-continuation",
+  "work_order": "WO-HAG-001",
+  "status": "in_progress",
+  "starting_commit": "7b3a1e8cefc02903f79392ea164aa7d7b8af71f8",
+  "pr": "https://github.com/mmzen/se_harness/pull/535",
+  "pr_target": "codex/hosted-artifact-graph-inputs",
+  "target_commit": "be1812e7042081014cc7682da8b9cd3822d9071f",
+  "whole_change_baseline": "82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1",
+  "governor": "se-harness 0.22.0, separate installed environment",
+  "tested_state": "working tree; no new verified candidate is claimed",
+  "tested_code_sha256": {
+    "server/hosted_artifact_graph/__init__.py": "16219d7e416fdd333a17d2247d914de404c0a13c019edd4dd8a7e78313373759",
+    "server/hosted_artifact_graph/canonical.py": "7163868a43cf7b7fe20fa8298117fceb25cab26479ab1b2f70b78c880cf23317",
+    "tests/test_hosted_artifact_graph.py": "3eab4bcfbca3db6b6df43ca8537f54279e0a78b5d8592297d573087eedbf3710"
+  },
+  "implemented": [
+    "Strict bounded JSON decoding and named canonical digests",
+    "Exact document-byte revision identity and integrity checks",
+    "Resolved immutable baseline value construction",
+    "Independent fixed-vector and boundary tests, retaining original contract tests"
+  ],
+  "observed_checks": {
+    "focused_tests": 18,
+    "source_suite_tests": 1297,
+    "source_suite_skips": 22,
+    "source_suite_exit": 0,
+    "distribution_checks": "pass: 22 distribution-bearing records",
+    "cli_smoke": "pass",
+    "source_git_blobs_matching": 1909,
+    "protected_handoff_files_unchanged": 107
+  },
+  "hosted_scenarios_executed": 0,
+  "remaining": [
+    "Service packaging, dependencies, Compose and explicit database initialization",
+    "Canonical import, database revisions, baselines and draft contexts",
+    "Released-evaluator projection and draft admission after prerequisite release/adoption",
+    "Atomic guarded mutations, receipts and retry recovery",
+    "Domain/MCP/Cypher reads and constrained execution",
+    "Remote CLI, plugin guidance, all 12 hosted scenarios and restart/restore qualification"
+  ],
+  "dependencies": [
+    "DEC-HAG-001 is open. The existing extend-evaluator choice is not an unanswered question.",
+    "WO-HAG-003 and its five governing drafts are proposed; no correction approval has been recorded.",
+    "WO-HAG-002 correction needs release together with the proposed identity correction, with new final-candidate verification.",
+    "Explicit hosted evaluator pin amendment/adoption is still required. Released 0.22.0 has no linked-revision activation command.",
+    "The separate docs/engineering/README.md aggregate-scope finding against main is retained, not hidden by changing the baseline."
+  ],
+  "preserved_verification": {
+    "record": "VREC-HAG-001",
+    "candidate": "169430fe25d28972a9b86fef2d00eccde2baa5db",
+    "tested_source": "08694a22ed754474267b0da98a9514648068f5f9",
+    "scope": "WO-HAG-002 only; no hosted-service verification"
+  },
+  "risk": "RISK-HAG-001 remains raised; Memgraph-side read-only enforcement is deferred. Private sandbox only.",
+  "lifecycle_result": {
+    "outcome": "completed",
+    "done": [
+      "Projected the selected scope for WO-HAG-001."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-HAG-001 is in_progress."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-CHECK",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-HAG-001",
+        "--checkpoint",
+        "handoff"
+      ]
+    },
+    "alternatives": []
+  },
+  "non_effects": [
+    "No completion, verification acceptance, decision disposition, pin change, release, deployment or merge",
+    "No PR push or retarget during this continuation"
+  ]
+}
