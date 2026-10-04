@@ -126,9 +126,13 @@ from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES, Lifecycl
 def validate_repository(repository_root: Path, artifact_root: Path | None = None) -> ValidationReport:
     repository_root = repository_root.resolve()
     selected_artifact_root = (artifact_root or repository_root / "docs" / "engineering").resolve()
-    revision_policy = load_revision_policy(repository_root)
-
     artifacts, parse_errors = load_artifacts(selected_artifact_root, repository_root)
+    return validate_artifact_catalog(repository_root, selected_artifact_root, artifacts, parse_errors)
+
+
+def validate_artifact_catalog(repository_root, selected_artifact_root, artifacts, parse_errors):
+    """Evaluate one already-parsed catalog; draft queries preserve background findings."""
+    revision_policy = load_revision_policy(repository_root)
     errors = list(parse_errors)
 
     assessment_warnings: list[Diagnostic] = []

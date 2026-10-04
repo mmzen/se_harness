@@ -45,7 +45,7 @@ These rules hold on every subcommand (`WO-ECP-022`):
   their preparation actor `--owner`. `preflight` keeps `--work-order`
   until it folds into `check`.
 - **`--json` everywhere.** The workflow commands print the schema-2 result;
-  `validate`, `inspect`, `resources`, `release-unit`, `identity`
+  `validate`, `validate-draft`, `inspect`, `resources`, `release-unit`, `identity`
   and `qualify` print their own objects; every other command prints one
   `se-harness-command-result-v1` object with the same facts as its human
   output.
@@ -66,6 +66,7 @@ These rules hold on every subcommand (`WO-ECP-022`):
 | --- | --- | --- | --- |
 | `init` | repository owner or authorized agent | writes the complete standard harness into an absent or empty target; into a target with content it preserves existing files, integrates the bounded fragments and writes `docs/engineering/ADOPTION_REPORT.md` | install the harness into any repository, new or existing |
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
+| `validate-draft` | human or agent | read-only | inspect one supported draft, separating invalidity, unfinished authoring slots and background findings |
 | `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer; under `--json` an engine refusal exits 2 and a failed generation carries the engine's standard error in `error` |
 | `resources` | human or agent | read-only | resolve instructions and templates from the selected external resource package; available in the governing 0.21.0 evaluator and published 0.22.0 |
@@ -130,6 +131,38 @@ Inspection ends with a vocabulary section. It counts the words of every artifact
 A successfully produced inspection exits zero even when formal validation failed or attention exists, so use `validate` when gate exit behavior is required. Inspection is repository-local derived evidence: it does not approve, authorize, verify, supersede, release, remediate, or independently govern the repository.
 
 Dashboard defaults to `target/harness-dashboard/`; its generated files are derived evidence, not formal authority. The small `index.html` bootstrap verifies `dashboard-manifest.json`, then loads a summary, compact topology, readiness data, individual artifact details, and explicitly expanded evidence from digest-named static resources. Serve the directory from one HTTP origin, for example with `python -m http.server 8000 --directory target/harness-dashboard`; direct `file://` opening is intentionally rejected because progressive resource loading and integrity checks require an origin. Generation remains local and needs no application server, but publishing or sharing the directory exposes every manifest-declared artifact and evidence body; the command does not scan for secrets or redact repository material. Doctor checks the standard installed contract against `.engineering-harness.lock` and the current distribution.
+
+## Standalone draft validation
+
+```text
+harnessctl validate-draft [TARGET] --artifact ARTIFACT-ID [--json]
+```
+
+The caller supplies a complete projection. The command uses one parsed catalog
+and the executing evaluator's canonical templates. It writes nothing. JSON is
+`se-harness-draft-validation-v1`, with `selection` (id, type, status, relative
+path), `admissible`, `errors`, `incomplete`, and `background`. Findings include
+stable codes and structured field/relation/target details where relevant.
+Text reports the same facts. Exit 0 means admissible; 1 means a produced refusal;
+2 means usage or a failure before a result can be produced.
+
+Supported draft types: intent, capability, requirement, specification,
+architecture, adr, verification, work_order, release_contract and
+operating_contract. Decision, risk, verification_record and release_record
+continue through their existing commands.
+
+A requirement with `CAP-xxx`, an omitted `derives_from`, or an empty array can
+be admissible with an incomplete finding. A link to an existing release record,
+an unknown non-template target, or `["CAP-xxx", "RLS-SEH-001"]` is refused.
+Malformed TOML and duplicate IDs block a trustworthy catalog globally. Other
+unselected findings remain background. A correct endpoint does not establish
+readiness of its full governing chain.
+
+Selection outside draft, lifecycle history and disposition are refused. This
+snapshot query cannot prove that imported identity or provenance is unchanged.
+The hosted caller must compare protected fields to its immutable base and enforce
+rights and expected versions. Admission does not waive validation, approval,
+verification or release gates, and includes no lifecycle next step.
 
 <a id="released-resource-lookup-successor-candidate"></a>
 

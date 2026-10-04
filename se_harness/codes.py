@@ -211,6 +211,9 @@ E020 = "E020"
 # Installed validator: an authoring-rule error on a formal artifact.
 E_AUT_001 = "E-AUT-001"
 E_AUT_002 = "E-AUT-002"
+E_AUT_003 = "E-AUT-003"  # Draft selection is missing, ambiguous, or unsupported.
+E_AUT_004 = "E-AUT-004"  # Draft state or protected history is not admissible.
+E_AUT_005 = "E-AUT-005"  # Supplied draft metadata has an invalid field shape/value.
 
 # Installed validator: a decision-artifact rule error.
 E_DCM_001 = "E-DCM-001"
@@ -251,6 +254,7 @@ W_AUT_020 = "W-AUT-020"
 W_AUT_021 = "W-AUT-021"
 W_AUT_022 = "W-AUT-022"
 W_AUT_023 = "W-AUT-023"
+W_AUT_024 = "W-AUT-024"  # Explicitly unfinished canonical draft authoring slot.
 
 # Installed validator: a decision-artifact warning.
 W_DCM_001 = "W-DCM-001"

@@ -1,0 +1,17 @@
+{
+  "work_order": "WO-HAG-002",
+  "public_reference_commit": "82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1",
+  "complete_implementation_base": "23c0c34c5b89897b8024a562d3b713e0fa967add",
+  "base_purpose": "Approved definitions and prior hosted work checkpoint, committed before correction implementation; never advanced to exclude correction changes.",
+  "governor": {
+    "version": "0.22.0",
+    "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+  },
+  "approval": "mmzen approved the four reviewed artifacts for local implementation with required commit-bound verification.",
+  "expectations": "tests/test_relation_policy.py independently transcribes all 25 declared source/relation pairs and exercises all 14 endpoint types (350 combinations). tests/test_draft_validation.py was first written before implementation; the before log retains the absent command and missing relationship refusals.",
+  "early_failures": [
+    "correction-tests-before.log: expected red baseline before implementation, 172 failures and one missing registry error.",
+    "correction-tests-01.log and correction-template-01.log: test author used unsupported --title/--owner create-artifact flags. Fixed test invocation, without changing product CLI or expected admissions. Focused regression rerun passes.",
+    "correction-reference-corpus.log: reused Phase 1 projection still contained intentional REQ-PROBE-001 with CAP-xxx; ordinary validation correctly rejected that extra artifact. Re-extract the untouched original archive for the 1909-artifact compatibility check."
+  ]
+}
