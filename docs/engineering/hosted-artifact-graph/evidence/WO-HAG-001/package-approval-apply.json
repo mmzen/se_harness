@@ -1,0 +1,1589 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "ADR-HAG-001",
+    "artifacts": [
+      "ADR-HAG-001",
+      "ARCH-HAG-001",
+      "CAP-HAG-001",
+      "INT-HAG-001",
+      "REQ-HAG-001",
+      "REQ-HAG-002",
+      "REQ-HAG-003",
+      "REQ-HAG-004",
+      "REQ-HAG-005",
+      "REQ-HAG-006",
+      "REQ-HAG-007",
+      "REQ-HAG-008",
+      "SPEC-HAG-001",
+      "SPEC-HAG-002",
+      "SPEC-HAG-003",
+      "VER-HAG-001"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-DEFINITION-COMPLETE",
+    "procedure_id": "PROC-DEFINITION-COMPLETE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:ADR-HAG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ADR-HAG-001"
+              }
+            ],
+            "message": "ADR-HAG-001 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:ADR-HAG-001"
+              }
+            ],
+            "message": "No open decision blocks ADR-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ADR-HAG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for ADR-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:ARCH-HAG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ARCH-HAG-001"
+              }
+            ],
+            "message": "ARCH-HAG-001 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:ARCH-HAG-001"
+              }
+            ],
+            "message": "No open decision blocks ARCH-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ARCH-HAG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for ARCH-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:CAP-HAG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "CAP-HAG-001"
+              }
+            ],
+            "message": "CAP-HAG-001 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:CAP-HAG-001"
+              }
+            ],
+            "message": "No open decision blocks CAP-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "CAP-HAG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for CAP-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:INT-HAG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "INT-HAG-001"
+              }
+            ],
+            "message": "INT-HAG-001 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:INT-HAG-001"
+              }
+            ],
+            "message": "No open decision blocks INT-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "INT-HAG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for INT-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-HAG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-001"
+              }
+            ],
+            "message": "REQ-HAG-001 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-HAG-001"
+              }
+            ],
+            "message": "No open decision blocks REQ-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-HAG-002"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-002"
+              }
+            ],
+            "message": "REQ-HAG-002 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-HAG-002"
+              }
+            ],
+            "message": "No open decision blocks REQ-HAG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-002"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-HAG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-HAG-003"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-003"
+              }
+            ],
+            "message": "REQ-HAG-003 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-HAG-003"
+              }
+            ],
+            "message": "No open decision blocks REQ-HAG-003."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-003"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-HAG-003."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-HAG-004"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-004"
+              }
+            ],
+            "message": "REQ-HAG-004 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-HAG-004"
+              }
+            ],
+            "message": "No open decision blocks REQ-HAG-004."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-004"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-HAG-004."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-HAG-005"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-005"
+              }
+            ],
+            "message": "REQ-HAG-005 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-HAG-005"
+              }
+            ],
+            "message": "No open decision blocks REQ-HAG-005."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-005"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-HAG-005."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-HAG-006"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-006"
+              }
+            ],
+            "message": "REQ-HAG-006 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-HAG-006"
+              }
+            ],
+            "message": "No open decision blocks REQ-HAG-006."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-006"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-HAG-006."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-HAG-007"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-007"
+              }
+            ],
+            "message": "REQ-HAG-007 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-HAG-007"
+              }
+            ],
+            "message": "No open decision blocks REQ-HAG-007."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-007"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-HAG-007."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-HAG-008"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-008"
+              }
+            ],
+            "message": "REQ-HAG-008 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-HAG-008"
+              }
+            ],
+            "message": "No open decision blocks REQ-HAG-008."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-HAG-008"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-HAG-008."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:SPEC-HAG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-HAG-001"
+              }
+            ],
+            "message": "SPEC-HAG-001 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:SPEC-HAG-001"
+              }
+            ],
+            "message": "No open decision blocks SPEC-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-HAG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for SPEC-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:SPEC-HAG-002"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-HAG-002"
+              }
+            ],
+            "message": "SPEC-HAG-002 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:SPEC-HAG-002"
+              }
+            ],
+            "message": "No open decision blocks SPEC-HAG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-HAG-002"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for SPEC-HAG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:SPEC-HAG-003"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-HAG-003"
+              }
+            ],
+            "message": "SPEC-HAG-003 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:SPEC-HAG-003"
+              }
+            ],
+            "message": "No open decision blocks SPEC-HAG-003."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-HAG-003"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for SPEC-HAG-003."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VER-HAG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-HAG-001"
+              }
+            ],
+            "message": "VER-HAG-001 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VER-HAG-001"
+              }
+            ],
+            "message": "No open decision blocks VER-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-HAG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for VER-HAG-001."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-DEFINITION-COMPLETE",
+    "current_step": "STEP-DEFINITION-COMPLETE",
+    "steps": [
+      {
+        "id": "STEP-DEFINITION-COMPLETE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G1-DEFINITION",
+          "QG-G2-ARCHITECTURE"
+        ],
+        "effects": [
+          "Permits a decision on ADR-HAG-001 only."
+        ],
+        "non_effects": [
+          "Related definitions remain unchanged unless separately selected."
+        ],
+        "decision_right": "DR-DEFINITION-DECIDE",
+        "role": "definition-owner",
+        "artifact": "ADR-HAG-001",
+        "decision": "whether the selected definition is complete",
+        "outcomes": [
+          "implemented",
+          "reject",
+          "stop"
+        ],
+        "response": "Decide the selected definition ADR-HAG-001 only."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "ADR-HAG-001",
+        "status": "draft"
+      },
+      {
+        "id": "ARCH-HAG-001",
+        "status": "draft"
+      },
+      {
+        "id": "CAP-HAG-001",
+        "status": "draft"
+      },
+      {
+        "id": "INT-HAG-001",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-HAG-001",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-HAG-002",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-HAG-003",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-HAG-004",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-HAG-005",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-HAG-006",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-HAG-007",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-HAG-008",
+        "status": "draft"
+      },
+      {
+        "id": "SPEC-HAG-001",
+        "status": "draft"
+      },
+      {
+        "id": "SPEC-HAG-002",
+        "status": "draft"
+      },
+      {
+        "id": "SPEC-HAG-003",
+        "status": "draft"
+      },
+      {
+        "id": "VER-HAG-001",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "ADR-HAG-001",
+        "status": "approved"
+      },
+      {
+        "id": "ARCH-HAG-001",
+        "status": "approved"
+      },
+      {
+        "id": "CAP-HAG-001",
+        "status": "approved"
+      },
+      {
+        "id": "INT-HAG-001",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-HAG-001",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-HAG-002",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-HAG-003",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-HAG-004",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-HAG-005",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-HAG-006",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-HAG-007",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-HAG-008",
+        "status": "approved"
+      },
+      {
+        "id": "SPEC-HAG-001",
+        "status": "approved"
+      },
+      {
+        "id": "SPEC-HAG-002",
+        "status": "approved"
+      },
+      {
+        "id": "SPEC-HAG-003",
+        "status": "approved"
+      },
+      {
+        "id": "VER-HAG-001",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "ADR-HAG-001",
+        "path": "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "ARCH-HAG-001",
+        "path": "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "CAP-HAG-001",
+        "path": "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "INT-HAG-001",
+        "path": "docs/engineering/hosted-artifact-graph/intent/INT-HAG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-HAG-001",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-HAG-002",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-002.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-HAG-003",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-003.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-HAG-004",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-004.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-HAG-005",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-005.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-HAG-006",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-006.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-HAG-007",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-007.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-HAG-008",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-008.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "SPEC-HAG-001",
+        "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "SPEC-HAG-002",
+        "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-002.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "SPEC-HAG-003",
+        "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "VER-HAG-001",
+        "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 16 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "ADR-HAG-001 is approved."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DEFINITION-DECIDE",
+      "role": "definition-owner",
+      "artifact": "ADR-HAG-001",
+      "decision": "whether the selected definition is complete",
+      "outcomes": [
+        "implemented",
+        "reject",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DEFINITION-COMPLETE",
+      "step_id": "STEP-DEFINITION-COMPLETE",
+      "action": "whether the selected definition is complete"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Decide the selected definition ADR-HAG-001 only."
+    },
+    "alternatives": []
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v2",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task",
+        "source": "released-resource",
+        "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context.",
+          "source": "released-resource",
+          "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result.",
+          "source": "released-resource",
+          "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e"
+        }
+      ],
+      "procedure": {
+        "id": "PROC-DEFINITION-COMPLETE",
+        "location": {
+          "file": "docs/engineering/harness/RECORD_STATE.md",
+          "heading": "complete-a-selected-definition",
+          "source": "released-resource",
+          "sha256": "0495c7cd684545b53e3e3f9c12f00334ca1d739bba52d95212a0eb361116cfc2"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision.",
+            "source": "released-resource",
+            "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+          }
+        ],
+        "steps": {
+          "STEP-DEFINITION-COMPLETE": {
+            "location": {
+              "file": "docs/engineering/harness/RECORD_STATE.md",
+              "heading": "complete-a-selected-definition",
+              "source": "released-resource",
+              "sha256": "0495c7cd684545b53e3e3f9c12f00334ca1d739bba52d95212a0eb361116cfc2"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision.",
+                "source": "released-resource",
+                "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-DEFINITION-COMPLETE",
+        "location": {
+          "file": "docs/engineering/harness/RECORD_STATE.md",
+          "heading": "complete-a-selected-definition",
+          "source": "released-resource",
+          "sha256": "0495c7cd684545b53e3e3f9c12f00334ca1d739bba52d95212a0eb361116cfc2"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision.",
+            "source": "released-resource",
+            "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "ADR-HAG-001",
+      "ARCH-HAG-001",
+      "CAP-HAG-001",
+      "INT-HAG-001",
+      "REQ-HAG-001",
+      "REQ-HAG-002",
+      "REQ-HAG-003",
+      "REQ-HAG-004",
+      "REQ-HAG-005",
+      "REQ-HAG-006",
+      "REQ-HAG-007",
+      "REQ-HAG-008",
+      "SPEC-HAG-001",
+      "SPEC-HAG-002",
+      "SPEC-HAG-003",
+      "VER-HAG-001"
+    ],
+    "evaluator_only_inputs": [
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/WORKFLOW.json",
+        "sha256": "00c222a9c71d95cb1162e6d6bacdb03cd9e43431303466077a85ceb8f921f0c2"
+      },
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/QUALITY_GATES.json",
+        "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+      }
+    ],
+    "release": {
+      "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+      "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+      "version": "0.22.0"
+    },
+    "formal_artifact_source": "repository"
+  },
+  "result_sha256": "1189eb2e32c108c965c61123977ba642c5a1baed560ad7dd17a110b622c1494d"
+}

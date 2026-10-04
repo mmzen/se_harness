@@ -4,6 +4,8 @@
 
 ## Product and governance domains
 
+- [hosted-artifact-graph/](hosted-artifact-graph/README.md): draft hosted context and draft-authoring sandbox, with Memgraph, immutable baselines, evaluator reuse and an unresolved database-side Cypher read-only boundary.
+
 - [release-0-22-0/](release-0-22-0/README.md): published evaluator 0.22.0 and plugin 0.2.5;
   [completed public delivery](release-0-22-0/evidence/WO-RLS-036/closeout.md) covers all five delivery surfaces.
 

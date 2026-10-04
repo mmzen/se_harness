@@ -1,0 +1,768 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:se-harness:remote-wire:v1",
+  "title": "Hosted sandbox wire shapes",
+  "description": "Structural shapes for SPEC-HAG-001/002. Semantic, authorization and evaluator admission remain required; DEC-HAG-001 records an unresolved admission dependency. Formats require an enabled format checker. Reject duplicate JSON keys, non-integer numbers and unknown fields before schema validation.",
+  "$ref": "#/$defs/Command",
+  "$defs": {
+    "Evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": "0.22.0"
+        },
+        "archive_sha256": {
+          "const": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+        },
+        "payload_sha256": {
+          "const": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        }
+      },
+      "required": [
+        "version",
+        "archive_sha256",
+        "payload_sha256"
+      ]
+    },
+    "Source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "object_format": {
+          "const": "sha1"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      },
+      "required": [
+        "repository",
+        "object_format",
+        "commit"
+      ]
+    },
+    "View": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "baseline"
+            },
+            "baseline_id": {
+              "type": "string",
+              "pattern": "^se-harness-artifact-baseline/v1:sha256:[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "kind",
+            "baseline_id"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "draft"
+            },
+            "context_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "context_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            }
+          },
+          "required": [
+            "kind",
+            "context_id",
+            "context_version"
+          ]
+        }
+      ]
+    },
+    "RevisionEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "const": "se-harness-artifact-revision/v1"
+        },
+        "project_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+        },
+        "document_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "original_path": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "description": "Relative POSIX path; semantic validation rejects empty/dot/dot-dot components, backslashes, drive prefixes, links and escape from the configured source root."
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "declared_relations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "maxItems": 10000
+          }
+        },
+        "provenance": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "git"
+                },
+                "source": {
+                  "$ref": "#/$defs/Source"
+                },
+                "blob_oid": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{40}$"
+                }
+              },
+              "required": [
+                "kind",
+                "source",
+                "blob_oid"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "draft"
+                },
+                "principal_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "operation_key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "created_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "kind",
+                "principal_id",
+                "operation_key",
+                "created_at"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "project_id",
+        "artifact_id",
+        "document_sha256",
+        "original_path",
+        "declared_relations",
+        "provenance"
+      ]
+    },
+    "StoredRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "revision_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "envelope": {
+          "$ref": "#/$defs/RevisionEnvelope"
+        },
+        "document_base64": {
+          "type": "string",
+          "contentEncoding": "base64"
+        }
+      },
+      "required": [
+        "revision_id",
+        "envelope",
+        "document_base64"
+      ]
+    },
+    "SourceManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "const": "se-harness-source-manifest/v1"
+        },
+        "source": {
+          "$ref": "#/$defs/Source"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "artifact_id": {
+                "type": "string",
+                "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Relative POSIX path; semantic validation rejects empty/dot/dot-dot components, backslashes, drive prefixes, links and escape from the configured source root."
+              },
+              "blob_oid": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "raw_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "bytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1048576
+              }
+            },
+            "required": [
+              "artifact_id",
+              "path",
+              "blob_oid",
+              "raw_sha256",
+              "bytes"
+            ]
+          },
+          "maxItems": 2500
+        }
+      },
+      "required": [
+        "schema",
+        "source",
+        "artifacts"
+      ]
+    },
+    "BaselineManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "const": "se-harness-artifact-baseline/v1"
+        },
+        "project_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "revision_scheme": {
+          "const": "se-harness-artifact-revision/v1"
+        },
+        "selection": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          }
+        },
+        "resolved_relations": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            ],
+            "items": false,
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "maxItems": 10000
+        },
+        "provenance": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "git"
+                },
+                "source": {
+                  "$ref": "#/$defs/Source"
+                },
+                "source_manifest_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "kind",
+                "source",
+                "source_manifest_sha256"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "draft-context"
+                },
+                "context_id": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                },
+                "context_version": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9223372036854775807
+                },
+                "base_baseline_id": {
+                  "type": "string",
+                  "pattern": "^se-harness-artifact-baseline/v1:sha256:[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "kind",
+                "context_id",
+                "context_version",
+                "base_baseline_id"
+              ]
+            }
+          ]
+        },
+        "evaluator": {
+          "$ref": "#/$defs/Evaluator"
+        }
+      },
+      "required": [
+        "schema",
+        "project_id",
+        "revision_scheme",
+        "selection",
+        "resolved_relations",
+        "provenance",
+        "evaluator"
+      ]
+    },
+    "Command": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "schema": {
+              "const": "se-harness-remote-command/v1"
+            },
+            "project_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "operation_key": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "expected_project_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "expected_evaluator": {
+              "$ref": "#/$defs/Evaluator"
+            },
+            "client": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "wheel_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "version",
+                "wheel_sha256"
+              ]
+            },
+            "operation": {
+              "const": "import"
+            },
+            "source_manifest": {
+              "$ref": "#/$defs/SourceManifest"
+            }
+          },
+          "required": [
+            "schema",
+            "project_id",
+            "operation_key",
+            "expected_project_version",
+            "expected_evaluator",
+            "client",
+            "operation",
+            "source_manifest"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "schema": {
+              "const": "se-harness-remote-command/v1"
+            },
+            "project_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "operation_key": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "expected_project_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "expected_evaluator": {
+              "$ref": "#/$defs/Evaluator"
+            },
+            "client": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "wheel_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "version",
+                "wheel_sha256"
+              ]
+            },
+            "operation": {
+              "const": "draft-open"
+            },
+            "base_baseline_id": {
+              "type": "string",
+              "pattern": "^se-harness-artifact-baseline/v1:sha256:[0-9a-f]{64}$"
+            },
+            "work_order_id": {
+              "type": "string",
+              "pattern": "^WO-[A-Z0-9]+-[0-9]{3,}$"
+            }
+          },
+          "required": [
+            "schema",
+            "project_id",
+            "operation_key",
+            "expected_project_version",
+            "expected_evaluator",
+            "client",
+            "operation",
+            "base_baseline_id",
+            "work_order_id"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "schema": {
+              "const": "se-harness-remote-command/v1"
+            },
+            "project_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "operation_key": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "expected_project_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "expected_evaluator": {
+              "$ref": "#/$defs/Evaluator"
+            },
+            "client": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "wheel_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "version",
+                "wheel_sha256"
+              ]
+            },
+            "operation": {
+              "const": "create-artifact"
+            },
+            "context_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "expected_context_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "domain": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "artifact_type": {
+              "enum": [
+                "intent",
+                "capability",
+                "requirement",
+                "specification",
+                "architecture",
+                "adr",
+                "verification",
+                "work_order",
+                "release_contract",
+                "operating_contract"
+              ]
+            },
+            "artifact_id": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "schema",
+            "project_id",
+            "operation_key",
+            "expected_project_version",
+            "expected_evaluator",
+            "client",
+            "operation",
+            "context_id",
+            "expected_context_version",
+            "domain",
+            "artifact_type",
+            "artifact_id"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "schema": {
+              "const": "se-harness-remote-command/v1"
+            },
+            "project_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "operation_key": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "expected_project_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "expected_evaluator": {
+              "$ref": "#/$defs/Evaluator"
+            },
+            "client": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "wheel_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "version",
+                "wheel_sha256"
+              ]
+            },
+            "operation": {
+              "const": "revise-artifact"
+            },
+            "context_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "expected_context_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "artifact_id": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+            },
+            "expected_revision_id": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "document_base64": {
+              "type": "string",
+              "contentEncoding": "base64"
+            }
+          },
+          "required": [
+            "schema",
+            "project_id",
+            "operation_key",
+            "expected_project_version",
+            "expected_evaluator",
+            "client",
+            "operation",
+            "context_id",
+            "expected_context_version",
+            "artifact_id",
+            "expected_revision_id",
+            "document_base64"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "schema": {
+              "const": "se-harness-remote-command/v1"
+            },
+            "project_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "operation_key": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "expected_project_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "expected_evaluator": {
+              "$ref": "#/$defs/Evaluator"
+            },
+            "client": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "wheel_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "version",
+                "wheel_sha256"
+              ]
+            },
+            "operation": {
+              "const": "freeze"
+            },
+            "context_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "expected_context_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            }
+          },
+          "required": [
+            "schema",
+            "project_id",
+            "operation_key",
+            "expected_project_version",
+            "expected_evaluator",
+            "client",
+            "operation",
+            "context_id",
+            "expected_context_version"
+          ]
+        }
+      ]
+    }
+  }
+}

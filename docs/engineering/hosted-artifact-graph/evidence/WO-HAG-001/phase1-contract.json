@@ -1,0 +1,113 @@
+{
+  "kind": "phase1-contract-and-feasibility-result",
+  "date": "2026-10-04",
+  "work_order": "WO-HAG-001",
+  "work_order_state": "in_progress",
+  "outcome": "Independent contract/fixture work prepared; dependent standalone admission is blocked pending DEC-HAG-001. Phase 1 and the work order are not complete.",
+  "reference": {
+    "source": {
+      "repository": "https://github.com/mmzen/se_harness",
+      "object_format": "sha1",
+      "commit": "82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1"
+    },
+    "artifact_count": 1909,
+    "raw_bytes": 10717173,
+    "largest_document_bytes": 57242,
+    "manifest_sha256": "f5762423d228489f2cd65692b8721218f1a824a00fe225c2e4a09cc9c95bbd46",
+    "blob_comparison": "All 1,909 archived formal documents were compared byte-for-byte with git cat-file --batch and each Git blob OID was recomputed."
+  },
+  "checks": {
+    "fixture_tests": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_hosted_artifact_graph",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\se_harness",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_baseline_resolves_every_declared_edge_in_the_fixed_selection (tests.hosted_artifact_graph.test_contract_vectors.HostedContractVectorTests.test_baseline_resolves_every_declared_edge_in_the_fixed_selection) ... ok\ntest_body_line_endings_and_unicode_are_distinct_raw_identities (tests.hosted_artifact_graph.test_contract_vectors.HostedContractVectorTests.test_body_line_endings_and_unicode_are_distinct_raw_identities) ... ok\ntest_json_preserves_sequences_and_does_not_normalize_unicode (tests.hosted_artifact_graph.test_contract_vectors.HostedContractVectorTests.test_json_preserves_sequences_and_does_not_normalize_unicode) ... ok\ntest_reference_manifest_fits_the_approved_import_envelope (tests.hosted_artifact_graph.test_contract_vectors.HostedContractVectorTests.test_reference_manifest_fits_the_approved_import_envelope) ... ok\ntest_revision_inputs_bind_the_exact_document_and_named_scheme (tests.hosted_artifact_graph.test_contract_vectors.HostedContractVectorTests.test_revision_inputs_bind_the_exact_document_and_named_scheme) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.008s\n\nOK\n"
+    },
+    "json_schema": {
+      "validator": "jsonschema 4.26.0",
+      "metaschema": "2020-12",
+      "revision_cases": 6,
+      "baseline_cases": 1,
+      "source_manifest_artifacts": 1909,
+      "accepted_command_shapes": [
+        "import",
+        "draft-open",
+        "create-artifact",
+        "revise-artifact",
+        "freeze"
+      ],
+      "rejected_command_shapes": [
+        "import-with-context",
+        "open-missing-baseline",
+        "fractional-version",
+        "negative-version",
+        "claimed-principal",
+        "unsupported-command"
+      ],
+      "limitation": "Structural schemas do not implement semantic draft admission, authorization, canonicalization, transactions or the hosted service."
+    },
+    "independent_hash_check": {
+      "runtime": "PowerShell/.NET System.Security.Cryptography.SHA256.HashData",
+      "revision_vectors": 6,
+      "baseline_vectors": 1,
+      "outcome": "pass"
+    },
+    "formal_validation": {
+      "valid": true,
+      "artifact_count": 1928,
+      "error_count": 0,
+      "warning_count": 61,
+      "advisory_count": 0
+    }
+  },
+  "unchanged_reviewed_records": 18,
+  "decision": {
+    "outcome": "completed",
+    "done": [
+      "Projected the pending decision DEC-HAG-001."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "DEC-HAG-001 is open; the artifacts it blocks cannot change state until it is disposed."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DECISION-DISPOSE",
+      "role": "owner of the blocked artifact, or of the departed specification for a deviation",
+      "artifact": "DEC-HAG-001",
+      "decision": "which declared option answers the pending decision",
+      "outcomes": [
+        "decided",
+        "deferred",
+        "withdrawn"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DEC-DISPOSE",
+      "step_id": "STEP-DEC-DISPOSE",
+      "action": "which declared option answers the pending decision"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "harnessctl decide . --artifact DEC-HAG-001 --option OPTION-ID --decision ROLE --reason TEXT"
+    },
+    "alternatives": []
+  },
+  "not_performed": [
+    "Service command adapter or transaction implementation",
+    "Memgraph schema execution",
+    "Packaged twelve-step walkthrough",
+    "Concurrency/fault/restart/restore qualification",
+    "Implementation completion or verification acceptance",
+    "Commit, push, publication or deployment"
+  ],
+  "open_cypher_item": "RISK-HAG-001 remains raised and byte-identical.",
+  "tooling": "JSON Schema checks used a disposable workspace venv with jsonschema 4.26.0. The selected evaluator environment was unchanged; full download identities are in the output archive."
+}

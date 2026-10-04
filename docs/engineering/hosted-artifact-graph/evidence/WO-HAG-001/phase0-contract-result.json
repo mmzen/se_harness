@@ -1,0 +1,199 @@
+{
+  "kind": "phase0-contract-preparation",
+  "date": "2026-10-04",
+  "work_order": "WO-HAG-001",
+  "scope": "Development and release contract only. This is supporting evidence and makes no verification, release or deployment decision.",
+  "approval": {
+    "actor": "mmzen",
+    "applied": true,
+    "state": [
+      {
+        "id": "WO-HAG-001",
+        "status": "approved"
+      }
+    ],
+    "result_sha256": "ec79dcf596e16e364b176ddd00df8cdda9bde05ad9ebbdd38a9cb7629148a584",
+    "assurance": "required"
+  },
+  "start_preflight": {
+    "ready": false,
+    "diagnostics": [
+      {
+        "code": "W013",
+        "message": "governing artifact ARCH-HAG-001 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact ADR-HAG-001 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-001.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact CAP-HAG-001 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-001.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact INT-HAG-001 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/intent/INT-HAG-001.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact REQ-HAG-001 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-001.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact REQ-HAG-002 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-002.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact REQ-HAG-003 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-003.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact REQ-HAG-004 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-004.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact REQ-HAG-005 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-005.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact REQ-HAG-006 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-006.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact REQ-HAG-007 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-007.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact REQ-HAG-008 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-008.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact SPEC-HAG-001 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-001.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact SPEC-HAG-002 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-002.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact SPEC-HAG-003 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md"
+      },
+      {
+        "code": "W013",
+        "message": "governing artifact VER-HAG-001 is not active",
+        "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md"
+      },
+      {
+        "code": "W018",
+        "message": "adr_required architecture ARCH-HAG-001 has no selected active deciding ADR",
+        "path": "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md"
+      }
+    ]
+  },
+  "source_reference_commit": "82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1",
+  "contract": {
+    "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md",
+    "status": "draft",
+    "sha256_before": "7548169d60acef3fc179823f6c6ec8cd447f98b47adaacdb43c8f69e6ef4e351",
+    "sha256_after": "abfd075c17b656f6c49bed02e2b06580128507b84ffc1bebb4810cf667926775",
+    "rules": [
+      "HAG-OPS-007",
+      "HAG-OPS-008",
+      "HAG-OPS-009",
+      "HAG-OPS-010",
+      "HAG-OPS-011"
+    ]
+  },
+  "delivered": [
+    "Component responsibilities and first server candidate contents",
+    "Exact runtime/database target pins and local Docker readiness",
+    "Canonical coordinated combination identity and compatibility policy",
+    "Separate qualification/release/publication/installation/deployment evidence",
+    "Minimum later release-tooling extensions and Phase 1 handoff"
+  ],
+  "not_performed": [
+    "Product code implementation",
+    "Artifact definition approval",
+    "Work-order start transition",
+    "Container execution or application qualification",
+    "Public release or external publication/deployment"
+  ],
+  "open_item": "RISK-HAG-001 remains raised: Memgraph-side read-only enforcement",
+  "next_engineering_phase": "Phase 1 artifact/API/schema contracts and scenarios; obtain definition decisions before implementation start.",
+  "validation": {
+    "valid": true,
+    "artifact_count": 1927,
+    "error_count": 0,
+    "warning_count": 61,
+    "advisory_count": 0,
+    "plane_counts": {
+      "governance": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "maintenance": {
+        "errors": 0,
+        "warnings": 61
+      },
+      "policy": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "structure": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "selected_findings": [],
+    "raw_result_sha256": "63a4a989bef738ee5d033e8aa73ac483a8a7632785b5ed6532087b3a2bb15f69",
+    "raw_result_delivery": "hosted-artifact-graph-phase0.zip/evaluator-results/phase0-validation.json"
+  },
+  "retained_results": {
+    "approve-apply": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-approve-apply.json",
+      "sha256": "de7fd699fcfb6fac94995fe260f1c0f755c816d6ffa9bc2b5c47b103d920f32a"
+    },
+    "start-preflight": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-start-preflight.json",
+      "sha256": "71c067d960c8ac71ee0c07dbcc85bd0a312c93cd74f5132d95e1c2144d56c0ec"
+    },
+    "start-readiness": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-start-readiness.json",
+      "sha256": "3bb760d2da1956a9c03a39d86d806ef8cb9a5906124882b1f9711857bd7128ca"
+    }
+  },
+  "current_start_checkpoint": {
+    "outcome": "blocked",
+    "blocked_by": [
+      "QGP-G3-PREFLIGHT: governing artifact ARCH-HAG-001 is not active"
+    ],
+    "current_lifecycle_state": [
+      "WO-HAG-001 is approved."
+    ],
+    "next": {
+      "procedure_id": "PROC-WO-START",
+      "step_id": "STEP-WO-START-PREFLIGHT",
+      "action": "Escalate QGP-G3-PREFLIGHT under DR-REMEDIATION-SCOPE"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Escalate to the accountable owner under DR-REMEDIATION-SCOPE: governing artifact ARCH-HAG-001 is not active"
+    }
+  },
+  "phase0_outcome": "Contract preparation complete and structurally valid; definitions remain draft and implementation start is blocked."
+}
