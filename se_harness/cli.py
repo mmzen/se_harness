@@ -658,6 +658,7 @@ def _decide(args: argparse.Namespace) -> int:
             revisit=args.revisit,
             mitigated_by=tuple(args.mitigated_by or ()),
             avoided_by=tuple(args.avoided_by or ()),
+            authority_owner=args.authority_owner,
             apply=bool(args.apply),
         )
         result = plan.result
@@ -1083,7 +1084,8 @@ def build_parser() -> argparse.ArgumentParser:
     decide.add_argument("target", nargs="?", default=".")
     decide.add_argument("--artifact", required=True, help="the decision to dispose")
     decide.add_argument("--option", help="the declared option identifier that answers the decision")
-    decide.add_argument("--decision", required=True, help="the accountable role disposing the decision")
+    decide.add_argument("--decision", required=True, help="the actual human decision-maker; this value does not authenticate the human or grant consent")
+    decide.add_argument("--authority-owner", help="explicit existing owner label under which that human decided; requires established authority, not authentication; omitted, --decision must match an owner")
     decide.add_argument("--reason", help="the verbatim answer; required")
     decide.add_argument("--defer", action="store_true", help="defer instead of deciding; needs --scope and --revisit")
     decide.add_argument("--scope", action="append", help="ARTIFACT-ID:FROM-TO transition a deferral admits; repeat per transition")

@@ -316,7 +316,7 @@ def _set_disposition(lines: list[str], fields: Mapping[str, Any]) -> None:
     while insert_at > 0 and lines[insert_at - 1] == "":
         insert_at -= 1
     rendered = ["", "[disposition]"]
-    for key in ("option", "label", "decided_by", "decided_at", "reason", "revisit", "scope"):
+    for key in ("option", "label", "decided_by", "authority_owner", "decided_at", "reason", "revisit", "scope"):
         value = fields.get(key)
         if value is None:
             continue

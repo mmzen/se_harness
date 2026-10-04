@@ -549,6 +549,11 @@ def _check_deviation_fields(
         add_error(errors, artifact, report_root, E_DCM_002, "a deviation's options are drawn from amend, supersede, accept, stop and include stop", plane="structure")
 
 
+def valid_authority_owner(value: Any) -> bool:
+    """Shape of an explicit owner claim, not proof of the claimant's authority."""
+    return isinstance(value, str) and bool(value.strip()) and len(value) <= 128 and value.isprintable()
+
+
 def _check_decision_disposition(
     artifact: Artifact,
     kind: Any,
@@ -576,6 +581,9 @@ def _check_decision_disposition(
             for key in ("decided_by", "decided_at", "reason", "label"):
                 if not isinstance(disposition.get(key), str) or not disposition[key].strip():
                     add_error(errors, artifact, report_root, E_DCM_003, f"disposition field '{key}' must be a non-empty string", plane="governance")
+            if "authority_owner" in disposition and not valid_authority_owner(disposition["authority_owner"]):
+                add_error(errors, artifact, report_root, E_DCM_003,
+                          "disposition field 'authority_owner' must be non-blank printable text of at most 128 characters", plane="governance")
             if artifact.status == "deferred" and (not isinstance(disposition.get("scope"), list) or not disposition.get("revisit")):
                 add_error(errors, artifact, report_root, E_DCM_003, "a deferred decision records its scope and its revisit trigger", plane="governance")
             if artifact.status == "decided" and kind == "deviation" and option == "accept":

@@ -21,6 +21,19 @@ INSTALLED_GATES = ENGINEERING_ROOT / "QUALITY_GATES.json"
 
 
 class WorkflowDocumentationContractTests(unittest.TestCase):
+    def test_decision_help_and_procedure_distinguish_identity_from_owner_claim(self):
+        from tests.cli_support import invoke
+        code, output, error = invoke('decide', '--help')
+        self.assertEqual(0, code, error)
+        output = ' '.join(output.split())
+        self.assertIn('--authority-owner', output)
+        self.assertIn('actual human decision-maker', output)
+        self.assertIn('does not authenticate', output)
+        procedure = (ENGINEERING_ROOT / 'harness/AUTHORIZE_WORK.md').read_text(encoding='utf-8')
+        self.assertIn('--decision mmzen --authority-owner engineering-owner', procedure)
+        self.assertIn('both preview and apply', procedure)
+        self.assertIn('Neither string authenticates', procedure)
+
     def test_integrity_policy_keeps_default_schema_and_bounded_plugin_exception(self) -> None:
         # Machine lock semantics remain unchanged; current routes need no pointer.
         from se_harness.integrity import LOCK_SCHEMA

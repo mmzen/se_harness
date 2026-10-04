@@ -409,6 +409,44 @@ class BorrowedStopTests(RiskFixture):
 
 
 class DisposalTests(RiskFixture):
+    def test_explicit_owner_binding_keeps_paired_risk_human_attribution(self):
+        for number, extra, state in (
+            (1, ('--option', 'accept', '--revisit', 'v9'), 'accepted'),
+            (2, ('--option', 'avoid'), 'avoided'),
+            (3, ('--option', 'mitigate', '--mitigated-by', 'WO-001'), 'mitigating'),
+            (4, ('--withdraw',), 'withdrawn'),
+        ):
+            risk_id, decision_id = f'RISK-PRD-00{number}', f'DEC-PRD-00{number}'
+            code, output, error = self.raise_risk(risk_id=risk_id, decision_id=decision_id)
+            self.assertEqual(0, code, output + error)
+            code, output, error = self.decide(*extra, '--authority-owner', 'engineering-owner',
+                                             '--reason', 'The human selected this outcome.', actor='mmzen', decision_id=decision_id)
+            self.assertEqual(0, code, output + error)
+            risk = (self.root / f'docs/engineering/product/risks/{risk_id}.md').read_text(encoding='utf-8')
+            decision = (self.root / f'docs/engineering/product/decisions/{decision_id}.md').read_text(encoding='utf-8')
+            self.assertIn(f'status = "{state}"', risk)
+            self.assertEqual(2, risk.count('decided_by = "mmzen"'))
+            self.assertEqual(2, decision.count('decided_by = "mmzen"'))
+            self.assertIn('authority_owner = "engineering-owner"', decision)
+        self.assertEqual([], [f'{i.code}: {i.message}' for i in self.validate().errors])
+
+    def test_explicit_owner_binding_keeps_paired_refusals_and_deferral_atomic(self):
+        self.in_progress_work_order()
+        code, output, error = self.raise_risk()
+        self.assertEqual(0, code, output + error)
+        before = (self.risk_file().read_bytes(), self.decision_file().read_bytes())
+        for extra in (('--option', 'accept'), ('--option', 'mitigate'),
+                      ('--option', 'avoid', '--avoided-by', 'WO-001'),
+                      ('--option', 'avoid', '--authority-owner', 'unrelated')):
+            code, output, error = self.decide('--authority-owner', 'engineering-owner', '--reason', 'Known answer.', *extra, actor='mmzen')
+            self.assertEqual(1, code, output + error)
+            self.assertEqual(before, (self.risk_file().read_bytes(), self.decision_file().read_bytes()))
+        code, output, error = self.decide('--defer', '--authority-owner', 'engineering-owner', '--reason', 'Wait.',
+                                         '--scope', 'WO-001:in_progress-implemented', '--revisit', 'v9', actor='mmzen')
+        self.assertEqual(0, code, output + error)
+        self.assertEqual(before[0], self.risk_file().read_bytes())
+        self.assertIn('authority_owner = "engineering-owner"', self.decision_file().read_text(encoding='utf-8'))
+
     """REQ-RSK-013: the answer is given once, on the decision, and copied over (RSK-MGT-016 to RSK-MGT-021)."""
 
     def test_disposing_the_decision_moves_the_risk_in_the_same_act_for_each_option(self) -> None:

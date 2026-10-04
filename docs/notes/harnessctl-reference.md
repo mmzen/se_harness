@@ -77,7 +77,7 @@ These rules hold on every subcommand (`WO-ECP-022`):
 | `check-pr` | managed GitHub CI | scope check; may rebind an in-progress handoff | check one or several approved work orders and their combined diff |
 | `check` | human or agent selecting work or assessing a checkpoint | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized actor; a person or agent uses the same recorded WO approval for start and completion after local checks pass (see [one execution route](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
-| `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
+| `decide` | the human who holds `DR-DECISION-DISPOSE`, directly or under an explicitly named eligible owner label | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
 | `raise-risk` | anyone working: a reviewer, an implementer, or an agent mid-execution; no decision right is needed | writes one risk artifact in `raised`, and with `--with-decision` the open decision that blocks the threatened artifacts; dry-run is read-only | record one measured threat to governed work so that an owner answers it before the threatened stage moves |
 | `risks` | human or agent | read-only | list the risks threatening one artifact and its governing chain, with score, state and pending decision |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
@@ -410,14 +410,25 @@ presentation consumes that result; it does not replace or recompute it.
 ## Decision disposition
 
 ```text
-harnessctl decide [TARGET] --artifact DEC-... --option OPTION-ID --decision ROLE --reason TEXT [--revisit TEXT] [--apply] [--json]
-harnessctl decide [TARGET] --artifact DEC-... --defer --scope ARTIFACT-ID:FROM-TO ... --revisit TEXT --decision ROLE --reason TEXT [--apply]
-harnessctl decide [TARGET] --artifact DEC-... --withdraw --decision ROLE --reason TEXT [--apply]
+harnessctl decide [TARGET] --artifact DEC-... --option OPTION-ID --decision ACTOR [--authority-owner OWNER] --reason TEXT [--revisit TEXT] [--apply] [--json]
+harnessctl decide [TARGET] --artifact DEC-... --defer --scope ARTIFACT-ID:FROM-TO ... --revisit TEXT --decision ACTOR [--authority-owner OWNER] --reason TEXT [--apply]
+harnessctl decide [TARGET] --artifact DEC-... --withdraw --decision ACTOR [--authority-owner OWNER] --reason TEXT [--apply]
 ```
 
 A decision artifact (`DEC-`) records one pending question, or one implementation deviation from one rule of one specification. While it is `open`, every artifact named in its `blocks` relation is refused its transitions by the `QGP-*-DECISION` predicate of the gate that transition would pass. The refusal names the decision, its question, its options, the deciding role, and the `decide` command that clears it.
 
-`decide` is the only way a decision changes state; `transition` refuses it. Without `--apply` the command plans and reports; with `--apply` it writes the `[disposition]` table (the option, its label, the role, the time, and the verbatim reason) and one lifecycle event. `--option` must name one of the options the artifact declares. A deferral needs one `--scope` entry per transition it admits and a `--revisit` trigger; the scoped transitions pass, every other blocked transition still waits. Accepting a deviation needs `--revisit`, because acceptance is time-bounded. The wrong role is refused with `DR-DECISION-DISPOSE`.
+`decide` is the only way a decision changes state; `transition` refuses it. Without `--apply` the command plans and reports; with `--apply` it writes the `[disposition]` table (the option, its label, the actual human, the time, and the verbatim reason) and one lifecycle event. `--option` must name one of the options the artifact declares. A deferral needs one `--scope` entry per transition it admits and a `--revisit` trigger; the scoped transitions pass, every other blocked transition still waits. Accepting a deviation needs `--revisit`, because acceptance is time-bounded. An ineligible owner is refused with `DR-DECISION-DISPOSE`.
+
+`--decision ACTOR` records the actual human who made the decision. With
+`--authority-owner OWNER`, the evaluator checks OWNER against the existing
+holders for the blocked artifacts, or the departed specification for a
+deviation. OWNER must match exactly and contain non-blank printable text of
+at most 128 characters. It is retained separately as `authority_owner` in
+the disposition. Without the option, ACTOR must directly match a holder.
+Both preview and apply use the same checks. The CLI does not authenticate
+these claims or grant consent; the caller must first establish the human's
+authority and obtain the exact decision. Existing owner labels and historical
+records are not changed.
 
 The validator reports a malformed decision as `E-DCM-001` to `E-DCM-003`, prose in a legacy definition's `## Open decisions` section as `E-DCM-004`, a deviation whose `against` fragment is not a rule identifier of the named specification (`SPEC-xxx#PREFIX-AREA-NNN`) as `E-DCM-005`, and an accepted deviation past its revisit or accepted twice against the same rule as `W-DCM-001` and `W-DCM-002`. See [decision artifacts](decision-artifacts.md) for the model.
 

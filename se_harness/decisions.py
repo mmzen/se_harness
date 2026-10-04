@@ -1,8 +1,8 @@
 """The decision artifact: disposition of a pending decision (SPEC-DCM-001).
 
 A decision (`DEC-`) blocks the transitions of the artifacts it names while it
-is `open`. The accountable role disposes it with one declared option; the
-tool records the option identifier, its label, the role, the time and the
+is `open`. The accountable human disposes it with one declared option; the
+tool records the option identifier, its label, the human, the time and the
 verbatim reason as the decision's `[disposition]` table and lifecycle event.
 `deferred` needs a scope of admitted transitions and a revisit trigger;
 `accept` on a deviation needs a revisit trigger. Every rule here is
@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from se_harness.installer import HarnessError
+from se_harness.engine.validation_decisions import valid_authority_owner
 
 #: `ARTIFACT-ID:FROM-TO`, the transition a deferral admits.
 SCOPE_ENTRY = re.compile(r"^([A-Z][A-Z0-9-]*-\d{3}):([a-z_]+)-([a-z_]+)$")
@@ -104,6 +105,7 @@ def validate_disposition_request(
     reason: str | None,
     revisit: str | None,
     scope: tuple[str, ...],
+    authority_owner: str | None = None,
 ) -> dict[str, str | list[str]]:
     """Check one disposition request and return the `[disposition]` fields to write."""
 
@@ -111,15 +113,22 @@ def validate_disposition_request(
         raise HarnessError(f"{decision.artifact_id} is not a decision")
     if decision.status not in {"open", "deferred"}:
         raise HarnessError(f"decision {decision.artifact_id} is {decision.status}; only an open or deferred decision is disposed")
+    if not isinstance(actor, str) or not actor.strip():
+        raise HarnessError("decision actor must name the actual decision-maker")
+    if authority_owner is not None and not valid_authority_owner(authority_owner):
+        raise HarnessError("--authority-owner must be non-blank printable text of at most 128 characters")
+    holder = actor if authority_owner is None else authority_owner
     roles = deciding_roles(decision, catalog)
-    if actor not in roles:
+    if holder not in roles:
         holders = ", ".join(sorted(roles)) if roles else "no role (the decision blocks nothing readable)"
         raise HarnessError(
-            f"DR-DECISION-DISPOSE: {decision.artifact_id} is disposed by {holders}, not {actor}"
+            f"DR-DECISION-DISPOSE: {decision.artifact_id} is disposed by {holders}, not {holder}"
         )
     if not reason or not reason.strip():
         raise HarnessError(f"disposing {decision.artifact_id} requires --reason with the verbatim answer")
     fields: dict[str, str | list[str]] = {"decided_by": actor, "reason": reason}
+    if authority_owner is not None:
+        fields["authority_owner"] = authority_owner
     if target == "withdrawn":
         fields["option"] = "withdrawn"
         fields["label"] = "The question no longer applies."
@@ -168,6 +177,7 @@ def dispose_decision(
     scope: tuple[str, ...] = (),
     revisit: str | None = None,
     apply: bool = False,
+    authority_owner: str | None = None,
 ) -> Any:
     """Plan or apply one disposition through the atomic transition path."""
 
@@ -186,6 +196,7 @@ def dispose_decision(
         "option": option,
         "revisit": revisit,
         "scope": tuple(scope),
+        "authority_owner": authority_owner,
     }
     return plan_transition(
         repository,
