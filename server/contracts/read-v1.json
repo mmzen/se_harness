@@ -1,0 +1,1533 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:se-harness:graph-read:v1",
+  "title": "Phase 1 domain read requests and response shapes",
+  "$ref": "#/$defs/Request",
+  "$defs": {
+    "View": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "baseline"
+            },
+            "baseline_id": {
+              "type": "string",
+              "pattern": "^se-harness-artifact-baseline/v1:sha256:[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "kind",
+            "baseline_id"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "context"
+            },
+            "context_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "context_version": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            }
+          },
+          "required": [
+            "kind",
+            "context_id",
+            "context_version"
+          ]
+        }
+      ]
+    },
+    "Comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "comparison"
+        },
+        "left": {
+          "$ref": "#/$defs/View"
+        },
+        "right": {
+          "$ref": "#/$defs/View"
+        }
+      },
+      "required": [
+        "kind",
+        "left",
+        "right"
+      ]
+    },
+    "Budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rows": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2097152
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "rows",
+        "bytes",
+        "depth"
+      ]
+    },
+    "Binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+        },
+        "revision_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "revision_id"
+      ]
+    },
+    "Edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+            },
+            "revision_id": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "artifact_id",
+            "revision_id"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+            },
+            "revision_id": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "artifact_id",
+            "revision_id"
+          ]
+        }
+      },
+      "required": [
+        "source",
+        "kind",
+        "target"
+      ]
+    },
+    "RequestFields": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "se-harness-graph-read/v1"
+        },
+        "project_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "budget": {
+          "$ref": "#/$defs/Budget"
+        }
+      },
+      "required": [
+        "schema",
+        "project_id",
+        "budget"
+      ]
+    },
+    "Request": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/RequestFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "revision"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "artifact_id": {
+                  "type": "string",
+                  "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                },
+                "revision_id": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "artifact_id",
+                "revision_id"
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/RequestFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "work-context"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "work_order_id": {
+                  "type": "string",
+                  "pattern": "^WO-[A-Z0-9]+-[0-9]{3,}$"
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "work_order_id"
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/RequestFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "compare"
+                },
+                "view": {
+                  "$ref": "#/$defs/Comparison"
+                }
+              },
+              "required": [
+                "operation",
+                "view"
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/RequestFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "impact"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "artifact_id": {
+                  "type": "string",
+                  "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "artifact_id"
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/RequestFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "lineage"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "artifact_id": {
+                  "type": "string",
+                  "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "artifact_id"
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/RequestFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "check"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "artifact_id": {
+                  "type": "string",
+                  "pattern": "^(WO|VREC|RLS|DEC)-[A-Z0-9]+-[0-9]{3,}$"
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "artifact_id"
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/RequestFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "cypher"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "query": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 16384
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "query",
+                "parameters"
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        }
+      ]
+    },
+    "UnresolvedReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+        }
+      },
+      "required": [
+        "source_artifact_id",
+        "kind",
+        "target_artifact_id"
+      ]
+    },
+    "Continuation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "enum": [
+                "row_limit",
+                "byte_limit",
+                "depth_limit",
+                "time_limit"
+              ]
+            },
+            "strategy": {
+              "const": "repeat_at_same_view_with_narrower_selection"
+            },
+            "instructions": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "reason",
+            "strategy",
+            "instructions"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "const": "unresolved_references"
+            },
+            "strategy": {
+              "const": "create_a_new_complete_view"
+            },
+            "instructions": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "reason",
+            "strategy",
+            "instructions"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "const": "binding_unavailable"
+            },
+            "strategy": {
+              "const": "restore_exact_binding_and_repeat_at_same_view"
+            },
+            "instructions": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "reason",
+            "strategy",
+            "instructions"
+          ]
+        }
+      ]
+    },
+    "ResponseFields": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "se-harness-graph-read/v1"
+        },
+        "project_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "observed_project_version": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "evaluator": {
+          "$ref": "urn:se-harness:remote-wire:v1#/$defs/Evaluator"
+        },
+        "provenance": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:se-harness:remote-wire:v1#/$defs/Source"
+          },
+          "maxItems": 500
+        },
+        "unresolved_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UnresolvedReference"
+          },
+          "maxItems": 500
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "continuation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "project_id",
+        "observed_project_version",
+        "evaluator",
+        "provenance",
+        "unresolved_references",
+        "complete",
+        "continuation"
+      ]
+    },
+    "Response": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ResponseFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "revision"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "data": {
+                  "oneOf": [
+                    {
+                      "$ref": "urn:se-harness:remote-wire:v1#/$defs/StoredRevision"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "evaluator_output": {
+                  "oneOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "data",
+                "evaluator_output"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "complete": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "continuation": {
+                        "type": "null"
+                      },
+                      "unresolved_references": {
+                        "maxItems": 0
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "continuation": {
+                        "$ref": "#/$defs/Continuation"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "complete": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "data": {
+                        "$ref": "urn:se-harness:remote-wire:v1#/$defs/StoredRevision"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ResponseFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "work-context"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "data": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "work_order": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "artifact_id": {
+                          "type": "string",
+                          "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                        },
+                        "revision_id": {
+                          "type": "string",
+                          "pattern": "^sha256:[0-9a-f]{64}$"
+                        }
+                      },
+                      "required": [
+                        "artifact_id",
+                        "revision_id"
+                      ]
+                    },
+                    "governing_artifacts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "artifact_id": {
+                            "type": "string",
+                            "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                          },
+                          "revision_id": {
+                            "type": "string",
+                            "pattern": "^sha256:[0-9a-f]{64}$"
+                          }
+                        },
+                        "required": [
+                          "artifact_id",
+                          "revision_id"
+                        ]
+                      },
+                      "maxItems": 500
+                    },
+                    "declared_scope": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "maxItems": 500
+                    },
+                    "dependencies": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "artifact_id": {
+                            "type": "string",
+                            "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                          },
+                          "revision_id": {
+                            "type": "string",
+                            "pattern": "^sha256:[0-9a-f]{64}$"
+                          }
+                        },
+                        "required": [
+                          "artifact_id",
+                          "revision_id"
+                        ]
+                      },
+                      "maxItems": 500
+                    },
+                    "relevant_decisions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "artifact_id": {
+                            "type": "string",
+                            "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                          },
+                          "revision_id": {
+                            "type": "string",
+                            "pattern": "^sha256:[0-9a-f]{64}$"
+                          }
+                        },
+                        "required": [
+                          "artifact_id",
+                          "revision_id"
+                        ]
+                      },
+                      "maxItems": 500
+                    }
+                  },
+                  "required": [
+                    "work_order",
+                    "governing_artifacts",
+                    "declared_scope",
+                    "dependencies",
+                    "relevant_decisions"
+                  ]
+                },
+                "evaluator_output": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "data",
+                "evaluator_output"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "complete": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "continuation": {
+                        "type": "null"
+                      },
+                      "unresolved_references": {
+                        "maxItems": 0
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "continuation": {
+                        "$ref": "#/$defs/Continuation"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ResponseFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "compare"
+                },
+                "view": {
+                  "$ref": "#/$defs/Comparison"
+                },
+                "data": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "changes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "artifact_id": {
+                            "type": "string",
+                            "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                          },
+                          "before": {
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "after": {
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "artifact_id",
+                          "before",
+                          "after"
+                        ]
+                      },
+                      "maxItems": 500
+                    },
+                    "added_relations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "source": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "artifact_id": {
+                                "type": "string",
+                                "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                              },
+                              "revision_id": {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              }
+                            },
+                            "required": [
+                              "artifact_id",
+                              "revision_id"
+                            ]
+                          },
+                          "kind": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "target": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "artifact_id": {
+                                "type": "string",
+                                "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                              },
+                              "revision_id": {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              }
+                            },
+                            "required": [
+                              "artifact_id",
+                              "revision_id"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "source",
+                          "kind",
+                          "target"
+                        ]
+                      },
+                      "maxItems": 500
+                    },
+                    "removed_relations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "source": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "artifact_id": {
+                                "type": "string",
+                                "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                              },
+                              "revision_id": {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              }
+                            },
+                            "required": [
+                              "artifact_id",
+                              "revision_id"
+                            ]
+                          },
+                          "kind": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "target": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "artifact_id": {
+                                "type": "string",
+                                "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                              },
+                              "revision_id": {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              }
+                            },
+                            "required": [
+                              "artifact_id",
+                              "revision_id"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "source",
+                          "kind",
+                          "target"
+                        ]
+                      },
+                      "maxItems": 500
+                    }
+                  },
+                  "required": [
+                    "changes",
+                    "added_relations",
+                    "removed_relations"
+                  ]
+                },
+                "evaluator_output": {
+                  "oneOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "data",
+                "evaluator_output"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "complete": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "continuation": {
+                        "type": "null"
+                      },
+                      "unresolved_references": {
+                        "maxItems": 0
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "continuation": {
+                        "$ref": "#/$defs/Continuation"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ResponseFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "impact"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "data": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "root": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "artifact_id": {
+                          "type": "string",
+                          "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                        },
+                        "revision_id": {
+                          "type": "string",
+                          "pattern": "^sha256:[0-9a-f]{64}$"
+                        }
+                      },
+                      "required": [
+                        "artifact_id",
+                        "revision_id"
+                      ]
+                    },
+                    "artifacts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "artifact_id": {
+                            "type": "string",
+                            "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                          },
+                          "revision_id": {
+                            "type": "string",
+                            "pattern": "^sha256:[0-9a-f]{64}$"
+                          }
+                        },
+                        "required": [
+                          "artifact_id",
+                          "revision_id"
+                        ]
+                      },
+                      "maxItems": 500
+                    },
+                    "relations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "source": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "artifact_id": {
+                                "type": "string",
+                                "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                              },
+                              "revision_id": {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              }
+                            },
+                            "required": [
+                              "artifact_id",
+                              "revision_id"
+                            ]
+                          },
+                          "kind": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "target": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "artifact_id": {
+                                "type": "string",
+                                "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                              },
+                              "revision_id": {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              }
+                            },
+                            "required": [
+                              "artifact_id",
+                              "revision_id"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "source",
+                          "kind",
+                          "target"
+                        ]
+                      },
+                      "maxItems": 500
+                    }
+                  },
+                  "required": [
+                    "root",
+                    "artifacts",
+                    "relations"
+                  ]
+                },
+                "evaluator_output": {
+                  "oneOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "data",
+                "evaluator_output"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "complete": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "continuation": {
+                        "type": "null"
+                      },
+                      "unresolved_references": {
+                        "maxItems": 0
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "continuation": {
+                        "$ref": "#/$defs/Continuation"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ResponseFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "lineage"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "data": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "root": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "artifact_id": {
+                          "type": "string",
+                          "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                        },
+                        "revision_id": {
+                          "type": "string",
+                          "pattern": "^sha256:[0-9a-f]{64}$"
+                        }
+                      },
+                      "required": [
+                        "artifact_id",
+                        "revision_id"
+                      ]
+                    },
+                    "artifacts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "artifact_id": {
+                            "type": "string",
+                            "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                          },
+                          "revision_id": {
+                            "type": "string",
+                            "pattern": "^sha256:[0-9a-f]{64}$"
+                          }
+                        },
+                        "required": [
+                          "artifact_id",
+                          "revision_id"
+                        ]
+                      },
+                      "maxItems": 500
+                    },
+                    "relations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "source": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "artifact_id": {
+                                "type": "string",
+                                "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                              },
+                              "revision_id": {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              }
+                            },
+                            "required": [
+                              "artifact_id",
+                              "revision_id"
+                            ]
+                          },
+                          "kind": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "target": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "artifact_id": {
+                                "type": "string",
+                                "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                              },
+                              "revision_id": {
+                                "type": "string",
+                                "pattern": "^sha256:[0-9a-f]{64}$"
+                              }
+                            },
+                            "required": [
+                              "artifact_id",
+                              "revision_id"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "source",
+                          "kind",
+                          "target"
+                        ]
+                      },
+                      "maxItems": 500
+                    }
+                  },
+                  "required": [
+                    "root",
+                    "artifacts",
+                    "relations"
+                  ]
+                },
+                "evaluator_output": {
+                  "oneOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "data",
+                "evaluator_output"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "complete": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "continuation": {
+                        "type": "null"
+                      },
+                      "unresolved_references": {
+                        "maxItems": 0
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "continuation": {
+                        "$ref": "#/$defs/Continuation"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ResponseFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "check"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "data": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "artifact": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "artifact_id": {
+                          "type": "string",
+                          "pattern": "^[A-Z]+-[A-Z0-9]+-[0-9]{3,}$"
+                        },
+                        "revision_id": {
+                          "type": "string",
+                          "pattern": "^sha256:[0-9a-f]{64}$"
+                        }
+                      },
+                      "required": [
+                        "artifact_id",
+                        "revision_id"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "artifact"
+                  ]
+                },
+                "evaluator_output": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "data",
+                "evaluator_output"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "complete": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "continuation": {
+                        "type": "null"
+                      },
+                      "unresolved_references": {
+                        "maxItems": 0
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "continuation": {
+                        "$ref": "#/$defs/Continuation"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ResponseFields"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "operation": {
+                  "const": "cypher"
+                },
+                "view": {
+                  "$ref": "#/$defs/View"
+                },
+                "data": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "columns": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "maxItems": 500
+                    },
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "array"
+                      },
+                      "maxItems": 500
+                    }
+                  },
+                  "required": [
+                    "columns",
+                    "rows"
+                  ]
+                },
+                "evaluator_output": {
+                  "oneOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "operation",
+                "view",
+                "data",
+                "evaluator_output"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "complete": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "continuation": {
+                        "type": "null"
+                      },
+                      "unresolved_references": {
+                        "maxItems": 0
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "continuation": {
+                        "$ref": "#/$defs/Continuation"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "unevaluatedProperties": false
+        }
+      ]
+    }
+  },
+  "description": "Shapes only. Apply the protocol guide for identity equality, released findings, aggregate budgets, view membership, Cypher admission and completeness. No service is implemented by this schema."
+}

@@ -1,0 +1,1554 @@
+{
+  "schema": "se-harness-hosted-scenarios/v1",
+  "purpose": "Independent Phase 1 expectations from approved definitions; examples are synthetic shapes, not observed service results.",
+  "source_commit": "82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1",
+  "reference_context": {
+    "work_order_id": "WO-RLS-038",
+    "governing_ids": [
+      "ADR-IAR-012",
+      "ARCH-IAR-012",
+      "CAP-IAR-002",
+      "CAP-RLO-004",
+      "INT-IAR-001",
+      "INT-RLO-001",
+      "REQ-IAR-030",
+      "REQ-RLO-019",
+      "REQ-RLO-020",
+      "SPEC-IAR-016",
+      "SPEC-RLO-006",
+      "VER-RLS-002"
+    ],
+    "dependency_ids": [
+      "VREC-RLS-001",
+      "VREC-RLS-002"
+    ],
+    "relevant_decision_ids": [
+      "DEC-RLS-007",
+      "DEC-RLS-008"
+    ],
+    "declared_scope": [
+      "README.md",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/release-0-22-0/README.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "docs/notes/release-delivery-completion.md",
+      "docs/engineering/release-0-22-0/work-orders/WO-RLS-038.md",
+      "docs/engineering/release-0-22-0/verification/VER-RLS-002.md",
+      "docs/engineering/release-0-22-0/decisions/DEC-RLS-007.md",
+      "docs/engineering/release-0-22-0/decisions/DEC-RLS-008.md",
+      "docs/engineering/release-0-22-0/evidence/WO-RLS-038/"
+    ],
+    "expectation_source": "SPEC-HAG-001 HAG-DAT-005 and the pinned original WO Git blob; evaluator findings must be compared with the released oracle at that source."
+  },
+  "wire_examples": [
+    {
+      "name": "revision-request",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "revision",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "artifact_id": "REQ-HAGV-001",
+        "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+      }
+    },
+    {
+      "name": "contradictory-view",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "revision",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15",
+          "context_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "artifact_id": "REQ-HAGV-001",
+        "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+      }
+    },
+    {
+      "name": "missing-view",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "revision",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "artifact_id": "REQ-HAGV-001",
+        "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+      }
+    },
+    {
+      "name": "unversioned-context",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "revision",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "context",
+          "context_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "artifact_id": "REQ-HAGV-001",
+        "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+      }
+    },
+    {
+      "name": "over-row-budget",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "revision",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "budget": {
+          "rows": 501,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "artifact_id": "REQ-HAGV-001",
+        "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+      }
+    },
+    {
+      "name": "work-context-request",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "work-context",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "work_order_id": "WO-RLS-038"
+      }
+    },
+    {
+      "name": "compare-request",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "compare",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "comparison",
+          "left": {
+            "kind": "baseline",
+            "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+          },
+          "right": {
+            "kind": "context",
+            "context_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+            "context_version": 1
+          }
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        }
+      }
+    },
+    {
+      "name": "impact-request",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "impact",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "artifact_id": "REQ-HAGV-001"
+      }
+    },
+    {
+      "name": "lineage-request",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "lineage",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "artifact_id": "WO-RLS-038"
+      }
+    },
+    {
+      "name": "check-request",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "check",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "artifact_id": "WO-RLS-038"
+      }
+    },
+    {
+      "name": "check-cannot-transition",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "check",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "artifact_id": "WO-RLS-038",
+        "target_state": "verified"
+      }
+    },
+    {
+      "name": "cypher-request",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Request",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "cypher",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "budget": {
+          "rows": 500,
+          "bytes": 2097152,
+          "depth": 8
+        },
+        "query": "MATCH (a:Artifact) WHERE a.artifact_id = $id RETURN a.artifact_id LIMIT 10",
+        "parameters": {
+          "id": "REQ-HAGV-001"
+        }
+      }
+    },
+    {
+      "name": "complete-revision-response",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "revision",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289",
+          "envelope": {
+            "schema": "se-harness-artifact-revision/v1",
+            "project_id": "00000000-0000-4000-8000-000000000001",
+            "artifact_id": "REQ-HAGV-001",
+            "document_sha256": "06058355349f85d86070851f2a8ca1aa880a01a74d4bae27409debe09ccb290c",
+            "original_path": null,
+            "declared_relations": {
+              "derives_from": [
+                "CAP-HAGV-001"
+              ]
+            },
+            "provenance": {
+              "kind": "draft",
+              "principal_id": "author-a",
+              "operation_key": "vector-REQ-HAGV-001",
+              "created_at": "2026-10-04T00:00:00Z"
+            }
+          },
+          "document_base64": "KysrCmlkID0gIlJFUS1IQUdWLTAwMSIKdHlwZSA9ICJyZXF1aXJlbWVudCIKdGl0bGUgPSAiUmV0dXJuIENhZsOpIHRleHQgdW5jaGFuZ2VkLiIKc3RhdHVzID0gImRyYWZ0Igpvd25lcnMgPSBbImF1dGhvci1hIl0KY3JlYXRlZCA9ICIyMDI2LTEwLTA0Igp1cGRhdGVkID0gIjIwMjYtMTAtMDQiCnN0YXRlbWVudCA9ICJSZXR1cm4gQ2Fmw6kgdGV4dCB1bmNoYW5nZWQuIgp2ZXJpZmljYXRpb25fbWV0aG9kID0gWyJ0ZXN0Il0KCltyZWxhdGlvbnNdCmRlcml2ZXNfZnJvbSA9IFsiQ0FQLUhBR1YtMDAxIl0KKysrCgpSZXR1cm4gQ2Fmw6kgdGV4dCB1bmNoYW5nZWQuCg=="
+        },
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null
+      }
+    },
+    {
+      "name": "empty-is-not-complete-revision",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "revision",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": null,
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null
+      }
+    },
+    {
+      "name": "bounded-revision-response",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "revision",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": null,
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": false,
+        "continuation": {
+          "reason": "byte_limit",
+          "strategy": "repeat_at_same_view_with_narrower_selection",
+          "instructions": "Repeat this exact revision request with the allowed 2 MiB byte budget."
+        }
+      }
+    },
+    {
+      "name": "partial-needs-continuation",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "revision",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": null,
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": false,
+        "continuation": null
+      }
+    },
+    {
+      "name": "work-context-response-shape",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "work-context",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "work_order": {
+            "artifact_id": "WO-HAGV-001",
+            "revision_id": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "governing_artifacts": [
+            {
+              "artifact_id": "REQ-HAGV-001",
+              "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+            }
+          ],
+          "declared_scope": [
+            "example/"
+          ],
+          "dependencies": [],
+          "relevant_decisions": []
+        },
+        "evaluator_output": {},
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null
+      }
+    },
+    {
+      "name": "work-context-response-is-not-approval",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "work-context",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "work_order": {
+            "artifact_id": "WO-HAGV-001",
+            "revision_id": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "governing_artifacts": [
+            {
+              "artifact_id": "REQ-HAGV-001",
+              "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+            }
+          ],
+          "declared_scope": [
+            "example/"
+          ],
+          "dependencies": [],
+          "relevant_decisions": []
+        },
+        "evaluator_output": {},
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null,
+        "accepted": true
+      }
+    },
+    {
+      "name": "unresolved-context-shape",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "work-context",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "work_order": {
+            "artifact_id": "WO-HAGV-001",
+            "revision_id": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "governing_artifacts": [
+            {
+              "artifact_id": "REQ-HAGV-001",
+              "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+            }
+          ],
+          "declared_scope": [
+            "example/"
+          ],
+          "dependencies": [],
+          "relevant_decisions": []
+        },
+        "evaluator_output": {},
+        "unresolved_references": [
+          {
+            "source_artifact_id": "WO-HAGV-001",
+            "kind": "implements",
+            "target_artifact_id": "REQ-HAGV-002"
+          }
+        ],
+        "complete": false,
+        "continuation": {
+          "reason": "unresolved_references",
+          "strategy": "create_a_new_complete_view",
+          "instructions": "Resolve the missing requirement in a new explicit context version before a governing claim."
+        }
+      }
+    },
+    {
+      "name": "unresolved-context-cannot-be-complete",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "work-context",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "work_order": {
+            "artifact_id": "WO-HAGV-001",
+            "revision_id": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "governing_artifacts": [
+            {
+              "artifact_id": "REQ-HAGV-001",
+              "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+            }
+          ],
+          "declared_scope": [
+            "example/"
+          ],
+          "dependencies": [],
+          "relevant_decisions": []
+        },
+        "evaluator_output": {},
+        "unresolved_references": [
+          {
+            "source_artifact_id": "WO-HAGV-001",
+            "kind": "implements",
+            "target_artifact_id": "REQ-HAGV-002"
+          }
+        ],
+        "complete": true,
+        "continuation": null
+      }
+    },
+    {
+      "name": "compare-response-shape",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "compare",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "comparison",
+          "left": {
+            "kind": "baseline",
+            "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+          },
+          "right": {
+            "kind": "context",
+            "context_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+            "context_version": 1
+          }
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "changes": [],
+          "added_relations": [],
+          "removed_relations": []
+        },
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null
+      }
+    },
+    {
+      "name": "compare-response-is-not-approval",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "compare",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "comparison",
+          "left": {
+            "kind": "baseline",
+            "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+          },
+          "right": {
+            "kind": "context",
+            "context_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+            "context_version": 1
+          }
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "changes": [],
+          "added_relations": [],
+          "removed_relations": []
+        },
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null,
+        "accepted": true
+      }
+    },
+    {
+      "name": "impact-response-shape",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "impact",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "root": {
+            "artifact_id": "REQ-HAGV-001",
+            "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+          },
+          "artifacts": [],
+          "relations": []
+        },
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null
+      }
+    },
+    {
+      "name": "impact-response-is-not-approval",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "impact",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "root": {
+            "artifact_id": "REQ-HAGV-001",
+            "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+          },
+          "artifacts": [],
+          "relations": []
+        },
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null,
+        "accepted": true
+      }
+    },
+    {
+      "name": "lineage-response-shape",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "lineage",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "root": {
+            "artifact_id": "REQ-HAGV-001",
+            "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+          },
+          "artifacts": [],
+          "relations": []
+        },
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null
+      }
+    },
+    {
+      "name": "lineage-response-is-not-approval",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "lineage",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "root": {
+            "artifact_id": "REQ-HAGV-001",
+            "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+          },
+          "artifacts": [],
+          "relations": []
+        },
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null,
+        "accepted": true
+      }
+    },
+    {
+      "name": "check-response-shape",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "check",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "artifact": {
+            "artifact_id": "WO-HAGV-001",
+            "revision_id": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          }
+        },
+        "evaluator_output": {},
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null
+      }
+    },
+    {
+      "name": "check-response-is-not-approval",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "check",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "artifact": {
+            "artifact_id": "WO-HAGV-001",
+            "revision_id": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          }
+        },
+        "evaluator_output": {},
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null,
+        "accepted": true
+      }
+    },
+    {
+      "name": "cypher-response-shape",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "cypher",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "columns": [
+            "artifact_id"
+          ],
+          "rows": [
+            [
+              "REQ-HAGV-001"
+            ]
+          ]
+        },
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null
+      }
+    },
+    {
+      "name": "cypher-response-is-not-approval",
+      "schema": "urn:se-harness:graph-read:v1#/$defs/Response",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-graph-read/v1",
+        "operation": "cypher",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "baseline",
+          "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+        },
+        "observed_project_version": 1,
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "provenance": [],
+        "data": {
+          "columns": [
+            "artifact_id"
+          ],
+          "rows": [
+            [
+              "REQ-HAGV-001"
+            ]
+          ]
+        },
+        "evaluator_output": null,
+        "unresolved_references": [],
+        "complete": true,
+        "continuation": null,
+        "accepted": true
+      }
+    },
+    {
+      "name": "accepted-receipt-shape",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": "fixture-create-1",
+        "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "context",
+          "context_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "context_version": 1
+        },
+        "versions": {
+          "project": {
+            "before": 2,
+            "after": 3
+          },
+          "context": {
+            "context_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+            "before": 0,
+            "after": 1
+          }
+        },
+        "affected_revision_ids": [
+          "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+        ],
+        "affected_artifacts": [
+          {
+            "artifact_id": "REQ-HAGV-001",
+            "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+          }
+        ],
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "evaluator_output": null,
+        "outcome": "accepted",
+        "http_status": 200,
+        "receipt_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"
+      }
+    },
+    {
+      "name": "accepted-needs-receipt",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": "fixture-create-1",
+        "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "view": {
+          "kind": "context",
+          "context_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "context_version": 1
+        },
+        "versions": {
+          "project": {
+            "before": 2,
+            "after": 3
+          },
+          "context": {
+            "context_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+            "before": 0,
+            "after": 1
+          }
+        },
+        "affected_revision_ids": [
+          "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+        ],
+        "affected_artifacts": [
+          {
+            "artifact_id": "REQ-HAGV-001",
+            "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+          }
+        ],
+        "evaluator": {
+          "version": "0.22.0",
+          "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+          "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+        },
+        "evaluator_output": null,
+        "outcome": "accepted",
+        "http_status": 200,
+        "receipt_id": null
+      }
+    },
+    {
+      "name": "400-refusal",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 400,
+        "receipt_id": null,
+        "error": {
+          "code": "HAG_REMOTE_MALFORMED",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    },
+    {
+      "name": "401-refusal",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 401,
+        "receipt_id": null,
+        "error": {
+          "code": "HAG_REMOTE_UNAUTHENTICATED",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    },
+    {
+      "name": "403-refusal",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 403,
+        "receipt_id": null,
+        "error": {
+          "code": "HAG_REMOTE_FORBIDDEN",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    },
+    {
+      "name": "404-refusal",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 404,
+        "receipt_id": null,
+        "error": {
+          "code": "HAG_REMOTE_UNKNOWN_IDENTITY",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    },
+    {
+      "name": "409-refusal",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 409,
+        "receipt_id": null,
+        "error": {
+          "code": "HAG_REMOTE_STALE_PROJECT",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    },
+    {
+      "name": "refusal-cannot-have-receipt",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 409,
+        "receipt_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "error": {
+          "code": "HAG_REMOTE_STALE_PROJECT",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    },
+    {
+      "name": "refusal-cannot-have-effects",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [
+          "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+        ],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 409,
+        "receipt_id": null,
+        "error": {
+          "code": "HAG_REMOTE_STALE_PROJECT",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    },
+    {
+      "name": "remote-code-does-not-reuse-evaluator-code",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": false,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 409,
+        "receipt_id": null,
+        "error": {
+          "code": "WEX201",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    },
+    {
+      "name": "422-refusal",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 422,
+        "receipt_id": null,
+        "error": {
+          "code": "HAG_REMOTE_INVALID_DRAFT",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    },
+    {
+      "name": "429-refusal",
+      "schema": "urn:se-harness:remote-result:v1#/$defs/Result",
+      "valid_shape": true,
+      "value": {
+        "schema": "se-harness-remote-result/v1",
+        "operation_key": null,
+        "request_digest": null,
+        "project_id": null,
+        "view": null,
+        "versions": null,
+        "affected_revision_ids": [],
+        "affected_artifacts": [],
+        "evaluator": null,
+        "evaluator_output": null,
+        "outcome": "refused",
+        "http_status": 429,
+        "receipt_id": null,
+        "error": {
+          "code": "HAG_REMOTE_RESOURCE_LIMIT",
+          "message": "Synthetic shape example; no request was executed."
+        }
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "SC-01",
+      "requirements": [
+        "REQ-HAG-001"
+      ],
+      "given_and_action": "Import the fixed 1,909 Git blobs at project version 0.",
+      "expected_success": "One complete baseline; exact raw hashes, original IDs, relations, paths and lifecycle history; project 0 to 1.",
+      "expected_failures_and_boundaries": [
+        "Duplicate ID, unresolved relation, missing/extra manifest entry or unsupported worktree export: 422 HAG_REMOTE_INVALID_IMPORT.",
+        "Changed bytes for a declared source identity: 409 HAG_REMOTE_SOURCE_MISMATCH; no graph, guard or receipt changes."
+      ],
+      "physical_support": [
+        "Project",
+        "Artifact",
+        "Revision",
+        "Baseline",
+        "Operation",
+        "HAS_REVISION",
+        "SELECTS",
+        "DECLARES"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-02",
+      "requirements": [
+        "REQ-HAG-001",
+        "REQ-HAG-002"
+      ],
+      "given_and_action": "Repeat the same import, first with the original key and then a new key.",
+      "expected_success": "Same key returns exactly the original receipt without increment. New key creates one new operation and guard increment, reusing baseline and revisions.",
+      "expected_failures_and_boundaries": [
+        "Reused key with changed content: 409 HAG_REMOTE_KEY_REUSE.",
+        "Raw LF/CRLF, Unicode, body and edge edits produce distinct identities per fixed byte vectors; original B remains unchanged."
+      ],
+      "physical_support": [
+        "Project",
+        "Revision",
+        "Baseline",
+        "Operation"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-03",
+      "requirements": [
+        "REQ-HAG-003",
+        "REQ-HAG-007"
+      ],
+      "given_and_action": "Read WO-RLS-038 at the imported B through the packaged client.",
+      "expected_success": "Exactly 12 governing IDs and 11 declared paths; dependencies and relevant decisions are separate; unchanged released oracle output accompanies the result.",
+      "expected_failures_and_boundaries": [
+        "A synthetic open blocking decision remains an evaluator finding, never an approval.",
+        "Missing historical evidence reports unavailable bindings and cannot become a successful governing assessment; preserve original fixture."
+      ],
+      "physical_support": [
+        "Baseline",
+        "Revision",
+        "SELECTS",
+        "DECLARES"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-04",
+      "requirements": [
+        "REQ-HAG-003",
+        "REQ-HAG-006"
+      ],
+      "given_and_action": "Use all six domain reads through HTTP and MCP on identical explicit views.",
+      "expected_success": "Same selection, revisions, provenance and meaningful findings; compare shows only proposed differences; B remains unchanged.",
+      "expected_failures_and_boundaries": [
+        "Unknown accessible identity: 404; cross-project access: 403 before disclosure.",
+        "Stale context version: 409 HAG_REMOTE_STALE_CONTEXT.",
+        "Budget stop: complete=false with same-view continuation; no empty complete success. Missing references are explicit and prevent completeness."
+      ],
+      "physical_support": [
+        "Baseline",
+        "DraftContext",
+        "Revision",
+        "BASED_ON",
+        "PROPOSES",
+        "SELECTS",
+        "DECLARES"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-05",
+      "requirements": [
+        "REQ-HAG-002",
+        "REQ-HAG-004"
+      ],
+      "given_and_action": "Open a context at B; create an incomplete requirement template; revise body and derives_from to a valid capability.",
+      "expected_success": "Open: project +1, context 0. Create/revise: project and context +1 each, new immutable revisions and declared edges. Draft findings remain; no approval event.",
+      "expected_failures_and_boundaries": [
+        "Freeze with unresolved targets: 422 HAG_REMOTE_INCOMPLETE_SELECTION.",
+        "A complete resolved draft selection can freeze without claiming approval; freeze increments project only and preserves the open context/base."
+      ],
+      "physical_support": [
+        "Project",
+        "Artifact",
+        "Revision",
+        "DraftContext",
+        "Baseline",
+        "Operation",
+        "PROPOSES",
+        "DECLARES",
+        "BASED_ON",
+        "SELECTS"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-06",
+      "requirements": [
+        "REQ-HAG-004",
+        "REQ-HAG-007"
+      ],
+      "given_and_action": "Submit an invalid/protected draft or locally valid request with different server rights/identity.",
+      "expected_success": "Server independently evaluates the exact selected input using the qualified released evaluator.",
+      "expected_failures_and_boundaries": [
+        "Malformed TOML, duplicate metadata, ID/type mismatch, requirement derives_from release record: 422 HAG_REMOTE_INVALID_DRAFT.",
+        "Protected identity/type/lifecycle/provenance/evidence edit: 422 HAG_REMOTE_PROTECTED_FIELD.",
+        "Forged actor field: 400 HAG_REMOTE_MALFORMED; lifecycle operation: 400 HAG_REMOTE_UNSUPPORTED_OPERATION.",
+        "Reader write: 403; unsupported evaluator/client tuple: 409. Every refusal leaves revisions, edges, heads, guards and receipts unchanged."
+      ],
+      "physical_support": [
+        "Project",
+        "Revision",
+        "DraftContext",
+        "Operation"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-07",
+      "requirements": [
+        "REQ-HAG-005"
+      ],
+      "given_and_action": "Race two independent database connections with different keys at the same project version N.",
+      "expected_success": "Exactly one commit moves N to N+1; losing command returns 409 HAG_REMOTE_STALE_PROJECT with no effects.",
+      "expected_failures_and_boundaries": [
+        "Changing only a governing dependency still invalidates a pending request.",
+        "Old context or selected revision: specific stale-context/stale-revision conflict after project guard check.",
+        "No automatic update of expected versions or rebase."
+      ],
+      "physical_support": [
+        "Project",
+        "DraftContext",
+        "Revision",
+        "Operation"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-08",
+      "requirements": [
+        "REQ-HAG-005"
+      ],
+      "given_and_action": "Suppress a committed response, then lookup/retry; race identical keys; inject precommit and commit failures.",
+      "expected_success": "Authenticated same-principal/project equal retry returns the exact original result before version checks; concurrent equal keys produce one accepted receipt.",
+      "expected_failures_and_boundaries": [
+        "Changed semantic request under key: 409 HAG_REMOTE_KEY_REUSE; unknown key: 404 HAG_REMOTE_OPERATION_UNKNOWN, not proof of rollback.",
+        "Before-commit rollback leaves no graph, guard or receipt effects. An uncertain commit remains unknown until lookup or identical retry resolves it.",
+        "Expired credentials and revoked project access refuse even an accepted retry."
+      ],
+      "physical_support": [
+        "Project",
+        "Revision",
+        "DraftContext",
+        "Operation",
+        "PROPOSES",
+        "DECLARES"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-09",
+      "requirements": [
+        "REQ-HAG-006"
+      ],
+      "given_and_action": "Run the narrow parameterized MATCH/WHERE/RETURN/LIMIT grammar at B and an explicit context.",
+      "expected_success": "Server binds the view, applies aggregate row/byte/depth/time limits and rolls back the exploratory transaction; HTTP/MCP use the same handler.",
+      "expected_failures_and_boundaries": [
+        "Write, CALL, subquery, admin/schema, loader, multiple statement or ambiguous grammar: 400 HAG_REMOTE_QUERY_SYNTAX before execution.",
+        "Exercise case, comments, literals and parameter substitution with AST admission; never keyword matching.",
+        "Budget stop reports incomplete, or 429 when no bounded honest result fits. Database-side read-only enforcement remains open."
+      ],
+      "physical_support": [
+        "Artifact",
+        "Revision",
+        "Baseline",
+        "DraftContext",
+        "HAS_REVISION",
+        "SELECTS",
+        "BASED_ON",
+        "PROPOSES",
+        "DECLARES"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-10",
+      "requirements": [
+        "REQ-HAG-002",
+        "REQ-HAG-008"
+      ],
+      "given_and_action": "Run every one of the 12 HAG-OPS-004 steps through actual packaged CLI/plugin guidance, HTTP/MCP/Cypher and database.",
+      "expected_success": "All 12 step observations retained with exact component tuple, B preservation, draft changes, refusal, retry and read-only released check.",
+      "expected_failures_and_boundaries": [
+        "A skipped step, mock substitution, missing package identity or failed step leaves the walkthrough unperformed/failed, never passed."
+      ],
+      "physical_support": [
+        "Project",
+        "Artifact",
+        "Revision",
+        "Baseline",
+        "DraftContext",
+        "Operation"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-11",
+      "requirements": [
+        "REQ-HAG-007"
+      ],
+      "given_and_action": "Assess historic records through canonical original-path projections and the pinned immutable code/evidence resolver.",
+      "expected_success": "Original scoped-code and path/content hashes reproduce independently under released canonical text handling; raw remote hashes stay separate.",
+      "expected_failures_and_boundaries": [
+        "Move a file, change scoped code or remove evidence: retain the corresponding released findings/unavailability.",
+        "Remote baseline hash cannot satisfy legacy fields; same-version substituted wheel, wrong payload, candidate fallback or unsupported release refuses."
+      ],
+      "physical_support": [
+        "Revision",
+        "Baseline",
+        "SELECTS"
+      ],
+      "hosted_execution": "unperformed"
+    },
+    {
+      "id": "SC-12",
+      "requirements": [
+        "REQ-HAG-008"
+      ],
+      "given_and_action": "Qualify actual packages/images, explicit schema initialization, restart on retained volume and backup restore to a fresh volume.",
+      "expected_success": "Report actual tuple, schema, B and receipt equality at recorded backup cutoff, limits, latency, storage and restore time.",
+      "expected_failures_and_boundaries": [
+        "Uninitialized/incompatible schema or unsupported tuple fails readiness/mutation before effects; no automatic migration.",
+        "Missing build/install/recovery observations remain unperformed. No production SLA or release/publication claim."
+      ],
+      "physical_support": [
+        "Project",
+        "Artifact",
+        "Revision",
+        "Baseline",
+        "DraftContext",
+        "Operation"
+      ],
+      "hosted_execution": "unperformed"
+    }
+  ]
+}

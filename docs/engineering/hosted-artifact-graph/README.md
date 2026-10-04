@@ -33,6 +33,9 @@ The 16 definitions above are approved; WO-HAG-001 is in_progress. The risk is ra
   selectors, hash rules and storage representation.
 - [Phase 1 result](evidence/WO-HAG-001/phase1-contract.json): fixture checks,
   Git-blob bindings and remaining qualification.
+- [Phase 1 continuation](evidence/WO-HAG-001/phase1-continuation.json): completed
+  independent read/result contracts, explicit outcomes for all twelve scenarios,
+  final schema/regression observations and the remaining Phase 2 admission dependency.
 - [Evaluator observations](evidence/WO-HAG-001/phase1-evaluator-feasibility.json):
   successful reference projection and the reproduced standalone admission gap.
 - [DEC-HAG-001](decisions/DEC-HAG-001.md): open correction-path decision. The
