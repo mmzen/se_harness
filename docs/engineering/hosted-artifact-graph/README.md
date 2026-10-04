@@ -57,6 +57,7 @@ It adds standalone draft validation and shared relationship checks to the
 evaluator. WO-HAG-002 is implemented. The
 [criterion assessment](evidence/WO-HAG-002/verification-results.json) records
 the full-suite result, installed-wheel qualification, identical independent
-package builds, retained failures and limitations. Required commit-bound
-verification is pending. Release/adoption and resolution of the separate
+package builds, retained failures and limitations.
+[VREC-HAG-001](verification-records/VREC-HAG-001.md) is ready and binds the clean
+candidate; mmzen's verification decision is pending. Release/adoption and resolution of the separate
 decision identity mismatch remain outside this work order.
