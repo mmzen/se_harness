@@ -2,7 +2,7 @@
 id = "REQ-HAG-010"
 type = "requirement"
 title = "Record the actual human behind a decision owner label"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-10-04"
 updated = "2026-10-04"
@@ -13,6 +13,13 @@ source = "DEC-HAG-001 WEX201 refusal and mmzen's 2026-10-04 continuation request
 
 [relations]
 derives_from = ["CAP-HAG-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-04T16:52:37Z"
+decided_by = "mmzen"
+reason = "mmzen explicitly approved WO-HAG-003 and required verification in response to the reviewed six-artifact correction package. This applies only to that package: local implementation, checks, commits and commit-bound verification preparation. Human verification acceptance, publication, release, adoption and the live DEC-HAG-001 disposition remain separate. Reviewed file hashes were compared before this transition; approval bindings are retained under docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/."
 +++
 
 # Record the actual human behind a decision owner label

@@ -2,10 +2,15 @@
 id = "WO-HAG-003"
 type = "work_order"
 title = "Correct decision attribution without rewriting artifact owners"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-04"
 updated = "2026-10-04"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Later decision recording and evaluator release depend on the correctness of this trusted behavior. mmzen confirmed required commit-bound verification with approval of the reviewed package."
+decided_by = "mmzen"
 
 [relations]
 implements = ["REQ-HAG-010"]
@@ -15,6 +20,21 @@ verification = ["VER-HAG-003"]
 
 [execution_scope]
 paths = ["se_harness/cli.py", "se_harness/decisions.py", "se_harness/risks.py", "se_harness/workflow_edges.py", "se_harness/workflow.py", "se_harness/engine/validation_decisions.py", "tests/test_decision_management.py", "tests/test_risk_management.py", "tests/test_workflow_execution.py", "tests/test_workflow_documentation_contract.py", "docs/notes/harnessctl-reference.md", "docs/notes/decision-artifacts.md", "templates/repository/standard/docs/engineering/harness/AUTHORITY.md", "templates/repository/standard/docs/engineering/harness/AUTHORIZE_WORK.md", "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-04T16:54:20Z"
+decided_by = "mmzen"
+reason = "mmzen explicitly approved WO-HAG-003 and required verification in response to the reviewed six-artifact correction package. This applies only to that package: local implementation, checks, commits and commit-bound verification preparation. Human verification acceptance, publication, release, adoption and the live DEC-HAG-001 disposition remain separate. Reviewed file hashes were compared before this transition; approval bindings are retained under docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/."
+scope_paths = ["se_harness/cli.py", "se_harness/decisions.py", "se_harness/risks.py", "se_harness/workflow_edges.py", "se_harness/workflow.py", "se_harness/engine/validation_decisions.py", "tests/test_decision_management.py", "tests/test_risk_management.py", "tests/test_workflow_execution.py", "tests/test_workflow_documentation_contract.py", "docs/notes/harnessctl-reference.md", "docs/notes/decision-artifacts.md", "templates/repository/standard/docs/engineering/harness/AUTHORITY.md", "templates/repository/standard/docs/engineering/harness/AUTHORIZE_WORK.md", "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-04T16:56:11Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Codex starts the unchanged approved correction after passing start preflight, under mmzen recorded approval and required commit-bound verification."
 +++
 
 # Correct decision attribution without rewriting artifact owners
