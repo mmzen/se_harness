@@ -1,0 +1,20 @@
+{
+  "command": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "pip",
+    "install",
+    "--no-index",
+    "--no-deps",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-tested-wheel\\se_harness-0.22.1-py3-none-any.whl"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo",
+  "exit_code": 0,
+  "started_unix": 1791123791.1466908,
+  "duration_seconds": 4.120582818984985,
+  "observer_python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "log": "correction-wheel-install.log"
+}

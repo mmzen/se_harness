@@ -1,0 +1,380 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-HAG-002",
+    "artifacts": [
+      "WO-HAG-002"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/",
+      "docs/engineering/hosted-artifact-graph/README.md",
+      "docs/notes/diagnostic-codes.md",
+      "docs/notes/harnessctl-reference.md",
+      "se_harness/cli.py",
+      "se_harness/codes.py",
+      "se_harness/draft_validation.py",
+      "se_harness/engine/validate_engineering_artifacts.py",
+      "se_harness/engine/validation_architecture.py",
+      "se_harness/engine/validation_authoring.py",
+      "se_harness/engine/validation_core.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/engine/validation_lifecycle.py",
+      "se_harness/preflight.py",
+      "se_harness/relation_policy.py",
+      "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md",
+      "templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "tests/test_artifact_authoring.py",
+      "tests/test_authoring_gate.py",
+      "tests/test_cli_shape.py",
+      "tests/test_draft_validation.py",
+      "tests/test_one_validation.py",
+      "tests/test_relation_policy.py",
+      "tests/test_validation_taxonomy.py"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+    "procedure_id": "PROC-WO-PREPARE-VREC",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HAG-002"
+              }
+            ],
+            "message": "WO-HAG-002 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-HAG-002"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HAG-002:[execution_scope]"
+              }
+            ],
+            "message": "WO-HAG-002 has recorded execution approval for its 25 scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-HAG-002:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-HAG-002"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/WO-HAG-002-handoff.md."
+          },
+          {
+            "id": "QGP-G4I-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-HAG-002"
+              }
+            ],
+            "message": "No open decision blocks WO-HAG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HAG-002"
+              }
+            ],
+            "message": "in_progress -> implemented is a declared lifecycle edge for WO-HAG-002."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-WO-PREPARE-VREC",
+    "current_step": "STEP-WO-PREPARE-VREC-CAPTURE",
+    "steps": [
+      {
+        "id": "STEP-WO-PREPARE-VREC-CAPTURE",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-CANDIDATE-READY"
+        ],
+        "effects": [
+          "Prepare one ready VREC using the selected approved inputs."
+        ],
+        "non_effects": [
+          "Substitute inspected record, verification and evidence inputs before running this command. Preparation does not verify WO-HAG-002."
+        ],
+        "argv": [
+          "harnessctl",
+          "capture-verification",
+          ".",
+          "--work-order",
+          "WO-HAG-002",
+          "--owner",
+          "delegated-executor",
+          "--id",
+          "VREC-...",
+          "--verification",
+          "VER-...",
+          "--evidence",
+          "..."
+        ],
+        "corrective": {
+          "QGP-G4C-STATUS": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-STATUS for WO-HAG-002 using the reported candidate-readiness failure, then retry preparation."
+          },
+          "QGP-G4C-GRAPH": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-GRAPH for WO-HAG-002 using the reported candidate-readiness failure, then retry preparation."
+          },
+          "QGP-G4C-INTEGRITY": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-INTEGRITY for WO-HAG-002 using the reported candidate-readiness failure, then retry preparation."
+          }
+        }
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-HAG-002",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-HAG-002",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-HAG-002",
+        "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-002.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 1 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-HAG-002 is implemented."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "capture-verification",
+        ".",
+        "--work-order",
+        "WO-HAG-002",
+        "--owner",
+        "delegated-executor",
+        "--id",
+        "VREC-...",
+        "--verification",
+        "VER-...",
+        "--evidence",
+        "..."
+      ]
+    },
+    "alternatives": []
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v2",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task",
+        "source": "released-resource",
+        "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context.",
+          "source": "released-resource",
+          "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result.",
+          "source": "released-resource",
+          "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e"
+        }
+      ],
+      "procedure": {
+        "id": "PROC-WO-PREPARE-VREC",
+        "location": {
+          "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+          "heading": "prepare-the-verification-record",
+          "source": "released-resource",
+          "sha256": "84686ea50e0e220aadc024145b88e05d83a0eab01be361ab50e12716a8cf950a"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+            "heading": "verification-coverage",
+            "when": "Before preparing the verification record.",
+            "source": "released-resource",
+            "sha256": "892ec2fedefc272f6bc2580268395e487f392cf5d92a3ea81fac015761bc87a8"
+          }
+        ],
+        "steps": {
+          "STEP-WO-PREPARE-VREC-CAPTURE": {
+            "location": {
+              "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+              "heading": "prepare-the-verification-record",
+              "source": "released-resource",
+              "sha256": "84686ea50e0e220aadc024145b88e05d83a0eab01be361ab50e12716a8cf950a"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+                "heading": "verification-coverage",
+                "when": "Before preparing the verification record.",
+                "source": "released-resource",
+                "sha256": "892ec2fedefc272f6bc2580268395e487f392cf5d92a3ea81fac015761bc87a8"
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-WO-PREPARE-VREC-CAPTURE",
+        "location": {
+          "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+          "heading": "prepare-the-verification-record",
+          "source": "released-resource",
+          "sha256": "84686ea50e0e220aadc024145b88e05d83a0eab01be361ab50e12716a8cf950a"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+            "heading": "verification-coverage",
+            "when": "Before preparing the verification record.",
+            "source": "released-resource",
+            "sha256": "892ec2fedefc272f6bc2580268395e487f392cf5d92a3ea81fac015761bc87a8"
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "WO-HAG-002"
+    ],
+    "evaluator_only_inputs": [
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/WORKFLOW.json",
+        "sha256": "00c222a9c71d95cb1162e6d6bacdb03cd9e43431303466077a85ceb8f921f0c2"
+      },
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/QUALITY_GATES.json",
+        "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+      }
+    ],
+    "release": {
+      "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+      "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+      "version": "0.22.0"
+    },
+    "formal_artifact_source": "repository"
+  },
+  "result_sha256": "b567f026778bf5107e988d26d3874980f5a79d67877b9956a3dac03b124af915"
+}

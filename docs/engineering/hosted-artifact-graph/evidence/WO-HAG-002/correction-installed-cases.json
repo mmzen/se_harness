@@ -1,0 +1,238 @@
+[
+  {
+    "case": "installed-payload",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-c",
+      "import json,platform,sys; from se_harness.evaluator_identity import installed_evaluator_identity; import se_harness; print(json.dumps({\"identity\":installed_evaluator_identity().to_lock(),\"python\":sys.version,\"platform\":platform.platform(),\"module\":se_harness.__file__,\"isolated\":sys.flags.isolated}))"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 0,
+    "stdout": "{\"identity\": {\"version\": \"0.22.1\", \"payload_manifest\": \"se-harness-installed-payload-v1\", \"payload_sha256\": \"81678fb90ed1fb7f24e72ae5b621632fbbbc0c4d694e2ebcc4debf9150cbe4f4\", \"archive_name\": \"se_harness-0.22.1-py3-none-any.whl\", \"archive_sha256\": \"2b9dda7f126128110ad2df71bebeaa120c4aca64bfbf422e4f7992ab3e8b1c16\"}, \"python\": \"3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]\", \"platform\": \"Windows-11-10.0.26100-SP0\", \"module\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-10-04\\\\clo\\\\work\\\\correction-candidate-env\\\\Lib\\\\site-packages\\\\se_harness\\\\__init__.py\", \"isolated\": 1}\n",
+    "stderr": "",
+    "seconds": 0.7311866000000009,
+    "expected_exit_code": 0
+  },
+  {
+    "case": "candidate-package-identity",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "identity",
+      "--role",
+      "candidate-package",
+      "--expected-version",
+      "0.22.1",
+      "--expected-root",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env",
+      "--checkout-root",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\se_harness",
+      "--candidate-commit",
+      "08694a22ed754474267b0da98a9514648068f5f9",
+      "--require-isolated-python",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 0,
+    "stdout": "{\n  \"candidate_commit\": \"08694a22ed754474267b0da98a9514648068f5f9\",\n  \"checkout_root\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-10-04\\\\clo\\\\se_harness\",\n  \"diagnostics\": [],\n  \"distribution_origin\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-10-04\\\\clo\\\\work\\\\correction-candidate-env\\\\Lib\\\\site-packages\",\n  \"entry_point_origin\": null,\n  \"evaluator_archive_name\": null,\n  \"evaluator_archive_sha256\": null,\n  \"evaluator_payload_manifest\": null,\n  \"evaluator_payload_sha256\": null,\n  \"evaluator_wheel_sha256\": null,\n  \"expected_root\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-10-04\\\\clo\\\\work\\\\correction-candidate-env\",\n  \"harness_version\": \"0.22.1\",\n  \"isolated_python\": true,\n  \"module_origin\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-10-04\\\\clo\\\\work\\\\correction-candidate-env\\\\Lib\\\\site-packages\\\\se_harness\\\\runtime_identity.py\",\n  \"passed\": true,\n  \"python_binary_position\": \"within-expected-root\",\n  \"python_entry_is_link\": false,\n  \"python_executable\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-10-04\\\\clo\\\\work\\\\correction-candidate-env\\\\Scripts\\\\python.exe\",\n  \"python_version\": \"3.13.3\",\n  \"pythonpath_present\": false,\n  \"role\": \"candidate-package\",\n  \"schema\": \"se-harness-runtime-identity-v4\",\n  \"template_origin\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-10-04\\\\clo\\\\work\\\\correction-candidate-env\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\",\n  \"user_site_enabled\": false\n}\n",
+    "stderr": "",
+    "seconds": 0.6195437999995193,
+    "expected_exit_code": 0
+  },
+  {
+    "case": "initialize-disposable-projection",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "init",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-wheel-projection",
+      "--project-name",
+      "draft-qualification",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 0,
+    "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+    "stderr": "",
+    "seconds": 2.4884065999995073,
+    "expected_exit_code": 0
+  },
+  {
+    "case": "generate-requirement",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "create-artifact",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-wheel-projection",
+      "--domain",
+      "demo",
+      "--type",
+      "requirement",
+      "--id",
+      "REQ-DEMO-001",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 0,
+    "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"create\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\"\n    }\n  ],\n  \"command\": \"create-artifact\",\n  \"dry_run\": false,\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\"\n}\n",
+    "stderr": "",
+    "seconds": 1.1555810999998357,
+    "expected_exit_code": 0
+  },
+  {
+    "case": "canonical-template",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate-draft",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-wheel-projection",
+      "--artifact",
+      "REQ-DEMO-001",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 0,
+    "stdout": "{\n  \"schema\": \"se-harness-draft-validation-v1\",\n  \"selection\": {\n    \"id\": \"REQ-DEMO-001\",\n    \"type\": \"requirement\",\n    \"status\": \"draft\",\n    \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\"\n  },\n  \"admissible\": true,\n  \"errors\": [],\n  \"incomplete\": [\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<the observable condition or event; \\\"always\\\" for an invariant>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<title>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<what happens when the response cannot be given>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<what the reader can check>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"measure\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"owners\",\n      \"index\": 0,\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"relations.derives_from\",\n      \"index\": 0,\n      \"message\": \"Canonical relation slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\",\n      \"relation\": \"derives_from\",\n      \"target\": \"CAP-xxx\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"source\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"statement\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"title\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    }\n  ],\n  \"background\": []\n}\n",
+    "stderr": "",
+    "seconds": 0.4874554999987595,
+    "expected_exit_code": 0
+  },
+  {
+    "case": "correct-capability-endpoint",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate-draft",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-wheel-projection",
+      "--artifact",
+      "REQ-DEMO-001",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 0,
+    "stdout": "{\n  \"schema\": \"se-harness-draft-validation-v1\",\n  \"selection\": {\n    \"id\": \"REQ-DEMO-001\",\n    \"type\": \"requirement\",\n    \"status\": \"draft\",\n    \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\"\n  },\n  \"admissible\": true,\n  \"errors\": [],\n  \"incomplete\": [\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<the observable condition or event; \\\"always\\\" for an invariant>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<title>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<what happens when the response cannot be given>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<what the reader can check>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"measure\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"owners\",\n      \"index\": 0,\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"source\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"statement\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"title\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    }\n  ],\n  \"background\": [\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'commit' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'git_object_format' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'version' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"status 'draft' is not declared for release_record artifacts\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'derives_from' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'includes_verification' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'releases_work' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'satisfies' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E009\",\n      \"message\": \"release_record status is not declared by the workflow lifecycle registry\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E012\",\n      \"message\": \"field 'evaluator_evidence_path' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"W-AUT-016\",\n      \"message\": \"Add an ability summary so the reader knows what this artifact delivers.\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"maintenance\",\n      \"severity\": \"advisory\"\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.49816139999893494,
+    "expected_exit_code": 0
+  },
+  {
+    "case": "wrong-release-endpoint",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate-draft",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-wheel-projection",
+      "--artifact",
+      "REQ-DEMO-001",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 1,
+    "stdout": "{\n  \"schema\": \"se-harness-draft-validation-v1\",\n  \"selection\": {\n    \"id\": \"REQ-DEMO-001\",\n    \"type\": \"requirement\",\n    \"status\": \"draft\",\n    \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\"\n  },\n  \"admissible\": false,\n  \"errors\": [\n    {\n      \"allowed_types\": [\n        \"capability\"\n      ],\n      \"code\": \"E011\",\n      \"field\": \"relations.derives_from\",\n      \"index\": 0,\n      \"message\": \"relation 'derives_from' target 'RLS-FIXTURE-001' must have type capability, found release_record\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\",\n      \"relation\": \"derives_from\",\n      \"target\": \"RLS-FIXTURE-001\",\n      \"target_type\": \"release_record\"\n    }\n  ],\n  \"incomplete\": [\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<the observable condition or event; \\\"always\\\" for an invariant>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<title>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<what happens when the response cannot be given>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<what the reader can check>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"measure\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"owners\",\n      \"index\": 0,\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"source\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"statement\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"title\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    }\n  ],\n  \"background\": [\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'commit' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'git_object_format' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'version' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"status 'draft' is not declared for release_record artifacts\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'derives_from' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'includes_verification' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'releases_work' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'satisfies' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E009\",\n      \"message\": \"release_record status is not declared by the workflow lifecycle registry\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E012\",\n      \"message\": \"field 'evaluator_evidence_path' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"W-AUT-016\",\n      \"message\": \"Add an ability summary so the reader knows what this artifact delivers.\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"maintenance\",\n      \"severity\": \"advisory\"\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.5760993000003509,
+    "expected_exit_code": 1
+  },
+  {
+    "case": "normal-validator-wrong-endpoint",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-wheel-projection",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 1,
+    "stdout": "{\n  \"advisories\": [\n    {\n      \"code\": \"W-AUT-016\",\n      \"message\": \"Add an ability summary so the reader knows what this artifact delivers.\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"maintenance\"\n    }\n  ],\n  \"advisory_count\": 1,\n  \"artifact_count\": 3,\n  \"artifacts\": [\n    {\n      \"id\": \"CAP-FIXTURE-001\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"status\": \"draft\",\n      \"type\": \"capability\"\n    },\n    {\n      \"id\": \"REQ-DEMO-001\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"status\": \"draft\",\n      \"type\": \"requirement\"\n    },\n    {\n      \"id\": \"RLS-FIXTURE-001\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"status\": \"draft\",\n      \"type\": \"release_record\"\n    }\n  ],\n  \"error_count\": 11,\n  \"errors\": [\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'derives_from' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'commit' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'git_object_format' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'version' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"status 'draft' is not declared for release_record artifacts\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'includes_verification' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'releases_work' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'satisfies' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"E009\",\n      \"message\": \"release_record status is not declared by the workflow lifecycle registry\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\"\n    },\n    {\n      \"code\": \"E012\",\n      \"message\": \"field 'evaluator_evidence_path' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\"\n    },\n    {\n      \"code\": \"E011\",\n      \"message\": \"relation 'derives_from' target 'RLS-FIXTURE-001' must have type capability, found release_record\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    }\n  ],\n  \"plane_counts\": {\n    \"governance\": {\n      \"errors\": 5,\n      \"warnings\": 0\n    },\n    \"maintenance\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    },\n    \"policy\": {\n      \"errors\": 0,\n      \"warnings\": 0\n    },\n    \"structure\": {\n      \"errors\": 6,\n      \"warnings\": 0\n    }\n  },\n  \"taxonomy\": \"se-harness-validation-taxonomy-v1\",\n  \"valid\": false,\n  \"warning_count\": 0,\n  \"warnings\": []\n}\n",
+    "stderr": "",
+    "seconds": 0.5679568999985349,
+    "expected_exit_code": 1
+  },
+  {
+    "case": "mixed-placeholder-and-wrong-endpoint",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate-draft",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-wheel-projection",
+      "--artifact",
+      "REQ-DEMO-001",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 1,
+    "stdout": "{\n  \"schema\": \"se-harness-draft-validation-v1\",\n  \"selection\": {\n    \"id\": \"REQ-DEMO-001\",\n    \"type\": \"requirement\",\n    \"status\": \"draft\",\n    \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\"\n  },\n  \"admissible\": false,\n  \"errors\": [\n    {\n      \"allowed_types\": [\n        \"capability\"\n      ],\n      \"code\": \"E011\",\n      \"field\": \"relations.derives_from\",\n      \"index\": 1,\n      \"message\": \"relation 'derives_from' target 'RLS-FIXTURE-001' must have type capability, found release_record\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\",\n      \"relation\": \"derives_from\",\n      \"target\": \"RLS-FIXTURE-001\",\n      \"target_type\": \"release_record\"\n    }\n  ],\n  \"incomplete\": [\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<the observable condition or event; \\\"always\\\" for an invariant>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<title>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<what happens when the response cannot be given>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"body\",\n      \"message\": \"Canonical body placeholder is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"placeholder\": \"<what the reader can check>\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"measure\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"owners\",\n      \"index\": 0,\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"relations.derives_from\",\n      \"index\": 0,\n      \"message\": \"Canonical relation slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\",\n      \"relation\": \"derives_from\",\n      \"target\": \"CAP-xxx\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"source\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"statement\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"W-AUT-024\",\n      \"field\": \"title\",\n      \"message\": \"Canonical authoring slot is unfinished.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    }\n  ],\n  \"background\": [\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'commit' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'git_object_format' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'version' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"status 'draft' is not declared for release_record artifacts\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'derives_from' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'includes_verification' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'releases_work' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'satisfies' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E009\",\n      \"message\": \"release_record status is not declared by the workflow lifecycle registry\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E012\",\n      \"message\": \"field 'evaluator_evidence_path' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"W-AUT-016\",\n      \"message\": \"Add an ability summary so the reader knows what this artifact delivers.\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"maintenance\",\n      \"severity\": \"advisory\"\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.5832704999993439,
+    "expected_exit_code": 1
+  },
+  {
+    "case": "lifecycle-history-refusal",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate-draft",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-wheel-projection",
+      "--artifact",
+      "REQ-DEMO-001",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 1,
+    "stdout": "{\n  \"schema\": \"se-harness-draft-validation-v1\",\n  \"selection\": {\n    \"id\": \"REQ-DEMO-001\",\n    \"type\": \"requirement\",\n    \"status\": \"draft\",\n    \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\"\n  },\n  \"admissible\": false,\n  \"errors\": [\n    {\n      \"code\": \"E-AUT-004\",\n      \"field\": \"lifecycle_events\",\n      \"message\": \"Draft must not contain lifecycle history or disposition.\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    }\n  ],\n  \"incomplete\": [],\n  \"background\": [\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'commit' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'git_object_format' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'version' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"status 'draft' is not declared for release_record artifacts\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'derives_from' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'includes_verification' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'releases_work' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'satisfies' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E009\",\n      \"message\": \"release_record status is not declared by the workflow lifecycle registry\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E012\",\n      \"message\": \"field 'evaluator_evidence_path' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"W-AUT-016\",\n      \"message\": \"Add an ability summary so the reader knows what this artifact delivers.\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"maintenance\",\n      \"severity\": \"advisory\"\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.5497713999993721,
+    "expected_exit_code": 1
+  },
+  {
+    "case": "malformed-toml-refusal",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-candidate-env\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate-draft",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-wheel-projection",
+      "--artifact",
+      "REQ-DEMO-001",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work",
+    "exit_code": 1,
+    "stdout": "{\n  \"schema\": \"se-harness-draft-validation-v1\",\n  \"selection\": {\n    \"id\": \"REQ-DEMO-001\",\n    \"type\": null,\n    \"status\": null,\n    \"path\": null\n  },\n  \"admissible\": false,\n  \"errors\": [\n    {\n      \"code\": \"E-AUT-003\",\n      \"field\": \"id\",\n      \"matches\": 0,\n      \"message\": \"Selection must resolve exactly one artifact.\",\n      \"path\": \"docs/engineering\",\n      \"plane\": \"structure\"\n    },\n    {\n      \"code\": \"E001\",\n      \"message\": \"invalid TOML front matter: Invalid value (at end of document)\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\"\n    }\n  ],\n  \"incomplete\": [],\n  \"background\": [\n    {\n      \"code\": \"E001\",\n      \"message\": \"invalid TOML front matter: Invalid value (at end of document)\",\n      \"path\": \"docs/engineering/demo/requirements/REQ-DEMO-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'commit' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'git_object_format' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"field 'version' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E002\",\n      \"message\": \"status 'draft' is not declared for release_record artifacts\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'derives_from' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'includes_verification' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'releases_work' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E005\",\n      \"message\": \"field 'satisfies' must be a non-empty array of strings\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"structure\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E009\",\n      \"message\": \"release_record status is not declared by the workflow lifecycle registry\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"E012\",\n      \"message\": \"field 'evaluator_evidence_path' must be a non-empty string\",\n      \"path\": \"docs/engineering/demo/RLS-FIXTURE-001.md\",\n      \"plane\": \"governance\",\n      \"severity\": \"error\"\n    },\n    {\n      \"code\": \"W-AUT-016\",\n      \"message\": \"Add an ability summary so the reader knows what this artifact delivers.\",\n      \"path\": \"docs/engineering/demo/CAP-FIXTURE-001.md\",\n      \"plane\": \"maintenance\",\n      \"severity\": \"advisory\"\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.5582888999997522,
+    "expected_exit_code": 1
+  }
+]

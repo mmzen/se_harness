@@ -2,7 +2,7 @@
 id = "WO-HAG-002"
 type = "work_order"
 title = "Implement and qualify standalone draft validation in the evaluator"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-04"
 updated = "2026-10-04"
@@ -33,6 +33,13 @@ to = "in_progress"
 decided_at = "2026-10-04T13:27:28Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Codex starts the explicitly approved evaluator correction under mmzen approval and required commit-bound verification. The four reviewed artifacts passed approval; approved scope and decision limits are unchanged."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-04T14:37:15Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Codex completed the approved local evaluator correction under mmzen approval. VER-HAG-002 EV-01 through EV-08 have retained passing evidence, including the frozen-source suite and identical independent package builds. Git-derived handoff passed from 23c0c34c5b89897b8024a562d3b713e0fa967add. Completion records implementation only; required human verification remains pending."
 +++
 
 # Implement and qualify standalone draft validation in the evaluator

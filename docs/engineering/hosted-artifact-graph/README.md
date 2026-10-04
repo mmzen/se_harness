@@ -54,6 +54,9 @@ commit-bound verification on 2026-10-04:
 [VER-HAG-002](verification/VER-HAG-002.md), and
 [WO-HAG-002](work-orders/WO-HAG-002.md).
 It adds standalone draft validation and shared relationship checks to the
-evaluator. WO-HAG-002 is in_progress. Evidence is retained under
-`evidence/WO-HAG-002/`. Release/adoption and resolution of the separate decision
-identity mismatch remain outside this work order.
+evaluator. WO-HAG-002 is implemented. The
+[criterion assessment](evidence/WO-HAG-002/verification-results.json) records
+the full-suite result, installed-wheel qualification, identical independent
+package builds, retained failures and limitations. Required commit-bound
+verification is pending. Release/adoption and resolution of the separate
+decision identity mismatch remain outside this work order.

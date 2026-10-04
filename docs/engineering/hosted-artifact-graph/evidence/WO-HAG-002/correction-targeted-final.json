@@ -1,0 +1,25 @@
+{
+  "command": [
+    "C:\\Python313\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "tests.test_draft_validation",
+    "tests.test_relation_policy",
+    "tests.test_artifact_authoring",
+    "tests.test_authoring_gate",
+    "tests.test_cli_shape",
+    "tests.test_validation_taxonomy",
+    "tests.test_one_validation",
+    "tests.test_codes_and_contract_tables",
+    "tests.test_diagnostic_code_index",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\se_harness",
+  "exit_code": 0,
+  "started_unix": 1791121677.7500644,
+  "duration_seconds": 294.1232659816742,
+  "observer_python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "log": "correction-targeted-final.log"
+}
