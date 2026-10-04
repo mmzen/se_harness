@@ -1,0 +1,701 @@
+{
+  "candidate": {},
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "9a5f8c0b29d91853e6008d7f5a96a012f8841d31531d5eb7be75a01857895718",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HAG-002"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-HAG-002 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-HAG-002"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HAG-002:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-HAG-002 has recorded execution approval for its 25 scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-HAG-002"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-HAG-002"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 67 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-HAG-002:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-HAG-002"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/WO-HAG-002-handoff.md.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-HAG-002"
+              }
+            ],
+            "id": "QGP-G4I-DECISION",
+            "message": "No open decision blocks WO-HAG-002.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "digest_format": "machine-fields-v1",
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 61
+  },
+  "instruction_discovery": {
+    "agent_instructions": {
+      "current_step": {
+        "id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "record-implementation-completion",
+          "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe",
+          "source": "released-resource"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d",
+            "source": "released-resource",
+            "when": "Before using the selected work order's execution grant."
+          }
+        ]
+      },
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task",
+        "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550",
+        "source": "released-resource"
+      },
+      "procedure": {
+        "id": "PROC-WO-IMPLEMENT",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "retain-the-implementation-evidence",
+          "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe",
+          "source": "released-resource"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d",
+            "source": "released-resource",
+            "when": "Before using the selected work order's execution grant."
+          }
+        ],
+        "steps": {
+          "STEP-WO-IMPLEMENT-APPLY": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "record-implementation-completion",
+              "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe",
+              "source": "released-resource"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d",
+                "source": "released-resource",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          },
+          "STEP-WO-IMPLEMENT-CHECK": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "retain-the-implementation-evidence",
+              "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe",
+              "source": "released-resource"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d",
+                "source": "released-resource",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          },
+          "STEP-WO-IMPLEMENT-PREVIEW": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "record-implementation-completion",
+              "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe",
+              "source": "released-resource"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d",
+                "source": "released-resource",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          }
+        }
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf",
+          "source": "released-resource",
+          "when": "Before the first eligible English explanation in a fresh context."
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e",
+          "source": "released-resource",
+          "when": "Before reporting a lifecycle result."
+        }
+      ]
+    },
+    "evaluator_only_inputs": [
+      {
+        "file": "docs/engineering/WORKFLOW.json",
+        "sha256": "00c222a9c71d95cb1162e6d6bacdb03cd9e43431303466077a85ceb8f921f0c2",
+        "source": "released-resource"
+      },
+      {
+        "file": "docs/engineering/QUALITY_GATES.json",
+        "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2",
+        "source": "released-resource"
+      }
+    ],
+    "formal_artifact_ids": [
+      "CAP-HAG-001",
+      "INT-HAG-001",
+      "REQ-HAG-009",
+      "SPEC-HAG-004",
+      "VER-HAG-002",
+      "WO-HAG-002"
+    ],
+    "formal_artifact_source": "repository",
+    "release": {
+      "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+      "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+      "version": "0.22.0"
+    },
+    "schema": "se-harness-instruction-discovery-v2",
+    "status": "available"
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-PREVIEW",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-HAG-002",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-HAG-002",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-HAG-002",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-HAG-002",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-HAG-002."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-HAG-002=implemented",
+          "--decision",
+          "WO-HAG-002=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-HAG-002",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-HAG-002",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-HAG-002",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Plan completion of WO-HAG-002."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "kind": "command",
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ]
+      },
+      {
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-HAG-002=implemented",
+          "--decision",
+          "WO-HAG-002=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-HAG-002",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-HAG-002",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-HAG-002",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Record completion of only WO-HAG-002 under its approved execution scope."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-APPLY",
+        "kind": "command",
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-HAG-002=implemented",
+        "--decision",
+        "WO-HAG-002=delegated-executor"
+      ],
+      "kind": "command"
+    },
+    "current_lifecycle_state": [
+      "WO-HAG-002 is in_progress."
+    ],
+    "decision_required": null,
+    "done": [
+      "Evaluated handoff compliance for WO-HAG-002."
+    ],
+    "next": {
+      "action": "Run the bound command",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-PREVIEW"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "eb59c2f5c4d478a7660c3df0fd70aca6f7c04ec2b7b704ea1328186eb54181b2",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-01.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-01.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-02.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-02.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-final.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-final.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-cli-smoke.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-cli-smoke.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-distributions.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-distributions.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-final-build-replay.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-01.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-01.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-02.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-02.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-cases.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-check.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-check.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-summary.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-json-boundary.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-original-corpus.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-original-corpus.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-reference-corpus.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-reference-corpus.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-relation-impact.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-targeted-final.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-targeted-final.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-template-01.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-tests-01.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-tests-02.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-tests-before.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-wheel-install.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-wheel-install.log",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/evaluator-correction-approval-apply.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/evaluator-correction-approval-binding.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/evaluator-correction-approval-preview.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/execution-inputs.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/handoff.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/implementation-inspection.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-handoff-initial.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-implementation-scope.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-review-final.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-start-apply.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-start-preflight.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-start-preview.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/qualify_correction_wheel.py",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/raw-observations.zip",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/verification-results.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/WO-HAG-002-handoff.md",
+      "docs/engineering/hosted-artifact-graph/README.md",
+      "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-002.md",
+      "docs/notes/diagnostic-codes.md",
+      "docs/notes/harnessctl-reference.md",
+      "se_harness/cli.py",
+      "se_harness/codes.py",
+      "se_harness/draft_validation.py",
+      "se_harness/engine/validate_engineering_artifacts.py",
+      "se_harness/engine/validation_architecture.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/preflight.py",
+      "se_harness/relation_policy.py",
+      "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md",
+      "templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "tests/test_cli_shape.py",
+      "tests/test_draft_validation.py",
+      "tests/test_relation_policy.py"
+    ],
+    "declared_paths": [
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/",
+      "docs/engineering/hosted-artifact-graph/README.md",
+      "docs/notes/diagnostic-codes.md",
+      "docs/notes/harnessctl-reference.md",
+      "se_harness/cli.py",
+      "se_harness/codes.py",
+      "se_harness/draft_validation.py",
+      "se_harness/engine/validate_engineering_artifacts.py",
+      "se_harness/engine/validation_architecture.py",
+      "se_harness/engine/validation_authoring.py",
+      "se_harness/engine/validation_core.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/engine/validation_lifecycle.py",
+      "se_harness/preflight.py",
+      "se_harness/relation_policy.py",
+      "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md",
+      "templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "tests/test_artifact_authoring.py",
+      "tests/test_authoring_gate.py",
+      "tests/test_cli_shape.py",
+      "tests/test_draft_validation.py",
+      "tests/test_one_validation.py",
+      "tests/test_relation_policy.py",
+      "tests/test_validation_taxonomy.py"
+    ],
+    "dependencies": [],
+    "governing": [
+      "CAP-HAG-001",
+      "INT-HAG-001",
+      "REQ-HAG-009",
+      "SPEC-HAG-004",
+      "VER-HAG-002"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-HAG-002"
+    ],
+    "primary": "WO-HAG-002"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-HAG-002",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-HAG-002",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

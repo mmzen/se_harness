@@ -1,0 +1,66 @@
+WEX_SCALE artifacts=100 validation=1.038238s focus=2.114669s plan=2.267773s
+WEX_SCALE artifacts=500 validation=5.805348s focus=7.466973s plan=12.686247s
+Evaluator Python: C:\Users\hok\AppData\Local\Temp\simple-plugin-5sro9zwx\private\evaluators\0.0.0\e7ce4119052eae4c64e24f7d3e41ba1b2bffa4b34f222d661a97ca1d78d62cb0\Scripts\python.exe
+Evaluator Python: C:\Users\hok\AppData\Local\Temp\simple-plugin-5sro9zwx\private\evaluators\0.0.0\e7ce4119052eae4c64e24f7d3e41ba1b2bffa4b34f222d661a97ca1d78d62cb0\Scripts\python.exe
+--workers must be at least 1
+0.22.1
+docs/notes/diagnostic-codes.md matches the source
+======================================================================
+FAIL: test_resources.ResourceTests.test_scaffold_previews_missing_parents_then_creates_only_the_requested_domain
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_resources.py", line 165, in test_scaffold_previews_missing_parents_then_creates_only_the_requested_domain
+    self.assertEqual(0, code, error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : harnessctl: selected evaluator payload_sha256 does not match installed resources
+
+
+======================================================================
+FAIL: test_cli_shape.RepositoryCommandShapeTests.test_doctor_json_lists_every_check
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_cli_shape.py", line 162, in test_doctor_json_lists_every_check
+    self.assertEqual(0, code, error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : 
+
+======================================================================
+ERROR: test_scope_preparation.ScopeDemonstrationTests.test_bug_fix_reaches_verification_without_an_extra_work_order
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_scope_preparation.py", line 205, in setUp
+    path.write_text(path.read_text().replace("WO-001", "WO-PRD-001"), encoding="utf-8")
+                    ~~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 710: character maps to <undefined>
+
+======================================================================
+ERROR: test_scope_preparation.ScopeDemonstrationTests.test_instruction_change_reaches_verification_without_an_extra_work_order
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_scope_preparation.py", line 205, in setUp
+    path.write_text(path.read_text().replace("WO-001", "WO-PRD-001"), encoding="utf-8")
+                    ~~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 710: character maps to <undefined>
+
+----------------------------------------------------------------------
+Ran 1284 tests in 1240.567s (188 classes, 6 workers)
+
+FAILED (failures=2, errors=2, skipped=22)

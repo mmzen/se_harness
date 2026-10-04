@@ -1,0 +1,2 @@
+C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\repository_tools\release_build.py:347: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+  source.extractall(destination)

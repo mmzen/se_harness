@@ -20,6 +20,16 @@ rules for the accountable reviewer.
 
 ## Design simplicity
 
+For unfinished work, `harnessctl validate-draft REPO --artifact ID --json`
+reports whether one supported draft has an admissible shape. Only exact values
+at the same type and field in this evaluator's canonical template, and missing
+or empty required authoring links, can be reported as incomplete. Invalid
+identity, dates, metadata shapes, actual endpoints, lifecycle history and
+disposition are errors. A missing non-template ID is an error. Background
+findings remain visible; this result makes no whole-repository validity claim.
+Complete the authoring checklist and pass ordinary approval gates before
+requesting approval. Draft admission grants no authority to write or approve.
+
 Choose the least complex design that satisfies the agreed requirements and
 constraints. Justify material added complexity by the need it serves and why
 a simpler approach is insufficient. Consider the effort to understand, build,

@@ -39,7 +39,7 @@ The 16 definitions above are approved; WO-HAG-001 is in_progress. The risk is ra
   dependent authoring adapter and work completion await disposition; the work
   order remains in_progress. This is separate from RISK-HAG-001.
 
-## Proposed evaluator correction
+## Evaluator correction
 
 mmzen accepted the `extend-evaluator` correction path in conversation. The
 released decision preview refused the actual identity with WEX201, so
@@ -47,11 +47,19 @@ DEC-HAG-001 remains open; that recording mismatch is not an unanswered choice.
 The exact observation is retained in
 [the decision attempt](evidence/WO-HAG-001/correction-decision-attempt.json).
 
-The prepared correction package remains draft:
+mmzen approved the correction package for local implementation with required
+commit-bound verification on 2026-10-04:
 [REQ-HAG-009](requirements/REQ-HAG-009.md),
 [SPEC-HAG-004](specifications/SPEC-HAG-004.md),
 [VER-HAG-002](verification/VER-HAG-002.md), and
 [WO-HAG-002](work-orders/WO-HAG-002.md).
 It adds standalone draft validation and shared relationship checks to the
-evaluator. Implementation, release/adoption, and resolution of the separate
-decision identity mismatch have not occurred.
+evaluator. WO-HAG-002 is implemented. The
+[criterion assessment](evidence/WO-HAG-002/verification-results.json) records
+the full-suite result, installed-wheel qualification, identical independent
+package builds, retained failures and limitations.
+[VREC-HAG-001](verification-records/VREC-HAG-001.md) is verified by mmzen and binds
+candidate `169430fe25d28972a9b86fef2d00eccde2baa5db`. The recorded acceptance is
+retained in [the verification result](evidence/WO-HAG-002/phase0-correction-verification-apply.json).
+Release/adoption and resolution of the separate decision identity mismatch
+remain outside this work order.

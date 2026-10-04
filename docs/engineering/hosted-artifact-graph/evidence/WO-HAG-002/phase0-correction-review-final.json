@@ -1,0 +1,27 @@
+{
+  "assurance": {
+    "commit_bound_verification": "required",
+    "decided_by": "mmzen",
+    "rationale": "Later hosted acceptance and release decisions rely on the changed validator, shared relationship rules and managed instructions. mmzen explicitly confirmed required commit-bound verification with approval of this reviewed package."
+  },
+  "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+  "background": [],
+  "diagnostics": [],
+  "phase": "review",
+  "reading_manifest": [
+    "docs/engineering/hosted-artifact-graph/intent/INT-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-009.md",
+    "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-004.md",
+    "docs/engineering/hosted-artifact-graph/verification/VER-HAG-002.md",
+    "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-002.md"
+  ],
+  "ready": true,
+  "schema": "se-harness-preflight-v2",
+  "skew": [],
+  "work_order": {
+    "id": "WO-HAG-002",
+    "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-002.md",
+    "status": "in_progress"
+  }
+}

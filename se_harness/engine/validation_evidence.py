@@ -334,23 +334,9 @@ def _validate_evaluator_evidence_binding(
         _evaluator_binding_error(artifact, errors, repository_root, EVIDENCE_MESSAGES.get(exc.reason, str(exc)))
 
 
-def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
+def validate_type_specific_fields(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
+    """Non-relation predicates, also used by the read-only draft query."""
     errors: list[Diagnostic] = []
-
-    relation_requirements: dict[str, tuple[str, ...]] = {
-        "capability": ("derives_from",),
-        "requirement": ("derives_from",),
-        "specification": ("specifies",),
-        "architecture": (),
-        "adr": ("decides",),
-        "verification": ("verifies",),
-        "work_order": ("implements", "specifications", "verification"),
-        "release_contract": ("gates",),
-        "verification_record": ("verifies_work_order", "conforms_to"),
-        "release_record": ("satisfies", "includes_verification", "releases_work"),
-        "operating_contract": ("assures",),
-        "decision": ("concerns", "blocks"),
-    }
 
     for artifact in artifacts:
         artifact_type = artifact.metadata.get("type")
@@ -553,6 +539,15 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 match_current_lock=artifact.status == "ready",
             )
 
+    return errors
+
+
+def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
+    from se_harness.relation_policy import REQUIRED_RELATIONS
+
+    errors = validate_type_specific_fields(artifacts, report_root)
+    for artifact in artifacts:
+        artifact_type = artifact.artifact_type
         if artifact_type == "work_order" and "architecture" in artifact.relations:
             require_non_empty_string_list(
                 artifact,
@@ -563,7 +558,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 container=artifact.relations,
             )
 
-        required_relations = relation_requirements.get(artifact_type, ())
+        required_relations = REQUIRED_RELATIONS.get(artifact_type, ())
         relations = artifact.metadata.get("relations", {})
         if not isinstance(relations, dict):
             continue

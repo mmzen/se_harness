@@ -1,0 +1,39 @@
+{
+  "artifact": "VREC-HAG-001",
+  "target": "verified",
+  "decision_maker": "mmzen",
+  "candidate": "169430fe25d28972a9b86fef2d00eccde2baa5db",
+  "record_sha256": "a1ed95c5edb96bec101c4245dfe9390ce785043a5c48c0e3b4e71af25d025a3f",
+  "reviewed_inputs_unchanged": true,
+  "evidence": [
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/WO-HAG-002-handoff.md",
+      "sha256": "cd583fa629f5d88fa5bcc130429dbb2084180d9fc3deba7b0b800eff3eeb5656"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-final-build-replay.json",
+      "sha256": "194d07bf5b73b741f2c3945db9dd65d3f9f5a59e3f0756b3563c0348725ab819"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/handoff.json",
+      "sha256": "b3fc807a35d1762f8a80773e1baa11e7a54ebca8ddfc551e09ae477d0999987d"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/implementation-inspection.json",
+      "sha256": "6e0e04f2f440811c07c95f6679f441f595ecb121b39a99d1ef1c303977ecae21"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/raw-observations.zip",
+      "sha256": "0ae3e5356883234a1d49651f9e742363cd3084fa92ff9643eee45454c26f40f2"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/verification-results.json",
+      "sha256": "dc09b525ba3ac5e46ad84006296dafe6e9c7f1e0b6b6a72cc14fe99c7bfbc44d"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-001-evaluator.json",
+      "sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905"
+    }
+  ],
+  "decision_source": "User message in this conversation: i verify VREC-HAG-001"
+}

@@ -921,6 +921,13 @@ def _qualify(args: argparse.Namespace) -> int:
     return 0 if result.passed else 1
 
 
+def _validate_draft(args) -> int:
+    from se_harness.draft_validation import validate_draft, render_human
+    result = validate_draft(Path(args.target), args.artifact)
+    print(json.dumps(result, indent=2, ensure_ascii=True) if args.json else render_human(result))
+    return 0 if result["admissible"] else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="harnessctl", description="Install and operate the standard software-engineering harness.")
     parser.add_argument("--version", action="version", version=__version__)
@@ -952,6 +959,12 @@ def build_parser() -> argparse.ArgumentParser:
             [*(["--json"] if args.json else []), *(["--advisories"] if args.advisories else [])],
         )
     )
+
+    draft = commands.add_parser("validate-draft", help="check one draft without approval or writes")
+    draft.add_argument("target", nargs="?", default=".")
+    draft.add_argument("--artifact", required=True)
+    draft.add_argument("--json", action="store_true")
+    draft.set_defaults(handler=_validate_draft)
 
     inspect = commands.add_parser("inspect", help="inspect repository-wide attention and lifecycle queues")
     inspect.add_argument("target", nargs="?", default=".")

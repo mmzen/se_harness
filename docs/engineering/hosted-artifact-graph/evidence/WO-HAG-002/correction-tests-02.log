@@ -1,0 +1,21 @@
+test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) ... ok
+test_catalog_parse_and_duplicate_failures_block_even_if_unrelated (tests.test_draft_validation.DraftValidationTests.test_catalog_parse_and_duplicate_failures_block_even_if_unrelated) ... ok
+test_complete_requirement_and_background_are_distinct (tests.test_draft_validation.DraftValidationTests.test_complete_requirement_and_background_are_distinct) ... ok
+test_determinism_cli_text_and_usage (tests.test_draft_validation.DraftValidationTests.test_determinism_cli_text_and_usage) ... ok
+test_draft_admission_does_not_grant_approval (tests.test_draft_validation.DraftValidationTests.test_draft_admission_does_not_grant_approval) ... ok
+test_identity_dates_status_and_protected_metadata_refuse (tests.test_draft_validation.DraftValidationTests.test_identity_dates_status_and_protected_metadata_refuse) ... ok
+test_invalid_edges_and_mixed_placeholder_cannot_hide_errors (tests.test_draft_validation.DraftValidationTests.test_invalid_edges_and_mixed_placeholder_cannot_hide_errors) ... ok
+test_missing_empty_and_exact_placeholder_links (tests.test_draft_validation.DraftValidationTests.test_missing_empty_and_exact_placeholder_links) ... ok
+test_modified_repository_template_cannot_grant_a_new_exception (tests.test_draft_validation.DraftValidationTests.test_modified_repository_template_cannot_grant_a_new_exception) ... ok
+test_non_array_and_toml_date_targets_produce_structured_refusals (tests.test_draft_validation.DraftValidationTests.test_non_array_and_toml_date_targets_produce_structured_refusals) ... ok
+test_one_placeholder_does_not_exempt_other_metadata_fields (tests.test_draft_validation.DraftValidationTests.test_one_placeholder_does_not_exempt_other_metadata_fields) ... ok
+test_ordinary_validation_rejects_unlinked_requirement_to_release (tests.test_draft_validation.DraftValidationTests.test_ordinary_validation_rejects_unlinked_requirement_to_release) ... ok
+test_unknown_and_unsupported_selection_refuse (tests.test_draft_validation.DraftValidationTests.test_unknown_and_unsupported_selection_refuse) ... ok
+test_every_declared_pair_against_every_target_type (tests.test_relation_policy.RelationPolicyTests.test_every_declared_pair_against_every_target_type) ... ok
+test_shared_registry_is_complete_and_reused (tests.test_relation_policy.RelationPolicyTests.test_shared_registry_is_complete_and_reused) ... ok
+test_undeclared_source_relation_is_never_an_any_type_fallback (tests.test_relation_policy.RelationPolicyTests.test_undeclared_source_relation_is_never_an_any_type_fallback) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 9.266s
+
+OK

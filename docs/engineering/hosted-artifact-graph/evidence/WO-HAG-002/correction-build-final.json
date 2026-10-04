@@ -1,0 +1,26 @@
+{
+  "command": [
+    "C:\\Python313\\python.exe",
+    "-B",
+    "-m",
+    "repository_tools.release_build",
+    "replay",
+    "--repository",
+    ".",
+    "--commit",
+    "08694a22ed754474267b0da98a9514648068f5f9",
+    "--version",
+    "0.22.1",
+    "--output-directory",
+    "C:\\Users\\hok\\Documents\\Codex\\hag2-final-bundle",
+    "--result",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-final-build-replay.json"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\se_harness",
+  "exit_code": 0,
+  "started_unix": 1791122803.4414473,
+  "duration_seconds": 1617.310392856598,
+  "observer_python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "log": "correction-build-final.log"
+}

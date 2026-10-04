@@ -2,7 +2,7 @@
 id = "WO-HAG-002"
 type = "work_order"
 title = "Implement and qualify standalone draft validation in the evaluator"
-status = "approved"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-04"
 updated = "2026-10-04"
@@ -26,6 +26,20 @@ decided_at = "2026-10-04T13:24:31Z"
 decided_by = "mmzen"
 reason = "mmzen explicitly approved REQ-HAG-009, SPEC-HAG-004, VER-HAG-002 and WO-HAG-002 for local implementation with required commit-bound verification in this conversation. Reviewed manifest SHA-256: e36a47fb59f1bf1f856aa8a47c20189bc84d9d53d787fce505e6bc0f895eabe8. All complete reviewed bytes matched; only the confirmed assurance table was completed before preview. This approval grants bounded local implementation and required verification preparation, not verification acceptance, publication, release or governor adoption. DEC-HAG-001 remains unchanged."
 scope_paths = ["se_harness/relation_policy.py", "se_harness/draft_validation.py", "se_harness/engine/validation_architecture.py", "se_harness/engine/validation_evidence.py", "se_harness/engine/validation_core.py", "se_harness/engine/validation_lifecycle.py", "se_harness/engine/validation_authoring.py", "se_harness/engine/validate_engineering_artifacts.py", "se_harness/preflight.py", "se_harness/cli.py", "se_harness/codes.py", "tests/test_draft_validation.py", "tests/test_relation_policy.py", "tests/test_artifact_authoring.py", "tests/test_authoring_gate.py", "tests/test_cli_shape.py", "tests/test_validation_taxonomy.py", "tests/test_one_validation.py", "templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md", "templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md", "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md", "docs/notes/harnessctl-reference.md", "docs/notes/diagnostic-codes.md", "docs/engineering/hosted-artifact-graph/README.md", "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-04T13:27:28Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Codex starts the explicitly approved evaluator correction under mmzen approval and required commit-bound verification. The four reviewed artifacts passed approval; approved scope and decision limits are unchanged."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-04T14:37:15Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Codex completed the approved local evaluator correction under mmzen approval. VER-HAG-002 EV-01 through EV-08 have retained passing evidence, including the frozen-source suite and identical independent package builds. Git-derived handoff passed from 23c0c34c5b89897b8024a562d3b713e0fa967add. Completion records implementation only; required human verification remains pending."
 +++
 
 # Implement and qualify standalone draft validation in the evaluator
