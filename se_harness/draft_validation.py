@@ -7,6 +7,7 @@ from collections import Counter
 from dataclasses import asdict
 from datetime import date
 import json
+import math
 from pathlib import Path
 import re
 
@@ -226,7 +227,18 @@ def validate_draft(repository_root: Path, artifact_id: str) -> dict:
 
     def stable(items):
         # TOML has dates as well as JSON primitives, including in malformed targets.
-        encoded = {json.dumps(f, sort_keys=True, default=lambda v: {'type': type(v).__name__, 'value': str(v)}) for f in items}
+        def json_value(value):
+            if isinstance(value, dict):
+                return {key: json_value(child) for key, child in value.items()}
+            if isinstance(value, list):
+                return [json_value(child) for child in value]
+            if isinstance(value, float) and not math.isfinite(value):
+                return {'type': 'float', 'value': str(value)}
+            if value is None or isinstance(value, (str, int, float, bool)):
+                return value
+            return {'type': type(value).__name__, 'value': str(value)}
+
+        encoded = {json.dumps(json_value(f), sort_keys=True, allow_nan=False) for f in items}
         return [json.loads(item) for item in sorted(encoded)]
 
     return {'schema': 'se-harness-draft-validation-v1', 'selection': selection,

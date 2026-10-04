@@ -47,7 +47,7 @@ class DraftValidationTests(unittest.TestCase):
         before = self.snapshot()
         code, output, error = invoke('validate-draft', str(self.root), '--artifact', artifact, '--json')
         self.assertEqual(0 if expected else 1, code, error or output)
-        data = json.loads(output)
+        data = json.loads(output, parse_constant=self.fail)
         self.assertEqual('se-harness-draft-validation-v1', data['schema'])
         self.assertEqual(expected, data['admissible'])
         self.assertEqual(before, self.snapshot())
@@ -94,7 +94,7 @@ class DraftValidationTests(unittest.TestCase):
         self.query(expected=False)
 
     def test_non_array_and_toml_date_targets_produce_structured_refusals(self):
-        for value in ('"CAP-DEMO-001"', '42', '[2026-01-01]', '[{}]'):
+        for value in ('"CAP-DEMO-001"', '42', '[2026-01-01]', '[{}]', '[nan]', '[inf]', '[{bad=nan}]'):
             self.requirement()
             write(self.selected, self.selected.read_text().replace('derives_from = ["CAP-DEMO-001"]',
                                                                   'derives_from = ' + value))
