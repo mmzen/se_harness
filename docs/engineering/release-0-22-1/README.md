@@ -16,7 +16,7 @@ amendment of the hosted pin follow publication; this package does neither.
 | [WO-RLS-042](work-orders/WO-RLS-042.md) | After the exact complete-release decision, execute and confirm all public surfaces. | [VER-RLS-038](verification/VER-RLS-038.md) |
 
 [REL-SEH-035](release/REL-SEH-035.md) selects the existing complete-release
-route. These seven drafts reuse accepted product, distribution and delivery
+route. These seven approved artifacts reuse accepted product, distribution and delivery
 definitions. No new policy engine, artifact type or release mechanism is needed.
 The three work orders separate candidate qualification, host-package qualification
 and public observations so publication is not its own precondition.
@@ -55,6 +55,19 @@ exact complete-release decision follow once their inputs are reviewable. The
 complete-release decision can cover evaluator, tags, PyPI, Pages, documentation,
 marketplace and listed receipts together. Provider-setting changes, adoption
 and amendments to accepted hosted definitions require separate bounded review.
+
+## Qualification evidence
+
+The [evaluator review](evidence/WO-RLS-040/qualification-review.md) records the
+preparation candidate, Windows/Linux checks, pinned builds and current provider
+controls. The [plugin review](evidence/WO-RLS-041/qualification-review.md) records
+the exact packages, native host observations and remaining desktop/walkthrough
+criteria. Both work orders remain in progress. There is no final aggregate VREC
+or release record yet.
+
+The draft preparation PR supports qualification and review. It does not request
+verification or merge. The tested preparation commit and later evidence commits
+remain distinct; final candidate capture will establish the release binding.
 
 ## Known dependencies
 
