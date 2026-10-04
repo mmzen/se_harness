@@ -1,0 +1,214 @@
+{
+  "pr": {
+    "baseRefName": "codex/hosted-artifact-graph-inputs",
+    "baseRefOid": "be1812e7042081014cc7682da8b9cd3822d9071f",
+    "body": "Harness-Work-Orders: WO-HAG-001, WO-HAG-003, WO-HAG-004\r\n\r\n## Current review update \u2014 verification pending\r\n\r\nWO-HAG-003 corrects decision attribution: the actual human remains the\r\ndecision-maker, while an optional `--authority-owner` identifies the existing\r\nowner label used. Invalid claims still refuse. The existing holder rules,\r\natomic writer, paired-risk controls and caller consent boundary remain intact.\r\n\r\nThe correction is implemented. [VREC-HAG-002](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-002.md)\r\nis **ready**, bound to candidate `5355877faecf4039c3bf994f43ddc60fef922c50`. Review head: `65a4cc958d27062c3b27b060e9eb5e2f198b2c75`.\r\nHuman verification is pending. Tested/package source:\r\n`99a8c53f6a2e253c20737d5985223ea0c25c79d9`; later commits add only governance\r\nand retained evidence, with unchanged source/build tree identities.\r\n\r\n- [Requirement assessment](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/verification-results.json): all eight VER-HAG-003 cases pass.\r\n- [Implementation review](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/implementation-review.md).\r\n- [Raw commands, failures and successful reruns](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/commands.zip).\r\n- [Equal pinned builds](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/build-replay.json).\r\n- Full source suite: 1,305 tests, 22 reported skips, exit 0. Installed-wheel\r\n  probes pass on Windows and Linux (14 CLI observations each); distribution\r\n  and CLI checks pass. Released 0.22.0 validation: zero errors, 61 existing warnings.\r\n- [Approved work](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-003.md) and\r\n  [verification contract](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/verification/VER-HAG-003.md).\r\n\r\nIndependent WO-HAG-001 work adds strict canonical parsing and immutable\r\nrevision/baseline values under its approved scope. [Continuation evidence](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/continuation.json)\r\nrecords that work. **Zero hosted service scenarios have run.**\r\nWO-HAG-001 remains `in_progress`; no hosted verification is claimed.\r\n\r\nDEC-HAG-001 remains open. The user's `extend-evaluator` choice is unchanged.\r\nBoth evaluator corrections must be released and explicitly adopted before\r\nthe live decision and dependent draft adapter can proceed. SPEC-HAG-003 still\r\npins 0.22.0. Historical VREC-HAG-001 and all its evidence remain unchanged.\r\n\r\nThis PR remains a draft against `codex/hosted-artifact-graph-inputs` at\r\n`be1812e7042081014cc7682da8b9cd3822d9071f`. It does not target main.\r\nThe existing aggregate `docs/engineering/README.md` scope issue against main\r\nremains unresolved. A passing correction check does not clear that issue or\r\nthe hosted decision gate. The retained prior handoff below remains historical.\r\n\r\n## Transport scope and publication authority\r\n\r\nWO-HAG-004 is implemented and covers the five unchanged approved governing\r\nfiles omitted from the original PR scope. It adds no implementation or new\r\nverification claim. [Transport evidence](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/transport-results.json)\r\nrecords complete-byte equality with the reviewed versions.\r\n\r\nmmzen explicitly approved this scope correction and authorized updating this\r\ndraft PR, including a later push of the separately given VREC-HAG-002 decision.\r\nThis authorization does not accept verification, resolve DEC-HAG-001, authorize\r\nmerge, or release an evaluator. The PR stays draft while WO-HAG-001 is unfinished.\r\n\r\n## Current check findings\r\n\r\nThe original-target union check passes path coverage and preflight, then\r\nrefuses the unfinished WO-HAG-001 handoff with two predicates:\r\n\r\n- `QGP-G4I-EVIDENCE`: its historical handoff packet is bound to the earlier\r\n  snapshot. A released rebind in a disposable clone removes this finding;\r\n  the publication branch preserves that historical packet unchanged.\r\n- `QGP-G4I-DECISION`: DEC-HAG-001 remains open pending qualified evaluator\r\n  release and explicit adoption/amendment. The human choice is already known.\r\n\r\n[Publication assessment](https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/publication-readiness.json)\r\nretains both findings and the disposable-clone diagnostic. Neither gate is\r\nwaived. VREC-HAG-002's separate assurance and review-publication gates pass.\r\nCI for this new review head is pending at publication; the historical CI\r\nfailure is not a result for this new head. This is an unfinished draft review.\r\n\r\n## Historical Phase 1 handoff\r\n\r\n## Summary\r\n\r\nComplete the independent Phase 1 contract package for the Hosted Artifact Graph: explicit domain/Cypher reads, accepted receipts and refusals, retry and error ordering, reference context, and expected outcomes for all twelve VER-HAG-001 scenarios. This is a draft continuation/handoff PR; WO-HAG-001 remains `in_progress`, and the hosted service has not been implemented or qualified.\r\n\r\nTarget: `codex/hosted-artifact-graph-inputs` at `be1812e7042081014cc7682da8b9cd3822d9071f`, which already contains the approved HAG artifacts and the evaluator correction merged in #534. The PR head includes that full history. Its new diff is the Phase 1 continuation; the complete artifact inventory below includes prerequisites inherited from the base. Contract/evidence checkpoint: `9b6a2c378c61ce3f35e4a70a960dd12406da5c7e`.\r\n\r\nThis PR does not target `main`. Main remains at original reference commit `82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1`. A previous aggregate check against main found `docs/engineering/README.md` outside the selected work orders' execution scopes. Preserve that integration issue for a scoped assessment; do not retarget or advance a comparison base merely to omit it.\r\n\r\nPublished handoff head: `7b3a1e8cefc02903f79392ea164aa7d7b8af71f8`, including the [retained handoff packet](https://github.com/mmzen/se_harness/blob/7b3a1e8cefc02903f79392ea164aa7d7b8af71f8/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/WO-HAG-001-handoff.md). The immutable contract and artifact links below identify the preceding Phase 1 checkpoint; those bytes are unchanged at this head.\r\n\r\n## Start here for the receiving Codex agent\r\n\r\n1. Fetch and check out `codex/hosted-artifact-phase1` with its history. All formal artifacts, contract fixtures, implementation source and retained verification evidence are in the branch; no earlier chat or scratch script is needed to understand the handoff.\r\n2. Read [AGENTS.md](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/AGENTS.md), the [domain index](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/README.md), [WO-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-001.md), [protocol guide](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/notes/hosted-artifact-graph.md), and [Phase 1 continuation report](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-continuation.json).\r\n3. Use Verity Plane setup to select the checkout's separately installed **released evaluator 0.22.0**. Resolve its absolute Python path and run it with `-I -m se_harness` from outside the checkout. The required archive SHA-256 is `44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4`; payload SHA-256 is `b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9`. Candidate source is not the repository governor.\r\n4. Obtain fresh `check REPO --artifact WO-HAG-001 --json`, then follow its selected instructions and reading manifest. Existing work is in progress; do not replay approval/start or mark the full work implemented from these contract checks. The current typed step is `STEP-WO-IMPLEMENT-CHECK`; its handoff check still needs the complete implementation and evidence.\r\n5. Resolve the specific admission dependencies below before implementing the dependent draft adapter. Phase 2 then supplies service packaging/lock/image/Compose, schema/init/import, immutable storage, evaluator projection, guarded transactions, domain/MCP/Cypher reads, remote CLI/plugin guidance, and every packaged/recovery scenario in VER-HAG-001.\r\n\r\n## Complete formal artifact inventory at the handoff checkpoint\r\n\r\n| Artifact | Recorded state | Purpose |\r\n| --- | --- | --- |\r\n| [ADR-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-001.md) | approved | Python command service over Memgraph with released evaluator materialization |\r\n| [ARCH-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md) | approved | One hosted graph service with an isolated released evaluator |\r\n| [CAP-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-001.md) | approved | Read a hosted work context and safely author sandbox drafts |\r\n| [DEC-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/decisions/DEC-HAG-001.md) | open | Released evaluator support for standalone sandbox draft admission |\r\n| [INT-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/intent/INT-HAG-001.md) | approved | Retrieve engineering context and revise drafts against an immutable hosted baseline |\r\n| [REQ-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-001.md) | approved | Import complete artifacts without changing historical claims |\r\n| [REQ-HAG-002](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-002.md) | approved | Preserve immutable revisions and reproducible baselines |\r\n| [REQ-HAG-003](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-003.md) | approved | Return the exact selected work context |\r\n| [REQ-HAG-004](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-004.md) | approved | Create and revise legitimate incomplete drafts |\r\n| [REQ-HAG-005](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-005.md) | approved | Commit changes and retries atomically under a version guard |\r\n| [REQ-HAG-006](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-006.md) | approved | Expose bounded read operations and Cypher with honest limits |\r\n| [REQ-HAG-007](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-007.md) | approved | Reuse explicit evaluator and historical evidence semantics |\r\n| [REQ-HAG-008](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-008.md) | approved | Qualify one reproducible packaged sandbox combination |\r\n| [REQ-HAG-009](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-009.md) | approved | Distinguish admissible draft incompleteness from invalid artifact relationships |\r\n| [RISK-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md) | raised | Cypher lacks a database-enforced read-only boundary in the sandbox |\r\n| [SPEC-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-001.md) | approved | Hosted artifact representation, immutable baselines and import fidelity |\r\n| [SPEC-HAG-002](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-002.md) | approved | Hosted command acceptance, context reads and evaluator adapter |\r\n| [SPEC-HAG-003](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md) | approved | Packaged sandbox qualification and coordinated release boundaries |\r\n| [SPEC-HAG-004](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-004.md) | approved | Standalone draft validation and shared relationship rules |\r\n| [VER-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md) | approved | Independent hosted context and draft-authoring qualification |\r\n| [VER-HAG-002](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/verification/VER-HAG-002.md) | approved | Independent draft admission and relationship regression evidence |\r\n| [VREC-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-001.md) | verified | Verification candidate for WO-HAG-002 |\r\n| [WO-HAG-001](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-001.md) | in_progress | Remote artifact context and draft authoring through the existing harness |\r\n| [WO-HAG-002](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-002.md) | implemented | Implement and qualify standalone draft validation in the evaluator |\r\n\r\n## Contracts, fixtures and retained evidence\r\n\r\n- [Canonical revisions, source manifests, baselines and mutation schema](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/server/contracts/remote-v1.json), [read schema](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/server/contracts/read-v1.json), [receipt/refusal schema](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/server/contracts/result-v1.json), and [proposed physical schema](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/server/contracts/graph-v1.cypher).\r\n- [Independent fixed byte/hash vectors](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/tests/hosted_artifact_graph/fixtures/canonical-v1.json), [complete 1,909-artifact source manifest](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/tests/hosted_artifact_graph/fixtures/reference-manifest.json), and [twelve scenario expectations plus exact reference context](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/tests/hosted_artifact_graph/fixtures/scenarios-v1.json).\r\n- [Phase 0 contract/environment and original Phase 1 observations](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-contract-result.json), [environment identities](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-environment.json), [original contract result](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-contract.json), and [released-evaluator feasibility gap](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-evaluator-feasibility.json).\r\n- [Latest Phase 1 report](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-continuation.json) and [actual command outputs](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-continuation-observations.json).\r\n- [Evaluator correction assessment](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/verification-results.json), [raw observations](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/raw-observations.zip), and [identical independent build replay](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-final-build-replay.json).\r\n\r\n## Current publication/readiness blocker\r\n\r\nThe released PR check currently fails QGP-G4I-DECISION because DEC-HAG-001 is open. Its missing handoff-header finding was corrected with the released evidence command; graph, scope, integrity, preflight and evidence predicates pass. This handoff is unfinished work and must not be treated as implementation completion or merge readiness. The decision-recording mismatch below remains unresolved.\r\n\r\nAfter reviewing this exact handoff head, target branch and failed gate, mmzen explicitly authorized: \"Publish the draft handoff with blockers disclosed\". This publication transfers unfinished work to another agent. The failed gate remains failed; this authorization changes no lifecycle state and grants no verification acceptance, release, merge or merge-readiness decision.\r\n\r\n## Validation and assurance boundary\r\n\r\n- Three schemas: **60 checks passed** (37 accepted shapes, 23 rejected shapes), using disposable `jsonschema==4.26.0` and `python -I -B tests/hosted_artifact_graph/validate_wire_contracts.py`.\r\n- Source suite: **1,284 tests, 22 reported skips, exit 0**, 188 classes / 8 workers, Windows Python 3.13.3 with process-local UTF-8 and default reduced scale: `python scripts/run_tests.py --workers 8`.\r\n- `python scripts/validate_release_distributions.py --root .`: **PASS**, 22 distribution-bearing records. CLI help smoke check passed.\r\n- Released validation: **1,933 artifacts, zero errors, 61 existing repository warnings**. Released doctor, selected review preflight and bounded Phase 1 scope checks passed.\r\n- Reference context matches the original Git blob; canonical vectors, prior formal records and correction evidence remain unchanged.\r\n- **Zero hosted service scenarios executed.** Memgraph schema execution, real HTTP/MCP/Cypher admission, transaction/concurrency tests, packaged walkthrough and restart/restore remain Phase 2 work. CI on this new PR is a separate observation and is pending at publication.\r\n\r\nVREC-HAG-001 is verified by mmzen and applies to the evaluator correction candidate `169430fe25d28972a9b86fef2d00eccde2baa5db`, not this full hosted implementation. Its tested/package source is `08694a22ed754474267b0da98a9514648068f5f9`. No new VREC or implementation-completion transition is claimed for WO-HAG-001.\r\n\r\n## Dependencies and decisions to preserve\r\n\r\n1. **Released admission support:** The correction is implemented, verified and merged, but SPEC-HAG-003 still pins released 0.22.0. The chosen `extend-evaluator` route requires release through the existing process and explicit adoption/amendment of the hosted evaluator identity before dependent admission implementation. Do not silently substitute the candidate or duplicate evaluator policy in the service.\r\n2. **Decision-recording mismatch:** mmzen already chose `extend-evaluator`. DEC-HAG-001 remains open because the released command rejected actual actor `mmzen` with WEX201 against the blocked WO's legacy `engineering-owner` label. [Retained attempt](https://github.com/mmzen/se_harness/blob/9b6a2c378c61ce3f35e4a70a960dd12406da5c7e/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/correction-decision-attempt.json). This is a recording defect, not an unanswered user choice. Do not impersonate the owner label or manually add disposition/lifecycle fields.\r\n3. **Cypher remains:** The user explicitly retained Cypher and deferred Memgraph-side read-only enforcement. RISK-HAG-001 remains raised. Preserve application grammar/view/budget/rollback controls; no authoritative pilot or untrusted-network exposure is authorized.\r\n4. **Authority and delivery:** mmzen approved WO-HAG-001 and its governing package and authorized Phase 1 continuation; the current request authorizes publishing this handoff branch/PR. It does not supply verification, release, merge or deployment decisions. Reuse valid prior decisions, preserving their exact scope.\r\n\r\nThe original source/evidence archive and candidate packages were built locally. A different host can recreate inputs from the pinned Git commits and image/build recipe identities in retained evidence. Rebuild the correction only from its recorded tested source and compare the recorded package digests; do not treat a local machine path as a durable distribution URL.\r\n",
+    "headRefName": "codex/hosted-artifact-phase1",
+    "headRefOid": "65a4cc958d27062c3b27b060e9eb5e2f198b2c75",
+    "isDraft": true,
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-04T17:50:59Z",
+        "conclusion": "FAILURE",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/37222042380/job/111494176797",
+        "name": "validate",
+        "startedAt": "2026-10-04T17:50:38Z",
+        "status": "COMPLETED",
+        "workflowName": "Engineering Harness"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-04T17:50:54Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/37222042516/job/111494177315",
+        "name": "Predecessor evaluator assessment",
+        "startedAt": "2026-10-04T17:50:38Z",
+        "status": "COMPLETED",
+        "workflowName": "Predecessor Evaluator Assessment"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-04T17:50:49Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/37222042627/job/111494177824",
+        "name": "Select release rehearsals",
+        "startedAt": "2026-10-04T17:50:39Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-04T17:51:48Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/37222042397/job/111494176914",
+        "name": "Candidate source evidence",
+        "startedAt": "2026-10-04T17:50:37Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "0001-01-01T00:00:00Z",
+        "conclusion": "",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/37222042397/job/111494410004",
+        "name": "Candidate package evidence",
+        "startedAt": "2026-10-04T17:51:51Z",
+        "status": "IN_PROGRESS",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-04T17:50:49Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/37222042627/job/111494220532",
+        "name": "Rehearse the qualification of this candidate",
+        "startedAt": "2026-10-04T17:50:49Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-04T17:50:49Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/37222042627/job/111494220327",
+        "name": "Rehearse the qualification of the release record",
+        "startedAt": "2026-10-04T17:50:49Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-04T17:50:49Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/37222042627/job/111494220405",
+        "name": "Rehearse complete delivery and recovery without publication",
+        "startedAt": "2026-10-04T17:50:49Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-04T17:50:54Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/37222042627/job/111494220143",
+        "name": "Publication rehearsal",
+        "startedAt": "2026-10-04T17:50:51Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      }
+    ],
+    "title": "Hosted Artifact Graph handoff and decision attribution correction",
+    "url": "https://github.com/mmzen/se_harness/pull/535"
+  },
+  "verification_record": "VREC-HAG-002",
+  "candidate": "5355877faecf4039c3bf994f43ddc60fef922c50",
+  "confirmed_files": [
+    {
+      "path": "docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-002.md",
+      "remote_git_blob": "8cccdece89ae813744d92e3328e6caad945edd53",
+      "sha256": "451263dc843ab738d1cea02a4dff8f45b8893aed0d0242aa93a42d47064b5566",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-002.md"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-002-evaluator.json",
+      "remote_git_blob": "95c8362eac0b7d39a78a6336e664062e1c71bb29",
+      "sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-002-evaluator.json"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/WO-HAG-003-handoff.md",
+      "remote_git_blob": "4d1519cc98e9c47396477a0079a50837f814d2a3",
+      "sha256": "e8f5f3ce432eda34cdc708441358982584185c7adf4f158eebde79d71c8aed38",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/WO-HAG-003-handoff.md"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/approval.json",
+      "remote_git_blob": "fafbdfbcccb88b4defd444235f2b552bc7e20286",
+      "sha256": "c5f0e9f8e92e597ac602737124745d99bc82572e2e5506152bc6454739c040fa",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/approval.json"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/build-replay.json",
+      "remote_git_blob": "3c1a85de57479ed10c5352d47d28e09a417c39e2",
+      "sha256": "a7a155c14dcddace9624688013714f5e0ee09f4c2be15641ea0197247fc512eb",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/build-replay.json"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/commands.zip",
+      "remote_git_blob": "79ab67210b4e277310d333f4b07eaaa514cc9b7c",
+      "sha256": "0f04a812d43699deb4ab34094115c40b62527b36790bd46a150eb305af641ce8",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/commands.zip"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/handoff.json",
+      "remote_git_blob": "731cb2748c09bd11f66688b2247b95432cad4cf4",
+      "sha256": "ff4125841e6727977dfcf3bca30e2b3af08ff0d216924c3ef685d43fa0ac4314",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/handoff.json"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/implementation-review.md",
+      "remote_git_blob": "a30dbc1f39691850d602de8ca4aaf81b2bf7d0b4",
+      "sha256": "5983b5dd00967b8aec8aac05198b3112660b6024f9be76256c105020e315722d",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/implementation-review.md"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/installed_probe.py",
+      "remote_git_blob": "da05ed2f576f31e56f3f3356c82ba6e1731f55f9",
+      "sha256": "dd682a9dd275271756712225486197e2aa1a33aa828dca286dfb63d55f556c05",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/installed_probe.py"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/verification-results.json",
+      "remote_git_blob": "9efeb952ee8e5cebb32f5ed72813e6e1e854280a",
+      "sha256": "e076058711cd742b66c72b5fc0ecfaaee778335f81a4b692c9fbaac996d6dd6e",
+      "matches_local": true,
+      "html_url": "https://github.com/mmzen/se_harness/blob/65a4cc958d27062c3b27b060e9eb5e2f198b2c75/docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/verification-results.json"
+    }
+  ],
+  "publication_actions": {
+    "transport-branch-push": {
+      "argv": [
+        "git",
+        "push",
+        "origin",
+        "65a4cc958d27062c3b27b060e9eb5e2f198b2c75:refs/heads/codex/hosted-artifact-phase1"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag",
+      "observed_at": "2026-10-04T17:50:28.431627+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "To https://github.com/mmzen/se_harness.git\n   7b3a1e8c..65a4cc95  65a4cc958d27062c3b27b060e9eb5e2f198b2c75 -> codex/hosted-artifact-phase1\n"
+    },
+    "transport-pr-update": {
+      "argv": [
+        "gh",
+        "pr",
+        "edit",
+        "535",
+        "--repo",
+        "mmzen/se_harness",
+        "--title",
+        "Hosted Artifact Graph handoff and decision attribution correction",
+        "--body-file",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-session-20261004\\transport-pr-body.md"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "observed_at": "2026-10-04T17:50:30.991284+00:00",
+      "exit_code": 0,
+      "stdout": "https://github.com/mmzen/se_harness/pull/535\n",
+      "stderr": ""
+    }
+  },
+  "limits": "Correction verification is pending. PR remains a draft; no merge, release, adoption or live DEC disposition occurred. Hosted handoff findings remain disclosed."
+}
