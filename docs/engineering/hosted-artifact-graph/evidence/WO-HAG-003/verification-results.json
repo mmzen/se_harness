@@ -1,0 +1,208 @@
+{
+  "work_order": "WO-HAG-003",
+  "verification_contract": "VER-HAG-003",
+  "requirement": "REQ-HAG-010",
+  "result": "pass",
+  "assurance_decision": "pending human verification",
+  "tested_and_packaged_source": "99a8c53f6a2e253c20737d5985223ea0c25c79d9",
+  "correction_implementation_base": "fcfb02b3a8ff041023e0d85d7bc2af0524559f8a",
+  "candidate_binding": "The later released VREC identifies the clean committed candidate. Only governance and this retained evidence are added after the tested source; source/build tree identities below must remain equal.",
+  "source_and_build_tree_identities": {
+    "se_harness": "42421a20f0a688f3d1dafc3c777447b36efabbde",
+    "templates": "ef672e8e486d7bfa4697963404952071f1114efe",
+    "tests": "edae198ef27ca318fb33e73c910d986efd20617a",
+    "repository_tools": "963fd9e3ef69f9305252592743170f931986395f",
+    "scripts": "7ba96a33fe6e2762bb6e1b4128263e19a311d19b",
+    "release": "f043176653b202e92a3d6771bf4265ee01e9873a",
+    "pyproject.toml": "e3386c567fd47fa11dff6d4fa96f23e4e6930c37",
+    "MANIFEST.in": "98351edfd0d1b095bb72615b72ac0bff31dbafab",
+    ".gitattributes": "049dfbc763e40dd23b57feb316b0f6eef92a5fdd",
+    "docs/notes": "4e8f79545fe8fc49fa27f9d8502eb8accdff0833"
+  },
+  "cases": [
+    {
+      "case": 1,
+      "result": "pass",
+      "evidence": [
+        "tests/test_decision_management.py::ExplicitDecisionOwnerTests.test_explicit_mapping_retains_human_and_preview_changes_no_bytes",
+        "correction-installed-windows.json",
+        "correction-installed-linux.json"
+      ],
+      "observation": "Without explicit binding, mmzen receives WEX201; all fixture bytes remain unchanged."
+    },
+    {
+      "case": 2,
+      "result": "pass",
+      "evidence": [
+        "tests/test_decision_management.py::ExplicitDecisionOwnerTests.test_explicit_mapping_retains_human_and_preview_changes_no_bytes",
+        "correction-installed-windows.json",
+        "correction-installed-linux.json"
+      ],
+      "observation": "Valid preview writes nothing; apply retains actual human, exact authority_owner and verbatim reason. Blocked work order remains byte-identical."
+    },
+    {
+      "case": 3,
+      "result": "pass",
+      "evidence": [
+        "tests/test_decision_management.py::ExplicitDecisionOwnerTests.test_mapping_does_not_bypass_invalid_inputs_or_infer_other_owners",
+        "tests/test_decision_management.py::ExplicitDecisionOwnerTests.test_explicit_mapping_retains_human_and_preview_changes_no_bytes",
+        "correction-installed-windows.json",
+        "correction-installed-linux.json"
+      ],
+      "observation": "Invalid binding, missing or invalid inputs and terminal replay refuse without changes."
+    },
+    {
+      "case": 4,
+      "result": "pass",
+      "evidence": [
+        "tests/test_decision_management.py::ExplicitDecisionOwnerTests.test_deviation_binding_uses_specification_holders"
+      ],
+      "observation": "A blocked work owner cannot answer a deviation; both existing specification holders remain eligible. Required revisit remains enforced."
+    },
+    {
+      "case": 5,
+      "result": "pass",
+      "evidence": [
+        "tests/test_risk_management.py::DisposalTests.test_explicit_owner_binding_keeps_paired_risk_human_attribution",
+        "tests/test_risk_management.py::DisposalTests.test_explicit_owner_binding_keeps_paired_refusals_and_deferral_atomic",
+        "tests/test_decision_management.py::ExplicitDecisionOwnerTests.test_direct_api_and_deferral_keep_the_same_checks_and_writer",
+        "correction-installed-windows.json",
+        "correction-installed-linux.json"
+      ],
+      "observation": "Accept, avoid, mitigate and withdraw retain actual human. Existing evidence requirements and limited deferral remain enforced."
+    },
+    {
+      "case": 6,
+      "result": "pass",
+      "evidence": [
+        "tests/test_decision_management.py::ExplicitDecisionOwnerTests.test_optional_metadata_shape_without_retroactive_owner_resolution",
+        "correction-full-2.json"
+      ],
+      "observation": "Legacy commands and records pass. Optional metadata is shape-checked, without retrospective holder reassignment."
+    },
+    {
+      "case": 7,
+      "result": "pass",
+      "evidence": [
+        "tests/test_decision_management.py::ExplicitDecisionOwnerTests.test_direct_api_and_deferral_keep_the_same_checks_and_writer",
+        "tests/test_workflow_documentation_contract.py::WorkflowDocumentationContractTests.test_decision_help_and_procedure_distinguish_identity_from_owner_claim",
+        "correction-index-regression.json",
+        "implementation-review.md"
+      ],
+      "observation": "CLI and API reuse the shared validator/writer. Documentation identifies the caller authority boundary. Diagnostic index and existing messages remain compatible."
+    },
+    {
+      "case": 8,
+      "result": "pass",
+      "evidence": [
+        "correction-full-2",
+        "correction-distribution",
+        "correction-cli-smoke",
+        "correction-validate-code",
+        "correction-index-regression",
+        "correction-build",
+        "correction-installed-windows",
+        "correction-installed-linux",
+        "correction-source-diff",
+        "correction-protected-bindings"
+      ],
+      "observation": "Focused and full source tests, distribution checks, CLI smoke, equal pinned builds, and real installed-wheel probes on Windows and Linux passed."
+    }
+  ],
+  "checks": {
+    "focused": {
+      "tests": 136,
+      "skipped": 1,
+      "exit_code": 0,
+      "observation": "correction-focused-1.json"
+    },
+    "final_full_suite": {
+      "tests": 1305,
+      "skipped": 22,
+      "exit_code": 0,
+      "observation": "correction-full-2.json"
+    },
+    "diagnostic_regression": {
+      "tests": 23,
+      "exit_code": 0,
+      "observation": "correction-index-regression.json"
+    },
+    "distribution": {
+      "records": 22,
+      "exit_code": 0
+    },
+    "released_validation": {
+      "evaluator": "0.22.0",
+      "artifacts": 1939,
+      "errors": 0,
+      "existing_warnings": 61
+    },
+    "installed_platforms": {
+      "windows": {
+        "platform": "Windows-11-10.0.26200-SP0",
+        "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "executable": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-session-20261004\\installed-windows\\Scripts\\python.exe",
+        "module": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-session-20261004\\installed-windows\\Lib\\site-packages\\se_harness\\__init__.py",
+        "version": "0.22.1",
+        "checks": [
+          "actual human without explicit binding refuses; no bytes changed",
+          "invalid or unrelated binding refuses; no bytes changed",
+          "valid preview writes nothing",
+          "apply records actual human and owner; terminal replay refuses; blocked work unchanged",
+          "paired risk and decision retain actual human through the installed mutation guard"
+        ],
+        "result": "pass",
+        "observed_cli_commands": 14
+      },
+      "linux": {
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+        "python": "3.11.9 (main, Sep  4 2024, 23:15:21) [GCC 12.2.0]",
+        "executable": "/tmp/evaluator/bin/python",
+        "module": "/tmp/evaluator/lib/python3.11/site-packages/se_harness/__init__.py",
+        "version": "0.22.1",
+        "checks": [
+          "actual human without explicit binding refuses; no bytes changed",
+          "invalid or unrelated binding refuses; no bytes changed",
+          "valid preview writes nothing",
+          "apply records actual human and owner; terminal replay refuses; blocked work unchanged",
+          "paired risk and decision retain actual human through the installed mutation guard"
+        ],
+        "result": "pass",
+        "observed_cli_commands": 14
+      }
+    },
+    "pinned_builds": [
+      {
+        "id": "a",
+        "sdist_sha256": "2843b0a032547096e1dbf13e72c452e0a1dc4c8d7f2f7eb927335913aa6a8974",
+        "wheel_sha256": "715fa7fef045aaa1a38284ee114d2e30db7e4a2eaa4bb8263a5452fbc4e838cc"
+      },
+      {
+        "id": "b",
+        "sdist_sha256": "2843b0a032547096e1dbf13e72c452e0a1dc4c8d7f2f7eb927335913aa6a8974",
+        "wheel_sha256": "715fa7fef045aaa1a38284ee114d2e30db7e4a2eaa4bb8263a5452fbc4e838cc"
+      }
+    ]
+  },
+  "material_failures": [
+    {
+      "observation": "correction-doc-tests.json",
+      "resolution": "The command-help assertion now normalizes help wrapping; the documentation check then passed."
+    },
+    {
+      "observation": "correction-full-1.json",
+      "resolution": "Three diagnostic-index assertions failed after adding a diagnostic emission site. The optional field now uses the existing field-validation loop. No index file changed. The 23-test regression and full 1305-test suite passed."
+    }
+  ],
+  "limits": [
+    "The 22 full-suite skips remain skips; raw runner output is retained.",
+    "The correction CLI checks a declared owner binding; it does not authenticate identity or human consent.",
+    "Installed tests mutate synthetic fixtures only; they do not dispose live DEC-HAG-001.",
+    "No hosted service scenario was executed. WO-HAG-001 remains in_progress.",
+    "Live DEC-HAG-001 remains open. Released governor and hosted pin remain 0.22.0.",
+    "VREC-HAG-001 and WO-HAG-002 evidence remain unchanged at their historical candidate bindings.",
+    "The whole HAG diff retains its known docs/engineering/README.md scope finding against main. This correction-specific base does not clear that integration finding.",
+    "Private 0.22.1 qualification archives do not constitute a selected or published release."
+  ],
+  "raw_observations": "commands.zip; entry digests are listed in manifest.json"
+}

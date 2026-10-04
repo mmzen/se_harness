@@ -2,7 +2,7 @@
 id = "WO-HAG-003"
 type = "work_order"
 title = "Correct decision attribution without rewriting artifact owners"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-04"
 updated = "2026-10-04"
@@ -35,6 +35,13 @@ to = "in_progress"
 decided_at = "2026-10-04T16:56:11Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Codex starts the unchanged approved correction after passing start preflight, under mmzen recorded approval and required commit-bound verification."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-04T17:27:05Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Codex completed the approved correction. VER-HAG-003 cases, installed Windows/Linux probes, pinned builds, review preflight and Git-derived handoff passed. Human verification, publication, release/adoption and live DEC-HAG-001 disposition remain separate."
 +++
 
 # Correct decision attribution without rewriting artifact owners
