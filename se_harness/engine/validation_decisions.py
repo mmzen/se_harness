@@ -578,12 +578,18 @@ def _check_decision_disposition(
             option = disposition.get("option")
             if artifact.status == "decided" and option not in option_ids:
                 add_error(errors, artifact, report_root, E_DCM_003, f"disposition option '{option}' is not a declared option", plane="governance")
-            for key in ("decided_by", "decided_at", "reason", "label"):
-                if not isinstance(disposition.get(key), str) or not disposition[key].strip():
-                    add_error(errors, artifact, report_root, E_DCM_003, f"disposition field '{key}' must be a non-empty string", plane="governance")
-            if "authority_owner" in disposition and not valid_authority_owner(disposition["authority_owner"]):
-                add_error(errors, artifact, report_root, E_DCM_003,
-                          "disposition field 'authority_owner' must be non-blank printable text of at most 128 characters", plane="governance")
+            fields = ("decided_by", "decided_at", "reason", "label")
+            if "authority_owner" in disposition:
+                fields += ("authority_owner",)
+            for key in fields:
+                value = disposition.get(key)
+                valid = isinstance(value, str) and bool(value.strip())
+                required = "a non-empty string"
+                if key == "authority_owner":
+                    valid = valid_authority_owner(value)
+                    required = "non-blank printable text of at most 128 characters"
+                if not valid:
+                    add_error(errors, artifact, report_root, E_DCM_003, f"disposition field '{key}' must be {required}", plane="governance")
             if artifact.status == "deferred" and (not isinstance(disposition.get("scope"), list) or not disposition.get("revisit")):
                 add_error(errors, artifact, report_root, E_DCM_003, "a deferred decision records its scope and its revisit trigger", plane="governance")
             if artifact.status == "decided" and kind == "deviation" and option == "accept":
