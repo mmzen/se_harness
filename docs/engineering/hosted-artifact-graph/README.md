@@ -58,6 +58,8 @@ evaluator. WO-HAG-002 is implemented. The
 [criterion assessment](evidence/WO-HAG-002/verification-results.json) records
 the full-suite result, installed-wheel qualification, identical independent
 package builds, retained failures and limitations.
-[VREC-HAG-001](verification-records/VREC-HAG-001.md) is ready and binds the clean
-candidate; mmzen's verification decision is pending. Release/adoption and resolution of the separate
-decision identity mismatch remain outside this work order.
+[VREC-HAG-001](verification-records/VREC-HAG-001.md) is verified by mmzen and binds
+candidate `169430fe25d28972a9b86fef2d00eccde2baa5db`. The recorded acceptance is
+retained in [the verification result](evidence/WO-HAG-002/phase0-correction-verification-apply.json).
+Release/adoption and resolution of the separate decision identity mismatch
+remain outside this work order.

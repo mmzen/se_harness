@@ -1,0 +1,294 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "169430fe25d28972a9b86fef2d00eccde2baa5db",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-HAG-001",
+    "artifacts": [
+      "VREC-HAG-001"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-VREC-DELIVER",
+    "procedure_id": "PROC-DELIVERY-SELECT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-ASSURANCE-DECISION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4A-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VREC-HAG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4A-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4A-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VREC-HAG-001"
+              }
+            ],
+            "message": "No open decision blocks VREC-HAG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VREC-HAG-001"
+              }
+            ],
+            "message": "ready -> verified is a declared lifecycle edge for VREC-HAG-001."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-DELIVERY-SELECT",
+    "current_step": "STEP-DELIVERY-SELECT",
+    "steps": [
+      {
+        "id": "STEP-DELIVERY-SELECT",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-VERIFIED-COVERAGE"
+        ],
+        "effects": [
+          "Selects one delivery path."
+        ],
+        "non_effects": [
+          "Selection performs no repository or release action."
+        ],
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner or release-owner",
+        "artifact": "VREC-HAG-001",
+        "decision": "which separately authorized delivery path to select",
+        "outcomes": [
+          "repository-integration",
+          "release-preparation",
+          "stop"
+        ],
+        "response": "Select one separately authorized delivery path for VREC-HAG-001."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-HAG-001",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-HAG-001",
+        "status": "verified"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "VREC-HAG-001",
+        "path": "docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated",
+          "verified_at",
+          "verified_by"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Planned 1 explicit lifecycle transition(s); no files were written."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-HAG-001 is verified."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DELIVERY-SELECT",
+      "role": "repository-owner or release-owner",
+      "artifact": "VREC-HAG-001",
+      "decision": "which separately authorized delivery path to select",
+      "outcomes": [
+        "repository-integration",
+        "release-preparation",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "step_id": "STEP-DELIVERY-SELECT",
+      "action": "which separately authorized delivery path to select"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Select one separately authorized delivery path for VREC-HAG-001."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+    ]
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v2",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task",
+        "source": "released-resource",
+        "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context.",
+          "source": "released-resource",
+          "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result.",
+          "source": "released-resource",
+          "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e"
+        }
+      ],
+      "procedure": {
+        "id": "PROC-DELIVERY-SELECT",
+        "location": {
+          "file": "docs/engineering/harness/DELIVER_RESULT.md",
+          "heading": "select-the-delivery-action",
+          "source": "released-resource",
+          "sha256": "13405ba32a2227a5c20abb59e806de18ed60b4ecf3c010508f053587cd8bf6b2"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision.",
+            "source": "released-resource",
+            "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+          }
+        ],
+        "steps": {
+          "STEP-DELIVERY-SELECT": {
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action",
+              "source": "released-resource",
+              "sha256": "13405ba32a2227a5c20abb59e806de18ed60b4ecf3c010508f053587cd8bf6b2"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision.",
+                "source": "released-resource",
+                "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-DELIVERY-SELECT",
+        "location": {
+          "file": "docs/engineering/harness/DELIVER_RESULT.md",
+          "heading": "select-the-delivery-action",
+          "source": "released-resource",
+          "sha256": "13405ba32a2227a5c20abb59e806de18ed60b4ecf3c010508f053587cd8bf6b2"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision.",
+            "source": "released-resource",
+            "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "VREC-HAG-001"
+    ],
+    "evaluator_only_inputs": [
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/WORKFLOW.json",
+        "sha256": "00c222a9c71d95cb1162e6d6bacdb03cd9e43431303466077a85ceb8f921f0c2"
+      },
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/QUALITY_GATES.json",
+        "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+      }
+    ],
+    "release": {
+      "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+      "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+      "version": "0.22.0"
+    },
+    "formal_artifact_source": "repository"
+  },
+  "result_sha256": "1b3e88f53242d440f31487fc37b69732d8cd6eb5c58a412206adb82074598f7c"
+}
