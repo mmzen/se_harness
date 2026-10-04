@@ -120,6 +120,16 @@ each selected mitigating work order (WO). For a risk-avoidance option, use
 `--avoided-by ARTIFACT-ID` when naming a separate architecture decision (ADR)
 or decision (DEC). Review the returned operation before applying it.
 
+ACTOR is the actual human who made the decision. If that human acts under an
+existing owner label, first resolve their authority under
+[Decision rights](AUTHORITY.md#decision-rights), then add
+`--authority-owner OWNER` to both preview and apply. For example, a human
+named `mmzen` acting under `engineering-owner` uses
+`--decision mmzen --authority-owner engineering-owner`. Do not put the owner
+label in place of the human. Neither string authenticates the decision.
+OWNER must be non-blank printable text of at most 128 characters and match
+an eligible owner exactly. An unrelated label refuses without writing.
+
 For an explicitly authorized deferral, use this preview instead:
 
 ```text

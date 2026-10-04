@@ -1,0 +1,166 @@
+{
+  "kind": "observed-decision-recording-refusal",
+  "date": "2026-10-04",
+  "human": "mmzen",
+  "user_response": "OK, i accept your recommended correction",
+  "selected_decision": "DEC-HAG-001",
+  "selected_option": "extend-evaluator",
+  "actual_result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "decide",
+      "outcome": "blocked"
+    },
+    "selection": {
+      "primary": "DEC-HAG-001",
+      "artifacts": [
+        "DEC-HAG-001"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+      "procedure_id": "PROC-REMEDIATE",
+      "status": "fail",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-REMEDIATE",
+      "current_step": "STEP-REMEDIATE-FOCUS",
+      "steps": [
+        {
+          "id": "STEP-REMEDIATE-FOCUS",
+          "kind": "command",
+          "gate_ids": [],
+          "effects": [
+            "Re-evaluated selected state for DEC-HAG-001."
+          ],
+          "non_effects": [
+            "Remediation does not expand scope or change state."
+          ],
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "DEC-HAG-001"
+          ]
+        }
+      ]
+    },
+    "state": {
+      "before": [],
+      "after": []
+    },
+    "findings": {
+      "scoped_blockers": [
+        {
+          "code": "WEX201",
+          "message": "DR-DECISION-DISPOSE: DEC-HAG-001 is disposed by engineering-owner, not mmzen"
+        }
+      ],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "blocked",
+      "done": [],
+      "not_done": [
+        "The requested workflow operation remains incomplete."
+      ],
+      "blocked_by": [
+        "WEX201: DR-DECISION-DISPOSE: DEC-HAG-001 is disposed by engineering-owner, not mmzen"
+      ],
+      "current_lifecycle_state": [
+        "No lifecycle state was changed."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-REMEDIATE",
+        "step_id": "STEP-REMEDIATE-FOCUS",
+        "action": "remediate"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "DEC-HAG-001"
+        ]
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-REMEDIATE",
+          "location": {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "if-a-procedure-is-blocked"
+          },
+          "prerequisites": [],
+          "steps": {
+            "STEP-REMEDIATE-FOCUS": {
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": []
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-REMEDIATE-FOCUS",
+          "location": {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "if-a-procedure-is-blocked"
+          },
+          "prerequisites": []
+        }
+      },
+      "formal_artifact_ids": [
+        "DEC-HAG-001"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "0bc6b545303b0a8c1568ba361e4bcfb26c2e5427ff135768cbcddcda9a8709fb"
+  },
+  "state_effect": "None. Preview refused; no apply attempted. DEC-HAG-001 remains open.",
+  "boundary": "This evidence retains the observed human response and failed command; it is not a replacement formal disposition or a new authority record."
+}

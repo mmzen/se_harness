@@ -1,0 +1,364 @@
+{
+  "kind": "released-evaluator-feasibility-observations",
+  "source_commit": "82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1",
+  "evaluator": "0.22.0",
+  "known_release_target": "RLS-SEH-001",
+  "generated_template_sha256": "d2573f64e539fd1bbaa386609dcfed88abaaa2c271c4335fb6942095142281ea",
+  "cases": [
+    {
+      "case": "reference-validation",
+      "exit_code": 0,
+      "duration_seconds": 7.813,
+      "errors": [],
+      "restitution": null
+    },
+    {
+      "case": "reference-context",
+      "exit_code": 0,
+      "duration_seconds": 8.433,
+      "errors": [],
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "WO-RLS-038 is implemented and has verified assurance coverage in VREC-RLS-001."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-RLS-038 is implemented; VREC-RLS-001 is verified."
+        ],
+        "decision_required": {
+          "decision_right": "DR-DELIVERY-SELECT",
+          "role": "repository-owner or release-owner",
+          "artifact": "WO-RLS-038",
+          "decision": "which separately authorized delivery path to select",
+          "outcomes": [
+            "repository-integration",
+            "release-preparation",
+            "stop"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-DELIVERY-SELECT",
+          "step_id": "STEP-DELIVERY-SELECT",
+          "action": "which separately authorized delivery path to select"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Select one separately authorized delivery path for WO-RLS-038."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION.",
+          "Use complete alternative procedure PROC-PREPARE-RELEASE."
+        ]
+      }
+    },
+    {
+      "case": "create-preview",
+      "exit_code": 0,
+      "duration_seconds": 2.322,
+      "errors": [],
+      "restitution": null
+    },
+    {
+      "case": "create",
+      "exit_code": 0,
+      "duration_seconds": 2.212,
+      "errors": [],
+      "restitution": null
+    },
+    {
+      "case": "incomplete-draft",
+      "exit_code": 1,
+      "duration_seconds": 7.814,
+      "errors": [
+        {
+          "code": "E006",
+          "message": "artifact 'REQ-PROBE-001' relation 'derives_from' references unknown target 'CAP-xxx'",
+          "path": "docs/engineering/hosted-probe/requirements/REQ-PROBE-001.md",
+          "plane": "structure"
+        }
+      ],
+      "restitution": null
+    },
+    {
+      "case": "empty-relation",
+      "exit_code": 1,
+      "duration_seconds": 7.392,
+      "errors": [
+        {
+          "code": "E005",
+          "message": "field 'derives_from' must be a non-empty array of strings",
+          "path": "docs/engineering/hosted-probe/requirements/REQ-PROBE-001.md",
+          "plane": "structure"
+        }
+      ],
+      "warnings_for_probe": [],
+      "valid": false
+    },
+    {
+      "case": "valid-relation",
+      "exit_code": 0,
+      "duration_seconds": 8.743,
+      "errors": [],
+      "warnings_for_probe": [],
+      "valid": true
+    },
+    {
+      "case": "forbidden-relation",
+      "exit_code": 0,
+      "duration_seconds": 9.745,
+      "errors": [],
+      "warnings_for_probe": [],
+      "valid": true
+    },
+    {
+      "case": "unknown-target",
+      "exit_code": 1,
+      "duration_seconds": 8.82,
+      "errors": [
+        {
+          "code": "E006",
+          "message": "artifact 'REQ-PROBE-001' relation 'derives_from' references unknown target 'CAP-PROBE-999'",
+          "path": "docs/engineering/hosted-probe/requirements/REQ-PROBE-001.md",
+          "plane": "structure"
+        }
+      ],
+      "warnings_for_probe": [],
+      "valid": false
+    },
+    {
+      "case": "duplicate-toml",
+      "exit_code": 1,
+      "duration_seconds": 9.396,
+      "errors": [
+        {
+          "code": "E001",
+          "message": "invalid TOML front matter: Cannot overwrite a value (at line 2, column 21)",
+          "path": "docs/engineering/hosted-probe/requirements/REQ-PROBE-001.md",
+          "plane": "structure"
+        }
+      ],
+      "warnings_for_probe": [],
+      "valid": false
+    },
+    {
+      "case": "identity-type-mismatch",
+      "exit_code": 1,
+      "duration_seconds": 8.855,
+      "errors": [
+        {
+          "code": "E004",
+          "message": "id 'REQ-PROBE-001' must start with 'CAP-' for type 'capability'",
+          "path": "docs/engineering/hosted-probe/requirements/REQ-PROBE-001.md",
+          "plane": "structure"
+        }
+      ],
+      "warnings_for_probe": [],
+      "valid": false
+    }
+  ],
+  "probe_setup_correction": "The generated template uses CAP-xxx, not an empty derives_from array. The first script stopped at that assertion before changing the file. Follow-up cases use the observed template and a confirmed existing release record.",
+  "preflight_cases": [
+    {
+      "case": "preflight-new-valid",
+      "ready": true,
+      "diagnostics": [],
+      "exit_code": 0
+    },
+    {
+      "case": "preflight-new-invalid",
+      "ready": true,
+      "diagnostics": [],
+      "exit_code": 0
+    }
+  ],
+  "exact_blob_recheck": [
+    {
+      "case": "exact-reference-validation",
+      "exit_code": 0,
+      "valid": true,
+      "ready": null,
+      "errors": [],
+      "diagnostics": [],
+      "operation": null
+    },
+    {
+      "case": "exact-reference-context",
+      "exit_code": 0,
+      "valid": null,
+      "ready": null,
+      "errors": [],
+      "diagnostics": [],
+      "operation": {
+        "kind": "check",
+        "outcome": "completed"
+      }
+    },
+    {
+      "case": "exact-valid-draft",
+      "exit_code": 0,
+      "valid": true,
+      "ready": null,
+      "errors": [],
+      "diagnostics": [],
+      "operation": null
+    },
+    {
+      "case": "exact-forbidden-draft",
+      "exit_code": 0,
+      "valid": true,
+      "ready": null,
+      "errors": [],
+      "diagnostics": [],
+      "operation": null
+    },
+    {
+      "case": "exact-invalid-preflight",
+      "exit_code": 0,
+      "valid": null,
+      "ready": true,
+      "errors": [],
+      "diagnostics": [],
+      "operation": null
+    }
+  ],
+  "projection_correction": "The initial Windows git archive used core.autocrlf and converted LF to CRLF. Git-blob comparison caught it. Re-exported with git -c core.autocrlf=false; all formal blobs are independently checked against git cat-file in reference-manifest generation. Key validation/context/admission cases rerun on exact bytes; earlier observations retained.",
+  "reference_context_comparison": {
+    "work_order": "WO-RLS-038",
+    "expected_from": "SPEC-HAG-001#HAG-DAT-005 and the original work-order scope at the pinned commit",
+    "expected_governing": [
+      "ADR-IAR-012",
+      "ARCH-IAR-012",
+      "CAP-IAR-002",
+      "CAP-RLO-004",
+      "INT-IAR-001",
+      "INT-RLO-001",
+      "REQ-IAR-030",
+      "REQ-RLO-019",
+      "REQ-RLO-020",
+      "SPEC-IAR-016",
+      "SPEC-RLO-006",
+      "VER-RLS-002"
+    ],
+    "expected_declared_paths": [
+      "README.md",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/release-0-22-0/README.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "docs/notes/release-delivery-completion.md",
+      "docs/engineering/release-0-22-0/work-orders/WO-RLS-038.md",
+      "docs/engineering/release-0-22-0/verification/VER-RLS-002.md",
+      "docs/engineering/release-0-22-0/decisions/DEC-RLS-007.md",
+      "docs/engineering/release-0-22-0/decisions/DEC-RLS-008.md",
+      "docs/engineering/release-0-22-0/evidence/WO-RLS-038/"
+    ],
+    "matches": true
+  },
+  "runtime": {
+    "version": "0.22.0",
+    "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+    "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+  },
+  "minimal_reproducer": {
+    "original_template_utf8": "+++\nid = \"REQ-PROBE-001\"\ntype = \"requirement\"\ntitle = \"<Observable obligation>\"\nstatus = \"draft\"\nowners = [\"<product/domain owner>\"]\ncreated = \"2026-10-04\"\nupdated = \"2026-10-04\"\n# State an observable behavior. SHALL is optional.\nstatement = \"<The observable behavior the system provides.>\"\nverification_method = [\"test\"]\npriority = \"must\"\nsource = \"<stakeholder, standard clause, incident, or artifact ID>\"\nmeasure = \"<value and unit, for a quality requirement>\"\n\n[relations]\nderives_from = [\"CAP-xxx\"]\n+++\n\n# Requirement: <title>\n\nBefore approval, apply the shared design principle and `requirement` checklist in\n`docs/engineering/ARTIFACT_AUTHORING.md`.\n\n## In plain words\n\n<One or two sentences a newcomer understands. A project term used here is\ndefined in this repository's own glossary, `GLOSSARY.md` at the repository\nroot, which this repository writes.>\n\n## Why\n\n<Why the obligation exists. How\nit is met belongs in the specification that specifies this requirement.>\n\n## Behavior\n\n| Trigger | Response | On failure |\n| --- | --- | --- |\n| <the observable condition or event; \"always\" for an invariant> | <what the reader can check> | <what happens when the response cannot be given> |\n\n## Examples\n\n### Normal\n\n**Given** ...\n\n**When** ...\n\n**Then** ...\n\n### Failure\n\n**Given** ...\n\n**When** ...\n\n**Then** ...\n",
+    "edit": {
+      "from": "derives_from = [\"CAP-xxx\"]",
+      "to": "derives_from = [\"RLS-SEH-001\"]"
+    },
+    "actual_validate_argv": [
+      "C:\\Users\\hok\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.0\\44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\phase1-probe\\reference",
+      "--json"
+    ],
+    "observed_exit": 0,
+    "observed_errors": [],
+    "expected_under_hosted_contract": "Refusal for prohibited requirement-to-release-record derives_from; see VER-HAG-001 SC-06.",
+    "boundaries": "All edits were made only in the disposable reference projection, never to repository authority."
+  },
+  "raw_results": [
+    {
+      "archive_path": "probe-results/create-preview.json",
+      "sha256": "7ef9a407417ccc47af4dda5a5811edc6d3231f3f9bd6832002976d1e14356b35"
+    },
+    {
+      "archive_path": "probe-results/create.json",
+      "sha256": "bf2e0f30ed2246788f13ad9830204fccaab49a2898ac109321ef36255ae4fbc2"
+    },
+    {
+      "archive_path": "probe-results/duplicate-toml.json",
+      "sha256": "e59e7f0abd9e4930167ad6ac90d793caad53925fb9e3fcb010391b0ece2153de"
+    },
+    {
+      "archive_path": "probe-results/empty-relation.json",
+      "sha256": "09c8771f6d0df95714f490c416ac7d525d3dd5536c04e8140622b07f893d25c5"
+    },
+    {
+      "archive_path": "probe-results/exact-forbidden-draft.json",
+      "sha256": "7a3c79aebb7d5a5ff54afdddd03f754da118069bc0455cd5f2d39375badeb55a"
+    },
+    {
+      "archive_path": "probe-results/exact-invalid-preflight.json",
+      "sha256": "6940bcfb23a7fa63d538bc8294ea85e220ae8529f6359fdfa767e90980b5dd1b"
+    },
+    {
+      "archive_path": "probe-results/exact-reference-context.json",
+      "sha256": "10ce16c2ffe1cbca7a4a88af9d51780b4d960d911671425379547b124b90b63f"
+    },
+    {
+      "archive_path": "probe-results/exact-reference-validation.json",
+      "sha256": "14d4672768ef81f511a38e3ccac6f3a2a2e14b800c7a559c3e8a0b66a750b80c"
+    },
+    {
+      "archive_path": "probe-results/exact-valid-draft.json",
+      "sha256": "14088203be55d4c4067a7ab99368265de4fdfb6aa9a05d58f844997f8708c12a"
+    },
+    {
+      "archive_path": "probe-results/forbidden-relation.json",
+      "sha256": "2410e992e02499bdce4bb373ff3e8af6b916e8947d81ca69f0530c7b6583acac"
+    },
+    {
+      "archive_path": "probe-results/identity-type-mismatch.json",
+      "sha256": "cfc39232794d4c10e5d3b470d434d880281a0fc97798a045495d9a1ca9c06c61"
+    },
+    {
+      "archive_path": "probe-results/incomplete-draft.json",
+      "sha256": "eee39b5cd5f63c3bd5dd6b66e0a2af8451890c3acc0031d5c54549b4107b3b62"
+    },
+    {
+      "archive_path": "probe-results/observations.json",
+      "sha256": "04c078ae934e9e1d26001660a8cb14bc22245c177cf51c1bb13473e2291cd447"
+    },
+    {
+      "archive_path": "probe-results/preflight-new-invalid.json",
+      "sha256": "9c3b08f5fdc4652a6c030a827231506d9315ac46dc5a2a1d6cf7f1da1b1bb508"
+    },
+    {
+      "archive_path": "probe-results/preflight-new-valid.json",
+      "sha256": "83056cf5e127c3139d7dab9d263a1e2afb97990916be3d3b79bc81351cd6ef74"
+    },
+    {
+      "archive_path": "probe-results/reference-context.json",
+      "sha256": "433db18630a6bd1eb4ca487be7467aaacd7c34dc40abbfea178cbad0c23cf832"
+    },
+    {
+      "archive_path": "probe-results/reference-validation.json",
+      "sha256": "2982d586076f4865724546f0a621b3b0d6b7fa3fe164819787771afc5c873ffa"
+    },
+    {
+      "archive_path": "probe-results/unknown-target.json",
+      "sha256": "e8a8909c1352c05f12204eab33f037912136e30f2fbcaa87ae1001e5381c1cb6"
+    },
+    {
+      "archive_path": "probe-results/valid-relation.json",
+      "sha256": "ffc7b283f2ee10305ad9f3934e749e62aedcc01afee1b6a68aeabd172026c379"
+    }
+  ],
+  "qualification": "Reference materialization is feasible. The available validation/preflight results are not sufficient as the whole standalone draft-admission decision. DEC-HAG-001 remains open."
+}

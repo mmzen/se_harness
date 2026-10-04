@@ -47,15 +47,13 @@ Startup/compaction hooks deliver the selected repository's instructions; they do
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
 
-### Published 0.22.0 / plugin 0.2.5
+### Release in preparation
 
-The [release package](docs/engineering/release-0-22-0/README.md) brings clearer
-approval and verification requests, a PR before verification, and complete-release
-preparation and recovery. Evaluator 0.22.0 and plugin 0.2.5 are public.
-
-This repository selects released evaluator 0.22.0. The single-approval release
-route still requires reviewed provider configuration. [Delivery closeout](docs/engineering/release-0-22-0/evidence/WO-RLS-036/closeout.md)
-confirms documentation integration and the latest/last markers.
+The [0.22.1 / plugin 0.2.6 package](docs/engineering/release-0-22-1/README.md)
+adds standalone draft validation and accurate decision-owner attribution.
+Qualification is in progress. Public latest remains 0.22.0 / 0.2.5; this
+repository still selects released evaluator 0.22.0. Release preparation does
+not verify or publish the unfinished hosted service.
 
 ## Fewer repository files
 

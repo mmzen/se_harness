@@ -76,3 +76,5 @@ Formal artifacts use TOML front matter between `+++` delimiters. Stable IDs and 
 ## Maintenance
 
 Update this index when an engineering domain or repository-specific guide is added, moved, superseded, or retired. Do not copy managed policy or lifecycle instructions into this owner-controlled file.
+
+- [Release 0.22.1 / plugin 0.2.6 preparation](release-0-22-1/README.md): approved qualification scope; publication and adoption remain pending.

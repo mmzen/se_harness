@@ -6,6 +6,7 @@ import contextlib
 import io
 import json
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -121,6 +122,130 @@ class DecisionManagementFixture:
         return {p["id"]: p for gate in result["compliance"]["gates"] for p in gate["predicates"]}
 
     # ---------------------------------------------------------------- REQ-DCM-001: the artifact and its validation
+
+
+class ExplicitDecisionOwnerTests(DecisionManagementFixture, unittest.TestCase):
+    """REQ-HAG-010: identity and the declared owner are separate assertions."""
+
+    def setUp(self):
+        super().setUp()
+        self.work = self.in_progress_work_order()
+        text = self.work.read_text(encoding="utf-8").replace('owners = ["owner"]', 'owners = ["engineering-owner"]')
+        self.work.write_text(text, encoding="utf-8")
+        path = self.raise_decision()
+        # Owning the question itself does not grant its blocked work's right.
+        path.write_text(path.read_text(encoding="utf-8").replace('owners = ["owner"]', 'owners = ["mmzen"]'), encoding="utf-8")
+
+    def snapshot(self):
+        return {p.relative_to(self.root).as_posix(): p.read_bytes() for p in self.root.rglob('*') if p.is_file()}
+
+    def metadata(self, path=None):
+        return tomllib.loads((path or self.decision_path()).read_text(encoding="utf-8").split('+++', 2)[1])
+
+    def decide(self, *extra):
+        return invoke('decide', str(self.root), '--artifact', 'DEC-001', '--decision', 'mmzen', *extra, '--json')
+
+    def test_explicit_mapping_retains_human_and_preview_changes_no_bytes(self):
+        before = self.snapshot()
+        code, output, error = self.decide('--option', 'keep', '--reason', 'Keep the existing definition.', '--apply')
+        self.assertEqual(1, code, output + error)
+        self.assertIn('WEX201', output)
+        self.assertIn('DR-DECISION-DISPOSE', output)
+        self.assertEqual(before, self.snapshot())
+        args = ('--option', 'keep', '--authority-owner', 'engineering-owner', '--reason', '  Exact human reason.  ')
+        code, output, error = self.decide(*args)
+        self.assertEqual(0, code, output + error)
+        self.assertEqual(before, self.snapshot())
+        code, output, error = self.decide(*args, '--apply')
+        self.assertEqual(0, code, output + error)
+        meta = self.metadata()
+        self.assertEqual('mmzen', meta['disposition']['decided_by'])
+        self.assertEqual('engineering-owner', meta['disposition']['authority_owner'])
+        self.assertEqual('  Exact human reason.  ', meta['disposition']['reason'])
+        self.assertEqual('mmzen', meta['lifecycle_events'][-1]['decided_by'])
+        self.assertEqual(before[self.work.relative_to(self.root).as_posix()], self.work.read_bytes())
+        changed = {p for p, value in self.snapshot().items() if before.get(p) != value}
+        self.assertEqual({self.decision_path().relative_to(self.root).as_posix()}, changed)
+        after = self.snapshot()
+        code, output, error = self.decide(*args, '--apply')
+        self.assertEqual(1, code, output + error)
+        self.assertEqual(after, self.snapshot())
+
+    def test_mapping_does_not_bypass_invalid_inputs_or_infer_other_owners(self):
+        before = self.snapshot()
+        for owner in ('release-owner', '', ' ', 'x' * 129, 'engineering-owner\n', 'x\t', 'x\x7f', 'x\x85', 'x\u2028'):
+            with self.subTest(owner=repr(owner)):
+                code, output, error = self.decide('--authority-owner', owner, '--option', 'keep', '--reason', 'Known answer.', '--apply')
+                self.assertEqual(1, code, output + error)
+                self.assertEqual(before, self.snapshot())
+        for extra in (('--option', 'keep'), ('--option', 'undeclared', '--reason', 'Known answer.'),
+                      ('--option', 'keep', '--reason', 'Known answer.', '--decision', ''),
+                      ('--defer', '--reason', 'Later.', '--revisit', 'v9'),
+                      ('--defer', '--reason', 'Later.', '--scope', 'WO-001:in_progress-implemented')):
+            with self.subTest(extra=extra):
+                code, output, error = self.decide('--authority-owner', 'engineering-owner', *extra, '--apply')
+                self.assertEqual(1, code, output + error)
+                self.assertEqual(before, self.snapshot())
+
+    def test_direct_api_and_deferral_keep_the_same_checks_and_writer(self):
+        from se_harness.decisions import dispose_decision
+        from se_harness.installer import HarnessError
+        before = self.snapshot()
+        args = dict(option=None, actor='mmzen', authority_owner='engineering-owner', reason='Wait for the defined trigger.',
+                    defer=True, scope=('WO-001:in_progress-implemented',), revisit='v9')
+        with self.assertRaises(HarnessError):
+            dispose_decision(self.root, 'DEC-001', **{**args, 'authority_owner': 'unrelated'}, apply=True)
+        self.assertEqual(before, self.snapshot())
+        dispose_decision(self.root, 'DEC-001', **args)
+        self.assertEqual(before, self.snapshot())
+        plan = dispose_decision(self.root, 'DEC-001', **args, apply=True)
+        self.assertEqual('completed', plan.result['operation']['outcome'])
+        self.assertEqual(['WO-001:in_progress-implemented'], self.metadata()['disposition']['scope'])
+        self.assertEqual('engineering-owner', self.metadata()['disposition']['authority_owner'])
+        self.assertEqual('pass', self.predicates(self.handoff_check())['QGP-G4I-DECISION']['status'])
+        # A later direct-owner disposition must not inherit an earlier mapping.
+        code, output, error = invoke('decide', str(self.root), '--artifact', 'DEC-001', '--withdraw',
+                                    '--decision', 'engineering-owner', '--reason', 'Question removed.', '--apply')
+        self.assertEqual(0, code, output + error)
+        self.assertNotIn('authority_owner', self.metadata()['disposition'])
+
+    def test_deviation_binding_uses_specification_holders(self):
+        spec = self.root / 'docs/engineering/product/specifications/SPEC-001.md'
+        spec.write_text(spec.read_text(encoding='utf-8').replace('owners = ["owner"]',
+                        'owners = ["technical-owner", "design-owner"]'), encoding='utf-8')
+        fields = dict(kind='deviation', against='SPEC-001#BASE-RUL-003', observed='The field cannot be read.',
+                      options=(('accept', 'Accept for one release.'), ('stop', 'Stop.')), recommendation='accept',
+                      concerns=('SPEC-001', 'WO-001'))
+        self.raise_decision(**fields)
+        before = self.snapshot()
+        code, output, error = self.decide('--option', 'accept', '--authority-owner', 'engineering-owner',
+                                         '--reason', 'Accepted temporarily.', '--revisit', 'v9', '--apply')
+        self.assertEqual(1, code, output + error)
+        self.assertEqual(before, self.snapshot())
+        for holder in ('technical-owner', 'design-owner'):
+            code, output, error = self.decide('--option', 'accept', '--authority-owner', holder,
+                                             '--reason', 'Accepted temporarily.', '--revisit', 'v9')
+            self.assertEqual(0, code, output + error)
+            self.assertEqual(before, self.snapshot())
+        code, output, error = self.decide('--option', 'accept', '--authority-owner', 'technical-owner',
+                                         '--reason', 'Accepted temporarily.', '--apply')
+        self.assertEqual(1, code, output + error)
+        self.assertEqual(before, self.snapshot())
+
+    def test_optional_metadata_shape_without_retroactive_owner_resolution(self):
+        code, output, error = self.decide('--option', 'keep', '--authority-owner', 'engineering-owner',
+                                         '--reason', 'Known answer.', '--apply')
+        self.assertEqual(0, code, output + error)
+        original = self.decision_path().read_text(encoding='utf-8')
+        for value in ('', 'x' * 129, '\n', '\u2028', 12, ['engineering-owner']):
+            self.decision_path().write_text(original.replace('authority_owner = "engineering-owner"',
+                                            'authority_owner = ' + json.dumps(value)), encoding='utf-8')
+            self.assertTrue(any('authority_owner' in e for e in self.decision_errors()), value)
+        self.decision_path().write_text(original, encoding='utf-8')
+        self.work.write_text(self.work.read_text(encoding='utf-8').replace('engineering-owner', 'changed-owner'), encoding='utf-8')
+        self.assertEqual([], self.decision_errors())
+        self.decision_path().write_text(original.replace('authority_owner = "engineering-owner"\n', ''), encoding='utf-8')
+        self.assertEqual([], self.decision_errors())
 
 
 class DecisionManagementTests(DecisionManagementFixture, unittest.TestCase):

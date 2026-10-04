@@ -2,7 +2,7 @@
 
 Summary: a decision artifact (`DEC-`) records one pending question, or one
 implementation deviation, as a formal artifact. While it is open, the
-artifacts it blocks cannot change state. A named role answers it with
+artifacts it blocks cannot change state. An authorized human answers it with
 `harnessctl decide`; the answer is retained verbatim. This note describes the
 model that `SPEC-DCM-001` fixes and that `WO-DCM-001` implemented.
 
@@ -57,13 +57,25 @@ disposed and its own transition is requested again.
 ## Disposition
 
 ```text
-harnessctl decide . --artifact DEC-PRD-001 --option keep --decision engineering-owner --reason "One record; the split buys nothing." --apply
+harnessctl decide REPO --artifact DEC-PRD-001 --option keep --decision mmzen --authority-owner engineering-owner --reason "One record; the split buys nothing." --json
 ```
 
-`decide` writes a `[disposition]` table with the option, its label, the role,
+This example is a preview. Resolve the named human's authority first, inspect
+the result, then repeat the same command with `--apply`. `--decision` names
+the actual human; `--authority-owner` names the existing accountability used.
+The command does not authenticate the human or grant consent. If the option
+is absent, the actual decision-maker must directly match an eligible owner.
+
+`decide` writes a `[disposition]` table with the option, its label, the human,
 the time, and the verbatim reason, then records one lifecycle event. It is the
 only path: `transition` refuses a decision, and a hand-written disposition is
 `E-DCM-003`.
+
+An explicit binding adds `authority_owner` to the disposition. It must name
+an eligible owner exactly, using non-blank printable text of at most 128
+characters. The same checks apply to previews and writes. Paired-risk events
+retain the human's identity. Existing records without this field keep their
+meaning; later owner changes do not rewrite historical dispositions.
 
 | State | Meaning | Reached by |
 | --- | --- | --- |

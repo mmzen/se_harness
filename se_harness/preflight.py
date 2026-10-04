@@ -11,6 +11,7 @@ from pathlib import Path
 from types import ModuleType
 from typing import Any, Iterable, Literal
 
+from se_harness.relation_policy import RELATION_TARGET_TYPES
 from se_harness.engine import validate_engineering_artifacts
 from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES
 from se_harness.installer import (
@@ -594,10 +595,10 @@ def run_preflight(
     def require_targets(
         source: Any,
         relation: str,
-        allowed_types: set[str],
         *,
         required: bool = True,
     ) -> list[Any]:
+        allowed_types = RELATION_TARGET_TYPES[(source.artifact_type, relation)]
         targets = _targets(source, relation)
         if required and not targets:
             diagnostics.append(
@@ -641,22 +642,21 @@ def run_preflight(
     capabilities: list[Any] = []
     intents: list[Any] = []
     if work_order is not None:
-        requirements = require_targets(work_order, "implements", {"requirement"})
-        specifications = require_targets(work_order, "specifications", {"specification"})
+        requirements = require_targets(work_order, "implements")
+        specifications = require_targets(work_order, "specifications")
         architecture_items = require_targets(
             work_order,
             "architecture",
-            {"architecture", "adr"},
             required=False,
         )
         architectures = [item for item in architecture_items if item.artifact_type == "architecture"]
         decisions = [item for item in architecture_items if item.artifact_type == "adr"]
-        verifications = require_targets(work_order, "verification", {"verification"})
+        verifications = require_targets(work_order, "verification")
 
         for requirement in requirements:
-            capabilities.extend(require_targets(requirement, "derives_from", {"capability"}))
+            capabilities.extend(require_targets(requirement, "derives_from"))
         for capability in list({item.artifact_id: item for item in capabilities}.values()):
-            intents.extend(require_targets(capability, "derives_from", {"intent"}))
+            intents.extend(require_targets(capability, "derives_from"))
 
         requirement_ids = {item.artifact_id for item in requirements}
         coverage = {

@@ -74,6 +74,12 @@ and instructions come from the same source commit; no output overlay is needed.
 
 ## Stage before release approval
 
+The [0.22.1 / plugin 0.2.6 preparation](../engineering/release-0-22-1/README.md)
+uses the complete-release route. Candidate qualification, exact final approval
+and public delivery are separate observed stages. Public latest remains 0.22.0;
+repository adoption and the hosted evaluator pin are unchanged.
+
+
 The future [complete-release route](release-delivery-completion.md#one-approval-for-the-complete-release)
 uses `stage` and `check-stage` before publication. They take the retained candidate's
 schema-2 build manifest, its independently retained digest and the exact wheel.

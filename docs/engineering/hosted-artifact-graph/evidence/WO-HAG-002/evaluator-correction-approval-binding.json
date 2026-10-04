@@ -1,0 +1,42 @@
+{
+  "review_manifest_sha256": "e36a47fb59f1bf1f856aa8a47c20189bc84d9d53d787fce505e6bc0f895eabe8",
+  "user_response": "i approve REQ-HAG-009, SPEC-HAG-004, VER-HAG-002 and WO-HAG-002 for local implementation, with required commit-bound verification",
+  "artifacts": [
+    {
+      "id": "REQ-HAG-009",
+      "type": "requirement",
+      "state": "draft",
+      "proposed_state": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-009.md",
+      "sha256": "96af3e41887c176faf7a14e85e05336d919033d1e1be278eae87db9e412f4aa0",
+      "apply_sha256": "96af3e41887c176faf7a14e85e05336d919033d1e1be278eae87db9e412f4aa0"
+    },
+    {
+      "id": "SPEC-HAG-004",
+      "type": "specification",
+      "state": "draft",
+      "proposed_state": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-004.md",
+      "sha256": "fb1774158ac06c2bb751338490b13a8c9aee56aef44088fdd51fec170708a6e7",
+      "apply_sha256": "fb1774158ac06c2bb751338490b13a8c9aee56aef44088fdd51fec170708a6e7"
+    },
+    {
+      "id": "VER-HAG-002",
+      "type": "verification",
+      "state": "draft",
+      "proposed_state": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-002.md",
+      "sha256": "b84ed6c7b20a78cb157fdaadc52c0dd02cbb8beb0e678a41f440865fa6581cf6",
+      "apply_sha256": "b84ed6c7b20a78cb157fdaadc52c0dd02cbb8beb0e678a41f440865fa6581cf6"
+    },
+    {
+      "id": "WO-HAG-002",
+      "type": "work_order",
+      "state": "draft",
+      "proposed_state": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-002.md",
+      "sha256": "2fb93043c0db7d35aaaaeba6cd51e8be3c983676fd778f469df386700440b50e",
+      "apply_sha256": "0277b78021ad0c5f5e5d6bc51c23168805e292e684dd00d661b52c142ac1064f"
+    }
+  ]
+}

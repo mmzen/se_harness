@@ -1,6 +1,6 @@
 # Verity Plane
 
-Verity Plane 0.2.5 exposes shared skills through the host's native skill discovery.
+Verity Plane 0.2.6 exposes shared skills through the host's native skill discovery.
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
@@ -15,7 +15,8 @@ changed, incompatible or oversized input reports a delivery gap without fallback
 Setup retains separate immutable evaluator environments outside repositories.
 Activation immediately returns the complete entry; it grants no lifecycle authority.
 
-Plugin 0.2.5 with evaluator 0.22.0 is published at
+This source prepares plugin 0.2.6 with evaluator 0.22.1; qualification is in progress.
+The current public plugin 0.2.5 with evaluator 0.22.0 is published at
 `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. VREC-PLG-032 verifies the qualified package.
 Source documentation updates do not rewrite the published bytes or inventories.
 Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.

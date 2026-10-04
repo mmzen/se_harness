@@ -1,0 +1,11 @@
+{
+  "kind": "observed-command-syntax-error",
+  "date": "2026-10-04",
+  "artifact": "WO-HAG-001",
+  "attempt": "Start transition preview before the corrected preview",
+  "diagnostic": "harnessctl: --reason must use ID=VALUE",
+  "cause": "The first preview supplied a reason without the WO-HAG-001= prefix.",
+  "effect": "Argument parsing failed before lifecycle evaluation or mutation. The wrapper then reported JSONDecodeError because no JSON result was emitted.",
+  "correction": "Retried the preview with the same intended reason prefixed by WO-HAG-001=.",
+  "corrected_result": "phase0-package-start-preview.json"
+}

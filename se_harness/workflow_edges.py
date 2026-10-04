@@ -111,6 +111,7 @@ def validate_edge(
             reason=reason,
             revisit=disposition.get("revisit"),
             scope=tuple(disposition.get("scope") or ()),
+            authority_owner=disposition.get("authority_owner"),
         )
     if artifact.artifact_type == "risk":
         # SPEC-RSK-010 RSK-MGT-016 to RSK-MGT-021: a raised risk moves only through the

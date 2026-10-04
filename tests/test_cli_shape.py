@@ -26,7 +26,7 @@ from tests.cli_support import invoke
 #: non-repository commands take none (WO-ECP-030 retired rehearse-recovery and renumber-artifacts).
 REPOSITORY_COMMANDS = {
     "check-pr", "resources",
-    "init", "validate", "inspect", "dashboard", "doctor", "preflight", "check", "evidence",
+    "init", "validate", "validate-draft", "inspect", "dashboard", "doctor", "preflight", "check", "evidence",
     "pr-body", "transition", "upgrade", "skill-ownership", "scaffold-domain", "create-artifact",
     "release-unit", "capture-verification", "refresh-verification", "prepare-release", "decide", "raise-risk", "risks",
 }

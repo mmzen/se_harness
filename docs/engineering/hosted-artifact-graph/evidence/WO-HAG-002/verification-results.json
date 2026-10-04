@@ -1,0 +1,348 @@
+{
+  "work_order": "WO-HAG-002",
+  "verification_contract": "VER-HAG-002",
+  "assessment_actor": "Codex",
+  "authority": "Observed technical evidence and preparation only; mmzen retains DR-VREC-DECIDE.",
+  "complete_implementation_base": "23c0c34c5b89897b8024a562d3b713e0fa967add",
+  "tested_and_built_source_commit": "08694a22ed754474267b0da98a9514648068f5f9",
+  "candidate_binding": "The later clean VREC candidate adds only retained governance/evidence and the domain index. This wheel was built from the source commit above, not from that later candidate. Source-tree identities below establish unchanged implementation/build inputs.",
+  "frozen_git_objects": {
+    "se_harness": "5e66459e13900f5658bf7ec4dc79ccbe9935ca89",
+    "templates": "8a2bfbd5ba0608c5c6d84344ebc2fbe446d2533b",
+    "tests": "8fb3d8c8ab87a901c9b743ab34cd05c3377ec8d4",
+    "repository_tools": "963fd9e3ef69f9305252592743170f931986395f",
+    "scripts": "7ba96a33fe6e2762bb6e1b4128263e19a311d19b",
+    "release": "f043176653b202e92a3d6771bf4265ee01e9873a",
+    "pyproject.toml": "e3386c567fd47fa11dff6d4fa96f23e4e6930c37",
+    "MANIFEST.in": "98351edfd0d1b095bb72615b72ac0bff31dbafab",
+    ".gitattributes": "049dfbc763e40dd23b57feb316b0f6eef92a5fdd",
+    "docs/notes": "d4eb3390fc7a616af696ffd42b27a6d8a963a006"
+  },
+  "source_comparison_command": [
+    "git",
+    "-C",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\se_harness",
+    "diff",
+    "--exit-code",
+    "08694a22ed754474267b0da98a9514648068f5f9",
+    "--",
+    "se_harness",
+    "templates",
+    "tests",
+    "repository_tools",
+    "scripts",
+    "release",
+    "pyproject.toml",
+    "MANIFEST.in",
+    ".gitattributes",
+    "docs/notes"
+  ],
+  "source_comparison_exit_code": 0,
+  "acceptance": [
+    {
+      "scenario": "EV-01",
+      "result": "pass",
+      "evidence": "All ten generated draft types, omitted/empty/canonical relations and valid capability endpoints: tests/test_draft_validation.py; correction-full-02.log; installed canonical requirement case."
+    },
+    {
+      "scenario": "EV-02",
+      "result": "pass",
+      "evidence": "Independent 25-pair by 14-endpoint matrix (350 combinations), plus requirement-to-release refusal without WO membership: tests/test_relation_policy.py; correction-installed-cases.json."
+    },
+    {
+      "scenario": "EV-03",
+      "result": "pass",
+      "evidence": "Mixed targets, unknown targets, wrong slots, self-links, undeclared relations and malformed target values remain errors: draft tests, full suite and installed mixed-target case."
+    },
+    {
+      "scenario": "EV-04",
+      "result": "pass",
+      "evidence": "Catalog parse/duplicate protection, metadata shape, dates, unsupported selection, non-draft state, lifecycle history and disposition: draft tests; installed history and malformed TOML cases."
+    },
+    {
+      "scenario": "EV-05",
+      "result": "pass",
+      "evidence": "Full suite: 1284 tests, 22 reported skips, exit 0. Original public corpus: 1909 artifacts, zero errors, 61 warnings. Existing gates pass; historical artifacts were not migrated."
+    },
+    {
+      "scenario": "EV-06",
+      "result": "pass",
+      "evidence": "JSON/text and exit behavior, deterministic selection, one catalog scan and byte snapshots: draft tests; all 11 isolated installed commands passed with no query writes."
+    },
+    {
+      "scenario": "EV-07",
+      "result": "pass",
+      "evidence": "implementation-inspection.json: shared registry, field-specific predicates, retained background findings and unchanged authority boundary. Strict JSON edge case corrected before final source freeze."
+    },
+    {
+      "scenario": "EV-08",
+      "result": "pass",
+      "evidence": "Two fresh digest-pinned Linux/amd64 producers emitted byte-identical wheel and normalized sdist. The final wheel hash equals the wheel installed and exercised outside the checkout with isolated Python."
+    }
+  ],
+  "full_suite": {
+    "tests": 1284,
+    "reported_skips": 22,
+    "exit_code": 0,
+    "classes": 188,
+    "workers": 8,
+    "environment": {
+      "PYTHONUTF8": "1"
+    },
+    "scale": "repository default reduced scale; full 1000-artifact scale was not selected"
+  },
+  "package": {
+    "version": "0.22.1",
+    "wheel_sha256": "2b9dda7f126128110ad2df71bebeaa120c4aca64bfbf422e4f7992ab3e8b1c16",
+    "sdist_sha256": "80f4eb9eed2ea86a2c4cbd63eb968499bdd68e6f0cd017a058668a4fefd7ce60",
+    "payload_sha256": "81678fb90ed1fb7f24e72ae5b621632fbbbc0c4d694e2ebcc4debf9150cbe4f4",
+    "local_bundle": "C:\\Users\\hok\\Documents\\Codex\\hag2-final-bundle",
+    "reproducibility": "exact",
+    "installed_cases": 11
+  },
+  "earlier_observations": [
+    "The pre-implementation red baseline failed as expected; its exact output is retained.",
+    "Early test invocations used unsupported create-artifact flags; fixtures were corrected without changing admission expectations or product flags.",
+    "A reused compatibility fixture contained the intentional invalid REQ-PROBE-001. The fresh immutable public corpus passed without artifact edits.",
+    "The first full suite reported two resource-identity failures while source edits overlapped and two existing cp1252 decoding errors. The stable final source passed with process-local UTF-8 for workers.",
+    "The first packaging attempt failed on a Windows path-length limit. The second used a short output path but was stopped after a strict JSON review fix superseded its source. The final pinned-recipe replay passed for the corrected commit."
+  ],
+  "limitations": "The full suite reports 22 skipped tests; unavailable cases are not passes. Local source/installed checks used Windows and Python 3.13.3, while package production used the pinned Linux/amd64 Python 3.11.9 recipe. The default reduced test scale was used. This is local candidate qualification, not release, publication, governor adoption or hosted-service acceptance. The read-only query cannot verify immutable-base protected fields, caller authentication or transaction versions; those remain caller responsibilities.",
+  "raw_evidence": {
+    "path": "raw-observations.zip",
+    "sha256": "0ae3e5356883234a1d49651f9e742363cd3084fa92ff9643eee45454c26f40f2",
+    "files": [
+      {
+        "path": "correction-build-01.json",
+        "sha256": "40637b5db3cbe7b37c2023fb04cd6403cb56660c5270f9b6ec3b7909c9dd8bb9",
+        "bytes": 847
+      },
+      {
+        "path": "correction-build-01.log",
+        "sha256": "43f76f8afc99f1c5c5611b8d95d70f7fd9c0536a62800588890905b1909a7d52",
+        "bytes": 639
+      },
+      {
+        "path": "correction-build-02.json",
+        "sha256": "641edfee0296e158ddb51b8e604cf139873ccea8bbf4b0cc9887b10b8d884596",
+        "bytes": 817
+      },
+      {
+        "path": "correction-build-02.log",
+        "sha256": "eb7ea85576fce5cd0516411de8a4fb8bdc296eb9d7bfc75b40015b13278275b8",
+        "bytes": 348
+      },
+      {
+        "path": "correction-build-final.json",
+        "sha256": "8d94258e3233a5746e7e889e0a1a8169bc475ad6135ace654d4e2e8b8d49f043",
+        "bytes": 833
+      },
+      {
+        "path": "correction-build-final.log",
+        "sha256": "7adbd37031dc00b513babb58deeddefb9d2214c6424a09c1fc050576563ddec9",
+        "bytes": 302
+      },
+      {
+        "path": "correction-cli-smoke.json",
+        "sha256": "2f254ac7e2cb0ce53107230a2dd79076ed8b952ef54196f37f06974a1f8162ef",
+        "bytes": 478
+      },
+      {
+        "path": "correction-cli-smoke.log",
+        "sha256": "af2d0b1cff9cd7aff6a3bffab831be041df20b3e2f77f8763bb2285e5003960c",
+        "bytes": 3872
+      },
+      {
+        "path": "correction-decision-readback.log",
+        "sha256": "096359d1803c42e1aef61b611d20abecbfbc877826b6590a482f49d4ae239706",
+        "bytes": 2560
+      },
+      {
+        "path": "correction-distributions.json",
+        "sha256": "9471085d77b117dbfda56a3699b7f3d1d22bf3b02881332abb2f26313db8a966",
+        "bytes": 511
+      },
+      {
+        "path": "correction-distributions.log",
+        "sha256": "b6a46e65edb811c28b5f76dbd6b024bf4c8b16c993fa209ab75b8408d7c1f461",
+        "bytes": 84
+      },
+      {
+        "path": "correction-final-build-replay.json",
+        "sha256": "194d07bf5b73b741f2c3945db9dd65d3f9f5a59e3f0756b3563c0348725ab819",
+        "bytes": 7097
+      },
+      {
+        "path": "correction-full-01.json",
+        "sha256": "a0bc60859137b705d81caff598629da655e246207bcdb6bd956e98cea03c00ac",
+        "bytes": 515
+      },
+      {
+        "path": "correction-full-01.log",
+        "sha256": "890a3adb46efb9f361fce14a623ceee8e08c9dbb3433b5b3c8b360ddc7848d19",
+        "bytes": 4286
+      },
+      {
+        "path": "correction-full-02.json",
+        "sha256": "1dac506017ac4bfb4f5bbc51620ac5e8d9975c69e73f9e69040205a8b948a322",
+        "bytes": 536
+      },
+      {
+        "path": "correction-full-02.log",
+        "sha256": "859f7bd4abac70fefe92f1f17ccfb20d53d2f65850ae8bfa0873524ec2fe231a",
+        "bytes": 4749
+      },
+      {
+        "path": "correction-implementation-scope.log",
+        "sha256": "7036cc60542d630cb631efd90a6638853f647650dca883949fc7b76a3dbb1c70",
+        "bytes": 4471
+      },
+      {
+        "path": "correction-installed-cases.json",
+        "sha256": "bedcda5140f8f4e5891c261d3c28ceb8d9522f68308fd2ccb1d38a97b3ce3a2b",
+        "bytes": 42785
+      },
+      {
+        "path": "correction-installed-check.json",
+        "sha256": "26dff66eb1721ca88b19dcc5811bf72b4093d850191a1788f0953f465ea4082f",
+        "bytes": 812
+      },
+      {
+        "path": "correction-installed-check.log",
+        "sha256": "4021b3d3dd16402fd9cc89685a22574293f8b88bd0c55c5c67c529d4a14e50ba",
+        "bytes": 933
+      },
+      {
+        "path": "correction-installed-summary.json",
+        "sha256": "97b9dc2b008d727c7477daa97d6f4e5f1bf373fcd436396027fcc01bc42f7dd8",
+        "bytes": 1027
+      },
+      {
+        "path": "correction-json-boundary.log",
+        "sha256": "bc9227d85aad1bd7597c00c05ce43ee30dc532b2049db5583ac54d911bd98f1b",
+        "bytes": 2970
+      },
+      {
+        "path": "correction-original-corpus.json",
+        "sha256": "e5df4a20ad842dd4d6a620fb830b083ef8e0fbedee27c4b48621ae8516e4b6cf",
+        "bytes": 548
+      },
+      {
+        "path": "correction-original-corpus.log",
+        "sha256": "b433db163f37dbacc10b62cb6a4ed11fa4e5aa3ef33fff1d67757a552e5dd51e",
+        "bytes": 379394
+      },
+      {
+        "path": "correction-producer-pull.log",
+        "sha256": "ebc6cd4c59a763b0a75bf1b463f752a21b512bc25477d815e5b28d38093d4e90",
+        "bytes": 891
+      },
+      {
+        "path": "correction-reference-corpus.json",
+        "sha256": "aa910851d352897eb66be153aff496d99f36914292d2e2ae6eddbcf5b5afea91",
+        "bytes": 542
+      },
+      {
+        "path": "correction-reference-corpus.log",
+        "sha256": "69b782af9bf3eb60c662e53118e742c77ceb744a7bc50ee3a981f5798ba5461a",
+        "bytes": 379826
+      },
+      {
+        "path": "correction-relation-impact.json",
+        "sha256": "2ed053ab5e53feae36a3536c5a0ec9a28196b2f24d4c5c253faa790df0ae9a81",
+        "bytes": 2293
+      },
+      {
+        "path": "correction-review-preflight.log",
+        "sha256": "ca88a7b684db008d8d346b96eab32b2dc56020fed2a89c6f45089be74ab89063",
+        "bytes": 1580
+      },
+      {
+        "path": "correction-start-apply.log",
+        "sha256": "aa75216dc4a38ee4efaed4b3aa2034f8c85dd9c2cb263d6c6f9363088e59316a",
+        "bytes": 3829
+      },
+      {
+        "path": "correction-start-preflight.log",
+        "sha256": "1e62b3147df5087d26c2bf326c83da2558541e81a522e48afb05d6039c2b3146",
+        "bytes": 1575
+      },
+      {
+        "path": "correction-start-preview.log",
+        "sha256": "eee033abc420261d082309d1bed41dd585cc5b6bf4385615f763b22f8ffa8d31",
+        "bytes": 3830
+      },
+      {
+        "path": "correction-targeted-final.json",
+        "sha256": "a54190c1afba3b0bbeab877504c9751f5311fea1078da66b47abf907df0cc491",
+        "bytes": 807
+      },
+      {
+        "path": "correction-targeted-final.log",
+        "sha256": "5d105820f7a337dbbc8b8ee406798b2c18e3c47d93c9b041167ddbef5305a02d",
+        "bytes": 16852
+      },
+      {
+        "path": "correction-template-01.log",
+        "sha256": "9e6802b20b4adc935389c66ec8340bb41980d4ff22c28e66c9e7bdbec49a7ddc",
+        "bytes": 14019
+      },
+      {
+        "path": "correction-tests-01.log",
+        "sha256": "5337397ac0d2e5b74c985c9d46962b5bfa44fee62bcfd58a2f618d9168be6808",
+        "bytes": 23478
+      },
+      {
+        "path": "correction-tests-02.log",
+        "sha256": "df11ca4f9ca4415d95db14005c79d0e3294dce15b680efa1348e1f220da69516",
+        "bytes": 2822
+      },
+      {
+        "path": "correction-tests-before.log",
+        "sha256": "02841aa1b8792607792d779af0b079511a29670a8b7c8bab73c27021e5b559de",
+        "bytes": 200876
+      },
+      {
+        "path": "correction-validation-final.log",
+        "sha256": "eac8a937b7004956fededbb982441943f9ab175505102f41a5b59520827be3ba",
+        "bytes": 304089
+      },
+      {
+        "path": "correction-validation-ready.log",
+        "sha256": "eac8a937b7004956fededbb982441943f9ab175505102f41a5b59520827be3ba",
+        "bytes": 304089
+      },
+      {
+        "path": "correction-vrec-id-preview.log",
+        "sha256": "e4059da7f403fd39c51aaf5852a47e6b79c651536f15479fb93a17b0ceb5c252",
+        "bytes": 671
+      },
+      {
+        "path": "correction-wheel-install.json",
+        "sha256": "5540ea77733675ba24926bcdc3ea9e0c6e5bf1675970c931a9722a2855b67fa2",
+        "bytes": 713
+      },
+      {
+        "path": "correction-wheel-install.log",
+        "sha256": "30bb577df9628e073b9414c9732c59c71fb434e0251dbc97607994dc9702e25f",
+        "bytes": 205
+      },
+      {
+        "path": "correction-work-context-ready.log",
+        "sha256": "db7457ec7738287f8006656a00c2c022d091a1441af0a8d381947fe97ce3abdb",
+        "bytes": 3183
+      },
+      {
+        "path": "qualify_correction_wheel.py",
+        "sha256": "4b4c5858ea65765a28e93064d32eef6af304aafc0b3025a8a006039e305bcae4",
+        "bytes": 4721
+      },
+      {
+        "path": "run_correction_check.py",
+        "sha256": "c5569824e297644f0f8c6822439d2809d734100005ba9a6b87ae52e19facc886",
+        "bytes": 1014
+      }
+    ],
+    "preservation": "The ZIP preserves exact observed file bytes, including failed runs and original line endings. Other text copies are convenient review surfaces and may be Git-normalized."
+  }
+}

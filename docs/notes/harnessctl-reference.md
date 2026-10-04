@@ -45,7 +45,7 @@ These rules hold on every subcommand (`WO-ECP-022`):
   their preparation actor `--owner`. `preflight` keeps `--work-order`
   until it folds into `check`.
 - **`--json` everywhere.** The workflow commands print the schema-2 result;
-  `validate`, `inspect`, `resources`, `release-unit`, `identity`
+  `validate`, `validate-draft`, `inspect`, `resources`, `release-unit`, `identity`
   and `qualify` print their own objects; every other command prints one
   `se-harness-command-result-v1` object with the same facts as its human
   output.
@@ -66,6 +66,7 @@ These rules hold on every subcommand (`WO-ECP-022`):
 | --- | --- | --- | --- |
 | `init` | repository owner or authorized agent | writes the complete standard harness into an absent or empty target; into a target with content it preserves existing files, integrates the bounded fragments and writes `docs/engineering/ADOPTION_REPORT.md` | install the harness into any repository, new or existing |
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
+| `validate-draft` | human or agent | read-only | inspect one supported draft, separating invalidity, unfinished authoring slots and background findings |
 | `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer; under `--json` an engine refusal exits 2 and a failed generation carries the engine's standard error in `error` |
 | `resources` | human or agent | read-only | resolve instructions and templates from the selected external resource package; available in the governing 0.21.0 evaluator and published 0.22.0 |
@@ -76,7 +77,7 @@ These rules hold on every subcommand (`WO-ECP-022`):
 | `check-pr` | managed GitHub CI | scope check; may rebind an in-progress handoff | check one or several approved work orders and their combined diff |
 | `check` | human or agent selecting work or assessing a checkpoint | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized actor; a person or agent uses the same recorded WO approval for start and completion after local checks pass (see [one execution route](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
-| `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
+| `decide` | the human who holds `DR-DECISION-DISPOSE`, directly or under an explicitly named eligible owner label | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
 | `raise-risk` | anyone working: a reviewer, an implementer, or an agent mid-execution; no decision right is needed | writes one risk artifact in `raised`, and with `--with-decision` the open decision that blocks the threatened artifacts; dry-run is read-only | record one measured threat to governed work so that an owner answers it before the threatened stage moves |
 | `risks` | human or agent | read-only | list the risks threatening one artifact and its governing chain, with score, state and pending decision |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
@@ -130,6 +131,38 @@ Inspection ends with a vocabulary section. It counts the words of every artifact
 A successfully produced inspection exits zero even when formal validation failed or attention exists, so use `validate` when gate exit behavior is required. Inspection is repository-local derived evidence: it does not approve, authorize, verify, supersede, release, remediate, or independently govern the repository.
 
 Dashboard defaults to `target/harness-dashboard/`; its generated files are derived evidence, not formal authority. The small `index.html` bootstrap verifies `dashboard-manifest.json`, then loads a summary, compact topology, readiness data, individual artifact details, and explicitly expanded evidence from digest-named static resources. Serve the directory from one HTTP origin, for example with `python -m http.server 8000 --directory target/harness-dashboard`; direct `file://` opening is intentionally rejected because progressive resource loading and integrity checks require an origin. Generation remains local and needs no application server, but publishing or sharing the directory exposes every manifest-declared artifact and evidence body; the command does not scan for secrets or redact repository material. Doctor checks the standard installed contract against `.engineering-harness.lock` and the current distribution.
+
+## Standalone draft validation
+
+```text
+harnessctl validate-draft [TARGET] --artifact ARTIFACT-ID [--json]
+```
+
+The caller supplies a complete projection. The command uses one parsed catalog
+and the executing evaluator's canonical templates. It writes nothing. JSON is
+`se-harness-draft-validation-v1`, with `selection` (id, type, status, relative
+path), `admissible`, `errors`, `incomplete`, and `background`. Findings include
+stable codes and structured field/relation/target details where relevant.
+Text reports the same facts. Exit 0 means admissible; 1 means a produced refusal;
+2 means usage or a failure before a result can be produced.
+
+Supported draft types: intent, capability, requirement, specification,
+architecture, adr, verification, work_order, release_contract and
+operating_contract. Decision, risk, verification_record and release_record
+continue through their existing commands.
+
+A requirement with `CAP-xxx`, an omitted `derives_from`, or an empty array can
+be admissible with an incomplete finding. A link to an existing release record,
+an unknown non-template target, or `["CAP-xxx", "RLS-SEH-001"]` is refused.
+Malformed TOML and duplicate IDs block a trustworthy catalog globally. Other
+unselected findings remain background. A correct endpoint does not establish
+readiness of its full governing chain.
+
+Selection outside draft, lifecycle history and disposition are refused. This
+snapshot query cannot prove that imported identity or provenance is unchanged.
+The hosted caller must compare protected fields to its immutable base and enforce
+rights and expected versions. Admission does not waive validation, approval,
+verification or release gates, and includes no lifecycle next step.
 
 <a id="released-resource-lookup-successor-candidate"></a>
 
@@ -377,14 +410,25 @@ presentation consumes that result; it does not replace or recompute it.
 ## Decision disposition
 
 ```text
-harnessctl decide [TARGET] --artifact DEC-... --option OPTION-ID --decision ROLE --reason TEXT [--revisit TEXT] [--apply] [--json]
-harnessctl decide [TARGET] --artifact DEC-... --defer --scope ARTIFACT-ID:FROM-TO ... --revisit TEXT --decision ROLE --reason TEXT [--apply]
-harnessctl decide [TARGET] --artifact DEC-... --withdraw --decision ROLE --reason TEXT [--apply]
+harnessctl decide [TARGET] --artifact DEC-... --option OPTION-ID --decision ACTOR [--authority-owner OWNER] --reason TEXT [--revisit TEXT] [--apply] [--json]
+harnessctl decide [TARGET] --artifact DEC-... --defer --scope ARTIFACT-ID:FROM-TO ... --revisit TEXT --decision ACTOR [--authority-owner OWNER] --reason TEXT [--apply]
+harnessctl decide [TARGET] --artifact DEC-... --withdraw --decision ACTOR [--authority-owner OWNER] --reason TEXT [--apply]
 ```
 
 A decision artifact (`DEC-`) records one pending question, or one implementation deviation from one rule of one specification. While it is `open`, every artifact named in its `blocks` relation is refused its transitions by the `QGP-*-DECISION` predicate of the gate that transition would pass. The refusal names the decision, its question, its options, the deciding role, and the `decide` command that clears it.
 
-`decide` is the only way a decision changes state; `transition` refuses it. Without `--apply` the command plans and reports; with `--apply` it writes the `[disposition]` table (the option, its label, the role, the time, and the verbatim reason) and one lifecycle event. `--option` must name one of the options the artifact declares. A deferral needs one `--scope` entry per transition it admits and a `--revisit` trigger; the scoped transitions pass, every other blocked transition still waits. Accepting a deviation needs `--revisit`, because acceptance is time-bounded. The wrong role is refused with `DR-DECISION-DISPOSE`.
+`decide` is the only way a decision changes state; `transition` refuses it. Without `--apply` the command plans and reports; with `--apply` it writes the `[disposition]` table (the option, its label, the actual human, the time, and the verbatim reason) and one lifecycle event. `--option` must name one of the options the artifact declares. A deferral needs one `--scope` entry per transition it admits and a `--revisit` trigger; the scoped transitions pass, every other blocked transition still waits. Accepting a deviation needs `--revisit`, because acceptance is time-bounded. An ineligible owner is refused with `DR-DECISION-DISPOSE`.
+
+`--decision ACTOR` records the actual human who made the decision. With
+`--authority-owner OWNER`, the evaluator checks OWNER against the existing
+holders for the blocked artifacts, or the departed specification for a
+deviation. OWNER must match exactly and contain non-blank printable text of
+at most 128 characters. It is retained separately as `authority_owner` in
+the disposition. Without the option, ACTOR must directly match a holder.
+Both preview and apply use the same checks. The CLI does not authenticate
+these claims or grant consent; the caller must first establish the human's
+authority and obtain the exact decision. Existing owner labels and historical
+records are not changed.
 
 The validator reports a malformed decision as `E-DCM-001` to `E-DCM-003`, prose in a legacy definition's `## Open decisions` section as `E-DCM-004`, a deviation whose `against` fragment is not a rule identifier of the named specification (`SPEC-xxx#PREFIX-AREA-NNN`) as `E-DCM-005`, and an accepted deviation past its revisit or accepted twice against the same rule as `W-DCM-001` and `W-DCM-002`. See [decision artifacts](decision-artifacts.md) for the model.
 
