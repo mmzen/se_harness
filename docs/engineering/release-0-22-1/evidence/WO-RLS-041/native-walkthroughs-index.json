@@ -1,0 +1,852 @@
+{
+  "archive": "native-walkthroughs.zip",
+  "sha256": "4bf3eb0db7e6df93089a477dd7de607f6613d98edc8e55b13b43bd25cf0b0bfc",
+  "entries": [
+    {
+      "path": "r221-session-20261004/claude-workflow/fixtures.json",
+      "bytes": 817,
+      "sha256": "4a804dc162a472aab998f229b0c03dd8273741fd7a36b9719acf38948307777d"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-add.json",
+      "bytes": 294,
+      "sha256": "e8e6725d1a9860d76847f6401a8d7d47e6fa81d1ea376e9f3b17d56ffbaf4794"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-bytes.json",
+      "bytes": 323,
+      "sha256": "cdb80c4c8ccddf3e643abb497008f7f511e0072e6ef6bfe34705a948fb872887"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-commit.json",
+      "bytes": 1218,
+      "sha256": "45c4c7a7ecd880cce2633b29c8a3610c4017a0f7a1d4d5af6d8d721611a3687a"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-email.json",
+      "bytes": 338,
+      "sha256": "05bfa2dcdb747dd29783e2f92c25bdf04b0ca2da233739f44b311438adefb306"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/3048b80f7838eaec7260752f72082cf682fd80208257d5b5662d1efefcd07061.decision.json",
+      "bytes": 199,
+      "sha256": "18db61ec1d7d62393921f6d351fd32d480655dbee1109f2479b0f30bcdf34e56"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/305978de642d3fab50345ade665209dd4c73772933f587c1a1d8c9fa05606dac.decision.json",
+      "bytes": 207,
+      "sha256": "927098e6849b393115bd792ab653e0e38f43c2e2ef094e634ed942fc65190343"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/6278011b9c8796793c5207bac96deee9a30a4274d85763d73123ecb7191cddee.decision.json",
+      "bytes": 199,
+      "sha256": "8c9982c6c343592a46345a8b0a0caad501fae10d0f154d96f515dc258d4daf32"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/6bd192926a4e7877e84db376fabb077fc3896f95422dcf6e44c153af6ede56b8.decision.json",
+      "bytes": 234,
+      "sha256": "4c3daed3e9b63faef15f1e6916d1f05c684405cfa308015d64f97d3072b1036c"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/6d56f251280253c55f0289b875ebf0f4984bf9bb3f9a26aa1c3fa962dbf63779.decision.json",
+      "bytes": 246,
+      "sha256": "4e6a19dc7c57052c81876aba6e5ea036a2df2427b06c5f44aa92a286a4d90559"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/870601e91544056f6b5690cf7db05a408b3520382599a5bfae19d64f7ab451ad.decision.json",
+      "bytes": 219,
+      "sha256": "7131d6b484cbd4a7370efd82d7f462bcf1f00f24d3497472cc35fa94894b9890"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/884c31dab8c82e2a1bd1ef64f38bdc07f40d53b5a306f767f88fc327a5b3b1bf.decision.json",
+      "bytes": 228,
+      "sha256": "6de7194fbb7c3bad82a51216a715aadab45fa736ad46594127ebd5c5a545f94e"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/9f8c35f4035ce03c39182b39a24b5e233d87d9f1995a2664f4f1395df627e8eb.decision.json",
+      "bytes": 223,
+      "sha256": "3f9c64a74803bd4b5e839d68b1b9b3879e7710d10715ab3ef0751f5000b4f125"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/9fcee2977b01ed9680ad410cca39576cfdcc75ea9e15cad99901aa97623b3ee8.decision.json",
+      "bytes": 181,
+      "sha256": "0017e2174d2c05382ac10404b17401f66aaa432e33248d0328198f6820016151"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/invocation.json",
+      "bytes": 3768,
+      "sha256": "f1a3974958ba8a68f94395a03aa93a911a49d49b5cfa772c5cb48a15fe008ea0"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/native-events.jsonl",
+      "bytes": 226657,
+      "sha256": "2414e4f5effbdd63717f795a42171e65915ed49a401b1616a8611e43c91efdf9"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/report.json",
+      "bytes": 9283,
+      "sha256": "9862b578f277f49ec41b9e5b540ab303d4dc4fd5252af81278e880a823f754bb"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-execute/stderr.json",
+      "bytes": 41,
+      "sha256": "9e7ed757dfb81a72eff7841b7ebfb6213f6caa340284e9726353accaf83f0775"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-final-proposal-assessment.json",
+      "bytes": 1363,
+      "sha256": "d2cb0015933f58fc7bd79d28958bee0532d2592237cb4126762ac7e35a4b4b82"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-head.json",
+      "bytes": 345,
+      "sha256": "2901b22e97e346b4f334aa5dfcd4e7e82585ff96cf5d4865b9ce96877aeb7de1"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-independent-assessment.json",
+      "bytes": 7498,
+      "sha256": "1b6c7b30b329c88c935ad8a967a5b1222201589cfac41ec2beef467de95c2484"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-init.json",
+      "bytes": 407,
+      "sha256": "6f9a44e1da814631821d283367f015e28c62e8a05f86d8f58cbe63c525225ac2"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-initial-draft.md",
+      "bytes": 3816,
+      "sha256": "6a4da85a0b87e22db88bd8c983812a430ec27b2f70d94b1d3a8a062014244bf3"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-initial-proposal-assessment.json",
+      "bytes": 1721,
+      "sha256": "3ca5e855f4bc9b8c42594d00f4f4fc7b05b6f4e7f92773a852d2755293193481"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-name.json",
+      "bytes": 330,
+      "sha256": "1ab9eb73be940903917d6372281cf5206a395b0852df16d437dd0b82c0a6e065"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-proposal/invocation.json",
+      "bytes": 3458,
+      "sha256": "4032ad01434d43b84bfdee5928bff32614a51a85dbd78ca21e1387d3206c6994"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-proposal/native-events.jsonl",
+      "bytes": 13461,
+      "sha256": "94ce080234e9f55041385cda56d6892fc8bfbbe3bd846d3816592f0b5cf77c9a"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-proposal/report.json",
+      "bytes": 3032,
+      "sha256": "028977ca5cc0684514ff56c9fc6290abc424b1d0fa63249e3f54bd7864887a5a"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-proposal/stderr.json",
+      "bytes": 41,
+      "sha256": "9e7ed757dfb81a72eff7841b7ebfb6213f6caa340284e9726353accaf83f0775"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/04a046bf040a0ca292a48d0a380905d57bee9dd4955b18259cf3734cf17b8173.decision.json",
+      "bytes": 260,
+      "sha256": "2f7b34e63119cdd1987935cb2d8bedd290ec0671cef72fe265823c6aceed837e"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/0a64d2c7096528a6624d0e177093c5045d8f595ec04c1281b8aa8dc3c9a8ce51.decision.json",
+      "bytes": 320,
+      "sha256": "ddf9f007a9b5cb12389a951cba4937ca99fcf903f834adb144503169df08f23d"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/0a90291a7290e70efb772c8df3b79f71a0d76c4f09040f2f37e9bea7199dc81d.decision.json",
+      "bytes": 230,
+      "sha256": "85ad8226c51e1f1ef271002c60f80e219df02b5bb6d32f7bae5fe69017552ff8"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/0b407aef877a54d39102871c8417720f1c18feb8b646c96c8e636676cdb79af4.decision.json",
+      "bytes": 250,
+      "sha256": "b6e54781149443635ab07cf498b92b5c37d41d5d2c650a58b589dc19f5347002"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/0b4c242b2af273fbc859c728868a1152a24c63b5d622d477d96180aa5024913e.decision.json",
+      "bytes": 211,
+      "sha256": "a721478f1041accb129fcd47d373a4e775707f3093328d590f93c9cbda7f06d3"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/116501d1544be5972fed5c051413179ac3e5fe0a60c5554ecdf975be08e60423.decision.json",
+      "bytes": 198,
+      "sha256": "5cc68a957f19e512755cd99a2c36c524e8d67af5d9aa615ec86baf82316423a4"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/1a23aa46dbf54e1306c39638bf6fff43a879b5948df8667c175f70eb4d6ccd38.decision.json",
+      "bytes": 263,
+      "sha256": "3efa800593f017d9451f3285aaec7e4d0f0ea6c25337737e556eddd0951863a9"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/1d67cfcfd95e585c5f157c64217c5612f9cfe4309f6f790b74416c21f4263e15.decision.json",
+      "bytes": 265,
+      "sha256": "5ed3b004781b2af71280b4c88e7ca51191847fbab2c0646b1a9a2fd770a513fe"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/24acb69f6390e138684cca40b6ac43b2a1ea619d8d5373dc389a6619f7ebfeb5.decision.json",
+      "bytes": 217,
+      "sha256": "daa09472630d274588013897e47408106fb02977be99edec8e0fff833c29bbcf"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/274a1069c57080e66909523006ff38ef8cd6c2a5e96c77f0cbad3880bcac85fd.decision.json",
+      "bytes": 210,
+      "sha256": "052efdb1c23b4ef475dd6885d676bb3a09f3f266e96c1f2740ecf957be4e6291"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/2c359024d28913bbca010e10082dfd4b3fa741c4c7ad76f1b1761a96e696c20e.decision.json",
+      "bytes": 215,
+      "sha256": "475cb149afe726e6d81b381ab1b40479222c106a01c7316316f0f4d8bf59d83a"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/33d4712209bf1248457f7dc18cbeea00fcdb8521c3d58ed7f0d4acc518bc51d4.decision.json",
+      "bytes": 259,
+      "sha256": "5c2921cda4cc8227686591062d6b80a4fc0d3ed983085ec96040a05f4eb6b5f4"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/509fa7c7c0ec75341900b88d48e13922c8324ee1c4bdf2c022f33bf3176e8bea.decision.json",
+      "bytes": 181,
+      "sha256": "48b3133f01c6b0cfd4d222838eac2c0138a824919064ba757777d312b71a5c9f"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/52ba33cc346499e72101440ebc0e83351e27f65984b2cc576198cb1c28619350.decision.json",
+      "bytes": 210,
+      "sha256": "fb95e40cfff0866805d776a75198ecf955c2dedaeefdebeb92fbe5f0f5bee96b"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/6e4f76c1243aaeebe265e0712436b52fc0d4903e5d2e5d435cd7bacf3fd39c54.decision.json",
+      "bytes": 298,
+      "sha256": "4d9201ac1812745525c2c0c109906ec947e678be32f7dbbe92cac89c1d0a5131"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/7dffc43a1de14c894aa6c9260866d86603fa06486071f53b187ba186ffa7ffde.decision.json",
+      "bytes": 243,
+      "sha256": "d5bc71ce7d952022dae3851f94f465d6cae607257bca1239abeb2485f8a23b3a"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/7f3ff0402bc3174bf5bc287f85dd63ede2fe2a6881eccc76aa0f237b739a441f.decision.json",
+      "bytes": 203,
+      "sha256": "e02ee6422728d0eb9953a1675f11aa3cad2c03c428b7197515ebf71e525a2978"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/88ac3ddd9236d6872146392442e31e88e4e98aa95f1be241951748e058277f07.decision.json",
+      "bytes": 221,
+      "sha256": "cb6040612588ca6d6b90eb7a10fe0046cb92a25cc6535e73f81e7f94468154a1"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/a4f2f5081462dc42dddd2b7fa40ee98b3ceaad495b1cec9f3ba013cf3de79c3b.decision.json",
+      "bytes": 233,
+      "sha256": "e621438a44c426c707d189b79be9ae6bd3e9ebb29458be375287897e192afa8d"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/b29f2a9e8489c4926c18f2912cdaa31a55e1ce9e4ebff3b9effb6b534e24f5a9.decision.json",
+      "bytes": 219,
+      "sha256": "f6e1e60b2818ebf8a8cfca49c10053fc6e57efd38ab3a15e040a75fd64a9e269"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/d55dce29df23bbd29e604556c7def17d60b09f5ff6368eeb60b3ced35a0d8d64.decision.json",
+      "bytes": 211,
+      "sha256": "cd535425c270897cd97adb2a9a54054ed949eb11a7ec6806f6e53540101641f6"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/e1ac28f55fc07edad3cd63e0d1dbb6954267eba688c8f59fa0a0bf46208b9ec5.decision.json",
+      "bytes": 210,
+      "sha256": "81be8fa1ea1bb3ccf2822e22f01d5230b66306eb64b19c56ecdc7ff762e39731"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/f20fd261fa2ef46de4a263aeec1319b10c0ad6a536f7ee58b2ee5d488b7a5144.decision.json",
+      "bytes": 175,
+      "sha256": "8650731f9f22b9785671db4ae5819a6dd1ffdc7dfd101ef8568a39851f1851ac"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/invocation.json",
+      "bytes": 3567,
+      "sha256": "750eb4e9a693d748418fb9e8cb00e9b935007b636014c8ed01c9c88d3024d527"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/native-events.jsonl",
+      "bytes": 442762,
+      "sha256": "8e00af12b7faf08c9376ffbcc10c28b891fb3f040d9a53b84b3c1c19b0163f77"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/report.json",
+      "bytes": 9592,
+      "sha256": "8d70dfbefadea572a76a86544c5bfaaae5a39527bacf34a2cfb5a08c800f2f2a"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-recovery-proposal/stderr.json",
+      "bytes": 41,
+      "sha256": "9e7ed757dfb81a72eff7841b7ebfb6213f6caa340284e9726353accaf83f0775"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/231fa47cd15b40c04cdcd50b1633abfec1bd900ebfc22abb252202fc8e811281.decision.json",
+      "bytes": 222,
+      "sha256": "61a2ebfde4222b13b2589a7862da0e99a16df7f416b7caf79828e69703fe2254"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/5c5adf76834a514eb3dcff46f135871c38128ea6f95d01242874e2981d474700.decision.json",
+      "bytes": 188,
+      "sha256": "91dac55801bca341b3208de6180ef70abf9b12685614cb7d6f6eee10e5dbe06d"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/6fde7d2b805a3e3fcebf150f3b3adc9f17429ec0956442b23a1f5a04a7364c24.decision.json",
+      "bytes": 269,
+      "sha256": "33b67403d38551b28e303db328595d416312b29cb41472dd3061323c34f885e3"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/aad1c0ff93938c80066757265f0e28e77c3c09b296120f57311f2ba2d40683d7.decision.json",
+      "bytes": 211,
+      "sha256": "738e7ba318c0f8fdf2fbc52cca661203a38d204a5b096d08373d6b8dc04a13f9"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/ad97cba519d9587d0cf6bfe3ff27857e6ed6411b7060deb2547e7299cd085736.decision.json",
+      "bytes": 231,
+      "sha256": "ba390a07ee7e7b95ed53e19a1f33f53e1d7b857013ddaa8bd5a8f2d0eb43f84b"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/be83562a272a9fb18cf5825ccbb321f819759af4484eb086f8be5430a5c882a6.decision.json",
+      "bytes": 180,
+      "sha256": "ba3907ea6fd2428991f863cba94fbf1b872abc5458a16fc0b19a485966baa2cb"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/cbae7d47f72e75009c685fd2ea3b2c396bba512ebf814b96ac1b5b5469d92254.decision.json",
+      "bytes": 201,
+      "sha256": "02f3cc3e2832b7b0b1eec20342e2b823c2435e6bdff3aed1911ba318b669a405"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/f23be3b04adb2c65c0670ecc3d4fa98a000dc9fc0dabb9d249f44b2b3fcd7718.decision.json",
+      "bytes": 265,
+      "sha256": "0ab395cd233dc34a18150efbdb0fda36afb68f55c961585179031857758ed903"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/invocation.json",
+      "bytes": 3719,
+      "sha256": "7b56846fc554811d191b8f6749d344262db6af8fb4eb03ec3ec987c2d98d41dc"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/native-events.jsonl",
+      "bytes": 180746,
+      "sha256": "1e1dd82bfaca696e0f2f1715cb6dbb62c82b52af882978daefb805da0d8570ae"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/report.json",
+      "bytes": 9366,
+      "sha256": "2ee289b7e7ff41f7d6c6f740540dd7d8d7f159a22aa4464acef5eed3802d8738"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-refine/stderr.json",
+      "bytes": 41,
+      "sha256": "9e7ed757dfb81a72eff7841b7ebfb6213f6caa340284e9726353accaf83f0775"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-remote.json",
+      "bytes": 395,
+      "sha256": "9edf096b165b200442f6a8e1d2e38c95f825c5708d08d81cfd860569f71264fa"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/one-validate.json",
+      "bytes": 2443,
+      "sha256": "00badba34b54b0196fe20c0a9cf1dc8105661aaaf28f92ea4f71f4feb4141d70"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/session.json",
+      "bytes": 62,
+      "sha256": "3a8320bd77b9edf71197e96023a66705806f9c417034644e8908e5512001c441"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/two-add.json",
+      "bytes": 294,
+      "sha256": "e478d20820b5df233ad5a044f73496e8b2d9a928d72fd2f9cad1917122e22986"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/two-bytes.json",
+      "bytes": 323,
+      "sha256": "3dfd64613b0aadf6ef79c54f6c012b03b37ddaedc4085ccf9fbdace08bf3198e"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/two-commit.json",
+      "bytes": 1218,
+      "sha256": "daab8c174cf8375e4ee3675f21d630906f7d95ddb4373f1f827f631fafbdc615"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/two-email.json",
+      "bytes": 338,
+      "sha256": "175a05f6a02a63d803e936e082267a6ca95727d954bfae0b45f8ad7e53552905"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/two-head.json",
+      "bytes": 345,
+      "sha256": "9395ee8c2a5e32f274477c2f92af6385e60edda8e55902f8beea6b9fa553cd77"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/two-init.json",
+      "bytes": 407,
+      "sha256": "35354156bcdffba4b26fa9b591ecf62bed39f2b7691448c45d7a201a8d5ed3b6"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/two-name.json",
+      "bytes": 330,
+      "sha256": "7e3186e4d9ecb82c78f936b5158566aa1beb264ffcf979e2ce1f9572543e197d"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/two-remote.json",
+      "bytes": 395,
+      "sha256": "545e0663f330d05a6f2a2aa1d4b35602565237582c9ecea4492e21834b1cfe80"
+    },
+    {
+      "path": "r221-session-20261004/claude-workflow/two-validate.json",
+      "bytes": 2443,
+      "sha256": "78f5947c57b3620ae95924a0f7091cf262da42ca9017dddedef265235df1a3b5"
+    },
+    {
+      "path": "r221-session-20261004/missing-evidence-linux.json",
+      "bytes": 10904,
+      "sha256": "05361754a7f4e3835b131169e97f1e63a5ce1e0957387da7b46e7fd2398152f7"
+    },
+    {
+      "path": "r221-session-20261004/missing-evidence-windows.json",
+      "bytes": 13309,
+      "sha256": "6e9df08e8fcbf49dd850f5486d5931e6586f1269cd42d4bdaf016f959bc58e25"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/fixtures.json",
+      "bytes": 1308,
+      "sha256": "0e5161b17d6de6c972e02e9f16dac6c2c6617f8b65396ca5babd953f93373b19"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/installed-before.json",
+      "bytes": 692,
+      "sha256": "4b5c56a4a23afe584bbb76716ed51f49aabcc881f151ae809ae8a3a412233846"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-check.json",
+      "bytes": 17663,
+      "sha256": "46a71f80a47764961cd144fff08ca9bf8bf1c49549cae4225f4c5a5c52c2b244"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-commit.json",
+      "bytes": 1197,
+      "sha256": "ad873209866112b882e9b79611fd149bd141147c68fadad2a90ef2d9c2f8ce4a"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-config-bytes.json",
+      "bytes": 312,
+      "sha256": "0b77f0063906fc61e648299ab78d05b57286b6ca2c579aa1c164d53b36625df9"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-config-mail.json",
+      "bytes": 327,
+      "sha256": "12b2b28d3d8d37e1e6893b2d71d10be3cfe030e3fa9c2f58abc5258aa04dd6ae"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-config-name.json",
+      "bytes": 319,
+      "sha256": "eeef66abbe535185e8d73cc89dbf2228502ed3f8111e09d08ac21e15bc8bc2da"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-execute/016a815bb41f780fd8d7e37d00e7a6551cffc0d768b0d232ad878c69718a49ea.decision.json",
+      "bytes": 280,
+      "sha256": "38212bed4b21cde96bb909966ed85f43abfe0b635fee5b6b351e8415d850157b"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-execute/5287f78f917795f06df9df1263a200ee0ac33ca8eb56fd5c114c521580e5223d.decision.json",
+      "bytes": 257,
+      "sha256": "bbad547eb77ea0dcf051c2e533a7f1df02d700ad2ec898942085c143cc80a67d"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-execute/7a6b115cfca1c109dcf7396f9d59f398e958f3e514ced77db6f2dd6c510a91d8.decision.json",
+      "bytes": 273,
+      "sha256": "7f81bc397df5032462a9812e445479a368473c4a625649f82b695110feee068f"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-execute/cffe34377bc7165210df46e1fa9412a9b168c23f46c7c35543b423363f8a82b0.decision.json",
+      "bytes": 273,
+      "sha256": "feca393871a1d689ac24f211646a440c469d53050ad57c7c6fa092d772be90af"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-execute/hooks.json",
+      "bytes": 1266,
+      "sha256": "ca01a7d7fc98644dcd8d635bcb2043f5f99d688638ec6606d72483ed60d0cd40"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-execute/native-events.jsonl",
+      "bytes": 131749,
+      "sha256": "06c7f0b1a7e5f91022ef544861e157310204ea524c27e6c116f420d0df807c38"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-execute/report.json",
+      "bytes": 12967,
+      "sha256": "a1102cb86ededd980c340a5cdf80942ad7d34c90ce52c7f523fb46ca4bf5115d"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-final-proposal-assessment.json",
+      "bytes": 1265,
+      "sha256": "6fbeaa2d2e4626b09145c379c5476ca05b89e157fc967d22bfbba15b8bff4c51"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-harness-init.json",
+      "bytes": 1026,
+      "sha256": "9e549f13e41ad768d4f35f303e7e28c995e81543d9ecda39f8ecbfd2206b859c"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-head.json",
+      "bytes": 334,
+      "sha256": "b372c89563ec4f8af597b2338cc866e5b09060da81ecc95db4fd7ff4cc02e949"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-independent-assessment.json",
+      "bytes": 8150,
+      "sha256": "51e29e8abc9f48292f9d0e5a663f385317bdfd5cad18abaa08a2514c083fccce"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-init.json",
+      "bytes": 392,
+      "sha256": "499f026c19f209daa81f366b650aaf60acd8884b1377fe7ef931c04f4099fd93"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-preflight.json",
+      "bytes": 1821,
+      "sha256": "c40baa8adb1081c614ca6123d269dc08fac0e6c714fbbacb8d8c96887bc63c08"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-proposal/0c566ad02ab837133e8bedf9dae1746185cc47e39fe4890821f979b00da59c34.decision.json",
+      "bytes": 261,
+      "sha256": "7f9e20e1d87387c09bc5b773d39dee071a451996ea5cd82010a8fccda50cb892"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-proposal/8c99548df4ce51117d752f565112c07b8c643e1610b8925ad24e9605a19c17c7.decision.json",
+      "bytes": 287,
+      "sha256": "402c4b831f8efa1fef2d9323fd320ac21658bf39e35b75a8c610a73f6d8ffe52"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-proposal/ae35f1d76bc0abdc6cb618ff6aa006de19de9a7641d72afe613438d671cccd92.decision.json",
+      "bytes": 263,
+      "sha256": "a7cf811c79a9904ede6732e152588aced9c4665617b4bc954a5424a35c45130d"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-proposal/af4dc8e19822c4f98e36f0a0148edc17ed767b26bae76c847ef11e7b03e0889b.decision.json",
+      "bytes": 226,
+      "sha256": "4578c2f9d547624b32708454c38201d9bff44424b494f213e824b39e1e730204"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-proposal/dc529cb2468051416a2f633f0eed40a1e02855992176fc4619239f78ec630815.decision.json",
+      "bytes": 259,
+      "sha256": "332ccc5c01fb8378eae2815cb48fed3acee4207f85f38617026950092f661386"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-proposal/hooks.json",
+      "bytes": 1266,
+      "sha256": "ca01a7d7fc98644dcd8d635bcb2043f5f99d688638ec6606d72483ed60d0cd40"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-proposal/native-events.jsonl",
+      "bytes": 162550,
+      "sha256": "3aabfbf51235c7fde5b6d27afcd767622897eec67f057917f2db7e1d16eaa351"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-proposal/report.json",
+      "bytes": 12667,
+      "sha256": "cc1a03e83f1c3fe7a389057fc467deb783f9a0bf66ec95d74cc5b7a03cff2da2"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-remote-init.json",
+      "bytes": 389,
+      "sha256": "f79faed1bd98ee89d992dfb958383452290c1bb020f0faf22d779ac52255f6e7"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-remote.json",
+      "bytes": 380,
+      "sha256": "83351274f72c0fa3d2479b4625e58d365c4faa1939fdf0e105a312f3c6222b8f"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-stage.json",
+      "bytes": 287,
+      "sha256": "ccfc9f0338c77a72d6fca0dc7049f3262ba22951b6156674fc95a5bd18d0fc14"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/legacy-validate.json",
+      "bytes": 2434,
+      "sha256": "6607c89f8813b381a32450c5612405ad09c1cf165485eacafac0f43f0e872aaa"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/plugin-install-first.json",
+      "bytes": 893,
+      "sha256": "ea01491cf5a2252c75f720fbc4e2a1397c15fe91564d239ec5552f71e2f940fe"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/plugin-restore-final.json",
+      "bytes": 886,
+      "sha256": "186bca17967b5e019e22e7ba70413c2771c9b34b1c197bd458dce768db854145"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/profile-after.json",
+      "bytes": 1180,
+      "sha256": "6048a20491b45301665d39eb45fccc8e04fdcd6ddb5851f2e2872d98a8208d26"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/profile-before.json",
+      "bytes": 1180,
+      "sha256": "6048a20491b45301665d39eb45fccc8e04fdcd6ddb5851f2e2872d98a8208d26"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/session.json",
+      "bytes": 61,
+      "sha256": "6d93b7f90421c687aaf25e3b4309a19af0fa5b64d0701cf4dff330e67aa59545"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-check.json",
+      "bytes": 17666,
+      "sha256": "7231933468236add2891134155adccdeabf92a95ddecdb6f85798b195e417296"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-commit.json",
+      "bytes": 1200,
+      "sha256": "131406468071d433654a0623c5fdc099e9222e9ef25d94fd306658f32d2bbe9a"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-config-bytes.json",
+      "bytes": 315,
+      "sha256": "813094643bb28a08c3e55cb0ef28fba820e5051240bc4ea1e05ee4d80a79f78d"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-config-mail.json",
+      "bytes": 330,
+      "sha256": "7af30d1b5fac95c8ebc40df44ed65719a8e6b995cd166ea008e285ba324362d0"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-config-name.json",
+      "bytes": 322,
+      "sha256": "7d82cfc69192c517b1ce43addfea83bee2bba269c553c578f31afdd41bc4dc89"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-execute/25eeeeea1738db5c6072531b4f76609ae1814eab925217766afcba6d2d35675e.decision.json",
+      "bytes": 308,
+      "sha256": "8891e87f655924d85d6296c91fb68ece721904e87162201c08162080fada7f5a"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-execute/2999e328ad51d35c8f07513e527382f6a09b5c07fe81185bfa959d2c5c781d82.decision.json",
+      "bytes": 322,
+      "sha256": "e0684107a945d05bb3f0429ecc754f611b2ada82a6a8b849e7de6aec18bf387a"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-execute/54a81c7f3d03fd927fe97d6b87d86ade837e3c29059760c64277813440b46220.decision.json",
+      "bytes": 285,
+      "sha256": "3b32065eba1ed6489718834a8d48d1d98509a08a3f8d6128ca81046bdd328f16"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-execute/5b0a13af7534594951f766948cd4d8c0ff73fcc3b44cfb442076fced9659556f.decision.json",
+      "bytes": 328,
+      "sha256": "2cdda03073d966714ab7728641e110c8aeb5857ffd5cb0a059fa2693d3af0c18"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-execute/77e0350532bf4fe679b382202e34025ae804e4f4e4bc12a7a71861a0e0d0d922.decision.json",
+      "bytes": 264,
+      "sha256": "0b480c111ea269fcf0cbdca8207e045bdfe8572d0aa94e5f661cb6ce5e7167a6"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-execute/8b4363ec0582f761e21b24566a8b5460e7172b3f1afc3ed83547c89c5db75b04.decision.json",
+      "bytes": 294,
+      "sha256": "c39b1edb67c0d5b2125bd6f5644a9c236c732fccda4a3ec092541441abb94e23"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-execute/hooks.json",
+      "bytes": 1266,
+      "sha256": "ca01a7d7fc98644dcd8d635bcb2043f5f99d688638ec6606d72483ed60d0cd40"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-execute/native-events.jsonl",
+      "bytes": 277127,
+      "sha256": "d9c89ebd4b643a58955fd76661c69c4e34745af74815878dd17eea2b0860f795"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-execute/report.json",
+      "bytes": 13349,
+      "sha256": "c43dda90e18fa51440b46692411be0a43c9738157405e6457e866d153643487f"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-final-proposal-assessment.json",
+      "bytes": 1268,
+      "sha256": "9144f31d8bff0b038be69331fcab2ac17e084ec7a41a1bb18d58e3ba738bc5dc"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-harness-init.json",
+      "bytes": 1029,
+      "sha256": "76dd07fedaaafbacdeccce1bb620e0293fb1b8e7f401db59f77098f16595fdc0"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-head.json",
+      "bytes": 337,
+      "sha256": "a4b94f20e45f1fd84244509392c7b29622f4454fea2c312286deb7fc5d38e06a"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-independent-assessment.json",
+      "bytes": 8189,
+      "sha256": "11ebf677ac7e5e08cb35921e643a0d47eb497311c1afda13bd7cdddf6fd41bcf"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-init.json",
+      "bytes": 398,
+      "sha256": "d3fa3c7aa30b4f5e9c06c4816744e061c2dbf1a25a6c62edf886c26174f1a81d"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-preflight.json",
+      "bytes": 1824,
+      "sha256": "dbf09ee8c03f5edfa0e1902b5c509527b13407f6bbe8e0c2a1d19d603568f3c5"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-proposal/36fb727cde2d6fe025b63ed17bfcd13a8ece052962933872374d2a4b0bec99c5.decision.json",
+      "bytes": 197,
+      "sha256": "b277267f2da36676bc50487c228f140972bda8834248883c647967c95cec280c"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-proposal/error.json",
+      "bytes": 44,
+      "sha256": "e8cafaef2b89e9d82eceec019cb5b8413736b01c2ca9565f36d3e98a886caee4"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-proposal/hooks.json",
+      "bytes": 1266,
+      "sha256": "ca01a7d7fc98644dcd8d635bcb2043f5f99d688638ec6606d72483ed60d0cd40"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-proposal/native-events.jsonl",
+      "bytes": 24989,
+      "sha256": "0bc0895750a595475fc45c3ce6d3db6e6c3b8cf0f9866a3df3b73d91bf6ccba4"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-proposal/pending-command.json",
+      "bytes": 4263,
+      "sha256": "cd7614f4e19f910a998130202dbea46b7f3c3c89d97f093c28e7055a6ee07ae4"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/46119383ca339adb80ef0fd3f3f743e05917f72c2266d56077f04f8c4640d524.decision.json",
+      "bytes": 298,
+      "sha256": "fb80466dc6d364371d807ce0d4632a02f852eed1faa9443739f1b8cac79c927f"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/4c122ba1fcbd4329465a0dc3548b3523ddb1b354ceaf970cf63d54848748756c.decision.json",
+      "bytes": 293,
+      "sha256": "62ec6e01b012e709d0b79d2865345255ad26eb57c9bff880566057e6e8e38aaf"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/5a0ce5b1dd090c26ff02cbcf9c9f16f9324b44d3ba5257389281045125210b4c.decision.json",
+      "bytes": 241,
+      "sha256": "29cae302bc7240f98de144e4c2bda128646b0a594fb897855fca6a9db4d06547"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/5b1d5d647686ce4173d3d7a1f3e0768b55d03b475f12f1c8048f0da4cf960450.decision.json",
+      "bytes": 307,
+      "sha256": "56b82b418117eefb7180201677a7b70e73f7f6f874189d1a4e57c42ae707b24a"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/7a5ecc03fee8d25d5f769baa45b11d649533043fa8f31156eb31b0f71f96e0ac.decision.json",
+      "bytes": 276,
+      "sha256": "5dbcdc6b465498ba42da96131b21771b1db7dc20ad5ba75532d6a7049872a967"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/91220aafb6b8bf23f9a7af55f1352c23bfb185d2e5224ca528704195edb10f56.decision.json",
+      "bytes": 226,
+      "sha256": "e2d9ea22bb00d7807230898abe73861d8599f3474ca2f80c7162514064641d8b"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/9ce19eb6964a915a906986a2eb8063a2daf13936c7b242673e45ec631b0fac78.decision.json",
+      "bytes": 317,
+      "sha256": "868ce865bfa10bb85ffa6a71553954003b11b1439622df705070e4d1599726dd"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/e901ebbe2acdd34368b8d82f66f13ee2572243eab78f5542210e5f18edcfa322.decision.json",
+      "bytes": 273,
+      "sha256": "a5298c052be78e4ca45351587304e04520a9133ef916aff085b3ab73a0a3bcf0"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/ebc8cfb783533ccfe558176021c41ceea5d3eb52888cf00f46472806f7d84350.decision.json",
+      "bytes": 264,
+      "sha256": "34e28e80a71979a0e666f03841369fcf1a5600180a530f2edc5f972ea7b0faa7"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/f37a2d87d9443eaa4905eb52f4557ca34dc8a0e3add43995d96cf23403d4e2d9.decision.json",
+      "bytes": 252,
+      "sha256": "36500e60638b8a2977bb0f56a307679230aee42614ced80344255c266755a4dd"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/hooks.json",
+      "bytes": 1266,
+      "sha256": "ca01a7d7fc98644dcd8d635bcb2043f5f99d688638ec6606d72483ed60d0cd40"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/native-events.jsonl",
+      "bytes": 371965,
+      "sha256": "c2073432432c83e4f926ef82b167fa210f286f70e657344f9c80aa66ac9cfd97"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-recovery-proposal/report.json",
+      "bytes": 4096,
+      "sha256": "d8afd6210f4b2fa870883791ded8167fdbc20511d6feeb0a9e9bc7a2dd7914b4"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-remote-init.json",
+      "bytes": 395,
+      "sha256": "71500e72028d93c5e899ce9fb1a3ae1dfc51809bfa4f944e11c7d0d801cbae6e"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-remote.json",
+      "bytes": 386,
+      "sha256": "9b50ea66d3172f83b2c06c6a3a27057efaf7eeb8a4e5a1830f0dfe2d3a17a1f5"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-stage.json",
+      "bytes": 290,
+      "sha256": "ee8504246e9358afc37b62eecd11673ac5624473432d04d8b4761b6dc7b5255c"
+    },
+    {
+      "path": "r221-session-20261004/native-workflow/successor-validate.json",
+      "bytes": 2437,
+      "sha256": "499d6dbebcc367bcafbc447fff6b5cf7b592bb9169e105524c9ed57bb360b768"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-claude-context-bound.json",
+      "bytes": 25084,
+      "sha256": "461301dc285f03b883938f9109333809fc41b04b9b17fe2d3ced8dfd0a2ddd33"
+    },
+    {
+      "path": "r221_claude_workflow.py",
+      "bytes": 11463,
+      "sha256": "9c3da75b1c606732aa95f7bc80a769670b17b6755489d15da1b5675b9c60ca93"
+    },
+    {
+      "path": "r221_context_bound.py",
+      "bytes": 3498,
+      "sha256": "694f5684687dd34c09f61c6db5b46695f344381f23549fb0a14e0b890f5dd0c0"
+    },
+    {
+      "path": "r221_missing_evidence_probe.py",
+      "bytes": 2103,
+      "sha256": "70b2ce692051781e261622e4dbc8d8a3df69ac188271850a4dd2a33f31e86813"
+    },
+    {
+      "path": "r221_native_workflow.py",
+      "bytes": 15275,
+      "sha256": "1126ce4d38ffc3ab61343275af1cc7fd5245ba432b1dc56629f446c9823c4290"
+    },
+    {
+      "path": "r221_proposal_assess.py",
+      "bytes": 1388,
+      "sha256": "d6cde5e01dc03796a641fa682ae8a78bdd1cfc2cf62b1e762e4d84df932d1946"
+    },
+    {
+      "path": "r221_walk_review.py",
+      "bytes": 739,
+      "sha256": "57eba3390c7eefece49e97646698e5613a46b27e3fd8cd4dcc3e4c1ab55c7dd6"
+    },
+    {
+      "path": "r221_workflow_assess.py",
+      "bytes": 2983,
+      "sha256": "0f36108202fc5ad73a59c3f9cbcc97b37084e3cce89451f33c14f955d187f2b6"
+    }
+  ],
+  "claim": "Native CLI observations and explicitly labelled adapter replay. No credentials, native profiles, real authority or desktop results."
+}

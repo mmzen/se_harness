@@ -65,6 +65,12 @@ the exact packages, native host observations and remaining desktop/walkthrough
 criteria. Both work orders remain in progress. There is no final aggregate VREC
 or release record yet.
 
+The native Claude walkthrough found an evaluator transition crash, reproduced
+on Windows and Linux. The [correction review](evidence/WO-RLS-041/correction-review.md)
+links draft WO-RLS-043 and VER-RLS-004. These are not approved. REL-SEH-035 is
+unchanged; adding the correction to its exact release membership requires an
+explicit reviewed amendment. The accepted version and historical evidence remain intact.
+
 The draft preparation PR supports qualification and review. It does not request
 verification or merge. The tested preparation commit and later evidence commits
 remain distinct; final candidate capture will establish the release binding.

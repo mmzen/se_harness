@@ -1,6 +1,7 @@
 # Evaluator 0.22.1 preparation review
 
-Status: qualification in progress. No final verification or release is requested.
+Status: qualification in progress; the native walkthrough found a reproduced
+transition defect. No final verification or release is requested.
 WO-RLS-040 and WO-RLS-041 remain in progress; WO-RLS-042 remains approved.
 Released evaluator 0.22.0 governs this checkout.
 
@@ -25,12 +26,21 @@ their exact source bytes. The unfinished hosted service is excluded.
 | Actual 0.22.0 to 0.22.1 upgrade | Two runs on each platform passed with the same semantic digest. |
 | Plugin 0.2.6 package assembly | Both platform builders and their own independent check-stage passed. Expanded contents/inventories match; compressed ZIP bytes differ across runtimes. |
 | Native host delivery | See [plugin review](../WO-RLS-041/qualification-review.md). |
-| Hosted CI rehearsals | Not yet run for this preparation branch. |
+| Preparation PR CI | Passed at review head 2ca5bf46006c412480b913178499a0e434bc7122; PR jobs assess merge commit acc1a62ec70bc3c2cc56a64d789a7ffebbb831cd. |
+| Manual release rehearsals | Candidate replay, prior RLS-SEH-032 replay and complete-delivery recovery all passed in run 37227997472. |
 
 The wheel digest is `0a9f87f235839689dbbca3b10013b5df2a71dc134b53795248f78de8e1cfec49`.
 The sdist digest is `c495536e19c9d9021c3de5b6e51ce316a7847af95ebd2920d9eab420f420d48f`.
 [The retained bundle](bundle.json) records the exact source, recipe and identities.
 These are preparation inputs, not a frozen final release candidate or publication.
+
+[CI evidence](ci/review.json) distinguishes the source, PR merge and review-head
+identities. The PR source suite ran 1,287 tests with two reported skips. Installed
+package checks, upgrade rehearsals, integration packages on both platforms and
+the required harness check passed. The manual head replay builds different
+archives from the later commit; those bytes have not replaced the preparation
+bundle or the package inputs used in the native tests. Raw CI artifacts were
+downloaded; their remote digests and expiry dates are retained in the review.
 
 ## Retained failures and limits
 
@@ -70,7 +80,10 @@ outputs, failures and relevant helpers; [the archive index](qualification-archiv
 binds their exact bytes. Native evidence is retained separately. Temporary test
 profiles and credentials are excluded.
 
-Finish required walkthrough/desktop and CI evidence. Resolve provider activation
-through its separate reviewed change. Then capture the final aggregate VREC,
+Review the bounded correction in WO-RLS-043/VER-RLS-004; neither is approved.
+Correct and requalify the affected candidate before finishing the native
+walkthrough. Required desktop evidence and provider readiness remain pending.
+CI at the retained review head passed but does not override this native failure.
+Resolve provider activation through its separate reviewed change. Then capture the final aggregate VREC,
 publish its review, obtain human verification, prepare the exact RLS and freeze
 the complete delivery plan. Earlier HAG verifications retain their original scope.

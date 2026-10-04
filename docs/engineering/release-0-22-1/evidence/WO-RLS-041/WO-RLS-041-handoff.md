@@ -12,5 +12,7 @@ Retained by `harnessctl evidence`; body content is owner-authored.
 This packet supports the authorized unfinished preparation review, not work
 completion. See [qualification-review.md](qualification-review.md) for exact
 staged package identities, native observations and retained failures. The
-walkthrough, Windows desktop criterion, long-path assessment and final staged
-commit remain pending. WO-RLS-041 remains in_progress.
+Codex walkthrough passes; the Claude walkthrough is blocked by the reproduced
+absent-draft-evidence crash. The packaged context-size boundary was assessed.
+Windows desktop evidence and the final staged commit remain pending.
+WO-RLS-041 remains in_progress. No completion is asserted by this packet.
