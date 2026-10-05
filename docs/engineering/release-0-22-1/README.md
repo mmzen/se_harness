@@ -1,6 +1,6 @@
 # Proposed evaluator 0.22.1 and plugin 0.2.6 release
 
-Status: **preparation implemented; final candidate verification pending**.
+Status: **VREC-SEH-033 ready; human verification pending**.
 
 The outcome is a public evaluator that provides standalone draft validation
 and records the actual human behind an existing ownership label. This removes
@@ -59,29 +59,26 @@ and amendments to accepted hosted definitions require separate bounded review.
 
 ## Qualification evidence
 
-The [evaluator review](evidence/WO-RLS-040/qualification-review.md) records the
-preparation candidate, Windows/Linux checks, pinned builds and current provider
-controls. The [plugin review](evidence/WO-RLS-041/qualification-review.md) records
-the exact packages, native host observations and remaining desktop/walkthrough
-criteria. WO-RLS-040/041/043 have implementation completion recorded; assurance remains pending. There is no final aggregate VREC
-or release record yet.
+[VREC-SEH-033](verification-records/VREC-SEH-033.md) is **ready**, bound to exact
+candidate `4f640284ec496b88cd7aa4ba88ca537d9374a2f8`. It covers all six release
+work orders and their seven verification contracts. Human verification remains pending.
 
-The native Claude walkthrough found an evaluator transition crash, reproduced
-on Windows and Linux. mmzen approved WO-RLS-043 and VER-RLS-004 with required
-commit-bound verification and the exact manual linked amendment of REL-SEH-035.
-The correction and amendment are applied. The previous accepted contract and
-all original failure evidence are preserved.
+The [final review](evidence/WO-RLS-040/final-verification-review.md) maps the
+criteria to Windows/Linux source, installed package, pinned build and native CLI
+observations. It records skipped checks, exact package/staging identities,
+original failures and their recovery, and the accepted desktop limitation.
+Its final raw evidence is bound by the capture command's receipt digest.
 
-The [current correction qualification review](evidence/WO-RLS-043/corrected-qualification-review.md)
-records the corrected package identities, passing Windows/Linux and native CLI
-checks and the then-pending desktop/provider criteria. Those three readiness
-items are now resolved as recorded below; the original report remains a historical snapshot. The earlier evaluator/plugin
-reviews describe the original preparation package, not the corrected wheel.
-No final aggregate VREC or release record exists yet.
+The earlier evaluator, plugin and correction reviews are historical snapshots.
+Their original candidates and evidence remain unchanged. The final review
+explains the limited reuse of byte-identical native inputs; it does not relabel
+earlier observations as new runs. The original transition defect and approved
+linked REL-SEH-035 amendment remain documented in the correction packet.
 
-The draft preparation PR supports qualification and review. It does not request
-verification or merge. The tested preparation commit and later evidence commits
-remain distinct; final candidate capture will establish the release binding.
+The PR remains draft. The next decision is human verification of VREC-SEH-033.
+After that decision, prepare the exact release record, bind and replay its
+archives, and freeze the complete-delivery plan for the later release decision.
+No release record or executable final plan is claimed yet.
 
 ## Desktop decision and provider readiness
 
@@ -97,9 +94,8 @@ main protections and workflow permissions are unchanged. mmzen confirmed the
 four PyPI Trusted Publisher fields. This is human account-side confirmation,
 not an authenticated PyPI read by the agent. No release was dispatched.
 
-The next preparation work is the exact marketplace staging commit and final
-candidate verification. The required handoff and completion checks passed; the work orders are
-`implemented`. Final candidate capture has not yet supplied human verification. This update supplies no verification,
+Final candidate capture and staging are complete. WO-RLS-040/041/043 remain
+`implemented`; VREC-SEH-033 remains `ready`. This review supplies no verification,
 merge, release or adoption decision.
 
 ## Known dependencies

@@ -1,0 +1,9 @@
+{
+  "candidate": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+  "review_ref": "refs/heads/codex/plugin-0-2-6-staging",
+  "commit": "85ae003769f53908addbdcf46c820a8af530ac24",
+  "parent": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+  "tree": "0069f9012fc6f6270410bfebbb673831d8745550",
+  "public_marketplace_unchanged": true,
+  "authority": "mmzen approved preparation and review publication; ordinary staging review ref only. No public marketplace publication."
+}
