@@ -1,0 +1,318 @@
+{
+  "release_record": "RLS-SEH-033",
+  "candidate_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+  "plan_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
+  "schema": "se-harness-delivery-result/v1",
+  "status": "ready_for_markers",
+  "input_status": "valid",
+  "authority": "derived operational evidence; no lifecycle transition",
+  "limitation": "Assesses supplied, retained observations only. Does not independently run host tests, authenticate human reviews, or establish live public state. Grants no lifecycle or external authority.",
+  "formal_release": {
+    "record": "RLS-SEH-033",
+    "status": "released",
+    "source": "https://github.com/mmzen/se_harness/blob/e0d50ec6255576e4b5517294c9c8bfc747b2a429/docs/engineering/release-0-22-1/releases/RLS-SEH-033.md",
+    "observed_at": "2026-10-05T08:59:01.146856+00:00",
+    "evidence": [
+      {
+        "path": "publisher.json",
+        "sha256": "c74f44c5624b61e3426b44c71435b9b6c96c19dd90e1878c40ddcb37ed53bfcc"
+      }
+    ]
+  },
+  "evaluator_publication": "satisfied",
+  "observed_at": "2026-10-05T08:59:01.146842+00:00",
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "disposition": "update",
+      "status": "satisfied",
+      "owner": "mmzen",
+      "next_action": "After the matching complete-release decision, integrate only the RLS decision into protected main via PR #536, advance release/0.22 ordinarily from abbec12ac5524c8adfb28693f846dd59de88f759 to 4f640284ec496b88cd7aa4ba88ca537d9374a2f8 after its ancestry/readback checks, then dispatch publish-pypi.yml on main for RLS-SEH-033. Publish only its v0.22.1 archives to GitHub and PyPI; independently download and install the exact public wheel. Stop on changed refs, provider controls or archive mismatch; preserve completed immutable output and resume only missing effects.",
+      "expected": {
+        "record": "RLS-SEH-033",
+        "version": "0.22.1",
+        "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053"
+      },
+      "observation": {
+        "id": "evaluator",
+        "status": "pass",
+        "observed_at": "2026-10-05T08:59:01.101341+00:00",
+        "source": "https://pypi.org/project/se-harness/0.22.1/",
+        "identity": {
+          "record": "RLS-SEH-033",
+          "version": "0.22.1",
+          "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053"
+        },
+        "evidence": {
+          "publisher": [
+            {
+              "path": "publisher.json",
+              "sha256": "c74f44c5624b61e3426b44c71435b9b6c96c19dd90e1878c40ddcb37ed53bfcc"
+            }
+          ],
+          "public_install": [
+            {
+              "path": "evaluator-public-install.json",
+              "sha256": "deabfe88d4660cee0513df0ea9550bff469f9e5090e4002106ff98cf167bafe1"
+            }
+          ]
+        }
+      },
+      "findings": []
+    },
+    {
+      "id": "marketplace",
+      "disposition": "update",
+      "status": "satisfied",
+      "owner": "mmzen",
+      "next_action": "After public-wheel byte equality, promote exactly the staged ordinary child to plugin-marketplace. Run public fresh installation and update from plugin 0.2.5 on both Windows CLIs using the actual public ref. Retain command/result/content identities. No desktop pass is claimed. Stop on a changed parent, authentication failure or any unperformed/failed route; never force, rebuild or silently replace the selected bytes.",
+      "expected": {
+        "plugin_version": "0.2.6",
+        "source_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+        "evaluator_version": "0.22.1",
+        "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+        "public_revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+        "codex_content_sha256": "4d04f8e2da8ed6bfb583b2aa7244c83ca439741e07b44b2469b1287ea58459a6",
+        "claude-code_content_sha256": "b6d7ce308724740c242e6ee81791dd624becc422b73082c1dbbad69daa712d69"
+      },
+      "observation": {
+        "id": "marketplace",
+        "status": "pass",
+        "observed_at": "2026-10-05T08:59:01.115454+00:00",
+        "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+        "identity": {
+          "plugin_version": "0.2.6",
+          "source_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+          "evaluator_version": "0.22.1",
+          "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+          "public_revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+          "codex_content_sha256": "4d04f8e2da8ed6bfb583b2aa7244c83ca439741e07b44b2469b1287ea58459a6",
+          "claude-code_content_sha256": "b6d7ce308724740c242e6ee81791dd624becc422b73082c1dbbad69daa712d69"
+        },
+        "evidence": {
+          "assembly": [
+            {
+              "path": "marketplace-public-ref.json",
+              "sha256": "dde6b058525082d0ccfba626c565930836072a553f84c98b97d617e0fa867cba"
+            }
+          ],
+          "qualification": [
+            {
+              "path": "marketplace-public-ref.json",
+              "sha256": "dde6b058525082d0ccfba626c565930836072a553f84c98b97d617e0fa867cba"
+            }
+          ],
+          "public_ref": [
+            {
+              "path": "marketplace-public-ref.json",
+              "sha256": "dde6b058525082d0ccfba626c565930836072a553f84c98b97d617e0fa867cba"
+            }
+          ]
+        },
+        "routes": [
+          {
+            "host": "codex",
+            "kind": "fresh",
+            "status": "pass",
+            "host_version": "codex-cli 0.159.2",
+            "observed_at": "2026-10-05T08:54:11.478228+00:00",
+            "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+            "revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+            "plugin_version": "0.2.6",
+            "content_sha256": "4d04f8e2da8ed6bfb583b2aa7244c83ca439741e07b44b2469b1287ea58459a6",
+            "evaluator_version": "0.22.1",
+            "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "evidence": [
+              {
+                "path": "codex-public-fresh.json",
+                "sha256": "47fba041b92e42675b97a42e1fc1690de97bd71add5bca80a453d2c692ca93f8"
+              }
+            ]
+          },
+          {
+            "host": "codex",
+            "kind": "update",
+            "status": "pass",
+            "host_version": "codex-cli 0.159.2",
+            "observed_at": "2026-10-05T08:54:11.475343+00:00",
+            "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+            "revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+            "plugin_version": "0.2.6",
+            "content_sha256": "4d04f8e2da8ed6bfb583b2aa7244c83ca439741e07b44b2469b1287ea58459a6",
+            "evaluator_version": "0.22.1",
+            "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "starting_version": "0.2.5",
+            "starting_source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+            "evidence": [
+              {
+                "path": "codex-public-update.json",
+                "sha256": "0eee701864dba029275cc2ef4dcc87cdb10956328c7b459d6eb09f3c76326f62"
+              }
+            ]
+          },
+          {
+            "host": "claude-code",
+            "kind": "fresh",
+            "status": "pass",
+            "host_version": "2.1.273 (Claude Code)",
+            "observed_at": "2026-10-05T08:54:10.518343+00:00",
+            "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+            "revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+            "plugin_version": "0.2.6",
+            "content_sha256": "b6d7ce308724740c242e6ee81791dd624becc422b73082c1dbbad69daa712d69",
+            "evaluator_version": "0.22.1",
+            "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "evidence": [
+              {
+                "path": "claude-code-public-fresh.json",
+                "sha256": "2b94af6841cd2b470504eb9e304ac743406f23a8f4cbb45b799c7302ac02c668"
+              }
+            ]
+          },
+          {
+            "host": "claude-code",
+            "kind": "update",
+            "status": "pass",
+            "host_version": "2.1.273 (Claude Code)",
+            "observed_at": "2026-10-05T08:54:11.780896+00:00",
+            "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+            "revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+            "plugin_version": "0.2.6",
+            "content_sha256": "b6d7ce308724740c242e6ee81791dd624becc422b73082c1dbbad69daa712d69",
+            "evaluator_version": "0.22.1",
+            "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "starting_version": "0.2.5",
+            "starting_source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+            "evidence": [
+              {
+                "path": "claude-code-public-update.json",
+                "sha256": "1fc3cb8b2f666de79110d2aa1a9bd1d044dd8532c98da08681fe66db13ce4f13"
+              }
+            ]
+          }
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "documentation",
+      "disposition": "update",
+      "status": "satisfied",
+      "owner": "mmzen",
+      "next_action": "Integrate the already verified source guides with protected PR #536 using the merge method and exact checked head. Compare every frozen file at the documentation commit, release-governance commit and current main. Preserve the unchanged packaged README snapshots and verify their links in package context. Later receipts cannot edit prose or hashes; changed guidance requires changed-scope review.",
+      "expected": {
+        "commit": "dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3"
+      },
+      "observation": {
+        "id": "documentation",
+        "status": "pass",
+        "observed_at": "2026-10-05T08:59:01.122374+00:00",
+        "source": "https://github.com/mmzen/se_harness/tree/main",
+        "identity": {
+          "commit": "dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3"
+        },
+        "evidence": {
+          "claims_review": [
+            {
+              "path": "documentation-observations.json",
+              "sha256": "92b48d0087ecf4008f4ae20d67c113a7192903f1baddd25c5428f1bd0a5145d4"
+            }
+          ],
+          "links": [
+            {
+              "path": "documentation-observations.json",
+              "sha256": "92b48d0087ecf4008f4ae20d67c113a7192903f1baddd25c5428f1bd0a5145d4"
+            }
+          ]
+        }
+      },
+      "findings": []
+    },
+    {
+      "id": "demonstration",
+      "disposition": "update",
+      "status": "satisfied",
+      "owner": "mmzen",
+      "next_action": "Use the existing Pages workflow for the first protected-main commit containing the exact released RLS and approved delivery binding. Read back deployment provenance through the canonical URL and existing www.verityplane.ai destination. Do not change the domain or provider settings. A failed or unknown deployment remains pending; inspect before retry.",
+      "expected": {
+        "governance_commit": "e0d50ec6255576e4b5517294c9c8bfc747b2a429"
+      },
+      "observation": {
+        "id": "demonstration",
+        "status": "pass",
+        "observed_at": "2026-10-05T08:59:01.127855+00:00",
+        "source": "https://mmzen.github.io/se_harness/",
+        "identity": {
+          "governance_commit": "e0d50ec6255576e4b5517294c9c8bfc747b2a429"
+        },
+        "evidence": {
+          "deployment": [
+            {
+              "path": "pages-observations.json",
+              "sha256": "a2b25d71ca506d4d4d3923e250a4f4441238485ff7b3be1c62c749d2ab1dfaf1"
+            }
+          ]
+        }
+      },
+      "findings": []
+    },
+    {
+      "id": "release_markers",
+      "disposition": "update",
+      "status": "failed",
+      "owner": "mmzen",
+      "next_action": "Only after all required non-marker observations pass, promote latest from v0.22.0 to v0.22.1 and last from abbec12ac5524c8adfb28693f846dd59de88f759 to 4f640284ec496b88cd7aa4ba88ca537d9374a2f8. Use the existing serialized publisher and exact last lease. Stop on unexpected movement. Read back both targets, integrate the named JSON receipts via protected PRs, and produce the five-surface completion report. This is the sole explicitly permitted moving-tag operation; no immutable version tag may move.",
+      "expected": {
+        "latest": "v0.22.1",
+        "last": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8"
+      },
+      "observation": {
+        "id": "release_markers",
+        "status": "pending",
+        "observed_at": "2026-10-05T08:59:01.138845+00:00",
+        "source": "https://github.com/mmzen/se_harness",
+        "identity": {
+          "latest": "v0.22.0",
+          "last": "abbec12ac5524c8adfb28693f846dd59de88f759"
+        },
+        "evidence": {
+          "authorization": [
+            {
+              "path": "publisher.json",
+              "sha256": "c74f44c5624b61e3426b44c71435b9b6c96c19dd90e1878c40ddcb37ed53bfcc"
+            }
+          ],
+          "readback": [
+            {
+              "path": "maintenance-line.json",
+              "sha256": "8d25e7eaaa945976396daecb517e08a740941144808d59bf3ffe1f135e426cb5"
+            }
+          ]
+        },
+        "note": "Markers unchanged until this exact public observation package is integrated and assessed."
+      },
+      "findings": [
+        {
+          "code": "pending",
+          "location": "release_markers",
+          "message": "Surface has not passed"
+        },
+        {
+          "code": "mismatch",
+          "location": "release_markers.identity.latest",
+          "message": "Identity differs",
+          "expected": "v0.22.1",
+          "observed": "v0.22.0"
+        },
+        {
+          "code": "mismatch",
+          "location": "release_markers.identity.last",
+          "message": "Identity differs",
+          "expected": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+          "observed": "abbec12ac5524c8adfb28693f846dd59de88f759"
+        }
+      ]
+    }
+  ],
+  "findings": []
+}
