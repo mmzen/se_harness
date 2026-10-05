@@ -1,0 +1,9 @@
+{
+  "base": "be1812e7042081014cc7682da8b9cd3822d9071f",
+  "candidate": "5b0d542238a067cfe2f61ecfa9e1e7c10608b2d1",
+  "anchor": "d7eeb2ae785928925669695074be7bdd6ccb1e0a",
+  "default_commit": "d7eeb2ae785928925669695074be7bdd6ccb1e0a",
+  "release_sha256": "a1f0fce27e21b342bf95c93e7e50376dfe52aee908aa06fb60536fdfac970177",
+  "raw_inputs_equal": true,
+  "clean_after": true
+}

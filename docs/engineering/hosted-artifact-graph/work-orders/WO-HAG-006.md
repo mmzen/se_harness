@@ -2,7 +2,7 @@
 id = "WO-HAG-006"
 type = "work_order"
 title = "Unblock reconciliation checks without changing the PR base"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-05"
 updated = "2026-10-05"
@@ -46,6 +46,13 @@ to = "in_progress"
 decided_at = "2026-10-05T13:26:47Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-05T13:47:18Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Completed approved reconciliation/correction with retained evidence. Public 0.22.1, original-base predecessor and combined-scope handoff checks pass; full regression and Windows/Linux focused checks pass. Historical verified evidence is preserved. This records implementation only, not human verification or hosted service readiness."
 +++
 
 # Unblock reconciliation checks without changing the PR base

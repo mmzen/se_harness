@@ -91,10 +91,13 @@ scenarios, the walkthrough and restart/restore qualification. Zero hosted
 scenarios have run. PR #535 stays draft and keeps its original target
 `codex/hosted-artifact-graph-inputs`.
 
-## Current reconciliation stop
+## Reconciliation correction
 
-The [progress report](evidence/WO-HAG-005/progress.md) records two outstanding
-checks: predecessor assessment against the original PR base and the stale
-WO-HAG-001 handoff snapshot. WO-HAG-005 remains in_progress. No verification
-record or PR update has been produced for this reconciliation. A separate
-correction package is under review; the original target and evidence are intact.
+The [historical progress report](evidence/WO-HAG-005/progress.md) retains the
+original refusals. The approved [WO-HAG-006](work-orders/WO-HAG-006.md) correction
+now passes the predecessor assessment against the original PR base. It preserves
+the prior WO-HAG-001 packet before rebinding the live packet with released 0.22.1.
+The [combined assessment](evidence/WO-HAG-006/review.md) records the correction,
+1,316 source tests (23 skips), platform checks and preserved evidence. Aggregate
+verification remains pending. The original PR target and unfinished hosted work
+remain unchanged.

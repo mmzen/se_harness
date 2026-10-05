@@ -1,0 +1,29 @@
+{
+  "implementation_commit": "5b0d542238a067cfe2f61ecfa9e1e7c10608b2d1",
+  "base": "be1812e7042081014cc7682da8b9cd3822d9071f",
+  "main": "d7eeb2ae785928925669695074be7bdd6ccb1e0a",
+  "assessed_file_sha256": {
+    "scripts/validate_governor_transition.py": "bf57814fab1e3d33e2c31536b7764f17741988a40a7e5989f061bea435fd3d1c",
+    "tests/test_governor_transition.py": "a97fe0a72ea464a91f565d2334d1b161aed599cae7674c9db7357bca6ae75e02",
+    "docs/notes/developing-se-harness.md": "dc053bd2ab606f120484a4d83550356bac6368fdfe8ab33788299283d9baf1f3"
+  },
+  "checks_sha256": "5c1a919b8ad784dd7c5632d899096d54216c0145ccfa9d5744bec40e7b2e0709",
+  "source_suite": {
+    "tests": 1316,
+    "reported_skips": 23,
+    "exit_code": 0
+  },
+  "focused_windows": {
+    "tests": 40,
+    "skips": 2,
+    "exit": 0
+  },
+  "focused_linux": {
+    "tests": 40,
+    "skips": 0,
+    "exit": 0
+  },
+  "hosted_scenarios_run": 0,
+  "assessment": "passed",
+  "actual_ci": "pending publication; required before merge"
+}
