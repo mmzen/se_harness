@@ -1,14 +1,17 @@
 # Verity Plane marketplace
 
 Verity Plane brings SE Harness setup, orientation, change and evidence workflows
-to Codex and Claude Code. Plugin **0.2.5** targets **SE Harness 0.22.0** and five
+to Codex and Claude Code. Plugin **0.2.6** targets **SE Harness 0.22.1** and five
 shared skills, including an explicitly requested operator brief.
 
-This source is part of the approved 0.22.0 release preparation. It does not prove
-public availability. A released assembly must contain the exact independently
-public evaluator wheel. Its PACKAGE-IDENTITY.json and assembly inventories record
-the actual source, wheel and package digests. Use those identities when comparing
-the installed package. Plugin updates do not adopt a repository's evaluator.
+This is the staged 0.2.6 distribution input; it is not yet public.
+The current public plugin 0.2.5 with evaluator 0.22.0 is published at
+`7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. Its PACKAGE-IDENTITY.json and assembly inventories
+record exact source, wheel and package digests. Use them to compare installed files.
+Source documentation updates do not replace the published package's original bytes.
+Plugin updates do not adopt a repository's evaluator.
+
+Qualification of staged 0.2.6 is in progress. Earlier release-specific accepted omissions do not establish its host support. The public 0.2.5 release retains its original evidence and later Claude follow-up.
 
 ## Install from Git
 
@@ -16,7 +19,9 @@ These commands select the `plugin-marketplace` distribution branch of
 `mmzen/se_harness`. The development branch contains assembly inputs; install the
 complete distribution branch. Check that
 the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.5, evaluator 0.22.0 and
-the expected qualified source commit before claiming this new delivery.
+the expected qualified source commit. After an authorized 0.2.6 promotion, require
+plugin 0.2.6 and evaluator 0.22.1 with their newly qualified identities before
+claiming that delivery.
 Package installation, native session delivery and repository adoption are separate.
 
 **Codex**
