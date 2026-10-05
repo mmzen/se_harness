@@ -76,16 +76,16 @@ earlier observations as new runs. The original transition defect and approved
 linked REL-SEH-035 amendment remain documented in the correction packet.
 
 The PR remains draft. [RLS-SEH-033](releases/RLS-SEH-033.md) is ready and bound
-to the exact verified archives. Distribution validation passes; a read-only
-ready-record replay follows publication of this preparation review.
+to the exact verified archives. Distribution validation passes; the [ready-record replay](evidence/WO-RLS-040/ready-record-replay-receipt.json)
+passed with two byte-identical builds of the bound candidate.
 
-The complete-delivery plan is not frozen yet. Its documentation review found
-stale qualification/current-version statements that would become locked by the
-plan. [WO-RLS-044 / VER-RLS-005](evidence/WO-RLS-044/review.md) propose a bounded,
-independently verified source-documentation correction. Its exact patch is
-unapplied. The already verified binary candidate and immutable staged packages
-remain unchanged. The release decision is not being requested until those
-documentation inputs and their required assurance are ready.
+The complete-delivery plan is not frozen yet. mmzen approved WO-RLS-044 and
+VER-RLS-005 for the bounded source-documentation correction. The six guides and
+stable delivery index are corrected and checked; the [assessment](evidence/WO-RLS-044/assessment.md)
+retains the original failures, their fixes and the unchanged payload identities.
+The required independent documentation verification is being prepared. The
+already verified binary candidate and immutable staged packages remain unchanged.
+The complete-release request follows that separate human verification.
 
 ## Desktop decision and provider readiness
 

@@ -47,13 +47,21 @@ Startup/compaction hooks deliver the selected repository's instructions; they do
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
 
-### Release in preparation
+### Evaluator 0.22.1 and plugin 0.2.6
 
-The [0.22.1 / plugin 0.2.6 package](docs/engineering/release-0-22-1/README.md)
-adds standalone draft validation and accurate decision-owner attribution.
-Qualification is in progress. Public latest remains 0.22.0 / 0.2.5; this
-repository still selects released evaluator 0.22.0. Release preparation does
-not verify or publish the unfinished hosted service.
+[0.22.1 / plugin 0.2.6](docs/engineering/release-0-22-1/README.md)
+adds standalone draft validation and decision attribution.
+mmzen verified `4f640284ec496b88cd7aa4ba88ca537d9374a2f8`:
+[VREC-SEH-033](docs/engineering/release-0-22-1/verification-records/VREC-SEH-033.md).
+Windows/Linux package and Codex/Claude CLI checks passed.
+Codex Windows desktop remains unverified (accepted DEC-RLS-009 / RISK-RLS-007).
+
+[Release record](docs/engineering/release-0-22-1/releases/RLS-SEH-033.md),
+[delivery evidence](docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md)
+and [public identity](https://github.com/mmzen/se_harness/blob/plugin-marketplace/PACKAGE-IDENTITY.json)
+distinguish authorization and availability. Qualification is not publication.
+Repository evaluator: 0.22.0.
+Delivery excludes adoption and hosted-service verification.
 
 ## Fewer repository files
 

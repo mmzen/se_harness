@@ -15,11 +15,17 @@ changed, incompatible or oversized input reports a delivery gap without fallback
 Setup retains separate immutable evaluator environments outside repositories.
 Activation immediately returns the complete entry; it grants no lifecycle authority.
 
-This source prepares plugin 0.2.6 with evaluator 0.22.1; qualification is in progress.
-The current public plugin 0.2.5 with evaluator 0.22.0 is published at
-`7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. VREC-PLG-032 verifies the qualified package.
-Source documentation updates do not rewrite the published bytes or inventories.
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+Plugin 0.2.6 targets evaluator 0.22.1. mmzen verified candidate
+`4f640284ec496b88cd7aa4ba88ca537d9374a2f8` in VREC-SEH-033.
+Windows/Linux package checks and native Codex/Claude CLI checks passed.
+Codex Windows desktop remains unverified under accepted DEC-RLS-009 / RISK-RLS-007.
+Qualification does not establish public installation or update results.
+
+Read the [release review](https://github.com/mmzen/se_harness/blob/main/docs/engineering/release-0-22-1/README.md)
+and its delivery evidence for publication status. Compare installed bytes with
+the [public identity](https://github.com/mmzen/se_harness/blob/plugin-marketplace/PACKAGE-IDENTITY.json).
+Qualified archives keep their original preparation README snapshots; source
+documentation corrections do not rewrite those bytes or inventories.
 
 Development archives cannot establish release or marketplace eligibility.
 Python 3.11+ must be available to the hook launcher. Codex also requires the

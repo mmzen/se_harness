@@ -2,13 +2,20 @@
 id = "VER-RLS-005"
 type = "verification"
 title = "Verify release documentation independently of public delivery"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-10-05"
 updated = "2026-10-05"
 
 [relations]
 verifies = ["REQ-RLO-019", "REQ-RLO-020"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-05T06:02:40Z"
+decided_by = "mmzen"
+reason = "mmzen replied \"I alprou\", understood in the immediately preceding approval request as approval of WO-RLS-044 and VER-RLS-005 with required commit-bound verification, reviewed in PR #536 at 57db794eb9d125c0a56d26e352f43c876954939a. This approves the six source-documentation corrections and stable delivery-evidence index, bounded checks and evidence, ordinary review updates from codex/release-0-22-1 to mmzen/se_harness:main, and the later separately supplied verification decision. It preserves verified candidate 4f640284ec496b88cd7aa4ba88ca537d9374a2f8 and all qualified package bytes. Human verification, merge and the exact complete-release decision remain separate. Reviewed hashes matched; only the confirmed assurance fields were added before approval."
 +++
 
 # Verify release documentation independently of public delivery

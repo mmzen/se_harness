@@ -2,10 +2,15 @@
 id = "WO-RLS-044"
 type = "work_order"
 title = "Prepare accurate release documentation before the frozen plan"
-status = "draft"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-05"
 updated = "2026-10-05"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen confirmed required commit-bound verification because the complete-release decision depends on the accuracy of the corrected source documentation."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = ["README.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "release/plugin-marketplace/README.md", "docs/engineering/release-0-22-1/"]
@@ -14,6 +19,28 @@ paths = ["README.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plu
 implements = ["REQ-RLO-019", "REQ-RLO-020"]
 specifications = ["SPEC-RLO-006", "SPEC-RLO-007"]
 verification = ["VER-RLS-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-05T06:02:40Z"
+decided_by = "mmzen"
+reason = "mmzen replied \"I alprou\", understood in the immediately preceding approval request as approval of WO-RLS-044 and VER-RLS-005 with required commit-bound verification, reviewed in PR #536 at 57db794eb9d125c0a56d26e352f43c876954939a. This approves the six source-documentation corrections and stable delivery-evidence index, bounded checks and evidence, ordinary review updates from codex/release-0-22-1 to mmzen/se_harness:main, and the later separately supplied verification decision. It preserves verified candidate 4f640284ec496b88cd7aa4ba88ca537d9374a2f8 and all qualified package bytes. Human verification, merge and the exact complete-release decision remain separate. Reviewed hashes matched; only the confirmed assurance fields were added before approval."
+scope_paths = ["README.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "release/plugin-marketplace/README.md", "docs/engineering/release-0-22-1/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-05T06:03:55Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-05T06:18:34Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. The approved six source-documentation corrections and stable delivery index are complete. Focused and full Windows suites, distributions, CLI, released validation, links and exact package/archive preservation checks pass. Original README-bound and inspection-context failures and their corrections are retained under evidence/WO-RLS-044. This supplies no human verification, release, merge or adoption decision."
 +++
 
 # Prepare accurate release documentation before the frozen plan
