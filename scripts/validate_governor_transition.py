@@ -341,8 +341,8 @@ def _evaluator(value: Any, label: str) -> dict[str, str | None]:
 
 
 def _released_distribution(
-    root: Path, base_revision: str, target_version: str
-) -> dict[str, str]:
+    root: Path, base_revision: str, target_version: str, *, allow_absent: bool = False
+) -> dict[str, str] | None:
     paths = _git(
         root,
         "ls-tree",
@@ -386,6 +386,11 @@ def _released_distribution(
             or not isinstance(distribution.get("wheel_sha256"), str)
             or SHA256.fullmatch(distribution["wheel_sha256"]) is None
         ):
+            if metadata.get("version") == target_version and metadata.get("status") == "released":
+                raise GovernorTransitionError(
+                    "trusted base must contain exactly one released distribution for the target version; "
+                    "a claimed release is malformed"
+                )
             continue
         matches.append(
             {
@@ -397,11 +402,54 @@ def _released_distribution(
                 "archive_sha256": str(distribution["wheel_sha256"]),
             }
         )
+    if not matches and allow_absent:
+        return None
     if len(matches) != 1:
         raise GovernorTransitionError(
             "trusted base must contain exactly one released distribution for the target version"
         )
     return matches[0]
+
+
+def _adopted_release(
+    root: Path,
+    head: str,
+    target: Mapping[str, Any],
+    default_branch_ref: str,
+    pattern: re.Pattern[str],
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Reuse adoption from independent default history, without replacing the event base."""
+    if DEFAULT_BRANCH_REF.fullmatch(default_branch_ref) is None or ".." in default_branch_ref:
+        raise GovernorTransitionError("default branch ref is invalid")
+    try:
+        default = _git(root, "rev-parse", "--verify", f"{default_branch_ref}^{{commit}}").decode("ascii").strip()
+    except GovernorTransitionError as error:
+        raise GovernorTransitionError(
+            "trusted base has no target release and adopted default-branch history is unavailable"
+        ) from error
+    _full_commit(root, default, pattern, "default branch revision")
+    anchors = _git(root, "merge-base", "--all", head, default).decode("ascii").splitlines()
+    if len(anchors) != 1:
+        raise GovernorTransitionError("adopted-history merge base is ambiguous")
+    anchor = _full_commit(root, anchors[0], pattern, "adopted-history anchor")
+    # merge-base proves both ancestry edges; inspect only its immutable Git objects.
+    adopted, _ = _root_identity(root, anchor, "adopted-history")
+    if (
+        _evaluator(adopted["evaluator"], "adopted-history evaluator")
+        != _evaluator(target["evaluator"], "target evaluator")
+        or adopted["canonical_lock_sha256"] != target["canonical_lock_sha256"]
+        or _canonical_lf(_blob(root, anchor, ".engineering-harness.toml", "adopted configuration"), "adopted configuration")
+        != _canonical_lf(_blob(root, head, ".engineering-harness.toml", "target configuration"), "target configuration")
+    ):
+        raise GovernorTransitionError("target root differs from the adopted default-branch history")
+    release = _released_distribution(root, anchor, str(target["version"]))
+    assert release is not None
+    return release, {
+        "mode": "adopted-history",
+        "default_branch_ref": default_branch_ref,
+        "default_branch_commit": default,
+        "anchor_commit": anchor,
+    }
 
 
 def _evidence_documents(root: Path, head: str) -> list[tuple[str, bytes]]:
@@ -524,8 +572,17 @@ def build_plan(
             raise GovernorTransitionError("same-version candidate changed the standard governor lock")
         upgrade: dict[str, Any] | None = None
     else:
-        trusted_release = _released_distribution(root, base_commit, str(target["version"]))
+        trusted_release = _released_distribution(root, base_commit, str(target["version"]), allow_absent=True)
+        authority = {"mode": "base", "anchor_commit": base_commit}
+        if trusted_release is None:
+            trusted_release, authority = _adopted_release(root, head, target, default_branch_ref, pattern)
         upgrade, target_evaluator = _select_transition(root, head, base, target, trusted_release)
+        release_raw = _blob(root, authority["anchor_commit"], trusted_release["path"], "trusted release")
+        if authority["mode"] == "adopted-history":
+            for path in (trusted_release["path"], upgrade["evidence_path"]):
+                if _blob(root, head, path, "target adoption input") != _blob(root, authority["anchor_commit"], path, "adopted input"):
+                    raise GovernorTransitionError("target adoption input differs from default-branch history: " + path)
+        upgrade["release_authority"] = {**authority, "release_sha256": _sha256(release_raw)}
         target["evaluator"] = target_evaluator
     return {
         "schema": SCHEMA,
