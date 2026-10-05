@@ -1306,6 +1306,8 @@ def build_parser() -> argparse.ArgumentParser:
     release.add_argument("--domain", help="place the record in an explicit engineering domain")
     release.add_argument("--json", action="store_true", help="emit the canonical workflow result as JSON")
     release.set_defaults(handler=_prepare_release)
+    from se_harness.remote import register as register_remote
+    register_remote(commands)
     return parser
 
 

@@ -1,0 +1,32 @@
+services:
+  graph:
+    image: memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce
+    platform: linux/amd64
+    command: ["--storage-mode=IN_MEMORY_TRANSACTIONAL", "--storage-snapshot-interval-sec=300", "--storage-wal-enabled=true", "--storage-recover-on-startup=true", "--query-execution-timeout-sec=5", "--telemetry-enabled=false"]
+    volumes:
+      - graph_data:/var/lib/memgraph
+    networks: [private]
+  service:
+    image: ${HAG_SERVICE_IMAGE:?Build and select the exact local candidate image}
+    platform: linux/amd64
+    ports: ["127.0.0.1:${HAG_HTTP_PORT:-8080}:8080"]
+    volumes:
+      - type: bind
+        source: ${HAG_STAGE:?Select the immutable staged reference source}
+        target: /source
+        read_only: true
+      - type: bind
+        source: ${HAG_CONFIG_DIRECTORY:?Select external non-secret configuration}
+        target: /run/config
+        read_only: true
+    secrets: [sandbox_credentials]
+    networks: [private]
+    depends_on: [graph]
+secrets:
+  sandbox_credentials:
+    file: ${HAG_CREDENTIAL_FILE:?Select a temporary sandbox credential file}
+volumes:
+  graph_data:
+networks:
+  private:
+    internal: true
