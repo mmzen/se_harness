@@ -2,7 +2,7 @@
 id = "VREC-RLS-004"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-042"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-05"
 updated = "2026-10-05"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-22-1/evidence/WO-RLS-042/claude-co
 evaluator_evidence_path = "docs/engineering/release-0-22-1/evidence/VREC-RLS-004-evaluator.json"
 evaluator_evidence_sha256 = "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905"
 
+verified_at = "2026-10-05T10:01:52Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLS-042"]
 conforms_to = ["VER-RLS-038"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-05T10:01:52Z"
+decided_by = "mmzen"
+reason = "mmzen stated \"I verify VREC-RLS-004\" for the ready public-delivery closeout record in PR #539, candidate 35fdd0712484145a763490846a96b7e8c63ca4bf. This records the human assurance decision for unchanged VER-RLS-038 evidence. Codex Windows desktop remains unverified under accepted DEC-RLS-009 / RISK-RLS-007. Hosted service and adoption are excluded. The existing WO-RLS-042 review-publication grant covers this decision update; no merge decision is supplied."
 +++
 
 # Verification Record Candidate
