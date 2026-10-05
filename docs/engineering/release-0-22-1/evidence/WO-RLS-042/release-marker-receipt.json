@@ -1,0 +1,232 @@
+{
+  "observed_at": "2026-10-05T09:09:29.793905+00:00",
+  "status": "pass",
+  "marker_result": {
+    "applied": true,
+    "last": "exact",
+    "latest": "exact",
+    "plan_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b"
+  },
+  "publisher_status": {
+    "argv": [
+      "gh",
+      "run",
+      "view",
+      "37285470260",
+      "--repo",
+      "mmzen/se_harness",
+      "--json",
+      "status,conclusion,jobs,url"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-05T09:09:25.519890+00:00",
+    "exit_code": 0,
+    "stdout": "{\"conclusion\":\"failure\",\"jobs\":[{\"completedAt\":\"2026-10-05T08:44:46Z\",\"conclusion\":\"success\",\"databaseId\":111691333748,\"name\":\"Resolve released authority from main\",\"startedAt\":\"2026-10-05T08:44:09Z\",\"status\":\"completed\",\"steps\":[{\"completedAt\":\"2026-10-05T08:44:11Z\",\"conclusion\":\"success\",\"name\":\"Set up job\",\"number\":1,\"startedAt\":\"2026-10-05T08:44:10Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:18Z\",\"conclusion\":\"success\",\"name\":\"Check out trusted main history\",\"number\":2,\"startedAt\":\"2026-10-05T08:44:11Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:18Z\",\"conclusion\":\"success\",\"name\":\"Select Python 3.11\",\"number\":3,\"startedAt\":\"2026-10-05T08:44:18Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:18Z\",\"conclusion\":\"success\",\"name\":\"Validate the selected RLS input\",\"number\":4,\"startedAt\":\"2026-10-05T08:44:18Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:18Z\",\"conclusion\":\"success\",\"name\":\"Resolve the independently released evaluator\",\"number\":5,\"startedAt\":\"2026-10-05T08:44:18Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:23Z\",\"conclusion\":\"success\",\"name\":\"Acquire and prove the released evaluator\",\"number\":6,\"startedAt\":\"2026-10-05T08:44:18Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:33Z\",\"conclusion\":\"success\",\"name\":\"Derive one canonical release plan\",\"number\":7,\"startedAt\":\"2026-10-05T08:44:23Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:42Z\",\"conclusion\":\"success\",\"name\":\"Check complete-release provider controls before publication\",\"number\":8,\"startedAt\":\"2026-10-05T08:44:33Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:44Z\",\"conclusion\":\"success\",\"name\":\"Retain the canonical release plan\",\"number\":9,\"startedAt\":\"2026-10-05T08:44:42Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:44Z\",\"conclusion\":\"skipped\",\"name\":\"Retain a bounded resolution refusal\",\"number\":10,\"startedAt\":\"2026-10-05T08:44:44Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:44Z\",\"conclusion\":\"skipped\",\"name\":\"Upload the resolution refusal\",\"number\":11,\"startedAt\":\"2026-10-05T08:44:44Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:44Z\",\"conclusion\":\"success\",\"name\":\"Post Select Python 3.11\",\"number\":21,\"startedAt\":\"2026-10-05T08:44:44Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:44Z\",\"conclusion\":\"success\",\"name\":\"Post Check out trusted main history\",\"number\":22,\"startedAt\":\"2026-10-05T08:44:44Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:44Z\",\"conclusion\":\"success\",\"name\":\"Complete job\",\"number\":23,\"startedAt\":\"2026-10-05T08:44:44Z\",\"status\":\"completed\"}],\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260/job/111691333748\"},{\"completedAt\":\"2026-10-05T08:48:31Z\",\"conclusion\":\"success\",\"databaseId\":111691334021,\"name\":\"Rebuild and qualify exact candidate / Qualify and replay (release-record)\",\"startedAt\":\"2026-10-05T08:44:49Z\",\"status\":\"completed\",\"steps\":[{\"completedAt\":\"2026-10-05T08:44:51Z\",\"conclusion\":\"success\",\"name\":\"Set up job\",\"number\":1,\"startedAt\":\"2026-10-05T08:44:50Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:57Z\",\"conclusion\":\"success\",\"name\":\"Check out the subject with full history\",\"number\":2,\"startedAt\":\"2026-10-05T08:44:51Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:57Z\",\"conclusion\":\"success\",\"name\":\"Select the one trusted orchestration Python\",\"number\":3,\"startedAt\":\"2026-10-05T08:44:57Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:44:57Z\",\"conclusion\":\"success\",\"name\":\"Validate the inputs\",\"number\":4,\"startedAt\":\"2026-10-05T08:44:57Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:45:12Z\",\"conclusion\":\"success\",\"name\":\"Resolve the subject\",\"number\":5,\"startedAt\":\"2026-10-05T08:44:57Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:47:56Z\",\"conclusion\":\"success\",\"name\":\"Qualify the exact candidate without publication credentials\",\"number\":6,\"startedAt\":\"2026-10-05T08:45:12Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:24Z\",\"conclusion\":\"success\",\"name\":\"Replay the exact recipe twice\",\"number\":7,\"startedAt\":\"2026-10-05T08:47:56Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:24Z\",\"conclusion\":\"success\",\"name\":\"Verify the rebuilt bundle against the record\",\"number\":8,\"startedAt\":\"2026-10-05T08:48:24Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:25Z\",\"conclusion\":\"success\",\"name\":\"Prove the qualification left no checkout change\",\"number\":9,\"startedAt\":\"2026-10-05T08:48:24Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:26Z\",\"conclusion\":\"success\",\"name\":\"Retain the candidate-controlled qualification result\",\"number\":10,\"startedAt\":\"2026-10-05T08:48:25Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:27Z\",\"conclusion\":\"success\",\"name\":\"Transfer only verified inert release bytes\",\"number\":11,\"startedAt\":\"2026-10-05T08:48:26Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:28Z\",\"conclusion\":\"success\",\"name\":\"Post Select the one trusted orchestration Python\",\"number\":21,\"startedAt\":\"2026-10-05T08:48:27Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:28Z\",\"conclusion\":\"success\",\"name\":\"Post Check out the subject with full history\",\"number\":22,\"startedAt\":\"2026-10-05T08:48:28Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:28Z\",\"conclusion\":\"success\",\"name\":\"Complete job\",\"number\":23,\"startedAt\":\"2026-10-05T08:48:28Z\",\"status\":\"completed\"}],\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260/job/111691334021\"},{\"completedAt\":\"2026-10-05T08:48:51Z\",\"conclusion\":\"success\",\"databaseId\":111691334745,\"name\":\"Materialize exact GitHub tag and release\",\"startedAt\":\"2026-10-05T08:48:34Z\",\"status\":\"completed\",\"steps\":[{\"completedAt\":\"2026-10-05T08:48:35Z\",\"conclusion\":\"success\",\"name\":\"Set up job\",\"number\":1,\"startedAt\":\"2026-10-05T08:48:35Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:41Z\",\"conclusion\":\"success\",\"name\":\"Check out trusted main orchestration only\",\"number\":2,\"startedAt\":\"2026-10-05T08:48:35Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:41Z\",\"conclusion\":\"success\",\"name\":\"Select Python 3.11\",\"number\":3,\"startedAt\":\"2026-10-05T08:48:41Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:41Z\",\"conclusion\":\"success\",\"name\":\"Download trusted plan and qualified bundle\",\"number\":4,\"startedAt\":\"2026-10-05T08:48:41Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:42Z\",\"conclusion\":\"success\",\"name\":\"Reverify transferred bytes\",\"number\":5,\"startedAt\":\"2026-10-05T08:48:41Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:43Z\",\"conclusion\":\"success\",\"name\":\"Create or verify the immutable annotated tag\",\"number\":6,\"startedAt\":\"2026-10-05T08:48:42Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:49Z\",\"conclusion\":\"success\",\"name\":\"Stage, verify, and publish the exact GitHub Release\",\"number\":7,\"startedAt\":\"2026-10-05T08:48:43Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:49Z\",\"conclusion\":\"success\",\"name\":\"Record final GitHub state\",\"number\":8,\"startedAt\":\"2026-10-05T08:48:49Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:50Z\",\"conclusion\":\"success\",\"name\":\"Create or verify the maintenance line\",\"number\":9,\"startedAt\":\"2026-10-05T08:48:49Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:50Z\",\"conclusion\":\"success\",\"name\":\"Post Select Python 3.11\",\"number\":17,\"startedAt\":\"2026-10-05T08:48:50Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:50Z\",\"conclusion\":\"success\",\"name\":\"Post Check out trusted main orchestration only\",\"number\":18,\"startedAt\":\"2026-10-05T08:48:50Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:50Z\",\"conclusion\":\"success\",\"name\":\"Complete job\",\"number\":19,\"startedAt\":\"2026-10-05T08:48:50Z\",\"status\":\"completed\"}],\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260/job/111691334745\"},{\"completedAt\":\"2026-10-05T08:49:52Z\",\"conclusion\":\"success\",\"databaseId\":111691335469,\"name\":\"Publish release-bound Explorer from main governance / Build release-bound demonstration\",\"startedAt\":\"2026-10-05T08:48:54Z\",\"status\":\"completed\",\"steps\":[{\"completedAt\":\"2026-10-05T08:48:58Z\",\"conclusion\":\"success\",\"name\":\"Set up job\",\"number\":1,\"startedAt\":\"2026-10-05T08:48:56Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:04Z\",\"conclusion\":\"success\",\"name\":\"Check out trusted main history\",\"number\":2,\"startedAt\":\"2026-10-05T08:48:58Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:04Z\",\"conclusion\":\"success\",\"name\":\"Select Python 3.11\",\"number\":3,\"startedAt\":\"2026-10-05T08:49:04Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:16Z\",\"conclusion\":\"success\",\"name\":\"Derive the release identity from the released record\",\"number\":4,\"startedAt\":\"2026-10-05T08:49:04Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:16Z\",\"conclusion\":\"success\",\"name\":\"Confirm the immutable governance input\",\"number\":5,\"startedAt\":\"2026-10-05T08:49:16Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:19Z\",\"conclusion\":\"success\",\"name\":\"Verify the published GitHub Release\",\"number\":6,\"startedAt\":\"2026-10-05T08:49:16Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:26Z\",\"conclusion\":\"success\",\"name\":\"Resolve immutable release and governance provenance\",\"number\":7,\"startedAt\":\"2026-10-05T08:49:19Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:28Z\",\"conclusion\":\"success\",\"name\":\"Check out the immutable governance snapshot\",\"number\":8,\"startedAt\":\"2026-10-05T08:49:26Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:28Z\",\"conclusion\":\"success\",\"name\":\"Resolve the released independent evaluator\",\"number\":9,\"startedAt\":\"2026-10-05T08:49:28Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:35Z\",\"conclusion\":\"success\",\"name\":\"Acquire and prove the released evaluator\",\"number\":10,\"startedAt\":\"2026-10-05T08:49:28Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:37Z\",\"conclusion\":\"success\",\"name\":\"Materialize the complete governance snapshot for generation\",\"number\":11,\"startedAt\":\"2026-10-05T08:49:35Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:44Z\",\"conclusion\":\"success\",\"name\":\"Generate the target-local canonical Explorer\",\"number\":12,\"startedAt\":\"2026-10-05T08:49:37Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:45Z\",\"conclusion\":\"success\",\"name\":\"Prepare and attest the exact public payload\",\"number\":13,\"startedAt\":\"2026-10-05T08:49:44Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:45Z\",\"conclusion\":\"success\",\"name\":\"Configure GitHub Pages\",\"number\":14,\"startedAt\":\"2026-10-05T08:49:45Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:47Z\",\"conclusion\":\"success\",\"name\":\"Upload the exact Pages artifact\",\"number\":15,\"startedAt\":\"2026-10-05T08:49:45Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:47Z\",\"conclusion\":\"success\",\"name\":\"Summarize the prepared demonstration\",\"number\":16,\"startedAt\":\"2026-10-05T08:49:47Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:48Z\",\"conclusion\":\"success\",\"name\":\"Post Select Python 3.11\",\"number\":31,\"startedAt\":\"2026-10-05T08:49:47Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:48Z\",\"conclusion\":\"success\",\"name\":\"Post Check out trusted main history\",\"number\":32,\"startedAt\":\"2026-10-05T08:49:48Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:48Z\",\"conclusion\":\"success\",\"name\":\"Complete job\",\"number\":33,\"startedAt\":\"2026-10-05T08:49:48Z\",\"status\":\"completed\"}],\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260/job/111691335469\"},{\"completedAt\":\"2026-10-05T08:49:17Z\",\"conclusion\":\"success\",\"databaseId\":111691336142,\"name\":\"Promote exact GitHub assets to PyPI\",\"startedAt\":\"2026-10-05T08:48:56Z\",\"status\":\"completed\",\"steps\":[{\"completedAt\":\"2026-10-05T08:48:58Z\",\"conclusion\":\"success\",\"name\":\"Set up job\",\"number\":1,\"startedAt\":\"2026-10-05T08:48:57Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:59Z\",\"conclusion\":\"success\",\"name\":\"Download and verify exact final GitHub assets\",\"number\":2,\"startedAt\":\"2026-10-05T08:48:58Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:48:59Z\",\"conclusion\":\"success\",\"name\":\"Reconcile immutable PyPI version state\",\"number\":3,\"startedAt\":\"2026-10-05T08:48:59Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:14Z\",\"conclusion\":\"success\",\"name\":\"Publish exact distributions with Trusted Publishing\",\"number\":4,\"startedAt\":\"2026-10-05T08:48:59Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:14Z\",\"conclusion\":\"success\",\"name\":\"Post Publish exact distributions with Trusted Publishing\",\"number\":8,\"startedAt\":\"2026-10-05T08:49:14Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:49:14Z\",\"conclusion\":\"success\",\"name\":\"Complete job\",\"number\":9,\"startedAt\":\"2026-10-05T08:49:14Z\",\"status\":\"completed\"}],\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260/job/111691336142\"},{\"completedAt\":\"2026-10-05T08:53:32Z\",\"conclusion\":\"success\",\"databaseId\":111691337202,\"name\":\"Promote the approved marketplace commit\",\"startedAt\":\"2026-10-05T08:53:00Z\",\"status\":\"completed\",\"steps\":[{\"completedAt\":\"2026-10-05T08:53:02Z\",\"conclusion\":\"success\",\"name\":\"Set up job\",\"number\":1,\"startedAt\":\"2026-10-05T08:53:01Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:09Z\",\"conclusion\":\"success\",\"name\":\"Check out trusted main and retained staging refs\",\"number\":2,\"startedAt\":\"2026-10-05T08:53:02Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:09Z\",\"conclusion\":\"success\",\"name\":\"Select Python 3.11\",\"number\":3,\"startedAt\":\"2026-10-05T08:53:09Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:13Z\",\"conclusion\":\"success\",\"name\":\"Independently obtain the public wheel without executing it\",\"number\":4,\"startedAt\":\"2026-10-05T08:53:09Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:27Z\",\"conclusion\":\"success\",\"name\":\"Reconcile and promote the exact staged tree\",\"number\":5,\"startedAt\":\"2026-10-05T08:53:13Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:29Z\",\"conclusion\":\"success\",\"name\":\"Retain the marketplace readback\",\"number\":6,\"startedAt\":\"2026-10-05T08:53:27Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:29Z\",\"conclusion\":\"success\",\"name\":\"Post Select Python 3.11\",\"number\":11,\"startedAt\":\"2026-10-05T08:53:29Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:29Z\",\"conclusion\":\"success\",\"name\":\"Post Check out trusted main and retained staging refs\",\"number\":12,\"startedAt\":\"2026-10-05T08:53:29Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:29Z\",\"conclusion\":\"success\",\"name\":\"Complete job\",\"number\":13,\"startedAt\":\"2026-10-05T08:53:29Z\",\"status\":\"completed\"}],\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260/job/111691337202\"},{\"completedAt\":\"2026-10-05T08:50:05Z\",\"conclusion\":\"success\",\"databaseId\":111691337229,\"name\":\"Publish release-bound Explorer from main governance / Deploy the public demonstration\",\"startedAt\":\"2026-10-05T08:49:56Z\",\"status\":\"completed\",\"steps\":[{\"completedAt\":\"2026-10-05T08:49:58Z\",\"conclusion\":\"success\",\"name\":\"Set up job\",\"number\":1,\"startedAt\":\"2026-10-05T08:49:57Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:50:04Z\",\"conclusion\":\"success\",\"name\":\"Deploy the Pages artifact\",\"number\":2,\"startedAt\":\"2026-10-05T08:49:58Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:50:04Z\",\"conclusion\":\"success\",\"name\":\"Summarize the deployment\",\"number\":3,\"startedAt\":\"2026-10-05T08:50:04Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:50:04Z\",\"conclusion\":\"success\",\"name\":\"Complete job\",\"number\":4,\"startedAt\":\"2026-10-05T08:50:04Z\",\"status\":\"completed\"}],\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260/job/111691337229\"},{\"completedAt\":\"2026-10-05T09:08:18Z\",\"conclusion\":\"failure\",\"databaseId\":111691337728,\"name\":\"Finish under the recorded complete-release approval\",\"startedAt\":\"2026-10-05T09:07:39Z\",\"status\":\"completed\",\"steps\":[{\"completedAt\":\"2026-10-05T09:07:41Z\",\"conclusion\":\"success\",\"name\":\"Set up job\",\"number\":1,\"startedAt\":\"2026-10-05T09:07:40Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T09:07:47Z\",\"conclusion\":\"success\",\"name\":\"Check out trusted main and retained observations\",\"number\":2,\"startedAt\":\"2026-10-05T09:07:41Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T09:07:47Z\",\"conclusion\":\"success\",\"name\":\"Select Python 3.11\",\"number\":3,\"startedAt\":\"2026-10-05T09:07:47Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T09:08:04Z\",\"conclusion\":\"success\",\"name\":\"Promote markers only after every required public observation\",\"number\":4,\"startedAt\":\"2026-10-05T09:07:47Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T09:08:15Z\",\"conclusion\":\"failure\",\"name\":\"Assess all five surfaces and retained receipts\",\"number\":5,\"startedAt\":\"2026-10-05T09:08:04Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T09:08:16Z\",\"conclusion\":\"success\",\"name\":\"Retain complete or pending delivery\",\"number\":6,\"startedAt\":\"2026-10-05T09:08:15Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T09:08:16Z\",\"conclusion\":\"skipped\",\"name\":\"Post Select Python 3.11\",\"number\":11,\"startedAt\":\"2026-10-05T09:08:16Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T09:08:16Z\",\"conclusion\":\"success\",\"name\":\"Post Check out trusted main and retained observations\",\"number\":12,\"startedAt\":\"2026-10-05T09:08:16Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T09:08:16Z\",\"conclusion\":\"success\",\"name\":\"Complete job\",\"number\":13,\"startedAt\":\"2026-10-05T09:08:16Z\",\"status\":\"completed\"}],\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260/job/111691337728\"},{\"completedAt\":\"2026-10-05T08:53:56Z\",\"conclusion\":\"success\",\"databaseId\":111691338425,\"name\":\"Retain public release observations\",\"startedAt\":\"2026-10-05T08:53:35Z\",\"status\":\"completed\",\"steps\":[{\"completedAt\":\"2026-10-05T08:53:38Z\",\"conclusion\":\"success\",\"name\":\"Set up job\",\"number\":1,\"startedAt\":\"2026-10-05T08:53:36Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:43Z\",\"conclusion\":\"success\",\"name\":\"Check out trusted reporting code\",\"number\":2,\"startedAt\":\"2026-10-05T08:53:38Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:44Z\",\"conclusion\":\"success\",\"name\":\"Select Python 3.11\",\"number\":3,\"startedAt\":\"2026-10-05T08:53:43Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:44Z\",\"conclusion\":\"success\",\"name\":\"Download the canonical plan\",\"number\":4,\"startedAt\":\"2026-10-05T08:53:44Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:54Z\",\"conclusion\":\"success\",\"name\":\"Observe public install and Pages provenance\",\"number\":5,\"startedAt\":\"2026-10-05T08:53:44Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:54Z\",\"conclusion\":\"success\",\"name\":\"Emit stage-specific result\",\"number\":6,\"startedAt\":\"2026-10-05T08:53:54Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:55Z\",\"conclusion\":\"success\",\"name\":\"Retain machine-readable release result\",\"number\":7,\"startedAt\":\"2026-10-05T08:53:54Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:55Z\",\"conclusion\":\"success\",\"name\":\"Post Select Python 3.11\",\"number\":13,\"startedAt\":\"2026-10-05T08:53:55Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:55Z\",\"conclusion\":\"success\",\"name\":\"Post Check out trusted reporting code\",\"number\":14,\"startedAt\":\"2026-10-05T08:53:55Z\",\"status\":\"completed\"},{\"completedAt\":\"2026-10-05T08:53:55Z\",\"conclusion\":\"success\",\"name\":\"Complete job\",\"number\":15,\"startedAt\":\"2026-10-05T08:53:55Z\",\"status\":\"completed\"}],\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260/job/111691338425\"}],\"status\":\"completed\",\"url\":\"https://github.com/mmzen/se_harness/actions/runs/37285470260\"}\n",
+    "stderr": ""
+  },
+  "readbacks": [
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/mmzen/se_harness/releases/latest"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "observed_at": "2026-10-05T09:09:28.571504+00:00",
+      "exit_code": 0,
+      "stdout": "{\"url\":\"https://api.github.com/repos/mmzen/se_harness/releases/403525847\",\"assets_url\":\"https://api.github.com/repos/mmzen/se_harness/releases/403525847/assets\",\"upload_url\":\"https://uploads.github.com/repos/mmzen/se_harness/releases/403525847/assets{?name,label}\",\"html_url\":\"https://github.com/mmzen/se_harness/releases/tag/v0.22.1\",\"id\":403525847,\"author\":{\"login\":\"github-actions[bot]\",\"id\":41898282,\"node_id\":\"MDM6Qm90NDE4OTgyODI=\",\"avatar_url\":\"https://avatars.githubusercontent.com/in/15368?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/github-actions%5Bbot%5D\",\"html_url\":\"https://github.com/apps/github-actions\",\"followers_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/subscriptions\",\"organizations_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/orgs\",\"repos_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/repos\",\"events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/received_events\",\"type\":\"Bot\",\"user_view_type\":\"public\",\"site_admin\":false},\"node_id\":\"RE_kwDOT09fPM4YDVDX\",\"tag_name\":\"v0.22.1\",\"target_commitish\":\"main\",\"name\":\"SE Harness 0.22.1\",\"draft\":false,\"immutable\":false,\"prerelease\":false,\"created_at\":\"2026-10-05T08:32:03Z\",\"updated_at\":\"2026-10-05T08:48:49Z\",\"published_at\":\"2026-10-05T08:48:49Z\",\"assets\":[{\"url\":\"https://api.github.com/repos/mmzen/se_harness/releases/assets/612015390\",\"id\":612015390,\"node_id\":\"RA_kwDOT09fPM4kep0e\",\"name\":\"se_harness-0.22.1-py3-none-any.whl\",\"label\":\"\",\"uploader\":{\"login\":\"github-actions[bot]\",\"id\":41898282,\"node_id\":\"MDM6Qm90NDE4OTgyODI=\",\"avatar_url\":\"https://avatars.githubusercontent.com/in/15368?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/github-actions%5Bbot%5D\",\"html_url\":\"https://github.com/apps/github-actions\",\"followers_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/subscriptions\",\"organizations_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/orgs\",\"repos_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/repos\",\"events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/received_events\",\"type\":\"Bot\",\"user_view_type\":\"public\",\"site_admin\":false},\"content_type\":\"application/octet-stream\",\"state\":\"uploaded\",\"size\":563004,\"digest\":\"sha256:cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\",\"download_count\":3,\"created_at\":\"2026-10-05T08:48:46Z\",\"updated_at\":\"2026-10-05T08:48:47Z\",\"browser_download_url\":\"https://github.com/mmzen/se_harness/releases/download/v0.22.1/se_harness-0.22.1-py3-none-any.whl\"},{\"url\":\"https://api.github.com/repos/mmzen/se_harness/releases/assets/612015432\",\"id\":612015432,\"node_id\":\"RA_kwDOT09fPM4kep1I\",\"name\":\"se_harness-0.22.1.tar.gz\",\"label\":\"\",\"uploader\":{\"login\":\"github-actions[bot]\",\"id\":41898282,\"node_id\":\"MDM6Qm90NDE4OTgyODI=\",\"avatar_url\":\"https://avatars.githubusercontent.com/in/15368?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/github-actions%5Bbot%5D\",\"html_url\":\"https://github.com/apps/github-actions\",\"followers_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/subscriptions\",\"organizations_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/orgs\",\"repos_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/repos\",\"events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/received_events\",\"type\":\"Bot\",\"user_view_type\":\"public\",\"site_admin\":false},\"content_type\":\"application/x-gtar\",\"state\":\"uploaded\",\"size\":841051,\"digest\":\"sha256:beea95b6431ae35d383789181fc59d1aae80efdab70d517b2dedf8782dfdc240\",\"download_count\":3,\"created_at\":\"2026-10-05T08:48:47Z\",\"updated_at\":\"2026-10-05T08:48:48Z\",\"browser_download_url\":\"https://github.com/mmzen/se_harness/releases/download/v0.22.1/se_harness-0.22.1.tar.gz\"},{\"url\":\"https://api.github.com/repos/mmzen/se_harness/releases/assets/612015359\",\"id\":612015359,\"node_id\":\"RA_kwDOT09fPM4kepz_\",\"name\":\"SHA256SUMS\",\"label\":\"\",\"uploader\":{\"login\":\"github-actions[bot]\",\"id\":41898282,\"node_id\":\"MDM6Qm90NDE4OTgyODI=\",\"avatar_url\":\"https://avatars.githubusercontent.com/in/15368?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/github-actions%5Bbot%5D\",\"html_url\":\"https://github.com/apps/github-actions\",\"followers_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/subscriptions\",\"organizations_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/orgs\",\"repos_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/repos\",\"events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/received_events\",\"type\":\"Bot\",\"user_view_type\":\"public\",\"site_admin\":false},\"content_type\":\"application/octet-stream\",\"state\":\"uploaded\",\"size\":192,\"digest\":\"sha256:d03e3471a42e16971e51c38e8d96092aa56d8a5cabeaf96f42637be40172a459\",\"download_count\":2,\"created_at\":\"2026-10-05T08:48:45Z\",\"updated_at\":\"2026-10-05T08:48:46Z\",\"browser_download_url\":\"https://github.com/mmzen/se_harness/releases/download/v0.22.1/SHA256SUMS\"}],\"tarball_url\":\"https://api.github.com/repos/mmzen/se_harness/tarball/v0.22.1\",\"zipball_url\":\"https://api.github.com/repos/mmzen/se_harness/zipball/v0.22.1\",\"body\":\"# SE Harness 0.22.1\\n\\nReleased from candidate `4f640284ec496b88cd7aa4ba88ca537d9374a2f8` under `RLS-SEH-033`.\\n\\nVerification: `VREC-SEH-033`\\n\\nReleased work: `WO-DST-028`, `WO-HAG-002`, `WO-HAG-003`, `WO-RLS-040`, `WO-RLS-041`, `WO-RLS-043`\\n\\nInstall with `python -m pip install se-harness==0.22.1`.\\n\"}",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/tags/last",
+        "refs/tags/v0.22.1",
+        "refs/tags/v0.22.1^{}",
+        "refs/heads/plugin-marketplace",
+        "refs/heads/release/0.22"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r221receipts",
+      "observed_at": "2026-10-05T09:09:28.941540+00:00",
+      "exit_code": 0,
+      "stdout": "85ae003769f53908addbdcf46c820a8af530ac24\trefs/heads/plugin-marketplace\n4f640284ec496b88cd7aa4ba88ca537d9374a2f8\trefs/heads/release/0.22\n4f640284ec496b88cd7aa4ba88ca537d9374a2f8\trefs/tags/last\nef77258e72ab2556fbcbf1c4fdfa8c03dd4d2f0f\trefs/tags/v0.22.1\n4f640284ec496b88cd7aa4ba88ca537d9374a2f8\trefs/tags/v0.22.1^{}\n",
+      "stderr": ""
+    }
+  ],
+  "authorization": {
+    "plan": {
+      "schema": "se-harness-delivery-plan/v2",
+      "release": {
+        "contract": "REL-SEH-035",
+        "record": "RLS-SEH-033",
+        "version": "0.22.1",
+        "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053"
+      },
+      "review": {
+        "by": "mmzen",
+        "reference": "PR #536 complete-release review; read complete-release-review.md in this same pre-approval commit. No decision until the matching human response. The immutable review commit binds both the plan and its execution/recovery instructions."
+      },
+      "surfaces": [
+        {
+          "id": "evaluator",
+          "owner": "mmzen",
+          "disposition": "update",
+          "destination": "https://pypi.org/project/se-harness/0.22.1/",
+          "work_reference": "WO-RLS-042",
+          "next_action": "After the matching complete-release decision, integrate only the RLS decision into protected main via PR #536, advance release/0.22 ordinarily from abbec12ac5524c8adfb28693f846dd59de88f759 to 4f640284ec496b88cd7aa4ba88ca537d9374a2f8 after its ancestry/readback checks, then dispatch publish-pypi.yml on main for RLS-SEH-033. Publish only its v0.22.1 archives to GitHub and PyPI; independently download and install the exact public wheel. Stop on changed refs, provider controls or archive mismatch; preserve completed immutable output and resume only missing effects.",
+          "expected": {
+            "record": "RLS-SEH-033",
+            "version": "0.22.1",
+            "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053"
+          },
+          "required_observations": [
+            "publisher",
+            "public_install"
+          ]
+        },
+        {
+          "id": "marketplace",
+          "owner": "mmzen",
+          "disposition": "update",
+          "destination": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+          "work_reference": "WO-RLS-042",
+          "next_action": "After public-wheel byte equality, promote exactly the staged ordinary child to plugin-marketplace. Run public fresh installation and update from plugin 0.2.5 on both Windows CLIs using the actual public ref. Retain command/result/content identities. No desktop pass is claimed. Stop on a changed parent, authentication failure or any unperformed/failed route; never force, rebuild or silently replace the selected bytes.",
+          "expected": {
+            "plugin_version": "0.2.6",
+            "source_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+            "evaluator_version": "0.22.1",
+            "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "public_revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+            "codex_content_sha256": "4d04f8e2da8ed6bfb583b2aa7244c83ca439741e07b44b2469b1287ea58459a6",
+            "claude-code_content_sha256": "b6d7ce308724740c242e6ee81791dd624becc422b73082c1dbbad69daa712d69"
+          },
+          "required_observations": [
+            "assembly",
+            "qualification",
+            "public_ref"
+          ],
+          "hosts": [
+            "codex",
+            "claude-code"
+          ]
+        },
+        {
+          "id": "documentation",
+          "owner": "mmzen",
+          "disposition": "update",
+          "destination": "https://github.com/mmzen/se_harness/tree/main",
+          "work_reference": "WO-RLS-044; verified by VREC-RLS-003; public observations under WO-RLS-042",
+          "next_action": "Integrate the already verified source guides with protected PR #536 using the merge method and exact checked head. Compare every frozen file at the documentation commit, release-governance commit and current main. Preserve the unchanged packaged README snapshots and verify their links in package context. Later receipts cannot edit prose or hashes; changed guidance requires changed-scope review.",
+          "expected": {
+            "commit": "dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3"
+          },
+          "required_observations": [
+            "claims_review",
+            "links"
+          ]
+        },
+        {
+          "id": "demonstration",
+          "owner": "mmzen",
+          "disposition": "update",
+          "destination": "https://mmzen.github.io/se_harness/",
+          "work_reference": "WO-RLS-042",
+          "next_action": "Use the existing Pages workflow for the first protected-main commit containing the exact released RLS and approved delivery binding. Read back deployment provenance through the canonical URL and existing www.verityplane.ai destination. Do not change the domain or provider settings. A failed or unknown deployment remains pending; inspect before retry.",
+          "expected": {
+            "governance_commit": "release-governance"
+          },
+          "required_observations": [
+            "deployment"
+          ]
+        },
+        {
+          "id": "release_markers",
+          "owner": "mmzen",
+          "disposition": "update",
+          "destination": "https://github.com/mmzen/se_harness",
+          "work_reference": "WO-RLS-042",
+          "next_action": "Only after all required non-marker observations pass, promote latest from v0.22.0 to v0.22.1 and last from abbec12ac5524c8adfb28693f846dd59de88f759 to 4f640284ec496b88cd7aa4ba88ca537d9374a2f8. Use the existing serialized publisher and exact last lease. Stop on unexpected movement. Read back both targets, integrate the named JSON receipts via protected PRs, and produce the five-surface completion report. This is the sole explicitly permitted moving-tag operation; no immutable version tag may move.",
+          "expected": {
+            "latest": "v0.22.1",
+            "last": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8"
+          },
+          "required_observations": [
+            "authorization",
+            "readback"
+          ]
+        }
+      ],
+      "complete_release": {
+        "repository": "mmzen/se_harness",
+        "candidate_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+        "actions": [
+          "release-integration",
+          "version-tag",
+          "github-release",
+          "pypi",
+          "maintenance-line",
+          "marketplace",
+          "documentation",
+          "pages",
+          "latest",
+          "last",
+          "receipts"
+        ],
+        "marketplace": {
+          "parent": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+          "commit": "85ae003769f53908addbdcf46c820a8af530ac24",
+          "tree": "0069f9012fc6f6270410bfebbb673831d8745550",
+          "identity_sha256": "4a62e5bb6a3ffb36ca723dca8fe3e71588d050bab70c5b1f11778dabb532249d"
+        },
+        "markers": {
+          "previous_latest": "v0.22.0",
+          "previous_last": "abbec12ac5524c8adfb28693f846dd59de88f759"
+        },
+        "integration": {
+          "decision_paths": [
+            "docs/engineering/release-0-22-1/releases/RLS-SEH-033.md"
+          ],
+          "receipt_paths": [
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/observations.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/publisher.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/evaluator-public-install.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/marketplace-public-ref.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/codex-public-fresh.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/codex-public-update.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/claude-code-public-fresh.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/claude-code-public-update.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/documentation-observations.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/pages-observations.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/release-marker-receipt.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/delivery-result.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/maintenance-line.json",
+            "docs/engineering/release-0-22-1/evidence/WO-RLS-042/integration-receipts.json"
+          ]
+        },
+        "readiness": {
+          "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/complete-release-readiness.json",
+          "sha256": "02b943afa5adba895219b8e9e1f3d13a9bb8777b537b89142c2d19860760d7c0"
+        },
+        "observations": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/observations.json",
+        "evidence_root": "docs/engineering/release-0-22-1/evidence/WO-RLS-042",
+        "documentation": {
+          "README.md": "f335a7f566a6ccb56f475b55beec75f5ff8deddf63522ca435115d5a29defd79",
+          "docs/notes/plugin-installation-guide.md": "ca0fd66e8679d546083c4cd9623c3b6d66395693ecae810af1e2b91bba9193b0",
+          "docs/notes/plugin-marketplace-publication.md": "66b4a7e6dc216ef48977daaf9235eecb16248beb7ba8c130097e85d78731ab5f",
+          "docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md": "ecabe74012ceff709980891983b1071a0b60f8e7b94a7d1e550974a605736289"
+        }
+      }
+    },
+    "sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
+    "decided_by": "mmzen",
+    "decision_reference": "Codex session 01a0bd7b-24c7-7503-8955-4a24231fb2a4, 2026-10-05: mmzen replied \"i approve the complete release\" to RLS-SEH-033 / evaluator 0.22.1 / plugin 0.2.6 at 81144fb1e468b7302d0523672c346618cfcc9171, then \"I approve\" to the exact owner correction and review-base amendment at f50fc49101cfbe5299d3d0a9f42d27e97a15fda5. The authorized corrected review base is 562f01e83ce2f18d3aa5d6094c8ab9608a0ef3c6",
+    "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/complete-release-plan.json",
+    "review_commit": "562f01e83ce2f18d3aa5d6094c8ab9608a0ef3c6"
+  },
+  "limitation": "Workflow marker writes succeeded. Its same-job report still reads the previously committed pending marker observation; this receipt updates that observation only after independent readback.",
+  "release_record": "RLS-SEH-033",
+  "candidate_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+  "plan_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b"
+}
