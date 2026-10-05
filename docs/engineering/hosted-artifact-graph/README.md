@@ -38,15 +38,17 @@ The 16 definitions above are approved; WO-HAG-001 is in_progress. The risk is ra
   final schema/regression observations and the remaining Phase 2 admission dependency.
 - [Evaluator observations](evidence/WO-HAG-001/phase1-evaluator-feasibility.json):
   successful reference projection and the reproduced standalone admission gap.
-- [DEC-HAG-001](decisions/DEC-HAG-001.md): open correction-path decision. The
-  dependent authoring adapter and work completion await disposition; the work
-  order remains in_progress. This is separate from RISK-HAG-001.
+- [DEC-HAG-001](decisions/DEC-HAG-001.md): the existing `extend-evaluator` choice
+  is now recorded by released 0.22.1 under actual human `mmzen`, with
+  `engineering-owner` retained separately as the authority owner. WO-HAG-001
+  remains in_progress. RISK-HAG-001 remains raised.
 
 ## Evaluator correction
 
 mmzen accepted the `extend-evaluator` correction path in conversation. The
-released decision preview refused the actual identity with WEX201, so
-DEC-HAG-001 remains open; that recording mismatch is not an unanswered choice.
+original 0.22.0 decision preview refused the actual identity with WEX201.
+That historical recording defect is now resolved through released 0.22.1;
+the previously selected answer has not changed.
 The exact observation is retained in
 [the decision attempt](evidence/WO-HAG-001/correction-decision-attempt.json).
 
@@ -66,3 +68,25 @@ candidate `169430fe25d28972a9b86fef2d00eccde2baa5db`. The recorded acceptance is
 retained in [the verification result](evidence/WO-HAG-002/phase0-correction-verification-apply.json).
 Release/adoption and resolution of the separate decision identity mismatch
 remain outside this work order.
+
+## Released evaluator reconciliation
+
+[WO-HAG-005](work-orders/WO-HAG-005.md) integrates the approved main commit
+`d7eeb2ae785928925669695074be7bdd6ccb1e0a` while preserving the HAG branch.
+[DEC-HAG-002](decisions/DEC-HAG-002.md) records the explicit bounded manual
+revision authority. SPEC-HAG-003 and VER-HAG-001 now select public evaluator
+0.22.1; their prior complete bytes and lifecycle events are preserved.
+Development source remains separately identified as 0.22.2, unpublished.
+
+[VER-HAG-004](verification/VER-HAG-004.md) assesses only this reconciliation.
+The [integration manifest](evidence/WO-HAG-005/integration-manifest.json) proves
+134 earlier HAG files are unchanged and 180 transported paths match the
+reviewed merge. VREC-HAG-001 and VREC-HAG-002 retain their exact candidates
+and evidence. The full source suite passed (1,311 tests, 23 skips), as did
+seven independent released draft-admission probes. Reconciliation verification
+is pending; these observations do not verify the hosted service.
+
+WO-HAG-001 still requires Phase 2 service implementation, all twelve hosted
+scenarios, the walkthrough and restart/restore qualification. Zero hosted
+scenarios have run. PR #535 stays draft and keeps its original target
+`codex/hosted-artifact-graph-inputs`.
