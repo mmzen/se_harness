@@ -1,0 +1,42 @@
+{
+  "archive": "final-capture-observations.zip",
+  "sha256": "d3287c9d418a745714d626dc1c7efa11639dd2d818d78b6200544e19288f7a1f",
+  "entries": [
+    {
+      "path": "r221-final-20261005/final-capture.json",
+      "sha256": "f5ed0077389ad8c044c910f6709c21142d1944c6f5879bfdc7e296640a90c060"
+    },
+    {
+      "path": "r221-final-20261005/final-capture-clean.json",
+      "sha256": "a8f40191e2dda2277fe75f357f51a5e42cfc8e69b26bbe9fb7082e405fb3895d"
+    },
+    {
+      "path": "r221-final-20261005/capture-candidate-check.json",
+      "sha256": "03cec5986d37a12e8a29556f53a84e6c5777551503440e1aa1ea63d448574812"
+    },
+    {
+      "path": "r221-final-20261005/capture-candidate-check-clean.json",
+      "sha256": "88593197148ac3d23716ed68699c68cd5ed4977fb6d545c9af09c4c792e63659"
+    },
+    {
+      "path": "r221-final-20261005/clean-capture-env.json",
+      "sha256": "2663ba8f44071c742b817cc1f44f80b0a33d58c3ef2d4b937271184bfe3f0d54"
+    },
+    {
+      "path": "r221_final_capture.py",
+      "sha256": "ae22bb01d249f7dc14eff1d29f708602d51f14efd030ca5b9c03eb0234b2ee63"
+    },
+    {
+      "path": "r221_final_capture_clean.py",
+      "sha256": "5816ad03d9826abd6b72553aa86fbee25967495d0b63c2a675af099d093b708f"
+    },
+    {
+      "path": "r221_final_capture_checks.py",
+      "sha256": "db621da44a2c79888b5dbb0d29cdc329a95762d107561f0592a01d962af6d9b9"
+    },
+    {
+      "path": "r221_final_capture_checks_clean.py",
+      "sha256": "465ef1572c7938ddf5f500209aac464ec728eb518b871e374112670b6a4d2942"
+    }
+  ]
+}

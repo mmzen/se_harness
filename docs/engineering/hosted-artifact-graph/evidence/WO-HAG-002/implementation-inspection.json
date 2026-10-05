@@ -1,0 +1,52 @@
+{
+  "work_order": "WO-HAG-002",
+  "verification_contract": "VER-HAG-002",
+  "scenario": "EV-07",
+  "reviewer": "Codex",
+  "authority": "Implementation review only; mmzen retains the verification decision.",
+  "implementation_commit": "08694a22ed754474267b0da98a9514648068f5f9",
+  "findings": [
+    {
+      "criterion": "One relationship contract",
+      "result": "pass",
+      "evidence": "se_harness/relation_policy.py holds all 25 declared pairs. Ordinary validation calls relation_findings, draft validation calls that same predicate, and preflight reads the same immutable table. Only decision.concerns and risk.threatens explicitly allow all artifact types. The independent test oracle evaluates 350 source/relation/endpoint combinations."
+    },
+    {
+      "criterion": "Narrow draft incompleteness",
+      "result": "pass",
+      "evidence": "The selected supported draft loads its canonical template from the executing evaluator. Metadata placeholders match exact whole values at the same named field; relation placeholders match only the matching canonical relation. Identity, dates, status and history do not receive exceptions. Every non-placeholder endpoint still passes shared relation checks. Required authoring omissions are classified before normal relation-completeness diagnostics are constructed."
+    },
+    {
+      "criterion": "No diagnostic suppression mechanism",
+      "result": "pass",
+      "evidence": "The query uses parser/catalog and structural field predicates directly. It does not match English diagnostics, suppress E005/E006 wholesale, filter errors by plane, or expose ignore_errors. Full ordinary findings are retained for unselected records as background. Parsing failures and duplicate IDs block globally. Ordinary validation still invokes its original required-relation, lifecycle, architecture, evidence and approval checks."
+    },
+    {
+      "criterion": "One projection scan and no mutation",
+      "result": "pass",
+      "evidence": "validate_draft loads one catalog and passes it to validate_artifact_catalog for background findings. The query writes no artifact or projection and emits no workflow next step. Tests count catalog loads and compare every fixture byte before and after admissions and refusals."
+    },
+    {
+      "criterion": "Shared metadata implementation remains small",
+      "result": "pass",
+      "evidence": "validate_type_specific_fields separates existing non-relation predicates without changing ordinary validation defaults. Draft-specific assurance, scope and architecture fields use existing enums, bounds and the scope-path predicate. They are checked field by field so one unfinished field cannot hide another malformed value. No service policy copy, workflow state, dependency or generic policy framework was added."
+    },
+    {
+      "criterion": "Malformed TOML values remain valid JSON",
+      "result": "corrected",
+      "evidence": "Review found that raw TOML non-finite floats would use Python's non-standard NaN/Infinity JSON spelling. Commit 08694a22 converts these values and TOML dates to tagged field details. Strict JSON regression cases cover nan, inf and nested non-finite targets; all 17 draft/relation tests passed after the correction. Earlier build commit 34d35f92 is superseded for qualification."
+    },
+    {
+      "criterion": "Authority and caller boundary",
+      "result": "pass",
+      "evidence": "The query only assesses a supplied snapshot. Documentation requires callers to enforce authentication, immutable-base protected-field comparison and expected versions before mutation. Draft admissibility does not assert approval readiness or the readiness of a target's governing chain. The real checkout remains governed by the separately installed 0.22.0 evaluator."
+    }
+  ],
+  "compatibility": {
+    "intended_change": "Previously untyped wrong endpoints and undeclared source/relation pairs now fail ordinary validation even without work-order membership.",
+    "original_public_corpus": "1909 artifacts at 82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1 validate successfully; no historical artifact was migrated.",
+    "first_full_suite": "1284 tests completed; two resource identity failures overlapped source edits and two existing tests decoded UTF-8 files as Windows cp1252. The original failures are retained. The stable-source rerun explicitly selects UTF-8 for the invocation and workers.",
+    "final_full_suite": "Frozen implementation commit 08694a22ed754474267b0da98a9514648068f5f9: 1284 tests, 188 classes, exit 0, 22 reported skips. correction-full-02.log retains the actual result. Default reduced scale was used.",
+    "platform_limitations": "Windows symlink-dependent tests report skips. Package builds use the unchanged digest-pinned Linux/amd64 recipe; a shorter authorized output path avoids the host's path-length limit."
+  }
+}

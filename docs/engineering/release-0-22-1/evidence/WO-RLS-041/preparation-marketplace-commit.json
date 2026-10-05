@@ -1,0 +1,15 @@
+{
+  "phase": "preparation candidate, not final release binding",
+  "candidate_commit": "061307929c94314ccd2beb4a53f174e536fceba8",
+  "marketplace_parent": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+  "marketplace_commit": "3ab0ac625187b92a56239f91ad3de6a9939603f9",
+  "marketplace_tree": "d403203d3186c59262458eb2f1acf63e99261af9",
+  "package_identity_sha256": "f77e7107efda0eaf93574bb6e25bd6ad94a95fccd5eab97d3e1ea855246be85f",
+  "file_count": 69,
+  "all_git_blob_bytes_match": true,
+  "public_ref_changed": false,
+  "staging_ref_pushed": false,
+  "planned_staging_ref": "refs/heads/codex/plugin-0-2-6-staging",
+  "qualification_review": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-qualification-review.md",
+  "limits": "Final candidate binding and matching staging must be checked again before aggregate verification. No verification or public publication is supplied."
+}

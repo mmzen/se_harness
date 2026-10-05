@@ -520,6 +520,7 @@ def dispose_decision_with_risks(
     mitigated_by: tuple[str, ...] = (),
     avoided_by: tuple[str, ...] = (),
     apply: bool = False,
+    authority_owner: str | None = None,
 ) -> Any:
     """Plan or apply one disposition and, in the same act, the risk moves it names (RSK-MGT-016).
 
@@ -539,7 +540,8 @@ def dispose_decision_with_risks(
     actors: dict[str, str] = {decision_id: actor}
     reasons: dict[str, str] = {decision_id: reason} if reason is not None else {}
     dispositions: dict[str, Mapping[str, Any]] = {
-        decision_id: {"target": target, "option": option, "revisit": revisit, "scope": tuple(scope)},
+        decision_id: {"target": target, "option": option, "revisit": revisit, "scope": tuple(scope),
+                      "authority_owner": authority_owner},
     }
     _, report = validated_repository(root)
     catalog = artifact_catalog(report) if not any(item.code in {E001, E003} for item in report.errors) else {}

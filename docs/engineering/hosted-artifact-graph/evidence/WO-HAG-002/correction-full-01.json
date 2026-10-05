@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Python313\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--workers",
+    "6",
+    "--timings",
+    ""
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\se_harness",
+  "exit_code": 1,
+  "started_unix": 1791121194.3231702,
+  "duration_seconds": 1243.0593695640564,
+  "observer_python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "log": "correction-full-01.log"
+}

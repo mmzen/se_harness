@@ -1,0 +1,136 @@
+test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) ... 
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='intent') ... FAIL
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='capability') ... FAIL
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='requirement') ... FAIL
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='specification') ... FAIL
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='architecture') ... FAIL
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='adr') ... FAIL
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='verification') ... FAIL
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='work_order') ... FAIL
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='release_contract') ... FAIL
+  test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='operating_contract') ... FAIL
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='intent')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='capability')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='requirement')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='specification')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='architecture')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='adr')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='verification')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='work_order')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='release_contract')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+======================================================================
+FAIL: test_all_generated_templates_are_admissible_and_explicitly_incomplete (tests.test_draft_validation.DraftValidationTests.test_all_generated_templates_are_admissible_and_explicitly_incomplete) (kind='operating_contract')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-10-04\clo\se_harness\tests\test_draft_validation.py", line 63, in test_all_generated_templates_are_admissible_and_explicitly_incomplete
+    self.assertEqual(0, code, error or output)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : usage: harnessctl [-h] [--version]
+                  {resources,init,validate,validate-draft,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --title New draft --owner operator
+
+
+----------------------------------------------------------------------
+Ran 1 test in 1.152s
+
+FAILED (failures=10)

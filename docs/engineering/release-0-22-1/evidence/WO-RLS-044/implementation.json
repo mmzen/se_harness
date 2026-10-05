@@ -1,0 +1,103 @@
+{
+  "schema": "release-documentation-implementation/v1",
+  "work_order": "WO-RLS-044",
+  "verification": "VER-RLS-005",
+  "trusted_work_base": "af27c2331741ae922276e50f9176d2a92743e053",
+  "full_pr_base": "82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1",
+  "approved_review": "57db794eb9d125c0a56d26e352f43c876954939a",
+  "human": "mmzen",
+  "response": "I alprou",
+  "qualification": {
+    "focused_tests": 44,
+    "source_suite_tests": 1293,
+    "source_suite_skips": 23,
+    "source_suite_exit": 0,
+    "distribution_records": 23,
+    "cli_help": "passed",
+    "released_validation_errors": 0,
+    "readme_words": 650
+  },
+  "changed_documents": [
+    {
+      "path": "README.md",
+      "sha256": "f335a7f566a6ccb56f475b55beec75f5ff8deddf63522ca435115d5a29defd79"
+    },
+    {
+      "path": "docs/notes/plugin-installation-guide.md",
+      "sha256": "ca0fd66e8679d546083c4cd9623c3b6d66395693ecae810af1e2b91bba9193b0"
+    },
+    {
+      "path": "docs/notes/plugin-marketplace-publication.md",
+      "sha256": "66b4a7e6dc216ef48977daaf9235eecb16248beb7ba8c130097e85d78731ab5f"
+    },
+    {
+      "path": "plugins/verity-plane/codex/README.md",
+      "sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91"
+    },
+    {
+      "path": "plugins/verity-plane/claude-code/README.md",
+      "sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91"
+    },
+    {
+      "path": "release/plugin-marketplace/README.md",
+      "sha256": "ae87cfe32798ad4e27474b8d4bb76a5bb218613a1d8ce73db26d16c3d3e47081"
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md",
+      "sha256": "ecabe74012ceff709980891983b1071a0b60f8e7b94a7d1e550974a605736289"
+    }
+  ],
+  "observations": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "r221_docs_checks.py",
+      "manual"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "checker_sha256": "a4b2935d8dae569a28f69686b47a7716f5a2463efc52da6ff9bdcefba2994f90",
+    "changed_paths": [
+      "README.md",
+      "docs/engineering/release-0-22-1/verification/VER-RLS-005.md",
+      "docs/engineering/release-0-22-1/work-orders/WO-RLS-044.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "plugins/verity-plane/claude-code/README.md",
+      "plugins/verity-plane/codex/README.md",
+      "release/plugin-marketplace/README.md"
+    ],
+    "source_paths": [
+      "README.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md"
+    ],
+    "source_links": "passed",
+    "original_staged_readme_links": "passed",
+    "staged_files_byte_identical": 69,
+    "package_identity_sha256": "4a62e5bb6a3ffb36ca723dca8fe3e71588d050bab70c5b1f11778dabb532249d",
+    "release_candidate": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+    "release_record": "RLS-SEH-033",
+    "release_state": "ready",
+    "verification_record": "VREC-SEH-033",
+    "verification_state": "verified",
+    "reviewed_documentation_bytes_match": "Six files match exactly; only the new README section was shortened in scope to satisfy the existing 650-word test.",
+    "separate_documentation_commit_supported": true,
+    "live_public_readback": "not performed; belongs to WO-RLS-042",
+    "executable_changes": false,
+    "readme_word_count": 650,
+    "retained_archive_sha256": {
+      "wheel": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+      "sdist": "beea95b6431ae35d383789181fc59d1aae80efdab70d517b2dedf8782dfdc240"
+    }
+  },
+  "raw_checks": {
+    "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/checks.zip",
+    "sha256": "7a2a7f7712dfa40929ac413b0b1cf4a2ea89f335f6d8be9703a7bc3f89d160d5"
+  },
+  "limits": [
+    "Documentation-only source correction; no rebuilt evaluator or plugin.",
+    "Package README snapshots retain their original preparation wording; current guides explain their historical context.",
+    "Codex Windows desktop remains unverified under DEC-RLS-009 / RISK-RLS-007.",
+    "No public 0.22.1/0.2.6 fresh/update tests, hosted-service verification, adoption, merge or release decision."
+  ]
+}

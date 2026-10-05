@@ -5,6 +5,13 @@
 An arrow points from the artifact that records the link to the artifact it
 references. These links describe meaning and coverage, not execution order.
 
+Repository validation, draft validation and work-order preflight share the
+declared source/relation/target types. A supplied undeclared relation or a target
+of the wrong type is invalid even when no work order selects the artifact.
+Preflight still evaluates readiness only for its selected governing chain.
+The read-only draft query permits specific unfinished authoring slots; ordinary
+validation and approval retain their completeness requirements.
+
 ```mermaid
 flowchart LR
     CAP["Capability (CAP)"] -->|derives_from| INT["Intent (INT)"]

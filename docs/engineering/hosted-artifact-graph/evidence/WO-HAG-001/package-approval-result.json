@@ -1,0 +1,214 @@
+{
+  "kind": "observed-artifact-package-approval",
+  "date": "2026-10-04",
+  "decision_maker": "mmzen",
+  "review_manifest_sha256": "fc1009f1b5fbfc3259f9df4057695500ac7ad3b80777f3107155c629eaea99cc",
+  "approved_definitions": [
+    "ADR-HAG-001",
+    "ARCH-HAG-001",
+    "CAP-HAG-001",
+    "INT-HAG-001",
+    "REQ-HAG-001",
+    "REQ-HAG-002",
+    "REQ-HAG-003",
+    "REQ-HAG-004",
+    "REQ-HAG-005",
+    "REQ-HAG-006",
+    "REQ-HAG-007",
+    "REQ-HAG-008",
+    "SPEC-HAG-001",
+    "SPEC-HAG-002",
+    "SPEC-HAG-003",
+    "VER-HAG-001"
+  ],
+  "artifacts": [
+    {
+      "id": "ADR-HAG-001",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-001.md",
+      "reviewed_sha256": "fa22c6338e879932c18f9cac9db2077fef48799b066d5016418f73d2ca48a2fb",
+      "current_sha256": "89a53f675442c6295cc63c16bc2ac0c5d6717dbaecc0a42f3cbad4e396971842"
+    },
+    {
+      "id": "ARCH-HAG-001",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md",
+      "reviewed_sha256": "49a1b2f898d7ced459dfade452b3687d81119d251445d8560a208b0082381cfb",
+      "current_sha256": "3f064c7619d81427f202e270c778b6fc3421e83e51a4c4ea0db94af99202e69f"
+    },
+    {
+      "id": "CAP-HAG-001",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-001.md",
+      "reviewed_sha256": "49c718923c860c4bcd88b66005b61a0269d478758c7d3c93d4b9564c66db42ca",
+      "current_sha256": "78e8161b20e205fd71d4b189fe1329b9649f141777cb0be36b500191f09013e9"
+    },
+    {
+      "id": "INT-HAG-001",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/intent/INT-HAG-001.md",
+      "reviewed_sha256": "3fc4096fb56ee1d46dd3eba5e4aff38e056b897e3f7f45e761a13d5dea1ee823",
+      "current_sha256": "650c32c6e4b6c8dc48c56c61fd3c1751ab305c8a157beeaf9b911f05edf52ead"
+    },
+    {
+      "id": "REQ-HAG-001",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-001.md",
+      "reviewed_sha256": "501c2c6ebaa838845969d3ff33da69d85518b7c89d13bbbb00ed059b56e0a39b",
+      "current_sha256": "fed60829ebf39c6882cc867dd6677517e783e501baafa55af60f68025d73e3e9"
+    },
+    {
+      "id": "REQ-HAG-002",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-002.md",
+      "reviewed_sha256": "47e308f633392854b85fb4046bd72dc9ee977f07cdb1a56cdf69006cf8bc2147",
+      "current_sha256": "840c2397b38d73d9a8a4a172b9481d91cfa44955b538a56b85dd2f65586a162b"
+    },
+    {
+      "id": "REQ-HAG-003",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-003.md",
+      "reviewed_sha256": "1616febb70afded6c9de269a45c6ef521f975f4d66ca73a5ffe1a9f0b1aeed1d",
+      "current_sha256": "aa2c52257b213a39f2df762f38dc11bb3f503fa294937bec91b52273a2dd68c4"
+    },
+    {
+      "id": "REQ-HAG-004",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-004.md",
+      "reviewed_sha256": "3e6bbb5409f91c847ee58dfbc972538071c496338c1fd5e742de47183f93bae4",
+      "current_sha256": "82dc5a6a8a3dd1fb5fa8db28817aae1d4fe726e2d6f39bf0c1cb93146d970d35"
+    },
+    {
+      "id": "REQ-HAG-005",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-005.md",
+      "reviewed_sha256": "e108e9d42afa32e6f6ae7be87ccc5d044b6b24318bd2ac7063b1c3590a203f46",
+      "current_sha256": "ae5457580cc935b1819b808311d094a26e7bfafb6818c05facfbab81720d9185"
+    },
+    {
+      "id": "REQ-HAG-006",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-006.md",
+      "reviewed_sha256": "ce09f6f17b0db20c5b43435da78824ca56253c8419a1a928398059c55055e5ba",
+      "current_sha256": "cf5d39baf53f8811d30782226ebd761454e081f4896649b1f435d90e2bbe7dea"
+    },
+    {
+      "id": "REQ-HAG-007",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-007.md",
+      "reviewed_sha256": "da5d237e6918beef77c006b94859bfd56905fbb751d588f888f95f9bda0be0a1",
+      "current_sha256": "4c514ddfb70a4d73461e046f5e2194496a7ec4be821e213c6b98771053f2b06a"
+    },
+    {
+      "id": "REQ-HAG-008",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-008.md",
+      "reviewed_sha256": "4bf2ddaf8275faf8eda27072005da9293dd1b07fa0e98c79d836dd1395192be9",
+      "current_sha256": "db1c3dec1a341260614f67747542e4200f95b69627e7c907c931401d7e6465e6"
+    },
+    {
+      "id": "RISK-HAG-001",
+      "status": "raised",
+      "path": "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md",
+      "reviewed_sha256": "c519e2f6b2da9855ecbcbb05c4de9d2ed6bcf7b3f0613b1696c4355130fc183e",
+      "current_sha256": "c519e2f6b2da9855ecbcbb05c4de9d2ed6bcf7b3f0613b1696c4355130fc183e"
+    },
+    {
+      "id": "SPEC-HAG-001",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-001.md",
+      "reviewed_sha256": "37a3a6422c50ab000b499a2a42259fb4a2e406445e43011614fe3f28a89f0093",
+      "current_sha256": "d2347c8572c64a6b8691c4b00f1037a9c3be8c1f7d7e2ec3f6ee8f17bc05482d"
+    },
+    {
+      "id": "SPEC-HAG-002",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-002.md",
+      "reviewed_sha256": "e3d4a4ac62718f88d4f6094f55b68afa3f60ddec542d996f5e42231712e599df",
+      "current_sha256": "c1ea773b5942614f804b93ed58c95dc9a4c980c50a5d989f009a7127416f8b28"
+    },
+    {
+      "id": "SPEC-HAG-003",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md",
+      "reviewed_sha256": "abfd075c17b656f6c49bed02e2b06580128507b84ffc1bebb4810cf667926775",
+      "current_sha256": "e6ea2418a6e4a734dc160c30676742b4afa11cf7784bbe010ce69118b9025499"
+    },
+    {
+      "id": "VER-HAG-001",
+      "status": "approved",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md",
+      "reviewed_sha256": "9645a29af6f101143c0596092fe6ad8efb9c7be74c91941e3365752a2c50757d",
+      "current_sha256": "744ca93c38acbed841db2047c15017d417bbfb95efead8a41ccdd911b7653dac"
+    },
+    {
+      "id": "WO-HAG-001",
+      "status": "in_progress",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-001.md",
+      "reviewed_sha256": "a2859e95084c032a535814f343130e675aba564dc99284f9993475afd769e5ce",
+      "current_sha256": "77712ddc3bcca8bc16f01906532cfb33eba0e1f555fcf3f0472df468863560cd"
+    }
+  ],
+  "work_order_state": "in_progress",
+  "start_preflight": {
+    "ready": true,
+    "diagnostics": []
+  },
+  "current_result": {
+    "outcome": "completed",
+    "done": [
+      "Projected the selected scope for WO-HAG-001."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-HAG-001 is in_progress."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-CHECK",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-HAG-001",
+        "--checkpoint",
+        "handoff"
+      ]
+    },
+    "alternatives": []
+  },
+  "retained_results": {
+    "package-approval-apply": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/package-approval-apply.json",
+      "sha256": "d7e243b7420c050f14a9ede18ab53f21e57f10959ff6bc73553f57423e142c4d"
+    },
+    "phase0-package-start-preflight": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-start-preflight.json",
+      "sha256": "a8ef5a98fec7a94f64b47e6bce5ee4099c2b62f25801def98f16087b852b33a8"
+    },
+    "phase0-package-start-preview": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-start-preview.json",
+      "sha256": "2c8a47b149ab9fcdc9c2397696ae06a2b0e1aca6c82fb99a78b70752fd132be2"
+    },
+    "phase0-package-start-apply": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-start-apply.json",
+      "sha256": "fefc15c32d38dbc5fa05e6d4e28c8a8f8e23ad8748ad88d9baae3b4564476fec"
+    },
+    "phase0-package-final": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-final.json",
+      "sha256": "906edd1cbd46d76ddb752adf92d3066b9474e04546c087016f835b731880927c"
+    },
+    "package-start-cli-error": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/package-start-cli-error.json",
+      "sha256": "61193d6faf9e4a7bb8e3d9cd9dbc48d980dc812991b4c80ee397dbea3b367f97"
+    }
+  },
+  "open_item": "RISK-HAG-001 remains raised: Memgraph-side read-only enforcement."
+}

@@ -1,0 +1,152 @@
+{
+  "provider-actions-permissions": {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/actions/permissions/workflow"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:49:43.911718+00:00",
+    "exit_code": 0,
+    "stdout": "{\"default_workflow_permissions\":\"read\",\"can_approve_pull_request_reviews\":false}",
+    "stderr": ""
+  },
+  "provider-main-protection": {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/branches/main/protection"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:49:43.496112+00:00",
+    "exit_code": 1,
+    "stdout": "{\"message\":\"Branch not protected\",\"documentation_url\":\"https://docs.github.com/rest/branches/branch-protection#get-branch-protection\",\"status\":\"404\"}",
+    "stderr": "gh: Branch not protected (HTTP 404)\n"
+  },
+  "provider-main-rules": {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/rules/branches/main"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:50:11.390661+00:00",
+    "exit_code": 0,
+    "stdout": "[{\"type\":\"deletion\",\"ruleset_source_type\":\"Repository\",\"ruleset_source\":\"mmzen/se_harness\",\"ruleset_id\":20693381},{\"type\":\"non_fast_forward\",\"ruleset_source_type\":\"Repository\",\"ruleset_source\":\"mmzen/se_harness\",\"ruleset_id\":20693381},{\"type\":\"pull_request\",\"parameters\":{\"required_approving_review_count\":0,\"dismiss_stale_reviews_on_push\":false,\"required_reviewers\":[],\"require_code_owner_review\":false,\"require_last_push_approval\":false,\"required_review_thread_resolution\":false,\"require_extra_approval_for_unattributed_changes\":false,\"allowed_merge_methods\":[\"merge\"]},\"ruleset_source_type\":\"Repository\",\"ruleset_source\":\"mmzen/se_harness\",\"ruleset_id\":20693381},{\"type\":\"required_status_checks\",\"parameters\":{\"strict_required_status_checks_policy\":false,\"do_not_enforce_on_create\":false,\"required_status_checks\":[{\"context\":\"validate\",\"integration_id\":15368}]},\"ruleset_source_type\":\"Repository\",\"ruleset_source\":\"mmzen/se_harness\",\"ruleset_id\":20693381}]",
+    "stderr": ""
+  },
+  "provider-main-ruleset": {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/rulesets/20693381"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:50:11.773256+00:00",
+    "exit_code": 0,
+    "stdout": "{\"id\":20693381,\"name\":\"main basic protection\",\"target\":\"branch\",\"source_type\":\"Repository\",\"source\":\"mmzen/se_harness\",\"enforcement\":\"active\",\"conditions\":{\"ref_name\":{\"exclude\":[],\"include\":[\"~DEFAULT_BRANCH\"]}},\"rules\":[{\"type\":\"deletion\"},{\"type\":\"non_fast_forward\"},{\"type\":\"pull_request\",\"parameters\":{\"required_approving_review_count\":0,\"dismiss_stale_reviews_on_push\":false,\"required_reviewers\":[],\"require_code_owner_review\":false,\"require_last_push_approval\":false,\"required_review_thread_resolution\":false,\"require_extra_approval_for_unattributed_changes\":false,\"allowed_merge_methods\":[\"merge\"]}},{\"type\":\"required_status_checks\",\"parameters\":{\"strict_required_status_checks_policy\":false,\"do_not_enforce_on_create\":false,\"required_status_checks\":[{\"context\":\"validate\",\"integration_id\":15368}]}}],\"node_id\":\"RRS_lACqUmVwb3NpdG9yec5PT188zgE7wYU\",\"created_at\":\"2026-08-11T13:52:02.098+02:00\",\"updated_at\":\"2026-09-02T16:01:45.248+02:00\",\"bypass_actors\":[{\"actor_id\":5,\"actor_type\":\"RepositoryRole\",\"bypass_mode\":\"pull_request\"}],\"current_user_can_bypass\":\"pull_requests_only\",\"_links\":{\"self\":{\"href\":\"https://api.github.com/repos/mmzen/se_harness/rulesets/20693381\"},\"html\":{\"href\":\"https://github.com/mmzen/se_harness/rules/20693381\"}}}",
+    "stderr": ""
+  },
+  "provider-pages": {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/pages"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:49:44.354438+00:00",
+    "exit_code": 0,
+    "stdout": "{\"url\":\"https://api.github.com/repos/mmzen/se_harness/pages\",\"status\":null,\"cname\":\"www.verityplane.ai\",\"custom_404\":false,\"html_url\":\"https://www.verityplane.ai/\",\"build_type\":\"workflow\",\"source\":{\"branch\":\"main\",\"path\":\"/\"},\"public\":true,\"protected_domain_state\":\"verified\",\"pending_domain_unverified_at\":null,\"https_certificate\":{\"state\":\"approved\",\"description\":\"The certificate has been approved.\",\"domains\":[\"www.verityplane.ai\"],\"expires_at\":\"2026-12-03\"},\"https_enforced\":true}",
+    "stderr": ""
+  },
+  "provider-pypi-branches": {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/environments/pypi/deployment-branch-policies"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:49:43.055878+00:00",
+    "exit_code": 0,
+    "stdout": "{\"total_count\":1,\"branch_policies\":[{\"id\":57065399,\"node_id\":\"MDE2OkdhdGVCcmFuY2hQb2xpY3k1NzA2NTM5OQ==\",\"name\":\"main\",\"type\":\"branch\"}]}",
+    "stderr": ""
+  },
+  "provider-pypi-environment": {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/environments/pypi"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:49:42.605910+00:00",
+    "exit_code": 0,
+    "stdout": "{\"id\":19679968294,\"node_id\":\"EN_kwDOT09fPM8AAAAElQR8Jg\",\"name\":\"pypi\",\"url\":\"https://api.github.com/repos/mmzen/se_harness/environments/pypi\",\"html_url\":\"https://github.com/mmzen/se_harness/deployments/activity_log?environments_filter=pypi\",\"created_at\":\"2026-08-11T14:05:27Z\",\"updated_at\":\"2026-08-11T14:05:27Z\",\"can_admins_bypass\":true,\"protection_rules\":[{\"id\":62393540,\"node_id\":\"GA_kwDOT09fPM4DuAzE\",\"type\":\"required_reviewers\",\"prevent_self_review\":false,\"reviewers\":[{\"type\":\"User\",\"reviewer\":{\"login\":\"mmzen\",\"id\":8011340,\"node_id\":\"MDQ6VXNlcjgwMTEzNDA=\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/8011340?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/mmzen\",\"html_url\":\"https://github.com/mmzen\",\"followers_url\":\"https://api.github.com/users/mmzen/followers\",\"following_url\":\"https://api.github.com/users/mmzen/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/mmzen/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/mmzen/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/mmzen/subscriptions\",\"organizations_url\":\"https://api.github.com/users/mmzen/orgs\",\"repos_url\":\"https://api.github.com/users/mmzen/repos\",\"events_url\":\"https://api.github.com/users/mmzen/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/mmzen/received_events\",\"type\":\"User\",\"user_view_type\":\"public\",\"site_admin\":false}}]},{\"id\":62393717,\"node_id\":\"GA_kwDOT09fPM4DuA11\",\"type\":\"branch_policy\"}],\"deployment_branch_policy\":{\"protected_branches\":false,\"custom_branch_policies\":true}}",
+    "stderr": ""
+  },
+  "provider-releases-corrected": {
+    "argv": [
+      "gh",
+      "release",
+      "list",
+      "--repo",
+      "mmzen/se_harness",
+      "--limit",
+      "5",
+      "--json",
+      "tagName,isLatest,isDraft,isPrerelease,publishedAt"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:50:12.161799+00:00",
+    "exit_code": 0,
+    "stdout": "[{\"isDraft\":false,\"isLatest\":true,\"isPrerelease\":false,\"publishedAt\":\"2026-10-03T04:22:55Z\",\"tagName\":\"v0.22.0\"},{\"isDraft\":false,\"isLatest\":false,\"isPrerelease\":false,\"publishedAt\":\"2026-10-02T05:06:15Z\",\"tagName\":\"v0.21.0\"},{\"isDraft\":false,\"isLatest\":false,\"isPrerelease\":false,\"publishedAt\":\"2026-10-01T08:55:43Z\",\"tagName\":\"v0.20.1\"},{\"isDraft\":false,\"isLatest\":false,\"isPrerelease\":false,\"publishedAt\":\"2026-09-29T18:55:25Z\",\"tagName\":\"v0.20.0\"},{\"isDraft\":false,\"isLatest\":false,\"isPrerelease\":false,\"publishedAt\":\"2026-09-27T19:43:03Z\",\"tagName\":\"v0.19.0\"}]\n",
+    "stderr": ""
+  },
+  "provider-releases": {
+    "argv": [
+      "gh",
+      "release",
+      "list",
+      "--repo",
+      "mmzen/se_harness",
+      "--limit",
+      "5",
+      "--json",
+      "tagName,isLatest,targetCommitish,isDraft,isPrerelease,publishedAt"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:49:45.775940+00:00",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Unknown JSON field: \"targetCommitish\"\nAvailable fields:\n  createdAt\n  isDraft\n  isImmutable\n  isLatest\n  isPrerelease\n  name\n  publishedAt\n  tagName\n"
+  },
+  "provider-remote-refs": {
+    "argv": [
+      "git",
+      "ls-remote",
+      "origin",
+      "refs/heads/main",
+      "refs/heads/plugin-marketplace",
+      "refs/heads/codex/plugin-0-2-6-staging",
+      "refs/heads/codex/release-0-22-1",
+      "refs/tags/v0.22.1",
+      "refs/tags/last"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r221",
+    "observed_at": "2026-10-04T18:49:45.125526+00:00",
+    "exit_code": 0,
+    "stdout": "82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1\trefs/heads/main\n7d30907f15bd7e06fb632e1ebf4e88e01b68726c\trefs/heads/plugin-marketplace\nabbec12ac5524c8adfb28693f846dd59de88f759\trefs/tags/last\n",
+    "stderr": ""
+  },
+  "provider-rulesets": {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/rulesets"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-04T18:49:44.725201+00:00",
+    "exit_code": 0,
+    "stdout": "[{\"id\":20693381,\"name\":\"main basic protection\",\"target\":\"branch\",\"source_type\":\"Repository\",\"source\":\"mmzen/se_harness\",\"enforcement\":\"active\",\"node_id\":\"RRS_lACqUmVwb3NpdG9yec5PT188zgE7wYU\",\"_links\":{\"self\":{\"href\":\"https://api.github.com/repos/mmzen/se_harness/rulesets/20693381\"},\"html\":{\"href\":\"https://github.com/mmzen/se_harness/rules/20693381\"}},\"created_at\":\"2026-08-11T13:52:02.098+02:00\",\"updated_at\":\"2026-09-02T16:01:45.248+02:00\"},{\"id\":23468315,\"name\":\"plugin-marketplace protection\",\"target\":\"branch\",\"source_type\":\"Repository\",\"source\":\"mmzen/se_harness\",\"enforcement\":\"active\",\"node_id\":\"RRS_lACqUmVwb3NpdG9yec5PT188zgFmGRs\",\"_links\":{\"self\":{\"href\":\"https://api.github.com/repos/mmzen/se_harness/rulesets/23468315\"},\"html\":{\"href\":\"https://github.com/mmzen/se_harness/rules/23468315\"}},\"created_at\":\"2026-09-15T18:31:02.287+02:00\",\"updated_at\":\"2026-09-29T10:29:30.215+02:00\"},{\"id\":22326279,\"name\":\"release protection\",\"target\":\"branch\",\"source_type\":\"Repository\",\"source\":\"mmzen/se_harness\",\"enforcement\":\"active\",\"node_id\":\"RRS_lACqUmVwb3NpdG9yec5PT188zgFUrAc\",\"_links\":{\"self\":{\"href\":\"https://api.github.com/repos/mmzen/se_harness/rulesets/22326279\"},\"html\":{\"href\":\"https://github.com/mmzen/se_harness/rules/22326279\"}},\"created_at\":\"2026-09-05T10:22:30.024+02:00\",\"updated_at\":\"2026-09-29T10:29:53.045+02:00\"}]",
+    "stderr": ""
+  }
+}

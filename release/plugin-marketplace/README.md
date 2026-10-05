@@ -1,24 +1,30 @@
 # Verity Plane marketplace
 
 Verity Plane brings SE Harness setup, orientation, change and evidence workflows
-to Codex and Claude Code. Plugin **0.2.5** targets **SE Harness 0.22.0** and five
+to Codex and Claude Code. Plugin **0.2.6** targets **SE Harness 0.22.1** and five
 shared skills, including an explicitly requested operator brief.
 
-Plugin 0.2.5 with evaluator 0.22.0 is published at
-`7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. Its PACKAGE-IDENTITY.json and assembly inventories
-record exact source, wheel and package digests. Use them to compare installed files.
-Source documentation updates do not replace the published package's original bytes.
-Plugin updates do not adopt a repository's evaluator.
+mmzen verified candidate `4f640284ec496b88cd7aa4ba88ca537d9374a2f8`
+in VREC-SEH-033. Windows/Linux package checks and native Codex/Claude CLI
+checks passed. Codex Windows desktop remains unverified under accepted
+DEC-RLS-009 / RISK-RLS-007. Public fresh/update results are separate.
 
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+Use the [release review and delivery evidence](https://github.com/mmzen/se_harness/blob/main/docs/engineering/release-0-22-1/README.md)
+for publication status. PACKAGE-IDENTITY.json and assembly inventories record
+exact source, wheel and package digests. Compare installed files with those
+identities. Qualified packages retain the preparation README snapshots from
+their original source commit; this source correction does not replace them.
+Plugin updates do not adopt a repository's evaluator.
 
 ## Install from Git
 
 These commands select the `plugin-marketplace` distribution branch of
 `mmzen/se_harness`. The development branch contains assembly inputs; install the
 complete distribution branch. Check that
-the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.5, evaluator 0.22.0 and
-the expected qualified source commit before claiming this new delivery.
+the branch's `PACKAGE-IDENTITY.json` matches the selected release's exact
+versions and qualified source commit. For the 0.2.6 delivery, require plugin
+0.2.6 and evaluator 0.22.1 with the identities from its reviewed plan. An older
+public tree does not establish that the selected delivery has completed.
 Package installation, native session delivery and repository adoption are separate.
 
 **Codex**
@@ -76,7 +82,7 @@ claude plugin install verity-plane@se-harness
 ## Instruction delivery
 
 This package includes native startup and post-compaction instruction hooks.
-Plugin 0.2.5 resolves the entry from its exact selected wheel for the
+Plugin 0.2.6 resolves the entry from its exact selected wheel for the
 external-resource layout, while retaining the repository-copy route for older
 selections. It bootstraps an unselected session and activates the actual checkout
 after cloning. Follow the packaged activation procedure for
@@ -117,8 +123,8 @@ inside its own directory; neither host needs the other host's files.
 
 Native qualification targets disposable Windows profiles on both hosts. Package identity alone does not
 prove a model-driven session, another operating system, public Git installation
-or provider approval. Consult the source repository's WO-PLG-030 qualification
-evidence and WO-PLG-031 public-route evidence for this package's actual results.
+or provider approval. Consult the source repository's WO-RLS-041 qualification
+evidence and WO-RLS-042 public-route evidence for 0.2.6 results.
 Neither a local result nor
 this guide establishes successful public installation. Desktop UI, automatic
 threshold compaction and other platforms require their own observations.

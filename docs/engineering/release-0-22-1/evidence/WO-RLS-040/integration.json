@@ -1,0 +1,254 @@
+{
+  "base": "82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1",
+  "correction_source": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+  "extracted_files": {
+    "docs/notes/decision-artifacts.md": {
+      "before_sha256": "9b786055c877543545f5ef3824d31c9ac51a78ad703ce04a9dc518485340e8cc",
+      "source_sha256": "6cad0ba252749dd197cfc58011b3fbb508c06213fa65ce4621056b869e00cf33"
+    },
+    "docs/notes/diagnostic-codes.md": {
+      "before_sha256": "db8dfe909b0ffbda3873a519b843a7e9d0dcdd42ce8232d84fb4f13a1de605b6",
+      "source_sha256": "4b1bda165b059a7ffccb8760745dfd49a8799b59c86c84c69f4db29b77829795"
+    },
+    "docs/notes/harnessctl-reference.md": {
+      "before_sha256": "9c0f505afaef7bc20c6d1ae45a0a1e59925e115ca14b3e2389e05cd22d56bd0b",
+      "source_sha256": "755b73d6abab6ad26ecb2dd900219363fb42d080dff811b13aa8fd84980763dc"
+    },
+    "se_harness/cli.py": {
+      "before_sha256": "a772dbef7df8a066983f7ff5d09c06eb088290116aea1779e0831cf3cf5c59ba",
+      "source_sha256": "26d1849359e016110fc6ccfe070bda3cf769e818904590465287ae1407fcedca"
+    },
+    "se_harness/codes.py": {
+      "before_sha256": "078b16741ca3d3c5dc003ee3acc96326793ea2e351ddebeb6cb53e187447ca7f",
+      "source_sha256": "7f294e342851716bb20898440526b81e8f31e0edb77cd205d5d8a303d3a7c047"
+    },
+    "se_harness/decisions.py": {
+      "before_sha256": "dacab9442bbcd5239c01f8981b4c3ebe6c8fce8568a9de4e239c8834a5dc4a6a",
+      "source_sha256": "745c23af41c614b062a2baa3e9938197936410ebfaf5073335e201bfbc985cd0"
+    },
+    "se_harness/draft_validation.py": {
+      "before_sha256": null,
+      "source_sha256": "fcd206ef1e85420f51f1c13a88d6fe42a1e68cd838ebdaf0b058a900d7c9ebf6"
+    },
+    "se_harness/engine/validate_engineering_artifacts.py": {
+      "before_sha256": "56f85362ead8987252050f258fc10a02c7eae48602eb660c5b81af8e18f4ec17",
+      "source_sha256": "3060bc4c1946e1add57471a8574ac81c3a6d1f0a4ec8cc7dda19793becdcff5c"
+    },
+    "se_harness/engine/validation_architecture.py": {
+      "before_sha256": "47db722ae7aa34baccc6dd894dc476c6b0d2bfb98e5513c780aa8c3d1b9166eb",
+      "source_sha256": "4dad69d0b96cef95a4b31f259c2b3b83bd7d8f6459e409e78c99d6de965976d4"
+    },
+    "se_harness/engine/validation_decisions.py": {
+      "before_sha256": "4122cd473356718a9372eada5ee8e22b0847669791b2e28e6d294cd3c4a935df",
+      "source_sha256": "dc06a9b9b4ae735c626acf981038e5f4c91ca36815e973fb9ddafeb369f47136"
+    },
+    "se_harness/engine/validation_evidence.py": {
+      "before_sha256": "32799e72e33c2b74434dcfd52bf0ab0ea8209a47d599700425e816e885c6df93",
+      "source_sha256": "c053cd4b6273315883cb9ef137273d770180414cf17ff8f6aa1e9c69b066d53f"
+    },
+    "se_harness/preflight.py": {
+      "before_sha256": "fd0294213d121210f174695583f2d97b0eb1dfa24ad3427096dfc3c371fa019c",
+      "source_sha256": "9d744800e578ed49b74cabe153747a3bb70b8cf263ef54fde2ca1edbd95c2978"
+    },
+    "se_harness/relation_policy.py": {
+      "before_sha256": null,
+      "source_sha256": "de0c066c84c799646d0fb9e9a95a53218706d3e83b1e307fe6da9a07ad359961"
+    },
+    "se_harness/risks.py": {
+      "before_sha256": "36a31bbd4e2d9a36498041b1c857c1158841df8592e5d900ec996fed0f57562b",
+      "source_sha256": "a0e8494e77458e2a48a29343303bd1fd0d2357293a13c3ba252b91f77d4fe1ae"
+    },
+    "se_harness/workflow.py": {
+      "before_sha256": "e4a71ddab3f83b07095c6227f1591089d29a7cbe9e917adf2ae6552b4e645c01",
+      "source_sha256": "011711a3c1bf94ddfd82bf5b05311f097bb599642bd6558fa74b508c34f19d4d"
+    },
+    "se_harness/workflow_edges.py": {
+      "before_sha256": "2672a96916c20d80e419704299cc9cffa6a8eb56e1c3a34ba882e52512d128e0",
+      "source_sha256": "b0690f1aff8f67cbaa99030af22edfbd58e5b6488f93c9077b1c831984362767"
+    },
+    "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md": {
+      "before_sha256": "5228d6266530b0d309b96aa319272174ee92ca2e13c04b512ce8482a73fa0378",
+      "source_sha256": "71de2cc92a470e2da25d525e3ad002b77faedb6ef0e69e2fa476a2fa4cb78ff5"
+    },
+    "templates/repository/standard/docs/engineering/harness/AUTHORITY.md": {
+      "before_sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d",
+      "source_sha256": "da7202bf8d1beee631e9b4b5ba01c04b440fbf76d200ccbccbb8781a59f88431"
+    },
+    "templates/repository/standard/docs/engineering/harness/AUTHORIZE_WORK.md": {
+      "before_sha256": "d6bd8b043c23a42826dbe87a2082b84c02806c7d7558da67370d3550f95c26f5",
+      "source_sha256": "991b526d6280554dcca6901c1790e5519b8894e08635a1f10618aa84a29aaf28"
+    },
+    "templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md": {
+      "before_sha256": "40165ae7b7e12406fd2ca572ea8502e5a0e5e443b6b7e42e2239910aa7ac6fcc",
+      "source_sha256": "75b0c06f90fbb219fc31684a1a2d97987215dbada20e335656e45a57532c3010"
+    },
+    "templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md": {
+      "before_sha256": "29922839d8c5dca67c299a8bb111c037db9799a4ba28fc8b59d1896eb3a4c41b",
+      "source_sha256": "a2041b84342c2b2e4b5ec0f26e3a70702a894c57d9810855cfe514881e5a0c28"
+    },
+    "tests/test_cli_shape.py": {
+      "before_sha256": "0d803ea47ebf7e3642afe6e600a9e50e4b813cc1069059d0072b1af603d6303b",
+      "source_sha256": "87da808de8ebfe0d05cf7535e9e762cd94a3b7c155ac324c2d74574afa643651"
+    },
+    "tests/test_decision_management.py": {
+      "before_sha256": "ca01e51fd7b318644b75f72acd7b34b5f010029159285725380ca6c6a665f3fb",
+      "source_sha256": "7d72e68390c7cdbed4c6239f0ab866c0b5b8f4630e0f1ef25217eddbbf637709"
+    },
+    "tests/test_draft_validation.py": {
+      "before_sha256": null,
+      "source_sha256": "5fc5b6053dc5f1d004bb62795f0d07652d198e03817d344dc9612764c0bc7fba"
+    },
+    "tests/test_relation_policy.py": {
+      "before_sha256": null,
+      "source_sha256": "ab374a7d0a9c2298327afc251394a91a94b15a8f15a360373fe0c10a0efaeab6"
+    },
+    "tests/test_risk_management.py": {
+      "before_sha256": "c31457b1c64aff8c66fb0bb40a6b0bc277207817b6404a01afac51b28b917956",
+      "source_sha256": "27fd0fdaec840131f038b6d95b0392a089bc1ccff4627a67f2e36bf32e00a2b1"
+    },
+    "tests/test_workflow_documentation_contract.py": {
+      "before_sha256": "13f04d24b28528c7aa02de83c8588fb89b54d83c351dae80e1dbeb247d5adf20",
+      "source_sha256": "1d0ddd6ac00042175073d5312a66346b0bce1de5cb4f14f202ed0833e6872719"
+    }
+  },
+  "formal_transport": {
+    "source_commit": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+    "paths": {
+      "docs/engineering/hosted-artifact-graph/README.md": "5cffbc1442f96b3bf8d62252aa350a343d8f088f94c04b15b54132568e8c2116",
+      "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md": "3f064c7619d81427f202e270c778b6fc3421e83e51a4c4ea0db94af99202e69f",
+      "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-002.md": "ceaa3b80532e53f6e1b26250038f2a035da07920620dd0c9be6491dd0156b607",
+      "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-001.md": "89a53f675442c6295cc63c16bc2ac0c5d6717dbaecc0a42f3cbad4e396971842",
+      "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-002.md": "c3e91c9441967d8f21cb8d3373b59e925ea6f0b670c02149e3cfaffc5f44396a",
+      "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-001.md": "78e8161b20e205fd71d4b189fe1329b9649f141777cb0be36b500191f09013e9",
+      "docs/engineering/hosted-artifact-graph/decisions/DEC-HAG-001.md": "91c6a43b32ed6e5cb649c029ca7acb5843870f9ccdd16b2a2ee3575ce18943ae",
+      "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-001-evaluator.json": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-002-evaluator.json": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/WO-HAG-001-handoff.md": "d109592865da42c88b176fe988492cb9643891aff29ac521d9434689ee7fcddf",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/ci-handoff-rebind.json": "8600f01d79d7aaeb2849824e5aa0d19d37a7b2a13499ee5bfd209191e298d4be",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/commands.json": "13e4470e0bc1910d3b97dc4801dfdc875a6af6a9eccba9a07891d3d13ab88623",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/continuation.json": "cee11719cdbd756530a8af5f2a3613764ed09e7a33756117dbda075e41c8c12d",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/implementation-review.md": "3fb12b78015f0e3315d8edbca9734d6dac17167ab2f941d2fb44a413e469a9bb",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/source-preservation.json": "f896689946b2d76df473e125ecf0ac8d197e0c3b48581dd9c1ab8b6acf3fd75b",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/correction-decision-attempt.json": "8e0a436f61596c1155439eef722c81b8d510f4986fa6dfaac78ce461c8af473f",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/package-approval-apply.json": "a9c7ba751ad73856e6e218970774275702aed126094340150eeba72bcbcfb4da",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/package-approval-result.json": "3cfa56cf968eee786d1cce8e3edf696c9b990e881406bf39ea78ee2dbc026778",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/package-start-cli-error.json": "61193d6faf9e4a7bb8e3d9cd9dbc48d980dc812991b4c80ee397dbea3b367f97",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-approve-apply.json": "f442d44ba28b55b8a4dfe30ba0c5cb0369485686bd9fae3f8d29fa34b7ae4813",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-contract-result.json": "5f6066cb09a532bbe81702a5c8db035125ed4ed916014b9a0e73474fec012311",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-environment.json": "321249beea7ad1c85471095c75ccab22738a50ef0391cf44eb280ad7e302fb87",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-final.json": "afa2c43c21d872a2f6669ec19c4a37f6cb1259090f9d3f8e4826cb556fc5cdcd",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-start-apply.json": "2bfa30ece9697ba72077056a9405b5218a6d5289c0b7228db31875c9e6f88926",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-start-preflight.json": "0be13be82fe6d71fbf48124c78fa8c868b8f31db97fe4c46d6cf7cb60aae62a0",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-start-preview.json": "ccf27bb382c32dc52bb1bd960807f2b89c7356c03034d8a0f17c8e919a191a06",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-start-preflight.json": "507156fd138cc51661483ca7886a9dcbb545c314a6cd1b893bedfb236c9d3bf1",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-start-readiness.json": "69929e7b611dbb084a9b12192b0ebac0e7d1803ab68050511f6ad80784ae0b25",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-continuation-observations.json": "12145b71655071bf5d9ec2100727d77eac221ffa201e935f1dc9a77810700cc8",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-continuation.json": "f325a0718f1b05ea34c95b88bd578ae1e85e2ae551cab73a6e8b1a2ce9b8fe3a",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-contract.json": "e06517fb341c38a8b91c15cb96fc2fdebde4b38b9c1312ffeaa6dfb400f9b80f",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-evaluator-feasibility.json": "72bbe2d4cb240176bedc97cf456d2c860a83c39af21c97d2b0f558bbcddcb160",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/WO-HAG-002-handoff.md": "cd583fa629f5d88fa5bcc130429dbb2084180d9fc3deba7b0b800eff3eeb5656",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-01.json": "caa8ad6d24513efb582e50027110d77a9fb3475b367d086bf173954b0deef17a",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-01.log": "6c8e613fb04885962d508ee8b440693848d2aa9e9c25159a56620fa3ff749364",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-02.json": "f3d8970d26d3bdb61bfaf7335e4a064089cdc6a75014d72f887988018acef3d6",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-02.log": "507eb7a4dcd4c3a11d70f108742398143ac877b1803a52bc0f5cd0240d314ffb",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-final.json": "b74ffc809f4f6dee48c3f162d9551b9ffd83dfa3323001a49ed160bde8ed291e",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-final.log": "dcc4a7125391fda3839ed59fc65bb8fdc66633008e2dde88f0811118fa1907f8",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-cli-smoke.json": "b3df77a7897cd0d2be45452a4f2b3b407d112825f6703f6752e75726bb7dde63",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-cli-smoke.log": "40d402f3cd586098e2805dc47369d99adc50d5512d0e45cbb7ba37d8f851e507",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-distributions.json": "4de0ad0454d10181fb6f9af716065ca96dbcc1a533922b52834525609441ee31",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-distributions.log": "5975e8d9e30eef7fcb4fb5589ac9077675513c539ef43967ef36b8d1842b0237",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-final-build-replay.json": "194d07bf5b73b741f2c3945db9dd65d3f9f5a59e3f0756b3563c0348725ab819",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-01.json": "e73776a48156caee2c2b3de3803f67283b4e2afdc158c700a1c4f546bd65cdff",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-01.log": "5438272c8af7f3e4d0a9e05957afb3d19dab561ce2bc065d1b766bf4efd7d02c",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-02.json": "cf9c6d631eeef4884713240e82c04048aeb2d36d5bc513aa602b2b146cdff1ac",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-02.log": "b261d3c5fb3559ac005ef2547819f3be7fe6cdb11be6b82966393338cd6e793a",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-cases.json": "5876e590dfbc13f31dc0e4e806063ca0debcb6cb6bf6dd39a0a773b894931bea",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-check.json": "ead73c9d616d84fbd6f1eaea060fcf6666fb84178704e4fb2c25c4810da72987",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-check.log": "c3d2ee38cba2f37f06ba5ff818fff843a3ee87552b017b6785afe12017a69ba8",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-summary.json": "3a3d38ed80d9182797c12021b3d8633ab5f5046409758e84e5d1f53c7bcd0f8a",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-json-boundary.log": "a49e1df22e0947da01d89edec85616b92ad0d181a14752874d0cffe746b5aa0e",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-original-corpus.json": "09c157e00baaf2cda5c45798a6bc8ce8895dc87eae6c5414be42ffe37f278e6b",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-original-corpus.log": "9decffdcebd7a8356b8d47e47bb7d3cb4a59f177cfdb392751d057a1cbd9282e",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-reference-corpus.json": "4b7a451b9f993af9484ad368533b13b5192382573ee0b1c2f52109163f222ca8",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-reference-corpus.log": "29e96140cae8799b44566d9be7c98f518992dd38e2edc0871cc7a5cf9e2f087b",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-relation-impact.json": "ec219f6651cd70d239fc63b0d61b8afd9363d762b7a2a67a18c0f5d4f07c7df7",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-targeted-final.json": "e259ed023ea3c42d1ccc89c0c8fad96a5479e31ec97ebb477061cfcba52f4457",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-targeted-final.log": "72be95e1b02cca5aab7a9578a494034b216840c6483d84dd4142c7398d02d4ce",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-template-01.log": "7b32148f6ce73709c4f2f032ba600be44248ecd38c2bcf8acf4250dded380160",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-tests-01.log": "bdbc86a70879c440389f11c140a43bf5351ec5a4e5336ec2e941e4b1c2858671",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-tests-02.log": "f5fef75bb552c08377dbf62243320305f5a43e8e2de183790009abd313faf123",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-tests-before.log": "a842e06f8ff9586072038b76c8da958ff282797a72c10982d4565432859b0134",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-verification-binding-apply.json": "2f31363d970f76a7b85707c6f5d05cd0d790d9bef10e79d880421546c9f33aa6",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-wheel-install.json": "8251b2f198fee9a5390b56f81734b1b142672e2e5c30386857714a68995bfbb9",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-wheel-install.log": "0fe78f2671d0f7ad0a45a883ba1c61821bc4126f8138a02a6de65525088cf261",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/evaluator-correction-approval-apply.json": "07eb0c967b84ae55313f79c0345ed4311f02b475e34d8112ea799f415bcb53a7",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/evaluator-correction-approval-binding.json": "f81c6d9076416c8bf31ec99464796437364ebe514f72e6b4ddfb85742cfd337c",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/evaluator-correction-approval-preview.json": "4f31706f11a31f451dc7ef21ef6d1a045a28c94b5f084229412f8081d12fde78",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/execution-inputs.json": "2894c4fbb1dbcf3950359e8fcaec2de07c4278e27d677dcbce7fa1c0daaef1e3",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/handoff.json": "b3fc807a35d1762f8a80773e1baa11e7a54ebca8ddfc551e09ae477d0999987d",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/implementation-inspection.json": "6e0e04f2f440811c07c95f6679f441f595ecb121b39a99d1ef1c303977ecae21",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-complete-apply.json": "8f90fb9f021bb3a52259ce9b335ae18eb864da8af672cf5c32043e6fd37ada7d",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-handoff-initial.json": "068ae63d1af1688e1363fe3d5d2103f4bb4225a4383e8d4dd5dc4f2ab069f10e",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-implementation-scope.json": "7d5ad20705e44e762dff83a1c2dd5d73d76ee55860b86b7190bbcb5181507e57",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-review-final.json": "bbad67d68f15f4c78ddf207385fd63c75ee261547086fa4defe0b29076013b1a",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-start-apply.json": "554bfb49ee65d24a0ba7782a1f46e3447c304775398262b542318b1fca6297cb",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-start-preflight.json": "a7bf7f74dcef93849eda85abfa1bd4a7428a63469da138b18f7b30754f5b0a06",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-start-preview.json": "1918e1601af3cdc6642f0deb3f874ca4320c9133ce82fe964c64f57ff98f5cd5",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-verification-apply.json": "16d54140282109fced9a4047f4c0413189adc31208ee1451bced42b3a6be57dd",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-verification-preview.json": "7a233ccace07b9659ce601b43a9bab855987318884b4215f3e7f7ce040bbeb7b",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/qualify_correction_wheel.py": "4b4c5858ea65765a28e93064d32eef6af304aafc0b3025a8a006039e305bcae4",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/raw-observations.zip": "0ae3e5356883234a1d49651f9e742363cd3084fa92ff9643eee45454c26f40f2",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/verification-results.json": "dc09b525ba3ac5e46ad84006296dafe6e9c7f1e0b6b6a72cc14fe99c7bfbc44d",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/WO-HAG-003-handoff.md": "e8f5f3ce432eda34cdc708441358982584185c7adf4f158eebde79d71c8aed38",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/approval.json": "c5f0e9f8e92e597ac602737124745d99bc82572e2e5506152bc6454739c040fa",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/build-replay.json": "a7a155c14dcddace9624688013714f5e0ee09f4c2be15641ea0197247fc512eb",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/commands.zip": "0f04a812d43699deb4ab34094115c40b62527b36790bd46a150eb305af641ce8",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/handoff.json": "ff4125841e6727977dfcf3bca30e2b3af08ff0d216924c3ef685d43fa0ac4314",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/implementation-review.md": "5983b5dd00967b8aec8aac05198b3112660b6024f9be76256c105020e315722d",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/installed_probe.py": "dd682a9dd275271756712225486197e2aa1a33aa828dca286dfb63d55f556c05",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/verification-results.json": "e076058711cd742b66c72b5fc0ecfaaee778335f81a4b692c9fbaac996d6dd6e",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/WO-HAG-004-handoff.md": "87fdb7238231cc5cf7aa092d097c7305e7a5426776031121f82023b0ef2883c3",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/handoff.json": "90704f765d2bd7dc57107c43ce4bf59620956a9f12a7247e8e2b8f51de9c128d",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/publication-readiness.json": "8cb2540d5bba65f45b7839103c02ee5a29648b02ad137628ea49123839ac670e",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/publication-receipt.json": "9a131d68292e6ce7e4fc7dcbbd0cedc8d7e14ddce5f11941f9e9821b79f99354",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/transport-results.json": "a8be0ca8e91ad7e4f3f16f6d56e40923b66f651460d3755df758adbd095d5ed7",
+      "docs/engineering/hosted-artifact-graph/intent/INT-HAG-001.md": "650c32c6e4b6c8dc48c56c61fd3c1751ab305c8a157beeaf9b911f05edf52ead",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-001.md": "fed60829ebf39c6882cc867dd6677517e783e501baafa55af60f68025d73e3e9",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-002.md": "840c2397b38d73d9a8a4a172b9481d91cfa44955b538a56b85dd2f65586a162b",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-003.md": "aa2c52257b213a39f2df762f38dc11bb3f503fa294937bec91b52273a2dd68c4",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-004.md": "82dc5a6a8a3dd1fb5fa8db28817aae1d4fe726e2d6f39bf0c1cb93146d970d35",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-005.md": "ae5457580cc935b1819b808311d094a26e7bfafb6818c05facfbab81720d9185",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-006.md": "cf5d39baf53f8811d30782226ebd761454e081f4896649b1f435d90e2bbe7dea",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-007.md": "4c514ddfb70a4d73461e046f5e2194496a7ec4be821e213c6b98771053f2b06a",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-008.md": "db1c3dec1a341260614f67747542e4200f95b69627e7c907c931401d7e6465e6",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-009.md": "d7eea13976dc3e4f48171ccc6277c71d647739f00ce97511a71bf577ab4ad52c",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-010.md": "379479fe1f603d5d19f74676e94b7b1a7122c1de84efc6b29f3a8550853898ca",
+      "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md": "c519e2f6b2da9855ecbcbb05c4de9d2ed6bcf7b3f0613b1696c4355130fc183e",
+      "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-001.md": "d2347c8572c64a6b8691c4b00f1037a9c3be8c1f7d7e2ec3f6ee8f17bc05482d",
+      "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-002.md": "c1ea773b5942614f804b93ed58c95dc9a4c980c50a5d989f009a7127416f8b28",
+      "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md": "e6ea2418a6e4a734dc160c30676742b4afa11cf7784bbe010ce69118b9025499",
+      "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-004.md": "9f92d63d839b3260ed3476bbb7ed2198e5fde8fe2b3209cb2bd8690aa59194f4",
+      "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-005.md": "5b72889b772eb19b654fba429a79d9f711aaf33ea86be0e1b197b7c5d4f91842",
+      "docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-001.md": "239f2fed8037baf5110bd2c9a317045626cb3de52fed56a739c3c887ddb1ece5",
+      "docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-002.md": "b8c685977d2dd4e0516b59d217baf9f9873b2155d496890255587b632bfc41af",
+      "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md": "744ca93c38acbed841db2047c15017d417bbfb95efead8a41ccdd911b7653dac",
+      "docs/engineering/hosted-artifact-graph/verification/VER-HAG-002.md": "b94b6ea72a9bfd442d97529daf9163d732af949777926344e62134de687e1d36",
+      "docs/engineering/hosted-artifact-graph/verification/VER-HAG-003.md": "2ed61007d66aadff21fc1e6aafe063b6e1149c5b6aa927084184b753054a1ecc",
+      "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-001.md": "77712ddc3bcca8bc16f01906532cfb33eba0e1f555fcf3f0472df468863560cd",
+      "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-002.md": "f4b1538269cd2d85455f78c2b891bcbe95d61ef6a3ffb5556adc2eb3980cdf16",
+      "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-003.md": "0d870e7c22fa3f90054268c59743e063c2b02b6ca4e14219f7a2891dae51ac98",
+      "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-004.md": "5b406f3443d54a03fa97c974b0d58aad4597ad40b200bf4405f4c6eb16dc72b6"
+    }
+  },
+  "excluded": [
+    "server/",
+    "se_harness/remote.py",
+    "tests/hosted_artifact_graph/",
+    "tests/test_hosted_artifact_graph.py"
+  ],
+  "limits": [
+    "No historical VREC or bound evidence rewritten.",
+    "No HAG pin or live DEC disposition changed.",
+    "No release/adoption/publication decision inferred."
+  ]
+}

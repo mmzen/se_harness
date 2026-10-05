@@ -1,0 +1,239 @@
+{
+  "authority": "technical replay evidence only; no lifecycle or external-action authority",
+  "builds": [
+    {
+      "id": "a",
+      "sdist_sha256": "3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a",
+      "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+    },
+    {
+      "id": "b",
+      "sdist_sha256": "3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a",
+      "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+    }
+  ],
+  "candidate": {
+    "commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+    "source_date_epoch": 1790980462,
+    "source_manifest_sha256": "8a8c0bd4ab3ba7125f18c19c8598f671b705dda6b5d70e8b74ea1dd430c2b2c3"
+  },
+  "expected": {
+    "sdist_sha256": "3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a",
+    "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+  },
+  "manifest": {
+    "build_recipe": "release/build-recipe.json",
+    "build_recipe_schema": "se-harness-release-build-recipe/v1",
+    "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+    "checksums": "SHA256SUMS",
+    "checksums_content": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4  se_harness-0.22.0-py3-none-any.whl\n3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a  se_harness-0.22.0.tar.gz\n",
+    "checksums_sha256": "cbc4fca53d4c8d664716592a623e10d61bc28622580fc08ef348c4b304141c37",
+    "commit": "abbec12ac5524c8adfb28693f846dd59de88f759",
+    "git_object_format": "sha1",
+    "schema": "se-harness-release-bundle/v2",
+    "sdist": "se_harness-0.22.0.tar.gz",
+    "sdist_sha256": "3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a",
+    "source_date_epoch": 1790980462,
+    "source_manifest_sha256": "8a8c0bd4ab3ba7125f18c19c8598f671b705dda6b5d70e8b74ea1dd430c2b2c3",
+    "version": "0.22.0",
+    "wheel": "se_harness-0.22.0-py3-none-any.whl",
+    "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+  },
+  "observations": [
+    {
+      "commands": [
+        [
+          "python",
+          "-m",
+          "pip",
+          "install",
+          "--disable-pip-version-check",
+          "--no-cache-dir",
+          "--only-binary=:all:",
+          "--require-hashes",
+          "--target",
+          "{toolchain_dir}",
+          "-r",
+          "{toolchain_lock}"
+        ],
+        [
+          "python",
+          "-m",
+          "build",
+          "--wheel",
+          "--sdist",
+          "--no-isolation",
+          "--outdir",
+          "{raw_output}",
+          "."
+        ],
+        [
+          "python",
+          "scripts/normalize_sdist.py",
+          "{raw_sdist}",
+          "{final_sdist}",
+          "--epoch",
+          "{source_date_epoch}"
+        ]
+      ],
+      "environment": {
+        "HOME": "/tmp/se-harness-home",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PATH": "/usr/local/bin:/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1790980462",
+        "TZ": "UTC"
+      },
+      "observed": {
+        "architecture": "amd64",
+        "os": "linux",
+        "pointer_bits": 64,
+        "python_implementation": "CPython",
+        "python_version": "3.11.9"
+      },
+      "outputs": {
+        "se_harness-0.22.0-py3-none-any.whl": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+        "se_harness-0.22.0.tar.gz": "3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a"
+      },
+      "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+      "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+      "schema": "se-harness-release-build-producer/v1",
+      "toolchain": [
+        {
+          "name": "build",
+          "version": "1.3.0"
+        },
+        {
+          "name": "colorama",
+          "version": "0.4.6"
+        },
+        {
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "name": "pip",
+          "version": "24.0"
+        },
+        {
+          "name": "pyproject-hooks",
+          "version": "1.2.0"
+        },
+        {
+          "name": "setuptools",
+          "version": "84.0.0"
+        },
+        {
+          "name": "wheel",
+          "version": "0.48.0"
+        }
+      ]
+    },
+    {
+      "commands": [
+        [
+          "python",
+          "-m",
+          "pip",
+          "install",
+          "--disable-pip-version-check",
+          "--no-cache-dir",
+          "--only-binary=:all:",
+          "--require-hashes",
+          "--target",
+          "{toolchain_dir}",
+          "-r",
+          "{toolchain_lock}"
+        ],
+        [
+          "python",
+          "-m",
+          "build",
+          "--wheel",
+          "--sdist",
+          "--no-isolation",
+          "--outdir",
+          "{raw_output}",
+          "."
+        ],
+        [
+          "python",
+          "scripts/normalize_sdist.py",
+          "{raw_sdist}",
+          "{final_sdist}",
+          "--epoch",
+          "{source_date_epoch}"
+        ]
+      ],
+      "environment": {
+        "HOME": "/tmp/se-harness-home",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PATH": "/usr/local/bin:/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1790980462",
+        "TZ": "UTC"
+      },
+      "observed": {
+        "architecture": "amd64",
+        "os": "linux",
+        "pointer_bits": 64,
+        "python_implementation": "CPython",
+        "python_version": "3.11.9"
+      },
+      "outputs": {
+        "se_harness-0.22.0-py3-none-any.whl": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+        "se_harness-0.22.0.tar.gz": "3bc9ddb9b1d046dc111c5582b7d857cc815c8e2fb9f8255ec07bda56315ef52a"
+      },
+      "producer_image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+      "recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+      "schema": "se-harness-release-build-producer/v1",
+      "toolchain": [
+        {
+          "name": "build",
+          "version": "1.3.0"
+        },
+        {
+          "name": "colorama",
+          "version": "0.4.6"
+        },
+        {
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "name": "pip",
+          "version": "24.0"
+        },
+        {
+          "name": "pyproject-hooks",
+          "version": "1.2.0"
+        },
+        {
+          "name": "setuptools",
+          "version": "84.0.0"
+        },
+        {
+          "name": "wheel",
+          "version": "0.48.0"
+        }
+      ]
+    }
+  ],
+  "producer": {
+    "architecture": "amd64",
+    "image": "python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050",
+    "os": "linux"
+  },
+  "recipe": {
+    "path": "release/build-recipe.json",
+    "schema": "se-harness-release-build-recipe/v1",
+    "sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc"
+  },
+  "release_record": "RLS-SEH-032",
+  "schema": "se-harness-release-build-replay/v1",
+  "state": "exact"
+}

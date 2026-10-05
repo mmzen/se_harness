@@ -1,0 +1,124 @@
+{
+  "assurance": {
+    "commit_bound_verification": "required",
+    "decided_by": "mmzen",
+    "rationale": "Later pilot, engineering, assurance and release decisions depend on the correctness of changed executable behavior, import fidelity, transaction correctness and evidence bindings. Confirmed through mmzen's approval of the reviewed WO-HAG-001 proposal, whose proposed classification was required."
+  },
+  "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+  "background": [],
+  "diagnostics": [
+    {
+      "code": "W013",
+      "message": "governing artifact ARCH-HAG-001 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact ADR-HAG-001 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-001.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact CAP-HAG-001 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-001.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact INT-HAG-001 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/intent/INT-HAG-001.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact REQ-HAG-001 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-001.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact REQ-HAG-002 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-002.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact REQ-HAG-003 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-003.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact REQ-HAG-004 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-004.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact REQ-HAG-005 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-005.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact REQ-HAG-006 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-006.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact REQ-HAG-007 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-007.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact REQ-HAG-008 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-008.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact SPEC-HAG-001 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-001.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact SPEC-HAG-002 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-002.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact SPEC-HAG-003 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md"
+    },
+    {
+      "code": "W013",
+      "message": "governing artifact VER-HAG-001 is not active",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md"
+    },
+    {
+      "code": "W018",
+      "message": "adr_required architecture ARCH-HAG-001 has no selected active deciding ADR",
+      "path": "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md"
+    }
+  ],
+  "phase": "start",
+  "reading_manifest": [
+    "docs/engineering/hosted-artifact-graph/intent/INT-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-002.md",
+    "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-003.md",
+    "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-004.md",
+    "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-005.md",
+    "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-006.md",
+    "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-007.md",
+    "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-008.md",
+    "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-002.md",
+    "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md",
+    "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-001.md"
+  ],
+  "ready": false,
+  "schema": "se-harness-preflight-v2",
+  "skew": [],
+  "work_order": {
+    "id": "WO-HAG-001",
+    "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-001.md",
+    "status": "approved"
+  }
+}

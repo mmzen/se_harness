@@ -1,0 +1,531 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-HAG-002",
+    "artifacts": [
+      "WO-HAG-002"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-HAG-001",
+      "INT-HAG-001",
+      "REQ-HAG-009",
+      "SPEC-HAG-004",
+      "VER-HAG-002"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/",
+      "docs/engineering/hosted-artifact-graph/README.md",
+      "docs/notes/diagnostic-codes.md",
+      "docs/notes/harnessctl-reference.md",
+      "se_harness/cli.py",
+      "se_harness/codes.py",
+      "se_harness/draft_validation.py",
+      "se_harness/engine/validate_engineering_artifacts.py",
+      "se_harness/engine/validation_architecture.py",
+      "se_harness/engine/validation_authoring.py",
+      "se_harness/engine/validation_core.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/engine/validation_lifecycle.py",
+      "se_harness/preflight.py",
+      "se_harness/relation_policy.py",
+      "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md",
+      "templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "tests/test_artifact_authoring.py",
+      "tests/test_authoring_gate.py",
+      "tests/test_cli_shape.py",
+      "tests/test_draft_validation.py",
+      "tests/test_one_validation.py",
+      "tests/test_relation_policy.py",
+      "tests/test_validation_taxonomy.py"
+    ],
+    "changed_paths": [
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/verification-results.json",
+      "docs/engineering/hosted-artifact-graph/README.md",
+      "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-002.md",
+      "docs/notes/diagnostic-codes.md",
+      "docs/notes/harnessctl-reference.md",
+      "se_harness/cli.py",
+      "se_harness/codes.py",
+      "se_harness/draft_validation.py",
+      "se_harness/engine/validate_engineering_artifacts.py",
+      "se_harness/engine/validation_architecture.py",
+      "se_harness/engine/validation_authoring.py",
+      "se_harness/engine/validation_core.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/engine/validation_lifecycle.py",
+      "se_harness/preflight.py",
+      "se_harness/relation_policy.py",
+      "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md",
+      "templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "tests/test_artifact_authoring.py",
+      "tests/test_authoring_gate.py",
+      "tests/test_cli_shape.py",
+      "tests/test_draft_validation.py",
+      "tests/test_one_validation.py",
+      "tests/test_relation_policy.py",
+      "tests/test_validation_taxonomy.py"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "scope",
+    "workflow_rule_id": "WFL-WO-START",
+    "procedure_id": "PROC-WO-START",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HAG-002:[execution_scope]"
+              }
+            ],
+            "message": "WO-HAG-002 declares 25 normalized scope path(s); this inspection grants no execution authority."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-HAG-002"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-HAG-002"
+              }
+            ],
+            "message": "All 26 declared changed path(s) are within execution scope."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "aab8b8b3806bc473142244ff1b8912f3f7476e70384d96a15b85194f2262831a",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-WO-START",
+    "current_step": "STEP-WO-START-PREVIEW",
+    "steps": [
+      {
+        "id": "STEP-WO-START-PREFLIGHT",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Evaluated start readiness for WO-HAG-002."
+        ],
+        "non_effects": [
+          "Preflight does not authorize or start implementation."
+        ],
+        "argv": [
+          "harnessctl",
+          "preflight",
+          ".",
+          "--work-order",
+          "WO-HAG-002",
+          "--phase",
+          "start"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-PREVIEW",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Planned the explicit transition for WO-HAG-002."
+        ],
+        "non_effects": [
+          "A preview does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-HAG-002=in_progress",
+          "--decision",
+          "WO-HAG-002=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-HAG-002",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-APPLY",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Changed only WO-HAG-002 to in_progress."
+        ],
+        "non_effects": [
+          "Related artifacts remain unchanged."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-HAG-002=in_progress",
+          "--decision",
+          "WO-HAG-002=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-HAG-002",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-FINAL-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected the resulting state for WO-HAG-002."
+        ],
+        "non_effects": [
+          "Focus does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-HAG-002"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-HAG-002",
+        "status": "approved"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-HAG-002",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 61
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated scope compliance for WO-HAG-002."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-HAG-002 is approved."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-START",
+      "step_id": "STEP-WO-START-PREVIEW",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-HAG-002=in_progress",
+        "--decision",
+        "WO-HAG-002=delegated-executor"
+      ]
+    },
+    "alternatives": []
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v2",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task",
+        "source": "released-resource",
+        "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context.",
+          "source": "released-resource",
+          "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result.",
+          "source": "released-resource",
+          "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e"
+        }
+      ],
+      "procedure": {
+        "id": "PROC-WO-START",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "start-the-selected-work",
+          "source": "released-resource",
+          "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "when": "Before using the selected work order's execution grant.",
+            "source": "released-resource",
+            "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+          }
+        ],
+        "steps": {
+          "STEP-WO-START-PREFLIGHT": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "establish-the-execution-context",
+              "source": "released-resource",
+              "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant.",
+                "source": "released-resource",
+                "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+              }
+            ]
+          },
+          "STEP-WO-START-PREVIEW": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "start-the-selected-work",
+              "source": "released-resource",
+              "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant.",
+                "source": "released-resource",
+                "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+              }
+            ]
+          },
+          "STEP-WO-START-APPLY": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "start-the-selected-work",
+              "source": "released-resource",
+              "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant.",
+                "source": "released-resource",
+                "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+              }
+            ]
+          },
+          "STEP-WO-START-FINAL-FOCUS": {
+            "location": {
+              "file": "docs/engineering/harness/CONTINUE.md",
+              "heading": "continue-selected-work",
+              "source": "released-resource",
+              "sha256": "7d5478fca5f80f996fc0a7a64627bbd2763401ff500a16671a592cb04394c304"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant.",
+                "source": "released-resource",
+                "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-WO-START-PREVIEW",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "start-the-selected-work",
+          "source": "released-resource",
+          "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "when": "Before using the selected work order's execution grant.",
+            "source": "released-resource",
+            "sha256": "93596f635ee127a35fcc9f641f9e2e6525887d8ab9292cb76513f7d65f30e55d"
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "CAP-HAG-001",
+      "INT-HAG-001",
+      "REQ-HAG-009",
+      "SPEC-HAG-004",
+      "VER-HAG-002",
+      "WO-HAG-002"
+    ],
+    "evaluator_only_inputs": [
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/WORKFLOW.json",
+        "sha256": "00c222a9c71d95cb1162e6d6bacdb03cd9e43431303466077a85ceb8f921f0c2"
+      },
+      {
+        "source": "released-resource",
+        "file": "docs/engineering/QUALITY_GATES.json",
+        "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+      }
+    ],
+    "release": {
+      "archive_name": "se_harness-0.22.0-py3-none-any.whl",
+      "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9",
+      "version": "0.22.0"
+    },
+    "formal_artifact_source": "repository"
+  },
+  "result_sha256": "4db75dbe9a2f6c741287aebc2c461679b5a17544b81c08457272883721a4bf68"
+}

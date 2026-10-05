@@ -262,6 +262,12 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 
 ## Release sequences
 
+The [0.22.1 / plugin 0.2.6 preparation](../engineering/release-0-22-1/README.md)
+uses the complete-release route. Candidate qualification, exact final approval
+and public delivery are separate observed stages. Public latest remains 0.22.0;
+repository adoption and the hosted evaluator pin are unchanged.
+
+
 The [0.22.0 package](../engineering/release-0-22-0/README.md) has published
 evaluator 0.22.0 and plugin 0.2.5 under selected evaluator 0.21.0. WO-RLS-035
 retains marketplace qualification/publication; WO-RLS-036 retains public-route

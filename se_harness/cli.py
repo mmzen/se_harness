@@ -658,6 +658,7 @@ def _decide(args: argparse.Namespace) -> int:
             revisit=args.revisit,
             mitigated_by=tuple(args.mitigated_by or ()),
             avoided_by=tuple(args.avoided_by or ()),
+            authority_owner=args.authority_owner,
             apply=bool(args.apply),
         )
         result = plan.result
@@ -921,6 +922,13 @@ def _qualify(args: argparse.Namespace) -> int:
     return 0 if result.passed else 1
 
 
+def _validate_draft(args) -> int:
+    from se_harness.draft_validation import validate_draft, render_human
+    result = validate_draft(Path(args.target), args.artifact)
+    print(json.dumps(result, indent=2, ensure_ascii=True) if args.json else render_human(result))
+    return 0 if result["admissible"] else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="harnessctl", description="Install and operate the standard software-engineering harness.")
     parser.add_argument("--version", action="version", version=__version__)
@@ -952,6 +960,12 @@ def build_parser() -> argparse.ArgumentParser:
             [*(["--json"] if args.json else []), *(["--advisories"] if args.advisories else [])],
         )
     )
+
+    draft = commands.add_parser("validate-draft", help="check one draft without approval or writes")
+    draft.add_argument("target", nargs="?", default=".")
+    draft.add_argument("--artifact", required=True)
+    draft.add_argument("--json", action="store_true")
+    draft.set_defaults(handler=_validate_draft)
 
     inspect = commands.add_parser("inspect", help="inspect repository-wide attention and lifecycle queues")
     inspect.add_argument("target", nargs="?", default=".")
@@ -1070,7 +1084,8 @@ def build_parser() -> argparse.ArgumentParser:
     decide.add_argument("target", nargs="?", default=".")
     decide.add_argument("--artifact", required=True, help="the decision to dispose")
     decide.add_argument("--option", help="the declared option identifier that answers the decision")
-    decide.add_argument("--decision", required=True, help="the accountable role disposing the decision")
+    decide.add_argument("--decision", required=True, help="the actual human decision-maker; this value does not authenticate the human or grant consent")
+    decide.add_argument("--authority-owner", help="explicit existing owner label under which that human decided; requires established authority, not authentication; omitted, --decision must match an owner")
     decide.add_argument("--reason", help="the verbatim answer; required")
     decide.add_argument("--defer", action="store_true", help="defer instead of deciding; needs --scope and --revisit")
     decide.add_argument("--scope", action="append", help="ARTIFACT-ID:FROM-TO transition a deferral admits; repeat per transition")

@@ -16,6 +16,7 @@ from types import SimpleNamespace
 from unittest import mock
 
 from se_harness.cli import main
+from se_harness.installer import HarnessError
 from se_harness.engine import validate_engineering_artifacts
 from se_harness.workflow import PreconditionError, apply_transition, plan_transition, project_selected
 from se_harness.workflow_compliance import check_workflow
@@ -796,6 +797,138 @@ class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertEqual(["Planned 1 explicit lifecycle transition(s); no files were written."], planned["restitution"]["done"])
         self.assertEqual(approved, target.read_bytes())
         self.assertEqual(implemented, path.read_bytes())
+
+    def draft_with_future_evidence(self) -> tuple[Path, Path]:
+        relative = "docs/engineering/product/evidence/WO-002/future.md"
+        draft = write(
+            self.root / "docs/engineering/product/work-orders/WO-002.md",
+            formal("WO-002", "work_order", "draft", {
+                "implements": ["REQ-001"], "specifications": ["SPEC-001"],
+                "architecture": ["ARCH-001", "ADR-001"], "verification": ["VER-001"],
+            }, f'evidence_paths = ["{relative}"]'),
+        )
+        return draft, self.root / relative
+
+    def file_snapshot(self) -> dict[str, bytes]:
+        return {p.relative_to(self.root).as_posix(): p.read_bytes()
+                for p in self.root.rglob("*") if p.is_file() and not p.is_symlink()}
+
+    def test_absent_unrelated_draft_evidence_allows_only_selected_start(self) -> None:
+        work = self.in_progress_work_order()
+        work.write_text(work.read_text(encoding="utf-8").replace(
+            'status = "in_progress"', 'status = "approved"', 1), encoding="utf-8")
+        record_execution_approval(work)
+        # Standalone preflight requires the domain-qualified work-order ID.
+        for path in (self.root / "docs/engineering").rglob("*.md"):
+            path.write_text(path.read_text(encoding="utf-8").replace("WO-001", "WO-TST-001"), encoding="utf-8")
+        work = work.rename(work.with_name("WO-TST-001.md"))
+        draft, evidence = self.draft_with_future_evidence()
+        before = self.file_snapshot()
+        for args in (
+            ("validate", str(self.root), "--json"),
+            ("preflight", str(self.root), "--work-order", "WO-TST-001", "--phase", "start", "--json"),
+            ("transition", str(self.root), "--set", "WO-TST-001=in_progress", "--decision", "WO-TST-001=Codex", "--json"),
+        ):
+            code, output, error = invoke(*args)
+            self.assertEqual(0, code, error + output)
+            json.loads(output)
+            self.assertEqual(before, self.file_snapshot())
+        code, output, error = invoke(*args, "--apply")
+        self.assertEqual(0, code, error + output)
+        self.assertEqual("completed", json.loads(output)["operation"]["outcome"])
+        after = self.file_snapshot()
+        self.assertEqual(set(before), set(after))
+        self.assertEqual([work.relative_to(self.root).as_posix()],
+                         [p for p in before if before[p] != after[p]])
+        self.assertIn('status = "in_progress"', work.read_text(encoding="utf-8"))
+        self.assertEqual(before[draft.relative_to(self.root).as_posix()], draft.read_bytes())
+        self.assertFalse(evidence.exists())
+
+    def test_missing_selected_completion_evidence_still_blocks_without_writes(self) -> None:
+        work = self.in_progress_work_order()
+        self.draft_with_future_evidence()
+        required = "docs/engineering/product/evidence/required.md"
+        work.write_text(work.read_text(encoding="utf-8").replace(
+            "[assurance]", f'evidence_paths = ["{required}"]\n\n[assurance]', 1), encoding="utf-8")
+        before = self.file_snapshot()
+        for apply in ((), ("--apply",)):
+            code, output, error = invoke(
+                "transition", str(self.root), "--set", "WO-001=implemented",
+                "--decision", "WO-001=Codex", "--json", *apply)
+            self.assertNotEqual(0, code, error + output)
+            self.assertEqual("blocked", json.loads(output)["operation"]["outcome"])
+            self.assertIn("evidence", output.lower())
+            self.assertEqual(before, self.file_snapshot())
+
+    def test_evidence_appearance_disappearance_or_edit_invalidates_plan(self) -> None:
+        _, evidence = self.draft_with_future_evidence()
+        for initial, changed in ((None, b""), (b"retained", None), (b"retained", b"changed")):
+            with self.subTest(initial=initial, changed=changed):
+                evidence.unlink(missing_ok=True)
+                if initial is not None:
+                    write(evidence, initial)
+                plan = plan_transition(self.root, {"INT-001": "implemented"}, {"INT-001": "owner"}, {})
+                if changed is None:
+                    evidence.unlink()
+                else:
+                    write(evidence, changed)
+                before = self.file_snapshot()
+                with self.assertRaisesRegex(HarnessError, "stale transition plan"):
+                    apply_transition(plan)
+                self.assertEqual(before, self.file_snapshot())
+                self.assertEqual([], list(self.root.rglob("*.wex-*")))
+
+    def test_directory_evidence_is_a_structured_refusal(self) -> None:
+        _, evidence = self.draft_with_future_evidence()
+        evidence.mkdir(parents=True)
+        before = self.file_snapshot()
+        code, output, error = invoke(
+            "transition", str(self.root), "--set", "INT-001=implemented",
+            "--decision", "INT-001=owner", "--apply", "--json")
+        self.assertEqual(1, code, error + output)
+        self.assertEqual("blocked", json.loads(output)["operation"]["outcome"])
+        self.assertIn("cannot read planned input", output)
+        self.assertEqual(before, self.file_snapshot())
+
+    def test_unreadable_evidence_refuses_plan_and_apply(self) -> None:
+        _, evidence = self.draft_with_future_evidence()
+        real_read = Path.read_bytes
+        def deny_evidence(path: Path) -> bytes:
+            if path == evidence:
+                raise PermissionError("injected unreadable evidence")
+            return real_read(path)
+        plan = plan_transition(self.root, {"INT-001": "implemented"}, {"INT-001": "owner"}, {})
+        before = self.file_snapshot()
+        with mock.patch.object(Path, "read_bytes", deny_evidence):
+            code, output, error = invoke(
+                "transition", str(self.root), "--set", "INT-001=implemented",
+                "--decision", "INT-001=owner", "--json")
+            self.assertEqual(1, code, error + output)
+            self.assertEqual("blocked", json.loads(output)["operation"]["outcome"])
+            self.assertIn("injected unreadable evidence", output)
+            with self.assertRaisesRegex(HarnessError, "cannot read planned input"):
+                apply_transition(plan)
+        self.assertEqual(before, self.file_snapshot())
+
+    def test_absent_evidence_replaced_by_broken_symlink_refuses_plan_and_apply(self) -> None:
+        _, evidence = self.draft_with_future_evidence()
+        plan = plan_transition(self.root, {"INT-001": "implemented"}, {"INT-001": "owner"}, {})
+        evidence.parent.mkdir(parents=True)
+        try:
+            evidence.symlink_to(self.root / "absent-outside-evidence")
+        except OSError as exc:
+            self.skipTest(f"file symlinks unavailable: {exc}")
+        before = self.file_snapshot()
+        code, output, error = invoke(
+            "transition", str(self.root), "--set", "INT-001=implemented",
+            "--decision", "INT-001=owner", "--json")
+        self.assertEqual(1, code, error + output)
+        self.assertEqual("blocked", json.loads(output)["operation"]["outcome"])
+        self.assertIn("symlink", output)
+        with self.assertRaisesRegex(HarnessError, "symlink"):
+            apply_transition(plan)
+        self.assertTrue(evidence.is_symlink())
+        self.assertEqual(before, self.file_snapshot())
 
     def test_stale_input_invalidates_plan_without_overwrite(self) -> None:
         path = self.root / "docs/engineering/product/intent/INT-001.md"

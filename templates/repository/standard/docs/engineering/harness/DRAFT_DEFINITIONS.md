@@ -10,6 +10,22 @@ Before choosing a type, read [ARTIFACTS.md#artifact-types](ARTIFACTS.md#artifact
 
 ## Procedure
 
+### Check an unfinished draft
+
+Use `harnessctl validate-draft REPO --artifact ARTIFACT-ID --json` to inspect
+one draft in a complete caller-supplied projection. The read-only result separates
+`errors`, permitted `incomplete` slots, and unselected `background` findings.
+Exact canonical template placeholders and omitted or empty required authoring
+relations can be incomplete. Every actual endpoint still needs a declared
+relationship and the correct type. A requirement cannot derive from a release
+record, including in an array that also contains `CAP-xxx`.
+
+An admissible result does not make the draft approval-ready. Normal validation,
+preflight and transition gates still apply. Selection must identify one supported
+draft without lifecycle history or disposition. The query does not create files,
+change state or supply a lifecycle next step. Its caller remains responsible for
+authentication, immutable-base comparison and expected versions before a write.
+
 ### Draft any missing definitions
 
 **Inputs:** The confirmed outcome, scope limits, and missing-definition list

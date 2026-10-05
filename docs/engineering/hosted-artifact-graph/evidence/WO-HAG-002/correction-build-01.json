@@ -1,0 +1,26 @@
+{
+  "command": [
+    "C:\\Python313\\python.exe",
+    "-B",
+    "-m",
+    "repository_tools.release_build",
+    "replay",
+    "--repository",
+    ".",
+    "--commit",
+    "34d35f92c1b5ff523a01dc47dac0520ea53c3944",
+    "--version",
+    "0.22.1",
+    "--output-directory",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-bundle",
+    "--result",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\work\\correction-build-replay.json"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-10-04\\clo\\se_harness",
+  "exit_code": 2,
+  "started_unix": 1791121984.7904458,
+  "duration_seconds": 89.46883916854858,
+  "observer_python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "log": "correction-build-01.log"
+}

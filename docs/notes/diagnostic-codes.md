@@ -18,7 +18,7 @@ test fails the suite when it does. The installed root evaluator is a
 released version and may emit a slightly older set until the repository
 adopts the next release.
 
-193 codes across 31 registered prefixes.
+197 codes across 31 registered prefixes.
 
 ## How to read a code
 
@@ -30,14 +30,14 @@ but are not diagnostics and are not listed here.
 | Prefix | Component | Meaning | Codes |
 | --- | --- | --- | ---: |
 | `E` | installed validator | an artifact-graph or integrity error; validation fails. | 19 |
-| `E-AUT` | installed validator | an authoring-rule error on a formal artifact. | 2 |
+| `E-AUT` | installed validator | an authoring-rule error on a formal artifact. | 5 |
 | `E-CIP` | installed validator | a CI-pipeline rule error. | 1 |
 | `E-DCM` | installed validator | a decision-artifact rule error. | 5 |
 | `E-ECP` | installed validator | a control-plane rule error. | 1 |
 | `E-RSK` | installed validator | a risk-artifact rule error. | 5 |
 | `W` | installed validator | a warning; validation still passes. | 16 |
 | `W-ADS` | installed validator | an agent-directive-surface warning. | 2 |
-| `W-AUT` | installed validator | an authoring-style advisory, raised only on drafts. | 23 |
+| `W-AUT` | installed validator | an authoring-style advisory, raised only on drafts. | 24 |
 | `W-DCM` | installed validator | a decision-artifact warning. | 2 |
 | `W-ECP` | installed validator | a control-plane warning. | 1 |
 | `W-REB` | installed validator | a released-evaluator-boundary warning. | 3 |
@@ -68,8 +68,8 @@ but are not diagnostics and are not listed here.
 | Code | Message text in the source |
 | --- | --- |
 | `E001` | `E001`; `E001: artifact root does not exist` (+4 more) |
-| `E002` | `E002`; `E002: field '{…}' must be a non-empty string` (+4 more) |
-| `E003` | `E003`; `E003: duplicate id '{…}' also declared in {…}` |
+| `E002` | `E002`; `E002: Date must be a valid calendar date in YYYY-MM-DD.` (+5 more) |
+| `E003` | `E003`; `E003: Duplicate artifact ID prevents an unambiguous catalog.` (+1 more) |
 | `E004` | `E004`; `E004: id '{…}' must start with '{…}' for type '{…}'` |
 | `E005` | `E005` |
 | `E006` | `E006`; `E006: artifact '{…}' must not reference itself via '{…}'` (+4 more) |
@@ -77,7 +77,7 @@ but are not diagnostics and are not listed here.
 | `E008` | `E008`; `E008: active requirement '{…}' has no active verification coverage` |
 | `E009` | `E009`; `E009: field 'artifact_snapshot_sha256' must be a lowercase SHA-256 value` (+14 more) |
 | `E010` | `E010`; `E010: active release record must not include superseded verification record '{…}'` (+19 more) |
-| `E011` | `E011`; `E011: relation '{…}' target '{…}' must have type {…}, found {…}` |
+| `E011` | `E011`; `E011: relation '{…}' target '{…}' must have type {…}, found {…}` (+1 more) |
 | `E012` | `E012`; `E012: evidence path does not identify an existing file: '{…}'` (+10 more) |
 | `E014` | `E014`; `E014: field 'lifecycle_events' must be a non-empty array of tables when present` (+14 more) |
 | `E015` | `E015`; `E015: adr_required architecture has no active ADR whose decides relation targets it` |
@@ -93,6 +93,9 @@ but are not diagnostics and are not listed here.
 | --- | --- |
 | `E-AUT-001` | `E-AUT-001`; `E-AUT-001: verification_method must list 1-4 distinct values from {…}` |
 | `E-AUT-002` | `E-AUT-002`; `E-AUT-002: measure must be a non-empty string when present` (+5 more) |
+| `E-AUT-003` | `E-AUT-003`; `E-AUT-003: Selected type does not support draft validation.` (+1 more) |
+| `E-AUT-004` | `E-AUT-004`; `E-AUT-004: Draft must not contain lifecycle history or disposition.` (+1 more) |
+| `E-AUT-005` | `E-AUT-005` |
 
 ### `E-CIP` — installed validator
 
@@ -181,6 +184,7 @@ but are not diagnostics and are not listed here.
 | `W-AUT-021` | `W-AUT-021` |
 | `W-AUT-022` | `W-AUT-022`; `W-AUT-022: Coverage row {…} names undefined rule {…}.` |
 | `W-AUT-023` | `W-AUT-023` |
+| `W-AUT-024` | `W-AUT-024`; `W-AUT-024: Canonical authoring slot is unfinished.` (+2 more) |
 
 ### `W-DCM` — installed validator
 

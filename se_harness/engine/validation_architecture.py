@@ -6,7 +6,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from se_harness.codes import E006, E007, E008, E011, E016
+from se_harness.codes import E007, E008, E016
 from se_harness.engine.validation_core import (
     Artifact,
     Diagnostic,
@@ -18,88 +18,15 @@ from se_harness.engine.validation_core import (
 from se_harness.engine.validation_lifecycle import grants_authority
 
 
-RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
-    ("architecture", "addresses"): {"requirement"},
-    ("architecture", "conforms_to"): {"specification"},
-    ("operating_contract", "assures"): {"requirement"},
-    ("verification_record", "verifies_work_order"): {"work_order"},
-    ("verification_record", "conforms_to"): {"verification"},
-    ("verification_record", "superseded_by"): {"verification_record"},
-    ("release_record", "satisfies"): {"release_contract"},
-    ("release_record", "includes_verification"): {"verification_record"},
-    ("release_record", "releases_work"): {"work_order"},
-    ("decision", "blocks"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},
-    ("decision", "produces"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},
-    ("risk", "mitigated_by"): {"work_order"},
-    ("risk", "avoided_by"): {"adr", "decision"},
-}
+from se_harness.relation_policy import RELATION_TARGET_TYPES, relation_findings
 
 
 def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
-    errors: list[Diagnostic] = []
-    catalog = {
-        artifact.artifact_id: artifact
-        for artifact in artifacts
-        if artifact.artifact_id != "<unknown>"
-    }
-
+    catalog = {a.artifact_id: a for a in artifacts if a.artifact_id != "<unknown>"}
+    errors = []
     for artifact in artifacts:
-        relations = artifact.metadata.get("relations", {})
-        if not isinstance(relations, dict):
-            continue
-        for relation_name, targets in sorted(relations.items()):
-            if not isinstance(targets, list):
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E006,
-                    f"relation '{relation_name}' must be an array of artifact IDs",
-                    plane="structure",
-                )
-                continue
-            for target in targets:
-                if not isinstance(target, str) or not target.strip():
-                    add_error(
-                        errors,
-                        artifact,
-                        report_root,
-                        E006,
-                        f"relation '{relation_name}' contains a non-string or empty target",
-                        plane="structure",
-                    )
-                    continue
-                if target == artifact.artifact_id:
-                    add_error(
-                        errors,
-                        artifact,
-                        report_root,
-                        E006,
-                        f"artifact '{artifact.artifact_id}' must not reference itself via '{relation_name}'",
-                        plane="structure",
-                    )
-                elif target not in catalog:
-                    add_error(
-                        errors,
-                        artifact,
-                        report_root,
-                        E006,
-                        f"artifact '{artifact.artifact_id}' relation '{relation_name}' references unknown target '{target}'",
-                        plane="structure",
-                    )
-                else:
-                    allowed_types = RELATION_TARGET_TYPES.get((artifact.artifact_type, relation_name))
-                    target_type = catalog[target].artifact_type
-                    if allowed_types is not None and target_type not in allowed_types:
-                        expected = ", ".join(sorted(allowed_types))
-                        add_error(
-                            errors,
-                            artifact,
-                            report_root,
-                            E011,
-                            f"relation '{relation_name}' target '{target}' must have type {expected}, found {target_type}",
-                            plane="structure",
-                        )
+        findings, _ = relation_findings(artifact, catalog, display_path(artifact.path, report_root))
+        errors.extend(Diagnostic(f["path"], f["code"], f["message"], f["plane"]) for f in findings)
     return errors
 
 
