@@ -5,7 +5,11 @@
 For evaluator 0.22.1 / plugin 0.2.6, use the [release review](../engineering/release-0-22-1/README.md)
 and [public delivery evidence](../engineering/release-0-22-1/evidence/WO-RLS-042/README.md).
 VREC-SEH-033 records mmzen's verification of the exact candidate. Local native
-Codex and Claude CLI checks passed; public fresh/update results are separate.
+Codex and Claude CLI checks passed. The separately retained public observations
+confirm Windows fresh installation, update from 0.2.5, installed package bytes
+and offline setup for both hosts. [VREC-RLS-004](../engineering/release-0-22-1/verification-records/VREC-RLS-004.md)
+records mmzen's verification of those results. They do not claim a desktop or
+new live model-session test.
 Codex Windows desktop remains unverified under accepted DEC-RLS-009 / RISK-RLS-007.
 Compare the [public identity](https://github.com/mmzen/se_harness/blob/plugin-marketplace/PACKAGE-IDENTITY.json)
 with the selected release's expected versions and hashes before claiming that

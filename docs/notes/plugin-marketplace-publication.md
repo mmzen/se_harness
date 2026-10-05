@@ -5,7 +5,9 @@
 For evaluator 0.22.1 / plugin 0.2.6, [VREC-SEH-033](../engineering/release-0-22-1/verification-records/VREC-SEH-033.md)
 records mmzen's verification of the exact candidate. The [release record](../engineering/release-0-22-1/releases/RLS-SEH-033.md)
 records its release decision; the [delivery evidence](../engineering/release-0-22-1/evidence/WO-RLS-042/README.md)
-records publication and public-route results separately. Read those records
+records completed publication and public-route results separately.
+[VREC-RLS-004](../engineering/release-0-22-1/verification-records/VREC-RLS-004.md)
+records mmzen's verification of those observations. Read those records
 and the actual public identity before claiming a current version or complete delivery.
 Codex Windows desktop remains unverified under accepted DEC-RLS-009 / RISK-RLS-007.
 
@@ -36,7 +38,7 @@ the original release omissions and accepted risks under DEC-RLS-005/006 remain
 historical records.
 
 This rollout used the existing delivery route under selected evaluator 0.21.0.
-The repository now selects 0.22.0. The separately authorized reviewer-only
+The repository now selects 0.22.1 under WO-HUP-030. The separately authorized reviewer-only
 provider change for 0.22.1 is recorded in the
 [configuration readback](../engineering/release-0-22-1/evidence/WO-RLS-040/provider-configuration-applied.json).
 Recheck actual provider controls before each authorized publication.
