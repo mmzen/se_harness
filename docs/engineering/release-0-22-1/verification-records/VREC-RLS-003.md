@@ -2,7 +2,7 @@
 id = "VREC-RLS-003"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-044"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-05"
 updated = "2026-10-05"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-22-1/evidence/WO-RLS-044/assessmen
 evaluator_evidence_path = "docs/engineering/release-0-22-1/evidence/VREC-RLS-003-evaluator.json"
 evaluator_evidence_sha256 = "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905"
 
+verified_at = "2026-10-05T06:42:19Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLS-044"]
 conforms_to = ["VER-RLS-005"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-05T06:42:19Z"
+decided_by = "mmzen"
+reason = "mmzen answered \"Verify result\" to the documentation assurance request for candidate dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3 in PR #536 at review head 262c424e69e48f072d1db075c8d2911ad44c8cd5. Ready record SHA-256 83dc2da028136c979f46d396f83adff68facfef2f643afd656f2055a38215041. This verifies WO-RLS-044 against VER-RLS-005 and its retained evidence. The binary release candidate and VREC-SEH-033 remain unchanged. The accepted desktop omission is DEC-RLS-009 / RISK-RLS-007. No merge, release, publication or adoption decision is supplied."
 +++
 
 # Verification Record Candidate
