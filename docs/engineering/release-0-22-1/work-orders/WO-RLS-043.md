@@ -2,7 +2,7 @@
 id = "WO-RLS-043"
 type = "work_order"
 title = "Handle absent draft evidence in transition snapshots"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-04"
 updated = "2026-10-05"
@@ -35,6 +35,13 @@ to = "in_progress"
 decided_at = "2026-10-05T01:20:21Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-05T03:40:55Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Codex records approved local preparation completion. Corrected source 061307929c94314ccd2beb4a53f174e536fceba8 passed retained Windows/Linux, installed-package and native CLI qualification. The checked 69-file marketplace child is prepared locally. Actual mmzen desktop omission/risk acceptance and exact provider activation are retained. Final committed-candidate capture and matching build/staging qualification follow separately; this supplies no verification, merge or release decision."
 +++
 
 # Handle absent draft evidence in transition snapshots

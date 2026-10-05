@@ -1,0 +1,51 @@
+{
+  "operation": "reviewer-only environment activation",
+  "status": "applied-and-read-back",
+  "decision": {
+    "human": "mmzen",
+    "question": "1/3 — Authorize the exact proposal in PR #536 to remove only the required reviewer from GitHub’s pypi environment in mmzen/se_harness, preserving main-only deployment and all other settings? Your previous approval excluded this configuration change.",
+    "response": "Authorize the exact configuration change",
+    "publisher_confirmation_question": "2/3 — Can you confirm that the se-harness project’s PyPI Publishing settings list GitHub owner mmzen, repository se_harness, workflow publish-pypi.yml, and environment pypi? No password or token is needed here.",
+    "publisher_confirmation_response": "Confirmed—all four values match",
+    "publisher_confirmation_source": "Human account-side confirmation in this conversation; the agent browser remained unauthenticated.",
+    "reviewed_proposal_sha256": "dd3132e0653971edf203b9049899440913784d354a12fe051de07828570ae237",
+    "repository": "mmzen/se_harness",
+    "environment": "pypi",
+    "requested_change": "Remove only the required reviewer; preserve the main-only branch policy and all other controls.",
+    "authority_limits": "No publication, release, merge, adoption or desktop-test acceptance.",
+    "recorded_at": "2026-10-05T03:10:12.455331+00:00"
+  },
+  "before": {
+    "wait_timer": 0,
+    "prevent_self_review": false,
+    "reviewers": [
+      {
+        "type": "User",
+        "id": 8011340
+      }
+    ],
+    "deployment_branch_policy": {
+      "protected_branches": false,
+      "custom_branch_policies": true
+    }
+  },
+  "after": {
+    "wait_timer": 0,
+    "prevent_self_review": false,
+    "reviewers": [],
+    "deployment_branch_policy": {
+      "protected_branches": false,
+      "custom_branch_policies": true
+    }
+  },
+  "unchanged": [
+    "main-only deployment branch policy",
+    "main rules",
+    "workflow default permissions",
+    "environment identity and admin-bypass setting",
+    "PyPI Trusted Publisher settings (not modified; confirmed by mmzen)"
+  ],
+  "observed_at": "2026-10-05T03:10:57.402062+00:00",
+  "release_dispatched": false,
+  "source_commit": "36a8b8868d2584f2eab6a770ae64f69076a5bb5b"
+}

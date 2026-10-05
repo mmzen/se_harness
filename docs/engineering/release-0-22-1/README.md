@@ -1,6 +1,6 @@
 # Proposed evaluator 0.22.1 and plugin 0.2.6 release
 
-Status: **preparation approved by mmzen; qualification in progress**.
+Status: **preparation implemented; final candidate verification pending**.
 
 The outcome is a public evaluator that provides standalone draft validation
 and records the actual human behind an existing ownership label. This removes
@@ -63,7 +63,7 @@ The [evaluator review](evidence/WO-RLS-040/qualification-review.md) records the
 preparation candidate, Windows/Linux checks, pinned builds and current provider
 controls. The [plugin review](evidence/WO-RLS-041/qualification-review.md) records
 the exact packages, native host observations and remaining desktop/walkthrough
-criteria. Both work orders remain in progress. There is no final aggregate VREC
+criteria. WO-RLS-040/041/043 have implementation completion recorded; assurance remains pending. There is no final aggregate VREC
 or release record yet.
 
 The native Claude walkthrough found an evaluator transition crash, reproduced
@@ -74,7 +74,8 @@ all original failure evidence are preserved.
 
 The [current correction qualification review](evidence/WO-RLS-043/corrected-qualification-review.md)
 records the corrected package identities, passing Windows/Linux and native CLI
-checks, and remaining desktop/provider criteria. The earlier evaluator/plugin
+checks and the then-pending desktop/provider criteria. Those three readiness
+items are now resolved as recorded below; the original report remains a historical snapshot. The earlier evaluator/plugin
 reviews describe the original preparation package, not the corrected wheel.
 No final aggregate VREC or release record exists yet.
 
@@ -82,11 +83,30 @@ The draft preparation PR supports qualification and review. It does not request
 verification or merge. The tested preparation commit and later evidence commits
 remain distinct; final candidate capture will establish the release binding.
 
+## Desktop decision and provider readiness
+
+mmzen accepted [DEC-RLS-009 and RISK-RLS-007](evidence/WO-RLS-041/desktop-deferral-review.md)
+for this release only. Codex Windows desktop remains **not run / unverified**;
+CLI evidence does not replace it. Revisit before the next plugin release or any
+verified-desktop claim, whichever comes first. Required CLI and public-route
+checks, human verification and the final complete-release decision remain intact.
+
+The separately authorized [pypi environment change](evidence/WO-RLS-040/provider-configuration-applied.json)
+removed only the required reviewer. Readback confirms main-only deployment,
+main protections and workflow permissions are unchanged. mmzen confirmed the
+four PyPI Trusted Publisher fields. This is human account-side confirmation,
+not an authenticated PyPI read by the agent. No release was dispatched.
+
+The next preparation work is the exact marketplace staging commit and final
+candidate verification. The required handoff and completion checks passed; the work orders are
+`implemented`. Final candidate capture has not yet supplied human verification. This update supplies no verification,
+merge, release or adoption decision.
+
 ## Known dependencies
 
 The current governor remains released 0.22.0. Native and desktop test readiness
-and independent provider controls must be checked during preparation. Earlier
-release-specific omissions are not accepted for this release. Missing required
+and independent provider controls must be checked during preparation. The bounded desktop omission for this release is recorded above; older
+release-specific omissions remain historical. Missing required
 results block the affected readiness claim until resolved through the proper
 decision procedure. No new risk acceptance is bundled into this proposal.
 

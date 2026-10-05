@@ -2,17 +2,28 @@
 artifact = "WO-RLS-040"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "e307065b08a532a9305afb3da0531c6049db2495cc3596d8f2d7c838f32f448c"
-rebound_at = "2026-10-05T01:30:36Z"
+rebound_at = "2026-10-05T03:38:58Z"
 ```
 
-# WO-RLS-040 handoff evidence
+# Preparation handoff
 
-Retained by `harnessctl evidence`; body content is owner-authored.
+The approved release inputs and corrected implementation are prepared. Actual
+checks for source 061307929c94314ccd2beb4a53f174e536fceba8 are retained in
+../WO-RLS-043/corrected-qualification-review.md and its immutable archives.
+Windows/Linux source, installed packages, both HAG fixes, the original draft
+transition defect, deterministic builds, upgrades and native CLI cycles pass.
+Original failures and reported skips remain visible.
 
-This packet supports the authorized unfinished preparation review, not work
-completion. See [qualification-review.md](qualification-review.md) for observed
-checks at preparation source 89c69748fcc5fc2578acef5cbf48f0734ef1b732 and retained
-failures. Hosted CI, final candidate binding, required plugin evidence and live
-provider readiness remain pending. WO-RLS-040 remains in_progress.
+../WO-RLS-041/preparation-marketplace-commit.json records the checked ordinary
+marketplace child and exact 69-file tree. It is local preparation, not a public
+marketplace update. Final candidate capture must retain its own exact build,
+staging identities and applicable checks; earlier tests are not relabelled.
 
-Correction qualification progress: mmzen approved WO-RLS-043/VER-RLS-004 and the exact linked REL-SEH-035 amendment. Windows full-scale source suite passed (1,293 tests; 23 reported skips). Distribution and CLI checks passed. Changed installed packages, Linux and native tests remain pending. This header binds retained observations; it is not a completion or verification decision. Original results remain preserved.
+../WO-RLS-041/desktop-deferral-review.md records mmzen's accepted DEC-RLS-009
+and RISK-RLS-007. Codex Windows desktop remains not run / unverified for this
+release. CLI/public-route checks and later human verification remain required.
+../WO-RLS-040/provider-configuration-applied.json retains the separately
+authorized exact GitHub activation and human PyPI binding confirmation.
+
+This handoff supports implementation completion and final verification
+preparation. It supplies no human verification, merge, release or adoption.
