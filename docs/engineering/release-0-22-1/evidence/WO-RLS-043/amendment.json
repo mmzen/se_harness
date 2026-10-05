@@ -1,0 +1,12 @@
+{
+  "actor": "mmzen",
+  "response": "I aaprove",
+  "request": "Approve WO-RLS-043 and VER-RLS-004 with required commit-bound verification, and explicitly authorize the manual linked amendment of REL-SEH-035 shown in PR #536? Covers the two-file transition correction, requalification, preservation of accepted release-contract bytes/history, and updates to the same review PR. Evaluator lacks supported amendment command. Human verification, merge, release, and acceptance of missing desktop/provider evidence remain separate.",
+  "review_commit": "dbc0144e3830087f1d4c267e76322f6d0e92edf4",
+  "observed_at": "2026-10-05T01:18:51.487790+00:00",
+  "mechanism": "Explicitly authorized manual linked amendment; released 0.22.0 has no supported revision command. Existing lifecycle history is preserved; no lifecycle event is invented.",
+  "path": "docs/engineering/release-0-22-1/release/REL-SEH-035.md",
+  "previous_path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/REL-SEH-035-accepted-before.txt",
+  "previous_sha256": "7249aa639db1cc412849fa2a54e8fe6135a8813fb4e9031295f1d1cebaa0ea4f",
+  "replacement_sha256": "c0c20d24e58b322d9304f52c830ea20022a6974122b78cf632a0abd2be0c9a99"
+}

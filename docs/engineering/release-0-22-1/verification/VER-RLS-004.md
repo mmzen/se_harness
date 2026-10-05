@@ -2,13 +2,20 @@
 id = "VER-RLS-004"
 type = "verification"
 title = "Verify transition snapshots with absent draft evidence"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-10-04"
-updated = "2026-10-04"
+updated = "2026-10-05"
 
 [relations]
 verifies = ["REQ-WEX-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-05T01:18:16Z"
+decided_by = "mmzen"
+reason = "mmzen replied \"I aaprove\" to the exact correction and manual linked amendment request reviewed at dbc0144e3830087f1d4c267e76322f6d0e92edf4. Approve WO-RLS-043 and VER-RLS-004 with required commit-bound verification, and explicitly authorize the manual linked amendment of REL-SEH-035 shown in PR #536? Covers the two-file transition correction, requalification, preservation of accepted release-contract bytes/history, and updates to the same review PR. Evaluator lacks supported amendment command. Human verification, merge, release, and acceptance of missing desktop/provider evidence remain separate. This includes bounded review updates from codex/release-0-22-1 to mmzen/se_harness:main in draft PR #536. Only confirmed assurance metadata is added to the reviewed drafts before approval."
 +++
 
 # Verify transition snapshots with absent draft evidence

@@ -2,10 +2,15 @@
 id = "WO-RLS-043"
 type = "work_order"
 title = "Handle absent draft evidence in transition snapshots"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-04"
-updated = "2026-10-04"
+updated = "2026-10-05"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen confirmed required commit-bound verification for the transition correction and changed release qualification."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = ["se_harness/workflow.py", "tests/test_workflow_execution.py", "docs/engineering/release-0-22-1/"]
@@ -15,6 +20,21 @@ implements = ["REQ-WEX-002"]
 specifications = ["SPEC-WEX-001"]
 architecture = ["ARCH-WEX-001", "ADR-WEX-001"]
 verification = ["VER-RLS-004"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-05T01:18:16Z"
+decided_by = "mmzen"
+reason = "mmzen replied \"I aaprove\" to the exact correction and manual linked amendment request reviewed at dbc0144e3830087f1d4c267e76322f6d0e92edf4. Approve WO-RLS-043 and VER-RLS-004 with required commit-bound verification, and explicitly authorize the manual linked amendment of REL-SEH-035 shown in PR #536? Covers the two-file transition correction, requalification, preservation of accepted release-contract bytes/history, and updates to the same review PR. Evaluator lacks supported amendment command. Human verification, merge, release, and acceptance of missing desktop/provider evidence remain separate. This includes bounded review updates from codex/release-0-22-1 to mmzen/se_harness:main in draft PR #536. Only confirmed assurance metadata is added to the reviewed drafts before approval."
+scope_paths = ["se_harness/workflow.py", "tests/test_workflow_execution.py", "docs/engineering/release-0-22-1/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-05T01:20:21Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Handle absent draft evidence in transition snapshots

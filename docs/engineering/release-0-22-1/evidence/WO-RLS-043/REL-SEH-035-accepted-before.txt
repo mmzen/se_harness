@@ -13,7 +13,7 @@ previous_release_tag = "v0.22.0"
 route = "complete-release"
 
 [relations]
-gates = ["WO-HAG-002", "WO-HAG-003", "WO-DST-028", "WO-RLS-040", "WO-RLS-041", "WO-RLS-043"]
+gates = ["WO-HAG-002", "WO-HAG-003", "WO-DST-028", "WO-RLS-040", "WO-RLS-041"]
 
 [[lifecycle_events]]
 from = "draft"
@@ -40,8 +40,8 @@ the release unit. Preserve PR #535 and its inputs-branch target. No comparison
 base change, silent ownership change or live decision disposition is permitted.
 
 The gates array is the exact proposed release membership. One final verified
-VREC at clean candidate C must cover all six work orders and VER-HAG-002,
-VER-HAG-003, VER-DST-030, VER-RLS-036, VER-RLS-037, VER-RLS-004 and VER-IAR-021. Earlier
+VREC at clean candidate C must cover all five work orders and VER-HAG-002,
+VER-HAG-003, VER-DST-030, VER-RLS-036, VER-RLS-037 and VER-IAR-021. Earlier
 VREC-HAG-001/002 and VREC-RLO-015 retain their original candidates/evidence.
 WO-RLS-042 owns post-publication observations and is excluded from this set.
 
@@ -84,17 +84,3 @@ latest/last afterward under the same matching complete-release grant.
 Repository/host adoption, linked preserved revisions of SPEC-HAG-003 and
 VER-HAG-001, and applying the already-selected DEC-HAG-001 option remain a
 separate bounded package after release. No historical decision is repeated.
-
-## Linked revision for the native qualification defect
-
-This revision adds only WO-RLS-043 and VER-RLS-004 to the release unit and final
-aggregate verification. It corrects transition snapshots of absent draft
-evidence under existing REQ-WEX-002 and SPEC-WEX-001. Versions, delivery route,
-provider controls, public destinations and all remaining acceptance criteria
-are unchanged. The prior accepted version is preserved byte-for-byte at
-../evidence/WO-RLS-043/REL-SEH-035-accepted-before.txt, SHA-256 `7249aa639db1cc412849fa2a54e8fe6135a8813fb4e9031295f1d1cebaa0ea4f`.
-
-Activation requires mmzen's explicit authorization of this exact manual linked
-amendment because released 0.22.0 has no supported revision command. Retain the
-actual human decision in the amendment evidence; preserve existing lifecycle
-history and prior evidence. This proposal alone does not activate the revision.
