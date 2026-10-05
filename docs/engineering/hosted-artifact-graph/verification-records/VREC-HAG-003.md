@@ -2,7 +2,7 @@
 id = "VREC-HAG-003"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-05"
 updated = "2026-10-05"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/hosted-artifact-graph/evidence/WO-HAG-005/SP
 evaluator_evidence_path = "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-003-evaluator.json"
 evaluator_evidence_sha256 = "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899"
 
+verified_at = "2026-10-05T14:08:10Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HAG-005", "WO-HAG-006"]
 conforms_to = ["VER-HAG-004", "VER-HAG-005"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-05T14:08:10Z"
+decided_by = "mmzen"
+reason = "Human mmzen explicitly replied \"Verify result\" to the published VREC-HAG-003 review in draft PR #535. This accepts the bounded WO-HAG-005/006 reconciliation and CI correction at exact candidate 4414eaf5d9739978654c55390b96aeac32699ed4 against VER-HAG-004/005, with unchanged reviewed record and evidence. WO-HAG-001 remains in_progress and zero hosted service scenarios have run. This decision does not verify the hosted service or authorize merge, release, deployment or risk acceptance. The existing bounded review-publication grant covers pushing this decision to the same draft PR."
 +++
 
 # Verification Record Candidate
