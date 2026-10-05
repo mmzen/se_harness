@@ -1,0 +1,46 @@
+{
+  "host": "codex",
+  "fixture": "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-flow\\legacy",
+  "draft_sha256": "178b8f30e3e0a0dcf8120cf273a3fba288779d3ab619e8a680f1bcd40afc4932",
+  "front_matter": {
+    "id": "WO-FLW-002",
+    "type": "work_order",
+    "title": "Provide the planned future note",
+    "status": "draft",
+    "owners": [
+      "engineering-owner"
+    ],
+    "created": "2026-10-04",
+    "updated": "2026-10-04",
+    "execution_scope": {
+      "paths": [
+        "notes/future.txt",
+        "docs/engineering/product/work-orders/WO-FLW-002.md",
+        "docs/engineering/product/evidence/WO-FLW-002/"
+      ]
+    },
+    "relations": {
+      "implements": [
+        "REQ-FLW-001"
+      ],
+      "specifications": [
+        "SPEC-FLW-001"
+      ],
+      "architecture": [
+        "ARCH-FLW-001"
+      ],
+      "verification": [
+        "VER-FLW-001"
+      ]
+    }
+  },
+  "checks": {
+    "draft": true,
+    "no_lifecycle_decision": true,
+    "future_absent": true,
+    "exact_requested_scope": true,
+    "no_unconfirmed_machine_assurance": true
+  },
+  "passed": true,
+  "claim": "Independent draft-content observation, not a real human approval. Failure remains visible alongside any guided correction."
+}

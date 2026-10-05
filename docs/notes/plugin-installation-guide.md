@@ -1,8 +1,23 @@
 # Install or update the Verity Plane plugin
 
-## Published 0.22.0 / 0.2.5
+## Select the release and its evidence
 
-Plugin 0.2.5 with evaluator 0.22.0 is public at
+For evaluator 0.22.1 / plugin 0.2.6, use the [release review](../engineering/release-0-22-1/README.md)
+and [public delivery evidence](../engineering/release-0-22-1/evidence/WO-RLS-042/README.md).
+VREC-SEH-033 records mmzen's verification of the exact candidate. Local native
+Codex and Claude CLI checks passed. The separately retained public observations
+confirm Windows fresh installation, update from 0.2.5, installed package bytes
+and offline setup for both hosts. [VREC-RLS-004](../engineering/release-0-22-1/verification-records/VREC-RLS-004.md)
+records mmzen's verification of those results. They do not claim a desktop or
+new live model-session test.
+Codex Windows desktop remains unverified under accepted DEC-RLS-009 / RISK-RLS-007.
+Compare the [public identity](https://github.com/mmzen/se_harness/blob/plugin-marketplace/PACKAGE-IDENTITY.json)
+with the selected release's expected versions and hashes before claiming that
+an installation uses it. A ready or released record alone is not delivery evidence.
+
+## Historical public delivery: 0.22.0 / 0.2.5
+
+The 2026-10-03 observation found plugin 0.2.5 with evaluator 0.22.0 at
 `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. VREC-PLG-032 verifies local package qualification.
 Codex CLI fresh installation and update from the preserved public 0.2.4
 installation passed. All 29 installed files match the qualified package.
@@ -31,13 +46,17 @@ to produce an external directory with both complete host packages. Do not instal
 the incomplete host folders directly from development source.
 
 The [assembly README](../../release/plugin-marketplace/README.md) describes the
-current source guidance. The public package uses qualified source
+source guidance. The historical 0.2.5 public package uses qualified source
 `abbec12ac5524c8adfb28693f846dd59de88f759`. Its
 [distribution identity](https://github.com/mmzen/se_harness/blob/7d30907f15bd7e06fb632e1ebf4e88e01b68726c/PACKAGE-IDENTITY.json)
 names plugin 0.2.5, evaluator 0.22.0 and wheel SHA-256
 `44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4`.
-The packaged READMEs retain their original pre-publication wording. Source
-corrections do not rewrite those qualified bytes; use this guide for current status.
+Qualified packages retain the README snapshot from their source commit. For
+0.2.6, that snapshot describes staging and the earlier 0.2.5 delivery. Those
+historical preparation statements are not a live publication status report.
+Source corrections do not rewrite the qualified archives or inventories.
+Use this guide and the selected release's separate public delivery evidence
+for availability and support claims.
 
 ## Install in a disposable profile
 
@@ -113,8 +132,8 @@ new environment is `DATA/evaluators/VERSION/DIGEST/Scripts/python.exe`, where
 
 In PowerShell, prefix a quoted executable with `&`, for example
 `& "CHECKER" -I -m se_harness doctor "PROJECT" --json`.
-Read the preview before applying. The final doctor must pass. Default 0.22.0
-initialization creates only configuration and lock files. It creates no local
+Read the preview before applying. The final doctor must pass. Default initialization with evaluator
+0.22.0 or 0.22.1 creates only configuration and lock files. It creates no local
 skill copies, so a new minimal installation needs no skill-ownership switch.
 Existing repository-copy installations retain their selected release and use
 its connection procedure until an explicitly approved migration.
@@ -149,9 +168,9 @@ resource with its matching SHA-256 and final heading `After compaction`. On
 compaction. A missing, changed or incompatible root must disclose a delivery
 gap; stop the affected governed action and resolve it before continuing.
 
-## Qualification limits
+## Historical 0.2.5 qualification limits
 
-Public fresh/update observations use Codex CLI 0.159.2. Installed bytes and
+The retained 0.2.5 public fresh/update observations use Codex CLI 0.159.2. Installed bytes and
 offline setup passed on both routes. Native debug prompt-input confirms skill
 discovery; it does not prove hook execution or a model session.
 
@@ -181,7 +200,7 @@ preserves its original host versions, failures and results.
 
 ## Clone, activate and resume
 
-This route is supplied by released plugin 0.2.5 with evaluator 0.22.0.
+This route is present in plugin 0.2.5 and the qualified 0.2.6 candidate.
 Installation of the host plugin is separate from a repository's release selection.
 An existing repository continues to use its selected release after a plugin update.
 
@@ -191,7 +210,7 @@ An existing repository continues to use its selected release after a plugin upda
    actual resulting absolute path, including a selected worktree's path.
 3. Invoke the setup skill. Prepare any missing exact evaluator in the supplied
    external plugin-data directory. A project without selection needs explicit
-   initialization; the selected 0.22.0 default writes only its configuration and lock.
+   initialization; the selected 0.22.x default writes only its configuration and lock.
 4. Activate the checkout with the helper below. Use the host-provided session ID
    and data directory. Do not invent an ID or copy it from another conversation.
 5. Read the complete returned entry before governed work. Follow its current

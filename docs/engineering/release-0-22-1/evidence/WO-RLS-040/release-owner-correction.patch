@@ -1,0 +1,11 @@
+--- a/docs/engineering/release-0-22-1/releases/RLS-SEH-033.md
++++ b/docs/engineering/release-0-22-1/releases/RLS-SEH-033.md
+@@ -3,7 +3,7 @@
+ type = "release_record"
+ title = "Release candidate 0.22.1"
+ status = "ready"
+-owners = ["Codex"]
++owners = ["mmzen"]
+ created = "2026-10-05"
+ updated = "2026-10-05"
+ version = "0.22.1"

@@ -1,6 +1,22 @@
 # Prepare and publish the Verity Plane marketplace
 
-## Current public release
+## Release status and immutable packages
+
+For evaluator 0.22.1 / plugin 0.2.6, [VREC-SEH-033](../engineering/release-0-22-1/verification-records/VREC-SEH-033.md)
+records mmzen's verification of the exact candidate. The [release record](../engineering/release-0-22-1/releases/RLS-SEH-033.md)
+records its release decision; the [delivery evidence](../engineering/release-0-22-1/evidence/WO-RLS-042/README.md)
+records completed publication and public-route results separately.
+[VREC-RLS-004](../engineering/release-0-22-1/verification-records/VREC-RLS-004.md)
+records mmzen's verification of those observations. Read those records
+and the actual public identity before claiming a current version or complete delivery.
+Codex Windows desktop remains unverified under accepted DEC-RLS-009 / RISK-RLS-007.
+
+Staged package READMEs are immutable snapshots of preparation. In 0.2.6 they
+include earlier 0.2.5 status and qualification wording. Preserve those bytes
+and inventories. Current source guidance and the delivery receipts describe
+later verification and publication; do not rewrite a qualified package in place.
+
+## Historical public delivery: 0.22.0 / 0.2.5
 
 [REL-SEH-034](../engineering/release-0-22-0/release/REL-SEH-034.md) records the
 evaluator 0.22.0 / plugin 0.2.5 delivery. Human mmzen verified VREC-PLG-032.
@@ -22,8 +38,10 @@ the original release omissions and accepted risks under DEC-RLS-005/006 remain
 historical records.
 
 This rollout used the existing delivery route under selected evaluator 0.21.0.
-The repository now selects 0.22.0; the complete-release route still needs
-reviewed provider configuration.
+The repository now selects 0.22.1 under WO-HUP-030. The separately authorized reviewer-only
+provider change for 0.22.1 is recorded in the
+[configuration readback](../engineering/release-0-22-1/evidence/WO-RLS-040/provider-configuration-applied.json).
+Recheck actual provider controls before each authorized publication.
 Earlier release records retain their original results and decisions.
 
 ## Assemble committed inputs
@@ -74,7 +92,14 @@ and instructions come from the same source commit; no output overlay is needed.
 
 ## Stage before release approval
 
-The future [complete-release route](release-delivery-completion.md#one-approval-for-the-complete-release)
+The [0.22.1 / plugin 0.2.6 preparation](../engineering/release-0-22-1/README.md)
+uses the complete-release route. Candidate qualification, exact final approval
+and public delivery are separate observed stages. Consult its current records
+for the observed public state. Repository adoption and the hosted evaluator
+pin require their own approved changes.
+
+
+The [complete-release route](release-delivery-completion.md#one-approval-for-the-complete-release)
 uses `stage` and `check-stage` before publication. They take the retained candidate's
 schema-2 build manifest, its independently retained digest and the exact wheel.
 The builder checks the commit, Git source tree, build recipe and wheel identity.
@@ -109,15 +134,15 @@ For a legacy delivery, use the
 [release delivery handoff](release-delivery-completion.md#perform-and-retain-each-handoff).
 Evaluator publication leaves plugin assembly, qualification and separately
 authorized marketplace publication pending with an owner and next action.
-For the prior delivery the published inputs are plugin 0.2.4 and evaluator
-0.21.0. The public-wheel prerequisite and authorized marketplace publication have
-completed; public-route qualification and documentation closeout remain separate.
+Historical deliveries retain their own plans and observations. For the selected
+complete-release route, execute the frozen plan under its matching human grant;
+do not request again authority that the grant already supplies.
 Track all five surfaces in the release delivery plan. Local package
 qualification does not close delivery or establish the public branch state.
 
 1. Run the declared package checks, host validators and local native installation
-   acceptance in fresh profiles. For 0.2.5, follow VER-RLS-034 and VER-IAR-021.
-   Public fresh installation and update from 0.2.4 follow under VER-RLS-035.
+   acceptance in fresh profiles. For 0.2.6, follow VER-RLS-037 and VER-IAR-021.
+   Public fresh installation and update from 0.2.5 follow under VER-RLS-038.
    Earlier accepted omissions remain limited to their recorded scope.
    Confirm the loaded package bytes, startup, manual compaction and resume. Do not alter real user profiles.
 2. Prepare the commit-bound verification record and obtain its owner decision.
@@ -130,13 +155,14 @@ qualification does not close delivery or establish the public branch state.
 4. Add the actual public Git marketplace in fresh Codex and Claude profiles,
    install verity-plane, and compare installed contents with the accepted package.
    Also test an existing public installation's update path on both hosts.
-   VER-RLS-035 governs these observations. Retain the public commit, active paths,
+   For 0.2.6, VER-RLS-038 governs these observations. Retain the public commit, active paths,
    installed hashes and native delivery before reporting public installation as checked.
-5. Update current availability claims through WO-RLS-036, obtain commit-bound
-   verification and separately authorized integration. Read the merged public
-   documentation back before declaring overall delivery complete. Preserve the
-   assembled source identity and earlier plan versions; bind observations to
-   the final delivery plan bytes.
+5. For 0.2.6, retain public observations through WO-RLS-042. Read the merged
+   public documentation back before declaring overall delivery complete.
+   The complete-release plan freezes documentation before approval; later
+   observations belong in its named receipt files. Preserve the assembled
+   source identity and the frozen plan. Any new documentation correction
+   needs bounded review before its changed bytes enter a new plan.
 
 Read the assembled README for user commands. Record current publication status
 in the work-order evidence; source preparation alone establishes no public ref.

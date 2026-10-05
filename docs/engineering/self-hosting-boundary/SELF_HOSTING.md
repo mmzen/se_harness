@@ -7,8 +7,8 @@ This guide supersedes the former specialized self-hosting operating model. The f
 The `se_harness` implementation checkout is a standard governed repository:
 
 - `.engineering-harness.toml` selects the exact released evaluator version and ordinary repository policy.
-- `.github/workflows/engineering-harness.yml` is the owner-maintained released-evaluator workflow, pinned to 0.22.0 under WO-HUP-028.
-- `.engineering-harness.lock` binds the selected 0.22.0 wheel resources and retained integrations with schema 5. Shared instructions and templates live outside the checkout.
+- `.github/workflows/engineering-harness.yml` is the owner-maintained released-evaluator workflow, pinned to 0.22.1 under WO-HUP-030.
+- `.engineering-harness.lock` binds the selected 0.22.1 wheel resources and retained integrations with schema 5. Shared instructions and templates live outside the checkout.
 - `.github/workflows/candidate-evidence.yml` is repository-owned CI for candidate source and package evidence.
 - Candidate execution never changes formal lifecycle state or the released-resource selection.
 

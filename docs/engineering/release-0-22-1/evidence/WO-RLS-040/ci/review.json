@@ -1,0 +1,507 @@
+{
+  "observed_at": "2026-10-04T19:34:23.311765+00:00",
+  "pull_request": "https://github.com/mmzen/se_harness/pull/536",
+  "review_head": "2ca5bf46006c412480b913178499a0e434bc7122",
+  "pull_request_merge_commit": "acc1a62ec70bc3c2cc56a64d789a7ffebbb831cd",
+  "status": "All current PR checks successful or explicitly skipped; manual rehearsal ran and passed all three legs. Qualification remains incomplete for non-CI criteria.",
+  "runs": [
+    {
+      "run": {
+        "databaseId": 37227957180,
+        "status": "completed",
+        "conclusion": "success",
+        "headSha": "2ca5bf46006c412480b913178499a0e434bc7122",
+        "event": "pull_request",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/37227957180"
+      },
+      "jobs": [
+        {
+          "name": "validate",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957180/job/111511427552"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 11313270539,
+          "name": "harness-dashboard",
+          "size_in_bytes": 8868687,
+          "digest": "sha256:e96cacf6acd0b0d2782721cbf934fbcde95ba0bd1348a47f554561903ab4a269",
+          "expired": false,
+          "expires_at": "2027-01-02T19:21:22Z"
+        }
+      ]
+    },
+    {
+      "run": {
+        "databaseId": 37227957187,
+        "status": "completed",
+        "conclusion": "success",
+        "headSha": "2ca5bf46006c412480b913178499a0e434bc7122",
+        "event": "pull_request",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/37227957187"
+      },
+      "jobs": [
+        {
+          "name": "Candidate source evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111511427771"
+        },
+        {
+          "name": "Candidate package evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111511696683"
+        },
+        {
+          "name": "Upgrade rehearsal (Linux)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111511805053"
+        },
+        {
+          "name": "Upgrade rehearsal (Windows)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111511805387"
+        },
+        {
+          "name": "Build deterministic integration package",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111512238562"
+        },
+        {
+          "name": "Verify integration package (Windows)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111512311423"
+        },
+        {
+          "name": "Verify integration package (Linux)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111512311467"
+        },
+        {
+          "name": "Retain verified integration package",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111512483931"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 11313230720,
+          "name": "candidate-source-raw",
+          "size_in_bytes": 2575,
+          "digest": "sha256:5505236ce45f93c215b499488d4de9548a3f459023ac8baff1dcf0649cbacbdc",
+          "expired": false,
+          "expires_at": "2026-10-18T19:22:39Z"
+        },
+        {
+          "id": 11312961507,
+          "name": "upgrade-rehearsal-Linux",
+          "size_in_bytes": 4858,
+          "digest": "sha256:e5db15cc5d9d5a4d3a01f5923bddd30c2e3d71dd3fa0bf0ad065999d5cc8dd76",
+          "expired": false,
+          "expires_at": "2026-10-18T19:24:13Z"
+        },
+        {
+          "id": 11312950765,
+          "name": "candidate-package-qualification-0.22.0",
+          "size_in_bytes": 1017,
+          "digest": "sha256:01862102353453b0dccc2fbf709ab554fec9a435f760b7f6027ab6c33e5cebe9",
+          "expired": false,
+          "expires_at": "2026-10-18T19:23:22Z"
+        },
+        {
+          "id": 11312876882,
+          "name": "upgrade-rehearsal-Windows",
+          "size_in_bytes": 5970,
+          "digest": "sha256:5fb2634667201db0601bd9cd0cb2948caeeb2bf1720f411d0a0a4f16e5e033be",
+          "expired": false,
+          "expires_at": "2026-10-18T19:25:23Z"
+        },
+        {
+          "id": 11312697529,
+          "name": "integration-package-staging-acc1a62ec70bc3c2cc56a64d789a7ffebbb831cd",
+          "size_in_bytes": 545757,
+          "digest": "sha256:59c6826813db17849db0a963867b4fe7ca959f5345d50d1a412fff6bba2138da",
+          "expired": false,
+          "expires_at": "2026-10-05T19:26:04Z"
+        },
+        {
+          "id": 11312676298,
+          "name": "candidate-wheel-non-promotable-acc1a62ec70bc3c2cc56a64d789a7ffebbb831cd",
+          "size_in_bytes": 544769,
+          "digest": "sha256:2f09f6fc914ab39fd614aa69faed38752aded582ded388af3be8d1b3fe5ad94b",
+          "expired": false,
+          "expires_at": "2026-10-05T19:22:44Z"
+        },
+        {
+          "id": 11312486900,
+          "name": "complete-candidate-qualification",
+          "size_in_bytes": 817,
+          "digest": "sha256:46d7cb13fc3721bf973d196ba09286ebca670961d1ddd451d0a29a4bb06cec5c",
+          "expired": false,
+          "expires_at": "2026-10-18T19:22:45Z"
+        }
+      ]
+    },
+    {
+      "run": {
+        "databaseId": 37227957094,
+        "status": "completed",
+        "conclusion": "success",
+        "headSha": "2ca5bf46006c412480b913178499a0e434bc7122",
+        "event": "pull_request",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/37227957094"
+      },
+      "jobs": [
+        {
+          "name": "Predecessor evaluator assessment",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957094/job/111511427369"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 11313081050,
+          "name": "predecessor-evaluator-assessment",
+          "size_in_bytes": 2912,
+          "digest": "sha256:55c9e4c3bce052dbfab89996435222dce9b8c16d5f2b9e89b235a66d3f76789a",
+          "expired": false,
+          "expires_at": "2026-10-18T19:21:34Z"
+        }
+      ]
+    },
+    {
+      "run": {
+        "databaseId": 37227957526,
+        "status": "completed",
+        "conclusion": "success",
+        "headSha": "2ca5bf46006c412480b913178499a0e434bc7122",
+        "event": "pull_request",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/37227957526"
+      },
+      "jobs": [
+        {
+          "name": "Select release rehearsals",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511428253"
+        },
+        {
+          "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511483613"
+        },
+        {
+          "name": "Rehearse the qualification of the release record",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511484337"
+        },
+        {
+          "name": "Rehearse complete delivery and recovery without publication",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511484619"
+        },
+        {
+          "name": "Publication rehearsal",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511603437"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 11313056212,
+          "name": "qualification-candidate-acc1a62ec70bc3c2cc56a64d789a7ffebbb831cd",
+          "size_in_bytes": 1594,
+          "digest": "sha256:1bbd1438f8dc6ac356de32de2b0d078f63aaf9b654eae1b2197ff046075a6166",
+          "expired": false,
+          "expires_at": "2026-10-18T19:22:16Z"
+        }
+      ]
+    },
+    {
+      "run": {
+        "databaseId": 37227997472,
+        "status": "completed",
+        "conclusion": "success",
+        "headSha": "2ca5bf46006c412480b913178499a0e434bc7122",
+        "event": "workflow_dispatch",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/37227997472"
+      },
+      "jobs": [
+        {
+          "name": "Select release rehearsals",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227997472/job/111511555076"
+        },
+        {
+          "name": "Rehearse complete delivery and recovery without publication",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227997472/job/111511597783"
+        },
+        {
+          "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227997472/job/111511598011"
+        },
+        {
+          "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227997472/job/111511598051"
+        },
+        {
+          "name": "Publication rehearsal",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/mmzen/se_harness/actions/runs/37227997472/job/111512238224"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 11313081200,
+          "name": "qualification-candidate-2ca5bf46006c412480b913178499a0e434bc7122",
+          "size_in_bytes": 1597,
+          "digest": "sha256:935f86e1bbbe6eb4b68374dd525c39d0798b873a890647d321b79f04a05e8665",
+          "expired": false,
+          "expires_at": "2026-10-18T19:22:59Z"
+        },
+        {
+          "id": 11312467016,
+          "name": "qualification-release-record-RLS-SEH-032",
+          "size_in_bytes": 5465,
+          "digest": "sha256:89447f2e4977de95c9fbeaae4836e7a60411098dbcb88ee05db23e666063dc3c",
+          "expired": false,
+          "expires_at": "2026-10-18T19:25:38Z"
+        },
+        {
+          "id": 11312342896,
+          "name": "release-bundle-RLS-SEH-032",
+          "size_in_bytes": 1363595,
+          "digest": "sha256:63ff8cac1176ea50fbacc5465820fbba36e8b37366559c947ac53a73584ce507",
+          "expired": false,
+          "expires_at": "2026-10-06T19:25:39Z"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111512483931",
+      "name": "Retain verified integration package",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111512311423",
+      "name": "Verify integration package (Windows)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111512311467",
+      "name": "Verify integration package (Linux)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111512238562",
+      "name": "Build deterministic integration package",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111511805053",
+      "name": "Upgrade rehearsal (Linux)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111511805387",
+      "name": "Upgrade rehearsal (Windows)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111511696683",
+      "name": "Candidate package evidence",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511603437",
+      "name": "Publication rehearsal",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/runs/111511557057",
+      "name": "CodeQL",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511483613",
+      "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511484619",
+      "name": "Rehearse complete delivery and recovery without publication",
+      "state": "SKIPPED"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511484337",
+      "name": "Rehearse the qualification of the release record",
+      "state": "SKIPPED"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957526/job/111511428253",
+      "name": "Select release rehearsals",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957094/job/111511427369",
+      "name": "Predecessor evaluator assessment",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227956152/job/111511426832",
+      "name": "Analyze (actions)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227956152/job/111511427095",
+      "name": "Analyze (python)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227956152/job/111511426986",
+      "name": "Analyze (javascript-typescript)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957187/job/111511427771",
+      "name": "Candidate source evidence",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/37227957180/job/111511427552",
+      "name": "validate",
+      "state": "SUCCESS"
+    }
+  ],
+  "downloaded_files": {
+    "37227997472/qualification-candidate-2ca5bf46006c412480b913178499a0e434bc7122/release-build-replay.json": {
+      "bytes": 7097,
+      "sha256": "af21e3413638bbe7cc581ef3158efde7790550bbc5e5d353a1e7b37c08416af9"
+    },
+    "37227997472/qualification-release-record-RLS-SEH-032/complete-candidate-qualification.json": {
+      "bytes": 1519,
+      "sha256": "c70ecbe95d52c41e3f87af3ab1a1cf93fa6741c95ec71f9c878fb100a8151678"
+    },
+    "37227997472/qualification-release-record-RLS-SEH-032/qualification.json": {
+      "bytes": 446,
+      "sha256": "b9a4e65b474b8e207f2fddf646d5511b56211348ecbc62a0e85a341f7da4bcb9"
+    },
+    "37227997472/qualification-release-record-RLS-SEH-032/release-build-replay.json": {
+      "bytes": 7256,
+      "sha256": "4e46e4cb0888ad3d212fa70a05cba8a66e301008752a9fe3d1cf50830a229ded"
+    },
+    "37227997472/qualification-release-record-RLS-SEH-032/release-test-evidence/output.log": {
+      "bytes": 5895,
+      "sha256": "8178810561ed2afb8ddc36de573e8d80c8fda7c0bea213b1c4d10f9f1b53d69e"
+    },
+    "37227997472/qualification-release-record-RLS-SEH-032/release-test-evidence/summary.json": {
+      "bytes": 3328,
+      "sha256": "9c5d6d53152902417d9cb2277adbc8ad37ad1930641065749ca86b7bac0fea21"
+    },
+    "37227957526/qualification-candidate-acc1a62ec70bc3c2cc56a64d789a7ffebbb831cd/release-build-replay.json": {
+      "bytes": 7097,
+      "sha256": "af3b0e99299a234b532afa15d84970a590b6f1ec436766114e629da178da294b"
+    },
+    "37227957187/candidate-package-qualification-0.22.0/candidate-package-qualification.json": {
+      "bytes": 1748,
+      "sha256": "37607f1424243c29faa7d6bfcf0bb74cb356c6c956ea9accb5ca207272115ed4"
+    },
+    "37227957187/candidate-source-raw/output.log": {
+      "bytes": 4740,
+      "sha256": "02bd44b03614d5b7391faa8f20f15c1e7235d0496c4e828945f89e6e8ab5c886"
+    },
+    "37227957187/candidate-source-raw/summary.json": {
+      "bytes": 3323,
+      "sha256": "771754588940e9f0a5c9cf334d13160febd0f6c3fe60dc4a62beaa6361a4a7a7"
+    },
+    "37227957187/complete-candidate-qualification/complete-candidate.json": {
+      "bytes": 1519,
+      "sha256": "4bbc29e033c596fe1b2e02602bc374695971249010f3d2c50550ae7894e6c0a4"
+    },
+    "37227957187/upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-result.json": {
+      "bytes": 3884,
+      "sha256": "b983cc03bb1194050cb035d436977f151c9ef1130441795a0c252b62959c7a1c"
+    },
+    "37227957187/upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-timing.json": {
+      "bytes": 4986,
+      "sha256": "7e64792c1ef9c9ad2c3ae7964d5f7dfb687beabed1838d673fb0b1c6c2ec6af7"
+    },
+    "37227957187/upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-result.json": {
+      "bytes": 3884,
+      "sha256": "b983cc03bb1194050cb035d436977f151c9ef1130441795a0c252b62959c7a1c"
+    },
+    "37227957187/upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-timing.json": {
+      "bytes": 4981,
+      "sha256": "8dfa6720aa439fb1e94df9c37366a9600b9a3ee4b6f9c0badc7ea1fbf715b1d6"
+    },
+    "37227957187/upgrade-rehearsal-Windows/windows-check-evidence/output.log": {
+      "bytes": 113,
+      "sha256": "d618afacc8672385a07d4c66d87c771b5c5f90267e404130c24941fa8bdafb47"
+    },
+    "37227957187/upgrade-rehearsal-Windows/windows-check-evidence/summary.json": {
+      "bytes": 1365,
+      "sha256": "98905bd60bc78f9dc4a2515ac8c2334abd4b1a1761cc6ffe2ff29d03bdc2b8f4"
+    },
+    "37227957187/upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-result.json": {
+      "bytes": 3878,
+      "sha256": "bcc7a58440cff3db3126496021001f1479552ee666fe7c332afac6fc2ae301c2"
+    },
+    "37227957187/upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-timing.json": {
+      "bytes": 4935,
+      "sha256": "21aaa9ab6a77d84904726525c42f89c0e13b25ef4b416845c7bf564096640f80"
+    },
+    "37227957187/upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-result.json": {
+      "bytes": 3878,
+      "sha256": "bcc7a58440cff3db3126496021001f1479552ee666fe7c332afac6fc2ae301c2"
+    },
+    "37227957187/upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-timing.json": {
+      "bytes": 4960,
+      "sha256": "b51176e2a1fe1953b8e4074a874d2b70600ea868b4462ecbd79bfd7d89c4de67"
+    },
+    "37227957094/predecessor-evaluator-assessment/evaluator-transition-assessment-result.json": {
+      "bytes": 1902,
+      "sha256": "c6c6c6eb545452686a5c57745b8ee925cf45b80416aec16d1a774ec32a7a6e10"
+    },
+    "37227957094/predecessor-evaluator-assessment/evaluator-transition-assessment.json": {
+      "bytes": 1902,
+      "sha256": "c6c6c6eb545452686a5c57745b8ee925cf45b80416aec16d1a774ec32a7a6e10"
+    },
+    "37227957094/predecessor-evaluator-assessment/evaluator-transition-plan-result.json": {
+      "bytes": 1852,
+      "sha256": "ee22f5a44dd30dfa34d061cc06c8aeb05c93572f8c40f9f7ab3eae8d6bf91ce3"
+    },
+    "37227957094/predecessor-evaluator-assessment/evaluator-transition-plan.json": {
+      "bytes": 1852,
+      "sha256": "ee22f5a44dd30dfa34d061cc06c8aeb05c93572f8c40f9f7ab3eae8d6bf91ce3"
+    }
+  },
+  "limits": [
+    "PR jobs assess the merge commit; manual candidate replay assesses the exact review head. Neither is silently substituted for the preparation source.",
+    "Raw CI evidence was downloaded and inspected; the source summary plus remote artifact identity/expiry is retained here. Expiry does not preserve retrievability.",
+    "This is preparation CI, not human verification, release readiness or public delivery."
+  ]
+}

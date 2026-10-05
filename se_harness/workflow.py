@@ -79,7 +79,7 @@ class PlannedWrite:
 @dataclass(frozen=True)
 class PlannedInput:
     path: Path
-    original: bytes
+    original: bytes | None
 
 
 @dataclass(frozen=True)
@@ -451,6 +451,18 @@ def _proposed_artifacts(validator: Any, report: Any, replacements: Mapping[Path,
     return proposed
 
 
+def _read_transition_input(root: Path, path: Path, *, allow_missing: bool) -> bytes | None:
+    try:
+        safe_destination(root, path.relative_to(root))
+        return path.read_bytes()
+    except FileNotFoundError as exc:
+        if allow_missing:
+            return None
+        raise HarnessError(f"cannot read planned input {path.relative_to(root).as_posix()}: {exc}") from exc
+    except OSError as exc:
+        raise HarnessError(f"cannot read planned input {path.relative_to(root).as_posix()}: {exc}") from exc
+
+
 def plan_transition(
     repository: Path,
     transitions: Mapping[str, str],
@@ -487,8 +499,11 @@ def plan_transition(
     catalog = artifact_catalog(report)
     ensure_governed_checkpoint(root, transitions, report=report, catalog=catalog)
     input_paths: set[Path] = set()
+    required_inputs: set[Path] = set()
     for artifact in report.artifacts:
-        input_paths.add(safe_destination(root, artifact.path.relative_to(root)))
+        artifact_path = safe_destination(root, artifact.path.relative_to(root))
+        input_paths.add(artifact_path)
+        required_inputs.add(artifact_path)
         evidence_paths = artifact.metadata.get("evidence_paths", [])
         if isinstance(evidence_paths, list):
             for raw_path in evidence_paths:
@@ -497,8 +512,9 @@ def plan_transition(
     policy_path = safe_destination(root, Path(".engineering-harness.toml"))
     if policy_path.is_file():
         input_paths.add(policy_path)
+        required_inputs.add(policy_path)
     inputs = tuple(
-        PlannedInput(path=path, original=path.read_bytes())
+        PlannedInput(path=path, original=_read_transition_input(root, path, allow_missing=path not in required_inputs))
         for path in sorted(input_paths, key=lambda item: item.relative_to(root).as_posix())
     )
     now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ") if apply else ""
@@ -646,11 +662,7 @@ def apply_transition(plan: TransitionPlan) -> None:
     ensure_governed_checkpoint(plan.root, plan.result["selection"]["artifacts"])
     selected = {write.path: write.artifact_id for write in plan.writes}
     for planned_input in plan.inputs:
-        try:
-            current = planned_input.path.read_bytes()
-        except OSError as exc:
-            relative = planned_input.path.relative_to(plan.root).as_posix()
-            raise HarnessError(f"cannot re-read planned input {relative}: {exc}") from exc
+        current = _read_transition_input(plan.root, planned_input.path, allow_missing=True)
         if current != planned_input.original:
             identity = selected.get(planned_input.path)
             label = identity or planned_input.path.relative_to(plan.root).as_posix()

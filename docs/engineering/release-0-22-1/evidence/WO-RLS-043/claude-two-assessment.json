@@ -1,0 +1,197 @@
+{
+  "host": "claude",
+  "fixture": {
+    "repo": "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+    "baseline": "a1e83792894168658cb54969b686eff9df03540c",
+    "remote": "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two-remote.git",
+    "source_baseline": "a51c08d2a62627d46af48a913b6638b558c3758c",
+    "archive_sha256": "131bed7eb38d99373f933ac86d1a93ac32332edd5f31489ae4dc226de39ffee6",
+    "prior_baseline": "880ac2461fd6c3b5e81ffda575d63df4e650fae3",
+    "baseline_preparation": "Only the supported upgrade lock change is committed as disposable test setup. No formal artifact, draft declaration or note was changed. This is not a production comparison-base change.",
+    "before": {
+      ".engineering-harness.lock": "6e575b0fe09d1e0a62f685fbdad7389e6f4f60f16a0b5a040916b9470fedeeff",
+      ".engineering-harness.toml": "7144bd70f270eca4b4fe66508b7f6cf1a61ed47d5986a7297642a4028bfd56ae",
+      ".gitattributes": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b",
+      "notes/note.txt": "a6456ed3bde94789512c42c563637b929da22b9b5611962bd2c8ff63343d8195",
+      "docs/engineering/product/architecture/ARCH-FLW-001.md": "0004446bb25b7a43cd3f2d0844204b705fff01a4e9f9b51636a177bc3303155d",
+      "docs/engineering/product/capabilities/CAP-FLW-001.md": "5db55cb15234dbeab43355fdeae7b69f1c9839835668073ba342675cd3efeb3a",
+      "docs/engineering/product/intent/INT-FLW-001.md": "5f07804831e66b9e12e88c3a0ae2b11b3cc14820dd948d611de2cceeca29f444",
+      "docs/engineering/product/requirements/REQ-FLW-001.md": "467eec9206068eb0280559ec6bfc4e106b0748b968265ca34ed0ac8d8222b760",
+      "docs/engineering/product/specifications/SPEC-FLW-001.md": "3d4b2f30dae0e8fefbc5bee2b5178780c4e332437704f663f247642a4e47212f",
+      "docs/engineering/product/verification/VER-FLW-001.md": "f45a4f5aa9b2d7bc7d5dab99187de1f6dba4644bd281bcc358eb1d995f8cd0f5",
+      "docs/engineering/product/work-orders/WO-FLW-001.md": "f309891a503dd0674615315aad21e1f79301dd7e36c924155472cb1bcba69247",
+      "docs/engineering/product/evidence/WO-FLW-001/observations.md": "4f537b43faf8f32eaee2d4e33913a3d1d0e7d8a1d28761feaf41344816f44327"
+    },
+    "after": {
+      ".engineering-harness.lock": "9bb94b86028f08980e4460db3e746fdcc4b3c55ef7d8c89e33a93cdac99b335f",
+      ".engineering-harness.toml": "7144bd70f270eca4b4fe66508b7f6cf1a61ed47d5986a7297642a4028bfd56ae",
+      ".gitattributes": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b",
+      "notes/note.txt": "a6456ed3bde94789512c42c563637b929da22b9b5611962bd2c8ff63343d8195",
+      "docs/engineering/product/architecture/ARCH-FLW-001.md": "0004446bb25b7a43cd3f2d0844204b705fff01a4e9f9b51636a177bc3303155d",
+      "docs/engineering/product/capabilities/CAP-FLW-001.md": "5db55cb15234dbeab43355fdeae7b69f1c9839835668073ba342675cd3efeb3a",
+      "docs/engineering/product/intent/INT-FLW-001.md": "5f07804831e66b9e12e88c3a0ae2b11b3cc14820dd948d611de2cceeca29f444",
+      "docs/engineering/product/requirements/REQ-FLW-001.md": "467eec9206068eb0280559ec6bfc4e106b0748b968265ca34ed0ac8d8222b760",
+      "docs/engineering/product/specifications/SPEC-FLW-001.md": "3d4b2f30dae0e8fefbc5bee2b5178780c4e332437704f663f247642a4e47212f",
+      "docs/engineering/product/verification/VER-FLW-001.md": "f45a4f5aa9b2d7bc7d5dab99187de1f6dba4644bd281bcc358eb1d995f8cd0f5",
+      "docs/engineering/product/work-orders/WO-FLW-001.md": "f309891a503dd0674615315aad21e1f79301dd7e36c924155472cb1bcba69247",
+      "docs/engineering/product/evidence/WO-FLW-001/observations.md": "4f537b43faf8f32eaee2d4e33913a3d1d0e7d8a1d28761feaf41344816f44327"
+    }
+  },
+  "candidate": "eb0ff43ba30e3a6b5c7f1975f902cdb5da6279fc",
+  "checks": {
+    "note_exact": true,
+    "future_note_absent": true,
+    "existing_work_implemented": true,
+    "one_start": true,
+    "one_completion": true,
+    "new_work_draft": true,
+    "new_work_not_approved": true,
+    "accepted_definitions_preserved": true,
+    "complete_diff_in_scope": true,
+    "clean_worktree": true,
+    "empty_local_remote": true,
+    "no_verification_or_release_records": true
+  },
+  "passed": true,
+  "changed_paths": [
+    "docs/engineering/product/evidence/WO-FLW-001/handoff.json",
+    "docs/engineering/product/evidence/WO-FLW-001/observations.md",
+    "docs/engineering/product/work-orders/WO-FLW-001.md",
+    "docs/engineering/product/work-orders/WO-FLW-002.md",
+    "notes/note.txt"
+  ],
+  "definition_byte_comparisons": {
+    "docs/engineering/product/architecture/ARCH-FLW-001.md": true,
+    "docs/engineering/product/capabilities/CAP-FLW-001.md": true,
+    "docs/engineering/product/intent/INT-FLW-001.md": true,
+    "docs/engineering/product/requirements/REQ-FLW-001.md": true,
+    "docs/engineering/product/specifications/SPEC-FLW-001.md": true,
+    "docs/engineering/product/verification/VER-FLW-001.md": true
+  },
+  "work_order_sha256": "873f561bb457cc49f890b2a17c8e55df6db0f3bf2ce515502ebc08be0b2edd28",
+  "draft_sha256": "221d4db86cd13ec2eea3660e5dd5f1014f0cf4dc9998325f996eeb45d04a2c15",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "diff",
+        "--name-only",
+        "a1e83792894168658cb54969b686eff9df03540c"
+      ],
+      "exit_code": 0,
+      "stdout": "docs/engineering/product/evidence/WO-FLW-001/handoff.json\ndocs/engineering/product/evidence/WO-FLW-001/observations.md\ndocs/engineering/product/work-orders/WO-FLW-001.md\ndocs/engineering/product/work-orders/WO-FLW-002.md\nnotes/note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "show",
+        "a1e83792894168658cb54969b686eff9df03540c:docs/engineering/product/architecture/ARCH-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"ARCH-FLW-001\"\r\ntype = \"architecture\"\r\ntitle = \"ARCH-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n[decision_assessment]\r\noutcome = \"no_significant_decision\"\r\ntriggers = []\r\nrationale = \"Disposable plain-text note, no architecture change.\"\r\nassessed_by = \"technical-owner\"\r\n\r\n[relations]\r\naddresses = [\"REQ-FLW-001\"]\r\nconforms_to = [\"SPEC-FLW-001\"]\r\n+++\r\n\r\n# ARCH-FLW-001\r\n\r\nRetain the existing local filesystem layout.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "show",
+        "a1e83792894168658cb54969b686eff9df03540c:docs/engineering/product/capabilities/CAP-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"CAP-FLW-001\"\r\ntype = \"capability\"\r\ntitle = \"CAP-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n\r\n\r\n[relations]\r\nderives_from = [\"INT-FLW-001\"]\r\n+++\r\n\r\n# CAP-FLW-001\r\n\r\nThe fixture reader can read plain-text notes.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "show",
+        "a1e83792894168658cb54969b686eff9df03540c:docs/engineering/product/intent/INT-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"INT-FLW-001\"\r\ntype = \"intent\"\r\ntitle = \"INT-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n\r\n\r\n[relations]\r\n\r\n+++\r\n\r\n# INT-FLW-001\r\n\r\nDisposable fixture only. Make small notes available to the fixture reader.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "show",
+        "a1e83792894168658cb54969b686eff9df03540c:docs/engineering/product/requirements/REQ-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"REQ-FLW-001\"\r\ntype = \"requirement\"\r\ntitle = \"REQ-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\nstatement = \"THE SYSTEM SHALL provide fixture notes with the exact text selected by the work order.\"\r\nverification_method = \"automated-test\"\r\n\r\n[relations]\r\nderives_from = [\"CAP-FLW-001\"]\r\n+++\r\n\r\n# REQ-FLW-001\r\n\r\nAccept when the selected note exists and its UTF-8 text matches the work-order acceptance text.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "show",
+        "a1e83792894168658cb54969b686eff9df03540c:docs/engineering/product/specifications/SPEC-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"SPEC-FLW-001\"\r\ntype = \"specification\"\r\ntitle = \"SPEC-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n\r\n\r\n[relations]\r\nspecifies = [\"REQ-FLW-001\"]\r\n+++\r\n\r\n# SPEC-FLW-001\r\n\r\nUse plain UTF-8 files below notes/. No runtime, network, configuration or authority behavior changes.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "show",
+        "a1e83792894168658cb54969b686eff9df03540c:docs/engineering/product/verification/VER-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"VER-FLW-001\"\r\ntype = \"verification\"\r\ntitle = \"VER-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n\r\n\r\n[relations]\r\nverifies = [\"REQ-FLW-001\"]\r\n+++\r\n\r\n# VER-FLW-001\r\n\r\nRead the selected note as UTF-8 and assert exact equality with its work-order acceptance text. Retain command, output and exit code.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "ls-remote",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two-remote.git"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\two",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "eb0ff43ba30e3a6b5c7f1975f902cdb5da6279fc\n",
+      "stderr": ""
+    }
+  ],
+  "claim": "Observed native fixture effects only. Synthetic fixture approval and local bare remote; no product authority or publication."
+}

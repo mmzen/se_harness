@@ -1,0 +1,170 @@
+{
+  "host": "codex",
+  "fixture": {
+    "repo": "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+    "python": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\41aa3f93f126c1f7cbb9efb6b31d5bb3ad755358e37069699d21bfee9be39475\\Scripts\\python.exe",
+    "version": "0.22.1",
+    "baseline": "29a223fe64a10f76e4174d48edb2954b3453c517",
+    "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor-remote.git",
+    "head_ref": "refs/heads/workflow-demo",
+    "base_ref": "refs/heads/main",
+    "synthetic_authority": true
+  },
+  "candidate": "56db17fc2f74bf2c8489371f152034c027dee262",
+  "checks": {
+    "note_exact": true,
+    "future_note_absent": true,
+    "existing_work_implemented": true,
+    "one_start": true,
+    "one_completion": true,
+    "new_work_draft": true,
+    "new_work_not_approved": true,
+    "accepted_definitions_preserved": true,
+    "complete_diff_in_scope": true,
+    "clean_worktree": true,
+    "empty_local_remote": true,
+    "no_verification_or_release_records": true
+  },
+  "passed": true,
+  "changed_paths": [
+    "docs/engineering/product/evidence/WO-FLW-001/handoff.json",
+    "docs/engineering/product/evidence/WO-FLW-001/observations.md",
+    "docs/engineering/product/work-orders/WO-FLW-001.md",
+    "docs/engineering/product/work-orders/WO-FLW-002.md",
+    "notes/note.txt"
+  ],
+  "definition_byte_comparisons": {
+    "docs/engineering/product/architecture/ARCH-FLW-001.md": true,
+    "docs/engineering/product/capabilities/CAP-FLW-001.md": true,
+    "docs/engineering/product/intent/INT-FLW-001.md": true,
+    "docs/engineering/product/requirements/REQ-FLW-001.md": true,
+    "docs/engineering/product/specifications/SPEC-FLW-001.md": true,
+    "docs/engineering/product/verification/VER-FLW-001.md": true
+  },
+  "work_order_sha256": "e76122fd2af3c4ee391a3a7b6d2cba6a919af7f580db1551e31810318af16ed6",
+  "draft_sha256": "6c9c41f66851362aabbe34c4198606b80b3b3bca50a4c14398dea2a766c1faa3",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "diff",
+        "--name-only",
+        "29a223fe64a10f76e4174d48edb2954b3453c517"
+      ],
+      "exit_code": 0,
+      "stdout": "docs/engineering/product/evidence/WO-FLW-001/handoff.json\ndocs/engineering/product/evidence/WO-FLW-001/observations.md\ndocs/engineering/product/work-orders/WO-FLW-001.md\ndocs/engineering/product/work-orders/WO-FLW-002.md\nnotes/note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "show",
+        "29a223fe64a10f76e4174d48edb2954b3453c517:docs/engineering/product/architecture/ARCH-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"ARCH-FLW-001\"\r\ntype = \"architecture\"\r\ntitle = \"ARCH-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n[decision_assessment]\r\noutcome = \"no_significant_decision\"\r\ntriggers = []\r\nrationale = \"Disposable plain-text note, no architecture change.\"\r\nassessed_by = \"technical-owner\"\r\n\r\n[relations]\r\naddresses = [\"REQ-FLW-001\"]\r\nconforms_to = [\"SPEC-FLW-001\"]\r\n+++\r\n\r\n# ARCH-FLW-001\r\n\r\nRetain the existing local filesystem layout.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "show",
+        "29a223fe64a10f76e4174d48edb2954b3453c517:docs/engineering/product/capabilities/CAP-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"CAP-FLW-001\"\r\ntype = \"capability\"\r\ntitle = \"CAP-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n\r\n\r\n[relations]\r\nderives_from = [\"INT-FLW-001\"]\r\n+++\r\n\r\n# CAP-FLW-001\r\n\r\nThe fixture reader can read plain-text notes.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "show",
+        "29a223fe64a10f76e4174d48edb2954b3453c517:docs/engineering/product/intent/INT-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"INT-FLW-001\"\r\ntype = \"intent\"\r\ntitle = \"INT-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n\r\n\r\n[relations]\r\n\r\n+++\r\n\r\n# INT-FLW-001\r\n\r\nDisposable fixture only. Make small notes available to the fixture reader.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "show",
+        "29a223fe64a10f76e4174d48edb2954b3453c517:docs/engineering/product/requirements/REQ-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"REQ-FLW-001\"\r\ntype = \"requirement\"\r\ntitle = \"REQ-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\nstatement = \"THE SYSTEM SHALL provide fixture notes with the exact text selected by the work order.\"\r\nverification_method = \"automated-test\"\r\n\r\n[relations]\r\nderives_from = [\"CAP-FLW-001\"]\r\n+++\r\n\r\n# REQ-FLW-001\r\n\r\nAccept when the selected note exists and its UTF-8 text matches the work-order acceptance text.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "show",
+        "29a223fe64a10f76e4174d48edb2954b3453c517:docs/engineering/product/specifications/SPEC-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"SPEC-FLW-001\"\r\ntype = \"specification\"\r\ntitle = \"SPEC-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n\r\n\r\n[relations]\r\nspecifies = [\"REQ-FLW-001\"]\r\n+++\r\n\r\n# SPEC-FLW-001\r\n\r\nUse plain UTF-8 files below notes/. No runtime, network, configuration or authority behavior changes.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "show",
+        "29a223fe64a10f76e4174d48edb2954b3453c517:docs/engineering/product/verification/VER-FLW-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "+++\r\nid = \"VER-FLW-001\"\r\ntype = \"verification\"\r\ntitle = \"VER-FLW-001\"\r\nstatus = \"approved\"\r\nowners = [\"owner\"]\r\ncreated = \"2026-08-11\"\r\nupdated = \"2026-08-11\"\r\n\r\n\r\n[relations]\r\nverifies = [\"REQ-FLW-001\"]\r\n+++\r\n\r\n# VER-FLW-001\r\n\r\nRead the selected note as UTF-8 and assert exact equality with its work-order acceptance text. Retain command, output and exit code.\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "ls-remote",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor-remote.git"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-fix043-flow\\successor",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "56db17fc2f74bf2c8489371f152034c027dee262\n",
+      "stderr": ""
+    }
+  ],
+  "claim": "Observed native fixture effects only. Synthetic fixture approval and local bare remote; no product authority or publication."
+}

@@ -1,0 +1,49 @@
+{
+  "host": "claude",
+  "fixture": "C:\\Users\\mathi\\AppData\\Local\\Temp\\r221-claude-flow\\one",
+  "draft_sha256": "63e9d2834d5638016bcc97702b3e9828c0a2334380cee02fa12d0a5a78bd5a30",
+  "front_matter": {
+    "id": "WO-FLW-002",
+    "type": "work_order",
+    "title": "Add notes/future.txt fixture note",
+    "status": "draft",
+    "owners": [
+      "owner"
+    ],
+    "created": "2026-10-04",
+    "updated": "2026-10-04",
+    "evidence_paths": [
+      "docs/engineering/product/evidence/WO-FLW-002/observations.md"
+    ],
+    "execution_scope": {
+      "paths": [
+        "notes/future.txt",
+        "docs/engineering/product/work-orders/WO-FLW-002.md",
+        "docs/engineering/product/evidence/WO-FLW-002/"
+      ]
+    },
+    "relations": {
+      "implements": [
+        "REQ-FLW-001"
+      ],
+      "specifications": [
+        "SPEC-FLW-001"
+      ],
+      "architecture": [
+        "ARCH-FLW-001"
+      ],
+      "verification": [
+        "VER-FLW-001"
+      ]
+    }
+  },
+  "checks": {
+    "draft": true,
+    "no_lifecycle_decision": true,
+    "future_absent": true,
+    "exact_requested_scope": true,
+    "no_unconfirmed_machine_assurance": true
+  },
+  "passed": true,
+  "claim": "Independent draft-content observation, not a real human approval. Failure remains visible alongside any guided correction."
+}

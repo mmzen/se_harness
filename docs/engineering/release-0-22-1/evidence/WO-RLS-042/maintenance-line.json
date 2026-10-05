@@ -1,0 +1,91 @@
+{
+  "release_record": "RLS-SEH-033",
+  "candidate_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+  "plan_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
+  "observed_at": "2026-10-05T08:59:01.062961+00:00",
+  "status": "pass",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/release/0.22"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r221",
+      "observed_at": "2026-10-05T08:43:32.300922+00:00",
+      "exit_code": 0,
+      "stdout": "abbec12ac5524c8adfb28693f846dd59de88f759\trefs/heads/release/0.22\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/mmzen/se_harness/rules/branches/release%2F0.22"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "observed_at": "2026-10-05T08:43:32.913659+00:00",
+      "exit_code": 0,
+      "stdout": "[{\"type\":\"deletion\",\"ruleset_source_type\":\"Repository\",\"ruleset_source\":\"mmzen/se_harness\",\"ruleset_id\":22326279},{\"type\":\"non_fast_forward\",\"ruleset_source_type\":\"Repository\",\"ruleset_source\":\"mmzen/se_harness\",\"ruleset_id\":22326279}]",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "abbec12ac5524c8adfb28693f846dd59de88f759",
+        "4f640284ec496b88cd7aa4ba88ca537d9374a2f8"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r221",
+      "observed_at": "2026-10-05T08:43:33.323859+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "push",
+        "origin",
+        "4f640284ec496b88cd7aa4ba88ca537d9374a2f8:refs/heads/release/0.22"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r221",
+      "observed_at": "2026-10-05T08:43:38.489613+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "To https://github.com/mmzen/se_harness.git\n   abbec12a..4f640284  4f640284ec496b88cd7aa4ba88ca537d9374a2f8 -> release/0.22\n"
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/release/0.22"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r221",
+      "observed_at": "2026-10-05T08:43:40.810637+00:00",
+      "exit_code": 0,
+      "stdout": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8\trefs/heads/release/0.22\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "https://github.com/mmzen/se_harness.git",
+        "refs/heads/plugin-marketplace",
+        "refs/heads/release/0.22",
+        "refs/tags/v0.22.1",
+        "refs/tags/v0.22.1^{}",
+        "refs/tags/last"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "observed_at": "2026-10-05T08:56:22.129460+00:00",
+      "exit_code": 0,
+      "stdout": "85ae003769f53908addbdcf46c820a8af530ac24\trefs/heads/plugin-marketplace\n4f640284ec496b88cd7aa4ba88ca537d9374a2f8\trefs/heads/release/0.22\nabbec12ac5524c8adfb28693f846dd59de88f759\trefs/tags/last\nef77258e72ab2556fbcbf1c4fdfa8c03dd4d2f0f\trefs/tags/v0.22.1\n4f640284ec496b88cd7aa4ba88ca537d9374a2f8\trefs/tags/v0.22.1^{}\n",
+      "stderr": ""
+    }
+  ]
+}
