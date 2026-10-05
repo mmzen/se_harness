@@ -131,6 +131,14 @@ including import variants, missing bindings, tuple/schema failures, measured
 limits and native plugin observations. Skipped or absent cases are unperformed.
 Run the applicable repository regression and distribution checks.
 
+Run `qualify_integrity.py` in a disposable service process with the same mounts,
+walkthrough and current continuation. Supply its separately installed candidate
+`--client-python`. This checks altered deployment identities, installed service
+contracts, evaluator substitution, and broken context-base links. Its file edits
+affect only the disposable container; its graph edits always roll back. Do not run
+it inside the serving container. Passing these checks does not complete the other
+scenario requirements.
+
 ## Restart and restore
 
 Keep the same `HAG_*` environment and stop other test writers. Use a fresh output

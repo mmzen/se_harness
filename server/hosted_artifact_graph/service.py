@@ -9,7 +9,8 @@ import os
 import platform
 import re
 import zipfile
-from importlib.metadata import version as package_version
+import sys
+from importlib.metadata import PackageNotFoundError, version as package_version
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
@@ -96,13 +97,19 @@ class Service:
             expect(all(isinstance(d, str) and re.fullmatch(r"[0-9a-f]{64}", d) and len(set(d)) > 1 for d in digests))
             expect(hashlib.sha256(Path("/opt/requirements.lock").read_bytes()).hexdigest() == server["dependency_lock_sha256"])
             expect(hashlib.sha256(Path("/opt/system-packages.lock.json").read_bytes()).hexdigest() == server["system_packages_sha256"])
+            deployment = {"configuration": {k: v for k, v in self.config.items() if k != "components"},
+                          "compose_sha256": hashlib.sha256(Path("/opt/compose.yaml").read_bytes()).hexdigest()}
+            expect(hashlib.sha256(canonical_json(deployment)).hexdigest() == value["deployment_sha256"])
             wheel, = Path("/opt/service-wheel").glob("*.whl")
             expect(hashlib.sha256(wheel.read_bytes()).hexdigest() == server["wheel_sha256"])
             with zipfile.ZipFile(wheel) as archive:
                 for name in archive.namelist():
                     if name.startswith("hosted_artifact_graph/") and not name.endswith("/"):
                         expect((Path(__file__).parent.parent / name).read_bytes() == archive.read(name))
-        except (AssertionError, KeyError, TypeError, ValueError, OSError, zipfile.BadZipFile) as exc:
+                    elif ".data/data/" in name and not name.endswith("/"):
+                        relative = name.split(".data/data/", 1)[1]
+                        expect((Path(sys.prefix) / relative).read_bytes() == archive.read(name))
+        except (AssertionError, KeyError, TypeError, ValueError, OSError, zipfile.BadZipFile, PackageNotFoundError) as exc:
             raise Refusal(409, "UNSUPPORTED_TUPLE", "Missing or incompatible sandbox component identities.") from exc
 
     def lookup(self, principal, project, key):

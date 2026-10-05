@@ -161,6 +161,12 @@ class Store:
             context = row["c"]
             require(context["context_version"] == view["context_version"], 409,
                     "STALE_CONTEXT", "Selected context version has changed.")
+            bases = tx.run("MATCH (c:DraftContext {project_id:$p, context_id:$c})-[:BASED_ON]->(b) "
+                           "RETURN b.project_id AS p, b.baseline_id AS b, labels(b) AS labels",
+                           p=self.project_id, c=view["context_id"]).data()
+            require(len(bases) == 1 and bases[0]["p"] == self.project_id
+                    and bases[0]["b"] == context["base_baseline_id"] and "Baseline" in bases[0]["labels"],
+                    422, "INCOMPLETE_SELECTION", "Context base edge differs from its declared baseline.")
             baseline = self.baseline(tx, context["base_baseline_id"])
             selection = dict(baseline["manifest"]["selection"])
             proposals = tx.run("MATCH (c:DraftContext {project_id:$p, context_id:$c})-[e:PROPOSES]->(r:Revision) "

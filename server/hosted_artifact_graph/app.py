@@ -5,6 +5,7 @@ import contextlib
 import contextvars
 import json
 import logging
+import traceback
 from pathlib import Path
 
 from mcp.server.lowlevel import Server
@@ -136,9 +137,13 @@ def create_app(config_path, credentials_path):
         except Refusal as exc:
             LOG.info("request refusal=%s", exc.code)
             return JSONResponse(exc.result(), status_code=exc.status)
-        except Exception:
-            # No guessed refusal after an uncertain commit. No document/credential in logs.
-            LOG.error("request outcome=unknown; reconcile by operation lookup")
+        except Exception as exc:
+            # Keep class and source locations only, never exception messages,
+            # source lines or local variables that may contain input or secrets.
+            locations = [(Path(frame.filename).name, frame.name, frame.lineno)
+                         for frame in traceback.extract_tb(exc.__traceback__)]
+            LOG.error("request outcome=unknown failure_type=%s locations=%s; reconcile by operation lookup",
+                      type(exc).__name__, locations)
             return JSONResponse({"schema": "se-harness-remote-transport/v1", "outcome": "unknown",
                                  "message": "Service could not establish the result. Look up or identically retry the operation."}, status_code=503)
 

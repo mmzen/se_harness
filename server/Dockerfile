@@ -11,6 +11,7 @@ COPY requirements.lock /opt/requirements.lock
 RUN python -m pip install --no-cache-dir --require-hashes -r /tmp/requirements.lock
 COPY vendor/se_harness-0.22.1-py3-none-any.whl /opt/evaluator-wheel/se_harness-0.22.1-py3-none-any.whl
 RUN python -m venv /opt/evaluator && /opt/evaluator/bin/python -I -m pip install --no-deps /opt/evaluator-wheel/se_harness-0.22.1-py3-none-any.whl
+COPY compose.yaml /opt/compose.yaml
 COPY pyproject.toml /tmp/service/pyproject.toml
 COPY contracts /tmp/service/contracts
 COPY hosted_artifact_graph /tmp/service/hosted_artifact_graph
