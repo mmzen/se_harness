@@ -79,13 +79,18 @@ The PR remains draft. [RLS-SEH-033](releases/RLS-SEH-033.md) is ready and bound
 to the exact verified archives. Distribution validation passes; the [ready-record replay](evidence/WO-RLS-040/ready-record-replay-receipt.json)
 passed with two byte-identical builds of the bound candidate.
 
-The complete-delivery plan is not frozen yet. mmzen approved WO-RLS-044 and
-VER-RLS-005 for the bounded source-documentation correction. The six guides and
-stable delivery index are corrected and checked; the [assessment](evidence/WO-RLS-044/assessment.md)
-retains the original failures, their fixes and the unchanged payload identities.
-The required independent documentation verification is being prepared. The
-already verified binary candidate and immutable staged packages remain unchanged.
-The complete-release request follows that separate human verification.
+mmzen verified the independent documentation correction in
+[VREC-RLS-003](verification-records/VREC-RLS-003.md), at candidate
+`dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3`. The decision is retained in
+`febda5a5be9d484231a932f19111bec8ebf72f8d`. The binary candidate and staged bytes
+remain unchanged.
+
+The [complete-release request](evidence/WO-RLS-040/complete-release-review.md)
+now presents the exact plan, readiness, destinations and recovery boundaries.
+RLS-SEH-033 remains ready until mmzen makes that single release decision.
+Required public observations occur afterward and are never inferred from this
+preparation. The release request covers all listed external actions, including
+protected integration and bounded receipt PRs; adoption remains separate.
 
 ## Desktop decision and provider readiness
 
@@ -102,8 +107,8 @@ four PyPI Trusted Publisher fields. This is human account-side confirmation,
 not an authenticated PyPI read by the agent. No release was dispatched.
 
 Final candidate capture and staging are complete. WO-RLS-040/041/043 remain
-`implemented`; VREC-SEH-033 is `verified`. The ready RLS and documentation
-proposal do not supply a merge, complete-release or adoption decision.
+`implemented`; VREC-SEH-033 is `verified`. WO-RLS-044 is implemented and VREC-RLS-003 is verified. The prepared complete-release
+request does not itself supply a merge, release or adoption decision.
 
 ## Known dependencies
 
