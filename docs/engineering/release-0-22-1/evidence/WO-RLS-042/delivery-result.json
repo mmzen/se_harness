@@ -1,9 +1,6 @@
 {
-  "release_record": "RLS-SEH-033",
-  "candidate_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
-  "plan_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
   "schema": "se-harness-delivery-result/v1",
-  "status": "ready_for_markers",
+  "status": "complete",
   "input_status": "valid",
   "authority": "derived operational evidence; no lifecycle transition",
   "limitation": "Assesses supplied, retained observations only. Does not independently run host tests, authenticate human reviews, or establish live public state. Grants no lifecycle or external authority.",
@@ -20,7 +17,7 @@
     ]
   },
   "evaluator_publication": "satisfied",
-  "observed_at": "2026-10-05T08:59:01.146842+00:00",
+  "observed_at": "2026-10-05T09:09:29.890739+00:00",
   "surfaces": [
     {
       "id": "evaluator",
@@ -259,7 +256,7 @@
     {
       "id": "release_markers",
       "disposition": "update",
-      "status": "failed",
+      "status": "satisfied",
       "owner": "mmzen",
       "next_action": "Only after all required non-marker observations pass, promote latest from v0.22.0 to v0.22.1 and last from abbec12ac5524c8adfb28693f846dd59de88f759 to 4f640284ec496b88cd7aa4ba88ca537d9374a2f8. Use the existing serialized publisher and exact last lease. Stop on unexpected movement. Read back both targets, integrate the named JSON receipts via protected PRs, and produce the five-surface completion report. This is the sole explicitly permitted moving-tag operation; no immutable version tag may move.",
       "expected": {
@@ -268,51 +265,33 @@
       },
       "observation": {
         "id": "release_markers",
-        "status": "pending",
-        "observed_at": "2026-10-05T08:59:01.138845+00:00",
+        "status": "pass",
+        "observed_at": "2026-10-05T09:09:29.890758+00:00",
         "source": "https://github.com/mmzen/se_harness",
         "identity": {
-          "latest": "v0.22.0",
-          "last": "abbec12ac5524c8adfb28693f846dd59de88f759"
+          "latest": "v0.22.1",
+          "last": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8"
         },
         "evidence": {
           "authorization": [
             {
-              "path": "publisher.json",
-              "sha256": "c74f44c5624b61e3426b44c71435b9b6c96c19dd90e1878c40ddcb37ed53bfcc"
+              "path": "release-marker-receipt.json",
+              "sha256": "4c74c64e73f0236fe1a1057303f90a3af2b5092b8c2e3f58ace508b1e8510286"
             }
           ],
           "readback": [
             {
-              "path": "maintenance-line.json",
-              "sha256": "8d25e7eaaa945976396daecb517e08a740941144808d59bf3ffe1f135e426cb5"
+              "path": "release-marker-receipt.json",
+              "sha256": "4c74c64e73f0236fe1a1057303f90a3af2b5092b8c2e3f58ace508b1e8510286"
             }
           ]
-        },
-        "note": "Markers unchanged until this exact public observation package is integrated and assessed."
-      },
-      "findings": [
-        {
-          "code": "pending",
-          "location": "release_markers",
-          "message": "Surface has not passed"
-        },
-        {
-          "code": "mismatch",
-          "location": "release_markers.identity.latest",
-          "message": "Identity differs",
-          "expected": "v0.22.1",
-          "observed": "v0.22.0"
-        },
-        {
-          "code": "mismatch",
-          "location": "release_markers.identity.last",
-          "message": "Identity differs",
-          "expected": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
-          "observed": "abbec12ac5524c8adfb28693f846dd59de88f759"
         }
-      ]
+      },
+      "findings": []
     }
   ],
-  "findings": []
+  "findings": [],
+  "plan_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
+  "release_record": "RLS-SEH-033",
+  "candidate_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8"
 }
