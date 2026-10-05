@@ -1,6 +1,6 @@
 # Proposed evaluator 0.22.1 and plugin 0.2.6 release
 
-Status: **VREC-SEH-033 ready; human verification pending**.
+Status: **VREC-SEH-033 verified by mmzen; RLS-SEH-033 ready. Complete-release review remains in preparation.**
 
 The outcome is a public evaluator that provides standalone draft validation
 and records the actual human behind an existing ownership label. This removes
@@ -59,9 +59,9 @@ and amendments to accepted hosted definitions require separate bounded review.
 
 ## Qualification evidence
 
-[VREC-SEH-033](verification-records/VREC-SEH-033.md) is **ready**, bound to exact
+[VREC-SEH-033](verification-records/VREC-SEH-033.md) is **verified by mmzen**, bound to exact
 candidate `4f640284ec496b88cd7aa4ba88ca537d9374a2f8`. It covers all six release
-work orders and their seven verification contracts. Human verification remains pending.
+work orders and their seven verification contracts. The exact human response, "Verify result", is recorded in commit `01daf09386ca16a92213857771f087ca06b07e9e`.
 
 The [final review](evidence/WO-RLS-040/final-verification-review.md) maps the
 criteria to Windows/Linux source, installed package, pinned build and native CLI
@@ -75,10 +75,17 @@ explains the limited reuse of byte-identical native inputs; it does not relabel
 earlier observations as new runs. The original transition defect and approved
 linked REL-SEH-035 amendment remain documented in the correction packet.
 
-The PR remains draft. The next decision is human verification of VREC-SEH-033.
-After that decision, prepare the exact release record, bind and replay its
-archives, and freeze the complete-delivery plan for the later release decision.
-No release record or executable final plan is claimed yet.
+The PR remains draft. [RLS-SEH-033](releases/RLS-SEH-033.md) is ready and bound
+to the exact verified archives. Distribution validation passes; a read-only
+ready-record replay follows publication of this preparation review.
+
+The complete-delivery plan is not frozen yet. Its documentation review found
+stale qualification/current-version statements that would become locked by the
+plan. [WO-RLS-044 / VER-RLS-005](evidence/WO-RLS-044/review.md) propose a bounded,
+independently verified source-documentation correction. Its exact patch is
+unapplied. The already verified binary candidate and immutable staged packages
+remain unchanged. The release decision is not being requested until those
+documentation inputs and their required assurance are ready.
 
 ## Desktop decision and provider readiness
 
@@ -95,8 +102,8 @@ four PyPI Trusted Publisher fields. This is human account-side confirmation,
 not an authenticated PyPI read by the agent. No release was dispatched.
 
 Final candidate capture and staging are complete. WO-RLS-040/041/043 remain
-`implemented`; VREC-SEH-033 remains `ready`. This review supplies no verification,
-merge, release or adoption decision.
+`implemented`; VREC-SEH-033 is `verified`. The ready RLS and documentation
+proposal do not supply a merge, complete-release or adoption decision.
 
 ## Known dependencies
 

@@ -1,0 +1,43 @@
+{
+  "schema": "release-documentation-proposal/v1",
+  "source_commit": "01daf09386ca16a92213857771f087ca06b07e9e",
+  "released_candidate": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+  "applied": false,
+  "files": [
+    {
+      "path": "README.md",
+      "before_sha256": "d0bcb062f3e2184341ee55f5d7467e36b40dfdbaffbcf1227eef85febf4b978a",
+      "proposed_sha256": "57b8e2a98e6ba804db159476673a970b4684c08b36cea355ea6da2e32da1b86c"
+    },
+    {
+      "path": "docs/notes/plugin-installation-guide.md",
+      "before_sha256": "c5bd5fdb10b8bada4eeaa678a55206741a92930055e4da5913a6500bd9aa1df0",
+      "proposed_sha256": "ca0fd66e8679d546083c4cd9623c3b6d66395693ecae810af1e2b91bba9193b0"
+    },
+    {
+      "path": "docs/notes/plugin-marketplace-publication.md",
+      "before_sha256": "0a8b527be4b1539ac139c7783b347429022874587f013e9f088dcf9021245047",
+      "proposed_sha256": "66b4a7e6dc216ef48977daaf9235eecb16248beb7ba8c130097e85d78731ab5f"
+    },
+    {
+      "path": "plugins/verity-plane/codex/README.md",
+      "before_sha256": "5d1117251574917978fdde2b60f745888b160026e83bad70534fdba3204c808b",
+      "proposed_sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91"
+    },
+    {
+      "path": "plugins/verity-plane/claude-code/README.md",
+      "before_sha256": "5d1117251574917978fdde2b60f745888b160026e83bad70534fdba3204c808b",
+      "proposed_sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91"
+    },
+    {
+      "path": "release/plugin-marketplace/README.md",
+      "before_sha256": "3a7e4bd52a1eb16166ece1a15822455216947d6615c0fa3f8c541840f13f7ddc",
+      "proposed_sha256": "ae87cfe32798ad4e27474b8d4bb76a5bb218613a1d8ce73db26d16c3d3e47081"
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md",
+      "before_sha256": null,
+      "proposed_sha256": "ecabe74012ceff709980891983b1071a0b60f8e7b94a7d1e550974a605736289"
+    }
+  ]
+}
