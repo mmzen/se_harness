@@ -2,10 +2,10 @@
 id = "DEC-HAG-001"
 type = "decision"
 title = "Released evaluator support for standalone sandbox draft admission"
-status = "open"
+status = "decided"
 owners = ["mmzen"]
 created = "2026-10-04"
-updated = "2026-10-04"
+updated = "2026-10-05"
 kind = "question"
 question = "How should the hosted adapter satisfy incomplete-draft and relationship-type admission when released evaluator 0.22.0 exposes no complete standalone draft-admission result?"
 raised_by = "Codex"
@@ -26,6 +26,21 @@ label = "Stop the dependent hosted authoring work and retain the completed Phase
 [relations]
 concerns = ["REQ-HAG-004", "REQ-HAG-007", "SPEC-HAG-002", "SPEC-HAG-003", "VER-HAG-001", "WO-HAG-001"]
 blocks = ["WO-HAG-001"]
+
+[disposition]
+option = "extend-evaluator"
+label = "Prepare a bounded evaluator extension and qualify a released version before changing the hosted evaluator pin."
+decided_by = "mmzen"
+authority_owner = "engineering-owner"
+decided_at = "2026-10-05T12:54:43Z"
+reason = "mmzen already selected extend-evaluator, as explicitly confirmed in the human handoff and retained correction work. Public evaluator 0.22.1 now contains the verified draft-admission and attribution fixes. WO-HAG-005 records the separately approved pin amendment and integration. This applies that existing choice only; hosted work remains in_progress and no hosted verification, risk acceptance, merge or release is supplied."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-10-05T12:54:43Z"
+decided_by = "mmzen"
+reason = "mmzen already selected extend-evaluator, as explicitly confirmed in the human handoff and retained correction work. Public evaluator 0.22.1 now contains the verified draft-admission and attribution fixes. WO-HAG-005 records the separately approved pin amendment and integration. This applies that existing choice only; hosted work remains in_progress and no hosted verification, risk acceptance, merge or release is supplied."
 +++
 
 # Released evaluator support for standalone sandbox draft admission
