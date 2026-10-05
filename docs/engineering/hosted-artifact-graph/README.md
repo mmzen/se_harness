@@ -90,3 +90,11 @@ WO-HAG-001 still requires Phase 2 service implementation, all twelve hosted
 scenarios, the walkthrough and restart/restore qualification. Zero hosted
 scenarios have run. PR #535 stays draft and keeps its original target
 `codex/hosted-artifact-graph-inputs`.
+
+## Current reconciliation stop
+
+The [progress report](evidence/WO-HAG-005/progress.md) records two outstanding
+checks: predecessor assessment against the original PR base and the stale
+WO-HAG-001 handoff snapshot. WO-HAG-005 remains in_progress. No verification
+record or PR update has been produced for this reconciliation. A separate
+correction package is under review; the original target and evidence are intact.
