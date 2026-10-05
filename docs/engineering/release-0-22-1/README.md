@@ -1,6 +1,8 @@
-# Proposed evaluator 0.22.1 and plugin 0.2.6 release
+# Evaluator 0.22.1 and plugin 0.2.6 release
 
-Status: **VREC-SEH-033 verified by mmzen; RLS-SEH-033 ready. Complete-release review remains in preparation.**
+Status: **RLS-SEH-033 released; all five public delivery surfaces complete.**
+[VREC-RLS-004](verification-records/VREC-RLS-004.md) records mmzen's verification of the [public observations](evidence/WO-RLS-042/closeout-assessment.md), merged through PR #539.
+Repository adoption now proceeds separately under [WO-HUP-030](../repository-harness-upgrade/work-orders/WO-HUP-030.md).
 
 The outcome is a public evaluator that provides standalone draft validation
 and records the actual human behind an existing ownership label. This removes
@@ -75,7 +77,7 @@ explains the limited reuse of byte-identical native inputs; it does not relabel
 earlier observations as new runs. The original transition defect and approved
 linked REL-SEH-035 amendment remain documented in the correction packet.
 
-The PR remains draft. [RLS-SEH-033](releases/RLS-SEH-033.md) is ready and bound
+At the preparation checkpoint, [RLS-SEH-033](releases/RLS-SEH-033.md) was ready and bound
 to the exact verified archives. Distribution validation passes; the [ready-record replay](evidence/WO-RLS-040/ready-record-replay-receipt.json)
 passed with two byte-identical builds of the bound candidate.
 
@@ -86,11 +88,11 @@ mmzen verified the independent documentation correction in
 remain unchanged.
 
 The [complete-release request](evidence/WO-RLS-040/complete-release-review.md)
-now presents the exact plan, readiness, destinations and recovery boundaries.
-RLS-SEH-033 remains ready until mmzen makes that single release decision.
-Required public observations occur afterward and are never inferred from this
-preparation. The release request covers all listed external actions, including
-protected integration and bounded receipt PRs; adoption remains separate.
+retains the exact plan, readiness, destinations and recovery boundaries reviewed
+by mmzen. The recorded complete-release decision authorized its listed external
+actions. The [delivery result](evidence/WO-RLS-042/delivery-result.json) and
+[public assessment](evidence/WO-RLS-042/closeout-assessment.md) record completion,
+including marketplace, Pages and latest/last. Adoption remains separate.
 
 ## Desktop decision and provider readiness
 
@@ -104,7 +106,8 @@ The separately authorized [pypi environment change](evidence/WO-RLS-040/provider
 removed only the required reviewer. Readback confirms main-only deployment,
 main protections and workflow permissions are unchanged. mmzen confirmed the
 four PyPI Trusted Publisher fields. This is human account-side confirmation,
-not an authenticated PyPI read by the agent. No release was dispatched.
+not an authenticated PyPI read by the agent. No release was dispatched during
+that configuration step; later publication is retained in the delivery evidence.
 
 Final candidate capture and staging are complete. WO-RLS-040/041/043 remain
 `implemented`; VREC-SEH-033 is `verified`. WO-RLS-044 is implemented and VREC-RLS-003 is verified. The prepared complete-release
@@ -112,13 +115,15 @@ request does not itself supply a merge, release or adoption decision.
 
 ## Known dependencies
 
-The current governor remains released 0.22.0. Native and desktop test readiness
+The release was prepared under released 0.22.0. Repository adoption under
+WO-HUP-030 now selects released 0.22.1. Native and desktop test readiness
 and independent provider controls must be checked during preparation. The bounded desktop omission for this release is recorded above; older
 release-specific omissions remain historical. Missing required
 results block the affected readiness claim until resolved through the proper
 decision procedure. No new risk acceptance is bundled into this proposal.
 
-After delivery, prepare explicit adoption and preserved linked revisions of
-SPEC-HAG-003 and VER-HAG-001. Then use the adopted released decision command to
+Repository adoption is covered by WO-HUP-030. Preserved linked revisions of
+SPEC-HAG-003 and VER-HAG-001 still need separate review and authority.
+After that boundary is resolved, use the adopted released decision command to
 record mmzen's existing `extend-evaluator` choice with the correct owner binding.
 The choice is already known; do not ask it again or fabricate a disposition.

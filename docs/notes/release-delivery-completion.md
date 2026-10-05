@@ -17,17 +17,20 @@ and the explicitly selected complete-release route in
 It grants no approval, publication right or lifecycle transition. Use the
 selected released evaluator and its procedures for those decisions.
 
-The [approved 0.22.0 / 0.2.5 release](../engineering/release-0-22-0/README.md)
+The historical [approved 0.22.0 / 0.2.5 release](../engineering/release-0-22-0/README.md)
 has published the supporting product. WO-RLS-034 owns evaluator preparation;
 WO-RLS-035/036 own marketplace publication and public closeout. This rollout
-uses selected evaluator 0.21.0 and the existing delivery route. Subsequent
-adoption and the reviewed provider configuration activate the new route below.
+used selected evaluator 0.21.0 and the existing delivery route. Later adoption
+and reviewed provider configuration enabled the complete-release route used by
+[0.22.1 / 0.2.6](../engineering/release-0-22-1/README.md).
 
 ## One approval for the complete release
 
 **Availability:** Evaluator 0.22.0 and plugin 0.2.5 contain this route. This
-repository selects 0.22.0 under WO-HUP-028. Apply the separately reviewed
-provider configuration before offering the complete-release route as ready. Existing releases keep their original decisions and procedures.
+repository selects 0.22.1 under WO-HUP-030. The separately authorized
+[provider configuration](../engineering/release-0-22-1/evidence/WO-RLS-040/provider-configuration-applied.json)
+was applied for 0.22.1. Recheck provider controls before each release.
+Existing releases keep their original decisions and procedures.
 
 **Input:** A verified candidate, exact evaluator distributions, both qualified
 plugin packages, documentation, demonstration inputs and operational readiness.
@@ -416,7 +419,21 @@ the required marketplace update remains absent. That case returns incomplete
 and retains the marketplace owner and next action. Live public qualification
 belongs to the subsequent marketplace work and its verification contract.
 
-## Current 0.22.0 delivery
+## Current 0.22.1 delivery
+
+Evaluator 0.22.1 and plugin 0.2.6 are public. The marketplace commit is
+`85ae003769f53908addbdcf46c820a8af530ac24`. The
+[delivery result](../engineering/release-0-22-1/evidence/WO-RLS-042/delivery-result.json)
+records all five surfaces complete, including Pages, latest v0.22.1 and last at
+the released candidate. [VREC-RLS-004](../engineering/release-0-22-1/verification-records/VREC-RLS-004.md)
+records mmzen's verification of those observations.
+
+Windows Codex and Claude Code CLI fresh installation, update from 0.2.5 and
+offline setup passed. Codex Windows desktop remains unverified under accepted
+DEC-RLS-009 / RISK-RLS-007. These public routes do not claim live model-session
+or hosted-service tests. Repository adoption is separate under WO-HUP-030.
+
+## Historical 0.22.0 delivery
 
 Evaluator 0.22.0 and plugin 0.2.5 are public. The marketplace commit is
 `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. [Public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md)

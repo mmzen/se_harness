@@ -3,7 +3,20 @@
 This domain governs separately authorized standard-root evaluator upgrades and
 their bounded post-adoption qualification.
 
-## Current adoption: 0.22.0
+## Current adoption: 0.22.1
+
+[WO-HUP-030](work-orders/WO-HUP-030.md) adopts the exact public wheel bound by
+RLS-SEH-033 under [VER-HUP-025](verification/VER-HUP-025.md). The installer
+updates only the configuration and lock. CI selects 0.22.1; development source
+advances to unpublished 0.22.2. Owner content, external resources, integrations
+and historical artifacts stay intact. No instruction copies are recreated.
+
+See the [transaction](evidence/WO-HUP-030-evaluator-upgrade.json) and
+[adoption review](evidence/WO-HUP-030/review.md). Human verification and merge
+remain separate. This adoption does not update the host plugin or amend the
+hosted-service contract, which still pins 0.22.0.
+
+## Previous adoption: 0.22.0
 
 WO-HUP-028 adopts the public wheel bound by RLS-SEH-032 under VER-HUP-005.
 The reviewed transaction updates the configuration and lock while preserving

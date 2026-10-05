@@ -38,9 +38,9 @@ claude plugin install verity-plane@se-harness
 
 Start a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.
 
-Observed public delivery (2026-10-03): Plugin **0.2.5** bundles released **SE Harness 0.22.0**. Codex CLI fresh installation, update from 0.2.4 and offline setup passed. [Public evidence](docs/engineering/release-0-22-0/evidence/WO-RLS-036/README.md) records exact identities and limits.
+Observed public delivery (2026-10-05): Plugin **0.2.6** bundles released **SE Harness 0.22.1**. On Windows, Codex and Claude Code CLI fresh installation, update from 0.2.5 and offline setup passed. [Public evidence](docs/engineering/release-0-22-1/evidence/WO-RLS-042/closeout-assessment.md) records exact identities and limits.
 
-[Claude follow-up](docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md): Windows installation, update and session checks passed. Codex desktop, the full Claude workflow and long paths remain unverified. Historical decisions and accepted risks are unchanged.
+Historical [0.22.0 Claude results and limitations](docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md) remain unchanged.
 
 Startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Setup installs the bundled wheel **offline** into a private environment. It does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
 
@@ -59,9 +59,11 @@ Codex Windows desktop remains unverified (accepted DEC-RLS-009 / RISK-RLS-007).
 [Release record](docs/engineering/release-0-22-1/releases/RLS-SEH-033.md),
 [delivery evidence](docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md)
 and [public identity](https://github.com/mmzen/se_harness/blob/plugin-marketplace/PACKAGE-IDENTITY.json)
-distinguish authorization and availability. Qualification is not publication.
-Repository evaluator: 0.22.0.
-Delivery excludes adoption and hosted-service verification.
+record completed delivery, verified in
+[VREC-RLS-004](docs/engineering/release-0-22-1/verification-records/VREC-RLS-004.md).
+Repository evaluator: 0.22.1, adopted under
+[WO-HUP-030](docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-030.md).
+Development source: unpublished 0.22.2. The hosted-service contract still pins 0.22.0.
 
 ## Fewer repository files
 

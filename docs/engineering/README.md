@@ -4,6 +4,10 @@
 
 ## Product and governance domains
 
+- [release-0-22-1/](release-0-22-1/README.md): published evaluator 0.22.1 and plugin 0.2.6;
+  [verified public delivery](release-0-22-1/verification-records/VREC-RLS-004.md) covers the five surfaces.
+- [Repository adoption](repository-harness-upgrade/README.md): WO-HUP-030 selects 0.22.1; development source is unpublished 0.22.2.
+
 - [release-0-22-0/](release-0-22-0/README.md): published evaluator 0.22.0 and plugin 0.2.5;
   [completed public delivery](release-0-22-0/evidence/WO-RLS-036/closeout.md) covers all five delivery surfaces.
 
@@ -76,5 +80,3 @@ Formal artifacts use TOML front matter between `+++` delimiters. Stable IDs and 
 ## Maintenance
 
 Update this index when an engineering domain or repository-specific guide is added, moved, superseded, or retired. Do not copy managed policy or lifecycle instructions into this owner-controlled file.
-
-- [Release 0.22.1 / plugin 0.2.6 preparation](release-0-22-1/README.md): approved qualification scope; publication and adoption remain pending.

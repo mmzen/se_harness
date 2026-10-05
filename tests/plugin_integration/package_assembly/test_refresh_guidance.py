@@ -11,11 +11,11 @@ ROOT = Path(__file__).resolve().parents[3]
 # Candidate identities come from approved REL-SEH-035, not candidate output.
 PLUGIN = "0.2.6"
 CANDIDATE_EVALUATOR = "0.22.1"
-# Published identities come from RLS-SEH-032 and independent public readback.
-EVALUATOR = "0.22.0"
-WHEEL_SHA = "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
-RELEASE = "docs/engineering/release-0-22-0/releases/RLS-SEH-032.md"
-OBSERVATION = "docs/engineering/release-0-22-0/evidence/WO-RLS-036/publication-receipt.json"
+# Published identities come from RLS-SEH-033 and independent public readback.
+EVALUATOR = "0.22.1"
+WHEEL_SHA = "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053"
+RELEASE = "docs/engineering/release-0-22-1/releases/RLS-SEH-033.md"
+OBSERVATION = "docs/engineering/release-0-22-1/evidence/WO-RLS-042/marketplace-public-ref.json"
 
 
 def selected_inputs():
@@ -36,7 +36,7 @@ def identity_findings(inputs):
         findings.append("candidate manifest version")
     release = inputs["release"]
     if (release.get("id"), release.get("status"), release.get("version")) != (
-            "RLS-SEH-032", "released", EVALUATOR):
+            "RLS-SEH-033", "released", EVALUATOR):
         findings.append("released evaluator selection")
     distribution = release.get("distribution", {})
     if (distribution.get("wheel"), distribution.get("wheel_sha256")) != (
@@ -49,10 +49,27 @@ def identity_findings(inputs):
     observed = re.search(
         r"Observed public delivery \(\d{4}-\d{2}-\d{2}\): Plugin \*\*([^*]+)\*\* "
         r"bundles released \*\*SE Harness ([^*]+)\*\*", root)
-    identity = inputs["observation"]["identity"]
+    observation = inputs["observation"]
+    identity = observation["assembly"]["content"]
     if not observed or observed.groups() != (identity["plugin_version"], identity["evaluator"]["version"]):
         findings.append("public claim lacks matching observation")
-    if inputs["observation"].get("tree_matches_accepted_distribution") is not True:
+    publisher = observation["publisher"]
+    readback = observation["readback"]
+    public_refs = dict(line.split()[::-1] for line in readback["stdout"].splitlines())
+    qualified = observation["qualification"]["retained_evidence_index"]["content"]["marketplace"]
+    if not (
+        observation["status"] == "pass"
+        and observation["release_record"] == "RLS-SEH-033"
+        and readback["exit_code"] == 0
+        and publisher["state"] == "exact"
+        and publisher["applied"] is True
+        and public_refs.get("refs/heads/plugin-marketplace") == publisher["commit"] == qualified["marketplace_commit"]
+        and publisher["tree"] == qualified["marketplace_tree"]
+        and publisher["identity_sha256"] == observation["assembly"]["sha256"] == qualified["package_identity_sha256"]
+        and qualified["all_git_blob_bytes_match"] is True
+        and (identity["plugin_version"], identity["evaluator"]["version"], identity["evaluator"]["archive_sha256"])
+            == (PLUGIN, EVALUATOR, WHEEL_SHA)
+    ):
         findings.append("public tree lacks accepted-package comparison")
     if "pending publication" in root:
         findings.append("stale publication status")
@@ -106,14 +123,16 @@ class RefreshGuidanceTests(unittest.TestCase):
     def test_premature_public_claim_is_rejected(self):
         data = selected_inputs()
         # A contradictory retained observation must defeat a current claim.
-        data["observation"]["identity"]["plugin_version"] = "0.1.0"
-        data["observation"]["identity"]["evaluator"]["version"] = "0.18.0"
+        data["observation"]["assembly"]["content"]["plugin_version"] = "0.1.0"
+        data["observation"]["assembly"]["content"]["evaluator"]["version"] = "0.18.0"
         self.assertIn("public claim lacks matching observation", identity_findings(data))
 
     def test_public_claim_requires_accepted_package_comparison(self):
-        data = selected_inputs()
-        data["observation"]["tree_matches_accepted_distribution"] = False
-        self.assertIn("public tree lacks accepted-package comparison", identity_findings(data))
+        for field in ("state", "tree", "identity_sha256", "commit"):
+            data = selected_inputs()
+            data["observation"]["publisher"][field] = "unconfirmed"
+            with self.subTest(field=field):
+                self.assertIn("public tree lacks accepted-package comparison", identity_findings(data))
 
     def test_published_guide_rejects_pending_publication_status(self):
         data = selected_inputs()
