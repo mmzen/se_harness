@@ -1,0 +1,177 @@
+{
+  "schema": "hag-supporting-correction-evidence-v1",
+  "work_order": "WO-HAG-007",
+  "parent_commit": "99a97a75ef0124dc0b6e8bc0a77d8173d1c481ab",
+  "review_binding": {
+    "work_order": "WO-HAG-007",
+    "base_commit": "c067608f71503f62fa6c9aa2f081515545bc350e",
+    "work_order_sha256": "395819937b4f769dda85d713f6b8f5d2675e7cacb0eb7624f3893b1bf97af9f5",
+    "patch_sha256": "9bbfd310650fb1a71a7099a9099c548b9045098d1b6f7b4fd54a767a983f0cd2",
+    "paths": [
+      {
+        "path": "docs/notes/harnessctl-reference.md",
+        "before_sha256": "c7382168ead8476bd63baa6d55ef0707457488f20ac3e7bb916d9888fa4c9408",
+        "proposed_sha256": "cab5fb4f27fc77bef83f5d42c1df61888723a495eac87e017c4a763c58428f6d"
+      },
+      {
+        "path": "tests/test_cli_shape.py",
+        "before_sha256": "87da808de8ebfe0d05cf7535e9e762cd94a3b7c155ac324c2d74574afa643651",
+        "proposed_sha256": "11a4553e17b80fa6c9d26576010a4f2faa5ab31f016437c2e10f9785a70312f4"
+      },
+      {
+        "path": "tests/plugin_integration/package_assembly/test_refresh_guidance.py",
+        "before_sha256": "b91b902105d69708418a8ee66abb589411838a938efa3158b85c69f914c35ea9",
+        "proposed_sha256": "69a9d226c80963593eeaf478623548a6634842015455d4bfe5e5d242b0f78d72"
+      }
+    ],
+    "reused_artifacts": [
+      {
+        "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-008.md",
+        "sha256": "db1c3dec1a341260614f67747542e4200f95b69627e7c907c931401d7e6465e6"
+      },
+      {
+        "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md",
+        "sha256": "411ea506a1ce9ee8de0bf6b34ba095dc0ce39186acac7796f4e2bad2ff3975bb"
+      },
+      {
+        "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md",
+        "sha256": "7e717148ddee865126b2ffb935b3e348a56321654007ce9abf19d3f2d8df6f6d"
+      },
+      {
+        "path": "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md",
+        "sha256": "3f064c7619d81427f202e270c778b6fc3421e83e51a4c4ea0db94af99202e69f"
+      },
+      {
+        "path": "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-001.md",
+        "sha256": "89a53f675442c6295cc63c16bc2ac0c5d6717dbaecc0a42f3cbad4e396971842"
+      }
+    ]
+  },
+  "changes": "Only the reviewed three supporting files plus WO-HAG-007 approval/start and its bounded evidence. Public release and receipt files, root README and marketplace guide are unchanged.",
+  "actual_checks": {
+    "focused_tests": 70,
+    "full_suite_tests": 1319,
+    "full_suite_skips": 23,
+    "distributions": 23,
+    "cli_smoke": "pass"
+  },
+  "scope": "Correction regression observations only; no hosted-service verification or completion. Combined VER-HAG-001 qualification remains pending.",
+  "archive_sha256": "5232e9e5a0f53706393a3b810aabd0ea7a85c46594850d138c3957e3b5cec841",
+  "inventory": [
+    {
+      "file": "candidate-full-suite-01.json",
+      "sha256": "a38ddfe6a75edb70234ba65d8598fd2a1d226da8ce072adaff04a4a7cba25b6b",
+      "bytes": 7958
+    },
+    {
+      "file": "correction-draft-validation-02.json",
+      "sha256": "15a3bba909ba782aa7728925350918e1d12f74c3795b2b317dab1da180774fb6",
+      "bytes": 424474
+    },
+    {
+      "file": "correction-planned-scope-02.json",
+      "sha256": "645a44bae1f08d41580fd659ddb56119ddddfd4785a12a4ec7c41853fe85a9ba",
+      "bytes": 12717
+    },
+    {
+      "file": "correction-proposal-distribution.json",
+      "sha256": "ea4bfd8183113b9505283e020ee342572dd3770f60dab3916b15ec89ceb6e196",
+      "bytes": 529
+    },
+    {
+      "file": "correction-proposal-focused.json",
+      "sha256": "29a8b44eafcd77117ad76aee6482f390f2782b8d777c599599a39d939f7e120f",
+      "bytes": 739
+    },
+    {
+      "file": "correction-proposal-full-suite-02.json",
+      "sha256": "48218cd8a7ae1341c9092cf15d7efc0d9c6f96f0a2e851d14fc5a48a524ef157",
+      "bytes": 5525
+    },
+    {
+      "file": "correction-proposal-full-suite.json",
+      "sha256": "afb8a559075084d14c82ffb321ff73c0dbe5188c40fc90328d4317a4744b7c09",
+      "bytes": 6391
+    },
+    {
+      "file": "hag007-actual-cli.json",
+      "sha256": "230a624ffc10d52c177ddef409ca42d2db9564792901bb1160ee3220ddb362dc",
+      "bytes": 4383
+    },
+    {
+      "file": "hag007-actual-diff-check.json",
+      "sha256": "c6c406ef7270aa3b1e64a085f6978ad61052ca98adef248cdb98285d14c57930",
+      "bytes": 273
+    },
+    {
+      "file": "hag007-actual-distributions.json",
+      "sha256": "7bd084a75733bfcf5a9e864e48e164cd2755d164f93938e285f11ce08992c66e",
+      "bytes": 503
+    },
+    {
+      "file": "hag007-actual-focused.json",
+      "sha256": "59f4f7fabfbf665fad3c3c5e836135104c34e4f521c3467f55dfc25286769de4",
+      "bytes": 735
+    },
+    {
+      "file": "hag007-actual-full-suite.json",
+      "sha256": "cd17bf11331701abe28a897d674409d9f9de7d5ada4ee224cf1d7c602bce2fc8",
+      "bytes": 5499
+    },
+    {
+      "file": "hag007-approval-apply.json",
+      "sha256": "a381c3b928a2a0244f6c5fedf9045dad5b26be3b241d394dcaa884c0ef840519",
+      "bytes": 18709
+    },
+    {
+      "file": "hag007-approval-context.json",
+      "sha256": "e0f4a9bf077aebdeb83011dee38449829fac16b5a5174fc1207a722572484400",
+      "bytes": 9936
+    },
+    {
+      "file": "hag007-approval-preview.json",
+      "sha256": "5172f96245522294e7e250e8522e42a7002f0465eabfe6c918b5c2d36d8fd580",
+      "bytes": 18706
+    },
+    {
+      "file": "hag007-approved-inputs.json",
+      "sha256": "58b64d6880b29163856eaca2bce2ff5a3a70ee75dffc5c7c09641693c6312c50",
+      "bytes": 1254
+    },
+    {
+      "file": "hag007-approved-readback.json",
+      "sha256": "b50c90760c81549132c0438375921f208f2adc5b9d7e358c46c5dbf0892580e2",
+      "bytes": 18564
+    },
+    {
+      "file": "hag007-implementation-scope.json",
+      "sha256": "2d2b36613d79d987be0d4f22a2e6836434ca31764bf91395dd208ce7970a85e9",
+      "bytes": 20460
+    },
+    {
+      "file": "hag007-resumed-approval-context.json",
+      "sha256": "56bac1b0d9f345f71b75f9978b6a8ac9a43e3f0161255c1b2ee6059df0a18daf",
+      "bytes": 9936
+    },
+    {
+      "file": "hag007-start-apply.json",
+      "sha256": "edca86ae909584ed65f9a8497bb92589d041b8cbc8cdf7ac10e9e75a66e10d9a",
+      "bytes": 20110
+    },
+    {
+      "file": "hag007-start-preflight.json",
+      "sha256": "89f4adb32717a8d8881876ba81df72dedea3c72fbe7cdad5095a240742fcb1d9",
+      "bytes": 2142
+    },
+    {
+      "file": "hag007-start-preview.json",
+      "sha256": "277e3243e0a1161981eb282991ffb1d15e48f22911f2c38559a697fbfc4eea5e",
+      "bytes": 20107
+    },
+    {
+      "file": "hag007-start-readback.json",
+      "sha256": "e36d0c3dade86c25f3406d152530529949dff1cd9d86be2e2aacb7a38ff2e9e2",
+      "bytes": 20189
+    }
+  ]
+}
