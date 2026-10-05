@@ -1,0 +1,48 @@
+{
+  "release_record": "RLS-SEH-033",
+  "candidate_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+  "plan_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
+  "observed_at": "2026-10-05T08:55:13.926642+00:00",
+  "public_main": "e0d50ec6255576e4b5517294c9c8bfc747b2a429",
+  "source_file_checks": [
+    {
+      "path": "README.md",
+      "expected_sha256": "f335a7f566a6ccb56f475b55beec75f5ff8deddf63522ca435115d5a29defd79",
+      "observed": {
+        "dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3": "f335a7f566a6ccb56f475b55beec75f5ff8deddf63522ca435115d5a29defd79",
+        "e0d50ec6255576e4b5517294c9c8bfc747b2a429": "f335a7f566a6ccb56f475b55beec75f5ff8deddf63522ca435115d5a29defd79"
+      }
+    },
+    {
+      "path": "docs/notes/plugin-installation-guide.md",
+      "expected_sha256": "ca0fd66e8679d546083c4cd9623c3b6d66395693ecae810af1e2b91bba9193b0",
+      "observed": {
+        "dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3": "ca0fd66e8679d546083c4cd9623c3b6d66395693ecae810af1e2b91bba9193b0",
+        "e0d50ec6255576e4b5517294c9c8bfc747b2a429": "ca0fd66e8679d546083c4cd9623c3b6d66395693ecae810af1e2b91bba9193b0"
+      }
+    },
+    {
+      "path": "docs/notes/plugin-marketplace-publication.md",
+      "expected_sha256": "66b4a7e6dc216ef48977daaf9235eecb16248beb7ba8c130097e85d78731ab5f",
+      "observed": {
+        "dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3": "66b4a7e6dc216ef48977daaf9235eecb16248beb7ba8c130097e85d78731ab5f",
+        "e0d50ec6255576e4b5517294c9c8bfc747b2a429": "66b4a7e6dc216ef48977daaf9235eecb16248beb7ba8c130097e85d78731ab5f"
+      }
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md",
+      "expected_sha256": "ecabe74012ceff709980891983b1071a0b60f8e7b94a7d1e550974a605736289",
+      "observed": {
+        "dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3": "ecabe74012ceff709980891983b1071a0b60f8e7b94a7d1e550974a605736289",
+        "e0d50ec6255576e4b5517294c9c8bfc747b2a429": "ecabe74012ceff709980891983b1071a0b60f8e7b94a7d1e550974a605736289"
+      }
+    }
+  ],
+  "commands": [],
+  "status": "pass",
+  "source_links": "passed",
+  "public_package_links": "passed",
+  "public_package_revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+  "public_package_file_count": 68,
+  "claims_review": "The four frozen source files match the independently verified documentation commit, release governance and current main. Guides distinguish prepared package snapshots, prior dated observations and current public receipt/identity checks. Public package README snapshots remain unchanged. No desktop or hosted service qualification is claimed."
+}
