@@ -1,6 +1,6 @@
 # Verity Plane
 
-Verity Plane 0.2.6 exposes shared skills through the host's native skill discovery.
+Verity Plane 0.2.7 is an unpublished development candidate. It exposes shared skills through the host's native skill discovery.
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
@@ -15,11 +15,14 @@ changed, incompatible or oversized input reports a delivery gap without fallback
 Setup retains separate immutable evaluator environments outside repositories.
 Activation immediately returns the complete entry; it grants no lifecycle authority.
 
-Plugin 0.2.6 targets evaluator 0.22.1. mmzen verified candidate
-`4f640284ec496b88cd7aa4ba88ca537d9374a2f8` in VREC-SEH-033.
-Windows/Linux package checks and native Codex/Claude CLI checks passed.
-Codex Windows desktop remains unverified under accepted DEC-RLS-009 / RISK-RLS-007.
-Qualification does not establish public installation or update results.
+This candidate adds explicit hosted sandbox read/draft guidance. Its development
+archive reuses the unchanged evaluator 0.22.1 wheel. Remote commands use a
+separately installed candidate client 0.22.2; that client never governs a checkout.
+Use setup's **Hosted sandbox selection** section with the exact combination
+report. This candidate has no public release or host qualification claim.
+
+The historical public plugin 0.2.6 qualification is in VREC-SEH-033. Its desktop
+omission and accepted risk do not qualify this changed candidate.
 
 Read the [release review](https://github.com/mmzen/se_harness/blob/main/docs/engineering/release-0-22-1/README.md)
 and its delivery evidence for publication status. Compare installed bytes with

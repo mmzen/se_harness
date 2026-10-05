@@ -1,9 +1,13 @@
-# Hosted artifact graph: Phase 1 implementation contract
+# Hosted artifact graph: sandbox protocol and implementation
 
-This guide makes the approved SPEC-HAG-001/002/003 concrete for implementation.
-It does not change those definitions or claim an operating service. The wire
-shapes and fixed vectors are ready for inspection; the released-evaluator
-admission dependency is open in DEC-HAG-001. Phase 2 qualification has not run.
+This guide explains the approved SPEC-HAG-001/002/003 protocol. The private
+service and candidate remote client are implemented under WO-HAG-001. Development
+integration tests have run; final qualification of all twelve scenarios remains
+pending. Use [the operating procedure](../../server/README.md) to build and test
+the exact combination. Git remains authoritative. This is not a public service.
+
+DEC-HAG-001 is decided. The bounded revision in DEC-HAG-002 selects public
+evaluator 0.22.1 for this sandbox; candidate client 0.22.2 is separate.
 
 ## Project and source identities
 
@@ -88,8 +92,8 @@ of HAG-API-001/002, not changes to the named protocol schemes.
 The draft view is its base plus explicit proposals. New IDs are reserved across
 all retained project artifacts, not just the selected baseline. The command adapter
 uses the released authoring template and allocation behavior in a disposable
-projection. DEC-HAG-001 must resolve standalone draft admission before this route
-is implemented. Protected lifecycle/provenance/evidence fields remain protected.
+projection. The isolated public 0.22.1 evaluator supplies standalone draft
+admission. Protected lifecycle/provenance/evidence fields remain protected.
 
 Freeze does not rebase, close, clear or otherwise change its context. Editing that
 context later creates another proposed revision. Opening a fresh context from
@@ -136,11 +140,9 @@ for WO-RLS-038; VREC dependencies remain separately classified.
 | Context/read/check | Explicit view, exact released context/findings, original-path historical resolver and honest resource limits | A bounded observation; `complete` does not mean approved or gate-passing |
 | Approval/verification/release | Unsupported in this sandbox | No remote command can confer a human decision or produce a verified/released record |
 
-The draft stage still depends on the release/adoption work identified by
-DEC-HAG-001. Its correction was merged and VREC-HAG-001 was verified, but the
-accepted service contract still pins released 0.22.0. Neither merge nor
-verification replaces that pin. The merged candidate is not an admission oracle
-for this contract. Do not implement an alternative local classification table.
+The draft stage uses the selected public 0.22.1 evaluator. Its archive and payload
+are fixed by SPEC-HAG-003. Earlier Phase 1 reports retain their original 0.22.0
+observations and unresolved-dependency status as historical evidence.
 
 ## Read request and response details
 

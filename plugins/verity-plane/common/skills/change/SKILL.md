@@ -9,6 +9,42 @@ Turn the selected change into a coherent artifact package or carry its work
 order forward. The installed harness decides lifecycle legality; this skill
 connects its existing procedures to the operator's request.
 
+## Explicit hosted sandbox drafts
+
+For an explicitly selected hosted sandbox, follow setup's hosted selection first.
+Use its separate candidate client and retain the exact baseline or context/version.
+Sandbox draft authority permits only the requested preparation. It does not change
+repository authority or grant a human decision right.
+
+Use `remote draft-open` to open a context at the selected baseline/work order.
+Then use `remote create-artifact` with the released template type/domain, or
+`remote revise-artifact` with the full UTF-8 document encoded as canonical base64.
+All mutations take a transient JSON request outside the checkout. Follow the v1
+command schema: include the expected project version, expected evaluator/client
+identities, a new operation key, and the required context/revision guards.
+An explicit artifact ID can create a draft in a new domain. Automatic allocation
+requires an existing domain whose identifier token the evaluator can read.
+
+```text
+CLIENT_PYTHON -I -m se_harness remote create-artifact --endpoint ENDPOINT --project PROJECT --token-env TOKEN_VARIABLE --client-wheel ABSOLUTE_CLIENT_WHEEL --request ABSOLUTE_REQUEST_JSON --json
+```
+
+The same options apply to `draft-open`, `revise-artifact` and `freeze`. Import is
+operator-only and accepts the configured complete canonical source manifest.
+Read each accepted result's actual view, versions, affected revisions and receipt.
+An incomplete template is a draft with findings. Baseline freeze is no approval.
+Imported records and their lifecycle, decision and evidence claims are immutable.
+
+After a stale-input refusal, read the current selection and review the change
+before preparing a new request. Do not silently replace expected versions.
+For uncertain transport, use `remote operation --key KEY` with the same
+endpoint/project/credential, or retry the identical request and key. Do not create
+a new key until the previous outcome is resolved. A different request under an
+accepted key is refused. Never fall back to local writes.
+
+The rest of this skill applies to local governed work. Remote lifecycle decisions,
+verification/release preparation and authority cutover are unsupported here.
+
 ## Repository context
 
 Use the selected entry returned by activation in the current context. If no

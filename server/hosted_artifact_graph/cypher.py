@@ -70,7 +70,7 @@ def compile_query(query, parameters, snapshot, budget, project_id):
     match, pattern = ast.children[:2]
     limit = int(ast.children[-1])
     require(1 <= limit <= 500, 429, "RESOURCE_LIMIT", "Cypher LIMIT must be between 1 and 500.")
-    labels, pieces, lengths = {}, [], {}
+    labels, pieces, lengths, total_depth = {}, [], {}, 0
     for item in pattern.children:
         variable, label = map(str, item.children[:2])
         require(variable not in labels and not variable.startswith("__"), 400,
@@ -82,12 +82,15 @@ def compile_query(query, parameters, snapshot, budget, project_id):
             pieces.append(f"({variable}:{label})")
         else:
             depth = ""
+            upper = 1
             if len(item.children) == 3:
                 lower, upper = map(int, item.children[2].children)
                 require(1 <= lower <= upper <= budget["depth"] <= 8, 429, "RESOURCE_LIMIT", "Cypher path exceeds the declared depth budget.")
                 depth = f"*{lower}..{upper}"
                 lengths[variable] = True
             require(budget["depth"] >= 1, 429, "RESOURCE_LIMIT", "Cypher relationship exceeds depth zero.")
+            total_depth += upper
+            require(total_depth <= budget["depth"], 429, "RESOURCE_LIMIT", "Complete Cypher path exceeds its depth budget.")
             left, right = ("-", "->") if item.data == "forward" else ("<-", "-")
             pieces.append(f"{left}[{variable}:{label}{depth}]{right}")
 

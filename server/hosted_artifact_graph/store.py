@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import json
+import re
+import time
 from contextlib import contextmanager
 
 from neo4j import GraphDatabase
@@ -49,8 +51,15 @@ class Store:
 
     @staticmethod
     def schema_inventory(session):
-        return {name: sorted([dict(r) for r in session.run(query)], key=text)
+        return Store.schema_shape({name: [dict(r) for r in session.run(query)]
                 for name, query in (("constraints", "SHOW CONSTRAINT INFO"), ("indexes", "SHOW INDEX INFO"))}
+        )
+
+    @staticmethod
+    def schema_shape(inventory):
+        # Index population is observed data, not a schema change.
+        return {name: sorted([{k: v for k, v in row.items() if k != "count"} for row in rows], key=text)
+                for name, rows in inventory.items()}
 
     def ready(self):
         with self.driver.session() as session:
@@ -58,9 +67,37 @@ class Store:
             require(len(row) == 1 and row[0]["p"]["project_id"] == self.project_id, 409,
                     "SCHEMA_MISMATCH", "Store is uninitialized or selects another project.")
             p = row[0]["p"]
-            require(p["schema_revision"] == SCHEMA_REVISION and p.get("schema_json") == text(self.schema_inventory(session)),
+            actual = self.schema_inventory(session)
+            require(p["schema_revision"] == SCHEMA_REVISION and self.schema_shape(json.loads(p.get("schema_json", "{}"))) == actual
+                    and actual == self.expected_schema(),
                     409, "SCHEMA_MISMATCH", "Store schema does not match initialized revision 1.")
+            version = session.run("SHOW VERSION").single()["version"]
+            settings = {r["name"]: r["current_value"] for r in session.run("SHOW CONFIG")}
+            storage = {r["storage info"]: r["value"] for r in session.run("SHOW STORAGE INFO")}
+            required = {"data_recovery_on_startup": "true", "storage_wal_enabled": "true",
+                        "storage_wal_file_flush_every_n_tx": "1", "query_execution_timeout_sec": "5"}
+            require(version == "3.13.1" and all(settings.get(k) == v for k, v in required.items())
+                    and storage.get("global_isolation_level") == "SNAPSHOT_ISOLATION"
+                    and storage.get("global_storage_mode") == "IN_MEMORY_TRANSACTIONAL", 409,
+                    "UNSUPPORTED_TUPLE", "Database version, durability or transaction configuration differs.")
             return p["command_version"]
+
+    @staticmethod
+    def expected_schema():
+        constraints, indexes = [], []
+        for line in contract_path("graph-v1.cypher").read_text(encoding="utf-8").splitlines():
+            unique = re.fullmatch(r"CREATE CONSTRAINT ON \(n:(\w+)\) ASSERT (.+) IS UNIQUE;", line)
+            exists = re.fullmatch(r"CREATE CONSTRAINT ON \(n:(\w+)\) ASSERT EXISTS \(n\.(\w+)\);", line)
+            index = re.fullmatch(r"CREATE INDEX ON :(\w+)\((\w+)\);", line)
+            if unique:
+                constraints.append({"constraint type": "unique", "label": unique[1], "properties": unique[2].replace("n.", "").split(", "), "data_type": ""})
+            elif exists:
+                constraints.append({"constraint type": "exists", "label": exists[1], "properties": exists[2], "data_type": ""})
+            elif index:
+                indexes.append({"index type": "label+property", "label": index[1], "property": [index[2]]})
+            elif line.strip() and not line.lstrip().startswith("//"):
+                raise ValueError("Unsupported declared schema statement")
+        return Store.schema_shape({"constraints": constraints, "indexes": indexes})
 
     def project(self, tx):
         row = tx.run("MATCH (p:Project {project_id:$p}) RETURN properties(p) AS p", p=self.project_id).single()
@@ -141,6 +178,15 @@ class Store:
         existing = {r["id"] for r in tx.run("MATCH (r:Revision {project_id:$p}) WHERE r.revision_id IN $ids "
                                              "RETURN r.revision_id AS id", p=self.project_id, ids=ids)}
         fresh = [r for rid, r in revisions.items() if rid not in existing]
+        known_ids = set(tx.run("MATCH (a:Artifact {project_id:$p}) RETURN a.artifact_id AS id", p=self.project_id).value())
+        new_ids = {r["envelope"]["artifact_id"] for r in fresh} - known_ids
+        # Previously unresolved declarations become graph edges when their real
+        # identity first exists. Canonical historical revision bytes stay unchanged.
+        backfill = []
+        if new_ids:
+            for row in tx.run("MATCH (r:Revision {project_id:$p}) RETURN r.revision_id AS id, r.envelope_json AS envelope", p=self.project_id):
+                for kind, targets in json.loads(row["envelope"])["declared_relations"].items():
+                    backfill.extend({"r": row["id"], "kind": kind, "target": target} for target in targets if target in new_ids)
         rows = [{"p": self.project_id, "a": r["envelope"]["artifact_id"], "r": r["revision_id"],
                  "envelope": text(r["envelope"]), "document": r["document_base64"],
                  "digest": r["envelope"]["document_sha256"], "type": metadata[r["envelope"]["artifact_id"]]["type"],
@@ -150,7 +196,7 @@ class Store:
                    "CREATE (r:Revision {project_id:row.p, artifact_id:row.a, revision_id:row.r, "
                    "envelope_json:row.envelope, document_base64:row.document, document_sha256:row.digest, "
                    "type:row.type, status:row.status}) CREATE (a)-[:HAS_REVISION]->(r)", rows=rows[start:start + 100]).consume()
-        edges = [{"r": r["revision_id"], "kind": k, "target": target} for r in fresh
+        edges = backfill + [{"r": r["revision_id"], "kind": k, "target": target} for r in fresh
                  for k, targets in r["envelope"]["declared_relations"].items() for target in targets]
         for start in range(0, len(edges), 200):
             # Only real targets get nodes. Unfilled template links stay in evaluator findings.
@@ -227,11 +273,17 @@ class Store:
                 return result
         except Neo4jError as exc:
             # Recover an identical winner only; never replay at a newer version.
-            with self.transaction() as tx:
-                winner = self.operation(tx, principal, command["operation_key"])
-            if winner:
-                require(winner[0] == digest, 409, "KEY_REUSE", "Operation key has different content.")
-                return winner[1]
             if "TransientError" in (exc.code or "") or "conflict" in str(exc).lower():
+                deadline = time.monotonic() + 5
+                while True:
+                    with self.transaction() as tx:
+                        winner = self.operation(tx, principal, command["operation_key"])
+                        version = self.project(tx)["command_version"]
+                    if winner:
+                        require(winner[0] == digest, 409, "KEY_REUSE", "Operation key has different content.")
+                        return winner[1]
+                    if version > command["expected_project_version"] or time.monotonic() >= deadline:
+                        break
+                    time.sleep(0.05)
                 raise Refusal(409, "STALE_PROJECT", "Concurrent project mutation refused.") from exc
             raise

@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from .canonical import canonical_json
 from .cypher import compile_query, public_rows
-from .protocol import EVALUATOR, READ, Refusal, require
+from .protocol import EVALUATOR, READ, Refusal, contained_file, require
 
 
 def binding(revisions, artifact_id):
@@ -22,6 +22,10 @@ def edges(revisions):
                 else:
                     unresolved.append({"source_artifact_id": artifact_id, "kind": kind, "target_artifact_id": target})
     return resolved, unresolved
+
+
+def edge_order(edge):
+    return edge["source"]["artifact_id"], edge["kind"], edge["target"]["artifact_id"]
 
 
 def incomplete(response, reason):
@@ -88,7 +92,7 @@ def read(service, principal, request):
     elif operation in ("work-context", "check"):
         artifact_id = request.get("work_order_id", request.get("artifact_id"))
         selected = binding(revisions, artifact_id)
-        with service.evaluator.project(revisions) as root:
+        with service.evaluator.project(revisions, allow_missing=True) as root:
             output = service.evaluator.cli(root, "check", "--artifact", artifact_id)
             catalog = service.evaluator.catalog(root)
             response["evaluator_output"] = output
@@ -100,17 +104,36 @@ def read(service, principal, request):
                 scope = output["scope"]
                 selected_ids = {artifact_id} | set(scope["governing"]) | set(scope["dependencies"])
                 decisions = sorted(a["id"] for a in catalog.values() if a["type"] == "decision" and
-                    selected_ids.intersection(set(a["relations"].get("concerns", [])) | set(a["relations"].get("blocks", []))))
+                    artifact_id in set(a["relations"].get("concerns", [])) | set(a["relations"].get("blocks", [])))
                 response["data"] = {"work_order": selected,
                     "governing_artifacts": [binding(revisions, a) for a in sorted(scope["governing"])],
                     "declared_scope": sorted(scope["declared_paths"]),
                     "dependencies": [binding(revisions, a) for a in sorted(scope["dependencies"])],
                     "relevant_decisions": [binding(revisions, a) for a in decisions]}
                 selected_ids.update(decisions)
-            missing = [path for a in selected_ids if a in catalog
-                       for path in catalog[a]["metadata"].get("evidence_paths", []) if not (root / path).is_file()]
+            bindings = set()
+            source_paths = {item["path"] for item in service.evaluator.support["files"]}
+            for a in selected_ids:
+                if a not in catalog:
+                    continue
+                metadata = catalog[a]["metadata"]
+                bindings.update(metadata.get("evidence_paths", []))
+                if metadata.get("evaluator_evidence_path"):
+                    bindings.add(metadata["evaluator_evidence_path"])
+                for scoped in metadata.get("execution_scope", {}).get("paths", []):
+                    if scoped.endswith("/"):
+                        bindings.update(item["path"] for item in service.evaluator.support["files"] if item["path"].startswith(scoped))
+                    elif scoped in source_paths:
+                        bindings.add(scoped)
+            missing = []
+            for path in sorted(bindings):
+                try:
+                    contained_file(root, path)
+                except Refusal:
+                    missing.append(path)
             if missing:
                 incomplete(response, "binding_unavailable")
+                response["continuation"]["instructions"] += " Missing inputs: " + ", ".join(missing)
     elif operation == "compare":
         right = other["revisions"]
         right_edges, right_missing = edges(right)
@@ -122,8 +145,8 @@ def read(service, principal, request):
             if before != after:
                 changes.append({"artifact_id": a, "before": before, "after": after})
         response["data"] = {"changes": changes,
-            "added_relations": [right_values[k] for k in sorted(right_values.keys() - left_values.keys())],
-            "removed_relations": [left_values[k] for k in sorted(left_values.keys() - right_values.keys())]}
+            "added_relations": sorted((right_values[k] for k in right_values.keys() - left_values.keys()), key=edge_order),
+            "removed_relations": sorted((left_values[k] for k in left_values.keys() - right_values.keys()), key=edge_order)}
         unresolved += right_missing
     elif operation in ("impact", "lineage"):
         artifact_id = request["artifact_id"]
@@ -151,7 +174,7 @@ def read(service, principal, request):
                 break
         selected_ids = found
         response["data"] = {"root": selected, "artifacts": [binding(revisions, a) for a in sorted(found - {artifact_id})],
-                            "relations": [traversed[k] for k in sorted(traversed)]}
+                            "relations": sorted(traversed.values(), key=edge_order)}
     response["unresolved_references"] = [u for u in unresolved if u["source_artifact_id"] in selected_ids]
     if response["unresolved_references"]:
         incomplete(response, "unresolved_references")

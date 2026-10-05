@@ -83,12 +83,14 @@ The [integration manifest](evidence/WO-HAG-005/integration-manifest.json) proves
 134 earlier HAG files are unchanged and 180 transported paths match the
 reviewed merge. VREC-HAG-001 and VREC-HAG-002 retain their exact candidates
 and evidence. The full source suite passed (1,311 tests, 23 skips), as did
-seven independent released draft-admission probes. Reconciliation verification
-is pending; these observations do not verify the hosted service.
+seven independent released draft-admission probes. [VREC-HAG-003](verification-records/VREC-HAG-003.md) is verified by mmzen for
+candidate `4414eaf5d9739978654c55390b96aeac32699ed4`. These observations do not
+verify the hosted service.
 
-WO-HAG-001 still requires Phase 2 service implementation, all twelve hosted
-scenarios, the walkthrough and restart/restore qualification. Zero hosted
-scenarios have run. PR #535 stays draft and keeps its original target
+WO-HAG-001 remains in_progress for the complete Phase 2 outcome. Development
+service tests now cover import, draft authoring, retries, concurrency, HTTP/MCP
+parity, historical hashes and restart/restore. Final qualification of the exact
+client/plugin/service combination and all twelve scenarios remains pending. PR #535 stays draft and keeps its original target
 `codex/hosted-artifact-graph-inputs`.
 
 ## Reconciliation correction
@@ -99,5 +101,17 @@ now passes the predecessor assessment against the original PR base. It preserves
 the prior WO-HAG-001 packet before rebinding the live packet with released 0.22.1.
 The [combined assessment](evidence/WO-HAG-006/review.md) records the correction,
 1,316 source tests (23 skips), platform checks and preserved evidence. Aggregate
-verification remains pending. The original PR target and unfinished hosted work
-remain unchanged.
+verification is recorded in VREC-HAG-003. The original PR target and unfinished
+hosted work remain unchanged.
+
+## Phase 2 implementation
+
+The [service operating guide](../../../server/README.md) gives the exact build,
+source staging, initialization, test and recovery procedure. The candidate client
+is 0.22.2; plugin guidance is unpublished 0.2.7; the service is 0.1.0.dev1. All
+three must derive from one clean candidate commit before final qualification.
+The governing evaluator remains the unchanged public 0.22.1 wheel.
+
+Development observations are not verification acceptance. Keep RISK-HAG-001
+raised: application query controls do not prove database-enforced read-only
+access. No public deployment, authority cutover, merge or release is claimed.

@@ -1,0 +1,36 @@
+{
+  "work_order": "WO-HAG-001",
+  "state": "in_progress",
+  "phase": "development qualification; final candidate qualification pending",
+  "archive_sha256": "14678e42b80cfb4ed8fbe911c87a7b67c11138fffe26b471cc4865c10a654a5b",
+  "observations": 247,
+  "observed": [
+    "Packaged client sequence with 1909-artifact exact import, expected 12 governing IDs and 11 paths, incomplete draft creation, body/link revision, invalid/stale/key-reuse refusal, retry and baseline preservation",
+    "Independent concurrent writes: one winner; identical keys return the same receipt",
+    "Real transaction faults leave no partial graph, version or receipt effects",
+    "All six domain reads and Cypher match over HTTP/MCP",
+    "Row/byte/depth limits and unsupported Cypher syntax refusal",
+    "Committed response loss recovered without duplicate mutation",
+    "Independent released 0.22.1 output and original path/code digest comparison",
+    "Restart and consistent backup/restore preserve acknowledged graph and receipts"
+  ],
+  "test_result": {
+    "focused_client_contract_plugin": "32 tests, one skip, exit 0",
+    "wire_shapes": "60 cases, exit 0"
+  },
+  "retained_backup": {
+    "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-phase2-20261005\\recovery-02\\graph-data.tar",
+    "bytes": 69253120,
+    "sha256": "8eb9bb6991cc7fe2e7cb8beab40bfc3e24239f8ec796941aa534d10d36ed2175"
+  },
+  "restart_seconds": 3.928,
+  "restore_seconds": 4.428,
+  "limitations": [
+    "Development client is bound to 7241dbaa3594e6f066c70be253a104ff09d957a0; evolving service inputs are listed by exact file hash. These are not a final coordinated candidate.",
+    "Final complete component-tuple readiness and new correction qualification remain pending.",
+    "Remaining negative variants, native plugin observations, full regression suite and all-criteria report remain pending.",
+    "RISK-HAG-001 remains raised; no database-enforced read-only, public deployment, authority cutover or assurance acceptance claim."
+  ],
+  "published_pr_head": "fed9d4897eb1840ebe0348f13577f8fdd22194d2",
+  "publication": "No Phase 2 implementation pushed; PR 535 stays draft against codex/hosted-artifact-graph-inputs."
+}

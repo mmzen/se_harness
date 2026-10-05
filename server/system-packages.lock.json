@@ -1,0 +1,145 @@
+{
+  "runtime": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4",
+  "architecture": "amd64",
+  "git_version": "2.39.5",
+  "packages": [
+    {
+      "url": "https://deb.debian.org/debian-security/pool/updates/main/p/perl/perl-base_5.36.0-7%2bdeb12u4_amd64.deb",
+      "file": "perl-base_5.36.0-7+deb12u4_amd64.deb",
+      "bytes": 1609596,
+      "sha256": "d7d1943aec9597629bf73075efcc5ef6dc9bda96d78e80d843156ecd448478b8"
+    },
+    {
+      "url": "https://deb.debian.org/debian-security/pool/updates/main/p/perl/perl-modules-5.36_5.36.0-7%2bdeb12u4_all.deb",
+      "file": "perl-modules-5.36_5.36.0-7+deb12u4_all.deb",
+      "bytes": 2817356,
+      "sha256": "3ed38ffa8320e9bf7597cefa01b6a6ace4a08ccc77cdfd15ef7d8b711dea7166"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/g/gdbm/libgdbm-compat4_1.23-3_amd64.deb",
+      "file": "libgdbm-compat4_1.23-3_amd64.deb",
+      "bytes": 48156,
+      "sha256": "4af36a590b68d415a78d9238b932b6a4579f515ec8a8016597498acff5b515a4"
+    },
+    {
+      "url": "https://deb.debian.org/debian-security/pool/updates/main/p/perl/libperl5.36_5.36.0-7%2bdeb12u4_amd64.deb",
+      "file": "libperl5.36_5.36.0-7+deb12u4_amd64.deb",
+      "bytes": 4207640,
+      "sha256": "ed8480b621ad574c25aea30d36194d0133ea74093756ecbe3dff157d0510ef7f"
+    },
+    {
+      "url": "https://deb.debian.org/debian-security/pool/updates/main/p/perl/perl_5.36.0-7%2bdeb12u4_amd64.deb",
+      "file": "perl_5.36.0-7+deb12u4_amd64.deb",
+      "bytes": 239392,
+      "sha256": "67e7a883c5d835939638f89a750799282df243ac1446281aa92ef9e19300940b"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/b/brotli/libbrotli1_1.0.9-2%2bb6_amd64.deb",
+      "file": "libbrotli1_1.0.9-2+b6_amd64.deb",
+      "bytes": 275248,
+      "sha256": "563b4caec1aa5e876bd3355b36e7a38e1484baf5a293b48d1e8bd22db786e4d7"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/k/krb5/libkrb5support0_1.20.1-2%2bdeb12u5_amd64.deb",
+      "file": "libkrb5support0_1.20.1-2+deb12u5_amd64.deb",
+      "bytes": 33212,
+      "sha256": "8b9c05f2d8d461a10d657b118f572af5bf8fd6c8f93dcef81e852c5ab0f428ab"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/k/krb5/libk5crypto3_1.20.1-2%2bdeb12u5_amd64.deb",
+      "file": "libk5crypto3_1.20.1-2+deb12u5_amd64.deb",
+      "bytes": 79712,
+      "sha256": "7b6e47d15c5c9cdcd456137533d8308aeba608a54cec73b28bd59bfc4b54cf06"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/k/keyutils/libkeyutils1_1.6.3-2_amd64.deb",
+      "file": "libkeyutils1_1.6.3-2_amd64.deb",
+      "bytes": 8808,
+      "sha256": "cfac89e6a7a54ff3c6a4f843310e25efeddaa771baeae470bd98bd588c373563"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/k/krb5/libkrb5-3_1.20.1-2%2bdeb12u5_amd64.deb",
+      "file": "libkrb5-3_1.20.1-2+deb12u5_amd64.deb",
+      "bytes": 332280,
+      "sha256": "c90801be09701af221b54dd502a59cb378b7284ff31e480738baca317d2f7653"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/k/krb5/libgssapi-krb5-2_1.20.1-2%2bdeb12u5_amd64.deb",
+      "file": "libgssapi-krb5-2_1.20.1-2+deb12u5_amd64.deb",
+      "bytes": 135168,
+      "sha256": "d8b87aea91b956b416c01a28c44ff6228315ae3b73de40acddac3dc5043607d2"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/c/cyrus-sasl2/libsasl2-modules-db_2.1.28%2bdfsg-10_amd64.deb",
+      "file": "libsasl2-modules-db_2.1.28+dfsg-10_amd64.deb",
+      "bytes": 20336,
+      "sha256": "3ac4fd6cbe3b3b06e68d24b931bf3eb9385b42f15604a37ed25310e948ca0ee6"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/c/cyrus-sasl2/libsasl2-2_2.1.28%2bdfsg-10_amd64.deb",
+      "file": "libsasl2-2_2.1.28+dfsg-10_amd64.deb",
+      "bytes": 59712,
+      "sha256": "11ee190ad39f8d7af441d2c8347388b9449434c73acc67b4b372445ac4152efa"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/o/openldap/libldap-2.5-0_2.5.13%2bdfsg-5_amd64.deb",
+      "file": "libldap-2.5-0_2.5.13+dfsg-5_amd64.deb",
+      "bytes": 183248,
+      "sha256": "4b6c30f6554149c594628d945edc6003f0eea8d0cc1341638c0e71375db147ed"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/n/nghttp2/libnghttp2-14_1.52.0-1%2bdeb12u3_amd64.deb",
+      "file": "libnghttp2-14_1.52.0-1+deb12u3_amd64.deb",
+      "bytes": 72404,
+      "sha256": "5a5736cee57e51c1baed869979e6ecdbc6495e939e33203d6cfe3b6e5a149e3f"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/libp/libpsl/libpsl5_0.21.2-1_amd64.deb",
+      "file": "libpsl5_0.21.2-1_amd64.deb",
+      "bytes": 58684,
+      "sha256": "4f0d35610204e4e754b057748719744114621f2f6f4202d846c314860a981afb"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/r/rtmpdump/librtmp1_2.4%2b20151223.gitfa8646d.1-2%2bb2_amd64.deb",
+      "file": "librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb",
+      "bytes": 60824,
+      "sha256": "e1f69020dc2c466e421ec6a58406b643be8b5c382abf0f8989011c1d3df91c87"
+    },
+    {
+      "url": "https://deb.debian.org/debian-security/pool/updates/main/libs/libssh2/libssh2-1_1.10.0-3%2bdeb12u1_amd64.deb",
+      "file": "libssh2-1_1.10.0-3+deb12u1_amd64.deb",
+      "bytes": 175976,
+      "sha256": "fff72a194e493f88e100a2567e22472bb4ab828d429c2956965c6f2f134f1b3a"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/c/curl/libcurl3-gnutls_7.88.1-10%2bdeb12u15_amd64.deb",
+      "file": "libcurl3-gnutls_7.88.1-10+deb12u15_amd64.deb",
+      "bytes": 386008,
+      "sha256": "bf430ecf80f7808704e0187cddc582fd57fc98789ea356d4797651edad387ef3"
+    },
+    {
+      "url": "https://deb.debian.org/debian-security/pool/updates/main/e/expat/libexpat1_2.5.0-1%2bdeb12u4_amd64.deb",
+      "file": "libexpat1_2.5.0-1+deb12u4_amd64.deb",
+      "bytes": 105852,
+      "sha256": "ed010cc41577d75ab01cccc6afa93496d9a99f1e16bd469caf58e1b81fddae80"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/libe/liberror-perl/liberror-perl_0.17029-2_all.deb",
+      "file": "liberror-perl_0.17029-2_all.deb",
+      "bytes": 29032,
+      "sha256": "5a466348531b9c38c8e5ccb18c231f27a98b9fdab61b37ea22592553de5d2ced"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/g/git/git-man_2.39.5-0%2bdeb12u3_all.deb",
+      "file": "git-man_1%3a2.39.5-0+deb12u3_all.deb",
+      "bytes": 2053236,
+      "sha256": "904dbd8dbc3db34c6780fb0abfe35816d4a90a490126ef0a055a77a0c5dcab82"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/g/git/git_2.39.5-0%2bdeb12u3_amd64.deb",
+      "file": "git_1%3a2.39.5-0+deb12u3_amd64.deb",
+      "bytes": 7264380,
+      "sha256": "637a85ddd6247fab13bdd0592f2f39aff04ce4dbf0655d3ab553ac359a38ce6f"
+    }
+  ]
+}
