@@ -2,7 +2,7 @@
 id = "WO-HUP-030"
 type = "work_order"
 title = "Adopt released evaluator 0.22.1"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-05"
 updated = "2026-10-05"
@@ -57,6 +57,13 @@ to = "in_progress"
 decided_at = "2026-10-05T10:45:08Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-05T11:08:01Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Applied the approved public 0.22.1 adoption, CI/source version and current-guide changes. Required local checks pass, including full regression and two real CI upgrade rehearsals. Historical bytes and HAG records are preserved. Retained failures and corrections remain visible. Completion does not supply human verification or merge authority."
 +++
 
 # Adopt released evaluator 0.22.1
