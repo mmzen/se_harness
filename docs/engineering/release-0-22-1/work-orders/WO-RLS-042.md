@@ -2,10 +2,10 @@
 id = "WO-RLS-042"
 type = "work_order"
 title = "Execute and confirm complete 0.22.1 delivery"
-status = "approved"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-04"
-updated = "2026-10-04"
+updated = "2026-10-05"
 
 [assurance]
 commit_bound_verification = "required"
@@ -28,6 +28,20 @@ decided_at = "2026-10-04T18:24:52Z"
 decided_by = "mmzen"
 reason = "mmzen answered \"Approve preparation and review publication\" to the exact seven-artifact evaluator 0.22.1 / plugin 0.2.6 proposal: REL-SEH-035, WO-RLS-040/041/042 and VER-RLS-036/037/038, with required commit-bound verification. This approves bounded preparation and qualification of the two HAG fixes and main already-approved dashboard correction, ordinary review pushes/draft PRs from codex/release-0-22-1 to mmzen/se_harness:main, later verification-decision updates, read-only CI rehearsals and the codex/plugin-0-2-6-staging review ref. Human verification, merge, the exact complete-release decision, adoption and provider-setting changes remain separate. Reviewed draft hashes matched; only the human-confirmed assurance fields were added before preview. Reviewed SHA-256 ece9baac7f27eaea72b19ea5493d67d1c0647606486e94a4e84d49060aa07474."
 scope_paths = ["docs/engineering/release-0-22-1/", "README.md", "release/plugin-marketplace/README.md", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md", "docs/notes/developing-se-harness.md", "docs/notes/release-delivery-completion.md", "docs/notes/release-publication-rehearsal.md", "docs/notes/harness-installation-and-upgrades.md", "docs/notes/harnessctl-reference.md", "docs/engineering/plugin-integration/README.md", "docs/engineering/README.md", "tests/test_progressive_documentation.py", "tests/plugin_integration/package_assembly/test_refresh_guidance.py"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-05T08:39:02Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-05T09:23:42Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. The authorized complete release was delivered. Five surfaces pass independent retained observations, public fresh/update and evaluator setup pass on both claimed Windows CLIs, protected receipt integration passed, and failures/recovery are preserved. The accepted desktop omission remains explicit. This records execution completion only; required commit-bound assurance remains a separate human decision."
 +++
 
 # Execute and confirm complete 0.22.1 delivery
