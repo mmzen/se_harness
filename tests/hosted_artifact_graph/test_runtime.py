@@ -39,5 +39,18 @@ class ReadAdmissionTests(unittest.TestCase):
             self.compile("MATCH (r:Revision)-[e:DECLARES*1..4]->(a:Artifact) RETURN a LIMIT 10")
 
 
+class ImportAdmissionTests(unittest.TestCase):
+    def test_unsupported_source_is_distinct_from_missing_command_inputs(self):
+        wire = Wire()
+        for source in ({"schema": "explorer-export", "nodes": [], "edges": []},
+                       {"schema": "se-harness-source-manifest/v1", "source": {"kind": "worktree"}, "artifacts": []}):
+            with self.subTest(source=source), self.assertRaises(Refusal) as caught:
+                wire.command({"operation": "import", "source_manifest": source})
+            self.assertEqual((422, "HAG_REMOTE_INVALID_IMPORT"), (caught.exception.status, caught.exception.code))
+        with self.assertRaises(Refusal) as caught:
+            wire.command({"operation": "import"})
+        self.assertEqual((400, "HAG_REMOTE_MALFORMED"), (caught.exception.status, caught.exception.code))
+
+
 if __name__ == "__main__":
     unittest.main()

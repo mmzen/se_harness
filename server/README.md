@@ -139,6 +139,17 @@ affect only the disposable container; its graph edits always roll back. Do not r
 it inside the serving container. Passing these checks does not complete the other
 scenario requirements.
 
+Run `qualify_imports.py` with the walkthrough, current continuation and a new
+output directory. It creates disposable copies of the original source to test
+duplicate IDs and unresolved targets. It also rejects unsupported import formats
+and changed bytes under the original provenance. These negative tests must not
+change the database.
+
+`qualify_time.py` measures the configured five-second database read-transaction
+limit. Its stress query is a direct driver test, outside the public read grammar.
+It must produce a resource-limit refusal. This does not by itself prove a slow
+query's HTTP response or replace the public Cypher admission checks.
+
 ## Restart and restore
 
 Keep the same `HAG_*` environment and stop other test writers. Use a fresh output

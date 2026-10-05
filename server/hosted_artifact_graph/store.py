@@ -29,6 +29,12 @@ class Store:
             tx = session.begin_transaction(timeout=timeout)
             try:
                 yield tx
+            except Neo4jError as exc:
+                if (timeout == 5
+                        and exc.code == "Memgraph.TransientError.MemgraphError.MemgraphError"
+                        and getattr(exc, "message", None) == "Transaction was asked to abort because of transaction timeout."):
+                    raise Refusal(429, "RESOURCE_LIMIT", "Read transaction exceeded its five-second limit.") from exc
+                raise
             finally:
                 if not tx.closed():
                     tx.rollback()

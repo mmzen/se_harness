@@ -195,7 +195,7 @@ class Service:
             require(sum(e["bytes"] for e in manifest["artifacts"]) <= 64 * 1024 * 1024,
                     429, "RESOURCE_LIMIT", "Formal import exceeds 64 MiB.")
             with self.evaluator.project() as root:
-                catalog = self.evaluator.catalog(root)
+                catalog = self.evaluator.catalog(root, invalid_code="INVALID_IMPORT")
                 output = self.evaluator.bridge("validate", root)
                 require(output["valid"], 422, "INVALID_IMPORT", "Released validation rejected the import.", evaluator_output=output)
                 require({(e["artifact_id"], e["path"]) for e in manifest["artifacts"]}

@@ -11,6 +11,7 @@ import tempfile
 import threading
 import time
 from contextlib import contextmanager
+from collections import Counter
 from pathlib import Path
 
 from .canonical import canonical_json
@@ -139,12 +140,13 @@ class Evaluator:
                                  env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
         require(process.returncode == 0, 422, "BINDING_UNAVAILABLE", "Disposable Git initialization failed.")
 
-    def catalog(self, root):
+    def catalog(self, root, *, invalid_code="INVALID_DRAFT"):
         result = self.bridge("catalog", root)
-        require(not result["errors"], 422, "INVALID_DRAFT", "Released parser rejected content.", evaluator_output=result)
+        require(not result["errors"], 422, invalid_code, "Released parser rejected content.", evaluator_output=result)
         items = result["artifacts"]
-        require(len({a["id"].casefold() for a in items}) == len(items), 422,
-                "INVALID_DRAFT", "Duplicate artifact IDs.")
+        counts = Counter(a["id"].casefold() for a in items)
+        duplicates = sorted({a["id"] for a in items if counts[a["id"].casefold()] > 1})
+        require(not duplicates, 422, invalid_code, "Duplicate artifact IDs: " + ", ".join(duplicates))
         return {a["id"]: a for a in items}
 
     def cli(self, root, command, *args):

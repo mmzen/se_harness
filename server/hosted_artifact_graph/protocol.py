@@ -72,6 +72,11 @@ class Wire:
         require(isinstance(value, dict), 400, "MALFORMED", "Expected one command object.")
         require(value.get("operation") in {"import", "draft-open", "create-artifact", "revise-artifact", "freeze"},
                 400, "UNSUPPORTED_OPERATION", "Only sandbox draft operations are supported.")
+        if value.get("operation") == "import" and "source_manifest" in value:
+            try:
+                self.validate(value["source_manifest"], "remote-v1.json", "SourceManifest")
+            except Refusal as exc:
+                raise Refusal(422, "INVALID_IMPORT", "Only a complete versioned Git source manifest is supported.") from exc
         self.validate(value, "remote-v1.json")
         command = copy.deepcopy(value)
         if "document_base64" in command:
