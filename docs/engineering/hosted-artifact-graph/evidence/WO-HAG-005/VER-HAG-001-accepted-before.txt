@@ -5,7 +5,7 @@ title = "Independent hosted context and draft-authoring qualification"
 status = "approved"
 owners = ["quality-owner"]
 created = "2026-10-04"
-updated = "2026-10-05"
+updated = "2026-10-04"
 
 [relations]
 verifies = ["REQ-HAG-001", "REQ-HAG-002", "REQ-HAG-003", "REQ-HAG-004", "REQ-HAG-005", "REQ-HAG-006", "REQ-HAG-007", "REQ-HAG-008"]
@@ -20,17 +20,11 @@ reason = "mmzen approved the current artifact package in this conversation: \"i 
 
 # Independent hosted context and draft-authoring qualification
 
-## Evaluator revision
-
-This revision changes the evaluator selection for future work under WO-HAG-001 and the bounded reconciliation under WO-HAG-005. Its specific human decision is DEC-HAG-002. The preserved accepted version is [the original file](../evidence/WO-HAG-005/VER-HAG-001-accepted-before.txt), SHA-256 `744ca93c38acbed841db2047c15017d417bbfb95efead8a41ccdd911b7653dac`, from commit `64b4feb0cbaff06111876a1d4c0cc35a6c814415`. The explicit manual activation and before/after identities are retained in `../evidence/WO-HAG-005/amendment.json`. This record does not provide a general amendment command. Earlier work and verification keep their original definition and candidate references.
-
 ## Independence
 
-Expected values come from REQ-HAG-001 through REQ-HAG-008 and SPEC-HAG-001 through SPEC-HAG-003. The positive context fixture is pinned to source commit 82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1 and WO-RLS-038. Its governing IDs and path membership are fixed in SPEC-HAG-001 before implementation. Compare evaluator results with the independently installed 0.22.1 release and its recorded archive/payload digests; do not generate expected answers from the candidate server. A second reviewer can replay retained requests against the recorded component tuple.
+Expected values come from REQ-HAG-001 through REQ-HAG-008 and SPEC-HAG-001 through SPEC-HAG-003. The positive context fixture is pinned to source commit 82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1 and WO-RLS-038. Its governing IDs and path membership are fixed in SPEC-HAG-001 before implementation. Compare evaluator results with the independently installed 0.22.0 release and its recorded archive/payload digests; do not generate expected answers from the candidate server. A second reviewer can replay retained requests against the recorded component tuple.
 
-Primary platform: Linux x86_64 Docker, Python 3.11 or later, one service and one transactional Memgraph instance with the exact version/image/configuration recorded. Any Windows-host Docker execution is additional observed coverage. Unsupported or unavailable prerequisites produce an unperformed result, never a pass. The checkout remains governed by released 0.22.1, even when the separately installed candidate wheel supplies new remote commands.
-
-Keep the reference snapshot and its original formal, code and evidence bytes unchanged. The disposable projection selects the exact 0.22.1 identities in SPEC-HAG-003; retain that selection separately from the source snapshot's historical 0.22.0 selection. Re-run the independent oracle and explain any changed findings. Keep earlier 0.22.0 observations as historical evidence. Do not overwrite them or claim that they qualify 0.22.1.
+Primary platform: Linux x86_64 Docker, Python 3.11 or later, one service and one transactional Memgraph instance with the exact version/image/configuration recorded. Any Windows-host Docker execution is additional observed coverage. Unsupported or unavailable prerequisites produce an unperformed result, never a pass. The checkout remains governed by released 0.22.0, even when the separately installed candidate wheel supplies new remote commands.
 
 ## Requirement-to-evidence matrix
 

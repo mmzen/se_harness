@@ -5,7 +5,7 @@ title = "Packaged sandbox qualification and coordinated release boundaries"
 status = "approved"
 owners = ["technical-owner", "engineering-owner"]
 created = "2026-10-04"
-updated = "2026-10-05"
+updated = "2026-10-04"
 contract = "Qualify the actual client, plugin, service, evaluator and database combination through a reproducible Docker sandbox and the complete twelve-step walkthrough, keeping later authority and release decisions separate."
 
 [relations]
@@ -21,10 +21,6 @@ reason = "mmzen approved the current artifact package in this conversation: \"i 
 
 # Packaged sandbox qualification and coordinated release boundaries
 
-## Evaluator revision
-
-This revision changes the evaluator selection for future work under WO-HAG-001 and the bounded reconciliation under WO-HAG-005. Its specific human decision is DEC-HAG-002. The preserved accepted version is [the original file](../evidence/WO-HAG-005/SPEC-HAG-003-accepted-before.txt), SHA-256 `e6ea2418a6e4a734dc160c30676742b4afa11cf7784bbe010ce69118b9025499`, from commit `64b4feb0cbaff06111876a1d4c0cc35a6c814415`. The explicit manual activation and before/after identities are retained in `../evidence/WO-HAG-005/amendment.json`. This record does not provide a general amendment command. Earlier work and verification keep their original definition and candidate references.
-
 ## Selected phase and operating scope
 
 The first work package implements Phases 0-2 as one complete sandbox outcome, ending at the twelve-step walkthrough. One disposable project named `hosted-artifact-poc` imports the public reference snapshot. One operator and two author test principals use a local Docker Compose deployment on Linux x86-64, Python 3.11 or later, and Memgraph in transactional storage mode. Windows with Docker Desktop/WSL may host the same Linux containers but is an additional observed host combination, not an assumed pass. Docker Desktop was installed by the user after the initial review. Phase 0 confirmed its Linux engine and Compose are available through the per-user executable; the exact observation is recorded in HAG-OPS-008. Application/container qualification remains Phase 2 work.
@@ -39,9 +35,9 @@ Initialize a new schema only through an explicit operator command. Normal startu
 
 The candidate-combination report is supporting evidence, not a replacement release record. It identifies source repository/candidate commit, harness package version and digest, plugin package version and digest, each embedded evaluator identity, server version and image digest, Memgraph version/image/configuration digest, API/read-contract versions, evaluator/policy identity and database schema revision. Test the actual installed wheel, assembled plugin guidance and built server image. A source-tree invocation alone is insufficient.
 
-Keep client and governing evaluator separate. The initial remote client is candidate development code; the server's validation evaluator is released 0.22.1 with wheel SHA-256 `cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053` and payload SHA-256 `0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff`. Root governance remains this exact released evaluator. If a candidate plugin needs both remote client and governing evaluator, keep both identities explicit and prepare the remote client in a separate candidate environment. Do not replace the governor to make the remote CLI available.
+Keep client and governing evaluator separate. The initial remote client is candidate development code; the server's validation evaluator is released 0.22.0 with wheel SHA-256 `44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4` and payload SHA-256 `b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9`. Root governance remains this exact released evaluator. If a candidate plugin needs both remote client and governing evaluator, keep both identities explicit and prepare the remote client in a separate candidate environment. Do not replace the governor to make the remote CLI available.
 
-Allocate unpublished development component versions before building and retain their actual values. Never label changed plugin/evaluator bytes with any immutable public package identity, including plugin 0.2.6 and evaluator 0.22.1. The implementation may choose unused development versions under the current build conventions; public release versions are a later release-owner decision. An unchanged public component can be reused only with its original identity and a compatibility assessment for the actual combination.
+Allocate unpublished development component versions before building and retain their actual values. Never label changed plugin/evaluator bytes as the existing immutable public 0.2.5/0.22.0 package. The implementation may choose unused development versions under the current build conventions; public release versions are a later release-owner decision. An unchanged public component can be reused only with its original identity and a compatibility assessment for the actual combination.
 
 ### HAG-OPS-003 — Minimal packaging changes
 
@@ -88,7 +84,7 @@ The first hosted candidate consists of three coordinated product components from
 | Verity Plane plugin | Operator/agent guidance, selection of the correct client and released evaluator, existing local workflows | An embedded server, automatic repository cutover or inferred human approval |
 | Hosted service | Authenticated sandbox commands, graph reads/MCP/Cypher, version guards, atomic receipts and the materialization adapter | A replacement evaluator, general shell/build execution or hosted human decisions in this POC |
 
-The server candidate must contain its installable package, exact dependency lock, image recipe, Compose configuration, explicit schema initialization command, schema revision declaration, health/readiness routes, import support and the documented qualification/recovery commands. The server image includes the selected 0.22.1 evaluator in a separate isolated environment. The service itself may have dependencies; these do not become dependencies of the core checker distribution.
+The server candidate must contain its installable package, exact dependency lock, image recipe, Compose configuration, explicit schema initialization command, schema revision declaration, health/readiness routes, import support and the documented qualification/recovery commands. The server image includes the selected 0.22.0 evaluator in a separate isolated environment. The service itself may have dependencies; these do not become dependencies of the core checker distribution.
 
 The development plugin uses the existing assembly mechanism and carries the unchanged released evaluator wheel. The remote client wheel is installed separately into a candidate test environment and identified explicitly in the plugin guidance. This avoids changing the assembler to carry two governing evaluators. The source package containing remote commands never governs this checkout or substitutes for server validation.
 
@@ -101,12 +97,12 @@ The first qualification target is the following closed combination. It is a targ
 | Input | Initial target | Identity/qualification rule |
 | --- | --- | --- |
 | Source | One future clean candidate commit in `mmzen/se_harness` containing WO-HAG-001 implementation | All changed product components derive from that commit. The original reference import remains commit `82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1`. |
-| Harness remote client | Candidate source after the reviewed integration declares unpublished `0.22.2` | Use a distinct unpublished candidate identity; record actual wheel version and SHA-256 before tests. No public version is allocated by this contract. |
-| Plugin | An unpublished candidate version distinct from public `0.2.6` and every earlier published version | Record the actual host package version, ZIP SHA-256 and assembly-inventory digest. Existing host qualification requirements are not waived. |
+| Harness remote client | Candidate source currently declares `0.22.1` | Use a distinct unpublished candidate identity; record actual wheel version and SHA-256 before tests. No public version is allocated by this contract. |
+| Plugin | A candidate version distinct from public `0.2.5` | Record the actual host package version, ZIP SHA-256 and assembly-inventory digest. Existing host qualification requirements are not waived. |
 | Server | New candidate service distribution and image | Record actual package version, dependency-lock digest and image manifest digest. No server release exists yet. |
 | Service runtime | CPython `3.13.16`, Debian Bookworm slim, `linux/amd64` | `python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4`; registry index observed as `sha256:5024f48ba9441d4b13a95d3945abc6365538e3a31109833367a1923523c6efed`. Verify the running interpreter during qualification. |
 | Database | Memgraph `3.13.1`, transactional storage, `linux/amd64` | `memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce`; registry index observed as `sha256:bd3fe13228f40881365486729c78110dde6e04f3c1f102c84720d31f38b693f8`. This target requires no Enterprise read-only-role claim. |
-| Evaluator | Released `0.22.1` | Archive and payload SHA-256 are fixed in HAG-OPS-002. Record the same identities for root governance, service evaluation and the plugin's reused evaluator. |
+| Evaluator | Released `0.22.0` | Archive and payload SHA-256 are fixed in HAG-OPS-002. Record the same identities for root governance, service evaluation and the plugin's reused evaluator. |
 | Protocols | Remote command/result v1; graph-read v1; revision/baseline v1 | Preserve the exact named schemes from SPEC-HAG-001/002. Reject unsupported combinations before mutation. |
 | Database schema | Revision `1` | Explicit initialization on an empty sandbox store. Fail readiness on mismatch; do not auto-migrate. |
 
