@@ -2,7 +2,7 @@
 id = "VREC-HUP-028"
 type = "verification_record"
 title = "Verification candidate for WO-HUP-030"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-05"
 updated = "2026-10-05"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-028-evaluator.json"
 evaluator_evidence_sha256 = "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899"
 
+verified_at = "2026-10-05T11:20:52Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HUP-030"]
 conforms_to = ["VER-HUP-025"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-05T11:20:52Z"
+decided_by = "mmzen"
+reason = "Human mmzen answered \"Verify result\" to the exact PR #540 verification request for repository adoption of public 0.22.1, candidate b2b20485f078fc175f4ded8282bcf7aa3aef7194. The review disclosed 1,293 tests with 23 reported skips, two matching upgrade rehearsals, preserved historical files and running CI. This records mmzen's assurance-owner acceptance of that adoption result only. Required CI must pass before merge; merge, host-plugin updates and HAG contract amendments remain separate. Candidate and bound evidence are unchanged."
 +++
 
 # Verification Record Candidate
