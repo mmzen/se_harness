@@ -2,7 +2,7 @@
 id = "VREC-SEH-033"
 type = "verification_record"
 title = "Verification candidate for 6 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-05"
 updated = "2026-10-05"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-22-1/evidence/WO-RLS-040/preparati
 evaluator_evidence_path = "docs/engineering/release-0-22-1/evidence/VREC-SEH-033-evaluator.json"
 evaluator_evidence_sha256 = "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905"
 
+verified_at = "2026-10-05T04:19:49Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-DST-028", "WO-HAG-002", "WO-HAG-003", "WO-RLS-040", "WO-RLS-041", "WO-RLS-043"]
 conforms_to = ["VER-DST-030", "VER-HAG-002", "VER-HAG-003", "VER-IAR-021", "VER-RLS-004", "VER-RLS-036", "VER-RLS-037"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-05T04:19:49Z"
+decided_by = "mmzen"
+reason = "mmzen answered Verify result to the explicit assurance-owner request for evaluator 0.22.1 / plugin 0.2.6, candidate 4f640284ec496b88cd7aa4ba88ca537d9374a2f8, reviewed at PR #536 head c3db0ef14dc4369ca91a0fff55e0c9d71933ef3e. Record SHA-256 59ba145b265395eddfc53a1a8ca3cb546228c39f4fb48bd26cd80ba1a4a1222f; final evidence receipt SHA-256 1552249eca44eff719615f57152e52064d8dc1f7f70ab17d946616ca02a71da2. Accepted desktop omission remains DEC-RLS-009 / RISK-RLS-007; no desktop or hosted-service pass, merge, release or adoption decision is supplied."
 +++
 
 # Verification Record Candidate
