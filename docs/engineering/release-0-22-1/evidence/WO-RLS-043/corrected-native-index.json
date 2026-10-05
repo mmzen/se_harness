@@ -1,0 +1,982 @@
+{
+  "archive": "corrected-native.zip",
+  "sha256": "937a41d0c23b1374925739d2faca2941c758b23511205183bc01af8e32174ce8",
+  "entries": [
+    {
+      "path": "iar-demo-tools/acceptance_native.py",
+      "bytes": 16418,
+      "sha256": "370159fb9ce9f8883901e4988a371f9e6ede0906d0c6c4ec8f19c82cd8cf3ed8"
+    },
+    {
+      "path": "iar-demo-tools/run_demo.py",
+      "bytes": 10706,
+      "sha256": "a898613fa3644623f2f26e98b918c833ba1f1cf439640bf4e41209e004484f86"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/fixture-snapshots.json",
+      "bytes": 2483,
+      "sha256": "db58265e2dbe78ad0835fdaa8ebcc2e76e9988c831faa03c2be542df238086c9"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/fixtures.json",
+      "bytes": 7523,
+      "sha256": "6e37840f288e2f0afb485cc55cbbfd1178962c754fc7a8710677fb6cf5433e0f"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-baseline-fixture.zip",
+      "bytes": 7108,
+      "sha256": "74454994036f7ebd5a7a366d1df59ac142d0474e140822073742eb8fe634908d"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/0d57595dbde4817fa8e81f2fa4ba394b40efb1865462064a1efb7fc2b74e11c8.decision.json",
+      "bytes": 200,
+      "sha256": "ae7831fa4978d0666fe418cec21b74d7836e6112197b55a52de52cfe6835ac43"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/1a75e7bc05285c0f074add240d0b3b003e989b4b2f9a140743ba49928f1763c5.decision.json",
+      "bytes": 260,
+      "sha256": "b0a7ca2f19695dab276aff840b65dd235456b9234e496ad2e5359f35d4c6619c"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/1bf2a5ec39caee112333284f85ca14a9016f915ec787aef640c2c59737e42bb7.decision.json",
+      "bytes": 258,
+      "sha256": "8e3ef98353e200970ecda913e247e9ab096f688e3c425ecffb5b92cfbccc23a7"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/23342c22f1efb4dd869a1f8b37e4d52c47acee59cbf42ac8dd753cf0c5f922f3.decision.json",
+      "bytes": 235,
+      "sha256": "e568471e56271f3564ce4de749ac382acfe1cf26eaeee75a3420eabe17c9a8bd"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/3211158848e2848404fed35ba9c4930eda133ecbb629afdcc802f1f854af143c.decision.json",
+      "bytes": 188,
+      "sha256": "47d9c1f9dd3bd97ad493ba7dc6c7e6d9996f659569524377885ced43ee6ff3a2"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/3515f6d03c0bd0ce71694dda689f0ca28d276aa3d1c0b8024d9688afd81f2803.decision.json",
+      "bytes": 204,
+      "sha256": "45da75f363af4f466abbe6d2b3351b4e720dd102b67e755698d20eca330a389d"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/5224a2ee5e5dd9de69690f95abc7d842bb083290db65d9c60e3b20bda57ae383.decision.json",
+      "bytes": 216,
+      "sha256": "182f713ce969b4c0056b0ac82e3342171e49939c883880b05a61f34a4b3a63ed"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/5392c8bcabc6ca41705fa46c82f51b35d389fc237bc59ed07dda5964ad6ae29e.decision.json",
+      "bytes": 199,
+      "sha256": "584c138d9fc6b1fb5dc0b63557aa435818f3d0f79087762d5ab67aa3962ef210"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/55b254b2a630a22778d1c839c3ff70b14b11372b479235ef710f1af978f93103.decision.json",
+      "bytes": 192,
+      "sha256": "c005fe36d57be651ad1c35a19a34b70b1982d1f6f068470156da50f57eb32c36"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/6f95d1d2d3c460c4e97e77df2c222472e7f0c9a3de473aee3d5e07e933e27cb7.decision.json",
+      "bytes": 229,
+      "sha256": "27b8a203ed290c075e01b34958eb7118ac6b6c4b242e3caa6bcbfe5e7aa8c0bd"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/76092f7899e90fffae32143eda0889516c30698005877c3f9dfd08e65b112dd0.decision.json",
+      "bytes": 207,
+      "sha256": "5dbdba835b816bafea0e234d86fe5708f50214f29fa7feb383ae785501849c4f"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/7beb06131e3c4fb2f9a22a2a5e35264ff47ed823ae40f29e43c9d0561b4906bc.decision.json",
+      "bytes": 193,
+      "sha256": "4cb2ecfeabd124a1c2499502c35a59af652c28c74be05ba913196ef8cbaf8c9c"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/7f46d8f8246b521c2483e5133fe8bfc2760f1a7c43de2c4c7ea548fb87d2c153.decision.json",
+      "bytes": 214,
+      "sha256": "9fe2be7dc0d043626248f2737cd09f825dc737fbf7a4879412fef6840c832c15"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/95733700d476ba4422530f59f2f4b4777e3ca9bdc54a55271751193c010f4eb9.decision.json",
+      "bytes": 237,
+      "sha256": "7aa4cbf9d90a115712edf302fb416d69033ff8acef9d4abaa0110cd6894748ab"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/9903d0c13d63ee0edd17988e3a45d2f5deb7c23038634f058589a52fd3193d1c.decision.json",
+      "bytes": 213,
+      "sha256": "d61630bbda96c0556a5c97e46d43ff80fa51124f64b4b1ad20ac3c62af11d0ad"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/ad33f74228e3ee09b096a707166599934f09218e0e35dee4ead600b32f45b610.decision.json",
+      "bytes": 190,
+      "sha256": "1eaddddc131e3d93b49db880fc272efa903cf809007b4fa4e9153039caea1844"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/bb56d7976b414ff7f4ea785361ec30e6d52b3ebfaec2d201504c67846c4b0297.decision.json",
+      "bytes": 200,
+      "sha256": "0030f9d6f71e8839d2548512b3801eb1a9bd6dc780da83d3de81868a0cc7263c"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/c25d6c13e5fbe122dd2054354f3ac400cd6f55272e1464b79db6bf6903e6eef9.decision.json",
+      "bytes": 201,
+      "sha256": "c423491f39d1efe5d3778ae20b75134919da76854aa93f6fa06b8a80a661cfa7"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/d0435d0ad1a9ec0d81fc279c729c8a763a82e1c8d8da3a47bc21273a942eef2a.decision.json",
+      "bytes": 212,
+      "sha256": "d91359511c2dfbc870ef3d359df855adbe539d63b7a5fdab26ba8fc58693bfdb"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/d11c96fb096e4ea8690c174f09ee3bc3326b7f7f958c7fce20a44c0975a01feb.decision.json",
+      "bytes": 226,
+      "sha256": "bf4dcdb3effba6b2874711008153c65e2cfdd91c9a83cb05386a875b07adedf4"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/d1842593f235ea389b41e0bed1a729c124404fbf0ca704dca475930811d29b0d.decision.json",
+      "bytes": 193,
+      "sha256": "cfaa7392b716bbb8dc3d5a07c5ccee82df5d09d5806ebcecc7b5c797a9588915"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/d1a42d86ad1c6f27fc70d9523411ff30bfdbac1b9e67bd1d2892f16b490309c9.decision.json",
+      "bytes": 238,
+      "sha256": "c2301199a1e1fcb4363eb03b75787a64aed4bbc722bdff37952108d370639783"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/d7f485238bd0d25ac8927ec2d5fc30d4266458e6e29751c43f2e6a878d5f7071.decision.json",
+      "bytes": 286,
+      "sha256": "0ca97e734f21f98ce03b68e3f002a191e1c6c646fed76db64ff8def47c40e479"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/d8131581b72aab55faa01583e7786800b926b6e6d8ee3aa62f6ae321b65bfef8.decision.json",
+      "bytes": 235,
+      "sha256": "e7fabdfb4fbb218580c7f40f640cfea138fa1c941cf5daa046172c25f9701b41"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/e5cf2d3079144100edee0b070d9445e32a88cc68a29dadf4ce2b11255b957f32.decision.json",
+      "bytes": 228,
+      "sha256": "6f7719c61b6bfc9a0ef3b9027dcc7038987659070ec3cf3ef0af3b94e03dad1e"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/e7124a51e334b1c0d24650ba79ee81dc4d1c99bd60b950721965f2ec7b29be2f.decision.json",
+      "bytes": 224,
+      "sha256": "47540762831aa68d94ec61d6717bdb0fef002d24b56c1e2c75bcaa0042104535"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/e83c8a1bc8228b27f86f474e3c97d955a7322e5804c0f4be14ec609ca5cf03e8.decision.json",
+      "bytes": 198,
+      "sha256": "cfdacb7929e7c2b00cb8039e157f0414d11f14a0edbc8fda17090d10b20ba866"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/f459e9215aa5cbd21c0acf8133d290d25a16853eb9c707bb0f40f2ac5350fdcc.decision.json",
+      "bytes": 221,
+      "sha256": "081e15b951702ad06e2bcfeac4cb566d8e57f4cbb7bfec1fee2a55b01aff889a"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/invocation.json",
+      "bytes": 7647,
+      "sha256": "5569bc189157a7cc0b3419a12bafa180f0f0451f8e8857cf7b5e113a97ec703e"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/native-events.jsonl",
+      "bytes": 518115,
+      "sha256": "9ba6d8a9aa3d63097a8ea4d62788851f9922beed76b0b46f30eb27cb5bcf43b5"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/report.json",
+      "bytes": 13185,
+      "sha256": "477c1ef84337caeb36b93edbe7d93a054051f374696290fd5349cf4af40a757a"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-corrected-execute/stderr.json",
+      "bytes": 41,
+      "sha256": "9e7ed757dfb81a72eff7841b7ebfb6213f6caa340284e9726353accaf83f0775"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-final-fixture.zip",
+      "bytes": 12873,
+      "sha256": "f89964c9af5ed0853ca7cd54eccabd1fce5133b9ff2d719ab134248f04be6bf3"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/one-independent-assessment.json",
+      "bytes": 11439,
+      "sha256": "dc9bfea46caf7b9e6c6995ae0ee3935c2d2ac01f0242c95440ecec2a77a5c051"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/session.json",
+      "bytes": 62,
+      "sha256": "3a8320bd77b9edf71197e96023a66705806f9c417034644e8908e5512001c441"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-baseline-fixture.zip",
+      "bytes": 7108,
+      "sha256": "298469b800ffdc7e23b32b2e4c1ff5285e3c48410ec5021751e5eed4cf1e7b53"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/05c7d108bc88a505ca1ce296a808117a4b27ba34c4a30e003ea8dbf13f8ca073.decision.json",
+      "bytes": 220,
+      "sha256": "cff84e8e5f1a86ed915e8ab963505b6c95a939729f9ad6940a2d735b37d9fd48"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/07b7101474a3721402fbc5346ccf03622a4c0a5b69d21ce30802aec595e5f21f.decision.json",
+      "bytes": 204,
+      "sha256": "bab9d068c774648063ff269840bfcf188a02dec54123858ba1b265f2a55872a1"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/0f798c2634870d908f52da45eb758d6d916888028b45bc872f1a4901b533ef92.decision.json",
+      "bytes": 177,
+      "sha256": "4a5172a0e3a029e140ec2f760cfdbcf9547f93e8e906e20cfcae8d32d166987f"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/1e0aae26441c90f6faf09382a12870b1c6d3d35d7d3d43078a3174ec047823f4.decision.json",
+      "bytes": 212,
+      "sha256": "9ce0133139b6c7e65c680f1e6a294e9f60b1e0a602a0b1eeba37e4cf9d146736"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/2058e18b645a10371dc76c9b0a6ab69c6cb40b0dbd23040162e18f41364170b4.decision.json",
+      "bytes": 195,
+      "sha256": "462876a3bcc9fe27e3a1c9d626a7a614f022f9882862bd3f2c24c1635af021df"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/236975d6556f4dd1a591a3268131159a6c4942024635a9d3fc5bb013f61b66af.decision.json",
+      "bytes": 215,
+      "sha256": "1451fb24771e5066bfe6db9399d51c2ab600405914408cf5c4350ed5075737f5"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/3a0f853877d28794979b8119d22e2fadcdc9251e54bc596d0f70bdabd640f9b8.decision.json",
+      "bytes": 225,
+      "sha256": "7a1773c6a7010d9cd7be44d017b8e5e6148d559ae89198edc1111a8eb2792c44"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/478b4ca7c8e0936dccc5755021cb5f83e965f624cde821ce7279e26661378ce0.decision.json",
+      "bytes": 239,
+      "sha256": "97854eeaf9609c081e46319ff8da65a264db455ef5b0f555beac80e4f133e245"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/48b79b57558158812f6863c1f2f7b8e378a355f7370790a5fcd6e07266b51edb.decision.json",
+      "bytes": 225,
+      "sha256": "ab382994718eb5aa1db094fa9a29eb957c267ae820c8fd6f9552ec92e7e9225b"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/503a636172530628bed40ec38215057889971c5aa5437f72cc8c1f712538160d.decision.json",
+      "bytes": 186,
+      "sha256": "b5ec75f189b5bba8ef641f9fafa7886484fd73a2cb5faa8aa0858fe7b2e49eaa"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/6e575d92c2438b246fb8705933c769730367d6a8f71f96ddc5029d7ddf804a92.decision.json",
+      "bytes": 212,
+      "sha256": "9b8effd8d7090b09f2af5950375cc496ef4c2744a3861aadd9db045f39133304"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/705165cf8817c9b1ae2ce4b26a32a96934f1991b3ca8edf5b876a02c69fd9488.decision.json",
+      "bytes": 258,
+      "sha256": "03e0eebbe5fee9a09b67da25b615ae84fbeaee2d95481e1941e4d5a6499d69d7"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/7864b4db5872ecec448c85e76eaa9bc6a4d51523683894ed804c9268e10ea282.decision.json",
+      "bytes": 235,
+      "sha256": "63c5d0edb70a1da25dae4e757f810713f08863f1cb85acc801d5ef454789b3bb"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/840541a6077d0914bd273a7803120643fcd75dd7da3e2a733770909fcb5ccd73.decision.json",
+      "bytes": 195,
+      "sha256": "4a53672a131c1ab71f03201f6c4b1d8bb22d0b1e6245bcffd0f6aed6edb5988d"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/88a2219ac8449aad166681bde594c07610c91d4229d57632a5c019a04bb4944a.decision.json",
+      "bytes": 209,
+      "sha256": "68fb4be77198d877c10672cae4a998b1ef7846ecea1e8bf6027dc649ba9f1a67"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/96dc79b5f9a0152ca6957673f210dac3c4fc776d100b58d0abe7a48fbd75fa90.decision.json",
+      "bytes": 231,
+      "sha256": "ca1429f96544f285a8a26da9be6adc103d1816b4aa0145e6c17b04e2704f6a44"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/9ab3ae0d52d37f1d6f1b58951248f4a7671496115098c4058f001f3a8128dce5.decision.json",
+      "bytes": 185,
+      "sha256": "54c6047fddf70875374d835e3bdef06886abac3de74e8150e4efa0238b242ea4"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/9e518f42913058bd33a45d328e83eeb2cbe506769e66fc3549375f6710510f88.decision.json",
+      "bytes": 190,
+      "sha256": "b4ab65482d6873a17159608ea7b0bc0bf7678d29f8ad11631fe7b5c353388442"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/a44a3e77b90bf0424e05be5dc7c9edada91daee3e5f712c91680c9a732c0b7c9.decision.json",
+      "bytes": 221,
+      "sha256": "5a7ce707f9bd8a403e66164642afbaa6765fae54560653f5a14e0f76011bad49"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/c17762b1c8e0f495558321cfdffbb765b190334de3b2c7d4e5b950fa68aa0149.decision.json",
+      "bytes": 262,
+      "sha256": "a872c2637d569f3e736c3332f433807da2b6bff22271f5700a6d7e65320c41d1"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/c3487940ced060148b0cfc344c4fe27f2d1b5e1c36b5b3f2a666e2a528ff825f.decision.json",
+      "bytes": 210,
+      "sha256": "67e51238229bf6d399081ed37470098e53406b55a8cf79312b34741ccef2b389"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/da671acbab4b5fc77554b16c4ffa73256eadb44c752ab5f0fe7975c79537fdfa.decision.json",
+      "bytes": 240,
+      "sha256": "1d035d30f2f171f57eb0a1eb26e6e0269f300e36dd5fbbb537ca2638c25088c4"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/f254328f65ec4c07c5ceb66776a0a16132324e973892ae2adaa22d6da4d48871.decision.json",
+      "bytes": 194,
+      "sha256": "44fbe0416d8bd3ce2db7ae1f3b18104a2b43d09355ea5f6ea94797cbe4a80cc1"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/f818f601e7a0f17aae6e4059f1b07dc7774b2ef11e67195a3eeb5bf3da463eaf.decision.json",
+      "bytes": 211,
+      "sha256": "797118a9255c4dd989650e364bded3a5f721ebc1b521fa4974390853d7552f63"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/invocation.json",
+      "bytes": 7951,
+      "sha256": "084232910b8127287e50acc5c4bdbb8dcbdc37f2617d5f4b48203c6a7fb5b661"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/native-events.jsonl",
+      "bytes": 249068,
+      "sha256": "90ae827476065fd616a9654a11f9ee0d907faf27784e82de9a78373499d3d136"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/report.json",
+      "bytes": 12263,
+      "sha256": "32b5d2d0b1788bddc8e28301a5b86b5d764aa7982c42f8d711c2faa654c086d6"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-cycle/stderr.json",
+      "bytes": 41,
+      "sha256": "9e7ed757dfb81a72eff7841b7ebfb6213f6caa340284e9726353accaf83f0775"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-final-fixture.zip",
+      "bytes": 12869,
+      "sha256": "2a270dff6884dbb59b5e52f9e624a161597965e573816fe34e4a15bfaa5aa91a"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-final-proposal-assessment.json",
+      "bytes": 1363,
+      "sha256": "ce6919f61d9f7eefdbfb0c12de1c4f67a75972a6fdbcca0ed937019c213bb068"
+    },
+    {
+      "path": "r221-fix043-20261005/claude-workflow/two-independent-assessment.json",
+      "bytes": 11181,
+      "sha256": "46e8469fa48c7960beb8218e09f60e0868584aaea3687c5ee8129acc158302b7"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-one-commit.json",
+      "bytes": 435,
+      "sha256": "7d78141f8b3b6a0f5ac96fe0cd3f4849749e513c2d01080598d482be1ad2b874"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-one-stage.json",
+      "bytes": 274,
+      "sha256": "1ac4fed83d6d883ed67edd0b12fee0febcef098f219866114e23bfa3002c084f"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-one-upgrade-apply.json",
+      "bytes": 1101,
+      "sha256": "af6f06e6a54afc1ef3295b76e735041ce5b69713aa1dc7050a790ac6efb345da"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-one-upgrade-preview.json",
+      "bytes": 1101,
+      "sha256": "d048f51dad6b3b0223eb923d6cd726785a3ec28ae81713058ef953f97234c085"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-one-validate.json",
+      "bytes": 2711,
+      "sha256": "00cf8cea9c7aa8215a16d2f3f1261fa3ef89f58e035b4948261e62cf0b609b9b"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-two-commit.json",
+      "bytes": 435,
+      "sha256": "9df8c7dc0e8836c1c1999c79959af9cfa61efc1d50b60e94c5fe35082c55a4f7"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-two-stage.json",
+      "bytes": 274,
+      "sha256": "60df87a4d6ed30d04ee27c72930a2658c8bc89b6c14b99fb3ae56495f6be1cc8"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-two-upgrade-apply.json",
+      "bytes": 1101,
+      "sha256": "6cac38f4681e3f6fe6ccebf83aa5dbc1506c3b79862d85f1ca2f7608d8dd9e45"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-two-upgrade-preview.json",
+      "bytes": 1101,
+      "sha256": "4e6e72dbddbbc205369ab0eba702211de5e68a02bdaad330276e991bc865d2af"
+    },
+    {
+      "path": "r221-fix043-20261005/flow-two-validate.json",
+      "bytes": 2530,
+      "sha256": "e1a5da0c5575083d7f01433d7e94f037d7011fabc36a981d0debe53d92cfbae7"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/fixture-snapshots.json",
+      "bytes": 2537,
+      "sha256": "43e649af8a85b132584e5dd62d5211e8e6c0e8b919d020c4c6a0f6fd4335ee71"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/fixtures.json",
+      "bytes": 1336,
+      "sha256": "fc7b868a03fabb25f54e33799e6332f15523fa260c23c46d97818e8c5353f948"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/installed-before.json",
+      "bytes": 692,
+      "sha256": "4b5c56a4a23afe584bbb76716ed51f49aabcc881f151ae809ae8a3a412233846"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-baseline-fixture.zip",
+      "bytes": 7108,
+      "sha256": "90fd5fed9b339b88324e38007ba10da5faccb1e7600b1e6f20ae1af60dbebd7d"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-check.json",
+      "bytes": 17677,
+      "sha256": "e6d109165355c8a4c0f0685094ea55e287d2cf54e4d8ae4bd287656be0927f4e"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-commit.json",
+      "bytes": 1211,
+      "sha256": "6dd3f639da69a3e818921397b16d5ec9ca5dfb18102f90b019df68bcd4a1a81a"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-config-bytes.json",
+      "bytes": 326,
+      "sha256": "e60fee2681a5df9aaf9eee3577f48ca35dc3096adf0cece40ecd6037ba781230"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-config-mail.json",
+      "bytes": 341,
+      "sha256": "4af4b0878441cbe3b0c353bdcfde3dc2026076e77519d40cdcef678ba9edd578"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-config-name.json",
+      "bytes": 333,
+      "sha256": "e28f5ac26879f4a9788c7f7a35025c741955be52d222bcb7ff578579c72b75c9"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/06abe838ed4a21abbfc50ba4eb2ec75609d5b9bfad38140b56f4366f94cd88cf.decision.json",
+      "bytes": 259,
+      "sha256": "1207b1ddfbf2a749fc0382f40b83c245dc34d5870edaa7fcc5907886481e81ac"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/1128dfba22eb09e58dd04940282221fbf4f3eee5c1451c19917457565d9cc6f0.decision.json",
+      "bytes": 253,
+      "sha256": "12893b2786c1d687ddfc346b01230ffc9204a6879bcbbbc62a6eb99c3c3f142e"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/1d8b991d3352ab207e1a9e497c51b29ac2aa8ca89eb77edba619e7b8fde8c07a.decision.json",
+      "bytes": 186,
+      "sha256": "76c4544833dc986fd0812b30a61a88fa2f5ecb8883fb3ab4c2617882594f5de5"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/5d973d8bc2dfb7bdfcd768fadfc2cf44482cad7b585b92e068db647820b434e7.decision.json",
+      "bytes": 202,
+      "sha256": "b8a3ef112a94a3ea590f4b21cc4a1017f21a535a7f2b066b49aa78cafb5ded49"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/632fa3169191eb21b607010bdda2f081abbf47843a11057c0649334417706acd.decision.json",
+      "bytes": 278,
+      "sha256": "6bcf4759b2db045c35ee48213e6a28644bf8a2f8a655fc7affdb1c7ff9c35fd0"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/6cc9d06910110317055d6811c652e7a87a6a9af8b37178e777f790989b4da2b8.decision.json",
+      "bytes": 210,
+      "sha256": "65ca3312b209d1d7f047f14d7d091234e5f4bdf60b2bd61fb5fe8c4d853e4431"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/72adcd829caca64ce7bc06810605a26a51bd60955ceff96159529b5d34570e57.decision.json",
+      "bytes": 218,
+      "sha256": "74ec92d58cdd4338105d56a62fd45ed81d256ef62c6789b3f1cf74a19ac2237b"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/778742cb2e5af56c056d48a1a306fc222d1965299c4b68bdc17da600c44571e4.decision.json",
+      "bytes": 197,
+      "sha256": "a3d9276edb4ae4e763409fc4e05e370d1b847efaeaaa8c5335dc446d42763032"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/874d1f8b9aa70308a50a41179713e3b2f14df6a5f508d19acc55e7d4dc47b79d.decision.json",
+      "bytes": 203,
+      "sha256": "023262cdd41fb14a8d078e401cb27ca40c4fbf6ed77bb2137580fa9e3658c5ed"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/bbce1feb0cf9ec343cdb64b82496942b87335752fa2782df38385d1f473f0666.decision.json",
+      "bytes": 232,
+      "sha256": "96069cab9e3aa7636264ebd59507fd6ec2f36bd3e38e4d21639d199eb0a9cdeb"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/c095ff7da56f0fd6d1952aa95a7ab3d6849c8b78e2329c692695bb59d981ccf3.decision.json",
+      "bytes": 239,
+      "sha256": "9522845e9ceb5b65f8a5c38913cd224492cef693a215c85bab8ef4c6284f436b"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/c8a4d6cdd7cfe79c09a58210a8ba81ccfb0ce8e48fcbf55e5d873bb5e566d3e0.decision.json",
+      "bytes": 235,
+      "sha256": "c3bad8972eef2ba5553612b0a0649e6c586d3aa42eab587ef499e63602d3210f"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/cc704909be51854ad0569234128b42b495958085d24a64d0b9df06782ae06416.decision.json",
+      "bytes": 245,
+      "sha256": "9005e047e13c28a2702b486a697030ee97c87d89d50dfac49ca412ca739011eb"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/cd2d3a1f92e8280473f7d114a33d6633182dfa02d39b7c1e5e4fc1b61083c2a3.decision.json",
+      "bytes": 218,
+      "sha256": "da08ebf3d9e5b9f2eb6977bf6caf2b9bbe05ac230c8f8f52bb0ca33f2e837f93"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/hooks.json",
+      "bytes": 1273,
+      "sha256": "24fedfc830438aabaf6fd5dab91b666ea96f2109d13eb22782694b3d6fa68d2e"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/native-events.jsonl",
+      "bytes": 246030,
+      "sha256": "ce278e95455b29f8c20dcf5872d9c10c7470ec20fe3817f66175071109ebd97e"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-cycle/report.json",
+      "bytes": 13884,
+      "sha256": "07f2c895c6afd0d9d8863d010818439f3e6f18e27f8e8db3115841fb75db34b1"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-final-fixture.zip",
+      "bytes": 12795,
+      "sha256": "1bd9dbc63672430df039c01e52da76e03f4441dfec60441a2f9d0e306e3f9e04"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-final-proposal-assessment.json",
+      "bytes": 1261,
+      "sha256": "9bdf4857dcab632ee153e7d10842bda945a32cc3849c3e632ada43022ba62f19"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-harness-init.json",
+      "bytes": 1040,
+      "sha256": "4a3a1660cad029965bcce48edbc6c872515e44fc042ccf394abcf1335a77e90f"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-head.json",
+      "bytes": 348,
+      "sha256": "a943426c044a619ae0bd677d63902d957843fafe39f3f88ac7bfcc0dfb44a179"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-independent-assessment.json",
+      "bytes": 8241,
+      "sha256": "2f91641d23dcaac042b683605f5b5c7c8c6f3a3e269765780f48656b15749157"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-init.json",
+      "bytes": 413,
+      "sha256": "ba9b78c0c58c8177e3c11b12833261238d94ec9bf7547274781ed9755c818a96"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-preflight.json",
+      "bytes": 1835,
+      "sha256": "53ca1e102d86e948bb7fabdf77c05660926ecf5f55a9607d37bfcbc731ee95d8"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-remote-init.json",
+      "bytes": 410,
+      "sha256": "d513d3d97cb3da7001d1531b8d4ad2ccabe5b71c3c3a49515f2d0325b15d561c"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-remote.json",
+      "bytes": 401,
+      "sha256": "550997531192db46ebf3722f4ee2c37fddad7b537d170645bca5663ea07932cb"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-stage.json",
+      "bytes": 301,
+      "sha256": "8ad5f05bac58aa996fb12e6c7e18ab6e92b13a1e6fbdde60c37f1b12ddcab344"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/legacy-validate.json",
+      "bytes": 2448,
+      "sha256": "1d2421e2879226ee90d7e1bffb7bae3cfc7b4a9cfb0ba32e2009c90bb296eb6a"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/plugin-install-first.json",
+      "bytes": 899,
+      "sha256": "f317dbb440ba2cf898bc8e68a504e8a7b9986380e52248fe6f6233657f936ff7"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/plugin-restore-final.json",
+      "bytes": 893,
+      "sha256": "c8a354ef3185937ea9d1a8b965241b45ecd1422461746f040c939681eaf0fb39"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/profile-after.json",
+      "bytes": 1187,
+      "sha256": "2f2a5bb79f41b16b656d71bda023b73b7d35adf1fbcb1a1435aba7ecef69a3d6"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/profile-before.json",
+      "bytes": 1187,
+      "sha256": "2f2a5bb79f41b16b656d71bda023b73b7d35adf1fbcb1a1435aba7ecef69a3d6"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/session.json",
+      "bytes": 61,
+      "sha256": "5f94685bb210ba21f9b142405b5370060ff96e34ef65df3fc24a0f7029c3f4e1"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-baseline-fixture.zip",
+      "bytes": 7108,
+      "sha256": "8fa0b778647c066cf7773c3d4d7aa1b57efc2c80d600c2fd6bddfa8aa70ccc5f"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-check.json",
+      "bytes": 17680,
+      "sha256": "eb30ec0fdf0b72464b6a5dd0d20d38ce0dbe1da31a738f99d27d44083cf5321a"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-commit.json",
+      "bytes": 1214,
+      "sha256": "a7bae3d104c7caa041db4080abad332e3a002bcfb2edbe013a4a5c3798cb9e99"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-config-bytes.json",
+      "bytes": 329,
+      "sha256": "9a8eec64a52aed3dbc3581a23a3af2cd6ff684ff2a4b62c5ea30bd75fb062ab5"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-config-mail.json",
+      "bytes": 344,
+      "sha256": "3e83b9351e07287ea5dba1446d190d66f109289a1c0c0641e34a914274f87de0"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-config-name.json",
+      "bytes": 336,
+      "sha256": "4bf51d68d95fc1b0bd9873de2b7c251a80300d391ef90574231eff34ac2fee64"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/0477ce0d1ace4714eb6ddc9fbe7d2b983910756078a2c4637cf11d0d9ff35ea1.decision.json",
+      "bytes": 229,
+      "sha256": "dec15a25f625a659a24945b476e67424b8477bcb9eaccf142bf3a1299f77a5ff"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/139218010ffe03806d63fd6958aaf6fd72d37b9aa9ed6d4f378c3bebcc5905d0.decision.json",
+      "bytes": 235,
+      "sha256": "fff4a31f65b198cbfafc780935b2ba7bdd12fdf4d64eee05c738c68f1172743d"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/4265f361ddce074939846b420a13699cf716e884a77af4c2a9b847d82538e484.decision.json",
+      "bytes": 200,
+      "sha256": "bdfb59d3b2369b8da31feedf5c96108aa70b8117e83d1586a8972124102f4c32"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/62b9fac9c8b8583713dfe6ea865016c5d87040f51c8d3c0027803a5f11ae9d22.decision.json",
+      "bytes": 222,
+      "sha256": "cbe55cea51a2c4b9ff286df0a07e629a2091f8105165f5577a75e5a69d33a990"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/6e8a6d266ee2fc25f6176bea1e66af7bc73c52f0a3fdbe07a1364cdf5c16e61e.decision.json",
+      "bytes": 219,
+      "sha256": "cd7702f3da644b3dcbc8759ec70671ba1cec2ecd70747aaaf96ef2203a42f104"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/786d84f15066fe05a2b71e45a15d8c225a91c4ac2e921426de873c2e2b4dd006.decision.json",
+      "bytes": 202,
+      "sha256": "d686ef2d2c1a1e560856455b161cac62fe94942d605cd848a546303bdadb4299"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/7911fb21715c78138b49d32fb043c3ed44e03a015e46ccb1198c384f68139eac.decision.json",
+      "bytes": 229,
+      "sha256": "193df96a622893abc51fe539ae10a05c981b6709e1def2a6b7104016e9f855f5"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/967cb72764322a5848eb22ab9ee05ea9a383811bdd6fbccba6bdae24f613ba20.decision.json",
+      "bytes": 206,
+      "sha256": "70a2343f64093a0eb68b3673c374a5d457e3a625a9d028c2923c3b8edfde43b0"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/a19f7adc462ae742e2eab08ba9789dc4eda932e5919a16ac7ae922caff446d74.decision.json",
+      "bytes": 183,
+      "sha256": "7223800ae60589e4f312427ee284812099bf70120cde2d2be02fa936e5f0502a"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/c502d133ac95e052efb26d314c515a865ffd6a1aa467a84a4f4a96ebc594f932.decision.json",
+      "bytes": 264,
+      "sha256": "40ce822c472aeacf0b601a57538e2781785cfa8416e5f1ccd8ce0c1d6f4d26b6"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/c87ef2312906be3b6d147278a4e2b5eccad69b353b4e0e16e1932a09da2e4167.decision.json",
+      "bytes": 220,
+      "sha256": "fdbb3a5c9d3253839255e52e6fad4819a396977489a5599a91dc48a7e1f7527b"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/d13acd40b05e8202c92b6b47986ba1397a0bd59ea643b281d9185eed4e6ee3d0.decision.json",
+      "bytes": 217,
+      "sha256": "5cd29fb66b7d3b6b478354339bcb3287e7222b061c1ab5152fa26c565e14b1bf"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/de58e8b21d8f8fafa354f4f5f8a704b8f868ec84baffec600f4a35f8a17bb56c.decision.json",
+      "bytes": 289,
+      "sha256": "1a25764720b08049c5253521652b506d833efcc18fa67b142911fd12c3fc9b16"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/hooks.json",
+      "bytes": 1273,
+      "sha256": "24fedfc830438aabaf6fd5dab91b666ea96f2109d13eb22782694b3d6fa68d2e"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/native-events.jsonl",
+      "bytes": 357134,
+      "sha256": "601878a4c8af2bd5771140be6c446ae373bf9a0a02b5eab62fa5f57786df4c21"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-execute/report.json",
+      "bytes": 13801,
+      "sha256": "2c2f395d210e47a89684ed1a23eda87ab0051e9dc8ef03bc14aa6eab025d9e43"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-final-fixture.zip",
+      "bytes": 13043,
+      "sha256": "d5aef1430a3215cbc201214f7a5a3b121c36d36128b4eba05b5da94a5d2a15b4"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-final-proposal-assessment.json",
+      "bytes": 1264,
+      "sha256": "053f4ea63fb70df422a29884e9a6d22ab732d54ac770004b12d8e36b9f524d95"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-harness-init.json",
+      "bytes": 1043,
+      "sha256": "a37ef602979a685c01acfab8832c2ae877463ec04bfda7d776fd66b52768e9f9"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-head.json",
+      "bytes": 351,
+      "sha256": "d6cbae69978221eed223a3f151fd9ded390940b3ddffedf3531515aa80cb65eb"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-independent-assessment.json",
+      "bytes": 8280,
+      "sha256": "4286f43dc7b5cd27a650bfd515aaa51e1156d143f12f357d0cc4383bda08e039"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-init.json",
+      "bytes": 419,
+      "sha256": "0c844a32a35d8c4aa4699b39ada1ca27afba4f17a6b99f1892e193f3ae7de79c"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-preflight.json",
+      "bytes": 1838,
+      "sha256": "78399b96fae69adb2de7b8fd95befdfadb2095c69470fa65e85e53421a2a740a"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/22eb0b2ec3dc2b69d89fd36426881f4030e5d27d3e74b203304ef4b017d6105e.decision.json",
+      "bytes": 240,
+      "sha256": "88b9d8d547c26b5fb7d8569832f4ac813348288d7ad5c47813c3e55723e0ec0c"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/3513090631cc0903903fcd4beddb45de60ea15065e4c9870414e68c14d26b47f.decision.json",
+      "bytes": 208,
+      "sha256": "12c5d1b75a59f9975afb227b934317d6fd6589986e01a394c16cda75ec6e623f"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/52e74f5b33bc3e4add6e784e91dc0228799d66be2e3a27bfe0488baa90f26340.decision.json",
+      "bytes": 213,
+      "sha256": "7244cb0dbd5e3523e14aef4989cbb56dcbac21cca52553c31eebf13361eaa453"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/6b506953db3365f9b83ad2fdf8884c3af42ab0c3278022a94843368cefaf2bbd.decision.json",
+      "bytes": 254,
+      "sha256": "f387818d0a044184c9fe00baad562324313d945ee9b4b0cdcdeab443cbb128df"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/7d3fec378b84ff7c4cf6ae707bdf4bc3fd8d3fba29df93e596bd838f180f73c0.decision.json",
+      "bytes": 202,
+      "sha256": "74cb7019c57bbb227a675e7169d9925ae3a497a10a197a0478d89ccd82d75311"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/9d2535811cf31b6d20bffc5214928fde8f970139b8ddb27effdb515e86ad8355.decision.json",
+      "bytes": 196,
+      "sha256": "1f8cb8f3445e839494ae17291a49a38d93d4c5d29724eba489b028a06577b287"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/aa95443e7ef3fefae1831566707532092d07b54525c88adb8e5247edfe513412.decision.json",
+      "bytes": 187,
+      "sha256": "ea1507fd8774f0c88dacbbf5d6d1036dc2c79553de918fe46e378291c2de40a1"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/ab750976d1e4926735024d4fe702ed2fca93f71e069fde2eef5f5d618bcd3c21.decision.json",
+      "bytes": 200,
+      "sha256": "3706514c739fe335ec0fafacb5be9da3448130c3e175bdece290ba3fcb8f1996"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/abe2c2e9b8ee4bc0ed542b18be8653e314c39da2809e916beb3eb1925ef559af.decision.json",
+      "bytes": 211,
+      "sha256": "1cf3f459ff37b072d425b2649d05aa9c3a42facb9ae8639e81256dd273e4d83c"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/c67d997161e61665789e5cc039c859321f562d3b36430baa49d1af0042d79b34.decision.json",
+      "bytes": 223,
+      "sha256": "8e36c07065af27f554ce0f7d0eae43a5ea06de75c3b7a85ac8363d8cc7ac5135"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/f07c5847523ead4e35a19758ff549bf0ec206193268dbdd70b148dfbd1a46136.decision.json",
+      "bytes": 251,
+      "sha256": "12eb8158fcf45817b508f0f6f79fab030f51d7f069fe0419940b2a2ed9d59c85"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/hooks.json",
+      "bytes": 1273,
+      "sha256": "24fedfc830438aabaf6fd5dab91b666ea96f2109d13eb22782694b3d6fa68d2e"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/native-events.jsonl",
+      "bytes": 299547,
+      "sha256": "716359b3dc3a214502116b5fa69451d8f8750ddcfc8c29dc2e7dda53e80532a2"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-proposal/report.json",
+      "bytes": 3897,
+      "sha256": "1f79f9ef8c2e2f7dce07ad038dd4103ab80b17dc88f37b18d2135628253bf818"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-remote-init.json",
+      "bytes": 416,
+      "sha256": "331c6fc82ad45b0521522ace0b7950850983f943bf5139749c08e55b806bc1e2"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-remote.json",
+      "bytes": 407,
+      "sha256": "95770302378f10215464e9b393ec3d6516022c487cd04e0c15763bf9489da5e5"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-stage.json",
+      "bytes": 304,
+      "sha256": "5fee1266940b3f11ff03622819c1dccd6662e0bc03c170393e253e9894cb52b2"
+    },
+    {
+      "path": "r221-fix043-20261005/native-workflow/successor-validate.json",
+      "bytes": 2451,
+      "sha256": "1fc12a714ddd82cf4d5fc3be9b9caf2f723fac380b7b19e5acc8661d5682b44b"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin026-boundaries-events/native-events.jsonl",
+      "bytes": 115781,
+      "sha256": "375e285dc9e1bef4870c40c1ce056118ecfd1bac7b4649c79271af82a09b3519"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin026-boundaries-native-codex.json",
+      "bytes": 131905,
+      "sha256": "185f641b8fbac218922c65288e6a5d5390ed34fb32a2d837dbe730c85d3844a0"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin026-claude-context-bound.json",
+      "bytes": 25084,
+      "sha256": "ab98ee8c9b25bdb833bafaa17af0307dc2c3b4fdb413dbecc910fefed466fb10"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin026-native-claude-boundaries-20261005.json",
+      "bytes": 406050,
+      "sha256": "5f0b23386d795f02e4c2f3a3dad2f6d2404feb8af0bccc8d48107957c46d8813"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin026-native-claude.json",
+      "bytes": 480516,
+      "sha256": "c77bcbf17d5665cb35d7e2d7ebeed435c0607f29b18980e9371c65020cccf4ed"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin026-trusted-native-codex-events/automatic/native-events.jsonl",
+      "bytes": 28047,
+      "sha256": "e25e30e60a9268d01a20f8cc22d8df74242a15d2f7d084a80d9a9e89b44f78c9"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin026-trusted-native-codex-events/native-events.jsonl",
+      "bytes": 21815,
+      "sha256": "cfb13c9faa1617f962be60eecf1959bee1bac4d84df24bfa516a837c2b4e8e6e"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin026-trusted-native-codex-events/resume/native-events.jsonl",
+      "bytes": 15192,
+      "sha256": "3937a40baaaac2e366018267baa6cbfd1a56ac69e83d2182aa3c7285c85ee216"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin026-trusted-native-codex.json",
+      "bytes": 72412,
+      "sha256": "7d8a0fb8cf7969d019337b9d0c4662861d4b22863a0214080806a7085fbdd7e4"
+    },
+    {
+      "path": "r221_fix043_boundaries_claude.py",
+      "bytes": 4954,
+      "sha256": "50b15b9a62aba85e6a3f8b1206456f8ec5c531e2217546a2ecc061021f121f43"
+    },
+    {
+      "path": "r221_fix043_boundaries_codex.py",
+      "bytes": 8894,
+      "sha256": "3a44dac89bd05da9876a704b9cfb0af1b5f36196ccea8f13c6a6797a0e5c8878"
+    },
+    {
+      "path": "r221_fix043_boundary_prepare.py",
+      "bytes": 913,
+      "sha256": "4363e58ab973c2518940ea1321975a549e99b90153694a16f3ea044e3063f7ad"
+    },
+    {
+      "path": "r221_fix043_claude_workflow.py",
+      "bytes": 12010,
+      "sha256": "76a4197dfb2a58c88bcb86ca7392580b407e36f2efaa3749dc47f30e49ddd8ad"
+    },
+    {
+      "path": "r221_fix043_codex_second.txt",
+      "bytes": 1550,
+      "sha256": "9b8a71a33bde0b62f1524022ff38d857411b6b011966ebea407779a3d6ca87f7"
+    },
+    {
+      "path": "r221_fix043_codex_workflow.py",
+      "bytes": 15588,
+      "sha256": "4d9dbc199992c2f52c245360377fcca06aea31bbc023deef209517a4600b75b4"
+    },
+    {
+      "path": "r221_fix043_context_bound.py",
+      "bytes": 3584,
+      "sha256": "15d9d08ca06d276167db7ed7ba07765f55e15680a352a12440f29ac8a5bdcb91"
+    },
+    {
+      "path": "r221_fix043_flow_prepare.py",
+      "bytes": 3789,
+      "sha256": "d201870b7562d434774e365c7985e08953a207a0e5945aeb9646eeb9ccd994f3"
+    },
+    {
+      "path": "r221_fix043_more.py",
+      "bytes": 3340,
+      "sha256": "bef02b26f1febc20ffdce15182e08ebc47e7a2c3aaf873f7b517b01ead7fd78b"
+    },
+    {
+      "path": "r221_fix043_native_claude.py",
+      "bytes": 10956,
+      "sha256": "8fffd5dea550750dd26a46d5e0817cb3d04f302bceb7e9f3e83a6432528fd89a"
+    },
+    {
+      "path": "r221_fix043_native_codex.py",
+      "bytes": 11851,
+      "sha256": "7cf6c8d99a83f4a328dd3023b98b1e105d65e63b3ae2b496c8ffcbf8b829cd7b"
+    },
+    {
+      "path": "r221_fix043_native_prepare.py",
+      "bytes": 1486,
+      "sha256": "b986a116dec3d9caa738e9ab9133ad9b37239f12492962a74e1e93fb2a3547cf"
+    },
+    {
+      "path": "r221_fix043_walk_review.py",
+      "bytes": 751,
+      "sha256": "3d0e0fca08056275ace1f33da1016157dd204dffd3fac7235090b6e512b8433f"
+    },
+    {
+      "path": "r221_proposal_assess.py",
+      "bytes": 1388,
+      "sha256": "d6cde5e01dc03796a641fa682ae8a78bdd1cfc2cf62b1e762e4d84df932d1946"
+    },
+    {
+      "path": "r221_workflow_assess.py",
+      "bytes": 2983,
+      "sha256": "0f36108202fc5ad73a59c3f9cbcc97b37084e3cce89451f33c14f955d187f2b6"
+    }
+  ],
+  "claim": "Actual correction qualification; no credentials, profile storage, final assurance or desktop results."
+}

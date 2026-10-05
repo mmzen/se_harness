@@ -14,11 +14,12 @@ amendment of the hosted pin follow publication; this package does neither.
 | [WO-RLS-040](work-orders/WO-RLS-040.md) | Integrate the two verified evaluator corrections on an isolated branch from main; qualify the final candidate and prepare its exact release inputs. | [VER-RLS-036](verification/VER-RLS-036.md) |
 | [WO-RLS-041](work-orders/WO-RLS-041.md) | Qualify and stage both plugin 0.2.6 packages before final release approval. | [VER-RLS-037](verification/VER-RLS-037.md) and existing VER-IAR-021 |
 | [WO-RLS-042](work-orders/WO-RLS-042.md) | After the exact complete-release decision, execute and confirm all public surfaces. | [VER-RLS-038](verification/VER-RLS-038.md) |
+| [WO-RLS-043](work-orders/WO-RLS-043.md) | Correct the native-test transition defect and requalify changed packages, preserving the original failure. | [VER-RLS-004](verification/VER-RLS-004.md) |
 
 [REL-SEH-035](release/REL-SEH-035.md) selects the existing complete-release
-route. These seven approved artifacts reuse accepted product, distribution and delivery
+route. The approved package reuses accepted product, distribution and delivery
 definitions. No new policy engine, artifact type or release mechanism is needed.
-The three work orders separate candidate qualification, host-package qualification
+The three original work orders separate candidate qualification, host-package qualification
 and public observations so publication is not its own precondition.
 
 Released 0.22.0 validation reports **zero errors**, with 61 existing repository
@@ -35,8 +36,8 @@ proposed in each work order; mmzen confirmed it and the released evaluator recor
   and historical evidence. Do not merge the unfinished hosted branch wholesale.
 - Include main's already-approved WO-DST-028 4 MiB dashboard correction. It is
   present in the proposed baseline but absent from the published 0.22.0 wheel.
-- Final release membership: WO-HAG-002, WO-HAG-003, WO-DST-028, WO-RLS-040
-  and WO-RLS-041. Require one new aggregate verified VREC at the final candidate.
+- Final release membership: WO-HAG-002, WO-HAG-003, WO-DST-028, WO-RLS-040,
+  WO-RLS-041 and WO-RLS-043. Require one new aggregate verified VREC at the final candidate.
 - Deliver evaluator 0.22.1, plugin 0.2.6, current documentation, Pages and
   latest/last through one later frozen complete-release plan.
 - Keep PR #535 draft and targeted at `codex/hosted-artifact-graph-inputs`.
@@ -66,10 +67,16 @@ criteria. Both work orders remain in progress. There is no final aggregate VREC
 or release record yet.
 
 The native Claude walkthrough found an evaluator transition crash, reproduced
-on Windows and Linux. The [correction review](evidence/WO-RLS-041/correction-review.md)
-links draft WO-RLS-043 and VER-RLS-004. These are not approved. REL-SEH-035 is
-unchanged; adding the correction to its exact release membership requires an
-explicit reviewed amendment. The accepted version and historical evidence remain intact.
+on Windows and Linux. mmzen approved WO-RLS-043 and VER-RLS-004 with required
+commit-bound verification and the exact manual linked amendment of REL-SEH-035.
+The correction and amendment are applied. The previous accepted contract and
+all original failure evidence are preserved.
+
+The [current correction qualification review](evidence/WO-RLS-043/corrected-qualification-review.md)
+records the corrected package identities, passing Windows/Linux and native CLI
+checks, and remaining desktop/provider criteria. The earlier evaluator/plugin
+reviews describe the original preparation package, not the corrected wheel.
+No final aggregate VREC or release record exists yet.
 
 The draft preparation PR supports qualification and review. It does not request
 verification or merge. The tested preparation commit and later evidence commits
