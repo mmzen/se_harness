@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-HAG-001"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "66fa99ed80737388c809ded8a390ea4d5b179424eb7507318aeef789078a895b"
-rebound_at = "2026-10-05T13:27:31Z"
+formal_snapshot_sha256 = "748709d88ebdd482296d4ea5f8daca5d858bea689f98abb98fd8269950a4c3ef"
+rebound_at = "2026-10-04T17:58:37Z"
 ```
 
 # WO-HAG-001 handoff evidence

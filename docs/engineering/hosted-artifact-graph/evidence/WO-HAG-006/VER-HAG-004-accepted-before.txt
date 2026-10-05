@@ -43,11 +43,6 @@ prerequisite reconciliation, not the hosted service or a new public package.
    reviewed digests. Confirm actual manual authority and activation are recorded.
    Existing lifecycle events are unchanged. Verify every pre-existing HAG
    evidence blob, fixture, candidate binding and VREC-HAG-001/002 is unchanged.
-   The sole live-packet exception is WO-HAG-001-handoff.md: before a supported
-   rebind, preserve its complete original Git-blob bytes at
-   evidence/WO-HAG-006/WO-HAG-001-handoff-before.txt and prove their equality.
-   The live packet may then acquire the current formal-snapshot binding;
-   historical test observations and all older VREC-bound evidence remain exact.
 2. RC-02: Run released `doctor`, `validate`, selected `check` and identity
    reporting on the integrated checkout. Root selection, CI pin and resource
    identity must all identify public 0.22.1 with the approved wheel/payload
@@ -89,11 +84,3 @@ Zero hosted scenarios have run at proposal time. All twelve VER-HAG-001 cases,
 the packaged walkthrough and restart/restore remain required under WO-HAG-001.
 RISK-HAG-001 remains raised. This result provides no service readiness,
 host-desktop qualification, public delivery or production safety claim.
-
-## Linked preservation amendment
-
-This revision requires the explicit DEC-HAG-003 bounded-manual-revision decision.
-The prior accepted file is preserved in full at
-../evidence/WO-HAG-006/VER-HAG-004-accepted-before.txt. Its original lifecycle
-events remain unchanged. The exception permits current handoff maintenance;
-it supplies no hosted test, completed work, assurance decision or gate waiver.
