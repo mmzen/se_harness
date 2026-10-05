@@ -329,7 +329,9 @@ admission; it does not resolve RISK-HAG-001 or prove database privileges.
 existence constraints and explicit lookup indexes. Memgraph requires separate
 indexes for uniqueness constraints ([official constraint documentation](https://memgraph.com/docs/fundamentals/constraints)).
 Schema creation must be an explicit operator step on an empty store; later
-startup verifies it and refuses mismatch. Runtime schema qualification is pending.
+startup verifies it and refuses mismatch. Explicit initialization, stored revision
+mismatch and missing-index refusal have now been tested for the exact candidate
+in the [qualification report](../engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase2-20261005/protocol04-assessment.md).
 
 ## Deferred boundary and remaining qualification
 
@@ -339,7 +341,15 @@ Database-enforced read-only access remains RISK-HAG-001; no authoritative-pilot 
 public-service claim is made. The current contract does not authorize a parser
 bypass, a replacement lifecycle policy or suppression of malformed input.
 
-The first service still needs a dependency lock, image/Compose files, admission
-adapter, transaction implementation, packaged client/plugin changes and all
-VER-HAG-001 cases. Phase 1 fixture checks do not satisfy the twelve-step sandbox,
-concurrency, restart/restore, actual package or release-delivery obligations.
+The candidate now includes its dependency lock, image/Compose files, admission
+adapter, transaction implementation, remote client and plugin guidance. The
+packaged-client walkthrough, live concurrency and refusal checks, independent
+evaluator comparison and restart/restore have passed for candidate
+`7290af984337e122b193981a187e58c29de41a16`. The linked report preserves earlier
+failures and exact component identities.
+
+Native-agent qualification remains incomplete: Claude's live walkthrough stopped
+at expired OAuth authentication, and the earlier Codex model session could not
+read the candidate guidance under its tool policy. Both CLIs discovered the exact
+candidate ZIPs; that subset does not replace the agent walkthrough. Desktop is
+unperformed. WO-HAG-001 remains in_progress, and PR #535 remains draft.

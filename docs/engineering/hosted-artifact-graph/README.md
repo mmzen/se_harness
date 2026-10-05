@@ -115,3 +115,16 @@ The governing evaluator remains the unchanged public 0.22.1 wheel.
 Development observations are not verification acceptance. Keep RISK-HAG-001
 raised: application query controls do not prove database-enforced read-only
 access. No public deployment, authority cutover, merge or release is claimed.
+
+The [current qualification report](evidence/WO-HAG-001/phase2-20261005/protocol04-assessment.md)
+records candidate `7290af984337e122b193981a187e58c29de41a16`. The packaged-client
+walkthrough, live boundary checks, independent evaluator comparisons, source
+regressions and restart/restore passed. Native-agent qualification is incomplete:
+Claude authentication expired, and the earlier Codex model session could not read
+the candidate guidance under its tool policy. Desktop is unperformed. Both
+passing and failed observations are retained; these gaps are not waived.
+
+[WO-HAG-007](work-orders/WO-HAG-007.md) authorizes the reviewed three-file command
+documentation and candidate-plugin regression correction. Its tests pass; it
+remains in_progress with WO-HAG-001 for combined qualification. No hosted VREC,
+verification acceptance or merge readiness is claimed.

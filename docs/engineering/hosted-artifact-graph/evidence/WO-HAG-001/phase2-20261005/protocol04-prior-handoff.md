@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-HAG-001"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "ac7d00eebba8d42cbce9216311d60d71fdf1e19d8ec5bdbf817c360d574bd06d"
-rebound_at = "2026-10-05T18:04:06Z"
+formal_snapshot_sha256 = "66fa99ed80737388c809ded8a390ea4d5b179424eb7507318aeef789078a895b"
+rebound_at = "2026-10-05T13:27:31Z"
 ```
 
 # WO-HAG-001 handoff evidence
@@ -34,22 +34,3 @@ The receiving agent must preserve the released 0.22.0 governor, the verified
 evaluator correction and its evidence, the open release/adoption dependency, and
 RISK-HAG-001. Obtain fresh selected context before continuing. The full Phase 2
 implementation, package walkthrough and recovery evidence remain outstanding.
-
-## Phase 2 continuation — 2026-10-05
-
-The Phase 1 narrative above is historical. DEC-HAG-001 is now decided, and the
-selected public evaluator is 0.22.1. The prior complete packet is preserved in
-[protocol04-prior-handoff.md](phase2-20261005/protocol04-prior-handoff.md).
-
-The current [qualification assessment](phase2-20261005/protocol04-assessment.md)
-records tested candidate 7290af984337e122b193981a187e58c29de41a16 and links the
-component tuple, bounded raw observations and exact-byte inventory. The packaged
-client, live boundary tests, independent evaluator comparisons and restart/restore
-pass. Required native-agent qualification remains incomplete. Claude OAuth expired;
-the prior Codex model session could not read the guidance under its tool policy.
-Desktop is unperformed. RISK-HAG-001 remains raised.
-
-This is an unfinished-work handoff for the authorized draft PR update. It does
-not claim completion, verification acceptance, merge or public deployment.
-WO-HAG-001 and WO-HAG-007 remain in_progress. Continue with the retained inputs
-in [protocol04-continuation.json](phase2-20261005/protocol04-continuation.json).
