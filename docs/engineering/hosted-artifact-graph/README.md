@@ -116,14 +116,18 @@ Development observations are not verification acceptance. Keep RISK-HAG-001
 raised: application query controls do not prove database-enforced read-only
 access. No public deployment, authority cutover, merge or release is claimed.
 
-The [current Claude qualification report](evidence/WO-HAG-001/claude-20261006/report.md)
-records candidate `5fa50787dba1fdd010f625335d844416dd3bf002`. It corrects a native
-MCP schema defect. Claude's 18-step installed-client run and all seven native MCP
-calls pass; HTTP responses match, and the live boundary suite passes. Claude
-incorrectly called one large partial response complete. A separate small-response
-probe passes, but the earlier reporting failure remains. Codex native qualification
-and desktop coverage remain incomplete. Earlier evaluator/recovery results remain
-bound to candidate04 in the [historical report](evidence/WO-HAG-001/phase2-20261005/protocol04-assessment.md).
+The [current Codex qualification report](evidence/WO-HAG-001/codex-20261006/report.md)
+records 18 successful installed-client operations and seven native MCP reads on
+candidate `5fa50787dba1fdd010f625335d844416dd3bf002`. All seven responses match
+HTTP. Codex correctly reports the large impact response as partial. Earlier
+file-access and approval-policy failures remain visible; the successful runs
+used normal approval review. Automatic candidate-plugin loading and desktop
+were not exercised.
+
+The [Claude report](evidence/WO-HAG-001/claude-20261006/report.md) retains its MCP
+schema correction and large-response reporting failure. Final exact-tuple
+qualification remains incomplete; earlier independent evaluator/recovery results
+belong to candidate04 in the [historical report](evidence/WO-HAG-001/phase2-20261005/protocol04-assessment.md).
 These gaps are not waived.
 
 [WO-HAG-007](work-orders/WO-HAG-007.md) authorizes the reviewed three-file command

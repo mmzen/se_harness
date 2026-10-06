@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-HAG-001"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "9da1a0b736092b6b173736039fde447d801b29f98ff4a56a418e292ee9901549"
-rebound_at = "2026-10-06T01:56:07Z"
+formal_snapshot_sha256 = "3ee85083f0766d5faa55b15b6bd3488d3ac2a218614d43e0a6df013616d11f23"
+rebound_at = "2026-10-06T02:46:32Z"
 ```
 
 # WO-HAG-001 handoff evidence
@@ -64,3 +64,15 @@ Codex native qualification and desktop remain incomplete. Earlier independent
 evaluator/recovery runs remain bound to candidate04. Both work orders remain
 in_progress. No hosted VREC or verification acceptance is claimed. The complete
 previous packet is archived in the new report before supported rebinding.
+
+## Codex qualification continuation — 2026-10-06
+
+The [Codex report](codex-20261006/report.md) records successful guided execution
+of all 18 installed-client operations and seven native MCP reads on the same
+candidate 5fa50787dba1fdd010f625335d844416dd3bf002. All seven responses match HTTP;
+Codex correctly reports the large impact result as partial. The earlier local
+file-access and approval-policy refusals are retained. Successful runs used
+normal approval review. Automatic candidate-plugin loading and desktop were
+not exercised. Claude reporting and final exact-tuple qualification remain
+open as described in the report. Both selected work orders remain in_progress;
+no completion, hosted VREC or human decision is supplied by these observations.

@@ -353,7 +353,14 @@ uses candidate `5fa50787dba1fdd010f625335d844416dd3bf002`. Authentication works;
 the corrected MCP schemas allow all seven native tools. The guided CLI sequence,
 HTTP/MCP response comparison and repeated live boundary suite pass. Claude still
 misreported a large partial response as complete. A smaller follow-up was correctly
-reported; it does not erase that failure. Codex's earlier tool-policy issue and
-unperformed desktop coverage remain. Earlier restart/restore and evaluator results
-above remain historical candidate04 evidence. WO-HAG-001 remains in_progress,
-and PR #535 remains draft.
+reported; it does not erase that failure.
+
+The [Codex continuation](../engineering/hosted-artifact-graph/evidence/WO-HAG-001/codex-20261006/report.md)
+on that same candidate completes 18 installed-client operations and seven native
+MCP reads, with exact HTTP parity and correct partial-result reporting. It retains
+the original wheel-access and MCP approval-policy failures. The successful runs
+use the normal host profile and approval reviewer; no persistent permissions were
+weakened. Exact candidate guidance was read explicitly, so automatic plugin loading
+and desktop remain unobserved. Earlier restart/restore and evaluator results above
+remain historical candidate04 evidence. WO-HAG-001 remains in_progress, and PR #535
+remains draft.

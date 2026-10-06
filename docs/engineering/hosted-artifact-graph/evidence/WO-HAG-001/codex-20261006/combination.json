@@ -1,0 +1,67 @@
+{
+  "combination_id": "sha256:435c059909edcc93b029508058546cd20a5e005bc5b818e6707281df4953a633",
+  "payload": {
+    "schema": "se-harness-hosted-combination/v1",
+    "source": {
+      "repository": "https://github.com/mmzen/se_harness.git",
+      "candidate_commit": "5fa50787dba1fdd010f625335d844416dd3bf002"
+    },
+    "client": {
+      "version": "0.22.2",
+      "wheel_sha256": "6f9a1577ad1d7da4025b7c5be32bef4a915347f7d2555e6116801bd2a18559a5"
+    },
+    "plugins": {
+      "codex": {
+        "version": "0.2.7",
+        "archive_sha256": "a65c0fc4035fa051c03d014c4c160ab354a0e4e4402970fa9a49a00bd3c84d95",
+        "inventory_sha256": "cf55266536e5a904750a5325957b8ece6557a3ca9edaab17a3dc383fb47116ce"
+      },
+      "claude": {
+        "version": "0.2.7",
+        "archive_sha256": "1f29bbdcb4c6dfc35c2f58a3caf18d18d4e7a483b3264281113c22daeb957666",
+        "inventory_sha256": "9a4dda9d789394425808551571bd886a0f462250fc2a542ff3db951035fc1604"
+      }
+    },
+    "server": {
+      "version": "0.1.0.dev1",
+      "wheel_sha256": "af2d7614fa8d8f0c5fd5d73c5daea0e3f158a94e852b4de577129630f13d11fc",
+      "image_manifest": "sha256:8fed660c2b13e80022dfff3a4dbd5c4f38de5b5f03f5ee05a5c5b394ddc4af83",
+      "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+      "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d"
+    },
+    "evaluator": {
+      "version": "0.22.1",
+      "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+      "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff"
+    },
+    "runtime": {
+      "python": "3.13.16",
+      "platform": "linux/amd64",
+      "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4"
+    },
+    "database": {
+      "version": "3.13.1",
+      "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce"
+    },
+    "schema_revision": 1,
+    "protocols": [
+      "se-harness-remote-command/v1",
+      "se-harness-remote-result/v1",
+      "se-harness-graph-read/v1",
+      "se-harness-artifact-revision/v1",
+      "se-harness-artifact-baseline/v1"
+    ],
+    "deployment_sha256": "b148f7aad64158e23332d4dc045a061892ecc7c4e3adfaf673791f35d0f9330b",
+    "required_secret_keys": [
+      "principals[].token"
+    ]
+  },
+  "state": "built; qualification pending",
+  "commands": [
+    "source-commit.json",
+    "source-status.json",
+    "plugin-assembly.json",
+    "server-build.json",
+    "image-package.json"
+  ]
+}
