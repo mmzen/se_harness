@@ -26,7 +26,15 @@ CLIENT_PYTHON -I -m se_harness remote read --endpoint ENDPOINT --project PROJECT
 ```
 
 Read `complete`, unresolved references and any continuation before reporting a
-governing context. A partial response cannot support that claim. Retain the view,
+governing context. A partial response cannot support that claim.
+If the host saves or truncates a response, inspect the returned file through an
+available, permitted read tool. A saved-file notice or successful tool call does
+not establish completeness. For large JSON, extract the result metadata without
+loading the whole graph into the conversation. If the response cannot be read,
+report its completeness as unassessed; do not report unseen content or use it to
+support a governing claim.
+
+Retain the view,
 revision and evaluator identities and report the embedded released result unchanged.
 An accepted read is not an approval. Database-side read-only enforcement remains
 unverified under RISK-HAG-001; use only the private public-data sandbox.
