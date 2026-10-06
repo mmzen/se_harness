@@ -116,13 +116,15 @@ Development observations are not verification acceptance. Keep RISK-HAG-001
 raised: application query controls do not prove database-enforced read-only
 access. No public deployment, authority cutover, merge or release is claimed.
 
-The [current qualification report](evidence/WO-HAG-001/phase2-20261005/protocol04-assessment.md)
-records candidate `7290af984337e122b193981a187e58c29de41a16`. The packaged-client
-walkthrough, live boundary checks, independent evaluator comparisons, source
-regressions and restart/restore passed. Native-agent qualification is incomplete:
-Claude authentication expired, and the earlier Codex model session could not read
-the candidate guidance under its tool policy. Desktop is unperformed. Both
-passing and failed observations are retained; these gaps are not waived.
+The [current Claude qualification report](evidence/WO-HAG-001/claude-20261006/report.md)
+records candidate `5fa50787dba1fdd010f625335d844416dd3bf002`. It corrects a native
+MCP schema defect. Claude's 18-step installed-client run and all seven native MCP
+calls pass; HTTP responses match, and the live boundary suite passes. Claude
+incorrectly called one large partial response complete. A separate small-response
+probe passes, but the earlier reporting failure remains. Codex native qualification
+and desktop coverage remain incomplete. Earlier evaluator/recovery results remain
+bound to candidate04 in the [historical report](evidence/WO-HAG-001/phase2-20261005/protocol04-assessment.md).
+These gaps are not waived.
 
 [WO-HAG-007](work-orders/WO-HAG-007.md) authorizes the reviewed three-file command
 documentation and candidate-plugin regression correction. Its tests pass; it

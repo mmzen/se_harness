@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-HAG-001"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "ac7d00eebba8d42cbce9216311d60d71fdf1e19d8ec5bdbf817c360d574bd06d"
-rebound_at = "2026-10-05T18:04:06Z"
+formal_snapshot_sha256 = "9da1a0b736092b6b173736039fde447d801b29f98ff4a56a418e292ee9901549"
+rebound_at = "2026-10-06T01:56:07Z"
 ```
 
 # WO-HAG-001 handoff evidence
@@ -53,3 +53,14 @@ This is an unfinished-work handoff for the authorized draft PR update. It does
 not claim completion, verification acceptance, merge or public deployment.
 WO-HAG-001 and WO-HAG-007 remain in_progress. Continue with the retained inputs
 in [protocol04-continuation.json](phase2-20261005/protocol04-continuation.json).
+
+## Claude qualification continuation — 2026-10-06
+
+The preceding Phase 2 status is historical. The [Claude report](claude-20261006/report.md)
+records candidate 5fa50787dba1fdd010f625335d844416dd3bf002 and the native MCP schema correction.
+The guided CLI sequence, seven native MCP reads and service boundary suite pass.
+Claude misreported a large partial response as complete; that finding remains.
+Codex native qualification and desktop remain incomplete. Earlier independent
+evaluator/recovery runs remain bound to candidate04. Both work orders remain
+in_progress. No hosted VREC or verification acceptance is claimed. The complete
+previous packet is archived in the new report before supported rebinding.

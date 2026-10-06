@@ -348,8 +348,12 @@ evaluator comparison and restart/restore have passed for candidate
 `7290af984337e122b193981a187e58c29de41a16`. The linked report preserves earlier
 failures and exact component identities.
 
-Native-agent qualification remains incomplete: Claude's live walkthrough stopped
-at expired OAuth authentication, and the earlier Codex model session could not
-read the candidate guidance under its tool policy. Both CLIs discovered the exact
-candidate ZIPs; that subset does not replace the agent walkthrough. Desktop is
-unperformed. WO-HAG-001 remains in_progress, and PR #535 remains draft.
+The [later Claude qualification](../engineering/hosted-artifact-graph/evidence/WO-HAG-001/claude-20261006/report.md)
+uses candidate `5fa50787dba1fdd010f625335d844416dd3bf002`. Authentication works;
+the corrected MCP schemas allow all seven native tools. The guided CLI sequence,
+HTTP/MCP response comparison and repeated live boundary suite pass. Claude still
+misreported a large partial response as complete. A smaller follow-up was correctly
+reported; it does not erase that failure. Codex's earlier tool-policy issue and
+unperformed desktop coverage remain. Earlier restart/restore and evaluator results
+above remain historical candidate04 evidence. WO-HAG-001 remains in_progress,
+and PR #535 remains draft.
