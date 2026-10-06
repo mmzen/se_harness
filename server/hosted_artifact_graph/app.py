@@ -79,7 +79,9 @@ def create_app(config_path, credentials_path):
             result = await run_in_threadpool(read, service, PRINCIPAL.get(), arguments)
         except Refusal as exc:
             result = exc.result()
-        return [TextContent(type="text", text=json.dumps(result, ensure_ascii=False))]
+        # Hosts may save large text responses. Line breaks keep metadata readable
+        # through bounded file reads without changing JSON values or byte size.
+        return [TextContent(type="text", text=json.dumps(result, ensure_ascii=False, separators=(",\n", ": ")))]
 
     manager = StreamableHTTPSessionManager(app=mcp, json_response=True, stateless=True)
 

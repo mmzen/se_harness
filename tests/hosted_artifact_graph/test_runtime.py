@@ -59,6 +59,46 @@ class ImportAdmissionTests(unittest.TestCase):
 
 
 class MCPDiscoveryTests(unittest.TestCase):
+    def test_large_partial_result_keeps_metadata_readable_in_a_saved_file(self):
+        from mcp.types import CallToolRequest, CallToolRequestParams
+        from hosted_artifact_graph.app import PRINCIPAL, create_app
+
+        request = {"schema": "se-harness-graph-read/v1", "operation": "impact",
+                   "project_id": "11111111-1111-4111-8111-111111111111",
+                   "view": {"kind": "baseline", "baseline_id": "se-harness-artifact-baseline/v1:sha256:" + "1" * 64},
+                   "budget": {"rows": 500, "bytes": 2097152, "depth": 8}, "artifact_id": "CAP-DEMO-001"}
+        response = {"schema": request["schema"], "operation": "impact", "project_id": request["project_id"],
+                    "view": request["view"], "complete": False,
+                    "continuation": {"reason": "row_limit", "strategy": "repeat_at_same_view_with_narrower_selection"},
+                    "unresolved_references": [], "data": {"artifacts": [{"body": "large é result " * 100} for _ in range(100)]}}
+        with tempfile.TemporaryDirectory() as directory:
+            config = Path(directory) / "config.json"
+            config.write_text("{}", encoding="utf-8")
+            with patch("hosted_artifact_graph.app.Service", return_value=SimpleNamespace(wire=Wire())), \
+                    patch("hosted_artifact_graph.app.StreamableHTTPSessionManager") as manager, \
+                    patch("hosted_artifact_graph.app.read", return_value=response):
+                create_app(config, config)
+                handler = manager.call_args.kwargs["app"].request_handlers[CallToolRequest]
+                token = PRINCIPAL.set({"id": "test-reader"})
+                try:
+                    result = asyncio.run(handler(CallToolRequest(method="tools/call",
+                        params=CallToolRequestParams(name="impact", arguments=request))))
+                finally:
+                    PRINCIPAL.reset(token)
+            self.assertFalse(result.root.isError)
+            self.assertEqual(len(result.root.content), 1)
+            text = result.root.content[0].text
+            self.assertEqual(json.loads(text), response)
+            self.assertGreater(len(text), 30000)
+            self.assertEqual(len(text.encode("utf-8")), len(json.dumps(response, ensure_ascii=False).encode("utf-8")))
+            saved = Path(directory) / "saved-response.json"
+            saved.write_text(text, encoding="utf-8")
+            with saved.open(encoding="utf-8") as stream:
+                prefix = "".join(line for _, line in zip(range(10), stream))
+            self.assertLess(len(prefix), 4096)
+            self.assertIn('"complete": false', prefix)
+            self.assertIn('"reason": "row_limit"', prefix)
+
     def test_advertised_tools_have_object_schemas_and_keep_operation_constraints(self):
         from jsonschema import Draft202012Validator
         from mcp.types import ListToolsRequest
