@@ -333,7 +333,7 @@ startup verifies it and refuses mismatch. Explicit initialization, stored revisi
 mismatch and missing-index refusal have now been tested for the exact candidate
 in the [qualification report](../engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase2-20261005/protocol04-assessment.md).
 
-## Deferred boundary and remaining qualification
+## Deferred boundary and historical qualification
 
 Cypher remains part of the sandbox: parse a narrow read grammar, constrain the
 selected view, apply row/byte/depth/time limits and roll back the read transaction.
@@ -364,3 +364,19 @@ weakened. Exact candidate guidance was read explicitly, so automatic plugin load
 and desktop remain unobserved. Earlier restart/restore and evaluator results above
 remain historical candidate04 evidence. WO-HAG-001 remains in_progress, and PR #535
 remains draft.
+
+
+## Current Phase 2 qualification
+
+The [current assessment](../engineering/hosted-artifact-graph/evidence/WO-HAG-001/final-20261006/report.md)
+records all twelve required scenarios for the final candidate, its exact component
+tuple, real native CLI observations and restart/restore. It preserves the earlier
+failures above. Large saved MCP responses expose their completeness metadata to
+bounded file reads. Parser failures preserve their errors without returning an
+unusable catalog that exceeds the CLI response bound.
+
+The assessment distinguishes tested behavior from human verification. Read the
+linked work orders and verification record for current lifecycle state. Codex
+candidate guidance was read explicitly; automatic loading and desktop were not
+tested. Database-side read-only enforcement remains RISK-HAG-001. Phase 3 pilot
+authority and Phase 4 production/release obligations require later work.

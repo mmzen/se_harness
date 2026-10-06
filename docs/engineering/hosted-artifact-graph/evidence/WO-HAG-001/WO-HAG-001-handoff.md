@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-HAG-001"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "3ee85083f0766d5faa55b15b6bd3488d3ac2a218614d43e0a6df013616d11f23"
-rebound_at = "2026-10-06T02:46:32Z"
+formal_snapshot_sha256 = "8bfea947566e62452e7b5658aed6d4a4ebba302756c42a584510a6984c4df1ab"
+rebound_at = "2026-10-06T04:08:07Z"
 ```
 
 # WO-HAG-001 handoff evidence
@@ -76,3 +76,19 @@ normal approval review. Automatic candidate-plugin loading and desktop were
 not exercised. Claude reporting and final exact-tuple qualification remain
 open as described in the report. Both selected work orders remain in_progress;
 no completion, hosted VREC or human decision is supplied by these observations.
+
+## Completed Phase 2 qualification — 2026-10-06
+
+The preceding continuation entries are historical. The
+[final assessment](final-20261006/report.md) records all twelve VER-HAG-001
+scenarios on product candidate `21d268664ffeb111b8b9e9e94921073c7bc99ec1`.
+It covers the native guided walkthrough, both native MCP clients, the independent
+released evaluator, failures and refusals, concurrent writes, retries, and actual
+restart/restore. Its archive preserves the previous packet bytes and failed runs.
+
+The evidence supports implementation-completion and verification preparation
+under the existing approvals. It supplies no human verification decision.
+Read the work orders and their directly linked verification record for current
+lifecycle state. RISK-HAG-001 remains raised; automatic Codex candidate-plugin
+loading and desktop were not exercised. PR #535 keeps its existing target and
+original comparison base.

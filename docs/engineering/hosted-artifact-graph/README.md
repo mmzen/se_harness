@@ -16,7 +16,7 @@ This package covers the first complete hosted context and draft-authoring sandbo
 - [WO-HAG-001](work-orders/WO-HAG-001.md): complete first implementation outcome, scoped paths and required commit-bound verification.
 - [RISK-HAG-001](risks/RISK-HAG-001.md): database-side read-only enforcement remains open while Cypher is retained in the sandbox.
 
-The 16 definitions above are approved; WO-HAG-001 is in_progress. The risk is raised, not accepted or closed. Phases 3 and 4 require later work for authenticated human decisions, authority cutover, operational qualification and release/deployment. No release or operating claim is made by this package.
+The 16 definitions above are approved; the linked WO-HAG-001 records the current work state. The risk is raised, not accepted or closed. Phases 3 and 4 require later work for authenticated human decisions, authority cutover, operational qualification and release/deployment. No release or operating claim is made by this package.
 
 ## Phase 0 observations
 
@@ -87,7 +87,7 @@ seven independent released draft-admission probes. [VREC-HAG-003](verification-r
 candidate `4414eaf5d9739978654c55390b96aeac32699ed4`. These observations do not
 verify the hosted service.
 
-WO-HAG-001 remains in_progress for the complete Phase 2 outcome. Development
+The following paragraph records the reconciliation-stage handoff. Development
 service tests now cover import, draft authoring, retries, concurrency, HTTP/MCP
 parity, historical hashes and restart/restore. Final qualification of the exact
 client/plugin/service combination and all twelve scenarios remains pending. PR #535 stays draft and keeps its original target
@@ -116,21 +116,21 @@ Development observations are not verification acceptance. Keep RISK-HAG-001
 raised: application query controls do not prove database-enforced read-only
 access. No public deployment, authority cutover, merge or release is claimed.
 
-The [current Codex qualification report](evidence/WO-HAG-001/codex-20261006/report.md)
-records 18 successful installed-client operations and seven native MCP reads on
-candidate `5fa50787dba1fdd010f625335d844416dd3bf002`. All seven responses match
-HTTP. Codex correctly reports the large impact response as partial. Earlier
-file-access and approval-policy failures remain visible; the successful runs
-used normal approval review. Automatic candidate-plugin loading and desktop
-were not exercised.
+The [Phase 2 qualification report](evidence/WO-HAG-001/final-20261006/report.md)
+assesses all twelve VER-HAG-001 scenarios on product candidate `21d268664ffeb111b8b9e9e94921073c7bc99ec1`.
+It includes the real Claude guided walkthrough, seven native MCP reads in each
+CLI with exact HTTP comparisons, concurrent/stale writes, retry/rollback and
+restart/restore. It retains the saved-response and oversized-error failures
+alongside their corrections. The exact packages are identified in its component
+manifest. Human verification remains separate.
 
-The [Claude report](evidence/WO-HAG-001/claude-20261006/report.md) retains its MCP
-schema correction and large-response reporting failure. Final exact-tuple
-qualification remains incomplete; earlier independent evaluator/recovery results
-belong to candidate04 in the [historical report](evidence/WO-HAG-001/phase2-20261005/protocol04-assessment.md).
-These gaps are not waived.
+[WO-HAG-007](work-orders/WO-HAG-007.md) covers the supporting command documentation
+and package checks. Read the two work orders and any directly linked verification
+record for current lifecycle state. The earlier [Claude](evidence/WO-HAG-001/claude-20261006/report.md),
+[Codex](evidence/WO-HAG-001/codex-20261006/report.md), and
+[Phase 2](evidence/WO-HAG-001/phase2-20261005/protocol04-assessment.md) observations
+remain historical evidence with their original candidate identities.
 
-[WO-HAG-007](work-orders/WO-HAG-007.md) authorizes the reviewed three-file command
-documentation and candidate-plugin regression correction. Its tests pass; it
-remains in_progress with WO-HAG-001 for combined qualification. No hosted VREC,
-verification acceptance or merge readiness is claimed.
+Automatic Codex candidate-plugin loading and desktop were not exercised.
+RISK-HAG-001 remains raised. This private-sandbox qualification establishes no
+human verification decision, public deployment, authority cutover or release.
