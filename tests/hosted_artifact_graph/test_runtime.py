@@ -157,5 +157,37 @@ class MCPDiscoveryTests(unittest.TestCase):
                 self.assertNotIn("urn:se-harness:remote-wire:v1#", json.dumps(tool.inputSchema))
 
 
+import base64
+from hosted_artifact_graph.canonical import canonical_json
+
+
+class HostedTestSnapshotTests(unittest.TestCase):
+    def test_snapshot_freezes_candidate_inputs_and_bundle_replays_without_branch_override(self):
+        from hosted_artifact_graph.pilot_git import initial, snapshot, verify_snapshot, restore
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / 'original'; root.mkdir()
+            (root / 'record.txt').write_bytes(b'exact fixture\r\n')
+            initial(root)
+            candidates = []
+            source = {'commit': 'a' * 40}
+            evaluator = {'version': 'released'}
+            value = snapshot(root, source=source, evaluator=evaluator, candidates=candidates)
+            original = canonical_json(value)
+            candidates.append({'new': 'candidate'})
+            source['commit'] = 'b' * 40
+            evaluator['version'] = 'changed'
+            self.assertEqual(original, canonical_json(verify_snapshot(value)))
+            replay = Path(directory) / 'replay'; replay.mkdir()
+            restore(replay, value)
+            self.assertEqual(b'exact fixture\r\n', (replay / 'record.txt').read_bytes())
+            self.assertIn(b' HEAD\n', base64.b64decode(value['git_bundle']['content_base64']).split(b'\n\n')[0] + b'\n')
+
+    def test_projection_paths_reject_cross_platform_ambiguity(self):
+        from hosted_artifact_graph.pilot_git import safe_path
+        from hosted_artifact_graph.protocol import Refusal
+        for path in ('../escape', 'a/.git/config', 'C:/escape', 'a\\b', 'a/CON.txt', 'a/trailing.', 'a//b'):
+            with self.subTest(path=path), self.assertRaises(Refusal):
+                safe_path(path)
+
 if __name__ == "__main__":
     unittest.main()

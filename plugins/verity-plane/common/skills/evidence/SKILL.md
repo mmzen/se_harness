@@ -76,3 +76,13 @@ At handoff, obtain the selected schema-2 result and report observed effects,
 material non-effects, final lifecycle state, the blocker or accountable
 decision, and its one typed next step. Preparing a ready record never supplies
 the later verification or release decision.
+
+## Private lifecycle test copy
+
+Test VRECs and RLSs belong only to the explicit hosted rehearsal. Keep the hosted
+baseline B, source fixture commit S, disposable Git candidate P and actual
+implementation candidate C distinct. A test record binds P; it does not verify C.
+Use `remote export --test-copy --destination NEW_DIRECTORY` with the exact immutable
+baseline request. Preserve the exported bytes and Git bundle. An incomplete marker
+or failed hash check prevents replay. Report independent replay separately from
+download success; real assurance still requires its own Git record and human decision.

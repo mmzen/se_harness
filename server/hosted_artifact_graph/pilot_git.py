@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import base64
+import copy
 import hashlib
 import os
 import subprocess
@@ -151,10 +152,10 @@ def snapshot(root, *, source, evaluator, candidates):
     require(tracked == set(files), 422, "BINDING_UNAVAILABLE", "Ignored or untracked test bytes cannot be omitted from history.")
     with tempfile.TemporaryDirectory(prefix="harness-test-export-") as scratch:
         bundle = Path(scratch) / "history.bundle"
-        git(root, "bundle", "create", bundle, "refs/heads/rehearsal")
+        git(root, "bundle", "create", bundle, "refs/heads/rehearsal", "HEAD")
         bundle_bytes = bundle.read_bytes()
     value = {"schema": SNAPSHOT, "test_copy": True, "authority": AUTHORITY,
-             "source": source, "head": head, "evaluator": evaluator, "candidates": candidates,
+             "source": copy.deepcopy(source), "head": head, "evaluator": copy.deepcopy(evaluator), "candidates": copy.deepcopy(candidates),
              "files": files, "git_bundle": encoded(bundle_bytes)}
     value["snapshot_id"] = "sha256:" + named_digest(SNAPSHOT, value)
     verify_snapshot(value)

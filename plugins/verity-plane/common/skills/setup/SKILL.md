@@ -74,3 +74,12 @@ Report what changed, the selected checker/version and its final check result.
 Follow the project's installed instructions for governed work and retain existing
 authorization for the requested action. These instructions install no host plugin
 and grant no assurance or release decision.
+
+## Private lifecycle test copy
+
+The unpublished hosted pilot requires a separately installed candidate remote
+client, a loopback endpoint, an explicit test project and a new disposable volume.
+Use the repository's `server/README.md` Phase 3 procedure. Its configuration must
+report `test_copy: true`; select `--test-copy` for each rehearsal or export.
+Keep the real checkout selected with its released evaluator. Remote setup does
+not activate graph authority or install this candidate into the user's host.

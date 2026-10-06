@@ -2,12 +2,19 @@
 
 This guide explains the approved SPEC-HAG-001/002/003 protocol. The private
 service and candidate remote client are implemented under WO-HAG-001. Development
-integration tests have run; final qualification of all twelve scenarios remains
-pending. Use [the operating procedure](../../server/README.md) to build and test
+qualification is retained in VREC-HAG-004. Use [the operating procedure](../../server/README.md) to build and test
 the exact combination. Git remains authoritative. This is not a public service.
 
 DEC-HAG-001 is decided. The bounded revision in DEC-HAG-002 selects public
 evaluator 0.22.1 for this sandbox; candidate client 0.22.2 is separate.
+
+Phase 3 adds an explicit private test-copy lifecycle pilot under WO-HAG-008 and
+SPEC-HAG-007. Git remains authoritative. The pilot uses separately versioned
+[closed operations](../../server/contracts/lifecycle-v2.md), exact multi-file
+snapshots and ordinary disposable Git history. Its eight required VER-HAG-006
+scenarios remain pending until the new qualification evidence is assessed.
+Authentication and database ACL implementation remain deferred. The existing
+private access controls and RISK-HAG-001 remain in place.
 
 ## Project and source identities
 

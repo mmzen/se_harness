@@ -132,7 +132,9 @@ class Service:
 
     def rehearse(self, principal, raw, *, fault=None):
         from .lifecycle import Adapter, COMMAND
+        from .protocol import MAX_REQUEST
         require(isinstance(raw, dict), 400, "MALFORMED", "Expected one closed rehearsal request.")
+        require(len(canonical_json(raw)) <= MAX_REQUEST, 429, "RESOURCE_LIMIT", "Rehearsal request exceeds 4 MiB.")
         self.access(principal, raw.get("project_id"), "rehearse")
         require(self.config.get("test_copy") is True and raw.get("test_copy") is True, 403,
                 "TEST_BOUNDARY", "Lifecycle operations require explicit test-copy configuration and selection.")

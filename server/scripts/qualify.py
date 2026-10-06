@@ -162,7 +162,9 @@ def recover(args):
         return value
 
     def compose(project, *argv):
-        return ["docker", "compose", "-p", project, "-f", args.compose, *argv]
+        override = args.compose_override if project == original else args.restore_override
+        extra = ["-f", override] if override else []
+        return ["docker", "compose", "-p", project, "-f", args.compose, *extra, *argv]
 
     def observe(label, project, environment=env):
         # The image is already built. Wait only for startup, never migrate/reinitialize.
@@ -233,5 +235,7 @@ if __name__ == "__main__":
     restore.add_argument("--project", required=True)
     restore.add_argument("--output", type=Path, required=True)
     restore.add_argument("--restore-port", type=int, default=18081)
+    restore.add_argument("--compose-override", type=Path, help="original stack's explicit local network configuration")
+    restore.add_argument("--restore-override", type=Path, help="separate restore stack's explicit local network configuration")
     args = parser.parse_args()
     prepare(args) if args.action == "prepare" else recover(args)

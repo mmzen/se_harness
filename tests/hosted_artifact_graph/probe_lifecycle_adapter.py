@@ -12,7 +12,7 @@ from types import SimpleNamespace
 from hosted_artifact_graph.canonical import make_baseline, make_revision
 from hosted_artifact_graph.evaluator import Evaluator
 from hosted_artifact_graph.lifecycle import Adapter
-from hosted_artifact_graph.pilot_git import encoded
+from hosted_artifact_graph.pilot_git import encoded, verify_snapshot
 from hosted_artifact_graph.protocol import EVALUATOR, Wire
 
 
@@ -45,6 +45,8 @@ def run(args):
         if not inspect:
             request.update(mode='apply', preview_digest=plan['result']['preview_digest'])
             plan = Adapter(service, request, {'id': 'probe'}, selected, retained).prepare()
+            verify_snapshot(plan['input_snapshot'])
+            verify_snapshot(plan['snapshot'])
             retained = plan['snapshot']
             selected['revisions'].update({r['envelope']['artifact_id']: r for r in plan['revisions'].values()})
             n += 1

@@ -123,7 +123,9 @@ class Store:
         row = tx.run("MATCH (s:TestSnapshot {project_id:$p, snapshot_id:$s}) RETURN s.payload_json AS payload",
                      p=self.project_id, s=identity).single()
         require(row is not None, 422, "BINDING_UNAVAILABLE", "Selected test snapshot is missing.")
-        return verify_snapshot(json.loads(row["payload"]))
+        value = verify_snapshot(json.loads(row["payload"]))
+        require(value["snapshot_id"] == identity, 422, "BINDING_UNAVAILABLE", "Snapshot node and payload identities differ.")
+        return value
 
     def selected_snapshot(self, tx, selected):
         context = selected.get("context") or {}

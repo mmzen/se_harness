@@ -247,7 +247,9 @@ class Adapter:
                 "affected_revision_ids": sorted(revisions),
                 "affected_artifacts": sorted([{"artifact_id": r["envelope"]["artifact_id"], "revision_id": k} for k, r in revisions.items()], key=lambda r: r["artifact_id"]),
                 "files": [{"path": p, "bytes": len(after[p]), "sha256": hashlib.sha256(after[p]).hexdigest()} for p in sorted(changed)],
-                "provenance": {"test_copy": True, "source": source, "candidates": candidates}}
+                "provenance": {"test_copy": True, "source": source, "candidates": candidates,
+                               "input_baseline": input_baseline["baseline_id"] if input_baseline else None,
+                               "input_git_head": input_snapshot["head"] if input_snapshot else None}}
             plan = {"revisions": revisions, "metadata": metadata, "result": result}
             if mode == "apply":
                 retained = snapshot(root, source=source, evaluator=EVALUATOR, candidates=candidates)
@@ -260,5 +262,6 @@ class Adapter:
                     receipt_id="sha256:" + named_digest(RESULT, {"principal": self.principal["id"], "request": result["request_digest"]}),
                     versions={"project": {"before": command["expected_project_version"], "after": command["expected_project_version"] + 1},
                               "context": {"context_id": command["context_id"], "before": command["expected_context_version"], "after": command["expected_context_version"] + 1}})
+                result["provenance"]["output_git_head"] = retained["head"]
             require(len(canonical_json(result)) <= MAX_RESPONSE, 429, "RESOURCE_LIMIT", "Complete test result exceeds 2 MiB.")
             return plan
