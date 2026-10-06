@@ -2,6 +2,7 @@
 import asyncio
 import json
 from pathlib import Path
+import subprocess
 import tempfile
 from types import SimpleNamespace
 import unittest
@@ -46,6 +47,33 @@ class ReadAdmissionTests(unittest.TestCase):
 
 
 class ImportAdmissionTests(unittest.TestCase):
+    def test_parser_failure_fits_client_bound_without_unrelated_catalog(self):
+        from hosted_artifact_graph.evaluator import BRIDGE
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            artifacts = root / "docs/engineering/requirements"
+            artifacts.mkdir(parents=True)
+            for number in range(4):
+                document = ('+++\nid = "REQ-DEMO-%03d"\ntype = "requirement"\n'
+                            'title = "Large valid metadata"\nstatus = "draft"\n'
+                            'statement = "%s"\n+++\n\n# Requirement\n') % (number + 1, "x" * 600000)
+                (artifacts / ("REQ-DEMO-%03d.md" % (number + 1))).write_text(document, encoding="utf-8")
+            broken = artifacts / "REQ-DEMO-005.md"
+            broken.write_text('+++\nid = "REQ-DEMO-005"\nbroken = [\n+++\n', encoding="utf-8")
+            argv = ["/opt/evaluator/bin/python", "-I", "-B", str(BRIDGE), "catalog", str(root)]
+            result = subprocess.run(argv, capture_output=True, check=True, timeout=30)
+            self.assertLess(len(result.stdout), 2 * 1024 * 1024)
+            failed = json.loads(result.stdout)
+            self.assertTrue(failed["errors"])
+            self.assertEqual(failed["artifacts"], [])
+            broken.unlink()
+            result = subprocess.run(argv, capture_output=True, check=True, timeout=30)
+            valid = json.loads(result.stdout)
+            self.assertEqual(valid["errors"], [])
+            self.assertEqual(len(valid["artifacts"]), 4)
+            self.assertTrue(all(len(a["metadata"]["statement"]) == 600000 for a in valid["artifacts"]))
+
     def test_unsupported_source_is_distinct_from_missing_command_inputs(self):
         wire = Wire()
         for source in ({"schema": "explorer-export", "nodes": [], "edges": []},

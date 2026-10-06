@@ -27,6 +27,10 @@ def main():
         return {"selected": installed_evaluator_identity().to_lock()}
     if action == "catalog":
         artifacts, errors = load_artifacts(root / "docs/engineering", root)
+        # A failed parse has no usable catalog. Preserve the released errors
+        # without carrying every unrelated record into the client refusal.
+        if errors:
+            artifacts = []
         return {"errors": [asdict(e) for e in errors], "artifacts": [
             {"id": a.artifact_id, "type": a.artifact_type, "status": a.status,
              "path": a.path.relative_to(root).as_posix(), "metadata": a.metadata,
