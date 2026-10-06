@@ -1,0 +1,28 @@
+{
+  "schema": "hag-phase3-source-binding-v1",
+  "tested_product_source": "345557d20e83f1c6ed72e11460ee4ba451cf3d91",
+  "comparison": "All Git tree entries except WO-HAG-008 evidence, its completion record and the domain status index must match the tested source exactly. This condition is checked again against the clean candidate before capture.",
+  "unchanged_entry_count": 14199,
+  "unchanged_entries_sha256": "99826ebda8836523a12c5c8334b3d4ebcf11a936da5fdd6735b079412b6e0457",
+  "qualification_metadata_only_changes": [
+    "docs/engineering/hosted-artifact-graph/README.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/WO-HAG-008-handoff.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/component-manifest.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/observation-inventory.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/p3-create-handoff.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/p3-initial-handoff.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/p3-review-preflight.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/qualification-observations.zip",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/qualification-packages.zip",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/report.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/starting-inputs.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/verification-results.json"
+  ],
+  "product_and_governing_files_identical": true,
+  "excluded_paths": [
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/",
+    "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-008.md",
+    "docs/engineering/hosted-artifact-graph/README.md"
+  ],
+  "independent_governor": "Released 0.22.1; candidate source never governs this work."
+}

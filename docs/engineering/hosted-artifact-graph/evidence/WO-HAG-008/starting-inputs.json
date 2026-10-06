@@ -1,0 +1,88 @@
+{
+  "outcome": "passed",
+  "input_git_commit": "1de120e3e429904407199a12ef43e432d682f615",
+  "source": {
+    "repository": "https://example.invalid/private-rehearsal.git",
+    "object_format": "sha1",
+    "commit": "7f97dbf9f1dfa539b1f34c308e2db57ab03688df"
+  },
+  "files": [
+    {
+      "path": ".engineering-harness.lock",
+      "sha256": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252"
+    },
+    {
+      "path": ".engineering-harness.toml",
+      "sha256": "38c489ae6017ad01c7eb79fda8002d60cb36046a25eea988b579fee2e688195d"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
+    },
+    {
+      "path": "REHEARSAL.txt",
+      "sha256": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-001.md",
+      "sha256": "3364e0c91d4849f2a07f800ec48bf969abbc86420bdf6d2090e096f3c9bb52fc"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md",
+      "sha256": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/intent/INT-P3-001.md",
+      "sha256": "dc58d6c520341478681365113219ffb8fcb2a17a7e12eb5769c08812547df451"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md",
+      "sha256": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/release/REL-P3-001.md",
+      "sha256": "a6f8a53d07c6d9940d2213b39015dec8723b94f82a45e60ee74a352ab805fcdc"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/release/REL-P3-900.md",
+      "sha256": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/requirements/REQ-P3-001.md",
+      "sha256": "0f3d03de5d84519f6e38baf5909a3a28b89681dbc32af3b0c11ce400280ee9d6"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md",
+      "sha256": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-001.md",
+      "sha256": "f42fa1d52b3c61362c110499092fd454a33421bca823ae0b50e255d19ceccb46"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+      "sha256": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/verification/VER-P3-001.md",
+      "sha256": "65d77b5a9fbd5f4cefecbdd85184adb80f6c33cc971a754e0f9dc9e94c6b5a86"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md",
+      "sha256": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/work-orders/WO-P3-001.md",
+      "sha256": "a5face8f96c935694ec6cf77cda99f66d4ce5794b389b49022dd6eb431e8809b"
+    },
+    {
+      "path": "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md",
+      "sha256": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332"
+    },
+    {
+      "path": "src/greeting.py",
+      "sha256": "2de05127cde4f7ee78118497c1b54a9a6a71319db60731912f94c1ea0b9c1b59"
+    }
+  ],
+  "comparison": "Exact initial Git blobs equal the independent staged source inventory plus canonical lifecycle_fixture.files(); no byte normalization."
+}

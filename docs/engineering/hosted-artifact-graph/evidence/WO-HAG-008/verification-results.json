@@ -1,0 +1,102 @@
+{
+  "schema": "hag-phase3-qualification/v1",
+  "test_copy": true,
+  "qualification_source_commit": "345557d20e83f1c6ed72e11460ee4ba451cf3d91",
+  "selected_work": [
+    "WO-HAG-008"
+  ],
+  "verification": [
+    "VER-HAG-006"
+  ],
+  "outcome": "all_required_criteria_passed",
+  "cases": [
+    {
+      "id": "P3-01",
+      "name": "Complete lifecycle parity",
+      "status": "passed",
+      "archive_members": "walkthrough04/; replay04/parity.json; replay04/commands.json",
+      "assessment": "Eleven accepted lifecycle operations and two independent refusals agree on states, exact predicate results, next typed actions and complete changed-path sets."
+    },
+    {
+      "id": "P3-02",
+      "name": "Authority and operation boundaries",
+      "status": "passed",
+      "archive_members": "commands/p3-store04.json; commands/store04.json; extra04/; walkthrough04/",
+      "assessment": "Missing test selection, imported state change, reader write, unknown schema/operation, arbitrary command input and unauthenticated v2 calls refuse. Seven HTTP/MCP reads match and are explicitly labeled test data."
+    },
+    {
+      "id": "P3-03",
+      "name": "Complete-result rollback",
+      "status": "passed",
+      "archive_members": "commands/store04.json",
+      "assessment": "Record-plus-sidecar and paired risk/decision mutations each roll back at five injected points. Missing sidecar and unexpected output refuse. Whole-store fingerprints and absent receipts prove no partial effects."
+    },
+    {
+      "id": "P3-04",
+      "name": "Staleness and competing writers",
+      "status": "passed",
+      "archive_members": "commands/store04.json; commands/stale-artifact04.json",
+      "assessment": "Exactly one competing write wins; identical key returns the original receipt and changed content conflicts. Changing a selected draft invalidates the earlier preview even with refreshed version numbers."
+    },
+    {
+      "id": "P3-05",
+      "name": "Unknown reply, restart and restore",
+      "status": "passed",
+      "archive_members": "transport04/; recovery04/; commands/recovery-receipts.json",
+      "assessment": "A dropped post-commit response is unknown; receipt recovery and identical retry do not rerun it. Process restart and quiesced backup/restore preserve logical state, exact records, history and receipts at the recorded cutoff."
+    },
+    {
+      "id": "P3-06",
+      "name": "Provenance and exact export",
+      "status": "passed",
+      "archive_members": "walkthrough04/early-export/; walkthrough04/final-export/; replay04/; commands/store04.json; commands/p3-export-negative-linux.json",
+      "assessment": "Older and later snapshots reconstruct exact Git trees with original candidate objects. Released validation/checks pass. Corrupt evidence, truncated Git history, unsafe paths, existing destinations and Linux link parents refuse."
+    },
+    {
+      "id": "P3-07",
+      "name": "Compatibility and bounded failures",
+      "status": "passed",
+      "archive_members": "v1compat02/; commands/p3-v1-wire.json; commands/store04.json; commands/p3-runtime-packaged02.json",
+      "assessment": "All 60 retained v1 wire checks, 18 installed-client steps and 52 additional live boundary observations pass. Seven legacy MCP reads match HTTP. Input, output, projection and evaluator time limits refuse without partial writes."
+    },
+    {
+      "id": "P3-08",
+      "name": "Packaged walkthrough and review",
+      "status": "passed",
+      "archive_members": "walkthrough04/; transport04/; replay04/; commands/p3-focused03.json; package02/",
+      "assessment": "Exact packaged service/client completes the 61-step walkthrough, uncertain-reply recovery and independent replay. Both candidate plugin archives contain the selected guidance. No live host-delivery claim."
+    }
+  ],
+  "source_suite": {
+    "tests": 1323,
+    "skipped": 23,
+    "exit": 0
+  },
+  "runtime_tests": 9,
+  "v1_schema_cases": 60,
+  "walkthrough": {
+    "command_steps": 61,
+    "sum_command_seconds": 88.53
+  },
+  "live_fault_and_boundary_cases": 25,
+  "restart_restore": {
+    "cutoff_project_version": 29,
+    "restart_seconds": 3.217,
+    "restore_seconds": 3.353
+  },
+  "evaluator": {
+    "version": "0.22.1",
+    "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+    "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff"
+  },
+  "human_verification": "pending; test decisions grant no actual assurance",
+  "omissions": [
+    "23 source-suite skips remain unperformed",
+    "Windows symlink creation unavailable; the required link refusal passed on Linux",
+    "No live Codex/Claude, desktop, startup or compaction testing; outside VER-HAG-006"
+  ],
+  "risks": [
+    "RISK-HAG-001 remains raised",
+    "RISK-HAG-002 remains raised"
+  ]
+}
