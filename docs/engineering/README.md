@@ -4,6 +4,7 @@
 
 ## Product and governance domains
 
+- [hosted-artifact-graph/](hosted-artifact-graph/README.md): draft hosted context and draft-authoring sandbox, with Memgraph, immutable baselines, evaluator reuse and an unresolved database-side Cypher read-only boundary.
 - [release-0-22-1/](release-0-22-1/README.md): published evaluator 0.22.1 and plugin 0.2.6;
   [verified public delivery](release-0-22-1/verification-records/VREC-RLS-004.md) covers the five surfaces.
 - [Repository adoption](repository-harness-upgrade/README.md): WO-HUP-030 selects 0.22.1; development source is unpublished 0.22.2.

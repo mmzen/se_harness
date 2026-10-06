@@ -1,0 +1,52 @@
+{
+  "observed_at": "2026-10-06T02:44:12.182943+00:00",
+  "candidate": "5fa50787dba1fdd010f625335d844416dd3bf002",
+  "combination_id": "sha256:435c059909edcc93b029508058546cd20a5e005bc5b818e6707281df4953a633",
+  "selected_work": {
+    "WO-HAG-001": "in_progress",
+    "WO-HAG-007": "in_progress"
+  },
+  "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+  "outputs": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-codex-20261006",
+  "sandbox": {
+    "project": "hagcodex20261006",
+    "endpoint": "http://127.0.0.1:18089",
+    "selection_file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-codex-20261006\\sandbox-selection.json",
+    "project_version": 5,
+    "baseline": {
+      "kind": "baseline",
+      "baseline_id": "se-harness-artifact-baseline/v1:sha256:42873b9a551cede806281cdb1afcc413cf626f46051b1644880759b68cb9bf57"
+    },
+    "context": {
+      "kind": "context",
+      "context_id": "cc35dfd9-0cda-4613-b939-acb9b829d46d",
+      "context_version": 2
+    },
+    "frozen": {
+      "kind": "baseline",
+      "baseline_id": "se-harness-artifact-baseline/v1:sha256:2ae23cb3a92de98b7ea6c75f07cbdf8e146aede9f6a3eccba1895d7459ece15f"
+    }
+  },
+  "observed": [
+    "Exact packaged setup/change guidance read through native Codex.",
+    "18 real installed-client operations passed after normally reviewed execution escalation.",
+    "Seven native MCP reads passed under automatic review, with exact HTTP parity.",
+    "Codex correctly reported the large impact result as partial and the checkpoint-free check as not_assessable."
+  ],
+  "remaining": [
+    "Claude large-response reporting finding remains; no Claude rerun in this report.",
+    "Final exact-tuple assessment: independent evaluator and restart/restore observations still belong to candidate04.",
+    "Automatic candidate-plugin loading and desktop were not exercised; do not infer coverage from explicit file reads.",
+    "Database-side read-only authorization remains RISK-HAG-001, outside the approved private sandbox boundary."
+  ],
+  "next_context_command": [
+    "harnessctl",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+    "--artifact",
+    "WO-HAG-001",
+    "--json"
+  ],
+  "recorded_next_step": "STEP-WO-IMPLEMENT-CHECK",
+  "notice": "Obtain fresh released context. Observations supply no lifecycle decision."
+}

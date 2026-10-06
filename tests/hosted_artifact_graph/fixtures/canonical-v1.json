@@ -1,0 +1,218 @@
+{
+  "kind": "independent-contract-vectors",
+  "purpose": "Byte expectations authored before the service serializer exists. These synthetic draft vectors make no accepted-operation or real-baseline claim; the all-zero parent is a fixture marker.",
+  "revision_vectors": [
+    {
+      "name": "INT-HAGV-001-lf",
+      "schema": "se-harness-artifact-revision/v1",
+      "document_base64": "KysrCmlkID0gIklOVC1IQUdWLTAwMSIKdHlwZSA9ICJpbnRlbnQiCnRpdGxlID0gIlByZXNlcnZlIGV4YWN0IGNvbnRlbnQuIgpzdGF0dXMgPSAiZHJhZnQiCm93bmVycyA9IFsiYXV0aG9yLWEiXQpjcmVhdGVkID0gIjIwMjYtMTAtMDQiCnVwZGF0ZWQgPSAiMjAyNi0xMC0wNCIKb3V0Y29tZSA9ICJQcmVzZXJ2ZSBleGFjdCBjb250ZW50LiIKCltyZWxhdGlvbnNdCgorKysKClByZXNlcnZlIGV4YWN0IGNvbnRlbnQuCg==",
+      "envelope": {
+        "schema": "se-harness-artifact-revision/v1",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "artifact_id": "INT-HAGV-001",
+        "document_sha256": "70a15ad1ae874cb9e17b91812d19c04c1dee81fabf0df12cc117c4d647bedda2",
+        "original_path": null,
+        "declared_relations": {},
+        "provenance": {
+          "kind": "draft",
+          "principal_id": "author-a",
+          "operation_key": "vector-INT-HAGV-001",
+          "created_at": "2026-10-04T00:00:00Z"
+        }
+      },
+      "canonical_utf8": "{\"artifact_id\":\"INT-HAGV-001\",\"declared_relations\":{},\"document_sha256\":\"70a15ad1ae874cb9e17b91812d19c04c1dee81fabf0df12cc117c4d647bedda2\",\"original_path\":null,\"project_id\":\"00000000-0000-4000-8000-000000000001\",\"provenance\":{\"created_at\":\"2026-10-04T00:00:00Z\",\"kind\":\"draft\",\"operation_key\":\"vector-INT-HAGV-001\",\"principal_id\":\"author-a\"},\"schema\":\"se-harness-artifact-revision/v1\"}",
+      "hash_input_base64": "c2UtaGFybmVzcy1hcnRpZmFjdC1yZXZpc2lvbi92MQp7ImFydGlmYWN0X2lkIjoiSU5ULUhBR1YtMDAxIiwiZGVjbGFyZWRfcmVsYXRpb25zIjp7fSwiZG9jdW1lbnRfc2hhMjU2IjoiNzBhMTVhZDFhZTg3NGNiOWUxN2I5MTgxMmQxOWMwNGMxZGVlODFmYWJmMGRmMTJjYzExN2M0ZDY0N2JlZGRhMiIsIm9yaWdpbmFsX3BhdGgiOm51bGwsInByb2plY3RfaWQiOiIwMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDEiLCJwcm92ZW5hbmNlIjp7ImNyZWF0ZWRfYXQiOiIyMDI2LTEwLTA0VDAwOjAwOjAwWiIsImtpbmQiOiJkcmFmdCIsIm9wZXJhdGlvbl9rZXkiOiJ2ZWN0b3ItSU5ULUhBR1YtMDAxIiwicHJpbmNpcGFsX2lkIjoiYXV0aG9yLWEifSwic2NoZW1hIjoic2UtaGFybmVzcy1hcnRpZmFjdC1yZXZpc2lvbi92MSJ9",
+      "revision_id": "sha256:b0bc3fdb32ef349ccab1e9625845d9c31159c1e4ed859566ab5c9d9da0a47c98"
+    },
+    {
+      "name": "CAP-HAGV-001-lf",
+      "schema": "se-harness-artifact-revision/v1",
+      "document_base64": "KysrCmlkID0gIkNBUC1IQUdWLTAwMSIKdHlwZSA9ICJjYXBhYmlsaXR5Igp0aXRsZSA9ICJSZWFkIGEgZml4ZWQgdmlldy4iCnN0YXR1cyA9ICJkcmFmdCIKb3duZXJzID0gWyJhdXRob3ItYSJdCmNyZWF0ZWQgPSAiMjAyNi0xMC0wNCIKdXBkYXRlZCA9ICIyMDI2LTEwLTA0IgphYmlsaXR5ID0gIlJlYWQgYSBmaXhlZCB2aWV3LiIKCltyZWxhdGlvbnNdCmRlcml2ZXNfZnJvbSA9IFsiSU5ULUhBR1YtMDAxIl0KKysrCgpSZWFkIGEgZml4ZWQgdmlldy4K",
+      "envelope": {
+        "schema": "se-harness-artifact-revision/v1",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "artifact_id": "CAP-HAGV-001",
+        "document_sha256": "b7ecd95d2760f8811858f25324b932fb841acbdca6a0b149f4e9aad1e4580e93",
+        "original_path": null,
+        "declared_relations": {
+          "derives_from": [
+            "INT-HAGV-001"
+          ]
+        },
+        "provenance": {
+          "kind": "draft",
+          "principal_id": "author-a",
+          "operation_key": "vector-CAP-HAGV-001",
+          "created_at": "2026-10-04T00:00:00Z"
+        }
+      },
+      "canonical_utf8": "{\"artifact_id\":\"CAP-HAGV-001\",\"declared_relations\":{\"derives_from\":[\"INT-HAGV-001\"]},\"document_sha256\":\"b7ecd95d2760f8811858f25324b932fb841acbdca6a0b149f4e9aad1e4580e93\",\"original_path\":null,\"project_id\":\"00000000-0000-4000-8000-000000000001\",\"provenance\":{\"created_at\":\"2026-10-04T00:00:00Z\",\"kind\":\"draft\",\"operation_key\":\"vector-CAP-HAGV-001\",\"principal_id\":\"author-a\"},\"schema\":\"se-harness-artifact-revision/v1\"}",
+      "hash_input_base64": "c2UtaGFybmVzcy1hcnRpZmFjdC1yZXZpc2lvbi92MQp7ImFydGlmYWN0X2lkIjoiQ0FQLUhBR1YtMDAxIiwiZGVjbGFyZWRfcmVsYXRpb25zIjp7ImRlcml2ZXNfZnJvbSI6WyJJTlQtSEFHVi0wMDEiXX0sImRvY3VtZW50X3NoYTI1NiI6ImI3ZWNkOTVkMjc2MGY4ODExODU4ZjI1MzI0YjkzMmZiODQxYWNiZGNhNmEwYjE0OWY0ZTlhYWQxZTQ1ODBlOTMiLCJvcmlnaW5hbF9wYXRoIjpudWxsLCJwcm9qZWN0X2lkIjoiMDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicHJvdmVuYW5jZSI6eyJjcmVhdGVkX2F0IjoiMjAyNi0xMC0wNFQwMDowMDowMFoiLCJraW5kIjoiZHJhZnQiLCJvcGVyYXRpb25fa2V5IjoidmVjdG9yLUNBUC1IQUdWLTAwMSIsInByaW5jaXBhbF9pZCI6ImF1dGhvci1hIn0sInNjaGVtYSI6InNlLWhhcm5lc3MtYXJ0aWZhY3QtcmV2aXNpb24vdjEifQ==",
+      "revision_id": "sha256:61d34d72c0b5719e83cd07307baa09126503ef10e1e1fc695658af35a93d799e"
+    },
+    {
+      "name": "REQ-HAGV-001-lf",
+      "schema": "se-harness-artifact-revision/v1",
+      "document_base64": "KysrCmlkID0gIlJFUS1IQUdWLTAwMSIKdHlwZSA9ICJyZXF1aXJlbWVudCIKdGl0bGUgPSAiUmV0dXJuIENhZsOpIHRleHQgdW5jaGFuZ2VkLiIKc3RhdHVzID0gImRyYWZ0Igpvd25lcnMgPSBbImF1dGhvci1hIl0KY3JlYXRlZCA9ICIyMDI2LTEwLTA0Igp1cGRhdGVkID0gIjIwMjYtMTAtMDQiCnN0YXRlbWVudCA9ICJSZXR1cm4gQ2Fmw6kgdGV4dCB1bmNoYW5nZWQuIgp2ZXJpZmljYXRpb25fbWV0aG9kID0gWyJ0ZXN0Il0KCltyZWxhdGlvbnNdCmRlcml2ZXNfZnJvbSA9IFsiQ0FQLUhBR1YtMDAxIl0KKysrCgpSZXR1cm4gQ2Fmw6kgdGV4dCB1bmNoYW5nZWQuCg==",
+      "envelope": {
+        "schema": "se-harness-artifact-revision/v1",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "artifact_id": "REQ-HAGV-001",
+        "document_sha256": "06058355349f85d86070851f2a8ca1aa880a01a74d4bae27409debe09ccb290c",
+        "original_path": null,
+        "declared_relations": {
+          "derives_from": [
+            "CAP-HAGV-001"
+          ]
+        },
+        "provenance": {
+          "kind": "draft",
+          "principal_id": "author-a",
+          "operation_key": "vector-REQ-HAGV-001",
+          "created_at": "2026-10-04T00:00:00Z"
+        }
+      },
+      "canonical_utf8": "{\"artifact_id\":\"REQ-HAGV-001\",\"declared_relations\":{\"derives_from\":[\"CAP-HAGV-001\"]},\"document_sha256\":\"06058355349f85d86070851f2a8ca1aa880a01a74d4bae27409debe09ccb290c\",\"original_path\":null,\"project_id\":\"00000000-0000-4000-8000-000000000001\",\"provenance\":{\"created_at\":\"2026-10-04T00:00:00Z\",\"kind\":\"draft\",\"operation_key\":\"vector-REQ-HAGV-001\",\"principal_id\":\"author-a\"},\"schema\":\"se-harness-artifact-revision/v1\"}",
+      "hash_input_base64": "c2UtaGFybmVzcy1hcnRpZmFjdC1yZXZpc2lvbi92MQp7ImFydGlmYWN0X2lkIjoiUkVRLUhBR1YtMDAxIiwiZGVjbGFyZWRfcmVsYXRpb25zIjp7ImRlcml2ZXNfZnJvbSI6WyJDQVAtSEFHVi0wMDEiXX0sImRvY3VtZW50X3NoYTI1NiI6IjA2MDU4MzU1MzQ5Zjg1ZDg2MDcwODUxZjJhOGNhMWFhODgwYTAxYTc0ZDRiYWUyNzQwOWRlYmUwOWNjYjI5MGMiLCJvcmlnaW5hbF9wYXRoIjpudWxsLCJwcm9qZWN0X2lkIjoiMDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicHJvdmVuYW5jZSI6eyJjcmVhdGVkX2F0IjoiMjAyNi0xMC0wNFQwMDowMDowMFoiLCJraW5kIjoiZHJhZnQiLCJvcGVyYXRpb25fa2V5IjoidmVjdG9yLVJFUS1IQUdWLTAwMSIsInByaW5jaXBhbF9pZCI6ImF1dGhvci1hIn0sInNjaGVtYSI6InNlLWhhcm5lc3MtYXJ0aWZhY3QtcmV2aXNpb24vdjEifQ==",
+      "revision_id": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+    },
+    {
+      "name": "REQ-HAGV-001-crlf",
+      "schema": "se-harness-artifact-revision/v1",
+      "document_base64": "KysrDQppZCA9ICJSRVEtSEFHVi0wMDEiDQp0eXBlID0gInJlcXVpcmVtZW50Ig0KdGl0bGUgPSAiUmV0dXJuIENhZsOpIHRleHQgdW5jaGFuZ2VkLiINCnN0YXR1cyA9ICJkcmFmdCINCm93bmVycyA9IFsiYXV0aG9yLWEiXQ0KY3JlYXRlZCA9ICIyMDI2LTEwLTA0Ig0KdXBkYXRlZCA9ICIyMDI2LTEwLTA0Ig0Kc3RhdGVtZW50ID0gIlJldHVybiBDYWbDqSB0ZXh0IHVuY2hhbmdlZC4iDQp2ZXJpZmljYXRpb25fbWV0aG9kID0gWyJ0ZXN0Il0NCg0KW3JlbGF0aW9uc10NCmRlcml2ZXNfZnJvbSA9IFsiQ0FQLUhBR1YtMDAxIl0NCisrKw0KDQpSZXR1cm4gQ2Fmw6kgdGV4dCB1bmNoYW5nZWQuDQo=",
+      "envelope": {
+        "schema": "se-harness-artifact-revision/v1",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "artifact_id": "REQ-HAGV-001",
+        "document_sha256": "f800b32c13c3fd0325af4974e3b0af6418eba5975ec87948dfeff5e6105fcbae",
+        "original_path": null,
+        "declared_relations": {
+          "derives_from": [
+            "CAP-HAGV-001"
+          ]
+        },
+        "provenance": {
+          "kind": "draft",
+          "principal_id": "author-a",
+          "operation_key": "vector-REQ-HAGV-001",
+          "created_at": "2026-10-04T00:00:00Z"
+        }
+      },
+      "canonical_utf8": "{\"artifact_id\":\"REQ-HAGV-001\",\"declared_relations\":{\"derives_from\":[\"CAP-HAGV-001\"]},\"document_sha256\":\"f800b32c13c3fd0325af4974e3b0af6418eba5975ec87948dfeff5e6105fcbae\",\"original_path\":null,\"project_id\":\"00000000-0000-4000-8000-000000000001\",\"provenance\":{\"created_at\":\"2026-10-04T00:00:00Z\",\"kind\":\"draft\",\"operation_key\":\"vector-REQ-HAGV-001\",\"principal_id\":\"author-a\"},\"schema\":\"se-harness-artifact-revision/v1\"}",
+      "hash_input_base64": "c2UtaGFybmVzcy1hcnRpZmFjdC1yZXZpc2lvbi92MQp7ImFydGlmYWN0X2lkIjoiUkVRLUhBR1YtMDAxIiwiZGVjbGFyZWRfcmVsYXRpb25zIjp7ImRlcml2ZXNfZnJvbSI6WyJDQVAtSEFHVi0wMDEiXX0sImRvY3VtZW50X3NoYTI1NiI6ImY4MDBiMzJjMTNjM2ZkMDMyNWFmNDk3NGUzYjBhZjY0MThlYmE1OTc1ZWM4Nzk0OGRmZWZmNWU2MTA1ZmNiYWUiLCJvcmlnaW5hbF9wYXRoIjpudWxsLCJwcm9qZWN0X2lkIjoiMDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicHJvdmVuYW5jZSI6eyJjcmVhdGVkX2F0IjoiMjAyNi0xMC0wNFQwMDowMDowMFoiLCJraW5kIjoiZHJhZnQiLCJvcGVyYXRpb25fa2V5IjoidmVjdG9yLVJFUS1IQUdWLTAwMSIsInByaW5jaXBhbF9pZCI6ImF1dGhvci1hIn0sInNjaGVtYSI6InNlLWhhcm5lc3MtYXJ0aWZhY3QtcmV2aXNpb24vdjEifQ==",
+      "revision_id": "sha256:710b46cf05f145a6a5e735679c7cb811e9876630a288db5c651111cf8fb095cd"
+    },
+    {
+      "name": "REQ-HAGV-001-nfd",
+      "schema": "se-harness-artifact-revision/v1",
+      "document_base64": "KysrCmlkID0gIlJFUS1IQUdWLTAwMSIKdHlwZSA9ICJyZXF1aXJlbWVudCIKdGl0bGUgPSAiUmV0dXJuIENhZmXMgSB0ZXh0IHVuY2hhbmdlZC4iCnN0YXR1cyA9ICJkcmFmdCIKb3duZXJzID0gWyJhdXRob3ItYSJdCmNyZWF0ZWQgPSAiMjAyNi0xMC0wNCIKdXBkYXRlZCA9ICIyMDI2LTEwLTA0IgpzdGF0ZW1lbnQgPSAiUmV0dXJuIENhZmXMgSB0ZXh0IHVuY2hhbmdlZC4iCnZlcmlmaWNhdGlvbl9tZXRob2QgPSBbInRlc3QiXQoKW3JlbGF0aW9uc10KZGVyaXZlc19mcm9tID0gWyJDQVAtSEFHVi0wMDEiXQorKysKClJldHVybiBDYWZlzIEgdGV4dCB1bmNoYW5nZWQuCg==",
+      "envelope": {
+        "schema": "se-harness-artifact-revision/v1",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "artifact_id": "REQ-HAGV-001",
+        "document_sha256": "1f37f63c7f187c9d85ad0ae0f00c2ba89c32cf19144a011c6f3e171cd52c69dc",
+        "original_path": null,
+        "declared_relations": {
+          "derives_from": [
+            "CAP-HAGV-001"
+          ]
+        },
+        "provenance": {
+          "kind": "draft",
+          "principal_id": "author-a",
+          "operation_key": "vector-REQ-HAGV-001",
+          "created_at": "2026-10-04T00:00:00Z"
+        }
+      },
+      "canonical_utf8": "{\"artifact_id\":\"REQ-HAGV-001\",\"declared_relations\":{\"derives_from\":[\"CAP-HAGV-001\"]},\"document_sha256\":\"1f37f63c7f187c9d85ad0ae0f00c2ba89c32cf19144a011c6f3e171cd52c69dc\",\"original_path\":null,\"project_id\":\"00000000-0000-4000-8000-000000000001\",\"provenance\":{\"created_at\":\"2026-10-04T00:00:00Z\",\"kind\":\"draft\",\"operation_key\":\"vector-REQ-HAGV-001\",\"principal_id\":\"author-a\"},\"schema\":\"se-harness-artifact-revision/v1\"}",
+      "hash_input_base64": "c2UtaGFybmVzcy1hcnRpZmFjdC1yZXZpc2lvbi92MQp7ImFydGlmYWN0X2lkIjoiUkVRLUhBR1YtMDAxIiwiZGVjbGFyZWRfcmVsYXRpb25zIjp7ImRlcml2ZXNfZnJvbSI6WyJDQVAtSEFHVi0wMDEiXX0sImRvY3VtZW50X3NoYTI1NiI6IjFmMzdmNjNjN2YxODdjOWQ4NWFkMGFlMGYwMGMyYmE4OWMzMmNmMTkxNDRhMDExYzZmM2UxNzFjZDUyYzY5ZGMiLCJvcmlnaW5hbF9wYXRoIjpudWxsLCJwcm9qZWN0X2lkIjoiMDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicHJvdmVuYW5jZSI6eyJjcmVhdGVkX2F0IjoiMjAyNi0xMC0wNFQwMDowMDowMFoiLCJraW5kIjoiZHJhZnQiLCJvcGVyYXRpb25fa2V5IjoidmVjdG9yLVJFUS1IQUdWLTAwMSIsInByaW5jaXBhbF9pZCI6ImF1dGhvci1hIn0sInNjaGVtYSI6InNlLWhhcm5lc3MtYXJ0aWZhY3QtcmV2aXNpb24vdjEifQ==",
+      "revision_id": "sha256:d94d7170399c8352b878aa03291b6785d27c2d382b238d9ac9fcd85e7681b5d9"
+    },
+    {
+      "name": "REQ-HAGV-001-body-change",
+      "schema": "se-harness-artifact-revision/v1",
+      "document_base64": "KysrCmlkID0gIlJFUS1IQUdWLTAwMSIKdHlwZSA9ICJyZXF1aXJlbWVudCIKdGl0bGUgPSAiUmV0dXJuIENhZsOpIHRleHQgdW5jaGFuZ2VkLiIKc3RhdHVzID0gImRyYWZ0Igpvd25lcnMgPSBbImF1dGhvci1hIl0KY3JlYXRlZCA9ICIyMDI2LTEwLTA0Igp1cGRhdGVkID0gIjIwMjYtMTAtMDQiCnN0YXRlbWVudCA9ICJSZXR1cm4gQ2Fmw6kgdGV4dCB1bmNoYW5nZWQuIgp2ZXJpZmljYXRpb25fbWV0aG9kID0gWyJ0ZXN0Il0KCltyZWxhdGlvbnNdCmRlcml2ZXNfZnJvbSA9IFsiQ0FQLUhBR1YtMDAxIl0KKysrCgpSZXR1cm4gQ2Fmw6kgdGV4dCB1bmNoYW5nZWQuCk9uZSBhZGRlZCBsaW5lLgo=",
+      "envelope": {
+        "schema": "se-harness-artifact-revision/v1",
+        "project_id": "00000000-0000-4000-8000-000000000001",
+        "artifact_id": "REQ-HAGV-001",
+        "document_sha256": "b4f9b230c4262e10c2bdf07ff3cb7bbd1030c00f4984bfd3e4a202dd375ed3e2",
+        "original_path": null,
+        "declared_relations": {
+          "derives_from": [
+            "CAP-HAGV-001"
+          ]
+        },
+        "provenance": {
+          "kind": "draft",
+          "principal_id": "author-a",
+          "operation_key": "vector-REQ-HAGV-001",
+          "created_at": "2026-10-04T00:00:00Z"
+        }
+      },
+      "canonical_utf8": "{\"artifact_id\":\"REQ-HAGV-001\",\"declared_relations\":{\"derives_from\":[\"CAP-HAGV-001\"]},\"document_sha256\":\"b4f9b230c4262e10c2bdf07ff3cb7bbd1030c00f4984bfd3e4a202dd375ed3e2\",\"original_path\":null,\"project_id\":\"00000000-0000-4000-8000-000000000001\",\"provenance\":{\"created_at\":\"2026-10-04T00:00:00Z\",\"kind\":\"draft\",\"operation_key\":\"vector-REQ-HAGV-001\",\"principal_id\":\"author-a\"},\"schema\":\"se-harness-artifact-revision/v1\"}",
+      "hash_input_base64": "c2UtaGFybmVzcy1hcnRpZmFjdC1yZXZpc2lvbi92MQp7ImFydGlmYWN0X2lkIjoiUkVRLUhBR1YtMDAxIiwiZGVjbGFyZWRfcmVsYXRpb25zIjp7ImRlcml2ZXNfZnJvbSI6WyJDQVAtSEFHVi0wMDEiXX0sImRvY3VtZW50X3NoYTI1NiI6ImI0ZjliMjMwYzQyNjJlMTBjMmJkZjA3ZmYzY2I3YmJkMTAzMGMwMGY0OTg0YmZkM2U0YTIwMmRkMzc1ZWQzZTIiLCJvcmlnaW5hbF9wYXRoIjpudWxsLCJwcm9qZWN0X2lkIjoiMDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicHJvdmVuYW5jZSI6eyJjcmVhdGVkX2F0IjoiMjAyNi0xMC0wNFQwMDowMDowMFoiLCJraW5kIjoiZHJhZnQiLCJvcGVyYXRpb25fa2V5IjoidmVjdG9yLVJFUS1IQUdWLTAwMSIsInByaW5jaXBhbF9pZCI6ImF1dGhvci1hIn0sInNjaGVtYSI6InNlLWhhcm5lc3MtYXJ0aWZhY3QtcmV2aXNpb24vdjEifQ==",
+      "revision_id": "sha256:7b9592b18a440aa59880f0b3353c55dfe523c73e7d82bda31397317cde3dc8ba"
+    }
+  ],
+  "baseline_vector": {
+    "manifest": {
+      "schema": "se-harness-artifact-baseline/v1",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "revision_scheme": "se-harness-artifact-revision/v1",
+      "selection": {
+        "INT-HAGV-001": "sha256:b0bc3fdb32ef349ccab1e9625845d9c31159c1e4ed859566ab5c9d9da0a47c98",
+        "CAP-HAGV-001": "sha256:61d34d72c0b5719e83cd07307baa09126503ef10e1e1fc695658af35a93d799e",
+        "REQ-HAGV-001": "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289"
+      },
+      "resolved_relations": [
+        [
+          "sha256:61d34d72c0b5719e83cd07307baa09126503ef10e1e1fc695658af35a93d799e",
+          "derives_from",
+          "sha256:b0bc3fdb32ef349ccab1e9625845d9c31159c1e4ed859566ab5c9d9da0a47c98"
+        ],
+        [
+          "sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289",
+          "derives_from",
+          "sha256:61d34d72c0b5719e83cd07307baa09126503ef10e1e1fc695658af35a93d799e"
+        ]
+      ],
+      "provenance": {
+        "kind": "draft-context",
+        "context_id": "00000000-0000-4000-8000-000000000002",
+        "context_version": 3,
+        "base_baseline_id": "se-harness-artifact-baseline/v1:sha256:0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "evaluator": {
+        "version": "0.22.0",
+        "archive_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+        "payload_sha256": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+      }
+    },
+    "canonical_utf8": "{\"evaluator\":{\"archive_sha256\":\"44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4\",\"payload_sha256\":\"b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9\",\"version\":\"0.22.0\"},\"project_id\":\"00000000-0000-4000-8000-000000000001\",\"provenance\":{\"base_baseline_id\":\"se-harness-artifact-baseline/v1:sha256:0000000000000000000000000000000000000000000000000000000000000000\",\"context_id\":\"00000000-0000-4000-8000-000000000002\",\"context_version\":3,\"kind\":\"draft-context\"},\"resolved_relations\":[[\"sha256:61d34d72c0b5719e83cd07307baa09126503ef10e1e1fc695658af35a93d799e\",\"derives_from\",\"sha256:b0bc3fdb32ef349ccab1e9625845d9c31159c1e4ed859566ab5c9d9da0a47c98\"],[\"sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289\",\"derives_from\",\"sha256:61d34d72c0b5719e83cd07307baa09126503ef10e1e1fc695658af35a93d799e\"]],\"revision_scheme\":\"se-harness-artifact-revision/v1\",\"schema\":\"se-harness-artifact-baseline/v1\",\"selection\":{\"CAP-HAGV-001\":\"sha256:61d34d72c0b5719e83cd07307baa09126503ef10e1e1fc695658af35a93d799e\",\"INT-HAGV-001\":\"sha256:b0bc3fdb32ef349ccab1e9625845d9c31159c1e4ed859566ab5c9d9da0a47c98\",\"REQ-HAGV-001\":\"sha256:fc084ef2fa7c22d309b3a645e0d2547cb6ee4d0c066f59136d504b72decf2289\"}}",
+    "hash_input_base64": "c2UtaGFybmVzcy1hcnRpZmFjdC1iYXNlbGluZS92MQp7ImV2YWx1YXRvciI6eyJhcmNoaXZlX3NoYTI1NiI6IjQ0NTQzZjI0MmVkMTliYjMwY2ZkNjVkYTQxNTM3MmE4NzUwOGE2ZTQzOTIwNGQ3ZjNlMzdmOWY0NWFlZmU0ZTQiLCJwYXlsb2FkX3NoYTI1NiI6ImI0NDY0ZTBjNTU4MTRlZTYyYTZlODQ0ZDcxMjUwMzE4ODQ5M2RhY2Y4NDFhZWFjOTBkNWYyNzBlOGM2ODM2YzkiLCJ2ZXJzaW9uIjoiMC4yMi4wIn0sInByb2plY3RfaWQiOiIwMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDEiLCJwcm92ZW5hbmNlIjp7ImJhc2VfYmFzZWxpbmVfaWQiOiJzZS1oYXJuZXNzLWFydGlmYWN0LWJhc2VsaW5lL3YxOnNoYTI1NjowMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIiwiY29udGV4dF9pZCI6IjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMiIsImNvbnRleHRfdmVyc2lvbiI6Mywia2luZCI6ImRyYWZ0LWNvbnRleHQifSwicmVzb2x2ZWRfcmVsYXRpb25zIjpbWyJzaGEyNTY6NjFkMzRkNzJjMGI1NzE5ZTgzY2QwNzMwN2JhYTA5MTI2NTAzZWYxMGUxZTFmYzY5NTY1OGFmMzVhOTNkNzk5ZSIsImRlcml2ZXNfZnJvbSIsInNoYTI1NjpiMGJjM2ZkYjMyZWYzNDljY2FiMWU5NjI1ODQ1ZDljMzExNTljMWU0ZWQ4NTk1NjZhYjVjOWQ5ZGEwYTQ3Yzk4Il0sWyJzaGEyNTY6ZmMwODRlZjJmYTdjMjJkMzA5YjNhNjQ1ZTBkMjU0N2NiNmVlNGQwYzA2NmY1OTEzNmQ1MDRiNzJkZWNmMjI4OSIsImRlcml2ZXNfZnJvbSIsInNoYTI1Njo2MWQzNGQ3MmMwYjU3MTllODNjZDA3MzA3YmFhMDkxMjY1MDNlZjEwZTFlMWZjNjk1NjU4YWYzNWE5M2Q3OTllIl1dLCJyZXZpc2lvbl9zY2hlbWUiOiJzZS1oYXJuZXNzLWFydGlmYWN0LXJldmlzaW9uL3YxIiwic2NoZW1hIjoic2UtaGFybmVzcy1hcnRpZmFjdC1iYXNlbGluZS92MSIsInNlbGVjdGlvbiI6eyJDQVAtSEFHVi0wMDEiOiJzaGEyNTY6NjFkMzRkNzJjMGI1NzE5ZTgzY2QwNzMwN2JhYTA5MTI2NTAzZWYxMGUxZTFmYzY5NTY1OGFmMzVhOTNkNzk5ZSIsIklOVC1IQUdWLTAwMSI6InNoYTI1NjpiMGJjM2ZkYjMyZWYzNDljY2FiMWU5NjI1ODQ1ZDljMzExNTljMWU0ZWQ4NTk1NjZhYjVjOWQ5ZGEwYTQ3Yzk4IiwiUkVRLUhBR1YtMDAxIjoic2hhMjU2OmZjMDg0ZWYyZmE3YzIyZDMwOWIzYTY0NWUwZDI1NDdjYjZlZTRkMGMwNjZmNTkxMzZkNTA0YjcyZGVjZjIyODkifX0=",
+    "baseline_id": "se-harness-artifact-baseline/v1:sha256:1af3e4e7f27561a17b32bd7151a3a18126f8064891aae43ef3d7300347645d15"
+  },
+  "json_vectors": [
+    {
+      "value": {
+        "z": [
+          2,
+          1
+        ],
+        "a": "é"
+      },
+      "canonical_utf8": "{\"a\":\"é\",\"z\":[2,1]}"
+    },
+    {
+      "value": {
+        "z": [
+          2,
+          1
+        ],
+        "a": "é"
+      },
+      "canonical_utf8": "{\"a\":\"é\",\"z\":[2,1]}"
+    }
+  ]
+}

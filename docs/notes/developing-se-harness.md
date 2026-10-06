@@ -267,7 +267,8 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 The [0.22.1 / plugin 0.2.6 release](../engineering/release-0-22-1/README.md)
 completed the complete-release route. Candidate qualification, final approval
 and public delivery have separate records. Public latest is 0.22.1.
-WO-HUP-030 adopts that evaluator; the hosted-service contract still pins 0.22.0.
+WO-HUP-030 adopts that evaluator. WO-HAG-005 reconciles the hosted-service
+contract with 0.22.1 while preserving the previous definitions and evidence.
 
 
 The [0.22.0 package](../engineering/release-0-22-0/README.md) has published
@@ -323,6 +324,17 @@ Owner content moved here from the retired repository-context document under `WO-
 This repository integrates reviewed work through branches and pull requests without one mandatory development-branch prefix. Every pull request subject to the installed workflow declares one standalone `Harness-Work-Order: WO-...` field or one comma-separated `Harness-Work-Orders` field; branch naming does not substitute for that declaration or for approved scope. Repository release automation establishes `release/MAJOR.MINOR` from each authorized released candidate as the canonical maintenance line. Existing compatible lines may advance through separately governed maintenance work; automation never moves a conflicting ref. This local rule is not part of portable SE Harness or its consumer workflow.
 
 ## Advancing the root evaluator
+
+For a stacked PR whose original target predates the selected release, the
+predecessor assessment can reuse an identical adoption already integrated on
+the fetched default branch (SPEC-HAG-006). It keeps the PR's event base for
+transition evidence and change-scope checks. Only a unique common ancestor with
+the same root configuration, lock and evaluator identity can supply the release
+record. The target's release and upgrade-transaction bytes must equal that
+independent history. Malformed, ambiguous, missing or changed proof refuses.
+The report names the immutable default-branch commit and common ancestor;
+archive, runtime and target-root qualification still run. The assessor never
+updates a branch or treats a candidate-only release record as approval.
 
 WO-HUP-030 selects public 0.22.1 from RLS-SEH-033 in the repository and CI.
 Its transaction updates only the configuration and lock; retained integrations

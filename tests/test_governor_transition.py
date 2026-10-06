@@ -203,6 +203,130 @@ class GovernorTransitionTests(unittest.TestCase):
         self.assertEqual("lock", plan["transition"]["archive_source"])
         self.assertEqual("RLS-TST-001", plan["transition"]["trusted_release"]["id"])
 
+    def stacked_adoption(self, fixture):
+        """An old work branch imports an adoption already committed on main."""
+        fixture.base()
+        release = fixture.root / "docs/engineering/sample/releases/RLS-TST-001.md"
+        raw = release.read_bytes()
+        release.unlink()
+        base = fixture.commit("before target release")
+        git(fixture.root, "branch", "work", base)
+        write(release, raw)
+        fixture.commit("release on main")
+        adopted = fixture.target(base)
+        git(fixture.root, "update-ref", "refs/remotes/origin/main", adopted)
+        git(fixture.root, "checkout", "work")
+        write(fixture.root / "work.txt", "independent work\n")
+        fixture.commit("work on old base")
+        git(fixture.root, "merge", "--no-edit", adopted)
+        return base, adopted
+
+    def test_stacked_adoption_keeps_event_base_and_reports_independent_proof(self):
+        temporary, fixture = self.fixture()
+        with temporary:
+            base, adopted = self.stacked_adoption(fixture)
+            # Main may advance again; the common adoption remains immutable.
+            head = git(fixture.root, "rev-parse", "HEAD")
+            git(fixture.root, "checkout", "--detach", adopted)
+            write(fixture.root / "main-note.txt", "later main work\n")
+            default = fixture.commit("advance main")
+            git(fixture.root, "update-ref", "refs/remotes/origin/main", default)
+            git(fixture.root, "checkout", "work")
+            plan = TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+            self.assertEqual(base, plan["base"]["commit"])
+            self.assertEqual(head, plan["target"]["commit"])
+            self.assertEqual("event", plan["base_source"])
+            proof = plan["transition"]["release_authority"]
+            self.assertEqual("adopted-history", proof["mode"])
+            self.assertEqual(adopted, proof["anchor_commit"])
+            self.assertEqual(default, proof["default_branch_commit"])
+            raw = git(fixture.root, "show", adopted + ":docs/engineering/sample/releases/RLS-TST-001.md", binary=True)
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), proof["release_sha256"])
+            self.assertEqual("", git(fixture.root, "status", "--porcelain"))
+            # The new proof does not waive the actual evaluator assessment.
+            with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "requires exact evaluator"):
+                TRANSITION.assess(str(fixture.root), base, "refs/remotes/origin/main", None, None, None)
+
+    def test_stacked_adoption_rejects_changed_inputs_and_duplicate_transaction(self):
+        for case in ("release", "transaction", "duplicate", "wrong-prior", "config", "lock", "identity", "dirty"):
+            with self.subTest(case=case):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    base, _ = self.stacked_adoption(fixture)
+                    release = fixture.root / "docs/engineering/sample/releases/RLS-TST-001.md"
+                    evidence = fixture.root / "docs/engineering/sample/evidence/evaluator-upgrade.json"
+                    if case == "release":
+                        write(release, release.read_bytes() + b"\nChanged claim.\n")
+                    elif case == "transaction":
+                        value = json.loads(evidence.read_bytes()); value["authority"] = "candidate claim"
+                        write(evidence, canonical_json(value))
+                    elif case == "duplicate":
+                        write(evidence.with_name("duplicate.json"), evidence.read_bytes())
+                    elif case == "wrong-prior":
+                        value = json.loads(evidence.read_bytes()); value["prior"]["lock_sha256"] = "0" * 64
+                        write(evidence, canonical_json(value))
+                    elif case == "config":
+                        path = fixture.root / ".engineering-harness.toml"
+                        write(path, path.read_bytes().replace(b"fixture", b"changed"))
+                    elif case in ("lock", "identity"):
+                        path = fixture.root / ".engineering-harness.lock"
+                        value = json.loads(path.read_bytes())
+                        if case == "lock": value["files"]["foreign"] = {"mode": "seed", "state": "present"}
+                        else: value["evaluator"]["payload_sha256"] = "c" * 64
+                        write(path, canonical_json(value))
+                    else:
+                        write(fixture.root / "untracked.txt", "not committed")
+                    if case != "dirty": fixture.commit("tamper " + case)
+                    with self.assertRaises(TRANSITION.GovernorTransitionError):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_stacked_adoption_rejects_missing_or_unadopted_default_history(self):
+        for case in ("missing", "old-main", "invalid-ref", "unrelated"):
+            with self.subTest(case=case):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    base, _ = self.stacked_adoption(fixture)
+                    ref = "refs/remotes/origin/main"
+                    if case == "missing": git(fixture.root, "update-ref", "-d", ref)
+                    elif case == "old-main": git(fixture.root, "update-ref", ref, base)
+                    elif case == "invalid-ref": ref = "refs/heads/work"
+                    else:
+                        tree = git(fixture.root, "rev-parse", "HEAD^{tree}")
+                        unrelated = git(fixture.root, "commit-tree", tree, "-m", "unrelated history")
+                        git(fixture.root, "update-ref", ref, unrelated)
+                    with self.assertRaises(TRANSITION.GovernorTransitionError):
+                        TRANSITION.build_plan(str(fixture.root), base, ref)
+
+    def test_stacked_adoption_rejects_ambiguous_common_history(self):
+        temporary, fixture = self.fixture()
+        with temporary:
+            base, adopted = self.stacked_adoption(fixture)
+            # Two criss-cross merges have two best common ancestors.
+            tree = git(fixture.root, "rev-parse", "HEAD^{tree}")
+            left = git(fixture.root, "commit-tree", tree, "-p", adopted, "-m", "left")
+            right = git(fixture.root, "commit-tree", tree, "-p", adopted, "-m", "right")
+            candidate = git(fixture.root, "commit-tree", tree, "-p", left, "-p", right, "-m", "candidate merge")
+            default = git(fixture.root, "commit-tree", tree, "-p", right, "-p", left, "-m", "default merge")
+            git(fixture.root, "reset", "--hard", candidate)
+            git(fixture.root, "update-ref", "refs/remotes/origin/main", default)
+            with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "ambiguous"):
+                TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_bad_base_release_never_uses_default_history_fallback(self):
+        for case in ("malformed", "multiple"):
+            with self.subTest(case=case):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    fixture.base()
+                    path = fixture.root / "docs/engineering/sample/releases/RLS-TST-001.md"
+                    if case == "malformed": write(path, path.read_bytes().replace(b'authorized_by = "release-owner"', b'authorized_by = ""'))
+                    else: write(path.with_name("RLS-TST-002.md"), path.read_bytes().replace(b"RLS-TST-001", b"RLS-TST-002"))
+                    base = fixture.commit("invalid base " + case)
+                    fixture.target(base)
+                    # There is deliberately no default ref to fall back to.
+                    with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "exactly one released distribution"):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
     def release_actor_base(self, fixture, authorizer, event_actor, *, omit=False):
         base = fixture.base()
         if authorizer == event_actor == "release-owner" and not omit:

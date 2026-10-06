@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-10-06T04:06:42.263443+00:00",
+  "candidate": "21d268664ffeb111b8b9e9e94921073c7bc99ec1",
+  "combination_id": "sha256:febab9cfb9a72fe2e78b5ef64c3da9319aa2e95305ae1840e9c981584ebe0b96",
+  "selected_work": [
+    "WO-HAG-001",
+    "WO-HAG-007"
+  ],
+  "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+  "outputs": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-bounded-20261006",
+  "sandbox": {
+    "project": "hagbounded20261006",
+    "endpoint": "http://127.0.0.1:18094",
+    "restored_project": "hagbounded20261006-restore",
+    "restored_endpoint": "http://127.0.0.1:18095",
+    "selection_file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-bounded-20261006\\sandbox-selection.json"
+  },
+  "qualification": "Required Phase 2 observations completed for this tuple; human verification remains a separate decision.",
+  "remaining": [
+    "Use released preflight/handoff/completion/capture procedures and confirm their actual results.",
+    "Publish the ready review package to existing draft PR #535 under the recorded grant.",
+    "Obtain human verification of the exact prepared record; do not infer acceptance from these tests."
+  ],
+  "next_context_command": [
+    "harnessctl",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+    "--artifact",
+    "WO-HAG-001",
+    "--json"
+  ],
+  "notice": "This is a retention-time continuation. Obtain fresh lifecycle context rather than replaying completed steps. No human decision is supplied."
+}

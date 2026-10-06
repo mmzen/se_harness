@@ -4,6 +4,10 @@
 
 These notes explain SE Harness in progressively greater detail. They are human-readable guidance, not formal engineering artifacts, and they grant no approval, verification, or release authority.
 
+[Hosted artifact graph](hosted-artifact-graph.md) describes the Phase 1 wire,
+storage and byte contracts and the open evaluator-admission dependency. It does
+not describe a deployed service.
+
 ## Suggested path
 
 | Step | Guide | Question answered |

@@ -12,6 +12,30 @@ does not pin that release. A development wheel is only for disposable testing.
 
 Use the target and action already requested; ask only for a missing choice.
 
+## Hosted sandbox selection
+
+Use this route only when the operator explicitly selects a hosted sandbox.
+It is separate from checkout activation. Retain the operator's loopback endpoint,
+project ID, baseline or versioned context, and named credential environment variable.
+Never print the credential. The sandbox is not repository authority.
+
+Obtain the qualified combination report and exact candidate client wheel.
+Create a separate disposable Python environment outside the checkout. Verify the
+wheel's SHA-256 against that report, then install that file with `pip --no-deps`.
+The plugin's bundled released evaluator remains unchanged; do not replace it with
+the candidate client. Use the candidate environment's absolute Python as
+`CLIENT_PYTHON` in the remote commands below.
+
+```text
+CLIENT_PYTHON -I -m se_harness remote status --endpoint ENDPOINT --project PROJECT --token-env TOKEN_VARIABLE --json
+```
+
+Compare readiness, authority mode `sandbox-projection`, schema, protocols, and
+all component identities with the selected combination. A mismatch stops the
+remote action. An unavailable service never selects local file writes as a fallback.
+Use harness-orient for reads or change for authorized sandbox draft preparation.
+This route grants no approval, verification, release, adoption or deployment right.
+
 ## Activate the checkout
 
 After cloning or selecting existing work, reuse that exact absolute checkout path.

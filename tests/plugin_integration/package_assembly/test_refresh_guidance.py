@@ -1,4 +1,4 @@
-"""Check REL-SEH-035 candidate inputs and the separately observed public delivery."""
+"""Keep the unpublished HAG candidate separate from public release evidence."""
 from copy import deepcopy
 import json
 import posixpath
@@ -8,9 +8,10 @@ import tomllib
 import unittest
 
 ROOT = Path(__file__).resolve().parents[3]
-# Candidate identities come from approved REL-SEH-035, not candidate output.
-PLUGIN = "0.2.6"
-CANDIDATE_EVALUATOR = "0.22.1"
+# WO-HAG-007 selects this unpublished candidate under SPEC-HAG-003.
+# Expected identities are explicit inputs, never derived from tested manifests.
+CANDIDATE_PLUGIN = "0.2.7"
+PUBLIC_PLUGIN = "0.2.6"
 # Published identities come from RLS-SEH-033 and independent public readback.
 EVALUATOR = "0.22.1"
 WHEEL_SHA = "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053"
@@ -32,7 +33,7 @@ def selected_inputs():
 
 def identity_findings(inputs):
     findings = []
-    if any(m.get("version") != PLUGIN for m in inputs["manifests"]):
+    if any(m.get("version") != CANDIDATE_PLUGIN for m in inputs["manifests"]):
         findings.append("candidate manifest version")
     release = inputs["release"]
     if (release.get("id"), release.get("status"), release.get("version")) != (
@@ -43,7 +44,7 @@ def identity_findings(inputs):
             f"se_harness-{EVALUATOR}-py3-none-any.whl", WHEEL_SHA):
         findings.append("released wheel identity")
     guide = " ".join(inputs["marketplace"].split())
-    if (f"Plugin **{PLUGIN}**" not in guide or f"**SE Harness {CANDIDATE_EVALUATOR}**" not in guide):
+    if (f"Plugin **{PUBLIC_PLUGIN}**" not in guide or f"**SE Harness {EVALUATOR}**" not in guide):
         findings.append("assembled guide selection")
     root = " ".join(inputs["root"].split())
     observed = re.search(
@@ -68,7 +69,7 @@ def identity_findings(inputs):
         and publisher["identity_sha256"] == observation["assembly"]["sha256"] == qualified["package_identity_sha256"]
         and qualified["all_git_blob_bytes_match"] is True
         and (identity["plugin_version"], identity["evaluator"]["version"], identity["evaluator"]["archive_sha256"])
-            == (PLUGIN, EVALUATOR, WHEEL_SHA)
+            == (PUBLIC_PLUGIN, EVALUATOR, WHEEL_SHA)
     ):
         findings.append("public tree lacks accepted-package comparison")
     if "pending publication" in root:
@@ -102,6 +103,22 @@ class RefreshGuidanceTests(unittest.TestCase):
     def test_selected_candidate_and_public_claims_have_independent_inputs(self):
         self.assertEqual([], identity_findings(selected_inputs()))
 
+    def test_each_host_must_match_the_unpublished_candidate(self):
+        for index in range(2):
+            for version in (PUBLIC_PLUGIN, "0.2.8"):
+                data = selected_inputs()
+                data["manifests"][index]["version"] = version
+                with self.subTest(host=index, version=version):
+                    self.assertIn("candidate manifest version", identity_findings(data))
+
+    def test_candidate_version_does_not_replace_public_evidence(self):
+        data = selected_inputs()
+        data["marketplace"] = data["marketplace"].replace(PUBLIC_PLUGIN, CANDIDATE_PLUGIN)
+        self.assertIn("assembled guide selection", identity_findings(data))
+        data = selected_inputs()
+        data["root"] = data["root"].replace(PUBLIC_PLUGIN, CANDIDATE_PLUGIN)
+        self.assertIn("public claim lacks matching observation", identity_findings(data))
+
     def test_wrong_manifest_or_wheel_is_rejected(self):
         original = selected_inputs()
         for field in ("manifest", "wheel"):
@@ -117,7 +134,7 @@ class RefreshGuidanceTests(unittest.TestCase):
     def test_mutually_stale_documents_do_not_establish_identity(self):
         data = selected_inputs()
         for name in ("root", "marketplace"):
-            data[name] = data[name].replace(PLUGIN, "0.1.0").replace(CANDIDATE_EVALUATOR, "0.18.0").replace("0.2.1", "0.1.0").replace(EVALUATOR, "0.18.0")
+            data[name] = data[name].replace(PUBLIC_PLUGIN, "0.1.0").replace("0.2.1", "0.1.0").replace(EVALUATOR, "0.18.0")
         self.assertIn("assembled guide selection", identity_findings(data))
 
     def test_premature_public_claim_is_rejected(self):

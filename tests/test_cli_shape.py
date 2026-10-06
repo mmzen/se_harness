@@ -31,6 +31,7 @@ REPOSITORY_COMMANDS = {
     "release-unit", "capture-verification", "refresh-verification", "prepare-release", "decide", "raise-risk", "risks",
 }
 NON_REPOSITORY_COMMANDS = {"select-work-order", "identity"}
+REMOTE_COMMANDS = {"remote"}
 REPOSITORY_QUALIFY_ROLES = {"released-root", "complete-candidate", "public-install"}
 NON_REPOSITORY_QUALIFY_ROLES = {"candidate-package"}
 SCHEMA = "se-harness-command-result-v1"
@@ -53,7 +54,7 @@ class ParserShapeTests(unittest.TestCase):
     def test_every_subcommand_is_classified_and_takes_target_accordingly(self) -> None:
         choices = _subparsers(build_parser())
         self.assertEqual(
-            REPOSITORY_COMMANDS | NON_REPOSITORY_COMMANDS | {"qualify"},
+            REPOSITORY_COMMANDS | NON_REPOSITORY_COMMANDS | REMOTE_COMMANDS | {"qualify"},
             set(choices),
         )
         for name in REPOSITORY_COMMANDS:
@@ -71,6 +72,14 @@ class ParserShapeTests(unittest.TestCase):
         for name in NON_REPOSITORY_COMMANDS:
             with self.subTest(command=name):
                 self.assertEqual([], _positionals(choices[name]))
+        # SPEC-HAG-003: the candidate remote client selects a service explicitly.
+        for name in REMOTE_COMMANDS:
+            with self.subTest(command=name):
+                remote = choices[name]
+                self.assertEqual(["operation"], _positionals(remote))
+                self.assertFalse(_options(remote) & {"--root", "--repository", "--checkout-root"})
+                required = {a.dest for a in remote._actions if a.required}
+                self.assertTrue({"operation", "endpoint", "token_env"} <= required)
         roles = next(a for a in choices["qualify"]._actions if getattr(a, "choices", None)).choices
         self.assertEqual(REPOSITORY_QUALIFY_ROLES | NON_REPOSITORY_QUALIFY_ROLES, set(roles))
         for name in REPOSITORY_QUALIFY_ROLES:
