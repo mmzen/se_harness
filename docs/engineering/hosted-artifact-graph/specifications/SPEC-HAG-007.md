@@ -2,7 +2,7 @@
 id = "SPEC-HAG-007"
 type = "specification"
 title = "Private test-copy lifecycle and export contract"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-10-06"
 updated = "2026-10-06"
@@ -10,6 +10,13 @@ contract = "Rehearse released-evaluator lifecycle operations atomically in an ex
 
 [relations]
 specifies = ["REQ-HAG-011", "REQ-HAG-012", "REQ-HAG-013"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-06T18:40:36Z"
+decided_by = "mmzen"
+reason = "Human mmzen answered \"I approve\" to the Phase 3 package published in PR #542 at 689dee3b1929e5c58338df1331a0eb9df484ce25. Approves the nine governing definitions and WO-HAG-008, including required commit-bound verification under VER-HAG-006 and its bounded local execution. Git remains authoritative; this is a private test-copy lifecycle rehearsal. Authentication and database ACL implementation remain deferred; existing controls stay. Includes the reviewed bounded publication grant to mmzen/se_harness, source codex/hosted-artifact-phase3, target main, draft PR #542, including the ready record and a later separately supplied verification-decision push. No risk acceptance, actual assurance decision, merge, real authority cutover, release, deployment or host-plugin update is granted."
 +++
 
 # Private test-copy lifecycle and export contract

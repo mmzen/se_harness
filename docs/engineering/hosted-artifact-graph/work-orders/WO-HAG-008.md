@@ -2,10 +2,15 @@
 id = "WO-HAG-008"
 type = "work_order"
 title = "Implement and qualify the private hosted lifecycle rehearsal"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-06"
 updated = "2026-10-06"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen approved required commit-bound verification because later decisions depend on the lifecycle boundary, atomic state, provenance and export behavior. Assess the exact candidate under VER-HAG-006."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = ["server/", "se_harness/remote.py", "se_harness/cli.py", "tests/hosted_artifact_graph/", "tests/test_hosted_artifact_graph.py", "tests/test_remote_client.py", "tests/test_cli_shape.py", "tests/plugin_integration/test_simple_plugin.py", "plugins/verity-plane/common/skills/setup/SKILL.md", "plugins/verity-plane/common/skills/change/SKILL.md", "plugins/verity-plane/common/skills/evidence/SKILL.md", "plugins/verity-plane/common/skills/harness-orient/SKILL.md", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "docs/notes/hosted-artifact-graph.md", "docs/notes/harnessctl-reference.md", "docs/engineering/hosted-artifact-graph/README.md", "docs/engineering/hosted-artifact-graph/intent/INT-HAG-002.md", "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-002.md", "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-011.md", "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-012.md", "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-013.md", "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-007.md", "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-003.md", "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-003.md", "docs/engineering/hosted-artifact-graph/verification/VER-HAG-006.md", "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-008.md", "docs/engineering/hosted-artifact-graph/decisions/DEC-HAG-004.md", "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md"]
@@ -15,6 +20,21 @@ implements = ["REQ-HAG-011", "REQ-HAG-012", "REQ-HAG-013"]
 specifications = ["SPEC-HAG-007"]
 architecture = ["ARCH-HAG-003", "ADR-HAG-003"]
 verification = ["VER-HAG-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-06T18:41:45Z"
+decided_by = "mmzen"
+reason = "Human mmzen answered \"I approve\" to the Phase 3 package published in PR #542 at 689dee3b1929e5c58338df1331a0eb9df484ce25. Approves the nine governing definitions and WO-HAG-008, including required commit-bound verification under VER-HAG-006 and its bounded local execution. Git remains authoritative; this is a private test-copy lifecycle rehearsal. Authentication and database ACL implementation remain deferred; existing controls stay. Includes the reviewed bounded publication grant to mmzen/se_harness, source codex/hosted-artifact-phase3, target main, draft PR #542, including the ready record and a later separately supplied verification-decision push. No risk acceptance, actual assurance decision, merge, real authority cutover, release, deployment or host-plugin update is granted."
+scope_paths = ["server/", "se_harness/remote.py", "se_harness/cli.py", "tests/hosted_artifact_graph/", "tests/test_hosted_artifact_graph.py", "tests/test_remote_client.py", "tests/test_cli_shape.py", "tests/plugin_integration/test_simple_plugin.py", "plugins/verity-plane/common/skills/setup/SKILL.md", "plugins/verity-plane/common/skills/change/SKILL.md", "plugins/verity-plane/common/skills/evidence/SKILL.md", "plugins/verity-plane/common/skills/harness-orient/SKILL.md", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "docs/notes/hosted-artifact-graph.md", "docs/notes/harnessctl-reference.md", "docs/engineering/hosted-artifact-graph/README.md", "docs/engineering/hosted-artifact-graph/intent/INT-HAG-002.md", "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-002.md", "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-011.md", "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-012.md", "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-013.md", "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-007.md", "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-003.md", "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-003.md", "docs/engineering/hosted-artifact-graph/verification/VER-HAG-006.md", "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-008.md", "docs/engineering/hosted-artifact-graph/decisions/DEC-HAG-004.md", "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-008/", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-06T18:42:55Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Implement and qualify the private hosted lifecycle rehearsal
