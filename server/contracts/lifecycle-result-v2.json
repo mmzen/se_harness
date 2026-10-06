@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:se-harness:lifecycle-result:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "se-harness-lifecycle-result/v2"
+    },
+    "test_copy": {
+      "const": true
+    },
+    "authority": {
+      "const": "rehearsal-only; Git remains authoritative"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "outcome": {
+      "enum": [
+        "inspected",
+        "previewed",
+        "accepted",
+        "refused"
+      ]
+    },
+    "operation_key": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "request_digest": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "preview_digest": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receipt_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "view": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "versions": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "baseline_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "archive_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "payload_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "archive_sha256",
+        "payload_sha256"
+      ]
+    },
+    "evaluator_output": {},
+    "http_status": {
+      "type": "integer"
+    },
+    "error": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "affected_revision_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "affected_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+          },
+          "revision_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "artifact_id",
+          "revision_id"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!/)(?!.*(?:^|/)(?:\\.|\\.\\.|\\.git)(?:/|$))[^\\\\:\\u0000]+$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "bytes"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "provenance": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "test_copy",
+    "authority",
+    "project_id",
+    "outcome",
+    "operation_key",
+    "request_digest",
+    "preview_digest",
+    "receipt_id",
+    "view",
+    "versions",
+    "baseline_id",
+    "evaluator",
+    "evaluator_output",
+    "http_status",
+    "error",
+    "affected_revision_ids",
+    "affected_artifacts",
+    "files",
+    "provenance"
+  ]
+}
