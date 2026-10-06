@@ -227,6 +227,11 @@ class Boundaries:
                     tools = await session.list_tools()
                     assert {t.name for t in tools.tools} == {r["operation"] for r in requests}
                     self.record("mcp-tool-schemas", tools.model_dump(mode="json"))
+                    from jsonschema import Draft202012Validator
+                    for tool in tools.tools:
+                        assert tool.inputSchema.get("type") == "object", tool.name
+                        validator = Draft202012Validator(tool.inputSchema)
+                        validator.validate(next(r for r in requests if r["operation"] == tool.name))
                     for request in requests:
                         status, http = await asyncio.to_thread(self.http, f"/v1/projects/{self.project}/reads/{request['operation']}", request)
                         mcp = await session.call_tool(request["operation"], request)

@@ -70,7 +70,7 @@ def create_app(config_path, credentials_path):
             return value
         return [Tool(name=variant["allOf"][1]["properties"]["operation"]["const"],
                      description="Read the explicit sandbox view. No approval or mutation authority.",
-                     inputSchema=inline_refs({**variant, "$defs": definitions})) for variant in schema["$defs"]["Request"]["oneOf"]]
+                     inputSchema=inline_refs({"type": "object", **variant, "$defs": definitions})) for variant in schema["$defs"]["Request"]["oneOf"]]
 
     @mcp.call_tool()
     async def call_tool(name, arguments):

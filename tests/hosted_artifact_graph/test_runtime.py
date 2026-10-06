@@ -1,5 +1,11 @@
 """Run with the installed service dependencies; these do not replace live scenarios."""
+import asyncio
+import json
+from pathlib import Path
+import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 from hosted_artifact_graph.cypher import compile_query
 from hosted_artifact_graph.protocol import EVALUATOR, Refusal, Wire
@@ -50,6 +56,37 @@ class ImportAdmissionTests(unittest.TestCase):
         with self.assertRaises(Refusal) as caught:
             wire.command({"operation": "import"})
         self.assertEqual((400, "HAG_REMOTE_MALFORMED"), (caught.exception.status, caught.exception.code))
+
+
+class MCPDiscoveryTests(unittest.TestCase):
+    def test_advertised_tools_have_object_schemas_and_keep_operation_constraints(self):
+        from jsonschema import Draft202012Validator
+        from mcp.types import ListToolsRequest
+        from hosted_artifact_graph.app import create_app
+
+        wire = Wire()
+        with tempfile.TemporaryDirectory() as directory:
+            config = Path(directory) / "config.json"
+            config.write_text("{}", encoding="utf-8")
+            with patch("hosted_artifact_graph.app.Service", return_value=SimpleNamespace(wire=wire)), \
+                    patch("hosted_artifact_graph.app.StreamableHTTPSessionManager") as manager:
+                create_app(config, config)
+                server = manager.call_args.kwargs["app"]
+                handler = server.request_handlers[ListToolsRequest]
+                result = asyncio.run(handler(ListToolsRequest(method="tools/list")))
+        tools = result.root.tools
+        self.assertEqual({tool.name for tool in tools},
+                         {"revision", "work-context", "compare", "impact", "lineage", "check", "cypher"})
+        for tool in tools:
+            with self.subTest(tool=tool.name):
+                # Native MCP clients require the root object type even when an
+                # allOf branch already constrains the instance to an object.
+                self.assertEqual(tool.inputSchema.get("type"), "object")
+                Draft202012Validator.check_schema(tool.inputSchema)
+                validator = Draft202012Validator(tool.inputSchema)
+                self.assertFalse(validator.is_valid([]))
+                self.assertFalse(validator.is_valid({"operation": "approve"}))
+                self.assertNotIn("urn:se-harness:remote-wire:v1#", json.dumps(tool.inputSchema))
 
 
 if __name__ == "__main__":
