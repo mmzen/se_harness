@@ -1,0 +1,70 @@
+{
+  "schema": "se-harness-complete-release-readiness/v1",
+  "candidate_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+  "verification_records": [
+    "VREC-SEH-033"
+  ],
+  "qualification": "passed",
+  "controls_ready": true,
+  "observed_at": "2026-10-05T06:47:15.804722+00:00",
+  "documentation": {
+    "verification_record": "VREC-RLS-003",
+    "state": "verified",
+    "candidate_commit": "dc3b6d39b3980299b5443e6036d3fe8aa34c4fa3",
+    "decision_commit": "febda5a5be9d484231a932f19111bec8ebf72f8d",
+    "note": "Independent source-documentation assurance; not added to binary release membership."
+  },
+  "evidence": [
+    {
+      "path": "docs/engineering/release-0-22-1/verification-records/VREC-SEH-033.md",
+      "sha256": "5dca3647daa0a0c236b120d22048deb9aca4ce59e2c52c06dcb6f9b71c2bed45"
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/verification-records/VREC-RLS-003.md",
+      "sha256": "cb85caa0c4b06a888a91595b0021932ec7ffe5d63383c2b9995d347486f5e2aa"
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-evidence-receipt.json",
+      "sha256": "1552249eca44eff719615f57152e52064d8dc1f7f70ab17d946616ca02a71da2"
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-verification-review.md",
+      "sha256": "5bb0ce000463d48e111665bb32234e598a765da435bc02b70c4cca719baa2007"
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/ready-record-replay-receipt.json",
+      "sha256": "09dc766f580c3e9bb97cff26d339059cb3c98a0c040aae855e1ba87b0e5c06a9"
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/provider-configuration-applied.json",
+      "sha256": "79e09e32114acfca5ad00a2efa324b0a25464887b56c73662fb850e9968d6d14"
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/complete-release-readiness.zip",
+      "sha256": "c71a1dccd2efc65794146511aeb2583e1c21bbcdd825362156ecbfce8ee0d883"
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/assessment.md",
+      "sha256": "dc68ba7dcad2d15971e5d21539a591b54317e7dc815ce14eefc2f5814cd37913"
+    }
+  ],
+  "provider_controls": {
+    "main": "PR plus validate; merge commits only; no bypass",
+    "pypi": "No separate reviewer; main-only deployment, OIDC and existing permissions preserved",
+    "trusted_publisher": "mmzen confirmed owner mmzen, repository se_harness, workflow publish-pypi.yml, environment pypi; human account-side confirmation, not an authenticated agent read",
+    "marketplace_and_maintenance": "Ordinary fast-forward; provider denies non-fast-forward and deletion",
+    "pages": "Existing GitHub Pages deployment and www.verityplane.ai domain unchanged"
+  },
+  "authentication": {
+    "codex": "Live reply passed in existing disposable profile",
+    "claude-code": "Live reply passed in existing disposable profile",
+    "limit": "Point-in-time readiness; repeat before public tests if necessary. No credentials retained in this receipt."
+  },
+  "limitations": [
+    "Codex Windows desktop is unverified under accepted DEC-RLS-009 / RISK-RLS-007; revisit before the next plugin release or verified-desktop claim.",
+    "Required public fresh/update routes run only after publication; local qualification is not public evidence.",
+    "No Hosted Artifact Graph service verification, repository adoption or hosted-pin amendment.",
+    "Immutable package READMEs retain historical preparation snapshots; corrected source guidance explains their use."
+  ],
+  "authority": "Prepared input for the later exact complete-release decision; this file authorizes nothing."
+}

@@ -1,0 +1,44 @@
+{
+  "candidate": "acc1a62ec70bc3c2cc56a64d789a7ffebbb831cd",
+  "working_tree": "clean",
+  "command": [
+    "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full",
+    "--timings",
+    "target/test-timings.json"
+  ],
+  "cwd": "/home/runner/work/se_harness/se_harness",
+  "checker": {
+    "version": "0.22.1",
+    "origin": "/home/runner/work/se_harness/se_harness/se_harness/__init__.py"
+  },
+  "started_at": "2026-10-04T19:21:38.108821+00:00",
+  "exit_code": 0,
+  "result": "pass",
+  "output_tail": "vidence/WO-PRD-001/handoff.json\", \"docs/engineering/product/evidence/WO-PRD-001/review.md\", \"docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md\", \"docs/engineering/product/work-orders/WO-PRD-001.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"corrected_exit\": 0, \"demonstration\": \"instruction-change\", \"detected_omission\": [\"tests/test_guidance.py\"], \"expansion_blocked_by\": [\"QGP-G4I-PATHS: WEX201: changed path is outside execution scope: unrelated/new.py\"], \"generated_outputs\": {\"automatic_matches\": [{\"path\": \"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}, {\"path\": \"docs/engineering/product/verification-records/VREC-001.md\", \"rule\": \"linked-record-or-evaluator-evidence\", \"work_order\": \"WO-PRD-001\"}], \"coverage\": \"covered\", \"explicit_matches\": [], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/engineering/product/evidence/VREC-001-evaluator.json\", \"docs/engineering/product/verification-records/VREC-001.md\"], \"uncovered_paths\": []}, \"handoff\": {\"kind\": \"check\", \"outcome\": \"completed\"}, \"planned\": {\"automatic_matches\": [], \"coverage\": \"covered\", \"explicit_matches\": [{\"path\": \"docs/cli.md\", \"scope_entry\": \"docs/cli.md\"}, {\"path\": \"docs/procedure.md\", \"scope_entry\": \"docs/procedure.md\"}, {\"path\": \"templates/work.md\", \"scope_entry\": \"templates/work.md\"}, {\"path\": \"tests/test_guidance.py\", \"scope_entry\": \"tests/test_guidance.py\"}], \"impact_analysis\": \"not_assessed\", \"invalid_declarations\": [], \"planned_paths\": [\"docs/cli.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"uncovered_paths\": []}, \"record\": {\"commit\": \"3ef5bfe6a75ce94242bc795ee0a911860d334ea7\", \"id\": \"VREC-001\", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\n0.22.1\n----------------------------------------------------------------------\nRan 1287 tests in 59.957s (188 classes, 4 workers)\n\nOK (skipped=2)\n",
+  "raw": {
+    "file": "output.log",
+    "bytes": 4740,
+    "artifact": "candidate-source-raw",
+    "repository": "mmzen/se_harness",
+    "run_id": "37227957187",
+    "run_url": "https://github.com/mmzen/se_harness/actions/runs/37227957187",
+    "retention_days": 14,
+    "estimated_expiry": "2026-10-18T19:21:38.108821+00:00",
+    "availability": "local; upload not yet confirmed",
+    "download_command": [
+      "gh",
+      "run",
+      "download",
+      "37227957187",
+      "--repo",
+      "mmzen/se_harness",
+      "--name",
+      "candidate-source-raw"
+    ]
+  }
+}

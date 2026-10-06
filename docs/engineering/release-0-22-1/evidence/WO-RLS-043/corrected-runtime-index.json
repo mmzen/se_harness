@@ -1,0 +1,422 @@
+{
+  "archive": "corrected-runtime.zip",
+  "sha256": "b625fa48fd1fbf880f73b6c43b2e6cf2a8e6be08ec2ff680ac454f4456cce7fd",
+  "entries": [
+    {
+      "path": "r221-fix043-20261005/build-replay.json",
+      "bytes": 7097,
+      "sha256": "a160230e46cdd25afc8ee0de4059d7987136c56441d94c11f8375d2fdf8c986d"
+    },
+    {
+      "path": "r221-fix043-20261005/bundle.json",
+      "bytes": 1091,
+      "sha256": "96eea2076d8103c5ca871d9758ccb6644ed4bda13cf8d67ffd42f33c352eb791"
+    },
+    {
+      "path": "r221-fix043-20261005/ci-final-37252124049.json",
+      "bytes": 7022,
+      "sha256": "4698a054154257a938860edfb216d385b7e37e3e6ae65199d0ca4216bfacf928"
+    },
+    {
+      "path": "r221-fix043-20261005/ci-final-37252125966.json",
+      "bytes": 3437,
+      "sha256": "b3582f989d5956946a65af9a927a268613112497e32a71f3803b07b88be0cd29"
+    },
+    {
+      "path": "r221-fix043-20261005/ci-final-37252126010.json",
+      "bytes": 25074,
+      "sha256": "4ea2385d1e8b18ce8445497ff1737584bbe0ac63ca807a30323b4493f266df59"
+    },
+    {
+      "path": "r221-fix043-20261005/ci-final-37252126041.json",
+      "bytes": 3757,
+      "sha256": "85769a21228d9f463e91eb8b1cac27a0920dd9794f9c4e6989159939b94c94d8"
+    },
+    {
+      "path": "r221-fix043-20261005/ci-final-37252126357.json",
+      "bytes": 7088,
+      "sha256": "305470a33018ecbe028e4d37793d8f329478471ad32164ce5c2b982be92c10ef"
+    },
+    {
+      "path": "r221-fix043-20261005/ci-final-37252846313.json",
+      "bytes": 11363,
+      "sha256": "166b19f5d3ce9a8fb9076457603b3508d255bb2fdc725fc0b48983f055069aa4"
+    },
+    {
+      "path": "r221-fix043-20261005/cli-smoke.json",
+      "bytes": 4272,
+      "sha256": "e1bd78d91d0717fdbca60eb2c235d6d6be411e66e3c3e5ece43dfad681e1f1e5"
+    },
+    {
+      "path": "r221-fix043-20261005/commit-correction.json",
+      "bytes": 1063,
+      "sha256": "d322bacb0dde7ea1c919de293019535fbd68afa66b28fb52b588ab154a904997"
+    },
+    {
+      "path": "r221-fix043-20261005/corrected-linux.json",
+      "bytes": 53440,
+      "sha256": "0a8e77f1142163ef136ca236ef05bd7f21faf2a38bb97de1fe860ff790e6facb"
+    },
+    {
+      "path": "r221-fix043-20261005/corrected-windows.json",
+      "bytes": 56404,
+      "sha256": "2e3a9bc88ac56954e8d858ed8fc3d3592d4edad3099064f1a061ced906e70545"
+    },
+    {
+      "path": "r221-fix043-20261005/correction-pr-scope-refreshed.json",
+      "bytes": 19004,
+      "sha256": "bbe9d7162ff2de4430acf0a00c783da9788367866d42c04be39f27b115161b02"
+    },
+    {
+      "path": "r221-fix043-20261005/correction-pr-scope.json",
+      "bytes": 1120,
+      "sha256": "d05a8c6a99f990b29a450c239c741dcaf8e47e2ac9ece8fc333af98f45c36c11"
+    },
+    {
+      "path": "r221-fix043-20261005/correction-publication-event.json",
+      "bytes": 4037,
+      "sha256": "66bcd5e55a8e31317fe49efd9b59e32628818911261efaf39f03aba87e18f3f4"
+    },
+    {
+      "path": "r221-fix043-20261005/correction-validation.json",
+      "bytes": 419795,
+      "sha256": "9a8cc6de83c2f776b8ad1eb32c8fc3be8e8bee2379e4e3dd6f058537aa73796d"
+    },
+    {
+      "path": "r221-fix043-20261005/distribution-checks.json",
+      "bytes": 514,
+      "sha256": "a3ebb8c5edcc1c881c61f942f2a6ad5d220f52406f127a6031546a379b9f0922"
+    },
+    {
+      "path": "r221-fix043-20261005/linux-history-bundle.json",
+      "bytes": 467,
+      "sha256": "18eb0438785666cac17f666f5f08fa3fb120a0f9d4e691a15a22842f6d1b7ece"
+    },
+    {
+      "path": "r221-fix043-20261005/manual-rehearsal-dispatch.json",
+      "bytes": 498,
+      "sha256": "919af726d4e8a9754f0df763d27e1d1333c48f723cd9e697a647ad8c292c78cd"
+    },
+    {
+      "path": "r221-fix043-20261005/manual-rehearsal-list.json",
+      "bytes": 803,
+      "sha256": "50ac55203b764d16cf258db44572b9cb76a29aba3d98a8506fa5010efb627227"
+    },
+    {
+      "path": "r221-fix043-20261005/pinned-build.json",
+      "bytes": 954,
+      "sha256": "a889733b6838135a107c6f784108c2170154c9cc4ae984382584684228dad37b"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin-check-stage.json",
+      "bytes": 2899,
+      "sha256": "e19d298883f911cc89e9f2df9061be92fe0b4a23a47cc14c974e5058a577e681"
+    },
+    {
+      "path": "r221-fix043-20261005/plugin-stage.json",
+      "bytes": 2893,
+      "sha256": "54a917c5a567dc1fbd8a35a0823b73eed112463a96f7013af6a34dec90955c54"
+    },
+    {
+      "path": "r221-fix043-20261005/pr-ci-final.json",
+      "bytes": 7181,
+      "sha256": "6beb7e139cce974991f0384c756952ff68fd14731ad2206c8bf35e8825454a49"
+    },
+    {
+      "path": "r221-fix043-20261005/publication-pr-before.json",
+      "bytes": 557,
+      "sha256": "0867385c2a5f3e2c627aa48e2a0c737917fdb3049cb6c8d5e2c8be73bc380dde"
+    },
+    {
+      "path": "r221-fix043-20261005/publication-pr-body.json",
+      "bytes": 529,
+      "sha256": "800ecb625f2bbe3c564cbe881836edb7798b5adb19e58aa3ce3853fd25ca2353"
+    },
+    {
+      "path": "r221-fix043-20261005/publication-preaction-rebound.json",
+      "bytes": 42678,
+      "sha256": "ba109edeab76cc77d48475ccd93025c7f9d53f040949ae2ec43585e141365077"
+    },
+    {
+      "path": "r221-fix043-20261005/publication-preaction.json",
+      "bytes": 43212,
+      "sha256": "df04fb43ccebab5ce9e8b0c1cf15a2cdefa432f2e9d2a0d0f8a76362d9be6020"
+    },
+    {
+      "path": "r221-fix043-20261005/publication-push.json",
+      "bytes": 493,
+      "sha256": "0c1cb39b82ff220f85967da156925efc3daa1bf0a0e4c6f24457257b92b5c416"
+    },
+    {
+      "path": "r221-fix043-20261005/publication-readback.json",
+      "bytes": 4693,
+      "sha256": "a423c0c2744d3c8ec7d20d358a8e868a0634d1ed66a80ca8064a6fae9ecc2bec"
+    },
+    {
+      "path": "r221-fix043-20261005/publication-scope-rebound.json",
+      "bytes": 19020,
+      "sha256": "d0a123204480f07bd02ea839487d4ab897ac10bfef49ca2cd3761f7daafd2568"
+    },
+    {
+      "path": "r221-fix043-20261005/publication-scope.json",
+      "bytes": 19020,
+      "sha256": "db24b92cc2698b5cfe273ed43b49a01978dded633318d352d6a039d1d75e8286"
+    },
+    {
+      "path": "r221-fix043-20261005/refresh-preaction-040.json",
+      "bytes": 20978,
+      "sha256": "2803c09ae2a38013e6fc3d06a50e4c36841cd8a93a66ae140e188bc20f8ddc77"
+    },
+    {
+      "path": "r221-fix043-20261005/refresh-WO-RLS-040.json",
+      "bytes": 20966,
+      "sha256": "082845be19c823d727d3ec092e8998684958de3932ec8ff102dc8349368c78e5"
+    },
+    {
+      "path": "r221-fix043-20261005/refresh-WO-RLS-041.json",
+      "bytes": 18328,
+      "sha256": "195f1cc403cfa1ec7d49c39d3a0ac34476dac7ffca2da472f8a4b8bb90ffc2a0"
+    },
+    {
+      "path": "r221-fix043-20261005/refresh-WO-RLS-043.json",
+      "bytes": 17580,
+      "sha256": "2ad93d8b3250e17089d527ab22af17912e58e6e41b66c7b36be203abdf52b2d4"
+    },
+    {
+      "path": "r221-fix043-20261005/review-event.json",
+      "bytes": 230,
+      "sha256": "c2414b05e5aecb8ff34ad14edef41b74a80030841435f4d59958e2000ac66904"
+    },
+    {
+      "path": "r221-fix043-20261005/stage-correction.json",
+      "bytes": 1213,
+      "sha256": "f507a3b650bde9d9ae2d709f9be8242f44b93f0cec23fb1821225864f3d74fee"
+    },
+    {
+      "path": "r221-fix043-20261005/topology-candidate-measure.json",
+      "bytes": 2922,
+      "sha256": "789bb685b1b3ef5d6fb78bfc059508fbe8e57bab78fa81c3eaf92719f2b0959e"
+    },
+    {
+      "path": "r221-fix043-20261005/whitespace.json",
+      "bytes": 385,
+      "sha256": "0452ad56bf65235e81913cb74095fd7c1f089343d8d146e1179095f68a5608d1"
+    },
+    {
+      "path": "r221-fix043-20261005/win-corrected-transition.json",
+      "bytes": 3139,
+      "sha256": "4c4e3b1b9f68293b009fa7f0315e6cf300266bb1a7ada7d4429da4235043a26e"
+    },
+    {
+      "path": "r221-fix043-20261005/win-decision-probe.json",
+      "bytes": 79494,
+      "sha256": "5cbb84b978d9fcc517bcd49790b84fa308ffad2b5996759cd7c0a8767d398ba2"
+    },
+    {
+      "path": "r221-fix043-20261005/win-draft-cli.json",
+      "bytes": 1986,
+      "sha256": "6cbf322c0b344ef0cd6e9f37ab3c42a658bbafa4ba99a8df29c82a9286dce08e"
+    },
+    {
+      "path": "r221-fix043-20261005/win-installed-simple-plugin.json",
+      "bytes": 2908,
+      "sha256": "ac344914cf4914c980cfa9b645d5b2559caf41acc0bcd9f9f000d312c4911bcb"
+    },
+    {
+      "path": "r221-fix043-20261005/win-installed-test_skill_ownership.json",
+      "bytes": 3381,
+      "sha256": "c92bb7ba4a644e81804fa6d5519bfe579daa504fd9645aeb3d605884fe96f8c4"
+    },
+    {
+      "path": "r221-fix043-20261005/win-package-qualification.json",
+      "bytes": 3206,
+      "sha256": "ecf17f3b360269ec39dc7c31709b1d1d577f949d0c63f07fba3422bd34c6c389"
+    },
+    {
+      "path": "r221-fix043-20261005/win-sdist-doctor.json",
+      "bytes": 1289,
+      "sha256": "88d0fbc299d02f7f3a8f20e6ed2da8afd9accd5e1494e255befe0458e9c95769"
+    },
+    {
+      "path": "r221-fix043-20261005/win-sdist-identity.json",
+      "bytes": 2921,
+      "sha256": "f3f3f2afed95135ce8d1c6f09d431783c9c129998806e118bc639a2c33946aea"
+    },
+    {
+      "path": "r221-fix043-20261005/win-sdist-init.json",
+      "bytes": 959,
+      "sha256": "22cc090820452bf1803e4cc78f1941d8238a683398c7913ac33056e425a886aa"
+    },
+    {
+      "path": "r221-fix043-20261005/win-sdist-install.json",
+      "bytes": 1732,
+      "sha256": "ad1b3a18730fde75e92573eb3134fc86176033ad0fdd8c3bedc8fbea04aec43d"
+    },
+    {
+      "path": "r221-fix043-20261005/win-sdist-tools.json",
+      "bytes": 2668,
+      "sha256": "631a101af1604f78cd337679c8fdb7514bdb949b471504a62872ce351091ad0f"
+    },
+    {
+      "path": "r221-fix043-20261005/win-sdist-validate.json",
+      "bytes": 1221,
+      "sha256": "74dc5f61bf85ce510981e96381b853a4a251c835976845e7671ba083fcffd3d5"
+    },
+    {
+      "path": "r221-fix043-20261005/win-sdist-venv.json",
+      "bytes": 486,
+      "sha256": "695e1031b85870feb05a3d4883576d057f070bff82ae817798b40e2b0cef92ee"
+    },
+    {
+      "path": "r221-fix043-20261005/win-topology-boundary.json",
+      "bytes": 1034,
+      "sha256": "2f9d3fa4b050d1b8672a772c55dcf563839e6f1b7f23df1882f4018b3c222b90"
+    },
+    {
+      "path": "r221-fix043-20261005/win-upgrade-1.json",
+      "bytes": 3627,
+      "sha256": "d1c5fe41c7e360e457ef54b05daef4e76cac37cba6afa8ad508a460bf13c4383"
+    },
+    {
+      "path": "r221-fix043-20261005/win-upgrade-2.json",
+      "bytes": 3626,
+      "sha256": "77928fd6c77589786a94c9319b59f1b93ff14329e6b6b8e5a6bd6dd692285726"
+    },
+    {
+      "path": "r221-fix043-20261005/win-wheel-doctor.json",
+      "bytes": 1289,
+      "sha256": "fa2f3e4b598f8e8652dc8607f11687ac16d02fa1fda1041ac29d327fd694b8bd"
+    },
+    {
+      "path": "r221-fix043-20261005/win-wheel-identity.json",
+      "bytes": 2921,
+      "sha256": "b1e401235cca91e7c7fb47c8fdf0a74bcf05933b9ca86c5d02f88eb22c182a9f"
+    },
+    {
+      "path": "r221-fix043-20261005/win-wheel-init.json",
+      "bytes": 959,
+      "sha256": "e43bcc0172d6b76be19cd55dad8d3166d9566767c44311114c35d943bf9f993f"
+    },
+    {
+      "path": "r221-fix043-20261005/win-wheel-install.json",
+      "bytes": 805,
+      "sha256": "d5cba5ee5d22b6fdd85abaf5ad39a5883e1ae7b765b65d6d95a2fb4b88d2f3dc"
+    },
+    {
+      "path": "r221-fix043-20261005/win-wheel-validate.json",
+      "bytes": 1221,
+      "sha256": "73ce9b2ddd266d64f1855a65ff8bcb493819a1f93c46351a5322a0d4d570f7a0"
+    },
+    {
+      "path": "r221-fix043-20261005/win-wheel-venv.json",
+      "bytes": 486,
+      "sha256": "e07aef594b49b3117a46aa120a087f4acf5f465f2a00d17201b97851d7a85b92"
+    },
+    {
+      "path": "r221-fix043-20261005/windows-full-source.json",
+      "bytes": 5615,
+      "sha256": "ac22bf9701456351cc668cb7b9a3ec642094586d4bd4308cd83609054bb63201"
+    },
+    {
+      "path": "r221-fix043-20261005/windows-package/correction-installed-cases.json",
+      "bytes": 45387,
+      "sha256": "b9bfa0ea31ef6c478aa4e7e5067299fd890d5caa66fdeeb045c8aae0ef5fa861"
+    },
+    {
+      "path": "r221-fix043-20261005/windows-package/correction-installed-summary.json",
+      "bytes": 1085,
+      "sha256": "aa5f3238f34987c75f68a503f18efe47ca3dffb94bb818adb2cb757a49447d4a"
+    },
+    {
+      "path": "r221-fix043-20261005/windows-package/upgrade-1/upgrade-rehearsal-result.json",
+      "bytes": 4574,
+      "sha256": "9b8869a661520397959a231d05dff9e757abad213fe082b546354ba22921f3c1"
+    },
+    {
+      "path": "r221-fix043-20261005/windows-package/upgrade-2/upgrade-rehearsal-result.json",
+      "bytes": 4574,
+      "sha256": "9b8869a661520397959a231d05dff9e757abad213fe082b546354ba22921f3c1"
+    },
+    {
+      "path": "r221-fix043-20261005/wsl-extra-launch.json",
+      "bytes": 6522,
+      "sha256": "6bf4921a7e6d200f62dd87fa1ba828f71939584f77fdfe8830898b5a5077dc8c"
+    },
+    {
+      "path": "r221-fix043-20261005/wsl-extra.json",
+      "bytes": 16900,
+      "sha256": "524895152029419fbe8bc1ef375e4618c602f5d53497f2fe16df4fe2b88b84ab"
+    },
+    {
+      "path": "r221-fix043-20261005/wsl-qualification-launch.json",
+      "bytes": 4974,
+      "sha256": "fb29c93161d01a104c1c25aa039a629bba42a2ae5c82dde830e08b4ec85282ec"
+    },
+    {
+      "path": "r221-fix043-20261005/wsl-qualification.json",
+      "bytes": 110875,
+      "sha256": "4b5e2f91478e87f8f853bf6694924a426c897ba3ad0d7e4f1979c7668452839b"
+    },
+    {
+      "path": "r221_checks.py",
+      "bytes": 2676,
+      "sha256": "a93aaf698a8b869b3671a474d6403ce4006167f298b22b5744fc9ffc810dac0a"
+    },
+    {
+      "path": "r221_fix043_extra.py",
+      "bytes": 5817,
+      "sha256": "2c7161a9dd0d01f089cf57c413200dcfdf7cd6a646f0dc787340400edf4f98ec"
+    },
+    {
+      "path": "r221_fix043_more.py",
+      "bytes": 1872,
+      "sha256": "4a5a83c64b36de6776aa6426fe6fd14261a730da5e30927591c957d0309464df"
+    },
+    {
+      "path": "r221_fix043_probe.py",
+      "bytes": 3490,
+      "sha256": "50d94dfcf8638fb091f53df170b86a3ca79ae2748d98c0baf857c1a5623edad8"
+    },
+    {
+      "path": "r221_fix043_run.py",
+      "bytes": 3047,
+      "sha256": "95612d8c217704c93f340ba0c6a8c00696a7340bf28af61ca51643731f4ae401"
+    },
+    {
+      "path": "r221_linux.py",
+      "bytes": 988,
+      "sha256": "c92acc885caaf686b3c0757e84fa5e7095b560cc00f1a69bfb88a8fe9da3956a"
+    },
+    {
+      "path": "r221_linux_resume.py",
+      "bytes": 4497,
+      "sha256": "d41f8cfc7939ecc9efa482ee5288a2c1facaf7c5b6d8a989410ac85446457a62"
+    },
+    {
+      "path": "r221_linux_wsl.py",
+      "bytes": 4431,
+      "sha256": "67eefca8ac27a8080e43d395b6cc8d98231d754fb74beabcb649fbbcf65186e8"
+    },
+    {
+      "path": "r221_packages.py",
+      "bytes": 3688,
+      "sha256": "e51abc8e63790a606692e76d058ea8dff6595bf3887b9d71caff3df15b35a166"
+    },
+    {
+      "path": "r221_session.py",
+      "bytes": 1896,
+      "sha256": "37de98b7a4be8ef4a61030b0c9d641d0c447279c833f1d2b49082c4a5a4ff579"
+    },
+    {
+      "path": "r221_topology.py",
+      "bytes": 1604,
+      "sha256": "5fcf8fd3b55ab5d163314876fae03e1193694e52cfd4d78899f000bc7986d606"
+    },
+    {
+      "path": "r221_windows_resume.py",
+      "bytes": 1939,
+      "sha256": "64f3b971e22019209e906647e8ff408eeb09aa312aef1ad8035fff27c6e501f5"
+    }
+  ],
+  "claim": "Actual correction qualification; no credentials, profile storage, final assurance or desktop results."
+}

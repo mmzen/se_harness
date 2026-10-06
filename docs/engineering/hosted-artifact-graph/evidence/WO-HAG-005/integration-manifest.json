@@ -1,0 +1,2455 @@
+{
+  "baseline": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+  "integrated_main": "d7eeb2ae785928925669695074be7bdd6ccb1e0a",
+  "unchanged_hag_files": [
+    {
+      "path": "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-001.md",
+      "original_blob": "e6e938544c8ef34094fd9ec928fa9d8f0e7032b5",
+      "current_blob": "e6e938544c8ef34094fd9ec928fa9d8f0e7032b5",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/architecture/ARCH-HAG-002.md",
+      "original_blob": "2a016e5a60f824708cb24f3677569e28b6001450",
+      "current_blob": "2a016e5a60f824708cb24f3677569e28b6001450",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-001.md",
+      "original_blob": "bf285aeb2a243cbb5d3771dfec60ccf5456e4748",
+      "current_blob": "bf285aeb2a243cbb5d3771dfec60ccf5456e4748",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/architecture/adr/ADR-HAG-002.md",
+      "original_blob": "bff715e725a9c0fa2a506442e3a2048ddd7bbda4",
+      "current_blob": "bff715e725a9c0fa2a506442e3a2048ddd7bbda4",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/capabilities/CAP-HAG-001.md",
+      "original_blob": "4bb0496b6d31cf0d79b6f4bb96e33858aae8cce6",
+      "current_blob": "4bb0496b6d31cf0d79b6f4bb96e33858aae8cce6",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-001-evaluator.json",
+      "original_blob": "95c8362eac0b7d39a78a6336e664062e1c71bb29",
+      "current_blob": "95c8362eac0b7d39a78a6336e664062e1c71bb29",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-002-evaluator.json",
+      "original_blob": "95c8362eac0b7d39a78a6336e664062e1c71bb29",
+      "current_blob": "95c8362eac0b7d39a78a6336e664062e1c71bb29",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/WO-HAG-001-handoff.md",
+      "original_blob": "1e51a6f21d3352fc6e774bf56e37501bb3ef5148",
+      "current_blob": "1e51a6f21d3352fc6e774bf56e37501bb3ef5148",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/ci-handoff-rebind.json",
+      "original_blob": "536bea4092d9015ae8eb3b8484a1c42fae48bd4d",
+      "current_blob": "536bea4092d9015ae8eb3b8484a1c42fae48bd4d",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/commands.json",
+      "original_blob": "3eeb7286e65117da30d475ccafa83e66589dc67e",
+      "current_blob": "3eeb7286e65117da30d475ccafa83e66589dc67e",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/continuation.json",
+      "original_blob": "dc75350f6071c7cec0d1c20e5ff6b91516787a41",
+      "current_blob": "dc75350f6071c7cec0d1c20e5ff6b91516787a41",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/implementation-review.md",
+      "original_blob": "b1d4dab6fa44c54a4fb06da1d90f0892d3239b93",
+      "current_blob": "b1d4dab6fa44c54a4fb06da1d90f0892d3239b93",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/continuation-20261004/source-preservation.json",
+      "original_blob": "60761b6b5b8a4804bc6438247a71266d34c3d83b",
+      "current_blob": "60761b6b5b8a4804bc6438247a71266d34c3d83b",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/correction-decision-attempt.json",
+      "original_blob": "1e7979337c4e5187f37ec4d117252cdbaf89184c",
+      "current_blob": "1e7979337c4e5187f37ec4d117252cdbaf89184c",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/package-approval-apply.json",
+      "original_blob": "53b250e53daec452ee1ad6fc6855784e03805113",
+      "current_blob": "53b250e53daec452ee1ad6fc6855784e03805113",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/package-approval-result.json",
+      "original_blob": "3eeac92b14b896be82ae1550303217d2bb55c07b",
+      "current_blob": "3eeac92b14b896be82ae1550303217d2bb55c07b",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/package-start-cli-error.json",
+      "original_blob": "ed5789ae8ad08c684a87a6835dfbe8ccb4039af5",
+      "current_blob": "ed5789ae8ad08c684a87a6835dfbe8ccb4039af5",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-approve-apply.json",
+      "original_blob": "7e2db0d7b602d3919d085d455954fa7f5689abc0",
+      "current_blob": "7e2db0d7b602d3919d085d455954fa7f5689abc0",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-contract-result.json",
+      "original_blob": "7d20160e68b7e34234ddc491eaa6e50643bd5a4f",
+      "current_blob": "7d20160e68b7e34234ddc491eaa6e50643bd5a4f",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-environment.json",
+      "original_blob": "5e8b3d2f51f9fceadc3156b88c83fcfc2f9c3ac9",
+      "current_blob": "5e8b3d2f51f9fceadc3156b88c83fcfc2f9c3ac9",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-final.json",
+      "original_blob": "666e2110507f3f2c2c688a7231fce50aca0c9696",
+      "current_blob": "666e2110507f3f2c2c688a7231fce50aca0c9696",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-start-apply.json",
+      "original_blob": "7da1fb6d4511aa31bc3827b409adb23048228e9e",
+      "current_blob": "7da1fb6d4511aa31bc3827b409adb23048228e9e",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-start-preflight.json",
+      "original_blob": "bd2fd4ed194ab64e3f7e460e1e5e2478a21bfc79",
+      "current_blob": "bd2fd4ed194ab64e3f7e460e1e5e2478a21bfc79",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-package-start-preview.json",
+      "original_blob": "e42d6090cd888ce9bf112ff4b33264e940a088bf",
+      "current_blob": "e42d6090cd888ce9bf112ff4b33264e940a088bf",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-start-preflight.json",
+      "original_blob": "9860bd7fae49c2fea3a78e8dc148497817b6079a",
+      "current_blob": "9860bd7fae49c2fea3a78e8dc148497817b6079a",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase0-start-readiness.json",
+      "original_blob": "06ba7d8b4a40c350f8c8f44679bceb5ea2c3e5e6",
+      "current_blob": "06ba7d8b4a40c350f8c8f44679bceb5ea2c3e5e6",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-continuation-observations.json",
+      "original_blob": "61582eb457537233812b2077a5e15edf028514b0",
+      "current_blob": "61582eb457537233812b2077a5e15edf028514b0",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-continuation.json",
+      "original_blob": "bd61fbb80000b9e127d17ff273120006971913a0",
+      "current_blob": "bd61fbb80000b9e127d17ff273120006971913a0",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-contract.json",
+      "original_blob": "d888494f779e218f0149f841380b47f83b8ffae3",
+      "current_blob": "d888494f779e218f0149f841380b47f83b8ffae3",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/phase1-evaluator-feasibility.json",
+      "original_blob": "8fde530df7edde7dcd1199b1d4d120067bbf251d",
+      "current_blob": "8fde530df7edde7dcd1199b1d4d120067bbf251d",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/WO-HAG-002-handoff.md",
+      "original_blob": "ccf25d17cc593b8e538ecf3e2365dec5ce841649",
+      "current_blob": "ccf25d17cc593b8e538ecf3e2365dec5ce841649",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-01.json",
+      "original_blob": "ff09ded839965ee0df50ce8c90f00288644f5c51",
+      "current_blob": "ff09ded839965ee0df50ce8c90f00288644f5c51",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-01.log",
+      "original_blob": "d2d2cbc2e30d89f2845fc7eeb45ab71225ee1524",
+      "current_blob": "d2d2cbc2e30d89f2845fc7eeb45ab71225ee1524",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-02.json",
+      "original_blob": "77ca98632d7f34fb352c89cc1ca82ee93060cab9",
+      "current_blob": "77ca98632d7f34fb352c89cc1ca82ee93060cab9",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-02.log",
+      "original_blob": "f99d9cf9cace56144289d739471aa1f6eec5cfea",
+      "current_blob": "f99d9cf9cace56144289d739471aa1f6eec5cfea",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-final.json",
+      "original_blob": "81373d20df5497ce08533e2e1aafb1221931972f",
+      "current_blob": "81373d20df5497ce08533e2e1aafb1221931972f",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-build-final.log",
+      "original_blob": "981b346458af52a5577468e448372354a11288e4",
+      "current_blob": "981b346458af52a5577468e448372354a11288e4",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-cli-smoke.json",
+      "original_blob": "89d826ec9236c4c661cb58c11c75f0ec1365cad4",
+      "current_blob": "89d826ec9236c4c661cb58c11c75f0ec1365cad4",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-cli-smoke.log",
+      "original_blob": "d747becd8593822e69a5883c6d3640009f896727",
+      "current_blob": "d747becd8593822e69a5883c6d3640009f896727",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-distributions.json",
+      "original_blob": "f0e28d34c23afeba7873eaadf4220708b1c85414",
+      "current_blob": "f0e28d34c23afeba7873eaadf4220708b1c85414",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-distributions.log",
+      "original_blob": "ae1f2f42df5570520ed39ac5179a0d81fed4ffeb",
+      "current_blob": "ae1f2f42df5570520ed39ac5179a0d81fed4ffeb",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-final-build-replay.json",
+      "original_blob": "1af01bb616e60a4aabd0d79b22db7b25d4de9ac3",
+      "current_blob": "1af01bb616e60a4aabd0d79b22db7b25d4de9ac3",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-01.json",
+      "original_blob": "2b60aaf6bbd57cb36e017c351e4d8d7c1d27b25a",
+      "current_blob": "2b60aaf6bbd57cb36e017c351e4d8d7c1d27b25a",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-01.log",
+      "original_blob": "c8658f646e24b5b55215f8185079be28d1fa6b80",
+      "current_blob": "c8658f646e24b5b55215f8185079be28d1fa6b80",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-02.json",
+      "original_blob": "cd864b29da0e79437d60ae244ba4268facf85ffc",
+      "current_blob": "cd864b29da0e79437d60ae244ba4268facf85ffc",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-full-02.log",
+      "original_blob": "553051aaf332decd3acbc0dbdc27d3ee00734536",
+      "current_blob": "553051aaf332decd3acbc0dbdc27d3ee00734536",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-cases.json",
+      "original_blob": "d38253a713a94cda422b6dc2678840db5fae7818",
+      "current_blob": "d38253a713a94cda422b6dc2678840db5fae7818",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-check.json",
+      "original_blob": "fa7c1a51f54e4722a6cc58bf48eb79a736fb7205",
+      "current_blob": "fa7c1a51f54e4722a6cc58bf48eb79a736fb7205",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-check.log",
+      "original_blob": "d7a7add1e311c672f11a04e66f125a795dce64eb",
+      "current_blob": "d7a7add1e311c672f11a04e66f125a795dce64eb",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-installed-summary.json",
+      "original_blob": "92bc4839ca6298f3eba05a517f1226ca844445a2",
+      "current_blob": "92bc4839ca6298f3eba05a517f1226ca844445a2",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-json-boundary.log",
+      "original_blob": "7ddf3d59a7d8cae029c54319498c37ecb9260a0e",
+      "current_blob": "7ddf3d59a7d8cae029c54319498c37ecb9260a0e",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-original-corpus.json",
+      "original_blob": "fa1e478b97823992560b6262e6c6bea530912015",
+      "current_blob": "fa1e478b97823992560b6262e6c6bea530912015",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-original-corpus.log",
+      "original_blob": "3d6c5bb693da434447f2b60ef20c46610a9a479e",
+      "current_blob": "3d6c5bb693da434447f2b60ef20c46610a9a479e",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-reference-corpus.json",
+      "original_blob": "debc03517dc2764d94d089671ed7505264a651b6",
+      "current_blob": "debc03517dc2764d94d089671ed7505264a651b6",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-reference-corpus.log",
+      "original_blob": "088fc00410e6aaf4ecff60f19e15e398bbe1d645",
+      "current_blob": "088fc00410e6aaf4ecff60f19e15e398bbe1d645",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-relation-impact.json",
+      "original_blob": "9950246e79412bc9fe3b41bb361cbc4c7c1a91e2",
+      "current_blob": "9950246e79412bc9fe3b41bb361cbc4c7c1a91e2",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-targeted-final.json",
+      "original_blob": "0e989397cdfbd96f63c66e47296d847710535ff9",
+      "current_blob": "0e989397cdfbd96f63c66e47296d847710535ff9",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-targeted-final.log",
+      "original_blob": "ab471de1e887f350fb3c452be578ab4689c74ce8",
+      "current_blob": "ab471de1e887f350fb3c452be578ab4689c74ce8",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-template-01.log",
+      "original_blob": "3521de2417071f675280b3fa8fb4623b92371ffb",
+      "current_blob": "3521de2417071f675280b3fa8fb4623b92371ffb",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-tests-01.log",
+      "original_blob": "8491e3ba294289aef14bc2c70b8141b2d51a001a",
+      "current_blob": "8491e3ba294289aef14bc2c70b8141b2d51a001a",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-tests-02.log",
+      "original_blob": "b76714dcacb1fcfeee29e1189482bca7d25fdfdf",
+      "current_blob": "b76714dcacb1fcfeee29e1189482bca7d25fdfdf",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-tests-before.log",
+      "original_blob": "17076f281a1c76a038c8d72ac59d077f29e3953f",
+      "current_blob": "17076f281a1c76a038c8d72ac59d077f29e3953f",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-verification-binding-apply.json",
+      "original_blob": "26b65afddffe4f42b7542650a07e95b6e11b8257",
+      "current_blob": "26b65afddffe4f42b7542650a07e95b6e11b8257",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-wheel-install.json",
+      "original_blob": "2ee757dec06b5e2733836baf2f894ee5001fae54",
+      "current_blob": "2ee757dec06b5e2733836baf2f894ee5001fae54",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/correction-wheel-install.log",
+      "original_blob": "4c14a1c8ab866e72813a5509039b9dca29ef85a7",
+      "current_blob": "4c14a1c8ab866e72813a5509039b9dca29ef85a7",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/evaluator-correction-approval-apply.json",
+      "original_blob": "684fd0f29662b5b3b19818a5ca3b8605332a194d",
+      "current_blob": "684fd0f29662b5b3b19818a5ca3b8605332a194d",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/evaluator-correction-approval-binding.json",
+      "original_blob": "d2d9fc3a1fdc903c196b836157672ab1186ad717",
+      "current_blob": "d2d9fc3a1fdc903c196b836157672ab1186ad717",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/evaluator-correction-approval-preview.json",
+      "original_blob": "436a26934bfb7f241c5955f172c3b177765d7692",
+      "current_blob": "436a26934bfb7f241c5955f172c3b177765d7692",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/execution-inputs.json",
+      "original_blob": "1cdc407b11ced072cce2a3fa21618fbeaaf52e3c",
+      "current_blob": "1cdc407b11ced072cce2a3fa21618fbeaaf52e3c",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/handoff.json",
+      "original_blob": "566ec39894d416cc158e25bc1817d2b9e56f3dc0",
+      "current_blob": "566ec39894d416cc158e25bc1817d2b9e56f3dc0",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/implementation-inspection.json",
+      "original_blob": "9e2bb6c47523c690d2f9ffc2b07238aadcf6dad6",
+      "current_blob": "9e2bb6c47523c690d2f9ffc2b07238aadcf6dad6",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-complete-apply.json",
+      "original_blob": "0d0045acd3183fc75e2345e807adefb3429ea7f6",
+      "current_blob": "0d0045acd3183fc75e2345e807adefb3429ea7f6",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-handoff-initial.json",
+      "original_blob": "d7e2a1dd142cd814448ff6bc185537defe813795",
+      "current_blob": "d7e2a1dd142cd814448ff6bc185537defe813795",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-implementation-scope.json",
+      "original_blob": "cbd2619cc5a9b5dc5aa754e9966d9e1bbd307e89",
+      "current_blob": "cbd2619cc5a9b5dc5aa754e9966d9e1bbd307e89",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-review-final.json",
+      "original_blob": "269e8423f3e97a58f1e591c65616f018d977a369",
+      "current_blob": "269e8423f3e97a58f1e591c65616f018d977a369",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-start-apply.json",
+      "original_blob": "e1ccbf1967d7c6277bdfc5ededa6a2d1ccad4864",
+      "current_blob": "e1ccbf1967d7c6277bdfc5ededa6a2d1ccad4864",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-start-preflight.json",
+      "original_blob": "4a241c0f0828350628742daa2b8f78b50384bc5d",
+      "current_blob": "4a241c0f0828350628742daa2b8f78b50384bc5d",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-start-preview.json",
+      "original_blob": "65b18fa109aa9d7492d2d4f03108f57b1ace636a",
+      "current_blob": "65b18fa109aa9d7492d2d4f03108f57b1ace636a",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-verification-apply.json",
+      "original_blob": "c25dfb319fc2ba67ed9145fa740479877f670614",
+      "current_blob": "c25dfb319fc2ba67ed9145fa740479877f670614",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/phase0-correction-verification-preview.json",
+      "original_blob": "93be24eb11d80082a87fd88b30ecba812086e18d",
+      "current_blob": "93be24eb11d80082a87fd88b30ecba812086e18d",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/qualify_correction_wheel.py",
+      "original_blob": "b7b5ccfaf10c91590b3511e67c008d8c92c06b9c",
+      "current_blob": "b7b5ccfaf10c91590b3511e67c008d8c92c06b9c",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/raw-observations.zip",
+      "original_blob": "054e208350d1936629ec5795671bbdb1f0f13858",
+      "current_blob": "054e208350d1936629ec5795671bbdb1f0f13858",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-002/verification-results.json",
+      "original_blob": "578d3e1e13686eb8eebcc96c826d86a4ae80a7b9",
+      "current_blob": "578d3e1e13686eb8eebcc96c826d86a4ae80a7b9",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/WO-HAG-003-handoff.md",
+      "original_blob": "4d1519cc98e9c47396477a0079a50837f814d2a3",
+      "current_blob": "4d1519cc98e9c47396477a0079a50837f814d2a3",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/approval.json",
+      "original_blob": "fafbdfbcccb88b4defd444235f2b552bc7e20286",
+      "current_blob": "fafbdfbcccb88b4defd444235f2b552bc7e20286",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/build-replay.json",
+      "original_blob": "3c1a85de57479ed10c5352d47d28e09a417c39e2",
+      "current_blob": "3c1a85de57479ed10c5352d47d28e09a417c39e2",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/commands.zip",
+      "original_blob": "79ab67210b4e277310d333f4b07eaaa514cc9b7c",
+      "current_blob": "79ab67210b4e277310d333f4b07eaaa514cc9b7c",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/handoff.json",
+      "original_blob": "731cb2748c09bd11f66688b2247b95432cad4cf4",
+      "current_blob": "731cb2748c09bd11f66688b2247b95432cad4cf4",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/implementation-review.md",
+      "original_blob": "a30dbc1f39691850d602de8ca4aaf81b2bf7d0b4",
+      "current_blob": "a30dbc1f39691850d602de8ca4aaf81b2bf7d0b4",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/installed_probe.py",
+      "original_blob": "da05ed2f576f31e56f3f3356c82ba6e1731f55f9",
+      "current_blob": "da05ed2f576f31e56f3f3356c82ba6e1731f55f9",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-003/verification-results.json",
+      "original_blob": "9efeb952ee8e5cebb32f5ed72813e6e1e854280a",
+      "current_blob": "9efeb952ee8e5cebb32f5ed72813e6e1e854280a",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/WO-HAG-004-handoff.md",
+      "original_blob": "9d8a1cf36e5377871ac447a7d1bd0207f3246f5b",
+      "current_blob": "9d8a1cf36e5377871ac447a7d1bd0207f3246f5b",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/handoff.json",
+      "original_blob": "f80a845685686951a0b190630fc4c43bca40d0f9",
+      "current_blob": "f80a845685686951a0b190630fc4c43bca40d0f9",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/publication-readiness.json",
+      "original_blob": "1a25feff64d6bfe25cde1db5a49bd15f6f72c703",
+      "current_blob": "1a25feff64d6bfe25cde1db5a49bd15f6f72c703",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/publication-receipt.json",
+      "original_blob": "a9bbbf359b63c685b3494ff226f0b8e287f43412",
+      "current_blob": "a9bbbf359b63c685b3494ff226f0b8e287f43412",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-004/transport-results.json",
+      "original_blob": "cf7fb4bdbf27e8521dddd287a59f813a51f372ac",
+      "current_blob": "cf7fb4bdbf27e8521dddd287a59f813a51f372ac",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/intent/INT-HAG-001.md",
+      "original_blob": "0b1bd72107f655ff5fe2d109089c9e933cd74bca",
+      "current_blob": "0b1bd72107f655ff5fe2d109089c9e933cd74bca",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-001.md",
+      "original_blob": "3e6c9f156dbfe0cbbba4592a784e50d44c0c8fdb",
+      "current_blob": "3e6c9f156dbfe0cbbba4592a784e50d44c0c8fdb",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-002.md",
+      "original_blob": "ab6fc889739298ba585f4946158aa60942382d97",
+      "current_blob": "ab6fc889739298ba585f4946158aa60942382d97",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-003.md",
+      "original_blob": "cdf7d5bacb5cb172a417cacafa16d7c81b7907f1",
+      "current_blob": "cdf7d5bacb5cb172a417cacafa16d7c81b7907f1",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-004.md",
+      "original_blob": "39e35641213b7035c34b7813268cf6b6e83d84cc",
+      "current_blob": "39e35641213b7035c34b7813268cf6b6e83d84cc",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-005.md",
+      "original_blob": "e857f0f5c016f7fe113a71e9cbc55a8fe8a639b4",
+      "current_blob": "e857f0f5c016f7fe113a71e9cbc55a8fe8a639b4",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-006.md",
+      "original_blob": "364fc9da897219614ad7f5326d37ad0576d376d6",
+      "current_blob": "364fc9da897219614ad7f5326d37ad0576d376d6",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-007.md",
+      "original_blob": "6493ddaf638ddce6bb94d36bbf609a9941ec8d53",
+      "current_blob": "6493ddaf638ddce6bb94d36bbf609a9941ec8d53",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-008.md",
+      "original_blob": "44891206bbad04b0326561007863caae2fa14d4b",
+      "current_blob": "44891206bbad04b0326561007863caae2fa14d4b",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-009.md",
+      "original_blob": "e6db2cf7542957bcf280bad5fd67e3409bbc1a47",
+      "current_blob": "e6db2cf7542957bcf280bad5fd67e3409bbc1a47",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-010.md",
+      "original_blob": "bc8eaa5572142282c468081550f45958b5ed7a75",
+      "current_blob": "bc8eaa5572142282c468081550f45958b5ed7a75",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md",
+      "original_blob": "275c0a00d36ee3077e672d0418a19a4d10510ede",
+      "current_blob": "275c0a00d36ee3077e672d0418a19a4d10510ede",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-001.md",
+      "original_blob": "26a760cdabc706230bbeae603e94367fd1c60f3e",
+      "current_blob": "26a760cdabc706230bbeae603e94367fd1c60f3e",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-002.md",
+      "original_blob": "6eddc1c807b112811d5eec9eacbe492b77707fcb",
+      "current_blob": "6eddc1c807b112811d5eec9eacbe492b77707fcb",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-004.md",
+      "original_blob": "58f232bab8ed2f4748a6be1dd34221cf2c597390",
+      "current_blob": "58f232bab8ed2f4748a6be1dd34221cf2c597390",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-005.md",
+      "original_blob": "46ee05555bc539a65c2d4bd4cedd69bbbc920893",
+      "current_blob": "46ee05555bc539a65c2d4bd4cedd69bbbc920893",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-001.md",
+      "original_blob": "454410a5de92260a8a848b1e8c31db2f21151765",
+      "current_blob": "454410a5de92260a8a848b1e8c31db2f21151765",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-002.md",
+      "original_blob": "b29d951185813cc250ba972db6db05e6c4ef8b26",
+      "current_blob": "b29d951185813cc250ba972db6db05e6c4ef8b26",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-002.md",
+      "original_blob": "44ec68be4920a63ceb45e66a86ac2992ff1f3c6c",
+      "current_blob": "44ec68be4920a63ceb45e66a86ac2992ff1f3c6c",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-003.md",
+      "original_blob": "2e96a5f6ad2a6bd47a4d5d19f335683048e06277",
+      "current_blob": "2e96a5f6ad2a6bd47a4d5d19f335683048e06277",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-001.md",
+      "original_blob": "28cd99821a485d26c296a3806ea1bfa933167ec4",
+      "current_blob": "28cd99821a485d26c296a3806ea1bfa933167ec4",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-002.md",
+      "original_blob": "292c18f39c7f11d770e435f15688db6047c4c2b0",
+      "current_blob": "292c18f39c7f11d770e435f15688db6047c4c2b0",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-003.md",
+      "original_blob": "7ea1de9af5d60a039b1105633e7fa1b2effb9ec9",
+      "current_blob": "7ea1de9af5d60a039b1105633e7fa1b2effb9ec9",
+      "equal": true
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-004.md",
+      "original_blob": "e950504fe6b7ebec7a198248937049c391e46ee3",
+      "current_blob": "e950504fe6b7ebec7a198248937049c391e46ee3",
+      "equal": true
+    },
+    {
+      "path": "server/README.md",
+      "original_blob": "28bf625ab525af2abe7a0b6179cdba95e5ae8af0",
+      "current_blob": "28bf625ab525af2abe7a0b6179cdba95e5ae8af0",
+      "equal": true
+    },
+    {
+      "path": "server/contracts/graph-v1.cypher",
+      "original_blob": "896103263090b4baf56a3a4a859766330ec2830c",
+      "current_blob": "896103263090b4baf56a3a4a859766330ec2830c",
+      "equal": true
+    },
+    {
+      "path": "server/contracts/read-v1.json",
+      "original_blob": "2a91dbc5121c71ee2fb25a619395081cfc245feb",
+      "current_blob": "2a91dbc5121c71ee2fb25a619395081cfc245feb",
+      "equal": true
+    },
+    {
+      "path": "server/contracts/remote-v1.json",
+      "original_blob": "a9c7a580656a503e283c9769121f91231aac4818",
+      "current_blob": "a9c7a580656a503e283c9769121f91231aac4818",
+      "equal": true
+    },
+    {
+      "path": "server/contracts/result-v1.json",
+      "original_blob": "05f0d49943bdf68b18960eda993cffcf2386cc1b",
+      "current_blob": "05f0d49943bdf68b18960eda993cffcf2386cc1b",
+      "equal": true
+    },
+    {
+      "path": "server/hosted_artifact_graph/__init__.py",
+      "original_blob": "8b2c25ab5dd77b9d4419aae6792103f77b59ba31",
+      "current_blob": "8b2c25ab5dd77b9d4419aae6792103f77b59ba31",
+      "equal": true
+    },
+    {
+      "path": "server/hosted_artifact_graph/canonical.py",
+      "original_blob": "dffa4ccb8eb30ad6209e90a58d95a8857805be32",
+      "current_blob": "dffa4ccb8eb30ad6209e90a58d95a8857805be32",
+      "equal": true
+    },
+    {
+      "path": "tests/hosted_artifact_graph/fixtures/REQ-HAGV-001.md",
+      "original_blob": "64a06aa9fcbd6a41834ad70cd6e6f92a909d231c",
+      "current_blob": "64a06aa9fcbd6a41834ad70cd6e6f92a909d231c",
+      "equal": true
+    },
+    {
+      "path": "tests/hosted_artifact_graph/fixtures/canonical-v1.json",
+      "original_blob": "59a0f29f34a7c70af6b8ee61d94152541957f63c",
+      "current_blob": "59a0f29f34a7c70af6b8ee61d94152541957f63c",
+      "equal": true
+    },
+    {
+      "path": "tests/hosted_artifact_graph/fixtures/reference-manifest.json",
+      "original_blob": "934e583cdc45f8f81f90df29e4ff5f8f0e062c95",
+      "current_blob": "934e583cdc45f8f81f90df29e4ff5f8f0e062c95",
+      "equal": true
+    },
+    {
+      "path": "tests/hosted_artifact_graph/fixtures/scenarios-v1.json",
+      "original_blob": "071d9bc1d85cd41e9b6f53e1a66030a6acdb780d",
+      "current_blob": "071d9bc1d85cd41e9b6f53e1a66030a6acdb780d",
+      "equal": true
+    },
+    {
+      "path": "tests/hosted_artifact_graph/test_contract_vectors.py",
+      "original_blob": "6c355c55f9b691490a0d5266b0bccfe54d7d92b4",
+      "current_blob": "6c355c55f9b691490a0d5266b0bccfe54d7d92b4",
+      "equal": true
+    },
+    {
+      "path": "tests/hosted_artifact_graph/validate_wire_contracts.py",
+      "original_blob": "c7f1b2c8045288346180b3055ba6f72aad75e4d0",
+      "current_blob": "c7f1b2c8045288346180b3055ba6f72aad75e4d0",
+      "equal": true
+    },
+    {
+      "path": "tests/test_hosted_artifact_graph.py",
+      "original_blob": "58046c8c81650771da1693da69ebf045791f48fb",
+      "current_blob": "58046c8c81650771da1693da69ebf045791f48fb",
+      "equal": true
+    }
+  ],
+  "reviewed_transport": [
+    {
+      "path": ".engineering-harness.lock",
+      "change": "M",
+      "main_sha256": "e2690ab8c796604335f7afc0dbf5eda7508c06555429daef7ffc518863015bd1",
+      "proposed_sha256": "e2690ab8c796604335f7afc0dbf5eda7508c06555429daef7ffc518863015bd1",
+      "matches_main": true,
+      "actual_sha256": "e2690ab8c796604335f7afc0dbf5eda7508c06555429daef7ffc518863015bd1",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": ".engineering-harness.toml",
+      "change": "M",
+      "main_sha256": "82167e8b4a1d7af2ec824cfcf46a004caf33f96edbc81165c9758c51d526485c",
+      "proposed_sha256": "82167e8b4a1d7af2ec824cfcf46a004caf33f96edbc81165c9758c51d526485c",
+      "matches_main": true,
+      "actual_sha256": "82167e8b4a1d7af2ec824cfcf46a004caf33f96edbc81165c9758c51d526485c",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": ".github/workflows/engineering-harness.yml",
+      "change": "M",
+      "main_sha256": "51e449537e6b40d94995992cf1a613f5b27cf271acd5f5316b552091502432c4",
+      "proposed_sha256": "51e449537e6b40d94995992cf1a613f5b27cf271acd5f5316b552091502432c4",
+      "matches_main": true,
+      "actual_sha256": "51e449537e6b40d94995992cf1a613f5b27cf271acd5f5316b552091502432c4",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "README.md",
+      "change": "M",
+      "main_sha256": "122d1a357492442022e8bac0f83a6d47caf75343db4e4c019cdb61e226700787",
+      "proposed_sha256": "122d1a357492442022e8bac0f83a6d47caf75343db4e4c019cdb61e226700787",
+      "matches_main": true,
+      "actual_sha256": "122d1a357492442022e8bac0f83a6d47caf75343db4e4c019cdb61e226700787",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/README.md",
+      "change": "M",
+      "main_sha256": "ffee84918d7d5110c54ef78989e509c8a30e9b318ec6015a3dff3040b040639a",
+      "proposed_sha256": "94c4790f7f66e021a0be0012d6d6e60b9e333b45f4e526f8237e7361bbac0127",
+      "matches_main": false,
+      "actual_sha256": "94c4790f7f66e021a0be0012d6d6e60b9e333b45f4e526f8237e7361bbac0127",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/README.md",
+      "change": "A",
+      "main_sha256": "c23da3804d3679452b1335910fcafbc13987c149459b192015f1593b9e16ee28",
+      "proposed_sha256": "c23da3804d3679452b1335910fcafbc13987c149459b192015f1593b9e16ee28",
+      "matches_main": true,
+      "actual_sha256": "c23da3804d3679452b1335910fcafbc13987c149459b192015f1593b9e16ee28",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/decisions/DEC-RLS-009.md",
+      "change": "A",
+      "main_sha256": "f8e482d7587459f28b9d89a0a9e43c2fbbe060d4768931713d528f98d7fded0e",
+      "proposed_sha256": "f8e482d7587459f28b9d89a0a9e43c2fbbe060d4768931713d528f98d7fded0e",
+      "matches_main": true,
+      "actual_sha256": "f8e482d7587459f28b9d89a0a9e43c2fbbe060d4768931713d528f98d7fded0e",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/RLS-SEH-033-evaluator.json",
+      "change": "A",
+      "main_sha256": "c293ed1f574d8278eda954dd34442c2d1283b8eb3866c080f5ca9b03d61e7f61",
+      "proposed_sha256": "c293ed1f574d8278eda954dd34442c2d1283b8eb3866c080f5ca9b03d61e7f61",
+      "matches_main": true,
+      "actual_sha256": "c293ed1f574d8278eda954dd34442c2d1283b8eb3866c080f5ca9b03d61e7f61",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/VREC-RLS-003-evaluator.json",
+      "change": "A",
+      "main_sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "proposed_sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "matches_main": true,
+      "actual_sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/VREC-RLS-004-evaluator.json",
+      "change": "A",
+      "main_sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "proposed_sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "matches_main": true,
+      "actual_sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/VREC-SEH-033-evaluator.json",
+      "change": "A",
+      "main_sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "proposed_sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "matches_main": true,
+      "actual_sha256": "2a3aae71ccdfd0da1d3f604ea7064f242db682d8d6ef2620bf22169be719b905",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/WO-RLS-040-handoff.md",
+      "change": "A",
+      "main_sha256": "ed16a7abe8f5cbf8930243511c1ab6e1d4d85950dab55f38cead09b43c86c1f4",
+      "proposed_sha256": "ed16a7abe8f5cbf8930243511c1ab6e1d4d85950dab55f38cead09b43c86c1f4",
+      "matches_main": true,
+      "actual_sha256": "ed16a7abe8f5cbf8930243511c1ab6e1d4d85950dab55f38cead09b43c86c1f4",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/WO-RLS-040-pre-action.md",
+      "change": "A",
+      "main_sha256": "4a23dd6a43250dc25e2ae71f16075cad3de3a82fc712741e3f0aa454f3816815",
+      "proposed_sha256": "4a23dd6a43250dc25e2ae71f16075cad3de3a82fc712741e3f0aa454f3816815",
+      "matches_main": true,
+      "actual_sha256": "4a23dd6a43250dc25e2ae71f16075cad3de3a82fc712741e3f0aa454f3816815",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/approval.json",
+      "change": "A",
+      "main_sha256": "d482e3dd0df5f8ddb893f5e43f070b068759486d3ea76ca93bfe507caffd0ced",
+      "proposed_sha256": "d482e3dd0df5f8ddb893f5e43f070b068759486d3ea76ca93bfe507caffd0ced",
+      "matches_main": true,
+      "actual_sha256": "d482e3dd0df5f8ddb893f5e43f070b068759486d3ea76ca93bfe507caffd0ced",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/build-replay.json",
+      "change": "A",
+      "main_sha256": "ed2f613be26410d3a4bad9a6bc609674b35abfdd0423323ed4b6a732af962d9b",
+      "proposed_sha256": "ed2f613be26410d3a4bad9a6bc609674b35abfdd0423323ed4b6a732af962d9b",
+      "matches_main": true,
+      "actual_sha256": "ed2f613be26410d3a4bad9a6bc609674b35abfdd0423323ed4b6a732af962d9b",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/bundle.json",
+      "change": "A",
+      "main_sha256": "16dd0823243889a9be5e8a1a6e076814fa643871db5ebd265a48857b1b9bfcc1",
+      "proposed_sha256": "16dd0823243889a9be5e8a1a6e076814fa643871db5ebd265a48857b1b9bfcc1",
+      "matches_main": true,
+      "actual_sha256": "16dd0823243889a9be5e8a1a6e076814fa643871db5ebd265a48857b1b9bfcc1",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/ci/head-build-replay.json",
+      "change": "A",
+      "main_sha256": "af21e3413638bbe7cc581ef3158efde7790550bbc5e5d353a1e7b37c08416af9",
+      "proposed_sha256": "af21e3413638bbe7cc581ef3158efde7790550bbc5e5d353a1e7b37c08416af9",
+      "matches_main": true,
+      "actual_sha256": "af21e3413638bbe7cc581ef3158efde7790550bbc5e5d353a1e7b37c08416af9",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/ci/prior-release-build-replay.json",
+      "change": "A",
+      "main_sha256": "4e46e4cb0888ad3d212fa70a05cba8a66e301008752a9fe3d1cf50830a229ded",
+      "proposed_sha256": "4e46e4cb0888ad3d212fa70a05cba8a66e301008752a9fe3d1cf50830a229ded",
+      "matches_main": true,
+      "actual_sha256": "4e46e4cb0888ad3d212fa70a05cba8a66e301008752a9fe3d1cf50830a229ded",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/ci/review.json",
+      "change": "A",
+      "main_sha256": "aae0dc93675567c0d9fb8863b3b0c2ec045407fad7dac6e694bbcca09221f193",
+      "proposed_sha256": "aae0dc93675567c0d9fb8863b3b0c2ec045407fad7dac6e694bbcca09221f193",
+      "matches_main": true,
+      "actual_sha256": "aae0dc93675567c0d9fb8863b3b0c2ec045407fad7dac6e694bbcca09221f193",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/ci/source-summary.json",
+      "change": "A",
+      "main_sha256": "771754588940e9f0a5c9cf334d13160febd0f6c3fe60dc4a62beaa6361a4a7a7",
+      "proposed_sha256": "771754588940e9f0a5c9cf334d13160febd0f6c3fe60dc4a62beaa6361a4a7a7",
+      "matches_main": true,
+      "actual_sha256": "771754588940e9f0a5c9cf334d13160febd0f6c3fe60dc4a62beaa6361a4a7a7",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/complete-release-plan.json",
+      "change": "A",
+      "main_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
+      "proposed_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
+      "matches_main": true,
+      "actual_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/complete-release-preparation.zip",
+      "change": "A",
+      "main_sha256": "9d9ab6a8e0be5aaebeeac75acb335462b3440b453f334bb8e8c588efaab43e48",
+      "proposed_sha256": "9d9ab6a8e0be5aaebeeac75acb335462b3440b453f334bb8e8c588efaab43e48",
+      "matches_main": true,
+      "actual_sha256": "9d9ab6a8e0be5aaebeeac75acb335462b3440b453f334bb8e8c588efaab43e48",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/complete-release-readiness.json",
+      "change": "A",
+      "main_sha256": "02b943afa5adba895219b8e9e1f3d13a9bb8777b537b89142c2d19860760d7c0",
+      "proposed_sha256": "02b943afa5adba895219b8e9e1f3d13a9bb8777b537b89142c2d19860760d7c0",
+      "matches_main": true,
+      "actual_sha256": "02b943afa5adba895219b8e9e1f3d13a9bb8777b537b89142c2d19860760d7c0",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/complete-release-readiness.zip",
+      "change": "A",
+      "main_sha256": "c71a1dccd2efc65794146511aeb2583e1c21bbcdd825362156ecbfce8ee0d883",
+      "proposed_sha256": "c71a1dccd2efc65794146511aeb2583e1c21bbcdd825362156ecbfce8ee0d883",
+      "matches_main": true,
+      "actual_sha256": "c71a1dccd2efc65794146511aeb2583e1c21bbcdd825362156ecbfce8ee0d883",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/complete-release-review.md",
+      "change": "A",
+      "main_sha256": "41e6d83c1ed108eea59b6699d849ced24ba08583b48577b29bfd03141baaee07",
+      "proposed_sha256": "41e6d83c1ed108eea59b6699d849ced24ba08583b48577b29bfd03141baaee07",
+      "matches_main": true,
+      "actual_sha256": "41e6d83c1ed108eea59b6699d849ced24ba08583b48577b29bfd03141baaee07",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-build-replay.json",
+      "change": "A",
+      "main_sha256": "6bc4ee363e083ccc8c0322aa5346ed3a0cb9e5972ebb3ec61e6fbc80745e360d",
+      "proposed_sha256": "6bc4ee363e083ccc8c0322aa5346ed3a0cb9e5972ebb3ec61e6fbc80745e360d",
+      "matches_main": true,
+      "actual_sha256": "6bc4ee363e083ccc8c0322aa5346ed3a0cb9e5972ebb3ec61e6fbc80745e360d",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-bundle.json",
+      "change": "A",
+      "main_sha256": "e5c5b9682573320f239c8286c36510cb85a63184f02b3cff3bd8980b0cabf475",
+      "proposed_sha256": "e5c5b9682573320f239c8286c36510cb85a63184f02b3cff3bd8980b0cabf475",
+      "matches_main": true,
+      "actual_sha256": "e5c5b9682573320f239c8286c36510cb85a63184f02b3cff3bd8980b0cabf475",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-capture-observations-index.json",
+      "change": "A",
+      "main_sha256": "9a7935a58171ad27258847fb6f0b387654f2b3bc9a8a0f5149eb885df17d4311",
+      "proposed_sha256": "9a7935a58171ad27258847fb6f0b387654f2b3bc9a8a0f5149eb885df17d4311",
+      "matches_main": true,
+      "actual_sha256": "9a7935a58171ad27258847fb6f0b387654f2b3bc9a8a0f5149eb885df17d4311",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-capture-observations.zip",
+      "change": "A",
+      "main_sha256": "d3287c9d418a745714d626dc1c7efa11639dd2d818d78b6200544e19288f7a1f",
+      "proposed_sha256": "d3287c9d418a745714d626dc1c7efa11639dd2d818d78b6200544e19288f7a1f",
+      "matches_main": true,
+      "actual_sha256": "d3287c9d418a745714d626dc1c7efa11639dd2d818d78b6200544e19288f7a1f",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-evidence-receipt.json",
+      "change": "A",
+      "main_sha256": "1552249eca44eff719615f57152e52064d8dc1f7f70ab17d946616ca02a71da2",
+      "proposed_sha256": "1552249eca44eff719615f57152e52064d8dc1f7f70ab17d946616ca02a71da2",
+      "matches_main": true,
+      "actual_sha256": "1552249eca44eff719615f57152e52064d8dc1f7f70ab17d946616ca02a71da2",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-marketplace-staging.json",
+      "change": "A",
+      "main_sha256": "8617d3bbb360d05b88f380cca351aab1f16817e11e5241be1661d91ef6abda02",
+      "proposed_sha256": "8617d3bbb360d05b88f380cca351aab1f16817e11e5241be1661d91ef6abda02",
+      "matches_main": true,
+      "actual_sha256": "8617d3bbb360d05b88f380cca351aab1f16817e11e5241be1661d91ef6abda02",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-package-identity.json",
+      "change": "A",
+      "main_sha256": "4a62e5bb6a3ffb36ca723dca8fe3e71588d050bab70c5b1f11778dabb532249d",
+      "proposed_sha256": "4a62e5bb6a3ffb36ca723dca8fe3e71588d050bab70c5b1f11778dabb532249d",
+      "matches_main": true,
+      "actual_sha256": "4a62e5bb6a3ffb36ca723dca8fe3e71588d050bab70c5b1f11778dabb532249d",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-qualification.zip",
+      "change": "A",
+      "main_sha256": "ec57e2e8585a76523a033e32cd2d63a34de02926c6904dd3e8616d8db0ce11b1",
+      "proposed_sha256": "ec57e2e8585a76523a033e32cd2d63a34de02926c6904dd3e8616d8db0ce11b1",
+      "matches_main": true,
+      "actual_sha256": "ec57e2e8585a76523a033e32cd2d63a34de02926c6904dd3e8616d8db0ce11b1",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-review-checks.zip",
+      "change": "A",
+      "main_sha256": "743da3c1e97703c3f32d8af2c991fd8541a5bc794203bcb6d2d47a689e40e7aa",
+      "proposed_sha256": "743da3c1e97703c3f32d8af2c991fd8541a5bc794203bcb6d2d47a689e40e7aa",
+      "matches_main": true,
+      "actual_sha256": "743da3c1e97703c3f32d8af2c991fd8541a5bc794203bcb6d2d47a689e40e7aa",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/final-verification-review.md",
+      "change": "A",
+      "main_sha256": "5bb0ce000463d48e111665bb32234e598a765da435bc02b70c4cca719baa2007",
+      "proposed_sha256": "5bb0ce000463d48e111665bb32234e598a765da435bc02b70c4cca719baa2007",
+      "matches_main": true,
+      "actual_sha256": "5bb0ce000463d48e111665bb32234e598a765da435bc02b70c4cca719baa2007",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/integration.json",
+      "change": "A",
+      "main_sha256": "785f5b2317d9e76296593fc417dbe3b584def86f3ceda37bfc57a37283f0c71d",
+      "proposed_sha256": "785f5b2317d9e76296593fc417dbe3b584def86f3ceda37bfc57a37283f0c71d",
+      "matches_main": true,
+      "actual_sha256": "785f5b2317d9e76296593fc417dbe3b584def86f3ceda37bfc57a37283f0c71d",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/pre-completion-packets.zip",
+      "change": "A",
+      "main_sha256": "d21c03a4a8550a21f31fe08c483ad4fc184cf4ad479dff51c0102be65d7d8a72",
+      "proposed_sha256": "d21c03a4a8550a21f31fe08c483ad4fc184cf4ad479dff51c0102be65d7d8a72",
+      "matches_main": true,
+      "actual_sha256": "d21c03a4a8550a21f31fe08c483ad4fc184cf4ad479dff51c0102be65d7d8a72",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/preparation-completion-observations.zip",
+      "change": "A",
+      "main_sha256": "0148c5a968539522b61761261a3daa6256cb0a6295863b6230ac0c887d35d20d",
+      "proposed_sha256": "0148c5a968539522b61761261a3daa6256cb0a6295863b6230ac0c887d35d20d",
+      "matches_main": true,
+      "actual_sha256": "0148c5a968539522b61761261a3daa6256cb0a6295863b6230ac0c887d35d20d",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/provider-activation-observations.zip",
+      "change": "A",
+      "main_sha256": "c12bd4f2f075c7180aa785cfd2794d383c747b37c944c8c01abedfc3388bdc74",
+      "proposed_sha256": "c12bd4f2f075c7180aa785cfd2794d383c747b37c944c8c01abedfc3388bdc74",
+      "matches_main": true,
+      "actual_sha256": "c12bd4f2f075c7180aa785cfd2794d383c747b37c944c8c01abedfc3388bdc74",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/provider-configuration-applied.json",
+      "change": "A",
+      "main_sha256": "79e09e32114acfca5ad00a2efa324b0a25464887b56c73662fb850e9968d6d14",
+      "proposed_sha256": "79e09e32114acfca5ad00a2efa324b0a25464887b56c73662fb850e9968d6d14",
+      "matches_main": true,
+      "actual_sha256": "79e09e32114acfca5ad00a2efa324b0a25464887b56c73662fb850e9968d6d14",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/provider-configuration-proposal.json",
+      "change": "A",
+      "main_sha256": "dd3132e0653971edf203b9049899440913784d354a12fe051de07828570ae237",
+      "proposed_sha256": "dd3132e0653971edf203b9049899440913784d354a12fe051de07828570ae237",
+      "matches_main": true,
+      "actual_sha256": "dd3132e0653971edf203b9049899440913784d354a12fe051de07828570ae237",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/provider-observations.json",
+      "change": "A",
+      "main_sha256": "79cdce860c6d9bc38c4589ef668469305b342ddeada08ffc968b55de82e7f34e",
+      "proposed_sha256": "79cdce860c6d9bc38c4589ef668469305b342ddeada08ffc968b55de82e7f34e",
+      "matches_main": true,
+      "actual_sha256": "79cdce860c6d9bc38c4589ef668469305b342ddeada08ffc968b55de82e7f34e",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/publication-hygiene.zip",
+      "change": "A",
+      "main_sha256": "f1226062274564132e864c7a2a81887fcffe6f814a415d170deac718ca661998",
+      "proposed_sha256": "f1226062274564132e864c7a2a81887fcffe6f814a415d170deac718ca661998",
+      "matches_main": true,
+      "actual_sha256": "f1226062274564132e864c7a2a81887fcffe6f814a415d170deac718ca661998",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/qualification-archive.json",
+      "change": "A",
+      "main_sha256": "fe0b5ffb9bd38db05b5052c582a445f45aa4e4dad1b0384bab602adec7e81b30",
+      "proposed_sha256": "fe0b5ffb9bd38db05b5052c582a445f45aa4e4dad1b0384bab602adec7e81b30",
+      "matches_main": true,
+      "actual_sha256": "fe0b5ffb9bd38db05b5052c582a445f45aa4e4dad1b0384bab602adec7e81b30",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/qualification-initial.zip",
+      "change": "A",
+      "main_sha256": "dd7fb5ed4424432cbe861f8c5303351cdcb6070e5baca93da9ce59a50dc540f8",
+      "proposed_sha256": "dd7fb5ed4424432cbe861f8c5303351cdcb6070e5baca93da9ce59a50dc540f8",
+      "matches_main": true,
+      "actual_sha256": "dd7fb5ed4424432cbe861f8c5303351cdcb6070e5baca93da9ce59a50dc540f8",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/qualification-review.md",
+      "change": "A",
+      "main_sha256": "75728d1d75f62f435c9edb28e1d567dfac35927493d84c13e8624f606f10e0b3",
+      "proposed_sha256": "75728d1d75f62f435c9edb28e1d567dfac35927493d84c13e8624f606f10e0b3",
+      "matches_main": true,
+      "actual_sha256": "75728d1d75f62f435c9edb28e1d567dfac35927493d84c13e8624f606f10e0b3",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/ready-record-replay-receipt.json",
+      "change": "A",
+      "main_sha256": "09dc766f580c3e9bb97cff26d339059cb3c98a0c040aae855e1ba87b0e5c06a9",
+      "proposed_sha256": "09dc766f580c3e9bb97cff26d339059cb3c98a0c040aae855e1ba87b0e5c06a9",
+      "matches_main": true,
+      "actual_sha256": "09dc766f580c3e9bb97cff26d339059cb3c98a0c040aae855e1ba87b0e5c06a9",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/ready-record-replay.json",
+      "change": "A",
+      "main_sha256": "9a3ade07779354a55d1a73c6a3c6e83112602f3538958ea5b881a87c9c507c4c",
+      "proposed_sha256": "9a3ade07779354a55d1a73c6a3c6e83112602f3538958ea5b881a87c9c507c4c",
+      "matches_main": true,
+      "actual_sha256": "9a3ade07779354a55d1a73c6a3c6e83112602f3538958ea5b881a87c9c507c4c",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/ready-release-preparation.zip",
+      "change": "A",
+      "main_sha256": "22317e95bd957fdaa934a03d228cde46c90e291e264067ed5b4b834582381503",
+      "proposed_sha256": "22317e95bd957fdaa934a03d228cde46c90e291e264067ed5b4b834582381503",
+      "matches_main": true,
+      "actual_sha256": "22317e95bd957fdaa934a03d228cde46c90e291e264067ed5b4b834582381503",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/release-owner-correction-checks.zip",
+      "change": "A",
+      "main_sha256": "640b3f0e1eacd6c9e0299247ae5276e5a83ecb472f89021f3694617330d979d4",
+      "proposed_sha256": "640b3f0e1eacd6c9e0299247ae5276e5a83ecb472f89021f3694617330d979d4",
+      "matches_main": true,
+      "actual_sha256": "640b3f0e1eacd6c9e0299247ae5276e5a83ecb472f89021f3694617330d979d4",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/release-owner-correction-review.md",
+      "change": "A",
+      "main_sha256": "a12ce9f3b195e5fdea97cca9189cf7d4bca8fb357ccbf4e56b90edb785e8e472",
+      "proposed_sha256": "a12ce9f3b195e5fdea97cca9189cf7d4bca8fb357ccbf4e56b90edb785e8e472",
+      "matches_main": true,
+      "actual_sha256": "a12ce9f3b195e5fdea97cca9189cf7d4bca8fb357ccbf4e56b90edb785e8e472",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/release-owner-correction.patch",
+      "change": "A",
+      "main_sha256": "8c54694a8a27090c38b74dc8ab9229de3a305c7eaa3e3a28d991b99a7924bb12",
+      "proposed_sha256": "8c54694a8a27090c38b74dc8ab9229de3a305c7eaa3e3a28d991b99a7924bb12",
+      "matches_main": true,
+      "actual_sha256": "8c54694a8a27090c38b74dc8ab9229de3a305c7eaa3e3a28d991b99a7924bb12",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-040/topology-candidate-measure.json",
+      "change": "A",
+      "main_sha256": "8c98a421b72d34f907ccdfa6fb70fa19ae3c047a56bdc83d6310a429079c6b5b",
+      "proposed_sha256": "8c98a421b72d34f907ccdfa6fb70fa19ae3c047a56bdc83d6310a429079c6b5b",
+      "matches_main": true,
+      "actual_sha256": "8c98a421b72d34f907ccdfa6fb70fa19ae3c047a56bdc83d6310a429079c6b5b",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/WO-RLS-041-handoff.md",
+      "change": "A",
+      "main_sha256": "95c65bbf39be98f5d747d3d46021d21199582b5cfc5aeb15e563d184049a641d",
+      "proposed_sha256": "95c65bbf39be98f5d747d3d46021d21199582b5cfc5aeb15e563d184049a641d",
+      "matches_main": true,
+      "actual_sha256": "95c65bbf39be98f5d747d3d46021d21199582b5cfc5aeb15e563d184049a641d",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/claude-assembly-inventory.json",
+      "change": "A",
+      "main_sha256": "2e2f62ae3df4e9cd018df59e12214153f405a1b9ec01e31c46f6c3ec282c3166",
+      "proposed_sha256": "2e2f62ae3df4e9cd018df59e12214153f405a1b9ec01e31c46f6c3ec282c3166",
+      "matches_main": true,
+      "actual_sha256": "2e2f62ae3df4e9cd018df59e12214153f405a1b9ec01e31c46f6c3ec282c3166",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/claude-context-bound.json",
+      "change": "A",
+      "main_sha256": "461301dc285f03b883938f9109333809fc41b04b9b17fe2d3ced8dfd0a2ddd33",
+      "proposed_sha256": "461301dc285f03b883938f9109333809fc41b04b9b17fe2d3ced8dfd0a2ddd33",
+      "matches_main": true,
+      "actual_sha256": "461301dc285f03b883938f9109333809fc41b04b9b17fe2d3ced8dfd0a2ddd33",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/claude-one-final-proposal-assessment.json",
+      "change": "A",
+      "main_sha256": "d2cb0015933f58fc7bd79d28958bee0532d2592237cb4126762ac7e35a4b4b82",
+      "proposed_sha256": "d2cb0015933f58fc7bd79d28958bee0532d2592237cb4126762ac7e35a4b4b82",
+      "matches_main": true,
+      "actual_sha256": "d2cb0015933f58fc7bd79d28958bee0532d2592237cb4126762ac7e35a4b4b82",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/claude-one-independent-assessment.json",
+      "change": "A",
+      "main_sha256": "1b6c7b30b329c88c935ad8a967a5b1222201589cfac41ec2beef467de95c2484",
+      "proposed_sha256": "1b6c7b30b329c88c935ad8a967a5b1222201589cfac41ec2beef467de95c2484",
+      "matches_main": true,
+      "actual_sha256": "1b6c7b30b329c88c935ad8a967a5b1222201589cfac41ec2beef467de95c2484",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/codex-assembly-inventory.json",
+      "change": "A",
+      "main_sha256": "e9eff34d5cbf66d41bf9b0535c8cdb7fd5f214a16c31f8d3c401113d8adc0f70",
+      "proposed_sha256": "e9eff34d5cbf66d41bf9b0535c8cdb7fd5f214a16c31f8d3c401113d8adc0f70",
+      "matches_main": true,
+      "actual_sha256": "e9eff34d5cbf66d41bf9b0535c8cdb7fd5f214a16c31f8d3c401113d8adc0f70",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/codex-legacy-final-proposal-assessment.json",
+      "change": "A",
+      "main_sha256": "6fbeaa2d2e4626b09145c379c5476ca05b89e157fc967d22bfbba15b8bff4c51",
+      "proposed_sha256": "6fbeaa2d2e4626b09145c379c5476ca05b89e157fc967d22bfbba15b8bff4c51",
+      "matches_main": true,
+      "actual_sha256": "6fbeaa2d2e4626b09145c379c5476ca05b89e157fc967d22bfbba15b8bff4c51",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/codex-legacy-independent-assessment.json",
+      "change": "A",
+      "main_sha256": "51e29e8abc9f48292f9d0e5a663f385317bdfd5cad18abaa08a2514c083fccce",
+      "proposed_sha256": "51e29e8abc9f48292f9d0e5a663f385317bdfd5cad18abaa08a2514c083fccce",
+      "matches_main": true,
+      "actual_sha256": "51e29e8abc9f48292f9d0e5a663f385317bdfd5cad18abaa08a2514c083fccce",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/codex-successor-final-proposal-assessment.json",
+      "change": "A",
+      "main_sha256": "9144f31d8bff0b038be69331fcab2ac17e084ec7a41a1bb18d58e3ba738bc5dc",
+      "proposed_sha256": "9144f31d8bff0b038be69331fcab2ac17e084ec7a41a1bb18d58e3ba738bc5dc",
+      "matches_main": true,
+      "actual_sha256": "9144f31d8bff0b038be69331fcab2ac17e084ec7a41a1bb18d58e3ba738bc5dc",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/codex-successor-independent-assessment.json",
+      "change": "A",
+      "main_sha256": "11ebf677ac7e5e08cb35921e643a0d47eb497311c1afda13bd7cdddf6fd41bcf",
+      "proposed_sha256": "11ebf677ac7e5e08cb35921e643a0d47eb497311c1afda13bd7cdddf6fd41bcf",
+      "matches_main": true,
+      "actual_sha256": "11ebf677ac7e5e08cb35921e643a0d47eb497311c1afda13bd7cdddf6fd41bcf",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/correction-review.md",
+      "change": "A",
+      "main_sha256": "9bd9b9aad8b25aa3d62ac52a986ab453568efef31ca3a2c948d0a04420d07de7",
+      "proposed_sha256": "9bd9b9aad8b25aa3d62ac52a986ab453568efef31ca3a2c948d0a04420d07de7",
+      "matches_main": true,
+      "actual_sha256": "9bd9b9aad8b25aa3d62ac52a986ab453568efef31ca3a2c948d0a04420d07de7",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/defect-package-validate.json",
+      "change": "A",
+      "main_sha256": "52ab961ff500a9a58dc8c66fe0080e7dddbe0a4d55c37b8bee2aaeeb8c67ec2c",
+      "proposed_sha256": "52ab961ff500a9a58dc8c66fe0080e7dddbe0a4d55c37b8bee2aaeeb8c67ec2c",
+      "matches_main": true,
+      "actual_sha256": "52ab961ff500a9a58dc8c66fe0080e7dddbe0a4d55c37b8bee2aaeeb8c67ec2c",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/defect-plan.json",
+      "change": "A",
+      "main_sha256": "472c92ab626aaa06ad249adf5b9f7a67152d0f8d1e7748b86127abd4d91f23aa",
+      "proposed_sha256": "472c92ab626aaa06ad249adf5b9f7a67152d0f8d1e7748b86127abd4d91f23aa",
+      "matches_main": true,
+      "actual_sha256": "472c92ab626aaa06ad249adf5b9f7a67152d0f8d1e7748b86127abd4d91f23aa",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/desktop-acceptance-observations.zip",
+      "change": "A",
+      "main_sha256": "1edd04ef175751c7f9bc406c0f84ce9d55bd1e9e5170aaa759c262ea5d4b3dac",
+      "proposed_sha256": "1edd04ef175751c7f9bc406c0f84ce9d55bd1e9e5170aaa759c262ea5d4b3dac",
+      "matches_main": true,
+      "actual_sha256": "1edd04ef175751c7f9bc406c0f84ce9d55bd1e9e5170aaa759c262ea5d4b3dac",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/desktop-deferral-review.md",
+      "change": "A",
+      "main_sha256": "4209987b46bc7913e8b1b3fd2137114c5666e75b084b2e791f360a172a600f71",
+      "proposed_sha256": "4209987b46bc7913e8b1b3fd2137114c5666e75b084b2e791f360a172a600f71",
+      "matches_main": true,
+      "actual_sha256": "4209987b46bc7913e8b1b3fd2137114c5666e75b084b2e791f360a172a600f71",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/desktop-proposal-preparation.zip",
+      "change": "A",
+      "main_sha256": "a37ce80cd7e5338cca3e9d59f7aa2ff2ca4b621c860e6c17a2737a0d55e7ca0f",
+      "proposed_sha256": "a37ce80cd7e5338cca3e9d59f7aa2ff2ca4b621c860e6c17a2737a0d55e7ca0f",
+      "matches_main": true,
+      "actual_sha256": "a37ce80cd7e5338cca3e9d59f7aa2ff2ca4b621c860e6c17a2737a0d55e7ca0f",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/final-staging-review-publication.json",
+      "change": "A",
+      "main_sha256": "29e25f5426784e6525710d304ac3d8d09a48a01ec0b1ed177008bd8ec9bae030",
+      "proposed_sha256": "29e25f5426784e6525710d304ac3d8d09a48a01ec0b1ed177008bd8ec9bae030",
+      "matches_main": true,
+      "actual_sha256": "29e25f5426784e6525710d304ac3d8d09a48a01ec0b1ed177008bd8ec9bae030",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/missing-evidence-linux.json",
+      "change": "A",
+      "main_sha256": "05361754a7f4e3835b131169e97f1e63a5ce1e0957387da7b46e7fd2398152f7",
+      "proposed_sha256": "05361754a7f4e3835b131169e97f1e63a5ce1e0957387da7b46e7fd2398152f7",
+      "matches_main": true,
+      "actual_sha256": "05361754a7f4e3835b131169e97f1e63a5ce1e0957387da7b46e7fd2398152f7",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/missing-evidence-windows.json",
+      "change": "A",
+      "main_sha256": "6e9df08e8fcbf49dd850f5486d5931e6586f1269cd42d4bdaf016f959bc58e25",
+      "proposed_sha256": "6e9df08e8fcbf49dd850f5486d5931e6586f1269cd42d4bdaf016f959bc58e25",
+      "matches_main": true,
+      "actual_sha256": "6e9df08e8fcbf49dd850f5486d5931e6586f1269cd42d4bdaf016f959bc58e25",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/native-archive.json",
+      "change": "A",
+      "main_sha256": "b010773ebc231a01d52521aba960729fe78b164e441ca210e00d87eb682e011e",
+      "proposed_sha256": "b010773ebc231a01d52521aba960729fe78b164e441ca210e00d87eb682e011e",
+      "matches_main": true,
+      "actual_sha256": "b010773ebc231a01d52521aba960729fe78b164e441ca210e00d87eb682e011e",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/native-initial.zip",
+      "change": "A",
+      "main_sha256": "b918f6c70155e2e65a6126f1336584327e18d3c30d5488b8ee9a97ac798ac1a5",
+      "proposed_sha256": "b918f6c70155e2e65a6126f1336584327e18d3c30d5488b8ee9a97ac798ac1a5",
+      "matches_main": true,
+      "actual_sha256": "b918f6c70155e2e65a6126f1336584327e18d3c30d5488b8ee9a97ac798ac1a5",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/native-walkthroughs-index.json",
+      "change": "A",
+      "main_sha256": "1ea66288f0e7e360a0f8b9881f599afc93f32b9df76271f1d42ca43013bb05bd",
+      "proposed_sha256": "1ea66288f0e7e360a0f8b9881f599afc93f32b9df76271f1d42ca43013bb05bd",
+      "matches_main": true,
+      "actual_sha256": "1ea66288f0e7e360a0f8b9881f599afc93f32b9df76271f1d42ca43013bb05bd",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/native-walkthroughs.zip",
+      "change": "A",
+      "main_sha256": "4bf3eb0db7e6df93089a477dd7de607f6613d98edc8e55b13b43bd25cf0b0bfc",
+      "proposed_sha256": "4bf3eb0db7e6df93089a477dd7de607f6613d98edc8e55b13b43bd25cf0b0bfc",
+      "matches_main": true,
+      "actual_sha256": "4bf3eb0db7e6df93089a477dd7de607f6613d98edc8e55b13b43bd25cf0b0bfc",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/package-identity.json",
+      "change": "A",
+      "main_sha256": "4475b4c9eefd5b2cb225bc80ad2a37d43abbab898fe9e05ff3a3545216c2c9b7",
+      "proposed_sha256": "4475b4c9eefd5b2cb225bc80ad2a37d43abbab898fe9e05ff3a3545216c2c9b7",
+      "matches_main": true,
+      "actual_sha256": "4475b4c9eefd5b2cb225bc80ad2a37d43abbab898fe9e05ff3a3545216c2c9b7",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/preparation-marketplace-commit.json",
+      "change": "A",
+      "main_sha256": "2ef6327faf1b4fc8e853d1bbe9948a38dc843ba08932ffe6c3b0ba84beb32636",
+      "proposed_sha256": "2ef6327faf1b4fc8e853d1bbe9948a38dc843ba08932ffe6c3b0ba84beb32636",
+      "matches_main": true,
+      "actual_sha256": "2ef6327faf1b4fc8e853d1bbe9948a38dc843ba08932ffe6c3b0ba84beb32636",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-041/qualification-review.md",
+      "change": "A",
+      "main_sha256": "89a8885337317faf1e097a09ac028658521fa5e1b64fd3d8ec380d851d7099c9",
+      "proposed_sha256": "89a8885337317faf1e097a09ac028658521fa5e1b64fd3d8ec380d851d7099c9",
+      "matches_main": true,
+      "actual_sha256": "89a8885337317faf1e097a09ac028658521fa5e1b64fd3d8ec380d851d7099c9",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md",
+      "change": "A",
+      "main_sha256": "ecabe74012ceff709980891983b1071a0b60f8e7b94a7d1e550974a605736289",
+      "proposed_sha256": "ecabe74012ceff709980891983b1071a0b60f8e7b94a7d1e550974a605736289",
+      "matches_main": true,
+      "actual_sha256": "ecabe74012ceff709980891983b1071a0b60f8e7b94a7d1e550974a605736289",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/WO-RLS-042-handoff.md",
+      "change": "A",
+      "main_sha256": "8338f515f0678f5fda05fe91b65f29bb968a771395417af41f31b5fad1dcb366",
+      "proposed_sha256": "8338f515f0678f5fda05fe91b65f29bb968a771395417af41f31b5fad1dcb366",
+      "matches_main": true,
+      "actual_sha256": "8338f515f0678f5fda05fe91b65f29bb968a771395417af41f31b5fad1dcb366",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/claude-code-public-fresh.json",
+      "change": "A",
+      "main_sha256": "2b94af6841cd2b470504eb9e304ac743406f23a8f4cbb45b799c7302ac02c668",
+      "proposed_sha256": "2b94af6841cd2b470504eb9e304ac743406f23a8f4cbb45b799c7302ac02c668",
+      "matches_main": true,
+      "actual_sha256": "2b94af6841cd2b470504eb9e304ac743406f23a8f4cbb45b799c7302ac02c668",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/claude-code-public-update.json",
+      "change": "A",
+      "main_sha256": "1fc3cb8b2f666de79110d2aa1a9bd1d044dd8532c98da08681fe66db13ce4f13",
+      "proposed_sha256": "1fc3cb8b2f666de79110d2aa1a9bd1d044dd8532c98da08681fe66db13ce4f13",
+      "matches_main": true,
+      "actual_sha256": "1fc3cb8b2f666de79110d2aa1a9bd1d044dd8532c98da08681fe66db13ce4f13",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/closeout-assessment.md",
+      "change": "A",
+      "main_sha256": "ecc7d879c103ee1d4cf3ab0011eb28bb7cf71a345bed1ba36041dce6879bbec2",
+      "proposed_sha256": "ecc7d879c103ee1d4cf3ab0011eb28bb7cf71a345bed1ba36041dce6879bbec2",
+      "matches_main": true,
+      "actual_sha256": "ecc7d879c103ee1d4cf3ab0011eb28bb7cf71a345bed1ba36041dce6879bbec2",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/closeout-checks.zip",
+      "change": "A",
+      "main_sha256": "9c79ec3b7188b932c9e5a732f5aabc8a5cfc8163bd035551573bdcddc966e968",
+      "proposed_sha256": "9c79ec3b7188b932c9e5a732f5aabc8a5cfc8163bd035551573bdcddc966e968",
+      "matches_main": true,
+      "actual_sha256": "9c79ec3b7188b932c9e5a732f5aabc8a5cfc8163bd035551573bdcddc966e968",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/closeout-lifecycle.zip",
+      "change": "A",
+      "main_sha256": "63cc75fe304041387e02190d048ba980f17882eb9b7ee4cddf2bea4d0b327011",
+      "proposed_sha256": "63cc75fe304041387e02190d048ba980f17882eb9b7ee4cddf2bea4d0b327011",
+      "matches_main": true,
+      "actual_sha256": "63cc75fe304041387e02190d048ba980f17882eb9b7ee4cddf2bea4d0b327011",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/codex-public-fresh.json",
+      "change": "A",
+      "main_sha256": "47fba041b92e42675b97a42e1fc1690de97bd71add5bca80a453d2c692ca93f8",
+      "proposed_sha256": "47fba041b92e42675b97a42e1fc1690de97bd71add5bca80a453d2c692ca93f8",
+      "matches_main": true,
+      "actual_sha256": "47fba041b92e42675b97a42e1fc1690de97bd71add5bca80a453d2c692ca93f8",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/codex-public-update.json",
+      "change": "A",
+      "main_sha256": "0eee701864dba029275cc2ef4dcc87cdb10956328c7b459d6eb09f3c76326f62",
+      "proposed_sha256": "0eee701864dba029275cc2ef4dcc87cdb10956328c7b459d6eb09f3c76326f62",
+      "matches_main": true,
+      "actual_sha256": "0eee701864dba029275cc2ef4dcc87cdb10956328c7b459d6eb09f3c76326f62",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/delivery-result.json",
+      "change": "A",
+      "main_sha256": "22349066ffb06d652a7f178b5a9dfddfafc883a0129c12b1e8224432d29043c5",
+      "proposed_sha256": "22349066ffb06d652a7f178b5a9dfddfafc883a0129c12b1e8224432d29043c5",
+      "matches_main": true,
+      "actual_sha256": "22349066ffb06d652a7f178b5a9dfddfafc883a0129c12b1e8224432d29043c5",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/documentation-observations.json",
+      "change": "A",
+      "main_sha256": "92b48d0087ecf4008f4ae20d67c113a7192903f1baddd25c5428f1bd0a5145d4",
+      "proposed_sha256": "92b48d0087ecf4008f4ae20d67c113a7192903f1baddd25c5428f1bd0a5145d4",
+      "matches_main": true,
+      "actual_sha256": "92b48d0087ecf4008f4ae20d67c113a7192903f1baddd25c5428f1bd0a5145d4",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/evaluator-public-install.json",
+      "change": "A",
+      "main_sha256": "deabfe88d4660cee0513df0ea9550bff469f9e5090e4002106ff98cf167bafe1",
+      "proposed_sha256": "deabfe88d4660cee0513df0ea9550bff469f9e5090e4002106ff98cf167bafe1",
+      "matches_main": true,
+      "actual_sha256": "deabfe88d4660cee0513df0ea9550bff469f9e5090e4002106ff98cf167bafe1",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/handoff.json",
+      "change": "A",
+      "main_sha256": "ace19c077651c0fe9ffd796a4df378702fad7745751dde564c30af4db88ab471",
+      "proposed_sha256": "ace19c077651c0fe9ffd796a4df378702fad7745751dde564c30af4db88ab471",
+      "matches_main": true,
+      "actual_sha256": "ace19c077651c0fe9ffd796a4df378702fad7745751dde564c30af4db88ab471",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/integration-receipts.json",
+      "change": "A",
+      "main_sha256": "e5a7aa5b57480f5fd0ae500a4a54cdd1f5439ca416a0ffd6fb185d5cee446a7f",
+      "proposed_sha256": "e5a7aa5b57480f5fd0ae500a4a54cdd1f5439ca416a0ffd6fb185d5cee446a7f",
+      "matches_main": true,
+      "actual_sha256": "e5a7aa5b57480f5fd0ae500a4a54cdd1f5439ca416a0ffd6fb185d5cee446a7f",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/maintenance-line.json",
+      "change": "A",
+      "main_sha256": "8d25e7eaaa945976396daecb517e08a740941144808d59bf3ffe1f135e426cb5",
+      "proposed_sha256": "8d25e7eaaa945976396daecb517e08a740941144808d59bf3ffe1f135e426cb5",
+      "matches_main": true,
+      "actual_sha256": "8d25e7eaaa945976396daecb517e08a740941144808d59bf3ffe1f135e426cb5",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/marketplace-public-ref.json",
+      "change": "A",
+      "main_sha256": "dde6b058525082d0ccfba626c565930836072a553f84c98b97d617e0fa867cba",
+      "proposed_sha256": "dde6b058525082d0ccfba626c565930836072a553f84c98b97d617e0fa867cba",
+      "matches_main": true,
+      "actual_sha256": "dde6b058525082d0ccfba626c565930836072a553f84c98b97d617e0fa867cba",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/observations.json",
+      "change": "A",
+      "main_sha256": "4609b266fb31f98f7940b235b51483e3d6879c4e547ea00a89c94dbb93e6dffd",
+      "proposed_sha256": "4609b266fb31f98f7940b235b51483e3d6879c4e547ea00a89c94dbb93e6dffd",
+      "matches_main": true,
+      "actual_sha256": "4609b266fb31f98f7940b235b51483e3d6879c4e547ea00a89c94dbb93e6dffd",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/pages-observations.json",
+      "change": "A",
+      "main_sha256": "a2b25d71ca506d4d4d3923e250a4f4441238485ff7b3be1c62c749d2ab1dfaf1",
+      "proposed_sha256": "a2b25d71ca506d4d4d3923e250a4f4441238485ff7b3be1c62c749d2ab1dfaf1",
+      "matches_main": true,
+      "actual_sha256": "a2b25d71ca506d4d4d3923e250a4f4441238485ff7b3be1c62c749d2ab1dfaf1",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/publisher.json",
+      "change": "A",
+      "main_sha256": "c74f44c5624b61e3426b44c71435b9b6c96c19dd90e1878c40ddcb37ed53bfcc",
+      "proposed_sha256": "c74f44c5624b61e3426b44c71435b9b6c96c19dd90e1878c40ddcb37ed53bfcc",
+      "matches_main": true,
+      "actual_sha256": "c74f44c5624b61e3426b44c71435b9b6c96c19dd90e1878c40ddcb37ed53bfcc",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-042/release-marker-receipt.json",
+      "change": "A",
+      "main_sha256": "4c74c64e73f0236fe1a1057303f90a3af2b5092b8c2e3f58ace508b1e8510286",
+      "proposed_sha256": "4c74c64e73f0236fe1a1057303f90a3af2b5092b8c2e3f58ace508b1e8510286",
+      "matches_main": true,
+      "actual_sha256": "4c74c64e73f0236fe1a1057303f90a3af2b5092b8c2e3f58ace508b1e8510286",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/REL-SEH-035-accepted-before.txt",
+      "change": "A",
+      "main_sha256": "7249aa639db1cc412849fa2a54e8fe6135a8813fb4e9031295f1d1cebaa0ea4f",
+      "proposed_sha256": "7249aa639db1cc412849fa2a54e8fe6135a8813fb4e9031295f1d1cebaa0ea4f",
+      "matches_main": true,
+      "actual_sha256": "7249aa639db1cc412849fa2a54e8fe6135a8813fb4e9031295f1d1cebaa0ea4f",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/WO-RLS-043-handoff.md",
+      "change": "A",
+      "main_sha256": "ea1b98bac5bb0846ab419aa08f363907d8b82d6eda81004c670b3533562d57e1",
+      "proposed_sha256": "ea1b98bac5bb0846ab419aa08f363907d8b82d6eda81004c670b3533562d57e1",
+      "matches_main": true,
+      "actual_sha256": "ea1b98bac5bb0846ab419aa08f363907d8b82d6eda81004c670b3533562d57e1",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/amendment.json",
+      "change": "A",
+      "main_sha256": "0dda55da86dee8c3be16e565f57c80d008ddd4404f934651def45e932c619a71",
+      "proposed_sha256": "0dda55da86dee8c3be16e565f57c80d008ddd4404f934651def45e932c619a71",
+      "matches_main": true,
+      "actual_sha256": "0dda55da86dee8c3be16e565f57c80d008ddd4404f934651def45e932c619a71",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/approval-and-regressions.zip",
+      "change": "A",
+      "main_sha256": "e0438e081f395f5db6b8b9370ec54ff910b45883f3327b1533cd51adc1bb38e3",
+      "proposed_sha256": "e0438e081f395f5db6b8b9370ec54ff910b45883f3327b1533cd51adc1bb38e3",
+      "matches_main": true,
+      "actual_sha256": "e0438e081f395f5db6b8b9370ec54ff910b45883f3327b1533cd51adc1bb38e3",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/claude-one-assessment.json",
+      "change": "A",
+      "main_sha256": "dc9bfea46caf7b9e6c6995ae0ee3935c2d2ac01f0242c95440ecec2a77a5c051",
+      "proposed_sha256": "dc9bfea46caf7b9e6c6995ae0ee3935c2d2ac01f0242c95440ecec2a77a5c051",
+      "matches_main": true,
+      "actual_sha256": "dc9bfea46caf7b9e6c6995ae0ee3935c2d2ac01f0242c95440ecec2a77a5c051",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/claude-two-assessment.json",
+      "change": "A",
+      "main_sha256": "46e8469fa48c7960beb8218e09f60e0868584aaea3687c5ee8129acc158302b7",
+      "proposed_sha256": "46e8469fa48c7960beb8218e09f60e0868584aaea3687c5ee8129acc158302b7",
+      "matches_main": true,
+      "actual_sha256": "46e8469fa48c7960beb8218e09f60e0868584aaea3687c5ee8129acc158302b7",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/codex-legacy-assessment.json",
+      "change": "A",
+      "main_sha256": "2f91641d23dcaac042b683605f5b5c7c8c6f3a3e269765780f48656b15749157",
+      "proposed_sha256": "2f91641d23dcaac042b683605f5b5c7c8c6f3a3e269765780f48656b15749157",
+      "matches_main": true,
+      "actual_sha256": "2f91641d23dcaac042b683605f5b5c7c8c6f3a3e269765780f48656b15749157",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/codex-successor-assessment.json",
+      "change": "A",
+      "main_sha256": "4286f43dc7b5cd27a650bfd515aaa51e1156d143f12f357d0cc4383bda08e039",
+      "proposed_sha256": "4286f43dc7b5cd27a650bfd515aaa51e1156d143f12f357d0cc4383bda08e039",
+      "matches_main": true,
+      "actual_sha256": "4286f43dc7b5cd27a650bfd515aaa51e1156d143f12f357d0cc4383bda08e039",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-build-replay.json",
+      "change": "A",
+      "main_sha256": "a160230e46cdd25afc8ee0de4059d7987136c56441d94c11f8375d2fdf8c986d",
+      "proposed_sha256": "a160230e46cdd25afc8ee0de4059d7987136c56441d94c11f8375d2fdf8c986d",
+      "matches_main": true,
+      "actual_sha256": "a160230e46cdd25afc8ee0de4059d7987136c56441d94c11f8375d2fdf8c986d",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-bundle.json",
+      "change": "A",
+      "main_sha256": "96eea2076d8103c5ca871d9758ccb6644ed4bda13cf8d67ffd42f33c352eb791",
+      "proposed_sha256": "96eea2076d8103c5ca871d9758ccb6644ed4bda13cf8d67ffd42f33c352eb791",
+      "matches_main": true,
+      "actual_sha256": "96eea2076d8103c5ca871d9758ccb6644ed4bda13cf8d67ffd42f33c352eb791",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-claude-assembly-inventory.json",
+      "change": "A",
+      "main_sha256": "b650692fa08d35d8ac291898888e7852cbe65210b9617a44df374195e858c0b2",
+      "proposed_sha256": "b650692fa08d35d8ac291898888e7852cbe65210b9617a44df374195e858c0b2",
+      "matches_main": true,
+      "actual_sha256": "b650692fa08d35d8ac291898888e7852cbe65210b9617a44df374195e858c0b2",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-codex-assembly-inventory.json",
+      "change": "A",
+      "main_sha256": "50a13bce4dbb6252495985a9e200f0020142091a30adc5548ddc1b39c78ad97a",
+      "proposed_sha256": "50a13bce4dbb6252495985a9e200f0020142091a30adc5548ddc1b39c78ad97a",
+      "matches_main": true,
+      "actual_sha256": "50a13bce4dbb6252495985a9e200f0020142091a30adc5548ddc1b39c78ad97a",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-native-index.json",
+      "change": "A",
+      "main_sha256": "282413c988cc601e72332f537343523af02895a1ff739365108953fbbd138b6c",
+      "proposed_sha256": "282413c988cc601e72332f537343523af02895a1ff739365108953fbbd138b6c",
+      "matches_main": true,
+      "actual_sha256": "282413c988cc601e72332f537343523af02895a1ff739365108953fbbd138b6c",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-native.zip",
+      "change": "A",
+      "main_sha256": "937a41d0c23b1374925739d2faca2941c758b23511205183bc01af8e32174ce8",
+      "proposed_sha256": "937a41d0c23b1374925739d2faca2941c758b23511205183bc01af8e32174ce8",
+      "matches_main": true,
+      "actual_sha256": "937a41d0c23b1374925739d2faca2941c758b23511205183bc01af8e32174ce8",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-package-identity.json",
+      "change": "A",
+      "main_sha256": "f77e7107efda0eaf93574bb6e25bd6ad94a95fccd5eab97d3e1ea855246be85f",
+      "proposed_sha256": "f77e7107efda0eaf93574bb6e25bd6ad94a95fccd5eab97d3e1ea855246be85f",
+      "matches_main": true,
+      "actual_sha256": "f77e7107efda0eaf93574bb6e25bd6ad94a95fccd5eab97d3e1ea855246be85f",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-qualification-review.md",
+      "change": "A",
+      "main_sha256": "a96f4a86a87dd59146ed72c5e8c6aa40bbf0973134bdca80b9e11882d5459ad6",
+      "proposed_sha256": "a96f4a86a87dd59146ed72c5e8c6aa40bbf0973134bdca80b9e11882d5459ad6",
+      "matches_main": true,
+      "actual_sha256": "a96f4a86a87dd59146ed72c5e8c6aa40bbf0973134bdca80b9e11882d5459ad6",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-runtime-index.json",
+      "change": "A",
+      "main_sha256": "e510f639cd72b64cdf5b88314a07604a12b881a3351ec64e51969cb512f58e90",
+      "proposed_sha256": "e510f639cd72b64cdf5b88314a07604a12b881a3351ec64e51969cb512f58e90",
+      "matches_main": true,
+      "actual_sha256": "e510f639cd72b64cdf5b88314a07604a12b881a3351ec64e51969cb512f58e90",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-runtime.zip",
+      "change": "A",
+      "main_sha256": "b625fa48fd1fbf880f73b6c43b2e6cf2a8e6be08ec2ff680ac454f4456cce7fd",
+      "proposed_sha256": "b625fa48fd1fbf880f73b6c43b2e6cf2a8e6be08ec2ff680ac454f4456cce7fd",
+      "matches_main": true,
+      "actual_sha256": "b625fa48fd1fbf880f73b6c43b2e6cf2a8e6be08ec2ff680ac454f4456cce7fd",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/corrected-topology-candidate-measure.json",
+      "change": "A",
+      "main_sha256": "789bb685b1b3ef5d6fb78bfc059508fbe8e57bab78fa81c3eaf92719f2b0959e",
+      "proposed_sha256": "789bb685b1b3ef5d6fb78bfc059508fbe8e57bab78fa81c3eaf92719f2b0959e",
+      "matches_main": true,
+      "actual_sha256": "789bb685b1b3ef5d6fb78bfc059508fbe8e57bab78fa81c3eaf92719f2b0959e",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/correction-qualification.json",
+      "change": "A",
+      "main_sha256": "9d7b63d72e8a925046e3796faeaa92df3b2b82731477e35c4a8ff4689659e516",
+      "proposed_sha256": "9d7b63d72e8a925046e3796faeaa92df3b2b82731477e35c4a8ff4689659e516",
+      "matches_main": true,
+      "actual_sha256": "9d7b63d72e8a925046e3796faeaa92df3b2b82731477e35c4a8ff4689659e516",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/results-publication-checks.zip",
+      "change": "A",
+      "main_sha256": "68d64be7a4e4cfb828a42d9fd0e335b252d85e322047ca07a93ea25b1b927483",
+      "proposed_sha256": "68d64be7a4e4cfb828a42d9fd0e335b252d85e322047ca07a93ea25b1b927483",
+      "matches_main": true,
+      "actual_sha256": "68d64be7a4e4cfb828a42d9fd0e335b252d85e322047ca07a93ea25b1b927483",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-043/source-checks.zip",
+      "change": "A",
+      "main_sha256": "615e14323d5515d5d3d31a383e7b2ed1091d1bb17a5659b187b3e9da5253c617",
+      "proposed_sha256": "615e14323d5515d5d3d31a383e7b2ed1091d1bb17a5659b187b3e9da5253c617",
+      "matches_main": true,
+      "actual_sha256": "615e14323d5515d5d3d31a383e7b2ed1091d1bb17a5659b187b3e9da5253c617",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/WO-RLS-044-handoff.md",
+      "change": "A",
+      "main_sha256": "d87d055716a9d3b359030c1c34baa3a83b030f4cb999dc3cc18bb49095bc4269",
+      "proposed_sha256": "d87d055716a9d3b359030c1c34baa3a83b030f4cb999dc3cc18bb49095bc4269",
+      "matches_main": true,
+      "actual_sha256": "d87d055716a9d3b359030c1c34baa3a83b030f4cb999dc3cc18bb49095bc4269",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/assessment.md",
+      "change": "A",
+      "main_sha256": "dc68ba7dcad2d15971e5d21539a591b54317e7dc815ce14eefc2f5814cd37913",
+      "proposed_sha256": "dc68ba7dcad2d15971e5d21539a591b54317e7dc815ce14eefc2f5814cd37913",
+      "matches_main": true,
+      "actual_sha256": "dc68ba7dcad2d15971e5d21539a591b54317e7dc815ce14eefc2f5814cd37913",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/checks.zip",
+      "change": "A",
+      "main_sha256": "7a2a7f7712dfa40929ac413b0b1cf4a2ea89f335f6d8be9703a7bc3f89d160d5",
+      "proposed_sha256": "7a2a7f7712dfa40929ac413b0b1cf4a2ea89f335f6d8be9703a7bc3f89d160d5",
+      "matches_main": true,
+      "actual_sha256": "7a2a7f7712dfa40929ac413b0b1cf4a2ea89f335f6d8be9703a7bc3f89d160d5",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/completion-checks.zip",
+      "change": "A",
+      "main_sha256": "628de03878cf02615ec38c9365abdd2cd214da544f0243294831226e49ec7020",
+      "proposed_sha256": "628de03878cf02615ec38c9365abdd2cd214da544f0243294831226e49ec7020",
+      "matches_main": true,
+      "actual_sha256": "628de03878cf02615ec38c9365abdd2cd214da544f0243294831226e49ec7020",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/handoff.json",
+      "change": "A",
+      "main_sha256": "9a5103bb91f2e7cb1ba59d7cb179f336ed86b42c81a333f7f493f8882b5cb7da",
+      "proposed_sha256": "9a5103bb91f2e7cb1ba59d7cb179f336ed86b42c81a333f7f493f8882b5cb7da",
+      "matches_main": true,
+      "actual_sha256": "9a5103bb91f2e7cb1ba59d7cb179f336ed86b42c81a333f7f493f8882b5cb7da",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/implementation.json",
+      "change": "A",
+      "main_sha256": "dbc421cb7de708dd6edeb03f0c4a197c05297e55f0613dd3247a2dbb6dc17a9c",
+      "proposed_sha256": "dbc421cb7de708dd6edeb03f0c4a197c05297e55f0613dd3247a2dbb6dc17a9c",
+      "matches_main": true,
+      "actual_sha256": "dbc421cb7de708dd6edeb03f0c4a197c05297e55f0613dd3247a2dbb6dc17a9c",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/preparation-checks.zip",
+      "change": "A",
+      "main_sha256": "f3639b821af891fb6c1e0d62880991406defc852171c3c87a92732863628fc83",
+      "proposed_sha256": "f3639b821af891fb6c1e0d62880991406defc852171c3c87a92732863628fc83",
+      "matches_main": true,
+      "actual_sha256": "f3639b821af891fb6c1e0d62880991406defc852171c3c87a92732863628fc83",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/proposal-checks.zip",
+      "change": "A",
+      "main_sha256": "c6fcbbc2035f1128d7d3a196f42a8badf26c08ff8d849b9b4b9fef087266490b",
+      "proposed_sha256": "c6fcbbc2035f1128d7d3a196f42a8badf26c08ff8d849b9b4b9fef087266490b",
+      "matches_main": true,
+      "actual_sha256": "c6fcbbc2035f1128d7d3a196f42a8badf26c08ff8d849b9b4b9fef087266490b",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/proposal-inputs.json",
+      "change": "A",
+      "main_sha256": "75c4146035bbcaf789fda139ce6da018e222924aad1774080534ec52fc1ba68c",
+      "proposed_sha256": "75c4146035bbcaf789fda139ce6da018e222924aad1774080534ec52fc1ba68c",
+      "matches_main": true,
+      "actual_sha256": "75c4146035bbcaf789fda139ce6da018e222924aad1774080534ec52fc1ba68c",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/proposed-documentation.patch",
+      "change": "A",
+      "main_sha256": "2128c1e37e2a4d4ff289e4b71ef6a087d9209c7219605317f4a2f0caca26b473",
+      "proposed_sha256": "2128c1e37e2a4d4ff289e4b71ef6a087d9209c7219605317f4a2f0caca26b473",
+      "matches_main": true,
+      "actual_sha256": "2128c1e37e2a4d4ff289e4b71ef6a087d9209c7219605317f4a2f0caca26b473",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/review.md",
+      "change": "A",
+      "main_sha256": "b3daa3eb20c07d0a26e7612e8b1919743a5d0c13d04ef0cf159ec3ba55516f3a",
+      "proposed_sha256": "b3daa3eb20c07d0a26e7612e8b1919743a5d0c13d04ef0cf159ec3ba55516f3a",
+      "matches_main": true,
+      "actual_sha256": "b3daa3eb20c07d0a26e7612e8b1919743a5d0c13d04ef0cf159ec3ba55516f3a",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/evidence/WO-RLS-044/verification-review.md",
+      "change": "A",
+      "main_sha256": "e0ec71ed507b16ef43451079315f8ad70df827442e962e48c3014238fb60a5d6",
+      "proposed_sha256": "e0ec71ed507b16ef43451079315f8ad70df827442e962e48c3014238fb60a5d6",
+      "matches_main": true,
+      "actual_sha256": "e0ec71ed507b16ef43451079315f8ad70df827442e962e48c3014238fb60a5d6",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/release/REL-SEH-035.md",
+      "change": "A",
+      "main_sha256": "c0c20d24e58b322d9304f52c830ea20022a6974122b78cf632a0abd2be0c9a99",
+      "proposed_sha256": "c0c20d24e58b322d9304f52c830ea20022a6974122b78cf632a0abd2be0c9a99",
+      "matches_main": true,
+      "actual_sha256": "c0c20d24e58b322d9304f52c830ea20022a6974122b78cf632a0abd2be0c9a99",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/releases/RLS-SEH-033.md",
+      "change": "A",
+      "main_sha256": "a1f0fce27e21b342bf95c93e7e50376dfe52aee908aa06fb60536fdfac970177",
+      "proposed_sha256": "a1f0fce27e21b342bf95c93e7e50376dfe52aee908aa06fb60536fdfac970177",
+      "matches_main": true,
+      "actual_sha256": "a1f0fce27e21b342bf95c93e7e50376dfe52aee908aa06fb60536fdfac970177",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/risks/RISK-RLS-007.md",
+      "change": "A",
+      "main_sha256": "c0e6bb6bb4a2bfa12b0eb47a532617aff0c4c0a4ef34f3b8f5410e5fe6299261",
+      "proposed_sha256": "c0e6bb6bb4a2bfa12b0eb47a532617aff0c4c0a4ef34f3b8f5410e5fe6299261",
+      "matches_main": true,
+      "actual_sha256": "c0e6bb6bb4a2bfa12b0eb47a532617aff0c4c0a4ef34f3b8f5410e5fe6299261",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/verification-records/VREC-RLS-003.md",
+      "change": "A",
+      "main_sha256": "cb85caa0c4b06a888a91595b0021932ec7ffe5d63383c2b9995d347486f5e2aa",
+      "proposed_sha256": "cb85caa0c4b06a888a91595b0021932ec7ffe5d63383c2b9995d347486f5e2aa",
+      "matches_main": true,
+      "actual_sha256": "cb85caa0c4b06a888a91595b0021932ec7ffe5d63383c2b9995d347486f5e2aa",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/verification-records/VREC-RLS-004.md",
+      "change": "A",
+      "main_sha256": "02daf5f469027bacd0b943f1fc15c9eca542e0c72da277adaefd324915aea15c",
+      "proposed_sha256": "02daf5f469027bacd0b943f1fc15c9eca542e0c72da277adaefd324915aea15c",
+      "matches_main": true,
+      "actual_sha256": "02daf5f469027bacd0b943f1fc15c9eca542e0c72da277adaefd324915aea15c",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/verification-records/VREC-SEH-033.md",
+      "change": "A",
+      "main_sha256": "5dca3647daa0a0c236b120d22048deb9aca4ce59e2c52c06dcb6f9b71c2bed45",
+      "proposed_sha256": "5dca3647daa0a0c236b120d22048deb9aca4ce59e2c52c06dcb6f9b71c2bed45",
+      "matches_main": true,
+      "actual_sha256": "5dca3647daa0a0c236b120d22048deb9aca4ce59e2c52c06dcb6f9b71c2bed45",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/verification/VER-RLS-004.md",
+      "change": "A",
+      "main_sha256": "bc480cb2ed6112e28ca765d6a4b4f6e88dde362284afecf6336c0785e6b01110",
+      "proposed_sha256": "bc480cb2ed6112e28ca765d6a4b4f6e88dde362284afecf6336c0785e6b01110",
+      "matches_main": true,
+      "actual_sha256": "bc480cb2ed6112e28ca765d6a4b4f6e88dde362284afecf6336c0785e6b01110",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/verification/VER-RLS-005.md",
+      "change": "A",
+      "main_sha256": "dc19fd4ed97470121bce047365b6dc5c1585a6daeac84f1c00c1cdbb55f01d8d",
+      "proposed_sha256": "dc19fd4ed97470121bce047365b6dc5c1585a6daeac84f1c00c1cdbb55f01d8d",
+      "matches_main": true,
+      "actual_sha256": "dc19fd4ed97470121bce047365b6dc5c1585a6daeac84f1c00c1cdbb55f01d8d",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/verification/VER-RLS-036.md",
+      "change": "A",
+      "main_sha256": "b74e6bc1b2d8048e567dbda05491bc63f78932c71855edb8e6e7d58e9819d3d3",
+      "proposed_sha256": "b74e6bc1b2d8048e567dbda05491bc63f78932c71855edb8e6e7d58e9819d3d3",
+      "matches_main": true,
+      "actual_sha256": "b74e6bc1b2d8048e567dbda05491bc63f78932c71855edb8e6e7d58e9819d3d3",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/verification/VER-RLS-037.md",
+      "change": "A",
+      "main_sha256": "b0b158733dd102a40ac52f269425c48b34d0626c2c32aee2ca373773c13b1cb0",
+      "proposed_sha256": "b0b158733dd102a40ac52f269425c48b34d0626c2c32aee2ca373773c13b1cb0",
+      "matches_main": true,
+      "actual_sha256": "b0b158733dd102a40ac52f269425c48b34d0626c2c32aee2ca373773c13b1cb0",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/verification/VER-RLS-038.md",
+      "change": "A",
+      "main_sha256": "6d115dc680dd6e858e025f611465b578c2f453c4bc8f310bd2de5a1a44c9ddcd",
+      "proposed_sha256": "6d115dc680dd6e858e025f611465b578c2f453c4bc8f310bd2de5a1a44c9ddcd",
+      "matches_main": true,
+      "actual_sha256": "6d115dc680dd6e858e025f611465b578c2f453c4bc8f310bd2de5a1a44c9ddcd",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/work-orders/WO-RLS-040.md",
+      "change": "A",
+      "main_sha256": "688762874dc64af54f6f7cadca2f0d84b33841f16c8ca05615a44bcf061109f4",
+      "proposed_sha256": "688762874dc64af54f6f7cadca2f0d84b33841f16c8ca05615a44bcf061109f4",
+      "matches_main": true,
+      "actual_sha256": "688762874dc64af54f6f7cadca2f0d84b33841f16c8ca05615a44bcf061109f4",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/work-orders/WO-RLS-041.md",
+      "change": "A",
+      "main_sha256": "0cd26f5d8e5934d4d81bfa951bb73276406441867ddf2b2e32f52292d77bc4c2",
+      "proposed_sha256": "0cd26f5d8e5934d4d81bfa951bb73276406441867ddf2b2e32f52292d77bc4c2",
+      "matches_main": true,
+      "actual_sha256": "0cd26f5d8e5934d4d81bfa951bb73276406441867ddf2b2e32f52292d77bc4c2",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/work-orders/WO-RLS-042.md",
+      "change": "A",
+      "main_sha256": "d5324d7513ef483fafa8937ed4b2526592154d7783f8e9ee3410e6a3b59acfbb",
+      "proposed_sha256": "d5324d7513ef483fafa8937ed4b2526592154d7783f8e9ee3410e6a3b59acfbb",
+      "matches_main": true,
+      "actual_sha256": "d5324d7513ef483fafa8937ed4b2526592154d7783f8e9ee3410e6a3b59acfbb",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/work-orders/WO-RLS-043.md",
+      "change": "A",
+      "main_sha256": "623c1f5577ac10572f5c0b9ecb8b9e1ca5d442ffd6df74ad9827d6f5eb45ea1e",
+      "proposed_sha256": "623c1f5577ac10572f5c0b9ecb8b9e1ca5d442ffd6df74ad9827d6f5eb45ea1e",
+      "matches_main": true,
+      "actual_sha256": "623c1f5577ac10572f5c0b9ecb8b9e1ca5d442ffd6df74ad9827d6f5eb45ea1e",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/release-0-22-1/work-orders/WO-RLS-044.md",
+      "change": "A",
+      "main_sha256": "8727ed4ce490f8ac3ac1bbfc7aba7acd1e11af7af423e01f9d551fdc219504fe",
+      "proposed_sha256": "8727ed4ce490f8ac3ac1bbfc7aba7acd1e11af7af423e01f9d551fdc219504fe",
+      "matches_main": true,
+      "actual_sha256": "8727ed4ce490f8ac3ac1bbfc7aba7acd1e11af7af423e01f9d551fdc219504fe",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/README.md",
+      "change": "M",
+      "main_sha256": "d1f3c602f98c08a000388ad027239c053eb4f2f41597e5765044163dca76aa2a",
+      "proposed_sha256": "d1f3c602f98c08a000388ad027239c053eb4f2f41597e5765044163dca76aa2a",
+      "matches_main": true,
+      "actual_sha256": "d1f3c602f98c08a000388ad027239c053eb4f2f41597e5765044163dca76aa2a",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-028-evaluator.json",
+      "change": "A",
+      "main_sha256": "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899",
+      "proposed_sha256": "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899",
+      "matches_main": true,
+      "actual_sha256": "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-030-evaluator-upgrade.json",
+      "change": "A",
+      "main_sha256": "3162738e0bc03eeca7b653ea6dbb41ec60388fd162340c4bc72feed6b742d8cd",
+      "proposed_sha256": "3162738e0bc03eeca7b653ea6dbb41ec60388fd162340c4bc72feed6b742d8cd",
+      "matches_main": true,
+      "actual_sha256": "3162738e0bc03eeca7b653ea6dbb41ec60388fd162340c4bc72feed6b742d8cd",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-030/WO-HUP-030-handoff.md",
+      "change": "A",
+      "main_sha256": "993b30924edab7f156c0b69b034d08dcac5f4f16959ee646e22c32a4a78311c7",
+      "proposed_sha256": "993b30924edab7f156c0b69b034d08dcac5f4f16959ee646e22c32a4a78311c7",
+      "matches_main": true,
+      "actual_sha256": "993b30924edab7f156c0b69b034d08dcac5f4f16959ee646e22c32a4a78311c7",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-030/commands.zip",
+      "change": "A",
+      "main_sha256": "8dbc54fd7938eadf4ba854072a7004c468aea00c7b2089bb4b9adc0fbc900917",
+      "proposed_sha256": "8dbc54fd7938eadf4ba854072a7004c468aea00c7b2089bb4b9adc0fbc900917",
+      "matches_main": true,
+      "actual_sha256": "8dbc54fd7938eadf4ba854072a7004c468aea00c7b2089bb4b9adc0fbc900917",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-030/handoff.json",
+      "change": "A",
+      "main_sha256": "06326bdb19dc1a3a72e575b66f5a83c5390b2c6798a293ee13c52ae0b6ed31ec",
+      "proposed_sha256": "06326bdb19dc1a3a72e575b66f5a83c5390b2c6798a293ee13c52ae0b6ed31ec",
+      "matches_main": true,
+      "actual_sha256": "06326bdb19dc1a3a72e575b66f5a83c5390b2c6798a293ee13c52ae0b6ed31ec",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-030/lifecycle.zip",
+      "change": "A",
+      "main_sha256": "d94a4307208d38240d85654deca97a68fe5eef117feb0942949b6af65b67706a",
+      "proposed_sha256": "d94a4307208d38240d85654deca97a68fe5eef117feb0942949b6af65b67706a",
+      "matches_main": true,
+      "actual_sha256": "d94a4307208d38240d85654deca97a68fe5eef117feb0942949b6af65b67706a",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-030/preparation.zip",
+      "change": "A",
+      "main_sha256": "6ec67d8a7503978387840fe57fb83a0f252d2d74d60ed97645a0889decfc37bb",
+      "proposed_sha256": "6ec67d8a7503978387840fe57fb83a0f252d2d74d60ed97645a0889decfc37bb",
+      "matches_main": true,
+      "actual_sha256": "6ec67d8a7503978387840fe57fb83a0f252d2d74d60ed97645a0889decfc37bb",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-030/results.json",
+      "change": "A",
+      "main_sha256": "c65a7d8c0dc950380179df0bb416c00a51ecae62a8b85dddebbbf02ca492a04c",
+      "proposed_sha256": "c65a7d8c0dc950380179df0bb416c00a51ecae62a8b85dddebbbf02ca492a04c",
+      "matches_main": true,
+      "actual_sha256": "c65a7d8c0dc950380179df0bb416c00a51ecae62a8b85dddebbbf02ca492a04c",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-030/review.md",
+      "change": "A",
+      "main_sha256": "d935bd8be2f7f3b23a89c26c86fc307c4223f22f8a72c0ec8356eecd2147f3a3",
+      "proposed_sha256": "d935bd8be2f7f3b23a89c26c86fc307c4223f22f8a72c0ec8356eecd2147f3a3",
+      "matches_main": true,
+      "actual_sha256": "d935bd8be2f7f3b23a89c26c86fc307c4223f22f8a72c0ec8356eecd2147f3a3",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-030/verification-preparation.md",
+      "change": "A",
+      "main_sha256": "3774c74c81e4f0a6b8ed6b3e50cc15ba09cb0d80113a2b961e0992cbc8370897",
+      "proposed_sha256": "3774c74c81e4f0a6b8ed6b3e50cc15ba09cb0d80113a2b961e0992cbc8370897",
+      "matches_main": true,
+      "actual_sha256": "3774c74c81e4f0a6b8ed6b3e50cc15ba09cb0d80113a2b961e0992cbc8370897",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-028.md",
+      "change": "A",
+      "main_sha256": "e8ca19ed0ac4eef5f9cf2e2c34c01881975f2e846c0a081ec75522c14addcc00",
+      "proposed_sha256": "e8ca19ed0ac4eef5f9cf2e2c34c01881975f2e846c0a081ec75522c14addcc00",
+      "matches_main": true,
+      "actual_sha256": "e8ca19ed0ac4eef5f9cf2e2c34c01881975f2e846c0a081ec75522c14addcc00",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/verification/VER-HUP-025.md",
+      "change": "A",
+      "main_sha256": "76b29544b865cf24da2376e057ce1d78e81bcd733c27cecfd900920245c5bf2f",
+      "proposed_sha256": "76b29544b865cf24da2376e057ce1d78e81bcd733c27cecfd900920245c5bf2f",
+      "matches_main": true,
+      "actual_sha256": "76b29544b865cf24da2376e057ce1d78e81bcd733c27cecfd900920245c5bf2f",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-030.md",
+      "change": "A",
+      "main_sha256": "909ca13b20f3601ac8f283cedc13445a0616d7d1e174505b3f070b5b13b9d20b",
+      "proposed_sha256": "909ca13b20f3601ac8f283cedc13445a0616d7d1e174505b3f070b5b13b9d20b",
+      "matches_main": true,
+      "actual_sha256": "909ca13b20f3601ac8f283cedc13445a0616d7d1e174505b3f070b5b13b9d20b",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/engineering/self-hosting-boundary/SELF_HOSTING.md",
+      "change": "M",
+      "main_sha256": "9b9475b0b8280b8de7187d0822ef307302d23c3ef77a23cb8384bb39ee0f259a",
+      "proposed_sha256": "9b9475b0b8280b8de7187d0822ef307302d23c3ef77a23cb8384bb39ee0f259a",
+      "matches_main": true,
+      "actual_sha256": "9b9475b0b8280b8de7187d0822ef307302d23c3ef77a23cb8384bb39ee0f259a",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/notes/developing-se-harness.md",
+      "change": "M",
+      "main_sha256": "557e9915bb807176ac972b44b69e51f9e66397a48606c7617abc1f6b84cb42f9",
+      "proposed_sha256": "557e9915bb807176ac972b44b69e51f9e66397a48606c7617abc1f6b84cb42f9",
+      "matches_main": true,
+      "actual_sha256": "557e9915bb807176ac972b44b69e51f9e66397a48606c7617abc1f6b84cb42f9",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/notes/harness-installation-and-upgrades.md",
+      "change": "M",
+      "main_sha256": "63fffdb45f833e7979220e255466d6f1e513d3fef8918a7e5bbd11046165e62c",
+      "proposed_sha256": "63fffdb45f833e7979220e255466d6f1e513d3fef8918a7e5bbd11046165e62c",
+      "matches_main": true,
+      "actual_sha256": "63fffdb45f833e7979220e255466d6f1e513d3fef8918a7e5bbd11046165e62c",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/notes/harnessctl-reference.md",
+      "change": "M",
+      "main_sha256": "c7382168ead8476bd63baa6d55ef0707457488f20ac3e7bb916d9888fa4c9408",
+      "proposed_sha256": "c7382168ead8476bd63baa6d55ef0707457488f20ac3e7bb916d9888fa4c9408",
+      "matches_main": true,
+      "actual_sha256": "c7382168ead8476bd63baa6d55ef0707457488f20ac3e7bb916d9888fa4c9408",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/notes/plugin-installation-guide.md",
+      "change": "M",
+      "main_sha256": "3700331926d4776dbc8e72c5d921948af3db665b82029f894f6efe814ad644b8",
+      "proposed_sha256": "3700331926d4776dbc8e72c5d921948af3db665b82029f894f6efe814ad644b8",
+      "matches_main": true,
+      "actual_sha256": "3700331926d4776dbc8e72c5d921948af3db665b82029f894f6efe814ad644b8",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/notes/plugin-marketplace-publication.md",
+      "change": "M",
+      "main_sha256": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58",
+      "proposed_sha256": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58",
+      "matches_main": true,
+      "actual_sha256": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "docs/notes/release-delivery-completion.md",
+      "change": "M",
+      "main_sha256": "90f2d5175d32221a16324626b62dc62b176515a980bec2a599143c62fe7b66be",
+      "proposed_sha256": "90f2d5175d32221a16324626b62dc62b176515a980bec2a599143c62fe7b66be",
+      "matches_main": true,
+      "actual_sha256": "90f2d5175d32221a16324626b62dc62b176515a980bec2a599143c62fe7b66be",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+      "change": "M",
+      "main_sha256": "c8f697401450b162ed14f6347933f889dd429af87a00bc7f41a4a5b83ff08d5a",
+      "proposed_sha256": "c8f697401450b162ed14f6347933f889dd429af87a00bc7f41a4a5b83ff08d5a",
+      "matches_main": true,
+      "actual_sha256": "c8f697401450b162ed14f6347933f889dd429af87a00bc7f41a4a5b83ff08d5a",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "plugins/verity-plane/claude-code/README.md",
+      "change": "M",
+      "main_sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91",
+      "proposed_sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91",
+      "matches_main": true,
+      "actual_sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+      "change": "M",
+      "main_sha256": "2e66baca2886908aed7c58cbb7e37fbd4f6eda0fca406718767a651f3882e6a1",
+      "proposed_sha256": "2e66baca2886908aed7c58cbb7e37fbd4f6eda0fca406718767a651f3882e6a1",
+      "matches_main": true,
+      "actual_sha256": "2e66baca2886908aed7c58cbb7e37fbd4f6eda0fca406718767a651f3882e6a1",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "plugins/verity-plane/codex/README.md",
+      "change": "M",
+      "main_sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91",
+      "proposed_sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91",
+      "matches_main": true,
+      "actual_sha256": "bed69d19affd0e924c5238bfa735af159ad5ffefeaa245ae07b329e027d78b91",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "pyproject.toml",
+      "change": "M",
+      "main_sha256": "70a358b2698a734aa84b1a2a7233d2349d31cc667db57b130f9ccb67c85eb8ea",
+      "proposed_sha256": "70a358b2698a734aa84b1a2a7233d2349d31cc667db57b130f9ccb67c85eb8ea",
+      "matches_main": true,
+      "actual_sha256": "70a358b2698a734aa84b1a2a7233d2349d31cc667db57b130f9ccb67c85eb8ea",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "release/plugin-marketplace/README.md",
+      "change": "M",
+      "main_sha256": "ae87cfe32798ad4e27474b8d4bb76a5bb218613a1d8ce73db26d16c3d3e47081",
+      "proposed_sha256": "ae87cfe32798ad4e27474b8d4bb76a5bb218613a1d8ce73db26d16c3d3e47081",
+      "matches_main": true,
+      "actual_sha256": "ae87cfe32798ad4e27474b8d4bb76a5bb218613a1d8ce73db26d16c3d3e47081",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "se_harness/__init__.py",
+      "change": "M",
+      "main_sha256": "278ed8727d91e736a8ee11507af47b5b2cf503f53fb10b87be5b50dc0638f668",
+      "proposed_sha256": "278ed8727d91e736a8ee11507af47b5b2cf503f53fb10b87be5b50dc0638f668",
+      "matches_main": true,
+      "actual_sha256": "278ed8727d91e736a8ee11507af47b5b2cf503f53fb10b87be5b50dc0638f668",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "se_harness/workflow.py",
+      "change": "M",
+      "main_sha256": "8d2d33e4642864d252ae10049c8165511faabccc8c1aa42d488fecc364cd6136",
+      "proposed_sha256": "8d2d33e4642864d252ae10049c8165511faabccc8c1aa42d488fecc364cd6136",
+      "matches_main": true,
+      "actual_sha256": "8d2d33e4642864d252ae10049c8165511faabccc8c1aa42d488fecc364cd6136",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "tests/plugin_integration/package_assembly/test_refresh_guidance.py",
+      "change": "M",
+      "main_sha256": "b91b902105d69708418a8ee66abb589411838a938efa3158b85c69f914c35ea9",
+      "proposed_sha256": "b91b902105d69708418a8ee66abb589411838a938efa3158b85c69f914c35ea9",
+      "matches_main": true,
+      "actual_sha256": "b91b902105d69708418a8ee66abb589411838a938efa3158b85c69f914c35ea9",
+      "equal_to_reviewed": true
+    },
+    {
+      "path": "tests/test_workflow_execution.py",
+      "change": "M",
+      "main_sha256": "805aaf05a9b0d2f2b8945349caa9ee30558a3b5411d213a8686716c708f74949",
+      "proposed_sha256": "805aaf05a9b0d2f2b8945349caa9ee30558a3b5411d213a8686716c708f74949",
+      "matches_main": true,
+      "actual_sha256": "805aaf05a9b0d2f2b8945349caa9ee30558a3b5411d213a8686716c708f74949",
+      "equal_to_reviewed": true
+    }
+  ],
+  "revisions": [
+    {
+      "id": "SPEC-HAG-003",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md",
+      "state": "approved",
+      "source_commit": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+      "before_sha256": "e6ea2418a6e4a734dc160c30676742b4afa11cf7784bbe010ce69118b9025499",
+      "after_sha256": "411ea506a1ce9ee8de0bf6b34ba095dc0ce39186acac7796f4e2bad2ff3975bb",
+      "previous_evidence_path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-005/SPEC-HAG-003-accepted-before.txt",
+      "proposed_transient_file": "SPEC-HAG-003-proposed.txt"
+    },
+    {
+      "id": "VER-HAG-001",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md",
+      "state": "approved",
+      "source_commit": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+      "before_sha256": "744ca93c38acbed841db2047c15017d417bbfb95efead8a41ccdd911b7653dac",
+      "after_sha256": "7e717148ddee865126b2ffb935b3e348a56321654007ce9abf19d3f2d8df6f6d",
+      "previous_evidence_path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-005/VER-HAG-001-accepted-before.txt",
+      "proposed_transient_file": "VER-HAG-001-proposed.txt"
+    }
+  ],
+  "all_pass": true
+}

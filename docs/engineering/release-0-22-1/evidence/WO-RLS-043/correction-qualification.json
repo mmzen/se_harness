@@ -1,0 +1,75 @@
+{
+  "work_order": "WO-RLS-043",
+  "verification": "VER-RLS-004",
+  "status": "implementation qualification in progress",
+  "reviewed_commit": "dbc0144e3830087f1d4c267e76322f6d0e92edf4",
+  "archive": "approval-and-regressions.zip",
+  "archive_sha256": "e0438e081f395f5db6b8b9370ec54ff910b45883f3327b1533cd51adc1bb38e3",
+  "members": [
+    {
+      "name": "fix043-approval-apply.json",
+      "sha256": "904bd1e77fc9285e366179e910e1353c3c12bd5e2862de5a76d51fa796940a6f"
+    },
+    {
+      "name": "fix043-approval-bindings.json",
+      "sha256": "e10c7c850740e0dd22295b9cecea7ddcd3e00619726e1911ba2ff5d99f598c19"
+    },
+    {
+      "name": "fix043-approval-preview.json",
+      "sha256": "55313d6554c6bc44e0e3241455ec5fb1e20fbf73e12f4220bc5517dac22b7b08"
+    },
+    {
+      "name": "fix043-approved.json",
+      "sha256": "a1010a2543d43948e9beca86f18262c48ef2fe09e22021376077417b8fb50f30"
+    },
+    {
+      "name": "fix043-context.json",
+      "sha256": "16d6e2dcf0aff78901ca6dce1c36ee8adae29a33298b1df57631c3033d5bbc89"
+    },
+    {
+      "name": "fix043-focused-fixture-corrected.json",
+      "sha256": "8f3ffea4731391f379a16821ee2f9b7d0ce3a03a9982704f2ecf459b594859df"
+    },
+    {
+      "name": "fix043-focused.json",
+      "sha256": "acac7d910523343364257988aa398f879f8d337c786aa4ab6f061762b0bb03ec"
+    },
+    {
+      "name": "fix043-preflight-fixture-corrected.json",
+      "sha256": "75b255422541930d88c7e922c5cfc1810ee3185298a27fb9c92cc2f411369d41"
+    },
+    {
+      "name": "fix043-scope.json",
+      "sha256": "55abb84a1c0881828d16e35c9cb2ad2a86251984b35d4b1b9f91b87d015023d3"
+    },
+    {
+      "name": "fix043-start-apply.json",
+      "sha256": "191b71f3485fc87cfb908fa154038b63c051b53b52a09b398e6e6285f2c40cc3"
+    },
+    {
+      "name": "fix043-start-preflight.json",
+      "sha256": "ae1cad2d3dc5cac313fb67b2f648f6fe33c0f0d408b1ec62a939a1d803c7d990"
+    },
+    {
+      "name": "fix043-start-preview.json",
+      "sha256": "942a98fc3a447a29facb84b48c3372a84296dea5bd1b1b6d8226a68107101558"
+    },
+    {
+      "name": "r221_fix043_authorize.py",
+      "sha256": "077f9a2ac5ba4580dd6341a58a75bb92d43230cb169c49a1c52ac68a41156302"
+    }
+  ],
+  "implementation": {
+    "se_harness/workflow.py": "8d2d33e4642864d252ae10049c8165511faabccc8c1aa42d488fecc364cd6136",
+    "tests/test_workflow_execution.py": "805aaf05a9b0d2f2b8945349caa9ee30558a3b5411d213a8686716c708f74949"
+  },
+  "review": [
+    "Absence is retained as None for declared evidence; empty bytes remain distinct. Required formal and policy inputs must still be readable.",
+    "The apply boundary rechecks path safety and every snapshot input. Appearance, disappearance and content changes invalidate the plan before staging.",
+    "Only FileNotFoundError may represent absent evidence. Other filesystem read failures use the existing structured HarnessError path.",
+    "No lifecycle policy, CLI, schema, dependency, required evidence gate, write set or rollback algorithm is changed.",
+    "Regression failures exposed incomplete links/history and a non-domain-qualified work-order ID in the new synthetic fixture. All failed runs are preserved; the corrected selected-start case passes.",
+    "The focused run passed existing rollback and the new required-evidence, stale-input, permission and directory cases. Windows symlink capability was unavailable; Linux qualification must execute that case.",
+    "Full source suites, exact installed packages, changed plugin qualification and the interrupted native Claude walkthrough remain pending; no final VREC or release readiness is claimed."
+  ]
+}

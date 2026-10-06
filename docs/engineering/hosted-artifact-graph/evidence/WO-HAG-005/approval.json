@@ -1,0 +1,64 @@
+{
+  "human": "mmzen",
+  "response": "I approve",
+  "reason": "Human mmzen answered \"I approve\" to the reviewed WO-HAG-005 / VER-HAG-004 request, including DEC-HAG-002 bounded-manual-revision for the exact SPEC-HAG-003 and VER-HAG-001 replacements, required commit-bound verification, and ordinary updates to draft PR #535 in mmzen/se_harness from codex/hosted-artifact-phase1 to codex/hosted-artifact-graph-inputs, including ready-record review and the later separately supplied verification decision. The review binding SHA-256 is 2dd5104adee7a1f8cc94df384ae62f6cbc0169448d91dae738dedb7292acab0a. Earlier accepted bytes and lifecycle history are preserved. This is an explicit bounded manual amendment authorization; it grants no general amendment mechanism, verification acceptance, risk acceptance, merge, release or deployment. No machine lifecycle rule or required gate is waived.",
+  "review_binding": {
+    "review_only": true,
+    "head": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+    "main": "d7eeb2ae785928925669695074be7bdd6ccb1e0a",
+    "target": "be1812e7042081014cc7682da8b9cd3822d9071f",
+    "records": [
+      {
+        "id": "WO-HAG-005",
+        "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-005.md",
+        "sha256": "70bd19d02be8f38bba98343669cadbe3ba5e36c598d35c344f4d23cd45477c60",
+        "state": "draft"
+      },
+      {
+        "id": "VER-HAG-004",
+        "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-004.md",
+        "sha256": "d9428023f7573f00062153e4aaa3543cbeac91c01f68c7cc829aef150edc1834",
+        "state": "draft"
+      },
+      {
+        "id": "DEC-HAG-002",
+        "path": "docs/engineering/hosted-artifact-graph/decisions/DEC-HAG-002.md",
+        "sha256": "e1542092c1e8e30e91a5be858a7e2bc157ee8f384c47e46550a98704a386f421",
+        "state": "open"
+      }
+    ],
+    "definition_revisions": [
+      {
+        "id": "SPEC-HAG-003",
+        "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md",
+        "state": "approved",
+        "source_commit": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+        "before_sha256": "e6ea2418a6e4a734dc160c30676742b4afa11cf7784bbe010ce69118b9025499",
+        "after_sha256": "411ea506a1ce9ee8de0bf6b34ba095dc0ce39186acac7796f4e2bad2ff3975bb",
+        "previous_evidence_path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-005/SPEC-HAG-003-accepted-before.txt",
+        "proposed_transient_file": "SPEC-HAG-003-proposed.txt"
+      },
+      {
+        "id": "VER-HAG-001",
+        "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md",
+        "state": "approved",
+        "source_commit": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+        "before_sha256": "744ca93c38acbed841db2047c15017d417bbfb95efead8a41ccdd911b7653dac",
+        "after_sha256": "7e717148ddee865126b2ffb935b3e348a56321654007ce9abf19d3f2d8df6f6d",
+        "previous_evidence_path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-005/VER-HAG-001-accepted-before.txt",
+        "proposed_transient_file": "VER-HAG-001-proposed.txt"
+      }
+    ],
+    "patch_sha256": "67ed0f96551c4585b9d8607f338db34d48bedb253e4107200f19e177404c25ca",
+    "index_resolution_sha256": "94c4790f7f66e021a0be0012d6d6e60b9e333b45f4e526f8237e7361bbac0127",
+    "integration_manifest_sha256": "cc639ecf8552ee985955af6889416d5b9ea371d75edf7e1007039e2e155c9752",
+    "checks": {
+      "artifacts": 1944,
+      "errors": 0,
+      "warnings": 61,
+      "planned_paths": 193,
+      "uncovered": 0,
+      "invalid": 0
+    }
+  }
+}

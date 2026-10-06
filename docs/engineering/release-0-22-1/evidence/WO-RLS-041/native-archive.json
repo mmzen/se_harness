@@ -1,0 +1,131 @@
+{
+  "path": "native-initial.zip",
+  "sha256": "b918f6c70155e2e65a6126f1336584327e18d3c30d5488b8ee9a97ac798ac1a5",
+  "entries": [
+    {
+      "path": "r221-session-20261004/cross-platform-package-comparison-command.json",
+      "bytes": 3112,
+      "sha256": "42a65410433684749a0293bd172c1e989906aa16a4d35b1740a4b2715e5f7cec"
+    },
+    {
+      "path": "r221-session-20261004/cross-platform-package-comparison.json",
+      "bytes": 15932,
+      "sha256": "723c6dd2c7aab442514762dc19aebc5a74395ca0e0073747dbc9d5d01c7fb4fe"
+    },
+    {
+      "path": "r221-session-20261004/plugin-check-stage.json",
+      "bytes": 2902,
+      "sha256": "4856394ac77f70bbf1865da18f41a554e5252a137c0178634cbe943911490169"
+    },
+    {
+      "path": "r221-session-20261004/plugin-context.json",
+      "bytes": 23051,
+      "sha256": "76522a5a537a6a6212b4d1cb2fa1ecefdacc888e8b5044beedf20bf3eff4d82a"
+    },
+    {
+      "path": "r221-session-20261004/plugin-stage.json",
+      "bytes": 2896,
+      "sha256": "47f5ced46834ab71ebbc5411e558170c3c5d0a8427710c1414e3d399012b7af3"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-boundaries-events/native-events.jsonl",
+      "bytes": 115779,
+      "sha256": "99bd0b7924ea263a725609744612633563ae24ec54f320d04c9f2b6909f58534"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-boundaries-native-codex.json",
+      "bytes": 131904,
+      "sha256": "bbd4baef0b80bb27b5d002b78a5d1acb1f8e18bd66941b93a74bc5439e5afbaa"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-native-claude-auto-recovery.json",
+      "bytes": 119591,
+      "sha256": "6c71e507056e56bde7e38b9461fb6fc9f6653909d11e0586acc4df541332922b"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-native-claude-boundaries-20261004.json",
+      "bytes": 405996,
+      "sha256": "b351f9dfbd2fb7b688d2ceb7029e8fd10a79b1de96deaadc74e3566414700a3e"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-native-claude.json",
+      "bytes": 403710,
+      "sha256": "ab29fe64ad2545e893f7d5986c7edcef14c0ba69a338a888db21cba0151688e1"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-trusted-native-codex-events/automatic/native-events.jsonl",
+      "bytes": 28046,
+      "sha256": "ad5f5498f84fb33254e560d18b267de789e11a44139a58653cbc43246b45f898"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-trusted-native-codex-events/native-events.jsonl",
+      "bytes": 21814,
+      "sha256": "bc3cfb3ddc34ac3922cbfc7935e8d3fae4dac643c9fc2a41d5d74526574d749f"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-trusted-native-codex-events/resume/native-events.jsonl",
+      "bytes": 15193,
+      "sha256": "0cd0d5dddfffff8d27c00201480356d87f90002872b6f0843fe06334f2625ce7"
+    },
+    {
+      "path": "r221-session-20261004/plugin026-trusted-native-codex.json",
+      "bytes": 72412,
+      "sha256": "5510e89a555ee56c6c4442852ee0634d0de37aee08f61992ffe6e364b691922d"
+    },
+    {
+      "path": "r221-session-20261004/start041-apply.json",
+      "bytes": 19853,
+      "sha256": "10d90db90d641583c7a33c059b8463ca1e4e27dae9c8248f38084fe050d56be7"
+    },
+    {
+      "path": "r221-session-20261004/start041-preflight.json",
+      "bytes": 3379,
+      "sha256": "ac6d7d05ffe3f05a30b689d442d8500bdb53dbf5d0afad844cc0a51cf25d55a0"
+    },
+    {
+      "path": "r221-session-20261004/start041-preview.json",
+      "bytes": 19849,
+      "sha256": "e2c826495a55fd1b94af3c8c54ee1278086f20939206ca75ac8c25d9134a13b3"
+    },
+    {
+      "path": "r221_boundaries_claude.py",
+      "bytes": 4947,
+      "sha256": "461d8dd2a67515c928a696ec16ca0b8562df2c7e9c3477e4b175928b320bb860"
+    },
+    {
+      "path": "r221_boundaries_codex.py",
+      "bytes": 8895,
+      "sha256": "b4f5d8581c869d6a5ce913d8feae22154410b6aacede9a3b57b0b370b2409e3a"
+    },
+    {
+      "path": "r221_boundaries_prepare.py",
+      "bytes": 1203,
+      "sha256": "27243d68d3dfeb42a986b699f27d8891c71ae2fba35cad76da3ae696e6302ec6"
+    },
+    {
+      "path": "r221_claude_resume_auto.py",
+      "bytes": 2304,
+      "sha256": "3cebb8b06b18d35e0b3d988e360e161777ca7d0b226d3dac92f7159f4b0078cf"
+    },
+    {
+      "path": "r221_compare_packages.py",
+      "bytes": 2062,
+      "sha256": "31bb1b11c851201c1e69999f1ae5fac15d30cbb44468a02da3fdc265d96186bb"
+    },
+    {
+      "path": "r221_native_claude.py",
+      "bytes": 10957,
+      "sha256": "9365b99e8c0d9ddcd565183c2066d63595e8a7d728ee279c011858a775013fdc"
+    },
+    {
+      "path": "r221_native_codex.py",
+      "bytes": 11852,
+      "sha256": "76b6921036a0040ce652718f5153de428d502ca40e327b67a0d1814df687c865"
+    },
+    {
+      "path": "r221_native_prepare.py",
+      "bytes": 1206,
+      "sha256": "556a31a04d51bd14ac259b101f6952e3144b9416399d4920523bb3b7c996fbd3"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "scope": "Authorized unfinished-work draft update only",
+  "archive": "protocol04-publication-checks.zip",
+  "sha256": "1f513599bead0f25608440ca0c96b3366b8f69775dd1ea7b557fd68e36c1cd04",
+  "initial_check": "Missing current WO-HAG-001 handoff evidence; retained as a failure",
+  "correction": "Preserved prior packet bytes, rebound only through the released evaluator, added explicit incomplete-qualification report",
+  "final_check": "check-pr passed for original base be1812e7042081014cc7682da8b9cd3822d9071f and complete union WO-HAG-001/003/004/005/006/007",
+  "not_claimed": [
+    "implementation completion",
+    "hosted verification acceptance",
+    "merge readiness"
+  ]
+}

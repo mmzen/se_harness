@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:se-harness:remote-wire:v1",
   "title": "Hosted sandbox wire shapes",
-  "description": "Structural shapes for SPEC-HAG-001/002. Semantic, authorization and evaluator admission remain required; DEC-HAG-001 records an unresolved admission dependency. Formats require an enabled format checker. Reject duplicate JSON keys, non-integer numbers and unknown fields before schema validation.",
+  "description": "Wire shapes only. Exact released evaluator and client compatibility is enforced separately, after accepted-key lookup, by the configured sandbox tuple.",
   "$ref": "#/$defs/Command",
   "$defs": {
     "Evaluator": {
@@ -10,13 +10,16 @@
       "additionalProperties": false,
       "properties": {
         "version": {
-          "const": "0.22.0"
+          "type": "string",
+          "minLength": 1
         },
         "archive_sha256": {
-          "const": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4"
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
         },
         "payload_sha256": {
-          "const": "b4464e0c55814ee62a6e844d712503188493dacf841aeac90d5f270e8c6836c9"
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
         }
       },
       "required": [

@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-10-06T01:54:25.195273+00:00",
+  "candidate": "5fa50787dba1fdd010f625335d844416dd3bf002",
+  "combination_id": "sha256:435c059909edcc93b029508058546cd20a5e005bc5b818e6707281df4953a633",
+  "selected_work": {
+    "WO-HAG-001": "in_progress",
+    "WO-HAG-007": "in_progress"
+  },
+  "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+  "outputs": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-claude-20261006",
+  "sandbox": {
+    "project": "hagmcp20261006",
+    "endpoint": "http://127.0.0.1:18088",
+    "selection_file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-claude-20261006\\sandbox-05-selection.json",
+    "boundary_context_version": 4
+  },
+  "remaining": [
+    "Native-agent accuracy for large MCP results: the broad impact output was partial, but Claude called it complete without reading the host output file.",
+    "Codex native agent previously could not read candidate guidance under its tool policy; no new Codex run in this report.",
+    "Desktop unperformed; previous public-release omissions do not cover this candidate.",
+    "Final exact-tuple qualification including independent evaluator/recovery assessment; historical candidate04 evidence remains distinct."
+  ],
+  "next_context_command": [
+    "harnessctl",
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+    "--artifact",
+    "WO-HAG-001",
+    "--json"
+  ],
+  "recorded_next_step": "STEP-WO-IMPLEMENT-CHECK",
+  "notice": "Obtain fresh released context; this evidence is not a lifecycle decision or permission to complete."
+}

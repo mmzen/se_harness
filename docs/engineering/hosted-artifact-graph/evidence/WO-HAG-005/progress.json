@@ -1,0 +1,49 @@
+{
+  "work_order": "WO-HAG-005",
+  "state": "in_progress",
+  "source_test_commit": "a6e1a1a0dd04e5d5e4794bbf9171b0bb7b21ea3c",
+  "local_progress_commit": "f73b0232c3433a429aa47aa540a4217b6b2cb020",
+  "original_hag": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+  "integrated_main": "d7eeb2ae785928925669695074be7bdd6ccb1e0a",
+  "original_pr_base": "be1812e7042081014cc7682da8b9cd3822d9071f",
+  "selected_evaluator": "0.22.1",
+  "decision": "DEC-HAG-001 decided: extend-evaluator; human mmzen; authority_owner engineering-owner",
+  "source_suite": {
+    "reported_tests": 1311,
+    "reported_skips": 23,
+    "exit": 0
+  },
+  "draft_probes": {
+    "passed": 7,
+    "failed": 0
+  },
+  "preserved_hag_files": 134,
+  "reviewed_transport_files": 180,
+  "hosted_scenarios_run": 0,
+  "completion": false,
+  "verification_record_created": false,
+  "pushed": false,
+  "blockers": [
+    {
+      "check": "Predecessor evaluator assessment",
+      "error": "trusted base must contain exactly one released distribution for the target version",
+      "base": "be1812e7042081014cc7682da8b9cd3822d9071f",
+      "observation": "original-base-predecessor-clean-result.json"
+    },
+    {
+      "check": "check-pr from original base",
+      "predicate": "QGP-G4I-EVIDENCE",
+      "artifact": "WO-HAG-001",
+      "observation": "combined-original-base-scope.json",
+      "error": "Current packet is bound to the old formal snapshot. The prior complete bytes must be preserved before an authorized supported rebind."
+    }
+  ],
+  "proposed_correction": {
+    "work_order": "WO-HAG-006",
+    "specification": "SPEC-HAG-006",
+    "verification": "VER-HAG-005",
+    "decision": "DEC-HAG-003",
+    "approved": false
+  },
+  "limitations": "Windows reconciliation checks only. Prior tests are not tests of a future CI correction. RISK-HAG-001 stays raised; hosted WO-HAG-001 stays in_progress."
+}

@@ -1,0 +1,215 @@
+{
+  "state": "in_progress; partial qualification only",
+  "work_order": "WO-HAG-001",
+  "source_candidate": "c067608f71503f62fa6c9aa2f081515545bc350e",
+  "combination": {
+    "combination_id": "sha256:b9418a3d90247859afa52dd0e2511d568489134ef69390ef2a1895a7f272e1d1",
+    "payload": {
+      "schema": "se-harness-hosted-combination/v1",
+      "source": {
+        "repository": "https://github.com/mmzen/se_harness.git",
+        "candidate_commit": "c067608f71503f62fa6c9aa2f081515545bc350e"
+      },
+      "client": {
+        "version": "0.22.2",
+        "wheel_sha256": "2ed8c301e5e2ed070a11820f7b77df4c70c30dc920295568f9e55a56c1cb918f"
+      },
+      "plugins": {
+        "codex": {
+          "version": "0.2.7",
+          "archive_sha256": "7ccc5f1af7d51eacb7f3225112f4a714aab4a9efb88d5d610ae72b2eab85a987",
+          "inventory_sha256": "cf55266536e5a904750a5325957b8ece6557a3ca9edaab17a3dc383fb47116ce"
+        },
+        "claude": {
+          "version": "0.2.7",
+          "archive_sha256": "81f58ed590e0d1cfca43f0e4ffc644824edf49ae8cc614fb260e05f500449e58",
+          "inventory_sha256": "9a4dda9d789394425808551571bd886a0f462250fc2a542ff3db951035fc1604"
+        }
+      },
+      "server": {
+        "version": "0.1.0.dev1",
+        "wheel_sha256": "eefd0e448afca9be142f4e4479a89aabc703ed4203f8efe6fed324aa00adb601",
+        "image_manifest": "sha256:ab4b86de688695d76c50d7a27b17d48c6c177530c708a96a0085d81fee301621",
+        "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+        "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d"
+      },
+      "evaluator": {
+        "version": "0.22.1",
+        "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+        "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff"
+      },
+      "runtime": {
+        "python": "3.13.16",
+        "platform": "linux/amd64",
+        "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4"
+      },
+      "database": {
+        "version": "3.13.1",
+        "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce"
+      },
+      "schema_revision": 1,
+      "protocols": [
+        "se-harness-remote-command/v1",
+        "se-harness-remote-result/v1",
+        "se-harness-graph-read/v1",
+        "se-harness-artifact-revision/v1",
+        "se-harness-artifact-baseline/v1"
+      ],
+      "deployment_sha256": "382f9e42f3f3672c7f2815f9d2f33d9bdab506c133ed34dfa4b3d34f8163c712",
+      "required_secret_keys": [
+        "principals[].token"
+      ]
+    },
+    "state": "built; qualification pending",
+    "commands": [
+      "source-commit.json",
+      "source-status.json",
+      "plugin-assembly.json",
+      "server-build.json",
+      "image-package.json"
+    ]
+  },
+  "observed_passes": [
+    "Pinned client replay produces equal wheels and sdists",
+    "Explicit uninitialized-store refusal, initialization and readiness",
+    "18-step installed-client sequence including draft and refusal/retry cases",
+    "15 malformed/protected/unsupported/stale refusals preserve all store effects",
+    "Concurrent distinct requests: one acceptance, one stale refusal",
+    "Concurrent identical keys: one shared accepted receipt on later direct and HTTP runs",
+    "Injected failures before commit roll back all graph, receipt and version effects",
+    "Shared HTTP/MCP parity for all six domain reads and Cypher",
+    "Rows, bytes, depth, view isolation and unsupported Cypher forms",
+    "Independent released-evaluator context equality and all 1909 original raw blob hashes; legacy path/code/line-ending variants"
+  ],
+  "qualification_failure": {
+    "file": "c067-boundaries/017-concurrent-equal.json",
+    "observed": "Both original HTTP requests returned 503 unknown; store version and whole-store fingerprint unchanged.",
+    "recovery": "Absent receipt confirmed before same-key retry. Two direct retries then returned one shared accepted result. Subsequent diagnostic HTTP and original-service HTTP concurrent tests passed.",
+    "status": "Original transient failure remains unexplained; no clean overall qualification claim."
+  },
+  "regression": {
+    "candidate_source_suite": "1319 tests, 23 skips, 3 integration failures at the selected source commit",
+    "distribution": "pass, 23 distribution-bearing records",
+    "cli_smoke": "pass",
+    "correction": "WO-HAG-007 draft prepared separately. Its three-file disposable proposal passes 70 focused tests, the 1319-test suite (23 skips), and distribution checks. It is not applied to this candidate."
+  },
+  "pending": [
+    "WO-HAG-007 scope/assurance and review-publication approval",
+    "Remaining complete-import and synthetic blocking-decision/missing-binding variants",
+    "Actual same-version archive/payload substitution and full tuple/schema negative qualification",
+    "Actual query-time boundary observation",
+    "Native candidate plugin loading and plugin-guided walkthrough evidence",
+    "Lost-response and restart/restore qualification on the final combined tuple",
+    "Final full checks, complete handoff and commit-bound verification"
+  ],
+  "preserved": [
+    "Historical VREC-HAG-001/002/003 bindings and accepted definitions",
+    "Original source snapshot 82f5a0ed7438a73da8f03aee23ad02a9b8cc09e1",
+    "Earlier development failures, source volumes and recovery archives",
+    "RISK-HAG-001 remains raised; no database read-only-enforcement or authoritative pilot claim"
+  ],
+  "publication": {
+    "url": "https://github.com/mmzen/se_harness/pull/535",
+    "head": "fed9d4897eb1840ebe0348f13577f8fdd22194d2",
+    "draft": true,
+    "target": "codex/hosted-artifact-graph-inputs",
+    "phase2_pushed": false,
+    "checks": [
+      {
+        "conclusion": "SUCCESS",
+        "name": "validate",
+        "status": "COMPLETED",
+        "workflowName": "Engineering Harness"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Predecessor evaluator assessment",
+        "status": "COMPLETED",
+        "workflowName": "Predecessor Evaluator Assessment"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Select release rehearsals",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Candidate source evidence",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Candidate package evidence",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "conclusion": "SKIPPED",
+        "name": "Rehearse the qualification of the release record",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Upgrade rehearsal (Linux)",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Upgrade rehearsal (Windows)",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "conclusion": "SKIPPED",
+        "name": "Rehearse complete delivery and recovery without publication",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Build deterministic integration package",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Publication rehearsal",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Verify integration package (Linux)",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Verify integration package (Windows)",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "conclusion": "SUCCESS",
+        "name": "Retain verified integration package",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      }
+    ]
+  },
+  "evidence_archive": {
+    "file": "c067-observations.zip",
+    "sha256": "728218f1bfe30d77a66ee05de601d1f9f41ba5fa618514b6a55263e1304d2a2f"
+  },
+  "next": "Continue STEP-WO-IMPLEMENT-CHECK preparation; full handoff is not yet ready."
+}

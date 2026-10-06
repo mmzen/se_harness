@@ -1,0 +1,21 @@
+{
+  "actor": "mmzen",
+  "authority": "Human mmzen answered \"I approve\" to SPEC-HAG-006, VER-HAG-005 and WO-HAG-006, required commit-bound verification, DEC-HAG-003 bounded-manual-revision of the exact VER-HAG-004 proposal, and ordinary draft PR #535 updates in mmzen/se_harness from codex/hosted-artifact-phase1 to codex/hosted-artifact-graph-inputs. Review binding SHA-256 c9d4d84326b0e26d39519a1eadb91e216e4a6f01700213ec3c76a6854e55a649. This covers local implementation, checks, aggregate ready-record publication and later separately given verification-decision push. No verification acceptance, risk acceptance, retargeting, base-branch update, force push, merge, release or deployment. The exact manual amendment grants no general revision mechanism or gate waiver.",
+  "activated_at": "2026-10-05T13:27:31.501572+00:00",
+  "review_binding": "c9d4d84326b0e26d39519a1eadb91e216e4a6f01700213ec3c76a6854e55a649",
+  "amendment": {
+    "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-004.md",
+    "before_sha256": "a655e2a0ec03a31245a426ff9b38167825fcd6a34b92a405f0d47a714dcd8795",
+    "after_sha256": "574a4505a315a1eecc9f07f5c1c12ac04e6faca2f8a0843fbe193db73702c474",
+    "preserved_path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-006/VER-HAG-004-accepted-before.txt",
+    "packet": {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-001/WO-HAG-001-handoff.md",
+      "source_commit": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+      "sha256": "d109592865da42c88b176fe988492cb9643891aff29ac521d9434689ee7fcddf",
+      "preserved_path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-006/WO-HAG-001-handoff-before.txt"
+    },
+    "applied": false
+  },
+  "applied": true,
+  "lifecycle_history_unchanged": true
+}

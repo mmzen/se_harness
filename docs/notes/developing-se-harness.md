@@ -6,7 +6,7 @@
 
 The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. Exact public 0.5.0 later governed the 0.6.0 release through the ordinary standard repository lifecycle. On 2026-08-23, the separately governed `WO-HUP-002` transaction adopted exact public 0.6.0 as the standard root evaluator. No self-hosting installation profile, evaluator descriptor, or special promotion command was introduced. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
 
-Development source in this checkout reports 0.22.1; it is not published by this adoption. Exact public 0.22.0 is bound by RLS-SEH-032. Source execution does not establish released-evaluator identity. The repository is governed by independently installed public 0.22.0, adopted under `WO-HUP-028`. The schema-5 lock selects external wheel resources and retains the public wheel and payload digests. Candidate source remains development evidence even when its version matches the released evaluator.
+Development source in this checkout reports 0.22.2; it is not published by this adoption. Exact public 0.22.1 is bound by RLS-SEH-033. Source execution does not establish released-evaluator identity. The repository is governed by independently installed public 0.22.1, adopted under `WO-HUP-030`. The schema-5 lock selects external wheel resources and retains the public wheel and payload digests. Candidate source remains development evidence even when its version matches the released evaluator.
 
 In evaluator examples, `harnessctl` means the absolute Python executable of
 the repository's selected released evaluator followed by `-I -m se_harness`.
@@ -46,11 +46,13 @@ Candidate behavior does not adopt its layout into this development repository.
 ## Agent skills for this checkout
 
 Agent skills and native instruction delivery come from each host's installed
-Verity Plane plugin. Public plugin 0.2.5 bundles evaluator 0.22.0 at marketplace
-commit `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. Publication does not update a user's local
-plugin or a repository's evaluator. WO-HUP-028 selects 0.22.0 here.
-[Current public observations](../engineering/release-0-22-0/evidence/WO-RLS-036/README.md)
-record Codex CLI routes and the explicitly untested Claude and desktop surfaces.
+Verity Plane plugin. Public plugin 0.2.6 bundles evaluator 0.22.1 at marketplace
+commit `85ae003769f53908addbdcf46c820a8af530ac24`. Publication does not update a user's local
+plugin or a repository's evaluator. WO-HUP-030 selects 0.22.1 here.
+[Current public observations](../engineering/release-0-22-1/evidence/WO-RLS-042/closeout-assessment.md)
+record Windows Codex and Claude Code CLI fresh/update routes and offline setup.
+Codex Windows desktop remains unverified under DEC-RLS-009 / RISK-RLS-007;
+these public-route observations do not claim new live model-session tests.
 
 Use the [plugin installation guide](plugin-installation-guide.md) for the
 published package identity and installation commands.
@@ -262,13 +264,20 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 
 ## Release sequences
 
+The [0.22.1 / plugin 0.2.6 release](../engineering/release-0-22-1/README.md)
+completed the complete-release route. Candidate qualification, final approval
+and public delivery have separate records. Public latest is 0.22.1.
+WO-HUP-030 adopts that evaluator. WO-HAG-005 reconciles the hosted-service
+contract with 0.22.1 while preserving the previous definitions and evidence.
+
+
 The [0.22.0 package](../engineering/release-0-22-0/README.md) has published
 evaluator 0.22.0 and plugin 0.2.5 under selected evaluator 0.21.0. WO-RLS-035
 retains marketplace qualification/publication; WO-RLS-036 retains public-route
 checks, current guidance and the remaining delivery closeout. Repository adoption
 and provider configuration remain separate.
 
-The prospective [complete-release route](release-delivery-completion.md#one-approval-for-the-complete-release)
+The [complete-release route](release-delivery-completion.md#one-approval-for-the-complete-release)
 prepares and verifies the evaluator, plugin packages and other delivery inputs
 before one final approval. It adds exact marketplace promotion, public-route
 checks and latest/last recovery to the existing publisher. Select it explicitly
@@ -305,7 +314,7 @@ steps. The integrated successor now follows the separate 0.21.0 release package.
 Owner content moved here from the retired repository-context document under `WO-ADS-002`. It grants no authority; every step below runs only under the approved work order or release record it names.
 
 - Candidate version bump: raise `pyproject.toml` to the new version. Since `WO-ECP-010` (issue #210) no migration scenario accompanies it: `repository_tools.evaluator_facts derive` needs only the declared root and the candidate version, and the `upgrade-rehearsal` legs rehearse the real `upgrade --apply` of that candidate against an export holding the predecessor's lock, failing when the resulting lock does not name the candidate's version and payload. `tests/test_ci_pipeline.py` asserts that a bump needs no scenario.
-- Release contract with the WO-KIS-004 candidate: the owner chooses the final candidate and approves its work scope. `harnessctl release-unit REPO --from <tag> --to <commit>` is an advisory census; missing trailers need no exemptions. Capture and explicitly verify one final VREC covering all released work and required verification contracts, with evidence that the final integration was tested. Earlier records may have different commits and remain historical evidence. `prepare-release` binds that final VREC at its exact candidate. The selected 0.22.0 evaluator applies these checks after the authorized `WO-HUP-028` adoption.
+- Release contract with the WO-KIS-004 candidate: the owner chooses the final candidate and approves its work scope. `harnessctl release-unit REPO --from <tag> --to <commit>` is an advisory census; missing trailers need no exemptions. Capture and explicitly verify one final VREC covering all released work and required verification contracts, with evidence that the final integration was tested. Earlier records may have different commits and remain historical evidence. `prepare-release` binds that final VREC at its exact candidate. The selected 0.22.1 evaluator applies these checks after the authorized `WO-HUP-030` adoption.
 - Build: under an approved release work order and after the exact candidate commit exists, run `python -m repository_tools.release_build replay --repository . --commit <full-candidate> --version <version> --output-directory <bundle-dir> --result <replay.json>`. The strict interpreter reads `release/build-recipe.json` and `release/build-toolchain.lock` from that candidate, launches two fresh instances of the digest-pinned Linux/amd64 producer, proves the exact CPython and complete hash-locked tool inventory, applies only the closed environment and argument arrays, normalizes the sdist, and requires byte-for-byte equality. Create retained binding evidence with `python scripts/create_release_bundle_manifest.py --repository . --commit <full-candidate> --version <version> --wheel <bundle-dir>/<wheel> --sdist <bundle-dir>/<sdist> --build-recipe release/build-recipe.json --output <bundle.json>`. Do not substitute native host commands for this recipe-era path. After the two producer runs the replay hands the workspace back to the calling user with one further run of the same pinned image (`chown -R <uid>:<gid> /workspace`, POSIX hosts only, `WO-RLO-007`): the producer writes as root inside the bind mount, and without the hand-back a hosted runner cannot tear the workspace down. The host this runs on does not enter the result (`WO-RLO-008`): the export disables Git line-ending conversion for its own invocation and each producer establishes the declared `0o775`/`0o664` source mode set inside the container, so a Windows workstation reproduces a bound record's exact bytes. Do not re-add a host restriction here; the two mechanisms are the obligation and are tested, and a note cannot fail a build. A workstation without a Docker engine does not build at all: the hosted Publication Rehearsal runs this exact replay in `candidate` mode, so the build of record is read from a `workflow_dispatch` of `publication-rehearsal.yml` on the release branch at the candidate head (the pull-request event builds the merge commit, not the head), its retained `release-build-replay.json` downloaded, `candidate.commit` checked equal to the candidate, and `.manifest` retained as the bundle (`WO-RLS-019`, 0.13.0); the bound-record replay then re-proves the digests before the release decision.
 - Release preparation: first run generic `harnessctl prepare-release ... --tag vX.Y.Z` with the explicitly selected version tag to create the ready RLS, then bind the retained schema-2 bundle with `python scripts/bind_release_distribution.py --repository . --release-record <RLS-path> --manifest <bundle.json>`. The binder changes only the repository-owned distribution table and fails atomically. Before the release decision, dispatch `.github/workflows/release-candidate-replay.yml` on the review ref with only `release_record=RLS-...`; it rebuilds twice from the already-bound recipe and hashes with read-only repository permission and retains technical evidence. Historical released schema-1 records remain valid as records, but they are never re-published: the release qualification is one definition, `.github/workflows/release-qualification.yml`, and it replays a bound schema-2 recipe only (`WO-CIP-002`, `SPEC-CIP-001` CIP-LEG 1). A new ready record cannot use schema 1. The publication rehearsal uses one changed-path decision: build inputs select candidate replay, publication implementation/workflows select both legs, and ordinary runtime/documentation PRs skip them. Manual release preparation runs both. A successful summary check reports skipped legs; source tests, installed-package checks and managed validation still run. See [rehearsing the publication path](release-publication-rehearsal.md).
 - Authorized last mile: after the RLS is `released` in `main`, dispatch `.github/workflows/publish-pypi.yml` from `main` with only `release_record=RLS-...`. Before privileged jobs, the workflow validates the complete committed governance graph with current semantics. It derives the candidate, governance commit, version, tag, recipe, files, hashes, and canonical `release/MAJOR.MINOR` maintenance line. The `qualify` job is a caller of `.github/workflows/release-qualification.yml` in `release-record` mode, so the release executes exactly the definition the rehearsal executed; there is no legacy leg. Only verified inert bytes cross into jobs that reconcile the exact GitHub tag and Release, maintenance line, PyPI state, Pages deployment, and public observation. The Pages deployment is a caller of `.github/workflows/pages-publication.yml`, the same definition the standalone `publish-dashboard-pages.yml` recovery workflow calls. The protected `pypi` environment remains a separate human decision.
@@ -316,10 +325,21 @@ This repository integrates reviewed work through branches and pull requests with
 
 ## Advancing the root evaluator
 
-WO-HUP-028 selects public 0.22.0 from RLS-SEH-032 in the repository and CI.
+For a stacked PR whose original target predates the selected release, the
+predecessor assessment can reuse an identical adoption already integrated on
+the fetched default branch (SPEC-HAG-006). It keeps the PR's event base for
+transition evidence and change-scope checks. Only a unique common ancestor with
+the same root configuration, lock and evaluator identity can supply the release
+record. The target's release and upgrade-transaction bytes must equal that
+independent history. Malformed, ambiguous, missing or changed proof refuses.
+The report names the immutable default-branch commit and common ancestor;
+archive, runtime and target-root qualification still run. The assessor never
+updates a branch or treats a candidate-only release record as approval.
+
+WO-HUP-030 selects public 0.22.1 from RLS-SEH-033 in the repository and CI.
 Its transaction updates only the configuration and lock; retained integrations
 and owner files stay in place. Development source advances to unpublished
-0.22.1 so candidate qualification remains distinct from the released evaluator.
+0.22.2 so candidate qualification remains distinct from the released evaluator.
 
 The following paragraph records the earlier 0.21.0 adoption.
 
@@ -352,7 +372,7 @@ response or preliminary merge. CI still checks integration and publication.
 New approval events retain approved paths without an optional delegation class.
 Historical explicit execution grants remain usable; older approvals without
 that grant need approval of remaining execution through the existing amendment
-process. This repository follows its selected public 0.22.0 evaluator after the authorized `WO-HUP-028` adoption.
+process. This repository follows its selected public 0.22.1 evaluator after the authorized `WO-HUP-030` adoption.
 
 For a combined PR, use one `Harness-Work-Orders: WO-AAA-001, WO-BBB-002` line.
 `harnessctl check-pr REPO --event event.json --from-git <base>` checks each selected

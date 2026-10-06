@@ -2,10 +2,10 @@
 id = "WO-HAG-001"
 type = "work_order"
 title = "Remote artifact context and draft authoring through the existing harness"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-10-04"
-updated = "2026-10-04"
+updated = "2026-10-06"
 
 [assurance]
 commit_bound_verification = "required"
@@ -35,6 +35,13 @@ to = "in_progress"
 decided_at = "2026-10-04T12:34:26Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Codex starts WO-HAG-001 under mmzen recorded work-order approval and explicit instruction to start, following approval of the reviewed 16-definition package and passing start preflight. Scope and required commit-bound verification are unchanged. Phase 0 contract preparation is complete; this start records no implementation completion, risk acceptance, verification acceptance or external delivery."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-06T04:11:23Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Completed the approved Phase 2 private sandbox and supporting correction. Final product candidate 21d268664ffeb111b8b9e9e94921073c7bc99ec1 has all twelve VER-HAG-001 scenarios observed, with actual native CLI, transaction and restart/restore evidence. Historical failures and raised RISK-HAG-001 remain retained. This records implementation completion only; human verification remains separate."
 +++
 
 # Remote artifact context and draft authoring through the existing harness

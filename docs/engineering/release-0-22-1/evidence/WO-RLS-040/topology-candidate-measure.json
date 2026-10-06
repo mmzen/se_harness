@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:\\Windows\\System32\\wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--cd",
+    "/tmp/r221-si3a4s09/source",
+    "--exec",
+    "/tmp/r221-si3a4s09/current/bin/python",
+    "-B",
+    "-c",
+    "import hashlib,json,pathlib,subprocess,zipfile\nfrom tests.test_dashboard_webui import GENERATOR,ROOT\nsnapshot,validation,_=GENERATOR.generate_snapshot(ROOT);assert validation.valid\nfirst=GENERATOR.build_dashboard_bundle(snapshot);second=GENERATOR.build_dashboard_bundle(snapshot);assert first==second\n_,manifest,resources,observations=first;entry=manifest['entrypoints']['topology'];assert entry['bytes']<=4194304\namendment=ROOT/'docs/engineering/harness-distribution/evidence/WO-DST-028/amendment.json';a=json.loads(amendment.read_text());archive=amendment.parent/a['archive'];assert hashlib.sha256(archive.read_bytes()).hexdigest()==a['archive_sha256']\nwith zipfile.ZipFile(archive) as z:\n for row in a['revisions']:\n  assert hashlib.sha256(z.read(row['predecessor_member'])).hexdigest()==row['predecessor_sha256']\n  assert hashlib.sha256((ROOT/row['path']).read_bytes()).hexdigest()==row['revision_sha256']\nprint(json.dumps({'candidate':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'valid':validation.valid,'artifacts':len(snapshot['artifacts']),'relations':len(snapshot['relations']),'topology':entry,'target':4194304,'headroom':4194304-entry['bytes'],'repeated_bundles_identical':True,'preserved_predecessors':len(a['revisions']),'observations':observations}))\n"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "observed_at": "2026-10-04T18:58:01.428018+00:00",
+  "exit_code": 0,
+  "stdout": "{\"candidate\": \"89c69748fcc5fc2578acef5cbf48f0734ef1b732\", \"valid\": true, \"artifacts\": 1948, \"relations\": 7445, \"topology\": {\"role\": \"topology\", \"schema\": \"harness-dashboard-topology-v2\", \"path\": \"data/topology/bb5f093e02ab5933358642adc314f5715baa98fbae6d01f8917ad3409c0928b9.json\", \"bytes\": 2170877, \"sha256\": \"bb5f093e02ab5933358642adc314f5715baa98fbae6d01f8917ad3409c0928b9\"}, \"target\": 4194304, \"headroom\": 2023427, \"repeated_bundles_identical\": true, \"preserved_predecessors\": 11, \"observations\": {\"role_bytes\": {\"artifact\": 16035212, \"evidence\": 8009703, \"readiness\": 3699360, \"summary\": 12899, \"topology\": 2170877}, \"role_counts\": {\"artifact\": 1948, \"evidence\": 890, \"readiness\": 1, \"summary\": 1, \"topology\": 1}, \"resource_count\": 2841, \"resource_bytes\": 29928051, \"largest_resource\": {\"role\": \"readiness\", \"schema\": \"harness-dashboard-readiness-v2\", \"path\": \"data/readiness/04be7efea2fb2d490431f51025533674a4aba4ca3ea22a936207836c027d8dc1.json\", \"bytes\": 3699360, \"sha256\": \"04be7efea2fb2d490431f51025533674a4aba4ca3ea22a936207836c027d8dc1\"}, \"topology_target_exceeded\": false}}\n",
+  "stderr": ""
+}

@@ -64,6 +64,15 @@ the actual Human or Agent executor. Supplying either identity does not grant
 authority. Preparation `--owner` values identify the preparation actor, not
 a future assurance or release decision-maker.
 
+For `decide`, when an owner label differs from the actual human's identity,
+use `--authority-owner OWNER` only after establishing that human's authority
+for the exact decision. Keep `--decision ACTOR` as the actual human. The
+evaluator checks that OWNER holds the existing decision right and records it
+separately as `authority_owner`. With the option absent, ACTOR must itself
+match an eligible owner. The command does not authenticate either claim or
+grant consent. Do not infer a binding from the decision's own owners, an
+earlier approval, Git configuration or the agent's identity.
+
 Silence, elapsed time, a commit, a pull request, tool execution, or a passing
 check MUST NOT count as a human decision. A rejection MUST include a non-empty
 reason. Supersession MUST name exactly one eligible successor. The decision

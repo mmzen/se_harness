@@ -1,0 +1,33 @@
+{
+  "actor": "mmzen",
+  "response": "I approve",
+  "authority": "Human mmzen answered \"I approve\" to the reviewed WO-HAG-005 / VER-HAG-004 request, including DEC-HAG-002 bounded-manual-revision for the exact SPEC-HAG-003 and VER-HAG-001 replacements, required commit-bound verification, and ordinary updates to draft PR #535 in mmzen/se_harness from codex/hosted-artifact-phase1 to codex/hosted-artifact-graph-inputs, including ready-record review and the later separately supplied verification decision. The review binding SHA-256 is 2dd5104adee7a1f8cc94df384ae62f6cbc0169448d91dae738dedb7292acab0a. Earlier accepted bytes and lifecycle history are preserved. This is an explicit bounded manual amendment authorization; it grants no general amendment mechanism, verification acceptance, risk acceptance, merge, release or deployment. No machine lifecycle rule or required gate is waived.",
+  "decision": "DEC-HAG-002",
+  "work_order": "WO-HAG-005",
+  "mechanism": "Explicitly authorized bounded manual linked revision; no supported revision command is claimed and no lifecycle history is invented.",
+  "activated_at": "2026-10-05T12:44:01.618123+00:00",
+  "previous_source_commit": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+  "revisions": [
+    {
+      "id": "SPEC-HAG-003",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-003.md",
+      "state": "approved",
+      "source_commit": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+      "before_sha256": "e6ea2418a6e4a734dc160c30676742b4afa11cf7784bbe010ce69118b9025499",
+      "after_sha256": "411ea506a1ce9ee8de0bf6b34ba095dc0ce39186acac7796f4e2bad2ff3975bb",
+      "previous_evidence_path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-005/SPEC-HAG-003-accepted-before.txt",
+      "proposed_transient_file": "SPEC-HAG-003-proposed.txt"
+    },
+    {
+      "id": "VER-HAG-001",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md",
+      "state": "approved",
+      "source_commit": "64b4feb0cbaff06111876a1d4c0cc35a6c814415",
+      "before_sha256": "744ca93c38acbed841db2047c15017d417bbfb95efead8a41ccdd911b7653dac",
+      "after_sha256": "7e717148ddee865126b2ffb935b3e348a56321654007ce9abf19d3f2d8df6f6d",
+      "previous_evidence_path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-005/VER-HAG-001-accepted-before.txt",
+      "proposed_transient_file": "VER-HAG-001-proposed.txt"
+    }
+  ],
+  "earlier_evidence": "Original candidates and definition references remain unchanged."
+}

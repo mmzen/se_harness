@@ -1,0 +1,633 @@
+{
+  "release_record": "RLS-SEH-033",
+  "candidate_commit": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8",
+  "plan_sha256": "50c97db22f33cdcf0eb44b229b5e1ab7d5afca887cca6ffb4a9e380bc8c3641b",
+  "observed_at": "2026-10-05T08:59:01.032999+00:00",
+  "status": "pass",
+  "native_route": {
+    "host": "claude-code",
+    "kind": "update",
+    "observed_at": "2026-10-05T08:54:11.780896+00:00",
+    "profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+    "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+    "commands": [
+      {
+        "name": "version",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "--version"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:11.807694+00:00",
+        "exit_code": 0,
+        "stdout": "2.1.273 (Claude Code)\n",
+        "stderr": ""
+      },
+      {
+        "name": "public-ref-before",
+        "argv": [
+          "git",
+          "ls-remote",
+          "https://github.com/mmzen/se_harness.git",
+          "refs/heads/plugin-marketplace"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:12.492123+00:00",
+        "exit_code": 0,
+        "stdout": "85ae003769f53908addbdcf46c820a8af530ac24\trefs/heads/plugin-marketplace\n",
+        "stderr": ""
+      },
+      {
+        "name": "installed-before",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "list",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:12.740591+00:00",
+        "exit_code": 0,
+        "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.5\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026u-l7j7do7k\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.5\",\n    \"installedAt\": \"2026-10-05T08:39:48.288Z\",\n    \"lastUpdated\": \"2026-10-05T08:39:48.288Z\"\n  }\n]\n",
+        "stderr": ""
+      },
+      {
+        "name": "marketplace-before",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "marketplace",
+          "list",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:12.970964+00:00",
+        "exit_code": 0,
+        "stdout": "[\n  {\n    \"name\": \"se-harness\",\n    \"source\": \"github\",\n    \"repo\": \"mmzen/se_harness\",\n    \"ref\": \"plugin-marketplace\",\n    \"installLocation\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026u-l7j7do7k\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\marketplaces\\\\se-harness\"\n  }\n]\n",
+        "stderr": ""
+      },
+      {
+        "name": "cache-before",
+        "argv": [
+          "git",
+          "-C",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\marketplaces\\se-harness",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:13.008476+00:00",
+        "exit_code": 0,
+        "stdout": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c\n",
+        "stderr": ""
+      },
+      {
+        "name": "refresh",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "marketplace",
+          "update",
+          "se-harness"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:15.809289+00:00",
+        "exit_code": 0,
+        "stdout": "Updating marketplace: se-harness...Refreshing marketplace cache (timeout: 120s)\u2026\n\u221a Successfully updated marketplace: se-harness\n",
+        "stderr": ""
+      },
+      {
+        "name": "install-or-update",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "update",
+          "verity-plane@se-harness",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:16.143386+00:00",
+        "exit_code": 0,
+        "stdout": "{\"command\":\"update\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Plugin \\\"verity-plane\\\" updated from 0.2.5 to 0.2.6 for scope user. Restart to apply changes.\",\"updateOutcome\":\"updated\",\"oldVersion\":\"0.2.5\",\"newVersion\":\"0.2.6\"}\n",
+        "stderr": ""
+      },
+      {
+        "name": "installed-after",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "list",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:16.402358+00:00",
+        "exit_code": 0,
+        "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.6\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026u-l7j7do7k\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.6\",\n    \"installedAt\": \"2026-10-05T08:39:48.288Z\",\n    \"lastUpdated\": \"2026-10-05T08:54:16.101Z\"\n  }\n]\n",
+        "stderr": ""
+      },
+      {
+        "name": "marketplace-after",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "marketplace",
+          "list",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:16.638657+00:00",
+        "exit_code": 0,
+        "stdout": "[\n  {\n    \"name\": \"se-harness\",\n    \"source\": \"github\",\n    \"repo\": \"mmzen/se_harness\",\n    \"ref\": \"plugin-marketplace\",\n    \"installLocation\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026u-l7j7do7k\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\marketplaces\\\\se-harness\"\n  }\n]\n",
+        "stderr": ""
+      },
+      {
+        "name": "cache-after",
+        "argv": [
+          "git",
+          "-C",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\marketplaces\\se-harness",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:16.675259+00:00",
+        "exit_code": 0,
+        "stdout": "85ae003769f53908addbdcf46c820a8af530ac24\n",
+        "stderr": ""
+      },
+      {
+        "name": "discover-skills",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "details",
+          "verity-plane@se-harness"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:54:17.084591+00:00",
+        "exit_code": 0,
+        "stdout": "verity-plane 0.2.6\n  Description: Use SE Harness skills for repository setup, governed changes and verification evidence.\n  Source: verity-plane@se-harness\n\nComponent inventory\n  Skills (5)  change, evidence, harness-operator-brief, harness-orient, setup\n  Agents (0)\n  Hooks (1)  SessionStart  (harness-only \u2014 no model context cost)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~331 tok   added to every session\n\nPer-component (rounded)\n  component               always-on  on-invoke\n  change                        ~70      ~1.1k\n  evidence                      ~60      ~1.1k\n  harness-operator-brief        ~80      ~1.4k\n  harness-orient                ~80      ~1.3k\n  setup                         ~40       ~680\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.\n",
+        "stderr": ""
+      }
+    ],
+    "status": "pass",
+    "desktop_claim": false,
+    "model_session_claim": false,
+    "host_version": "2.1.273 (Claude Code)",
+    "starting_version": "0.2.5",
+    "starting_source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+    "starting_revision": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+    "starting_files": {
+      "assembly-inventory.json": "cfb1fcc7c2720590aa159887faf2f45afb2b212bb25fa68e237cd3b198ba64dc",
+      "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "README.md": "cd3bcc597033754ad344f05c381d72b9947adae49538f7a3f23aac35f4e908c2",
+      ".claude-plugin/plugin.json": "6c116eb15c4ab2028970b9b45042fa8dd56327f38fb9463ca34bb09c8c2846e3",
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "hooks/hooks.json": "677e2b7797c7f708589578559a3ea19d36c41cfe1dce05f3c39365ce5c395cf5",
+      "packages/se_harness-0.22.0-py3-none-any.whl": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+      "scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+      "skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+      "skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+      "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "skills/evidence/references/external-actions.md": "5ef66907e1a07e67b0ed8dfc6b38646a3eae494c83827780d1a84330397de604",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+      "skills/change/references/authority.md": "e19371f8004782ebba8b3c2c07ed9b560890d9fcbd72b931d1ac59e2bce711ff",
+      "skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+    },
+    "starting_method": "Actual public 0.2.5 installation retained before 0.2.6 marketplace promotion; all installed bytes rechecked before update.",
+    "revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+    "public_revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+    "plugin_version": "0.2.6",
+    "evaluator_version": "0.22.1",
+    "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+    "content_sha256": "b6d7ce308724740c242e6ee81791dd624becc422b73082c1dbbad69daa712d69",
+    "installed_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.6",
+    "files": {
+      "assembly-inventory.json": "b6d7ce308724740c242e6ee81791dd624becc422b73082c1dbbad69daa712d69",
+      "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "README.md": "5d1117251574917978fdde2b60f745888b160026e83bad70534fdba3204c808b",
+      ".claude-plugin/plugin.json": "c8f697401450b162ed14f6347933f889dd429af87a00bc7f41a4a5b83ff08d5a",
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "hooks/hooks.json": "677e2b7797c7f708589578559a3ea19d36c41cfe1dce05f3c39365ce5c395cf5",
+      "packages/se_harness-0.22.1-py3-none-any.whl": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+      "scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+      "skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+      "skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+      "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "skills/evidence/references/external-actions.md": "5ef66907e1a07e67b0ed8dfc6b38646a3eae494c83827780d1a84330397de604",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+      "skills/change/references/authority.md": "e19371f8004782ebba8b3c2c07ed9b560890d9fcbd72b931d1ac59e2bce711ff",
+      "skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+    },
+    "marketplace": {
+      "name": "se-harness",
+      "source": "github",
+      "repo": "mmzen/se_harness",
+      "ref": "plugin-marketplace",
+      "installLocation": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\marketplaces\\se-harness"
+    },
+    "plugin": {
+      "id": "verity-plane@se-harness",
+      "version": "0.2.6",
+      "scope": "user",
+      "enabled": true,
+      "installPath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.6",
+      "installedAt": "2026-10-05T08:39:48.288Z",
+      "lastUpdated": "2026-10-05T08:54:16.101Z"
+    },
+    "all_installed_bytes_match": true,
+    "active_method": "Native plugin details"
+  },
+  "setup": {
+    "host": "claude",
+    "route": "update",
+    "status": "pass",
+    "root": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_",
+    "commands": [
+      {
+        "label": "prepare-evaluator",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-I",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.6\\scripts\\setup.py",
+          "--target",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\repo",
+          "--data-root",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data",
+          "--wheel",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.6\\packages\\se_harness-0.22.1-py3-none-any.whl"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_",
+        "observed_at": "2026-10-05T08:55:46.492194+00:00",
+        "exit_code": 1,
+        "stdout": "Processing C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.6\\packages\\se_harness-0.22.1-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.22.1\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe\n{\n  \"checks\": [\n    {\n      \"detail\": \"required\",\n      \"name\": \"ENGINEERING_HARNESS.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/ARTIFACT_AUTHORING.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/README.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required instruction file is missing: ENGINEERING_HARNESS.md\",\n      \"name\": \"instruction-discovery\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "identity",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "identity",
+          "--role",
+          "released-evaluator",
+          "--expected-version",
+          "0.22.1",
+          "--expected-root",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+          "--checkout-root",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\repo",
+          "--evaluator-payload-sha256",
+          "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+          "--evaluator-wheel-sha256",
+          "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+          "--require-isolated-python",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_",
+        "observed_at": "2026-10-05T08:55:46.844260+00:00",
+        "exit_code": 0,
+        "stdout": "{\n  \"candidate_commit\": null,\n  \"checkout_root\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026s-2_rvovc_\\\\repo\",\n  \"diagnostics\": [],\n  \"distribution_origin\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026s-2_rvovc_\\\\data\\\\evaluators\\\\0.22.1\\\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\\\Lib\\\\site-packages\",\n  \"entry_point_origin\": null,\n  \"evaluator_archive_name\": \"se_harness-0.22.1-py3-none-any.whl\",\n  \"evaluator_archive_sha256\": \"cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\",\n  \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\",\n  \"evaluator_payload_sha256\": \"0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff\",\n  \"evaluator_wheel_sha256\": \"cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\",\n  \"expected_root\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026s-2_rvovc_\\\\data\\\\evaluators\\\\0.22.1\\\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\",\n  \"harness_version\": \"0.22.1\",\n  \"isolated_python\": true,\n  \"module_origin\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026s-2_rvovc_\\\\data\\\\evaluators\\\\0.22.1\\\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\\\Lib\\\\site-packages\\\\se_harness\\\\runtime_identity.py\",\n  \"passed\": true,\n  \"python_binary_position\": \"within-expected-root\",\n  \"python_entry_is_link\": false,\n  \"python_executable\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026s-2_rvovc_\\\\data\\\\evaluators\\\\0.22.1\\\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\\\Scripts\\\\python.exe\",\n  \"python_version\": \"3.14.6\",\n  \"pythonpath_present\": false,\n  \"role\": \"released-evaluator\",\n  \"schema\": \"se-harness-runtime-identity-v4\",\n  \"template_origin\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026s-2_rvovc_\\\\data\\\\evaluators\\\\0.22.1\\\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\",\n  \"user_site_enabled\": false\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "init-preview",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "init",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\repo",
+          "--project-name",
+          "Public plugin observation",
+          "--dry-run",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_",
+        "observed_at": "2026-10-05T08:55:47.407042+00:00",
+        "exit_code": 0,
+        "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": false\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "init",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "init",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\repo",
+          "--project-name",
+          "Public plugin observation",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_",
+        "observed_at": "2026-10-05T08:55:48.439578+00:00",
+        "exit_code": 0,
+        "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "doctor",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "doctor",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\repo",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_",
+        "observed_at": "2026-10-05T08:55:48.980020+00:00",
+        "exit_code": 0,
+        "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "entry-resource",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "resources",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\repo",
+          "--resource",
+          "ENGINEERING_HARNESS.md",
+          "--content",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_",
+        "observed_at": "2026-10-05T08:55:49.458617+00:00",
+        "exit_code": 0,
+        "stdout": "{\n  \"content\": \"# Engineering Harness for Public plugin observation\\n\\nThis repository uses SE Harness 0.22.1.\\n\\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\\n\\n## Goals\\n\\nThis harness makes engineering authority explicit, limits execution to approved\\nscope, binds assurance and release claims to exact evidence, and gives every\\nactor the same deterministic next step. These goals are informative; the rules\\nbelow and the installed evaluator's machine policy are normative.\\n\\n## Policy / Global invariants\\n\\n### HRN-001 \\u2014 Formal authority\\n\\nFormal artifacts under `docs/engineering/` are the authoritative\\nrecords of product intent, requirements, architecture decisions, work authority,\\nverification contracts, risks, assurance decisions, and release decisions. Code,\\ntests, commits, tickets, dashboards, and conversation text are evidence or\\nobservations; they MUST NOT substitute for formal authority.\\n\\n### HRN-002 \\u2014 Change control\\n\\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\\nis approved. This preparation MUST NOT authorize implementation.\\n\\nAccepted formal artifacts MUST define the change before implementation starts.\\nOne or more approved work orders MUST authorize implementation. A valid\\nrepository-owned exception MAY remove the requirement for formal definitions,\\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\\n\\nAny required work orders MUST pass the required validation checks before\\nimplementation starts. The result MUST be verified against the accepted\\ndefinitions that apply. All required verification checks remain required.\\n\\n### HRN-003 \\u2014 Lifecycle authority\\n\\nArtifacts and the work itself MUST follow a strict lifecycle.\\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\\nstate changes and the next action. Actors MUST use its results when reporting\\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\\nrepository notes MUST NOT work out their own answers or change those results.\\n\\n### HRN-004 \\u2014 Bounded scope\\n\\nAn actor MUST select one clearly defined set of artifacts before\\nacting. This set defines the scope. Findings from unrelated work orders MUST\\nNOT be presented as findings about the selected scope. An issue outside the\\nscope MAY be reported only as an observation that has not been assessed, with\\nits artifact ID. It MUST NOT block the selected work unless a recorded\\ndependency or gate connects it to that work.\\n\\n### HRN-005 \\u2014 Explicit decisions\\n\\nEach decision MUST identify the accountable human or agent and the authority\\nused. Being a human or an agent does not by itself authorize an action.\\n\\nPreparing, inspecting, validating, or collecting evidence MUST NOT\\ncount as an authorized decision. A state change requires the exact artifact,\\nthe intended state, and the accountable actor. The required gates MUST pass,\\nand an explicit state transition MUST be applied.\\n\\n### HRN-006 \\u2014 Targeted transitions\\n\\nA state transition MUST change only the artifacts explicitly\\nselected by the accountable actor. The states of related artifacts MUST NOT\\nchange just because they are linked.\\n\\n### HRN-007 \\u2014 Repository ownership\\n\\n`AGENTS.md` MUST belong entirely to the repository owner and contain\\nno harness instructions. Repository-specific facts and commands belong in\\nthat file. The harness MUST NOT generate, track, or require that owner content.\\n\\n### HRN-008 \\u2014 Rule precedence\\n\\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\\nfor product, engineering, assurance, release, or external actions. They MUST\\nNOT remove, weaken, or contradict the harness rules.\\n\\nRepository owners MAY define exceptions through the supported exception\\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\\nthem to configure: whether formal definitions and work orders are required.\\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\\nNOT waive a harness rule.\\n\\n### HRN-009 \\u2014 Required checks\\n\\nManaged-file integrity checks, artifact graph checks, scope checks, and required\\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\\ncount as approval or acceptance of a risk.\\n\\n## Scope of these rules\\n\\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\\nagent performs or reports a governed lifecycle action. Reading, analysis, and\\nanswering questions need no work order when they change no lifecycle state,\\nexercise no decision right, and present no finding as a formal verdict.\\n\\nPreparing a proposed artifact package does not require an approved work\\norder. A human or agent MAY create and edit drafts, record risks and open\\nquestions, review the proposed content, and validate the package. These\\nactions MUST follow the authoring procedure and required checks. They MUST\\nNOT change an accepted definition, approve a work order, or start\\nimplementation. Decisions and lifecycle transitions follow their separate\\nauthority rules.\\n\\nBefore a lifecycle action, select the exact artifacts and read the governing\\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\\ncontext. It does not evaluate checkpoint gates or authorize work.\\n\\n## Using these instructions\\n\\nA human is a person; an agent is an automated system acting under granted\\nauthority. Approval, verification acceptance and release decisions require an\\nauthorized human. Agents may apply a matching recorded decision. Resolve the\\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\\nbefore obtaining or applying a decision.\\n\\n`harnessctl` means this repository's selected released evaluator, invoked through\\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\\n\\nTransient working material stays in the conversation or temporary storage outside\\nthe repository, at the agent's discretion. It has no formal authority and SHALL\\nNOT be persisted in the repository. This rule covers working notes, not formal\\nartifacts or evidence required at a contract's prescribed durable location.\\n\\n## Read by task\\n\\nFor the external-resource layout, the files below are released resources outside\\nthe checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`\\nand read its returned path and the required heading. Use instruction links\\nrelative to that resource location. Formal artifacts remain repository files.\\n`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`\\nreturns this entry with the selected project and release. Repository-copy\\ninstallations continue to read their installed files.\\n\\nRead the selected file's entry conditions and current step. Read its required\\nreferences before the action they govern. A link alone does not require reading\\nits target. Do not load all procedures or future stages in advance.\\n\\n| Current need | Read first |\\n| --- | --- |\\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\\n\\nBefore the first eligible English explanation in a fresh context, read\\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\\nReuse it while retained in context. This applies to ordinary answers too.\\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\\nwhen changing or investigating their contracts. Use evaluator results in normal\\nwork. Missing instructions or an unknown returned procedure stop the affected\\naction: report the exact discovery gap in RESULTS.md.\\n\\n## After compaction\\n\\nRecover the repository, selected IDs, objective, existing authority and pending\\naction from the summary. For governed work, obtain fresh context through\\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\\nuncertain writes or external effects before retrying. Resume only unapplied work.\\n\",\n  \"content_sha256\": \"d1f3f835288cc77a00e5d777e27656acd9c500b3cd805b8c8e752d3019f1ea10\",\n  \"release\": {\n    \"archive_name\": \"se_harness-0.22.1-py3-none-any.whl\",\n    \"archive_sha256\": \"cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\",\n    \"payload_manifest\": \"se-harness-installed-payload-v1\",\n    \"payload_sha256\": \"0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff\",\n    \"version\": \"0.22.1\"\n  },\n  \"resource_layout\": \"released-resources-v1\",\n  \"resources\": [\n    {\n      \"bytes\": 9146,\n      \"headings\": [\n        \"engineering-harness-for-project_name\",\n        \"goals\",\n        \"policy--global-invariants\",\n        \"hrn-001--formal-authority\",\n        \"hrn-002--change-control\",\n        \"hrn-003--lifecycle-authority\",\n        \"hrn-004--bounded-scope\",\n        \"hrn-005--explicit-decisions\",\n        \"hrn-006--targeted-transitions\",\n        \"hrn-007--repository-ownership\",\n        \"hrn-008--rule-precedence\",\n        \"hrn-009--required-checks\",\n        \"scope-of-these-rules\",\n        \"using-these-instructions\",\n        \"read-by-task\",\n        \"after-compaction\"\n      ],\n      \"path\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026s-2_rvovc_\\\\data\\\\evaluators\\\\0.22.1\\\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\\\\ENGINEERING_HARNESS.md.tpl\",\n      \"resource\": \"ENGINEERING_HARNESS.md\",\n      \"sha256\": \"3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550\"\n    }\n  ],\n  \"schema\": \"se-harness-resources-v1\"\n}\n",
+        "stderr": ""
+      },
+      {
+        "label": "reuse",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-I",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.6\\scripts\\setup.py",
+          "--target",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\repo",
+          "--data-root",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data",
+          "--wheel",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.6\\packages\\se_harness-0.22.1-py3-none-any.whl"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_",
+        "observed_at": "2026-10-05T08:55:50.387674+00:00",
+        "exit_code": 0,
+        "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe\n{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+        "stderr": ""
+      }
+    ],
+    "public_revision": "85ae003769f53908addbdcf46c820a8af530ac24",
+    "evaluator_version": "0.22.1",
+    "wheel_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+    "python": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\data\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+    "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026s-2_rvovc_\\repo",
+    "default_files": [
+      ".engineering-harness.lock",
+      ".engineering-harness.toml"
+    ],
+    "native_model_session_claim": false,
+    "desktop_claim": false
+  },
+  "runner_sources": {
+    "r221_public_routes.py": "\"\"\"Actual public native install/update routes, using disposable host profiles.\"\"\"\nfrom pathlib import Path\nimport datetime,hashlib,json,os,subprocess,sys,tempfile,tomllib\nWORK=Path(__file__).resolve().parent;REPO=WORK/'r221';OUT=WORK/'r221-delivery-corrected-20261005/public026';OUT.mkdir(exist_ok=True)\nsys.path.insert(0,str(WORK/'iar-demo-tools'))\nfrom run_demo import child_env\nHOSTS={'codex':r'C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\a51e250fa15c740a\\codex.exe','claude':r'C:\\Users\\mathi\\.local\\bin\\claude.exe'}\nOLD='7d30907f15bd7e06fb632e1ebf4e88e01b68726c';NEW='85ae003769f53908addbdcf46c820a8af530ac24'\nmode,host=sys.argv[1:];assert mode in ('baseline','fresh','update') and host in HOSTS\nwo=WORK/'r221p/docs/engineering/release-0-22-1/work-orders/WO-RLS-042.md';assert tomllib.loads(wo.read_text().split('+++',2)[1])['status']=='in_progress'\nlabel=mode+'-'+host;dest=OUT/(label+'-route.json');assert not dest.exists()\nstarting=None\nif mode=='update':\n    starting=json.loads((OUT/('baseline-'+host+'-route.json')).read_text());base=Path(starting['profile'])\nelse:base=Path(tempfile.mkdtemp(prefix='p026'+('u' if mode=='baseline' else 'f')+'-'))\nenv=child_env(base,host);env.update(GIT_CONFIG_COUNT='2',GIT_CONFIG_KEY_0='core.longpaths',GIT_CONFIG_VALUE_0='true',GIT_CONFIG_KEY_1='core.autocrlf',GIT_CONFIG_VALUE_1='false',PYTHONDONTWRITEBYTECODE='1')\nfor key in ('CODEX_HOME','CLAUDE_CONFIG_DIR','APPDATA','LOCALAPPDATA','TEMP'):Path(env[key]).mkdir(parents=True,exist_ok=True)\nexpected_revision=OLD if mode=='baseline' else NEW;version='0.2.5' if mode=='baseline' else '0.2.6'\nidentity=json.loads(subprocess.check_output(['git','show',expected_revision+':PACKAGE-IDENTITY.json'],cwd=REPO))\nprefix='packages/'+host+'/verity-plane/'\nexpected_files={n[len(prefix):]:h for n,h in identity['files'].items() if n.startswith(prefix)};assert expected_files\nreport={'host':'claude-code' if host=='claude' else 'codex','kind':mode,'observed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'profile':str(base),'source':'https://github.com/mmzen/se_harness.git#plugin-marketplace','commands':[],'status':'pending','desktop_claim':False,'model_session_claim':False}\ndef save():dest.write_text(json.dumps(report,indent=2)+'\\n',encoding='utf-8')\ndef run(name,args):\n    argv=list(map(str,args));r=subprocess.run(argv,cwd=base,env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=300)\n    report['commands'].append({'name':name,'argv':argv,'cwd':str(base),'observed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr});save()\n    print(json.dumps({'route':label,'step':name,'exit':r.returncode}),flush=True)\n    assert r.returncode==0,(name,r.stderr[-900:],r.stdout[-500:]);return r.stdout\ndef native(name,args):return run(name,[HOSTS[host],*args])\ndef market(name):\n    v=json.loads(native(name,['plugin','marketplace','list','--json']));rows=v['marketplaces'] if host=='codex' else v\n    return next(x for x in rows if x['name']=='se-harness')\ndef installed(name):\n    v=json.loads(native(name,['plugin','list',*(['--marketplace','se-harness'] if host=='codex' else []),'--json']));rows=v['installed'] if host=='codex' else v\n    return next(x for x in rows if x['pluginId' if host=='codex' else 'id']=='verity-plane@se-harness')\ndef sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()\ndef revision(cache,name):\n    assert cache.resolve().is_relative_to(base.resolve())\n    return run(name,['git','-C',cache,'rev-parse','HEAD']).strip()\nreport['host_version']=native('version',['--version']).strip()\nremote=run('public-ref-before',['git','ls-remote','https://github.com/mmzen/se_harness.git','refs/heads/plugin-marketplace']);assert remote.split()[0]==expected_revision\nif mode=='update':\n    row=installed('installed-before');assert row['version']=='0.2.5'\n    m=market('marketplace-before');cache=Path(m['root' if host=='codex' else 'installLocation']);assert revision(cache,'cache-before')==OLD\n    oldpath=Path(starting['installed_path']);assert all(sha(oldpath/p)==h for p,h in starting['files'].items())\n    report.update(starting_version='0.2.5',starting_source=report['source'],starting_revision=OLD,starting_files=starting['files'],starting_method='Actual public 0.2.5 installation retained before 0.2.6 marketplace promotion; all installed bytes rechecked before update.')\n    native('refresh',['plugin','marketplace','upgrade' if host=='codex' else 'update','se-harness',*(['--json'] if host=='codex' else [])])\nelse:\n    v=json.loads(native('marketplaces-before',['plugin','marketplace','list','--json']));rows=v['marketplaces'] if host=='codex' else v\n    assert not any(x['name']=='se-harness' for x in rows)\n    native('add-public-marketplace',['plugin','marketplace','add','mmzen/se_harness','--ref','plugin-marketplace','--json'] if host=='codex' else ['plugin','marketplace','add','mmzen/se_harness@plugin-marketplace'])\nresponse=native('install-or-update',['plugin','add' if host=='codex' else ('update' if mode=='update' else 'install'),'verity-plane@se-harness','--json'])\nrow=installed('installed-after');assert row['version']==version,row\nm=market('marketplace-after');cache=Path(m['root' if host=='codex' else 'installLocation']);assert revision(cache,'cache-after')==expected_revision\npath=Path(json.loads(response)['installedPath']) if host=='codex' else Path(row['installPath']);assert path.resolve().is_relative_to(base.resolve())\nfiles={p.relative_to(path).as_posix():sha(p) for p in path.rglob('*') if p.is_file()};assert files==expected_files\nactive=native('discover-skills',['debug','prompt-input','List installed Verity Plane skills.'] if host=='codex' else ['plugin','details','verity-plane@se-harness']);assert 'harness-orient' in active\nreport.update(status='pass',revision=expected_revision,public_revision=expected_revision,plugin_version=version,evaluator_version=identity['evaluator']['version'],wheel_sha256=identity['evaluator']['archive_sha256'],content_sha256=sha(path/'assembly-inventory.json'),installed_path=str(path),files=files,marketplace=m,plugin=row,all_installed_bytes_match=True,active_method='Native debug prompt-input' if host=='codex' else 'Native plugin details')\nsave();print(json.dumps({'host':host,'route':mode,'version':version,'status':'pass','profile':str(base)}))\n",
+    "r221_public_setup.py": "\"\"\"Exercise setup from an actually public installed host plugin.\"\"\"\nfrom pathlib import Path\nimport datetime,hashlib,json,os,subprocess,sys,tempfile\nWORK=Path(__file__).resolve().parent;OUT=WORK/'r221-delivery-corrected-20261005/public026'\nkind,host=sys.argv[1:];assert kind in ('fresh','update') and host in ('codex','claude')\nroute=json.loads((OUT/(kind+'-'+host+'-route.json')).read_text());assert route['status']=='pass'\nplugin=Path(route['installed_path']);root=Path(tempfile.mkdtemp(prefix='p026s-'));target=root/'repo';target.mkdir();data=root/'data'\ndest=OUT/(kind+'-'+host+'-setup.json');assert not dest.exists()\nexpected=json.loads((WORK/'r221-final-20261005/plugin026-marketplace/PACKAGE-IDENTITY.json').read_text())['evaluator']\nwheel=plugin/'packages'/expected['archive'];assert hashlib.sha256(wheel.read_bytes()).hexdigest()==expected['archive_sha256']\nreport={'host':host,'route':kind,'status':'pending','root':str(root),'commands':[],'public_revision':route['revision'],'evaluator_version':expected['version'],'wheel_sha256':expected['archive_sha256']}\nenv=dict(os.environ,PYTHONDONTWRITEBYTECODE='1')\ndef save():dest.write_text(json.dumps(report,indent=2)+'\\n',encoding='utf-8')\ndef run(label,args,allowed=(0,)):\n    argv=list(map(str,args));r=subprocess.run(argv,cwd=root,env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=300)\n    report['commands'].append({'label':label,'argv':argv,'cwd':str(root),'observed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr});save()\n    print(json.dumps({'host':host,'route':kind,'step':label,'exit':r.returncode}),flush=True);assert r.returncode in allowed,(label,r.stderr[-800:],r.stdout[-500:]);return r.stdout\nrun('prepare-evaluator',[sys.executable,'-I',plugin/'scripts/setup.py','--target',target,'--data-root',data,'--wheel',wheel],(1,2))\npy=data/'evaluators'/expected['version']/expected['archive_sha256']/'Scripts/python.exe';assert py.is_file() and not list(target.iterdir())\nidentity=json.loads(run('identity',[py,'-I','-m','se_harness','identity','--role','released-evaluator','--expected-version',expected['version'],'--expected-root',py.parent.parent,'--checkout-root',target,'--evaluator-payload-sha256',expected['payload_sha256'],'--evaluator-wheel-sha256',expected['archive_sha256'],'--require-isolated-python','--json']));assert identity['passed']\nrun('init-preview',[py,'-I','-m','se_harness','init',target,'--project-name','Public plugin observation','--dry-run','--json'])\nrun('init',[py,'-I','-m','se_harness','init',target,'--project-name','Public plugin observation','--json'])\nassert {p.name for p in target.iterdir()}=={'.engineering-harness.toml','.engineering-harness.lock'}\nrun('doctor',[py,'-I','-m','se_harness','doctor',target,'--json'])\nrun('entry-resource',[py,'-I','-m','se_harness','resources',target,'--resource','ENGINEERING_HARNESS.md','--content','--json'])\nrun('reuse',[sys.executable,'-I',plugin/'scripts/setup.py','--target',target,'--data-root',data,'--wheel',wheel])\nreport.update(status='pass',python=str(py),repository=str(target),default_files=sorted(p.name for p in target.iterdir()),native_model_session_claim=False,desktop_claim=False);save()\n"
+  },
+  "baseline": {
+    "host": "claude-code",
+    "kind": "baseline",
+    "observed_at": "2026-10-05T08:39:42.775171+00:00",
+    "profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+    "source": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+    "commands": [
+      {
+        "name": "version",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "--version"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:39:42.842134+00:00",
+        "exit_code": 0,
+        "stdout": "2.1.273 (Claude Code)\n",
+        "stderr": ""
+      },
+      {
+        "name": "public-ref-before",
+        "argv": [
+          "git",
+          "ls-remote",
+          "https://github.com/mmzen/se_harness.git",
+          "refs/heads/plugin-marketplace"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:39:43.572599+00:00",
+        "exit_code": 0,
+        "stdout": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c\trefs/heads/plugin-marketplace\n",
+        "stderr": ""
+      },
+      {
+        "name": "marketplaces-before",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "marketplace",
+          "list",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:39:43.923168+00:00",
+        "exit_code": 0,
+        "stdout": "[]\n",
+        "stderr": ""
+      },
+      {
+        "name": "add-public-marketplace",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "marketplace",
+          "add",
+          "mmzen/se_harness@plugin-marketplace"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:39:47.932346+00:00",
+        "exit_code": 0,
+        "stdout": "Adding marketplace\u2026SSH not configured, cloning via HTTPS: https://github.com/mmzen/se_harness.git\nRefreshing marketplace cache (timeout: 120s)\u2026\nCloning repository (timeout: 120s): https://github.com/mmzen/se_harness.git (ref: plugin-marketplace)\nClone complete, validating marketplace\u2026\nCleaning up old marketplace cache\u2026\n\u221a Successfully added marketplace: se-harness (declared in user settings)\n",
+        "stderr": ""
+      },
+      {
+        "name": "install-or-update",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "install",
+          "verity-plane@se-harness",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:39:48.361855+00:00",
+        "exit_code": 0,
+        "stdout": "{\"command\":\"install\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Successfully installed plugin: verity-plane@se-harness (scope: user)\"}\n",
+        "stderr": ""
+      },
+      {
+        "name": "installed-after",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "list",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:39:48.634801+00:00",
+        "exit_code": 0,
+        "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.5\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026u-l7j7do7k\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.5\",\n    \"installedAt\": \"2026-10-05T08:39:48.288Z\",\n    \"lastUpdated\": \"2026-10-05T08:39:48.288Z\"\n  }\n]\n",
+        "stderr": ""
+      },
+      {
+        "name": "marketplace-after",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "marketplace",
+          "list",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:39:48.868199+00:00",
+        "exit_code": 0,
+        "stdout": "[\n  {\n    \"name\": \"se-harness\",\n    \"source\": \"github\",\n    \"repo\": \"mmzen/se_harness\",\n    \"ref\": \"plugin-marketplace\",\n    \"installLocation\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\p026u-l7j7do7k\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\marketplaces\\\\se-harness\"\n  }\n]\n",
+        "stderr": ""
+      },
+      {
+        "name": "cache-after",
+        "argv": [
+          "git",
+          "-C",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\marketplaces\\se-harness",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:39:48.913513+00:00",
+        "exit_code": 0,
+        "stdout": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c\n",
+        "stderr": ""
+      },
+      {
+        "name": "discover-skills",
+        "argv": [
+          "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+          "plugin",
+          "details",
+          "verity-plane@se-harness"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k",
+        "observed_at": "2026-10-05T08:39:49.481168+00:00",
+        "exit_code": 0,
+        "stdout": "verity-plane 0.2.5\n  Description: Use SE Harness skills for repository setup, governed changes and verification evidence.\n  Source: verity-plane@se-harness\n\nComponent inventory\n  Skills (5)  change, evidence, harness-operator-brief, harness-orient, setup\n  Agents (0)\n  Hooks (1)  SessionStart  (harness-only \u2014 no model context cost)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~331 tok   added to every session\n\nPer-component (rounded)\n  component               always-on  on-invoke\n  change                        ~70      ~1.1k\n  evidence                      ~60      ~1.1k\n  harness-operator-brief        ~80      ~1.4k\n  harness-orient                ~80      ~1.3k\n  setup                         ~40       ~680\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.\n",
+        "stderr": ""
+      }
+    ],
+    "status": "pass",
+    "desktop_claim": false,
+    "model_session_claim": false,
+    "host_version": "2.1.273 (Claude Code)",
+    "revision": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+    "public_revision": "7d30907f15bd7e06fb632e1ebf4e88e01b68726c",
+    "plugin_version": "0.2.5",
+    "evaluator_version": "0.22.0",
+    "wheel_sha256": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+    "content_sha256": "cfb1fcc7c2720590aa159887faf2f45afb2b212bb25fa68e237cd3b198ba64dc",
+    "installed_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.5",
+    "files": {
+      "assembly-inventory.json": "cfb1fcc7c2720590aa159887faf2f45afb2b212bb25fa68e237cd3b198ba64dc",
+      "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "README.md": "cd3bcc597033754ad344f05c381d72b9947adae49538f7a3f23aac35f4e908c2",
+      ".claude-plugin/plugin.json": "6c116eb15c4ab2028970b9b45042fa8dd56327f38fb9463ca34bb09c8c2846e3",
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "hooks/hooks.json": "677e2b7797c7f708589578559a3ea19d36c41cfe1dce05f3c39365ce5c395cf5",
+      "packages/se_harness-0.22.0-py3-none-any.whl": "44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4",
+      "scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+      "skills/harness-orient/scripts/orient.py": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f",
+      "skills/harness-operator-brief/agents/openai.yaml": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+      "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "skills/evidence/references/external-actions.md": "5ef66907e1a07e67b0ed8dfc6b38646a3eae494c83827780d1a84330397de604",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+      "skills/change/references/authority.md": "e19371f8004782ebba8b3c2c07ed9b560890d9fcbd72b931d1ac59e2bce711ff",
+      "skills/change/references/work-orders.md": "4e18e1a4103925d2eb8a021af384938e485ce24d42a349aca58e93d8db0a4481"
+    },
+    "marketplace": {
+      "name": "se-harness",
+      "source": "github",
+      "repo": "mmzen/se_harness",
+      "ref": "plugin-marketplace",
+      "installLocation": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\marketplaces\\se-harness"
+    },
+    "plugin": {
+      "id": "verity-plane@se-harness",
+      "version": "0.2.5",
+      "scope": "user",
+      "enabled": true,
+      "installPath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p026u-l7j7do7k\\profiles\\claude\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.5",
+      "installedAt": "2026-10-05T08:39:48.288Z",
+      "lastUpdated": "2026-10-05T08:39:48.288Z"
+    },
+    "all_installed_bytes_match": true,
+    "active_method": "Native plugin details"
+  }
+}

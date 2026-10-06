@@ -1,0 +1,44 @@
+{
+  "schema": "se-harness-hosted-phase2-continuation/v1",
+  "candidate_commit": "7290af984337e122b193981a187e58c29de41a16",
+  "selected_work_orders": [
+    "WO-HAG-001",
+    "WO-HAG-007"
+  ],
+  "lifecycle_state": "in_progress",
+  "qualification": "incomplete",
+  "combination_id": "sha256:e997637ecfee3ab4e7514239cb3006254d52afc0181f68ae98fc95e1ca374168",
+  "released_evaluator": "0.22.1",
+  "original_comparison_base": "be1812e7042081014cc7682da8b9cd3822d9071f",
+  "pr": {
+    "number": 535,
+    "source": "codex/hosted-artifact-phase1",
+    "target": "codex/hosted-artifact-graph-inputs",
+    "draft": true
+  },
+  "remaining": [
+    "Restore Claude authentication and run the retained native guided walkthrough without permission bypass.",
+    "Resolve the native Codex read-tool refusal through a supported host configuration; retain its failure.",
+    "Finish and explicitly assess the applicable candidate-plugin host qualification; desktop is unperformed.",
+    "Retain completed native results, rerun affected checks, then perform final handoff and capture through released 0.22.1.",
+    "Request human verification only after all required evidence or a separately approved contract amendment exists."
+  ],
+  "local_sandbox": {
+    "project": "hagprotocol20261005",
+    "endpoint": "http://127.0.0.1:18086",
+    "restored_project": "hagprotocol20261005-restore",
+    "restore_endpoint": "http://127.0.0.1:18087",
+    "last_context_result": "protocol04-lost-reply/004-completed.json",
+    "configuration": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-phase2-20261005\\package-04\\configuration\\config.json",
+    "credential_file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-phase2-20261005\\package-04\\credentials.json",
+    "credential_values_retained": false
+  },
+  "backup": {
+    "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-phase2-20261005\\protocol04-recovery\\graph-data.tar",
+    "bytes": 183080960,
+    "sha256": "029ef7e682db5142e73c87dfec5f5fbccc14d8d99fc457961232936759ae0cae"
+  },
+  "native_walkthrough_script": "qualification-scripts/native_walkthrough04.py",
+  "authority": "Reuse recorded approvals and review-publication grant. No completion, verification acceptance, merge, release or public deployment is inferred.",
+  "original_failures_preserved": true
+}

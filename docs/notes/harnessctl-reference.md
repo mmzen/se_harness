@@ -31,7 +31,8 @@ supply an absolute `TARGET` for repository operations from the external director
 
 ## Command shape
 
-These rules hold on every subcommand (`WO-ECP-022`):
+These rules describe the local evaluator commands (`WO-ECP-022`).
+The unpublished hosted `remote` client has the separate contract below:
 
 - **The repository is the positional `TARGET`**, default `.`, on every
   command that reads or writes one. `select-work-order` reads an event file,
@@ -64,12 +65,13 @@ These rules hold on every subcommand (`WO-ECP-022`):
 
 | Command | Principal actor | State effect | Intended use |
 | --- | --- | --- | --- |
+| `remote` | authorized sandbox operator or author; reader for reads | explicit remote reads or bounded sandbox draft writes; no local fallback | use the separately installed unpublished client; see [Hosted sandbox client](#hosted-sandbox-client-unpublished) |
 | `init` | repository owner or authorized agent | writes the complete standard harness into an absent or empty target; into a target with content it preserves existing files, integrates the bounded fragments and writes `docs/engineering/ADOPTION_REPORT.md` | install the harness into any repository, new or existing |
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
 | `validate-draft` | human or agent | read-only | inspect one supported draft, separating invalidity, unfinished authoring slots and background findings |
 | `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer; under `--json` an engine refusal exits 2 and a failed generation carries the engine's standard error in `error` |
-| `resources` | human or agent | read-only | resolve instructions and templates from the selected external resource package; available in the governing 0.21.0 evaluator and published 0.22.0 |
+| `resources` | human or agent | read-only | resolve instructions and templates from the selected external resource package; available since 0.21.0 and in the selected released 0.22.1 evaluator |
 | `doctor` | human or agent | read-only | inspect installation integrity, required supplied files and evaluator identity |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
@@ -77,7 +79,7 @@ These rules hold on every subcommand (`WO-ECP-022`):
 | `check-pr` | managed GitHub CI | scope check; may rebind an in-progress handoff | check one or several approved work orders and their combined diff |
 | `check` | human or agent selecting work or assessing a checkpoint | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized actor; a person or agent uses the same recorded WO approval for start and completion after local checks pass (see [one execution route](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
-| `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
+| `decide` | the human who holds `DR-DECISION-DISPOSE`, directly or under an explicitly named eligible owner label | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
 | `raise-risk` | anyone working: a reviewer, an implementer, or an agent mid-execution; no decision right is needed | writes one risk artifact in `raised`, and with `--with-decision` the open decision that blocks the threatened artifacts; dry-run is read-only | record one measured threat to governed work so that an owner answers it before the threatened stage moves |
 | `risks` | human or agent | read-only | list the risks threatening one artifact and its governing chain, with score, state and pending decision |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
@@ -91,6 +93,39 @@ These rules hold on every subcommand (`WO-ECP-022`):
 | `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC plus canonical evaluator evidence | bind selected work, verification contracts, evidence, evaluator identity, snapshot, and exact clean `HEAD` |
 | `refresh-verification` | coding agent after an unchanged rebase | writes a new `ready` VREC | compare relevant Git entries and reuse evidence while preserving the original |
 | `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS plus canonical evaluator evidence | bind release policy, eligible VRECs, exact work coverage, released evaluator wheel identity, version, and the same candidate commit |
+
+## Hosted sandbox client (unpublished)
+
+`harnessctl remote` is available in candidate client 0.22.2, installed into a
+separate test environment. The selected released evaluator 0.22.1 does not
+provide this command. Keep the released evaluator selected for repository and server checks.
+
+In these examples, `CLIENT_PYTHON` is the absolute Python path in the separate
+candidate environment. Run from outside the checkout. `HAG_TEST_TOKEN` is the
+name of a private environment variable; do not put its value in the command.
+
+```text
+"CLIENT_PYTHON" -I -m se_harness remote status --endpoint http://127.0.0.1:18080 --token-env HAG_TEST_TOKEN --json
+"CLIENT_PYTHON" -I -m se_harness remote read --endpoint http://127.0.0.1:18080 --token-env HAG_TEST_TOKEN --project PROJECT_ID --baseline BASELINE_ID --request READ_REQUEST_JSON --json
+```
+
+The positional argument is an operation, not a repository path. Every operation
+requires an explicit endpoint and credential-variable name. Operations other
+than `status` also require `--project`. `baseline` selects `--baseline`;
+`operation` selects the original operation `--key`. `read`, `check`, and `query`
+use a versioned `--request` and an explicit baseline or context view.
+
+The write operations are `import`, `draft-open`, `create-artifact`,
+`revise-artifact`, and `freeze`. Each requires the complete versioned request
+and `--client-wheel` identifying the actual separately installed candidate.
+There is no automatic retry, rebase, local fallback, or implicit apply step.
+After an uncertain write, inspect its original operation key before retrying.
+
+This client prints the remote protocol result, not the local evaluator result
+schema. Transport errors go to standard error; an unknown write outcome is not
+a refusal or proof that nothing changed. See the [hosted sandbox guide](hosted-artifact-graph.md)
+for the request contracts and qualification limits. These commands do not
+approve work, accept verification, or release artifacts.
 
 ## Repository setup and inspection
 
@@ -168,9 +203,10 @@ verification or release gates, and includes no lifecycle next step.
 
 ## Released resource lookup
 
-Released 0.21.0 and 0.22.0 provide this command for repositories selecting the
-`released-resources-v1` layout. This repository uses its independently installed
-0.21.0 evaluator. Publishing 0.22.0 does not change that selection.
+Released evaluators since 0.21.0 provide this command for repositories selecting
+the `released-resources-v1` layout. This repository uses independently installed
+0.22.1 after explicit adoption under WO-HUP-030. Publication alone does not
+change a repository's selection.
 
 ```text
 harnessctl resources [TARGET] [--resource RESOURCE-ID] [--content] [--json]
@@ -410,14 +446,25 @@ presentation consumes that result; it does not replace or recompute it.
 ## Decision disposition
 
 ```text
-harnessctl decide [TARGET] --artifact DEC-... --option OPTION-ID --decision ROLE --reason TEXT [--revisit TEXT] [--apply] [--json]
-harnessctl decide [TARGET] --artifact DEC-... --defer --scope ARTIFACT-ID:FROM-TO ... --revisit TEXT --decision ROLE --reason TEXT [--apply]
-harnessctl decide [TARGET] --artifact DEC-... --withdraw --decision ROLE --reason TEXT [--apply]
+harnessctl decide [TARGET] --artifact DEC-... --option OPTION-ID --decision ACTOR [--authority-owner OWNER] --reason TEXT [--revisit TEXT] [--apply] [--json]
+harnessctl decide [TARGET] --artifact DEC-... --defer --scope ARTIFACT-ID:FROM-TO ... --revisit TEXT --decision ACTOR [--authority-owner OWNER] --reason TEXT [--apply]
+harnessctl decide [TARGET] --artifact DEC-... --withdraw --decision ACTOR [--authority-owner OWNER] --reason TEXT [--apply]
 ```
 
 A decision artifact (`DEC-`) records one pending question, or one implementation deviation from one rule of one specification. While it is `open`, every artifact named in its `blocks` relation is refused its transitions by the `QGP-*-DECISION` predicate of the gate that transition would pass. The refusal names the decision, its question, its options, the deciding role, and the `decide` command that clears it.
 
-`decide` is the only way a decision changes state; `transition` refuses it. Without `--apply` the command plans and reports; with `--apply` it writes the `[disposition]` table (the option, its label, the role, the time, and the verbatim reason) and one lifecycle event. `--option` must name one of the options the artifact declares. A deferral needs one `--scope` entry per transition it admits and a `--revisit` trigger; the scoped transitions pass, every other blocked transition still waits. Accepting a deviation needs `--revisit`, because acceptance is time-bounded. The wrong role is refused with `DR-DECISION-DISPOSE`.
+`decide` is the only way a decision changes state; `transition` refuses it. Without `--apply` the command plans and reports; with `--apply` it writes the `[disposition]` table (the option, its label, the actual human, the time, and the verbatim reason) and one lifecycle event. `--option` must name one of the options the artifact declares. A deferral needs one `--scope` entry per transition it admits and a `--revisit` trigger; the scoped transitions pass, every other blocked transition still waits. Accepting a deviation needs `--revisit`, because acceptance is time-bounded. An ineligible owner is refused with `DR-DECISION-DISPOSE`.
+
+`--decision ACTOR` records the actual human who made the decision. With
+`--authority-owner OWNER`, the evaluator checks OWNER against the existing
+holders for the blocked artifacts, or the departed specification for a
+deviation. OWNER must match exactly and contain non-blank printable text of
+at most 128 characters. It is retained separately as `authority_owner` in
+the disposition. Without the option, ACTOR must directly match a holder.
+Both preview and apply use the same checks. The CLI does not authenticate
+these claims or grant consent; the caller must first establish the human's
+authority and obtain the exact decision. Existing owner labels and historical
+records are not changed.
 
 The validator reports a malformed decision as `E-DCM-001` to `E-DCM-003`, prose in a legacy definition's `## Open decisions` section as `E-DCM-004`, a deviation whose `against` fragment is not a rule identifier of the named specification (`SPEC-xxx#PREFIX-AREA-NNN`) as `E-DCM-005`, and an accepted deviation past its revisit or accepted twice against the same rule as `W-DCM-001` and `W-DCM-002`. See [decision artifacts](decision-artifacts.md) for the model.
 

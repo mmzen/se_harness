@@ -1,6 +1,6 @@
 [harness]
 resource_layout = "released-resources-v1"
-tool_version = "0.22.0"
+tool_version = "0.22.1"
 installed_at = "2026-08-11"
 project_name = "se_harness"
 
