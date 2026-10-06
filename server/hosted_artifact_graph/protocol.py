@@ -54,7 +54,8 @@ class Wire:
     def __init__(self):
         self.schemas = {}
         registry = Registry()
-        for filename in ("remote-v1.json", "read-v1.json", "result-v1.json"):
+        for filename in ("remote-v1.json", "read-v1.json", "result-v1.json",
+                         "lifecycle-v2.json", "lifecycle-result-v2.json", "export-v2.json", "read-result-v2.json"):
             schema = json.loads(contract_path(filename).read_text(encoding="utf-8"))
             self.schemas[filename] = schema
             registry = registry.with_resource(schema["$id"], Resource.from_contents(schema))

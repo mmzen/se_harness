@@ -110,6 +110,9 @@ def prepare(args):
     config = json.loads((context / "config.example.json").read_text())
     config["client"] = client
     config.pop("components")
+    if getattr(args, "phase3", False):
+        config["test_copy"] = True
+        config["protocols"] += ["se-harness-lifecycle-command/v2", "se-harness-lifecycle-result/v2", "se-harness-lifecycle-export/v2", "se-harness-graph-read/v2"]
     deployment_digest = hashlib.sha256(canonical({"configuration": config, "compose_sha256": digest(context / "compose.yaml")})).hexdigest()
     payload = {"schema": "se-harness-hosted-combination/v1", "source": {"repository": "https://github.com/mmzen/se_harness.git", "candidate_commit": commit},
                "client": client, "plugins": plugins, "server": {"version": observed["version"], "wheel_sha256": observed["wheel_sha256"],
@@ -117,7 +120,7 @@ def prepare(args):
                "system_packages_sha256": digest(context / "system-packages.lock.json")}, "evaluator": evaluator,
                "runtime": {"python": observed["python"], "platform": "linux/amd64", "image": RUNTIME},
                "database": {"version": "3.13.1", "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce"},
-               "schema_revision": 1, "protocols": config["protocols"], "deployment_sha256": deployment_digest,
+               "schema_revision": 2 if getattr(args, "phase3", False) else 1, "protocols": config["protocols"], "deployment_sha256": deployment_digest,
                "required_secret_keys": ["principals[].token"]}
     combination_id = "sha256:" + hashlib.sha256(b"se-harness-hosted-combination/v1\n" + canonical(payload)).hexdigest()
     config["components"] = payload
@@ -224,6 +227,7 @@ if __name__ == "__main__":
     for name in ("repository", "output", "client-wheel", "client-replay", "evaluator-wheel"):
         build.add_argument("--" + name, type=Path, required=True)
     build.add_argument("--image", required=True)
+    build.add_argument("--phase3", action="store_true", help="explicit test-copy configuration on a new schema-2 volume; no real authority")
     restore = commands.add_parser("recover", help="restart and restore the private initialized sandbox")
     restore.add_argument("--compose", type=Path, required=True)
     restore.add_argument("--project", required=True)

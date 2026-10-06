@@ -3,6 +3,10 @@
 The v2 endpoint accepts only `lifecycle-v2.json`. Every request and result selects
 test data. Git remains authoritative for real work. Existing v1 routes and the
 seven read-only MCP tools keep their contract; they cannot dispatch v2 actions.
+In an explicitly configured test project their results use
+`se-harness-graph-read/v2`, with a required test-copy label. Ordinary Phase 2
+projects retain their v1 read result shapes. Revision byte hashing is unchanged;
+test revisions add explicit test-copy provenance, without rewriting v1 fixtures.
 
 `inspect` accepts check, preflight and validate. `preview` runs a mutation in a
 discarded projection and returns its input digest and complete proposed file
