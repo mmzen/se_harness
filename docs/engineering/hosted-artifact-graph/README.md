@@ -4,6 +4,39 @@
 
 This package covers the first complete hosted context and draft-authoring sandbox. mmzen approved WO-HAG-001 with required commit-bound verification on 2026-10-04. mmzen subsequently approved all 16 governing definitions in the reviewed Phase 0 artifact package. This index grants no authority.
 
+## Phase 3 proposal — Git remains authoritative
+
+The delivered Phase 2 work was verified in [VREC-HAG-004](verification-records/VREC-HAG-004.md)
+and integrated into `main` through PR #541. Earlier sections below retain their
+stage-specific observations. The new proposal is available in [draft PR #542](https://github.com/mmzen/se_harness/pull/542).
+
+[DEC-HAG-004](decisions/DEC-HAG-004.md) records mmzen's choice: **Git remains
+authoritative.** Phase 3 therefore rehearses the full lifecycle in a private test
+copy. It does not switch real authority to the graph. Authentication and database
+ACL implementation remain deferred; existing sandbox controls stay in place.
+
+The proposed result is one guided change from draft definitions to a test release
+decision, with atomic records/evidence, receipt recovery and an exact export that
+can be checked independently. The released evaluator still makes every lifecycle
+decision. Disposable Git history supplies its existing verification bindings.
+
+| Read | Purpose |
+| --- | --- |
+| [INT-HAG-002](intent/INT-HAG-002.md), [CAP-HAG-002](capabilities/CAP-HAG-002.md) | Outcome, operator ability and exclusions |
+| [REQ-HAG-011](requirements/REQ-HAG-011.md) | Rehearsal operations and retained Git authority |
+| [REQ-HAG-012](requirements/REQ-HAG-012.md) | Atomic complete results, stale-input refusal and retries |
+| [REQ-HAG-013](requirements/REQ-HAG-013.md) | Test provenance, exact export and independent replay |
+| [SPEC-HAG-007](specifications/SPEC-HAG-007.md) | Closed operation families and checkable behavior |
+| [ARCH-HAG-003](architecture/ARCH-HAG-003.md), [ADR-HAG-003](architecture/adr/ADR-HAG-003.md) | One service/store and ordinary test Git projections; alternatives and cost |
+| [VER-HAG-006](verification/VER-HAG-006.md) | Eight actual hosted qualification scenarios and their evidence |
+| [WO-HAG-008](work-orders/WO-HAG-008.md) | One bounded implementation plan with supporting paths and proposed required verification |
+| [RISK-HAG-002](risks/RISK-HAG-002.md) | Test decisions being mistaken for real authority |
+
+The definitions and work order are **draft**. Implementation and qualification
+have not started. The existing [RISK-HAG-001](risks/RISK-HAG-001.md) and new risk
+remain raised. Draft publication does not approve the package, accept risks,
+verify an implementation or authorize merge, release or deployment.
+
 ## Definitions and work
 
 - [INT-HAG-001](intent/INT-HAG-001.md) and [CAP-HAG-001](capabilities/CAP-HAG-001.md): intended outcome and operator ability.

@@ -2,7 +2,7 @@
 id = "DEC-HAG-004"
 type = "decision"
 title = "Phase 3 pilot authority while authentication and database ACLs are deferred"
-status = "open"
+status = "decided"
 owners = ["mmzen"]
 created = "2026-10-06"
 updated = "2026-10-06"
@@ -22,6 +22,21 @@ label = "Propose a bounded real pilot using graph authority, with explicit treat
 [relations]
 concerns = ["SPEC-HAG-003"]
 blocks = ["SPEC-HAG-003"]
+
+[disposition]
+option = "test-copy"
+label = "Implement and exercise the lifecycle on a private test copy; Git remains authoritative for real engineering decisions."
+decided_by = "mmzen"
+authority_owner = "engineering-owner"
+decided_at = "2026-10-06T06:29:30Z"
+reason = "mmzen replied Git remains authoritative to DEC-HAG-004. Phase 3 is defined as a private test-copy lifecycle pilot. Git remains authoritative for real engineering records and decisions. Authentication and database ACL implementation remain deferred. This selects proposal scope only; it does not approve new implementation, accept RISK-HAG-001, amend accepted cutover prerequisites, or authorize release or deployment."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-10-06T06:29:30Z"
+decided_by = "mmzen"
+reason = "mmzen replied Git remains authoritative to DEC-HAG-004. Phase 3 is defined as a private test-copy lifecycle pilot. Git remains authoritative for real engineering records and decisions. Authentication and database ACL implementation remain deferred. This selects proposal scope only; it does not approve new implementation, accept RISK-HAG-001, amend accepted cutover prerequisites, or authorize release or deployment."
 +++
 
 # Phase 3 pilot authority
