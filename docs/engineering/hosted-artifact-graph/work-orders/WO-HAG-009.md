@@ -2,10 +2,15 @@
 id = "WO-HAG-009"
 type = "work_order"
 title = "Qualify native Codex and Claude hosted workflows"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-07"
 updated = "2026-10-07"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen confirmed required verification because the native qualification claim depends on the exact candidate instructions, drivers, component identities and retained host evidence."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = ["docs/engineering/hosted-artifact-graph/verification/VER-HAG-007.md", "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-009.md", "docs/engineering/hosted-artifact-graph/README.md", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md", "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/", "tests/hosted_artifact_graph/", "tests/plugin_integration/test_simple_plugin.py", "plugins/verity-plane/common/skills/setup/SKILL.md", "plugins/verity-plane/common/skills/change/SKILL.md", "plugins/verity-plane/common/skills/evidence/SKILL.md", "plugins/verity-plane/common/skills/harness-orient/SKILL.md", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "server/README.md", "server/contracts/lifecycle-v2.md", "docs/notes/hosted-artifact-graph.md", "docs/notes/harnessctl-reference.md"]
@@ -15,6 +20,21 @@ implements = ["REQ-HAG-011", "REQ-HAG-012", "REQ-HAG-013"]
 specifications = ["SPEC-HAG-007"]
 architecture = ["ARCH-HAG-003", "ADR-HAG-003"]
 verification = ["VER-HAG-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-07T01:50:55Z"
+decided_by = "mmzen"
+reason = "Human mmzen answered \"I approve\" to the reviewed WO-HAG-009 and VER-HAG-007 package at 540bd9fb3a79cf7d8cfaccf01c52b9e8f7b0f133 in PR #543, confirming required commit-bound verification and bounded local Codex CLI/Claude Code qualification. The grant includes ordinary review pushes and PR updates in mmzen/se_harness from codex/hosted-agent-qualification to main, the ready record and the later separately supplied human verification decision, and marking the same PR ready only after that decision is recorded and remote. Git remains authoritative. This grants no verification acceptance, merge, release, public deployment, host-plugin update or risk acceptance."
+scope_paths = ["docs/engineering/hosted-artifact-graph/verification/VER-HAG-007.md", "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-009.md", "docs/engineering/hosted-artifact-graph/README.md", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md", "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/", "tests/hosted_artifact_graph/", "tests/plugin_integration/test_simple_plugin.py", "plugins/verity-plane/common/skills/setup/SKILL.md", "plugins/verity-plane/common/skills/change/SKILL.md", "plugins/verity-plane/common/skills/evidence/SKILL.md", "plugins/verity-plane/common/skills/harness-orient/SKILL.md", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "server/README.md", "server/contracts/lifecycle-v2.md", "docs/notes/hosted-artifact-graph.md", "docs/notes/harnessctl-reference.md"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-07T01:52:57Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Qualify native Codex and Claude hosted workflows

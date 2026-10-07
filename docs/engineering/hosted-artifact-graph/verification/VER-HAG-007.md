@@ -2,13 +2,20 @@
 id = "VER-HAG-007"
 type = "verification"
 title = "Qualify Codex and Claude on the hosted lifecycle"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-10-07"
 updated = "2026-10-07"
 
 [relations]
 verifies = ["REQ-HAG-011", "REQ-HAG-012", "REQ-HAG-013"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-07T01:50:55Z"
+decided_by = "mmzen"
+reason = "Human mmzen answered \"I approve\" to the reviewed WO-HAG-009 and VER-HAG-007 package at 540bd9fb3a79cf7d8cfaccf01c52b9e8f7b0f133 in PR #543, confirming required commit-bound verification and bounded local Codex CLI/Claude Code qualification. The grant includes ordinary review pushes and PR updates in mmzen/se_harness from codex/hosted-agent-qualification to main, the ready record and the later separately supplied human verification decision, and marking the same PR ready only after that decision is recorded and remote. Git remains authoritative. This grants no verification acceptance, merge, release, public deployment, host-plugin update or risk acceptance."
 +++
 
 # Qualify Codex and Claude on the hosted lifecycle
