@@ -1,14 +1,61 @@
-# Native Codex and Claude qualification — in progress
+# Native Codex and Claude qualification — incomplete
 
-**Codex native06 passes the observed cases at corrected package source
-`0dbb8ea19f28994da7abc7ecbab08c8db430dc0c`, including independent replay.
-Claude remains unqualified; another bounded trial is being prepared.** WO-HAG-009 and
-WO-HAG-010 remain `in_progress`. Combined qualification and human verification
-are pending. No actual verification record is prepared.
+Codex native06 passes its observed cases at package source
+`0dbb8ea19f28994da7abc7ecbab08c8db430dc0c`, with the timing limits already
+recorded in its assessment. **Claude remains unqualified.** Its functional
+operations have supporting evidence, but required procedure reads are absent
+from the lifecycle transcripts and a later trial violated its shell route.
+Retrospective reporting does not repair either failure.
 
-mmzen approved WO-HAG-009, VER-HAG-007 and the bounded native retry permissions.
-The same normal sandbox and permission review remain in use. Git remains
-authoritative. No service, evaluator or protocol implementation was changed.
+WO-HAG-009 and WO-HAG-010 remain `in_progress`. No final handoff or actual VREC
+is prepared. PR #543 remains an unfinished-work draft, not ready to merge.
+Git remains authoritative. No actual human decision or risk acceptance is implied.
+
+## Current independent findings
+
+| Area | Codex native06 | Claude Opus02–05 |
+| --- | --- | --- |
+| Instructions and context | Observed reads and exact hashes retained; late adapter read disclosed | Incomplete: no observed reads of five required procedures before lifecycle work |
+| Test lifecycle | 11 accepted operations independently replayed | 12 lifecycle operations across Opus02/03 independently replayed; greeting passed |
+| Refusals and reads | Stale/scope refusals and seven MCP tools observed | Stale selected-draft recovery replayed in Opus04; seven complete MCP responses match HTTP; Opus04 also violated its shell route |
+| Lost reply recovery | Original-key lookup, identical retry and conflict observed | Same three observations independently checked |
+| Exports and reporting | Four native exports independently reconstructed | Two exact exports replayed; reporting-only retry retained separately, without changing the earlier qualification failures |
+
+The missing procedure reads are `AUTHORITY.md`, `EXECUTE_WORK.md`,
+`VERIFY_OUTCOME.md`, `RELEASE.md` and `RESULTS.md`. The candidate change skill
+required those current procedures. The full trace distinguishes actual reads,
+staged immutable hashes and post-run hashes of mutable files.
+
+Opus05 completed its reporting-only retry in 496.916 seconds using native file
+tools, with shell and MCP access disabled for that session. Its report still
+confuses fixture S with candidate P, labels an accepted risk operation as refused,
+and misidentifies verification preparation as release preparation. Exit 0 does
+not make those statements correct. The report is retained unchanged with an
+independent assessment; NQ-05's accurate-report requirement remains unsatisfied.
+
+- [Instruction findings and next correction](claude-instruction-findings.json)
+- [Independent read trace](claude-independent-read-trace.json)
+- [Stopped selected-draft trial](opus04-assessment.json)
+- [Reporting-only retry assessment](opus05-assessment.json)
+- [Reporting-only transcript inventory](opus05-inventory.json)
+
+Next: improve discovery of the already-required current procedure and reduce
+test context load without hiding results or supplying workflow answers. Rerun
+affected native scenarios from a clean point with narrower session shell rules.
+No qualification criterion is waived. Further identical retries would not
+resolve the documented instruction-following gap.
+
+Released validation passes with 1,987 artifacts, zero errors and 63 existing
+warnings. The unchanged source checks passed 1,323 tests with 23 skips, plus
+seven focused driver checks, distribution checks and CLI smoke. CI at
+`8bd4aacfc1900c7a2bddfd279b69d0eb2bde5a04` failed only the required final-handoff
+check (`QGP-G4I-EVIDENCE`); other applicable checks passed. Later-head CI is
+reported separately and is never inferred from this run.
+
+## Earlier observations — preserved chronology
+
+The sections below retain the earlier progress statements and failures.
+They do not supersede the current assessment above.
 
 ## Latest driver trials
 
@@ -353,3 +400,9 @@ The continuation finished in 1,124.557 seconds. Independent replay passed the th
 The native report incorrectly marked all cases complete. It substituted a risk-related refusal for the required selected-draft change, named the wrong mitigated risk, and misreported compactions and the proxy endpoint change. Its read trace is incomplete. The original report remains evidence of model behavior, not a qualification verdict. See [assessment](opus03-assessment.json) and [inventory](opus03-inventory.json). Claude remains incomplete pending the exact stale-draft scenario and accurate reporting.
 
 Supporting checks at fb6d804324f3972e468a673a297f71298a5d6be7 passed: seven focused tests; 1,323 source tests, 23 skips; distribution checks; CLI smoke; 1,987 artifacts, zero errors, 63 warnings. The first source invocation omitted UTF-8 propagation and failed two Windows decoding checks; both the failure and corrected rerun are retained. Current CI has only the expected missing-handoff failure; other applicable jobs pass and conditional release jobs are skipped.
+
+## Opus04 selected-draft test and stopped report
+
+Claude changed the exact selected draft, received HAG_REMOTE_STALE_CONTEXT with no committed effect, then refreshed and applied a valid correction. Project versions were 32, 33, 33 after refusal, and 34 after recovery. Independent replay passed the one accepted action; its whole-run wrapper still exits 1 because this focused test contains no new exports. Opus03 supplies the earlier two exports.
+
+The parent stopped this run after observing three non-helper directory-listing commands in its own test evidence area. Full transcript review found eight listing attempts, including earlier calls missed by the live observer. The real checkout and selected host settings stayed unchanged. No final report was produced, so the combined qualification remains incomplete. See [assessment](opus04-assessment.json) and [inventory](opus04-inventory.json).

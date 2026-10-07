@@ -1,0 +1,148 @@
+{
+  "archive": "opus05-reporting.zip",
+  "bytes": 357520,
+  "sha256": "dc367b723d2f90e30067cd1c05ee19d0bc1f2adbaebf58eceb879e0bba7430f1",
+  "files": [
+    {
+      "path": "checks/claude-guidance14-auth-probe.json",
+      "bytes": 2815,
+      "sha256": "ae1b00e959a3e03f70e85e83f3f9a2e573dfff0d045670c0463d33ce00413667"
+    },
+    {
+      "path": "checks/claude-guidance14-version.json",
+      "bytes": 308,
+      "sha256": "f62d8a654e41a50b600e067995e47177b931551acab4942b0aadc307e08a5a03"
+    },
+    {
+      "path": "checks/guidance14-state-after.json",
+      "bytes": 986,
+      "sha256": "6b10dd94761558d7633b7c2e2f28a722f191e09f57c59e842ebd2baf3d0f572c"
+    },
+    {
+      "path": "checks/guidance14-state-before.json",
+      "bytes": 986,
+      "sha256": "6b10dd94761558d7633b7c2e2f28a722f191e09f57c59e842ebd2baf3d0f572c"
+    },
+    {
+      "path": "checks/native14-ci-failure.json",
+      "bytes": 3433,
+      "sha256": "13c371dc416c85944fdec5fb234da7b8db2e5490a5eaca367a04f7cca5bca628"
+    },
+    {
+      "path": "checks/native14-ci-status.json",
+      "bytes": 7065,
+      "sha256": "8d33edf5f50d9c8055f403a8e70d97300c6166e786ba3d5fedea99a3d2ca9b06"
+    },
+    {
+      "path": "checks/native14-final-scope-WO-HAG-009.json",
+      "bytes": 36847,
+      "sha256": "ede946a081ce30726183bd565210647338c3c3d19627dd2557e125afd53dbe49"
+    },
+    {
+      "path": "checks/native14-final-scope-WO-HAG-010.json",
+      "bytes": 21157,
+      "sha256": "195d52da8868a1242f68ebfe73e7f8a431007bb61da15084e835c9252abe0ab9"
+    },
+    {
+      "path": "checks/native14-validation.json",
+      "bytes": 427921,
+      "sha256": "d3dc2948b182e98a998a322239b094d83b6b9c2a7ea27136107291faee8468e6"
+    },
+    {
+      "path": "checks/opus05-report-review.json",
+      "bytes": 4336,
+      "sha256": "3205925efd1f13fa3925e7becc8437cd5596a5117a9efabc9602f39c494119f0"
+    },
+    {
+      "path": "native/CLAUDE.md",
+      "bytes": 640,
+      "sha256": "2f3ffa58ed5af27bfce35904fcc7b23314220ad7774f5f280ad0fdef4139b868"
+    },
+    {
+      "path": "native/events.jsonl",
+      "bytes": 1263151,
+      "sha256": "78de669362f54432adb9ba987242ae3a17e21480d8cb618ee6d0f0bd68b57002"
+    },
+    {
+      "path": "native/inputs/event-index.json",
+      "bytes": 617536,
+      "sha256": "4d4e593e3eb29ec36d5628706746dbdd114ccdfcdaf2cac36ba143088ce83be4"
+    },
+    {
+      "path": "native/inputs/evidence-files.json",
+      "bytes": 93871,
+      "sha256": "bd20483ff132cbcf3610f76bc1b45ab327536f9531e9df46e1907057dcd1e743"
+    },
+    {
+      "path": "native/inputs/inventory.json",
+      "bytes": 190261,
+      "sha256": "2c2376fa8a309c23a9ba39b518a58ba6bc8e2436fdf908bf02842592aaaca0fe"
+    },
+    {
+      "path": "native/invocation.json",
+      "bytes": 6740,
+      "sha256": "162b1f6020a0d4146cb31acadbff8b08a6bfce2b81137dc880aee8bd003b8e96"
+    },
+    {
+      "path": "native/mcp.json",
+      "bytes": 233,
+      "sha256": "56d8db1969b8d8013aa2fa4408f1f759893b875c3bc68584618d88c5443e9f43"
+    },
+    {
+      "path": "native/native-observations.json",
+      "bytes": 10345,
+      "sha256": "cf0d9e32cff2a3aa07d60c08bd73ce233bdb9c1efbaf52212810132cafe5b306"
+    },
+    {
+      "path": "native/native-report.md",
+      "bytes": 12784,
+      "sha256": "a9f5437e50082a01c326ad881a7849f0ac0631e3702ec6ddd0602dc1e2c56218"
+    },
+    {
+      "path": "native/selection.json",
+      "bytes": 3388,
+      "sha256": "509e29bbf33ff1188ca1601466a810dc206ebe79012e4173c97cd5384e997e52"
+    },
+    {
+      "path": "native/session.json",
+      "bytes": 322,
+      "sha256": "d80f145ce03f98112a53087d16ec649dcc43c13603697260330f411a5eb2cdb5"
+    },
+    {
+      "path": "native/task.md",
+      "bytes": 4570,
+      "sha256": "7b1a0f7a8c48cdaecda807838d8072a2a00a1ae70f821d2fe50d19d8383edb2d"
+    },
+    {
+      "path": "operator/read-audit.py",
+      "bytes": 3261,
+      "sha256": "569b0c8161eee9330d80e2c5e959446c394243d21f12c755425289e008b5099a"
+    },
+    {
+      "path": "operator/report-runner.py",
+      "bytes": 14489,
+      "sha256": "8bf1cdc996502843773e27a0c46e5e423df8e7d789fa91d4e36f937790e81387"
+    },
+    {
+      "path": "setup/native-selection.json",
+      "bytes": 3267,
+      "sha256": "d06da0d13f208df683410a590c702bb86b9dc0cc208898c1990e9f7c40e335a2"
+    },
+    {
+      "path": "setup/native-task.md",
+      "bytes": 4366,
+      "sha256": "40735506c677bda0108db812431013e159b5f0ef50862813152793ed9163b78f"
+    },
+    {
+      "path": "setup/permissions.json",
+      "bytes": 2560,
+      "sha256": "35eba5d3f355e3898c0f4609f48679cd1e5e6cea68355d348f463d37daec20fb"
+    },
+    {
+      "path": "setup/report-binding.json",
+      "bytes": 1068,
+      "sha256": "ac7815fe0bd6a88ae29a587538fadc30d148a25de494f2dba0b25979b7f2ef08"
+    }
+  ],
+  "exclusions": "Credentials, packages and environments. Event-index entries link exact original lines already retained in prior trial archives."
+}

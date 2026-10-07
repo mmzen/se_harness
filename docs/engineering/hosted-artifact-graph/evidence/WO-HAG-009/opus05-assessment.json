@@ -1,0 +1,112 @@
+{
+  "trial": "opus05 reporting-only",
+  "session": {
+    "host": "claude",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 496.916,
+    "reply_dropped": false,
+    "redactions": 0,
+    "events_sha256": "78de669362f54432adb9ba987242ae3a17e21480d8cb618ee6d0f0bd68b57002",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "permission_change": "Bash, ToolSearch and MCP removed only from this session. Existing file-tool permissions retained. Normal candidate plugin and hooks remained loaded.",
+  "observed_tools": [
+    "Read",
+    "Write"
+  ],
+  "real_repository_and_selected_host_settings_unchanged": true,
+  "read_errors": [
+    {
+      "source_line": 15,
+      "tool_use_id": "toolu_01PJgckJQKUUXHgp3bkRV8zS",
+      "content": "File content (603.1KB) exceeds maximum allowed size (256KB). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file."
+    },
+    {
+      "source_line": 62,
+      "tool_use_id": "toolu_019Vs7nREzqk943dugcjhkdP",
+      "content": "File content (25827 tokens) exceeds maximum allowed tokens (25000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file."
+    }
+  ],
+  "report_review": {
+    "outcome": "reporting_requirement_not_satisfied",
+    "native_report_sha256": "a9f5437e50082a01c326ad881a7849f0ac0631e3702ec6ddd0602dc1e2c56218",
+    "positive_observations": [
+      "Session completed with only Read/Write file calls, no shell or service action and no observed outside write.",
+      "It names the previous shell-route failure and does not claim combined verification."
+    ],
+    "factual_errors": [
+      {
+        "claim": "Synthetic Git candidate P is 5820415917e87b64d80bad2f7c39c6d18d692829; client also labeled P and evaluator B.",
+        "finding": "5820415917e87b64d80bad2f7c39c6d18d692829 is fixture S. Native exports and independent replay retain P abff603aec6a46c5100ce80e14551a8c16e2a5cb. B is a hosted input baseline, not the released evaluator. The report does not preserve the required identity distinction."
+      },
+      {
+        "claim": "042-raise-risk-stale-preview.json and 043-raise-risk-stale-apply.json are refused.",
+        "finding": "The exact first record is previewed. The second is accepted and changes project 23 to 24. The earlier 042-raise-risk-stale-demo.json is the refused no-matching-preview attempt. File names do not establish outcomes."
+      },
+      {
+        "claim": "048 is prepare-release and 050 is handoff.",
+        "finding": "048-vrec-apply.json captures a ready VREC. 050-vrec-transition-preview.json is a verification transition preview. Neither is the claimed operation; the proposed 048-prepare-release.json path does not exist."
+      },
+      {
+        "claim": "NQ-01 through NQ-04 labels in the report map to the approved cases.",
+        "finding": "The report uses its own mapping; the approved contract defines NQ-01 instructions, NQ-02 lifecycle, NQ-03 refusals/reads and NQ-04 reply recovery. This is a reporting clarity defect, not a changed acceptance criterion."
+      }
+    ],
+    "checked_receipts": [
+      {
+        "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus02\\work\\receipts\\042-raise-risk-stale-preview.json",
+        "sha256": "9365007d90862f6fde583741fa8bbcbc996dd4fdc76e6f2266457830a9d89f6a",
+        "outcome": "previewed",
+        "versions": null
+      },
+      {
+        "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus02\\work\\receipts\\043-raise-risk-stale-apply.json",
+        "sha256": "5fb7ee71502efd0c6e66e129586b01d41c10c044cf436fdb0385f4f7043b0025",
+        "outcome": "accepted",
+        "versions": {
+          "project": {
+            "before": 23,
+            "after": 24
+          },
+          "context": {
+            "context_id": "a27675eb-a7cc-4e03-9892-7f77eba4f83c",
+            "before": 20,
+            "after": 21
+          }
+        }
+      },
+      {
+        "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus02\\work\\receipts\\048-vrec-apply.json",
+        "sha256": "323e11c18aaceae3d0ac96a6823d78ed15c5e102fe7b1924cf5616602f21ba50",
+        "outcome": "accepted",
+        "versions": {
+          "project": {
+            "before": 25,
+            "after": 26
+          },
+          "context": {
+            "context_id": "a27675eb-a7cc-4e03-9892-7f77eba4f83c",
+            "before": 22,
+            "after": 23
+          }
+        }
+      },
+      {
+        "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus02\\work\\receipts\\050-vrec-transition-preview.json",
+        "sha256": "69782768f4a405c08b237dfee1518cac1df9f408b76910cd72a2708a121ffa81",
+        "outcome": "previewed",
+        "versions": null
+      }
+    ],
+    "independent_export_replay": {
+      "path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\hag-o03-replay-20261007\\assessment.json",
+      "sha256": "0489a96807e6489a708250bf4bf0429396262e5ae87a3a8862f525964226fff6",
+      "original_P": "abff603aec6a46c5100ce80e14551a8c16e2a5cb"
+    },
+    "conclusion": "The source evidence remains useful, but this second reporting attempt is not an accurate final host report. Preserve it unchanged as observed model output. Do not request human verification or claim Claude qualification."
+  },
+  "qualification": "not_qualified",
+  "reason": "Retrospective reporting cannot satisfy missed required reads before earlier lifecycle actions or erase the previous command-route violation. No actual verification record is prepared."
+}
