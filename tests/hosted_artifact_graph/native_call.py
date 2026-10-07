@@ -95,6 +95,11 @@ def main():
                           'project_id':config['project_id'],'endpoint':config['endpoint']}))
         return 0
     record = contained(root,args.record,new=True)
+    # Keep the original command record for independent replay. Give native file
+    # tools a separate, unescaped copy of stdout; do not summarize the result or
+    # choose the next operation for the agent. Check both destinations before
+    # executing a potentially mutating request.
+    stdout_file = contained(root,record.with_name(record.name + '.stdout.txt'),new=True)
     if args.kind == 'assert-greeting':
         source=Path(config['source_directory'])/'src/greeting.py'
         if hashlib.sha256(source.read_bytes()).hexdigest()!=config['greeting_sha256']:
@@ -110,8 +115,13 @@ def main():
     if token and token in raw:
         raise ValueError('Refusing to retain or print a credential')
     record.parent.mkdir(parents=True,exist_ok=True)
-    record.write_text(raw,encoding='utf-8')
-    print(raw,end='')
+    with record.open('x',encoding='utf-8',newline='') as stream:
+        stream.write(raw)
+    with stdout_file.open('x',encoding='utf-8',newline='') as stream:
+        stream.write(outcome.stdout)
+    print(json.dumps({'record':str(record),'exit':outcome.returncode,
+                      'stdout_file':str(stdout_file),'stderr':outcome.stderr,
+                      'instruction':'Read stdout_file for the complete unmodified command result.'}))
     return outcome.returncode
 
 

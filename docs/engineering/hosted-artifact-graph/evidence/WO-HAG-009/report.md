@@ -339,3 +339,9 @@ disclosed, not bypassed. The full comparison starts at
 RISK-HAG-001/002 remain raised. Desktop, automatic startup/compaction/resume,
 authentication/DB ACL implementation, public/production delivery, actual assurance,
 merge and release remain outside this work.
+
+## Opus02 partial observation
+
+The native Opus 4.6 run timed out after 3,300 seconds. It completed the synthetic work and created a ready test VREC. Independent released replay passed all nine accepted operations, then refused the overall assessment because native exports were missing. Test verification/release, seven MCP tools, exports, and the precise selected-draft stale case remain pending. There is no Claude pass or actual verification record.
+
+See [assessment](opus02-assessment.json) and [retained inventory](opus02-inventory.json). Three automatic compactions and all refused calls are retained. The real repository and selected host settings were unchanged. A test-driver correction now keeps the original command record and saves complete stdout separately so native Read can inspect it without escaped long lines. Seven focused checks pass. The continuation reuses only this Claude project and its own evidence; it receives no completed requests or corrective workflow commands.
