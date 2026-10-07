@@ -62,6 +62,29 @@ was changed. A new independent trial is required; the diagnostic is not a pass
 for the five lifecycle scenarios. Its inputs will be staged under its own
 read-protected inputs directory, with the exact output path explicit.
 
+Claude sonnet06 stopped after its quoted helper path failed to match the original
+literal permission rule. The project remained at version 0. A separate read-only
+diagnostic established that finite quoting equivalents of the exact approved
+prefix work, while direct client execution stays denied. See the
+[stopped-run assessment](sonnet06-stop.json), [inventory](sonnet06-stopped.json),
+[archive](sonnet06-stopped.zip) and [quoting diagnostic](native-permission-quoting.json).
+
+Claude sonnet07 then used the approved helper successfully for identity and status.
+After automatic compaction it guessed an incorrect interpreter path and ended with
+an unsupported claim that all Bash calls were blocked. The run took 644.050 seconds
+and made no service mutation. It is not qualified. See the
+[assessment](sonnet07-assessment.json), [inventory](sonnet07-inventory.json) and
+[transcript](sonnet07-incomplete.zip). The next trial will persist the approved
+command prefix, task path and output directory in its selection file. This changes
+no permission or lifecycle answer. Host-setting hashes and checkout HEAD stayed
+unchanged; four coordinator evidence files written during the run are identified
+separately.
+
+The stricter launch mode was checked at source
+`7295682f85006127ae9088179919b35dfc62c2d0`: 1,323 tests with 23 skips,
+distribution checks, CLI smoke and released validation passed. Product packages
+remain those built from `0dbb8ea19f28994da7abc7ecbab08c8db430dc0c`.
+
 The current source suite passed: 1,323 tests with 23 skips. Distribution checks,
 CLI smoke, 28 focused package/activation checks (two skips), six native-support
 checks and released validation passed. Validation reported 1,987 artifacts,

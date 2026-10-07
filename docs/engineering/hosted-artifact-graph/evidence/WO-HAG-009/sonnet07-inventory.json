@@ -1,0 +1,143 @@
+{
+  "archive": "sonnet07-incomplete.zip",
+  "bytes": 276002,
+  "sha256": "b37f2fbacd3ef607fd87f0a1957ec18e7e2e9bbcc4db95f4c966ec5a0aa8e047",
+  "files": [
+    {
+      "path": "sonnet07/events.jsonl",
+      "bytes": 898723,
+      "sha256": "2b2423a85c4471232b055504e471a7577a2d32470f14094ce570d5f5cf71cf75"
+    },
+    {
+      "path": "sonnet07/session.json",
+      "bytes": 321,
+      "sha256": "511d888694dab81d813d7e7c7e7702131829384bfca5e38c2a39281eed2448fc"
+    },
+    {
+      "path": "sonnet07/invocation.json",
+      "bytes": 11740,
+      "sha256": "e7f17e9f6366855b118e76211c60f2e1761848dffd6dfb6141b4863273217d42"
+    },
+    {
+      "path": "sonnet07/selection.json",
+      "bytes": 2918,
+      "sha256": "fb0af001086e7aa9bf8332c26afb28cd8cdf0a9919333c80ce3f05314c4a2092"
+    },
+    {
+      "path": "sonnet07/task.md",
+      "bytes": 9646,
+      "sha256": "1d1d0ecc50456fb3b637f67b2218d7ad122ed12ebec92171be6220dd31d0d392"
+    },
+    {
+      "path": "sonnet07/work/import/req-import-001.json",
+      "bytes": 2995,
+      "sha256": "fb8a53399449cb29ec23f54ea697cb015f7c15409fee7d5a87b124e9290d1235"
+    },
+    {
+      "path": "sonnet07/work/setup/status.json",
+      "bytes": 4440,
+      "sha256": "420dbefc1b55d2df8753d1b8cd21cad3583ed1fea19b061af65a1d634ddc2f5a"
+    },
+    {
+      "path": "support/guidance07-state-before.json",
+      "bytes": 775,
+      "sha256": "8d42d7c042ccb1e222f26ae0573b892488aba3a1e4da331382f5e9c5ba5b2acc"
+    },
+    {
+      "path": "support/guidance07-state-after.json",
+      "bytes": 1118,
+      "sha256": "411e46126abcc41a3fcc73f80122c1112c44970e982bbf5e5bcaa8f5acdf306d"
+    },
+    {
+      "path": "support/guidance07-coordinator-writes.json",
+      "bytes": 1117,
+      "sha256": "b76ec2223c33f9afea019125e7ba11802888b1af5d9af154ff998f56503cfd51"
+    },
+    {
+      "path": "support/sonnet07-final-status.json",
+      "bytes": 4391,
+      "sha256": "daee76f5de89953dbb244b3d023d7bd265357538155b559b6905ad885f0a9b7c"
+    },
+    {
+      "path": "support/qualification-pr-current.json",
+      "bytes": 7191,
+      "sha256": "dd3fe1e22692eff7018fd19c72d485571a7e991c865580fdc2476ee53fa2d25a"
+    },
+    {
+      "path": "support/qualification-ci-current-failure.json",
+      "bytes": 3433,
+      "sha256": "82139715be2fb2225d0028e09dede0bc334edc29453eac245a9ff59ac3527531"
+    },
+    {
+      "path": "support/claude-guidance07-auth-probe.json",
+      "bytes": 2817,
+      "sha256": "3b6e041da1c87c7dba66b385eac4a23f38f6ee03349c9e7152b29285b76200b0"
+    },
+    {
+      "path": "support/claude-guidance07-init.json",
+      "bytes": 1031,
+      "sha256": "66c15af2e2c6710ba347fe9f870950641054f035f3fcc8a6051211fc15befd84"
+    },
+    {
+      "path": "support/claude-guidance07-initial-status.json",
+      "bytes": 4394,
+      "sha256": "37ea8bc2a9285e00c54c78d67c6fbaccca10ea67e579ca27be0338bd98820448"
+    },
+    {
+      "path": "support/claude-guidance07-networks.json",
+      "bytes": 132587,
+      "sha256": "518242fd2d6167f6d96e8130830ffec073081632445e1e39e70381a77d597af9"
+    },
+    {
+      "path": "support/claude-guidance07-source-stage.json",
+      "bytes": 749,
+      "sha256": "836bf9ae5dbc215e6af0f822cf37d5a37ac147f55cb1f738cee6ae8c67467feb"
+    },
+    {
+      "path": "support/claude-guidance07-up.json",
+      "bytes": 1886,
+      "sha256": "6c5afb996520a4a99d047c1c0db0cec7a19305319ee358579d37547bd0fc98c3"
+    },
+    {
+      "path": "support/claude-guidance07-version.json",
+      "bytes": 308,
+      "sha256": "cac389b16e4295f66d704137b404e5374d061bc7a264d42ffeb990f0a54953bb"
+    },
+    {
+      "path": "support/claude-guidance07-volume-absent.json",
+      "bytes": 394,
+      "sha256": "1608e47de425c4802436c2ab0af76af02abf9a06a24a3c0487c9495c9fbe1c24"
+    },
+    {
+      "path": "support/claude-guidance07-volume-create.json",
+      "bytes": 341,
+      "sha256": "3c0a9fa0a76d369c8fae23c9fe51b2a8cde77ace0307f30f006f2beff9ea509d"
+    },
+    {
+      "path": "support/guidance07/stage-evidence.json",
+      "bytes": 885,
+      "sha256": "9b79fc03cc855efa34cef2c5e11ef4d032eb48ee9c090d582dd2f3f85ca2f3e9"
+    },
+    {
+      "path": "support/guidance07/permissions.json",
+      "bytes": 2309,
+      "sha256": "b2cab6412ed8f71061f87fded7e20c8d27beab467e343f5a1929711c0815c702"
+    },
+    {
+      "path": "support/guidance07/native-selection.json",
+      "bytes": 2800,
+      "sha256": "bae936584f6b716d97b379c7af3174c329881fd241d9fae490b960ca46321cf0"
+    },
+    {
+      "path": "support/guidance07/selection.json",
+      "bytes": 1574,
+      "sha256": "ec7a9bd8b5d9c97b3790156e319c6f89c7488342fb8882d5a9b97130970c50f3"
+    },
+    {
+      "path": "support/guidance07/combination.json",
+      "bytes": 2542,
+      "sha256": "81451ef1f87b133e76bc5ee7d503b0347341fff11f9bb6171c2772de84142f75"
+    }
+  ],
+  "redaction": "Native recorder redaction preserved; scanned retained files for current sandbox keys. Credentials, account stores and copied inputs excluded."
+}
