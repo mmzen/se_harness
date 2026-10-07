@@ -8,7 +8,8 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 The delivered Phase 2 work was verified in [VREC-HAG-004](verification-records/VREC-HAG-004.md)
 and integrated into `main` through PR #541. Earlier sections below retain their
-stage-specific observations. Phase 3 is available in [draft PR #542](https://github.com/mmzen/se_harness/pull/542).
+stage-specific observations. Phase 3 is integrated through [PR #542](https://github.com/mmzen/se_harness/pull/542),
+merge commit `55caaada508495bea7d97effd27644d1ce8373da`.
 
 [DEC-HAG-004](decisions/DEC-HAG-004.md) records mmzen's choice: **Git remains
 authoritative.** Phase 3 therefore rehearses the full lifecycle in a private test
@@ -35,9 +36,26 @@ decision. Disposable Git history supplies its existing verification bindings.
 mmzen approved the definitions and WO-HAG-008 with required verification.
 The [Phase 3 assessment](evidence/WO-HAG-008/report.md) records all eight passing
 hosted scenarios, source checks, exact package identities, failures and corrections.
-Human verification remains pending; consult WO-HAG-008 and its linked record for
-current lifecycle state. Both RISK-HAG-001 and RISK-HAG-002 remain raised.
-Draft publication grants no merge, release, deployment or real authority cutover.
+mmzen verified [VREC-HAG-005](verification-records/VREC-HAG-005.md) for candidate
+`a3b3f2dd0e91d0559a48b19f31e382a2c804769d`. WO-HAG-008 is implemented.
+Both RISK-HAG-001 and RISK-HAG-002 remain raised. Integration is not public
+release, deployment or real authority cutover.
+
+## Native Codex and Claude qualification — proposal
+
+[WO-HAG-009](work-orders/WO-HAG-009.md) and
+[VER-HAG-007](verification/VER-HAG-007.md) propose an agent-driven Windows CLI
+qualification against the unchanged Phase 3 behavior. Each host uses a fresh
+private test project and exact candidate guidance. The agent must select its own
+workflow commands, recover refused/uncertain requests, and export replayable data.
+The five cases must pass for both hosts. Earlier scripted walkthroughs remain
+historical evidence; they do not prove this additional native claim.
+
+The package reuses the existing intent, capability, requirements, specification
+and architecture. Only these two formal artifacts are new. Git remains
+authoritative; desktop, real authority, authentication/DB ACL implementation and
+public delivery remain excluded. The drafts await human approval with required
+commit-bound verification; no new native session or implementation is claimed.
 
 ## Definitions and work
 
