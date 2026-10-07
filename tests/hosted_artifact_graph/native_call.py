@@ -12,6 +12,7 @@ import base64
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 import urllib.parse
@@ -20,6 +21,48 @@ from pathlib import Path
 OPERATIONS = ('status','read','import','draft-open','create-artifact','revise-artifact',
               'freeze','rehearse','export','operation')
 MUTATIONS = ('import','draft-open','create-artifact','revise-artifact','freeze','rehearse','export')
+
+
+def read_json(root, supplied, pointer, keys=False):
+    """Read one agent-selected JSON value; never infer a workflow field."""
+    path = contained(root, supplied)
+    if path.stat().st_size > 4*1024*1024:
+        raise ValueError('JSON input exceeds 4 MiB')
+    raw = path.read_bytes()
+    token = os.environ.get('HAG_NATIVE_TEST_TOKEN', '')
+    if token and token.encode() in raw:
+        raise ValueError('Refusing to read a credential')
+    value = json.loads(raw)
+    if pointer and not pointer.startswith('/'):
+        raise ValueError('JSON pointer must be empty or start with /')
+    for part in pointer.split('/')[1:]:
+        if re.search(r'~(?![01])', part):
+            raise ValueError('Invalid JSON pointer escape')
+        part = part.replace('~1', '/').replace('~0', '~')
+        if isinstance(value, dict):
+            if part not in value:
+                raise ValueError('JSON pointer does not exist')
+            value = value[part]
+        elif isinstance(value, list) and re.fullmatch(r'0|[1-9][0-9]*', part):
+            if int(part) >= len(value):
+                raise ValueError('JSON pointer does not exist')
+            value = value[int(part)]
+        else:
+            raise ValueError('JSON pointer does not exist')
+    result = {'file':str(path), 'sha256':hashlib.sha256(raw).hexdigest(),
+              'pointer':pointer, 'selection_only':True}
+    if keys:
+        if isinstance(value, dict):
+            result.update(type='object', keys=list(value))
+        elif isinstance(value, list):
+            result.update(type='array', length=len(value))
+        else:
+            result.update(type='scalar')
+    else:
+        result['value'] = value
+    if len(json.dumps(result,ensure_ascii=False).encode()) > 64*1024:
+        raise ValueError('Selected output exceeds 64 KiB; use --keys or a narrower pointer')
+    return result
 
 
 def contained(root, supplied, *, new=False):
@@ -76,12 +119,19 @@ def main():
     remote.add_argument('--record',required=True)
     encoded = commands.add_parser('encode-file')
     encoded.add_argument('path')
+    selected = commands.add_parser('read-json', help='Read an exact JSON pointer from a saved result; empty pointer selects its root')
+    selected.add_argument('path')
+    selected.add_argument('--pointer', default='')
+    selected.add_argument('--keys', action='store_true', help='Return object keys or array length, without field values')
     commands.add_parser('identity')
     assertion = commands.add_parser('assert-greeting')
     assertion.add_argument('--record',required=True)
     args = parser.parse_args()
     root = Path(os.environ['HAG_NATIVE_WORK_DIRECTORY']).resolve()
     config = json.loads(Path(os.environ['HAG_NATIVE_SELECTION']).read_text(encoding='utf-8'))
+    if args.kind == 'read-json':
+        print(json.dumps(read_json(root,args.path,args.pointer,args.keys),ensure_ascii=False))
+        return 0
     if args.kind == 'encode-file':
         raw = contained(root,args.path).read_bytes()
         if len(raw)>1024*1024:

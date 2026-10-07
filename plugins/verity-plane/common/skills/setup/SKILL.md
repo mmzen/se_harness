@@ -39,6 +39,9 @@ Compare readiness, authority mode `sandbox-projection`, schema, protocols, and
 all component identities with the selected combination. A mismatch stops the
 remote action. An unavailable service never selects local file writes as a fallback.
 Use harness-orient for reads or change for authorized sandbox draft preparation.
+For lifecycle rehearsal, read change's **Hosted reading and context** section
+before the first request. For record preparation or reporting, use evidence's
+**Private lifecycle test copy** section. Read each current procedure when needed.
 Do not continue into "Activate the checkout" for this hosted selection.
 This route grants no approval, verification, release, adoption or deployment right.
 

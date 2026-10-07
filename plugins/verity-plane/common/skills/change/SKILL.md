@@ -9,6 +9,63 @@ Turn the selected change into a coherent artifact package or carry its work
 order forward. The installed harness decides lifecycle legality; this skill
 connects its existing procedures to the operator's request.
 
+## Hosted reading and context
+
+For an explicit hosted test copy, follow setup's hosted selection. Before a
+lifecycle request, read the current released procedure and its applicable
+prerequisites. Resolve paths against the selected released-resource directory,
+not the test output directory. The command schema supplies fields, not policy.
+The task-to-file table below locates instructions; only the released evaluator
+determines the next action and whether it is permitted.
+
+Keep complete requests and results in files. Read only the fields needed for
+the current action, then the required procedure section. Use bounded file reads
+or an available read-only JSON field selector. A selected field is not the full
+result: inspect reported failures, required checks and incomplete-response flags
+before proceeding. Do not read an entire historical transcript into context to
+recover one artifact ID or result.
+
+Keep a small transient progress note outside the repository when needed. Record
+the current selection, exact last request/result paths, unresolved effects, and
+the evaluator's current procedure/step and instruction references. Cite source
+fields rather than copying large receipts. Update it after inspecting a result.
+After compaction, use it to locate the original evidence and recover current
+context; it grants no authority and does not replace a fresh required check.
+
+## Private lifecycle test copy
+
+When the approved task explicitly selects the hosted rehearsal, use the installed
+candidate client's `remote rehearse --test-copy` command and the closed v2 request
+schema in `server/contracts/lifecycle-v2.json`. Preview the exact action, then
+apply it with that preview digest and unchanged versions. The service reruns the
+released evaluator. After an uncertain reply, look up the original operation key;
+do not rebase or invent a replacement key to conceal the outcome.
+
+This is test data. Supplied actors are synthetic inputs, not human consent.
+Imported records stay immutable. Keep real decisions and work in the authoritative
+Git workflow. No rehearsal record authorizes a real release or external action.
+
+| Current task | Released procedure to read |
+| --- | --- |
+| Complete draft content | `docs/engineering/ARTIFACT_AUTHORING.md` and the selected type's checklist |
+| Record supplied definition/work decisions | `docs/engineering/harness/AUTHORITY.md` and `AUTHORIZE_WORK.md` |
+| Start, retain handoff or complete work | The current step in `docs/engineering/harness/EXECUTE_WORK.md` |
+| Prepare or assess a test VREC | The current step in `docs/engineering/harness/VERIFY_OUTCOME.md` |
+| Prepare or assess a test RLS | The current step in `docs/engineering/harness/RELEASE.md` |
+| Report a refusal or unknown reply | `docs/engineering/harness/RESULTS.md` |
+
+These local-style commands run inside the service's disposable projection. Express
+the selected operation through the closed v2 request; do not run it against the
+real checkout. Read the literal target state from the released procedure. Words
+such as "accept" in a task description are not lifecycle-state values to guess.
+A refused edge is not a reason to try arbitrary states or freeze a context.
+
+For `decide`, `action.decision` is the supplied actor identity; explanatory text
+belongs in `action.reason`. Preserve the supplied option exactly: mitigation does
+not authorize risk acceptance. Preparation owners must match the fixture's
+supplied preparation identities. Do not infer a different actor or decision from
+a passed gate, an available owner label or a generated record.
+
 ## Explicit hosted sandbox drafts
 
 For an explicitly selected hosted sandbox, follow setup's hosted selection first.
@@ -43,7 +100,7 @@ a new key until the previous outcome is resolved. A different request under an
 accepted key is refused. Never fall back to local writes.
 
 For real governed work, use the local repository procedure below. The explicit
-test-copy exception is described under **Private lifecycle test copy**. It permits
+test-copy exception is described above under **Private lifecycle test copy**. It permits
 rehearsal operations only; real remote decisions and authority cutover remain
 unsupported.
 
@@ -116,42 +173,3 @@ effects, final state, blocker or accountable decision, and its one typed next
 step. A preview's proposed state is not an applied change. Report readiness
 blockers separately from lifecycle projections. Evidence preparation follows
 the installed procedure; use the `evidence` skill only if it is available.
-
-## Private lifecycle test copy
-
-When the approved task explicitly selects the hosted rehearsal, use the installed
-candidate client's `remote rehearse --test-copy` command and the closed v2 request
-schema in `server/contracts/lifecycle-v2.json`. Preview the exact action, then
-apply it with that preview digest and unchanged versions. The service reruns the
-released evaluator. After an uncertain reply, look up the original operation key;
-do not rebase or invent a replacement key to conceal the outcome.
-
-This is test data. Supplied actors are synthetic inputs, not human consent.
-Imported records stay immutable. Keep real decisions and work in the authoritative
-Git workflow. No rehearsal record authorizes a real release or external action.
-
-Before constructing a lifecycle request, read the current procedure and applicable
-prerequisites identified by the released result. Use the operator-supplied released
-resource location or its resource resolver. The wire schema describes request
-fields; it does not replace the released authoring and lifecycle instructions.
-
-| Current task | Released procedure to read |
-| --- | --- |
-| Complete draft content | `docs/engineering/ARTIFACT_AUTHORING.md` and the selected type's checklist |
-| Record supplied definition/work decisions | `docs/engineering/harness/AUTHORITY.md` and `AUTHORIZE_WORK.md` |
-| Start, retain handoff or complete work | The current step in `docs/engineering/harness/EXECUTE_WORK.md` |
-| Prepare or assess a test VREC | The current step in `docs/engineering/harness/VERIFY_OUTCOME.md` |
-| Prepare or assess a test RLS | The current step in `docs/engineering/harness/RELEASE.md` |
-| Report a refusal or unknown reply | `docs/engineering/harness/RESULTS.md` |
-
-These local-style commands run inside the service's disposable projection. Express
-the selected operation through the closed v2 request; do not run it against the
-real checkout. Read the literal target state from the released procedure. Words
-such as "accept" in a task description are not lifecycle-state values to guess.
-A refused edge is not a reason to try arbitrary states or freeze a context.
-
-For `decide`, `action.decision` is the supplied actor identity; explanatory text
-belongs in `action.reason`. Preserve the supplied option exactly: mitigation does
-not authorize risk acceptance. Preparation owners must match the fixture's
-supplied preparation identities. Do not infer a different actor or decision from
-a passed gate, an available owner label or a generated record.

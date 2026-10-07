@@ -11,12 +11,43 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from native_call import contained, remote_argv, main
+from native_call import contained, remote_argv, main, read_json
 from qualify_agents import prepare_output
 from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_json_read_preserves_exact_values_and_pointers_without_execution(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); path=root/'receipt.json'
+            raw=b'{"outcome":"refused","a/b":{"~x":[null,false,"not accepted"]}}\n'
+            path.write_bytes(raw)
+            with patch('native_call.subprocess.run') as run:
+                selected=read_json(root,path,'/a~1b/~0x/2')
+                self.assertEqual(selected['value'],'not accepted')
+                self.assertEqual(selected['pointer'],'/a~1b/~0x/2')
+                self.assertTrue(selected['selection_only'])
+                self.assertEqual(read_json(root,path,'/a~1b/~0x/0')['value'],None)
+                self.assertIs(read_json(root,path,'/a~1b/~0x/1')['value'],False)
+                self.assertEqual(read_json(root,path,'',True)['keys'],['outcome','a/b'])
+                self.assertEqual(read_json(root,path,'/a~1b/~0x',True)['length'],3)
+            run.assert_not_called();self.assertEqual(path.read_bytes(),raw)
+
+    def test_json_read_refuses_escape_missing_fields_credentials_and_oversize(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);path=root/'receipt.json'
+            path.write_text(json.dumps({'large':'x'*70000,'values':[1]}))
+            for pointer in ('/missing','/values/01','/values/-1','/values/1','/values/0/x','bad','/~2'):
+                with self.assertRaises(ValueError):read_json(root,path,pointer)
+            with self.assertRaises(ValueError):read_json(root,'../receipt.json','')
+            with self.assertRaisesRegex(ValueError,'64 KiB'):read_json(root,path,'/large')
+            self.assertEqual(read_json(root,path,'',True)['keys'],['large','values'])
+            with patch.dict(os.environ,{'HAG_NATIVE_TEST_TOKEN':'private-test-token'}):
+                path.write_text('{"secret":"private-test-token"}')
+                with self.assertRaisesRegex(ValueError,'credential'):read_json(root,path,'',True)
+            path.write_bytes(b' '*(4*1024*1024+1))
+            with self.assertRaisesRegex(ValueError,'4 MiB'):read_json(root,path,'')
+
     def test_readable_output_preserves_complete_result_and_exit(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory); selection=root/'selection.json'
