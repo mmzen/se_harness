@@ -1,3 +1,15 @@
+# Latest instruction-discovery rerun
+
+The proposed guidance and bounded reader were implemented and tested. The reader
+works after a Windows argument-format correction, but the fresh Claude rerun
+still omitted required authoring reads. Claude remains unqualified.
+
+See [the current assessment and next proposal](instruction-discovery-rerun.md),
+including exact native evidence, context measurements and unperformed cases.
+WO-HAG-009/010 remain in progress; PR #543 stays draft.
+
+## Previous assessment (preserved)
+
 # Native Codex and Claude qualification — incomplete
 
 Codex native06 passes its observed cases at package source
