@@ -9,6 +9,19 @@ ROOT=Path(__file__).resolve().parents[2]
 
 
 class SchemaViews(unittest.TestCase):
+    def test_read_views_preserve_allof_and_unevaluated_property_boundary(self):
+        raw=(ROOT/'server/contracts/read-v1.json').read_bytes();source=json.loads(raw)
+        for index,branch in enumerate(source['$defs']['Request']['oneOf']):
+            operation=branch['allOf'][1]['properties']['operation']['const']
+            result=operation_view(raw,'read-v1',operation);view=result['schema']
+            self.assertEqual(result['source_pointer'],'/$defs/Request/oneOf/'+str(index))
+            self.assertEqual(view['allOf'],branch['allOf'])
+            self.assertIs(view['unevaluatedProperties'],False)
+            self.assertEqual(view['$defs']['RequestFields'],source['$defs']['RequestFields'])
+            self.assertEqual(view['$defs']['Budget'],source['$defs']['Budget'])
+            for name,definition in view['$defs'].items():self.assertEqual(definition,source['$defs'][name])
+        with self.assertRaises(ValueError):operation_view(raw,'read-v1','create-artifact')
+
     def test_remote_branches_and_reference_closure_are_unchanged(self):
         raw=(ROOT/'server/contracts/remote-v1.json').read_bytes();source=json.loads(raw)
         for index,branch in enumerate(source['$defs']['Command']['oneOf']):

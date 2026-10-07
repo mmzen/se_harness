@@ -11,12 +11,53 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from native_call import contained, remote_argv, main, read_json, lookup_file, result_fields
+from native_call import contained, remote_argv, main, read_json, lookup_file, find_file, result_fields
 from qualify_agents import prepare_output
 from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_filename_search_is_bounded_ambiguous_and_never_selects(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);inputs=root/'inputs';inputs.mkdir();entries=[]
+            for number in range(22):
+                path=inputs/str(number)/'guide.md';path.parent.mkdir();path.write_bytes(b'exact')
+                entries.append({'relative':path.relative_to(inputs).as_posix(),'path':str(path),'bytes':5,'sha256':hashlib.sha256(b'exact').hexdigest()})
+            inventory=inputs/'inventory.json';inventory.write_text(json.dumps({'files':entries}));config={'inputs_inventory':str(inventory)}
+            with patch('native_call.subprocess.run') as run:
+                result=find_file(root,config,'guide.md')
+                self.assertEqual(result['total_matches'],22);self.assertEqual(len(result['matches']),20)
+                self.assertFalse(result['complete']);self.assertIsNone(result['selection'])
+                narrowed=find_file(root,config,'guide.md','2/')
+                self.assertTrue(narrowed['complete']);self.assertEqual(narrowed['matches'],[entries[2]])
+                self.assertEqual(find_file(root,config,'absent.md')['matches'],[])
+                for name in ('','../guide.md','*','dir\\guide.md','..'):
+                    with self.assertRaises(ValueError):find_file(root,config,name)
+                with self.assertRaises(ValueError):find_file(root,config,'guide.md','../')
+                Path(entries[2]['path']).write_bytes(b'changed')
+                with self.assertRaisesRegex(ValueError,'no longer'):find_file(root,config,'guide.md','2/')
+            run.assert_not_called()
+
+    def test_base64_reader_preserves_utf8_bytes_and_rejects_invalid_or_secret_text(self):
+        import base64,hashlib
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);p=root/'revision.json';raw='+++\r\nid = "INT-T-001"\r\n+++\nCafé\n'.encode()
+            p.write_text(json.dumps({'data':{'document_base64':base64.b64encode(raw).decode()}}))
+            with patch('native_call.subprocess.run') as run:
+                value=read_json(root,p,'/data/document_base64',decode_base64=True)
+                self.assertEqual(value['value'].encode(),raw)
+                self.assertEqual(value['decoded_sha256'],hashlib.sha256(raw).hexdigest())
+                with self.assertRaises(ValueError):read_json(root,p,'/data',decode_base64=True)
+                with self.assertRaises(ValueError):read_json(root,p,'/data/document_base64',keys=True,decode_base64=True)
+                for encoded in ('not base64','Zh==','/w=='):
+                    p.write_text(json.dumps(encoded))
+                    with self.assertRaises(ValueError):read_json(root,p,'',decode_base64=True)
+                with patch.dict(os.environ,{'HAG_NATIVE_TEST_TOKEN':'private-test-token'}):
+                    p.write_text(json.dumps(base64.b64encode(b'private-test-token').decode()))
+                    with self.assertRaisesRegex(ValueError,'credential'):read_json(root,p,'',decode_base64=True)
+            run.assert_not_called()
+
     def test_lookup_verifies_one_exact_file_and_rejects_changed_or_ambiguous_inputs(self):
         import hashlib
         with tempfile.TemporaryDirectory() as directory:

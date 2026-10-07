@@ -47,6 +47,26 @@ An accepted read is not an approval. Database-side read-only enforcement remains
 unverified under RISK-HAG-001; use only the private public-data sandbox.
 The rest of this skill applies to a local repository selection.
 
+### Read one hosted revision
+
+Use the exact `view`, `artifact_id` and `revision_id` returned by the selected
+creation or revision result. In `server/contracts/read-v1.json`, select the
+`revision` branch of `$defs.Request`, with its referenced `RequestFields`, `View`
+and `Budget` definitions. Build that read request with `operation: "revision"`,
+the selected project and a sufficient bounded budget. Submit it with
+`remote read --request ABSOLUTE_REQUEST_JSON`, or the configured read-only
+`revision` MCP tool using its displayed input schema. `--key` is only for
+`remote operation`, which looks up a mutation receipt; it cannot read a document.
+For CLI help, select `remote read --help`, not just the parent command's help.
+
+Inspect the response's `complete`, `continuation`, `view` and `data.revision_id`.
+The document bytes are `data.document_base64`; decode that field as base64 and
+UTF-8, without newline conversion. Compare the decoded SHA-256 with
+`data.envelope.document_sha256`, then read the text. A permitted exact field
+decoder may perform this byte conversion; it must not fill or interpret the
+template. Stop an incomplete, mismatched or unreadable result before authoring.
+Return to the current drafting step after this read.
+
 ## Required inputs
 
 Obtain an unambiguous repository target, a structured launcher for the target's

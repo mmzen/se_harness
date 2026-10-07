@@ -105,6 +105,19 @@ Read each accepted result's actual view, versions, affected revisions and receip
 An incomplete template is a draft with findings. Baseline freeze is no approval.
 Imported records and their lifecycle, decision and evidence claims are immutable.
 
+### Read and complete the created template
+
+Apply the selected release's drafting sequence to one artifact at a time.
+After `create-artifact`, use the returned `view` and selected entry in
+`affected_artifacts` to read that exact artifact/revision. The hosted read route
+is [harness-orient: Read one hosted revision](../harness-orient/SKILL.md#read-one-hosted-revision).
+Inspect the returned UTF-8 document before editing it; creation findings alone
+are not the document. Complete and review this draft under its type checklist,
+then submit the full document with `revise-artifact` and inspect that result.
+Only then create the next missing artifact. If reading or completing the current
+draft is blocked, stop that step and report the exact error. Creating another
+template does not resolve the failed step.
+
 After a stale-input refusal, read the current selection and review the change
 before preparing a new request. Do not silently replace expected versions.
 For uncertain transport, use `remote operation --key KEY` with the same

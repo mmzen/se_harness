@@ -29,7 +29,7 @@ def lookup_file(root, config, name):
     selected = read_json(root, inventory, '/files')['value']
     matches = [entry for entry in selected if entry['relative'] == name]
     if len(matches) != 1:
-        raise ValueError('Expected one exact inventory name')
+        raise ValueError('Expected one exact inventory name; use find-file BASENAME when the path is unknown')
     entry = matches[0]
     path = contained(root, entry['path'])
     expected = contained(inventory.parent, name)
@@ -43,6 +43,29 @@ def lookup_file(root, config, name):
         raise ValueError('Staged file no longer matches its inventory')
     return {'file':entry, 'inventory_sha256':hashlib.sha256(inventory.read_bytes()).hexdigest(),
             'lookup_only':True, 'content_read':False}
+
+
+def find_file(root, config, name, under=''):
+    """List bounded exact-basename matches; never select a file for the agent."""
+    if not name or len(name)>128 or name in ('.','..') or any(c in name for c in '/\\\0'):
+        raise ValueError('Use one filename without directories or wildcards')
+    if '*' in name or '?' in name:
+        raise ValueError('Wildcards are not supported')
+    if under and (not under.endswith('/') or '\\' in under or under.startswith('/') or '..' in under.split('/')):
+        raise ValueError('--under must be a relative directory prefix ending in /')
+    inventory=contained(root,config['inputs_inventory'])
+    entries=read_json(root,inventory,'/files')['value']
+    names=sorted(x['relative'] for x in entries if x['relative'].split('/')[-1]==name and x['relative'].startswith(under))
+    if len(names)!=len(set(names)):
+        raise ValueError('Ambiguous duplicate inventory names')
+    selected=[]
+    for relative in names[:20]:
+        entry=lookup_file(root,config,relative)['file']
+        if len(json.dumps(selected+[entry],ensure_ascii=False).encode())>8192:break
+        selected.append(entry)
+    return {'matches':selected,'total_matches':len(names),'complete':len(selected)==len(names),
+            'inventory_sha256':hashlib.sha256(inventory.read_bytes()).hexdigest(),
+            'selection':None,'content_read':False,'instruction':'Choose one exact path. Narrow --under when incomplete; use native Read for content.'}
 
 
 def result_fields(stdout):
@@ -73,7 +96,7 @@ def result_fields(stdout):
     return result
 
 
-def read_json(root, supplied, pointer, keys=False):
+def read_json(root, supplied, pointer, keys=False, decode_base64=False):
     """Read one agent-selected JSON value; never infer a workflow field."""
     path = contained(root, supplied)
     if path.stat().st_size > 4*1024*1024:
@@ -104,6 +127,16 @@ def read_json(root, supplied, pointer, keys=False):
             raise ValueError('JSON pointer does not exist')
     result = {'file':str(path), 'sha256':hashlib.sha256(raw).hexdigest(),
               'pointer':pointer, 'selection_only':True}
+    if decode_base64:
+        if keys or not isinstance(value,str):
+            raise ValueError('Base64 decoding requires one string value, without --keys')
+        decoded=base64.b64decode(value,validate=True)
+        if base64.b64encode(decoded).decode()!=value:
+            raise ValueError('Expected canonical base64')
+        if token and token.encode() in decoded:
+            raise ValueError('Refusing to decode a credential')
+        value=decoded.decode('utf-8')
+        result.update(decoded_bytes=len(decoded),decoded_sha256=hashlib.sha256(decoded).hexdigest(),conversion='base64 to UTF-8; exact bytes, no newline conversion')
     if keys:
         if isinstance(value, dict):
             result.update(type='object', keys=list(value))
@@ -167,17 +200,23 @@ def main():
     commands = parser.add_subparsers(dest='kind',required=True)
     remote = commands.add_parser('remote')
     remote.add_argument('operation',choices=OPERATIONS)
-    for name in ('request','key','destination'):
-        remote.add_argument('--'+name)
+    remote.add_argument('--request',help='Path to the selected operation JSON request. Artifact reads use the revision shape from read-v1.json.')
+    remote.add_argument('--key',help='Only for remote operation receipt lookup; never for remote read.')
+    remote.add_argument('--destination',help='New destination, only for export.')
     remote.add_argument('--record',required=True)
     encoded = commands.add_parser('encode-file')
     encoded.add_argument('path')
     selected = commands.add_parser('read-json', help='Read an exact JSON pointer from a saved result; empty pointer selects its root')
     selected.add_argument('path')
     selected.add_argument('--pointer', default='', help="JSON pointer, optionally encoded as a JSON string. Windows Bash: --pointer '\"/field\"' preserves the slash. Omit for root.")
-    selected.add_argument('--keys', action='store_true', help='Return object keys or array length, without field values')
+    representation=selected.add_mutually_exclusive_group()
+    representation.add_argument('--keys', action='store_true', help='Return object keys or array length, without field values')
+    representation.add_argument('--decode-base64', action='store_true', help='Decode the selected canonical base64 string to exact UTF-8 text; returns its byte digest')
     lookup = commands.add_parser('lookup-file', help='Locate one exact relative name in the staged input inventory; does not read its content into context')
     lookup.add_argument('name')
+    search=commands.add_parser('find-file',help='List up to 20 exact filename matches in the staged inventory; never chooses a file')
+    search.add_argument('name')
+    search.add_argument('--under',default='',help='Optional relative directory prefix ending in /')
     commands.add_parser('identity')
     assertion = commands.add_parser('assert-greeting')
     assertion.add_argument('--record',required=True)
@@ -187,8 +226,11 @@ def main():
     if args.kind == 'lookup-file':
         print(json.dumps(lookup_file(root,config,args.name),ensure_ascii=False))
         return 0
+    if args.kind == 'find-file':
+        print(json.dumps(find_file(root,config,args.name,args.under),ensure_ascii=False))
+        return 0
     if args.kind == 'read-json':
-        print(json.dumps(read_json(root,args.path,args.pointer,args.keys),ensure_ascii=False))
+        print(json.dumps(read_json(root,args.path,args.pointer,args.keys,args.decode_base64),ensure_ascii=False))
         return 0
     if args.kind == 'encode-file':
         raw = contained(root,args.path).read_bytes()

@@ -14,17 +14,21 @@ def operation_view(raw, family, operation):
         branches = source['$defs']['Command']['oneOf']
         key = 'operation'
         pointer = '/$defs/Command/oneOf/'
+    elif family == 'read-v1':
+        branches = source['$defs']['Request']['oneOf']
+        key = 'operation'
+        pointer = '/$defs/Request/oneOf/'
     elif family == 'lifecycle-v2':
         branches = source['properties']['action']['oneOf']
         key = 'kind'
         pointer = '/properties/action/oneOf/'
     else:
         raise ValueError('Unsupported schema family')
-    matches = [(i,b) for i,b in enumerate(branches) if b['properties'][key]['const']==operation]
+    matches = [(i,b) for i,b in enumerate(branches) if (b['allOf'][1] if family=='read-v1' else b)['properties'][key]['const']==operation]
     if len(matches)!=1:
         raise ValueError('Expected one exact operation')
     index, branch = matches[0]
-    if family == 'remote-v1':
+    if family in ('remote-v1','read-v1'):
         view = copy.deepcopy(branch)
         definitions = {}
         def include(value):
