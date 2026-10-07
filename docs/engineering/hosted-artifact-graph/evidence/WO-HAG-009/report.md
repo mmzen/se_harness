@@ -345,3 +345,11 @@ merge and release remain outside this work.
 The native Opus 4.6 run timed out after 3,300 seconds. It completed the synthetic work and created a ready test VREC. Independent released replay passed all nine accepted operations, then refused the overall assessment because native exports were missing. Test verification/release, seven MCP tools, exports, and the precise selected-draft stale case remain pending. There is no Claude pass or actual verification record.
 
 See [assessment](opus02-assessment.json) and [retained inventory](opus02-inventory.json). Three automatic compactions and all refused calls are retained. The real repository and selected host settings were unchanged. A test-driver correction now keeps the original command record and saves complete stdout separately so native Read can inspect it without escaped long lines. Seven focused checks pass. The continuation reuses only this Claude project and its own evidence; it receives no completed requests or corrective workflow commands.
+
+## Opus03 continuation and report findings
+
+The continuation finished in 1,124.557 seconds. Independent replay passed the three new lifecycle operations and both native exports; all seven complete MCP responses matched independent HTTP reads. The real checkout and selected host settings stayed unchanged.
+
+The native report incorrectly marked all cases complete. It substituted a risk-related refusal for the required selected-draft change, named the wrong mitigated risk, and misreported compactions and the proxy endpoint change. Its read trace is incomplete. The original report remains evidence of model behavior, not a qualification verdict. See [assessment](opus03-assessment.json) and [inventory](opus03-inventory.json). Claude remains incomplete pending the exact stale-draft scenario and accurate reporting.
+
+Supporting checks at fb6d804324f3972e468a673a297f71298a5d6be7 passed: seven focused tests; 1,323 source tests, 23 skips; distribution checks; CLI smoke; 1,987 artifacts, zero errors, 63 warnings. The first source invocation omitted UTF-8 propagation and failed two Windows decoding checks; both the failure and corrected rerun are retained. Current CI has only the expected missing-handoff failure; other applicable jobs pass and conditional release jobs are skipped.
