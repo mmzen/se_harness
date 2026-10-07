@@ -31,13 +31,15 @@ class NativeCallBoundaries(unittest.TestCase):
                 self.assertIs(read_json(root,path,'/a~1b/~0x/1')['value'],False)
                 self.assertEqual(read_json(root,path,'',True)['keys'],['outcome','a/b'])
                 self.assertEqual(read_json(root,path,'/a~1b/~0x',True)['length'],3)
+                self.assertEqual(read_json(root,path,json.dumps('/a~1b/~0x/2')),selected)
+                self.assertEqual(read_json(root,path,'""',True)['keys'],['outcome','a/b'])
             run.assert_not_called();self.assertEqual(path.read_bytes(),raw)
 
     def test_json_read_refuses_escape_missing_fields_credentials_and_oversize(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);path=root/'receipt.json'
             path.write_text(json.dumps({'large':'x'*70000,'values':[1]}))
-            for pointer in ('/missing','/values/01','/values/-1','/values/1','/values/0/x','bad','/~2'):
+            for pointer in ('/missing','/values/01','/values/-1','/values/1','/values/0/x','bad','/~2','"bad"','"unfinished'):
                 with self.assertRaises(ValueError):read_json(root,path,pointer)
             with self.assertRaises(ValueError):read_json(root,'../receipt.json','')
             with self.assertRaisesRegex(ValueError,'64 KiB'):read_json(root,path,'/large')

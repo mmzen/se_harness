@@ -33,6 +33,9 @@ def read_json(root, supplied, pointer, keys=False):
     if token and token.encode() in raw:
         raise ValueError('Refusing to read a credential')
     value = json.loads(raw)
+    if pointer.startswith('"'):
+        # A JSON string preserves /field through Windows Bash path conversion.
+        pointer = json.loads(pointer)
     if pointer and not pointer.startswith('/'):
         raise ValueError('JSON pointer must be empty or start with /')
     for part in pointer.split('/')[1:]:
@@ -121,7 +124,7 @@ def main():
     encoded.add_argument('path')
     selected = commands.add_parser('read-json', help='Read an exact JSON pointer from a saved result; empty pointer selects its root')
     selected.add_argument('path')
-    selected.add_argument('--pointer', default='')
+    selected.add_argument('--pointer', default='', help="JSON pointer, optionally encoded as a JSON string. Windows Bash: --pointer '\"/field\"' preserves the slash. Omit for root.")
     selected.add_argument('--keys', action='store_true', help='Return object keys or array length, without field values')
     commands.add_parser('identity')
     assertion = commands.add_parser('assert-greeting')
