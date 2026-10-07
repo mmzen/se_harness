@@ -2,10 +2,15 @@
 id = "WO-HAG-010"
 type = "work_order"
 title = "Keep hosted setup separate from checkout activation"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-07"
 updated = "2026-10-07"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen confirmed required commit-bound verification because native qualification depends on the exact corrected startup/setup guidance and retained evidence."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = ["plugins/verity-plane/common/assets/bootstrap.md", "plugins/verity-plane/common/skills/setup/SKILL.md", "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-010.md", "docs/engineering/hosted-artifact-graph/README.md", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md", "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/"]
@@ -15,6 +20,21 @@ implements = ["REQ-HAG-011"]
 specifications = ["SPEC-HAG-007"]
 architecture = ["ARCH-HAG-003", "ADR-HAG-003"]
 verification = ["VER-HAG-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-07T05:24:42Z"
+decided_by = "mmzen"
+reason = "Human mmzen answered \"I approve\" to the reviewed WO-HAG-010 correction at c7fa06c5b97a916058717a60c8073c7ad8e8ac67, confirming required commit-bound verification under VER-HAG-007 and inclusion in draft PR #543. This authorizes the two instruction-file correction, rebuilt local packages, affected native qualification and evidence preparation. The bounded publication grant is mmzen/se_harness, codex/hosted-agent-qualification to main, existing draft PR #543, including the ready record and a later separately supplied verification decision. Both hosts must still pass all five cases; Git remains authoritative. No human verification, merge, release, deployment, host-plugin update, permission bypass or changed criterion is granted. Existing WO-HAG-009 authority is preserved."
+scope_paths = ["plugins/verity-plane/common/assets/bootstrap.md", "plugins/verity-plane/common/skills/setup/SKILL.md", "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-010.md", "docs/engineering/hosted-artifact-graph/README.md", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md", "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md", "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-07T05:26:06Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Keep hosted setup separate from checkout activation
