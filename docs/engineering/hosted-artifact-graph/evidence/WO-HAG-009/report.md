@@ -85,6 +85,22 @@ The stricter launch mode was checked at source
 distribution checks, CLI smoke and released validation passed. Product packages
 remain those built from `0dbb8ea19f28994da7abc7ecbab08c8db430dc0c`.
 
+Claude sonnet08 completed after 1,626.608 seconds without a successful lifecycle
+transition or native export. It authored drafts and corrected several refused
+requests, but twice requested an unsupported `draft -> accepted` transition.
+After two automatic compactions it abandoned the helper and again incorrectly
+reported that shell access was unavailable. The project remained at version 18;
+checkout content/HEAD and selected host-setting hashes were unchanged. See the
+[assessment](sonnet08-assessment.json), [inventory](sonnet08-inventory.json) and
+[transcript](sonnet08-incomplete.zip). This is **not qualification**.
+
+The next driver correction creates a small root `CLAUDE.md` only in each disposable
+Claude test directory. It locates the original task, selection and exact approved
+helper argv after compaction. It supplies no request payload, lifecycle answer,
+actor or decision. A session deny rule protects this locator from agent edits.
+Normal hooks, compaction and permissions remain active. The supported reload
+behavior is described in [Claude Code's memory documentation](https://code.claude.com/docs/en/memory#instructions-seem-lost-after-compact).
+
 The current source suite passed: 1,323 tests with 23 skips. Distribution checks,
 CLI smoke, 28 focused package/activation checks (two skips), six native-support
 checks and released validation passed. Validation reported 1,987 artifacts,

@@ -134,6 +134,20 @@ def run(args):
     save(output/'selection.json', settings)
     prompt = args.task.read_text(encoding='utf-8').replace('SELECTION_FILE', str(output/'selection.json'))
     (output/'task.md').write_text(prompt, encoding='utf-8')
+    locator = None
+    if args.host == 'claude':
+        locator = output/'CLAUDE.md'
+        # Keep operator inputs discoverable when conversation text is compacted.
+        # This supplies no workflow request, state, actor or decision.
+        with locator.open('x', encoding='utf-8') as stream:
+            stream.write('# Disposable qualification task inputs\n\n'
+                f'Read `{output / "task.md"}` and `{output / "selection.json"}` before acting,\n'
+                'including after compaction. They retain the task, selected inputs and tool boundary.\n'
+                'Use the selected candidate plugin skills and their required references for the workflow.\n'
+                'This file supplies no lifecycle procedure or new permission.\n')
+            if settings.get('approved_shell_argv_prefix'):
+                stream.write('\nThe existing approved shell prefix is this argument array:\n\n```json\n'
+                    + json.dumps(settings['approved_shell_argv_prefix']) + '\n```\n')
     plugin = Path(settings['plugin'])
     mcp_url = actual_endpoint + '/mcp'
     if args.host == 'codex':
@@ -172,6 +186,8 @@ def run(args):
               'task': hashlib.sha256(args.task.read_bytes()).hexdigest()}
     if args.permission_settings:
         before['permission_settings'] = hashlib.sha256(args.permission_settings.read_bytes()).hexdigest()
+    if locator:
+        before['task_locator'] = hashlib.sha256(locator.read_bytes()).hexdigest()
     save(output/'invocation.json', {'host': args.host, 'argv': argv, 'cwd': str(output),
         'started_at': started, 'timeout_seconds': args.timeout, 'input_sha256': before,
         'environment_keys_added': ['PYTHONUTF8','NO_COLOR','HAG_NATIVE_TEST_TOKEN',

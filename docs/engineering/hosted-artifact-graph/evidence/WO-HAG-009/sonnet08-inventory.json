@@ -1,0 +1,439 @@
+{
+  "archive": "sonnet08-incomplete.zip",
+  "bytes": 455874,
+  "sha256": "a681891922ac845e3f48f776b918c2fc072cb433e0e72c4e001c29b0e5e4f4a1",
+  "files": [
+    {
+      "path": "sonnet08/events.jsonl",
+      "bytes": 1589631,
+      "sha256": "25b92e1d2e91d4c2355d69f55cc6b9e1def5f33f1e7c47368743dbb59eeb1a19"
+    },
+    {
+      "path": "sonnet08/session.json",
+      "bytes": 323,
+      "sha256": "7e012f571c1d21ed9c4a281ae6d00540af3e56f88803793d095c2ec855d8360a"
+    },
+    {
+      "path": "sonnet08/invocation.json",
+      "bytes": 12070,
+      "sha256": "4c156c636182dfa9e4e7058a81f2117792d599bdccd356b7d8635d111404e442"
+    },
+    {
+      "path": "sonnet08/selection.json",
+      "bytes": 3733,
+      "sha256": "b3ab1fdbaae74ba90b43462af09dd78a3ebf9d0532b0e967eebe363f3e2f4ab1"
+    },
+    {
+      "path": "sonnet08/task.md",
+      "bytes": 9976,
+      "sha256": "119c27353b39dcb320bec60c53f8836bc69080b24093b03ef704327b17b6235e"
+    },
+    {
+      "path": "sonnet08/work/assert-greeting-01.json",
+      "bytes": 815,
+      "sha256": "dafade18e3b64a397ad1868c0e286a466f37e07d16a645912765636855ea0f9e"
+    },
+    {
+      "path": "sonnet08/work/draft-CAP-P3-901.md",
+      "bytes": 506,
+      "sha256": "e556c5dea279a19c10725367ffd2c62a70eaf3d85e381397094cec40d878dc97"
+    },
+    {
+      "path": "sonnet08/work/draft-INT-P3-901.md",
+      "bytes": 719,
+      "sha256": "afb3e41f7380e04920469e45577fd4c3bb8be39b55129ad6da29af31e5c975c9"
+    },
+    {
+      "path": "sonnet08/work/draft-REL-P3-901.md",
+      "bytes": 678,
+      "sha256": "1161f3db42e12c847d631d6ca44229ae894575331e59e6c9b265225b777f1f37"
+    },
+    {
+      "path": "sonnet08/work/draft-REQ-P3-901.md",
+      "bytes": 821,
+      "sha256": "46cdb8085d16b5c4d0c72ce04ae057a67c7bc6cb48e1e87a9d2b979294f895ad"
+    },
+    {
+      "path": "sonnet08/work/draft-SPEC-P3-901.md",
+      "bytes": 1121,
+      "sha256": "49842fc2da1e313b8ec35494057caf437e53925228235aacb64fb2b7d64b48ea"
+    },
+    {
+      "path": "sonnet08/work/draft-VER-P3-901.md",
+      "bytes": 775,
+      "sha256": "d34a077b3858e13f3c4293c40265d5c396bcc6c3226b4ac1da450fc55ff1a512"
+    },
+    {
+      "path": "sonnet08/work/draft-WO-P3-901.md",
+      "bytes": 1252,
+      "sha256": "6a6080ca694aeb42b8f4b67a0d548ab562c5e2146674fb578a40ffbdc7487d20"
+    },
+    {
+      "path": "sonnet08/work/rec-create-cap-901.json",
+      "bytes": 4670,
+      "sha256": "3f7181fe6c5465e4d6ce5144f177926482cb4a2a41e02578ee47f8d715afe80c"
+    },
+    {
+      "path": "sonnet08/work/rec-create-int-901.json",
+      "bytes": 6308,
+      "sha256": "8417947d94198511fd214195fadc140253fa3d7d6405674bbfe26ac5ae74a4b7"
+    },
+    {
+      "path": "sonnet08/work/rec-create-rel-901.json",
+      "bytes": 7730,
+      "sha256": "f11181b94bcdfe6a4fbab6ea59d0821517d538c3a294f0956752e1d786af1e24"
+    },
+    {
+      "path": "sonnet08/work/rec-create-req-901.json",
+      "bytes": 6572,
+      "sha256": "680eee2535b56f991d77c860e457db2679453808c73df6ae0f1f5f0c34f63931"
+    },
+    {
+      "path": "sonnet08/work/rec-create-spec-901.json",
+      "bytes": 9220,
+      "sha256": "0edbc460c382f6febc1b573dcf7ee1f0ce32cf2a93e138ced7278128c1d0c4e5"
+    },
+    {
+      "path": "sonnet08/work/rec-create-ver-901.json",
+      "bytes": 5321,
+      "sha256": "9978c6da3788d761168b4dd22961c06029006336310f8c38bd589d32efad914d"
+    },
+    {
+      "path": "sonnet08/work/rec-create-wo-901.json",
+      "bytes": 1658,
+      "sha256": "18652d7d4520d18b64872d01b8bb534bc830421c9dbe2cbe1388f376fd8cc524"
+    },
+    {
+      "path": "sonnet08/work/rec-create-wo-901b.json",
+      "bytes": 8468,
+      "sha256": "f3721cb0a5f568b3c4ceacf9740a1aa6df11dd72afc0959536d3293f34a813cc"
+    },
+    {
+      "path": "sonnet08/work/rec-draft-open-01.json",
+      "bytes": 1662,
+      "sha256": "90f5539960d690ff0d6706c6148b6aabe763ab5f6e9147571148566cb90d24bd"
+    },
+    {
+      "path": "sonnet08/work/rec-draft-open-02.json",
+      "bytes": 10891,
+      "sha256": "f0156e76ce1868a305503cd321b1d3d4ba5c671a486d650f7babb06b64b6af20"
+    },
+    {
+      "path": "sonnet08/work/rec-draft-open-c2.json",
+      "bytes": 10889,
+      "sha256": "b70478d02798f546fde0786a72022c15f2edd30350fab6cd29bf446e4e177b4e"
+    },
+    {
+      "path": "sonnet08/work/rec-export-b1.json",
+      "bytes": 2329,
+      "sha256": "2cc5d8d67e7a9e4da94b837c0791391799ec8a3f2dc747437de4e527298e8969"
+    },
+    {
+      "path": "sonnet08/work/rec-freeze-c1.json",
+      "bytes": 2270,
+      "sha256": "1078d3790c18e820c16aac7f6e71e96e6ce1d10f02e0139ebcf2900d0e4752d2"
+    },
+    {
+      "path": "sonnet08/work/rec-import-01.json",
+      "bytes": 6149,
+      "sha256": "114e999c271c2c05241d18f7f0c547178515960ade1b292c0e52d1e20a31bc79"
+    },
+    {
+      "path": "sonnet08/work/rec-lc-check-wo-901.json",
+      "bytes": 2128,
+      "sha256": "0fe71aa560474baf00ac0f5494093b1d3f3a1bc29bb486e3fc5fbf29ef6d00e9"
+    },
+    {
+      "path": "sonnet08/work/rec-lc-check-wo-901b.json",
+      "bytes": 10800,
+      "sha256": "143578d04df00b4896bcfd20346500a0e755afdf8d2ee9482f37a7f5a288db14"
+    },
+    {
+      "path": "sonnet08/work/rec-lc-preflight-start-preview.json",
+      "bytes": 2139,
+      "sha256": "5948b1cba1147ab3aa57af70510b3f4e24db9098bff0caa57f62ce1e333bfe25"
+    },
+    {
+      "path": "sonnet08/work/rec-lc-transition-int-preview-c2.json",
+      "bytes": 8101,
+      "sha256": "b7541c1e4bcf86f3e83e95ef6d1736dba9600e58a1473e1c05f4f3d88e1d0476"
+    },
+    {
+      "path": "sonnet08/work/rec-lc-transition-int-preview1.json",
+      "bytes": 8099,
+      "sha256": "e16525f2bb39047ca2d4c3e03506c2e9fea10d28c234ccc3a2ab8caa0d459595"
+    },
+    {
+      "path": "sonnet08/work/rec-revise-cap-901.json",
+      "bytes": 5873,
+      "sha256": "e04743db475c64522823c2d2254509fce630990d941f5b3e34d43133412d446e"
+    },
+    {
+      "path": "sonnet08/work/rec-revise-int-901.json",
+      "bytes": 6171,
+      "sha256": "21824ead463bbd3ac6d7169bb1a9bf65fdb6c158faca3abfa7acdd3ae4ba3cc4"
+    },
+    {
+      "path": "sonnet08/work/rec-revise-rel-901.json",
+      "bytes": 2857,
+      "sha256": "28e45ecf7b8a35424438f854586d4e0743f5b3fa43db1d786e9faa57fd8ddc2d"
+    },
+    {
+      "path": "sonnet08/work/rec-revise-rel-901b.json",
+      "bytes": 3147,
+      "sha256": "2efe3dd537284ba5b5e93c876c8f48224c4ab6b127f208522ed1939ec297c517"
+    },
+    {
+      "path": "sonnet08/work/rec-revise-req-901.json",
+      "bytes": 5567,
+      "sha256": "39121968dec35d5810af07afae54f745ffae744049be2a5cf7b89a9515446812"
+    },
+    {
+      "path": "sonnet08/work/rec-revise-spec-901.json",
+      "bytes": 5267,
+      "sha256": "7076f4fa53d0236506571d25904e3f2b283bb380bf2850434b1216263dc94442"
+    },
+    {
+      "path": "sonnet08/work/rec-revise-ver-901.json",
+      "bytes": 4954,
+      "sha256": "02867aee28b99d4c94209fb58033af582f69f3669b6ffb65b22446e7a5edcced"
+    },
+    {
+      "path": "sonnet08/work/rec-revise-wo-901.json",
+      "bytes": 3732,
+      "sha256": "896de56037621b03f9ec2c207bd05ec840a7d249d022bf4e9318531c82dba016"
+    },
+    {
+      "path": "sonnet08/work/remote-status-01.json",
+      "bytes": 4440,
+      "sha256": "fd19967a833ba6d63ac815f573a17305edc330ff848e324a9ad0b0beca2a22bc"
+    },
+    {
+      "path": "sonnet08/work/req-create-cap-901.json",
+      "bytes": 760,
+      "sha256": "5b609ff23a755f3cb6815c26be257ba9455c6bebde27135364b8e4d6ea74a652"
+    },
+    {
+      "path": "sonnet08/work/req-create-int-901.json",
+      "bytes": 756,
+      "sha256": "db80c2a2bc44a9bd44140b9b77f8546fae3c34e5cd45f7c630cd97a02952dae1"
+    },
+    {
+      "path": "sonnet08/work/req-create-rel-901.json",
+      "bytes": 766,
+      "sha256": "59e5f5a6bd43b13efc94efa66faf110e82e81958c568f5bfac26c720890b37df"
+    },
+    {
+      "path": "sonnet08/work/req-create-req-901.json",
+      "bytes": 761,
+      "sha256": "e982faee8a372ae3434885aba4c18ff7a1fd8a88c87b8a7e82a0a4d145af3c6c"
+    },
+    {
+      "path": "sonnet08/work/req-create-spec-901.json",
+      "bytes": 765,
+      "sha256": "422bb99173eb9df221405daa26f5f938c52fb31f2c2d3a04b8c0226a928ebd8c"
+    },
+    {
+      "path": "sonnet08/work/req-create-ver-901.json",
+      "bytes": 762,
+      "sha256": "43c728404b65347e1698e7b42854ee8a7dbe69dfd6bbf898a9ec05caef268881"
+    },
+    {
+      "path": "sonnet08/work/req-create-wo-901.json",
+      "bytes": 758,
+      "sha256": "acacf09fa39f52930f192da6081e91cef7728213ba0b88105b7da6007039fe3c"
+    },
+    {
+      "path": "sonnet08/work/req-draft-open-01.json",
+      "bytes": 735,
+      "sha256": "88240b802ff41170cf6d7601cbe3a4cb3f156d7c9536da795c96639b03c64193"
+    },
+    {
+      "path": "sonnet08/work/req-draft-open-02.json",
+      "bytes": 739,
+      "sha256": "9dc51307be24f0aba9d56c8d9d7a442eea9df0bfd1c95efb70da56242b2e1003"
+    },
+    {
+      "path": "sonnet08/work/req-draft-open-c2.json",
+      "bytes": 736,
+      "sha256": "cbf253379ad92375adffb8d46f82ca5c1a72e5db1fb76c9eaaf285ac5e13495e"
+    },
+    {
+      "path": "sonnet08/work/req-export-b1.json",
+      "bytes": 624,
+      "sha256": "53fa852371ba145a8c06f971871a45d4029af607060c7287176aa530b82e9ab2"
+    },
+    {
+      "path": "sonnet08/work/req-freeze-c1.json",
+      "bytes": 662,
+      "sha256": "5ba5776694a24fa94fd86a82bf7b316f6d656e334aa02043c13dcd779ed22c84"
+    },
+    {
+      "path": "sonnet08/work/req-import-01.json",
+      "bytes": 2998,
+      "sha256": "1047235a13309667bba1746d180715aaeb834aa058d244a910f7811348db607b"
+    },
+    {
+      "path": "sonnet08/work/req-lc-check-wo-901.json",
+      "bytes": 831,
+      "sha256": "4d8d60f0ee250c320591fa47bd8c83ae498f9552412ad70b9e645380fcf8eb84"
+    },
+    {
+      "path": "sonnet08/work/req-lc-preflight-start-inspect.json",
+      "bytes": 845,
+      "sha256": "924ebc526f5beb45e4e268afc2d0ac0e1f5694d87854051452175c81a07a4aa0"
+    },
+    {
+      "path": "sonnet08/work/req-lc-preflight-start-preview.json",
+      "bytes": 837,
+      "sha256": "d69245d782d7de88e8dabef69ea77f0177aeb722659082742319db462c7ed43f"
+    },
+    {
+      "path": "sonnet08/work/req-lc-transition-int-preview-c2.json",
+      "bytes": 1010,
+      "sha256": "cf3a385d991e75baa32444a3648a2ed4836f1ca6aa23146ecf88999981ebd415"
+    },
+    {
+      "path": "sonnet08/work/req-lc-transition-int-preview1.json",
+      "bytes": 1002,
+      "sha256": "596db749565e55b439717e157f8813c26730862d839a8e1ba874a3de0acf7062"
+    },
+    {
+      "path": "sonnet08/work/req-revise-cap-901.json",
+      "bytes": 1499,
+      "sha256": "62266393b49cc8a24636d3b602b5f51aa1142956ee5b4e254a89262f019950c2"
+    },
+    {
+      "path": "sonnet08/work/req-revise-int-901.json",
+      "bytes": 1782,
+      "sha256": "98bba4e0f8867c2681ba3380ce2230d61cc4a3ff30f42c6075234b894b803fa2"
+    },
+    {
+      "path": "sonnet08/work/req-revise-rel-901.json",
+      "bytes": 1748,
+      "sha256": "0a8d68e21531c644408add86bd8f6265c62e74b9cdb1377a7d28d4d1d4300ef3"
+    },
+    {
+      "path": "sonnet08/work/req-revise-rel-901b.json",
+      "bytes": 1728,
+      "sha256": "34c1d915e3b33fb95f3ab47f0cac03db1142e57d6eee4e0fe2f6ad9434daa526"
+    },
+    {
+      "path": "sonnet08/work/req-revise-req-901.json",
+      "bytes": 1919,
+      "sha256": "a98786eba6025ab40757b0b0a6ff21799f60a560a93721dfd2b242dfb38d952a"
+    },
+    {
+      "path": "sonnet08/work/req-revise-spec-901.json",
+      "bytes": 2322,
+      "sha256": "60806ba0fb3c24a332b2556adfe81b34e57ee509e350598d99103d564b3cea36"
+    },
+    {
+      "path": "sonnet08/work/req-revise-ver-901.json",
+      "bytes": 1860,
+      "sha256": "aebdde646865d6869e229eef5a31bca9ecb35d3acdf0cde76df9b13e04c82a5f"
+    },
+    {
+      "path": "sonnet08/work/req-revise-wo-901.json",
+      "bytes": 2494,
+      "sha256": "a72ff317738bc7cf6956e2c250ec2e09ecd67770ddc75e7597f2753f25f7f8f2"
+    },
+    {
+      "path": "support/guidance08-state-before.json",
+      "bytes": 775,
+      "sha256": "c9cb5fa25b907aa6de17c08c508ab11baa1ce16408b7adc4f645de4223e903cf"
+    },
+    {
+      "path": "support/guidance08-state-after.json",
+      "bytes": 775,
+      "sha256": "c9cb5fa25b907aa6de17c08c508ab11baa1ce16408b7adc4f645de4223e903cf"
+    },
+    {
+      "path": "support/sonnet08-final-status.json",
+      "bytes": 4392,
+      "sha256": "3626393569729b81b58d5af154aa89ddc97a71fb418f0f547fee8f7ffb29670b"
+    },
+    {
+      "path": "support/native-persistent-context-cli-help.json",
+      "bytes": 22089,
+      "sha256": "88e8be8c4bb4402a493ec18faf95958ddf00c0f403399340a8782823af2263b2"
+    },
+    {
+      "path": "support/claude-guidance08-auth-probe.json",
+      "bytes": 2817,
+      "sha256": "fbe93d4996ab7b3941f36c99be88772a4050407cd39bb8a274a1cb74d3ffe0e4"
+    },
+    {
+      "path": "support/claude-guidance08-init.json",
+      "bytes": 1031,
+      "sha256": "81f9165b3c20727911040155175c02b4acc403121df1d8b049ca893b781e278c"
+    },
+    {
+      "path": "support/claude-guidance08-initial-status.json",
+      "bytes": 4394,
+      "sha256": "8d4ee39aa4f9457a47f4e62d5ae63b7a2f2954328aae45d0aaa716faa1ce52f3"
+    },
+    {
+      "path": "support/claude-guidance08-networks-retry.json",
+      "bytes": 137214,
+      "sha256": "57aeaf74560b788f111b9a691c321cc79ecd8fee58ab166f9d430af5e1234ebd"
+    },
+    {
+      "path": "support/claude-guidance08-networks.json",
+      "bytes": 137214,
+      "sha256": "64aceeeae9e57ec4fac28bef4e7150c6ab9afe23f31a543c1d61f33feb4669b6"
+    },
+    {
+      "path": "support/claude-guidance08-source-stage.json",
+      "bytes": 749,
+      "sha256": "1bd58f1843c1def2ffc7f729e60d664641c4367322a9be087b2e390c0950dc7d"
+    },
+    {
+      "path": "support/claude-guidance08-up.json",
+      "bytes": 1886,
+      "sha256": "dff23423faf17b18051dfe0a0f118e3b113e7e4a9a0e79bbf13258fbfede1c12"
+    },
+    {
+      "path": "support/claude-guidance08-version.json",
+      "bytes": 308,
+      "sha256": "acb47160cf2f014427d7482fff7b2e8d35e5bd76fd53bf86aad57bf9a183250d"
+    },
+    {
+      "path": "support/claude-guidance08-volume-absent.json",
+      "bytes": 394,
+      "sha256": "13110dca652c359b39d0bde73617b3157bf40cc3fe31cf98894c5c2627bb6977"
+    },
+    {
+      "path": "support/claude-guidance08-volume-create.json",
+      "bytes": 341,
+      "sha256": "59fec40b4cc8caa5242e96c14f6dc68dfa8ad19cf4c3857693cea5e248d26a5b"
+    },
+    {
+      "path": "support/guidance08/stage-evidence.json",
+      "bytes": 885,
+      "sha256": "370bd1a5e0efc649e1db04fcf4f3ed21cdeaf44cdac6f3d1cb7af483ca7a7ef7"
+    },
+    {
+      "path": "support/guidance08/permissions.json",
+      "bytes": 2309,
+      "sha256": "5420b031568195b6e57ac43ef739e18340c263ca43941951977d0ce2fc954da8"
+    },
+    {
+      "path": "support/guidance08/native-selection.json",
+      "bytes": 3607,
+      "sha256": "b6b1dc4ff8960e6ca57626cd294c25f26a1f2886715ee2ec5b3e4412d340af69"
+    },
+    {
+      "path": "support/guidance08/selection.json",
+      "bytes": 1574,
+      "sha256": "9d930c8489f4655e0e9bdccf2ff1495d8d11f04ae1e0bb911cb5c60d49de7a29"
+    },
+    {
+      "path": "support/guidance08/combination.json",
+      "bytes": 2542,
+      "sha256": "95f304be8d94d19d4390d38e8bf87eccb7503fed1789e08866dc8b99eae592af"
+    }
+  ],
+  "redaction": "Native recorder redaction preserved; selected files scanned for test project keys. Credentials, account stores and copied inputs excluded.",
+  "operator_setup_failure": "Initial subnet pool 10.231.62.0/24 was exhausted by preserved earlier stacks. Before any volume/container operation, setup stopped. It resumed only missing operations after choosing unused subnets from 10.231.62.0/23; original project and keys preserved. No old network or volume was removed."
+}
