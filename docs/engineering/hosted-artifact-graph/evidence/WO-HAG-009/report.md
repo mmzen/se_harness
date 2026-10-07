@@ -10,6 +10,47 @@ mmzen approved WO-HAG-009, VER-HAG-007 and the bounded native retry permissions.
 The same normal sandbox and permission review remain in use. Git remains
 authoritative. No service, evaluator or protocol implementation was changed.
 
+## Latest driver trials
+
+The driver now creates a read-only, disposable `CLAUDE.md` task locator. It names
+the original task, selection and exact approved helper prefix. It supplies no
+lifecycle steps or decisions. The file is a test input, not a qualification of
+automatic product instruction delivery.
+
+Sonnet09 stopped on its first helper call: backslash-form paths in the locator
+did not match the forward-slash permission spelling. No service mutation occurred.
+The next selection used forward slashes without expanding the permission rules.
+See the [assessment](sonnet09-assessment.json), [inventory](sonnet09-inventory.json)
+and [transcript and supporting checks](sonnet09-incomplete.zip).
+
+Sonnet10 ran for 1,810.670 seconds and retained the helper path through two automatic
+compactions. It authored seven drafts, passed the greeting assertion, approved five
+definitions with the supplied test actor, recovered the deliberately lost reply
+by its original key, and received the same receipt on an identical retry. The
+service remained at project version 17. Independent released replay passed that
+one accepted lifecycle action, then refused the overall assessment because no
+native exports existed. This is a partial result, not qualification.
+
+Three shell calls were denied: a pipeline with arbitrary Python, a Python summary
+command, and a permitted helper followed by `echo`. No unapproved shell command
+ran. The last denial ended the session; its claim that the helper itself was
+blocked is contradicted by earlier successful calls. The model did not complete
+work execution, risk mitigation, stale/scope refusals, verification, release, MCP
+coverage or native exports. Real checkout and selected host-setting hashes were
+unchanged during the run. See the [assessment](sonnet10-assessment.json),
+[inventory](sonnet10-inventory.json) and [transcript and partial replay](sonnet10-incomplete.zip).
+
+The locator now states the existing one-command boundary explicitly: no pipeline,
+second command, `echo`, shell wrapper or arbitrary Python. Native file tools read
+retained results. A fresh Opus 4.6 trial is being prepared with the same product
+packages, helper, criteria and permission scope. Sonnet's failures remain visible;
+a result for another model will not qualify Sonnet.
+
+At driver source `05745c7e2c3abb0d91a2aa36381153c622999645`, six focused checks,
+the 1,323-test source suite (23 skips), distribution checks and CLI smoke passed.
+Released validation reported 1,987 artifacts, zero errors and 63 existing warnings.
+Those supporting checks do not replace missing native cases.
+
 ## Current corrected-package results
 
 mmzen approved WO-HAG-010. The exact two-file bootstrap/setup correction was
@@ -287,9 +328,11 @@ source/gate checks, retain handoff evidence and prepare actual commit-bound
 verification. Both hosts must pass all five cases. No omission or changed
 criterion is accepted.
 
-PR #543 stays draft. At the earlier observed remote head `7f2a16e1`, Engineering Harness
-CI failed because final handoff evidence is absent; other applicable checks
-passed. That failure is disclosed, not bypassed. The full comparison starts at
+PR #543 stays draft. At observed remote head
+`d657df14c941a65330eb513488273f81fc88c05a`, Engineering Harness CI failed
+`QGP-G4I-EVIDENCE` because final handoff evidence is absent; other applicable
+checks passed and conditional release jobs were skipped. That failure is
+disclosed, not bypassed. The full comparison starts at
 `55caaada508495bea7d97effd27644d1ce8373da`. Released next step:
 `STEP-WO-IMPLEMENT-CHECK`.
 

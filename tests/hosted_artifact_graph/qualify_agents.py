@@ -148,6 +148,10 @@ def run(args):
             if settings.get('approved_shell_argv_prefix'):
                 stream.write('\nThe existing approved shell prefix is this argument array:\n\n```json\n'
                     + json.dumps(settings['approved_shell_argv_prefix']) + '\n```\n')
+                stream.write('\nUse one helper command per Bash call. Do not add a pipeline, a second\n'
+                    'command (including echo), a shell wrapper or arbitrary Python. The tool\n'
+                    'result already reports the exit status. Use native Read/Write/Edit tools\n'
+                    'for files, including retained results. These are the existing tool limits.\n')
     plugin = Path(settings['plugin'])
     mcp_url = actual_endpoint + '/mcp'
     if args.host == 'codex':
