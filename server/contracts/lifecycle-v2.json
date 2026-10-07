@@ -1,0 +1,591 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:se-harness:lifecycle-wire:v2",
+  "title": "Explicit private test-copy operations",
+  "description": "Closed argv inputs. No executable, arbitrary argv, output override or test-command forwarding. Lifecycle legality belongs to released 0.22.1.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "se-harness-lifecycle-command/v2"
+    },
+    "operation": {
+      "const": "rehearse"
+    },
+    "test_copy": {
+      "const": true
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "operation_key": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,128}$"
+    },
+    "client": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "wheel_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "wheel_sha256"
+      ]
+    },
+    "expected_evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "archive_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "payload_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "archive_sha256",
+        "payload_sha256"
+      ]
+    },
+    "expected_project_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "context_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "expected_context_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "mode": {
+      "enum": [
+        "inspect",
+        "preview",
+        "apply"
+      ]
+    },
+    "preview_digest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "action": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "validate"
+            }
+          },
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "check"
+            },
+            "artifact": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "checkpoint": {
+              "enum": [
+                "start",
+                "scope",
+                "pre-action"
+              ]
+            },
+            "from_git": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            }
+          },
+          "required": [
+            "kind",
+            "artifact"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "preflight"
+            },
+            "work_order": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "phase": {
+              "enum": [
+                "start",
+                "review"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "work_order",
+            "phase"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "transition"
+            },
+            "assignments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "artifact": {
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+                  },
+                  "state": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096
+                  },
+                  "actor": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096
+                  }
+                },
+                "required": [
+                  "artifact",
+                  "state",
+                  "actor",
+                  "reason"
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 32,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "assignments"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "decide"
+            },
+            "artifact": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "decision": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "option": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "authority_owner": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "disposition": {
+              "enum": [
+                "decide",
+                "defer",
+                "withdraw"
+              ]
+            },
+            "scope": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "minItems": 0,
+              "maxItems": 128,
+              "uniqueItems": true
+            },
+            "revisit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "mitigated_by": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+              },
+              "minItems": 0,
+              "maxItems": 128,
+              "uniqueItems": true
+            },
+            "avoided_by": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+              },
+              "minItems": 0,
+              "maxItems": 128,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "artifact",
+            "decision",
+            "reason",
+            "disposition"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "raise-risk"
+            },
+            "domain": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9-]{0,63}$"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "action": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "owner": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "raised_by": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "threatens": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+              },
+              "minItems": 0,
+              "maxItems": 128,
+              "uniqueItems": true
+            },
+            "stage": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "category": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "likelihood": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "impact": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "decision_id": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "recommend": {
+              "enum": [
+                "accept",
+                "avoid",
+                "mitigate"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "domain",
+            "id",
+            "title",
+            "description",
+            "action",
+            "owner",
+            "raised_by",
+            "threatens"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "handoff"
+            },
+            "work_order": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "from_git": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024,
+                    "pattern": "^(?!/)(?!.*(?:^|/)(?:\\.|\\.\\.|\\.git)(?:/|$))[^\\\\:\\u0000]+$"
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  },
+                  "bytes": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1048576
+                  },
+                  "content_base64": {
+                    "type": "string",
+                    "maxLength": 1398104
+                  }
+                },
+                "required": [
+                  "path",
+                  "sha256",
+                  "bytes",
+                  "content_base64"
+                ]
+              },
+              "minItems": 0,
+              "maxItems": 32,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "work_order",
+            "from_git",
+            "files"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "capture-verification"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "domain": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9-]{0,63}$"
+            },
+            "work_orders": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+              },
+              "minItems": 1,
+              "maxItems": 32,
+              "uniqueItems": true
+            },
+            "verifications": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+              },
+              "minItems": 1,
+              "maxItems": 32,
+              "uniqueItems": true
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^(?!/)(?!.*(?:^|/)(?:\\.|\\.\\.|\\.git)(?:/|$))[^\\\\:\\u0000]+$"
+              },
+              "minItems": 1,
+              "maxItems": 128,
+              "uniqueItems": true
+            },
+            "owner": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            }
+          },
+          "required": [
+            "kind",
+            "id",
+            "domain",
+            "work_orders",
+            "verifications",
+            "evidence",
+            "owner"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "prepare-release"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "domain": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9-]{0,63}$"
+            },
+            "release_contract": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "verification_record": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+            },
+            "work_orders": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+$"
+              },
+              "minItems": 1,
+              "maxItems": 32,
+              "uniqueItems": true
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "owner": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "tag": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            }
+          },
+          "required": [
+            "kind",
+            "id",
+            "domain",
+            "release_contract",
+            "verification_record",
+            "work_orders",
+            "version",
+            "owner",
+            "tag"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "operation",
+    "test_copy",
+    "project_id",
+    "operation_key",
+    "client",
+    "expected_evaluator",
+    "expected_project_version",
+    "context_id",
+    "expected_context_version",
+    "mode",
+    "preview_digest",
+    "action"
+  ]
+}

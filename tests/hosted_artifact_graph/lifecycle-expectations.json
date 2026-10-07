@@ -1,0 +1,45 @@
+{
+  "schema": "hag-phase3-independent-expectations/v1",
+  "authority": "test inputs only",
+  "source": [
+    "SPEC-HAG-007",
+    "VER-HAG-006",
+    "released 0.22.1 ordinary Git feasibility"
+  ],
+  "success": {
+    "definition_acceptance": "approved",
+    "work_approval": "approved",
+    "work_start": "in_progress",
+    "risk_create": [
+      "raised",
+      "open"
+    ],
+    "risk_mitigate": [
+      "mitigating",
+      "decided"
+    ],
+    "handoff": "pass",
+    "work_completion": "implemented",
+    "capture": "ready",
+    "verify": "verified",
+    "prepare_release": "ready",
+    "release": "released"
+  },
+  "refusals": {
+    "missing_test_copy": "HAG_REMOTE_TEST_BOUNDARY",
+    "imported_record": "HAG_REMOTE_PROTECTED_FIELD",
+    "stale_preview": "HAG_REMOTE_STALE_PREVIEW",
+    "changed_key": "HAG_REMOTE_KEY_REUSE",
+    "unsupported_command": "HAG_REMOTE_MALFORMED",
+    "unrecognized_output": "HAG_REMOTE_UNEXPECTED_OUTPUT",
+    "corrupt_history": "HAG_REMOTE_BINDING_UNAVAILABLE",
+    "existing_export_destination": "HAG_REMOTE_EXPORT_EXISTS"
+  },
+  "semantic_exclusions": [
+    "incidental evaluator timestamps",
+    "temporary absolute projection paths",
+    "test Git OIDs when lifecycle timestamps differ (candidate bindings must remain internally exact)"
+  ],
+  "exact_bytes_never_normalized": true,
+  "hosted_scenarios_executed": 0
+}

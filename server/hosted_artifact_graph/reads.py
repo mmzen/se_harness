@@ -71,9 +71,13 @@ def read(service, principal, request):
         else:
             snapshot = service.store.view(tx, view)
         revisions = snapshot["revisions"]
+        snapshot["snapshot"] = service.store.selected_snapshot(tx, snapshot)
         response = {"schema": READ, "project_id": service.project_id, "observed_project_version": snapshot["version"],
                     "evaluator": EVALUATOR, "provenance": [], "unresolved_references": [], "complete": True,
                     "continuation": None, "operation": operation, "view": view, "data": None, "evaluator_output": None}
+        if service.config.get("test_copy") is True:
+            response.update(schema="se-harness-graph-read/v2", test_copy=True,
+                            authority="rehearsal-only; Git remains authoritative")
         if operation == "cypher":
             query = compile_query(request["query"], request["parameters"], snapshot, budget, service.project_id)
             rows = public_rows(list(tx.run(query.cypher, **query.parameters)), query)
@@ -92,7 +96,7 @@ def read(service, principal, request):
     elif operation in ("work-context", "check"):
         artifact_id = request.get("work_order_id", request.get("artifact_id"))
         selected = binding(revisions, artifact_id)
-        with service.evaluator.project(revisions, allow_missing=True) as root:
+        with service.projection(snapshot, allow_missing=True) as root:
             output = service.evaluator.cli(root, "check", "--artifact", artifact_id)
             catalog = service.evaluator.catalog(root)
             response["evaluator_output"] = output
@@ -184,4 +188,6 @@ def read(service, principal, request):
         sources.update(canonical_json(r["envelope"]["provenance"]["source"]) for r in other["revisions"].values()
                        if r["envelope"]["provenance"]["kind"] == "git")
     response["provenance"] = [json.loads(s) for s in sorted(sources)]
+    if service.config.get("test_copy") is True:
+        service.wire.validate(response, "read-result-v2.json")
     return constrain(response, budget)

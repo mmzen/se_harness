@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:se-harness:lifecycle-export:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "se-harness-lifecycle-export-request/v2"
+    },
+    "test_copy": {
+      "const": true
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "baseline_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "client": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "wheel_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "wheel_sha256"
+      ]
+    },
+    "expected_evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "archive_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "payload_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "archive_sha256",
+        "payload_sha256"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "test_copy",
+    "project_id",
+    "baseline_id",
+    "client",
+    "expected_evaluator"
+  ]
+}

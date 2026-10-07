@@ -51,6 +51,16 @@ def _options(subparser) -> set[str]:
 
 
 class ParserShapeTests(unittest.TestCase):
+    def test_lifecycle_client_needs_explicit_test_selection_and_destination(self):
+        parser = build_parser()
+        args = parser.parse_args(['remote', 'rehearse', '--endpoint', 'http://127.0.0.1:8080',
+                                  '--token-env', 'TEST_TOKEN', '--test-copy', '--request', 'request.json'])
+        self.assertTrue(args.test_copy)
+        self.assertEqual('rehearse', args.operation)
+        args = parser.parse_args(['remote', 'export', '--endpoint', 'http://127.0.0.1:8080',
+                                 '--token-env', 'TEST_TOKEN', '--test-copy', '--destination', 'new-export'])
+        self.assertEqual('new-export', args.destination)
+
     def test_every_subcommand_is_classified_and_takes_target_accordingly(self) -> None:
         choices = _subparsers(build_parser())
         self.assertEqual(

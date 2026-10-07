@@ -131,3 +131,11 @@ them as the governing result.
 
 The receipt is evidence, not authority. Return it inline and write no receipt
 or other evidence file into the target repository.
+
+## Reading a hosted test copy
+
+The seven existing MCP tools remain read-only. In the explicit lifecycle pilot,
+their result schema is `se-harness-graph-read/v2` and every result is labeled test
+data. Read its selected view and evaluator output; report any incomplete context.
+A synthetic actor label, test `verified` state or test `released` state establishes
+no real human decision. Git remains authoritative for the actual repository.

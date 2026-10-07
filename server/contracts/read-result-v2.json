@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:se-harness:test-read-result:v2",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "se-harness-graph-read/v2"
+    },
+    "test_copy": {
+      "const": true
+    },
+    "authority": {
+      "const": "rehearsal-only; Git remains authoritative"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "observed_project_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "archive_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "payload_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "archive_sha256",
+        "payload_sha256"
+      ]
+    },
+    "provenance": {
+      "type": "array"
+    },
+    "unresolved_references": {
+      "type": "array"
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "continuation": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "operation": {
+      "enum": [
+        "revision",
+        "work-context",
+        "check",
+        "compare",
+        "impact",
+        "lineage",
+        "cypher"
+      ]
+    },
+    "view": {
+      "type": "object"
+    },
+    "data": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "evaluator_output": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "test_copy",
+    "authority",
+    "project_id",
+    "observed_project_version",
+    "evaluator",
+    "provenance",
+    "unresolved_references",
+    "complete",
+    "continuation",
+    "operation",
+    "view",
+    "data",
+    "evaluator_output"
+  ]
+}

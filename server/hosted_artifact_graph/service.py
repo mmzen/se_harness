@@ -28,7 +28,7 @@ class Service:
         self.project_id = config["project_id"]
         self.wire = Wire()
         self.evaluator = Evaluator(config)
-        self.store = Store(config["database_uri"], self.project_id)
+        self.store = Store(config["database_uri"], self.project_id, test_copy=config.get("test_copy") is True)
 
     def authenticate(self, authorization):
         require(isinstance(authorization, str) and authorization.startswith("Bearer "), 401,
@@ -52,11 +52,12 @@ class Service:
         version = self.store.ready()
         require(self.config.get("authority_mode") == "sandbox-projection" and self.config.get("client"),
                 409, "UNSUPPORTED_TUPLE", "The explicit sandbox component tuple is missing.")
-        return {"ready": True, "project_id": self.project_id, "schema_revision": 1,
+        return {"ready": True, "project_id": self.project_id, "schema_revision": self.store.schema_revision,
                 "project_version": version, "evaluator": EVALUATOR,
                 "components": self.config["components"], "client": self.config["client"],
                 "authority_mode": "sandbox-projection", "protocols": self.config["protocols"],
-                "database_read_only_enforcement": "deferred: RISK-HAG-001"}
+                "database_read_only_enforcement": "deferred: RISK-HAG-001",
+                **({"test_copy": True, "authority": "rehearsal-only; Git remains authoritative"} if self.config.get("test_copy") is True else {})}
 
     def compatibility(self):
         """Validate the selected closed combination and observed in-image identities.
@@ -77,9 +78,11 @@ class Service:
             expect(re.fullmatch(r"[0-9a-f]{40}", value["source"]["candidate_commit"]))
             expect(value["source"]["candidate_commit"] == os.environ.get("HAG_SOURCE_COMMIT"))
             expect(value["client"] == self.config["client"] and value["client"]["version"] == "0.22.2")
-            expect(value["evaluator"] == EVALUATOR and value["schema_revision"] == 1)
+            expect(value["evaluator"] == EVALUATOR and value["schema_revision"] == self.store.schema_revision)
             protocols = ["se-harness-remote-command/v1", "se-harness-remote-result/v1", "se-harness-graph-read/v1",
                          "se-harness-artifact-revision/v1", "se-harness-artifact-baseline/v1"]
+            if self.config.get("test_copy") is True:
+                protocols += ["se-harness-lifecycle-command/v2", "se-harness-lifecycle-result/v2", "se-harness-lifecycle-export/v2", "se-harness-graph-read/v2"]
             expect(value["protocols"] == self.config["protocols"] == protocols)
             expect(value["runtime"] == {"python": "3.13.16", "platform": "linux/amd64",
                 "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4"})
@@ -127,6 +130,69 @@ class Service:
         require(len(canonical_json(value)) <= MAX_RESPONSE, 429, "RESOURCE_LIMIT", "Baseline response exceeds 2 MiB.")
         return value
 
+    def rehearse(self, principal, raw, *, fault=None):
+        from .lifecycle import Adapter, COMMAND
+        from .protocol import MAX_REQUEST
+        require(isinstance(raw, dict), 400, "MALFORMED", "Expected one closed rehearsal request.")
+        require(len(canonical_json(raw)) <= MAX_REQUEST, 429, "RESOURCE_LIMIT", "Rehearsal request exceeds 4 MiB.")
+        self.access(principal, raw.get("project_id"), "rehearse")
+        require(self.config.get("test_copy") is True and raw.get("test_copy") is True, 403,
+                "TEST_BOUNDARY", "Lifecycle operations require explicit test-copy configuration and selection.")
+        self.wire.validate(raw, "lifecycle-v2.json")
+        command = json.loads(canonical_json(raw))
+        digest = "sha256:" + named_digest(COMMAND, command)
+        with self.store.transaction() as tx:
+            old = self.store.operation(tx, principal["id"], command["operation_key"])
+            if old:
+                require(old[0] == digest, 409, "KEY_REUSE", "Operation key has different content.")
+                return old[1]
+            require(command["expected_evaluator"] == EVALUATOR and command["client"] == self.config["client"],
+                    409, "UNSUPPORTED_TUPLE", "Unsupported test client/evaluator tuple.")
+            require(self.store.project(tx)["command_version"] == command["expected_project_version"],
+                    409, "STALE_PROJECT", "Expected project version is stale.")
+            selected = self.store.view(tx, {"kind": "context", "context_id": command["context_id"],
+                                            "context_version": command["expected_context_version"]})
+            retained = self.store.selected_snapshot(tx, selected)
+            count = tx.run("MATCH (r:Revision {project_id:$p}) RETURN count(r) AS n", p=self.project_id).single()["n"]
+        self.evaluator.identity()
+        self.evaluator.verify_source()
+        self.compatibility()
+        self.store.ready()
+        plan = Adapter(self, command, principal, selected, retained).prepare()
+        require(count + len(plan["revisions"]) <= MAX_REVISIONS, 429, "RESOURCE_LIMIT", "Project revision retention limit reached.")
+        self.wire.validate(plan["result"], "lifecycle-result-v2.json")
+        if command["mode"] != "apply":
+            return plan["result"]
+        if fault:
+            fault("after_evaluation", None)
+        return self.store.commit(command, principal["id"], digest, plan, fault=fault)
+
+    def export_test(self, principal, request):
+        from .lifecycle import project as test_project
+        from .pilot_git import AUTHORITY, scan, decoded
+        self.access(principal, request.get("project_id"))
+        require(self.config.get("test_copy") is True and request.get("test_copy") is True,
+                403, "TEST_BOUNDARY", "Export requires explicit test-copy selection.")
+        self.wire.validate(request, "export-v2.json")
+        require(request["expected_evaluator"] == EVALUATOR and request["client"] == self.config["client"],
+                409, "UNSUPPORTED_TUPLE", "Unsupported test export tuple.")
+        with self.store.transaction() as tx:
+            selected = self.store.view(tx, {"kind": "baseline", "baseline_id": request["baseline_id"]})
+            retained = self.store.selected_snapshot(tx, selected)
+        require(retained is not None, 422, "BINDING_UNAVAILABLE", "Baseline has no complete test history.")
+        for revision in selected["revisions"].values():
+            path = revision["envelope"]["original_path"]
+            require(path in retained["files"] and decoded(retained["files"][path]) == base64.b64decode(revision["document_base64"], validate=True),
+                    422, "BINDING_UNAVAILABLE", "Selected baseline differs from retained test history.")
+        # Verify complete object availability, exact tree bytes and source identity before export.
+        with test_project(self, selected, retained) as root:
+            require(scan(root) == {p: decoded(v) for p, v in retained["files"].items()}, 422,
+                    "BINDING_UNAVAILABLE", "Export does not reconstruct the exact selected bytes.")
+        result = {"schema": "se-harness-lifecycle-export/v2", "test_copy": True, "authority": AUTHORITY,
+                  "project_id": self.project_id, "baseline": selected["baseline"], "snapshot": retained}
+        require(len(canonical_json(result)) <= MAX_RESPONSE, 429, "RESOURCE_LIMIT", "Exact export exceeds 2 MiB.")
+        return result
+
     def command(self, principal, raw, *, fault=None):
         require(isinstance(raw, dict), 400, "MALFORMED", "Expected a command object.")
         self.access(principal, raw.get("project_id"), raw.get("operation"))
@@ -155,6 +221,8 @@ class Service:
             require(project["command_version"] == command["expected_project_version"], 409,
                     "STALE_PROJECT", "Expected project version is stale.")
             selected = self.store.view(tx, view) if view else None
+            if selected is not None:
+                selected["snapshot"] = self.store.selected_snapshot(tx, selected)
             if "expected_revision_id" in command:
                 revision = selected["revisions"].get(command["artifact_id"], {})
                 require(revision.get("revision_id") == command["expected_revision_id"], 409,
@@ -220,7 +288,7 @@ class Service:
         elif operation == "draft-open":
             revisions = selected["revisions"]
             require(command["work_order_id"] in revisions, 404, "UNKNOWN_IDENTITY", "Work order is absent from the selected baseline.")
-            with self.evaluator.project(revisions) as root:
+            with self.projection(selected) as root:
                 catalog = self.evaluator.catalog(root)
                 require(catalog[command["work_order_id"]]["type"] == "work_order", 422,
                         "INVALID_DRAFT", "A draft context must select a work order.")
@@ -232,8 +300,11 @@ class Service:
             view = {"kind": "context", "context_id": context_id, "context_version": 0}
         elif operation == "freeze":
             c = selected["context"]
-            baseline = self.freeze(selected["revisions"], {"kind": "draft-context", "context_id": c["context_id"],
-                                   "context_version": c["context_version"], "base_baseline_id": c["base_baseline_id"]})
+            provenance = {"kind": "draft-context", "context_id": c["context_id"],
+                          "context_version": c["context_version"], "base_baseline_id": c["base_baseline_id"]}
+            if c.get("snapshot_id"):
+                provenance.update(test_copy=True, snapshot_id=c["snapshot_id"])
+            baseline = self.freeze(selected["revisions"], provenance)
             plan["baseline"] = baseline
             view = {"kind": "baseline", "baseline_id": baseline["baseline_id"]}
             context_versions = {"context_id": c["context_id"], "before": c["context_version"], "after": c["context_version"]}
@@ -259,9 +330,15 @@ class Service:
         require(len(canonical_json(value)) <= MAX_RESPONSE, 429, "RESOURCE_LIMIT", "Complete baseline exceeds 2 MiB.")
         return value
 
+    def projection(self, selected, *, allow_missing=False):
+        if selected.get("snapshot"):
+            from .lifecycle import project
+            return project(self, selected, selected["snapshot"])
+        return self.evaluator.project(selected["revisions"], allow_missing=allow_missing)
+
     def prepare_draft(self, command, principal, selected, reserved):
         revisions = selected["revisions"]
-        with self.evaluator.project(revisions) as root:
+        with self.projection(selected) as root:
             before_catalog = self.evaluator.catalog(root)
             if command["operation"] == "create-artifact":
                 # Reserve identities outside this view using the release's allocation API.

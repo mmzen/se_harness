@@ -114,3 +114,16 @@ effects, final state, blocker or accountable decision, and its one typed next
 step. A preview's proposed state is not an applied change. Report readiness
 blockers separately from lifecycle projections. Evidence preparation follows
 the installed procedure; use the `evidence` skill only if it is available.
+
+## Private lifecycle test copy
+
+When the approved task explicitly selects the hosted rehearsal, use the installed
+candidate client's `remote rehearse --test-copy` command and the closed v2 request
+schema in `server/contracts/lifecycle-v2.json`. Preview the exact action, then
+apply it with that preview digest and unchanged versions. The service reruns the
+released evaluator. After an uncertain reply, look up the original operation key;
+do not rebase or invent a replacement key to conceal the outcome.
+
+This is test data. Supplied actors are synthetic inputs, not human consent.
+Imported records stay immutable. Keep real decisions and work in the authoritative
+Git workflow. No rehearsal record authorizes a real release or external action.

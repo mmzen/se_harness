@@ -693,3 +693,25 @@ installation, upgrade and release preparation check the full installed payload.
 The module route works without a console launcher. Runtime identity schema v4
 reports Python version without hashing the executable. New evaluator evidence
 schema v2 binds canonical validated values; legacy schema v1 remains readable.
+
+## Hosted lifecycle rehearsal (candidate client)
+
+These commands belong to the separately installed candidate client. The selected
+released evaluator remains 0.22.1 and is the service's sole lifecycle evaluator.
+
+```text
+CLIENT_PYTHON -I -m se_harness remote rehearse --endpoint ENDPOINT --project PROJECT_ID --token-env TOKEN_VARIABLE --client-wheel CLIENT_WHEEL --test-copy --request REQUEST_JSON --json
+CLIENT_PYTHON -I -m se_harness remote operation --endpoint ENDPOINT --project PROJECT_ID --token-env TOKEN_VARIABLE --key ORIGINAL_KEY --json
+CLIENT_PYTHON -I -m se_harness remote export --endpoint ENDPOINT --project PROJECT_ID --token-env TOKEN_VARIABLE --client-wheel CLIENT_WHEEL --test-copy --request EXPORT_JSON --destination NEW_DIRECTORY --json
+```
+
+Use the [closed v2 contract](../../server/contracts/lifecycle-v2.md) for request
+fields, modes and allowed effects. `inspect` reports evaluator results. `preview`
+stages a disposable result without changing graph state. `apply` requires the
+returned preview digest and unchanged inputs. Only `apply` creates an accepted
+operation receipt. A retry with identical inputs returns that receipt; different
+inputs under its key fail. No arbitrary command or `--test-command` is forwarded.
+
+Export requires an immutable baseline and a new directory. It writes exact files,
+a Git bundle and a manifest. Download success does not claim successful independent
+replay. All these records are test data; Git remains authoritative for real work.

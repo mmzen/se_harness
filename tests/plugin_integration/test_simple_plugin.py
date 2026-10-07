@@ -43,6 +43,10 @@ class SimplePluginTests(unittest.TestCase):
                 self.assertIn('verity-plane/packages/'+self.wheel.name, names)
                 self.assertEqual((ROOT/'plugins/verity-plane/common/skills/change/SKILL.md').read_bytes(),
                                  archive.read('verity-plane/skills/change/SKILL.md'))
+                for skill in ('setup', 'change', 'evidence', 'harness-orient'):
+                    guidance = archive.read(f'verity-plane/skills/{skill}/SKILL.md')
+                    self.assertEqual((ROOT/f'plugins/verity-plane/common/skills/{skill}/SKILL.md').read_bytes(), guidance)
+                    self.assertIn(b'test', guidance)
                 self.assertIn('verity-plane/hooks/hooks.json', names)
                 for member in ('scripts/harness_runtime.py','scripts/activate.py','assets/bootstrap.md'):
                     self.assertEqual((ROOT/'plugins/verity-plane/common'/member).read_bytes(),

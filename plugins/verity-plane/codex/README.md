@@ -59,3 +59,11 @@ An existing project's selected evaluator remains authoritative.
 See [setup](skills/setup/SKILL.md) and its shared references for initialization,
 connection and repair. Read `assembly-inventory.json` for this package's exact
 source and released-wheel identity when using a release assembly.
+
+## Hosted lifecycle rehearsal
+
+Candidate packages include guidance for an explicit private test copy. Use the
+separately installed remote client and the repository's `server/README.md` Phase 3
+procedure. Git remains authoritative. Test approvals, VRECs, RLSs and exports do
+not authorize real work or publication. Packaged guidance checks do not prove
+live Codex desktop, startup or compaction delivery.

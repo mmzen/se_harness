@@ -18,8 +18,9 @@ def text(value):
 
 
 class Store:
-    def __init__(self, uri, project_id):
+    def __init__(self, uri, project_id, *, test_copy=False):
         self.project_id = project_id
+        self.schema_revision = 2 if test_copy else SCHEMA_REVISION
         self.driver = GraphDatabase.driver(uri, auth=None, max_connection_pool_size=8,
                                           connection_timeout=10, max_transaction_retry_time=0)
 
@@ -45,14 +46,14 @@ class Store:
             if nodes:
                 self.ready()
                 return {"initialized": False, "project_id": self.project_id}
-            raw = contract_path("graph-v1.cypher").read_text(encoding="utf-8")
+            raw = contract_path(f"graph-v{self.schema_revision}.cypher").read_text(encoding="utf-8")
             statements = "\n".join(line for line in raw.splitlines() if not line.lstrip().startswith("//"))
             for statement in statements.split(";"):
                 if statement.strip():
                     session.run(statement).consume()
             schema = self.schema_inventory(session)
             session.run("CREATE (:Project {project_id:$p, command_version:0, schema_revision:$s, schema_json:$schema})",
-                        p=self.project_id, s=SCHEMA_REVISION, schema=text(schema)).consume()
+                        p=self.project_id, s=self.schema_revision, schema=text(schema)).consume()
         return {"initialized": True, "project_id": self.project_id}
 
     @staticmethod
@@ -74,9 +75,9 @@ class Store:
                     "SCHEMA_MISMATCH", "Store is uninitialized or selects another project.")
             p = row[0]["p"]
             actual = self.schema_inventory(session)
-            require(p["schema_revision"] == SCHEMA_REVISION and self.schema_shape(json.loads(p.get("schema_json", "{}"))) == actual
-                    and actual == self.expected_schema(),
-                    409, "SCHEMA_MISMATCH", "Store schema does not match initialized revision 1.")
+            require(p["schema_revision"] == self.schema_revision and self.schema_shape(json.loads(p.get("schema_json", "{}"))) == actual
+                    and actual == self.expected_schema(self.schema_revision),
+                    409, "SCHEMA_MISMATCH", "Store schema does not match the explicitly selected revision.")
             version = session.run("SHOW VERSION").single()["version"]
             settings = {r["name"]: r["current_value"] for r in session.run("SHOW CONFIG")}
             storage = {r["storage info"]: r["value"] for r in session.run("SHOW STORAGE INFO")}
@@ -89,9 +90,9 @@ class Store:
             return p["command_version"]
 
     @staticmethod
-    def expected_schema():
+    def expected_schema(revision=1):
         constraints, indexes = [], []
-        for line in contract_path("graph-v1.cypher").read_text(encoding="utf-8").splitlines():
+        for line in contract_path(f"graph-v{revision}.cypher").read_text(encoding="utf-8").splitlines():
             unique = re.fullmatch(r"CREATE CONSTRAINT ON \(n:(\w+)\) ASSERT (.+) IS UNIQUE;", line)
             exists = re.fullmatch(r"CREATE CONSTRAINT ON \(n:(\w+)\) ASSERT EXISTS \(n\.(\w+)\);", line)
             index = re.fullmatch(r"CREATE INDEX ON :(\w+)\((\w+)\);", line)
@@ -107,7 +108,7 @@ class Store:
 
     def project(self, tx):
         row = tx.run("MATCH (p:Project {project_id:$p}) RETURN properties(p) AS p", p=self.project_id).single()
-        require(row is not None and row["p"]["schema_revision"] == SCHEMA_REVISION, 409,
+        require(row is not None and row["p"]["schema_revision"] == self.schema_revision, 409,
                 "SCHEMA_MISMATCH", "Missing compatible project schema.")
         return row["p"]
 
@@ -116,6 +117,20 @@ class Store:
                      "RETURN o.request_sha256 AS digest, o.result_json AS result",
                      p=self.project_id, a=principal, k=key).single()
         return (row["digest"], json.loads(row["result"])) if row else None
+
+    def snapshot(self, tx, identity):
+        from .pilot_git import verify_snapshot
+        row = tx.run("MATCH (s:TestSnapshot {project_id:$p, snapshot_id:$s}) RETURN s.payload_json AS payload",
+                     p=self.project_id, s=identity).single()
+        require(row is not None, 422, "BINDING_UNAVAILABLE", "Selected test snapshot is missing.")
+        value = verify_snapshot(json.loads(row["payload"]))
+        require(value["snapshot_id"] == identity, 422, "BINDING_UNAVAILABLE", "Snapshot node and payload identities differ.")
+        return value
+
+    def selected_snapshot(self, tx, selected):
+        context = selected.get("context") or {}
+        identity = context.get("snapshot_id") or selected["baseline"]["manifest"]["provenance"].get("snapshot_id")
+        return self.snapshot(tx, identity) if identity else None
 
     def baseline(self, tx, identity):
         row = tx.run("MATCH (b:Baseline {project_id:$p, baseline_id:$b}) RETURN b.manifest_json AS manifest",
@@ -251,6 +266,23 @@ class Store:
                         require(selected.get("revision_id") == command["expected_revision_id"], 409,
                                 "STALE_REVISION", "Selected revision changed before acceptance.")
                 fresh = self.new_revisions(tx, plan.get("revisions", {}), plan.get("metadata", {}))
+                if fault:
+                    fault("after_revisions", tx)
+                if plan.get("input_baseline"):
+                    self.add_baseline(tx, plan["input_baseline"])
+                for s in [v for v in (plan.get("input_snapshot"), plan.get("snapshot")) if v]:
+                    count = tx.run("MATCH (s:TestSnapshot {project_id:$p}) RETURN count(s) AS n",
+                                   p=self.project_id).single()["n"]
+                    exists = tx.run("MATCH (s:TestSnapshot {project_id:$p, snapshot_id:$s}) RETURN s.snapshot_id AS id",
+                                    p=self.project_id, s=s["snapshot_id"]).single()
+                    require(exists or count < 128, 429, "RESOURCE_LIMIT", "Pilot snapshot retention reached 128 snapshots.")
+                    tx.run("MERGE (s:TestSnapshot {project_id:$p, snapshot_id:$s}) "
+                           "ON CREATE SET s.payload_json=$payload",
+                           p=self.project_id, s=s["snapshot_id"], payload=text(s)).consume()
+                    require(self.snapshot(tx, s["snapshot_id"]) == s, 422,
+                            "BINDING_UNAVAILABLE", "Stored test snapshot identity conflict.")
+                    if fault:
+                        fault("after_snapshot", tx)
                 if plan.get("baseline"):
                     self.add_baseline(tx, plan["baseline"])
                 if plan.get("new_context"):
@@ -269,6 +301,18 @@ class Store:
                            "(r:Revision {project_id:$p, revision_id:$r}) "
                            "SET c.context_version=c.context_version+1 CREATE (c)-[:PROPOSES {artifact_id:$a}]->(r)",
                            p=self.project_id, c=command["context_id"], r=revision["revision_id"], a=artifact_id).consume()
+                if command["operation"] == "rehearse":
+                    for revision in plan["revisions"].values():
+                        artifact_id = revision["envelope"]["artifact_id"]
+                        tx.run("MATCH (c:DraftContext {project_id:$p, context_id:$c}) "
+                               "OPTIONAL MATCH (c)-[e:PROPOSES {artifact_id:$a}]->() DELETE e",
+                               p=self.project_id, c=command["context_id"], a=artifact_id).consume()
+                        tx.run("MATCH (c:DraftContext {project_id:$p, context_id:$c}), "
+                               "(r:Revision {project_id:$p, revision_id:$r}) CREATE (c)-[:PROPOSES {artifact_id:$a}]->(r)",
+                               p=self.project_id, c=command["context_id"], r=revision["revision_id"], a=artifact_id).consume()
+                    tx.run("MATCH (c:DraftContext {project_id:$p, context_id:$c}) "
+                           "SET c.context_version=c.context_version+1, c.snapshot_id=$s",
+                           p=self.project_id, c=command["context_id"], s=plan["snapshot"]["snapshot_id"]).consume()
                 if fault:
                     fault("after_graph", tx)
                 result = plan["result"]

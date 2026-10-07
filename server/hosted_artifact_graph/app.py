@@ -126,7 +126,10 @@ def create_app(config_path, credentials_path):
                 require(isinstance(body, dict) and body.get("project_id") == project, 400,
                         "MALFORMED", "Route and body project differ.")
                 route = request.path_params.get("operation")
-                if route:
+                if request.url.path.startswith("/v2/"):
+                    handler = service.export_test if request.url.path.endswith("/exports") else service.rehearse
+                    result = await run_in_threadpool(handler, principal, body)
+                elif route:
                     require(body.get("operation") == route, 400, "MALFORMED", "Route and read operation differ.")
                     result = await run_in_threadpool(read, service, principal, body)
                 else:
@@ -138,6 +141,9 @@ def create_app(config_path, credentials_path):
             return JSONResponse(result)
         except Refusal as exc:
             LOG.info("request refusal=%s", exc.code)
+            if request.url.path.startswith("/v2/"):
+                from .lifecycle import refusal_result
+                return JSONResponse(refusal_result(service.project_id, exc), status_code=exc.status)
             return JSONResponse(exc.result(), status_code=exc.status)
         except Exception as exc:
             # Keep class and source locations only, never exception messages,
@@ -155,6 +161,8 @@ def create_app(config_path, credentials_path):
 
     base = "/v1/projects/{project}"
     routes = [Route("/health", health), Route("/v1/status", status),
+              Route("/v2/projects/{project}/rehearsals", handle, methods=["POST"]),
+              Route("/v2/projects/{project}/exports", handle, methods=["POST"]),
               Route(base + "/baselines/{baseline:path}", handle),
               Route(base + "/operations/{key}", handle),
               Route(base + "/reads/{operation}", handle, methods=["POST"]),

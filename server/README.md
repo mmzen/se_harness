@@ -2,13 +2,13 @@
 
 One Python service provides HTTP commands and shared HTTP/MCP reads over one
 Memgraph database. Git remains the repository's formal authority. The sandbox
-imports the fixed public snapshot and prepares drafts; it cannot approve,
-verify, release, or replace imported decisions. RISK-HAG-001 remains raised:
+imports a fixed snapshot and prepares drafts. The explicit Phase 3 test-copy mode
+can rehearse lifecycle actions on new test records. It cannot replace imported
+decisions or authorize real work or publication. RISK-HAG-001 remains raised:
 application query controls do not prove database-enforced read-only access.
 
-WO-HAG-001 remains in progress. Development integration checks have exercised
-the real service. Final VER-HAG-001 qualification requires one clean source
-commit, its actual installed packages, all twelve scenarios and retained evidence.
+Phase 2 was verified in VREC-HAG-004. WO-HAG-008 extends that implementation with
+the private lifecycle pilot; its independent VER-HAG-006 qualification is pending.
 No public service, release, authority cutover or production claim is supplied here.
 
 ## Inputs
@@ -178,3 +178,81 @@ Limits: 2,500 imported artifacts; 10,000 retained revisions; 1 MiB per document;
 2 MiB per response; depth eight; five seconds per Cypher query; 120 seconds per
 evaluator process. Preserve measured limitations and RISK-HAG-001. Do not expose
 the sandbox on a shared or untrusted network.
+
+## Phase 3: private lifecycle rehearsal
+
+This is an opt-in test project. Supplied decision actors are synthetic labels.
+Git remains authoritative for real definitions and decisions. Authentication and
+database ACL implementation are deferred; keep the existing private controls.
+
+1. Build the clean candidate client with the pinned recipe above. Prepare the
+   service with the same command above, adding `--phase3`. The configuration selects
+   schema revision 2 and `test_copy: true`. These are local qualification packages;
+   do not publish them or replace the user's installed plugin.
+2. Create the small synthetic source fixture outside the checkout:
+
+   ```text
+   python REPO/tests/hosted_artifact_graph/prepare_lifecycle_fixture.py --evaluator-python RELEASED_PYTHON --output FIXTURE_OUT
+   ```
+
+   `RELEASED_PYTHON` is the absolute Python path for public evaluator 0.22.1. This
+   command uses `-I`, creates an ordinary disposable Git repository, validates the
+   seed records and stages exact Git blobs. Copy `FIXTURE_OUT/staged/` into a new
+   source volume with the volume procedure above.
+3. Use a new Compose project and graph volume. Set `HAG_SERVICE_IMAGE`,
+   `HAG_CONFIG_DIRECTORY`, `HAG_CREDENTIAL_FILE`, `HAG_SOURCE_VOLUME` and a free
+   loopback `HAG_HTTP_PORT`. Start the stack and run its explicit `init`. Do not
+   migrate or reuse a Phase 2 volume. Read authenticated status and require the
+   expected package identities, schema revision 2 and `test_copy: true`.
+4. Install `CLIENT_WHEEL` into a separate environment. Run the packaged-client
+   walkthrough, keeping its output outside the checkout:
+
+   ```text
+   python REPO/tests/hosted_artifact_graph/qualify_pilot.py --repository REPO --client-python CLIENT_PYTHON --client-wheel CLIENT_WHEEL --configuration PACKAGE_OUT/configuration/config.json --credentials PACKAGE_OUT/credentials.json --source-manifest FIXTURE_OUT/staged/source-manifest.json --endpoint ENDPOINT --output WALKTHROUGH_OUT
+   ```
+
+   The runner authors new test definitions, exercises a failed gate and an invalid
+   edge, accepts definitions, starts work, records a paired risk/decision, retains
+   handoff evidence, and prepares and assesses a test VREC and RLS. It repeats
+   accepted requests, reads the resulting context and exports an earlier and a
+   later baseline. Each command and actual result is retained. It does not claim
+   the remaining fault, concurrency, recovery or independent replay checks passed.
+5. Use the recorded v2 request files as examples for deliberate manual rehearsal.
+   The [wire contract](contracts/lifecycle-v2.md) defines every allowed operation.
+   Keep versions and input digest from the selected preview. After a lost reply,
+   use the existing operation lookup before changing a key or input.
+6. Export with an explicit new destination. The client creates `files/`,
+   `history.bundle` and `manifest.json`. An `.incomplete` marker means the export
+   must not be used. Clone the bundle into another new directory, compare every
+   exported file byte-for-byte, then use released 0.22.1 there to validate and
+   check the selected records. Keep the original test candidate P from the VREC;
+   a later governance commit is not a replacement candidate.
+
+The read-only MCP tools use the same exact selected test snapshots. Their results
+are labeled `se-harness-graph-read/v2`; ordinary Phase 2 projects retain v1 results.
+No new writable MCP tool or external publication operation is present.
+
+Preserve test volumes until restart and restore checks finish. If Docker has no
+automatic subnet left, inspect its networks and host routes, then supply a Compose
+override with unused private subnets. Retain the override and effective Compose
+configuration with the run. Keep the database private and HTTP bound to loopback;
+do not delete unrelated stacks to obtain address space.
+
+For the required supplemental checks, run `qualify_pilot_store.py` and
+`qualify_pilot_replay.py` from `tests/hosted_artifact_graph/` in the packaged
+service container. Copy the selected walkthrough output into that container;
+use `--state WALKTHROUGH_OUT/walkthrough.json --output STORE_RESULT.json` for
+the store runner and `--walkthrough WALKTHROUGH_OUT --output REPLAY_OUT` for
+independent replay. Both use the mounted configuration and credential files.
+The store runner injects faults locally; no fault-injection HTTP route exists.
+It tests actual transaction rollback, racing writers, retained receipts, bounds
+and the 120-second evaluator deadline. Retain its result before continuing.
+
+Then run `qualify_pilot_transport.py` on the client host with the walkthrough's
+client, configuration, credential, source, repository and endpoint arguments.
+Set a new `--output TRANSPORT_OUT` and `--state STORE_RESULT.json`. It drops one
+reply after a real commit, retrieves the receipt and repeats the identical
+request. Use the recovery command above afterward. With explicit subnets, add
+`--compose-override ORIGINAL_OVERRIDE --restore-override RESTORE_OVERRIDE`;
+the restored stack needs separate unused ranges. Reconcile the retained operation
+key and re-export its baseline on both stacks. These are test decisions only.
