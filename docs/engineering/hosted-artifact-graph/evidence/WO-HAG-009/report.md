@@ -1,3 +1,5 @@
+> Latest focused diagnostic: [Opus09 findings](instruction-discovery-rerun18.md). This tests one intent draft; full native qualification remains incomplete. Earlier observations below retain their original scope.
+
 > Latest focused diagnostic: [proposal and Opus08 findings](instruction-discovery-rerun17.md). Discovery improved, but required template inspection failed; qualification remains incomplete. Earlier observations below retain their original scope.
 
 # Latest instruction-discovery rerun

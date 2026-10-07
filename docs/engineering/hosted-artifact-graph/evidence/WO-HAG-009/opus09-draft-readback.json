@@ -1,0 +1,38 @@
+{
+  "completed_revision_observed": true,
+  "artifact_id": "INT-P3-001",
+  "revision_id": "sha256:57b80c72c57b78ec1eeea887a4f41a187b27230c1b4e709a7d07ee654b489fad",
+  "view": {
+    "kind": "context",
+    "context_id": "dbee6059-5a66-4b27-9689-f00b7e99ae86",
+    "context_version": 2
+  },
+  "document_sha256": "57b267bea065645a6c260f5164c9b11e6be825c9701a700790b406b23030172b",
+  "document_bytes": 1241,
+  "native_submitted_bytes_equal_independent_service_bytes": true,
+  "status": "draft",
+  "type": "intent",
+  "evaluator_output": {
+    "schema": "se-harness-draft-validation-v1",
+    "selection": {
+      "id": "INT-P3-001",
+      "type": "intent",
+      "status": "draft",
+      "path": "docs/engineering/lifecycle-pilot/intent/INT-P3-001.md"
+    },
+    "admissible": true,
+    "errors": [],
+    "incomplete": [],
+    "background": [
+      {
+        "code": "W-AUT-022",
+        "message": "Coverage row REQ-P3-900 names undefined rule P3-GREET-900.",
+        "path": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+        "plane": "maintenance",
+        "severity": "advisory"
+      }
+    ]
+  },
+  "native_record": "work/revise-intent-result.json",
+  "limits": "Readback confirms exact submitted draft and evaluator findings. It approves no artifact or work and does not qualify the full lifecycle."
+}
