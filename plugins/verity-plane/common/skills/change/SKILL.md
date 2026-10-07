@@ -11,10 +11,23 @@ connects its existing procedures to the operator's request.
 
 ## Hosted reading and context
 
-For an explicit hosted test copy, follow setup's hosted selection. Before a
-lifecycle request, read the current released procedure and its applicable
+For an explicit hosted test copy, follow setup's hosted selection.
+
+For draft preparation, enter the selected release's
+`docs/engineering/harness/DRAFT_DEFINITIONS.md`: read **Read this when**,
+**Before this action**, and the current drafting step. Follow its prerequisites
+before choosing a type, linking records or writing content. This includes
+`ARTIFACT_AUTHORING.md#design-simplicity` and the selected type's checklist.
+Read these instructions before the command schema. Do not load future lifecycle
+procedures while the current task is drafting.
+
+Before a lifecycle request, read the current released procedure and its applicable
 prerequisites. Resolve paths against the selected released-resource directory,
 not the test output directory. The command schema supplies fields, not policy.
+Use an available file lookup to resolve one named resource; the full inventory
+is evidence, not a prerequisite reading list. After choosing an operation, read
+its schema section and referenced definitions. An operation-specific view must
+identify its original schema and preserve its required fields and constraints.
 The task-to-file table below locates instructions; only the released evaluator
 determines the next action and whether it is permitted.
 

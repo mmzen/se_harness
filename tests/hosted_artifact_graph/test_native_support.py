@@ -11,12 +11,48 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from native_call import contained, remote_argv, main, read_json
+from native_call import contained, remote_argv, main, read_json, lookup_file, result_fields
 from qualify_agents import prepare_output
 from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_lookup_verifies_one_exact_file_and_rejects_changed_or_ambiguous_inputs(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); inputs=root/'inputs'; inputs.mkdir()
+            path=inputs/'guide.md';path.write_bytes(b'original')
+            entry={'relative':'guide.md','path':str(path),'bytes':8,'sha256':hashlib.sha256(b'original').hexdigest()}
+            inventory=inputs/'inventory.json';config={'inputs_inventory':str(inventory)}
+            inventory.write_text(json.dumps({'files':[entry]}))
+            with patch('native_call.subprocess.run') as run:
+                self.assertEqual(lookup_file(root,config,'guide.md')['file'],entry)
+                self.assertFalse(lookup_file(root,config,'guide.md')['content_read'])
+            run.assert_not_called()
+            with self.assertRaises(ValueError):lookup_file(root,config,'../guide.md')
+            path.write_bytes(b'modified')
+            with self.assertRaisesRegex(ValueError,'no longer'):lookup_file(root,config,'guide.md')
+            inventory.write_text(json.dumps({'files':[entry,entry]}))
+            with self.assertRaisesRegex(ValueError,'one exact'):lookup_file(root,config,'guide.md')
+            entry['path']=str(root/'guide.md')
+            inventory.write_text(json.dumps({'files':[entry]}))
+            with self.assertRaisesRegex(ValueError,'relative name'):lookup_file(root,config,'guide.md')
+
+    def test_small_result_view_keeps_refusals_and_explicitly_marks_omissions(self):
+        raw=json.dumps({'outcome':'refused','evaluator_output':{'errors':[{'id':'FAILED','passed':False}],
+            'complete':False,'history':'x'*80000},'a/b':{'~':None}})
+        view=result_fields(raw)
+        self.assertEqual(view['fields']['/outcome'],'refused')
+        self.assertEqual(view['fields']['/evaluator_output/errors'],[{'id':'FAILED','passed':False}])
+        self.assertIs(view['fields']['/evaluator_output/complete'],False)
+        self.assertIn('/evaluator_output/history',view['omitted_pointers'])
+        self.assertFalse(view['complete']);self.assertFalse(view['interpretation'])
+        self.assertLessEqual(len(json.dumps(view).encode()),16*1024)
+        self.assertFalse(result_fields('not json')['json'])
+        self.assertEqual(result_fields('{"accepted":false}')['fields'][''],{'accepted':False})
+        many=result_fields(json.dumps({'x'*100+str(i):'y'*9000 for i in range(1000)}))
+        self.assertEqual(many['omitted_pointers'],[''])
+
     def test_json_read_preserves_exact_values_and_pointers_without_execution(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory); path=root/'receipt.json'

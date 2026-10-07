@@ -38,9 +38,10 @@ CLIENT_PYTHON -I -m se_harness remote status --endpoint ENDPOINT --project PROJE
 Compare readiness, authority mode `sandbox-projection`, schema, protocols, and
 all component identities with the selected combination. A mismatch stops the
 remote action. An unavailable service never selects local file writes as a fallback.
-Use harness-orient for reads or change for authorized sandbox draft preparation.
-For lifecycle rehearsal, read change's **Hosted reading and context** section
-before the first request. For record preparation or reporting, use evidence's
+Use harness-orient for reads. For draft preparation, read change's
+**Hosted reading and context** section before choosing artifact types or writing
+content. It identifies the released drafting procedure and its prerequisites.
+Use that same section before lifecycle rehearsal. For record preparation or reporting, use evidence's
 **Private lifecycle test copy** section. Read each current procedure when needed.
 Do not continue into "Activate the checkout" for this hosted selection.
 This route grants no approval, verification, release, adoption or deployment right.

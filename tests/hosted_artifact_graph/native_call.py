@@ -23,6 +23,56 @@ OPERATIONS = ('status','read','import','draft-open','create-artifact','revise-ar
 MUTATIONS = ('import','draft-open','create-artifact','revise-artifact','freeze','rehearse','export')
 
 
+def lookup_file(root, config, name):
+    """Resolve one exact staged relative name, without selecting an instruction."""
+    inventory = contained(root, config['inputs_inventory'])
+    selected = read_json(root, inventory, '/files')['value']
+    matches = [entry for entry in selected if entry['relative'] == name]
+    if len(matches) != 1:
+        raise ValueError('Expected one exact inventory name')
+    entry = matches[0]
+    path = contained(root, entry['path'])
+    expected = contained(inventory.parent, name)
+    if path.resolve() != expected.resolve():
+        raise ValueError('Inventory path does not match its relative name')
+    raw = path.read_bytes()
+    token = os.environ.get('HAG_NATIVE_TEST_TOKEN', '')
+    if token and token.encode() in raw:
+        raise ValueError('Refusing to locate a credential')
+    if len(raw) != entry['bytes'] or hashlib.sha256(raw).hexdigest() != entry['sha256']:
+        raise ValueError('Staged file no longer matches its inventory')
+    return {'file':entry, 'inventory_sha256':hashlib.sha256(inventory.read_bytes()).hexdigest(),
+            'lookup_only':True, 'content_read':False}
+
+
+def result_fields(stdout):
+    """Render bounded exact JSON fields; list every omitted subtree explicitly."""
+    try:
+        value = json.loads(stdout)
+    except ValueError:
+        return {'json':False, 'instruction':'Read stdout_file for the original output.'}
+    shown, omitted, used = {}, [], 0
+    def visit(value, pointer, depth):
+        nonlocal used
+        size = len(json.dumps({pointer:value}, ensure_ascii=False).encode())
+        if size <= 2048 and used + size <= 8192:
+            shown[pointer] = value
+            used += size
+        elif isinstance(value, dict) and depth < 2:
+            for key, child in value.items():
+                visit(child, pointer+'/'+key.replace('~','~0').replace('/','~1'), depth+1)
+        else:
+            omitted.append(pointer)
+    visit(value, '', 0)
+    result = {'json':True, 'fields':shown, 'omitted_pointers':omitted,
+              'complete':not omitted, 'interpretation':False,
+              'instruction':'Exact fields only. Read omitted fields needed for this action from stdout_file with read-json; command exit alone is not a gate verdict.'}
+    if len(json.dumps(result,ensure_ascii=False).encode()) > 16*1024:
+        return {'json':True,'fields':{},'omitted_pointers':[''],'complete':False,
+                'interpretation':False,'instruction':'Use read-json on stdout_file; the field index exceeds 16 KiB.'}
+    return result
+
+
 def read_json(root, supplied, pointer, keys=False):
     """Read one agent-selected JSON value; never infer a workflow field."""
     path = contained(root, supplied)
@@ -126,12 +176,17 @@ def main():
     selected.add_argument('path')
     selected.add_argument('--pointer', default='', help="JSON pointer, optionally encoded as a JSON string. Windows Bash: --pointer '\"/field\"' preserves the slash. Omit for root.")
     selected.add_argument('--keys', action='store_true', help='Return object keys or array length, without field values')
+    lookup = commands.add_parser('lookup-file', help='Locate one exact relative name in the staged input inventory; does not read its content into context')
+    lookup.add_argument('name')
     commands.add_parser('identity')
     assertion = commands.add_parser('assert-greeting')
     assertion.add_argument('--record',required=True)
     args = parser.parse_args()
     root = Path(os.environ['HAG_NATIVE_WORK_DIRECTORY']).resolve()
     config = json.loads(Path(os.environ['HAG_NATIVE_SELECTION']).read_text(encoding='utf-8'))
+    if args.kind == 'lookup-file':
+        print(json.dumps(lookup_file(root,config,args.name),ensure_ascii=False))
+        return 0
     if args.kind == 'read-json':
         print(json.dumps(read_json(root,args.path,args.pointer,args.keys),ensure_ascii=False))
         return 0
@@ -174,6 +229,7 @@ def main():
         stream.write(outcome.stdout)
     print(json.dumps({'record':str(record),'exit':outcome.returncode,
                       'stdout_file':str(stdout_file),'stderr':outcome.stderr,
+                      'result_fields':result_fields(outcome.stdout),
                       'instruction':'Read stdout_file for the complete unmodified command result.'}))
     return outcome.returncode
 
