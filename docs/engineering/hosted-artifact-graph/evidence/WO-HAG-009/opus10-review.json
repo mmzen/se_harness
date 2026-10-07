@@ -1,0 +1,259 @@
+{
+  "source_candidate": "5f3b8499a5342d38dcce900d395b022039762e50",
+  "readback": {
+    "completed_revision_observed": true,
+    "artifact_id": "INT-P3-001",
+    "revision_id": "sha256:b12401f014deae58ac2af0e0634b116e7c68d94fe30a8c1ffcda0dc680291151",
+    "view": {
+      "kind": "context",
+      "context_id": "786d5290-331c-4dfb-9aba-d20bbe0a1656",
+      "context_version": 2
+    },
+    "document_sha256": "526749ab08ee31e1d14b8d8b8365f4d00470a0cd6955ce5f0eb841ec9cce8cdf",
+    "document_bytes": 1283,
+    "native_submitted_bytes_equal_independent_service_bytes": true,
+    "status": "draft",
+    "type": "intent",
+    "evaluator_output": {
+      "schema": "se-harness-draft-validation-v1",
+      "selection": {
+        "id": "INT-P3-001",
+        "type": "intent",
+        "status": "draft",
+        "path": "docs/engineering/lifecycle-pilot/intent/INT-P3-001.md"
+      },
+      "admissible": true,
+      "errors": [],
+      "incomplete": [],
+      "background": [
+        {
+          "code": "W-AUT-022",
+          "message": "Coverage row REQ-P3-900 names undefined rule P3-GREET-900.",
+          "path": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+          "plane": "maintenance",
+          "severity": "advisory"
+        }
+      ]
+    },
+    "native_record": "work/revise-intent-record.json",
+    "limits": "Readback confirms exact submitted draft and evaluator findings. It approves no artifact or work and does not qualify the full lifecycle."
+  },
+  "source_reads": [
+    {
+      "line": 103,
+      "name": "Read",
+      "input": {
+        "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus10\\inputs\\source\\src\\greeting.py"
+      },
+      "id": "toolu_018qTgfaqaFbHLHJ9fXD3B7p",
+      "result_line": 104,
+      "returned_error": false,
+      "staged_sha256": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1",
+      "extent": "Only the requested offset/limit; no full-file inference."
+    }
+  ],
+  "source_read_before_authorship": true,
+  "fixture_assertion_executed": false,
+  "identity_command_calls": 1,
+  "searches": [
+    {
+      "call_line": 45,
+      "result_line": 46,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file change --under \"inputs/plugin/verity-plane/skills/\"",
+      "error": false,
+      "total_matches": 0
+    },
+    {
+      "call_line": 47,
+      "result_line": 48,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file greeting.py --under \"inputs/source/\"",
+      "error": false,
+      "total_matches": 0
+    },
+    {
+      "call_line": 53,
+      "result_line": 54,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file SKILL.md --under \"inputs/plugin/verity-plane/skills/\"",
+      "error": false,
+      "total_matches": 0
+    },
+    {
+      "call_line": 55,
+      "result_line": 56,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file greeting --under \"inputs/source/\"",
+      "error": false,
+      "total_matches": 0
+    },
+    {
+      "call_line": 60,
+      "result_line": 61,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file greeting",
+      "error": false,
+      "total_matches": 0
+    },
+    {
+      "call_line": 62,
+      "result_line": 63,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file SKILL.md",
+      "error": false,
+      "total_matches": 5
+    },
+    {
+      "call_line": 70,
+      "result_line": 71,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file fixture.py",
+      "error": false,
+      "total_matches": 0
+    },
+    {
+      "call_line": 76,
+      "result_line": 77,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file DRAFT_DEFINITIONS.md",
+      "error": false,
+      "total_matches": 1
+    },
+    {
+      "call_line": 78,
+      "result_line": 79,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file .py --under \"source/\"",
+      "error": false,
+      "total_matches": 0
+    },
+    {
+      "call_line": 88,
+      "result_line": 90,
+      "command": "\"C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe\" -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work\\hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" find-file conftest.py",
+      "error": true,
+      "total_matches": null
+    }
+  ],
+  "empty_searches": 7,
+  "decodes": [
+    {
+      "call_line": 266,
+      "result_line": 267,
+      "error": false,
+      "before_authorship": true,
+      "result": {
+        "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus10\\work\\read-intent-record.json.stdout.txt",
+        "sha256": "7520a2aeea3b971294c7cd99888b607caa399a7497257b1d696d24df722753c5",
+        "pointer": "/data/document_base64",
+        "selection_only": true,
+        "decoded_bytes": 1460,
+        "decoded_sha256": "376ad84a748bf670f9ccf463248a4bd576bc90a751f9ec2c8220de3b23e829d7",
+        "conversion": "base64 to UTF-8; exact bytes, no newline conversion",
+        "value": "+++\nid = \"INT-P3-001\"\ntype = \"intent\"\ntitle = \"<Outcome-oriented title>\"\nstatus = \"draft\"\nowners = [\"<accountable product/domain role>\"]\ncreated = \"2026-10-07\"\nupdated = \"2026-10-07\"\n# The desired outcome and who benefits. The Explorer shows this summary under the title.\noutcome = \"<WHO> can <observable result after delivery>.\"\n\n[relations]\n+++\n\n# Intent: <title>\n\nBefore approval, apply the shared design principle and `intent` checklist in\n`docs/engineering/ARTIFACT_AUTHORING.md`.\n\n## In plain words\n\n<One or two sentences a newcomer understands. A project term used here is\ndefined in this repository's own glossary, `GLOSSARY.md` at the repository\nroot, which this repository writes.>\n\n## Problem\n\n<What happens today, to whom, and why it needs to change. Link useful evidence.>\n\n## Success measures\n\n<A success measure is observed in operation, after delivery, by someone who\nhas not read the code. \"Observed\" names a place and a cadence an operator\nrecognises. A row proved by a CI run, a test, a validator run, a\nverification or an implementation review is an acceptance check and\nbelongs in the verification contract. \"Today\" may read \"not measured\".>\n\n| Measure | Today | When reached | Observed |\n| --- | --- | --- | --- |\n| <what an operator can count or time after delivery> | <baseline, or \"not measured\"> | <target> | <where and how often, in operation> |\n\n## Not this\n\n- <what this initiative deliberately leaves alone; at most five bullets>\n"
+      }
+    }
+  ],
+  "read_documents": [
+    {
+      "file": "work/read-intent-final-record.json.stdout.txt",
+      "revision_id": "sha256:b12401f014deae58ac2af0e0634b116e7c68d94fe30a8c1ffcda0dc680291151",
+      "sha256": "526749ab08ee31e1d14b8d8b8365f4d00470a0cd6955ce5f0eb841ec9cce8cdf",
+      "bytes": 1283,
+      "complete": true,
+      "text": "+++\nid = \"INT-P3-001\"\ntype = \"intent\"\ntitle = \"Establish greeting fixture returns Hello rehearsal\"\nstatus = \"draft\"\nowners = [\"test-owner\"]\ncreated = \"2026-10-07\"\nupdated = \"2026-10-07\"\noutcome = \"An operator can confirm that the greeting() function in src/greeting.py returns exactly Hello rehearsal.\"\n\n[relations]\n+++\n\n# Intent: Establish greeting fixture returns Hello rehearsal\n\n## In plain words\n\nConfirm that the existing greeting fixture's greeting() function returns the exact string Hello rehearsal, establishing a known baseline for the lifecycle-pilot domain.\n\n## Problem\n\nThe greeting() function in src/greeting.py must return exactly Hello rehearsal to satisfy the lifecycle-pilot domain's greeting contract. Without an explicit intent establishing this expectation, there is no traceable link between the fixture's required behavior and the verification and release process.\n\n## Success measures\n\n| Measure | Today | When reached | Observed |\n| --- | --- | --- | --- |\n| greeting() returns exactly Hello rehearsal | not measured | greeting() == \"Hello rehearsal\" | source inspection of src/greeting.py |\n\n## Not this\n\n- Changing the return value of greeting().\n- Adding new functions or modules beyond the existing fixture.\n- Performance or load-testing of greeting().\n"
+    },
+    {
+      "file": "work/read-intent-record.json.stdout.txt",
+      "revision_id": "sha256:6aae37dcbdfb0751c35941f02782db22bad72c31a3d0fd8e7cb8e8c59b9aa863",
+      "sha256": "376ad84a748bf670f9ccf463248a4bd576bc90a751f9ec2c8220de3b23e829d7",
+      "bytes": 1460,
+      "complete": true,
+      "text": "+++\nid = \"INT-P3-001\"\ntype = \"intent\"\ntitle = \"<Outcome-oriented title>\"\nstatus = \"draft\"\nowners = [\"<accountable product/domain role>\"]\ncreated = \"2026-10-07\"\nupdated = \"2026-10-07\"\n# The desired outcome and who benefits. The Explorer shows this summary under the title.\noutcome = \"<WHO> can <observable result after delivery>.\"\n\n[relations]\n+++\n\n# Intent: <title>\n\nBefore approval, apply the shared design principle and `intent` checklist in\n`docs/engineering/ARTIFACT_AUTHORING.md`.\n\n## In plain words\n\n<One or two sentences a newcomer understands. A project term used here is\ndefined in this repository's own glossary, `GLOSSARY.md` at the repository\nroot, which this repository writes.>\n\n## Problem\n\n<What happens today, to whom, and why it needs to change. Link useful evidence.>\n\n## Success measures\n\n<A success measure is observed in operation, after delivery, by someone who\nhas not read the code. \"Observed\" names a place and a cadence an operator\nrecognises. A row proved by a CI run, a test, a validator run, a\nverification or an implementation review is an acceptance check and\nbelongs in the verification contract. \"Today\" may read \"not measured\".>\n\n| Measure | Today | When reached | Observed |\n| --- | --- | --- | --- |\n| <what an operator can count or time after delivery> | <baseline, or \"not measured\"> | <target> | <where and how often, in operation> |\n\n## Not this\n\n- <what this initiative deliberately leaves alone; at most five bullets>\n"
+    }
+  ],
+  "inventory_reads": [
+    {
+      "line": 94,
+      "name": "Read",
+      "input": {
+        "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus10\\inputs\\inventory.json",
+        "limit": 100
+      },
+      "id": "toolu_01DjD9Xm2xEyxseheDqahVfJ",
+      "result_line": 95,
+      "returned_error": false,
+      "staged_sha256": null,
+      "extent": "Only the requested offset/limit; no full-file inference."
+    },
+    {
+      "line": 97,
+      "name": "Read",
+      "input": {
+        "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus10\\inputs\\inventory.json",
+        "offset": 100
+      },
+      "id": "toolu_01L4SURQYnqPhk6XiJRoQxJM",
+      "result_line": 98,
+      "returned_error": false,
+      "staged_sha256": null,
+      "extent": "Only the requested offset/limit; no full-file inference."
+    }
+  ],
+  "schema_views_read": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus10\\inputs\\schemas\\remote-v1\\draft-open.json",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus10\\inputs\\schemas\\remote-v1\\create-artifact.json",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus10\\inputs\\schemas\\remote-v1\\import.json",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus10\\inputs\\schemas\\read-v1\\revision.json",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus10\\inputs\\schemas\\remote-v1\\revise-artifact.json"
+  ],
+  "native_report_present": true,
+  "native_observations_present": true,
+  "limits": "These observations require content review of the actual final document and native reports. Draft admission is not a writing-quality verdict or full native qualification.",
+  "reported_identity_comparison": [
+    {
+      "subject": "fixture",
+      "reported": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1",
+      "actual": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1",
+      "matches": true
+    },
+    {
+      "subject": "client wheel",
+      "reported": "3cafe5e9226389f563bdf170e6c668217b912ff933462699e24be70e8d5a5685",
+      "actual": "3cafe5e9226389f563bdf170e6c668217b912ff933462699e24be70e8d5a5685",
+      "matches": true
+    },
+    {
+      "subject": "combination",
+      "reported": "sha256:c96534e0139ea6baf840e94e91d85c350e756cb93854122eac17e324a9a39318",
+      "actual": "sha256:c96534e0139ea6baf840e94e91d85c350e756cb93854122eac17e324a9a39318",
+      "matches": true
+    },
+    {
+      "subject": "evaluator archive",
+      "reported": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+      "actual": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+      "matches": true
+    },
+    {
+      "subject": "evaluator payload",
+      "reported": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+      "actual": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+      "matches": true
+    },
+    {
+      "subject": "final document",
+      "reported": "526749ab08ee31e1d14b8d8b8365f4d00470a0cd6955ce5f0eb841ec9cce8cdf",
+      "actual": "526749ab08ee31e1d14b8d8b8365f4d00470a0cd6955ce5f0eb841ec9cce8cdf",
+      "matches": true
+    }
+  ],
+  "native_report_omitted_error_result_lines": [
+    87,
+    90,
+    136,
+    185
+  ],
+  "judgement_findings": [
+    "The native Markdown report says no failures and its JSON has empty failures/denied_calls, contradicting four observed results (87, 90, 136, 185).",
+    "The final success measure is an assertion with source inspection as its observation. The decoded template says operational measures are observed after delivery and excludes code/verification review as the measure.",
+    "The claimed absence of a traceable link is not supported by a content read of the imported governing records. The requested one-intent task does not establish that absence.",
+    "ARTIFACTS.md and the harness-orient read route were not read. The task already selected intent and no links were added; these are discovery observations, not newly invented gates.",
+    "Seven empty searches, one guessed missing path and a large inventory read remain costly. The tool index was read, but its input-relative naming and exact-basename rule were not consistently used.",
+    "The metadata identity operation worked; no wheel-base64 dump occurred. All six copied component/fixture/document identity values checked here match.",
+    "This single run used fewer calls and less elapsed time than Opus09 but more peak input context. It does not establish general efficiency or context reduction."
+  ],
+  "conclusion": "Partial diagnostic. Exact draft preparation and metadata identity checking work; content review and failure reporting remain deficient. Full native qualification is incomplete."
+}
