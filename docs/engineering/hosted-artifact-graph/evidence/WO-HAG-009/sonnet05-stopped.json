@@ -1,0 +1,363 @@
+{
+  "archive": "sonnet05-stopped.zip",
+  "bytes": 432133,
+  "sha256": "04391d6755105257ad7cc056fd5abb367ed849f084fda3cc3606a5ae421e2fdd",
+  "files": [
+    {
+      "path": "native/events.jsonl",
+      "bytes": 1472872,
+      "sha256": "bc769a6ebbb2806005e20e7966aec84e010e52c8f1fc31e94d460c5970e82cc5"
+    },
+    {
+      "path": "native/session.json",
+      "bytes": 331,
+      "sha256": "068924983d43041c1a12445e534b5ebf2765c073737eee859abd7abd6e84ab46"
+    },
+    {
+      "path": "native/invocation.json",
+      "bytes": 11346,
+      "sha256": "dc1f7fe26a108b1e28f7ae39f1547f39e7490882fec47e6244b3181dcee6899d"
+    },
+    {
+      "path": "native/selection.json",
+      "bytes": 2882,
+      "sha256": "7e9fffb14afa25552f07e47d99d93e45517068ec7909a6860e724fcb0aff2fe3"
+    },
+    {
+      "path": "native/task.md",
+      "bytes": 9244,
+      "sha256": "f0206a7b327318b07857bf9b1924effe54456724a4817b21073dd85c0a19d4d0"
+    },
+    {
+      "path": "native/reply-fault.json",
+      "bytes": 47285,
+      "sha256": "9bed0744f856a15745056b9b2b42590bef38b50d30bc95bac5c0f249e1507c6e"
+    },
+    {
+      "path": "native/work/assert-greeting-result.json",
+      "bytes": 811,
+      "sha256": "df365dd555bbd37c9435deeddb4a87a89b7e0eb5d765cdd8085fa7d24f416ecd"
+    },
+    {
+      "path": "native/work/rec-approve-wo-001-apply-retry.json",
+      "bytes": 46237,
+      "sha256": "9b2c2d5c43952ca73dc4021a5400549281d93e011d008b6b26a790c0f4e57a42"
+    },
+    {
+      "path": "native/work/rec-approve-wo-001-apply.json",
+      "bytes": 1395,
+      "sha256": "5f14edaaed61bf5d3caaf5003035173f86453646c70b98c8b00bb7d53609e27e"
+    },
+    {
+      "path": "native/work/rec-approve-wo-001-preview.json",
+      "bytes": 45788,
+      "sha256": "7e8a4c46d91cc1bddf01bdd4452788202e3051b11095720bf97e87232068b9ed"
+    },
+    {
+      "path": "native/work/rec-create-rel-001.json",
+      "bytes": 6337,
+      "sha256": "20ac1775f8d48e873761dc558cfa297183c37e283f508c8658ad0ae3cf2ce52d"
+    },
+    {
+      "path": "native/work/rec-create-ver-001.json",
+      "bytes": 5486,
+      "sha256": "ead09dcfeccc036c83649687e407dbc3ae3c56a52a8414ac802adfa86ea8806b"
+    },
+    {
+      "path": "native/work/rec-create-wo-001.json",
+      "bytes": 7049,
+      "sha256": "67e2e6d458432909757d0001191e0c92bf91f852f5dcde6719f4bbad41c9e454"
+    },
+    {
+      "path": "native/work/rec-decide-risk-apply.json",
+      "bytes": 22059,
+      "sha256": "3eef4d625580b02655ba0dccf428f1ad5e7f31cacb0f66a18c18878d318c2dd5"
+    },
+    {
+      "path": "native/work/rec-decide-risk-preview.json",
+      "bytes": 21630,
+      "sha256": "82f2dc9d60e6c78216828562dee0ad1d43a1fc0f4b56deb3ae7d37addc31eebf"
+    },
+    {
+      "path": "native/work/rec-draft-open.json",
+      "bytes": 10873,
+      "sha256": "26ec74e3255d8bb95b41b9363b57efa78c5013e0952fc9aa2e5fa192b0f238e2"
+    },
+    {
+      "path": "native/work/rec-import.json",
+      "bytes": 6138,
+      "sha256": "8bb8928483100cb287c835e0e7ce68205f380f7c9739ff242522bb1eb77c8d7a"
+    },
+    {
+      "path": "native/work/rec-inspect-wo-001.json",
+      "bytes": 12999,
+      "sha256": "3929d685f67411e6a09b8a9b7dbb201abb3977e55d501d47a40349c67fa0b90c"
+    },
+    {
+      "path": "native/work/rec-key-conflict-demo.json",
+      "bytes": 2108,
+      "sha256": "cd71c1838a2d951e6a44dccf04b6aafe383de0148207714896216242bc210325"
+    },
+    {
+      "path": "native/work/rec-operation-lookup-approve.json",
+      "bytes": 45791,
+      "sha256": "cf59b4ff682d9c7dd424940e7e7900fe0c3088cb94069c4a3d6c102db00f9aec"
+    },
+    {
+      "path": "native/work/rec-preflight-wo-001-start.json",
+      "bytes": 3984,
+      "sha256": "466f4f0274a8d6eb13e7dc2a50c885ff9f9fce1528ab699f8c3a15c9036be23b"
+    },
+    {
+      "path": "native/work/rec-raise-risk-apply.json",
+      "bytes": 7307,
+      "sha256": "7f0581fa78fa0e53ea262001684eda9017cdeb29909242741bfaffc0f72ce585"
+    },
+    {
+      "path": "native/work/rec-raise-risk-preview.json",
+      "bytes": 6857,
+      "sha256": "2dfcc44deca62ee76c94839535464f6d10da1d2ac32082f5c5bcba56bf169b60"
+    },
+    {
+      "path": "native/work/rec-revise-rel-001.json",
+      "bytes": 4286,
+      "sha256": "36502f3d78ab208e7fbf9f8bb2669fa84e0d7a97d7cdc3dde7d5938626cbba3c"
+    },
+    {
+      "path": "native/work/rec-revise-ver-001.json",
+      "bytes": 4287,
+      "sha256": "324209c82ed4ce1472ff1dee6b93366a45e4c202a56eb23ec8fb98e490080a5c"
+    },
+    {
+      "path": "native/work/rec-revise-wo-001.json",
+      "bytes": 2728,
+      "sha256": "18dc1a9571f91b3a6a3fd80374f3f8ed6942e0c23248070d7fc6ead69f6888d8"
+    },
+    {
+      "path": "native/work/rec-revise-wo-001b.json",
+      "bytes": 3118,
+      "sha256": "d978a7fc035ff60f9e722a0e10c874079135d6a6b1bc20c9bf71c37e93c87698"
+    },
+    {
+      "path": "native/work/rec-status-post-approve.json",
+      "bytes": 4440,
+      "sha256": "8aa6f0eb65dc221bf0291c4422196532e637904d1af1809c04263edaa6117cac"
+    },
+    {
+      "path": "native/work/REL-P3-001.md",
+      "bytes": 489,
+      "sha256": "db4b977ff1595f5e1353659cec24927b4d207d310e8e747407977b4d5158467f"
+    },
+    {
+      "path": "native/work/req-approve-wo-001-apply.json",
+      "bytes": 1121,
+      "sha256": "373dd0b2d6b578522768556473bf715e660f00f57b5f64409342ed8b2b804eed"
+    },
+    {
+      "path": "native/work/req-approve-wo-001-preview.json",
+      "bytes": 1054,
+      "sha256": "9c07534c05d35101cbad572eaaed39df7b9e78942ed11cf7e0f0809d553a6016"
+    },
+    {
+      "path": "native/work/req-create-rel-001.json",
+      "bytes": 753,
+      "sha256": "caf847f1b999ed75aa515c8ab8f9cbcf6cdc6ffba1988977c1f171b59679c857"
+    },
+    {
+      "path": "native/work/req-create-ver-001.json",
+      "bytes": 749,
+      "sha256": "3fba15814f345caa975e514532fa887cca0be8a46da1c09d48cfe4db68455a8a"
+    },
+    {
+      "path": "native/work/req-create-wo-001.json",
+      "bytes": 745,
+      "sha256": "60dbd8cf311990e3edeaaa44ed2a40584c721980ecc88611d82856078f8b7c94"
+    },
+    {
+      "path": "native/work/req-decide-risk-apply.json",
+      "bytes": 1145,
+      "sha256": "b3fe4061bc6b83574a48de503dc0cf3ed611ea24786b99c0eddb76f8e0aca410"
+    },
+    {
+      "path": "native/work/req-decide-risk-preview.json",
+      "bytes": 1078,
+      "sha256": "3c7ddb3c5b5a9ed50b424546ba56bbfe3b9b599e345406bdbfb4925f63ca7be7"
+    },
+    {
+      "path": "native/work/req-draft-open.json",
+      "bytes": 728,
+      "sha256": "8e2185f97b4bc150a45f06c37a45ceace59c7fa82e3b49b7dfdc31e8f1bad98a"
+    },
+    {
+      "path": "native/work/req-import.json",
+      "bytes": 2994,
+      "sha256": "cb624f716d4687b6916d549c9ec9736434d64b5b2333a15aefc8715fb246864c"
+    },
+    {
+      "path": "native/work/req-inspect-wo-001.json",
+      "bytes": 800,
+      "sha256": "3dd48d1ec4b1740c45869294b23f18681c7ecaab37cc9de098b73d3028b86b54"
+    },
+    {
+      "path": "native/work/req-key-conflict-demo.json",
+      "bytes": 1074,
+      "sha256": "fd98e87c7a5b1422c4148f98b67b5776e8595dcd1f05fb7b285b4db9e474ebd2"
+    },
+    {
+      "path": "native/work/req-preflight-wo-001-start.json",
+      "bytes": 837,
+      "sha256": "5af7f70590a71d6b03fbe52a1a174f13ac859e75feced57d1832092da7b633c1"
+    },
+    {
+      "path": "native/work/req-raise-risk-apply.json",
+      "bytes": 1421,
+      "sha256": "0047b1ea82fdff012932a488e4e6cf71ce580e1040cfebaa4643b8f2bf2bb3fd"
+    },
+    {
+      "path": "native/work/req-raise-risk-preview.json",
+      "bytes": 1354,
+      "sha256": "0a7cec4e448c747da839a6a3c1e3cce3bc8122e9b144b34daf29f0dec6025932"
+    },
+    {
+      "path": "native/work/req-revise-rel-001.json",
+      "bytes": 1493,
+      "sha256": "1667d5549cba772211e9356cba7e198fe05b77698e25d5bda1cd37ee43de1cec"
+    },
+    {
+      "path": "native/work/req-revise-ver-001.json",
+      "bytes": 1757,
+      "sha256": "df0f3abf67ab401d7d93b35b800b7646fed0cdd096d5ffdcfd1752e7e48e9b28"
+    },
+    {
+      "path": "native/work/req-revise-wo-001.json",
+      "bytes": 2547,
+      "sha256": "df43a66991ea57e893f2c95827cf9c87a77f6f0badf1bde5a5f8a723c7e48b03"
+    },
+    {
+      "path": "native/work/req-revise-wo-001b.json",
+      "bytes": 2547,
+      "sha256": "a979e3691f7091e0c5fc0d26b5ccb2bfa117fe6add68950b18ba878893d620bc"
+    },
+    {
+      "path": "native/work/VER-P3-001.md",
+      "bytes": 687,
+      "sha256": "d940313aae150033fc4b11f8bfb5949e8f760c6dcdc2f86eec5d662fee7eab25"
+    },
+    {
+      "path": "native/work/WO-P3-001.md",
+      "bytes": 1279,
+      "sha256": "2ebee78d1a1c95127bea37baceab53c5b482497cc63aa5fe510cbd75d09178ed"
+    },
+    {
+      "path": "permission-probe/events.jsonl",
+      "bytes": 26551,
+      "sha256": "9ddf9bf9fb377eee8b6a27fe2f39086ee8e81482c7258aeecd8a24bb7f5060b1"
+    },
+    {
+      "path": "permission-probe/session.json",
+      "bytes": 321,
+      "sha256": "fb7cd1dd6e50e45b0145383b88c2577a04cce6268c8580a3c5920b481ce641b0"
+    },
+    {
+      "path": "permission-probe/invocation.json",
+      "bytes": 2983,
+      "sha256": "ac788b17fea7dbc17cff64928a35eb30fc6c6926077994c285f98ab48e3b1132"
+    },
+    {
+      "path": "permission-probe/selection.json",
+      "bytes": 2882,
+      "sha256": "fb9a2415afb0b2737142189274b012dd3d20aa516fa2d4f2df7eeafc966c3549"
+    },
+    {
+      "path": "permission-probe/task.md",
+      "bytes": 948,
+      "sha256": "e72b44c449c75b8c6d71cb5669c716179b4755451c43fd0a1b158a465c8881da"
+    },
+    {
+      "path": "setup/claude-guidance05-auth-probe.json",
+      "bytes": 2832,
+      "sha256": "f3a3553c9007a59d46dcd1ef5e7ed77356bfca78afe055f43884ead4d9ba4f20"
+    },
+    {
+      "path": "setup/claude-guidance05-empty-readback.json",
+      "bytes": 562,
+      "sha256": "e5fe71662eebc5f90cf018bbfe2ab964ff7fa4684d4fa89529463c6c64dfd805"
+    },
+    {
+      "path": "setup/claude-guidance05-image-readback.json",
+      "bytes": 4413,
+      "sha256": "4de9d10c7bd41977c5484fa358bef92b5f5c3f0c228880e23b76545c21638f71"
+    },
+    {
+      "path": "setup/claude-guidance05-init.json",
+      "bytes": 1031,
+      "sha256": "3530a97c43894e982727b95b07bc33c59ab0bb6b02c10158c44fa8697ea59c3d"
+    },
+    {
+      "path": "setup/claude-guidance05-initial-status.json",
+      "bytes": 4394,
+      "sha256": "c307e73c60e99955601d4526b1491de67deb0cb8f21aea7e13584c40c7d9affa"
+    },
+    {
+      "path": "setup/claude-guidance05-networks.json",
+      "bytes": 123334,
+      "sha256": "ed183586666d49001b940c5f1f411f0a52ef81124dfbfdd0bec759ea445ec932"
+    },
+    {
+      "path": "setup/claude-guidance05-source-stage.json",
+      "bytes": 990,
+      "sha256": "f1da2213147808fe9bf89da749131e334fd9303807224b5811843ee057983c43"
+    },
+    {
+      "path": "setup/claude-guidance05-source-stage02.json",
+      "bytes": 749,
+      "sha256": "0ddffeda12bb99bcfe98ecbdfbf7059e11d2c6afd7861b448aafafdf7b07887f"
+    },
+    {
+      "path": "setup/claude-guidance05-up.json",
+      "bytes": 1886,
+      "sha256": "ffe6883340902d707a33c466fa3933cff21cbc6766e0c0c4e84041c331284186"
+    },
+    {
+      "path": "setup/claude-guidance05-version.json",
+      "bytes": 308,
+      "sha256": "08e6fc3a73748aa7d7d8e2b81b94226c89b858d399b10dfb43e876d5f5b82ebf"
+    },
+    {
+      "path": "setup/claude-guidance05-volume-absent.json",
+      "bytes": 394,
+      "sha256": "f3a9c01baefaf72a1fffd083fa1216175ac5cda9363c37c02f0e6b59437181f8"
+    },
+    {
+      "path": "setup/claude-guidance05-volume-create.json",
+      "bytes": 341,
+      "sha256": "ed4bfcd73f9910af1789de271c0a42ae09520ad394932053b88f6276bfbe6d66"
+    },
+    {
+      "path": "support/sonnet05-process-stop.json",
+      "bytes": 196,
+      "sha256": "481e9044e3f88258b65836f7ce4a17af82795fdf6eab66263d0ef60ba5a87ff8"
+    },
+    {
+      "path": "support/sonnet05-process-readback.json",
+      "bytes": 511,
+      "sha256": "2617a6df03b3e4fc678a741a6facfa1e9d36a0aa888d60265b275bf5d5aa07ca"
+    },
+    {
+      "path": "support/sonnet05-stopped-status.json",
+      "bytes": 4395,
+      "sha256": "64583250ca1f2370bd595d93dd051398cb81280f74c5802a9a4149091e3894bf"
+    },
+    {
+      "path": "support/native-mode-scope.json",
+      "bytes": 19873,
+      "sha256": "16b642fdf5442cef6ed420e5df3cbff45863b42e3516ccf96b0ea2f1d3f8ea66"
+    },
+    {
+      "path": "support/native-mode-support-tests.json",
+      "bytes": 607,
+      "sha256": "2dcebe37861856052000cca79ef570fbbb1fd9e4a73d1f7b8d42796ce27f89b9"
+    }
+  ],
+  "redaction": "Native recorder redaction preserved; selected bytes checked for current private sandbox keys. No credential files or copied environment retained."
+}

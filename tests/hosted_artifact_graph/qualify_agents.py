@@ -150,7 +150,9 @@ def run(args):
         save(output/'mcp.json', {'mcpServers': {'hag': {'type': 'http', 'url': mcp_url,
              'headers': {'Authorization': 'Bearer ${HAG_NATIVE_TEST_TOKEN}'}, 'timeout': 180000}}})
         argv = [str(args.executable), '-p', '--no-session-persistence', '--plugin-dir', str(plugin),
-                '--permission-mode', 'auto', '--permission-prompts', 'none',
+                # Use only the operator's pre-approved tools. The automatic
+                # classifier can allow commands outside that bounded grant.
+                '--permission-mode', 'dontAsk', '--permission-prompts', 'none',
                 # Keep the normal instruction-loading tool available to the
                 # session-local plugin; file and command permissions still apply.
                 '--tools', 'Read,Write,Edit,Bash,Skill,ToolSearch', '--mcp-config', str(output/'mcp.json'),

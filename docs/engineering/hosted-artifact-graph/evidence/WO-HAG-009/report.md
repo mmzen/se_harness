@@ -2,7 +2,7 @@
 
 **Codex native06 passes the observed cases at corrected package source
 `0dbb8ea19f28994da7abc7ecbab08c8db430dc0c`, including independent replay.
-Claude remains unqualified; a fresh bounded trial is running.** WO-HAG-009 and
+Claude remains unqualified; another bounded trial is being prepared.** WO-HAG-009 and
 WO-HAG-010 remain `in_progress`. Combined qualification and human verification
 are pending. No actual verification record is prepared.
 
@@ -45,10 +45,22 @@ narrower task limit. The partial run is **not qualified**. See the
 [partial transcript](sonnet04-stopped.zip). The lost reply and actual project
 version 17 are retained; no completed native recovery is inferred.
 
-A fresh sonnet05 trial uses a separate project with the same packaged guidance,
-client, helper and normal permission file. Its task spells out the absolute output
-directory and fixed helper route. This is a test-boundary clarification; no
-workflow request, decision or procedural sequence was supplied. Its result is pending.
+The fresh sonnet05 trial respected the explicit file-output boundary but later
+made nine direct client calls outside the approved one-call helper route. It was
+stopped after 1,352.271 seconds. The service was at project version 11. Partial
+recovery and mitigation observations remain retained; this is not qualification.
+See the [stop assessment](sonnet05-stop.json), [inventory](sonnet05-stopped.json),
+and [partial transcript and setup evidence](sonnet05-stopped.zip).
+
+The test launcher now uses Claude's `dontAsk` mode, retaining the original
+allow-list and normal deny rules. Unlike `auto`, this mode does not let the
+classifier approve new commands outside the explicit grant. A live read-only
+[permission diagnostic](native-permission-boundary.json) confirms that the approved
+helper runs and a harmless direct-client control is denied. The six existing
+native-support checks pass. No product runtime, plugin hook or global setting
+was changed. A new independent trial is required; the diagnostic is not a pass
+for the five lifecycle scenarios. Its inputs will be staged under its own
+read-protected inputs directory, with the exact output path explicit.
 
 The current source suite passed: 1,323 tests with 23 skips. Distribution checks,
 CLI smoke, 28 focused package/activation checks (two skips), six native-support
