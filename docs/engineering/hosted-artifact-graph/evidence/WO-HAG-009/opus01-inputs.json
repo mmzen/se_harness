@@ -1,0 +1,10 @@
+{
+  "reason": "Independent clean model trial after Haiku fabricated outcomes and Sonnet changed a supplied synthetic risk choice. Earlier failures remain retained.",
+  "model": "claude-opus-4-6",
+  "project_id": "733b3f82-6076-44aa-9a29-bb7f23765776",
+  "task_sha256": "3a99a703d000f1d50e7396ee97c4afc76e3fc5eff8960a544bc4b521c88d8ad6",
+  "selection_sha256": "1c0e12a7cd4a273a2e99c3e581bedb220bfb9eefd2dad87acfde59e6d90fc7f9",
+  "synthetic_input_clarification": "Explicit unchanged risk option and preparation/decision identities; no operation sequence, commands, requests or artifact content supplied.",
+  "permission_boundary": "Exact approved Claude native02 rules and fixed helper. New output is within its approved work subtree.",
+  "rules_sha256": "48af73d913845721f895c8266af843c5265ffdbbd960b7ea24346d749874457d"
+}

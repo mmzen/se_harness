@@ -55,9 +55,11 @@ The package reuses the existing intent, capability, requirements, specification
 and architecture. Only these two formal artifacts are new. Git remains
 authoritative; desktop, real authority, authentication/DB ACL implementation and
 public delivery remain excluded. mmzen approved both artifacts with required
-commit-bound verification. WO-HAG-009 is in progress. The [first native sessions](evidence/WO-HAG-009/report.md)
-encountered setup and permission blockers; neither host is qualified. The exact
-retry permission proposal is available in [PR #543](https://github.com/mmzen/se_harness/pull/543).
+commit-bound verification. WO-HAG-009 is in progress. mmzen also approved the
+bounded native permissions in [PR #543](https://github.com/mmzen/se_harness/pull/543).
+The [current assessment](evidence/WO-HAG-009/report.md) preserves the failed runs,
+independent replay results and remaining native checks. Combined qualification
+and human verification remain pending.
 
 ## Definitions and work
 

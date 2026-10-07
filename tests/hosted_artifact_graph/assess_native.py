@@ -163,7 +163,10 @@ def run(args):
                 'limits':'Diagnostic limited to the selected first operations. No full qualification or export pass.'})
             print(json.dumps({'accepted_calls':len(cases),'replay':'partial_diagnostic_passed'}))
             return
-        saved_exports=list((args.native_root/'work').rglob('manifest.json'))
+        # Hosts may use a separate exports/ directory in their bounded run root.
+        # Staged input examples are not native exports and cannot satisfy this case.
+        saved_exports=[p for p in args.native_root.rglob('manifest.json')
+                       if 'inputs' not in p.relative_to(args.native_root).parts]
         count=0
         for path in saved_exports:
             value=json.loads(path.read_text(encoding='utf-8'))

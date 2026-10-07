@@ -12,7 +12,10 @@ Phase 3 adds an explicit private test-copy lifecycle pilot under WO-HAG-008 and
 SPEC-HAG-007. Git remains authoritative. The pilot uses separately versioned
 [closed operations](../../server/contracts/lifecycle-v2.md), exact multi-file
 snapshots and ordinary disposable Git history. Its eight required VER-HAG-006
-scenarios remain pending until the new qualification evidence is assessed.
+scenarios passed, and mmzen verified
+[VREC-HAG-005](../engineering/hosted-artifact-graph/verification-records/VREC-HAG-005.md).
+PR #542 integrated that result. The separate native Codex/Claude qualification is
+[in progress under WO-HAG-009](../engineering/hosted-artifact-graph/evidence/WO-HAG-009/report.md).
 Authentication and database ACL implementation remain deferred. The existing
 private access controls and RISK-HAG-001 remain in place.
 

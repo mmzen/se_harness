@@ -42,8 +42,10 @@ endpoint/project/credential, or retry the identical request and key. Do not crea
 a new key until the previous outcome is resolved. A different request under an
 accepted key is refused. Never fall back to local writes.
 
-The rest of this skill applies to local governed work. Remote lifecycle decisions,
-verification/release preparation and authority cutover are unsupported here.
+For real governed work, use the local repository procedure below. The explicit
+test-copy exception is described under **Private lifecycle test copy**. It permits
+rehearsal operations only; real remote decisions and authority cutover remain
+unsupported.
 
 ## Repository context
 
@@ -127,3 +129,29 @@ do not rebase or invent a replacement key to conceal the outcome.
 This is test data. Supplied actors are synthetic inputs, not human consent.
 Imported records stay immutable. Keep real decisions and work in the authoritative
 Git workflow. No rehearsal record authorizes a real release or external action.
+
+Before constructing a lifecycle request, read the current procedure and applicable
+prerequisites identified by the released result. Use the operator-supplied released
+resource location or its resource resolver. The wire schema describes request
+fields; it does not replace the released authoring and lifecycle instructions.
+
+| Current task | Released procedure to read |
+| --- | --- |
+| Complete draft content | `docs/engineering/ARTIFACT_AUTHORING.md` and the selected type's checklist |
+| Record supplied definition/work decisions | `docs/engineering/harness/AUTHORITY.md` and `AUTHORIZE_WORK.md` |
+| Start, retain handoff or complete work | The current step in `docs/engineering/harness/EXECUTE_WORK.md` |
+| Prepare or assess a test VREC | The current step in `docs/engineering/harness/VERIFY_OUTCOME.md` |
+| Prepare or assess a test RLS | The current step in `docs/engineering/harness/RELEASE.md` |
+| Report a refusal or unknown reply | `docs/engineering/harness/RESULTS.md` |
+
+These local-style commands run inside the service's disposable projection. Express
+the selected operation through the closed v2 request; do not run it against the
+real checkout. Read the literal target state from the released procedure. Words
+such as "accept" in a task description are not lifecycle-state values to guess.
+A refused edge is not a reason to try arbitrary states or freeze a context.
+
+For `decide`, `action.decision` is the supplied actor identity; explanatory text
+belongs in `action.reason`. Preserve the supplied option exactly: mitigation does
+not authorize risk acceptance. Preparation owners must match the fixture's
+supplied preparation identities. Do not infer a different actor or decision from
+a passed gate, an available owner label or a generated record.

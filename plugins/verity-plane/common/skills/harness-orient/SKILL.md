@@ -21,6 +21,13 @@ and a budget within 500 rows, 2 MiB and depth eight. Domain reads are `revision`
 `work-context`, `compare`, `impact`, `lineage` and `check`; `cypher` is constrained
 exploration with parameters. MCP exposes these same reads, not mutations.
 
+Before a Cypher query, read the selected product's
+`docs/notes/hosted-artifact-graph.md#physical-representation` and
+`server/contracts/lifecycle-v2.md#bounded-cypher-reads`. They define the public
+labels/properties and show the supported query form. Require these references in
+the staged input set; do not guess labels from the JSON field names or assume the
+full database query language is exposed.
+
 ```text
 CLIENT_PYTHON -I -m se_harness remote read --endpoint ENDPOINT --project PROJECT --token-env TOKEN_VARIABLE --request ABSOLUTE_REQUEST_JSON --json
 ```

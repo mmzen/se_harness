@@ -71,3 +71,25 @@ Boundary/malformed requests, stale inputs, evaluator refusals, invalid output an
 unknown transport outcomes remain distinct. Read the operation receipt after a
 lost reply. A changed request under the same accepted key is a conflict. The
 service does not automatically rerun a mutation at a newer version.
+
+## Bounded Cypher reads
+
+The existing `cypher` MCP/HTTP read selects one exact view. Its request uses the
+read schema, not the lifecycle command schema. Read the public labels and
+properties in [the physical representation](../../docs/notes/hosted-artifact-graph.md#physical-representation)
+before selecting a query. `Artifact` and `Revision` are distinct public labels.
+
+The admitted form has one `MATCH` or `OPTIONAL MATCH` path, labelled nodes,
+optional parameterized property comparisons, `RETURN`, and a numeric `LIMIT`.
+For example, with `parameters` containing a selected artifact ID under `artifact`:
+
+```cypher
+MATCH (r:Revision) WHERE r.artifact_id = $artifact RETURN r.artifact_id AS id, r.status AS status LIMIT 10
+```
+
+Use the response's completeness fields with the requested row/byte/depth budget.
+This example supplies no project filter: the service binds the selected project
+and view. Unlabelled nodes, `WITH`, aggregation and arbitrary database syntax are
+not part of this small public read form. A rejected query has not completed a read.
+Keep the exact refusal; consult the documented form before constructing another
+request. Do not weaken query admission or bypass it through a direct database call.
