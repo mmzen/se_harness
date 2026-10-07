@@ -61,10 +61,10 @@ The [current assessment](evidence/WO-HAG-009/report.md) preserves the failed run
 independent replay results and remaining native checks. Combined qualification
 and human verification remain pending.
 
-[WO-HAG-010](work-orders/WO-HAG-010.md) is a draft correction for the startup
+[WO-HAG-010](work-orders/WO-HAG-010.md) is approved and in progress for the startup
 instruction conflict found in Claude's hosted-only trial. The
-[review and proposed text](evidence/WO-HAG-010/review.md) are ready for review;
-the two product instruction files have not been changed. Approval is pending.
+[reviewed correction](evidence/WO-HAG-010/review.md) is applied to the two instruction
+files. Final packaged native qualification and human verification remain pending.
 
 ## Definitions and work
 

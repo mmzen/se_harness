@@ -11,6 +11,9 @@ Use the wheel selected for the repository's released evaluator. Plugin source
 does not pin that release. A development wheel is only for disposable testing.
 
 Use the target and action already requested; ask only for a missing choice.
+For an explicitly selected hosted sandbox, complete only "Hosted sandbox
+selection" and the applicable "Private lifecycle test copy" guidance below.
+Checkout activation and repository setup are separate routes.
 
 ## Hosted sandbox selection
 
@@ -20,8 +23,10 @@ project ID, baseline or versioned context, and named credential environment vari
 Never print the credential. The sandbox is not repository authority.
 
 Obtain the qualified combination report and exact candidate client wheel.
-Create a separate disposable Python environment outside the checkout. Verify the
-wheel's SHA-256 against that report, then install that file with `pip --no-deps`.
+If the selected candidate client is already installed in a separate disposable
+environment, verify its identity and reuse it. Otherwise create that environment
+outside the checkout. Verify the wheel's SHA-256 against the combination report,
+then install that file with `pip --no-deps`.
 The plugin's bundled released evaluator remains unchanged; do not replace it with
 the candidate client. Use the candidate environment's absolute Python as
 `CLIENT_PYTHON` in the remote commands below.
@@ -34,6 +39,7 @@ Compare readiness, authority mode `sandbox-projection`, schema, protocols, and
 all component identities with the selected combination. A mismatch stops the
 remote action. An unavailable service never selects local file writes as a fallback.
 Use harness-orient for reads or change for authorized sandbox draft preparation.
+Do not continue into "Activate the checkout" for this hosted selection.
 This route grants no approval, verification, release, adoption or deployment right.
 
 ## Activate the checkout
@@ -81,5 +87,5 @@ The unpublished hosted pilot requires a separately installed candidate remote
 client, a loopback endpoint, an explicit test project and a new disposable volume.
 Use the repository's `server/README.md` Phase 3 procedure. Its configuration must
 report `test_copy: true`; select `--test-copy` for each rehearsal or export.
-Keep the real checkout selected with its released evaluator. Remote setup does
+Leave any existing real checkout selection unchanged. Remote setup does
 not activate graph authority or install this candidate into the user's host.

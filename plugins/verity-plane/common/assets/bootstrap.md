@@ -1,5 +1,20 @@
 # Select the working repository
 
+First use the target already selected by the operator.
+
+## Explicit hosted sandbox
+
+If the operator selected a hosted sandbox, use the setup skill's "Hosted sandbox
+selection" procedure. Retain its endpoint, project and versioned context. Leave
+any existing checkout selection unchanged. This route does not activate or clear
+a checkout, install a repository harness, or switch real authority to the graph.
+After checking the hosted selection, follow harness-orient for reads or change
+for authorized sandbox work. Do not continue into checkout activation.
+
+## Local checkout
+
+Use this route for work in a cloned or existing repository.
+
 When asked to clone, clone to the intended destination, then activate that exact
 checkout. For existing work, reuse the known checkout path. Ask for a path only
 when the intended repository is ambiguous. Do not scan child repositories.
