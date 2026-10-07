@@ -41,10 +41,10 @@ mmzen verified [VREC-HAG-005](verification-records/VREC-HAG-005.md) for candidat
 Both RISK-HAG-001 and RISK-HAG-002 remain raised. Integration is not public
 release, deployment or real authority cutover.
 
-## Native Codex and Claude qualification — proposal
+## Native Codex and Claude qualification — in progress
 
 [WO-HAG-009](work-orders/WO-HAG-009.md) and
-[VER-HAG-007](verification/VER-HAG-007.md) propose an agent-driven Windows CLI
+[VER-HAG-007](verification/VER-HAG-007.md) define the approved agent-driven Windows CLI
 qualification against the unchanged Phase 3 behavior. Each host uses a fresh
 private test project and exact candidate guidance. The agent must select its own
 workflow commands, recover refused/uncertain requests, and export replayable data.
@@ -54,8 +54,10 @@ historical evidence; they do not prove this additional native claim.
 The package reuses the existing intent, capability, requirements, specification
 and architecture. Only these two formal artifacts are new. Git remains
 authoritative; desktop, real authority, authentication/DB ACL implementation and
-public delivery remain excluded. The drafts await human approval with required
-commit-bound verification; no new native session or implementation is claimed.
+public delivery remain excluded. mmzen approved both artifacts with required
+commit-bound verification. WO-HAG-009 is in progress. The [first native sessions](evidence/WO-HAG-009/report.md)
+encountered setup and permission blockers; neither host is qualified. The exact
+retry permission proposal is available in [PR #543](https://github.com/mmzen/se_harness/pull/543).
 
 ## Definitions and work
 

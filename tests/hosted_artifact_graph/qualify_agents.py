@@ -1,0 +1,216 @@
+"""Record a native agent session; do not select or execute its workflow steps.
+
+Inputs are operator-selected local paths and a task file. The optional loopback
+proxy drops the first accepted lifecycle reply. It never performs recovery.
+Provider authentication stays in the native host's normal credential store.
+"""
+from __future__ import annotations
+
+import argparse
+import datetime
+import hashlib
+import json
+import os
+import re
+import socket
+import subprocess
+import threading
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+
+
+def save(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+
+class ReplyFault:
+    """Forward local traffic and retain evidence of one discarded reply."""
+
+    def __init__(self, endpoint, output):
+        parsed = urllib.parse.urlsplit(endpoint)
+        if parsed.scheme != 'http' or parsed.hostname != '127.0.0.1' or parsed.path:
+            raise ValueError('Use an explicit loopback HTTP service without a path')
+        self.events = []
+        self.dropped = False
+        self.lock = threading.Lock()
+        fault = self
+
+        class Handler(BaseHTTPRequestHandler):
+            def log_message(self, *args):
+                pass
+
+            def forward(self):
+                size = int(self.headers.get('Content-Length', '0'))
+                if size > 4 * 1024 * 1024:
+                    self.send_error(413)
+                    return
+                body = self.rfile.read(size) if size else None
+                headers = {k: v for k, v in self.headers.items()
+                           if k.lower() not in ('host', 'connection', 'content-length')}
+                request = urllib.request.Request(endpoint+self.path, body, headers, method=self.command)
+                try:
+                    response = urllib.request.urlopen(request, timeout=180)
+                except urllib.error.HTTPError as exc:
+                    response = exc
+                with response:
+                    raw = response.read(2 * 1024 * 1024 + 1)
+                    status = response.status
+                    content_type = response.headers.get('Content-Type', 'application/json')
+                try:
+                    sent, received = json.loads(body or b'null'), json.loads(raw)
+                except ValueError:
+                    sent, received = None, None
+                with fault.lock:
+                    drop = (not fault.dropped and isinstance(sent, dict)
+                            and sent.get('schema') == 'se-harness-lifecycle-command/v2'
+                            and sent.get('mode') == 'apply' and isinstance(received, dict)
+                            and received.get('outcome') == 'accepted')
+                    if drop:
+                        fault.dropped = True
+                        fault.events.append({'status': status, 'operation_key': sent['operation_key'],
+                                             'result': received, 'reply_dropped': True})
+                        save(output/'reply-fault.json', fault.events)
+                if drop:
+                    self.close_connection = True
+                    self.connection.shutdown(socket.SHUT_RDWR)
+                    self.connection.close()
+                    return
+                self.send_response(status)
+                self.send_header('Content-Type', content_type)
+                self.send_header('Content-Length', str(len(raw)))
+                self.end_headers()
+                self.wfile.write(raw)
+
+            do_POST = forward
+            do_GET = forward
+
+        self.server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
+        self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
+        self.thread.start()
+        self.endpoint = 'http://127.0.0.1:' + str(self.server.server_port)
+
+    def close(self):
+        self.server.shutdown()
+        self.server.server_close()
+        self.thread.join()
+
+
+def run(args):
+    output = args.output.resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    settings = json.loads(args.selection.read_text(encoding='utf-8'))
+    credentials = json.loads(args.credentials.read_text(encoding='utf-8'))
+    secrets = [p['token'] for p in credentials['principals']]
+    token = next(p['token'] for p in credentials['principals'] if p['id'] == 'operator')
+    env = dict(os.environ, PYTHONUTF8='1', NO_COLOR='1', HAG_NATIVE_TEST_TOKEN=token)
+    settings.pop('credentials', None)
+    actual_endpoint = settings['endpoint']
+    fault = ReplyFault(actual_endpoint, output) if args.drop_reply else None
+    if fault:
+        settings['endpoint'] = fault.endpoint
+    settings.update(token_variable='HAG_NATIVE_TEST_TOKEN',
+                    instruction_delivery='session-local plugin' if args.host == 'claude' else 'explicit resource reads')
+    save(output/'selection.json', settings)
+    prompt = args.task.read_text(encoding='utf-8').replace('SELECTION_FILE', str(output/'selection.json'))
+    (output/'task.md').write_text(prompt, encoding='utf-8')
+    plugin = Path(settings['plugin'])
+    mcp_url = actual_endpoint + '/mcp'
+    if args.host == 'codex':
+        argv = [str(args.executable), '--no-daemon', 'exec', '--ephemeral', '--skip-git-repo-check',
+                '--json', '-C', str(output), '--approve-for-me',
+                '-c', 'plugins."verity-plane@se-harness".enabled=false',
+                '-c', f'mcp_servers.hag.url={json.dumps(mcp_url)}',
+                '-c', 'mcp_servers.hag.bearer_token_env_var="HAG_NATIVE_TEST_TOKEN"',
+                '-c', 'mcp_servers.hag.required=true',
+                '-c', 'mcp_servers.hag.tool_timeout_sec=180']
+        if args.model:
+            argv += ['--model', args.model]
+    else:
+        save(output/'mcp.json', {'mcpServers': {'hag': {'type': 'http', 'url': mcp_url,
+             'headers': {'Authorization': 'Bearer ${HAG_NATIVE_TEST_TOKEN}'}, 'timeout': 180000}}})
+        argv = [str(args.executable), '-p', '--no-session-persistence', '--plugin-dir', str(plugin),
+                '--permission-mode', 'auto', '--permission-prompts', 'none',
+                '--tools', 'Read,Write,Edit,Bash,ToolSearch', '--mcp-config', str(output/'mcp.json'),
+                '--strict-mcp-config', '--output-format', 'stream-json', '--verbose', '--include-hook-events']
+        if args.model:
+            argv += ['--model', args.model]
+    argv.append(prompt)
+    started = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    start = time.monotonic()
+    timed_out = threading.Event()
+    redact_count = 0
+    stream_path = output/'events.jsonl'
+    before = {'selection': hashlib.sha256(args.selection.read_bytes()).hexdigest(),
+              'driver': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              'task': hashlib.sha256(args.task.read_bytes()).hexdigest()}
+    save(output/'invocation.json', {'host': args.host, 'argv': argv, 'cwd': str(output),
+        'started_at': started, 'timeout_seconds': args.timeout, 'input_sha256': before,
+        'environment_keys_added': ['PYTHONUTF8','NO_COLOR','HAG_NATIVE_TEST_TOKEN'],
+        'claim': 'Observed native calls only; this launcher supplies no workflow requests or decisions.'})
+    try:
+        with subprocess.Popen(argv, cwd=output, env=env, stdin=subprocess.DEVNULL,
+                              stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                              text=True, encoding='utf-8', errors='replace') as child:
+            def stop():
+                timed_out.set()
+                child.kill()
+            timer = threading.Timer(args.timeout, stop)
+            timer.start()
+            try:
+                with stream_path.open('x', encoding='utf-8') as stream:
+                    for line in child.stdout:
+                        for secret in secrets:
+                            if secret in line:
+                                redact_count += line.count(secret)
+                                line = line.replace(secret, '[REDACTED-SANDBOX-TOKEN]')
+                        line, count = re.subn(r'sk-ant-(?:oat|ort|api)[^\s"\\]+', '[REDACTED-PROVIDER-TOKEN]', line)
+                        redact_count += count
+                        stream.write(line)
+                        stream.flush()
+                        try:
+                            event = json.loads(line)
+                        except ValueError:
+                            continue
+                        item = event.get('item', {})
+                        if event.get('type') == 'item.completed':
+                            print(json.dumps({'host':args.host,'type':item.get('type'),
+                                'tool':item.get('tool'),'status':item.get('status'),
+                                'text':item.get('text') if item.get('type')=='agent_message' else None}),flush=True)
+                        if event.get('type') == 'system' and event.get('subtype') == 'init':
+                            print(json.dumps({'host':args.host,'event':'init','model':event.get('model'),
+                                'plugins':event.get('plugins'),'mcp_servers':event.get('mcp_servers')}),flush=True)
+                        for block in event.get('message',{}).get('content',[]) if isinstance(event.get('message'),dict) else []:
+                            if isinstance(block,dict) and block.get('type') == 'tool_use':
+                                print(json.dumps({'host':args.host,'tool':block.get('name')}),flush=True)
+                        if event.get('type') == 'result':
+                            print(json.dumps({'host':args.host,'event':'result','error':event.get('is_error'),
+                                'text':event.get('result')}),flush=True)
+                code = child.wait()
+            finally:
+                timer.cancel()
+    finally:
+        if fault:
+            fault.close()
+    result = {'host':args.host,'exit':code,'timed_out':timed_out.is_set(),
+        'elapsed_seconds':round(time.monotonic()-start,3),'reply_dropped':bool(fault and fault.dropped),
+        'redactions':redact_count,'events_sha256':hashlib.sha256(stream_path.read_bytes()).hexdigest(),
+        'outcome':'observation_retained','qualification':'requires independent assessment'}
+    save(output/'session.json',result)
+    print(json.dumps(result),flush=True)
+    return code or int(timed_out.is_set())
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--host',choices=('codex','claude'),required=True)
+    for name in ('executable','selection','credentials','task','output'):
+        parser.add_argument('--'+name,type=Path,required=True)
+    parser.add_argument('--model')
+    parser.add_argument('--timeout',type=int,default=2700)
+    parser.add_argument('--drop-reply',action='store_true')
+    raise SystemExit(run(parser.parse_args()))
