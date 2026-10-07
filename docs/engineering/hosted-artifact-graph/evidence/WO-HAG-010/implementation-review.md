@@ -11,3 +11,11 @@ introduced. Existing archive tests verify both shipped copies; existing activati
 and delivery tests cover the unchanged local path. Native trials must assess the
 final packaged guidance before the work can complete. Earlier failures and
 Codex native05 evidence remain bound to their original packages.
+
+Current rebuilt-package checks pass: source suite 1,323 tests (23 skips),
+distributions, CLI smoke, focused package/activation checks and released validation.
+Two builds matched. Codex native06 independently replays all 11 accepted operations
+and four exports; its full evidence is under WO-HAG-009. Claude sonnet04 confirms
+the corrected setup route but fails the test output boundary. A fresh Claude trial
+remains pending. These observations do not complete either work order or verify
+the actual candidate.

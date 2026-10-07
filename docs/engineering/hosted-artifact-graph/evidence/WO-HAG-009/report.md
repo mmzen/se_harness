@@ -1,14 +1,71 @@
 # Native Codex and Claude qualification — in progress
 
-**Codex native05 passes the observed cases at package source `7f2a16e1`, including
-independent replay. Claude is not qualified. Combined qualification and human verification remain
-pending.** WO-HAG-009 remains `in_progress`; no verification record is prepared.
+**Codex native06 passes the observed cases at corrected package source
+`0dbb8ea19f28994da7abc7ecbab08c8db430dc0c`, including independent replay.
+Claude remains unqualified; a fresh bounded trial is running.** WO-HAG-009 and
+WO-HAG-010 remain `in_progress`. Combined qualification and human verification
+are pending. No actual verification record is prepared.
 
 mmzen approved WO-HAG-009, VER-HAG-007 and the bounded native retry permissions.
 The same normal sandbox and permission review remain in use. Git remains
 authoritative. No service, evaluator or protocol implementation was changed.
 
-## Latest corrected-package results
+## Current corrected-package results
+
+mmzen approved WO-HAG-010. The exact two-file bootstrap/setup correction was
+applied and rebuilt as source `0dbb8ea19f28994da7abc7ecbab08c8db430dc0c`.
+The local route is preserved. Explicit hosted selection stops before checkout
+activation; no hook, service, evaluator, permission or host-setting change was made.
+
+Codex native06 completed in 1,813.820 seconds. Its 11 accepted lifecycle
+operations independently replayed through released 0.22.1. All four native
+exports reconstructed with exact Git/file bytes. The original test candidate
+`b1ae7c695684b82c00d1102d1443a7800a66e431` remains bound to its VREC and RLS;
+the earliest export predates those records and has no candidate entry.
+All seven MCP tools supplied 13 complete responses matching independent HTTP
+reads. All 344 recorded read hashes match; 14 entries are explicitly retrospective.
+The native report discloses a late candidate-adapter reference read; released
+AUTHORITY.md was read before decisions. This is not proof that every prerequisite
+was read at its earliest required point.
+
+The greeting assertion, exact synthetic mitigation and actors, stale-project and
+stale-preview refusals, out-of-scope refusal, original-key lookup, identical retry
+and changed-key-content conflict are retained. Real checkout HEAD/content and the
+selected non-credential host-setting hashes were unchanged at run completion,
+before the coordinator retained this evidence. See the [independent assessment](codex-native06-assessment.json),
+[inventory](codex-native06-inventory.json), and [bounded archive](codex-native06.zip).
+No procedural assistance was supplied during that run.
+
+Claude sonnet04 loaded the corrected hosted setup route without attempting checkout
+activation. It was stopped after writing 53 files into sibling directories outside
+its task-permitted `work/` subdirectory. Those files stayed inside the disposable
+native area. The helper allowed the broader native root; this did not override the
+narrower task limit. The partial run is **not qualified**. See the
+[stop assessment](sonnet04-stop.json), [inventory](sonnet04-stopped.json), and
+[partial transcript](sonnet04-stopped.zip). The lost reply and actual project
+version 17 are retained; no completed native recovery is inferred.
+
+A fresh sonnet05 trial uses a separate project with the same packaged guidance,
+client, helper and normal permission file. Its task spells out the absolute output
+directory and fixed helper route. This is a test-boundary clarification; no
+workflow request, decision or procedural sequence was supplied. Its result is pending.
+
+The current source suite passed: 1,323 tests with 23 skips. Distribution checks,
+CLI smoke, 28 focused package/activation checks (two skips), six native-support
+checks and released validation passed. Validation reported 1,987 artifacts,
+zero errors and 63 existing warnings. The failed focused-test invocation is
+retained beside the corrected invocation. Two pinned package builds matched.
+The evidence archive retains exact commands and component identities.
+
+| Current component | Identity |
+| --- | --- |
+| Client | 0.22.2; wheel `84a24a0824fabc22f72142efc9cbc1f46651f75a5c814fb3de179259e2fa494b` |
+| Codex plugin | 0.2.7; archive `e4a740ce310facf7a517b68a5849d47b473bb9c91513fdcd4bc25700b49af4c7` |
+| Claude plugin | 0.2.7; archive `a9f14bcf34b948d693052d3da53d9163c3df4b27e69316ccee2dc9b651ccbcb0` |
+| Service image | `sha256:1700dcfbc71ab6a3e411e3d206235a377c09e6b407511e55ac62caf4239b3791` |
+| Released evaluator | 0.22.1; original pinned archive/payload unchanged |
+
+## Earlier corrected-package results
 
 Codex native05 completed in 1,566.039 seconds with no procedural intervention.
 Its 11 accepted operations replayed through released 0.22.1. Both native exports
@@ -38,10 +95,9 @@ surviving process, and the hosted project remained at version 0. See the
 [partial transcript](sonnet03-stopped.zip). No successful activation is claimed.
 
 The bootstrap asset is outside WO-HAG-009. [WO-HAG-010](../../work-orders/WO-HAG-010.md)
-proposes the two-file routing correction; its [review diff](../WO-HAG-010/review.md)
-is pending approval. Product instructions have not been changed for that proposal.
-No hook is disabled. Both hosts still require all five cases against the final
-applicable guidance; no actual verification record is ready.
+subsequently received approval and its two-file correction is applied as described
+above. The [original review diff](../WO-HAG-010/review.md) remains the reviewed input.
+No hook is disabled. This historical native05 result does not cover the later edit.
 
 ## Earlier observations
 
@@ -174,8 +230,8 @@ this assessment states which claims the evidence supports.
 
 ## Remaining work
 
-Obtain approval for WO-HAG-010, implement its bounded instruction correction,
-and rerun affected native cases. Complete and independently assess Claude. Run final
+Complete and independently assess the fresh Claude trial under the existing
+WO-HAG-009/010 approvals. Keep any failed case explicit. Run final
 source/gate checks, retain handoff evidence and prepare actual commit-bound
 verification. Both hosts must pass all five cases. No omission or changed
 criterion is accepted.
