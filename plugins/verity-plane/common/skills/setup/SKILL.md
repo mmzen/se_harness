@@ -22,6 +22,12 @@ It is separate from checkout activation. Retain the operator's loopback endpoint
 project ID, baseline or versioned context, and named credential environment variable.
 Never print the credential. The sandbox is not repository authority.
 
+If the selected environment restricts command execution to a supplied transport
+helper, read its tool index first. Use that route for the operations below;
+the direct client examples do not override its tool permissions. Use its
+metadata-only identity operation when available. Encoding a wheel is not needed
+to inspect its digest. Stop a denied action without changing the permission route.
+
 Obtain the qualified combination report and exact candidate client wheel.
 If the selected candidate client is already installed in a separate disposable
 environment, verify its identity and reuse it. Otherwise create that environment
@@ -38,6 +44,8 @@ CLIENT_PYTHON -I -m se_harness remote status --endpoint ENDPOINT --project PROJE
 Compare readiness, authority mode `sandbox-projection`, schema, protocols, and
 all component identities with the selected combination. A mismatch stops the
 remote action. An unavailable service never selects local file writes as a fallback.
+Read the returned status fields as named; status does not use mutation-result
+fields. Consult the tool index or command help before guessing a request shape.
 Use harness-orient for reads. For draft preparation, read change's
 **Hosted reading and context** section before choosing artifact types or writing
 content. It identifies the released drafting procedure and its prerequisites.

@@ -118,6 +118,21 @@ Only then create the next missing artifact. If reading or completing the current
 draft is blocked, stop that step and report the exact error. Creating another
 template does not resolve the failed step.
 
+### Review and report the draft
+
+Before calling a draft complete, read the finished text against its template
+and selected type checklist. Check the claims against the source actually
+inspected. Keep operational success measures separate from acceptance checks
+where the template requires that distinction. An admissible result with no
+incomplete fields is not a content-review verdict; report unmet writing guidance.
+
+Report the observed method: source inspection, an executed test, or an evaluator
+check. Include failed and denied calls, their recorded outcomes and any recovery.
+Use exact result paths and fields for evidence. For instruction digests, cite the
+matching lookup or inventory entry; if copying a value, compare that file's own
+entry before reporting it. Omit an unconfirmed digest rather than guess one.
+Retain the original failures even when a later call succeeds.
+
 After a stale-input refusal, read the current selection and review the change
 before preparing a new request. Do not silently replace expected versions.
 For uncertain transport, use `remote operation --key KEY` with the same
