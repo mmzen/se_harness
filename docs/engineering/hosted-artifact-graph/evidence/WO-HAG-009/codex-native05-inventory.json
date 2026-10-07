@@ -1,0 +1,1408 @@
+{
+  "archive": "codex-native05.zip",
+  "bytes": 1765073,
+  "sha256": "3e5c473cb0aad5d7c5872c3de2b8b845a409d21a239c40998ea65f6220b372ab",
+  "files": [
+    {
+      "path": "native05/events.jsonl",
+      "bytes": 2783789,
+      "sha256": "a84157a7ebddbb4d5457456eb73d7a3dd67d7571cd0f4b04e7a9ac518bb1ab9c"
+    },
+    {
+      "path": "native05/session.json",
+      "bytes": 321,
+      "sha256": "f6d5eaf98e97341229cf58890737bbbfadeeea7425e842fccf66697a2f7b6b69"
+    },
+    {
+      "path": "native05/invocation.json",
+      "bytes": 9698,
+      "sha256": "b9ef4596a6e4a29d361a111adc5ce084b94f6fbd8eb5162add13db9af90608a7"
+    },
+    {
+      "path": "native05/selection.json",
+      "bytes": 2874,
+      "sha256": "fb98bca674bf54670e88ac821de2555cb74721bbbe3ae9529c5a94e566533930"
+    },
+    {
+      "path": "native05/task.md",
+      "bytes": 8070,
+      "sha256": "bbeaaf93f2d72b91d7d7bb085fbe5b312346c8e748a8361b95f0a19699e2b5b4"
+    },
+    {
+      "path": "native05/reply-fault.json",
+      "bytes": 67988,
+      "sha256": "c1b035e55c7453c45b4714d04e1bc10ae4fcbbbe70377c60127b729f05f04ce1"
+    },
+    {
+      "path": "native05/native-report.md",
+      "bytes": 11257,
+      "sha256": "b51550fb0d5c21a37ed931456ff38df6335f643d22b557b79a100ba4684c885a"
+    },
+    {
+      "path": "native05/native-observations.json",
+      "bytes": 26668,
+      "sha256": "8f73278697d4fead2bb2fde6c858f980839d1529f62698802d17835b5d004fab"
+    },
+    {
+      "path": "native05/work/approve-wo-apply.request.json",
+      "bytes": 1137,
+      "sha256": "73b6c5b60ec8c5b666c745c278bf1ee548f3e210857145ea05bc9cbdd5f09d41"
+    },
+    {
+      "path": "native05/work/approve-wo-apply.result.json",
+      "bytes": 47814,
+      "sha256": "ba5d30fb85907bf6e87554c093263978cc4f95aac33ce23054cc709620ee231b"
+    },
+    {
+      "path": "native05/work/approve-wo-preview.request.json",
+      "bytes": 1072,
+      "sha256": "55dcd1155f68f5585ba589dbdc245e7bbb21b90134db4a8c878080fcc73a46ed"
+    },
+    {
+      "path": "native05/work/approve-wo-preview.result.json",
+      "bytes": 47363,
+      "sha256": "1faa1fc6ee5bacee90d3bdc422a9698b654c1620de7a436532702ca264b044a6"
+    },
+    {
+      "path": "native05/work/assertion.json",
+      "bytes": 803,
+      "sha256": "6e8b4c1aa931f2a0214f2ed4ed8930b0848b5730c771d419bfba55b000bbe860"
+    },
+    {
+      "path": "native05/work/capture-apply.request.json",
+      "bytes": 1376,
+      "sha256": "88cf8fc0d3ddda5fc8960feba96229d6f979999e2142757dc53e69f175f0008e"
+    },
+    {
+      "path": "native05/work/capture-apply.result.json",
+      "bytes": 21599,
+      "sha256": "8b849c8bb5e935673a9870a808f5ad4c0793cf48371be378c6ee2afc70c2a518"
+    },
+    {
+      "path": "native05/work/capture-preview.request.json",
+      "bytes": 1311,
+      "sha256": "e94d3f7bcc3065d8eb680323046ea28b6d88627767352eb231289592157f7cd2"
+    },
+    {
+      "path": "native05/work/capture-preview.result.json",
+      "bytes": 21148,
+      "sha256": "8710afcdc8039ba2fe4b79b6005e47dcdd23a1bde5723997581f03b03053ad5b"
+    },
+    {
+      "path": "native05/work/check-draft-wo.request.json",
+      "bytes": 805,
+      "sha256": "52c05a2539ffdf83576fe64504d89603ad9ab6f3cba0ce6cd12b6993726f309c"
+    },
+    {
+      "path": "native05/work/check-draft-wo.result.json",
+      "bytes": 14550,
+      "sha256": "aac0376e1581e6e5b5c4b13bd4d84348170078614d504f0eeaee27103c51df66"
+    },
+    {
+      "path": "native05/work/commands-index.json",
+      "bytes": 88769,
+      "sha256": "ed2f8b8571b620988e4e851975463fe3edf4dd2e9e9c2c197aae15af242998f0"
+    },
+    {
+      "path": "native05/work/comparison-audit.json",
+      "bytes": 405,
+      "sha256": "b55a90ee62cd643451f2988b22197c816dd0cce92ea93680731b419c4c50b93a"
+    },
+    {
+      "path": "native05/work/complete-apply.request.json",
+      "bytes": 1131,
+      "sha256": "dc1982bcaf375d57cf23ef4696e981ef20bdd7c1821a0d94f6e8b8c024d479f3"
+    },
+    {
+      "path": "native05/work/complete-apply.result.json",
+      "bytes": 35774,
+      "sha256": "fe34af70052d1ea653cd1bdc5f6ed9b16a0e72f83f79779a9ded213d8f8b5163"
+    },
+    {
+      "path": "native05/work/complete-preview.request.json",
+      "bytes": 1066,
+      "sha256": "d02eeaea9367dcc7ada113c19094f878fbd591114c3b962bb6001b556ccec8bf"
+    },
+    {
+      "path": "native05/work/complete-preview.result.json",
+      "bytes": 35323,
+      "sha256": "2e398e6fde584b294b42771fa572a941adecb6cc9656284664871cc74b1be4d0"
+    },
+    {
+      "path": "native05/work/create-cap.request.json",
+      "bytes": 762,
+      "sha256": "1154126694dbfb7eb0b8e21302ed7a4dd7253482245a2096295a4524615de302"
+    },
+    {
+      "path": "native05/work/create-cap.result.json",
+      "bytes": 4662,
+      "sha256": "3fdb57f996e5df8dab862c404c2ea7f7a5f505d2bdc40395c6a93bda3862eae9"
+    },
+    {
+      "path": "native05/work/create-int.request.json",
+      "bytes": 758,
+      "sha256": "3296ce6bcea3594b8610388940e230a1727501e24802f78e7c05ed3c05b0bc75"
+    },
+    {
+      "path": "native05/work/create-int.result.json",
+      "bytes": 6305,
+      "sha256": "6ef60b554cbc4cc2c3fc47c053fac726c7b896f7345c6960a51ae8a319ded0c1"
+    },
+    {
+      "path": "native05/work/create-rel.request.json",
+      "bytes": 770,
+      "sha256": "61ad55822f54b8eb9dc923e5ce1095451eab37b1848a846274c543998dd3f249"
+    },
+    {
+      "path": "native05/work/create-rel.result.json",
+      "bytes": 5885,
+      "sha256": "101e27e6ea95b22f3bac9fc469545938fdca6f855dfc261063bcc7f42bbdf778"
+    },
+    {
+      "path": "native05/work/create-req.request.json",
+      "bytes": 763,
+      "sha256": "b6010e1a85a284f66917d61ef0da57b68e840ee1b92c9e3ebbb6a0c1c3e9204f"
+    },
+    {
+      "path": "native05/work/create-req.result.json",
+      "bytes": 6260,
+      "sha256": "85fbf3a9377f310853c39683c307435b2e4c81f0a9c90b5346f1c226feba34b1"
+    },
+    {
+      "path": "native05/work/create-spec.request.json",
+      "bytes": 767,
+      "sha256": "8f85eaa19e7a2dd472da38f1b41d6f345fa9070b87cbf6d8b5f1cabcd6add54e"
+    },
+    {
+      "path": "native05/work/create-spec.result.json",
+      "bytes": 8606,
+      "sha256": "cf9d3b6e74b8ab7e7fa4fe23cc5478f46253e162fa6eac2341da03e9ecf3730b"
+    },
+    {
+      "path": "native05/work/create-ver.request.json",
+      "bytes": 765,
+      "sha256": "c1f829d6af2c4709c09ba7ded812ae4957278af736996155e1af03d6beb9bf45"
+    },
+    {
+      "path": "native05/work/create-ver.result.json",
+      "bytes": 4989,
+      "sha256": "37cacce03f8af66692c3e7b7b7a2e6bc82615a7549042c1d53500eac5ca1ef0e"
+    },
+    {
+      "path": "native05/work/create-wo.request.json",
+      "bytes": 762,
+      "sha256": "1debc817419bcc5538be8b4cb33de2900e09c803a3683707084a5c3960dc878d"
+    },
+    {
+      "path": "native05/work/create-wo.result.json",
+      "bytes": 7843,
+      "sha256": "094708e027e2d3124d23b1eceee7f1ad31a384b2d5823d814a3db7a3104a453d"
+    },
+    {
+      "path": "native05/work/definitions-apply.request.json",
+      "bytes": 2288,
+      "sha256": "6438bf81a29689810a15e6a03018cea1e56691c67f5bd609e75b2806d8ba82cd"
+    },
+    {
+      "path": "native05/work/definitions-apply.result.json",
+      "bytes": 1382,
+      "sha256": "be23a6b29600166cf610c3e7e875d0baf9b1dfe43776aa0183b4208444fc53e1"
+    },
+    {
+      "path": "native05/work/definitions-key-conflict.request.json",
+      "bytes": 2335,
+      "sha256": "667ad9d8cc68b0f62109e3abb3d6edaf57f5d1712a01d67e11dcddc170944adb"
+    },
+    {
+      "path": "native05/work/definitions-key-conflict.result.json",
+      "bytes": 2105,
+      "sha256": "c28882b159ebb686a16f6b4225834ad239160221913f40e06d7bcf42d4af2705"
+    },
+    {
+      "path": "native05/work/definitions-lookup.result.json",
+      "bytes": 65352,
+      "sha256": "283ef2bd084f937a40efa85b13c180194a7d0371be7d06c0f593bee117658516"
+    },
+    {
+      "path": "native05/work/definitions-preview-old.request.json",
+      "bytes": 2227,
+      "sha256": "1f29eacc06c1d795555325894e028cfd3e5c59a3fb0cf16f154acc2bfa750a48"
+    },
+    {
+      "path": "native05/work/definitions-preview-old.result.json",
+      "bytes": 65342,
+      "sha256": "2acd105013a2ec664646f09e9a30dfdca374db36aadc4ebd64cb22337c390a54"
+    },
+    {
+      "path": "native05/work/definitions-preview.request.json",
+      "bytes": 2223,
+      "sha256": "52f8e07056e6881ce55d5f9c4fc753df616b3f97269d8c961afdd9989340841d"
+    },
+    {
+      "path": "native05/work/definitions-preview.result.json",
+      "bytes": 65334,
+      "sha256": "37ae054f07ba286a4bfa2a6ff69381b869f0e964f41d4932b1702d417bd1c4e1"
+    },
+    {
+      "path": "native05/work/definitions-retry.result.json",
+      "bytes": 65785,
+      "sha256": "d44a9bf61cc087ec2b8eb98e53c552ee4a2d11614f4075911572ba11f2bafdbe"
+    },
+    {
+      "path": "native05/work/definitions-stale-apply.request.json",
+      "bytes": 2294,
+      "sha256": "6564ad4f18c5009a59b60b52de6092b5625b386d1dd043dd5f41c35442691de8"
+    },
+    {
+      "path": "native05/work/definitions-stale-apply.result.json",
+      "bytes": 2106,
+      "sha256": "1182c23c797ead096d6f1046a55ce85db4c3153d7691f808dc2cb3a88ccb4283"
+    },
+    {
+      "path": "native05/work/export-byte-audit.json",
+      "bytes": 13661,
+      "sha256": "1440dc395eaf80b555939569c8b633f339bd152e7bf2ca4d819cb08b6c7d00ce"
+    },
+    {
+      "path": "native05/work/export-early.request.json",
+      "bytes": 623,
+      "sha256": "cd4a9bba4f353d7804b66fa68fdd2630cd1d74cf3a9c0c31c15c7205176f541d"
+    },
+    {
+      "path": "native05/work/export-early.result.json",
+      "bytes": 2029,
+      "sha256": "614c0456a698951d313521347827d1924f9c043ba5146b472ea0f46fa0b83b79"
+    },
+    {
+      "path": "native05/work/export-late.request.json",
+      "bytes": 623,
+      "sha256": "d29527a2e0ee3475f94418c96ad2657916cc91b2b19b4fe060ba0fb76697c888"
+    },
+    {
+      "path": "native05/work/export-late.result.json",
+      "bytes": 2026,
+      "sha256": "6bd3e1075c24c7bc7f3c132a325bd31ae1717d80f18b9c4f4149117ebd2be700"
+    },
+    {
+      "path": "native05/work/file-read-trace.json",
+      "bytes": 104167,
+      "sha256": "911f6a7314fa599e5e0832665a9b4ccc2fd36ff6d10999ebfd9427daaacf2df7"
+    },
+    {
+      "path": "native05/work/handoff-apply.request.json",
+      "bytes": 4536,
+      "sha256": "90a83d5236385cbac9f8051afe4149e4ee6b69cb7feb1dae5e813ec8fed58b3b"
+    },
+    {
+      "path": "native05/work/handoff-apply.result.json",
+      "bytes": 78523,
+      "sha256": "1452264a36c088d84ce0e9ac878cd8a3da08b0ad42fad356527e0463a282a479"
+    },
+    {
+      "path": "native05/work/handoff-outside.request.json",
+      "bytes": 1141,
+      "sha256": "1c5ab6c44f3a77b9a7b787bf6dadc96ecc30e03c08253b6f70a260a886c10efd"
+    },
+    {
+      "path": "native05/work/handoff-outside.result.json",
+      "bytes": 25598,
+      "sha256": "96f02c4b9527440bfaab06c1fed3eb0cacb798c4a50241d558875bbb824392f5"
+    },
+    {
+      "path": "native05/work/handoff-preview.request.json",
+      "bytes": 4471,
+      "sha256": "df92b80db1f6eed659d27061881b8d54c1315e8abde84db4dd8012b8a29a7088"
+    },
+    {
+      "path": "native05/work/handoff-preview.result.json",
+      "bytes": 78072,
+      "sha256": "905684205b348f7261d9ba6edfe72029b3aa79355e23c543d1f52fa9f16befb1"
+    },
+    {
+      "path": "native05/work/helper-help.json",
+      "bytes": 1026,
+      "sha256": "d7d71a2416a2da5dbdc165ccdd5ea100e4dda15c32d16acffb8a8553f8f5b441"
+    },
+    {
+      "path": "native05/work/helper-identity.json",
+      "bytes": 824,
+      "sha256": "1a9ed25611084d447e3b4b1f27fc8a420028d75b96a70c01aa37b470c5030d56"
+    },
+    {
+      "path": "native05/work/import.request.json",
+      "bytes": 2996,
+      "sha256": "e00500b9f4c58db2de51c0ab3cf717b55dcc8056fb46ea1635f57cc6a33a5700"
+    },
+    {
+      "path": "native05/work/import.result.json",
+      "bytes": 6131,
+      "sha256": "ec101c35b8d7235479fe3b0d9209a736684cf99ab09720df3105c97212d76199"
+    },
+    {
+      "path": "native05/work/mcp-decision.request.json",
+      "bytes": 446,
+      "sha256": "1ddd6b9c627177e170515c6862cbdd4dd5cc0a1823828087c00de3bad2950de2"
+    },
+    {
+      "path": "native05/work/mcp-decision.result.json",
+      "bytes": 3797,
+      "sha256": "d664470d42296051a59a6dca5a3108bd4686904348f1b19a3643a6b6a9bac398"
+    },
+    {
+      "path": "native05/work/mcp-final-compare.request.json",
+      "bytes": 588,
+      "sha256": "f5fbaae44fa295a16cc6300dc29d478dacd9cb1843ce8c36a165f9c53d036fc9"
+    },
+    {
+      "path": "native05/work/mcp-final-compare.result.json",
+      "bytes": 3911,
+      "sha256": "34fda862307f72effabf62b8d51138925373705ad220e7f0ebfd1b1b7b23f7d4"
+    },
+    {
+      "path": "native05/work/mcp-final-cypher.request.json",
+      "bytes": 536,
+      "sha256": "f71adfb53fe928f91d1922fa4590565ef1b4d58b5473a1b21a46dead6bdcb05c"
+    },
+    {
+      "path": "native05/work/mcp-final-cypher.result.json",
+      "bytes": 1111,
+      "sha256": "d57c893866426a00dbda202bce41f3242b09ed2ca27f3e494e7a036b37a7fa1a"
+    },
+    {
+      "path": "native05/work/mcp-final-impact.request.json",
+      "bytes": 394,
+      "sha256": "ae3c6de98ddfbd0c6e2c6b93d0ad1dacf876e1887cfbfcf0dc7c9b9575495b45"
+    },
+    {
+      "path": "native05/work/mcp-final-impact.result.json",
+      "bytes": 7189,
+      "sha256": "b930eb8374455e2865d46e1d46fd95b35e3ca262f0e2063f8d5edceb87ca1e64"
+    },
+    {
+      "path": "native05/work/mcp-final-lineage.request.json",
+      "bytes": 395,
+      "sha256": "5e593b5fb6bf087ce943eebba11b5d9281501fcb806f077dddcbdcde881c2cf4"
+    },
+    {
+      "path": "native05/work/mcp-final-lineage.result.json",
+      "bytes": 3503,
+      "sha256": "733319094eebba26f91948b0ef77332aad37030caa0cd70a84c87d87c7eb5a98"
+    },
+    {
+      "path": "native05/work/mcp-initial-context.request.json",
+      "bytes": 400,
+      "sha256": "f7236d9702decfaf4bd1772bea6f11ddb1f3e03089704e8b39cdb122e543fd6e"
+    },
+    {
+      "path": "native05/work/mcp-initial-context.result.json",
+      "bytes": 8276,
+      "sha256": "fdf985b3fec70aa9fbc3e2720354df0a98e349d4b54f698f4493931d2338a6ed"
+    },
+    {
+      "path": "native05/work/mcp-int-revision.request.json",
+      "bytes": 445,
+      "sha256": "698a5e638ee9733c18e3877a94743b72acbd0e0b2ecddb78e2df00582660fce0"
+    },
+    {
+      "path": "native05/work/mcp-int-revision.result.json",
+      "bytes": 3433,
+      "sha256": "992b78e744f1d3ab48783df14078e7190296e455ad64ec1644be24ac03337aff"
+    },
+    {
+      "path": "native05/work/mcp-read-index.json",
+      "bytes": 4325,
+      "sha256": "0f149f07e7e8fd1f418babb4b60e37cbbf20531b72183107a0977118769d99c0"
+    },
+    {
+      "path": "native05/work/mcp-risk.request.json",
+      "bytes": 447,
+      "sha256": "da1eccae61c7bdfb9f57c57e74158e8f3e0964e26add6c55a97a976152ce925b"
+    },
+    {
+      "path": "native05/work/mcp-risk.result.json",
+      "bytes": 3110,
+      "sha256": "619aafb0d61ca17baef3f59dca39d5c8e9eac262d5c6dee50634e67c13ba471b"
+    },
+    {
+      "path": "native05/work/mcp-rls-ready.request.json",
+      "bytes": 446,
+      "sha256": "070e797f404a7dfbf3bf71e4bc16b2996f2b59395ebccbdb4c9f17991f78e77d"
+    },
+    {
+      "path": "native05/work/mcp-rls-ready.result.json",
+      "bytes": 3189,
+      "sha256": "825811b9f3ef405b92652f01e515c48b047c3ddc904ac39b87cc191cf5d0dd03"
+    },
+    {
+      "path": "native05/work/mcp-wo-check.request.json",
+      "bytes": 350,
+      "sha256": "239d330f8a640cd7a18b206646a2a42ddcafae898166ff8d25e375db80f78e4d"
+    },
+    {
+      "path": "native05/work/mcp-wo-check.result.json",
+      "bytes": 10603,
+      "sha256": "356f37514d97d69517b88e0fe7c3e5279499c90191bb5d73253c4eda73def5b7"
+    },
+    {
+      "path": "native05/work/mitigate-apply.request.json",
+      "bytes": 1158,
+      "sha256": "a1d309bf7ace9b95844beb96ab142197c65f057cef3fa4f34b8c13da0be95350"
+    },
+    {
+      "path": "native05/work/mitigate-apply.result.json",
+      "bytes": 24617,
+      "sha256": "058405a71033e440b1e162a4319190a25962fe95c58146f2e5998910b0d441b4"
+    },
+    {
+      "path": "native05/work/mitigate-preview.request.json",
+      "bytes": 1093,
+      "sha256": "823c6201136c17f888c805e6588f2dbefa9568a3ff519a4e39de5e5ad5ddaa17"
+    },
+    {
+      "path": "native05/work/mitigate-preview.result.json",
+      "bytes": 24166,
+      "sha256": "4b246d5973011f60764be03279a8b1515e4f8a081d91b60ec441cd33cda960d3"
+    },
+    {
+      "path": "native05/work/open-reference.request.json",
+      "bytes": 741,
+      "sha256": "bc09e53a4eb2c7ed626cd51e796db1b77d38356e5785bb9e2454fc12503f38a5"
+    },
+    {
+      "path": "native05/work/open-reference.result.json",
+      "bytes": 10881,
+      "sha256": "bc73907e391176dce15ac9d0b5d368c3e64d7493ab93dbcc9d273faa89eed1c1"
+    },
+    {
+      "path": "native05/work/open.request.json",
+      "bytes": 732,
+      "sha256": "aba0adf25adce2c2a7d170d5740b72262dd6decb8379b66bbcac35e20d9238d8"
+    },
+    {
+      "path": "native05/work/open.result.json",
+      "bytes": 1639,
+      "sha256": "e8ddb72c5bec8a8cce313d444b57699738fb44e54cad5b41976e33457c8736dd"
+    },
+    {
+      "path": "native05/work/reference-history-audit.json",
+      "bytes": 2547,
+      "sha256": "25f71d656c238310faa6619b862882765f7d601047bd078322a984f113e54fb7"
+    },
+    {
+      "path": "native05/work/release-apply.request.json",
+      "bytes": 1253,
+      "sha256": "ee98f34daf77b6d23d45a689ee465d375790ccec68c91cfa4fe9659ff3ef67c0"
+    },
+    {
+      "path": "native05/work/release-apply.result.json",
+      "bytes": 38705,
+      "sha256": "dfed5c3282c409a3b2e12dcef8ade0200fbfb9cc14f3325f90646995e1f5f6da"
+    },
+    {
+      "path": "native05/work/release-prepare-apply.request.json",
+      "bytes": 1121,
+      "sha256": "b284f544f239c103d8853184dc825b80b89b376a1d9043dcbd1b85d13dd2ea31"
+    },
+    {
+      "path": "native05/work/release-prepare-apply.result.json",
+      "bytes": 21538,
+      "sha256": "9f1ddc2d636183aaa0989221a5fcc59f5f69d5795e6e0f65585ecf7981dbb2cc"
+    },
+    {
+      "path": "native05/work/release-prepare-preview.request.json",
+      "bytes": 1056,
+      "sha256": "8f51dcbfd9b967322d9b5b464b6abffd8a6837af5b7b9ee0e4e03171f5a1a3d1"
+    },
+    {
+      "path": "native05/work/release-prepare-preview.result.json",
+      "bytes": 21087,
+      "sha256": "44f1f39e56a1ac9742242d2048b64f40d4fb142cf35da178ff1ae602c1f6f7c7"
+    },
+    {
+      "path": "native05/work/release-preview.request.json",
+      "bytes": 1188,
+      "sha256": "e88af97f8f830bbcd8f3f0770d1132757fb1afa18ac511c65401301b34dab727"
+    },
+    {
+      "path": "native05/work/release-preview.result.json",
+      "bytes": 38254,
+      "sha256": "107e3688ffb4be1ce361ef0b805dfec97f031494e47f7b50aa53e1fc11370478"
+    },
+    {
+      "path": "native05/work/report-validation.json",
+      "bytes": 228,
+      "sha256": "5777eb6e46e353eb080772117054c39f874da0a988d068217bc98852e9ee0393"
+    },
+    {
+      "path": "native05/work/review-preflight.request.json",
+      "bytes": 836,
+      "sha256": "6ff054321cf8f8c8b0e724d4bc8a9c882cf380b9eae62e76e9b8f0ac422e09c0"
+    },
+    {
+      "path": "native05/work/review-preflight.result.json",
+      "bytes": 4291,
+      "sha256": "4b97402d67dc6e8a920476bfeb51948260efedaf2bb0f231938e758341f51cd9"
+    },
+    {
+      "path": "native05/work/review.json",
+      "bytes": 1520,
+      "sha256": "6b79f9e3cca8df72dce1327faed4f94c2e03032da1b1831a06b609ed7a6c8770"
+    },
+    {
+      "path": "native05/work/reviewed-definition-hashes.json",
+      "bytes": 597,
+      "sha256": "32075cfc9456fce8b1b63d74ea184d7907aa2b98386fa624db33a91c4a488c33"
+    },
+    {
+      "path": "native05/work/revise-cap.request.json",
+      "bytes": 1756,
+      "sha256": "706c6a562e5853978faf12de7c65f81b450e60624db9ffaae9e19164c48e2300"
+    },
+    {
+      "path": "native05/work/revise-cap.result.json",
+      "bytes": 3127,
+      "sha256": "4b638c81448748f6fc4c53fa21b2bcaa0f84f4708fdae0ada2994c6997efe20f"
+    },
+    {
+      "path": "native05/work/revise-int.request.json",
+      "bytes": 1892,
+      "sha256": "570f044769b829d4ba4dfb9b392b1a1b6e3146de156169c4b22ce8d36fbad365"
+    },
+    {
+      "path": "native05/work/revise-int.result.json",
+      "bytes": 3117,
+      "sha256": "44c4cc2dfd3e8032217ac36a91c329408719910851bea5bfc590c24d8339f5d8"
+    },
+    {
+      "path": "native05/work/revise-rel.request.json",
+      "bytes": 2346,
+      "sha256": "15a4b0878efdce4a7cf65e22850e8aa3ab84637f42df4ef5ebeb4c33250464f9"
+    },
+    {
+      "path": "native05/work/revise-rel.result.json",
+      "bytes": 3736,
+      "sha256": "adaf79ae3ba21868074bbaad0d2ed9dfc33359bae8e428e821df923c27224976"
+    },
+    {
+      "path": "native05/work/revise-req.request.json",
+      "bytes": 2164,
+      "sha256": "6a3baa6f68b11902f185df17400bfbbf3350e493d6d4c8e2af771c5683d6859b"
+    },
+    {
+      "path": "native05/work/revise-req.result.json",
+      "bytes": 3128,
+      "sha256": "f502a97d391ed9fe5cc83551bf127786a9ba885e9ffcb83181092eab647bfc39"
+    },
+    {
+      "path": "native05/work/revise-spec-after-preview.request.json",
+      "bytes": 2418,
+      "sha256": "a6f4c86f044a5e8dd6bf0bba1820547f62bf0a9a74002215b432d4fa9c8d9f5d"
+    },
+    {
+      "path": "native05/work/revise-spec-after-preview.result.json",
+      "bytes": 3170,
+      "sha256": "dfeaca84a06189cc4113904a00c708f4022d7b000319c7c5754f7eff21ad530b"
+    },
+    {
+      "path": "native05/work/revise-spec.request.json",
+      "bytes": 2406,
+      "sha256": "754d526f976deb4225812961df74f287877906081e25ed7357831d2c2d3cb9d1"
+    },
+    {
+      "path": "native05/work/revise-spec.result.json",
+      "bytes": 3138,
+      "sha256": "ed10bc9dedf740256d5aa115c5f0f64b8f203820919f69c0b25fb77b06ca0ea3"
+    },
+    {
+      "path": "native05/work/revise-ver.request.json",
+      "bytes": 3073,
+      "sha256": "b3492400b210a9acad34a3c965ea624b102b3e978507b17c383efe41419b0f6f"
+    },
+    {
+      "path": "native05/work/revise-ver.result.json",
+      "bytes": 3736,
+      "sha256": "ef55fcdbb8432ffbc414c3fc2b35e4dce542c80cb0d8500d2747a3d68e24b414"
+    },
+    {
+      "path": "native05/work/revise-wo.request.json",
+      "bytes": 5224,
+      "sha256": "56d7f99c6995fdcbb6e77c129fce50ceaed74475359efb81aca20e2fa4cbd603"
+    },
+    {
+      "path": "native05/work/revise-wo.result.json",
+      "bytes": 3729,
+      "sha256": "42cacbe6febb706dd702ef78f31d3ae53e879e8128feb206c5c1cc961856e4e2"
+    },
+    {
+      "path": "native05/work/risk-apply.request.json",
+      "bytes": 1495,
+      "sha256": "51900fed5723a22d999f0a50898daeb20b72acbeeb9f9b159a403869de419a9f"
+    },
+    {
+      "path": "native05/work/risk-apply.result.json",
+      "bytes": 7606,
+      "sha256": "3f55adc1fdd83d8c61ba5bfa3ec5f0d0a3ab77c9e8526bf326408b33483c3154"
+    },
+    {
+      "path": "native05/work/risk-preview.request.json",
+      "bytes": 1430,
+      "sha256": "3d614e891897022a5e491d7987512cf17e6fec2547b391b2a25fc26c52892582"
+    },
+    {
+      "path": "native05/work/risk-preview.result.json",
+      "bytes": 7155,
+      "sha256": "801f7ff1a7e877421c90a3b7593d35e7c5e814ebde60186f80330347e41c3b39"
+    },
+    {
+      "path": "native05/work/scope-check.request.json",
+      "bytes": 889,
+      "sha256": "2b46129ce1d5f9dacc7d4eb7d84063488e8a2e317be710c6e3b892490def76b3"
+    },
+    {
+      "path": "native05/work/scope-check.result.json",
+      "bytes": 26605,
+      "sha256": "58063ee93bb43d7937772f63b9f1064fd1bd7a0acbe8f0fd79bf49cd6aa5df42"
+    },
+    {
+      "path": "native05/work/start-apply.request.json",
+      "bytes": 1083,
+      "sha256": "5291e56f4ef65d751ae7b95ae4cf4c4351d2e8a38f186be8e77aa86effbadf8b"
+    },
+    {
+      "path": "native05/work/start-apply.result.json",
+      "bytes": 53766,
+      "sha256": "b2c33c684d064bfd3167cf2d089990d968b278e3d86a1431786eef4c5d0b9a4b"
+    },
+    {
+      "path": "native05/work/start-preflight.request.json",
+      "bytes": 834,
+      "sha256": "12a9847d1ae236f24dcb36181c7edf06a7f32f4cc12c03091e3d74c9bc829c99"
+    },
+    {
+      "path": "native05/work/start-preflight.result.json",
+      "bytes": 4284,
+      "sha256": "30577bcfeeb5538995a658426cf0f225cad393157a25ac15d70d25c0c99753c2"
+    },
+    {
+      "path": "native05/work/start-preview.request.json",
+      "bytes": 1018,
+      "sha256": "8844f8a7eb78ababfe41346d8e04ad0069e8ba3ef36075bddc172d5767acc56f"
+    },
+    {
+      "path": "native05/work/start-preview.result.json",
+      "bytes": 53315,
+      "sha256": "0855e7d79e5e7bcb52ada5e12d067845cb73b100fddadf89b62e4985d06d7d1f"
+    },
+    {
+      "path": "native05/work/status-after-outside.json",
+      "bytes": 4435,
+      "sha256": "3d2ed71038e99a9ba76385b58b6f7fdb0f6029ff4b29b592380197ce0285830b"
+    },
+    {
+      "path": "native05/work/status-after-recovery.json",
+      "bytes": 4435,
+      "sha256": "9ec98af484a26374c7a3969e54a68c1d431bf3a7b4ef835ba57aaab3817065f0"
+    },
+    {
+      "path": "native05/work/status.json",
+      "bytes": 4434,
+      "sha256": "d57420f012a85d581911df34d25a9f981f9c9908115244639c05c15d7f6be867"
+    },
+    {
+      "path": "native05/work/trusted-base.json",
+      "bytes": 296,
+      "sha256": "cc3fa8215edf47872a60ee8665d418128a27acbf71aa2cd93bf11619e7565c71"
+    },
+    {
+      "path": "native05/work/validate-drafts.request.json",
+      "bytes": 779,
+      "sha256": "d58f51c0f7118f3122eda09c7aa8eaf7e5f63277df39e15bd9808f75e03c9041"
+    },
+    {
+      "path": "native05/work/validate-drafts.result.json",
+      "bytes": 7843,
+      "sha256": "f3f00fc7d9c5b1661185b4cd32299707135d21a50d0f08b469c36147e887a473"
+    },
+    {
+      "path": "native05/work/validate-final.request.json",
+      "bytes": 778,
+      "sha256": "2717232c62918f26ae4ced7d97425f032cae03436d594d6394229794681e3c56"
+    },
+    {
+      "path": "native05/work/validate-final.result.json",
+      "bytes": 12626,
+      "sha256": "a93495506dd8c49cd3e40eec2ed79de37ae65f9f9de4b911e9be5998f13b361e"
+    },
+    {
+      "path": "native05/work/validate-revised.request.json",
+      "bytes": 780,
+      "sha256": "8af1b2b8ebe27d368c685e81883c501a347a22789c27da81e3795ab7f406b32b"
+    },
+    {
+      "path": "native05/work/validate-revised.result.json",
+      "bytes": 7244,
+      "sha256": "63a3d8442e97dd82e03b74d9f56ae2e79b7e95a1da2c6ca85e0cd03d983f08fb"
+    },
+    {
+      "path": "native05/work/verify-apply.request.json",
+      "bytes": 1208,
+      "sha256": "7317a94f79463e92d5204ab047da2e07d6177ee869ad77cbd97423353ac6a8eb"
+    },
+    {
+      "path": "native05/work/verify-apply.result.json",
+      "bytes": 33801,
+      "sha256": "6a72ea81e1bbe30ede412e1f0657b1d53df5349e1160a28bc2bda869893d1128"
+    },
+    {
+      "path": "native05/work/verify-preview.request.json",
+      "bytes": 1143,
+      "sha256": "7b33a563f091210e577c8a52a3e4a3aa4fb0cd4e7f37ba92e051bfd526330cf4"
+    },
+    {
+      "path": "native05/work/verify-preview.result.json",
+      "bytes": 33350,
+      "sha256": "352bf49858787a613b7bb85d50ad5fbc5fb668ad2f17fb9a9331b70c91e7d737"
+    },
+    {
+      "path": "native05/work/authored/CAP-NAT-001.md",
+      "bytes": 699,
+      "sha256": "d843f21d46340fd789dbd240e765b131820a8b5590cafe9f9449ff8ae8fd0a81"
+    },
+    {
+      "path": "native05/work/authored/INT-NAT-001.md",
+      "bytes": 799,
+      "sha256": "7a44efc16489f1881429a4148900f5ac1601da14237a90a934d611f868f0b882"
+    },
+    {
+      "path": "native05/work/authored/REL-NAT-001.md",
+      "bytes": 1139,
+      "sha256": "3319d1e80737ff4d5938d16806167ec56e9c6c25e611bedcf445306f4c072917"
+    },
+    {
+      "path": "native05/work/authored/REQ-NAT-001.md",
+      "bytes": 1003,
+      "sha256": "da83be79ac35e9e321bad37ad0784ea3424cfe5d7fc6b64440966ed24aa9ef94"
+    },
+    {
+      "path": "native05/work/authored/SPEC-NAT-001-v2.md",
+      "bytes": 1182,
+      "sha256": "8bcde6804c58c41a4d5f230fdefcab96681cc7872d1b880471ed1799b4128ceb"
+    },
+    {
+      "path": "native05/work/authored/SPEC-NAT-001.md",
+      "bytes": 1183,
+      "sha256": "9fbb863b2861d7cf266f3f88497904b525c37a2698a6215398827b12d044127a"
+    },
+    {
+      "path": "native05/work/authored/VER-NAT-001.md",
+      "bytes": 1684,
+      "sha256": "bdbfa77a2988ac8c9a41bd413f1300022621f50e9247582d74052bc93bda84a8"
+    },
+    {
+      "path": "native05/work/authored/WO-NAT-001.md",
+      "bytes": 3299,
+      "sha256": "c3933c014872cd03b3ea073750816276809415ce34e9eded7e16fee0832d4006"
+    },
+    {
+      "path": "native05/work/export-early/history.bundle",
+      "bytes": 22149,
+      "sha256": "5455aa6bf6fc30fe295abd45c2c86268f6821fc778e7d09b7a5a1e6c5608c72f"
+    },
+    {
+      "path": "native05/work/export-early/manifest.json",
+      "bytes": 18159,
+      "sha256": "608088c7ab09aabdac0840c79d7ef27544cb9f73cfcc733d9817c1af443441e8"
+    },
+    {
+      "path": "native05/work/export-late/history.bundle",
+      "bytes": 24720,
+      "sha256": "28fcb4e59fe3bda82ac48a1d557dccd0cfc2dccb0fcef1fcf2435b55e54ebda8"
+    },
+    {
+      "path": "native05/work/export-late/manifest.json",
+      "bytes": 19317,
+      "sha256": "e43e334f977b5e42d0012b3388572b35f5f9a30960ee70f268b5b1d90102bf64"
+    },
+    {
+      "path": "native05/work/export-late/files/.engineering-harness.lock",
+      "bytes": 656,
+      "sha256": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252"
+    },
+    {
+      "path": "native05/work/export-late/files/.engineering-harness.toml",
+      "bytes": 237,
+      "sha256": "069622e02d80bdec13240889f7e83b1063b01208b9e4a5f6f37fdcdcf53a8d22"
+    },
+    {
+      "path": "native05/work/export-late/files/.gitattributes",
+      "bytes": 173,
+      "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
+    },
+    {
+      "path": "native05/work/export-late/files/REHEARSAL.txt",
+      "bytes": 46,
+      "sha256": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c"
+    },
+    {
+      "path": "native05/work/export-late/files/src/greeting.py",
+      "bytes": 45,
+      "sha256": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/capabilities/CAP-NAT-001.md",
+      "bytes": 931,
+      "sha256": "58dd31cc306f50accc18631f7a1380245f3d1914c36dcdd9b992b161025141dc"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md",
+      "bytes": 426,
+      "sha256": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/decisions/DEC-NAT-001.md",
+      "bytes": 2214,
+      "sha256": "157964cff3b3f391a2329f1e6d30e07b007612e20a068e110943ed8ce5469fdd"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/evidence/RLS-NAT-001-evaluator.json",
+      "bytes": 881,
+      "sha256": "1521d0f7b70cf50ac623f3fb80a2d95bdc28293681b809002573d3115629707c"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/evidence/VREC-NAT-001-evaluator.json",
+      "bytes": 698,
+      "sha256": "2762aeaa36f7fe172361be82edb9420da8a316d972c443f2f0a37bfc54d25bc6"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/intent/INT-NAT-001.md",
+      "bytes": 1030,
+      "sha256": "3d578b60aa20798bc3a1ab2da821cc90873c1fd51df6ab5b92e30707a92ddf8c"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/intent/INT-P3-900.md",
+      "bytes": 516,
+      "sha256": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/release/REL-NAT-001.md",
+      "bytes": 1371,
+      "sha256": "0e36887254cab34bdf1ccbf850c62e8211143cd7924efab0d53e71a8b50049b8"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/release/REL-P3-900.md",
+      "bytes": 529,
+      "sha256": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/releases/RLS-NAT-001.md",
+      "bytes": 1573,
+      "sha256": "f36743bda3499364d1264786aea82cf904a18fafeb5e3e9f7189535ed7ad36ff"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/requirements/REQ-NAT-001.md",
+      "bytes": 1235,
+      "sha256": "b5409873e1b2031605b644512a14b40db8b42784022126e72e8f7ae7e97ed4e0"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md",
+      "bytes": 539,
+      "sha256": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/risks/RISK-NAT-001.md",
+      "bytes": 1776,
+      "sha256": "e7e8691ffcd9066b400320de8434312d8ff312f1535d942892d22a7d0b7b67ad"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/specifications/SPEC-NAT-001.md",
+      "bytes": 1414,
+      "sha256": "82b35f69b93d2312d7a94d6bb33cdd422dac842e56f7a92715105058d7bfdd09"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+      "bytes": 539,
+      "sha256": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/verification/VER-NAT-001.md",
+      "bytes": 1916,
+      "sha256": "199c971077b662587b79c556196441fe20ab175135aa96f3041e1e78a245e241"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/verification/VER-P3-900.md",
+      "bytes": 688,
+      "sha256": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/verification-records/VREC-NAT-001.md",
+      "bytes": 1953,
+      "sha256": "87c5dcb6b72642cfbc38e104d431aaffdd8ee216186d3bb3663e5aec358f85bf"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/work-orders/WO-NAT-001.md",
+      "bytes": 4860,
+      "sha256": "bda9aa362c5c59758f85d851cb7bf538614e71cc1d71af1f72859ad6203a4813"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md",
+      "bytes": 1096,
+      "sha256": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/evidence/WO-NAT-001/assertion.json",
+      "bytes": 803,
+      "sha256": "6e8b4c1aa931f2a0214f2ed4ed8930b0848b5730c771d419bfba55b000bbe860"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/evidence/WO-NAT-001/handoff.json",
+      "bytes": 19744,
+      "sha256": "32ce28ad1d69351ce9a1b447ab205dd8805cbb04aa384cea6a32ae2b391a67e7"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/evidence/WO-NAT-001/review.json",
+      "bytes": 1520,
+      "sha256": "6b79f9e3cca8df72dce1327faed4f94c2e03032da1b1831a06b609ed7a6c8770"
+    },
+    {
+      "path": "native05/work/export-late/files/docs/engineering/lifecycle-pilot/evidence/WO-NAT-001/WO-NAT-001-handoff.md",
+      "bytes": 286,
+      "sha256": "af89dfd620bd65700ea861984e77026445a35917d90cbb5709eea42cd3b4e61a"
+    },
+    {
+      "path": "native05/work/export-early/files/.engineering-harness.lock",
+      "bytes": 656,
+      "sha256": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252"
+    },
+    {
+      "path": "native05/work/export-early/files/.engineering-harness.toml",
+      "bytes": 237,
+      "sha256": "069622e02d80bdec13240889f7e83b1063b01208b9e4a5f6f37fdcdcf53a8d22"
+    },
+    {
+      "path": "native05/work/export-early/files/.gitattributes",
+      "bytes": 173,
+      "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
+    },
+    {
+      "path": "native05/work/export-early/files/REHEARSAL.txt",
+      "bytes": 46,
+      "sha256": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c"
+    },
+    {
+      "path": "native05/work/export-early/files/src/greeting.py",
+      "bytes": 45,
+      "sha256": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/capabilities/CAP-NAT-001.md",
+      "bytes": 931,
+      "sha256": "58dd31cc306f50accc18631f7a1380245f3d1914c36dcdd9b992b161025141dc"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md",
+      "bytes": 426,
+      "sha256": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/decisions/DEC-NAT-001.md",
+      "bytes": 2214,
+      "sha256": "157964cff3b3f391a2329f1e6d30e07b007612e20a068e110943ed8ce5469fdd"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/evidence/VREC-NAT-001-evaluator.json",
+      "bytes": 698,
+      "sha256": "2762aeaa36f7fe172361be82edb9420da8a316d972c443f2f0a37bfc54d25bc6"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/intent/INT-NAT-001.md",
+      "bytes": 1030,
+      "sha256": "3d578b60aa20798bc3a1ab2da821cc90873c1fd51df6ab5b92e30707a92ddf8c"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/intent/INT-P3-900.md",
+      "bytes": 516,
+      "sha256": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/release/REL-NAT-001.md",
+      "bytes": 1371,
+      "sha256": "0e36887254cab34bdf1ccbf850c62e8211143cd7924efab0d53e71a8b50049b8"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/release/REL-P3-900.md",
+      "bytes": 529,
+      "sha256": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/requirements/REQ-NAT-001.md",
+      "bytes": 1235,
+      "sha256": "b5409873e1b2031605b644512a14b40db8b42784022126e72e8f7ae7e97ed4e0"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md",
+      "bytes": 539,
+      "sha256": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/risks/RISK-NAT-001.md",
+      "bytes": 1776,
+      "sha256": "e7e8691ffcd9066b400320de8434312d8ff312f1535d942892d22a7d0b7b67ad"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/specifications/SPEC-NAT-001.md",
+      "bytes": 1414,
+      "sha256": "82b35f69b93d2312d7a94d6bb33cdd422dac842e56f7a92715105058d7bfdd09"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+      "bytes": 539,
+      "sha256": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/verification/VER-NAT-001.md",
+      "bytes": 1916,
+      "sha256": "199c971077b662587b79c556196441fe20ab175135aa96f3041e1e78a245e241"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/verification/VER-P3-900.md",
+      "bytes": 688,
+      "sha256": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/verification-records/VREC-NAT-001.md",
+      "bytes": 1554,
+      "sha256": "605cfc46d198e7b48c9793d3f90684d61c8d531288d1ab8d30c38a8ad49869e1"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/work-orders/WO-NAT-001.md",
+      "bytes": 4860,
+      "sha256": "bda9aa362c5c59758f85d851cb7bf538614e71cc1d71af1f72859ad6203a4813"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md",
+      "bytes": 1096,
+      "sha256": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/evidence/WO-NAT-001/assertion.json",
+      "bytes": 803,
+      "sha256": "6e8b4c1aa931f2a0214f2ed4ed8930b0848b5730c771d419bfba55b000bbe860"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/evidence/WO-NAT-001/handoff.json",
+      "bytes": 19744,
+      "sha256": "32ce28ad1d69351ce9a1b447ab205dd8805cbb04aa384cea6a32ae2b391a67e7"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/evidence/WO-NAT-001/review.json",
+      "bytes": 1520,
+      "sha256": "6b79f9e3cca8df72dce1327faed4f94c2e03032da1b1831a06b609ed7a6c8770"
+    },
+    {
+      "path": "native05/work/export-early/files/docs/engineering/lifecycle-pilot/evidence/WO-NAT-001/WO-NAT-001-handoff.md",
+      "bytes": 286,
+      "sha256": "af89dfd620bd65700ea861984e77026445a35917d90cbb5709eea42cd3b4e61a"
+    },
+    {
+      "path": "independent-replay/000-transition-input.json",
+      "bytes": 45700,
+      "sha256": "6463e6c9ac94d54ed61682a084eade146ac864c0630730765ccbf4c6a5bc5ebe"
+    },
+    {
+      "path": "independent-replay/000-transition-output.json",
+      "bytes": 50026,
+      "sha256": "b0fdbcad2594387e1da55e3890e65ad3c9a54a008c0c7b6898a95ab4ce27b740"
+    },
+    {
+      "path": "independent-replay/001-transition-input.json",
+      "bytes": 50026,
+      "sha256": "b0fdbcad2594387e1da55e3890e65ad3c9a54a008c0c7b6898a95ab4ce27b740"
+    },
+    {
+      "path": "independent-replay/001-transition-output.json",
+      "bytes": 52078,
+      "sha256": "60db9b9894da8c9eee439a89de96952ba53a0ef1d08b24510116f4814f3ec191"
+    },
+    {
+      "path": "independent-replay/002-transition-input.json",
+      "bytes": 52078,
+      "sha256": "60db9b9894da8c9eee439a89de96952ba53a0ef1d08b24510116f4814f3ec191"
+    },
+    {
+      "path": "independent-replay/002-transition-output.json",
+      "bytes": 53230,
+      "sha256": "fb477f50e78f80409a4fbf5c54be409b6fd968b3509a14aa7cc4e048e843127f"
+    },
+    {
+      "path": "independent-replay/003-raise-risk-input.json",
+      "bytes": 53230,
+      "sha256": "fb477f50e78f80409a4fbf5c54be409b6fd968b3509a14aa7cc4e048e843127f"
+    },
+    {
+      "path": "independent-replay/003-raise-risk-output.json",
+      "bytes": 60615,
+      "sha256": "61fd4117ed14912f8db5213b676abbe574a8cdcff8e289adf19947b81161ec27"
+    },
+    {
+      "path": "independent-replay/004-decide-input.json",
+      "bytes": 60615,
+      "sha256": "61fd4117ed14912f8db5213b676abbe574a8cdcff8e289adf19947b81161ec27"
+    },
+    {
+      "path": "independent-replay/004-decide-output.json",
+      "bytes": 63654,
+      "sha256": "c95bac352d83a8e00a5356c358e3360ecc38176f6b36cd0ab8369c047add6a59"
+    },
+    {
+      "path": "independent-replay/005-handoff-input.json",
+      "bytes": 63654,
+      "sha256": "c95bac352d83a8e00a5356c358e3360ecc38176f6b36cd0ab8369c047add6a59"
+    },
+    {
+      "path": "independent-replay/005-handoff-output.json",
+      "bytes": 100835,
+      "sha256": "c7dcda4ecfa366082da7043ef37f4622918a7e1048d5277e1e32f111ede09e91"
+    },
+    {
+      "path": "independent-replay/006-transition-input.json",
+      "bytes": 100835,
+      "sha256": "c7dcda4ecfa366082da7043ef37f4622918a7e1048d5277e1e32f111ede09e91"
+    },
+    {
+      "path": "independent-replay/006-transition-output.json",
+      "bytes": 102011,
+      "sha256": "ca9e4fc2f675e63d1e5f5343bfb1b9b2ec99b63adfe71ce54285f8bb9b3e93ba"
+    },
+    {
+      "path": "independent-replay/007-capture-verification-input.json",
+      "bytes": 102011,
+      "sha256": "ca9e4fc2f675e63d1e5f5343bfb1b9b2ec99b63adfe71ce54285f8bb9b3e93ba"
+    },
+    {
+      "path": "independent-replay/007-capture-verification-output.json",
+      "bytes": 112574,
+      "sha256": "db5cec168b3be977d566c3cc4ddaf6e2cbf28a1da90ac6d3aa9418976657d9bf"
+    },
+    {
+      "path": "independent-replay/008-transition-input.json",
+      "bytes": 112574,
+      "sha256": "db5cec168b3be977d566c3cc4ddaf6e2cbf28a1da90ac6d3aa9418976657d9bf"
+    },
+    {
+      "path": "independent-replay/008-transition-output.json",
+      "bytes": 113882,
+      "sha256": "0a52f41d1cd9a8f7380c0bc5ea4795f3329d54f0ca746bc998ce43cfd2abd201"
+    },
+    {
+      "path": "independent-replay/009-prepare-release-input.json",
+      "bytes": 113882,
+      "sha256": "0a52f41d1cd9a8f7380c0bc5ea4795f3329d54f0ca746bc998ce43cfd2abd201"
+    },
+    {
+      "path": "independent-replay/009-prepare-release-output.json",
+      "bytes": 119698,
+      "sha256": "d10b0dea0d3c40122f4f40f04b6918cfebbe173eb339a7d6f2a3319375ba7ec3"
+    },
+    {
+      "path": "independent-replay/010-transition-input.json",
+      "bytes": 119698,
+      "sha256": "d10b0dea0d3c40122f4f40f04b6918cfebbe173eb339a7d6f2a3319375ba7ec3"
+    },
+    {
+      "path": "independent-replay/010-transition-output.json",
+      "bytes": 121082,
+      "sha256": "71119bb5985f1d93fa2e776b4187641e26111366e6b7e01e6e638693fe706de3"
+    },
+    {
+      "path": "independent-replay/assessment.json",
+      "bytes": 75086,
+      "sha256": "936756481b43cd9fbfbd29dd067b14fac49c79069a5864c66778ffd98e8fc9a6"
+    },
+    {
+      "path": "independent-replay/commands.json",
+      "bytes": 382114,
+      "sha256": "aa2dec9ccbd8a481267420c7be9990cb596f9adedfaf71715726165e02daeb3a"
+    },
+    {
+      "path": "independent-replay/lookup-000.json",
+      "bytes": 46703,
+      "sha256": "6d6e2b1ad6cf6ffc0126534004bea26655cbb76f67403e2599cb3f93173a2a94"
+    },
+    {
+      "path": "independent-replay/lookup-001.json",
+      "bytes": 20460,
+      "sha256": "400f2b1c9cf07327c84a308f5b8dba0ba1c7448b0cb5e45549263e9436c23dab"
+    },
+    {
+      "path": "independent-replay/lookup-002.json",
+      "bytes": 34703,
+      "sha256": "60569c1953959b7b899faad42e25c90bed970a6b7716b6aa3e33f49a872a5d2a"
+    },
+    {
+      "path": "independent-replay/lookup-003.json",
+      "bytes": 64742,
+      "sha256": "b9519ad9dc021205ba27ddfefa69b830598f119f66ae6dc56ce9f09d4ce017aa"
+    },
+    {
+      "path": "independent-replay/lookup-004.json",
+      "bytes": 700,
+      "sha256": "be2ab57e2460de2c8c630b4330384e547d676f457d3fecfc1c361bfcaa4dbd79"
+    },
+    {
+      "path": "independent-replay/lookup-005.json",
+      "bytes": 77374,
+      "sha256": "97e57886c1b7d6caea35dd18e2a136f454fb081b3c8562aeae173d15b5dc7476"
+    },
+    {
+      "path": "independent-replay/lookup-006.json",
+      "bytes": 23574,
+      "sha256": "dbc8b92275b8909b9f70bb648fed671c60f2c7002a3bfb414f9fe5fe225fe853"
+    },
+    {
+      "path": "independent-replay/lookup-007.json",
+      "bytes": 37504,
+      "sha256": "2bf0b00f7ad38fb5d92659dc567b5be4f374d5d91e00b795f483f48359ef20f5"
+    },
+    {
+      "path": "independent-replay/lookup-008.json",
+      "bytes": 20399,
+      "sha256": "98523530e806ae5a2ba971861da14b5f625d59c98c3f1714e6bd53daaf0d5487"
+    },
+    {
+      "path": "independent-replay/lookup-009.json",
+      "bytes": 6591,
+      "sha256": "49d2d5ef274c02f7fc40269f89b1aafc1dbe6364597b72d80b085d2013fbce04"
+    },
+    {
+      "path": "independent-replay/lookup-010.json",
+      "bytes": 52679,
+      "sha256": "9f42da7bbadb0d1b60e6be6f65545ec69cc9af97280ebb43e56f2da3f0d62322"
+    },
+    {
+      "path": "independent-replay/lookup-011.json",
+      "bytes": 32640,
+      "sha256": "6ffaac721d79ec32c5479d938a94669bd3a353f1c812e181cc3656eb71b649f2"
+    },
+    {
+      "path": "independent-replay/native-export-0.json",
+      "bytes": 112574,
+      "sha256": "db5cec168b3be977d566c3cc4ddaf6e2cbf28a1da90ac6d3aa9418976657d9bf"
+    },
+    {
+      "path": "independent-replay/native-export-1.json",
+      "bytes": 121082,
+      "sha256": "71119bb5985f1d93fa2e776b4187641e26111366e6b7e01e6e638693fe706de3"
+    },
+    {
+      "path": "independent-mcp/001-codex-guidance02-work-context.json",
+      "bytes": 22543,
+      "sha256": "1fa8bb5219dc92815023f9c43519d6c2aa45255fb12c5506914ca0361b20b4b9"
+    },
+    {
+      "path": "independent-mcp/002-codex-guidance02-revision.json",
+      "bytes": 7844,
+      "sha256": "0d32f2964ff2be25c42aef8338ee6457f517100228da69a011c50b1c78d2e448"
+    },
+    {
+      "path": "independent-mcp/003-codex-guidance02-revision.json",
+      "bytes": 7305,
+      "sha256": "48623aeffa74aa6b842ec9f97a35a5f03405efe0a149d56053aa8d680f9c91d5"
+    },
+    {
+      "path": "independent-mcp/004-codex-guidance02-revision.json",
+      "bytes": 8762,
+      "sha256": "a4be6c00875eb3a66ff04e6b3a3c1ca40f90f967dfc70f6617976bf774b7bdc6"
+    },
+    {
+      "path": "independent-mcp/005-codex-guidance02-check.json",
+      "bytes": 28601,
+      "sha256": "db40b939ba1ad8fc44c07ea2064f947bb7c3f1f43e9562e02adde93bceb9d1c5"
+    },
+    {
+      "path": "independent-mcp/006-codex-guidance02-revision.json",
+      "bytes": 7590,
+      "sha256": "0257a34bb74290712927bd75a3f7f8e8cfd95fb8ffe3f32594fd3a7a8472528b"
+    },
+    {
+      "path": "independent-mcp/007-codex-guidance02-compare.json",
+      "bytes": 10598,
+      "sha256": "412b8916637e3a60d07b60204a07645bf1626c42fa326d5768199fb00d3aae8f"
+    },
+    {
+      "path": "independent-mcp/008-codex-guidance02-impact.json",
+      "bytes": 18992,
+      "sha256": "c65dfcb159d9fe608b26296d351aedd4fdba17b544263a9d21542694ea215810"
+    },
+    {
+      "path": "independent-mcp/009-codex-guidance02-lineage.json",
+      "bytes": 9327,
+      "sha256": "ae5c16e0b9a7047d80e394b059338005fb36006a792c6f8d978f7d73285ba929"
+    },
+    {
+      "path": "independent-mcp/010-codex-guidance02-cypher.json",
+      "bytes": 3335,
+      "sha256": "f95635ebaa4a65c5d0a8c60713640662fd0774bf1a90a3b18c69c1100f6e369c"
+    },
+    {
+      "path": "support/guidance02-state-before.json",
+      "bytes": 775,
+      "sha256": "33d6a9f05e5a82ff3e35f39c216314b1cc9bbbe2d63260bba9edbafba6d77f0b"
+    },
+    {
+      "path": "support/runtime-reuse-guidance02.json",
+      "bytes": 34966,
+      "sha256": "b4701630f1d0ac7de5ccfdb61e3944652c8244364728611bc4731bb8988d783d"
+    },
+    {
+      "path": "support/guidance02-source-suite.json",
+      "bytes": 5499,
+      "sha256": "cb0bd04736b7ea0b395c19d0b49fe570791d86973b8d61df1a2cd3f72f040b80"
+    },
+    {
+      "path": "support/guidance02-distributions.json",
+      "bytes": 503,
+      "sha256": "2e4a37e4134bd6e96b4a886e1f5800c1978b89aa43e4e69f9c6ebcd4647bf4f3"
+    },
+    {
+      "path": "support/guidance02-cli-smoke.json",
+      "bytes": 4383,
+      "sha256": "48a11d5c952bc7a2dae1fe021fa15c515c4437fb48886ab401df899f2186198e"
+    },
+    {
+      "path": "support/guidance02-focused.json",
+      "bytes": 514,
+      "sha256": "f7c63fd1de4570f6c9968b0b690c9b3ea2e9bb2efd14451e45561493e5fe7758"
+    },
+    {
+      "path": "support/guidance02-validation.json",
+      "bytes": 427720,
+      "sha256": "62c29f38c351f8307e314a1b18ad4507c2b95e5e1cc3620fd02b6a29d7a26a85"
+    },
+    {
+      "path": "support/guidance02-client-build.json",
+      "bytes": 991,
+      "sha256": "92cf7eb3239af719219b9daea0a6fae093aab614e78935ef9a18d659e5ee438a"
+    },
+    {
+      "path": "support/guidance02-package.json",
+      "bytes": 1869,
+      "sha256": "67d93f3bdfdb5744eec766d7b080200a6b81d3331737be27749476a29cfac027"
+    },
+    {
+      "path": "support/build02-replay.json",
+      "bytes": 7097,
+      "sha256": "c361185ea3eea294930a7ef8101b0646db3790fbb404c07c1d08eeba480d5d37"
+    },
+    {
+      "path": "support/guidance02-candidate.json",
+      "bytes": 3046,
+      "sha256": "f02d434cd90c27809fbe119343ee73509ddb41a921c83e695cb0bf13ea170fff"
+    },
+    {
+      "path": "support/skill-loader-candidate.json",
+      "bytes": 218,
+      "sha256": "337a2a6cc777e696fd81dd55e065a3ca1215ecf277ff34817eed80fab5551e83"
+    }
+  ],
+  "redaction": "Native stream recorder redaction retained. All selected bytes scanned for this run group private keys; no credential files, account stores or host configuration content included."
+}

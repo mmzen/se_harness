@@ -11,7 +11,7 @@ action = "mmzen reviews the explicit test boundary and VER-HAG-006 refusal/expor
 raised_by = "operator"
 
 [relations]
-threatens = ["REQ-HAG-011", "REQ-HAG-013", "WO-HAG-008", "WO-HAG-009"]
+threatens = ["REQ-HAG-011", "REQ-HAG-013", "WO-HAG-008", "WO-HAG-009", "WO-HAG-010"]
 
 [[lifecycle_events]]
 from = "identified"

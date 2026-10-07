@@ -1,14 +1,50 @@
 # Native Codex and Claude qualification — in progress
 
-**Codex has completed the observed cases after a bounded read-input correction.
-Claude is not qualified. Combined qualification and human verification remain
+**Codex native05 passes the observed cases at package source `7f2a16e1`, including
+independent replay. Claude is not qualified. Combined qualification and human verification remain
 pending.** WO-HAG-009 remains `in_progress`; no verification record is prepared.
 
 mmzen approved WO-HAG-009, VER-HAG-007 and the bounded native retry permissions.
 The same normal sandbox and permission review remain in use. Git remains
 authoritative. No service, evaluator or protocol implementation was changed.
 
-## Current observations
+## Latest corrected-package results
+
+Codex native05 completed in 1,566.039 seconds with no procedural intervention.
+Its 11 accepted operations replayed through released 0.22.1. Both native exports
+were reconstructed with exact Git/file bytes and the original test candidate
+`87daba6465ccfa24c84d0d85c1ee10aa76141daf`. All seven MCP tools supplied ten complete
+responses matching direct HTTP reads. The supplied mitigation and actor identities,
+live greeting assertion, stale/scope refusals and original-key recovery all match
+the test input. All 268 retained file-read hashes match. See the
+[independent assessment](codex-native05-assessment.json),
+[inventory](codex-native05-inventory.json) and [bounded archive](codex-native05.zip).
+
+This run used packages from `7f2a16e190de183a021adafbf0aa7838ddf7f40a`:
+client SHA-256 `95079598c5e533a4f51c61db96bdf6572d4a68bcf776c3ee3386462321c850dc`,
+Codex plugin `59d51af950fed1113e84a99d64388e6f7f79233fecb03c02ad8bf50a88049f91`,
+Claude plugin `91d74bf8a5fdd61f39e92ac3a66cae5c7cd03c759168bfa35bc674ae7aa73a71`,
+and image `sha256:8e84370f46e829635f59d58738930784390594c926de0165b25b9f26353db1df`.
+The archive retains exact build results, component equality and supporting checks.
+The source suite passed at that commit: 1,323 tests, 23 skips; distribution, CLI
+and focused checks passed. This is not a pass for later proposed guidance.
+
+Claude sonnet03 loaded the normal setup skill, then attempted checkout activation
+because startup bootstrap unconditionally directed that route. The task had
+explicitly selected hosted-only testing. The operator stopped the run; no result
+for the activation command returned. Readback found no locator files or matching
+surviving process, and the hosted project remained at version 0. See the
+[stop assessment](sonnet03-stop.json), [inventory](sonnet03-stopped.json) and
+[partial transcript](sonnet03-stopped.zip). No successful activation is claimed.
+
+The bootstrap asset is outside WO-HAG-009. [WO-HAG-010](../../work-orders/WO-HAG-010.md)
+proposes the two-file routing correction; its [review diff](../WO-HAG-010/review.md)
+is pending approval. Product instructions have not been changed for that proposal.
+No hook is disabled. Both hosts still require all five cases against the final
+applicable guidance; no actual verification record is ready.
+
+## Earlier observations
+
 
 | Case | Codex CLI 0.159.2 | Claude Code 2.1.273 |
 | --- | --- | --- |
@@ -77,18 +113,17 @@ The candidate change skill now routes rehearsal operations to the released
 procedures and clarifies literal state values and supplied decision identities.
 The orientation skill links the existing physical graph guide. The wire guide
 shows the already-supported bounded Cypher form. These are instruction corrections,
-not changes to lifecycle policy or service behavior. Both hosts will run from
-fresh projects with the corrected, digest-checked packages. Earlier runs remain
-observations of the preceding package.
+not changes to lifecycle policy or service behavior. The latest trials above used fresh projects and the corrected, digest-checked
+packages. Earlier runs remain observations of the preceding package.
 
 The first corrected-package Claude trial was stopped because the launcher omitted
 the normal `Skill` tool, although plugin skills were listed. Explicit file reads
 were available. The launcher now exposes that instruction loader while retaining
-the approved permission settings and one-call helper. A fresh Claude trial will
-start through the selected hosted setup skill. See [the stop and correction](sonnet02-stop.json)
-and [partial-run inventory](sonnet02-stopped.json). The concurrent Codex run is unaffected.
+the approved permission settings and one-call helper. The subsequent sonnet03 trial invoked the selected hosted setup skill and exposed
+the startup conflict described above. See [the stop and correction](sonnet02-stop.json)
+and [partial-run inventory](sonnet02-stopped.json). Codex native05 subsequently completed and was independently assessed.
 
-## Component and candidate boundaries
+## Earlier component and candidate boundaries
 
 The runtime and packaged guidance come from qualified Phase 3 source
 `345557d20e83f1c6ed72e11460ee4ba451cf3d91`. Their byte equality was checked before
@@ -139,12 +174,13 @@ this assessment states which claims the evidence supports.
 
 ## Remaining work
 
-Complete and independently assess Claude. Resolve in-scope gaps, run final
+Obtain approval for WO-HAG-010, implement its bounded instruction correction,
+and rerun affected native cases. Complete and independently assess Claude. Run final
 source/gate checks, retain handoff evidence and prepare actual commit-bound
 verification. Both hosts must pass all five cases. No omission or changed
 criterion is accepted.
 
-PR #543 stays draft. At last observed remote head `bbae08ab`, Engineering Harness
+PR #543 stays draft. At the earlier observed remote head `7f2a16e1`, Engineering Harness
 CI failed because final handoff evidence is absent; other applicable checks
 passed. That failure is disclosed, not bypassed. The full comparison starts at
 `55caaada508495bea7d97effd27644d1ce8373da`. Released next step:

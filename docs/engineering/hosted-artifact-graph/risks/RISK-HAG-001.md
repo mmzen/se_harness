@@ -11,7 +11,7 @@ action = "Security owner: before Phase 3 authority cutover or untrusted-network 
 raised_by = "operator"
 
 [relations]
-threatens = ["REQ-HAG-006", "WO-HAG-001", "WO-HAG-009"]
+threatens = ["REQ-HAG-006", "WO-HAG-001", "WO-HAG-009", "WO-HAG-010"]
 
 [[lifecycle_events]]
 from = "identified"
