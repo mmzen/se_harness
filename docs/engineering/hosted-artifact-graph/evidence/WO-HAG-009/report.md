@@ -81,6 +81,13 @@ not changes to lifecycle policy or service behavior. Both hosts will run from
 fresh projects with the corrected, digest-checked packages. Earlier runs remain
 observations of the preceding package.
 
+The first corrected-package Claude trial was stopped because the launcher omitted
+the normal `Skill` tool, although plugin skills were listed. Explicit file reads
+were available. The launcher now exposes that instruction loader while retaining
+the approved permission settings and one-call helper. A fresh Claude trial will
+start through the selected hosted setup skill. See [the stop and correction](sonnet02-stop.json)
+and [partial-run inventory](sonnet02-stopped.json). The concurrent Codex run is unaffected.
+
 ## Component and candidate boundaries
 
 The runtime and packaged guidance come from qualified Phase 3 source

@@ -1,0 +1,130 @@
+{
+  "outcome": "partial_trial_stopped_for_test_launcher_correction",
+  "project": "c0a65a1d-9117-4166-b842-8dcca51906cb",
+  "session": {
+    "host": "claude",
+    "exit": 4294967295,
+    "timed_out": false,
+    "elapsed_seconds": 752.866,
+    "reply_dropped": false,
+    "redactions": 0,
+    "events_sha256": "32c3a51a5e0f480e03380ef4f681ed886ff9aa866a67a48844e34cda52fc850c",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "actual_tools": [
+    "Bash",
+    "Edit",
+    "Read",
+    "ToolSearch",
+    "Write",
+    "mcp__hag__check",
+    "mcp__hag__compare",
+    "mcp__hag__cypher",
+    "mcp__hag__impact",
+    "mcp__hag__lineage",
+    "mcp__hag__revision",
+    "mcp__hag__work-context"
+  ],
+  "candidate_skills_listed": [
+    "verity-plane:change",
+    "verity-plane:evidence",
+    "verity-plane:harness-operator-brief",
+    "verity-plane:harness-orient",
+    "verity-plane:setup"
+  ],
+  "stop": "2026-10-07T05:51:06.1829504+02:00; exact Claude child PID 39940, parent 41824. Prior in-flight helper processes had ended before stop.",
+  "finding": "Plugin skills were listed, but the explicitly selected tool set omitted the normal Skill loader. Explicit Read was available. This run does not establish normal skill invocation or final qualification.",
+  "correction": "Add Skill to the native Claude tool set. Retain the exact filesystem/MCP/Bash permission rules and helper; no sandbox bypass or new operation privilege. A fresh trial starts through the selected hosted setup skill, with no workflow request or answers supplied.",
+  "status_after": {
+    "ready": true,
+    "project_id": "c0a65a1d-9117-4166-b842-8dcca51906cb",
+    "schema_revision": 2,
+    "project_version": 8,
+    "evaluator": {
+      "version": "0.22.1",
+      "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+      "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff"
+    },
+    "components": {
+      "client": {
+        "version": "0.22.2",
+        "wheel_sha256": "95079598c5e533a4f51c61db96bdf6572d4a68bcf776c3ee3386462321c850dc"
+      },
+      "database": {
+        "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce",
+        "version": "3.13.1"
+      },
+      "deployment_sha256": "81ed7cd51e35b4795a3de699b2df6e20fa0470867e133e56f7445e5052eb4242",
+      "evaluator": {
+        "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+        "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+        "version": "0.22.1"
+      },
+      "plugins": {
+        "claude": {
+          "archive_sha256": "91d74bf8a5fdd61f39e92ac3a66cae5c7cd03c759168bfa35bc674ae7aa73a71",
+          "inventory_sha256": "7624b69cfba57d7bcad433a6d77fc67da650d643bff32a22abd8c2c390c2c34b",
+          "version": "0.2.7"
+        },
+        "codex": {
+          "archive_sha256": "59d51af950fed1113e84a99d64388e6f7f79233fecb03c02ad8bf50a88049f91",
+          "inventory_sha256": "52ecc0ad3db8dbc8f19d2875c58718d8b09a8fbdccd11c09f2206d80887d2838",
+          "version": "0.2.7"
+        }
+      },
+      "protocols": [
+        "se-harness-remote-command/v1",
+        "se-harness-remote-result/v1",
+        "se-harness-graph-read/v1",
+        "se-harness-artifact-revision/v1",
+        "se-harness-artifact-baseline/v1",
+        "se-harness-lifecycle-command/v2",
+        "se-harness-lifecycle-result/v2",
+        "se-harness-lifecycle-export/v2",
+        "se-harness-graph-read/v2"
+      ],
+      "required_secret_keys": [
+        "principals[].token"
+      ],
+      "runtime": {
+        "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4",
+        "platform": "linux/amd64",
+        "python": "3.13.16"
+      },
+      "schema": "se-harness-hosted-combination/v1",
+      "schema_revision": 2,
+      "server": {
+        "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+        "image_manifest": "sha256:8e84370f46e829635f59d58738930784390594c926de0165b25b9f26353db1df",
+        "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d",
+        "version": "0.1.0.dev1",
+        "wheel_sha256": "164cafae5205ace1bc035a4c668935a80627300b8bae68154085e956f311825b"
+      },
+      "source": {
+        "candidate_commit": "7f2a16e190de183a021adafbf0aa7838ddf7f40a",
+        "repository": "https://github.com/mmzen/se_harness.git"
+      }
+    },
+    "client": {
+      "version": "0.22.2",
+      "wheel_sha256": "95079598c5e533a4f51c61db96bdf6572d4a68bcf776c3ee3386462321c850dc"
+    },
+    "authority_mode": "sandbox-projection",
+    "protocols": [
+      "se-harness-remote-command/v1",
+      "se-harness-remote-result/v1",
+      "se-harness-graph-read/v1",
+      "se-harness-artifact-revision/v1",
+      "se-harness-artifact-baseline/v1",
+      "se-harness-lifecycle-command/v2",
+      "se-harness-lifecycle-result/v2",
+      "se-harness-lifecycle-export/v2",
+      "se-harness-graph-read/v2"
+    ],
+    "database_read_only_enforcement": "deferred: RISK-HAG-001",
+    "test_copy": true,
+    "authority": "rehearsal-only; Git remains authoritative"
+  },
+  "scope": "WO-HAG-009 already authorizes bounded native test-driver corrections. No changed criteria, real decision, release or host-plugin installation."
+}

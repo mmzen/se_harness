@@ -151,7 +151,9 @@ def run(args):
              'headers': {'Authorization': 'Bearer ${HAG_NATIVE_TEST_TOKEN}'}, 'timeout': 180000}}})
         argv = [str(args.executable), '-p', '--no-session-persistence', '--plugin-dir', str(plugin),
                 '--permission-mode', 'auto', '--permission-prompts', 'none',
-                '--tools', 'Read,Write,Edit,Bash,ToolSearch', '--mcp-config', str(output/'mcp.json'),
+                # Keep the normal instruction-loading tool available to the
+                # session-local plugin; file and command permissions still apply.
+                '--tools', 'Read,Write,Edit,Bash,Skill,ToolSearch', '--mcp-config', str(output/'mcp.json'),
                 '--strict-mcp-config', '--output-format', 'stream-json', '--verbose', '--include-hook-events']
         if args.permission_settings:
             argv += ['--settings', str(args.permission_settings.resolve())]
