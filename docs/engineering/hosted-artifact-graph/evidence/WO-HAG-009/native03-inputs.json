@@ -1,0 +1,21 @@
+{
+  "human": "mmzen",
+  "response": "I approve",
+  "review_commit": "bbae08ab461dc57463f18fd76876a4c76f1833ec",
+  "review_path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/retry-review.md",
+  "review_sha256": "f19fdfe9374185edf60cafd3a73c3aa58d133fb32e59d06307543433091407fa",
+  "permission_rules_sha256": "48af73d913845721f895c8266af843c5265ffdbbd960b7ea24346d749874457d",
+  "helper_sha256": "3438927b4e48bed88038f17e564ff6b00f6527d04f8a292338e149165eb2a7b8",
+  "scope": "The exact reviewed temporary native tool permissions and staged test inputs. No new work-order approval or qualification acceptance.",
+  "hosts": {
+    "codex": {
+      "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\codex\\native03",
+      "project_id": "0c07f0af-551e-4962-9743-acf6f1656e42",
+      "source_commit": "5820415917e87b64d80bad2f7c39c6d18d692829",
+      "inventory_sha256": "d2e9321dc4b293c60db9f8b5e748d4eeed144aac0a598586a9f03ccfe3d636a8",
+      "files": 80,
+      "task_sha256": "096aefa8a33ac2d08f88964e8949b43b6ef19a3532487718c1bd1ffd7e176910",
+      "selection_sha256": "e394b3dbf0734a83076a5c81acdbff8d5e485600565a88d7ee6333f6c14cfa87"
+    }
+  }
+}

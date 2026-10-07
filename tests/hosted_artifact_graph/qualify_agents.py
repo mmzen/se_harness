@@ -100,14 +100,30 @@ class ReplyFault:
         self.thread.join()
 
 
+def prepare_output(output, prepared_inputs=False):
+    if not prepared_inputs:
+        output.mkdir(parents=True, exist_ok=False)
+        return
+    if output.is_symlink() or output.is_junction() or not output.is_dir():
+        raise ValueError('Prepared output must be an existing ordinary directory')
+    if {p.name for p in output.iterdir()} != {'inputs', 'work'}:
+        raise ValueError('Prepared output must contain only inputs and empty work')
+    for child in (output/'inputs', output/'work'):
+        if child.is_symlink() or child.is_junction() or not child.is_dir():
+            raise ValueError('Prepared inputs and work must be ordinary directories')
+    if any((output/'work').iterdir()):
+        raise ValueError('Prepared work directory must be empty')
+
+
 def run(args):
     output = args.output.resolve()
-    output.mkdir(parents=True, exist_ok=False)
+    prepare_output(output, args.prepared_inputs)
     settings = json.loads(args.selection.read_text(encoding='utf-8'))
     credentials = json.loads(args.credentials.read_text(encoding='utf-8'))
     secrets = [p['token'] for p in credentials['principals']]
     token = next(p['token'] for p in credentials['principals'] if p['id'] == 'operator')
     env = dict(os.environ, PYTHONUTF8='1', NO_COLOR='1', HAG_NATIVE_TEST_TOKEN=token)
+    env.update(HAG_NATIVE_WORK_DIRECTORY=str(output), HAG_NATIVE_SELECTION=str(output/'selection.json'))
     settings.pop('credentials', None)
     actual_endpoint = settings['endpoint']
     fault = ReplyFault(actual_endpoint, output) if args.drop_reply else None
@@ -137,6 +153,8 @@ def run(args):
                 '--permission-mode', 'auto', '--permission-prompts', 'none',
                 '--tools', 'Read,Write,Edit,Bash,ToolSearch', '--mcp-config', str(output/'mcp.json'),
                 '--strict-mcp-config', '--output-format', 'stream-json', '--verbose', '--include-hook-events']
+        if args.permission_settings:
+            argv += ['--settings', str(args.permission_settings.resolve())]
         if args.model:
             argv += ['--model', args.model]
     argv.append(prompt)
@@ -148,9 +166,12 @@ def run(args):
     before = {'selection': hashlib.sha256(args.selection.read_bytes()).hexdigest(),
               'driver': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'task': hashlib.sha256(args.task.read_bytes()).hexdigest()}
+    if args.permission_settings:
+        before['permission_settings'] = hashlib.sha256(args.permission_settings.read_bytes()).hexdigest()
     save(output/'invocation.json', {'host': args.host, 'argv': argv, 'cwd': str(output),
         'started_at': started, 'timeout_seconds': args.timeout, 'input_sha256': before,
-        'environment_keys_added': ['PYTHONUTF8','NO_COLOR','HAG_NATIVE_TEST_TOKEN'],
+        'environment_keys_added': ['PYTHONUTF8','NO_COLOR','HAG_NATIVE_TEST_TOKEN',
+                                 'HAG_NATIVE_WORK_DIRECTORY','HAG_NATIVE_SELECTION'],
         'claim': 'Observed native calls only; this launcher supplies no workflow requests or decisions.'})
     try:
         with subprocess.Popen(argv, cwd=output, env=env, stdin=subprocess.DEVNULL,
@@ -213,4 +234,6 @@ if __name__ == '__main__':
     parser.add_argument('--model')
     parser.add_argument('--timeout',type=int,default=2700)
     parser.add_argument('--drop-reply',action='store_true')
+    parser.add_argument('--prepared-inputs',action='store_true',help='Use an operator-staged inputs directory and empty work directory')
+    parser.add_argument('--permission-settings',type=Path,help='Exact separately approved Claude session-only settings file')
     raise SystemExit(run(parser.parse_args()))

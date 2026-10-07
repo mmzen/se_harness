@@ -1,13 +1,41 @@
 """Boundaries of the one-call native qualification helper."""
 import argparse
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
 from native_call import contained, remote_argv
+from qualify_agents import prepare_output
+from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_receipt_key_order_is_incidental_but_state_is_not(self):
+        value={'state':{'after':[{'id':'WO-T-001','status':'approved'}]},
+            'restitution':{'current_lifecycle_state':['WO-T-001 is approved.'],
+                          'next':{'procedure_id':'PROC-WO-START','step_id':'STEP-WO-START-PREFLIGHT'}}}
+        stored=json.loads(json.dumps(value,sort_keys=True))
+        self.assertEqual(semantic_assertions(value),semantic_assertions(stored))
+        stored['state']['after'][0]['status']='draft'
+        self.assertNotEqual(semantic_assertions(value),semantic_assertions(stored))
+
+    def test_prepared_run_cannot_overwrite_prior_results(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            (root/'inputs').mkdir(); (root/'work').mkdir()
+            prepare_output(root,True)
+            (root/'events.jsonl').write_text('prior evidence')
+            with self.assertRaises(ValueError): prepare_output(root,True)
+            self.assertEqual((root/'events.jsonl').read_text(),'prior evidence')
+
+    def test_prepared_run_requires_empty_work(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            (root/'inputs').mkdir(); (root/'work').mkdir()
+            (root/'work/request.json').write_text('{}')
+            with self.assertRaises(ValueError): prepare_output(root,True)
+
     def test_path_escape_and_existing_export_refuse(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)

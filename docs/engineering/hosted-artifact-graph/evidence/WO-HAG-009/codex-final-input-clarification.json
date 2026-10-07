@@ -1,0 +1,9 @@
+{
+  "kind": "Synthetic fixture owner inputs made explicit before a fresh run; no operation sequence or completed requests supplied.",
+  "previous_observation": "native03 retained the failed release-owner check without rewriting its ready record.",
+  "work_execution_actor": "test-executor",
+  "verification_preparation_owner": "quality-owner",
+  "release_preparation_owner": "release-owner",
+  "task_sha256": "3de49b97c17ef15b0d06b721021ae8f8c21490ddcf0295e77561b822a6859fd2",
+  "project_id": "4a495f62-50ba-4f69-b120-393685b1d232"
+}
