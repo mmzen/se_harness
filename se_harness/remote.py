@@ -78,7 +78,7 @@ def installed_client(wheel):
     return {"version": __version__, "wheel_sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
 
 
-def send(endpoint, token, method, path, payload=None, timeout=130):
+def send(endpoint, token, method, path, payload=None, timeout=130, *, capture=None):
     if not token or "\r" in token or "\n" in token:
         raise RemoteError("The named secret source contains no usable sandbox credential.")
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), allow_nan=False).encode() if payload is not None else None
@@ -93,12 +93,16 @@ def send(endpoint, token, method, path, payload=None, timeout=130):
             response = exc
         with response:
             raw = response.read(LIMIT + 1)
+            if capture:
+                capture.response(response.status, raw, complete=len(raw) <= LIMIT)
             if len(raw) > LIMIT:
                 raise TransportUncertain("Remote response exceeds 2 MiB; its outcome is unknown.")
             value = json.loads(raw)
             if not isinstance(value, dict):
                 raise TransportUncertain("Remote response is not an object; its outcome is unknown.")
             return response.status, value
+    except TransportUncertain:
+        raise
     except (OSError, urllib.error.URLError, ValueError) as exc:
         # Never include credentials, response bodies, or a guessed refused receipt.
         raise TransportUncertain("Remote transport is uncertain. Look up the original operation key or retry the identical request; do not change its expected versions.") from exc
@@ -119,13 +123,34 @@ def register(commands):
     parser.add_argument("--test-copy", action="store_true", help="explicitly select test data; Git remains authoritative")
     parser.add_argument("--destination", help="new destination for an exact test export")
     parser.add_argument("--json", action="store_true")
+    from se_harness.remote_authoring import register as register_authoring
+    register_authoring(parser)
     parser.set_defaults(handler=run)
 
 
 def run(args):
+    from se_harness.remote_authoring import Capture, TYPED_FIELDS, encoded, file_bytes, revision_request, typed_request
+    capture = None
+    sent = False
+    payload = None
+    token = os.environ.get(args.token_env, "")
     try:
-        token = os.environ.get(args.token_env, "")
+        endpoint_url(args.endpoint)
+        if not token or "\r" in token or "\n" in token:
+            raise RemoteError("The named secret source contains no usable sandbox credential.")
         op = args.operation
+        typed = getattr(args, "typed", False)
+        compact = getattr(args, "compact", False)
+        include_document = getattr(args, "include_document", False)
+        destination = getattr(args, "record_directory", None)
+        if compact and not destination:
+            raise RemoteError("--compact requires --record-directory.")
+        if include_document and (op != "create-artifact" or not compact):
+            raise RemoteError("--include-document requires create-artifact with --compact.")
+        if not typed and any(getattr(args, field, None) is not None for field in TYPED_FIELDS):
+            raise RemoteError("Typed fields require --typed and cannot be mixed with --request.")
+        if typed:
+            payload = typed_request(args)
         if op == "status":
             method, path, payload = "GET", "/v1/status", None
         else:
@@ -138,12 +163,10 @@ def run(args):
                     raise RemoteError("The exact --baseline or --key is required.")
                 method, path, payload = "GET", base + ("/baselines/" if op == "baseline" else "/operations/") + urllib.parse.quote(identifier, safe=""), None
             else:
-                if not args.request:
+                if not typed and not args.request:
                     raise RemoteError("--request must name the explicit versioned request.")
-                source = Path(args.request)
-                if source.stat().st_size > 4 * 1024 * 1024:
-                    raise RemoteError("Request exceeds 4 MiB.")
-                payload = strict_json(source.read_text(encoding="utf-8"))
+                if not typed:
+                    payload = strict_json(file_bytes(args.request, 4 * 1024 * 1024))
                 if not isinstance(payload, dict) or payload.get("project_id", args.project) != args.project:
                     raise RemoteError("Request and selected project disagree.")
                 payload["project_id"] = args.project
@@ -182,14 +205,57 @@ def run(args):
                         payload["view"] = selector
                     route = "reads/" + urllib.parse.quote(str(wanted), safe="")
                 method, path = "POST", base + "/" + route
-        status, result = send(args.endpoint, token, method, path, payload)
+        wire = encoded(payload) if payload is not None else b""
+        if len(wire) > 4 * 1024 * 1024 or token.encode() in wire:
+            raise RemoteError("Oversized request or credential content in request; refused before sending.")
+        if payload and "document_base64" in payload and token.encode() in base64.b64decode(payload["document_base64"], validate=True):
+            raise RemoteError("Credential content in document; refused before sending.")
+        if destination:
+            capture = Capture(destination, token)
+            capture.request(method, path, payload)
+        sent = True
+        if capture:
+            capture.sent = True
+        status, result = send(args.endpoint, token, method, path, payload, **({"capture": capture} if capture else {}))
+        if token in json.dumps(result, ensure_ascii=False):
+            raise RemoteError("Refusing credential content in remote output.")
         if op == "export" and status == 200:
             result = save_export(result, args.destination)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-        return 0 if status == 200 else 1
-    except (RemoteError, OSError, ValueError) as exc:
-        result = {"schema": "se-harness-remote-transport/v1", "outcome": "unknown" if isinstance(exc, TransportUncertain) else "not_sent",
-                  "message": str(exc) if isinstance(exc, RemoteError) else "Invalid local remote-request input."}
+        output = capture.compact(result) if compact else result
+        code = 0 if status == 200 else 1
+        if include_document and status == 200 and result.get("outcome") == "accepted":
+            affected = result.get("affected_artifacts", [])
+            if len(affected) != 1:
+                raise RemoteError("Create response does not select one exact artifact; inspect its retained result.")
+            request = revision_request(args.project, result["view"], affected[0]["artifact_id"], affected[0]["revision_id"])
+            read_path = "/v1/projects/" + urllib.parse.quote(args.project, safe="") + "/reads/revision"
+            capture.request("POST", read_path, request)
+            read_status, document = send(args.endpoint, token, "POST", read_path, request, capture=capture)
+            if (read_status == 200 and (document.get("project_id") != args.project or document.get("view") != result["view"] or
+                    document.get("data", {}).get("revision_id") != affected[0]["revision_id"] or
+                    document.get("data", {}).get("envelope", {}).get("artifact_id") != affected[0]["artifact_id"])):
+                raise RemoteError("Document read differs from the created revision; inspect retained responses.")
+            output["document_read"] = capture.compact(document)
+            if read_status != 200:
+                code = 1
+        if capture:
+            capture.finish(code, result.get("outcome", "response_received"))
+        print(json.dumps(output, ensure_ascii=False, indent=2))
+        return code
+    except (RemoteError, OSError, ValueError, KeyError, TypeError) as exc:
+        unknown = sent or isinstance(exc, TransportUncertain)
+        result = {"schema": "se-harness-remote-transport/v1", "outcome": "unknown" if unknown else "not_sent",
+                  "message": str(exc) if isinstance(exc, RemoteError) else "Invalid remote input or incomplete local capture.",
+                  "operation_key": payload.get("operation_key") if isinstance(payload, dict) else None,
+                  "recovery": "A remote effect may have committed. Inspect retained responses and the original operation key; do not choose a new key." if unknown else None}
+        if token and token in result["message"]:
+            result["message"] = "Remote input or capture failed; credential content withheld."
+        if capture:
+            result["evidence"] = str(capture.path)
+            try:
+                capture.finish(2, result["outcome"])
+            except (OSError, ValueError):
+                result["capture_incomplete"] = True
         print(json.dumps(result), file=sys.stderr)
         return 2
 

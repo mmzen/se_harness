@@ -4,6 +4,20 @@
 
 This package covers the first complete hosted context and draft-authoring sandbox. mmzen approved WO-HAG-001 with required commit-bound verification on 2026-10-04. mmzen subsequently approved all 16 governing definitions in the reviewed Phase 0 artifact package. This index grants no authority.
 
+## Authoring simplification in progress
+
+[WO-HAG-011](work-orders/WO-HAG-011.md) is approved and in progress for reducing instruction
+length, repeated content, calls and elapsed time. It adds client-side file input,
+focused instruction views and concise evidence-backed results. Its package is
+[REQ-HAG-014](requirements/REQ-HAG-014.md),
+[SPEC-HAG-008](specifications/SPEC-HAG-008.md) and
+[VER-HAG-008](verification/VER-HAG-008.md). mmzen approved this package and required commit-bound verification on 2026-10-08.
+
+The change extends the client beyond WO-HAG-009's explanatory/test-driver scope.
+Existing qualification remains in progress and its criteria remain unchanged.
+The proposed timing/context/call goals are reported separately from correctness;
+the package introduces no new KIS gate or lifecycle policy.
+
 ## Phase 3 — Git remains authoritative
 
 The delivered Phase 2 work was verified in [VREC-HAG-004](verification-records/VREC-HAG-004.md)

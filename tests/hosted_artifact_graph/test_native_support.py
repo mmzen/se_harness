@@ -17,6 +17,41 @@ from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_typed_adapter_forwards_inputs_without_encoding_or_choosing_values(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);document=root/'draft.md';document.write_bytes(b'exact')
+            args=argparse.Namespace(operation='revise-artifact',request=None,key=None,destination=None,
+                typed=True,compact=True,include_document=False,record=str(root/'record.json'),
+                document_file=str(document),operation_key='caller-key',expected_project_version='4',
+                context='caller-context',context_version='2',artifact='INT-TST-001',expected_revision='caller-revision')
+            config={'endpoint':'http://127.0.0.1:18080','client_python':'candidate-python','project_id':'selected-project','client_wheel':'candidate.whl'}
+            with patch('native_call.subprocess.run') as run:
+                argv=remote_argv(config,root,args)
+                self.assertEqual(str(document),argv[argv.index('--document-file')+1])
+                self.assertEqual('caller-key',argv[argv.index('--operation-key')+1])
+                self.assertEqual(str(root/'record.json.evidence'),argv[argv.index('--record-directory')+1])
+                self.assertNotIn('--request',argv)
+            run.assert_not_called()
+
+    def test_summary_retains_recovered_native_and_command_failures(self):
+        from summarize_native import summarize
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'work').mkdir()
+            (root/'session.json').write_text(json.dumps({'elapsed_seconds':200}))
+            events=[{'message':{'id':'m1','usage':{'input_tokens':100,'cache_read_input_tokens':200},'content':[
+                {'type':'tool_use','id':'c1','name':'Bash','input':{}}, {'type':'thinking','thinking':'private content'}]}},
+                {'message':{'content':[{'type':'tool_result','tool_use_id':'c1','is_error':True,'content':'denied'}]}},
+                {'message':{'id':'m2','usage':{'input_tokens':50,'cache_read_input_tokens':400},'content':[
+                    {'type':'tool_use','id':'c2','name':'Bash','input':{}}]}}]
+            (root/'events.jsonl').write_text('\n'.join(json.dumps(x) for x in events))
+            for name,code in [('failed',2),('recovered',0)]:
+                (root/'work'/f'{name}.json').write_text(json.dumps({'argv':['client'],'cwd':str(root),'exit':code,'stdout':'','stderr':''}))
+            value=summarize(root)
+            self.assertEqual(2,value['native_calls']);self.assertEqual(450,value['peak_input_context'])
+            self.assertEqual(1,len(value['native_failures']));self.assertEqual(1,len(value['failed_command_records']))
+            self.assertNotIn('private content',json.dumps(value))
+            self.assertEqual('missed',value['goals']['wall_under_180'])
+
     def test_filename_search_is_bounded_ambiguous_and_never_selects(self):
         import hashlib
         with tempfile.TemporaryDirectory() as directory:

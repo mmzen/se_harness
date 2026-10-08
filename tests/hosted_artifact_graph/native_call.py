@@ -15,12 +15,16 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib.parse
 from pathlib import Path
 
 OPERATIONS = ('status','read','import','draft-open','create-artifact','revise-artifact',
               'freeze','rehearse','export','operation')
 MUTATIONS = ('import','draft-open','create-artifact','revise-artifact','freeze','rehearse','export')
+TYPED_OPTIONS = ('evaluator-file','source-manifest','operation-key','expected-project-version',
+                 'work-order','domain','artifact-type','artifact','expected-revision','document-file',
+                 'baseline','context','context-version')
 
 
 def lookup_file(root, config, name):
@@ -192,7 +196,48 @@ def remote_argv(config, root, args):
         if args.operation != 'export':
             raise ValueError('A destination is used only for export')
         argv += ['--destination',str(contained(root,args.destination,new=True))]
+    if getattr(args,'typed',False):
+        argv += ['--typed']
+    for option in TYPED_OPTIONS:
+        value = getattr(args,option.replace('-','_'),None)
+        if value is not None:
+            if option in ('evaluator-file','source-manifest','document-file'):
+                value = str(contained(root,value))
+            argv += ['--'+option,str(value)]
+    if getattr(args,'compact',False):
+        argv += ['--compact','--record-directory',str(contained(root,args.record+'.evidence',new=True))]
+    if getattr(args,'include_document',False):
+        argv += ['--include-document']
     return argv
+
+
+def instructions(root, config, selectors):
+    """Resolve selected staged files, then use the installed public section reader."""
+    if not 1 <= len(selectors) <= 12:
+        raise ValueError('Select 1-12 exact inventory-name#heading values')
+    grouped = {}
+    for selector in selectors:
+        name,sep,heading=selector.partition('#')
+        if not sep or not heading or not name.startswith('released-resources/'):
+            raise ValueError('Select a staged released resource and exact heading')
+        grouped.setdefault(name,[]).append(heading)
+    selected=[]
+    release=json.loads(contained(root,config['configuration']).read_text(encoding='utf-8'))['components']['evaluator']
+    if release['version'] != config['evaluator_version']:
+        raise ValueError('Selected instruction release differs from the evaluator')
+    for name,headings in grouped.items():
+        item=lookup_file(root,config,name)['file']
+        selected.append({'raw':base64.b64encode(Path(item['path']).read_bytes()).decode(),
+            'resource':name.removeprefix('released-resources/'),'path':item['path'],
+            'release':release,'sha256':item['sha256'],'headings':headings})
+    script=('import base64,json,sys; from se_harness.resources import section_view; '
+            'items=json.load(sys.stdin); '
+            'print(json.dumps({"resources":[section_view(base64.b64decode(x.pop("raw")),**x) for x in items]},ensure_ascii=False))')
+    outcome=subprocess.run([config['client_python'],'-I','-c',script],input=json.dumps(selected),
+        cwd=root,capture_output=True,text=True,encoding='utf-8',timeout=30)
+    if outcome.returncode:
+        raise ValueError('Selected instruction view failed: '+outcome.stderr)
+    return json.loads(outcome.stdout)
 
 
 def main():
@@ -204,6 +249,13 @@ def main():
     remote.add_argument('--key',help='Only for remote operation receipt lookup; never for remote read.')
     remote.add_argument('--destination',help='New destination, only for export.')
     remote.add_argument('--record',required=True)
+    remote.add_argument('--typed',action='store_true')
+    remote.add_argument('--compact',action='store_true')
+    remote.add_argument('--include-document',action='store_true')
+    for option in TYPED_OPTIONS:
+        remote.add_argument('--'+option)
+    instruction=commands.add_parser('instructions',help='Read complete selected released sections with provenance')
+    instruction.add_argument('--section',action='append',required=True)
     encoded = commands.add_parser('encode-file')
     encoded.add_argument('path')
     selected = commands.add_parser('read-json', help='Read an exact JSON pointer from a saved result; empty pointer selects its root')
@@ -223,6 +275,9 @@ def main():
     args = parser.parse_args()
     root = Path(os.environ['HAG_NATIVE_WORK_DIRECTORY']).resolve()
     config = json.loads(Path(os.environ['HAG_NATIVE_SELECTION']).read_text(encoding='utf-8'))
+    if args.kind == 'instructions':
+        print(json.dumps(instructions(root,config,args.section),ensure_ascii=False))
+        return 0
     if args.kind == 'lookup-file':
         print(json.dumps(lookup_file(root,config,args.name),ensure_ascii=False))
         return 0
@@ -258,8 +313,10 @@ def main():
               "import runpy,sys;assert runpy.run_path(sys.argv[1])['greeting']()=='Hello rehearsal';print('exact greeting passed')",str(source)]
     else:
         argv=remote_argv(config,root,args)
+    started=time.monotonic()
     outcome=subprocess.run(argv,cwd=root,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=180)
-    value={'argv':argv,'cwd':str(root),'exit':outcome.returncode,'stdout':outcome.stdout,'stderr':outcome.stderr}
+    value={'argv':argv,'cwd':str(root),'exit':outcome.returncode,'stdout':outcome.stdout,'stderr':outcome.stderr,
+           'elapsed_seconds':round(time.monotonic()-started,6)}
     raw=json.dumps(value,indent=2)+'\n'
     token=os.environ.get('HAG_NATIVE_TEST_TOKEN','')
     if token and token in raw:
@@ -269,6 +326,11 @@ def main():
         stream.write(raw)
     with stdout_file.open('x',encoding='utf-8',newline='') as stream:
         stream.write(outcome.stdout)
+    if getattr(args,'compact',False):
+        # Pass through the client's evidence-backed view, without a second summary.
+        print(json.dumps({'record':str(record),'exit':outcome.returncode,'elapsed_seconds':value['elapsed_seconds'],
+                          'stdout_file':str(stdout_file),'stderr':outcome.stderr,'client_view':json.loads(outcome.stdout) if outcome.stdout else None}))
+        return outcome.returncode
     print(json.dumps({'record':str(record),'exit':outcome.returncode,
                       'stdout_file':str(stdout_file),'stderr':outcome.stderr,
                       'result_fields':result_fields(outcome.stdout),

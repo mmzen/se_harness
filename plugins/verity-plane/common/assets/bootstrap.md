@@ -4,12 +4,9 @@ First use the target already selected by the operator.
 
 ## Explicit hosted sandbox
 
-If the operator selected a hosted sandbox, use the setup skill's "Hosted sandbox
-selection" procedure. Retain its endpoint, project and versioned context. Leave
-any existing checkout selection unchanged. This route does not activate or clear
-a checkout, install a repository harness, or switch real authority to the graph.
-After checking the hosted selection, follow harness-orient for reads or change
-for authorized sandbox work. Do not continue into checkout activation.
+If the operator selected a hosted sandbox, follow setup's
+[Hosted selection](../skills/setup/references/hosted-context.md). This is a
+separate route; do not continue into checkout activation.
 
 ## Local checkout
 

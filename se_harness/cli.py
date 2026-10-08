@@ -108,9 +108,12 @@ def _print_json(payload: object) -> None:
 
 
 def _resources(args: argparse.Namespace) -> int:
-    from se_harness.resources import ResourceSet
-    result = ResourceSet(Path(args.target)).query(args.resource, content=args.content)
-    if args.json:
+    from se_harness.resources import ResourceError, ResourceSet
+    if args.section and (args.resource or args.content):
+        raise ResourceError("--section cannot be mixed with --resource or --content")
+    selected = ResourceSet(Path(args.target))
+    result = selected.sections(args.section) if args.section else selected.query(args.resource, content=args.content)
+    if args.json or args.section:
         _print_json(result)
     elif args.content:
         print(result["content"], end="")
@@ -938,6 +941,7 @@ def build_parser() -> argparse.ArgumentParser:
     resources.add_argument("target", nargs="?", default=".")
     resources.add_argument("--resource", help="one resource-relative ID; omit to list available resources")
     resources.add_argument("--content", action="store_true", help="return one resource's text; render project and release for the entry")
+    resources.add_argument("--section", action="append", help="complete RESOURCE#heading with provenance; repeat for up to 12 sections")
     resources.add_argument("--json", action="store_true")
     resources.set_defaults(handler=_resources)
 
