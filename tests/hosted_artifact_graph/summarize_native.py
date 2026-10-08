@@ -10,10 +10,19 @@ from pathlib import Path
 
 
 def summarize(root):
-    session = json.loads((root/'session.json').read_text(encoding='utf-8'))
+    complete = (root/'session.json').is_file()
+    session = json.loads((root/'session.json').read_text(encoding='utf-8')) if complete else {}
     calls, messages, failures, reads = {}, {}, {}, []
-    for line, raw in enumerate((root/'events.jsonl').read_text(encoding='utf-8').splitlines(), 1):
-        event = json.loads(raw)
+    lines = (root/'events.jsonl').read_text(encoding='utf-8').splitlines()
+    partial_line = False
+    for line, raw in enumerate(lines, 1):
+        try:
+            event = json.loads(raw)
+        except ValueError:
+            if complete or line != len(lines):
+                raise
+            partial_line = True
+            break
         message = event.get('message', {})
         if not isinstance(message, dict):
             continue
@@ -27,11 +36,12 @@ def summarize(root):
             if block.get('type') == 'tool_use':
                 key = block['id']
                 if key not in calls:
-                    calls[key] = {'line': line, 'name': block['name']}
+                    calls[key] = {'line': line, 'name': block['name'], 'description': block.get('input', {}).get('description')}
                     if block['name'] == 'Read':
                         reads.append({'line': line, 'path': block.get('input', {}).get('file_path')})
             if block.get('type') == 'tool_result' and block.get('is_error'):
-                failures[block['tool_use_id']] = {'line':line,'call_id':block['tool_use_id'], 'source':'native tool_result is_error'}
+                failures[block['tool_use_id']] = {'line':line,'call_id':block['tool_use_id'], 'source':'native tool_result is_error',
+                    'call':calls.get(block['tool_use_id']), 'diagnostic':str(block.get('content',''))[-1000:]}
         item = event.get('item', {})
         if event.get('type') == 'item.completed' and item.get('type') in ('command_execution','mcp_tool_call'):
             calls[item['id']] = {'line':line,'name':item['type']}
@@ -49,12 +59,14 @@ def summarize(root):
             records.append({'path':str(path),'exit':value['exit'],'elapsed_seconds':value.get('elapsed_seconds'),
                             'argv':value['argv']})
     peak=max((x['tokens'] for x in messages.values()),default=None)
-    wall=session['elapsed_seconds']
-    return {'wall_seconds':wall,'native_calls':len(calls),'calls_by_tool':dict(collections.Counter(x['name'] for x in calls.values())),
+    wall=session.get('elapsed_seconds')
+    return {'snapshot':'complete' if complete else 'in_progress', 'partial_event_line_omitted':partial_line,
+            'wall_seconds':wall,'native_calls':len(calls),'calls_by_tool':dict(collections.Counter(x['name'] for x in calls.values())),
             'model_turns':len(messages) if messages else None,'peak_input_context':peak,
             'initial_input_context':next(iter(messages.values()))['tokens'] if messages else None,
-            'goals':{'wall_under_180':'met' if wall<180 else 'missed','calls_at_most_15':'met' if len(calls)<=15 else 'missed',
-                     'peak_under_40000':'unavailable' if peak is None else 'met' if peak<40000 else 'missed'},
+            'goals':{'wall_under_180':'unavailable' if wall is None else 'met' if wall<180 else 'missed',
+                     'calls_at_most_15':'missed' if len(calls)>15 else 'met' if complete else 'unavailable',
+                     'peak_under_40000':'unavailable' if peak is None else 'missed' if peak>=40000 else 'met' if complete else 'unavailable'},
             'native_failures':list(failures.values()),'command_records':records,
             'failed_command_records':[x for x in records if x['exit']!=0], 'file_reads':reads,
             'repeated_read_paths':{p:n for p,n in collections.Counter(x['path'] for x in reads).items() if n>1},

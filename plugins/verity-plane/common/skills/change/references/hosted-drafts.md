@@ -1,127 +1,81 @@
-## Hosted reading and context
+## Select the drafting instructions
 
-Follow [Hosted selection](../../setup/references/hosted-context.md) once for the current unchanged selection.
+Follow [Hosted selection](../../setup/references/hosted-context.md) once for the
+unchanged selection. Use its separate candidate client and exact baseline or
+context/version. Sandbox draft authority covers only the requested preparation;
+it grants no human decision right and does not change Git authority.
 
-For draft preparation, enter the selected release's
-`docs/engineering/harness/DRAFT_DEFINITIONS.md`: read **Read this when**,
-**Before this action**, and **Draft any missing definitions**
-(`draft-any-missing-definitions`). Follow its prerequisites
-before choosing a type, linking records or writing content. This includes
-`ARTIFACT_AUTHORING.md#design-simplicity` and the selected type's checklist.
-Read these instructions before the command schema. Do not load future lifecycle
-procedures while the current task is drafting.
+Read the selected release's `docs/engineering/harness/DRAFT_DEFINITIONS.md`:
+**Read this when**, **Before this action**, and **Draft any missing definitions**.
+Follow its applicable prerequisites before choosing a type, linking or writing.
+These include `ARTIFACT_AUTHORING.md#design-simplicity` and the type checklist.
+Read instructions before command fields. Load later [lifecycle procedures](hosted-test-lifecycle.md)
+only when the task reaches them; only the released evaluator selects the next step.
 
-Before a lifecycle request, read the current released procedure and its applicable
-prerequisites. Resolve paths against the selected released-resource directory,
-not the test output directory. The command schema supplies fields, not policy.
-Use the selected resource root with its known relative resource ID directly.
-Use lookup only when a file's location is unknown. A full inventory is evidence,
-not a prerequisite reading list. Use actual heading names from instructions or
-an inspected file; do not guess a heading or repeat a failed section selection.
-For raw request mode, read the selected operation schema and referenced
-definitions. For typed mode, read the corresponding CLI/tool-index inputs; the
-client constructs that existing schema. An operation-specific view must
-identify its original schema and preserve its required fields and constraints.
-The [lifecycle reference](hosted-test-lifecycle.md) locates later procedures; only the released evaluator
-determines the next action and whether it is permitted.
+Use the selected resource root and known resource ID directly. Request known
+sections together through an available section reader. It returns complete text
+with source identity; pointers alone do not prove reading. Reuse unchanged content.
+Do not guess headings or load the full inventory. Look up only unknown paths;
+missing, ambiguous or changed sources stop the affected read.
 
-Keep complete requests and results in files. Read only the fields needed for
-the current action, then the required procedure section. Use bounded file reads
-or an available read-only JSON field selector. A selected field is not the full
-result: inspect reported failures, required checks and incomplete-response flags
-before proceeding. Do not read an entire historical transcript into context to
-recover one artifact ID or result.
+## Write only supported claims
 
-Keep a small transient progress note outside the repository when needed. Record
-the current selection, exact last request/result paths, unresolved effects, and
-the evaluator's current procedure/step and instruction references. Cite source
-fields rather than copying large receipts. Update it after inspecting a result.
-After compaction, use it to locate the original evidence and recover current
-context; it grants no authority and does not replace a fresh required check.
+Apply these existing content checks **before submitting the draft**:
 
+- State the request and observed facts. A request for a new draft does not prove
+  that definitions or behavior are absent. Read the relevant existing records
+  before claiming absence; otherwise state that it has not been assessed.
+- Keep operational outcomes separate from acceptance tests when the template
+  requires this. Missing outcome/measure information remains unresolved. Do not
+  invent it, or re-label an acceptance check to make the draft look complete.
+- Check the finished text against the actual template and type checklist.
+  Template admission and zero incomplete fields do not establish content quality.
+  Report a content blocker even when the service accepts the bytes.
 
-An available section reader can return complete selected sections together, with
-source path, heading, release and SHA-256. Choose the sections required by the
-current procedure; a pointer alone is not proof of reading. Reuse unchanged
-content already in context. Missing, ambiguous or changed sources stop the read.
+Imported records, lifecycle history, decisions and evidence remain immutable.
 
-When using a section reader, request the known entry conditions, current step and
-shared prerequisites together. For typed operations, the input table is sufficient
-unless a needed field or constraint is absent; do not also discover raw schemas
-or CLI help for fields already documented there.
+## Submit one selected operation
 
-## Explicit hosted sandbox drafts
+Use the typed inputs in the supplied tool index or
+`docs/notes/harnessctl-reference.md#concise-hosted-authoring`. They are the command
+reference; do not also read raw schemas/help for already documented fields.
+Choose each operation, target, expected versions, key and document yourself.
+Supply the selected evaluator identity file; the client verifies its installed
+wheel. Import is operator-only and uses the configured complete source manifest.
 
-For an explicitly selected hosted sandbox, follow setup's hosted selection first.
-Use its separate candidate client and retain the exact baseline or context/version.
-Sandbox draft authority permits only the requested preparation. It does not change
-repository authority or grant a human decision right.
+Use `--typed --compact --record-directory NEW_DIRECTORY`. For a restricted
+transport helper, use its documented field names and existing permission route.
+Raw `--request FILE` remains available and requires the selected schema plus its
+referenced definitions; a schema view must retain source identity and constraints.
+Do not mix raw and typed inputs or manually encode a typed document. Freeze uses
+raw mode and grants no approval. Explicit IDs permit creation in a new domain;
+automatic allocation requires an existing domain with an evaluable ID token.
 
-Use the installed client's typed mode for one selected operation at a time.
-The supplied tool index or the selected product's
-`docs/notes/harnessctl-reference.md#concise-hosted-authoring` describes the inputs. Select the operation, target,
-expected versions and operation key yourself. Supply the exact evaluator identity
-file from the selected inputs. The client verifies its installed wheel identity.
+After create, inspect `--include-document` or [read that exact revision](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
+The option adds one exact read and saves the template; it performs no further
+mutation. Creation findings alone are not the document. Complete and review one
+draft, submit its full UTF-8 file through `revise-artifact`, and inspect the actual
+view, versions, receipt and findings before creating another. A blocked read or
+incomplete draft must be resolved; another template is not a remedy.
 
-- `draft-open`: selected baseline and work order.
-- `create-artifact`: domain, type, context/version and optional explicit artifact ID.
-- `revise-artifact`: context/version, artifact, expected revision and UTF-8 document file.
-- `import`: operator-only, using the configured complete canonical source manifest.
+## Retain and report the result
 
-Use `--typed --compact --record-directory NEW_DIRECTORY`. `--include-document`
-on create adds one read of that exact returned revision and saves its template.
-Inspect the text before editing. This performs no subsequent mutation. Raw
-`--request FILE` remains available; do not mix it with typed fields. Freeze uses
-raw mode and is no approval. Never manually encode a document for typed mode.
+Keep complete requests/results in files. Read necessary fields and all required
+omitted findings before a conclusion. Avoid full historical transcripts to recover
+one ID. A compact view is not the full result. Retain a small transient progress
+note outside the repository: selection, original result paths, unresolved effects
+and the evaluator's procedure/step. After compaction use it to find evidence and
+recover current context; it grants no authority or substitute for a fresh check.
 
-An explicit artifact ID can create a draft in a new domain. Automatic allocation
-requires an existing domain whose identifier token the evaluator can read.
-Read the actual view, versions, affected revisions, receipt and findings.
-A compact view retains the full response at its evidence path. Read any required
-omitted findings before a conclusion. Imported records and their lifecycle,
-decision and evidence claims stay immutable. A local capture failure after send
-can leave a committed effect; reconcile the original operation key.
+Name the observed method and tool: source inspection, an executed test or an
+evaluator check. Include failures and denials even after recovery. Use available
+mechanical observations before making an exhaustive failure claim; then add your
+content judgement and limits. Cite exact evidence paths. Cite the matching
+inventory/lookup entry for a digest; omit unconfirmed values rather than guess.
 
-### Read and complete the created template
-
-Apply the selected release's drafting sequence to one artifact at a time.
-After `create-artifact`, inspect the `--include-document` result, or use the returned
-`view` and `affected_artifacts` entry to [read that exact revision](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
-Inspect the returned UTF-8 document before editing it; creation findings alone
-are not the document. Complete and review this draft under its type checklist,
-then submit the full document with `revise-artifact` and inspect that result.
-Only then create the next missing artifact. If reading or completing the current
-draft is blocked, stop that step and report the exact error. Creating another
-template does not resolve the failed step.
-
-### Review and report the draft
-
-Before calling a draft complete, read the finished text against its template
-and selected type checklist. Check the claims against the source actually
-inspected. Keep operational success measures separate from acceptance checks
-where the template requires that distinction. An admissible result with no
-incomplete fields is not a content-review verdict; report unmet writing guidance.
-
-For verification or documentation of existing behavior, describe that requested
-evidence or record. Do not claim missing behavior or absent definitions without
-inspecting evidence for that claim. If an operational measure is not supplied,
-report it as unresolved; do not replace it with an acceptance check or invent an
-outcome to make a template look complete.
-
-Report the observed method: source inspection, an executed test, or an evaluator
-check. Include failed and denied calls, their recorded outcomes and any recovery.
-Use exact result paths and fields for evidence. For instruction digests, cite the
-matching lookup or inventory entry; if copying a value, compare that file's own
-entry before reporting it. Omit an unconfirmed digest rather than guess one.
-Retain the original failures even when a later call succeeds.
-Do not call a failure list complete unless compared with the actual records.
-A mechanical summary can supply the operation and failure list; your review
-supplies the content judgement and limits.
-
-After a stale-input refusal, read the current selection and review the change
-before preparing a new request. Do not silently replace expected versions.
-For uncertain transport, use `remote operation --key KEY` with the same
-endpoint/project/credential, or retry the identical request and key. Do not create
-a new key until the previous outcome is resolved. A different request under an
-accepted key is refused. Never fall back to local writes.
-
+After a stale-input refusal, inspect the current selection before making a new
+request; never silently refresh versions. For an uncertain reply or local capture
+failure after send, inspect `remote operation --key KEY` with the same selection
+and credential, or retry identical bytes/key. Do not choose a new key until the
+effect is resolved. Changed bytes under an accepted key are refused. Never fall
+back to local writes.

@@ -47,12 +47,15 @@ key with `remote operation --key KEY --record ABSOLUTE_NEW_RECORD`.
 | --- | --- |
 | Service readiness and selected components | `remote status --record ABSOLUTE_NEW_RECORD` |
 | Local wheel metadata | `identity` |
-| Complete released instruction sections | `instructions --section "RELATIVE_NAME#HEADING"`; repeat for up to 12 sections |
+| Captured calls/failures so far | `observations`; includes recovered and denied native calls, no content verdict |
+| Complete released instruction sections | `instructions --section "RESOURCE_ID#HEADING"`; repeat for up to 12 sections |
 | One unknown input location | `find-file BASENAME --under RELATIVE_DIRECTORY/` |
 | One exact inventory entry | `lookup-file RELATIVE_NAME` |
 | One saved JSON field | `read-json ABSOLUTE_FILE --pointer '"/field"'`; omit pointer for root; optional `--keys` |
 | A raw base64 field | Add `--decode-base64` to that field read |
 | Fixture assertion | `assert-greeting --record ABSOLUTE_NEW_RECORD` |
+
+For `instructions`, use canonical IDs such as `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`. The earlier `released-resources/` inventory prefix also works. Request known sections together.
 
 For known paths, use them directly. Inventory names are relative to the staged
 inputs directory: `released-resources/docs/engineering/ARTIFACT_AUTHORING.md`,
@@ -70,6 +73,8 @@ contract. Original schemas are under `reference/server/contracts/`. Selected
 schema views use `schemas/remote-v1/OPERATION.json` or `schemas/read-v1/OPERATION.json`.
 Each view retains its original pointer/digest. Lifecycle test-copy schemas are
 separate; do not load them for drafting alone. `--key` reads a receipt, not a document.
+
+Use `observations` before the final failure report. It reads existing native event/command captures and identifies the snapshot boundary; subsequent report writes are not yet counted. Keep its paths as evidence instead of copying every command. It supplies no draft text, content judgement or lifecycle decision.
 
 Retain failed calls and recoveries. Template admission is not a content review.
 Report only inspected facts and actual outcomes; distinguish unresolved content

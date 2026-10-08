@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import re
+import runpy
 import subprocess
 import sys
 import time
@@ -218,8 +219,12 @@ def instructions(root, config, selectors):
     grouped = {}
     for selector in selectors:
         name,sep,heading=selector.partition('#')
-        if not sep or not heading or not name.startswith('released-resources/'):
-            raise ValueError('Select a staged released resource and exact heading')
+        if not sep or not heading:
+            raise ValueError('Select a released resource ID and exact heading')
+        # The public resource ID is relative to the selected release root.
+        # Keep the earlier inventory-name spelling compatible without guessing.
+        if not name.startswith('released-resources/'):
+            name = 'released-resources/' + name
         grouped.setdefault(name,[]).append(heading)
     selected=[]
     release=json.loads(contained(root,config['configuration']).read_text(encoding='utf-8'))['components']['evaluator']
@@ -238,6 +243,20 @@ def instructions(root, config, selectors):
     if outcome.returncode:
         raise ValueError('Selected instruction view failed: '+outcome.stderr)
     return json.loads(outcome.stdout)
+
+
+def observations(root, config):
+    """Read the current capture through the one existing mechanical summarizer."""
+    item=lookup_file(root,config,'summarize_native.py')['file']
+    value=runpy.run_path(item['path'])['summarize'](root)
+    # Long command arguments stay in the original records, not another copy.
+    for key in ('command_records','failed_command_records'):
+        value[key]=[{k:v for k,v in record.items() if k!='argv'} for record in value[key]]
+    token=os.environ.get('HAG_NATIVE_TEST_TOKEN','')
+    if token and token in json.dumps(value):
+        raise ValueError('Refusing credential content in observations')
+    value['limits'] += ' This is a read-only snapshot through the current call; later report writes and results are not yet included.'
+    return value
 
 
 def main():
@@ -270,11 +289,15 @@ def main():
     search.add_argument('name')
     search.add_argument('--under',default='',help='Optional relative directory prefix ending in /')
     commands.add_parser('identity')
+    commands.add_parser('observations',help='Read captured calls, failures and metrics so far; no content verdict')
     assertion = commands.add_parser('assert-greeting')
     assertion.add_argument('--record',required=True)
     args = parser.parse_args()
     root = Path(os.environ['HAG_NATIVE_WORK_DIRECTORY']).resolve()
     config = json.loads(Path(os.environ['HAG_NATIVE_SELECTION']).read_text(encoding='utf-8'))
+    if args.kind == 'observations':
+        print(json.dumps(observations(root,config)))
+        return 0
     if args.kind == 'instructions':
         print(json.dumps(instructions(root,config,args.section),ensure_ascii=True))
         return 0

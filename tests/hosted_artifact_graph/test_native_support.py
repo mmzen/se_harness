@@ -17,6 +17,47 @@ from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_live_observations_preserve_failures_without_reasoning_or_final_claim(self):
+        import hashlib
+        from native_call import observations
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);inputs=root/'inputs';inputs.mkdir();(root/'work').mkdir()
+            script=inputs/'summarize_native.py'
+            script.write_bytes(Path(__file__).with_name('summarize_native.py').read_bytes())
+            inventory=inputs/'inventory.json'
+            inventory.write_text(json.dumps({'files':[{'relative':script.name,'path':str(script),'bytes':script.stat().st_size,'sha256':hashlib.sha256(script.read_bytes()).hexdigest()}]}))
+            events=[{'message':{'content':[{'type':'thinking','thinking':'private content'},
+                {'type':'tool_use','id':'failed','name':'Bash','input':{'description':'read selected sections'}}]}},
+                {'message':{'content':[{'type':'tool_result','tool_use_id':'failed','is_error':True,'content':'missing heading'}]}}]
+            (root/'events.jsonl').write_text('\n'.join(json.dumps(x) for x in events)+'\n{"partial":')
+            result=observations(root,{'inputs_inventory':str(inventory)})
+            self.assertEqual('in_progress',result['snapshot']);self.assertIsNone(result['wall_seconds'])
+            self.assertEqual('unavailable',result['goals']['calls_at_most_15'])
+            self.assertTrue(result['partial_event_line_omitted'])
+            self.assertEqual('missing heading',result['native_failures'][0]['diagnostic'])
+            self.assertNotIn('private content',json.dumps(result))
+            self.assertEqual('not performed by this summary',result['content_review'])
+            script.write_bytes(b'raise AssertionError("must not execute changed code")')
+            with self.assertRaises(ValueError):observations(root,{'inputs_inventory':str(inventory)})
+
+    def test_section_resource_ids_and_legacy_inventory_names_resolve_same_source(self):
+        import hashlib
+        from native_call import instructions
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);inputs=root/'inputs';inputs.mkdir()
+            name='released-resources/docs/engineering/guide.md';source=inputs/name;source.parent.mkdir(parents=True)
+            source.write_bytes(b'# Selected\nExact text.\n')
+            inventory=inputs/'inventory.json';inventory.write_text(json.dumps({'files':[{'relative':name,'path':str(source),'bytes':source.stat().st_size,'sha256':hashlib.sha256(source.read_bytes()).hexdigest()}]}))
+            config_file=root/'configuration.json';config_file.write_text(json.dumps({'components':{'evaluator':{'version':'0.22.1'}}}))
+            config={'configuration':str(config_file),'evaluator_version':'0.22.1','inputs_inventory':str(inventory),'client_python':'installed-python'}
+            with patch('native_call.subprocess.run',return_value=subprocess.CompletedProcess([],0,'{}','')) as run:
+                instructions(root,config,['docs/engineering/guide.md#Selected'])
+                first=run.call_args.kwargs['input']
+                instructions(root,config,[name+'#Selected'])
+                self.assertEqual(first,run.call_args.kwargs['input'])
+                with self.assertRaises(ValueError):instructions(root,config,['../guide.md#Selected'])
+                self.assertEqual(2,run.call_count)
+
     def test_typed_adapter_forwards_inputs_without_encoding_or_choosing_values(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);document=root/'draft.md';document.write_bytes(b'exact')
