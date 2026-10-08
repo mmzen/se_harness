@@ -54,6 +54,7 @@ key with `remote operation --key KEY --record ABSOLUTE_NEW_RECORD`.
 | One saved JSON field | `read-json ABSOLUTE_FILE --pointer '"/field"'`; omit pointer for root; optional `--keys` |
 | A raw base64 field | Add `--decode-base64` to that field read |
 | Fixture assertion | `assert-greeting --record ABSOLUTE_NEW_RECORD` |
+| Text when native Read is unavailable | `read-text ABSOLUTE_FILE`; inventoried inputs or work files, at most 64 KiB |
 
 For `instructions`, use canonical IDs such as `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`. The earlier `released-resources/` inventory prefix also works. Request known sections together.
 

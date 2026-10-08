@@ -17,6 +17,38 @@ from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_text_read_is_exact_bounded_and_cannot_read_host_capture(self):
+        import hashlib
+        from native_call import read_text
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);inputs=root/'inputs';inputs.mkdir();work=root/'work';work.mkdir()
+            source=inputs/'skill.md';raw='Exact “UTF-8” text.\r\n'.encode();source.write_bytes(raw)
+            inventory=inputs/'inventory.json';inventory.write_text(json.dumps({'files':[{'relative':'skill.md','path':str(source),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}]}))
+            config={'inputs_inventory':str(inventory)}
+            result=read_text(root,config,source)
+            self.assertEqual(raw,result['text'].encode());self.assertEqual(hashlib.sha256(raw).hexdigest(),result['sha256'])
+            (root/'events.jsonl').write_text('private capture')
+            with self.assertRaises(ValueError):read_text(root,config,work/'../events.jsonl')
+            with self.assertRaises(ValueError):read_text(root,config,root/'events.jsonl')
+            source.write_bytes(b'changed')
+            with self.assertRaises(ValueError):read_text(root,config,source)
+            document=work/'draft.md';document.write_bytes(b'x'*65537)
+            with self.assertRaises(ValueError):read_text(root,config,document)
+            document.write_bytes(b'private-test-token')
+            with patch.dict(os.environ,{'HAG_NATIVE_TEST_TOKEN':'private-test-token'}):
+                with self.assertRaises(ValueError):read_text(root,config,document)
+
+    def test_codex_capture_is_not_a_complete_native_call_count(self):
+        from summarize_native import summarize
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'work').mkdir()
+            (root/'session.json').write_text(json.dumps({'host':'codex','elapsed_seconds':80}))
+            (root/'events.jsonl').write_text('Reading additional input from stdin...\n'+json.dumps({'type':'item.completed','item':{'type':'file_change','id':'c1','status':'completed'}})+'\n')
+            result=summarize(root)
+            self.assertIsNone(result['native_calls']);self.assertIsNone(result['peak_input_context'])
+            self.assertEqual(1,result['observed_tool_items']);self.assertEqual([1],result['non_json_diagnostic_lines'])
+            self.assertEqual('unavailable',result['goals']['calls_at_most_15'])
+
     def test_live_observations_preserve_failures_without_reasoning_or_final_claim(self):
         import hashlib
         from native_call import observations

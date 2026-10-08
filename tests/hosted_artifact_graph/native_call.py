@@ -73,6 +73,24 @@ def find_file(root, config, name, under=''):
             'selection':None,'content_read':False,'instruction':'Choose one exact path. Narrow --under when incomplete; use native Read for content.'}
 
 
+def read_text(root, config, supplied):
+    """Read selected staged text or a work file when the host lacks native Read."""
+    path=contained(root,supplied).resolve()
+    if path.stat().st_size>65536:
+        raise ValueError('Text exceeds 64 KiB; select instruction sections or JSON fields')
+    if path.is_relative_to((root/'inputs').resolve()):
+        name=path.relative_to((root/'inputs').resolve()).as_posix()
+        lookup_file(root,config,name)  # Exact staged bytes; never execute them.
+    elif not path.is_relative_to((root/'work').resolve()):
+        raise ValueError('Text reads are restricted to inventoried inputs or work files')
+    raw=path.read_bytes();token=os.environ.get('HAG_NATIVE_TEST_TOKEN','')
+    if len(raw)>65536:
+        raise ValueError('Text exceeds 64 KiB')
+    if token and token.encode() in raw:
+        raise ValueError('Refusing to read a credential')
+    return {'path':str(path),'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'text':raw.decode('utf-8')}
+
+
 def result_fields(stdout):
     """Render bounded exact JSON fields; list every omitted subtree explicitly."""
     try:
@@ -276,6 +294,8 @@ def main():
     instruction=commands.add_parser('instructions',help='Read complete selected released sections with provenance')
     instruction.add_argument('--section',action='append',required=True)
     encoded = commands.add_parser('encode-file')
+    text=commands.add_parser('read-text',help='Read an inventoried text input or work file, at most 64 KiB')
+    text.add_argument('path')
     encoded.add_argument('path')
     selected = commands.add_parser('read-json', help='Read an exact JSON pointer from a saved result; empty pointer selects its root')
     selected.add_argument('path')
@@ -295,6 +315,9 @@ def main():
     args = parser.parse_args()
     root = Path(os.environ['HAG_NATIVE_WORK_DIRECTORY']).resolve()
     config = json.loads(Path(os.environ['HAG_NATIVE_SELECTION']).read_text(encoding='utf-8'))
+    if args.kind == 'read-text':
+        print(json.dumps(read_text(root,config,args.path)))
+        return 0
     if args.kind == 'observations':
         print(json.dumps(observations(root,config)))
         return 0

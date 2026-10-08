@@ -133,6 +133,16 @@ def run(args):
                     instruction_delivery='session-local plugin' if args.host == 'claude' else 'explicit resource reads')
     save(output/'selection.json', settings)
     prompt = args.task.read_text(encoding='utf-8').replace('SELECTION_FILE', str(output/'selection.json'))
+    if args.host == 'codex' and settings.get('approved_shell_argv_prefix'):
+        prompt += ('\n\n## Codex file discovery\n\n'
+            'If native Read is unavailable, use this existing approved helper prefix:\n\n```json\n'
+            + json.dumps(settings['approved_shell_argv_prefix']) + '\n```\n'
+            'Append `read-json ABSOLUTE_FILE` to read selection.json, or '
+            '`read-text ABSOLUTE_FILE` for an inventoried input or work text file. '
+            'Use native patch/file tools for writing. This host adaptation replaces only '
+            'the unavailable native Read route; keep one helper call per invocation, '
+            'normal permissions, the same selected task and all other restrictions. '
+            'It supplies no workflow operation, request values, draft or decision.\n')
     (output/'task.md').write_text(prompt, encoding='utf-8')
     locator = None
     if args.host == 'claude':

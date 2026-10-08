@@ -13,12 +13,16 @@ def summarize(root):
     complete = (root/'session.json').is_file()
     session = json.loads((root/'session.json').read_text(encoding='utf-8')) if complete else {}
     calls, messages, failures, reads = {}, {}, {}, []
+    non_json_lines = []
     lines = (root/'events.jsonl').read_text(encoding='utf-8').splitlines()
     partial_line = False
     for line, raw in enumerate(lines, 1):
         try:
             event = json.loads(raw)
         except ValueError:
+            if not raw.lstrip().startswith(('{','[')):
+                non_json_lines.append(line)
+                continue
             if complete or line != len(lines):
                 raise
             partial_line = True
@@ -43,7 +47,7 @@ def summarize(root):
                 failures[block['tool_use_id']] = {'line':line,'call_id':block['tool_use_id'], 'source':'native tool_result is_error',
                     'call':calls.get(block['tool_use_id']), 'diagnostic':str(block.get('content',''))[-1000:]}
         item = event.get('item', {})
-        if event.get('type') == 'item.completed' and item.get('type') in ('command_execution','mcp_tool_call'):
+        if event.get('type') == 'item.completed' and item.get('type') in ('command_execution','mcp_tool_call','file_change'):
             calls[item['id']] = {'line':line,'name':item['type']}
             if item.get('exit_code', 0) not in (None,0) or item.get('error'):
                 failures[item['id']] = {'line':line,'call_id':item['id'],'source':'native failed item'}
@@ -60,12 +64,18 @@ def summarize(root):
                             'argv':value['argv']})
     peak=max((x['tokens'] for x in messages.values()),default=None)
     wall=session.get('elapsed_seconds')
+    # Codex JSON omits some orchestrated tool calls. Its item count is a lower
+    # bound, not a complete native-call count or provider context measurement.
+    count_complete=session.get('host') != 'codex' and bool(messages)
     return {'snapshot':'complete' if complete else 'in_progress', 'partial_event_line_omitted':partial_line,
-            'wall_seconds':wall,'native_calls':len(calls),'calls_by_tool':dict(collections.Counter(x['name'] for x in calls.values())),
+            'non_json_diagnostic_lines':non_json_lines,
+            'wall_seconds':wall,'native_calls':len(calls) if count_complete else None,
+            'observed_tool_items':len(calls), 'native_call_count_complete':count_complete,
+            'calls_by_tool':dict(collections.Counter(x['name'] for x in calls.values())),
             'model_turns':len(messages) if messages else None,'peak_input_context':peak,
             'initial_input_context':next(iter(messages.values()))['tokens'] if messages else None,
             'goals':{'wall_under_180':'unavailable' if wall is None else 'met' if wall<180 else 'missed',
-                     'calls_at_most_15':'missed' if len(calls)>15 else 'met' if complete else 'unavailable',
+                     'calls_at_most_15':'missed' if len(calls)>15 else 'met' if complete and count_complete else 'unavailable',
                      'peak_under_40000':'unavailable' if peak is None else 'missed' if peak>=40000 else 'met' if complete else 'unavailable'},
             'native_failures':list(failures.values()),'command_records':records,
             'failed_command_records':[x for x in records if x['exit']!=0], 'file_reads':reads,
