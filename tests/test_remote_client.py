@@ -205,6 +205,17 @@ class AuthoringTests(unittest.TestCase):
                 self.assertEqual('not_sent',json.loads(output.getvalue())['outcome'])
                 transport.assert_not_called()
 
+    def test_unicode_result_survives_a_legacy_windows_console(self):
+        from se_harness.remote import run
+        import contextlib, io
+        value={'message':'“Résumé” — 你好'}
+        buffer=io.BytesIO();console=io.TextIOWrapper(buffer,encoding='cp1252')
+        with mock.patch.dict('os.environ',{'HAG_TEST_TOKEN':'synthetic-secret'}),mock.patch('se_harness.remote.send',return_value=(200,value)),contextlib.redirect_stdout(console):
+            self.assertEqual(0,run(self.args('status')))
+        console.flush()
+        self.assertEqual(value,json.loads(buffer.getvalue()))
+        console.detach()
+
     def test_post_send_capture_failure_is_unknown_not_not_sent(self):
         from se_harness.remote import run
         import contextlib, io

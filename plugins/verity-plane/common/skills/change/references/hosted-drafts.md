@@ -4,7 +4,8 @@ Follow [Hosted selection](../../setup/references/hosted-context.md) once for the
 
 For draft preparation, enter the selected release's
 `docs/engineering/harness/DRAFT_DEFINITIONS.md`: read **Read this when**,
-**Before this action**, and the current drafting step. Follow its prerequisites
+**Before this action**, and **Draft any missing definitions**
+(`draft-any-missing-definitions`). Follow its prerequisites
 before choosing a type, linking records or writing content. This includes
 `ARTIFACT_AUTHORING.md#design-simplicity` and the selected type's checklist.
 Read these instructions before the command schema. Do not load future lifecycle
@@ -13,8 +14,11 @@ procedures while the current task is drafting.
 Before a lifecycle request, read the current released procedure and its applicable
 prerequisites. Resolve paths against the selected released-resource directory,
 not the test output directory. The command schema supplies fields, not policy.
-Use an available file lookup to resolve one named resource; the full inventory
-is evidence, not a prerequisite reading list. For raw request mode, read the selected operation schema and referenced
+Use the selected resource root with its known relative resource ID directly.
+Use lookup only when a file's location is unknown. A full inventory is evidence,
+not a prerequisite reading list. Use actual heading names from instructions or
+an inspected file; do not guess a heading or repeat a failed section selection.
+For raw request mode, read the selected operation schema and referenced
 definitions. For typed mode, read the corresponding CLI/tool-index inputs; the
 client constructs that existing schema. An operation-specific view must
 identify its original schema and preserve its required fields and constraints.
@@ -40,6 +44,11 @@ An available section reader can return complete selected sections together, with
 source path, heading, release and SHA-256. Choose the sections required by the
 current procedure; a pointer alone is not proof of reading. Reuse unchanged
 content already in context. Missing, ambiguous or changed sources stop the read.
+
+When using a section reader, request the known entry conditions, current step and
+shared prerequisites together. For typed operations, the input table is sufficient
+unless a needed field or constraint is absent; do not also discover raw schemas
+or CLI help for fields already documented there.
 
 ## Explicit hosted sandbox drafts
 
@@ -93,12 +102,21 @@ inspected. Keep operational success measures separate from acceptance checks
 where the template requires that distinction. An admissible result with no
 incomplete fields is not a content-review verdict; report unmet writing guidance.
 
+For verification or documentation of existing behavior, describe that requested
+evidence or record. Do not claim missing behavior or absent definitions without
+inspecting evidence for that claim. If an operational measure is not supplied,
+report it as unresolved; do not replace it with an acceptance check or invent an
+outcome to make a template look complete.
+
 Report the observed method: source inspection, an executed test, or an evaluator
 check. Include failed and denied calls, their recorded outcomes and any recovery.
 Use exact result paths and fields for evidence. For instruction digests, cite the
 matching lookup or inventory entry; if copying a value, compare that file's own
 entry before reporting it. Omit an unconfirmed digest rather than guess one.
 Retain the original failures even when a later call succeeds.
+Do not call a failure list complete unless compared with the actual records.
+A mechanical summary can supply the operation and failure list; your review
+supplies the content judgement and limits.
 
 After a stale-input refusal, read the current selection and review the change
 before preparing a new request. Do not silently replace expected versions.

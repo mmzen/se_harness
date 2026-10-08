@@ -232,7 +232,7 @@ def instructions(root, config, selectors):
             'release':release,'sha256':item['sha256'],'headings':headings})
     script=('import base64,json,sys; from se_harness.resources import section_view; '
             'items=json.load(sys.stdin); '
-            'print(json.dumps({"resources":[section_view(base64.b64decode(x.pop("raw")),**x) for x in items]},ensure_ascii=False))')
+            'print(json.dumps({"resources":[section_view(base64.b64decode(x.pop("raw")),**x) for x in items]},ensure_ascii=True))')
     outcome=subprocess.run([config['client_python'],'-I','-c',script],input=json.dumps(selected),
         cwd=root,capture_output=True,text=True,encoding='utf-8',timeout=30)
     if outcome.returncode:
@@ -276,7 +276,7 @@ def main():
     root = Path(os.environ['HAG_NATIVE_WORK_DIRECTORY']).resolve()
     config = json.loads(Path(os.environ['HAG_NATIVE_SELECTION']).read_text(encoding='utf-8'))
     if args.kind == 'instructions':
-        print(json.dumps(instructions(root,config,args.section),ensure_ascii=False))
+        print(json.dumps(instructions(root,config,args.section),ensure_ascii=True))
         return 0
     if args.kind == 'lookup-file':
         print(json.dumps(lookup_file(root,config,args.name),ensure_ascii=False))

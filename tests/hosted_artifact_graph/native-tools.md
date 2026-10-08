@@ -1,49 +1,76 @@
-# Native test tool index
+# Native test tools
 
-Read `selection.json` for the exact `approved_shell_argv_prefix`, project and
-paths. Append one operation below to that prefix per shell call. Use native
-Read/Write/Edit for files. Output directories already exist. Direct client
-commands, directory listing, wrappers and permission changes are not permitted.
-This index lists capabilities; the agent selects the workflow from its task and
-the applicable released instructions.
+Use `selection.json` for the exact `approved_shell_argv_prefix` and absolute
+input/output paths. Append one helper operation per shell call. Use native
+Read/Write/Edit for files. Keep normal permissions: no wrappers, loops, pipes,
+directory listing, direct client commands or permission changes. This index
+describes capabilities; it supplies no workflow or finished artifact.
 
-| Need | Helper operation |
+## Typed authoring
+
+Prefer typed input for the operations below. This table supplies their CLI fields;
+you do not also need their raw schemas or help files unless a needed field is
+missing. Choose the operation, target, versions, key and content yourself.
+
+```text
+remote OPERATION --typed --compact --record ABSOLUTE_NEW_RECORD [FIELDS]
+```
+
+Every typed mutation takes `--operation-key KEY --expected-project-version N
+--evaluator-file FILE`. Use the selected `evaluator_file` path. The fixed adapter
+supplies the selected endpoint/project/token environment and exact installed
+client wheel. The client constructs the existing request and verifies its identity.
+
+| Operation | Other fields |
 | --- | --- |
-| Candidate wheel identity | `identity` returns metadata and SHA-256 only. |
-| One known input path and digest | `lookup-file RELATIVE_NAME` |
-| Locate a filename | `find-file BASENAME` with optional `--under DIRECTORY/`; the trailing slash is required. No wildcards. |
-| Inspect saved JSON | `read-json ABSOLUTE_FILE --pointer '"/field"'`; `--keys` lists names only. Omit the pointer for the root. |
-| Read a base64 document field | Add `--decode-base64` to that exact field read; inspect its text and digest. |
-| Encode authored document bytes | `encode-file ABSOLUTE_DOCUMENT`; not for wheel identity. |
-| Service identity/readiness | `remote status --record ABSOLUTE_NEW_RECORD`; no request file. Status reports `project_version`. |
-| One selected remote operation | `remote OPERATION --request ABSOLUTE_REQUEST --record ABSOLUTE_NEW_RECORD` |
-| Mutation receipt | `remote operation --key KEY --record ABSOLUTE_NEW_RECORD` |
+| `import` | `--source-manifest FILE`; use selected `source_manifest` |
+| `draft-open` | `--baseline ID --work-order WO-ID` |
+| `create-artifact` | `--context UUID --context-version N --domain NAME --artifact-type TYPE`; optional `--artifact ID --include-document` |
+| `revise-artifact` | `--context UUID --context-version N --artifact ID --expected-revision REVISION --document-file FILE` |
+| `read` (revision) | `--artifact ID --expected-revision REVISION` and `--baseline ID` or `--context UUID --context-version N`; no mutation fields |
 
-All draft/request/result paths belong under the selected output directory.
-Read each actual result and its omitted fields as needed. `--record` retains
-complete output; the displayed `result_fields` are bounded exact values, not an
-independent verdict. `remote read` needs a request; `--key` cannot read a document.
+The client never refreshes a version or retries a mutation on its own. Typed and
+raw input cannot be mixed. Documents are exact UTF-8 files. No manual base64 or
+copied client digest is needed. `--include-document` adds one read of the exact
+created revision, returning text or a decoded file path. Inspect it before editing.
 
-## Request discovery
+`--record` retains the command. Its new `.evidence` directory retains exact
+requests/responses and decoded documents. The displayed `client_view` is the
+client's own view. Inspect outcomes and findings; read required omitted content.
+Do not reread a whole receipt just to extract a small field already displayed.
+A capture error after send can leave a committed effect. Reconcile its original
+key with `remote operation --key KEY --record ABSOLUTE_NEW_RECORD`.
 
-After selecting an operation, read its one schema view under `inputs/schemas/`.
-Each view cites its original schema, pointer and digest. No values are supplied.
+## Reads and discovery
 
-| Family | Available operation names |
+| Need | Operation |
 | --- | --- |
-| `remote-v1` | `import`, `draft-open`, `create-artifact`, `revise-artifact`, `freeze` |
-| `read-v1` | `revision`, `work-context`, `compare`, `impact`, `lineage`, `check`, `cypher` |
+| Service readiness and selected components | `remote status --record ABSOLUTE_NEW_RECORD` |
+| Local wheel metadata | `identity` |
+| Complete released instruction sections | `instructions --section "RELATIVE_NAME#HEADING"`; repeat for up to 12 sections |
+| One unknown input location | `find-file BASENAME --under RELATIVE_DIRECTORY/` |
+| One exact inventory entry | `lookup-file RELATIVE_NAME` |
+| One saved JSON field | `read-json ABSOLUTE_FILE --pointer '"/field"'`; omit pointer for root; optional `--keys` |
+| A raw base64 field | Add `--decode-base64` to that field read |
+| Fixture assertion | `assert-greeting --record ABSOLUTE_NEW_RECORD` |
 
-The relative view name is `schemas/FAMILY/OPERATION.json`. Read operations use
-the CLI's `remote read`. The original schemas remain under
-`reference/server/contracts/`. `status` and receipt lookup have no request schema.
-Captured CLI help is `inputs/client-help/OPERATION.txt` for `read`, `operation`,
-`create-artifact` and `revise-artifact`. Other helper syntax is available with
-`--help`; do not guess options. Lifecycle schemas are separate and unnecessary
-for a drafting-only task.
+For known paths, use them directly. Inventory names are relative to the staged
+inputs directory: `released-resources/docs/engineering/ARTIFACT_AUTHORING.md`,
+`source/src/greeting.py`, `client-help/create-artifact.txt`. **Do not add `inputs/`
+to these names.** Native Read takes the absolute path, not an inventory name.
+A digest or lookup is not a content read. Unknown headings must not be guessed;
+read the named file once to locate its actual headings. Request known current
+sections together and reuse unchanged content. A full inventory is not required.
 
-Input names for lookup are relative to `inputs/`: `plugin/verity-plane/skills/`,
-`released-resources/` and `source/`. Read only the required sections after lookup.
-A digest or file search is not a content read. To report a digest, cite its exact
-lookup/inventory entry or copy that entry's own value. Keep complete inputs and
-failures as evidence without loading their entire inventory into context.
+## Other operations
+
+Raw mode remains `remote OPERATION --request ABSOLUTE_FILE --record ABSOLUTE_NEW_RECORD`.
+Use it for operations without typed input, or when explicitly checking a raw
+contract. Original schemas are under `reference/server/contracts/`. Selected
+schema views use `schemas/remote-v1/OPERATION.json` or `schemas/read-v1/OPERATION.json`.
+Each view retains its original pointer/digest. Lifecycle test-copy schemas are
+separate; do not load them for drafting alone. `--key` reads a receipt, not a document.
+
+Retain failed calls and recoveries. Template admission is not a content review.
+Report only inspected facts and actual outcomes; distinguish unresolved content
+from a completed definition. Do not claim an exhaustive failure count from memory.

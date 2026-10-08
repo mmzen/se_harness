@@ -240,7 +240,9 @@ def run(args):
                 code = 1
         if capture:
             capture.finish(code, result.get("outcome", "response_received"))
-        print(json.dumps(output, ensure_ascii=False, indent=2))
+        # ASCII JSON escapes preserve Unicode through Windows legacy consoles.
+        # Exact HTTP/document bytes are retained separately by Capture.
+        print(json.dumps(output, ensure_ascii=True, indent=2))
         return code
     except (RemoteError, OSError, ValueError, KeyError, TypeError) as exc:
         unknown = sent or isinstance(exc, TransportUncertain)
