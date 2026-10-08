@@ -47,8 +47,8 @@ def matches(value, pattern, label):
 
 
 def integer(value, label):
-    if type(value) is not int or value < 0:
-        raise RemoteError("A nonnegative integer is required for " + label + ".")
+    if type(value) is not int or not 0 <= value <= 9223372036854775807:
+        raise RemoteError("An integer from 0 through 9223372036854775807 is required for " + label + ".")
     return value
 
 
@@ -125,7 +125,7 @@ def typed_request(args):
         result["source_manifest"] = manifest(strict_json(file_bytes(args.source_manifest, 4 * 1024 * 1024)))
     elif op == "draft-open":
         result.update(base_baseline_id=matches(args.baseline, r"se-harness-artifact-baseline/v1:sha256:[0-9a-f]{64}", "baseline"),
-                      work_order_id=matches(args.work_order, r"[A-Z]+-[A-Z0-9]+-[0-9]{3,}", "work order"))
+                      work_order_id=matches(args.work_order, r"WO-[A-Z0-9]+-[0-9]{3,}", "work order"))
     else:
         result.update(context_id=identifier(args.context, "context"), expected_context_version=integer(args.context_version, "context version"), artifact_id=artifact)
         if op == "create-artifact":

@@ -193,6 +193,18 @@ class AuthoringTests(unittest.TestCase):
         with self.assertRaises(RemoteError):
             Capture(capture.path,'synthetic-secret')
 
+    def test_wire_version_bounds_and_work_order_type_refuse_before_sending(self):
+        from se_harness.remote import run
+        import contextlib, io
+        for version, work_order in [('9223372036854775808','WO-TST-001'),('1','INT-TST-001')]:
+            args=self.args('draft-open','--typed','--evaluator-file',self.evaluator_file,
+                '--operation-key','chosen','--expected-project-version',version,
+                '--baseline',self.baseline,'--work-order',work_order)
+            with mock.patch.dict('os.environ',{'HAG_TEST_TOKEN':'synthetic-secret'}),mock.patch('se_harness.remote.send') as transport,contextlib.redirect_stderr(io.StringIO()) as output:
+                self.assertEqual(2,run(args))
+                self.assertEqual('not_sent',json.loads(output.getvalue())['outcome'])
+                transport.assert_not_called()
+
     def test_post_send_capture_failure_is_unknown_not_not_sent(self):
         from se_harness.remote import run
         import contextlib, io
