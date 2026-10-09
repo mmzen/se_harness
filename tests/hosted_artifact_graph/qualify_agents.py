@@ -22,6 +22,8 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from native_call import contained, instructions, lookup_file
+
 
 def save(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -115,6 +117,51 @@ def prepare_output(output, prepared_inputs=False):
         raise ValueError('Prepared work directory must be empty')
 
 
+def instruction_entry(root, settings, selectors):
+    """Copy operator-selected canonical sections and manifest pointers, not answers."""
+    view = instructions(root, settings, selectors)
+    manifest_path = contained(root, settings['source_manifest'])
+    name = manifest_path.relative_to(root / 'inputs').as_posix()
+    manifest_entry = lookup_file(root, settings, name)['file']
+    manifest = json.loads(manifest_path.read_bytes())
+    artifacts = manifest['artifacts']
+    if not isinstance(artifacts, list) or len(artifacts) > 100:
+        raise ValueError('Entry requires at most 100 exact source-manifest pointers')
+    pointers, ids = [], set()
+    for artifact in artifacts:
+        item = lookup_file(root, settings, 'source/' + artifact['path'])['file']
+        if (artifact['artifact_id'] in ids or item['bytes'] != artifact['bytes']
+                or item['sha256'] != artifact['raw_sha256']):
+            raise ValueError('Source-manifest identity differs from its staged input')
+        ids.add(artifact['artifact_id'])
+        pointers.append({'id': artifact['artifact_id'], 'path': item['path'],
+                         'sha256': item['sha256']})
+    packet = {'instruction_view': view, 'source_manifest': manifest_entry,
+              'artifact_pointers': pointers,
+              'claim': 'Explicit task inputs, not automatic startup-delivery evidence. '
+                       'Pointers are not artifact content reads.'}
+    parts = ['## Selected instruction entry\n\n'
+             'The following complete canonical sections are already supplied in this context. '
+             'Apply them before commentary and actions. Reuse them while unchanged and retained; '
+             'read additional references only when their conditions apply. '
+             'After compaction, recover this entry from task.md. '
+             + packet['claim'] + '\n']
+    for resource in view['resources']:
+        parts.append('\nSource: ' + json.dumps({k: resource[k] for k in
+                     ('resource', 'path', 'release', 'sha256')}) + '\n')
+        for section in resource['sections']:
+            if 'content' in section:
+                parts.append('\n' + section['content'])
+    parts.append('\n## Existing artifact pointers\n\n'
+                 'These records are available for inspection. Their presence does not '
+                 'establish that they cover this request. Select and read the applicable '
+                 'records before making content claims.\n\n' + json.dumps(pointers) + '\n')
+    text = ''.join(parts)
+    if len(text.encode('utf-8')) > 64 * 1024:
+        raise ValueError('Selected instruction entry exceeds 64 KiB; select narrower sections')
+    return packet, text
+
+
 def run(args):
     output = args.output.resolve()
     prepare_output(output, args.prepared_inputs)
@@ -132,7 +179,13 @@ def run(args):
     settings.update(token_variable='HAG_NATIVE_TEST_TOKEN',
                     instruction_delivery='session-local plugin' if args.host == 'claude' else 'explicit resource reads')
     save(output/'selection.json', settings)
-    prompt = ('Before your first explanation, read the selected task inputs, '
+    preparation_start = time.monotonic()
+    entry = None
+    prompt_prefix = ''
+    if getattr(args, 'instruction_section', None):
+        entry, prompt_prefix = instruction_entry(output, settings, args.instruction_section)
+        save(output/'instruction-entry.json', entry)
+    prompt = prompt_prefix + ('Before your first explanation, read the selected task inputs, '
         'applicable plugin instructions and their required communication policy. '
         'Use the existing file tools below. This explicit test setup does not '
         'establish automatic startup instruction delivery.\n\n'
@@ -147,7 +200,7 @@ def run(args):
             'the unavailable native Read route; keep one helper call per invocation, '
             'normal permissions, the same selected task and all other restrictions. '
             'It supplies no workflow operation, request values, draft or decision.\n')
-    (output/'task.md').write_text(prompt, encoding='utf-8')
+    (output/'task.md').write_bytes(prompt.encode('utf-8'))
     locator = None
     if args.host == 'claude':
         locator = output/'CLAUDE.md'
@@ -155,8 +208,9 @@ def run(args):
         # This supplies no workflow request, state, actor or decision.
         with locator.open('x', encoding='utf-8') as stream:
             stream.write('# Disposable qualification task inputs\n\n'
-                f'Read `{output / "task.md"}` and `{output / "selection.json"}` before acting,\n'
-                'including after compaction. They retain the task, selected inputs and tool boundary.\n'
+                f'The initial prompt is retained in `{output / "task.md"}`. Reuse it while in context;\n'
+                f'read it after compaction. Read `{output / "selection.json"}` before acting.\n'
+                'These files retain the task, selected inputs and tool boundary.\n'
                 'Use the selected candidate plugin skills and their required references for the workflow.\n'
                 'This file supplies no lifecycle procedure or new permission.\n')
             if settings.get('approved_shell_argv_prefix'):
@@ -193,7 +247,10 @@ def run(args):
             argv += ['--settings', str(args.permission_settings.resolve())]
         if args.model:
             argv += ['--model', args.model]
-    argv.append(prompt)
+    # A selected entry can exceed Windows' command-line limit. Both hosts accept
+    # the prompt on stdin; credentials still use the existing environment route.
+    if args.host == 'codex':
+        argv.append('-')
     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
     start = time.monotonic()
     timed_out = threading.Event()
@@ -201,18 +258,23 @@ def run(args):
     stream_path = output/'events.jsonl'
     before = {'selection': hashlib.sha256(args.selection.read_bytes()).hexdigest(),
               'driver': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-              'task': hashlib.sha256(args.task.read_bytes()).hexdigest()}
+              'task': hashlib.sha256(args.task.read_bytes()).hexdigest(),
+              'effective_prompt': hashlib.sha256(prompt.encode('utf-8')).hexdigest()}
     if args.permission_settings:
         before['permission_settings'] = hashlib.sha256(args.permission_settings.read_bytes()).hexdigest()
     if locator:
         before['task_locator'] = hashlib.sha256(locator.read_bytes()).hexdigest()
+    if entry:
+        before['instruction_entry'] = hashlib.sha256((output/'instruction-entry.json').read_bytes()).hexdigest()
     save(output/'invocation.json', {'host': args.host, 'argv': argv, 'cwd': str(output),
         'started_at': started, 'timeout_seconds': args.timeout, 'input_sha256': before,
+        'prompt_file': str(output/'task.md'), 'prompt_transport': 'stdin',
+        'entry_preparation_seconds': round(start-preparation_start, 3),
         'environment_keys_added': ['PYTHONUTF8','NO_COLOR','HAG_NATIVE_TEST_TOKEN',
                                  'HAG_NATIVE_WORK_DIRECTORY','HAG_NATIVE_SELECTION'],
         'claim': 'Observed native calls only; this launcher supplies no workflow requests or decisions.'})
     try:
-        with subprocess.Popen(argv, cwd=output, env=env, stdin=subprocess.DEVNULL,
+        with subprocess.Popen(argv, cwd=output, env=env, stdin=subprocess.PIPE,
                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                               text=True, encoding='utf-8', errors='replace') as child:
             def stop():
@@ -221,6 +283,8 @@ def run(args):
             timer = threading.Timer(args.timeout, stop)
             timer.start()
             try:
+                child.stdin.write(prompt)
+                child.stdin.close()
                 with stream_path.open('x', encoding='utf-8') as stream:
                     for line in child.stdout:
                         for secret in secrets:
@@ -270,6 +334,8 @@ if __name__ == '__main__':
     for name in ('executable','selection','credentials','task','output'):
         parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--model')
+    parser.add_argument('--instruction-section', action='append',
+                        help='Operator-selected canonical RESOURCE_ID#HEADING for the opening context')
     parser.add_argument('--timeout',type=int,default=2700)
     parser.add_argument('--drop-reply',action='store_true')
     parser.add_argument('--prepared-inputs',action='store_true',help='Use an operator-staged inputs directory and empty work directory')

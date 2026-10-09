@@ -12,11 +12,60 @@ from unittest.mock import patch
 from pathlib import Path
 
 from native_call import contained, remote_argv, main, read_json, lookup_file, find_file, result_fields
-from qualify_agents import prepare_output
+from qualify_agents import prepare_output, instruction_entry
 from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_opening_entry_keeps_canonical_bytes_and_only_pointers_to_artifacts(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); inputs = root/'inputs'; inputs.mkdir()
+            artifact = inputs/'source/REQ-TST-001.md'; artifact.parent.mkdir()
+            raw = b'private fixture content, not an opening answer\n'
+            artifact.write_bytes(raw)
+            manifest = inputs/'source-manifest.json'
+            item = {'artifact_id':'REQ-TST-001', 'path':'REQ-TST-001.md',
+                    'bytes':len(raw), 'raw_sha256':hashlib.sha256(raw).hexdigest()}
+            manifest.write_text(json.dumps({'artifacts':[item]}))
+            inventory = inputs/'inventory.json'
+            inventory.write_text(json.dumps({'files':[
+                {'relative':p.relative_to(inputs).as_posix(), 'path':str(p),
+                 'bytes':p.stat().st_size, 'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+                for p in (manifest, artifact)]}))
+            settings = {'source_manifest':str(manifest), 'inputs_inventory':str(inventory)}
+            content = '## Exact section\r\nKeep “these” bytes.\r\n'
+            view = {'resources':[{'resource':'guide.md','path':'selected-release/guide.md',
+                'release':{'version':'0.22.1'},'sha256':'source-sha',
+                'sections':[{'content':content}]}]}
+            with patch('qualify_agents.instructions', return_value=view) as reader:
+                packet, text = instruction_entry(root, settings, ['guide.md#exact-section'])
+                reader.assert_called_once_with(root, settings, ['guide.md#exact-section'])
+                self.assertIn(content, text)
+                self.assertNotIn(raw.decode(), text)
+                self.assertEqual(str(artifact), packet['artifact_pointers'][0]['path'])
+                self.assertEqual(view, packet['instruction_view'])
+                artifact.write_bytes(b'changed')
+                with self.assertRaises(ValueError):
+                    instruction_entry(root, settings, ['guide.md#exact-section'])
+                artifact.write_bytes(raw)
+                item['raw_sha256'] = 'wrong'
+                manifest.write_text(json.dumps({'artifacts':[item]}))
+                entries = json.loads(inventory.read_text())
+                entries['files'][0].update(bytes=manifest.stat().st_size,
+                    sha256=hashlib.sha256(manifest.read_bytes()).hexdigest())
+                inventory.write_text(json.dumps(entries))
+                with self.assertRaisesRegex(ValueError, 'Source-manifest identity'):
+                    instruction_entry(root, settings, ['guide.md#exact-section'])
+                settings['source_manifest'] = str(root/'../outside.json')
+                with self.assertRaises(ValueError):
+                    instruction_entry(root, settings, ['guide.md#exact-section'])
+
+    def test_opening_entry_preserves_instruction_discovery_refusal(self):
+        with patch('qualify_agents.instructions', side_effect=ValueError('ambiguous heading')):
+            with self.assertRaisesRegex(ValueError, 'ambiguous heading'):
+                instruction_entry(Path('.'), {}, ['guide.md#duplicate'])
+
     def test_text_read_is_exact_bounded_and_cannot_read_host_capture(self):
         import hashlib
         from native_call import read_text

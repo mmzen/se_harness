@@ -6,8 +6,11 @@ context/version. Sandbox draft authority covers only the requested preparation;
 it grants no human decision right and does not change Git authority.
 
 Read the selected release's `docs/engineering/harness/DRAFT_DEFINITIONS.md`:
-**Read this when**, **Before this action**, and **Draft any missing definitions**.
-Follow its applicable prerequisites before choosing a type, linking or writing.
+**Read this when**, **Before this action**, and the procedure for the requested
+type. Use **Define how the result will be verified** for a verification contract,
+**Prepare a release or operating contract** for those contracts, and
+**Draft any missing definitions** for other definitions. Follow applicable
+prerequisites before choosing a type, linking or writing.
 These include `ARTIFACT_AUTHORING.md#design-simplicity` and the type checklist.
 Checklist headings use the full type name: `#intent`, `#verification`, or
 `#work_order`, not artifact codes such as `INT`, `VER`, or `WO`.
@@ -17,6 +20,8 @@ only when the task reaches them; only the released evaluator selects the next st
 Use the selected resource root and known resource ID directly. Request known
 sections together through an available section reader. It returns complete text
 with source identity; pointers alone do not prove reading. Reuse unchanged content.
+If the starting context already supplies these exact sections with source identity,
+apply them directly. Read only applicable sections that are still missing.
 Do not guess headings or load the full inventory. Look up only unknown paths;
 missing, ambiguous or changed sources stop the affected read.
 
@@ -31,6 +36,8 @@ Apply these existing content checks **before submitting the draft**:
 - State the request and observed facts. A request for a new draft does not prove
   that definitions or behavior are absent. Read the relevant existing records
   before claiming absence; otherwise state that it has not been assessed.
+  Use selected artifact IDs and exact file pointers to locate existing records;
+  the pointer itself does not establish their meaning or current coverage.
 - Keep operational outcomes separate from acceptance tests when the template
   requires this. Missing outcome/measure information remains unresolved. Do not
   invent it, or re-label an acceptance check to make the draft look complete.

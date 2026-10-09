@@ -6,7 +6,7 @@ Read/Write/Edit for files. Keep normal permissions: no wrappers, loops, pipes,
 directory listing, direct client commands or permission changes. This index
 describes capabilities; it supplies no workflow or finished artifact.
 
-## Typed authoring
+## Draft mutations
 
 Prefer typed input for the operations below. This table supplies their CLI fields;
 you do not also need their raw schemas or help files unless a needed field is
@@ -27,7 +27,6 @@ client wheel. The client constructs the existing request and verifies its identi
 | `draft-open` | `--baseline ID --work-order WO-ID` |
 | `create-artifact` | `--context UUID --context-version N --domain NAME --artifact-type TYPE`; optional `--artifact ID --include-document` |
 | `revise-artifact` | `--context UUID --context-version N --artifact ID --expected-revision REVISION --document-file FILE` |
-| `read` (revision) | `--artifact ID --expected-revision REVISION` and `--baseline ID` or `--context UUID --context-version N`; no mutation fields |
 
 The client never refreshes a version or retries a mutation on its own. Typed and
 raw input cannot be mixed. Documents are exact UTF-8 files. No manual base64 or
@@ -41,6 +40,16 @@ Do not reread a whole receipt just to extract a small field already displayed.
 A capture error after send can leave a committed effect. Reconcile its original
 key with `remote operation --key KEY --record ABSOLUTE_NEW_RECORD`.
 
+## Read one revision
+
+```text
+remote read --typed --compact --record ABSOLUTE_NEW_RECORD --artifact ID --expected-revision REVISION --context UUID --context-version N
+```
+
+For an imported baseline, replace the context fields with `--baseline ID`.
+Reads take no `--operation-key`, `--expected-project-version` or `--evaluator-file`.
+Choose the exact revision and context from the selected inputs or actual results.
+
 ## Reads and discovery
 
 | Need | Operation |
@@ -53,7 +62,6 @@ key with `remote operation --key KEY --record ABSOLUTE_NEW_RECORD`.
 | One exact inventory entry | `lookup-file RELATIVE_NAME` |
 | One saved JSON field | `read-json ABSOLUTE_FILE --pointer '"/field"'`; omit pointer for root; optional `--keys` |
 | A raw base64 field | Add `--decode-base64` to that field read |
-| Fixture assertion | `assert-greeting --record ABSOLUTE_NEW_RECORD` |
 | Text when native Read is unavailable | `read-text ABSOLUTE_FILE`; inventoried inputs or work files, at most 64 KiB |
 
 For `instructions`, use canonical IDs such as `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`. The earlier `released-resources/` inventory prefix also works. Request known sections together.
@@ -67,6 +75,10 @@ to these names.** Native Read takes the absolute path, not an inventory name.
 A digest or lookup is not a content read. Unknown headings must not be guessed;
 read the named file once to locate its actual headings. Request known current
 sections together and reuse unchanged content. A full inventory is not required.
+
+Source inspection and test execution are different actions. Drafting a verification
+contract describes future checks; it does not require running them. If the task
+authorizes execution, use [Execution tools](native-execution-tools.md).
 
 ## Other operations
 
