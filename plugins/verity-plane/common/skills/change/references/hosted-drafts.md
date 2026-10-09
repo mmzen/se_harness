@@ -41,22 +41,28 @@ Do not mix modes or manually encode typed documents. Freeze is raw-only and gran
 no approval. Explicit IDs allow a new domain; automatic allocation requires an
 existing domain with an evaluable ID token.
 
+Before creating a draft, inspect the request and the existing definitions needed
+for its claims. Apply the selected type checklist to those inputs:
+
+| Input check | Proceed only with a supported answer |
+| --- | --- |
+| Existing coverage | Read the definitions for the claimed gap. For missing behavior or checks, inspect the relevant requirements, specifications and verification contracts. Source code or a same-type record cannot establish that those definitions are absent. |
+| Purpose and measure | For an intent, identify the requested improvement in the user's situation and how the owner will observe that benefit. Producing an artifact or confirming an expected program output alone describes preparation or verification, not an operational benefit. If the sources do not supply the benefit or its measure, ask for that input. |
+| Planned evidence | For a verification plan, name the check, pass condition and complete proposed evidence path, including its filename. Resolve any work-order directory used in that path. Distinguish the proposed destination from existing evidence or authority to execute. |
+
+If a required answer is missing, report the exact missing input and stop the
+writing that depends on it. Do not manufacture an answer to fill the template.
+An existing partial draft may stay incomplete; a new template does not resolve
+the missing input. A claim that coverage has not been assessed is different from
+a claim that no definition exists.
+
 After create, inspect `--include-document` or [read the exact revision](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
 The option performs one read and saves the template, with no further mutation.
-Creation findings are not the document. Complete the template using the request
-and selected existing records, then apply its type checklist **to the finished text**:
-
-| Review | Required answer before calling the draft complete |
-| --- | --- |
-| Claims | Identify the source for each claimed problem, outcome and measure. Read existing records before claiming a gap; a request for another draft does not establish absence. |
-| Missing inputs | Identify any required answer the sources do not supply. Leave it unresolved and report the blocker; do not fill the heading with a different answer or treat an acceptance test as an operational success measure. |
-| Planned evidence | Check that a later executor can use the named destination without selecting a work order or filename. Name the planned check and pass condition; do not describe them as executed evidence. |
-
-This is the content review, not an extra review or report. Correct unsupported
-claims before submission. A draft with a missing required input may remain
-incomplete, but must not be called complete. Service admission and zero incomplete
-fields do not answer these content questions. Resolve a blocked read or report it;
-creating another template does not resolve the missing input.
+Creation findings are not the document. Complete the template from the supported
+inputs and check the finished text against the same type checklist. This is one
+content review, recorded in the existing report. Service admission and zero
+incomplete fields do not establish that the answers are supported or complete.
+Resolve a blocked read or report it before continuing.
 
 Submit the full UTF-8 file through `revise-artifact`. Inspect the actual document,
 versions, receipt and findings before starting another draft. Imported records,
