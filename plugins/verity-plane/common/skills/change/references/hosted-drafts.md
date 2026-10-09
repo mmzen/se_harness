@@ -50,11 +50,13 @@ for its claims. Apply the selected type checklist to those inputs:
 | Purpose and measure | For an intent, identify the requested improvement in the user's situation and how the owner will observe that benefit. Producing an artifact or confirming an expected program output alone describes preparation or verification, not an operational benefit. If the sources do not supply the benefit or its measure, ask for that input. |
 | Planned evidence | For a verification plan, name the check, pass condition and complete proposed evidence path, including its filename. Resolve any work-order directory used in that path. Distinguish the proposed destination from existing evidence or authority to execute. |
 
-If a required answer is missing, report the exact missing input and stop the
-writing that depends on it. Do not manufacture an answer to fill the template.
-An existing partial draft may stay incomplete; a new template does not resolve
-the missing input. A claim that coverage has not been assessed is different from
-a claim that no definition exists.
+If a required answer is missing, stop dependent writing and report the exact
+input needed. The request to create an artifact does not supply missing content
+or waive its checklist. Report a requested type that does not fit the supported
+outcome as a mismatch; do not invent a benefit or silently change type.
+A partial draft may remain, but report it as incomplete. Do not call the draft
+complete while a required content finding remains unresolved, even if admission
+passes. Unassessed coverage does not mean that definitions are absent.
 
 After create, inspect `--include-document` or [read the exact revision](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
 The option performs one read and saves the template, with no further mutation.
