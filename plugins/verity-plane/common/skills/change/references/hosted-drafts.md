@@ -60,8 +60,10 @@ After create, inspect `--include-document` or [read the exact revision](../../ha
 The option performs one read and saves the template, with no further mutation.
 Creation findings are not the document. Complete the template from the supported
 inputs and check the finished text against the same type checklist. This is one
-content review, recorded in the existing report. Service admission and zero
-incomplete fields do not establish that the answers are supported or complete.
+content review, recorded in the existing report. For a verification contract,
+confirm that each proposed assertion actually tests its stated pass condition.
+Remove duplicate checks and constraints absent from the governing definitions.
+Service admission and zero incomplete fields do not establish supported content.
 Resolve a blocked read or report it before continuing.
 
 Submit the full UTF-8 file through `revise-artifact`. Inspect the actual document,
