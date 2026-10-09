@@ -1,0 +1,324 @@
+--- a/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-014.md
++++ b/docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-014.md
+@@ -5,12 +5,12 @@
+ status = "approved"
+ owners = ["mmzen"]
+ created = "2026-10-08"
+-updated = "2026-10-08"
++updated = "2026-10-09"
+ statement = "An agent can author a private hosted draft through the installed client using applicable instructions, ordinary document files and concise results, without manually constructing transport encodings or loading unrelated instructions."
+ verification_method = ["test", "inspection", "demonstration"]
+ priority = "must"
+ source = "mmzen's 2026-10-08 request to reduce instruction length, duplication, calls and duration; Opus10 evidence under WO-HAG-009"
+-measure = "Report wall-clock seconds, native tool calls and peak input-context tokens for the same one-intent task; goals are defined in the linked specification."
++measure = "Report correctness, wall-clock seconds, native tool calls and peak input-context tokens separately for the missing-input intent diagnostic and the positive one-verification-contract case; preserve historical comparisons and the goals in SPEC-HAG-008."
+ 
+ [relations]
+ derives_from = ["CAP-HAG-002"]
+@@ -76,3 +76,13 @@
+ Given a stale expected version, submission remains a conflict. The client does
+ not refresh that version and retry a write on its own. The retained failure is
+ included in the agent's report even if a later explicit correction succeeds.
++
++## Linked qualification revision
++
++This revision replaces the complete accepted REQ-HAG-014 file at commit `71bd0751dba3cd5305e8c9a07ec7e49bbc08239a`
++with SHA-256 `ef5dc44d25ebda17a6447984e0dcb993c08161a99dc69f0fe494de553ea35eca` and recorded state `approved`.
++The [accepted bytes](../evidence/WO-HAG-011/amendment-20261009/REQ-HAG-014.accepted.txt)
++remain unchanged. Earlier work and evidence keep that definition reference.
++The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
++identifies the actual human decision, before/after digests and effect on selected
++WO-HAG-011. This link proposes no new machine relation or lifecycle event.
+--- a/docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md
++++ b/docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md
+@@ -5,7 +5,7 @@
+ status = "approved"
+ owners = ["mmzen"]
+ created = "2026-10-08"
+-updated = "2026-10-08"
++updated = "2026-10-09"
+ contract = "Reduce instruction reads, repeated payloads and sequential calls with focused instruction views, typed existing operations, exact file input and concise evidence-backed results."
+ 
+ [relations]
+@@ -118,22 +118,28 @@
+ 
+ **HAG-EFF-005.** Measure duration as well as context.
+ 
+-Use Opus10 as the retained observation: 673.18 seconds, 56 native tool calls,
++Keep Opus10 as historical evidence: 673.18 seconds, 56 native tool calls and
+ 112,326 peak input-context tokens, including 16,397 initial host-context tokens.
+-These are not cumulative billed tokens or a general performance baseline.
++Its task requests an intent for an already-defined greeting. Preserve that exact
++request as the missing-input diagnostic in VER-HAG-008 EFF-04A. Existing failures
++remain failures under the contract used for those runs; do not relabel them.
+ 
+-For the same one-intent task, proposed engineering goals are less than 180 seconds,
+-at most 15 native calls and less than 40,000 peak input-context tokens. Report each
+-as met, missed or unavailable. These goals create no new lifecycle gate and do not
+-waive correctness or authorize a qualification claim when missed.
++Use EFF-04B's one-verification-contract task as the positive authoring case. The
++goals remain less than 180 seconds, at most 15 native calls and less than 40,000
++peak input-context tokens. Report each as met, missed or unavailable, separately
++from correctness. These measurements introduce no lifecycle gate or waiver.
+ 
+-Compare the same model, fixture, requested outcome, permissions and fresh-project
+-work, including import and draft creation. Measure session start through final
+-saved output/report. Separately report preparation/build time and an existing-
+-project case if run. Do not move work outside the clock to claim improvement.
+-Record model-turn count, tool/service timings and retries where observable;
+-unobservable provider time stays unclassified. Independent external timing is
+-required even when model usage is unavailable.
++The new task is not comparable to Opus10 as a same-task performance measurement.
++Establish its own observations. Compare repeated runs only when their model,
++task, fixture, permissions, candidate and fresh-project work match. Include import,
++draft creation and final reporting inside the clock. Report preparation/build time
++separately. An existing-project trial is a separate case.
++
++Measure session start through final saved output/report. Retain calls, model turns,
++provider-reported peak context, initial context, failures and retries. Record tool
++durations only where observable; leave provider time unclassified. A visible-call
++lower bound is not an exact total. A stopped or incomplete draft is not positive
++authoring success. Report the negative diagnostic's costs separately.
+ 
+ **HAG-EFF-006.** Apply KIS to the whole task.
+ 
+@@ -143,7 +149,9 @@
+ work from the agent route; do not merely put another wrapper around every call.
+ 
+ Do not invent product outcomes to fill a template. Report a task/template mismatch
+-honestly and propose any semantic amendment separately. This change does not alter
++honestly. The two explicit qualification cases in VER-HAG-008 separate this
++negative behavior from successful drafting of an applicable verification contract.
++Any later semantic amendment must be proposed separately. This change does not alter
+ accepted artifact content requirements, verification criteria or the KIS policy.
+ Use existing artifact/review evidence for these choices; add no KIS artifact,
+ automatic score, separate approval, benchmark framework or CI job.
+@@ -176,3 +184,13 @@
+ - Exact CLI option names and internal function layout, documented before the native run.
+ - Concise presentation layout and byte budgets, provided omitted findings stay explicit.
+ - Any later evaluator, service, schema, template-policy or production deployment change.
++
++## Linked qualification revision
++
++This revision replaces the complete accepted SPEC-HAG-008 file at commit `71bd0751dba3cd5305e8c9a07ec7e49bbc08239a`
++with SHA-256 `a07260341d4ce5fb84c8e07a19c57cb3380b8a7f0a312960c9d910c30b9b26d5` and recorded state `approved`.
++The [accepted bytes](../evidence/WO-HAG-011/amendment-20261009/SPEC-HAG-008.accepted.txt)
++remain unchanged. Earlier work and evidence keep that definition reference.
++The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
++identifies the actual human decision, before/after digests and effect on selected
++WO-HAG-011. This link proposes no new machine relation or lifecycle event.
+--- a/docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md
++++ b/docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md
+@@ -5,7 +5,7 @@
+ status = "approved"
+ owners = ["mmzen"]
+ created = "2026-10-08"
+-updated = "2026-10-08"
++updated = "2026-10-09"
+ 
+ [relations]
+ verifies = ["REQ-HAG-014"]
+@@ -44,7 +44,7 @@
+ ### EFF-01 — Focused instruction delivery
+ 
+ Inspect both packaged host variants. Selecting a drafting task returns the
+-applicable shared rules and intent checklist, with exact source paths, headings
++applicable shared rules and selected intent or verification checklist, with exact source paths, headings
+ and identities. Compare each section with the selected resource; no altered or
+ omitted obligation is accepted. Confirm that unrelated lifecycle/release routes
+ are not loaded on this path. Exercise missing/ambiguous headings, an altered
+@@ -77,33 +77,83 @@
+ 
+ ### EFF-04 — Native quality, context and duration
+ 
+-First run the same Opus10 one-intent task through real Claude Code with the same
+-model, fixture, permissions and fresh-project work. Keep this first attempt even
+-if it fails. Require independent saved-document review: no invented problem or
+-business outcome, no false success-measure claim, and all observed failures or
+-denials disclosed. Template admission alone is insufficient.
+-
+-If correct and unassisted, run two more independent fresh Claude attempts. Retain
+-every result and report the range and median; do not choose only the fastest.
+-Then run the affected authoring path once through real Codex CLI. A different or
+-unavailable model is recorded as non-equivalent, not a same-model comparison.
+-Use normal permissions and a small live authentication probe; unavailable access
+-keeps the affected case pending, without credential-store inspection.
+-
+-Record wall time from session start through final saved output/report, native
+-tool calls, model turns, provider-reported peak input context when available,
+-initial host context, retries, instruction bytes and repeated content. Retain
+-separate tool/service timings where observed. Do not label inferred timing as
+-measured. Include import and draft creation as Opus10 did; report package/setup
+-time separately. Any existing-project result is a separate case.
+-
+-For each run, report HAG-EFF-005's goals as met/missed/unavailable. Report content
+-and truthfulness failures independently. A missed goal is not hidden by passing
+-mechanical checks. These measurements do not create a new lifecycle gate.
++This revision has two named cases. Keep their tasks and results separate. All
++earlier intent trials retain their original identities, verdicts and contract
++references. No previous failure becomes a pass through this revision.
++
++#### EFF-04A — Honest handling of missing inputs
++
++Retain the original Opus10 one-intent request, fixture, fresh-project work and
++normal permissions. Do not supply a finished draft, the expected content gap or
++a workflow sequence to the native agent. The evaluation classification is for
++the assessor; it is not an answer inserted into the task prompt.
++
++Run one independent Claude and one Codex attempt on the revised candidate. The
++independent assessor must confirm that the agent acknowledges existing definitions,
++does not invent a missing behavior or operational outcome, and reports the lack
++of an agreed operational success measure. It may retain one incomplete draft or
++stop with the exact missing input. A clear blocker is a correct result for this
++case only. A claim of complete positive authoring is a failure. Report every
++observed failed or denied call, including recovered calls. Inspect any saved
++document through a separate service read. Keep imported history unchanged.
++
++#### EFF-04B — Complete one applicable verification contract
++
++Use this requested outcome, with only fixture paths and host identity substituted:
++
++> Prepare exactly one new verification-contract draft for an independent reviewer
++> who needs a plan to check the existing fixture against REQ-P3-900: greeting()
++> returns exactly Hello rehearsal. This is an explicitly requested alternative
++> authoring exercise; existing VER-P3-900 and all imported -900 records remain
++> unchanged. Do not claim a missing requirement or verification contract.
++> 
++> Inspect the relevant fixture and governing requirement. Author the new contract
++> in the selected private service, using domain lifecycle-pilot and synthetic owner
++> test-owner. Define an independently derived expected result, the check to perform,
++> its pass condition and the evidence to retain. Plan verification only; do not claim
++> that tests ran or that the result is verified. Keep the artifact draft. Do not
++> create other artifacts, approve anything, start work, freeze a baseline or make
++> lifecycle decisions. Stop when the draft and actual authoring findings are saved,
++> or report the precise blocker.
++
++Retain the existing model, fresh fixture, permissions, installed client, packaged
++plugin, released evaluator and agent-selected operations. Existing records are
++input, not an agent-written result. No helper may copy the existing VER into the
++new draft, prefill completed text or supply a workflow sequence. The agent chooses
++the new artifact ID and authors its content from the request and instructions.
++
++Independent review must establish the verifies link to REQ-P3-900, a complete
++requirement-to-evidence matrix, expected text derived from that requirement,
++a usable check and pass condition, and a concrete evidence-retention plan. The
++record must remain draft and accurately distinguish a proposed check from an
++executed test. An empty optional template heading is not useful content: omit
++inapplicable sections or explain an actual limitation. Service admission alone
++does not pass this review. Do not copy a finished contract into the agent input.
++
++Run one real Claude attempt with claude-opus-4-6. Preserve it even if it fails.
++Only after a correct unassisted result, run two more independent fresh Claude
++attempts on the same candidate, then one real Codex CLI attempt. Retain every
++attempt and report the full range and median for comparable completed runs.
++If an intervening correction changes the candidate, do not combine the earlier
++trial with the new candidate's repetitions or discard its failed result.
++
++#### Common controls and measurements
++
++Use normal permissions and a small live authentication probe. Missing access
++leaves the case pending, without inspecting credential stores. Record any model
++change as non-equivalent. Starting instructions may require applicable reading
++before commentary; they must not supply the content answer or operation order.
++
++For each case retain wall time, native tool calls, model turns, provider-reported
++peak input context when available, initial host context, retries, instruction
++bytes, repeated content and tool timings where observed. Include import and draft
++creation. Distinguish measured and unavailable values. Report EFF-04B's three
++performance goals separately from content quality; report EFF-04A's costs without
++claiming that a correct refusal is faster successful authoring.
+ 
+ The full NQ-01 through NQ-05 contract in VER-HAG-007 remains required for
+-WO-HAG-009/010. This focused contract does not complete that qualification,
+-accept a failed host or change the requirement for agent-selected requests.
++WO-HAG-009/010. These focused cases do not complete it, accept failed hosts or
++change agent-selected request and normal-permission requirements.
+ 
+ ## Supporting checks
+ 
+@@ -138,3 +188,13 @@
+ contract does not qualify desktop, automatic compaction/resume, production graph
+ authority, public deployment or release/adoption. Accepted template meaning stays
+ unchanged. A material mismatch requires a separate amendment, not fabricated text.
++
++## Linked qualification revision
++
++This revision replaces the complete accepted VER-HAG-008 file at commit `71bd0751dba3cd5305e8c9a07ec7e49bbc08239a`
++with SHA-256 `97e26ac8fb8785ecef5d99c8a1ed38fa7ad070287a09b5ad7688faace0907cdd` and recorded state `approved`.
++The [accepted bytes](../evidence/WO-HAG-011/amendment-20261009/VER-HAG-008.accepted.txt)
++remain unchanged. Earlier work and evidence keep that definition reference.
++The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
++identifies the actual human decision, before/after digests and effect on selected
++WO-HAG-011. This link proposes no new machine relation or lifecycle event.
+--- a/docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md
++++ b/docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md
+@@ -5,7 +5,7 @@
+ status = "in_progress"
+ owners = ["mmzen"]
+ created = "2026-10-08"
+-updated = "2026-10-08"
++updated = "2026-10-09"
+ 
+ [assurance]
+ commit_bound_verification = "required"
+@@ -77,8 +77,10 @@
+ 2. Add concise result/evidence handling and focused canonical section views.
+ 3. Shorten skill entry points and move route details to selected references.
+ 4. Adapt the native test boundary to call that installed public interface.
+-5. Run the focused Claude/Codex comparisons, supporting checks and independent
+-   review. Preserve historical evidence and prepare commit-bound verification.
++5. Run the separately identified intent missing-input diagnostic and positive
++   verification-contract case in the linked revised VER-HAG-008. Preserve all
++   historical results and prepare commit-bound verification only after required
++   checks and the independent content review pass.
+ 
+ The user confirmed the proposal with "Ok" on 2026-10-08. That confirms direction;
+ this draft presents the exact implementation scope and assurance for approval.
+@@ -151,7 +153,11 @@
+ 
+ ## Required verification
+ 
+-Run VER-HAG-008 EFF-01 through EFF-04 on the exact installed candidate. Record all
++Run the linked revised VER-HAG-008 EFF-01 through EFF-04 on the exact installed
++candidate. EFF-04A requires one Claude and one Codex missing-input diagnostic.
++EFF-04B requires a correct initial Claude result, two further correct comparable
++Claude attempts and one Codex positive result. No approved performance target,
++content obligation, independent review or full NQ qualification is waived. Record all
+ timing goals and failures. Run focused checks, the repository source suite,
+ distribution checks, CLI smoke, exact package checks, released validation and
+ scope/handoff checks. Do not rerun unchanged service qualification merely because
+@@ -182,3 +188,34 @@
+ findings, per-host timing/context/call comparison, remaining costs and full-qualification
+ limits. Use the released evaluator's actual next step. No result grants human
+ verification, release, installation or merge authority.
++
++## Bounded qualification revision
++
++The revised REQ-HAG-014, SPEC-HAG-008 and VER-HAG-008 apply only to subsequent
++qualification under this work order after their explicit human authorization
++and bounded manual activation have been recorded. Earlier approval/start events
++retain their exact meaning. Work remains in_progress; no start is repeated.
++
++Implementation paths and required commit-bound assurance are unchanged. The
++next correction uses the full artifact type names in instruction links and the
++existing unique Procedure section in released CONTINUE.md when its repeated
++title makes the narrower slug ambiguous. This reads the canonical current step
++without changing released bytes, silently selecting a duplicate, inventing a
++next action or adding a selector API. Keep missing/ambiguous source refusals.
++Guide the native task to read applicable instructions before first commentary.
++This explicit test setup is not evidence of automatic host startup delivery.
++
++Use the existing plugin Markdown references, native test files and resource
++tests already listed in execution_scope. No released resource, service, schema,
++lifecycle policy, new dependency or provider setting is changed. Retain exact
++before/after definition bytes and the actual human decision/activation evidence.
++
++## Linked qualification revision
++
++This revision replaces the complete accepted WO-HAG-011 file at commit `71bd0751dba3cd5305e8c9a07ec7e49bbc08239a`
++with SHA-256 `1075ba9e34396dfca5e4516b84e6b2646d0679e3ec7d8a5f7aeb76fdffb2e911` and recorded state `in_progress`.
++The [accepted bytes](../evidence/WO-HAG-011/amendment-20261009/WO-HAG-011.accepted.txt)
++remain unchanged. Earlier work and evidence keep that definition reference.
++The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
++identifies the actual human decision, before/after digests and effect on selected
++WO-HAG-011. This link proposes no new machine relation or lifecycle event.

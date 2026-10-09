@@ -214,3 +214,5 @@ human verification decision, public deployment, authority cutover or release.
 ## Efficiency qualification observations
 
 WO-HAG-011 remains in progress. The [implementation assessment](evidence/WO-HAG-011/efficiency-assessment.md) records reduced entry text, client checks, all native attempts, missed goals and unresolved content/discovery findings. No verification or completed host qualification is claimed.
+
+The [qualification amendment review](evidence/WO-HAG-011/amendment-20261009/README.md) proposes separate missing-input and positive verification-contract cases. Its exact replacements are inactive review copies pending an explicit bounded amendment decision.
