@@ -169,6 +169,15 @@ def write_prompt(stream, prompt):
     stream.close()
 
 
+def prompt_pointer(path):
+    """Deliver the task once, through a file read that is visible in the capture."""
+    return (f'Read `{path}` before your first explanation or action. '
+            'It contains the complete task and selected instruction entry. '
+            'Apply that content directly; do not reread it while retained and unchanged. '
+            'After compaction, recover from the same file. '
+            'This explicit test setup is not automatic startup-delivery evidence.')
+
+
 def run(args):
     output = args.output.resolve()
     prepare_output(output, args.prepared_inputs)
@@ -192,8 +201,8 @@ def run(args):
     if getattr(args, 'instruction_section', None):
         entry, prompt_prefix = instruction_entry(output, settings, args.instruction_section)
         save(output/'instruction-entry.json', entry)
-    prompt = prompt_prefix + ('Before your first explanation, read the selected task inputs, '
-        'applicable plugin instructions and their required communication policy. '
+    prompt = prompt_prefix + ('Before your first explanation, apply the supplied sections and read '
+        'only the applicable plugin instructions and prerequisites still missing from context. '
         'Use the existing file tools below. This explicit test setup does not '
         'establish automatic startup instruction delivery.\n\n'
         + args.task.read_text(encoding='utf-8').replace('SELECTION_FILE', str(output/'selection.json')))
@@ -208,6 +217,7 @@ def run(args):
             'normal permissions, the same selected task and all other restrictions. '
             'It supplies no workflow operation, request values, draft or decision.\n')
     (output/'task.md').write_bytes(prompt.encode('utf-8'))
+    initial_prompt = prompt_pointer(output/'task.md')
     locator = None
     if args.host == 'claude':
         locator = output/'CLAUDE.md'
@@ -215,8 +225,8 @@ def run(args):
         # This supplies no workflow request, state, actor or decision.
         with locator.open('x', encoding='utf-8') as stream:
             stream.write('# Disposable qualification task inputs\n\n'
-                f'The initial prompt is retained in `{output / "task.md"}`. Reuse it while in context;\n'
-                f'read it after compaction. Read `{output / "selection.json"}` before acting.\n'
+                + initial_prompt + '\n'
+                f'Read `{output / "selection.json"}` before acting.\n'
                 'These files retain the task, selected inputs and tool boundary.\n'
                 'Use the selected candidate plugin skills and their required references for the workflow.\n'
                 'This file supplies no lifecycle procedure or new permission.\n')
@@ -266,7 +276,8 @@ def run(args):
     before = {'selection': hashlib.sha256(args.selection.read_bytes()).hexdigest(),
               'driver': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'task': hashlib.sha256(args.task.read_bytes()).hexdigest(),
-              'effective_prompt': hashlib.sha256(prompt.encode('utf-8')).hexdigest()}
+              'effective_prompt': hashlib.sha256(initial_prompt.encode('utf-8')).hexdigest(),
+              'task_file': hashlib.sha256(prompt.encode('utf-8')).hexdigest()}
     if args.permission_settings:
         before['permission_settings'] = hashlib.sha256(args.permission_settings.read_bytes()).hexdigest()
     if locator:
@@ -275,7 +286,8 @@ def run(args):
         before['instruction_entry'] = hashlib.sha256((output/'instruction-entry.json').read_bytes()).hexdigest()
     save(output/'invocation.json', {'host': args.host, 'argv': argv, 'cwd': str(output),
         'started_at': started, 'timeout_seconds': args.timeout, 'input_sha256': before,
-        'prompt_file': str(output/'task.md'), 'prompt_transport': 'stdin',
+        'prompt_file': str(output/'task.md'), 'prompt_transport': 'stdin-file-pointer',
+        'initial_prompt': initial_prompt,
         'entry_preparation_seconds': round(start-preparation_start, 3),
         'environment_keys_added': ['PYTHONUTF8','NO_COLOR','HAG_NATIVE_TEST_TOKEN',
                                  'HAG_NATIVE_WORK_DIRECTORY','HAG_NATIVE_SELECTION'],
@@ -290,7 +302,7 @@ def run(args):
             timer = threading.Timer(args.timeout, stop)
             timer.start()
             try:
-                write_prompt(child.stdin, prompt)
+                write_prompt(child.stdin, initial_prompt)
                 with stream_path.open('x', encoding='utf-8') as stream:
                     for line in child.stdout:
                         for secret in secrets:

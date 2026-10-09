@@ -12,11 +12,23 @@ from unittest.mock import patch
 from pathlib import Path
 
 from native_call import contained, remote_argv, main, read_json, lookup_file, find_file, result_fields
-from qualify_agents import prepare_output, instruction_entry, write_prompt
+from qualify_agents import prepare_output, instruction_entry, write_prompt, prompt_pointer
 from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_startup_pointer_leaves_task_bytes_in_one_readable_location(self):
+        with tempfile.TemporaryDirectory() as directory:
+            task = Path(directory)/'task with spaces.md'
+            raw = '## Canonical\r\nExact “instruction”.\nRequested outcome.\n'.encode()
+            task.write_bytes(raw)
+            prompt = prompt_pointer(task)
+            self.assertIn(str(task), prompt)
+            self.assertNotIn(raw.decode(), prompt)
+            self.assertEqual(raw, task.read_bytes())
+            self.assertIn('before your first explanation', prompt)
+            self.assertIn('After compaction', prompt)
+
     def test_native_stdin_preserves_utf8_and_mixed_canonical_line_endings(self):
         raw = '## Exact\nUnicode “text”.\r\nNext.\n'.encode()
         with subprocess.Popen([sys.executable, '-I', '-c',

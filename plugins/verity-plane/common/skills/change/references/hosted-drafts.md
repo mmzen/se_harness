@@ -41,6 +41,13 @@ Apply these existing content checks **before submitting the draft**:
 - Keep operational outcomes separate from acceptance tests when the template
   requires this. Missing outcome/measure information remains unresolved. Do not
   invent it, or re-label an acceptance check to make the draft look complete.
+- Trace each claimed outcome and measure to the request, an existing definition
+  or a requester clarification. An implementation check alone does not supply
+  a required operational measure. Report an unsupported required claim as an
+  open input, even if the template has no empty fields.
+- For planned evidence, name a destination that a later executor can use without
+  choosing an unspecified work order or filename. Distinguish planned locations
+  from evidence that already exists. Do not claim that a planned check ran.
 - Check the finished text against the actual template and type checklist.
   Template admission and zero incomplete fields do not establish content quality.
   Report a content blocker even when the service accepts the bytes.
@@ -83,7 +90,9 @@ recover current context; it grants no authority or substitute for a fresh check.
 Name the observed method and tool: source inspection, an executed test or an
 evaluator check. Include failures and denials even after recovery. Use available
 mechanical observations before making an exhaustive failure claim; then add your
-content judgement and limits. Cite exact evidence paths. Cite the matching
+content judgement and limits. Link to the captured observations instead of
+rewriting their inventories or metrics. One short report may also serve as the
+transient progress note. Cite exact evidence paths. Cite the matching
 inventory/lookup entry for a digest; omit unconfirmed values rather than guess.
 
 After a stale-input refusal, inspect the current selection before making a new
