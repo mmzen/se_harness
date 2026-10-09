@@ -162,6 +162,13 @@ def instruction_entry(root, settings, selectors):
     return packet, text
 
 
+def write_prompt(stream, prompt):
+    """Do not translate canonical LF or CRLF sections on Windows stdin."""
+    stream.reconfigure(newline='')
+    stream.write(prompt)
+    stream.close()
+
+
 def run(args):
     output = args.output.resolve()
     prepare_output(output, args.prepared_inputs)
@@ -283,8 +290,7 @@ def run(args):
             timer = threading.Timer(args.timeout, stop)
             timer.start()
             try:
-                child.stdin.write(prompt)
-                child.stdin.close()
+                write_prompt(child.stdin, prompt)
                 with stream_path.open('x', encoding='utf-8') as stream:
                     for line in child.stdout:
                         for secret in secrets:

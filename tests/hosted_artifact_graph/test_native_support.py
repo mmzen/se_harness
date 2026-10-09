@@ -12,11 +12,22 @@ from unittest.mock import patch
 from pathlib import Path
 
 from native_call import contained, remote_argv, main, read_json, lookup_file, find_file, result_fields
-from qualify_agents import prepare_output, instruction_entry
+from qualify_agents import prepare_output, instruction_entry, write_prompt
 from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_native_stdin_preserves_utf8_and_mixed_canonical_line_endings(self):
+        raw = '## Exact\nUnicode “text”.\r\nNext.\n'.encode()
+        with subprocess.Popen([sys.executable, '-I', '-c',
+                'import sys;sys.stdout.buffer.write(sys.stdin.buffer.read())'],
+                stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                text=True, encoding='utf-8') as child:
+            child.stdin.reconfigure(newline='\r\n')
+            write_prompt(child.stdin, raw.decode())
+            self.assertEqual(raw, child.stdout.buffer.read())
+            self.assertEqual(0, child.wait(timeout=10))
+
     def test_opening_entry_keeps_canonical_bytes_and_only_pointers_to_artifacts(self):
         import hashlib
         with tempfile.TemporaryDirectory() as directory:
