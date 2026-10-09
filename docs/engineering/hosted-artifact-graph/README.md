@@ -6,6 +6,8 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
+The [focused entry assessment](evidence/WO-HAG-011/entry-qualification-assessment.md) records candidate `de65c510021b229519dfce04667704808f0f4fe5`: two of three positive Claude drafts pass content review, all miss efficiency goals, and Codex remains blocked by host shell setup. The work and full qualification remain incomplete. Earlier evidence is preserved.
+
 [WO-HAG-011](work-orders/WO-HAG-011.md) is approved and in progress for reducing instruction
 length, repeated content, calls and elapsed time. It adds client-side file input,
 focused instruction views and concise evidence-backed results. Its package is

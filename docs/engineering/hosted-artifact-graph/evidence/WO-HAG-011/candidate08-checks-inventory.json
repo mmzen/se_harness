@@ -1,0 +1,627 @@
+{
+  "archive": "candidate08-checks.zip",
+  "sha256": "c87c92a893a6b10d4530502809107ca0eea1be112cd65656928f10932d14d4b7",
+  "files": [
+    {
+      "path": "build07-replay.json",
+      "bytes": 7097,
+      "sha256": "06c3a8951e7251a4d0c2697cd4b56587981049ea2fe6e25834457343e5235a3c"
+    },
+    {
+      "path": "build08-replay.json",
+      "bytes": 7097,
+      "sha256": "41312c98a552e094749065fcbdcbe9f44e4295f2f8d4911ec4c69a2b3938755e"
+    },
+    {
+      "path": "candidate-07.json",
+      "bytes": 108,
+      "sha256": "421afc760fd0aeeb13e5668b5d77ff531714d30b41533b013ef317d56aa6c244"
+    },
+    {
+      "path": "candidate-08.json",
+      "bytes": 108,
+      "sha256": "86e3bdf21ea14da18da2183ab3d9a44187df5f08d6929048cb0dd551e75a099e"
+    },
+    {
+      "path": "candidate08-component-review.json",
+      "bytes": 1730,
+      "sha256": "4893bb6c2e39f70955f4ac0ec378e326b7e07d144d07e2b468633e178efcea73"
+    },
+    {
+      "path": "claude-21-baseline-CAP-P3-900.json",
+      "bytes": 3376,
+      "sha256": "e11e824a4df91a16e211e660dfb39eaf78a1a82ed25d885ab93981b813d3dd63"
+    },
+    {
+      "path": "claude-21-baseline-INT-P3-900.json",
+      "bytes": 3416,
+      "sha256": "9910a3bac9d3a887959fbe6ecdeef9796d4c4ca0d43e63197478d74e0f9d9790"
+    },
+    {
+      "path": "claude-21-baseline-REL-P3-900.json",
+      "bytes": 3503,
+      "sha256": "2aa136cb7338c65cbd776799f5ad07e5b669e91567dc278accfec66c70e6bd60"
+    },
+    {
+      "path": "claude-21-baseline-REQ-P3-900.json",
+      "bytes": 3528,
+      "sha256": "a18a961ea84c82129b42b00512af240878145b374d49ec904df11d202c731d73"
+    },
+    {
+      "path": "claude-21-baseline-SPEC-P3-900.json",
+      "bytes": 3530,
+      "sha256": "1eeef411ee826c294e5f59d6a5a45ec5d0e0bcc1e5a2b282a30c82b6a5fca945"
+    },
+    {
+      "path": "claude-21-baseline-VER-P3-900.json",
+      "bytes": 3724,
+      "sha256": "aa3f7c473945f11dfc1e162a6f6e0305910efc22c81f1ce464431906f292314b"
+    },
+    {
+      "path": "claude-21-baseline-WO-P3-900.json",
+      "bytes": 4403,
+      "sha256": "2c16469908c5210d4788e3af0b30b8c4a00bb52cd315d304ae21f0e25c6fde7a"
+    },
+    {
+      "path": "claude-21-containers.json",
+      "bytes": 553,
+      "sha256": "36e50383cf759ed6341bcb057f5b6f0cbc417d20288edf1ec596df48713b1dfc"
+    },
+    {
+      "path": "claude-21-final-status.json",
+      "bytes": 4381,
+      "sha256": "1e9b243d3bac9bfda03c08ab128eb6441d06f2787f8da0381d61425258eca15f"
+    },
+    {
+      "path": "claude-21-independent-read.json",
+      "bytes": 4295,
+      "sha256": "446b1315b02f26ff099d46657dd2093b186256979d6b2289c01ac22ad6014f38"
+    },
+    {
+      "path": "claude-21-stop.json",
+      "bytes": 405,
+      "sha256": "8b71e1ab164e143b688d04f6b170286e143fb8ab16c20b87cd3e758cea33bcf1"
+    },
+    {
+      "path": "claude-21/baseline-CAP-P3-900.json",
+      "bytes": 486,
+      "sha256": "b52d87abeb7a9b2128d69a84c2b67b0961a7bebbfbe22565a0ef461f4d824bde"
+    },
+    {
+      "path": "claude-21/baseline-INT-P3-900.json",
+      "bytes": 486,
+      "sha256": "d3a00feadf4a46bd020802c9fb6982ee4f51016a7fa5ffbd8a9e34df4c4438d0"
+    },
+    {
+      "path": "claude-21/baseline-REL-P3-900.json",
+      "bytes": 486,
+      "sha256": "9ac4606b751090bbaf95a53369a337fa73a537d851fbbd68cd084deb49612a69"
+    },
+    {
+      "path": "claude-21/baseline-REQ-P3-900.json",
+      "bytes": 486,
+      "sha256": "a379610b675f996b3371cccdbf0b03be36ee5932ca59cee621beff8971b4a0b0"
+    },
+    {
+      "path": "claude-21/baseline-SPEC-P3-900.json",
+      "bytes": 487,
+      "sha256": "2ca385a0497a9df34538fcab93c2a05d8092d2a15c612f56824cc8a0eebd92e7"
+    },
+    {
+      "path": "claude-21/baseline-VER-P3-900.json",
+      "bytes": 486,
+      "sha256": "553d78a9c622daf65bd3d25fe1cf915ffe531966690cdd41d3e7a47411ed7a79"
+    },
+    {
+      "path": "claude-21/baseline-WO-P3-900.json",
+      "bytes": 485,
+      "sha256": "e34e0c813eabd2b7c56ed6156b487e0c3833d39bba997557c18f4021ba4c5e47"
+    },
+    {
+      "path": "claude-21/immutable-baseline-review.json",
+      "bytes": 2006,
+      "sha256": "69d26cd39816531de7024838d76adce747caa0c4ea6088547bdaa7b9b6fea2b2"
+    },
+    {
+      "path": "claude-21/independent-assessment.json",
+      "bytes": 2375,
+      "sha256": "183cd726e4a275461112d5d6dfbce292ff3e42063a0862fc949c64d4ad02cef6"
+    },
+    {
+      "path": "claude-21/independent-observation.json",
+      "bytes": 424,
+      "sha256": "8d8ed94402059c24fdbbc4eceabb6710a6df9a11ec0ab37ed609565640ac25f5"
+    },
+    {
+      "path": "claude-21/independent-read-request.json",
+      "bytes": 443,
+      "sha256": "d5da902e7b97789b530c973ff150e75b07863250c2f1b7b9fcfe25af06728c64"
+    },
+    {
+      "path": "claude-21/stage-evidence.json",
+      "bytes": 876,
+      "sha256": "6f47bb2712020ebeac1e9075c34976182972de0ec6a2cbfed37df4b2e74fa341"
+    },
+    {
+      "path": "claude-22-baseline-CAP-P3-900.json",
+      "bytes": 3376,
+      "sha256": "94ba1ba8012f9cee2591dd27e162c14944c3c5656983345b6244ed89a027838b"
+    },
+    {
+      "path": "claude-22-baseline-INT-P3-900.json",
+      "bytes": 3416,
+      "sha256": "1c6e2be15d4a4fb622cde5461fdc6e816dbc247db80dd508f3923cd72928ba94"
+    },
+    {
+      "path": "claude-22-baseline-REL-P3-900.json",
+      "bytes": 3503,
+      "sha256": "684c96d07db89164319ee88c051bb5dbcfe008f61e3e1945ddd6bf1bf8195832"
+    },
+    {
+      "path": "claude-22-baseline-REQ-P3-900.json",
+      "bytes": 3528,
+      "sha256": "1d40a8a22e77306786ce5486595b74e688730c76c2adddbe43133c7e53776547"
+    },
+    {
+      "path": "claude-22-baseline-SPEC-P3-900.json",
+      "bytes": 3530,
+      "sha256": "fdd30ad2fab352a319ce172301cd2c3e6f1da51baea60bbd2999a9761e2b7130"
+    },
+    {
+      "path": "claude-22-baseline-VER-P3-900.json",
+      "bytes": 3724,
+      "sha256": "295dfe0926f08d9904efbb204834245e912be73e8627b4196799fdfde443d0d8"
+    },
+    {
+      "path": "claude-22-baseline-WO-P3-900.json",
+      "bytes": 4403,
+      "sha256": "257317d349c9096c9b3a591834db536af9666a2a4fee0039a11eba56fe95c9d8"
+    },
+    {
+      "path": "claude-22-containers-recheck-recheck.json",
+      "bytes": 553,
+      "sha256": "d863fa6d6457a769472a80443220ac0cdddee2423fecbf397c69c71d00a73284"
+    },
+    {
+      "path": "claude-22-containers-recheck.json",
+      "bytes": 553,
+      "sha256": "f33c6b878caa9cff0681c1227577a57c0337a650f812b3905e80df5de6b8a03e"
+    },
+    {
+      "path": "claude-22-containers.json",
+      "bytes": 553,
+      "sha256": "7ec847ebf17192077aeee95dde6ea2678e118bb1f05251f1c2c4325196aac18e"
+    },
+    {
+      "path": "claude-22-final-status-recheck-recheck.json",
+      "bytes": 4381,
+      "sha256": "c4e9b3ded082383869dc1f46e67f2dbc3cde5ae9ac7febe552d1339c47109a5a"
+    },
+    {
+      "path": "claude-22-final-status-recheck.json",
+      "bytes": 4381,
+      "sha256": "de0678ca3fb317985c0df6161721c80dae603dcabcf080ee313a4e8deedff1cc"
+    },
+    {
+      "path": "claude-22-final-status.json",
+      "bytes": 4381,
+      "sha256": "25c3b1a70c1d51a308707a8df3510ae7a73c5b274d7108d8785d1c73ecb47c9f"
+    },
+    {
+      "path": "claude-22-independent-read.json",
+      "bytes": 4557,
+      "sha256": "0cfd1a4cdf896554f6b34c32d8c47ecdb5638d12dc35a8906332c2f89da97d74"
+    },
+    {
+      "path": "claude-22-stop.json",
+      "bytes": 405,
+      "sha256": "4dd111769a0bb873f0f0453ed79aa4bff26ccb07f4140b7dae67877261fb658f"
+    },
+    {
+      "path": "claude-22/baseline-CAP-P3-900.json",
+      "bytes": 486,
+      "sha256": "8ab4df325cbe19161101f4be6d740318cc8b2854c381f00636b9dd7ed059cd76"
+    },
+    {
+      "path": "claude-22/baseline-INT-P3-900.json",
+      "bytes": 486,
+      "sha256": "d98aec8ec493e9d38a9fea1c1f79cbcbab97e0b4f8e649de57322d5ed367bc24"
+    },
+    {
+      "path": "claude-22/baseline-REL-P3-900.json",
+      "bytes": 486,
+      "sha256": "7905dedff768df7c296670e778582d74908b4c500828a749fc8c368acd50d414"
+    },
+    {
+      "path": "claude-22/baseline-REQ-P3-900.json",
+      "bytes": 486,
+      "sha256": "4617b7245647b6a59bec0278a38b54aaddd6623e559c7419ef89d9bfa8532add"
+    },
+    {
+      "path": "claude-22/baseline-SPEC-P3-900.json",
+      "bytes": 487,
+      "sha256": "ddde8d4b89eedeec0f593f8e5da546ccb2e1c1049da334aa907a42968222b3c4"
+    },
+    {
+      "path": "claude-22/baseline-VER-P3-900.json",
+      "bytes": 486,
+      "sha256": "cdf0ac8ad5af494ffd6df37d1b9607838967004ac4a9743ca3d039915f353693"
+    },
+    {
+      "path": "claude-22/baseline-WO-P3-900.json",
+      "bytes": 485,
+      "sha256": "23642d1d8983039f7fcf870d5b3eed761b5cd0ac890e2e073c93b994f6a6a37d"
+    },
+    {
+      "path": "claude-22/immutable-baseline-review.json",
+      "bytes": 2006,
+      "sha256": "594fd2b99619ac29d3f3b0c81cfb72fa41dc296e8e8ba5a5359448c1f2ebb43d"
+    },
+    {
+      "path": "claude-22/independent-assessment.json",
+      "bytes": 2459,
+      "sha256": "cb9af884dfd98013f5a253225b8ae2713d3a0c0ac842c89e4d673d0a0e971d77"
+    },
+    {
+      "path": "claude-22/independent-observation.json",
+      "bytes": 424,
+      "sha256": "6415dd191dcdff929e1ed5a185d16ea55f0e44e0ce748e40dfed87a9e73a7a9b"
+    },
+    {
+      "path": "claude-22/independent-read-request.json",
+      "bytes": 443,
+      "sha256": "94ec6c0897ff14e5850df20cf10319bc98880246ca92293dc8e191ea6f0f4fe8"
+    },
+    {
+      "path": "claude-22/stage-evidence.json",
+      "bytes": 876,
+      "sha256": "9e15474ce82d0b2619876305e9cfa4562a51b1c4cd9a2dde4a760ef98527fcc8"
+    },
+    {
+      "path": "claude-23-baseline-CAP-P3-900.json",
+      "bytes": 3376,
+      "sha256": "fdf546e255e22fec1d574892c072966a214fb20740694395fd0323d6248a2098"
+    },
+    {
+      "path": "claude-23-baseline-INT-P3-900.json",
+      "bytes": 3416,
+      "sha256": "b447e6a6011525167d8c365559174dbf1c8a4732d61233fb01cb9fef9fb6a9c4"
+    },
+    {
+      "path": "claude-23-baseline-REL-P3-900.json",
+      "bytes": 3503,
+      "sha256": "1c7cda777b5c8837ff3aa406c0d9c5dffe6b8a783982407bb4313a34622e7ca8"
+    },
+    {
+      "path": "claude-23-baseline-REQ-P3-900.json",
+      "bytes": 3528,
+      "sha256": "7b574c4e2ccbb00fc80cc04e7378714886f51dfb1cd268de36dbbbbff40db17b"
+    },
+    {
+      "path": "claude-23-baseline-SPEC-P3-900.json",
+      "bytes": 3530,
+      "sha256": "6bccabf9bb01e4aff39bf2d248ce3113fdd42b58144a860158aacea8cb2025db"
+    },
+    {
+      "path": "claude-23-baseline-VER-P3-900.json",
+      "bytes": 3724,
+      "sha256": "ddefd5e5902f255027d9160a37e509297779a7cb66c678fb37bcab9b26fcc6e6"
+    },
+    {
+      "path": "claude-23-baseline-WO-P3-900.json",
+      "bytes": 4403,
+      "sha256": "886e5e7825fa0d89bb3774b1be0f74f71637256b079fefea0233d6e40b20ab35"
+    },
+    {
+      "path": "claude-23-containers.json",
+      "bytes": 553,
+      "sha256": "cde4d77f2cf838b953ac7dbf38a4878ef37ca98d3ca0f3b6d4ed6c02647cd419"
+    },
+    {
+      "path": "claude-23-final-status.json",
+      "bytes": 4381,
+      "sha256": "b309931a515d0a87bbcea75a88000bc8cb8a1e70af657ca97fa4d06aafe74a8b"
+    },
+    {
+      "path": "claude-23-independent-read.json",
+      "bytes": 4309,
+      "sha256": "f104fcb89c00af211bb9c109b33bd382527d3a76bd35f97f6a068eb29621f191"
+    },
+    {
+      "path": "claude-23-stop.json",
+      "bytes": 405,
+      "sha256": "2371849adad486835164be17722b31a23a38d296e74612c253f5ca99ecd1f61b"
+    },
+    {
+      "path": "claude-23/baseline-CAP-P3-900.json",
+      "bytes": 486,
+      "sha256": "e6bec0c0a3235edc5e210940b2a3cb348540225ab0ce3dd0470e0ac7374a0bec"
+    },
+    {
+      "path": "claude-23/baseline-INT-P3-900.json",
+      "bytes": 486,
+      "sha256": "7644b7c65b6142b0b0b469d9ec9f3ab3ff5f4a8686ce7db448372c76bed00c54"
+    },
+    {
+      "path": "claude-23/baseline-REL-P3-900.json",
+      "bytes": 486,
+      "sha256": "7823e705ceab40046db64ecbabe35668e4ad2142a0b6dfd21f98fd4a7c1428da"
+    },
+    {
+      "path": "claude-23/baseline-REQ-P3-900.json",
+      "bytes": 486,
+      "sha256": "c8f5d9174399c4a0d34bfc6cd7680c91224fdb497fc8f0f812ccca95ce7e2f0d"
+    },
+    {
+      "path": "claude-23/baseline-SPEC-P3-900.json",
+      "bytes": 487,
+      "sha256": "29c44d52b925a0070912433fabe462ffac737016d9de39080c19e705a34233ef"
+    },
+    {
+      "path": "claude-23/baseline-VER-P3-900.json",
+      "bytes": 486,
+      "sha256": "0e99b5e75e7afe295b7a09c7d0842a9434e6b29a33bf0b4e6677c235997ca35f"
+    },
+    {
+      "path": "claude-23/baseline-WO-P3-900.json",
+      "bytes": 485,
+      "sha256": "c9910f62b65f74cb5ddf753278a6b0691af06d9807b62bb613786370b3d36dae"
+    },
+    {
+      "path": "claude-23/immutable-baseline-review.json",
+      "bytes": 2006,
+      "sha256": "ecbe59f8a47cfe96ca9a992a9df4668f5d7667961f7310587b481b6f2158fe46"
+    },
+    {
+      "path": "claude-23/independent-assessment.json",
+      "bytes": 2144,
+      "sha256": "8576173a528770380c079876360b88a95b467f34748164e6948a8db190356297"
+    },
+    {
+      "path": "claude-23/independent-observation.json",
+      "bytes": 424,
+      "sha256": "cdd7cbd33adfdbe88112ce26d1d57085c1e2e6a082e1dcf2f2228b34e7d2f9ca"
+    },
+    {
+      "path": "claude-23/independent-read-request.json",
+      "bytes": 443,
+      "sha256": "962668fceecc5ddc9954149aad7a77f9201898e942d51994027d82d641d990a6"
+    },
+    {
+      "path": "claude-23/stage-evidence.json",
+      "bytes": 876,
+      "sha256": "3214f670ff9476f5eb1134594d46e5a66861f7a3ae74fbc9fa2b37d2c3e126a8"
+    },
+    {
+      "path": "claude-24-baseline-CAP-P3-900.json",
+      "bytes": 3376,
+      "sha256": "14001c97889c8b8e28dd584560e6967298e79198f018b6b294e2c62faca21b50"
+    },
+    {
+      "path": "claude-24-baseline-INT-P3-900.json",
+      "bytes": 3416,
+      "sha256": "468fd3568d0df21f4d5bdb79c3783d090bb78f1e00b5a535b9b4353ce0652752"
+    },
+    {
+      "path": "claude-24-baseline-REL-P3-900.json",
+      "bytes": 3503,
+      "sha256": "f0054a3a56765d77c0c849c70ad17c9ac9f56b24787adb4b8c13ad5c1e0ee94c"
+    },
+    {
+      "path": "claude-24-baseline-REQ-P3-900.json",
+      "bytes": 3528,
+      "sha256": "ac619d3d9c4eb29f74bc028f2ddb30de233e0ec640edd21544315f98318cf1dd"
+    },
+    {
+      "path": "claude-24-baseline-SPEC-P3-900.json",
+      "bytes": 3530,
+      "sha256": "e4bcda7e1b118c4708d9deb6a878b89b1251fa87efdaf52e16a5f5f554d619d0"
+    },
+    {
+      "path": "claude-24-baseline-VER-P3-900.json",
+      "bytes": 3724,
+      "sha256": "dce184f684d46932a5c4414676a7343c2e4c13bb765f7766f1a1245310b4a51a"
+    },
+    {
+      "path": "claude-24-baseline-WO-P3-900.json",
+      "bytes": 4403,
+      "sha256": "1562afc25bc5563f2c515c6f95929459fdd40d385eeb888ab2029288a6e1c642"
+    },
+    {
+      "path": "claude-24-containers.json",
+      "bytes": 553,
+      "sha256": "3858c64950f58c9468354002193c7281bd0af26d89634fbd3c18470d78634ea4"
+    },
+    {
+      "path": "claude-24-final-status.json",
+      "bytes": 4381,
+      "sha256": "d77213355f914a46d855c5d9f7fc209326c36513a2a2441778f305b98cf14fc5"
+    },
+    {
+      "path": "claude-24-independent-read.json",
+      "bytes": 4609,
+      "sha256": "8df7bf48a6cf6d9f89b8a238077881acf945532684dc891eed58b769d06ee961"
+    },
+    {
+      "path": "claude-24-stop.json",
+      "bytes": 405,
+      "sha256": "0e28fccdaa6bd5087409548b7b6da1410ec8d1b2f056d3b0ad6144621c37a21f"
+    },
+    {
+      "path": "claude-24/baseline-CAP-P3-900.json",
+      "bytes": 486,
+      "sha256": "53c4ac3b5d56ef92215370f17bd385e52a8d0ae7f20a867fd8dc00bfdcaa5735"
+    },
+    {
+      "path": "claude-24/baseline-INT-P3-900.json",
+      "bytes": 486,
+      "sha256": "3a3221a2ddb398820053e97144c8d1d6172449137345c947116c849ea04caa42"
+    },
+    {
+      "path": "claude-24/baseline-REL-P3-900.json",
+      "bytes": 486,
+      "sha256": "f35be7574da34eab968aae19ada7b10d4e7b1ff60dc54626d40ea2c6833b9363"
+    },
+    {
+      "path": "claude-24/baseline-REQ-P3-900.json",
+      "bytes": 486,
+      "sha256": "eaccbe531460d8d3fc931c1654214c9d0a964bae64be65ad586b40129b20ecfd"
+    },
+    {
+      "path": "claude-24/baseline-SPEC-P3-900.json",
+      "bytes": 487,
+      "sha256": "7e7786f018f1a25ae499b85a2e133788055c085c9040f968d41d5ddc739e12ed"
+    },
+    {
+      "path": "claude-24/baseline-VER-P3-900.json",
+      "bytes": 486,
+      "sha256": "fac117c2a27dcc6f3e628adf9fe20f9cdd3b32f1f7393bbdd96fcce475d06f0b"
+    },
+    {
+      "path": "claude-24/baseline-WO-P3-900.json",
+      "bytes": 485,
+      "sha256": "b050dbaf76392057668c244cfe036d6b4f886dfc6661924b9a43c7d4f4a061dc"
+    },
+    {
+      "path": "claude-24/immutable-baseline-review.json",
+      "bytes": 2006,
+      "sha256": "bd77481d688fb84ebb7bb2df8249116476da0d3c9e2b9563b7dde1380b066320"
+    },
+    {
+      "path": "claude-24/independent-assessment.json",
+      "bytes": 2144,
+      "sha256": "85ed7a8da48e697a5944916a04af308d75a09810f29d5df1106f57809310bb91"
+    },
+    {
+      "path": "claude-24/independent-observation.json",
+      "bytes": 424,
+      "sha256": "41a7e5e36c3ac2ac80969961c1ebf9975bec7f4f4e42f36354728dd6d0fc7c74"
+    },
+    {
+      "path": "claude-24/independent-read-request.json",
+      "bytes": 443,
+      "sha256": "8aa607c43e2bee746fd58b9ace74beaf954caf70a9bcefc81fdb50d4b2bfc98c"
+    },
+    {
+      "path": "claude-24/stage-evidence.json",
+      "bytes": 876,
+      "sha256": "cbc3f454538e50012dd5c0375e3521aaa3e93bc62be13cf0fd4c8581e722b225"
+    },
+    {
+      "path": "cli-smoke.json",
+      "bytes": 4387,
+      "sha256": "d676b13f1bbdf7159107f99b9f778682cae8d4717cb03a86fa1d8423f1e25555"
+    },
+    {
+      "path": "client-build-07.json",
+      "bytes": 965,
+      "sha256": "2c390dac550ef285058e081056e919cde3ddd3cb0aee45b60da27d0407f1d730"
+    },
+    {
+      "path": "client-build-08.json",
+      "bytes": 965,
+      "sha256": "0cc7b5b2f630d306d97db619b8675a30885ecbbbcf8479ef598478058c97387e"
+    },
+    {
+      "path": "client-env-07.json",
+      "bytes": 459,
+      "sha256": "302a23763275da8df8c26ce7e12d0c32a74da2005adb2c176d633515bc04b43f"
+    },
+    {
+      "path": "client-env-08.json",
+      "bytes": 459,
+      "sha256": "94dc595a9b0420dab56b9f448ab4aebd8d1d69a6da09fcd31a0a66cf0310fa2c"
+    },
+    {
+      "path": "client-install-07.json",
+      "bytes": 1060,
+      "sha256": "a4a888272edebabf731cf9c8c4cb5c7649dac55d9c1fda136898557856678d14"
+    },
+    {
+      "path": "client-install-08.json",
+      "bytes": 1060,
+      "sha256": "03707412a41b8b4c653ca69f3275c816a2f750ee94cad8ff1b6fcafc404c94b6"
+    },
+    {
+      "path": "codex-read-probe.json",
+      "bytes": 764,
+      "sha256": "d41b3912bd8d5409c00d106a1ae081272a0e2ec847185ee8b7839a5456057545"
+    },
+    {
+      "path": "diff-08.json",
+      "bytes": 274,
+      "sha256": "5b74ac817cf2a355de1fd75dd4a1b231046b9222ca7412b4f60ecb921a7435db"
+    },
+    {
+      "path": "diff-check.json",
+      "bytes": 274,
+      "sha256": "9b5a1ac17237c06af4313b4f9a6bdf256a8312ea4598aa0ee0cdce7730b52c4a"
+    },
+    {
+      "path": "distributions.json",
+      "bytes": 505,
+      "sha256": "6ad749c3de5a8c3f6e1be84cf64d206dc78e7d9d23b27f52c0f20306d5048776"
+    },
+    {
+      "path": "entry-native-metrics.json",
+      "bytes": 52127,
+      "sha256": "315d27ce64aa39e8486b93f5925991404b19cd7b3598fe610607908fad5d3880"
+    },
+    {
+      "path": "installed08-ambiguous.json",
+      "bytes": 2502,
+      "sha256": "c9e9835dd9a4249c1d63497a55a7043e508322cc3a77cd147cfa78220d110cc1"
+    },
+    {
+      "path": "local-closeout-correction.json",
+      "bytes": 579,
+      "sha256": "89e7222b1f242bd13c7e08fb6d0c4b5574dc9175c5c2e8ed665ab705ccea9fbe"
+    },
+    {
+      "path": "native-tests-08.json",
+      "bytes": 607,
+      "sha256": "e5039c2feacaca722c455494f046f45a44e7a6924bd05646deb58251f02f219f"
+    },
+    {
+      "path": "native-tests.json",
+      "bytes": 607,
+      "sha256": "d2fc2f4bd0e95f84819265426777f11edc2f83a8a0d47c3b77e409d3d1b34751"
+    },
+    {
+      "path": "package-07.json",
+      "bytes": 1819,
+      "sha256": "7aec467dd7d9a5db61ac83894978290f4dd5e15d5af3e77013aaa3527e446c90"
+    },
+    {
+      "path": "package-08.json",
+      "bytes": 1819,
+      "sha256": "34c581ac373d7910b96a800b83d1887bfa063ab1b4cdca0a82dc639058b51a37"
+    },
+    {
+      "path": "preflight.json",
+      "bytes": 1978,
+      "sha256": "35b6dd8607de8fcf754d8ef0073a8c37a66a46f1775ffd6812346a0cf1eb81c4"
+    },
+    {
+      "path": "scope-08.json",
+      "bytes": 20249,
+      "sha256": "40a558584bd9a1d0f9961c16cab7277251824da517d5b9481370c6827c575c59"
+    },
+    {
+      "path": "scope.json",
+      "bytes": 20714,
+      "sha256": "0a5b61da4be7451cffaf93150a95c84d7f95deeb676f4093ee4d33b792f7531c"
+    },
+    {
+      "path": "source-tests.json",
+      "bytes": 5501,
+      "sha256": "902c81eb0c4b81eaa4f9f2366a1e57b675feefdf1f2e62d00bcee05e4f1e7af3"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 428738,
+      "sha256": "1067d65482cffa3bd722ccfdb795dca84a90795a4d640ad8da510040aee2b3ad"
+    }
+  ],
+  "exclusions": "No private reasoning, raw native streams, auth-probe transcripts, credential stores, credentials or wheel binaries. Native inputs and visible transcripts have separate trial archives."
+}
