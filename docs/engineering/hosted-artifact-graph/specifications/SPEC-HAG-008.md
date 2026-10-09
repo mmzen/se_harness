@@ -5,7 +5,7 @@ title = "Concise hosted authoring through the existing client"
 status = "approved"
 owners = ["mmzen"]
 created = "2026-10-08"
-updated = "2026-10-08"
+updated = "2026-10-09"
 contract = "Reduce instruction reads, repeated payloads and sequential calls with focused instruction views, typed existing operations, exact file input and concise evidence-backed results."
 
 [relations]
@@ -118,22 +118,28 @@ already contains the useful fields.
 
 **HAG-EFF-005.** Measure duration as well as context.
 
-Use Opus10 as the retained observation: 673.18 seconds, 56 native tool calls,
+Keep Opus10 as historical evidence: 673.18 seconds, 56 native tool calls and
 112,326 peak input-context tokens, including 16,397 initial host-context tokens.
-These are not cumulative billed tokens or a general performance baseline.
+Its task requests an intent for an already-defined greeting. Preserve that exact
+request as the missing-input diagnostic in VER-HAG-008 EFF-04A. Existing failures
+remain failures under the contract used for those runs; do not relabel them.
 
-For the same one-intent task, proposed engineering goals are less than 180 seconds,
-at most 15 native calls and less than 40,000 peak input-context tokens. Report each
-as met, missed or unavailable. These goals create no new lifecycle gate and do not
-waive correctness or authorize a qualification claim when missed.
+Use EFF-04B's one-verification-contract task as the positive authoring case. The
+goals remain less than 180 seconds, at most 15 native calls and less than 40,000
+peak input-context tokens. Report each as met, missed or unavailable, separately
+from correctness. These measurements introduce no lifecycle gate or waiver.
 
-Compare the same model, fixture, requested outcome, permissions and fresh-project
-work, including import and draft creation. Measure session start through final
-saved output/report. Separately report preparation/build time and an existing-
-project case if run. Do not move work outside the clock to claim improvement.
-Record model-turn count, tool/service timings and retries where observable;
-unobservable provider time stays unclassified. Independent external timing is
-required even when model usage is unavailable.
+The new task is not comparable to Opus10 as a same-task performance measurement.
+Establish its own observations. Compare repeated runs only when their model,
+task, fixture, permissions, candidate and fresh-project work match. Include import,
+draft creation and final reporting inside the clock. Report preparation/build time
+separately. An existing-project trial is a separate case.
+
+Measure session start through final saved output/report. Retain calls, model turns,
+provider-reported peak context, initial context, failures and retries. Record tool
+durations only where observable; leave provider time unclassified. A visible-call
+lower bound is not an exact total. A stopped or incomplete draft is not positive
+authoring success. Report the negative diagnostic's costs separately.
 
 **HAG-EFF-006.** Apply KIS to the whole task.
 
@@ -143,7 +149,9 @@ ordinary files and existing client code. Remove superseded guidance and transpor
 work from the agent route; do not merely put another wrapper around every call.
 
 Do not invent product outcomes to fill a template. Report a task/template mismatch
-honestly and propose any semantic amendment separately. This change does not alter
+honestly. The two explicit qualification cases in VER-HAG-008 separate this
+negative behavior from successful drafting of an applicable verification contract.
+Any later semantic amendment must be proposed separately. This change does not alter
 accepted artifact content requirements, verification criteria or the KIS policy.
 Use existing artifact/review evidence for these choices; add no KIS artifact,
 automatic score, separate approval, benchmark framework or CI job.
@@ -176,3 +184,13 @@ file location without an extra base64 extraction call (HAG-EFF-003).
 - Exact CLI option names and internal function layout, documented before the native run.
 - Concise presentation layout and byte budgets, provided omitted findings stay explicit.
 - Any later evaluator, service, schema, template-policy or production deployment change.
+
+## Linked qualification revision
+
+This revision replaces the complete accepted SPEC-HAG-008 file at commit `71bd0751dba3cd5305e8c9a07ec7e49bbc08239a`
+with SHA-256 `a07260341d4ce5fb84c8e07a19c57cb3380b8a7f0a312960c9d910c30b9b26d5` and recorded state `approved`.
+The [accepted bytes](../evidence/WO-HAG-011/amendment-20261009/SPEC-HAG-008.accepted.txt)
+remain unchanged. Earlier work and evidence keep that definition reference.
+The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
+identifies the actual human decision, before/after digests and effect on selected
+WO-HAG-011. This link proposes no new machine relation or lifecycle event.

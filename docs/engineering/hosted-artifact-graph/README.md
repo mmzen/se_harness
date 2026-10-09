@@ -13,6 +13,13 @@ focused instruction views and concise evidence-backed results. Its package is
 [SPEC-HAG-008](specifications/SPEC-HAG-008.md) and
 [VER-HAG-008](verification/VER-HAG-008.md). mmzen approved this package and required commit-bound verification on 2026-10-08.
 
+On 2026-10-09, mmzen approved the [exact qualification revision](evidence/WO-HAG-011/amendment-20261009/README.md).
+Its [activation record](evidence/WO-HAG-011/amendment-20261009/activation.json)
+links the preserved accepted bytes to the four active revisions. The original
+intent task is a missing-input diagnostic; a separate verification-contract task
+measures completed authoring. Earlier failed trials remain failed. WO-HAG-011
+stays in progress with required commit-bound verification.
+
 The change extends the client beyond WO-HAG-009's explanatory/test-driver scope.
 Existing qualification remains in progress and its criteria remain unchanged.
 The proposed timing/context/call goals are reported separately from correctness;
@@ -215,4 +222,4 @@ human verification decision, public deployment, authority cutover or release.
 
 WO-HAG-011 remains in progress. The [implementation assessment](evidence/WO-HAG-011/efficiency-assessment.md) records reduced entry text, client checks, all native attempts, missed goals and unresolved content/discovery findings. No verification or completed host qualification is claimed.
 
-The [qualification amendment review](evidence/WO-HAG-011/amendment-20261009/README.md) proposes separate missing-input and positive verification-contract cases. Its exact replacements are inactive review copies pending an explicit bounded amendment decision.
+The [qualification amendment review](evidence/WO-HAG-011/amendment-20261009/README.md) records the proposal for separate missing-input and positive verification-contract cases. mmzen approved it on 2026-10-09; the [activation record](evidence/WO-HAG-011/amendment-20261009/activation.json) binds the exact four active revisions. The review copies preserve their historical proposal status.

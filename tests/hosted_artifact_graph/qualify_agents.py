@@ -132,7 +132,11 @@ def run(args):
     settings.update(token_variable='HAG_NATIVE_TEST_TOKEN',
                     instruction_delivery='session-local plugin' if args.host == 'claude' else 'explicit resource reads')
     save(output/'selection.json', settings)
-    prompt = args.task.read_text(encoding='utf-8').replace('SELECTION_FILE', str(output/'selection.json'))
+    prompt = ('Before your first explanation, read the selected task inputs, '
+        'applicable plugin instructions and their required communication policy. '
+        'Use the existing file tools below. This explicit test setup does not '
+        'establish automatic startup instruction delivery.\n\n'
+        + args.task.read_text(encoding='utf-8').replace('SELECTION_FILE', str(output/'selection.json')))
     if args.host == 'codex' and settings.get('approved_shell_argv_prefix'):
         prompt += ('\n\n## Codex file discovery\n\n'
             'If native Read is unavailable, use this existing approved helper prefix:\n\n```json\n'

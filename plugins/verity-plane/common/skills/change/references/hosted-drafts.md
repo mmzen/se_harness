@@ -9,6 +9,8 @@ Read the selected release's `docs/engineering/harness/DRAFT_DEFINITIONS.md`:
 **Read this when**, **Before this action**, and **Draft any missing definitions**.
 Follow its applicable prerequisites before choosing a type, linking or writing.
 These include `ARTIFACT_AUTHORING.md#design-simplicity` and the type checklist.
+Checklist headings use the full type name: `#intent`, `#verification`, or
+`#work_order`, not artifact codes such as `INT`, `VER`, or `WO`.
 Read instructions before command fields. Load later [lifecycle procedures](hosted-test-lifecycle.md)
 only when the task reaches them; only the released evaluator selects the next step.
 
@@ -17,6 +19,10 @@ sections together through an available section reader. It returns complete text
 with source identity; pointers alone do not prove reading. Reuse unchanged content.
 Do not guess headings or load the full inventory. Look up only unknown paths;
 missing, ambiguous or changed sources stop the affected read.
+
+For released 0.22.1, `CONTINUE.md#continue-selected-work` matches both the title
+and a nested heading. Select its unique `#procedure` parent to read the complete
+current procedure. Do not choose one duplicate or load the later typed-step index.
 
 ## Write only supported claims
 

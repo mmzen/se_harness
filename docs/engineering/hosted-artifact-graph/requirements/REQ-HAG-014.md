@@ -5,12 +5,12 @@ title = "Reduce the work needed to author a hosted draft"
 status = "approved"
 owners = ["mmzen"]
 created = "2026-10-08"
-updated = "2026-10-08"
+updated = "2026-10-09"
 statement = "An agent can author a private hosted draft through the installed client using applicable instructions, ordinary document files and concise results, without manually constructing transport encodings or loading unrelated instructions."
 verification_method = ["test", "inspection", "demonstration"]
 priority = "must"
 source = "mmzen's 2026-10-08 request to reduce instruction length, duplication, calls and duration; Opus10 evidence under WO-HAG-009"
-measure = "Report wall-clock seconds, native tool calls and peak input-context tokens for the same one-intent task; goals are defined in the linked specification."
+measure = "Report correctness, wall-clock seconds, native tool calls and peak input-context tokens separately for the missing-input intent diagnostic and the positive one-verification-contract case; preserve historical comparisons and the goals in SPEC-HAG-008."
 
 [relations]
 derives_from = ["CAP-HAG-002"]
@@ -76,3 +76,13 @@ evidence path. The final document matches the submitted bytes.
 Given a stale expected version, submission remains a conflict. The client does
 not refresh that version and retry a write on its own. The retained failure is
 included in the agent's report even if a later explicit correction succeeds.
+
+## Linked qualification revision
+
+This revision replaces the complete accepted REQ-HAG-014 file at commit `71bd0751dba3cd5305e8c9a07ec7e49bbc08239a`
+with SHA-256 `ef5dc44d25ebda17a6447984e0dcb993c08161a99dc69f0fe494de553ea35eca` and recorded state `approved`.
+The [accepted bytes](../evidence/WO-HAG-011/amendment-20261009/REQ-HAG-014.accepted.txt)
+remain unchanged. Earlier work and evidence keep that definition reference.
+The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
+identifies the actual human decision, before/after digests and effect on selected
+WO-HAG-011. This link proposes no new machine relation or lifecycle event.

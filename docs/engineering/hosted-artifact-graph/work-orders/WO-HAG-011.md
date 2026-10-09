@@ -5,7 +5,7 @@ title = "Simplify hosted authoring instructions and client interaction"
 status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-08"
-updated = "2026-10-08"
+updated = "2026-10-09"
 
 [assurance]
 commit_bound_verification = "required"
@@ -77,8 +77,10 @@ authority. Implement REQ-HAG-014 and assess it through VER-HAG-008.
 2. Add concise result/evidence handling and focused canonical section views.
 3. Shorten skill entry points and move route details to selected references.
 4. Adapt the native test boundary to call that installed public interface.
-5. Run the focused Claude/Codex comparisons, supporting checks and independent
-   review. Preserve historical evidence and prepare commit-bound verification.
+5. Run the separately identified intent missing-input diagnostic and positive
+   verification-contract case in the linked revised VER-HAG-008. Preserve all
+   historical results and prepare commit-bound verification only after required
+   checks and the independent content review pass.
 
 The user confirmed the proposal with "Ok" on 2026-10-08. That confirms direction;
 this draft presents the exact implementation scope and assurance for approval.
@@ -151,7 +153,11 @@ to the domain evidence/ or verification-records/ directories is inferred.
 
 ## Required verification
 
-Run VER-HAG-008 EFF-01 through EFF-04 on the exact installed candidate. Record all
+Run the linked revised VER-HAG-008 EFF-01 through EFF-04 on the exact installed
+candidate. EFF-04A requires one Claude and one Codex missing-input diagnostic.
+EFF-04B requires a correct initial Claude result, two further correct comparable
+Claude attempts and one Codex positive result. No approved performance target,
+content obligation, independent review or full NQ qualification is waived. Record all
 timing goals and failures. Run focused checks, the repository source suite,
 distribution checks, CLI smoke, exact package checks, released validation and
 scope/handoff checks. Do not rerun unchanged service qualification merely because
@@ -182,3 +188,34 @@ Report the actual interface and instruction changes, candidate identity, correct
 findings, per-host timing/context/call comparison, remaining costs and full-qualification
 limits. Use the released evaluator's actual next step. No result grants human
 verification, release, installation or merge authority.
+
+## Bounded qualification revision
+
+The revised REQ-HAG-014, SPEC-HAG-008 and VER-HAG-008 apply only to subsequent
+qualification under this work order after their explicit human authorization
+and bounded manual activation have been recorded. Earlier approval/start events
+retain their exact meaning. Work remains in_progress; no start is repeated.
+
+Implementation paths and required commit-bound assurance are unchanged. The
+next correction uses the full artifact type names in instruction links and the
+existing unique Procedure section in released CONTINUE.md when its repeated
+title makes the narrower slug ambiguous. This reads the canonical current step
+without changing released bytes, silently selecting a duplicate, inventing a
+next action or adding a selector API. Keep missing/ambiguous source refusals.
+Guide the native task to read applicable instructions before first commentary.
+This explicit test setup is not evidence of automatic host startup delivery.
+
+Use the existing plugin Markdown references, native test files and resource
+tests already listed in execution_scope. No released resource, service, schema,
+lifecycle policy, new dependency or provider setting is changed. Retain exact
+before/after definition bytes and the actual human decision/activation evidence.
+
+## Linked qualification revision
+
+This revision replaces the complete accepted WO-HAG-011 file at commit `71bd0751dba3cd5305e8c9a07ec7e49bbc08239a`
+with SHA-256 `1075ba9e34396dfca5e4516b84e6b2646d0679e3ec7d8a5f7aeb76fdffb2e911` and recorded state `in_progress`.
+The [accepted bytes](../evidence/WO-HAG-011/amendment-20261009/WO-HAG-011.accepted.txt)
+remain unchanged. Earlier work and evidence keep that definition reference.
+The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
+identifies the actual human decision, before/after digests and effect on selected
+WO-HAG-011. This link proposes no new machine relation or lifecycle event.

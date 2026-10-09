@@ -476,6 +476,15 @@ class SectionViewTests(unittest.TestCase):
         with self.assertRaisesRegex(resources.ResourceError,'changed'):
             resources.section_view(b'# One\n',resource='r',path='p',release={},sha256='0'*64,headings=['one'])
 
+    def test_unique_parent_preserves_repeated_nested_heading_without_later_index(self):
+        raw = (b'# Continue selected work\n\n## Procedure\n\n'
+               b'### Continue selected work\n\nMUST use the returned step.\n\n'
+               b'## Returned typed steps\n\nLater index.\n')
+        with self.assertRaisesRegex(resources.ResourceError, 'missing or ambiguous'):
+            self.view(raw, ['continue-selected-work'])
+        section = self.view(raw, ['procedure'])['sections'][0]['content']
+        self.assertEqual(raw[raw.index(b'## Procedure'):raw.index(b'## Returned typed steps')].decode(), section)
+
 
 if __name__ == "__main__":
     unittest.main()

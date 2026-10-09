@@ -57,6 +57,8 @@ key with `remote operation --key KEY --record ABSOLUTE_NEW_RECORD`.
 | Text when native Read is unavailable | `read-text ABSOLUTE_FILE`; inventoried inputs or work files, at most 64 KiB |
 
 For `instructions`, use canonical IDs such as `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`. The earlier `released-resources/` inventory prefix also works. Request known sections together.
+For authoring checklists and the repeated released 0.22.1 continuation heading,
+use the exact selectors in the selected plugin's `change/references/hosted-drafts.md`.
 
 For known paths, use them directly. Inventory names are relative to the staged
 inputs directory: `released-resources/docs/engineering/ARTIFACT_AUTHORING.md`,
