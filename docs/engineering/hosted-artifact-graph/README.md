@@ -223,3 +223,7 @@ human verification decision, public deployment, authority cutover or release.
 WO-HAG-011 remains in progress. The [implementation assessment](evidence/WO-HAG-011/efficiency-assessment.md) records reduced entry text, client checks, all native attempts, missed goals and unresolved content/discovery findings. No verification or completed host qualification is claimed.
 
 The [qualification amendment review](evidence/WO-HAG-011/amendment-20261009/README.md) records the proposal for separate missing-input and positive verification-contract cases. mmzen approved it on 2026-10-09; the [activation record](evidence/WO-HAG-011/amendment-20261009/activation.json) binds the exact four active revisions. The review copies preserve their historical proposal status.
+
+## Revised qualification observations
+
+The [revised qualification assessment](evidence/WO-HAG-011/revised-qualification-assessment.md) records candidate a99a00a1: two failed Claude trials and one host-blocked Codex attempt. Required repetitions remain pending. Source and package checks passed; no work completion or verification is claimed.
