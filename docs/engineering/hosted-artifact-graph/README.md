@@ -6,7 +6,15 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
-The [latest assessment](evidence/WO-HAG-011/complete-input-qualification-assessment.md)
+The [latest assessment](evidence/WO-HAG-011/direct-input-qualification-assessment.md)
+records candidate18's direct task delivery, bounded recovery and readiness wording.
+The first Claude missing-input diagnostic fails: it treats verification preparation
+as a supported operational benefit and calls the intent complete. Further native
+runs stopped as required. It used 271.050 seconds, 12 calls and 61,544 peak input
+tokens. Codex and the positive cases remain unperformed on this candidate.
+WO-HAG-011 remains in progress; no completion or verification is claimed.
+
+The [candidate17 assessment](evidence/WO-HAG-011/complete-input-qualification-assessment.md)
 records the approved complete-input implementation and all six candidate17 trials.
 Both missing-input cases pass. The positive draft documents pass inspection, but
 two Claude trials fail reporting; Codex's positive case passes with recovered read
@@ -16,8 +24,8 @@ input tokens. The call goal is met; time and context goals are missed.
 The [activation record](evidence/WO-HAG-011/input-delivery-20261010/activation.json)
 records mmzen's approval and the exact active SPEC/VER/WO revisions. Previous
 accepted bytes and lifecycle history remain preserved. WO-HAG-011 remains in
-progress; Codex entry recovery, reporting consistency and efficiency need further
-work. No completion or verification is claimed.
+progress. The newer correction above retains the unresolved content criterion
+and efficiency limits. No completion or verification is claimed.
 
 The [candidate16 assessment](evidence/WO-HAG-011/fact-grounding-assessment.md)
 preserves the failed wording trial and restored guidance. The
