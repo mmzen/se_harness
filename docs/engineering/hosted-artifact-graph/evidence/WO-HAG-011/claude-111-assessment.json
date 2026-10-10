@@ -1,0 +1,39 @@
+{
+  "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+  "case": "EFF-04A",
+  "trial": "claude-111",
+  "content_verdict": "pass",
+  "meaning": "Correct negative-case result with one explicitly incomplete draft; not completed intent authoring or an efficiency success.",
+  "findings": [
+    "Acknowledges INT-P3-900, REQ-P3-900 and SPEC-P3-900 and does not claim that governing definitions are absent.",
+    "The draft outcome restates the operator request to establish the expected greeting, rather than inventing a distinct product improvement. The report explicitly says the sources supply no distinct operational benefit and the proposed confirmation is verification activity.",
+    "Reports incomplete content with overlap and purpose/measure findings. The table is not accepted as an operational success measure; no complete or verified intent is claimed.",
+    "The draft still uses confirmation language and a before-reliance explanation. This remains part of the disclosed incomplete draft, not a new approved operational requirement. It requires revision before positive intent acceptance.",
+    "No failed or denied native calls were observed. The observations helper was not invoked; the native report makes no exhaustive tool-failure claim. Independent capture supplies the complete observed call assessment.",
+    "Exact saved bytes match independent service readback; all seven imported records are unchanged."
+  ],
+  "metrics": {
+    "wall_seconds": 400.396,
+    "native_calls": 13,
+    "model_turns": 13,
+    "peak_input_context": 68461,
+    "initial_input_context": 15672,
+    "calls_by_tool": {
+      "Read": 3,
+      "Skill": 1,
+      "Bash": 7,
+      "Write": 2
+    },
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "repeated_read_paths": {}
+  },
+  "observed_failed_calls": [],
+  "baseline_records_unchanged": 7,
+  "exact_saved_document": true,
+  "final_project_version": 4,
+  "decision": "Continue the amended qualification sequence. Cost outcomes are separately reported; original historical failures remain failures."
+}

@@ -1,0 +1,50 @@
+{
+  "archive": "checks.zip",
+  "sha256": "0e28d07cf98cc2bd4fa2c1c0baa27cdd187ec049f07566f1066a86bf9381ae65",
+  "files": [
+    {
+      "path": "historical-display-check.json",
+      "sha256": "b6e3949626c613bbe888de561921c3c50417c816d0c3474127d06fda81cd52f9"
+    },
+    {
+      "path": "native-unit-tests.json",
+      "sha256": "22fca3b05e2c4011f3571dbfb6131c19a02ebb438f76db3346880e37fca10506"
+    },
+    {
+      "path": "native-unit-tests-02.json",
+      "sha256": "161b6190767f9520e3cb4b7b8146416e0a942cfd0f016261cccb50b25ae8dba2"
+    },
+    {
+      "path": "source-tests.json",
+      "sha256": "7a1c4747d0b3bb8e98fc7c506c21267bf92aeabe2007d449f09600bda5a78fee"
+    },
+    {
+      "path": "distributions.json",
+      "sha256": "fd3e4c20a453b7b540a64502b1f31f68e0748f563733d6d4fe002e0dd5ef748f"
+    },
+    {
+      "path": "cli-smoke.json",
+      "sha256": "69eec6e3b38d7acf63788cecf1bd41550a446b4cf30e82b64f0f3756883129fc"
+    },
+    {
+      "path": "WO-HAG-009-scope.json",
+      "sha256": "a3a9a0587783943e07724e5784cb72f78ae9cd98f088da97a8a2f9f6a3a1e207"
+    },
+    {
+      "path": "WO-HAG-011-scope.json",
+      "sha256": "30e547991eb8252780ebee11bf06b433397ad59cbb7ce29add8d33b367656013"
+    },
+    {
+      "path": "WO-HAG-009-preflight.json",
+      "sha256": "4a9c299181ceb50358401a0ac7c7effc4be82ee490c4e0d995b7364d6dd77465"
+    },
+    {
+      "path": "WO-HAG-011-preflight.json",
+      "sha256": "c72e23bede68f99f5085e197571133a9f5ab0f575a8b5131b25172c2d1e82a3d"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "17b7bed3eeb8b0dea7b27fc9d49a27b21944ea7b108fac36b2d599cb2157b74d"
+    }
+  ]
+}

@@ -36,6 +36,55 @@ class ResourceError(IntegrityError):
     """A selected resource cannot be returned safely."""
 
 
+def section_view(raw: bytes, *, resource: str, path: str, release: dict,
+                 sha256: str, headings: list[str]) -> dict:
+    """Copy complete ATX sections from already selected, identity-bound bytes.
+
+    Selection/authorization belongs to the caller. This reader never chooses a
+    procedure or follows links. Fenced examples are not instruction headings.
+    """
+    if raw_sha256(raw) != sha256:
+        raise ResourceError(f"selected resource changed: {resource}")
+    if not headings or len(headings) > 12:
+        raise ResourceError("select 1-12 explicit headings")
+    lines = raw.decode("utf-8").splitlines(keepends=True)
+    found, fence = [], None
+    for index, line in enumerate(lines):
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if marker:
+            marks, tail = marker.groups()
+            if fence is None:
+                fence = marks
+            elif marks[0] == fence[0] and len(marks) >= len(fence) and not tail.strip():
+                fence = None
+            continue
+        match = re.match(r"^(#{1,6}) +(.+?)[ \t]*\r?\n?$", line) if fence is None else None
+        if match:
+            title = re.sub(r" +#+$", "", match[2])
+            slug = re.sub(r"[^\w\- ]", "", title.strip().lower()).replace(" ", "-")
+            found.append((index, len(match[1]), title, slug))
+    selected = []
+    for heading in dict.fromkeys(headings):
+        matches = [item for item in found if heading in (item[2], item[3])]
+        if len(matches) != 1:
+            raise ResourceError(f"missing or ambiguous heading: {resource}#{heading}")
+        start, level, title, slug = matches[0]
+        end = next((i for i, depth, _, _ in found if i > start and depth <= level), len(lines))
+        selected.append((start, end, heading, title, slug))
+    sections = []
+    for start, end, heading, title, slug in selected:
+        parent = next((h for a, b, h, _, _ in selected if a <= start and b >= end and (a, b) != (start, end)), None)
+        item = {"heading": heading, "title": title, "anchor": slug, "start_line": start + 1, "end_line": end}
+        if parent:
+            item["included_in"] = parent
+        else:
+            item["content"] = "".join(lines[start:end])
+            item["content_sha256"] = raw_sha256(item["content"].encode("utf-8"))
+        sections.append(item)
+    return {"resource": resource, "path": path, "release": release, "sha256": sha256,
+            "bytes": len(raw), "sections": sections}
+
+
 def _safe_path(path: Path) -> Path:
     """Check before resolving, including Windows junctions and linked parents."""
     path = path.absolute()
@@ -231,5 +280,22 @@ class ResourceSet:
                 text = text.replace("{{PROJECT_NAME}}", project).replace("{{HARNESS_VERSION}}", __version__)
             result["content"] = text
             result["content_sha256"] = raw_sha256(text.encode("utf-8"))
+        self.assert_current()
+        return result
+
+    def sections(self, selectors: list[str]) -> dict[str, Any]:
+        if not selectors or len(selectors) > 12:
+            raise ResourceError("select 1-12 RESOURCE#heading values")
+        grouped = {}
+        for selector in selectors:
+            identifier, sep, heading = selector.partition("#")
+            if not sep or not heading:
+                raise ResourceError("each section must name RESOURCE#heading")
+            grouped.setdefault(identifier, []).append(heading)
+        result = {"schema": "se-harness-instruction-view/v1", "resources": []}
+        for identifier, headings in grouped.items():
+            raw = self._read_member(identifier)
+            result["resources"].append(section_view(raw, resource=identifier, path=str(self._path(identifier)),
+                release=self.release, sha256=self.members[identifier]["sha256"], headings=headings))
         self.assert_current()
         return result

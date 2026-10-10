@@ -1,0 +1,211 @@
+{
+  "status": "incomplete_setup_observations",
+  "work_order": "WO-HAG-009",
+  "verification": "VER-HAG-007",
+  "approved_proposal_commit": "540bd9fb3a79cf7d8cfaccf01c52b9e8f7b0f133",
+  "approval_commit": "50d19ea575c5126d7d8059406f7a65c1bb154ba5",
+  "sessions": {
+    "codex": {
+      "host": "codex",
+      "exit": 0,
+      "timed_out": false,
+      "elapsed_seconds": 185.482,
+      "reply_dropped": false,
+      "redactions": 0,
+      "events_sha256": "0f9e828ea774b24d6985d5f06d89a55f91af54f9f2539c41178cdc9e7d394b2b",
+      "outcome": "observation_retained",
+      "qualification": "requires independent assessment"
+    },
+    "claude": {
+      "host": "claude",
+      "exit": 0,
+      "timed_out": false,
+      "elapsed_seconds": 95.104,
+      "reply_dropped": false,
+      "redactions": 0,
+      "events_sha256": "f5074140a201164528e3e771e1ce2289467fbc8ceb85a6ae458a8b5890f2f4a3",
+      "outcome": "observation_retained",
+      "qualification": "requires independent assessment"
+    }
+  },
+  "scenarios_passed": [],
+  "archive": {
+    "path": "native01-observations.zip",
+    "bytes": 88931,
+    "sha256": "3956c2505ed28d5f5ad3683c37b180b8b5db0ec45df117aab3311b1e4d4181a4"
+  },
+  "files": [
+    {
+      "path": "codex/events.jsonl",
+      "bytes": 98415,
+      "sha256": "0f9e828ea774b24d6985d5f06d89a55f91af54f9f2539c41178cdc9e7d394b2b"
+    },
+    {
+      "path": "codex/invocation.json",
+      "bytes": 7416,
+      "sha256": "9b497eb01af8f1d9d17853d916659d6e3716ae807fe01ad88ac58a42490173ef"
+    },
+    {
+      "path": "codex/session.json",
+      "bytes": 321,
+      "sha256": "f8dce2bc0d6e34dc1a4da758e9ef2ec3cf5018ee97b2e7d0544ee48ab6c24056"
+    },
+    {
+      "path": "codex/task.md",
+      "bytes": 5912,
+      "sha256": "a804868f1e56347bf9a8b9073c8848cb54f1c7343fa623fdb8a77c00b2fa40fe"
+    },
+    {
+      "path": "codex/selection.json",
+      "bytes": 1621,
+      "sha256": "1144dcfc9770b96f166dfe4124487b69b6131386849a84ae79c4fb4992c2932a"
+    },
+    {
+      "path": "codex/native-report.md",
+      "bytes": 6507,
+      "sha256": "e8c10c443d53a42f49e1e8c16043686d49ee173352603199566458c5d7f59353"
+    },
+    {
+      "path": "codex/native-observations.json",
+      "bytes": 4404,
+      "sha256": "1acd72ca9f0374a57c1ef7474c428932cd515a38780abf8007583544036cb59b"
+    },
+    {
+      "path": "codex/file-read-trace.jsonl",
+      "bytes": 4554,
+      "sha256": "d6cb572723ac8b29f70c8cbc58f9e3afdfd88a78588f24f526bcf59a30f82a77"
+    },
+    {
+      "path": "codex/assertion.command.json",
+      "bytes": 579,
+      "sha256": "7d7f2c1398325cbdc1ca962645091bc6b31f1b06599507e547af0643fb386bfc"
+    },
+    {
+      "path": "codex/assertion.result.txt",
+      "bytes": 629,
+      "sha256": "a3f0f9ac79ca88f3492bb9a4312d7bb402fa1ef3d241f6035d0177bee86d287c"
+    },
+    {
+      "path": "codex/assertion.exit.json",
+      "bytes": 24,
+      "sha256": "75876e0e3f497cad271143ba85bd4f36569cd81195509043f860dab14265b716"
+    },
+    {
+      "path": "codex/status.command.json",
+      "bytes": 449,
+      "sha256": "bb78aa1ba031c768c788e8be1f3be7140698e931e2efc12f7f11e6111f4c7c6f"
+    },
+    {
+      "path": "codex/status.result.txt",
+      "bytes": 488,
+      "sha256": "32583c503f50a0160cf1fc1a43aaabacb76414f8394612401de43311d87061cc"
+    },
+    {
+      "path": "codex/status.exit.json",
+      "bytes": 24,
+      "sha256": "50d7caf03dd967e4363a5bc7babbf450452b31dd1ec7fb605b2abc6465759571"
+    },
+    {
+      "path": "codex/fixture-head.command.json",
+      "bytes": 265,
+      "sha256": "2ba1eb3a652aedf1f22d017ee03ec1108d6061c8e6087acdf90cefb6f1ab3b50"
+    },
+    {
+      "path": "codex/fixture-head.result.txt",
+      "bytes": 785,
+      "sha256": "06c19c89e124501ff3d24674f234d677f010825527f54df1a41f4c8347e96d0a"
+    },
+    {
+      "path": "codex/fixture-head.exit.json",
+      "bytes": 26,
+      "sha256": "5c919da36a3e8017c255aaeb7e0bdbf903f8e766cb8083da331565dbb7deaad2"
+    },
+    {
+      "path": "codex/wheel-hash-denial.txt",
+      "bytes": 769,
+      "sha256": "5817a2a3b433742b1ddab31201de0b0e3542e3c421edb3c703d41b609fc42754"
+    },
+    {
+      "path": "codex/local-invocation-failures.txt",
+      "bytes": 723,
+      "sha256": "1c51e5e3865da2dcad3e060be999ee80936759e5fc7f08e3a578385af4635581"
+    },
+    {
+      "path": "codex/service-scope-correction.json",
+      "bytes": 1424,
+      "sha256": "e7c9dcbe02561efd4956414495f1bcc0a85d494adab0d98e2737043c820e4bfc"
+    },
+    {
+      "path": "claude/events.jsonl",
+      "bytes": 183837,
+      "sha256": "f5074140a201164528e3e771e1ce2289467fbc8ceb85a6ae458a8b5890f2f4a3"
+    },
+    {
+      "path": "claude/invocation.json",
+      "bytes": 7496,
+      "sha256": "2c4d861958bb878358520813f21291579f7c719f54ee9bd6a380f88517ae441f"
+    },
+    {
+      "path": "claude/session.json",
+      "bytes": 321,
+      "sha256": "9a0e3c4d014d3d6d5e845bfa350a08f6208f6ffc572b4c7ee40b6fc8e1377d6d"
+    },
+    {
+      "path": "claude/task.md",
+      "bytes": 5913,
+      "sha256": "04ff420af93485e1d16c10cfb7d068c0d0c190b9ca62e3a70fe2293ad70d0a3b"
+    },
+    {
+      "path": "claude/selection.json",
+      "bytes": 1623,
+      "sha256": "a148c76b6734d5cbfcaa3061d6c6709651a3676b1ed1841a0d500d443282115f"
+    },
+    {
+      "path": "claude/service-scope-correction.json",
+      "bytes": 1424,
+      "sha256": "1294a27cd9e1817b9e0c0958ce9aa14c0a614590af2f2776b22251e85083edb3"
+    },
+    {
+      "path": "operator/native-helper-boundaries.json",
+      "bytes": 620,
+      "sha256": "5e2f8330c2a30e7b9f2a4fc52f039702960cd08802af9ca77ffb3862401cc274"
+    },
+    {
+      "path": "operator/runtime-reuse.json",
+      "bytes": 3592,
+      "sha256": "e78d4c5ee6d9cdfaa9c2a01dd7efea44c5d32e8bc3455bf105d2fb460adc9e7d"
+    },
+    {
+      "path": "operator/codex-initial-store.json",
+      "bytes": 648,
+      "sha256": "fca32f12582b8ce18a78bc11bc336ae5a3b1fbf437226cc6ca64451d59e0b8c8"
+    },
+    {
+      "path": "operator/claude-initial-store.json",
+      "bytes": 649,
+      "sha256": "3f1f4dace1898e2af13e8a64ca6b6d09a4247f68cf57d2eccf6cc9339f283361"
+    },
+    {
+      "path": "operator/codex-auth.json",
+      "bytes": 2572,
+      "sha256": "11e8efb242360ecfcdcd1382ba45a40507330f378551664e1e47bf44ec244922"
+    },
+    {
+      "path": "operator/claude-default-model.json",
+      "bytes": 2023,
+      "sha256": "145ce7c1f477e4de961ffc3e849c265c409f80871b6e20221b7fa5207076211a"
+    },
+    {
+      "path": "operator/claude-supported-model.json",
+      "bytes": 2609,
+      "sha256": "e3fcf5f84a26345c79d27b9e175836118f769406e14666f3c4e6e6239162ede1"
+    }
+  ],
+  "secret_retention": "Known sandbox tokens scanned and absent; native recorder performed zero redactions. No credential files or full environment retained.",
+  "service_states_before_correction": {
+    "codex": 0,
+    "claude": 0
+  },
+  "claim_limits": "No hosted lifecycle operation, retry recovery, native MCP parity or export scenario passed. Exit zero is not qualification.",
+  "pending": "Human approval of the exact session-only native tool permissions in retry-review.md."
+}

@@ -1,0 +1,148 @@
+{
+  "archive": "candidate05-checks.zip",
+  "bytes": 55895,
+  "sha256": "05509ebc5f2a28d0a8975e29b297aa04cd0dacbc30551b44f2ee3e04eb593316",
+  "files": [
+    {
+      "path": "codex-02/independent-document.md",
+      "bytes": 2994,
+      "sha256": "e8f0c6cf97b4774b02c7bc2b9a4ffe301b542a70bce3cb883ee16b1261ad744a"
+    },
+    {
+      "path": "codex-02/independent-observation.json",
+      "bytes": 423,
+      "sha256": "ab7aacf820dc49326910df41642a5bd90ab589d63e88e941b9bd1a6b26aee60a"
+    },
+    {
+      "path": "observations/build05-replay.json",
+      "bytes": 7097,
+      "sha256": "4c0624ffde8a39ae410ff1b26e0c446a31bb2cd22bc48a57c1e2a274c6aafe34"
+    },
+    {
+      "path": "observations/candidate-05.json",
+      "bytes": 113,
+      "sha256": "ff2e06db0f4a3c5576185aa3bdb302fa17eb4ab33e610d0011b29b6148290a11"
+    },
+    {
+      "path": "observations/cli-smoke-06.json",
+      "bytes": 4387,
+      "sha256": "8ab747c4f50e622bf36d61f3a56eb6235b4b289d1685d6c9acc6c7f5a6c9884b"
+    },
+    {
+      "path": "observations/client-build-05.json",
+      "bytes": 971,
+      "sha256": "947406628f4861da89ae85e4e7e35fa8cd85b8cb271fa298f5d4161fe7dde17e"
+    },
+    {
+      "path": "observations/client-env-05.json",
+      "bytes": 462,
+      "sha256": "45abddb26809daf2dd70fd9ef241103f522c2d2dee73393b2f9290f26a2cd7bf"
+    },
+    {
+      "path": "observations/client-install-05.json",
+      "bytes": 1072,
+      "sha256": "a3a78ca9cca210effd1fe62a8d115afd186aee697adc0066cc5818eafabf0757"
+    },
+    {
+      "path": "observations/codex-02-independent-read.json",
+      "bytes": 6373,
+      "sha256": "998fea18ea4b22397a8a521805c5ba37e673c6ce35497171eeb7e9d560cf0c9f"
+    },
+    {
+      "path": "observations/codex-portability-08.json",
+      "bytes": 605,
+      "sha256": "93bc41a89788f8615da770ce24a1f9a9704587a4d2239e398b654a711bac294f"
+    },
+    {
+      "path": "observations/codex02-init.json",
+      "bytes": 982,
+      "sha256": "abe039588bce2fd42cb333391dd0b1accbf2e536859e8a82494e152baf428673"
+    },
+    {
+      "path": "observations/codex02-initial-status.json",
+      "bytes": 4384,
+      "sha256": "3d92da5a2e05c34b1ae37ac8c97997469287845b3b202c0c956a49caf1fa4ff3"
+    },
+    {
+      "path": "observations/codex02-networks.json",
+      "bytes": 205820,
+      "sha256": "88ad4c6228f57bdab91758a439f4ab60cd218d08090ef900af94744845c6b724"
+    },
+    {
+      "path": "observations/codex02-source-stage.json",
+      "bytes": 746,
+      "sha256": "5010be2c5d9f94ce9d43209ab74481f0b4224e6b229196cc8ec410cf9e908fb9"
+    },
+    {
+      "path": "observations/codex02-up.json",
+      "bytes": 1752,
+      "sha256": "84444a00c7410ddf5b9904283aa04cb3d076c7dec3f72dd718785b910014b3a2"
+    },
+    {
+      "path": "observations/codex02-volume-absent.json",
+      "bytes": 384,
+      "sha256": "8f490bc6f5bb3ee1aecaf9062cc193bfcc2c73df7cfd42e7dde7fc8cc4c6321d"
+    },
+    {
+      "path": "observations/codex02-volume-create.json",
+      "bytes": 331,
+      "sha256": "ecccf808b8c112ea4f947c0da59107d98bfb80e80b79c3f34a459bae95cc15ba"
+    },
+    {
+      "path": "observations/distribution-06.json",
+      "bytes": 506,
+      "sha256": "3c6aaec7b8757ae8242cbcd9331b129bd422b61cd7eaf41abdfb428f5bdababd"
+    },
+    {
+      "path": "observations/package-05.json",
+      "bytes": 1831,
+      "sha256": "a56433f2d66689e20e7502d4d9d57c1527992881ee46dfd5d6446425c809f616"
+    },
+    {
+      "path": "observations/review-preflight-05.json",
+      "bytes": 1978,
+      "sha256": "fae6e41cf841ce19f977db8e5813e41292365f186bfe42bd6071945b2bce0083"
+    },
+    {
+      "path": "observations/runtime-candidate05-comparison.json",
+      "bytes": 538,
+      "sha256": "7a0eb3824d257a5119fd842efcb21f0678d1496e13f70110875eb47aa756d757"
+    },
+    {
+      "path": "observations/source-suite-06.json",
+      "bytes": 5500,
+      "sha256": "87e53daffc26c48e3d567b65139cf75b0a618c8dae4e335aaa8c7adc10155168"
+    },
+    {
+      "path": "operator/hag_efficiency_native.py",
+      "bytes": 10436,
+      "sha256": "8278351bd64867cd30b1a2b35ceb0b3f628ae93b8babb080909a01cbd6c73ac9"
+    },
+    {
+      "path": "operator/hag_efficiency_observe.py",
+      "bytes": 2751,
+      "sha256": "eccb18ba9dc725ada3a76a6c8fbf7d3766fe3f5e2f9372987a751ca2582e4254"
+    },
+    {
+      "path": "operator/hag_efficiency_package05.py",
+      "bytes": 2071,
+      "sha256": "f979663928b40aa3676c10973c5bfc4f1508e8b26f22bc8186e07f281716bbe0"
+    },
+    {
+      "path": "operator/hag_efficiency_retain.py",
+      "bytes": 4170,
+      "sha256": "04bdfc6a7bcb9a3cf172a11179a8f4e5b9b683075a90018b297bb4971c015c89"
+    },
+    {
+      "path": "operator/hag_efficiency_retain05.py",
+      "bytes": 2118,
+      "sha256": "c41803846e84c5dbd3ce2471dc1b4d78ef90315cb21351430994b9a0a15c2a54"
+    },
+    {
+      "path": "package05/combination.json",
+      "bytes": 2807,
+      "sha256": "4148c03d9e78f7a2cb9549ea42a50ca4c90dd1b91f3087e294763d8ea95221d2"
+    }
+  ],
+  "limits": "Exact candidate05 build/install and native-support checks; unchanged candidate04 product behavior reuses its full suite and installed-client evidence with the retained byte comparison. Native evidence has its own archive. No raw private events, credentials, wheels or account stores."
+}

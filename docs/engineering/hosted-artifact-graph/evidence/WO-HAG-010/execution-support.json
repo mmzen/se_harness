@@ -1,0 +1,148 @@
+{
+  "archive": "execution-support.zip",
+  "bytes": 71407,
+  "sha256": "8dcb5c1bac8935622ea4f1b8ad8047c168171f8397301b1250bf2783c3e60e6c",
+  "files": [
+    {
+      "path": "wo010-approval-apply.json",
+      "bytes": 18741,
+      "sha256": "5670d5170146a84d7dc96c02daf4e6e7a70ef31fef15dcd4f3d3df18257a8a39"
+    },
+    {
+      "path": "wo010-approval-binding.json",
+      "bytes": 83,
+      "sha256": "bffe439305f8804c926b362a2b908ac45ff79c242bf3570854bd3cb5c35e48cf"
+    },
+    {
+      "path": "wo010-approval-preview.json",
+      "bytes": 18738,
+      "sha256": "1d9814beb3adcfc3a43e7bf3a5c84051fa1a02fc45052c24a247d6aa5f5b8a46"
+    },
+    {
+      "path": "wo010-approved-context.json",
+      "bytes": 18898,
+      "sha256": "d593a94c287aa13389b4825d53481bb4600bc34b0430665b2fbce929ef2b6569"
+    },
+    {
+      "path": "wo010-approved-request-context.json",
+      "bytes": 10270,
+      "sha256": "7b61ed9b2b2e22299506de69aad23623a32c9a331de320b88203e7ce68e8fe3b"
+    },
+    {
+      "path": "wo010-authority-commit.json",
+      "bytes": 603,
+      "sha256": "5377853777c6ad865d6266b5c7ad5476d8ec356e1e36665890e5072d8a7b2633"
+    },
+    {
+      "path": "wo010-authority-stage.json",
+      "bytes": 419,
+      "sha256": "4859de812e416e83fc3d7a793deed4b158fb279d3037f83bb6d5a3ca21c9e94a"
+    },
+    {
+      "path": "wo010-edit-scope.json",
+      "bytes": 19678,
+      "sha256": "af729d339644ebd9cfa07ed3788d1eede282298b6a6e036a4c6b939e9c8c59c9"
+    },
+    {
+      "path": "wo010-implementation-diff.json",
+      "bytes": 7782,
+      "sha256": "fade73050c79b3666fedbd0e80867341bb9f6b3b63b4cd6622fddd30a826f0b1"
+    },
+    {
+      "path": "wo010-start-apply.json",
+      "bytes": 20277,
+      "sha256": "92d7ba6281e8e1ad80d782acf1c2b3c47be636cb22dbfedf4cc3c87c5b89cb0d"
+    },
+    {
+      "path": "wo010-start-context.json",
+      "bytes": 20523,
+      "sha256": "542df7b4a250eb2099a76550d8c50d864200ad4161207733cf40c0b2ce566928"
+    },
+    {
+      "path": "wo010-start-preflight.json",
+      "bytes": 2105,
+      "sha256": "534b2c4185013d5e39456af281d5f0a0d5abd02e144dcd9db5915c70880ae2dd"
+    },
+    {
+      "path": "wo010-start-preview.json",
+      "bytes": 20274,
+      "sha256": "2da10aa555725a9c4e4ff2a9e43e1b8674ac9adae05d10d57d379c812120a45e"
+    },
+    {
+      "path": "guidance04-focused.json",
+      "bytes": 1962,
+      "sha256": "f39a6d8e22a2bc58daa8719d74f753becd36866d895e3a8a82fea8ce807a30f0"
+    },
+    {
+      "path": "guidance04-focused-02.json",
+      "bytes": 1100,
+      "sha256": "c6bb8808f9e78373a8a97a9554b94f57a65c26bbd572a7148e8a9a93e92e797d"
+    },
+    {
+      "path": "guidance04-native-support.json",
+      "bytes": 514,
+      "sha256": "91d8b985e6365e22027fe5c5af0773cbdeb23f8612fb470128a870c800ec0f00"
+    },
+    {
+      "path": "guidance04-source-suite.json",
+      "bytes": 5499,
+      "sha256": "3a9e1d5cf87d5aa18ddc476f29b989d0fd5c75289b5d4bcd690a0fa9cfc295c4"
+    },
+    {
+      "path": "guidance04-distributions.json",
+      "bytes": 503,
+      "sha256": "ed2e9c5cdd9bad4095db1f422dad5e578f4160ea0ec232aa765d2b3c8008cbbe"
+    },
+    {
+      "path": "guidance04-cli-smoke.json",
+      "bytes": 4383,
+      "sha256": "c4a6318745067e2e90023812f043ee88949f42d588b4d0a97b9703ad3d1aa0a2"
+    },
+    {
+      "path": "guidance04-validation.json",
+      "bytes": 427921,
+      "sha256": "3ecaec354ad186d41e443c86527d7344af7311f9e097e808321dc9a6d055be13"
+    },
+    {
+      "path": "guidance04-diff-check.json",
+      "bytes": 273,
+      "sha256": "6946dd65a2ebbdc88574bfc3b8f702b389108d89cd1b4280925b0d155eb8da7b"
+    },
+    {
+      "path": "guidance04-state-before.json",
+      "bytes": 775,
+      "sha256": "89f6a00339fc14b40a2b5a72d68171d1e4e0551552e78abec0198024143a89f2"
+    },
+    {
+      "path": "guidance04-state-after.json",
+      "bytes": 775,
+      "sha256": "89f6a00339fc14b40a2b5a72d68171d1e4e0551552e78abec0198024143a89f2"
+    },
+    {
+      "path": "runtime-reuse-guidance04.json",
+      "bytes": 34966,
+      "sha256": "21fbdc8096467d6bb5e0db9dc27f175de374b0ae41fb6dc56293e90422a8d5d3"
+    },
+    {
+      "path": "build03-replay.json",
+      "bytes": 7097,
+      "sha256": "5dff10d650e45549e50a5991722911f330af3d2230e92c9e9378b866115442bf"
+    },
+    {
+      "path": "guidance04-client-build.json",
+      "bytes": 991,
+      "sha256": "f60a9e05316c3ed771e7b1645f0ca7805f5ab1dd5f9624313d08f0721e7dc132"
+    },
+    {
+      "path": "guidance04-package.json",
+      "bytes": 1869,
+      "sha256": "10f5f56518ae88b101ae8629f416d1c0a8192204ed1c2be7ba64a73f92997dd7"
+    },
+    {
+      "path": "guidance04-candidate.json",
+      "bytes": 113,
+      "sha256": "100ef2237e596d01d2fecb76fff5ef1fb51ec53d5f930a24d8e133542a76fdd7"
+    }
+  ],
+  "limits": "Actual approval/start and implementation checks. Original failed invocations retained alongside corrected results. Native qualification remains separately assessed under WO-HAG-009; no human verification or completion is inferred."
+}

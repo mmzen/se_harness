@@ -1,0 +1,11 @@
+{
+  "review_commit": "bbae08ab461dc57463f18fd76876a4c76f1833ec",
+  "reason": "Haiku failed the native behavioral criteria; the tool-free Sonnet 4.6 probe passed.",
+  "permission_boundary": "Unchanged exact Claude native02 rules. The new output is nested in the already-approved work subtree; the helper prefix is unchanged.",
+  "model": "claude-sonnet-4-6",
+  "output": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\sonnet01",
+  "project_version_before": 0,
+  "task_sha256": "06c684b28520c5657d47b5677fd1946b1bfc9f4f20434771b7c7ae3d2b1e2257",
+  "selection_sha256": "5a92754684e247b631745735f655fa0926ee51dbd8564b1d07d09cc383fa5ba9",
+  "rules_sha256": "48af73d913845721f895c8266af843c5265ffdbbd960b7ea24346d749874457d"
+}

@@ -1,0 +1,164 @@
+{
+  "candidate": "a2499d21f154e7682ff160cc122a72dd597936a3",
+  "trials": {
+    "claude-91": {
+      "metrics": {
+        "wall_seconds": 304.362,
+        "native_calls": 19,
+        "observed_tool_items": 19,
+        "model_turns": 15,
+        "peak_input_context": 59565,
+        "initial_input_context": 15661,
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "missed",
+          "peak_under_40000": "missed"
+        },
+        "calls_by_tool": {
+          "Read": 5,
+          "Skill": 1,
+          "Bash": 11,
+          "Write": 2
+        },
+        "repeated_read_paths": {}
+      },
+      "assessment": "claude-91-assessment.json",
+      "visible_transcript": "claude-91-visible.md"
+    },
+    "codex-91": {
+      "metrics": {
+        "wall_seconds": 120.868,
+        "native_calls": null,
+        "observed_tool_items": 12,
+        "model_turns": null,
+        "peak_input_context": null,
+        "initial_input_context": null,
+        "goals": {
+          "wall_under_180": "met",
+          "calls_at_most_15": "unavailable",
+          "peak_under_40000": "unavailable"
+        },
+        "calls_by_tool": {
+          "command_execution": 11,
+          "file_change": 1
+        },
+        "repeated_read_paths": {}
+      },
+      "assessment": "codex-91-assessment.json",
+      "visible_transcript": "codex-91-visible.md"
+    },
+    "claude-92": {
+      "metrics": {
+        "wall_seconds": 286.94,
+        "native_calls": 21,
+        "observed_tool_items": 21,
+        "model_turns": 14,
+        "peak_input_context": 57952,
+        "initial_input_context": 15661,
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "missed",
+          "peak_under_40000": "missed"
+        },
+        "calls_by_tool": {
+          "Read": 9,
+          "Skill": 1,
+          "Bash": 9,
+          "Write": 2
+        },
+        "repeated_read_paths": {}
+      },
+      "assessment": "claude-92-assessment.json",
+      "visible_transcript": "claude-92-visible.md"
+    },
+    "claude-93": {
+      "metrics": {
+        "wall_seconds": 247.157,
+        "native_calls": 20,
+        "observed_tool_items": 20,
+        "model_turns": 14,
+        "peak_input_context": 57592,
+        "initial_input_context": 15661,
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "missed",
+          "peak_under_40000": "missed"
+        },
+        "calls_by_tool": {
+          "Read": 10,
+          "Skill": 1,
+          "Bash": 7,
+          "Write": 2
+        },
+        "repeated_read_paths": {}
+      },
+      "assessment": "claude-93-assessment.json",
+      "visible_transcript": "claude-93-visible.md"
+    },
+    "claude-94": {
+      "metrics": {
+        "wall_seconds": 249.398,
+        "native_calls": 21,
+        "observed_tool_items": 21,
+        "model_turns": 14,
+        "peak_input_context": 58929,
+        "initial_input_context": 15662,
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "missed",
+          "peak_under_40000": "missed"
+        },
+        "calls_by_tool": {
+          "Read": 10,
+          "Skill": 1,
+          "Bash": 8,
+          "Write": 2
+        },
+        "repeated_read_paths": {}
+      },
+      "assessment": "claude-94-assessment.json",
+      "visible_transcript": "claude-94-visible.md"
+    },
+    "codex-92": {
+      "metrics": {
+        "wall_seconds": 193.065,
+        "native_calls": null,
+        "observed_tool_items": 17,
+        "model_turns": null,
+        "peak_input_context": null,
+        "initial_input_context": null,
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "missed",
+          "peak_under_40000": "unavailable"
+        },
+        "calls_by_tool": {
+          "command_execution": 15,
+          "file_change": 2
+        },
+        "repeated_read_paths": {}
+      },
+      "assessment": "codex-92-assessment.json",
+      "visible_transcript": "codex-92-visible.md"
+    }
+  },
+  "comparable_claude_positive_runs": {
+    "wall_seconds": {
+      "min": 247.157,
+      "median": 249.398,
+      "max": 286.94
+    },
+    "native_calls": {
+      "min": 20,
+      "median": 21,
+      "max": 21
+    },
+    "peak_input_context": {
+      "min": 57592,
+      "median": 57952,
+      "max": 58929
+    }
+  },
+  "comparison_limit": "Do not combine negative and positive tasks, different candidates or different host permission profiles. Codex exact counts/context are unavailable.",
+  "state": "WO-HAG-011 in_progress; required negative case still fails; no verification request or completion."
+}

@@ -112,5 +112,257 @@ class RemoteClientTests(unittest.TestCase):
             thread.join()
 
 
+class AuthoringTests(unittest.TestCase):
+    def setUp(self):
+        from se_harness.cli import build_parser
+        self.parser = build_parser()
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.evaluator = {'version': '0.22.1', 'archive_sha256': 'a'*64, 'payload_sha256': 'b'*64}
+        self.evaluator_file = self.root / 'evaluator.json'
+        self.evaluator_file.write_text(json.dumps(self.evaluator))
+        self.project = '12345678-1234-4234-8234-123456789abc'
+        self.context = 'abcdef12-1234-4234-8234-123456789abc'
+        self.baseline = 'se-harness-artifact-baseline/v1:sha256:' + 'd'*64
+        self.revision = 'sha256:' + 'e'*64
+
+    def args(self, op, *extra):
+        return self.parser.parse_args(['remote', op, '--endpoint', 'http://127.0.0.1:1',
+            '--token-env', 'HAG_TEST_TOKEN', '--project', self.project, *map(str, extra)])
+
+    def test_typed_inputs_match_independent_wire_contracts(self):
+        from se_harness.remote_authoring import typed_request
+        source = {'schema': 'se-harness-source-manifest/v1', 'source': {'repository':'fixture', 'object_format':'sha1','commit':'f'*40},
+                  'artifacts': [{'artifact_id':'INT-TST-001','path':'docs/intent.md','blob_oid':'a'*40,'raw_sha256':'b'*64,'bytes':16}]}
+        manifest_file = self.root / 'manifest.json'
+        manifest_file.write_text(json.dumps(source))
+        document = self.root / 'document.md'
+        raw = 'exact\r\nUTF-8 café\n'.encode()
+        document.write_bytes(raw)
+        common = ['--typed','--evaluator-file', self.evaluator_file, '--operation-key','chosen-key','--expected-project-version','4']
+        cases = [
+            ('import', ['--source-manifest', manifest_file], {'source_manifest':source}),
+            ('draft-open', ['--baseline', self.baseline, '--work-order','WO-TST-001'], {'base_baseline_id':self.baseline,'work_order_id':'WO-TST-001'}),
+            ('create-artifact', ['--context',self.context,'--context-version','2','--domain','example','--artifact-type','intent','--artifact','INT-TST-001'],
+             {'context_id':self.context,'expected_context_version':2,'domain':'example','artifact_type':'intent','artifact_id':'INT-TST-001'}),
+            ('revise-artifact',['--context',self.context,'--context-version','2','--artifact','INT-TST-001','--expected-revision',self.revision,'--document-file',document],
+             {'context_id':self.context,'expected_context_version':2,'artifact_id':'INT-TST-001','expected_revision_id':self.revision,'document_base64':base64.b64encode(raw).decode()}),
+        ]
+        for op, extra, expected in cases:
+            with self.subTest(op=op):
+                self.assertEqual({'schema':'se-harness-remote-command/v1','operation':op,'project_id':self.project,
+                    'operation_key':'chosen-key','expected_project_version':4,'expected_evaluator':self.evaluator, **expected}, typed_request(self.args(op,*common,*extra)))
+        read = typed_request(self.args('read','--typed','--baseline',self.baseline,'--artifact','INT-TST-001','--expected-revision',self.revision))
+        self.assertEqual({'schema':'se-harness-graph-read/v1','operation':'revision','project_id':self.project,
+            'view':{'kind':'baseline','baseline_id':self.baseline},'artifact_id':'INT-TST-001','revision_id':self.revision,
+            'budget':{'rows':1,'bytes':2097152,'depth':0}},read)
+
+    def test_invalid_inputs_never_send(self):
+        from se_harness.remote import run
+        import contextlib, io
+        document = self.root / 'document.md'
+        document.write_bytes(b'x'*1048577)
+        cases = [self.args('read','--typed','--request',document), self.args('read','--artifact','INT-TST-001'),
+                 self.args('status','--compact'), self.args('status','--typed'),
+                 self.args('revise-artifact','--typed','--document-file',document),
+                 self.args('read','--typed','--baseline',self.baseline,'--context-version','1','--artifact','INT-TST-001','--expected-revision',self.revision)]
+        for args in cases:
+            with self.subTest(args=args), mock.patch.dict('os.environ',{'HAG_TEST_TOKEN':'synthetic-secret'}), mock.patch('se_harness.remote.send') as transport, contextlib.redirect_stderr(io.StringIO()) as output:
+                self.assertEqual(2,run(args))
+                transport.assert_not_called()
+                self.assertEqual('not_sent',json.loads(output.getvalue())['outcome'])
+
+    def test_capture_preserves_wire_bytes_document_and_omissions(self):
+        from se_harness.remote_authoring import Capture
+        raw = b'Exact\r\ndocument\n'
+        value = {'outcome':'accepted','evaluator_output':{'incomplete':['large finding'*3000]},
+                 'data':{'envelope':{'document_sha256':hashlib.sha256(raw).hexdigest()},'document_base64':base64.b64encode(raw).decode()}}
+        capture = Capture(self.root/'new','synthetic-secret')
+        capture.request('POST','/command',{'operation_key':'fixed'})
+        wire = json.dumps(value,indent=3).encode()+b'\n'
+        capture.response(200,wire)
+        view = capture.compact(value)
+        capture.finish(0,'accepted')
+        self.assertEqual(wire,(capture.path/'1-response.json').read_bytes())
+        self.assertEqual(raw,Path(view['documents'][0]['path']).read_bytes())
+        self.assertEqual(raw.decode(),view['documents'][0]['text'])
+        self.assertFalse(view['findings_complete'])
+        self.assertTrue(any(x.get('required_reading') for x in view['omitted']))
+        self.assertNotIn('document_base64', view['result']['data'])
+        with self.assertRaises(RemoteError):
+            Capture(capture.path,'synthetic-secret')
+
+    def test_compact_workflow_keeps_action_findings_and_prerequisites_with_exact_catalogue_pointer(self):
+        from se_harness.remote_authoring import Capture
+        current={'id':'STEP-1','location':{'file':'current.md','heading':'act'},
+                 'prerequisites':[{'file':'authority.md','heading':'rights'}]}
+        workflow={'schema':'se-harness-workflow-result-v2',
+            'procedure':{'current_step':'STEP-1','steps':[{'id':'STEP-1','argv':['harnessctl','check']}]},
+            'findings':{'scoped_blockers':[{'id':'GATE-1','message':'Required input missing'}]},
+            'restitution':{'outcome':'blocked','command_or_response':{'kind':'decision','right':'human'}},
+            'instruction_discovery':{'agent_instructions':{'current_step':current,
+                'shared_prerequisites':[{'file':'results.md'}],
+                'procedure':{'id':'PROC-1','prerequisites':[{'file':'additional.md'}],
+                    'steps':{'STEP-1':current,'STEP-2':{'location':{'file':'later.md'}}}}},
+                'evaluator_only_inputs':[{'file':'WORKFLOW.json','sha256':'exact'}]}}
+        result={'outcome':'refused','operation_key':'same-key','evaluator_output':workflow}
+        capture=Capture(self.root/'workflow','synthetic-secret')
+        capture.request('POST','/command',{'operation_key':'same-key'})
+        raw=json.dumps(result,indent=3).encode()+b'\n'
+        capture.response(409,raw)
+        view=capture.compact(result)
+        shown=view['result']['evaluator_output']
+        for key in ('procedure','findings','restitution'):
+            self.assertEqual(workflow[key],shown[key])
+        instructions=shown['instruction_discovery']['agent_instructions']
+        self.assertEqual(current,instructions['current_step'])
+        self.assertEqual([{'file':'additional.md'}],instructions['procedure']['prerequisites'])
+        self.assertEqual([{'file':'results.md'}],instructions['shared_prerequisites'])
+        # Small metadata stays inline when a pointer would be larger.
+        self.assertEqual(1,len(view['omitted']))
+        self.assertEqual(workflow['instruction_discovery']['evaluator_only_inputs'],
+                         shown['instruction_discovery']['evaluator_only_inputs'])
+        for item in view['omitted']:
+            self.assertEqual(raw,Path(view['full_response']).read_bytes())
+            original=json.loads(Path(view['full_response']).read_bytes())
+            for segment in item['pointer'].split('/')[1:]:original=original[segment]
+            self.assertTrue(original)
+        self.assertLess(len(json.dumps(shown,indent=2)),len(json.dumps(workflow,indent=2)))
+        self.assertTrue(view['findings_complete'])
+        self.assertEqual('refused',view['result']['outcome'])
+        self.assertEqual('same-key',view['result']['operation_key'])
+        for index,change in enumerate(('unknown-schema','no-current-step')):
+            original=json.loads(raw)
+            if change=='unknown-schema':original['evaluator_output']['schema']='unknown'
+            else:del original['evaluator_output']['instruction_discovery']['agent_instructions']['current_step']
+            other=Capture(self.root/str(index),'synthetic-secret').compact(original)
+            self.assertEqual(original,other['result'])
+            self.assertEqual([],other['omitted'])
+
+    def test_wire_version_bounds_and_work_order_type_refuse_before_sending(self):
+        from se_harness.remote import run
+        import contextlib, io
+        for version, work_order in [('9223372036854775808','WO-TST-001'),('1','INT-TST-001')]:
+            args=self.args('draft-open','--typed','--evaluator-file',self.evaluator_file,
+                '--operation-key','chosen','--expected-project-version',version,
+                '--baseline',self.baseline,'--work-order',work_order)
+            with mock.patch.dict('os.environ',{'HAG_TEST_TOKEN':'synthetic-secret'}),mock.patch('se_harness.remote.send') as transport,contextlib.redirect_stderr(io.StringIO()) as output:
+                self.assertEqual(2,run(args))
+                self.assertEqual('not_sent',json.loads(output.getvalue())['outcome'])
+                transport.assert_not_called()
+
+    def test_draft_shape_result_never_claims_content_readiness(self):
+        from se_harness.remote_authoring import Capture
+        for index, validation in enumerate((
+            {'schema':'se-harness-draft-validation-v1', 'admissible':True, 'errors':[], 'incomplete':[]},
+            {'schema':'se-harness-draft-validation-v1', 'admissible':False, 'errors':['invalid link'], 'incomplete':[]},
+            {'schema':'se-harness-draft-validation-v1', 'admissible':True, 'errors':[], 'incomplete':['large finding'*3000]},
+        )):
+            with self.subTest(validation=validation['admissible'], incomplete=bool(validation['incomplete'])):
+                result = {'outcome':'accepted', 'evaluator_output':validation}
+                capture = Capture(self.root/str(index),'synthetic-secret')
+                capture.request('POST','/command',{'operation_key':'fixed'})
+                raw = json.dumps(result,indent=2).encode()
+                capture.response(200,raw)
+                view = capture.compact(result)
+                self.assertEqual('not_assessed', view['draft_review']['content_review'])
+                self.assertEqual('draft_shape_and_required_links', view['draft_review']['validation_scope'])
+                self.assertEqual(validation['admissible'], view['result']['evaluator_output']['admissible'])
+                self.assertEqual(raw,(capture.path/'1-response.json').read_bytes())
+                self.assertEqual(not validation['incomplete'],view['findings_complete'])
+        capture = Capture(self.root/'other','synthetic-secret')
+        self.assertNotIn('draft_review',capture.compact({'evaluator_output':{'schema':'other-result'}}))
+        self.assertNotIn('draft_review',capture.compact({'outcome':'refused','evaluator_output':None}))
+
+    def test_unicode_result_survives_a_legacy_windows_console(self):
+        from se_harness.remote import run
+        import contextlib, io
+        value={'message':'“Résumé” — 你好'}
+        buffer=io.BytesIO();console=io.TextIOWrapper(buffer,encoding='cp1252')
+        with mock.patch.dict('os.environ',{'HAG_TEST_TOKEN':'synthetic-secret'}),mock.patch('se_harness.remote.send',return_value=(200,value)),contextlib.redirect_stdout(console):
+            self.assertEqual(0,run(self.args('status')))
+        console.flush()
+        self.assertEqual(value,json.loads(buffer.getvalue()))
+        console.detach()
+
+    def test_post_send_capture_failure_is_unknown_not_not_sent(self):
+        from se_harness.remote import run
+        import contextlib, io
+        request = self.root/'request.json'
+        request.write_text(json.dumps({'operation':'create-artifact','operation_key':'original','project_id':self.project}))
+        def accepted(*args, **kwargs):
+            kwargs['capture'].response(200,b'{"outcome":"accepted"}')
+            return 200, {'outcome':'accepted'}
+        with mock.patch.dict('os.environ',{'HAG_TEST_TOKEN':'synthetic-secret'}), mock.patch('se_harness.remote.installed_client',return_value={'version':'test'}), mock.patch('se_harness.remote.send',side_effect=accepted) as transport, mock.patch('se_harness.remote_authoring.Capture.finish',side_effect=OSError('disk full')), contextlib.redirect_stderr(io.StringIO()) as output:
+            code=run(self.args('create-artifact','--request',request,'--client-wheel','fixture','--compact','--record-directory',self.root/'new'))
+        result=json.loads(output.getvalue())
+        self.assertEqual(2,code)
+        self.assertEqual('unknown',result['outcome'])
+        self.assertEqual('original',result['operation_key'])
+        self.assertTrue(result['capture_incomplete'])
+        self.assertEqual(1,transport.call_count)
+        self.assertEqual(b'{"outcome":"accepted"}',(self.root/'new/1-response.json').read_bytes())
+
+    def test_linked_oversized_and_secret_documents_are_refused(self):
+        from se_harness.remote_authoring import file_bytes, Capture
+        p=self.root/'large';p.write_bytes(b'x'*1025)
+        with self.assertRaises(ValueError):file_bytes(p,1024)
+        capture=Capture(self.root/'capture','synthetic-secret')
+        with self.assertRaisesRegex(RemoteError,'credential'):
+            capture.write('secret',b'contains synthetic-secret')
+        self.assertFalse((capture.path/'secret').exists())
+        link=self.root/'link'
+        try:link.symlink_to(p)
+        except OSError:self.skipTest('host cannot create symlinks')
+        with self.assertRaises(ValueError):file_bytes(link,2048)
+
+    def test_create_returns_exact_document_with_one_read_and_raw_replay_unchanged(self):
+        from se_harness.remote import run
+        import contextlib, io
+        owner=self;requests=[];raw=b'+++\r\nid = "INT-TST-001"\r\n+++\r\n'
+        view={'kind':'context','context_id':self.context,'context_version':1}
+        accepted={'outcome':'accepted','receipt_id':'original-receipt','project_id':self.project,'view':view,
+                  'affected_artifacts':[{'artifact_id':'INT-TST-001','revision_id':self.revision}],
+                  'evaluator_output':{'incomplete':['Complete the definition.']}}
+        document={'complete':True,'continuation':None,'project_id':self.project,'view':view,
+                  'data':{'revision_id':self.revision,'envelope':{'artifact_id':'INT-TST-001','document_sha256':hashlib.sha256(raw).hexdigest()},
+                          'document_base64':base64.b64encode(raw).decode()}}
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_POST(self):
+                requests.append(json.loads(self.rfile.read(int(self.headers['Content-Length']))))
+                value=document if self.path.endswith('/reads/revision') else accepted
+                body=(json.dumps(value,indent=3)+'\n').encode()
+                self.send_response(200);self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
+            def log_message(self,*args):pass
+        server=http.server.ThreadingHTTPServer(('127.0.0.1',0),Handler)
+        thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+        try:
+            args=self.args('create-artifact','--typed','--evaluator-file',self.evaluator_file,'--client-wheel','fixture',
+                '--operation-key','chosen','--expected-project-version','2','--context',self.context,'--context-version','0',
+                '--domain','example','--artifact-type','intent','--artifact','INT-TST-001','--include-document','--compact','--record-directory',self.root/'new')
+            args.endpoint='http://127.0.0.1:'+str(server.server_port)
+            with mock.patch.dict('os.environ',{'HAG_TEST_TOKEN':'synthetic-secret'}),mock.patch('se_harness.remote.installed_client',return_value={'version':'test','wheel_sha256':'a'*64}),contextlib.redirect_stdout(io.StringIO()) as out:
+                self.assertEqual(0,run(args))
+            result=json.loads(out.getvalue());self.assertEqual(2,len(requests))
+            self.assertEqual('revision',requests[1]['operation'])
+            self.assertEqual(self.revision,requests[1]['revision_id'])
+            self.assertEqual(raw,Path(result['document_read']['documents'][0]['path']).read_bytes())
+            self.assertEqual(raw.decode(),result['document_read']['documents'][0]['text'])
+            self.assertEqual(accepted,result['result'])
+            record=json.loads((self.root/'new/capture.json').read_text())
+            self.assertTrue(all(x['body_complete'] for x in record['exchanges']))
+            original=json.loads((self.root/'new/1-request.json').read_bytes())
+            request=self.root/'raw.json';request.write_text(json.dumps(original))
+            args=self.args('create-artifact','--request',request,'--client-wheel','fixture')
+            args.endpoint='http://127.0.0.1:'+str(server.server_port)
+            with mock.patch.dict('os.environ',{'HAG_TEST_TOKEN':'synthetic-secret'}),mock.patch('se_harness.remote.installed_client',return_value=original['client']),contextlib.redirect_stdout(io.StringIO()) as out:
+                self.assertEqual(0,run(args))
+            self.assertEqual(accepted,json.loads(out.getvalue()))
+            self.assertEqual(requests[0],requests[2])
+        finally:
+            server.shutdown();server.server_close();thread.join()
+
+
 if __name__ == "__main__":
     unittest.main()

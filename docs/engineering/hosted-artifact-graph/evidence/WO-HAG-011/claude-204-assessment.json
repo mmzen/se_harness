@@ -1,0 +1,64 @@
+{
+  "candidate": "d31e337425696c944ee61eda9957b6ac4bd2c82b",
+  "trial": "claude-204",
+  "case": "EFF-04B",
+  "overall": "pass",
+  "method": "Independent semantic review of saved document, report, visible calls and final reply; separate exact saved-byte and seven imported-revision reads. This script retains the reviewed findings, not a keyword-based content grade.",
+  "findings": [
+    "The draft correctly verifies REQ-P3-900. Its expected string derives from the requirement and specification; the planned import/call/string-equality assertion directly checks the stated pass condition. The matrix, platform/evaluator and exact JSON evidence destination are usable.",
+    "Saved document and report distinguish a verification plan from executed tests and evaluator shape admission from content review. The report retains W-AUT-022 and accurate operation evidence. No empty optional heading, invented coverage gap or unchecked asserted condition is present.",
+    "All seven imported records and staged inputs are unchanged; independent service readback exactly matches the submitted draft. The residual-uncertainty section is minimal, but the task has one exact return-value criterion and the contract makes no extra coverage claim."
+  ],
+  "blocking_findings": [],
+  "metrics": {
+    "snapshot": "complete",
+    "partial_event_line_omitted": false,
+    "non_json_diagnostic_lines": [],
+    "wall_seconds": 241.706,
+    "native_calls": 8,
+    "observed_tool_items": 8,
+    "native_call_count_complete": true,
+    "calls_by_tool": {
+      "Bash": 6,
+      "Write": 2
+    },
+    "model_turns": 9,
+    "peak_input_context": 54685,
+    "initial_input_context": 32813,
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "native_failures": [],
+    "command_records": [],
+    "failed_command_records": [],
+    "file_reads": [],
+    "repeated_read_paths": {},
+    "content_review": "not performed by this summary",
+    "provider_time": "unclassified",
+    "limits": "Observed native calls and command captures only. No private reasoning exported. Provider usage is not billed-token total. Tool durations may overlap; they are not subtracted to infer model time."
+  },
+  "performance_verdict": {
+    "wall_under_180": "missed",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "remote_operations": [
+    "status",
+    "import",
+    "draft-open",
+    "create-artifact",
+    "revise-artifact"
+  ],
+  "observed_command_failures": [],
+  "baseline_records_unchanged": 7,
+  "input_changes": [],
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:a2273f0b2007d344afb17d184744dfb056f5cea35d3c0083db5ce5397f32073a"
+  },
+  "document_sha256": "1ec8978db4b03897455b7ed7f50fc3afd267bf5cc6c66a27dbb96f3f14cce2be",
+  "final_project_version": 4,
+  "limits": "Draft content and reporting result only. Performance misses remain misses; full NQ qualification, work completion and human verification remain separate. Earlier evidence unchanged."
+}

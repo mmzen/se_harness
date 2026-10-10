@@ -1,0 +1,222 @@
+{
+  "trial": "claude-212",
+  "session": {
+    "host": "claude",
+    "exit": 1,
+    "timed_out": true,
+    "elapsed_seconds": 1800.206,
+    "reply_dropped": true,
+    "redactions": 0,
+    "events_sha256": "47c6bbc1593bde6aa7719ce55a868cc2d96766641d2363c416278b8de55aeadd",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "task_bytes": 13664,
+  "observed_call_categories": {
+    "Read": 35,
+    "remote status": 1,
+    "identity": 1,
+    "instructions": 2,
+    "find-file": 6,
+    "other shell": 1,
+    "remote import": 1,
+    "remote draft-open": 1,
+    "remote create-artifact": 7,
+    "Write": 24,
+    "remote revise-artifact": 7,
+    "remote rehearse": 18,
+    "read-json": 23,
+    "remote operation": 1,
+    "assert-greeting": 1
+  },
+  "visible_tool_result_characters": 432921,
+  "unique_command_records": [
+    {
+      "first_path": "work/assertion-001.json",
+      "elapsed_seconds": 0.07561,
+      "exit": 0
+    },
+    {
+      "first_path": "work/create-cap-001.json",
+      "elapsed_seconds": 2.062132,
+      "exit": 0
+    },
+    {
+      "first_path": "work/create-int-001.json",
+      "elapsed_seconds": 2.020694,
+      "exit": 0
+    },
+    {
+      "first_path": "work/create-rel-001.json",
+      "elapsed_seconds": 2.044827,
+      "exit": 0
+    },
+    {
+      "first_path": "work/create-req-001.json",
+      "elapsed_seconds": 2.115419,
+      "exit": 0
+    },
+    {
+      "first_path": "work/create-spec-001.json",
+      "elapsed_seconds": 2.05388,
+      "exit": 0
+    },
+    {
+      "first_path": "work/create-ver-001.json",
+      "elapsed_seconds": 1.995902,
+      "exit": 0
+    },
+    {
+      "first_path": "work/create-wo-001.json",
+      "elapsed_seconds": 2.11279,
+      "exit": 0
+    },
+    {
+      "first_path": "work/draft-open-001.json",
+      "elapsed_seconds": 1.449606,
+      "exit": 0
+    },
+    {
+      "first_path": "work/import-001.json",
+      "elapsed_seconds": 1.363367,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-approve-apply-result.json",
+      "elapsed_seconds": 1.898072,
+      "exit": 2
+    },
+    {
+      "first_path": "work/lc-approve-changed-result.json",
+      "elapsed_seconds": 0.393534,
+      "exit": 1
+    },
+    {
+      "first_path": "work/lc-approve-lookup.json",
+      "elapsed_seconds": 0.479291,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-approve-preview-result.json",
+      "elapsed_seconds": 1.882334,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-approve-retry.json",
+      "elapsed_seconds": 0.394689,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-decide-apply-result.json",
+      "elapsed_seconds": 1.910086,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-decide-preview-result.json",
+      "elapsed_seconds": 1.941761,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-handoff-apply-result.json",
+      "elapsed_seconds": 0.541502,
+      "exit": 1
+    },
+    {
+      "first_path": "work/lc-handoff-empty-preview-result.json",
+      "elapsed_seconds": 1.960984,
+      "exit": 1
+    },
+    {
+      "first_path": "work/lc-handoff-oos-result.json",
+      "elapsed_seconds": 1.521542,
+      "exit": 1
+    },
+    {
+      "first_path": "work/lc-handoff-preview-result.json",
+      "elapsed_seconds": 2.289234,
+      "exit": 1
+    },
+    {
+      "first_path": "work/lc-implement-apply-direct-result.json",
+      "elapsed_seconds": 0.522505,
+      "exit": 1
+    },
+    {
+      "first_path": "work/lc-implement-preview-result.json",
+      "elapsed_seconds": 1.5541,
+      "exit": 1
+    },
+    {
+      "first_path": "work/lc-preflight-start-result.json",
+      "elapsed_seconds": 1.53033,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-risk-apply-result.json",
+      "elapsed_seconds": 1.813494,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-risk-preview-result.json",
+      "elapsed_seconds": 1.691824,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-start-apply-result.json",
+      "elapsed_seconds": 2.006731,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-start-preview-result.json",
+      "elapsed_seconds": 1.917694,
+      "exit": 0
+    },
+    {
+      "first_path": "work/lc-validate-001-result.json",
+      "elapsed_seconds": 1.490899,
+      "exit": 0
+    },
+    {
+      "first_path": "work/revise-cap-001.json",
+      "elapsed_seconds": 1.475257,
+      "exit": 0
+    },
+    {
+      "first_path": "work/revise-int-001.json",
+      "elapsed_seconds": 1.485789,
+      "exit": 0
+    },
+    {
+      "first_path": "work/revise-rel-001.json",
+      "elapsed_seconds": 1.447159,
+      "exit": 0
+    },
+    {
+      "first_path": "work/revise-req-001.json",
+      "elapsed_seconds": 1.411357,
+      "exit": 0
+    },
+    {
+      "first_path": "work/revise-spec-001.json",
+      "elapsed_seconds": 1.46085,
+      "exit": 0
+    },
+    {
+      "first_path": "work/revise-ver-001.json",
+      "elapsed_seconds": 1.486916,
+      "exit": 0
+    },
+    {
+      "first_path": "work/revise-wo-001.json",
+      "elapsed_seconds": 1.458667,
+      "exit": 0
+    },
+    {
+      "first_path": "work/status-001.json",
+      "elapsed_seconds": 0.726103,
+      "exit": 0
+    }
+  ],
+  "recorded_command_seconds": 55.986931,
+  "limits": "Full five-scenario lifecycle trial, not the focused one-artifact EFF benchmark. Codex items are a lower bound. Records duplicated by exports are deduplicated by exact canonical record content. Byte/character counts are not tokens; command durations may overlap, and unexplained wall time is not assigned to model reasoning. No private reasoning is reproduced."
+}

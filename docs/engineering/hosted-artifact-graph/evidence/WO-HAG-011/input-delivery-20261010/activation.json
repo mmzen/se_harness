@@ -1,0 +1,37 @@
+{
+  "schema": "manual-linked-amendment-v1",
+  "decided_by": "mmzen",
+  "recorded_by": "Codex",
+  "recorded_at": "2026-10-10T04:25:37.016744+00:00",
+  "review_commit": "08a3ad39ee3e349a2fefe24502575f5f082b7e26",
+  "decision": "I approve",
+  "question": "Approve the complete-input amendment to SPEC-HAG-008, VER-HAG-008 and WO-HAG-011 in PR #543? It permits one bounded entry containing the complete selected fixture and exact applicable instructions, followed by a fresh Claude diagnostic. This includes manual activation with accepted versions preserved and required commit-bound verification. Tasks, content criteria, permissions and human verification remain unchanged.",
+  "mechanism": "Explicitly approved manual linked revision; selected released evaluator has no supported accepted-definition amendment command.",
+  "artifacts": [
+    {
+      "id": "SPEC-HAG-008",
+      "repository_path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md",
+      "accepted_sha256": "02b199be5ae7fb867a6fda43f29ac1f3e6ef2bfd2cab2610150fdd8e4e22627c",
+      "proposed_sha256": "805c9da66ca26c1d56b767bbd3e8545229a0c1f9a46a2846b95fcc04c98da343",
+      "accepted_bytes": 11410,
+      "proposed_bytes": 14117
+    },
+    {
+      "id": "VER-HAG-008",
+      "repository_path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+      "accepted_sha256": "6c1b35ad722facd04047d436b6db0f264fb63064d52b0e9991f05c3213f577f9",
+      "proposed_sha256": "6464d4009e1cfb1036d49ce2fba51a1565639ecf777b9a8d2623b5d04d583833",
+      "accepted_bytes": 14069,
+      "proposed_bytes": 16552
+    },
+    {
+      "id": "WO-HAG-011",
+      "repository_path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+      "accepted_sha256": "992565fec8044b813a58827ba56b5412c25166567a256f226924ac79c62387e1",
+      "proposed_sha256": "b40b961ff3c775f8b4afc7335415cf62f63b866858029c890471bd4f92faa05b",
+      "accepted_bytes": 15964,
+      "proposed_bytes": 17885
+    }
+  ],
+  "unchanged": "Owners, lifecycle events and states; required commit-bound assurance; original native tasks, content criteria and permissions. No approval or start transition repeated."
+}

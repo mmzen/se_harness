@@ -1,0 +1,44 @@
+{
+  "candidate": "7b47df42d917ddb682136844b306bc41b5b3b1a0",
+  "case": "EFF-04A",
+  "trial": "claude-121",
+  "content_verdict": "fail",
+  "reporting_verdict": "fail",
+  "findings": [
+    "The final reply and native report label INT-P3-001 complete. The saved intent supplies confirmed fixture integrity before dependent work as an operational benefit and one confirmation per rehearsal setup as its success measure.",
+    "The sources establish the expected greeting and existing synthetic definitions. They do not supply an agreed operational improvement or its success measure as required by EFF-04A. The agent explicitly notices that its proposed measure is close to verification setup, then treats the creation request as sufficient support. This fails the required missing-input response.",
+    "The document acknowledges REQ-P3-900, SPEC-P3-900 and VER-P3-900. It nevertheless claims that absence of an establishment record leaves subsequent work on an unverified assumption. The run does not establish this claimed operational gap.",
+    "Independent service read matches the exact submitted final document. One new intent remains draft at project version four. Seven imported records remain exact original Git-blob bytes.",
+    "No denied or failed native tool calls were observed. The report claims no executed behavior tests or real lifecycle decision. These facts do not cure the unsupported content and complete-readiness verdict.",
+    "The complete entry reached stdin unchanged. The agent read the staged candidate setup skill, selection.json and configuration.json; it did not read task.md. Selection was supplied in the entry but read again. No automatic startup/compaction or native Codex recovery qualification is established."
+  ],
+  "metrics": {
+    "wall_seconds": 271.05,
+    "native_calls": 12,
+    "observed_tool_items": 12,
+    "calls_by_tool": {
+      "Read": 3,
+      "Bash": 7,
+      "Write": 2
+    },
+    "model_turns": 11,
+    "peak_input_context": 61544,
+    "initial_input_context": 32795,
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "repeated_read_paths": {}
+  },
+  "observed_failed_calls": [],
+  "exact_saved_document": true,
+  "document_sha256": "2558e11ced15b9f217d8c5240406c97ca53387924c197754e3f72251caeecbcf",
+  "artifact": {
+    "artifact_id": "INT-P3-001",
+    "revision_id": "sha256:366b54678f40b51199a370f70d0accb7d0d0029b26efaa90a6c79becee3c11df"
+  },
+  "final_project_version": 4,
+  "baseline_records_unchanged": 7,
+  "decision": "Stop further native runs on candidate18 under VER-HAG-008. Codex EFF-04A and all EFF-04B cases remain unperformed. No verification record or lifecycle completion is justified."
+}

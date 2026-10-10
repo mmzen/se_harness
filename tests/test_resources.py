@@ -91,6 +91,22 @@ class ResourceTests(unittest.TestCase):
         checks = inspect_installation(self.root)
         self.assertTrue(all(item.passed for item in checks), checks)
 
+    def test_section_cli_uses_selected_identity_and_refuses_mixed_modes(self):
+        name='docs/engineering/ARTIFACT_AUTHORING.md'
+        code,output,error=invoke('resources',str(self.root),'--section',name+'#design-simplicity','--section',name+'#intent','--json')
+        self.assertEqual(0,code,error)
+        view=json.loads(output)['resources'][0]
+        self.assertEqual(self.lock['evaluator'],view['release'])
+        self.assertEqual(resources.raw_sha256((self.bundle/name).read_bytes()),view['sha256'])
+        self.assertEqual(['design-simplicity','intent'],[x['heading'] for x in view['sections']])
+        for flags in [('--resource',name),('--content',)]:
+            code,output,error=invoke('resources',str(self.root),'--section',name+'#intent',*flags,'--json')
+            self.assertNotEqual(0,code)
+        self.lock['evaluator']['payload_sha256']='0'*64
+        self.write_lock()
+        code,output,error=invoke('resources',str(self.root),'--section',name+'#intent','--json')
+        self.assertNotEqual(0,code)
+
     def test_empty_external_install_validates_without_creating_an_artifact_directory(self):
         before = self.files()
         report = validate_repository(self.root)
@@ -438,6 +454,36 @@ class ResourceTests(unittest.TestCase):
             self.skipTest("host cannot create symlinks")
         with self.assertRaisesRegex(resources.ResourceError, "linked"):
             resources.ResourceSet(self.root)
+
+
+class SectionViewTests(unittest.TestCase):
+    def view(self, raw, headings):
+        return resources.section_view(raw, resource='instructions.md', path='/selected/instructions.md',
+            release={'version':'test'}, sha256=resources.raw_sha256(raw), headings=headings)
+
+    def test_complete_sections_preserve_newlines_and_skip_fenced_headings(self):
+        raw=b'# Whole\r\nIntro\r\n## Selected\r\n```md\r\n## Fake\r\n```\r\n### Child\r\nMUST remain.\r\n## Next\r\nNo.\r\n'
+        value=self.view(raw,['selected','child'])
+        self.assertEqual('## Selected\r\n```md\r\n## Fake\r\n```\r\n### Child\r\nMUST remain.\r\n',value['sections'][0]['content'])
+        self.assertEqual('selected',value['sections'][1]['included_in'])
+        self.assertNotIn('content',value['sections'][1])
+        with self.assertRaisesRegex(resources.ResourceError,'missing or ambiguous'):
+            self.view(raw,['fake'])
+
+    def test_missing_ambiguous_and_changed_sources_refuse(self):
+        for raw, headings in [(b'# Same\n# Same\n',['same']),(b'# One\n',['missing'])]:
+            with self.assertRaises(resources.ResourceError):self.view(raw,headings)
+        with self.assertRaisesRegex(resources.ResourceError,'changed'):
+            resources.section_view(b'# One\n',resource='r',path='p',release={},sha256='0'*64,headings=['one'])
+
+    def test_unique_parent_preserves_repeated_nested_heading_without_later_index(self):
+        raw = (b'# Continue selected work\n\n## Procedure\n\n'
+               b'### Continue selected work\n\nMUST use the returned step.\n\n'
+               b'## Returned typed steps\n\nLater index.\n')
+        with self.assertRaisesRegex(resources.ResourceError, 'missing or ambiguous'):
+            self.view(raw, ['continue-selected-work'])
+        section = self.view(raw, ['procedure'])['sections'][0]['content']
+        self.assertEqual(raw[raw.index(b'## Procedure'):raw.index(b'## Returned typed steps')].decode(), section)
 
 
 if __name__ == "__main__":

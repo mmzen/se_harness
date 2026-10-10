@@ -715,3 +715,75 @@ inputs under its key fail. No arbitrary command or `--test-command` is forwarded
 Export requires an immutable baseline and a new directory. It writes exact files,
 a Git bundle and a manifest. Download success does not claim successful independent
 replay. All these records are test data; Git remains authoritative for real work.
+
+## Concise hosted authoring
+
+The candidate client supports explicit typed inputs for existing operations.
+This does not change service schemas, select lifecycle actions or grant authority.
+Use the installed candidate Python with `-I -m se_harness remote OPERATION`.
+Common selection is `--endpoint URL --project UUID --token-env VARIABLE`.
+Credentials stay in that environment variable. The service remains a private
+loopback sandbox; Git remains authoritative.
+
+| Operation | Required typed fields |
+| --- | --- |
+| `remote import` | `--source-manifest FILE` |
+| `remote draft-open` | `--baseline ID --work-order WO-ID` |
+| `remote create-artifact` | `--context UUID --context-version N --domain NAME --artifact-type TYPE`; optional `--artifact ID` |
+| `remote revise-artifact` | `--context UUID --context-version N --artifact ID --expected-revision REVISION --document-file FILE` |
+| `remote read` (revision) | `--artifact ID --expected-revision REVISION` and exactly one of `--baseline ID` or `--context UUID --context-version N` |
+
+Select `--typed`. Every mutation also requires `--operation-key KEY`,
+`--expected-project-version N`, `--evaluator-file FILE`, and `--client-wheel FILE`.
+The evaluator file contains exactly `version`, `archive_sha256`, `payload_sha256`
+from the selected combination. The client verifies the executing package against
+its wheel. The source manifest uses the existing canonical manifest schema.
+Document files are exact UTF-8 bytes, at most 1 MiB. Linked paths are refused.
+The client constructs the existing wire request; the agent selects its meaning,
+versions and key. It never retries or changes these inputs automatically.
+
+Raw `--request FILE` remains available for every existing operation, including
+freeze and test-copy lifecycle operations. Do not combine raw and typed input.
+Invalid typed fields fail before a network request. Stale versions and reused
+keys with changed content retain the service's normal refusal behavior.
+
+Add `--compact --record-directory NEW_DIRECTORY` for an evidence-backed view.
+The parent directory must exist; the destination must not exist or traverse a
+link. It retains exact request/response bytes, decoded documents and capture
+metadata (exit, timings, uncertainty). The view shows small fields and documents,
+with explicit pointers for omitted content. Required omitted findings still need
+reading. It is a presentation, not an independent verdict.
+For known workflow results with a selected instruction step, the view can leave
+the full instruction-step catalogue and evaluator-only inputs in `full_response`
+when their pointers are smaller. Their JSON pointers are listed in `omitted`.
+The response path is given once in `full_response`. The selected step, its
+prerequisites, executable procedure, findings and next action stay in view.
+For draft-validation responses, `draft_review` identifies the evaluator's shape
+and required-link checks and reports content review as `not_assessed`. An empty
+`incomplete` list and `findings_complete: true` do not establish content readiness.
+The agent reviews the saved content against the applicable authoring checklist.
+
+For `create-artifact`, optional `--include-document` performs one read of the
+exact created revision after an accepted creation. No other mutation occurs.
+Its `document_read` field retains the independent response. A failed read does
+not undo creation. After a capture or transport failure, inspect retained results
+and look up the original operation key; a remote effect may have committed.
+Do not choose a new key to conceal an unknown outcome. An explicit separate
+revision read remains available for verification.
+
+### Complete instruction sections
+
+For a repository governed by a release that supports this option:
+
+```text
+harnessctl resources REPO --section docs/engineering/ARTIFACT_AUTHORING.md#design-simplicity --section docs/engineering/ARTIFACT_AUTHORING.md#intent --json
+```
+
+Use actual returned/selected headings. The example does not select a lifecycle
+step. `--section RESOURCE#heading` can repeat up to 12 times. Each complete section
+includes source path, selected release, digest and line range. Overlapping sections
+are included once. Unknown or ambiguous headings and changed resources fail.
+Do not mix `--section` with `--resource`/`--content`. Existing resource modes stay
+available. This candidate option does not make an older released evaluator support it.
+The native test adapter can use the same installed reader on byte-verified staged
+released resources; that does not substitute candidate policy for the released evaluator.

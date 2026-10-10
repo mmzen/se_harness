@@ -1,0 +1,69 @@
+{
+  "archive": "supporting-checks01.zip",
+  "bytes": 34263,
+  "sha256": "fb9a954adf2812abb04dc2d7ba12211fcbdb3a5f59a51f2b253c5ca7b1b94e8d",
+  "source_checkpoint": "635cf03af096c1c3b415c78d447be0e5614335a9",
+  "claims": "Source checks and component reuse only. Native qualification and final commit-bound verification are separate.",
+  "files": [
+    {
+      "path": "native-driver-source.json",
+      "bytes": 1899,
+      "sha256": "d98b5f1b728c72af930170650cf282dfcd77a0882aa0fb9a860e530da2f330de"
+    },
+    {
+      "path": "native-final-source-suite.json",
+      "bytes": 5499,
+      "sha256": "0b95969e02a0cb45109e75ea5742941f2493bf16b94e76fe4119a5957eb2d2ea"
+    },
+    {
+      "path": "native-final-distribution-check.json",
+      "bytes": 503,
+      "sha256": "b00e1e9ef602bc08c8de847f278576121ec3415f33cdab138503467ea997a0dc"
+    },
+    {
+      "path": "native-final-cli-smoke.json",
+      "bytes": 4383,
+      "sha256": "5c1ff4b216ff67fc01fedd914c86c81a06d5fe623db6b08390858547ad93cce0"
+    },
+    {
+      "path": "native-final-focused-check.json",
+      "bytes": 514,
+      "sha256": "290c63a17d0068abb554432ca61f2d3001675ab3023f7f547fcc0cb46fecf66d"
+    },
+    {
+      "path": "native-driver-validation.json",
+      "bytes": 427720,
+      "sha256": "1482975c296900c53bae4441312564995e21788b882b8905ae0bbd84602ec923"
+    },
+    {
+      "path": "native-driver-scope.json",
+      "bytes": 23717,
+      "sha256": "8f39068746d8c96dad663f8f3e9b67f53d3e957eccb041beb898ae4b75289fce"
+    },
+    {
+      "path": "runtime-reuse.json",
+      "bytes": 3592,
+      "sha256": "e78d4c5ee6d9cdfaa9c2a01dd7efea44c5d32e8bc3455bf105d2fb460adc9e7d"
+    },
+    {
+      "path": "native-image-identity.json",
+      "bytes": 4397,
+      "sha256": "c408bf081f3202cebf2b8d835824139a394268f2c0965a975a02b2b6f719a743"
+    },
+    {
+      "path": "native-fixture-initial.json",
+      "bytes": 1167,
+      "sha256": "1d3f255433c0b57f114f72f282a3f689ff2cba6828598d5ca65a5216cadd9d4f"
+    },
+    {
+      "path": "claude-opus-probe.json",
+      "bytes": 2878,
+      "sha256": "d2e53c7258fc648783b8bc27df238ddf450d541a99c1736d1f05af50bee6f249"
+    },
+    {
+      "path": "claude-final-initial-status.json",
+      "bytes": 4381,
+      "sha256": "c4706829783ec1d690e18f08c00294f74bd7e204b91726a07e36194bfab6717f"
+    }
+  ]
+}

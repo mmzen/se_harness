@@ -1,0 +1,356 @@
+{
+  "outcome": "native06_observed_cases_pass",
+  "package_source": "0dbb8ea19f28994da7abc7ecbab08c8db430dc0c",
+  "session": {
+    "host": "codex",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 1813.82,
+    "reply_dropped": true,
+    "redactions": 0,
+    "events_sha256": "43fb4c77014af93bf6b7038bab0524ddca77b13493015c5c1a518a42f20ebe7a",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "accepted_operations": 11,
+  "native_exports": [
+    {
+      "case": "native-export-0",
+      "head": "ba43395d2ad6e64b9e175d0bababa4f203a2f79b",
+      "file_count": 19,
+      "baseline_id": "se-harness-artifact-baseline/v1:sha256:6c6eea82ef59f5387938af80cb6e0edc320fc6d532f9dca9aa9ad64bfe25fee5",
+      "snapshot_id": "sha256:a7a5c1283f13dfe05658b36d3ec35d79d31f1a7628d387f62c50b055ad8c7b59",
+      "candidates": [],
+      "exact_git_bytes": true
+    },
+    {
+      "case": "native-export-1",
+      "head": "afc21626fd1ebb07d64093abcb76f575e491648a",
+      "file_count": 29,
+      "baseline_id": "se-harness-artifact-baseline/v1:sha256:4181939de0e3c746d9bfcd3e742efb8a6a56df6e4a4ce0b93e79edcae120fa81",
+      "snapshot_id": "sha256:77560c55d9fcc2e72023209501cd86296a062ee7df7f9cb0e7ace331aee57c92",
+      "candidates": [
+        {
+          "evaluator": {
+            "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+            "version": "0.22.1"
+          },
+          "files": {
+            ".engineering-harness.lock": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252",
+            ".engineering-harness.toml": "069622e02d80bdec13240889f7e83b1063b01208b9e4a5f6f37fdcdcf53a8d22",
+            ".gitattributes": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b",
+            "REHEARSAL.txt": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c",
+            "docs/engineering/lifecycle-pilot/capabilities/CAP-N06-001.md": "a3a8871d580dea81584873c9840f2d9651e0427bf17101a56eedac1bc4186c8e",
+            "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0",
+            "docs/engineering/lifecycle-pilot/decisions/DEC-N06-001.md": "6521319978d3a98888a1357e5a481f572cb93dd3c472e4c81689d7133e8eddd0",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/WO-N06-001-handoff.md": "5beb68670a0c8d79c3bc22f6cdb97a24ff2c192a36d0f917615ab04cbbb3b9d8",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/assertion.json": "477ef69c21d32d2ad90e8adf7f7cfc6a33cfbbffc9149f7cc115ab71cf563acc",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/handoff.json": "7f600ebe027557d1f880e94daa0c8e52d9ba04cad5d5eab6e1b4e66c91fbe475",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/inspection.md": "5943a8c728e0cc7b7cc02af8ef2458f16a970d5269d17f2420565c8ea03a4872",
+            "docs/engineering/lifecycle-pilot/intent/INT-N06-001.md": "2ebe09fdbc34791096db86506cc113c93ace9cb72724e05007fd92a951f2fc20",
+            "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed",
+            "docs/engineering/lifecycle-pilot/release/REL-N06-001.md": "74d43515b80743c7e7a75ef6ffb0368700d14ac534005f35ba088587d97dac55",
+            "docs/engineering/lifecycle-pilot/release/REL-P3-900.md": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935",
+            "docs/engineering/lifecycle-pilot/requirements/REQ-N06-001.md": "d9e1e47d5928ed0e6d75daff2e9509408e481cc4568f223d0afc19c9289f77fc",
+            "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4",
+            "docs/engineering/lifecycle-pilot/risks/RISK-N06-001.md": "e0c0305f131b273bb4e3aa7ce07896ba491cdb6ebc95b2f2a52d59f8bcf8189b",
+            "docs/engineering/lifecycle-pilot/specifications/SPEC-N06-001.md": "d42096e76465881b5f51670a5fbf2bbef84443426b8f5b34c6a373ecf81bf578",
+            "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9",
+            "docs/engineering/lifecycle-pilot/verification/VER-N06-001.md": "e54bb0594c37822ed8d1673179cb8490c12b382b1a173ee7d2f90e65f0df0ade",
+            "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4",
+            "docs/engineering/lifecycle-pilot/work-orders/WO-N06-001.md": "bf0b27cb52023df6f1895992f6acb321a61bf799373c9eb936c0901d92ec2c26",
+            "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332",
+            "src/greeting.py": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1"
+          },
+          "implementation_candidate": "separate actual qualification record; never this test candidate",
+          "input_baseline": "se-harness-artifact-baseline/v1:sha256:da36ada985b5aa780b79eebf98b150fdf9e219b2a016674d4f793804a8e96e39",
+          "source": {
+            "commit": "5820415917e87b64d80bad2f7c39c6d18d692829",
+            "object_format": "sha1",
+            "repository": "https://example.invalid/private-rehearsal.git"
+          },
+          "test_candidate": "b1ae7c695684b82c00d1102d1443a7800a66e431",
+          "verification_record": "VREC-N06-001"
+        }
+      ],
+      "exact_git_bytes": true
+    },
+    {
+      "case": "native-export-2",
+      "head": "a9bfc88aef48386cd47b7d220073d69a29c48805",
+      "file_count": 29,
+      "baseline_id": "se-harness-artifact-baseline/v1:sha256:c41467b05d5f484ccf1a2efe20963e932045817dda9100fced0dc0893695fca6",
+      "snapshot_id": "sha256:b107fcc865ea127b96e3ba99f0483c380e751c42aad6800a1dd4765439ab4fd5",
+      "candidates": [
+        {
+          "evaluator": {
+            "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+            "version": "0.22.1"
+          },
+          "files": {
+            ".engineering-harness.lock": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252",
+            ".engineering-harness.toml": "069622e02d80bdec13240889f7e83b1063b01208b9e4a5f6f37fdcdcf53a8d22",
+            ".gitattributes": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b",
+            "REHEARSAL.txt": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c",
+            "docs/engineering/lifecycle-pilot/capabilities/CAP-N06-001.md": "a3a8871d580dea81584873c9840f2d9651e0427bf17101a56eedac1bc4186c8e",
+            "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0",
+            "docs/engineering/lifecycle-pilot/decisions/DEC-N06-001.md": "6521319978d3a98888a1357e5a481f572cb93dd3c472e4c81689d7133e8eddd0",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/WO-N06-001-handoff.md": "5beb68670a0c8d79c3bc22f6cdb97a24ff2c192a36d0f917615ab04cbbb3b9d8",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/assertion.json": "477ef69c21d32d2ad90e8adf7f7cfc6a33cfbbffc9149f7cc115ab71cf563acc",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/handoff.json": "7f600ebe027557d1f880e94daa0c8e52d9ba04cad5d5eab6e1b4e66c91fbe475",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/inspection.md": "5943a8c728e0cc7b7cc02af8ef2458f16a970d5269d17f2420565c8ea03a4872",
+            "docs/engineering/lifecycle-pilot/intent/INT-N06-001.md": "2ebe09fdbc34791096db86506cc113c93ace9cb72724e05007fd92a951f2fc20",
+            "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed",
+            "docs/engineering/lifecycle-pilot/release/REL-N06-001.md": "74d43515b80743c7e7a75ef6ffb0368700d14ac534005f35ba088587d97dac55",
+            "docs/engineering/lifecycle-pilot/release/REL-P3-900.md": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935",
+            "docs/engineering/lifecycle-pilot/requirements/REQ-N06-001.md": "d9e1e47d5928ed0e6d75daff2e9509408e481cc4568f223d0afc19c9289f77fc",
+            "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4",
+            "docs/engineering/lifecycle-pilot/risks/RISK-N06-001.md": "e0c0305f131b273bb4e3aa7ce07896ba491cdb6ebc95b2f2a52d59f8bcf8189b",
+            "docs/engineering/lifecycle-pilot/specifications/SPEC-N06-001.md": "d42096e76465881b5f51670a5fbf2bbef84443426b8f5b34c6a373ecf81bf578",
+            "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9",
+            "docs/engineering/lifecycle-pilot/verification/VER-N06-001.md": "e54bb0594c37822ed8d1673179cb8490c12b382b1a173ee7d2f90e65f0df0ade",
+            "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4",
+            "docs/engineering/lifecycle-pilot/work-orders/WO-N06-001.md": "bf0b27cb52023df6f1895992f6acb321a61bf799373c9eb936c0901d92ec2c26",
+            "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332",
+            "src/greeting.py": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1"
+          },
+          "implementation_candidate": "separate actual qualification record; never this test candidate",
+          "input_baseline": "se-harness-artifact-baseline/v1:sha256:da36ada985b5aa780b79eebf98b150fdf9e219b2a016674d4f793804a8e96e39",
+          "source": {
+            "commit": "5820415917e87b64d80bad2f7c39c6d18d692829",
+            "object_format": "sha1",
+            "repository": "https://example.invalid/private-rehearsal.git"
+          },
+          "test_candidate": "b1ae7c695684b82c00d1102d1443a7800a66e431",
+          "verification_record": "VREC-N06-001"
+        }
+      ],
+      "exact_git_bytes": true
+    },
+    {
+      "case": "native-export-3",
+      "head": "80af6f252cb5e1891dfd617ee56443fcc62f1454",
+      "file_count": 27,
+      "baseline_id": "se-harness-artifact-baseline/v1:sha256:2386587ed22e9bd87412d9d35465f9f8b26e53be591f6a42175cfe197cb8bb8e",
+      "snapshot_id": "sha256:72f7a4356a01cf7ba662ba28b2b857ae2393b5cb19e13d309b0d9e828e168f20",
+      "candidates": [
+        {
+          "evaluator": {
+            "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+            "version": "0.22.1"
+          },
+          "files": {
+            ".engineering-harness.lock": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252",
+            ".engineering-harness.toml": "069622e02d80bdec13240889f7e83b1063b01208b9e4a5f6f37fdcdcf53a8d22",
+            ".gitattributes": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b",
+            "REHEARSAL.txt": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c",
+            "docs/engineering/lifecycle-pilot/capabilities/CAP-N06-001.md": "a3a8871d580dea81584873c9840f2d9651e0427bf17101a56eedac1bc4186c8e",
+            "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0",
+            "docs/engineering/lifecycle-pilot/decisions/DEC-N06-001.md": "6521319978d3a98888a1357e5a481f572cb93dd3c472e4c81689d7133e8eddd0",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/WO-N06-001-handoff.md": "5beb68670a0c8d79c3bc22f6cdb97a24ff2c192a36d0f917615ab04cbbb3b9d8",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/assertion.json": "477ef69c21d32d2ad90e8adf7f7cfc6a33cfbbffc9149f7cc115ab71cf563acc",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/handoff.json": "7f600ebe027557d1f880e94daa0c8e52d9ba04cad5d5eab6e1b4e66c91fbe475",
+            "docs/engineering/lifecycle-pilot/evidence/WO-N06-001/inspection.md": "5943a8c728e0cc7b7cc02af8ef2458f16a970d5269d17f2420565c8ea03a4872",
+            "docs/engineering/lifecycle-pilot/intent/INT-N06-001.md": "2ebe09fdbc34791096db86506cc113c93ace9cb72724e05007fd92a951f2fc20",
+            "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed",
+            "docs/engineering/lifecycle-pilot/release/REL-N06-001.md": "74d43515b80743c7e7a75ef6ffb0368700d14ac534005f35ba088587d97dac55",
+            "docs/engineering/lifecycle-pilot/release/REL-P3-900.md": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935",
+            "docs/engineering/lifecycle-pilot/requirements/REQ-N06-001.md": "d9e1e47d5928ed0e6d75daff2e9509408e481cc4568f223d0afc19c9289f77fc",
+            "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4",
+            "docs/engineering/lifecycle-pilot/risks/RISK-N06-001.md": "e0c0305f131b273bb4e3aa7ce07896ba491cdb6ebc95b2f2a52d59f8bcf8189b",
+            "docs/engineering/lifecycle-pilot/specifications/SPEC-N06-001.md": "d42096e76465881b5f51670a5fbf2bbef84443426b8f5b34c6a373ecf81bf578",
+            "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9",
+            "docs/engineering/lifecycle-pilot/verification/VER-N06-001.md": "e54bb0594c37822ed8d1673179cb8490c12b382b1a173ee7d2f90e65f0df0ade",
+            "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4",
+            "docs/engineering/lifecycle-pilot/work-orders/WO-N06-001.md": "bf0b27cb52023df6f1895992f6acb321a61bf799373c9eb936c0901d92ec2c26",
+            "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332",
+            "src/greeting.py": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1"
+          },
+          "implementation_candidate": "separate actual qualification record; never this test candidate",
+          "input_baseline": "se-harness-artifact-baseline/v1:sha256:da36ada985b5aa780b79eebf98b150fdf9e219b2a016674d4f793804a8e96e39",
+          "source": {
+            "commit": "5820415917e87b64d80bad2f7c39c6d18d692829",
+            "object_format": "sha1",
+            "repository": "https://example.invalid/private-rehearsal.git"
+          },
+          "test_candidate": "b1ae7c695684b82c00d1102d1443a7800a66e431",
+          "verification_record": "VREC-N06-001"
+        }
+      ],
+      "exact_git_bytes": true
+    }
+  ],
+  "synthetic_decisions": [
+    {
+      "artifact": "INT-N06-001",
+      "state": "approved",
+      "actor": "test-owner"
+    },
+    {
+      "artifact": "CAP-N06-001",
+      "state": "approved",
+      "actor": "test-owner"
+    },
+    {
+      "artifact": "REQ-N06-001",
+      "state": "approved",
+      "actor": "test-owner"
+    },
+    {
+      "artifact": "SPEC-N06-001",
+      "state": "approved",
+      "actor": "test-owner"
+    },
+    {
+      "artifact": "VER-N06-001",
+      "state": "approved",
+      "actor": "test-owner"
+    },
+    {
+      "artifact": "REL-N06-001",
+      "state": "approved",
+      "actor": "test-owner"
+    },
+    {
+      "artifact": "WO-N06-001",
+      "state": "approved",
+      "actor": "test-owner"
+    },
+    {
+      "artifact": "WO-N06-001",
+      "state": "in_progress",
+      "actor": "test-executor"
+    },
+    {
+      "artifact": "DEC-N06-001",
+      "option": "mitigate",
+      "actor": "test-owner"
+    },
+    {
+      "artifact": "WO-N06-001",
+      "state": "implemented",
+      "actor": "test-executor"
+    },
+    {
+      "artifact": "VREC-N06-001",
+      "state": "verified",
+      "actor": "quality-owner"
+    },
+    {
+      "artifact": "RLS-N06-001",
+      "state": "released",
+      "actor": "release-owner"
+    }
+  ],
+  "test_records": [
+    {
+      "path": "work/export-review/files/docs/engineering/lifecycle-pilot/verification-records/VREC-N06-001.md",
+      "id": "VREC-N06-001",
+      "status": "ready",
+      "candidate": "b1ae7c695684b82c00d1102d1443a7800a66e431"
+    },
+    {
+      "path": "work/export-release-review/files/docs/engineering/lifecycle-pilot/releases/RLS-N06-001.md",
+      "id": "RLS-N06-001",
+      "status": "ready",
+      "candidate": "b1ae7c695684b82c00d1102d1443a7800a66e431"
+    },
+    {
+      "path": "work/export-release-review/files/docs/engineering/lifecycle-pilot/verification-records/VREC-N06-001.md",
+      "id": "VREC-N06-001",
+      "status": "verified",
+      "candidate": "b1ae7c695684b82c00d1102d1443a7800a66e431"
+    },
+    {
+      "path": "work/export-later/files/docs/engineering/lifecycle-pilot/releases/RLS-N06-001.md",
+      "id": "RLS-N06-001",
+      "status": "released",
+      "candidate": "b1ae7c695684b82c00d1102d1443a7800a66e431"
+    },
+    {
+      "path": "work/export-later/files/docs/engineering/lifecycle-pilot/verification-records/VREC-N06-001.md",
+      "id": "VREC-N06-001",
+      "status": "verified",
+      "candidate": "b1ae7c695684b82c00d1102d1443a7800a66e431"
+    }
+  ],
+  "reply_recovery": {
+    "original_receipt_equals_lookup_and_retry": true,
+    "project_version_after_retry": 18,
+    "changed_payload_refused": true
+  },
+  "refusals": {
+    "stale_project": true,
+    "stale_preview": true,
+    "outside_paths": true
+  },
+  "assertion": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\client03\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-c",
+      "import runpy,sys;assert runpy.run_path(sys.argv[1])['greeting']()=='Hello rehearsal';print('exact greeting passed')",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\codex-guidance04\\native06\\inputs\\source\\src\\greeting.py"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\codex-guidance04\\native06",
+    "exit": 0,
+    "stdout": "exact greeting passed\n",
+    "stderr": ""
+  },
+  "read_trace": {
+    "matching_hashes": 344,
+    "later_changed_outputs": [],
+    "required_skills_read": true,
+    "retrospective_entries": 14,
+    "limits": "A file hash identifies bytes; partial and retrospective reads remain identified in the native trace and event stream."
+  },
+  "mcp": {
+    "responses": 13,
+    "tools": [
+      "check",
+      "compare",
+      "cypher",
+      "impact",
+      "lineage",
+      "revision",
+      "work-context"
+    ],
+    "all_exact_http_matches": true,
+    "all_complete": true
+  },
+  "host_settings_unchanged": [
+    {
+      "path": "C:\\Users\\mathi\\.codex\\config.toml",
+      "exists": true,
+      "sha256": "a4d38ba8d0e859d78b3d5f461ed211067398be79d3225e91c68a40b5c30c02db"
+    },
+    {
+      "path": "C:\\Users\\mathi\\.claude\\settings.json",
+      "exists": true,
+      "sha256": "741ee3a3088bd9c9ed1b1eaf45eb8e571710d05c198e51a61a26c6974a789749"
+    },
+    {
+      "path": "C:\\Users\\mathi\\.claude\\plugins\\installed_plugins.json",
+      "exists": true,
+      "sha256": "1f580b6bd8c1b58e2553e1535444c61ae8746eef8232a4edec1373eee866acf8"
+    }
+  ],
+  "real_repository": {
+    "before_head": "0dbb8ea19f28994da7abc7ecbab08c8db430dc0c",
+    "after_head": "0dbb8ea19f28994da7abc7ecbab08c8db430dc0c",
+    "status": ""
+  },
+  "configured_model": "gpt-6-astra",
+  "configured_reasoning": "high",
+  "limits": [
+    "Codex events do not return a model identity; configured model is not a provider claim.",
+    "Explicit candidate instruction reads were used; automatic delivery and desktop are outside this trial.",
+    "Synthetic decisions do not verify this actual work. Combined qualification remains pending until Claude also passes.",
+    "Earlier export before verification has no candidate entry; later snapshots preserve the original VREC/RLS candidate.",
+    "The candidate continuing-authority adapter reference was read during final review. Released AUTHORITY.md was read before lifecycle decisions. The evidence does not prove every candidate prerequisite was read at its earliest required point."
+  ]
+}

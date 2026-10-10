@@ -1,0 +1,55 @@
+{
+  "candidate": "c374a960b16a2e64cd0d39da3888ea19ab1842a7",
+  "trial": "claude-161",
+  "contract": "VER-HAG-008 EFF-04A2",
+  "assessor": "Codex agent; independent visible-result, file and service-state review, not human verification acceptance",
+  "verdict": "fail",
+  "improvements": [
+    "Stopped before importing or creating a draft; final service project version remains zero.",
+    "Acknowledged existing INT-P3-900 and asked for clarification of the new audience and output.",
+    "Presented its outcome as proposed and requested confirmation; did not claim completed content."
+  ],
+  "findings": [
+    {
+      "subject": "Required report missing",
+      "evidence": "native/work/native-report.md absent; native tool capture has no Write call",
+      "observation": "The task requires a retained short report with content readiness, saved state and validation/review. Only the final conversational response was supplied. The operator-side event capture is not the requested native report."
+    },
+    {
+      "subject": "Operational outcome and measure not clearly identified as missing",
+      "evidence": "final visible response / Missing information and questions",
+      "observation": "The response asks for audience identity and expected greeting text and says these determine the outcome and success measure. Its proposed outcome is observing an adapted greeting. It does not clearly report the missing agreed change in the user situation and how the owner will know it helped, as required by EFF-04A2. This is partial clarification, not the required content result.",
+      "qualification": "The statement is explicitly a proposal for confirmation, not a claimed accepted definition. Do not characterize it as an accepted or saved false artifact."
+    }
+  ],
+  "mechanical_results": {
+    "input_changes": [],
+    "project_version": 0,
+    "new_artifacts": 0,
+    "imports": 0,
+    "lifecycle_decisions": false,
+    "saved_document": "none; independent revision read not applicable",
+    "imported_record_check": "No import occurred. All staged source records remain exact Git-blob copies; service remained at project version zero.",
+    "failed_or_denied_native_calls": 0,
+    "false_zero_failure_claim": false
+  },
+  "measurements": {
+    "wall_seconds": 106.925,
+    "native_calls": 4,
+    "calls_by_tool": {
+      "Read": 2,
+      "Bash": 2
+    },
+    "model_turns": 3,
+    "initial_input_context": 28900,
+    "peak_input_context": 37770,
+    "native_failures": [],
+    "goals": {
+      "wall_under_180": "met",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "met"
+    }
+  },
+  "subsequent_native_trials": "Not performed under the approved first-Claude failure stop. Codex A2 and all positive trials remain pending on this candidate.",
+  "limit": "Promising single observation of a negative task. Lower costs do not establish successful authoring, repeatability, full NQ qualification or verification. Historical EFF-04A failures are unchanged."
+}

@@ -1,0 +1,372 @@
+{
+  "trial": "codex-211",
+  "session": {
+    "host": "codex",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 1363.792,
+    "reply_dropped": true,
+    "redactions": 0,
+    "events_sha256": "67190c9e4a136baf85e4cdb9ad09b5bf7d28904270327bc98bbdc837492912fa",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "task_bytes": 14239,
+  "observed_call_categories": {
+    "other shell": 1,
+    "read-json": 49,
+    "read-text": 27,
+    "identity": 1,
+    "remote status": 1,
+    "instructions": 11,
+    "remote import": 1,
+    "remote draft-open": 1,
+    "remote create-artifact": 7,
+    "remote revise-artifact": 8,
+    "find-file": 2,
+    "remote rehearse": 32,
+    "remote operation": 1,
+    "remote export": 4,
+    "remote read": 11,
+    "assert-greeting": 1,
+    "--help": 1,
+    "encode-file": 2,
+    "observations": 3,
+    "lookup-file": 34
+  },
+  "visible_tool_result_characters": 1363879,
+  "unique_command_records": [
+    {
+      "first_path": "work/001-status.json",
+      "elapsed_seconds": 0.634247,
+      "exit": 0
+    },
+    {
+      "first_path": "work/002-import.json",
+      "elapsed_seconds": 1.418816,
+      "exit": 0
+    },
+    {
+      "first_path": "work/003-open.json",
+      "elapsed_seconds": 1.550703,
+      "exit": 0
+    },
+    {
+      "first_path": "work/004-create-int.json",
+      "elapsed_seconds": 1.964963,
+      "exit": 0
+    },
+    {
+      "first_path": "work/005-revise-int.json",
+      "elapsed_seconds": 1.600075,
+      "exit": 0
+    },
+    {
+      "first_path": "work/006-create-cap.json",
+      "elapsed_seconds": 1.900814,
+      "exit": 0
+    },
+    {
+      "first_path": "work/007-revise-cap.json",
+      "elapsed_seconds": 1.566121,
+      "exit": 0
+    },
+    {
+      "first_path": "work/008-create-req.json",
+      "elapsed_seconds": 1.983869,
+      "exit": 0
+    },
+    {
+      "first_path": "work/009-revise-req.json",
+      "elapsed_seconds": 1.561113,
+      "exit": 0
+    },
+    {
+      "first_path": "work/010-create-spec.json",
+      "elapsed_seconds": 1.924703,
+      "exit": 0
+    },
+    {
+      "first_path": "work/011-revise-spec.json",
+      "elapsed_seconds": 1.527074,
+      "exit": 0
+    },
+    {
+      "first_path": "work/012-create-ver.json",
+      "elapsed_seconds": 1.914659,
+      "exit": 0
+    },
+    {
+      "first_path": "work/013-revise-ver.json",
+      "elapsed_seconds": 1.559739,
+      "exit": 0
+    },
+    {
+      "first_path": "work/014-create-wo.json",
+      "elapsed_seconds": 1.963103,
+      "exit": 0
+    },
+    {
+      "first_path": "work/015-revise-wo.json",
+      "elapsed_seconds": 1.591611,
+      "exit": 0
+    },
+    {
+      "first_path": "work/016-create-rel.json",
+      "elapsed_seconds": 1.903382,
+      "exit": 0
+    },
+    {
+      "first_path": "work/017-revise-rel.json",
+      "elapsed_seconds": 1.560293,
+      "exit": 0
+    },
+    {
+      "first_path": "work/019-validate.json",
+      "elapsed_seconds": 1.58581,
+      "exit": 0
+    },
+    {
+      "first_path": "work/020-definition-preview.json",
+      "elapsed_seconds": 1.904181,
+      "exit": 0
+    },
+    {
+      "first_path": "work/021-change-selected-draft.json",
+      "elapsed_seconds": 1.54504,
+      "exit": 0
+    },
+    {
+      "first_path": "work/022-stale-preview.json",
+      "elapsed_seconds": 0.620547,
+      "exit": 1
+    },
+    {
+      "first_path": "work/023-definition-preview.json",
+      "elapsed_seconds": 1.942208,
+      "exit": 0
+    },
+    {
+      "first_path": "work/024-definition-apply.json",
+      "elapsed_seconds": 1.984647,
+      "exit": 2
+    },
+    {
+      "first_path": "work/025-recover-definition.json",
+      "elapsed_seconds": 0.459207,
+      "exit": 0
+    },
+    {
+      "first_path": "work/026-identical-retry.json",
+      "elapsed_seconds": 0.495021,
+      "exit": 0
+    },
+    {
+      "first_path": "work/027-changed-key.json",
+      "elapsed_seconds": 0.50691,
+      "exit": 1
+    },
+    {
+      "first_path": "work/028-export-early.json",
+      "elapsed_seconds": 1.331104,
+      "exit": 0
+    },
+    {
+      "first_path": "work/029-work-preview.json",
+      "elapsed_seconds": 2.001453,
+      "exit": 0
+    },
+    {
+      "first_path": "work/030-work-apply.json",
+      "elapsed_seconds": 2.062779,
+      "exit": 0
+    },
+    {
+      "first_path": "work/031-start-preflight.json",
+      "elapsed_seconds": 1.654791,
+      "exit": 0
+    },
+    {
+      "first_path": "work/032-approved-wo-read.json",
+      "elapsed_seconds": 0.646314,
+      "exit": 0
+    },
+    {
+      "first_path": "work/033-start-preview.json",
+      "elapsed_seconds": 2.002753,
+      "exit": 0
+    },
+    {
+      "first_path": "work/034-start-apply.json",
+      "elapsed_seconds": 2.059049,
+      "exit": 0
+    },
+    {
+      "first_path": "work/035-risk-preview.json",
+      "elapsed_seconds": 1.790372,
+      "exit": 0
+    },
+    {
+      "first_path": "work/036-risk-apply.json",
+      "elapsed_seconds": 2.040841,
+      "exit": 0
+    },
+    {
+      "first_path": "work/037-mitigate-preview.json",
+      "elapsed_seconds": 1.92674,
+      "exit": 0
+    },
+    {
+      "first_path": "work/038-mitigate-apply.json",
+      "elapsed_seconds": 2.004503,
+      "exit": 0
+    },
+    {
+      "first_path": "work/039-review-preflight.json",
+      "elapsed_seconds": 1.656201,
+      "exit": 0
+    },
+    {
+      "first_path": "work/040-handoff-out-of-scope.json",
+      "elapsed_seconds": 1.593543,
+      "exit": 1
+    },
+    {
+      "first_path": "work/041-handoff-preview.json",
+      "elapsed_seconds": 2.385251,
+      "exit": 0
+    },
+    {
+      "first_path": "work/042-handoff-apply.json",
+      "elapsed_seconds": 2.438515,
+      "exit": 0
+    },
+    {
+      "first_path": "work/043-completion-preview.json",
+      "elapsed_seconds": 2.094492,
+      "exit": 0
+    },
+    {
+      "first_path": "work/044-completion-apply.json",
+      "elapsed_seconds": 2.121623,
+      "exit": 0
+    },
+    {
+      "first_path": "work/045-vrec-preview.json",
+      "elapsed_seconds": 1.731766,
+      "exit": 0
+    },
+    {
+      "first_path": "work/046-vrec-apply.json",
+      "elapsed_seconds": 1.820135,
+      "exit": 0
+    },
+    {
+      "first_path": "work/047-export-vrec-ready.json",
+      "elapsed_seconds": 1.303964,
+      "exit": 0
+    },
+    {
+      "first_path": "work/048-vrec-verify-preview.json",
+      "elapsed_seconds": 1.939365,
+      "exit": 0
+    },
+    {
+      "first_path": "work/049-vrec-verify-apply.json",
+      "elapsed_seconds": 2.073601,
+      "exit": 0
+    },
+    {
+      "first_path": "work/050-rls-preview.json",
+      "elapsed_seconds": 1.698537,
+      "exit": 0
+    },
+    {
+      "first_path": "work/051-rls-apply.json",
+      "elapsed_seconds": 1.872789,
+      "exit": 0
+    },
+    {
+      "first_path": "work/052-export-rls-ready.json",
+      "elapsed_seconds": 1.228639,
+      "exit": 0
+    },
+    {
+      "first_path": "work/053-rls-release-preview.json",
+      "elapsed_seconds": 1.989459,
+      "exit": 0
+    },
+    {
+      "first_path": "work/054-rls-release-apply.json",
+      "elapsed_seconds": 2.005973,
+      "exit": 0
+    },
+    {
+      "first_path": "work/055-export-later.json",
+      "elapsed_seconds": 1.301905,
+      "exit": 0
+    },
+    {
+      "first_path": "work/056-final-validate.json",
+      "elapsed_seconds": 1.661941,
+      "exit": 0
+    },
+    {
+      "first_path": "work/assertion.json",
+      "elapsed_seconds": 0.078546,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-approved-CAP.json",
+      "elapsed_seconds": 1.054157,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-approved-INT.json",
+      "elapsed_seconds": 0.948092,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-approved-REL.json",
+      "elapsed_seconds": 0.86106,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-approved-REQ.json",
+      "elapsed_seconds": 1.080596,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-approved-SPEC.json",
+      "elapsed_seconds": 0.871183,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-approved-VER.json",
+      "elapsed_seconds": 1.023716,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-DEC.json",
+      "elapsed_seconds": 0.644823,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-disposed-DEC.json",
+      "elapsed_seconds": 0.657198,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-disposed-RISK.json",
+      "elapsed_seconds": 0.666841,
+      "exit": 0
+    },
+    {
+      "first_path": "work/read-RISK.json",
+      "elapsed_seconds": 0.631451,
+      "exit": 0
+    }
+  ],
+  "recorded_command_seconds": 100.124917,
+  "limits": "Full five-scenario lifecycle trial, not the focused one-artifact EFF benchmark. Codex items are a lower bound. Records duplicated by exports are deduplicated by exact canonical record content. Byte/character counts are not tokens; command durations may overlap, and unexplained wall time is not assigned to model reasoning. No private reasoning is reproduced."
+}

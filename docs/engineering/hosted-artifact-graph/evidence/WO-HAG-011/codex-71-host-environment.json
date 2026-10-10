@@ -1,0 +1,10 @@
+{
+  "executable": "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\9691020b546a15b2\\codex.exe",
+  "version": "codex-cli 0.162.0-alpha.2",
+  "executable_sha256": "3553cd6e7df5a093d8cb8301cd8088a57e0971aba71ddbe0e67f7f44a15cdf68",
+  "features.prefer_mxc": true,
+  "configuration_override_arguments": [],
+  "permissions": "Existing qualification driver and normal permissions unchanged.",
+  "comparison_limit": "New installed CLI and MXC preference; preserve earlier host failures separately.",
+  "repair_summary": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\codex-sandbox-repair-20261010\\repair-summary.json"
+}

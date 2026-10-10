@@ -1,0 +1,188 @@
+{
+  "archive": "sonnet02-stopped.zip",
+  "sha256": "a625dd5d3d1b781dc58e4076391626f8833e3067def72d5d744f58e671c8bafa",
+  "bytes": 245359,
+  "files": [
+    {
+      "path": "events.jsonl",
+      "bytes": 955465,
+      "sha256": "32c3a51a5e0f480e03380ef4f681ed886ff9aa866a67a48844e34cda52fc850c"
+    },
+    {
+      "path": "session.json",
+      "bytes": 331,
+      "sha256": "4c9f206cc14df4580c80c951ac89a4835c93b1a26228e1c25c067ead1bb606b8"
+    },
+    {
+      "path": "invocation.json",
+      "bytes": 10139,
+      "sha256": "864da679a971d3f384ec1940c100de3d0706926cd43db27b97b5fe8ca5c44ae4"
+    },
+    {
+      "path": "selection.json",
+      "bytes": 2882,
+      "sha256": "801c4d347eeea7a415209d045396d68d8926be439b4a657c845dc3443e4e081f"
+    },
+    {
+      "path": "task.md",
+      "bytes": 8068,
+      "sha256": "ebf812f97efd31f5386174631777f17c074debb7ea51c0ba70d6d8a920c15674"
+    },
+    {
+      "path": "work/artifacts/REL-P3-001.md",
+      "bytes": 489,
+      "sha256": "1d13f4d4a0ecdfef1e6e1e5a5d6ba33fd01adc102db82f81a9a59435f7c6f7f0"
+    },
+    {
+      "path": "work/artifacts/VER-P3-001.md",
+      "bytes": 711,
+      "sha256": "89ff04a49799fad5b5ec76dbd4ec967b2321289326ee78064d93c3950279e40d"
+    },
+    {
+      "path": "work/artifacts/WO-P3-001.md",
+      "bytes": 1308,
+      "sha256": "c088f1f64f26c6fdd141c8de3b1965e5b2098d782e5552a22f2de623e7bcf02b"
+    },
+    {
+      "path": "work/records/assertion.json",
+      "bytes": 817,
+      "sha256": "a6872b938aaf088c6a4f81c1fe8332a1b4cc7f92dd40fc088bf5f2c62609e19c"
+    },
+    {
+      "path": "work/records/create-rel-001.json",
+      "bytes": 6644,
+      "sha256": "891271b0cb6873530d1745b8ce3286e8e3f73e274725af59937f33a95f2733ce"
+    },
+    {
+      "path": "work/records/create-ver-001.json",
+      "bytes": 5501,
+      "sha256": "8e8b45fc27f73d826138b4cca026faaec2c9673e8d81438940b9d5e519c76c4a"
+    },
+    {
+      "path": "work/records/create-wo-001.json",
+      "bytes": 7064,
+      "sha256": "8847e4501f2614f15f51dbc0e7866c8f0dafc2c6c38254eafea0f874b6f7576e"
+    },
+    {
+      "path": "work/records/draft-open-01.json",
+      "bytes": 10890,
+      "sha256": "a90eb6f5ecee62dd1a0072aa563027be4a2821eab8c35f21803fe25437a04940"
+    },
+    {
+      "path": "work/records/import-01.json",
+      "bytes": 6157,
+      "sha256": "8cb199c81bae856bf765ea1afa6155c501a642140de99270a4b6592355e5bf72"
+    },
+    {
+      "path": "work/records/rehearse-approve-chain-preview.json",
+      "bytes": 2167,
+      "sha256": "1e9563a59621f6bfa9b8e81824326d08b06f9cf775aa3005d0d823f6bd36080b"
+    },
+    {
+      "path": "work/records/rehearse-check-wo-01.json",
+      "bytes": 13015,
+      "sha256": "985f0a15ba54d1b914ded31cb14bed3e20ab85f7ddc28405c17a19ab95fbe98e"
+    },
+    {
+      "path": "work/records/rehearse-preflight-01.json",
+      "bytes": 5619,
+      "sha256": "6214ae457a850102d84229b5457b460a841e33752e99b93c2350aac094ad388a"
+    },
+    {
+      "path": "work/records/rehearse-validate-01.json",
+      "bytes": 6258,
+      "sha256": "281d815843724bc3981ddc2f68bf5cab08904b440e5b0e525f5c9de81b226ae2"
+    },
+    {
+      "path": "work/records/revise-rel-001.json",
+      "bytes": 3139,
+      "sha256": "310339230e6b43cd5f952bc1a5cfd5c098157f5428de6fa2e41a2a143a9e4633"
+    },
+    {
+      "path": "work/records/revise-ver-001.json",
+      "bytes": 3707,
+      "sha256": "707f749ffdc1b5bfb1a7b2490b6ced3a53ea6f9fb3f89fce9cafc47bc789cc15"
+    },
+    {
+      "path": "work/records/revise-wo-001-v2.json",
+      "bytes": 4003,
+      "sha256": "8071f7f8b1fafea8e61078a5f210089d3384f23cfb3f51d80b3b0bba7c3e3027"
+    },
+    {
+      "path": "work/records/revise-wo-001.json",
+      "bytes": 2743,
+      "sha256": "1777fd9dad7d2a2f56e76ebf072cedf1d51ebc8aaf03a333c316edea8a9f321a"
+    },
+    {
+      "path": "work/records/status-01.json",
+      "bytes": 4446,
+      "sha256": "5f8938c2ac6ffe0cce2938d60d0257d6c5fa62dd11746aa2c79fda39fed9f211"
+    },
+    {
+      "path": "work/requests/create-rel-p3-001.json",
+      "bytes": 753,
+      "sha256": "817ae6654e12d28426bbeb73a4b25f8e09d49e0df61be5b140520474eb3733bf"
+    },
+    {
+      "path": "work/requests/create-ver-p3-001.json",
+      "bytes": 749,
+      "sha256": "ff330b59131dcb76b00fd1577e035ebfd3a7bb25893bbaafc8ddb2a44c0e2b77"
+    },
+    {
+      "path": "work/requests/create-wo-p3-001.json",
+      "bytes": 745,
+      "sha256": "006f8ea918997233a4ef43847c6ce18f2647a9b53d9c8ec5f00d0eaa592a61e4"
+    },
+    {
+      "path": "work/requests/draft-open.json",
+      "bytes": 733,
+      "sha256": "d53bbdb47b639c615edb34e610c3a20de948ffb2b0da9d3ff1878867f88e4739"
+    },
+    {
+      "path": "work/requests/import-source.json",
+      "bytes": 2994,
+      "sha256": "ccbdbd1802cb68003c7f6e45373a1eafe92dd89ae862f70f13cfe444f57bb35a"
+    },
+    {
+      "path": "work/requests/rehearse-approve-chain-preview.json",
+      "bytes": 2096,
+      "sha256": "4611b6ffd4a7feb1728f6a96c660df95fe030ce185595e7dabfc8ef0336bfc67"
+    },
+    {
+      "path": "work/requests/rehearse-check-wo.json",
+      "bytes": 801,
+      "sha256": "59d5c635c4ecde698d6cfcf45a7e0fd32a458ccd1f26ae9a053d41826c1e2d34"
+    },
+    {
+      "path": "work/requests/rehearse-preflight.json",
+      "bytes": 833,
+      "sha256": "8de630f123f28a17128f6c0dfd637f0a0ef26745a17563120fca3bff66c3d80c"
+    },
+    {
+      "path": "work/requests/rehearse-validate.json",
+      "bytes": 774,
+      "sha256": "082afdf42d4b3743f5beeeb22fbdfb5f30335b336d532bc23ddcccc64ee07327"
+    },
+    {
+      "path": "work/requests/revise-rel-p3-001.json",
+      "bytes": 1474,
+      "sha256": "19243f821cd7afefcef069dd8d428d59a7b44239fd449dd1ef4337df7127cd53"
+    },
+    {
+      "path": "work/requests/revise-ver-p3-001.json",
+      "bytes": 1770,
+      "sha256": "8f6f4afa7824dc8ebd0ea09a9f2e8879f290ccac49a854a49f49b8d484eb501c"
+    },
+    {
+      "path": "work/requests/revise-wo-p3-001-v2.json",
+      "bytes": 2573,
+      "sha256": "1a16aab08cd7f6b7daa5fe7053ceb96ddee201038fd9a4d33fc872d40575ba63"
+    },
+    {
+      "path": "work/requests/revise-wo-p3-001.json",
+      "bytes": 2564,
+      "sha256": "81225f97a3ab9b936bca13041499cdfc0216a427dd4b9146c55edfe45b9c8637"
+    }
+  ],
+  "redaction": "Native stream redaction retained; selected files scanned for this sandbox keys; no credential stores or configuration content retained."
+}

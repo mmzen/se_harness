@@ -1,0 +1,50 @@
+{
+  "accountable_human": "mmzen",
+  "decision_text": "I approve",
+  "decision_context": "Approval of the exact four linked revisions and bounded manual activation in PR #543 review; continue listed discovery corrections and revised qualification under WO-HAG-011.",
+  "applied_at": "2026-10-09T01:45:41.600199+00:00",
+  "review_commit": "efdd06940b3d3ddd897e6b8f93640f87481795dc",
+  "binding_sha256": "ac14cfda434024b919f4b1f39e902569e6e8541d6531842cad7272f266f0c93d",
+  "work_order": "WO-HAG-011",
+  "method": "Explicitly authorized one-time manual linked revision because released 0.22.1 has no amendment command/relation. Exact proposed bytes applied; no lifecycle transition or typed relation invented.",
+  "records": [
+    {
+      "id": "REQ-HAG-014",
+      "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-014.md",
+      "state": "approved",
+      "accepted_sha256": "ef5dc44d25ebda17a6447984e0dcb993c08161a99dc69f0fe494de553ea35eca",
+      "proposed_sha256": "59095720f4811518bd1852617f8156d9d64dd4a1fa195ca55475afd7f9a7f1a0",
+      "accepted_copy": "REQ-HAG-014.accepted.txt",
+      "proposed_copy": "REQ-HAG-014.proposed.txt"
+    },
+    {
+      "id": "SPEC-HAG-008",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md",
+      "state": "approved",
+      "accepted_sha256": "a07260341d4ce5fb84c8e07a19c57cb3380b8a7f0a312960c9d910c30b9b26d5",
+      "proposed_sha256": "02b199be5ae7fb867a6fda43f29ac1f3e6ef2bfd2cab2610150fdd8e4e22627c",
+      "accepted_copy": "SPEC-HAG-008.accepted.txt",
+      "proposed_copy": "SPEC-HAG-008.proposed.txt"
+    },
+    {
+      "id": "VER-HAG-008",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+      "state": "approved",
+      "accepted_sha256": "97e26ac8fb8785ecef5d99c8a1ed38fa7ad070287a09b5ad7688faace0907cdd",
+      "proposed_sha256": "e044db24389da3e318c40b97d58f634acccc989afc957d2b60479605369de1a2",
+      "accepted_copy": "VER-HAG-008.accepted.txt",
+      "proposed_copy": "VER-HAG-008.proposed.txt"
+    },
+    {
+      "id": "WO-HAG-011",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+      "state": "in_progress",
+      "accepted_sha256": "1075ba9e34396dfca5e4516b84e6b2646d0679e3ec7d8a5f7aeb76fdffb2e911",
+      "proposed_sha256": "893c10a1e3835fd9565202e00ac6aa0c575b1c19d5cd59e88f6568c1c93cfae5",
+      "accepted_copy": "WO-HAG-011.accepted.txt",
+      "proposed_copy": "WO-HAG-011.proposed.txt"
+    }
+  ],
+  "preserved": "Accepted Git-blob copies, lifecycle history, owners, states, approved path scope, required commit-bound verification and previous evidence.",
+  "authority_limits": "No verification acceptance, merge, release, installation, provider settings, permission bypass, or acceptance of failed tests. Existing ordinary review publication remains PR #543 to main."
+}

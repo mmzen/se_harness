@@ -1,0 +1,37 @@
+{
+  "reference_commit": "acfc1bc547e248971cac975f785b5610202575f4",
+  "changed_paths": [
+    "docs/engineering/hosted-artifact-graph/README.md",
+    "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md",
+    "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+    "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/diagnostic-review-20261010/activation.json"
+  ],
+  "checks": [
+    {
+      "label": "source-tests",
+      "sha256": "d6fda4f2d8eb3788f44fbd081d6e1ad8502798237c0e2490d6e1264631420e9b",
+      "source": "review-checks.zip/source-tests.json",
+      "exit": 0
+    },
+    {
+      "label": "final-plugin-checks",
+      "sha256": "7ffdbbb9bd4f4082de2f47d80af6965c0c9be0c7d66ac340758d46f1e4648d0b",
+      "source": "review-checks.zip/final-plugin-checks.json",
+      "exit": 0
+    },
+    {
+      "label": "distributions",
+      "sha256": "006d219370ac61ead05bf64717e44b4875ece176edc848305edba4e310526dd3",
+      "source": "review-checks.zip/distributions.json",
+      "exit": 0
+    },
+    {
+      "label": "cli-smoke",
+      "sha256": "5c6a2ada5f71bdfa7a3afb24efa9c8804e9d31438e05b808dd0f799a1cb41ced",
+      "source": "review-checks.zip/cli-smoke.json",
+      "exit": 0
+    }
+  ],
+  "rationale": "Only exact approved formal revisions, their activation evidence and domain index change after the preparation checks. All source, tests, build inputs, plugin guidance and native driver bytes remain unchanged. Reuse those passed preparation tests; fresh released validation/scope/preflight assess activation. Exact packages and fresh native trials still required."
+}

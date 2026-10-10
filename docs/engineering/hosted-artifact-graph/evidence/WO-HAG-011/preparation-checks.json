@@ -1,0 +1,572 @@
+{
+  "selected_evaluator": "0.22.1",
+  "reviewed_artifacts": {
+    "requirements/REQ-HAG-014.md": {
+      "sha256": "a37d4903c501b322a608ba8d98f5b926197c91d3e573b3f020a7400d5a8e4581",
+      "bytes": 3728,
+      "state": "draft",
+      "proposed_state": "approved"
+    },
+    "specifications/SPEC-HAG-008.md": {
+      "sha256": "20179df6500eece03a22ae7204f8862f08f2b5d08377e63b752b23e885e93607",
+      "bytes": 9310,
+      "state": "draft",
+      "proposed_state": "approved"
+    },
+    "verification/VER-HAG-008.md": {
+      "sha256": "7b9b0b19cf7403b82246969d39938e982daaba961c6f2d84dd616ed613398bbe",
+      "bytes": 7109,
+      "state": "draft",
+      "proposed_state": "approved"
+    },
+    "work-orders/WO-HAG-011.md": {
+      "sha256": "61f8613b799f9eeb3a84cd7c009f6888824ffcf620d0396ef5d32178cf7138c6",
+      "bytes": 9161,
+      "state": "draft",
+      "proposed_state": "approved"
+    }
+  },
+  "validation": {
+    "argv": [
+      "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "validate",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit": 0,
+    "elapsed_seconds": 6.911160600022413,
+    "stderr": "",
+    "result_fields": {
+      "valid": true,
+      "artifact_count": 1991,
+      "error_count": 0,
+      "warning_count": 63,
+      "errors": [],
+      "advisory_count": 0,
+      "advisories": [],
+      "plane_counts": {
+        "governance": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "maintenance": {
+          "errors": 0,
+          "warnings": 63
+        },
+        "policy": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "structure": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "selection_notice": "Selected exact result fields; artifact inventories and unrelated warning bodies omitted. Counts retained."
+  },
+  "planned_scope": {
+    "argv": [
+      "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+      "--artifact",
+      "WO-HAG-011",
+      "--planned-path",
+      "se_harness/remote.py",
+      "--planned-path",
+      "se_harness/remote_authoring.py",
+      "--planned-path",
+      "se_harness/resources.py",
+      "--planned-path",
+      "se_harness/cli.py",
+      "--planned-path",
+      "tests/test_remote_client.py",
+      "--planned-path",
+      "tests/test_resources.py",
+      "--planned-path",
+      "tests/plugin_integration/test_simple_plugin.py",
+      "--planned-path",
+      "plugins/verity-plane/common/assets/bootstrap.md",
+      "--planned-path",
+      "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+      "--planned-path",
+      "plugins/verity-plane/codex/README.md",
+      "--planned-path",
+      "plugins/verity-plane/claude-code/README.md",
+      "--planned-path",
+      "docs/notes/harnessctl-reference.md",
+      "--planned-path",
+      "docs/notes/hosted-artifact-graph.md",
+      "--planned-path",
+      "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-014.md",
+      "--planned-path",
+      "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md",
+      "--planned-path",
+      "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+      "--planned-path",
+      "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+      "--planned-path",
+      "docs/engineering/hosted-artifact-graph/README.md",
+      "--planned-path",
+      "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md",
+      "--planned-path",
+      "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md",
+      "--planned-path",
+      "tests/hosted_artifact_graph/native_call.py",
+      "--planned-path",
+      "tests/hosted_artifact_graph/native-tools.md",
+      "--planned-path",
+      "tests/hosted_artifact_graph/qualify_agents.py",
+      "--planned-path",
+      "tests/hosted_artifact_graph/assess_native.py",
+      "--planned-path",
+      "tests/hosted_artifact_graph/test_native_support.py",
+      "--planned-path",
+      "plugins/verity-plane/common/skills/setup/SKILL.md",
+      "--planned-path",
+      "plugins/verity-plane/common/skills/setup/references/hosted-context.md",
+      "--planned-path",
+      "plugins/verity-plane/common/skills/change/SKILL.md",
+      "--planned-path",
+      "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+      "--planned-path",
+      "plugins/verity-plane/common/skills/change/references/hosted-test-lifecycle.md",
+      "--planned-path",
+      "plugins/verity-plane/common/skills/evidence/SKILL.md",
+      "--planned-path",
+      "plugins/verity-plane/common/skills/evidence/references/hosted-evidence.md",
+      "--planned-path",
+      "plugins/verity-plane/common/skills/harness-orient/references/hosted-reads.md",
+      "--planned-path",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/preparation-review.md",
+      "--planned-path",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/preparation-checks.json",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit": 0,
+    "elapsed_seconds": 7.5285356000531465,
+    "stderr": "",
+    "result_fields": {
+      "selection": {
+        "primary": "WO-HAG-011",
+        "artifacts": [
+          "WO-HAG-011"
+        ]
+      },
+      "scope": {
+        "mode": "selected",
+        "governing": [
+          "CAP-HAG-002",
+          "INT-HAG-002",
+          "REQ-HAG-014",
+          "SPEC-HAG-008",
+          "VER-HAG-008"
+        ],
+        "dependencies": [],
+        "declared_paths": [
+          "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/",
+          "docs/engineering/hosted-artifact-graph/README.md",
+          "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-014.md",
+          "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md",
+          "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md",
+          "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md",
+          "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+          "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+          "docs/notes/harnessctl-reference.md",
+          "docs/notes/hosted-artifact-graph.md",
+          "plugins/verity-plane/claude-code/README.md",
+          "plugins/verity-plane/codex/README.md",
+          "plugins/verity-plane/common/assets/bootstrap.md",
+          "plugins/verity-plane/common/skills/change/",
+          "plugins/verity-plane/common/skills/evidence/",
+          "plugins/verity-plane/common/skills/harness-orient/references/",
+          "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+          "plugins/verity-plane/common/skills/setup/",
+          "se_harness/cli.py",
+          "se_harness/remote.py",
+          "se_harness/remote_authoring.py",
+          "se_harness/resources.py",
+          "tests/hosted_artifact_graph/",
+          "tests/plugin_integration/test_simple_plugin.py",
+          "tests/test_remote_client.py",
+          "tests/test_resources.py"
+        ],
+        "changed_paths": [],
+        "change_set_complete": false,
+        "preparation": {
+          "planned_paths": [
+            "docs/engineering/hosted-artifact-graph/README.md",
+            "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/preparation-checks.json",
+            "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/preparation-review.md",
+            "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-014.md",
+            "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md",
+            "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md",
+            "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md",
+            "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+            "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+            "docs/notes/harnessctl-reference.md",
+            "docs/notes/hosted-artifact-graph.md",
+            "plugins/verity-plane/claude-code/README.md",
+            "plugins/verity-plane/codex/README.md",
+            "plugins/verity-plane/common/assets/bootstrap.md",
+            "plugins/verity-plane/common/skills/change/SKILL.md",
+            "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+            "plugins/verity-plane/common/skills/change/references/hosted-test-lifecycle.md",
+            "plugins/verity-plane/common/skills/evidence/SKILL.md",
+            "plugins/verity-plane/common/skills/evidence/references/hosted-evidence.md",
+            "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+            "plugins/verity-plane/common/skills/harness-orient/references/hosted-reads.md",
+            "plugins/verity-plane/common/skills/setup/SKILL.md",
+            "plugins/verity-plane/common/skills/setup/references/hosted-context.md",
+            "se_harness/cli.py",
+            "se_harness/remote.py",
+            "se_harness/remote_authoring.py",
+            "se_harness/resources.py",
+            "tests/hosted_artifact_graph/assess_native.py",
+            "tests/hosted_artifact_graph/native-tools.md",
+            "tests/hosted_artifact_graph/native_call.py",
+            "tests/hosted_artifact_graph/qualify_agents.py",
+            "tests/hosted_artifact_graph/test_native_support.py",
+            "tests/plugin_integration/test_simple_plugin.py",
+            "tests/test_remote_client.py",
+            "tests/test_resources.py"
+          ],
+          "coverage": "covered",
+          "explicit_matches": [
+            {
+              "path": "docs/engineering/hosted-artifact-graph/README.md",
+              "scope_entry": "docs/engineering/hosted-artifact-graph/README.md"
+            },
+            {
+              "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/preparation-checks.json",
+              "scope_entry": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/"
+            },
+            {
+              "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/preparation-review.md",
+              "scope_entry": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/"
+            },
+            {
+              "path": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-014.md",
+              "scope_entry": "docs/engineering/hosted-artifact-graph/requirements/REQ-HAG-014.md"
+            },
+            {
+              "path": "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md",
+              "scope_entry": "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md"
+            },
+            {
+              "path": "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md",
+              "scope_entry": "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md"
+            },
+            {
+              "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md",
+              "scope_entry": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md"
+            },
+            {
+              "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+              "scope_entry": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md"
+            },
+            {
+              "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+              "scope_entry": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md"
+            },
+            {
+              "path": "docs/notes/harnessctl-reference.md",
+              "scope_entry": "docs/notes/harnessctl-reference.md"
+            },
+            {
+              "path": "docs/notes/hosted-artifact-graph.md",
+              "scope_entry": "docs/notes/hosted-artifact-graph.md"
+            },
+            {
+              "path": "plugins/verity-plane/claude-code/README.md",
+              "scope_entry": "plugins/verity-plane/claude-code/README.md"
+            },
+            {
+              "path": "plugins/verity-plane/codex/README.md",
+              "scope_entry": "plugins/verity-plane/codex/README.md"
+            },
+            {
+              "path": "plugins/verity-plane/common/assets/bootstrap.md",
+              "scope_entry": "plugins/verity-plane/common/assets/bootstrap.md"
+            },
+            {
+              "path": "plugins/verity-plane/common/skills/change/SKILL.md",
+              "scope_entry": "plugins/verity-plane/common/skills/change/"
+            },
+            {
+              "path": "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+              "scope_entry": "plugins/verity-plane/common/skills/change/"
+            },
+            {
+              "path": "plugins/verity-plane/common/skills/change/references/hosted-test-lifecycle.md",
+              "scope_entry": "plugins/verity-plane/common/skills/change/"
+            },
+            {
+              "path": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+              "scope_entry": "plugins/verity-plane/common/skills/evidence/"
+            },
+            {
+              "path": "plugins/verity-plane/common/skills/evidence/references/hosted-evidence.md",
+              "scope_entry": "plugins/verity-plane/common/skills/evidence/"
+            },
+            {
+              "path": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+              "scope_entry": "plugins/verity-plane/common/skills/harness-orient/SKILL.md"
+            },
+            {
+              "path": "plugins/verity-plane/common/skills/harness-orient/references/hosted-reads.md",
+              "scope_entry": "plugins/verity-plane/common/skills/harness-orient/references/"
+            },
+            {
+              "path": "plugins/verity-plane/common/skills/setup/SKILL.md",
+              "scope_entry": "plugins/verity-plane/common/skills/setup/"
+            },
+            {
+              "path": "plugins/verity-plane/common/skills/setup/references/hosted-context.md",
+              "scope_entry": "plugins/verity-plane/common/skills/setup/"
+            },
+            {
+              "path": "se_harness/cli.py",
+              "scope_entry": "se_harness/cli.py"
+            },
+            {
+              "path": "se_harness/remote.py",
+              "scope_entry": "se_harness/remote.py"
+            },
+            {
+              "path": "se_harness/remote_authoring.py",
+              "scope_entry": "se_harness/remote_authoring.py"
+            },
+            {
+              "path": "se_harness/resources.py",
+              "scope_entry": "se_harness/resources.py"
+            },
+            {
+              "path": "tests/hosted_artifact_graph/assess_native.py",
+              "scope_entry": "tests/hosted_artifact_graph/"
+            },
+            {
+              "path": "tests/hosted_artifact_graph/native-tools.md",
+              "scope_entry": "tests/hosted_artifact_graph/"
+            },
+            {
+              "path": "tests/hosted_artifact_graph/native_call.py",
+              "scope_entry": "tests/hosted_artifact_graph/"
+            },
+            {
+              "path": "tests/hosted_artifact_graph/qualify_agents.py",
+              "scope_entry": "tests/hosted_artifact_graph/"
+            },
+            {
+              "path": "tests/hosted_artifact_graph/test_native_support.py",
+              "scope_entry": "tests/hosted_artifact_graph/"
+            },
+            {
+              "path": "tests/plugin_integration/test_simple_plugin.py",
+              "scope_entry": "tests/plugin_integration/test_simple_plugin.py"
+            },
+            {
+              "path": "tests/test_remote_client.py",
+              "scope_entry": "tests/test_remote_client.py"
+            },
+            {
+              "path": "tests/test_resources.py",
+              "scope_entry": "tests/test_resources.py"
+            }
+          ],
+          "automatic_matches": [],
+          "uncovered_paths": [],
+          "invalid_declarations": [],
+          "impact_analysis": "not_assessed"
+        }
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Projected the selected scope for WO-HAG-011."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-HAG-011 is draft."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "step_id": "STEP-FOCUS-SELECTED",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-HAG-011"
+          ]
+        },
+        "alternatives": []
+      }
+    },
+    "selection_notice": "Selected exact result fields; artifact inventories and unrelated warning bodies omitted. Counts retained."
+  },
+  "approval_readiness": {
+    "argv": [
+      "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+      "--artifact",
+      "WO-HAG-011",
+      "--checkpoint",
+      "transition",
+      "--target",
+      "approved",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit": 1,
+    "elapsed_seconds": 7.250214400002733,
+    "stderr": "",
+    "result_fields": {
+      "selection": {
+        "primary": "WO-HAG-011",
+        "artifacts": [
+          "WO-HAG-011"
+        ]
+      },
+      "compliance": {
+        "checkpoint": "transition",
+        "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+        "procedure_id": "PROC-FOCUS-SELECTED",
+        "status": "fail",
+        "gates": [
+          {
+            "id": "QG-G3-WORK-AUTHORIZATION",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G3-GRAPH",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "formal-graph:WO-HAG-011"
+                  }
+                ],
+                "message": "The selected formal graph is valid."
+              },
+              {
+                "id": "QGP-G3-INTEGRITY",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "repository-integrity:transition"
+                  }
+                ],
+                "message": "No repository-integrity blocker prevents selected evaluation."
+              },
+              {
+                "id": "QGP-G3-DECISION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "decision-register:WO-HAG-011"
+                  }
+                ],
+                "message": "No open decision blocks WO-HAG-011."
+              }
+            ]
+          },
+          {
+            "id": "QG-STRUCTURAL",
+            "status": "fail",
+            "predicates": [
+              {
+                "id": "QGS-EDGE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "WO-HAG-011"
+                  }
+                ],
+                "message": "draft -> approved is a declared lifecycle edge for WO-HAG-011."
+              },
+              {
+                "id": "QGS-ASSURANCE",
+                "status": "fail",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "WO-HAG-011"
+                  }
+                ],
+                "message": "work order WO-HAG-011 requires a complete assurance classification before approval"
+              }
+            ]
+          }
+        ],
+        "formal_snapshot_sha256": "504ea7ea4c36810235f4eb1b0838b92640d1e3bd18f22e7e0f167a3d4ab2a550",
+        "change_set_source": "arguments"
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 63
+      },
+      "restitution": {
+        "outcome": "blocked",
+        "done": [
+          "Evaluated transition compliance for WO-HAG-011."
+        ],
+        "not_done": [
+          "The transition checkpoint did not pass."
+        ],
+        "blocked_by": [
+          "QGS-ASSURANCE: work order WO-HAG-011 requires a complete assurance classification before approval"
+        ],
+        "current_lifecycle_state": [
+          "WO-HAG-011 is draft."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "step_id": "STEP-FOCUS-SELECTED",
+          "action": "Supply the corrective input for QGS-ASSURANCE"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Resolve QGS-ASSURANCE for WO-HAG-011: work order WO-HAG-011 requires a complete assurance classification before approval"
+        },
+        "alternatives": []
+      }
+    },
+    "selection_notice": "Selected exact result fields; artifact inventories and unrelated warning bodies omitted. Counts retained."
+  },
+  "earlier_attempt": {
+    "validation_advisories": 6,
+    "cause": "Coverage parser did not recognize rule identifiers in headings. Replaced headings with the canonical bold rule-label form; validate-02 has no advisories."
+  },
+  "not_performed": [
+    "implementation",
+    "runtime tests",
+    "native reruns",
+    "approval or start transition",
+    "push or PR update"
+  ]
+}

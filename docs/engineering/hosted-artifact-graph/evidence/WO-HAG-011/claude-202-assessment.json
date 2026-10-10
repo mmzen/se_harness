@@ -1,0 +1,70 @@
+{
+  "candidate": "d31e337425696c944ee61eda9957b6ac4bd2c82b",
+  "trial": "claude-202",
+  "case": "EFF-04B",
+  "overall": "pass",
+  "method": "Independent semantic review of saved document, report, visible calls and final reply; separate exact saved-byte and seven imported-revision reads. This script retains the reviewed findings, not a keyword-based content grade.",
+  "findings": [
+    "Expected Hello rehearsal derives from REQ-P3-900 and SPEC-P3-900, with the correct verifies link and requirement matrix. Every stated pass condition has a direct check: full-string equality and str type. The JSON evidence destination is exact and names platform and evaluator.",
+    "The report separates planned checks, template admission and source-based content review, retains W-AUT-022, and claims no executed tests or lifecycle decision. No empty optional headings or invented coverage gap.",
+    "The native agent did not issue a separate post-revision service read. The assessor performed the required independent read and found the saved bytes identical to the submitted file; the report does not claim an additional native read. Work-relative evidence paths resolve from the supplied native root."
+  ],
+  "blocking_findings": [],
+  "metrics": {
+    "snapshot": "complete",
+    "partial_event_line_omitted": false,
+    "non_json_diagnostic_lines": [],
+    "wall_seconds": 170.423,
+    "native_calls": 9,
+    "observed_tool_items": 9,
+    "native_call_count_complete": true,
+    "calls_by_tool": {
+      "Bash": 6,
+      "Read": 1,
+      "Write": 2
+    },
+    "model_turns": 9,
+    "peak_input_context": 52717,
+    "initial_input_context": 32815,
+    "goals": {
+      "wall_under_180": "met",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "native_failures": [],
+    "command_records": [],
+    "failed_command_records": [],
+    "file_reads": [
+      {
+        "line": 15,
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-efficiency-compact-pointers-20261010\\claude-202\\native\\inputs\\configuration.json"
+      }
+    ],
+    "repeated_read_paths": {},
+    "content_review": "not performed by this summary",
+    "provider_time": "unclassified",
+    "limits": "Observed native calls and command captures only. No private reasoning exported. Provider usage is not billed-token total. Tool durations may overlap; they are not subtracted to infer model time."
+  },
+  "performance_verdict": {
+    "wall_under_180": "met",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "remote_operations": [
+    "create-artifact",
+    "draft-open",
+    "import",
+    "revise-artifact",
+    "status"
+  ],
+  "observed_command_failures": [],
+  "baseline_records_unchanged": 7,
+  "input_changes": [],
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:41c7b5174b311163a250ef4df0c8e03c2a583d21c6fbd8e75ccf50cffa675c63"
+  },
+  "document_sha256": "6b0c9f54b54bfb62ff4ddfbebc143cdaad7197841217a97c78b8593b5322ab93",
+  "final_project_version": 4,
+  "limits": "Draft content and reporting result only. Performance misses remain misses; full NQ qualification, work completion and human verification remain separate. Earlier evidence unchanged."
+}

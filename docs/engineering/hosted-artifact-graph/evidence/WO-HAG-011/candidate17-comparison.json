@@ -1,0 +1,310 @@
+{
+  "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+  "trials": {
+    "claude-111": {
+      "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+      "case": "EFF-04A",
+      "trial": "claude-111",
+      "content_verdict": "pass",
+      "meaning": "Correct negative-case result with one explicitly incomplete draft; not completed intent authoring or an efficiency success.",
+      "findings": [
+        "Acknowledges INT-P3-900, REQ-P3-900 and SPEC-P3-900 and does not claim that governing definitions are absent.",
+        "The draft outcome restates the operator request to establish the expected greeting, rather than inventing a distinct product improvement. The report explicitly says the sources supply no distinct operational benefit and the proposed confirmation is verification activity.",
+        "Reports incomplete content with overlap and purpose/measure findings. The table is not accepted as an operational success measure; no complete or verified intent is claimed.",
+        "The draft still uses confirmation language and a before-reliance explanation. This remains part of the disclosed incomplete draft, not a new approved operational requirement. It requires revision before positive intent acceptance.",
+        "No failed or denied native calls were observed. The observations helper was not invoked; the native report makes no exhaustive tool-failure claim. Independent capture supplies the complete observed call assessment.",
+        "Exact saved bytes match independent service readback; all seven imported records are unchanged."
+      ],
+      "metrics": {
+        "wall_seconds": 400.396,
+        "native_calls": 13,
+        "model_turns": 13,
+        "peak_input_context": 68461,
+        "initial_input_context": 15672,
+        "calls_by_tool": {
+          "Read": 3,
+          "Skill": 1,
+          "Bash": 7,
+          "Write": 2
+        },
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "met",
+          "peak_under_40000": "missed"
+        },
+        "repeated_read_paths": {}
+      },
+      "observed_failed_calls": [],
+      "baseline_records_unchanged": 7,
+      "exact_saved_document": true,
+      "final_project_version": 4,
+      "decision": "Continue the amended qualification sequence. Cost outcomes are separately reported; original historical failures remain failures."
+    },
+    "codex-111": {
+      "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+      "case": "EFF-04A",
+      "trial": "codex-111",
+      "content_verdict": "pass",
+      "meaning": "Correct missing-input stop before import or draft mutation; not completed positive authoring.",
+      "findings": [
+        "The report acknowledges INT-P3-900, REQ-P3-900, SPEC-P3-900 and VER-P3-900, and asserts no missing definition or coverage gap.",
+        "It identifies the missing operational benefit and agreed measure, asks the unanswered question and creates no artifact.",
+        "The independent final status confirms project version zero. No imported records or new draft exist; staged input bytes remain unchanged.",
+        "The initial task read was truncated. The helper refused a later task.md read because that root file is outside inventoried inputs and work. The report discloses the failed call and reads applicable source sections through permitted input paths.",
+        "The under-development prefer_mxc warning is a host warning, separate from the failed helper call. Boundary probes passed before the run.",
+        "The report states the observations snapshot was incomplete and makes no exhaustive failure-count claim. This independent capture includes the one observed failed call."
+      ],
+      "metrics": {
+        "wall_seconds": 148.438,
+        "native_calls": null,
+        "observed_tool_items": 12,
+        "calls_by_tool": {
+          "command_execution": 11,
+          "file_change": 1
+        },
+        "model_turns": null,
+        "peak_input_context": null,
+        "initial_input_context": null,
+        "goals": {
+          "wall_under_180": "met",
+          "calls_at_most_15": "unavailable",
+          "peak_under_40000": "unavailable"
+        },
+        "repeated_read_paths": {}
+      },
+      "observed_failed_calls": [
+        {
+          "line": 13,
+          "call_id": "item_2",
+          "source": "native failed item"
+        }
+      ],
+      "final_project_version": 0,
+      "exact_saved_document": "Not applicable: no mutation or new document.",
+      "delivery_verdict": "Recovery defect observed: complete assembled input was not delivered by the initial host tool read without truncation.",
+      "decision": "Continue the existing approved positive sequence on this unchanged candidate; retain the transport defect and do not infer efficiency success."
+    },
+    "claude-112": {
+      "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+      "case": "EFF-04B",
+      "trial": "claude-112",
+      "content_verdict": "pass",
+      "findings": [
+        "Independent service read matches the exact submitted final document. The draft verifies REQ-P3-900 and fixes the expected Hello rehearsal value from the governing definitions.",
+        "The requirement-to-evidence matrix, function call, exact-string pass condition and failure conditions form a usable check. The platform and evaluator are named.",
+        "The evidence plan names greeting-check.json and records actual/expected output, comparison result and evaluator version.",
+        "No empty optional headings remain. The native report clearly distinguishes planned verification from executed tests and reports the imported W-AUT-022 advisory separately.",
+        "The agent corrected its first revision to name the platform and evaluator. Both successful revisions are retained; no observed denied or failed native call is omitted.",
+        "Seven imported records remain exact original bytes. Exactly one new artifact remains draft. No lifecycle decision or real authority is exercised."
+      ],
+      "metrics": {
+        "wall_seconds": 252.974,
+        "native_calls": 13,
+        "observed_tool_items": 13,
+        "calls_by_tool": {
+          "Read": 3,
+          "Skill": 1,
+          "Bash": 6,
+          "Write": 2,
+          "Edit": 1
+        },
+        "model_turns": 13,
+        "peak_input_context": 59655,
+        "initial_input_context": 15675,
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "met",
+          "peak_under_40000": "missed"
+        },
+        "repeated_read_paths": {}
+      },
+      "observed_failed_calls": [],
+      "baseline_records_unchanged": 7,
+      "exact_saved_document": true,
+      "document_sha256": "ac13fb42b54555a1bd7cacb594a99fa4c95c15def1006be57bdde2aaec801566",
+      "artifact": {
+        "artifact_id": "VER-P3-901",
+        "revision_id": "sha256:92f856d3057d713dcad32dcdfa1c9d6e31c8ab21c8cdd15d40f2438a90c48e34"
+      },
+      "final_project_version": 5,
+      "decision": "Correct first positive result permits the two required fresh Claude repetitions on the unchanged candidate. Time and context goals are missed; call goal is met."
+    },
+    "claude-113": {
+      "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+      "case": "EFF-04B",
+      "trial": "claude-113",
+      "content_verdict": "fail",
+      "findings": [
+        "Independent saved bytes match the submitted draft; the verifies link, requirement-derived expected value, matrix, exact-string check, failure outcomes and proposed evidence destination satisfy the draft-content criteria.",
+        "The record remains draft. The detailed native report explicitly says no tests were executed and the evidence destination is proposed.",
+        "The final reply nevertheless says the contract was authored, submitted, and verified in the hosted sandbox. This is an unsupported verification claim under the task instruction not to claim that the result is verified. Saved-byte readback and template admission do not verify the planned greeting check.",
+        "This is a reporting failure, not an unauthorized lifecycle transition. The detailed report and the contradictory final reply are both preserved; the trial is not counted as wholly correct authoring.",
+        "Seven imported records remain exact original bytes. Exactly one new artifact remains draft. No failed or denied native calls were observed."
+      ],
+      "metrics": {
+        "wall_seconds": 302.182,
+        "native_calls": 13,
+        "observed_tool_items": 13,
+        "calls_by_tool": {
+          "Read": 3,
+          "Skill": 1,
+          "Bash": 7,
+          "Write": 2
+        },
+        "model_turns": 12,
+        "peak_input_context": 62427,
+        "initial_input_context": 15674,
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "met",
+          "peak_under_40000": "missed"
+        },
+        "repeated_read_paths": {}
+      },
+      "observed_failed_calls": [],
+      "baseline_records_unchanged": 7,
+      "exact_saved_document": true,
+      "document_sha256": "74e3226f274939f37d8cdbeceeedc4fc1e1af9008ee286cfc78ab874464be174",
+      "artifact": {
+        "artifact_id": "VER-P3-901",
+        "revision_id": "sha256:dd526261e5aa389e3f179594213a3f0ce665fc5db7d8de5621ece3eb5ec05390"
+      },
+      "final_project_version": 4,
+      "decision": "Preserve the failed reporting result and complete the remaining scheduled same-candidate comparisons. Do not mark this repetition as a successful authoring result or apply a verification decision.",
+      "draft_content_verdict": "pass",
+      "reporting_verdict": "fail"
+    },
+    "claude-114": {
+      "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+      "case": "EFF-04B",
+      "trial": "claude-114",
+      "content_verdict": "fail",
+      "findings": [
+        "Independent saved bytes match the submitted verification draft. Its verifies link, independent expected text, matrix, usable check, platform/evaluator and concrete proposed evidence plan satisfy the content criteria.",
+        "The document and final reply clearly say the checks are planned, no tests ran and no result is verified. Seven imported records remain unchanged.",
+        "The first create request used the project UUID as context before a context existed and was refused with HTTP404 / HAG_REMOTE_UNKNOWN_IDENTITY. The agent opened a context, then made the corrected request. The report accurately preserves the failed call and recovery. Exactly one new draft exists.",
+        "The report nevertheless labels content readiness Incomplete solely because the evaluator returned content_review=not_assessed. It simultaneously says its own complete checklist review found no missing inputs or content issues. The evaluator does not conduct the agent content review; this is not a substantive missing-input blocker.",
+        "This contradictory readiness result fails positive completion reporting. It is not a saved-document defect, a service validation failure or evidence of unauthorized lifecycle action."
+      ],
+      "metrics": {
+        "wall_seconds": 296.55,
+        "native_calls": 15,
+        "observed_tool_items": 15,
+        "calls_by_tool": {
+          "Read": 2,
+          "Skill": 1,
+          "Bash": 9,
+          "Write": 2,
+          "Edit": 1
+        },
+        "model_turns": 14,
+        "peak_input_context": 63663,
+        "initial_input_context": 15675,
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "met",
+          "peak_under_40000": "missed"
+        },
+        "repeated_read_paths": {}
+      },
+      "observed_failed_calls": [
+        {
+          "line": 72,
+          "call_id": "toolu_01AC4gAirY7yLhyC9puWDz7K",
+          "source": "native tool_result is_error",
+          "call": {
+            "line": 71,
+            "name": "Bash",
+            "description": "Create a new verification artifact in lifecycle-pilot domain"
+          },
+          "diagnostic": "e\\\\work\\\\create-ver-001.json.stdout.txt\", \"stderr\": \"\", \"client_view\": {\"schema\": \"se-harness-remote-view/v1\", \"result\": {\"schema\": \"se-harness-remote-result/v1\", \"operation_key\": null, \"request_digest\": null, \"project_id\": null, \"view\": null, \"versions\": null, \"affected_revision_ids\": [], \"affected_artifacts\": [], \"evaluator\": null, \"evaluator_output\": null, \"outcome\": \"refused\", \"receipt_id\": null, \"http_status\": 404, \"error\": {\"code\": \"HAG_REMOTE_UNKNOWN_IDENTITY\", \"message\": \"Unknown selected context.\"}}, \"documents\": [], \"omitted\": [], \"findings_complete\": true, \"evidence\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\hag-efficiency-complete-inputs-20261010\\\\claude-114\\\\native\\\\work\\\\create-ver-001.json.evidence\", \"full_response\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\hag-efficiency-complete-inputs-20261010\\\\claude-114\\\\native\\\\work\\\\create-ver-001.json.evidence\\\\1-response.json\"}}"
+        }
+      ],
+      "baseline_records_unchanged": 7,
+      "exact_saved_document": true,
+      "document_sha256": "759f7f23a44856131ad26345601eb81e991580da5e2b962141f88e7216c94773",
+      "artifact": {
+        "artifact_id": "VER-P3-001",
+        "revision_id": "sha256:1cb42f17a1b145ccfe3bb29e28d9b97f2bb134d60826027cef88b2a12f4ac29f"
+      },
+      "final_project_version": 4,
+      "decision": "Retain the failed readiness-reporting result. Complete the planned Codex comparison, but do not count three wholly correct Claude authoring results or prepare verification from this qualification.",
+      "draft_content_verdict": "pass",
+      "reporting_verdict": "fail"
+    },
+    "codex-112": {
+      "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+      "case": "EFF-04B",
+      "trial": "codex-112",
+      "content_verdict": "pass",
+      "findings": [
+        "Independent service read matches the exact submitted draft. Its verifies link and independent expected value come from REQ-P3-900; it acknowledges existing VER-P3-900 instead of inventing a coverage gap.",
+        "The matrix, executable Python equality check, candidate/fixture identities, chosen platform and proposed JSON evidence file provide a usable verification plan. Expected output is fixed before running the fixture.",
+        "The document, detailed report and final reply all distinguish saved draft, template validation, independent content review and unperformed behavior checks. No verified outcome is claimed.",
+        "The report retains the two denied reads: the installed host-plugin path outside the selected workspace and root task.md outside permitted inventoried/work text paths. It locates the staged plugin through selection and uses permitted files; no alternate permission route or global setting change occurred.",
+        "Both Codex trials report initial entry truncation. This remains a delivery defect despite correct task completion. The selected-service boundary probes passed.",
+        "Seven imported records remain exact original bytes. Exactly one new artifact is draft at final project version four. The report retains the pre-existing W-AUT-022 advisory and claims no complete NQ qualification.",
+        "Twenty observed tool items exceed the fifteen-call goal even though the exact native call total and provider peak context are unavailable. Duration also misses the goal."
+      ],
+      "metrics": {
+        "wall_seconds": 241.615,
+        "native_calls": null,
+        "observed_tool_items": 20,
+        "calls_by_tool": {
+          "command_execution": 18,
+          "file_change": 2
+        },
+        "model_turns": null,
+        "peak_input_context": null,
+        "initial_input_context": null,
+        "goals": {
+          "wall_under_180": "missed",
+          "calls_at_most_15": "missed",
+          "peak_under_40000": "unavailable"
+        },
+        "repeated_read_paths": {}
+      },
+      "observed_failed_calls": [
+        {
+          "line": 12,
+          "call_id": "item_2",
+          "source": "native failed item"
+        },
+        {
+          "line": 16,
+          "call_id": "item_4",
+          "source": "native failed item"
+        }
+      ],
+      "baseline_records_unchanged": 7,
+      "exact_saved_document": true,
+      "document_sha256": "b8d61046f11678fadaf422d5abdc9e30607b68126d3cfd31ee0cefd0519a9ae6",
+      "artifact": {
+        "artifact_id": "VER-P3-001",
+        "revision_id": "sha256:48fb40a75ab7e9031101713b2a6d9cb3b40f45c437e209f786b09ba1f40af25a"
+      },
+      "final_project_version": 4,
+      "decision": "The positive content/reporting case passes with two retained recovered read refusals. Preserve unresolved input-delivery defects and failed Claude reporting cases; no implementation completion or verification acceptance is inferred.",
+      "draft_content_verdict": "pass",
+      "reporting_verdict": "pass"
+    }
+  },
+  "positive_claude_range_median": {
+    "wall_seconds": {
+      "minimum": 252.974,
+      "median": 296.55,
+      "maximum": 302.182
+    },
+    "native_calls": {
+      "minimum": 13,
+      "median": 13,
+      "maximum": 15
+    },
+    "peak_input_context": {
+      "minimum": 59655,
+      "median": 62427,
+      "maximum": 63663
+    }
+  },
+  "limits": "Only the three positive Claude attempts share task/model/candidate/permissions. Negative cases are separate. Earlier candidates and tasks retain their original verdicts."
+}

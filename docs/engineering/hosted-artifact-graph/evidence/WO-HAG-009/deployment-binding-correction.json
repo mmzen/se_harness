@@ -1,0 +1,212 @@
+{
+  "reason": "The fresh project ID changes the configuration bytes and therefore its deployment digest.",
+  "effect": "Rebind each disposable deployment to its actual configuration; no compatibility check, runtime or historical package was changed.",
+  "records": [
+    {
+      "host": "codex",
+      "project_id": "0c07f0af-551e-4962-9743-acf6f1656e42",
+      "before_deployment_sha256": "930c0016c60446eae3dbf33f3f5e5131ae988c0ce3a28a88cf9f5bdc651c8c6e",
+      "after_deployment_sha256": "640f186125d9fe7a816f34e071feac5e01b382192d68fde2123902994955469c",
+      "configuration_sha256": "bf1450b0daea05993932e30cf5ae1381edbad0310c1042688aca423e13073f7d",
+      "compose_sha256": "b5b4a1a33883c8a409320f585548761aec9d8f85475eec2379d50113ac42a9a5",
+      "combination": {
+        "schema": "se-harness-hosted-combination/v1",
+        "payload": {
+          "client": {
+            "version": "0.22.2",
+            "wheel_sha256": "dde016db02340ca01a9542ec052cce471b27308df8a85878bf36b1ce97d89353"
+          },
+          "database": {
+            "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce",
+            "version": "3.13.1"
+          },
+          "deployment_sha256": "640f186125d9fe7a816f34e071feac5e01b382192d68fde2123902994955469c",
+          "evaluator": {
+            "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+            "version": "0.22.1"
+          },
+          "plugins": {
+            "claude": {
+              "archive_sha256": "bea2bd41c40a682ec4ea21da73aad31f6f0129aa1a4e497ef56fd5bae7182787",
+              "inventory_sha256": "2e00f26112f86320981222fbfc4b20f7f54cdb1d79bb2dbe20b18ea43bb562d6",
+              "version": "0.2.7"
+            },
+            "codex": {
+              "archive_sha256": "3a692c1cf94745449dd376b5c9b65787ee16c79abf8e45901a362b103286cb5b",
+              "inventory_sha256": "063f249fe664c2f8ebf790b526294e96c8bbc8fe3c0b6cc4f9c590d877263397",
+              "version": "0.2.7"
+            }
+          },
+          "protocols": [
+            "se-harness-remote-command/v1",
+            "se-harness-remote-result/v1",
+            "se-harness-graph-read/v1",
+            "se-harness-artifact-revision/v1",
+            "se-harness-artifact-baseline/v1",
+            "se-harness-lifecycle-command/v2",
+            "se-harness-lifecycle-result/v2",
+            "se-harness-lifecycle-export/v2",
+            "se-harness-graph-read/v2"
+          ],
+          "required_secret_keys": [
+            "principals[].token"
+          ],
+          "runtime": {
+            "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4",
+            "platform": "linux/amd64",
+            "python": "3.13.16"
+          },
+          "schema": "se-harness-hosted-combination/v1",
+          "schema_revision": 2,
+          "server": {
+            "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+            "image_manifest": "sha256:cd3d8e10d56c7101690b9711d4b7ed246aed90bb0fd270dc2c592380c3fc9bed",
+            "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d",
+            "version": "0.1.0.dev1",
+            "wheel_sha256": "ffae3844b0e3488d3e3715f538d75176c6a39c524263ca9b4fb07ae01327d2d1"
+          },
+          "source": {
+            "candidate_commit": "345557d20e83f1c6ed72e11460ee4ba451cf3d91",
+            "repository": "https://github.com/mmzen/se_harness.git"
+          }
+        },
+        "combination_id": "sha256:12ba9b6d8040d058a899c997768309458544f740ed4c3049c5a9015ac6d762d1"
+      }
+    },
+    {
+      "host": "claude",
+      "project_id": "58fface5-45c9-4252-b8ad-a30af2b4825e",
+      "before_deployment_sha256": "930c0016c60446eae3dbf33f3f5e5131ae988c0ce3a28a88cf9f5bdc651c8c6e",
+      "after_deployment_sha256": "4ffcb1b1fad861e9c906750ffd26da7f63fdad73fab40b24314592f2eaee40dd",
+      "configuration_sha256": "7702831c1c972a43733b5d8a08d8e31231dd5ff8a210f427316187ea50257b8e",
+      "compose_sha256": "b5b4a1a33883c8a409320f585548761aec9d8f85475eec2379d50113ac42a9a5",
+      "combination": {
+        "schema": "se-harness-hosted-combination/v1",
+        "payload": {
+          "client": {
+            "version": "0.22.2",
+            "wheel_sha256": "dde016db02340ca01a9542ec052cce471b27308df8a85878bf36b1ce97d89353"
+          },
+          "database": {
+            "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce",
+            "version": "3.13.1"
+          },
+          "deployment_sha256": "4ffcb1b1fad861e9c906750ffd26da7f63fdad73fab40b24314592f2eaee40dd",
+          "evaluator": {
+            "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+            "version": "0.22.1"
+          },
+          "plugins": {
+            "claude": {
+              "archive_sha256": "bea2bd41c40a682ec4ea21da73aad31f6f0129aa1a4e497ef56fd5bae7182787",
+              "inventory_sha256": "2e00f26112f86320981222fbfc4b20f7f54cdb1d79bb2dbe20b18ea43bb562d6",
+              "version": "0.2.7"
+            },
+            "codex": {
+              "archive_sha256": "3a692c1cf94745449dd376b5c9b65787ee16c79abf8e45901a362b103286cb5b",
+              "inventory_sha256": "063f249fe664c2f8ebf790b526294e96c8bbc8fe3c0b6cc4f9c590d877263397",
+              "version": "0.2.7"
+            }
+          },
+          "protocols": [
+            "se-harness-remote-command/v1",
+            "se-harness-remote-result/v1",
+            "se-harness-graph-read/v1",
+            "se-harness-artifact-revision/v1",
+            "se-harness-artifact-baseline/v1",
+            "se-harness-lifecycle-command/v2",
+            "se-harness-lifecycle-result/v2",
+            "se-harness-lifecycle-export/v2",
+            "se-harness-graph-read/v2"
+          ],
+          "required_secret_keys": [
+            "principals[].token"
+          ],
+          "runtime": {
+            "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4",
+            "platform": "linux/amd64",
+            "python": "3.13.16"
+          },
+          "schema": "se-harness-hosted-combination/v1",
+          "schema_revision": 2,
+          "server": {
+            "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+            "image_manifest": "sha256:cd3d8e10d56c7101690b9711d4b7ed246aed90bb0fd270dc2c592380c3fc9bed",
+            "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d",
+            "version": "0.1.0.dev1",
+            "wheel_sha256": "ffae3844b0e3488d3e3715f538d75176c6a39c524263ca9b4fb07ae01327d2d1"
+          },
+          "source": {
+            "candidate_commit": "345557d20e83f1c6ed72e11460ee4ba451cf3d91",
+            "repository": "https://github.com/mmzen/se_harness.git"
+          }
+        },
+        "combination_id": "sha256:5c0b592519fafbf7ce6050a26f829e652db74dc6ba701f0c8bd1e7c09a7daeb4"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "docker",
+        "compose",
+        "-p",
+        "hag-native-codex-20261007",
+        "-f",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-phase3-execution-20261006\\package02\\candidate-source\\server\\compose.yaml",
+        "-f",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\codex\\network.json",
+        "restart",
+        "service"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "observed_at": "2026-10-07T02:12:51.947483+00:00",
+      "exit": 0,
+      "stdout": "",
+      "stderr": " Container hag-native-codex-20261007-service-1 Restarting \n Container hag-native-codex-20261007-service-1 Started \n"
+    },
+    {
+      "argv": [
+        "docker",
+        "compose",
+        "-p",
+        "hag-native-claude-20261007",
+        "-f",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-phase3-execution-20261006\\package02\\candidate-source\\server\\compose.yaml",
+        "-f",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\network.json",
+        "restart",
+        "service"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "observed_at": "2026-10-07T02:12:53.236245+00:00",
+      "exit": 0,
+      "stdout": "",
+      "stderr": " Container hag-native-claude-20261007-service-1 Restarting \n Container hag-native-claude-20261007-service-1 Started \n"
+    }
+  ],
+  "failed_readiness_probe": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-phase3-execution-20261006\\client02\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "remote",
+      "status",
+      "--endpoint",
+      "http://127.0.0.1:18310",
+      "--project",
+      "0c07f0af-551e-4962-9743-acf6f1656e42",
+      "--token-env",
+      "HAG_NATIVE_TEST_TOKEN",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "observed_at": "2026-10-07T02:11:56.736606+00:00",
+    "exit": 1,
+    "stdout": "{\n  \"ready\": false,\n  \"schema\": \"se-harness-remote-result/v1\",\n  \"operation_key\": null,\n  \"request_digest\": null,\n  \"project_id\": null,\n  \"view\": null,\n  \"versions\": null,\n  \"affected_revision_ids\": [],\n  \"affected_artifacts\": [],\n  \"evaluator\": null,\n  \"evaluator_output\": null,\n  \"outcome\": \"refused\",\n  \"receipt_id\": null,\n  \"http_status\": 409,\n  \"error\": {\n    \"code\": \"HAG_REMOTE_UNSUPPORTED_TUPLE\",\n    \"message\": \"Missing or incompatible sandbox component identities.\"\n  }\n}\n",
+    "stderr": ""
+  }
+}

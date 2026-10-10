@@ -1,0 +1,152 @@
+{
+  "outcome": "stopped_for_conflicting_startup_instructions",
+  "project": "f6a0d903-cf60-48b5-8fa3-88cdc2eaf18f",
+  "session": {
+    "host": "claude",
+    "exit": 4294967295,
+    "timed_out": false,
+    "elapsed_seconds": 120.1,
+    "reply_dropped": false,
+    "redactions": 0,
+    "events_sha256": "aa1bd65c43f2f154e4d0471bfd1a4671d4dd378518d9ca0c267261efef036fcd",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "stop": "2026-10-07T05:55:57.7823918+02:00; exact Claude PID 39412, parent 35156.",
+  "finding": "The normal Skill tool loaded setup, but startup bootstrap unconditionally required checkout activation. The task explicitly selected hosted-only testing and prohibited activation. Claude attempted activation; no tool result was returned before stop.",
+  "activation_attempt": {
+    "type": "tool_use",
+    "id": "toolu_01QeeKBVBKd61ewjYTtm9RMs",
+    "name": "Bash",
+    "input": {
+      "command": "python -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/guidance03/plugin/verity-plane/scripts/activate.py\" --host claude --session-id 6e607919-41df-4c2d-b1ce-00faf3c756c2 --data-root \"C:/Users/mathi/.claude/plugins/data/verity-plane-inline\" --target \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/work/sonnet03\" 2>&1",
+      "description": "Activate the working directory checkout for this session"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  "hook_events": [
+    {
+      "type": "system",
+      "subtype": "hook_started",
+      "hook_id": "a1f387a9-f068-45fc-b951-8fd9ccb9ee48",
+      "hook_name": "SessionStart:startup",
+      "hook_event": "SessionStart",
+      "uuid": "e3a42d4f-db5f-4585-a237-24471d878fad",
+      "session_id": "6e607919-41df-4c2d-b1ce-00faf3c756c2"
+    },
+    {
+      "type": "system",
+      "subtype": "hook_response",
+      "hook_id": "a1f387a9-f068-45fc-b951-8fd9ccb9ee48",
+      "hook_name": "SessionStart:startup",
+      "hook_event": "SessionStart",
+      "output": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"Host: claude; session_id: 6e607919-41df-4c2d-b1ce-00faf3c756c2\\nPlugin data: C:\\\\Users\\\\mathi\\\\.claude\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\n# Select the working repository\\n\\nWhen asked to clone, clone to the intended destination, then activate that exact\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\n\\nUse the setup skill's activation procedure with the host, session_id and\\nplugin data supplied with this message. It immediately returns\\nthe selected instructions. Read that complete entry before governed work. If the\\nrepository has no harness selection or its evaluator is missing, use the setup\\nskill with an explicitly selected release, then activate again. Do not choose a\\nrelease or upgrade silently.\\n\\nSelection belongs only to this host session. A new session activates its own\\ncheckout. Switching or clearing affects only this session. Activation gives no\\napproval, verification or delivery authority; follow the selected release for\\nnew or resumed work and any requested push or pull request.\\n\"}}\r\n",
+      "stdout": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"Host: claude; session_id: 6e607919-41df-4c2d-b1ce-00faf3c756c2\\nPlugin data: C:\\\\Users\\\\mathi\\\\.claude\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\n# Select the working repository\\n\\nWhen asked to clone, clone to the intended destination, then activate that exact\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\n\\nUse the setup skill's activation procedure with the host, session_id and\\nplugin data supplied with this message. It immediately returns\\nthe selected instructions. Read that complete entry before governed work. If the\\nrepository has no harness selection or its evaluator is missing, use the setup\\nskill with an explicitly selected release, then activate again. Do not choose a\\nrelease or upgrade silently.\\n\\nSelection belongs only to this host session. A new session activates its own\\ncheckout. Switching or clearing affects only this session. Activation gives no\\napproval, verification or delivery authority; follow the selected release for\\nnew or resumed work and any requested push or pull request.\\n\"}}\r\n",
+      "stderr": "",
+      "exit_code": 0,
+      "outcome": "success",
+      "uuid": "c80aba41-eb23-42e9-bfbb-b0fcb4d203a1",
+      "session_id": "6e607919-41df-4c2d-b1ce-00faf3c756c2"
+    }
+  ],
+  "locator_readback": {
+    "path": "C:\\Users\\mathi\\.claude\\plugins\\data\\verity-plane-inline",
+    "exists": true,
+    "entries": []
+  },
+  "process_readback_file": "sonnet03-process-readback-02.json",
+  "status_after": {
+    "ready": true,
+    "project_id": "f6a0d903-cf60-48b5-8fa3-88cdc2eaf18f",
+    "schema_revision": 2,
+    "project_version": 0,
+    "evaluator": {
+      "version": "0.22.1",
+      "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+      "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff"
+    },
+    "components": {
+      "client": {
+        "version": "0.22.2",
+        "wheel_sha256": "95079598c5e533a4f51c61db96bdf6572d4a68bcf776c3ee3386462321c850dc"
+      },
+      "database": {
+        "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce",
+        "version": "3.13.1"
+      },
+      "deployment_sha256": "0459cd4c7b865132c8eb5ee9a1dc13bbe138175cde419a38e3600200a7bfcdb4",
+      "evaluator": {
+        "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+        "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+        "version": "0.22.1"
+      },
+      "plugins": {
+        "claude": {
+          "archive_sha256": "91d74bf8a5fdd61f39e92ac3a66cae5c7cd03c759168bfa35bc674ae7aa73a71",
+          "inventory_sha256": "7624b69cfba57d7bcad433a6d77fc67da650d643bff32a22abd8c2c390c2c34b",
+          "version": "0.2.7"
+        },
+        "codex": {
+          "archive_sha256": "59d51af950fed1113e84a99d64388e6f7f79233fecb03c02ad8bf50a88049f91",
+          "inventory_sha256": "52ecc0ad3db8dbc8f19d2875c58718d8b09a8fbdccd11c09f2206d80887d2838",
+          "version": "0.2.7"
+        }
+      },
+      "protocols": [
+        "se-harness-remote-command/v1",
+        "se-harness-remote-result/v1",
+        "se-harness-graph-read/v1",
+        "se-harness-artifact-revision/v1",
+        "se-harness-artifact-baseline/v1",
+        "se-harness-lifecycle-command/v2",
+        "se-harness-lifecycle-result/v2",
+        "se-harness-lifecycle-export/v2",
+        "se-harness-graph-read/v2"
+      ],
+      "required_secret_keys": [
+        "principals[].token"
+      ],
+      "runtime": {
+        "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4",
+        "platform": "linux/amd64",
+        "python": "3.13.16"
+      },
+      "schema": "se-harness-hosted-combination/v1",
+      "schema_revision": 2,
+      "server": {
+        "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+        "image_manifest": "sha256:8e84370f46e829635f59d58738930784390594c926de0165b25b9f26353db1df",
+        "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d",
+        "version": "0.1.0.dev1",
+        "wheel_sha256": "164cafae5205ace1bc035a4c668935a80627300b8bae68154085e956f311825b"
+      },
+      "source": {
+        "candidate_commit": "7f2a16e190de183a021adafbf0aa7838ddf7f40a",
+        "repository": "https://github.com/mmzen/se_harness.git"
+      }
+    },
+    "client": {
+      "version": "0.22.2",
+      "wheel_sha256": "95079598c5e533a4f51c61db96bdf6572d4a68bcf776c3ee3386462321c850dc"
+    },
+    "authority_mode": "sandbox-projection",
+    "protocols": [
+      "se-harness-remote-command/v1",
+      "se-harness-remote-result/v1",
+      "se-harness-graph-read/v1",
+      "se-harness-artifact-revision/v1",
+      "se-harness-artifact-baseline/v1",
+      "se-harness-lifecycle-command/v2",
+      "se-harness-lifecycle-result/v2",
+      "se-harness-lifecycle-export/v2",
+      "se-harness-graph-read/v2"
+    ],
+    "database_read_only_enforcement": "deferred: RISK-HAG-001",
+    "test_copy": true,
+    "authority": "rehearsal-only; Git remains authoritative"
+  },
+  "limits": "Empty locator and no matching surviving process show no retained activation effect. They do not establish the interrupted command exit or prove every transient effect. This run fails qualification and is not a native pass.",
+  "correction": "Propose WO-HAG-010 for bootstrap text and setup routing. No hook or activation implementation change; original WO-HAG-009 excludes the bootstrap path."
+}
