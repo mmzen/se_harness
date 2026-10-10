@@ -62,7 +62,7 @@ Choose the exact revision and context from the selected inputs or actual results
 | One exact inventory entry | `lookup-file RELATIVE_NAME` |
 | One saved JSON field | `read-json ABSOLUTE_FILE --pointer '"/field"'`; omit pointer for root; optional `--keys` |
 | A raw base64 field | Add `--decode-base64` to that field read |
-| Text when native Read is unavailable | `read-text ABSOLUTE_FILE`; inventoried inputs or work files, at most 64 KiB |
+| One text file or independent reads together | `read-text ABSOLUTE_FILE [ABSOLUTE_FILE ...]`; up to eight selected inventoried inputs or work files, at most 64 KiB output |
 
 For `instructions`, use canonical IDs such as `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`. The earlier `released-resources/` inventory prefix also works. Request known sections together.
 For authoring checklists and the repeated released 0.22.1 continuation heading,
@@ -72,7 +72,8 @@ For known paths, use them directly. Inventory names are relative to the staged
 inputs directory: `released-resources/docs/engineering/ARTIFACT_AUTHORING.md`,
 `source/src/greeting.py`, `client-help/create-artifact.txt`. **Do not add `inputs/`
 to these names.** Native Read takes the absolute path, not an inventory name.
-A digest or lookup is not a content read. Unknown headings must not be guessed;
+A digest or lookup is not a content read. Batch independent reads when their exact
+paths are known. Unknown headings must not be guessed;
 read the named file once to locate its actual headings. Request known current
 sections together and reuse unchanged content. A full inventory is not required.
 

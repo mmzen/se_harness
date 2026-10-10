@@ -223,6 +223,13 @@ class Capture:
             remaining[0] -= size
             return value
         visible = render(result)
-        return {"schema": "se-harness-remote-view/v1", "result": visible, "documents": documents, "omitted": omitted,
+        view = {"schema": "se-harness-remote-view/v1", "result": visible, "documents": documents, "omitted": omitted,
                 "findings_complete": not any(item.get("required_reading") for item in omitted),
                 "evidence": str(self.path), "full_response": str(self.path / response_name)}
+        validation = result.get("evaluator_output") if isinstance(result, dict) else None
+        if isinstance(validation, dict) and validation.get("schema") == "se-harness-draft-validation-v1":
+            # This describes the evaluator's existing boundary, not a content verdict.
+            view["draft_review"] = {"validation_scope": "draft_shape_and_required_links",
+                                    "content_review": "not_assessed",
+                                    "source": "/result/evaluator_output"}
+        return view

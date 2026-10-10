@@ -753,6 +753,10 @@ link. It retains exact request/response bytes, decoded documents and capture
 metadata (exit, timings, uncertainty). The view shows small fields and documents,
 with explicit pointers for omitted content. Required omitted findings still need
 reading. It is a presentation, not an independent verdict.
+For draft-validation responses, `draft_review` identifies the evaluator's shape
+and required-link checks and reports content review as `not_assessed`. An empty
+`incomplete` list and `findings_complete: true` do not establish content readiness.
+The agent reviews the saved content against the applicable authoring checklist.
 
 For `create-artifact`, optional `--include-document` performs one read of the
 exact created revision after an accepted creation. No other mutation occurs.

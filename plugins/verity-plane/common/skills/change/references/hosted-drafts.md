@@ -21,8 +21,9 @@ only when needed; the released evaluator selects the next step.
 
 Reuse exact sections already supplied with source identity. For missing sections,
 use the selected resource root and known IDs; request independent sections together.
-Read the complete returned sections. Pointers alone do not prove reading. Look up
-only unknown paths; a missing, ambiguous or changed source stops that read.
+Batch independent file reads when their exact paths are known. Read their complete
+content; pointers alone do not prove reading. Look up only unknown paths. A missing,
+ambiguous or changed source stops that read.
 For released 0.22.1, the repeated `CONTINUE.md#continue-selected-work` heading
 requires its unique `#procedure` parent, not the later typed-step index.
 
@@ -50,13 +51,10 @@ for its claims. Apply the selected type checklist to those inputs:
 | Purpose and measure | For an intent, identify the requested improvement in the user's situation and how the owner will observe that benefit. Producing an artifact or confirming an expected program output alone describes preparation or verification, not an operational benefit. If the sources do not supply the benefit or its measure, ask for that input. |
 | Planned evidence | For a verification plan, name the check, pass condition and complete proposed evidence path, including its filename. Resolve any work-order directory used in that path. Distinguish the proposed destination from existing evidence or authority to execute. |
 
-If a required answer is missing, stop dependent writing and report the exact
-input needed. The request to create an artifact does not supply missing content
-or waive its checklist. Report a requested type that does not fit the supported
-outcome as a mismatch; do not invent a benefit or silently change type.
-A partial draft may remain, but report it as incomplete. Do not call the draft
-complete while a required content finding remains unresolved, even if admission
-passes. Unassessed coverage does not mean that definitions are absent.
+If a required answer is missing, stop dependent writing and name the needed input.
+Keep any partial draft incomplete. A creation request does not supply missing
+content or waive the checklist. Report a type/outcome mismatch without inventing
+a benefit or changing type. Unassessed coverage does not establish absence.
 
 After create, inspect `--include-document` or [read the exact revision](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
 The option performs one read and saves the template, with no further mutation.
@@ -65,7 +63,6 @@ inputs and check the finished text against the same type checklist. This is one
 content review, recorded in the existing report. For a verification contract,
 confirm that each proposed assertion actually tests its stated pass condition.
 Remove duplicate checks and constraints absent from the governing definitions.
-Service admission and zero incomplete fields do not establish supported content.
 Resolve a blocked read or report it before continuing.
 
 Submit the full UTF-8 file through `revise-artifact`. Inspect the actual document,
@@ -74,11 +71,19 @@ lifecycle history, decisions and evidence remain immutable.
 
 ## Retain the result and recover uncertainty
 
-Keep complete requests/results in files. Read needed fields and required omitted
-findings before a conclusion; a compact view is not the full result. Keep one short
-transient report outside the repository: selection, versions, document/result paths,
-unresolved inputs or effects, and the evaluator's procedure/step. Reuse it after
-compaction to locate evidence and obtain fresh context; it grants no authority.
+Keep complete requests/results in files; read required omitted findings before
+concluding. Keep one short transient report outside the repository:
+
+- **Content readiness:** complete, incomplete or blocked, with the reason. Any
+  unresolved required content finding makes it incomplete, even after a successful save.
+- **Saved state:** selection, revision, versions and exact document/result paths.
+- **Validation and review:** evaluator findings, separate content-review findings,
+  missing inputs or uncertain effects, and the returned procedure/step if available.
+
+Draft validation checks template shape and required links. An empty `incomplete`
+list or a complete findings display is not a content verdict. The client's
+`draft_review` states that limit; the agent must perform the content review.
+Reuse the report after compaction to locate evidence and obtain fresh context.
 
 Report the observed method: source inspection, executed test or evaluator check.
 Include failed and denied calls after recovery. Use mechanical observations before

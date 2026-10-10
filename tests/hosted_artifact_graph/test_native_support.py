@@ -11,12 +11,39 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from native_call import contained, remote_argv, main, read_json, lookup_file, find_file, result_fields
+from native_call import contained, remote_argv, main, read_json, lookup_file, find_file, result_fields, read_text_files
 from qualify_agents import prepare_output, instruction_entry, write_prompt, prompt_pointer
 from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_batch_text_preserves_exact_selected_bytes_and_refuses_unsafe_inputs(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); inputs=root/'inputs'; inputs.mkdir(); (root/'work').mkdir()
+            first=inputs/'one.md'; first.write_bytes('One\r\n“Exact”.\n'.encode())
+            second=root/'work/two.md'; second.write_bytes(b'Two\n')
+            inventory=inputs/'inventory.json'
+            inventory.write_text(json.dumps({'files':[{'path':str(first),'relative':'one.md',
+                'bytes':first.stat().st_size,'sha256':hashlib.sha256(first.read_bytes()).hexdigest()}]}))
+            config={'inputs_inventory':str(inventory)}
+            values=read_text_files(root,config,[first,second])['files']
+            self.assertEqual([first.read_bytes(),second.read_bytes()],[x['text'].encode() for x in values])
+            self.assertEqual(values[0],read_text_files(root,config,[first]))
+            for paths in ([],[first]*9,[first,root/'../outside'],[first,root/'selection.json']):
+                with self.subTest(paths=paths),self.assertRaises((ValueError,OSError)):
+                    read_text_files(root,config,paths)
+            first.write_bytes(b'changed staged input')
+            with self.assertRaisesRegex(ValueError,'inventory'):
+                read_text_files(root,config,[first,second])
+            with patch.dict(os.environ,{'HAG_NATIVE_TEST_TOKEN':'synthetic-secret'}):
+                second.write_bytes(b'synthetic-secret')
+                with self.assertRaisesRegex(ValueError,'credential'):
+                    read_text_files(root,config,[second])
+            second.write_text('x'*40000)
+            with self.assertRaisesRegex(ValueError,'64 KiB'):
+                read_text_files(root,config,[second,second])
+
     def test_startup_pointer_leaves_task_bytes_in_one_readable_location(self):
         with tempfile.TemporaryDirectory() as directory:
             task = Path(directory)/'task with spaces.md'

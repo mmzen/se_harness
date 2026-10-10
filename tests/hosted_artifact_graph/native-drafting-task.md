@@ -39,10 +39,12 @@ those observations into another JSON file or calculate final metrics during the
 run. Use the observations command before an exhaustive failure claim; its
 in-progress snapshot does not include subsequent calls.
 
-Keep one short `native-report.md` in WORK_DIRECTORY. It also serves as the
-transient progress note: selected artifact/revision, current versions, exact
-document and result paths, unresolved effects, and content-review findings.
-Explain any blocker and distinguish planned checks from executed checks.
+Keep one short `native-report.md` in WORK_DIRECTORY. Start with content readiness:
+complete, incomplete or blocked, with the actual reason. Then record the saved
+artifact/revision, current versions, exact document/result paths, template-validation
+result, content-review findings and unresolved inputs or effects. A saved draft
+and passed template checks do not establish content readiness. This is also the
+transient progress note. Distinguish planned checks from executed checks.
 Link original evidence instead of reproducing it. Do not write a separate
 native-observations.json or read inventory. End with a brief result and the report
 path. No complete NQ-01 through NQ-05 claim: lifecycle, MCP parity, reply recovery

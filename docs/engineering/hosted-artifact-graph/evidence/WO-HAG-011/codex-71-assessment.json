@@ -1,0 +1,24 @@
+{
+  "case": "VER-HAG-008 EFF-04A",
+  "candidate": "4ce7ffd09d0b991d29311a1164b1fa029a64a83e",
+  "outcome": "blocked",
+  "content_review": "not_assessable",
+  "reason": "The unchanged normal Codex workspace permission profile denies localhost sockets (WinError 10013); the selected service remains ready outside that sandbox.",
+  "service_project_version_after": 0,
+  "remote_mutations_observed": 0,
+  "native_failures": 2,
+  "additional_host_errors": [
+    {
+      "id": "item_0",
+      "type": "error",
+      "message": "Under-development features enabled: prefer_mxc. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in C:\\Users\\mathi\\.codex\\config.toml."
+    }
+  ],
+  "limitations": [
+    "No imported baseline or authored revision exists to assess.",
+    "No positive authoring or performance success is claimed.",
+    "The separate Codex EFF-04B case remains unperformed behind the same connection prerequisite."
+  ],
+  "permission_changes": [],
+  "protected_app_processes_stopped": []
+}

@@ -205,6 +205,29 @@ class AuthoringTests(unittest.TestCase):
                 self.assertEqual('not_sent',json.loads(output.getvalue())['outcome'])
                 transport.assert_not_called()
 
+    def test_draft_shape_result_never_claims_content_readiness(self):
+        from se_harness.remote_authoring import Capture
+        for index, validation in enumerate((
+            {'schema':'se-harness-draft-validation-v1', 'admissible':True, 'errors':[], 'incomplete':[]},
+            {'schema':'se-harness-draft-validation-v1', 'admissible':False, 'errors':['invalid link'], 'incomplete':[]},
+            {'schema':'se-harness-draft-validation-v1', 'admissible':True, 'errors':[], 'incomplete':['large finding'*3000]},
+        )):
+            with self.subTest(validation=validation['admissible'], incomplete=bool(validation['incomplete'])):
+                result = {'outcome':'accepted', 'evaluator_output':validation}
+                capture = Capture(self.root/str(index),'synthetic-secret')
+                capture.request('POST','/command',{'operation_key':'fixed'})
+                raw = json.dumps(result,indent=2).encode()
+                capture.response(200,raw)
+                view = capture.compact(result)
+                self.assertEqual('not_assessed', view['draft_review']['content_review'])
+                self.assertEqual('draft_shape_and_required_links', view['draft_review']['validation_scope'])
+                self.assertEqual(validation['admissible'], view['result']['evaluator_output']['admissible'])
+                self.assertEqual(raw,(capture.path/'1-response.json').read_bytes())
+                self.assertEqual(not validation['incomplete'],view['findings_complete'])
+        capture = Capture(self.root/'other','synthetic-secret')
+        self.assertNotIn('draft_review',capture.compact({'evaluator_output':{'schema':'other-result'}}))
+        self.assertNotIn('draft_review',capture.compact({'outcome':'refused','evaluator_output':None}))
+
     def test_unicode_result_survives_a_legacy_windows_console(self):
         from se_harness.remote import run
         import contextlib, io

@@ -91,6 +91,17 @@ def read_text(root, config, supplied):
     return {'path':str(path),'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'text':raw.decode('utf-8')}
 
 
+def read_text_files(root, config, paths):
+    """Read only the agent-selected files, with the same guards and one output bound."""
+    if not 1 <= len(paths) <= 8:
+        raise ValueError('Select between one and eight text files')
+    files = [read_text(root, config, path) for path in paths]
+    result = files[0] if len(files) == 1 else {'files':files}
+    if len(json.dumps(result,ensure_ascii=True).encode()) > 65536:
+        raise ValueError('Selected text output exceeds 64 KiB; select fewer files or sections')
+    return result
+
+
 def result_fields(stdout):
     """Render bounded exact JSON fields; list every omitted subtree explicitly."""
     try:
@@ -295,7 +306,7 @@ def main():
     instruction.add_argument('--section',action='append',required=True)
     encoded = commands.add_parser('encode-file')
     text=commands.add_parser('read-text',help='Read an inventoried text input or work file, at most 64 KiB')
-    text.add_argument('path')
+    text.add_argument('path', nargs='+')
     encoded.add_argument('path')
     selected = commands.add_parser('read-json', help='Read an exact JSON pointer from a saved result; empty pointer selects its root')
     selected.add_argument('path')
@@ -316,7 +327,7 @@ def main():
     root = Path(os.environ['HAG_NATIVE_WORK_DIRECTORY']).resolve()
     config = json.loads(Path(os.environ['HAG_NATIVE_SELECTION']).read_text(encoding='utf-8'))
     if args.kind == 'read-text':
-        print(json.dumps(read_text(root,config,args.path)))
+        print(json.dumps(read_text_files(root,config,args.path)))
         return 0
     if args.kind == 'observations':
         print(json.dumps(observations(root,config)))
