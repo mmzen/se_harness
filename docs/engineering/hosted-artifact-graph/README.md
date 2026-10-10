@@ -6,13 +6,20 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
+The [new-request assessment](evidence/WO-HAG-011/new-request-qualification-assessment.md)
+records the activated EFF-04A2 diagnostic on candidate21. Claude's first trial fails:
+it invents required meaning and reports complete content. Saved bytes, imported
+records and failure reporting pass independent checks. The run took 226.201 seconds,
+13 calls and 58,356 peak input tokens. Further native tests stopped; WO-HAG-011 stays
+in progress and verification is not requested.
+
 The [approved correction review](evidence/WO-HAG-011/diagnostic-review-20261010/review.md)
 introduces the separately identified EFF-04A2 missing-input task and clarifies
 the hosted command route. Its [activation record](evidence/WO-HAG-011/diagnostic-review-20261010/activation.json)
 retains mmzen's approval and exact accepted/revised identities. Historical verdicts
-are unchanged. Fresh qualification is pending; no new native result is claimed.
+are unchanged. The new assessment above records the first native result.
 
-The [latest assessment](evidence/WO-HAG-011/test-copy-qualification-assessment.md)
+The [candidate20 assessment](evidence/WO-HAG-011/test-copy-qualification-assessment.md)
 records candidate20's clarification that synthetic drafts use the normal checklist.
 Claude still fails content review and omits one failed call from its report.
 The run took 225.493 seconds, 12 calls and 58,920 peak input tokens. Further native

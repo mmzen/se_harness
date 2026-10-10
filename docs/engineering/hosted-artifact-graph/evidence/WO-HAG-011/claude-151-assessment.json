@@ -1,0 +1,61 @@
+{
+  "candidate": "946d566b1f3f79cfdf5060242ba39fde045c1774",
+  "trial": "claude-151",
+  "contract": "VER-HAG-008 EFF-04A2",
+  "assessor": "Codex agent, independent post-run saved-document and visible-result review; not human verification acceptance",
+  "verdict": "fail",
+  "findings": [
+    {
+      "subject": "Unsupported audience need",
+      "evidence": "independent-document.md / In plain words and Problem",
+      "observation": "The request names an unspecified new audience. The draft adds that they need to be addressed directly and that the existing text fails them. No supplied source establishes who the new audience is, its situation or that need."
+    },
+    {
+      "subject": "Missing agreed operational outcome and measure",
+      "evidence": "independent-document.md / Success measures; native/work/native-report.md / Content readiness",
+      "observation": "The draft treats return of an adapted greeting and manual inspection as sufficient success. It does not report the missing owner-agreed operational outcome and measure; an unmeasured baseline does not supply either input."
+    },
+    {
+      "subject": "Unsupported exclusions",
+      "evidence": "independent-document.md / Not this",
+      "observation": "Preserving the existing greeting behavior, excluding internationalisation, excluding dynamic personalisation and excluding operational monitoring are not agreed limits in the request. These choices may materially change what adapting the greeting means."
+    },
+    {
+      "subject": "Incorrect completeness claim",
+      "evidence": "native/work/native-report.md / Content readiness and Content review; final visible response",
+      "observation": "The report marks all intent checklist items complete and claims no unsupported constraints. The final response also calls the draft complete. The required negative-case behavior is an incomplete draft or an exact missing-input blocker."
+    }
+  ],
+  "mechanical_results": {
+    "saved_bytes_exact": true,
+    "document_sha256": "e9ae9576d21802dc554f2e65397a9029b6413fde76eb7c817647ada835492bd7",
+    "input_changes": [],
+    "imported_records_unchanged": 7,
+    "new_artifact": "INT-P3-001",
+    "state": "draft",
+    "project_version": 4,
+    "lifecycle_decisions": false,
+    "failed_or_denied_native_calls": 0,
+    "failure_reporting": "The observations command was used before the final report. Its zero-failure report agrees with the captured native events."
+  },
+  "measurements": {
+    "wall_seconds": 226.201,
+    "native_calls": 13,
+    "calls_by_tool": {
+      "Read": 4,
+      "Bash": 7,
+      "Write": 2
+    },
+    "model_turns": 11,
+    "initial_input_context": 32677,
+    "peak_input_context": 58356,
+    "native_failures": [],
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    }
+  },
+  "subsequent_native_trials": "Not run on this candidate, following the approved first-Claude failure stop. Codex EFF-04A2 and all positive EFF-04B cases remain unperformed.",
+  "limit": "A new task, not an equivalent sample of historical EFF-04A. Earlier failures retain their original verdict. Correct tool execution and saved bytes do not establish supported content. No full NQ qualification, work completion or verification decision."
+}
