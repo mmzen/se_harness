@@ -122,9 +122,12 @@ already contains the useful fields.
 
 Keep Opus10 as historical evidence: 673.18 seconds, 56 native tool calls and
 112,326 peak input-context tokens, including 16,397 initial host-context tokens.
-Its task requests an intent for an already-defined greeting. Preserve that exact
-request as the missing-input diagnostic in VER-HAG-008 EFF-04A. Existing failures
-remain failures under the contract used for those runs; do not relabel them.
+Its task requests an intent for an already-defined greeting. Retain that exact
+request and all original EFF-04A evidence as historical observations. Use the
+separately identified EFF-04A2 request in VER-HAG-008 for subsequent missing-input
+qualification. It asks for a new change without a same-outcome example in the
+fixture. Existing failures remain failures; the new case cannot repair them.
+Do not compare the two tasks as equivalent performance samples.
 
 Use EFF-04B's one-verification-contract task as the positive authoring case. The
 goals remain less than 180 seconds, at most 15 native calls and less than 40,000
@@ -218,8 +221,8 @@ assembly. Refuse missing, changed, linked, duplicate, non-UTF-8 or oversized inp
 The complete entry MUST fit 64 KiB; do not truncate, select a semantic subset or
 silently fall back. The operator may select the existing pointer route in a new
 run. No credentials, previous trial, answer, private reasoning or unrelated file
-may enter the fixture. Keep the original requested outcome and case classification
-out of the data transformation.
+may enter the fixture. Keep the selected accepted requested outcome unchanged and the assessor
+case classification out of the data transformation.
 
 Native agents still select each operation, artifact ID, document and conclusion.
 Keep the current model, permission boundaries, tool capabilities, released governor
@@ -236,3 +239,14 @@ The matching activation record must identify the actual human decision and exact
 before/after digests before this revision is applied. Earlier evidence retains
 its original definition and input-delivery references. Keep prior lifecycle events
 unchanged; this link grants no authority by itself.
+
+## Linked diagnostic revision
+
+This revision preserves the complete accepted SPEC-HAG-008 at commit
+`8ed1ae5391ec1b405b132b9d120ab91a47803cca`, SHA-256 `805c9da66ca26c1d56b767bbd3e8545229a0c1f9a46a2846b95fcc04c98da343`, and recorded
+state `approved` in
+`../evidence/WO-HAG-011/diagnostic-review-20261010/SPEC-HAG-008.accepted.txt`.
+The activation record must identify the actual human decision and exact
+before/after digests before this revision governs work. Earlier evidence keeps
+its original definition and task references. No machine relation or lifecycle
+event is invented by this link.

@@ -6,11 +6,11 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
-The [next correction review](evidence/WO-HAG-011/diagnostic-review-20261010/review.md)
-proposes a separately identified missing-input task and clarifies the hosted
-command route. Its three linked artifact revisions are pending approval; active
-definitions and historical verdicts are unchanged. The instruction clarification
-uses existing scope. No new native qualification result is claimed.
+The [approved correction review](evidence/WO-HAG-011/diagnostic-review-20261010/review.md)
+introduces the separately identified EFF-04A2 missing-input task and clarifies
+the hosted command route. Its [activation record](evidence/WO-HAG-011/diagnostic-review-20261010/activation.json)
+retains mmzen's approval and exact accepted/revised identities. Historical verdicts
+are unchanged. Fresh qualification is pending; no new native result is claimed.
 
 The [latest assessment](evidence/WO-HAG-011/test-copy-qualification-assessment.md)
 records candidate20's clarification that synthetic drafts use the normal checklist.

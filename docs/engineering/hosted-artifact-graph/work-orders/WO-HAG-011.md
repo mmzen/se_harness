@@ -154,7 +154,7 @@ to the domain evidence/ or verification-records/ directories is inferred.
 ## Required verification
 
 Run the linked revised VER-HAG-008 EFF-01 through EFF-04 on the exact installed
-candidate. EFF-04A requires one Claude and one Codex missing-input diagnostic.
+candidate. EFF-04A2 requires one Claude and one Codex missing-input diagnostic.
 EFF-04B requires a correct initial Claude result, two further correct comparable
 Claude attempts and one Codex positive result. No approved performance target,
 content obligation, independent review or full NQ qualification is waived. Record all
@@ -269,3 +269,36 @@ The matching activation record must identify the actual human decision and exact
 before/after digests before this revision is applied. Earlier evidence retains
 its original definition and input-delivery references. Keep prior lifecycle events
 unchanged; this link grants no authority by itself.
+
+## Bounded diagnostic revision
+
+After approval and recorded activation of this linked revision, use VER-HAG-008
+EFF-04A2 for new missing-input trials. Preserve EFF-04A as historical evidence;
+do not reclassify it, remove its failures or combine its measurements with A2.
+The positive task, content requirements, goals, hosts, model, permissions,
+independence, evidence and required commit-bound assurance remain unchanged.
+
+Existing plugin Markdown and native test paths cover clarification of local
+versus remote command applicability and selection of the exact new task.
+No canonical resource, evaluator, server, schema, host setting or build identity
+rule may change under this revision. Stop after a failed first Claude A2 trial;
+return its observed limitation for review before another task or instruction
+variation. Later required native cases proceed only after that diagnostic passes.
+
+The proposed activation is manual because released 0.22.1 has no supported
+linked-revision command. It requires mmzen's explicit approval of these exact
+three proposed files and this bounded activation, with complete accepted copies,
+before/after digests and the human decision retained. Keep existing lifecycle
+events and states unchanged. No approval, start or verification is replayed.
+The existing draft-PR grant remains unchanged; merge and release are excluded.
+
+## Linked diagnostic revision
+
+This revision preserves the complete accepted WO-HAG-011 at commit
+`8ed1ae5391ec1b405b132b9d120ab91a47803cca`, SHA-256 `b40b961ff3c775f8b4afc7335415cf62f63b866858029c890471bd4f92faa05b`, and recorded
+state `in_progress` in
+`../evidence/WO-HAG-011/diagnostic-review-20261010/WO-HAG-011.accepted.txt`.
+The activation record must identify the actual human decision and exact
+before/after digests before this revision governs work. Earlier evidence keeps
+its original definition and task references. No machine relation or lifecycle
+event is invented by this link.
