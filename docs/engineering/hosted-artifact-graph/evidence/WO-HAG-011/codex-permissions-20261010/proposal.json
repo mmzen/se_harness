@@ -1,0 +1,19 @@
+{
+  "status": "proposed",
+  "candidate_at_preparation": "9d4034dc293b6f1de7919400d6f8cc1bda356dbd",
+  "artifacts": [
+    {
+      "id": "VER-HAG-008",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+      "before_sha256": "e044db24389da3e318c40b97d58f634acccc989afc957d2b60479605369de1a2",
+      "proposed_sha256": "6c1b35ad722facd04047d436b6db0f264fb63064d52b0e9991f05c3213f577f9"
+    },
+    {
+      "id": "WO-HAG-011",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+      "before_sha256": "893c10a1e3835fd9565202e00ac6aa0c575b1c19d5cd59e88f6568c1c93cfae5",
+      "proposed_sha256": "992565fec8044b813a58827ba56b5412c25166567a256f226924ac79c62387e1"
+    }
+  ],
+  "applied": false
+}

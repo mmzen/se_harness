@@ -231,3 +231,7 @@ The [qualification amendment review](evidence/WO-HAG-011/amendment-20261009/READ
 ## Revised qualification observations
 
 The [revised qualification assessment](evidence/WO-HAG-011/revised-qualification-assessment.md) records candidate a99a00a1: two failed Claude trials and one host-blocked Codex attempt. Required repetitions remain pending. Source and package checks passed; no work completion or verification is claimed.
+
+## Draft readiness observations
+
+The [10 October assessment](evidence/WO-HAG-011/readiness-qualification-assessment.md) records the incomplete-result correction, remaining Claude content failure and Codex localhost blocker. Its permission amendment is proposed and unapplied. WO-HAG-011 and full qualification remain incomplete.

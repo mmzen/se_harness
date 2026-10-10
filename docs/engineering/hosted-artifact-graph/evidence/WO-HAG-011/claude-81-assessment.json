@@ -1,0 +1,26 @@
+{
+  "candidate": "9d4034dc293b6f1de7919400d6f8cc1bda356dbd",
+  "case": "EFF-04A",
+  "trial": "claude-81",
+  "verdict": "fail",
+  "content_readiness_report": "Correctly incomplete, with missing operational benefit identified.",
+  "findings": [
+    "The saved problem claims no independent confirmation and says downstream rehearsal cannot be trusted. Neither claim is established by the supplied request or inspected source.",
+    "The outcome invents reliance on a confirmed fixture as the operational benefit. The report admits that this is its best available interpretation of missing input.",
+    "The proposed measure repeats a verification check. Reporting incomplete afterwards does not make these unsupported saved claims acceptable.",
+    "Existing INT, REQ and SPEC were read and the report acknowledges overlap. Existing VER was not read before claiming missing independent confirmation."
+  ],
+  "preservation": {
+    "submitted_bytes_match_independent_read": true,
+    "baseline_records_unchanged": 7,
+    "lifecycle_decisions": 0
+  },
+  "metrics": {
+    "seconds": 279.029,
+    "native_calls": 19,
+    "peak_input_context": 56057,
+    "model_turns": 14,
+    "native_failures_observed": 0
+  },
+  "limits": "Negative diagnostic cost, not successful positive authoring. No candidate14 positive repetitions performed after this failure. Codex remains network-blocked; full NQ qualification and verification remain pending."
+}
