@@ -1,0 +1,382 @@
+[
+  {
+    "line": 336,
+    "characters": 64934,
+    "operation": "read-text 'inputs/reference/docs/notes/harnessctl-reference.md'\""
+  },
+  {
+    "line": 529,
+    "characters": 44772,
+    "operation": "read-json 'inputs/inventory.json' --pointer '/files'\""
+  },
+  {
+    "line": 87,
+    "characters": 38286,
+    "operation": "read-text 'inputs/released-resources/docs/engineering/harness/AUTHORITY.md' 'inputs/released-resources/docs/engineering/harness/AUTHORIZE_WORK.md' 'inputs/released-resources/docs/engineering/harness/RESULTS.md'\""
+  },
+  {
+    "line": 290,
+    "characters": 37684,
+    "operation": "read-json 'work/041-handoff-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 296,
+    "characters": 37682,
+    "operation": "read-json 'work/042-handoff-apply.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 441,
+    "characters": 32155,
+    "operation": "read-json 'work/025-recover-definition.json.stdout.txt'\""
+  },
+  {
+    "line": 440,
+    "characters": 32152,
+    "operation": "read-json 'work/026-identical-retry.json.stdout.txt'\""
+  },
+  {
+    "line": 122,
+    "characters": 28326,
+    "operation": "read-json 'work/020-definition-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 140,
+    "characters": 28326,
+    "operation": "read-json 'work/023-definition-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 149,
+    "characters": 28326,
+    "operation": "read-json 'work/025-recover-definition.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 179,
+    "characters": 28102,
+    "operation": "read-text 'inputs/reference/docs/notes/hosted-artifact-graph.md'\""
+  },
+  {
+    "line": 27,
+    "characters": 25742,
+    "operation": "read-text 'inputs/plugin/verity-plane/skills/harness-orient/references/hosted-reads.md' 'inputs/plugin/verity-plane/skills/evidence/references/hosted-evidence.md' 'inputs/reference/server/README.md' 'inputs/source-manifest.json' 'inputs/source/src/greeting.py'\""
+  },
+  {
+    "line": 91,
+    "characters": 24699,
+    "operation": "read-text 'inputs/reference/server/contracts/lifecycle-v2.json' 'inputs/reference/server/contracts/lifecycle-v2.md'\""
+  },
+  {
+    "line": 226,
+    "characters": 24681,
+    "operation": "read-json 'work/033-start-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 193,
+    "characters": 22930,
+    "operation": "read-json 'work/029-work-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 23,
+    "characters": 22850,
+    "operation": "read-text 'inputs/combination.json' 'inputs/configuration.json' 'inputs/evaluator.json' 'inputs/plugin/verity-plane/skills/change/SKILL.md' 'inputs/plugin/verity-plane/skills/change/references/hosted-drafts.md' 'inputs/plugin/verity-plane/skills/change/references/hosted-test-lifecycle.md' 'inputs/plugin/verity-plane/skills/harness-orient/SKILL.md' 'inputs/plugin/verity-plane/skills/evidence/SKILL.md'\""
+  },
+  {
+    "line": 304,
+    "characters": 19271,
+    "operation": "read-text 'inputs/released-resources/docs/engineering/harness/VERIFY_OUTCOME.md'\""
+  },
+  {
+    "line": 302,
+    "characters": 17658,
+    "operation": "read-json 'work/043-completion-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 316,
+    "characters": 17656,
+    "operation": "read-json 'work/044-completion-apply.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 418,
+    "characters": 17245,
+    "operation": "read-json 'work/053-rls-release-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 424,
+    "characters": 17243,
+    "operation": "read-json 'work/054-rls-release-apply.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 34,
+    "characters": 16198,
+    "operation": "read-text 'inputs/source/docs/engineering/lifecycle-pilot/intent/INT-P3-900.md' 'inputs/source/docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md' 'inputs/source/docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md' 'inputs/source/docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md' 'inputs/source/docs/engineering/lifecycle-pilot/verification/VER-P3-900.md' 'inputs/source/docs/engineering/lifecycle-pilot/release/REL-P3-900.md' 'inputs/source/docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md' 'inputs/released-resources/docs/engineering/harness/DRAFT_WORK_ORDERS.md'\""
+  },
+  {
+    "line": 432,
+    "characters": 15936,
+    "operation": "read-json 'work/export-later/manifest.json'\""
+  },
+  {
+    "line": 329,
+    "characters": 15134,
+    "operation": "read-text 'task.md'\""
+  },
+  {
+    "line": 364,
+    "characters": 15022,
+    "operation": "read-json 'work/export-vrec-ready/manifest.json'\""
+  },
+  {
+    "line": 373,
+    "characters": 14225,
+    "operation": "read-json 'work/048-vrec-verify-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 383,
+    "characters": 14223,
+    "operation": "read-json 'work/049-vrec-verify-apply.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 110,
+    "characters": 14205,
+    "operation": "read-text 'work/drafts/INT-P3-901.md' 'work/drafts/CAP-P3-901.md' 'work/drafts/REQ-P3-901.md' 'work/drafts/SPEC-P3-901.md' 'work/drafts/VER-P3-901.md' 'work/drafts/WO-P3-901.md' 'work/drafts/REL-P3-901.md'\""
+  },
+  {
+    "line": 195,
+    "characters": 12582,
+    "operation": "read-text 'inputs/released-resources/docs/engineering/harness/EXECUTE_WORK.md'\""
+  },
+  {
+    "line": 224,
+    "characters": 12397,
+    "operation": "read-text 'inputs/released-resources/docs/engineering/harness/RISKS_AND_DECISIONS.md'\""
+  },
+  {
+    "line": 283,
+    "characters": 12223,
+    "operation": "read-json 'work/040-handoff-out-of-scope.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 259,
+    "characters": 11028,
+    "operation": "read-json 'work/037-mitigate-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 459,
+    "characters": 10890,
+    "operation": "read-json 'work/mcp/work_context.json'\""
+  },
+  {
+    "line": 546,
+    "characters": 9480,
+    "operation": "read-text 'work/native-report.md'\""
+  },
+  {
+    "line": 453,
+    "characters": 9315,
+    "operation": "read-json 'work/mcp/check.json'\""
+  },
+  {
+    "line": 443,
+    "characters": 8815,
+    "operation": "read-json 'work/export-early/manifest.json'\""
+  },
+  {
+    "line": 455,
+    "characters": 8596,
+    "operation": "read-json 'work/mcp/01-revision.json'\""
+  },
+  {
+    "line": 351,
+    "characters": 8349,
+    "operation": "read-text 'inputs/released-resources/docs/engineering/harness/RELEASE.md'\""
+  },
+  {
+    "line": 400,
+    "characters": 7985,
+    "operation": "read-json 'work/050-rls-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 406,
+    "characters": 7983,
+    "operation": "read-json 'work/051-rls-apply.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 323,
+    "characters": 7818,
+    "operation": "read-json 'work/045-vrec-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 342,
+    "characters": 7816,
+    "operation": "read-json 'work/046-vrec-apply.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 354,
+    "characters": 7733,
+    "operation": "read-text 'inputs/native-tools.md' 'inputs/native-execution-tools.md'\""
+  },
+  {
+    "line": 16,
+    "characters": 6823,
+    "operation": "read-text 'inputs/native-tools.md'\""
+  },
+  {
+    "line": 393,
+    "characters": 6758,
+    "operation": "read-json 'inputs/reference/server/contracts/lifecycle-v2.json' --pointer '/properties/action'\""
+  },
+  {
+    "line": 430,
+    "characters": 5795,
+    "operation": "read-text 'work/export-later/files/docs/engineering/lifecycle-pilot/releases/RLS-P3-901.md' 'work/export-later/files/docs/engineering/lifecycle-pilot/verification-records/VREC-P3-901.md' 'work/export-later/files/src/greeting.py' 'work/export-later/files/docs/engineering/lifecycle-pilot/evidence/WO-P3-901/assertion.json'\""
+  },
+  {
+    "line": 454,
+    "characters": 5547,
+    "operation": "read-json 'work/mcp/compare.json'\""
+  },
+  {
+    "line": 367,
+    "characters": 5041,
+    "operation": "read-text 'work/export-vrec-ready/files/docs/engineering/lifecycle-pilot/verification-records/VREC-P3-901.md' 'work/export-vrec-ready/files/docs/engineering/lifecycle-pilot/evidence/VREC-P3-901-evaluator.json' 'work/export-vrec-ready/files/docs/engineering/lifecycle-pilot/release/REL-P3-901.md'\""
+  },
+  {
+    "line": 387,
+    "characters": 4675,
+    "operation": "read-json 'work/mcp/verified-vrec.json'\""
+  },
+  {
+    "line": 314,
+    "characters": 4262,
+    "operation": "read-text 'inputs/released-resources/docs/engineering/ARTIFACT_AUTHORING.md' --offset 7900 --limit 3791\""
+  },
+  {
+    "line": 12,
+    "characters": 4057,
+    "operation": "read-json 'selection.json'\""
+  },
+  {
+    "line": 437,
+    "characters": 4057,
+    "operation": "read-json 'selection.json'\""
+  },
+  {
+    "line": 456,
+    "characters": 4019,
+    "operation": "read-json 'work/mcp/impact.json'\""
+  },
+  {
+    "line": 325,
+    "characters": 3977,
+    "operation": "read-json 'work/045-vrec-preview.json.stdout.txt' --pointer '/provenance/candidates'\""
+  },
+  {
+    "line": 18,
+    "characters": 3596,
+    "operation": "read-text 'inputs/plugin/verity-plane/skills/setup/references/hosted-context.md'\""
+  },
+  {
+    "line": 538,
+    "characters": 3454,
+    "operation": "read-json 'work/056-final-validate.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 116,
+    "characters": 2872,
+    "operation": "read-json 'work/019-validate.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 412,
+    "characters": 2868,
+    "operation": "read-text 'work/export-rls-ready/files/docs/engineering/lifecycle-pilot/releases/RLS-P3-901.md' 'work/export-rls-ready/files/docs/engineering/lifecycle-pilot/evidence/RLS-P3-901-evaluator.json'\""
+  },
+  {
+    "line": 243,
+    "characters": 2467,
+    "operation": "read-json 'work/035-risk-preview.json.stdout.txt' --pointer '/evaluator_output/commands'\""
+  },
+  {
+    "line": 391,
+    "characters": 2361,
+    "operation": "read-json 'work/mcp/verified-vrec-decoded-envelope.json' --pointer '/data/document_base64' --decode-base64\""
+  },
+  {
+    "line": 157,
+    "characters": 2232,
+    "operation": "read-text 'inputs/reference/server/contracts/export-v2.json'\""
+  },
+  {
+    "line": 457,
+    "characters": 2057,
+    "operation": "read-json 'work/mcp/lineage.json'\""
+  },
+  {
+    "line": 458,
+    "characters": 1803,
+    "operation": "read-json 'work/mcp/cypher.json'\""
+  },
+  {
+    "line": 138,
+    "characters": 1574,
+    "operation": "read-text 'work/drafts/INT-P3-901.md'\""
+  },
+  {
+    "line": 241,
+    "characters": 1502,
+    "operation": "read-text 'work/assertion.json' 'work/assertion.json.stdout.txt'\""
+  },
+  {
+    "line": 253,
+    "characters": 1479,
+    "operation": "read-json 'inputs/reference/server/contracts/lifecycle-v2.json' --pointer '/properties/action/oneOf/4'\""
+  },
+  {
+    "line": 344,
+    "characters": 1416,
+    "operation": "read-json 'inputs/reference/server/contracts/export-v2.json'\""
+  },
+  {
+    "line": 15,
+    "characters": 1136,
+    "operation": "read-text 'inputs/plugin/verity-plane/skills/setup/SKILL.md'\""
+  },
+  {
+    "line": 385,
+    "characters": 1045,
+    "operation": "read-text 'inputs/reference/server/contracts/lifecycle-v2.json' --offset 7000 --limit 10000\""
+  },
+  {
+    "line": 97,
+    "characters": 990,
+    "operation": "read-json 'inputs/reference/server/contracts/lifecycle-v2.json' --pointer '/properties/action/oneOf/3'\""
+  },
+  {
+    "line": 42,
+    "characters": 897,
+    "operation": "read-text 'inputs/native-execution-tools.md'\""
+  },
+  {
+    "line": 352,
+    "characters": 893,
+    "operation": "read-json 'work/028-export-early.json.stdout.txt'\""
+  },
+  {
+    "line": 346,
+    "characters": 676,
+    "operation": "read-json 'work/046-vrec-apply.json.stdout.txt' --pointer '/files'\""
+  },
+  {
+    "line": 548,
+    "characters": 593,
+    "operation": "read-json 'work/native-observations.json' --keys\""
+  },
+  {
+    "line": 362,
+    "characters": 414,
+    "operation": "read-json 'work/export-vrec-ready/manifest.json' --keys\""
+  },
+  {
+    "line": 527,
+    "characters": 333,
+    "operation": "read-json 'inputs/inventory.json' --keys\""
+  }
+]

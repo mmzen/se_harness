@@ -15,6 +15,18 @@ apply it with that preview digest and unchanged versions. The service reruns the
 released evaluator. After an uncertain reply, look up the original operation key;
 do not rebase or invent a replacement key to conceal the outcome.
 
+Read the overall `outcome` before following any sub-command's next step. A refused
+action commits none of its proposed effects, even if earlier sub-commands passed.
+Inspect the failed command and correct its inputs before a new preview. Do not
+apply a refused preview or guess a digest.
+
+For a handoff's `from_git`, use a retained comparison base in the service's test
+Git history that covers the complete work. In a fresh test copy, retain
+`provenance.input_git_head` from its first accepted lifecycle mutation. An
+unapplied preview's head may not be retained. The imported source commit identifies
+provenance; it is not automatically present in this separate Git history. Do not
+replace the retained base with a later head to omit changed files.
+
 This is test data. Supplied actors are synthetic inputs, not human consent.
 Imported records stay immutable. Keep real decisions and work in the authoritative
 Git workflow. No rehearsal record authorizes a real release or external action.
@@ -39,4 +51,3 @@ belongs in `action.reason`. Preserve the supplied option exactly: mitigation doe
 not authorize risk acceptance. Preparation owners must match the fixture's
 supplied preparation identities. Do not infer a different actor or decision from
 a passed gate, an available owner label or a generated record.
-

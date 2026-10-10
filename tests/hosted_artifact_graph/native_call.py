@@ -130,8 +130,18 @@ def result_fields(stdout):
         if size <= 2048 and used + size <= 8192:
             shown[pointer] = value
             used += size
+        elif pointer == '/evaluator_output/commands' and isinstance(value, list):
+            # Preserve indices, but display failed commands before successful steps
+            # consume the output budget. Never calculate a lifecycle verdict.
+            order = sorted(range(len(value)), key=lambda i:
+                           0 if isinstance(value[i], dict) and value[i].get('exit') not in (None, 0) else 1)
+            for index in order:
+                visit(value[index], pointer+'/'+str(index), 0)
         elif isinstance(value, dict) and depth < 2:
-            for key, child in value.items():
+            priority = ('outcome', 'command', 'exit', 'restitution', 'result')
+            keys = [k for k in priority if k in value] + [k for k in value if k not in priority]
+            for key in keys:
+                child = value[key]
                 visit(child, pointer+'/'+key.replace('~','~0').replace('/','~1'), depth+1)
         else:
             omitted.append(pointer)
@@ -337,7 +347,8 @@ def main():
     search.add_argument('name')
     search.add_argument('--under',default='',help='Optional relative directory prefix ending in /')
     commands.add_parser('identity')
-    commands.add_parser('observations',help='Read captured calls, failures and metrics so far; no content verdict')
+    observed = commands.add_parser('observations',help='Read captured calls, failures and metrics so far; no content verdict')
+    observed.add_argument('--record',help='Retain the complete snapshot in a new work file and display only its index')
     assertion = commands.add_parser('assert-greeting')
     assertion.add_argument('--record',required=True)
     args = parser.parse_args()
@@ -349,7 +360,19 @@ def main():
         print(json.dumps(read_text_files(root,config,args.path,args.offset,args.limit)))
         return 0
     if args.kind == 'observations':
-        print(json.dumps(observations(root,config)))
+        value = observations(root,config)
+        if args.record:
+            record = contained(root,args.record,new=True)
+            if not record.resolve().is_relative_to((root/'work').resolve()):
+                raise ValueError('Observation records must be new files under work/')
+            record.parent.mkdir(parents=True,exist_ok=True)
+            with record.open('x',encoding='utf-8') as stream:
+                json.dump(value,stream,ensure_ascii=True,indent=2)
+            value = {k:value[k] for k in ('snapshot','wall_seconds','native_calls',
+                'observed_tool_items','native_call_count_complete','peak_input_context','limits')}
+            value.update(record=str(record), pointers=['/observed_content_reads',
+                '/native_failures','/failed_command_records','/command_records'])
+        print(json.dumps(value))
         return 0
     if args.kind == 'instructions':
         print(json.dumps(instructions(root,config,args.section),ensure_ascii=True))

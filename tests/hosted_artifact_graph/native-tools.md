@@ -61,7 +61,7 @@ Choose the exact revision and context from the selected inputs or actual results
 | --- | --- |
 | Service readiness and selected components | `remote status --record ABSOLUTE_NEW_RECORD` |
 | Local wheel metadata | `identity` |
-| Captured calls/failures so far | `observations`; includes recovered and denied native calls, no content verdict |
+| Captured calls, reads and failures so far | `observations --record ABSOLUTE_NEW_RECORD`; retains the full snapshot and returns its field pointers, no content verdict |
 | Complete released instruction sections | `instructions --section "RESOURCE_ID#HEADING"`; repeat for up to 12 sections |
 | One unknown input location | `find-file BASENAME --under RELATIVE_DIRECTORY/` |
 | One exact inventory entry | `lookup-file RELATIVE_NAME` |
@@ -96,7 +96,14 @@ schema views use `schemas/remote-v1/OPERATION.json` or `schemas/read-v1/OPERATIO
 Each view retains its original pointer/digest. Lifecycle test-copy schemas are
 separate; do not load them for drafting alone. `--key` reads a receipt, not a document.
 
-Use `observations` before the final failure report. It reads existing native event/command captures and identifies the snapshot boundary; subsequent report writes are not yet counted. Keep its paths as evidence instead of copying every command. It supplies no draft text, content judgement or lifecycle decision.
+Use `observations --record ABSOLUTE_NEW_RECORD` before the final report. Read its
+selected fields as needed. `observed_content_reads` contains successful visible
+read metadata; `file_reads` retains Claude Read attempts, including failures.
+Use the observed trace instead of rebuilding it with inventory lookups. Missing
+reads remain unknown; rereading now does not prove an earlier read. The capture
+may be incomplete, and subsequent report writes are not yet counted. Keep the
+record path as evidence instead of copying every command. This supplies no draft
+text, content judgement or lifecycle decision.
 
 Retain failed calls and recoveries. Template admission is not a content review.
 Report only inspected facts and actual outcomes; distinguish unresolved content

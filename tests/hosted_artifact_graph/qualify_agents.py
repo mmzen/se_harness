@@ -243,6 +243,15 @@ def prompt_pointer(path):
             'This explicit test setup is not automatic startup-delivery evidence.')
 
 
+def shell_prefix(argv):
+    """Render the existing three-argument helper grant without changing its spelling."""
+    if (len(argv) != 3 or argv[1] != '-I'
+            or any(not isinstance(x, str) or not x or any(c in x for c in '\"$`\r\n')
+                   for x in (argv[0], argv[2]))):
+        raise ValueError('Expected Python, -I and a helper path safe for literal shell display')
+    return f'"{argv[0]}" -I "{argv[2]}"'
+
+
 def codex_loopback_options(host, endpoint):
     """Closed, explicitly selected test profile; never an automatic fallback."""
     parsed = urllib.parse.urlsplit(endpoint)
@@ -294,6 +303,11 @@ def run(args):
         'Use the existing file tools below. This explicit test setup does not '
         'establish automatic startup instruction delivery.\n\n'
         + args.task.read_text(encoding='utf-8').replace('SELECTION_FILE', str(output/'selection.json')))
+    if not complete_inputs:
+        prompt += ('\n\nStart instruction discovery at `'
+            + str(Path(settings['plugin'])/'skills/setup/SKILL.md')
+            + '`. Follow its route for this selected target. Read current prerequisites '
+            'before acting; reuse unchanged content already retained in context.\n')
     if args.host == 'codex' and settings.get('approved_shell_argv_prefix'):
         prompt += ('\n\n## Codex file discovery\n\n'
             'If native Read is unavailable, use this existing approved helper prefix:\n\n```json\n'
@@ -331,8 +345,8 @@ def run(args):
                 'Use the selected candidate plugin skills and their required references for the workflow.\n'
                 'This file supplies no lifecycle procedure or new permission.\n')
             if settings.get('approved_shell_argv_prefix'):
-                stream.write('\nThe existing approved shell prefix is this argument array:\n\n```json\n'
-                    + json.dumps(settings['approved_shell_argv_prefix']) + '\n```\n')
+                stream.write('\nUse this exact existing approved shell prefix (keep -I unquoted):\n\n```text\n'
+                    + shell_prefix(settings['approved_shell_argv_prefix']) + '\n```\n')
                 stream.write('\nUse one helper command per Bash call. Do not add a pipeline, a second\n'
                     'command (including echo), a shell wrapper or arbitrary Python. The tool\n'
                     'result already reports the exit status. Use native file tools or the\n'

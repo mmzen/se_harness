@@ -115,7 +115,9 @@ class NativeCallBoundaries(unittest.TestCase):
                 with self.subTest(host=host_name,complete=complete),tempfile.TemporaryDirectory() as directory:
                     root=Path(directory);output=root/'native'
                     selection=root/'selected.json'
-                    selection.write_text(json.dumps({'endpoint':'http://127.0.0.1:8000','plugin':str(root/'plugin')}))
+                    prefix=['C:/Program Files/Python/python.exe','-I','C:/trial/native_call.py']
+                    selection.write_text(json.dumps({'endpoint':'http://127.0.0.1:8000','plugin':str(root/'plugin'),
+                                                     'approved_shell_argv_prefix':prefix}))
                     credentials=root/'credentials.json'
                     credentials.write_text(json.dumps({'principals':[{'id':'operator','token':'synthetic-test-secret'}]}))
                     task=root/'request.md';task.write_text('Unique requested outcome.\n')
@@ -130,12 +132,17 @@ class NativeCallBoundaries(unittest.TestCase):
                         child.stdout=[];child.wait.return_value=0
                         self.assertEqual(0,run_native(args))
                     raw=(output/'task.md').read_bytes()
+                    if complete:
+                        self.assertNotIn(b'Start instruction discovery at',raw)
+                    else:
+                        self.assertIn(str(root/'plugin/skills/setup/SKILL.md').encode(),raw)
                     sent=writer.call_args.args[1]
                     self.assertEqual(raw.decode() if complete else prompt_pointer(output/'task.md'),sent)
                     self.assertEqual(hashlib.sha256(raw).hexdigest(),process.call_args.kwargs['env']['HAG_NATIVE_ENTRY_SHA256'])
                     if host_name=='claude':
                         locator=(output/'CLAUDE.md').read_text()
                         self.assertNotIn('Unique requested outcome.',locator)
+                        self.assertIn('"C:/Program Files/Python/python.exe" -I "C:/trial/native_call.py"',locator)
                         if complete:self.assertNotIn('selection.json',locator)
                     invocation=json.loads((output/'invocation.json').read_bytes())
                     self.assertEqual('stdin-complete-entry' if complete else 'stdin-file-pointer',invocation['prompt_transport'])
