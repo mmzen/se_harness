@@ -6,10 +6,16 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
+The [clarification-route assessment](evidence/WO-HAG-011/clarification-route-assessment.md)
+records candidate22. Claude asks for clarification and makes no service write:
+106.925 seconds, 4 calls, 37,770 peak input tokens. Qualification still fails because
+the saved report is missing and the required operational clarification is incomplete.
+Further native tests stopped. WO-HAG-011 and full qualification remain incomplete.
+
 The [routing correction review](evidence/WO-HAG-011/routing-review-20261010/review.md)
 proposes using the existing clarification step before dependent drafting and
 loading later instructions when their conditions apply. It preserves the task,
-content criteria and permissions. Product changes and a new trial are not applied.
+content criteria and permissions. The exact correction and first trial are recorded above.
 
 The [new-request assessment](evidence/WO-HAG-011/new-request-qualification-assessment.md)
 records the activated EFF-04A2 diagnostic on candidate21. Claude's first trial fails:
