@@ -5,7 +5,7 @@ title = "Concise hosted authoring through the existing client"
 status = "approved"
 owners = ["mmzen"]
 created = "2026-10-08"
-updated = "2026-10-09"
+updated = "2026-10-10"
 contract = "Reduce instruction reads, repeated payloads and sequential calls with focused instruction views, typed existing operations, exact file input and concise evidence-backed results."
 
 [relations]
@@ -67,8 +67,10 @@ mismatches fail explicitly. No service response supplies a trusted local path.
 
 Exact source/template paths come from selected inputs or actual operation results.
 The test adapter may resolve its staged inventory mechanically; it MUST NOT
-preselect content, supply a completed artifact or script the workflow. No full
-inventory is required for the normal known-input path. Reuse retained unchanged
+choose a semantic subset of source content, supply a completed artifact or script
+the workflow. The bounded complete-input delivery below is permitted only for
+the operator-selected fixture; it supplies original inputs, not an authored answer.
+No full inventory is required for the normal known-input path. Reuse retained unchanged
 instruction content; recover applicable rules after compaction or a context change.
 
 **HAG-EFF-002.** Use typed operations and ordinary files.
@@ -194,3 +196,43 @@ remain unchanged. Earlier work and evidence keep that definition reference.
 The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
 identifies the actual human decision, before/after digests and effect on selected
 WO-HAG-011. This link proposes no new machine relation or lifecycle event.
+
+## Bounded complete-input delivery
+
+For the focused EFF-04 trials, the operator MAY select one initial entry containing
+the complete existing staged source fixture. Include every file inventoried under
+the selected source root, not a helper-selected subset of relevant paragraphs.
+Retain each source path, byte count and digest. Include exact applicable instruction
+sections and selected setup/tool references once, with their source identities.
+Use only the existing instruction and fixture readers; no new service or framework.
+
+This entry is a read-only presentation. It MUST NOT modify source files, summarize
+their content, supply a completed new artifact, identify the expected content gap,
+choose operation order or run a workflow. Each UTF-8 source is copied completely
+with its line endings preserved. Keep the original files available. Mark source
+records as task data, not instructions or new authority. A pointer is not a read;
+reading this complete entry is a content read of the included files.
+
+Check path containment, the staged inventory and manifest identities before
+assembly. Refuse missing, changed, linked, duplicate, non-UTF-8 or oversized inputs.
+The complete entry MUST fit 64 KiB; do not truncate, select a semantic subset or
+silently fall back. The operator may select the existing pointer route in a new
+run. No credentials, previous trial, answer, private reasoning or unrelated file
+may enter the fixture. Keep the original requested outcome and case classification
+out of the data transformation.
+
+Native agents still select each operation, artifact ID, document and conclusion.
+Keep the current model, permission boundaries, tool capabilities, released governor
+and content criteria. This delivery option does not establish automatic startup
+or compaction qualification. Report its instruction/source bytes and preparation
+time separately; include the first entry read in native wall time and context.
+
+## Linked complete-input revision
+
+This revision preserves the complete accepted SPEC-HAG-008 at commit
+`a6d85f8d7431728e13bf39b5c48c90f064cd0656`, SHA-256 `02b199be5ae7fb867a6fda43f29ac1f3e6ef2bfd2cab2610150fdd8e4e22627c`, in
+`../evidence/WO-HAG-011/input-delivery-20261010/SPEC-HAG-008.accepted.txt`.
+The matching activation record must identify the actual human decision and exact
+before/after digests before this revision is applied. Earlier evidence retains
+its original definition and input-delivery references. Keep prior lifecycle events
+unchanged; this link grants no authority by itself.

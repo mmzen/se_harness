@@ -238,3 +238,34 @@ with SHA-256 `893c10a1e3835fd9565202e00ac6aa0c575b1c19d5cd59e88f6568c1c93cfae5` 
 The matching activation record must identify the actual human decision and exact
 before/after digests before this revision is applied. Earlier evidence keeps its
 original environment and definition references.
+
+## Complete-input delivery amendment
+
+The proposed bounded continuation adds the complete-input presentation defined by
+the linked SPEC-HAG-008 and VER-HAG-008 revisions. It changes the disposable native
+test entry inside tests/hosted_artifact_graph/, with matching deterministic tests
+and task/tool wording. It may reuse the existing client/resource readers but adds
+no endpoint, dependency, scriptable workflow or automatic content assessment.
+
+Use the complete original staged fixture and exact applicable instruction sources.
+Do not supply the expected missing input or a finished artifact. No template or
+released evaluator policy change is included. Preserve current content criteria,
+host/model selection, permission probes, evidence and required commit-bound
+verification. Keep WO-HAG-009/010 qualification incomplete until its contract passes.
+
+Existing ordinary publication authority for draft PR #543, source
+codex/hosted-agent-qualification and target main, remains bounded to this work.
+This amendment does not authorize human verification, merge, release, host-plugin
+installation or changed host settings. Approval of this proposal would authorize
+manual activation of the three linked revisions, preserving their accepted bytes
+and lifecycle history, followed by the bounded implementation and qualification.
+
+## Linked complete-input revision
+
+This revision preserves the complete accepted WO-HAG-011 at commit
+`a6d85f8d7431728e13bf39b5c48c90f064cd0656`, SHA-256 `992565fec8044b813a58827ba56b5412c25166567a256f226924ac79c62387e1`, in
+`../evidence/WO-HAG-011/input-delivery-20261010/WO-HAG-011.accepted.txt`.
+The matching activation record must identify the actual human decision and exact
+before/after digests before this revision is applied. Earlier evidence retains
+its original definition and input-delivery references. Keep prior lifecycle events
+unchanged; this link grants no authority by itself.

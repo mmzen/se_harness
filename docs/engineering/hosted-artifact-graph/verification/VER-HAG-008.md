@@ -236,3 +236,42 @@ with SHA-256 `e044db24389da3e318c40b97d58f634acccc989afc957d2b60479605369de1a2` 
 The matching activation record must identify the actual human decision and exact
 before/after digests before this revision is applied. Earlier evidence keeps its
 original environment and definition references.
+
+## Complete-input delivery qualification
+
+For new EFF-04 trials, use the explicitly selected complete-input route in
+SPEC-HAG-008. This changes only input presentation. The original negative and
+positive requested outcomes, existing source bytes, selected model, authority,
+permissions, agent-selected operations and independent verdicts remain required.
+Neither the negative case classification nor its expected missing answer is added
+to the native prompt. Existing records remain inputs; no helper authors the result.
+
+Compare the assembled entry against the independent staged inventory: every source
+file under the selected root is present once, with exact bytes and identities.
+Compare instruction sections with their released sources and selected references
+with their packaged sources. Exercise tampered/missing/duplicate, outside/linked,
+non-UTF-8 and oversized inputs; refuse rather than hide or replace content.
+Check that no completed new artifact, expected gap, mutation order or previous
+trial is supplied. Preserve native access to the original paths and normal skills.
+
+First run one fresh Claude EFF-04A diagnostic. Retain a failure and stop further
+native repetitions on that candidate if it fails. After it passes, run the Codex
+diagnostic with its required boundary probes and the existing EFF-04B sequence:
+one correct Claude result, two further independent fresh Claude attempts on the
+same candidate, then one Codex attempt. A correction creates a new candidate.
+
+Report costs for the new route separately from historical pointer-based runs.
+Historical results remain unchanged. Three positive attempts on the same new
+candidate provide the required range and median; a failed diagnostic cannot be
+counted as a faster completed draft. Keep all existing efficiency goals, omissions,
+independent saved-byte reads, immutable imported records and failure reporting.
+
+## Linked complete-input revision
+
+This revision preserves the complete accepted VER-HAG-008 at commit
+`a6d85f8d7431728e13bf39b5c48c90f064cd0656`, SHA-256 `6c1b35ad722facd04047d436b6db0f264fb63064d52b0e9991f05c3213f577f9`, in
+`../evidence/WO-HAG-011/input-delivery-20261010/VER-HAG-008.accepted.txt`.
+The matching activation record must identify the actual human decision and exact
+before/after digests before this revision is applied. Earlier evidence retains
+its original definition and input-delivery references. Keep prior lifecycle events
+unchanged; this link grants no authority by itself.

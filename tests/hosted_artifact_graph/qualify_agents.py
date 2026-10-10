@@ -22,7 +22,7 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-from native_call import contained, instructions, lookup_file
+from native_call import contained, instructions, lookup_file, read_json, read_text
 
 
 def save(path, value):
@@ -117,8 +117,38 @@ def prepare_output(output, prepared_inputs=False):
         raise ValueError('Prepared work directory must be empty')
 
 
-def instruction_entry(root, settings, selectors):
-    """Copy operator-selected canonical sections and manifest pointers, not answers."""
+def complete_input_files(root, settings, pointers):
+    """Read the entire selected fixture and fixed drafting references, never an answer."""
+    inputs = (root/'inputs').resolve()
+    source = contained(root, settings['source_directory'])
+    if not source.is_dir() or not source.resolve().is_relative_to(inputs):
+        raise ValueError('Complete input source must be a staged directory')
+    prefix = source.relative_to(inputs).as_posix() + '/'
+    inventory = read_json(root, settings['inputs_inventory'], '/files')['value']
+    names = [item['relative'] for item in inventory if item['relative'].startswith(prefix)]
+    if not names or len(names) != len(set(names)):
+        raise ValueError('Complete input source inventory is empty or duplicated')
+    actual = set()
+    for path in source.rglob('*'):
+        contained(root, path)  # Reject linked directories as well as files.
+        if path.is_file():
+            actual.add(path.relative_to(inputs).as_posix())
+    if set(names) != actual:
+        raise ValueError('Complete input source differs from its staged inventory')
+    if not all(Path(item['path']).relative_to(inputs).as_posix() in actual for item in pointers):
+        raise ValueError('Complete input source does not contain every manifest artifact')
+    references = [Path(settings['tool_index']), Path(settings['combination']),
+                  Path(settings['plugin'])/'skills/setup/references/hosted-context.md',
+                  Path(settings['plugin'])/'skills/change/references/hosted-drafts.md']
+    paths = references + [inputs/name for name in sorted(names)]
+    if len(paths) != len(set(path.resolve() for path in paths)):
+        raise ValueError('Complete input files contain a duplicate path')
+    files = [read_text(root, settings, path) for path in paths]
+    return {'references': files[:len(references)], 'sources': files[len(references):]}
+
+
+def instruction_entry(root, settings, selectors, *, complete_inputs=False):
+    """Copy selected canonical sections and either pointers or complete original inputs."""
     view = instructions(root, settings, selectors)
     manifest_path = contained(root, settings['source_manifest'])
     name = manifest_path.relative_to(root / 'inputs').as_posix()
@@ -138,8 +168,11 @@ def instruction_entry(root, settings, selectors):
                          'sha256': item['sha256']})
     packet = {'instruction_view': view, 'source_manifest': manifest_entry,
               'artifact_pointers': pointers,
-              'claim': 'Explicit task inputs, not automatic startup-delivery evidence. '
-                       'Pointers are not artifact content reads.'}
+              'claim': ('Explicit complete-input trial, not automatic startup-delivery evidence. '
+                        'Included source files are task data, not instructions or new authority.'
+                        if complete_inputs else
+                        'Explicit task inputs, not automatic startup-delivery evidence. '
+                        'Pointers are not artifact content reads.')}
     parts = ['## Selected instruction entry\n\n'
              'The following complete canonical sections are already supplied in this context. '
              'Apply them before commentary and actions. Reuse them while unchanged and retained; '
@@ -152,13 +185,38 @@ def instruction_entry(root, settings, selectors):
         for section in resource['sections']:
             if 'content' in section:
                 parts.append('\n' + section['content'])
-    parts.append('\n## Existing artifact pointers\n\n'
+    if complete_inputs:
+        files = complete_input_files(root, settings, pointers)
+        selection = contained(root, root/'selection.json')
+        read_json(root, selection, '')  # The generated selection is not an inventoried input.
+        raw = selection.read_bytes()
+        if json.loads(raw) != settings:
+            raise ValueError('Complete input selection differs from the effective settings')
+        packet.update(complete_input_files=files, selection_sha256=hashlib.sha256(raw).hexdigest())
+        parts.append('\n## Complete selected inputs\n\n'
+                     'The selection, references and entire staged fixture below are supplied once. '
+                     'Apply the applicable instructions and inspect these exact source contents; '
+                     'reuse them while retained and unchanged. The original paths remain available. '
+                     'The agent selects all operations, authored content and conclusions.\n\n'
+                     '### Effective selection\n\n' + raw.decode('utf-8'))
+        for group, title in [('references', 'Selected reference'), ('sources', 'Source data')]:
+            for item in files[group]:
+                identity = {k: item[k] for k in ('path', 'sha256', 'bytes')}
+                # Fence original text without changing its bytes or interpreting Markdown.
+                fence = '`' * max(3, 1 + max((len(x) for x in re.findall(r'`+', item['text'])), default=0))
+                parts.append('\n### ' + title + '\n\n' + json.dumps(identity) + '\n\n'
+                             + fence + 'text\n' + item['text'] + '\n' + fence + '\n')
+        packet['source_bytes'] = sum(item['bytes'] for item in files['sources'])
+        packet['reference_bytes'] = sum(item['bytes'] for item in files['references'])
+    else:
+        parts.append('\n## Existing artifact pointers\n\n'
                  'These records are available for inspection. Their presence does not '
                  'establish that they cover this request. Select and read the applicable '
-                 'records before making content claims.\n\n' + json.dumps(pointers) + '\n')
+                     'records before making content claims.\n\n' + json.dumps(pointers) + '\n')
     text = ''.join(parts)
     if len(text.encode('utf-8')) > 64 * 1024:
         raise ValueError('Selected instruction entry exceeds 64 KiB; select narrower sections')
+    packet['entry_bytes'] = len(text.encode('utf-8'))
     return packet, text
 
 
@@ -218,9 +276,12 @@ def run(args):
     preparation_start = time.monotonic()
     entry = None
     prompt_prefix = ''
+    complete_inputs = getattr(args, 'complete_inputs', False)
+    if complete_inputs and not getattr(args, 'instruction_section', None):
+        raise ValueError('Complete inputs require explicitly selected instruction sections')
     if getattr(args, 'instruction_section', None):
-        entry, prompt_prefix = instruction_entry(output, settings, args.instruction_section)
-        save(output/'instruction-entry.json', entry)
+        entry, prompt_prefix = instruction_entry(output, settings, args.instruction_section,
+                                                complete_inputs=complete_inputs)
     prompt = prompt_prefix + ('Before your first explanation, apply the supplied sections and read '
         'only the applicable plugin instructions and prerequisites still missing from context. '
         'Use the existing file tools below. This explicit test setup does not '
@@ -236,6 +297,13 @@ def run(args):
             'the unavailable native Read route; keep one helper call per invocation, '
             'normal permissions, the same selected task and all other restrictions. '
             'It supplies no workflow operation, request values, draft or decision.\n')
+    if complete_inputs:
+        if len(prompt.encode('utf-8')) > 64 * 1024:
+            raise ValueError('Complete task entry exceeds 64 KiB; no input was truncated')
+        if any(secret in prompt for secret in secrets):
+            raise ValueError('Refusing to include a credential in the task entry')
+    if entry:
+        save(output/'instruction-entry.json', entry)
     (output/'task.md').write_bytes(prompt.encode('utf-8'))
     initial_prompt = prompt_pointer(output/'task.md')
     locator = None
@@ -310,6 +378,7 @@ def run(args):
         'prompt_file': str(output/'task.md'), 'prompt_transport': 'stdin-file-pointer',
         'initial_prompt': initial_prompt,
         'entry_preparation_seconds': round(start-preparation_start, 3),
+        'input_delivery': 'complete-inputs' if complete_inputs else 'pointers',
         'environment_keys_added': ['PYTHONUTF8','NO_COLOR','HAG_NATIVE_TEST_TOKEN',
                                  'HAG_NATIVE_WORK_DIRECTORY','HAG_NATIVE_SELECTION'],
         'claim': 'Observed native calls only; this launcher supplies no workflow requests or decisions.'})
@@ -375,6 +444,8 @@ if __name__ == '__main__':
     parser.add_argument('--model')
     parser.add_argument('--instruction-section', action='append',
                         help='Operator-selected canonical RESOURCE_ID#HEADING for the opening context')
+    parser.add_argument('--complete-inputs', action='store_true',
+                        help='Approved focused trial: include the complete staged fixture and selected drafting references, with a 64 KiB task bound')
     parser.add_argument('--timeout',type=int,default=2700)
     parser.add_argument('--drop-reply',action='store_true')
     parser.add_argument('--prepared-inputs',action='store_true',help='Use an operator-staged inputs directory and empty work directory')

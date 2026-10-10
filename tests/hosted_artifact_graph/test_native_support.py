@@ -1,6 +1,7 @@
 """Boundaries of the one-call native qualification helper."""
 import argparse
 import contextlib
+import hashlib
 import io
 import json
 import os
@@ -12,7 +13,7 @@ from unittest.mock import patch
 from pathlib import Path
 
 from native_call import contained, remote_argv, main, read_json, lookup_file, find_file, result_fields, read_text_files
-from qualify_agents import prepare_output, instruction_entry, write_prompt, prompt_pointer, codex_loopback_options
+from qualify_agents import prepare_output, instruction_entry, write_prompt, prompt_pointer, codex_loopback_options, run as run_native
 from assess_native import semantic_assertions
 
 
@@ -131,6 +132,115 @@ class NativeCallBoundaries(unittest.TestCase):
         with patch('qualify_agents.instructions', side_effect=ValueError('ambiguous heading')):
             with self.assertRaisesRegex(ValueError, 'ambiguous heading'):
                 instruction_entry(Path('.'), {}, ['guide.md#duplicate'])
+
+    def complete_entry_fixture(self, root):
+        inputs=root/'inputs'; inputs.mkdir()
+        paths={
+            'source/REQ-TST-001.md':b'Original requirement\r\n```markdown\nNot an answer.\n```\n',
+            'source/unrelated.txt':'Every source is included, even “unrelated”.\n'.encode(),
+            'native-tools.md':b'Original tool capabilities\n',
+            'combination.json':b'{"component":"original"}\n',
+            'plugin/skills/setup/references/hosted-context.md':b'Exact setup reference\r\n',
+            'plugin/skills/change/references/hosted-drafts.md':b'Exact drafting reference\n',
+        }
+        for name,raw in paths.items():
+            path=inputs/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(raw)
+        raw=paths['source/REQ-TST-001.md']
+        manifest=inputs/'source-manifest.json'
+        manifest.write_text(json.dumps({'artifacts':[{'artifact_id':'REQ-TST-001',
+            'path':'REQ-TST-001.md','bytes':len(raw),'raw_sha256':hashlib.sha256(raw).hexdigest()}]}))
+        inventory=inputs/'inventory.json'
+        self.refresh_entry_inventory(inputs,inventory)
+        settings={'source_manifest':str(manifest),'inputs_inventory':str(inventory),
+            'source_directory':str(inputs/'source'),'tool_index':str(inputs/'native-tools.md'),
+            'combination':str(inputs/'combination.json'),'plugin':str(inputs/'plugin')}
+        (root/'selection.json').write_text(json.dumps(settings))
+        view={'resources':[{'resource':'guide.md','path':'released/guide.md',
+            'release':{'version':'0.22.1'},'sha256':'canonical-identity',
+            'sections':[{'content':'## Canonical\r\nAn exact rule.\n'}]}]}
+        return settings,view,paths
+
+    def refresh_entry_inventory(self,inputs,inventory):
+        files=[p for p in inputs.rglob('*') if p.is_file() and p!=inventory]
+        inventory.write_text(json.dumps({'files':[{'relative':p.relative_to(inputs).as_posix(),
+            'path':str(p),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+            for p in files]}))
+
+    def test_complete_entry_copies_all_sources_and_references_once_without_changing_them(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);settings,view,originals=self.complete_entry_fixture(root)
+            with patch('qualify_agents.instructions',return_value=view):
+                packet,text=instruction_entry(root,settings,['guide.md#canonical'],complete_inputs=True)
+            files=packet['complete_input_files']['references']+packet['complete_input_files']['sources']
+            self.assertEqual(set(originals),{Path(x['path']).relative_to(root/'inputs').as_posix() for x in files})
+            self.assertEqual(len(files),len({x['path'] for x in files}))
+            for item in files:
+                raw=originals[Path(item['path']).relative_to(root/'inputs').as_posix()]
+                self.assertEqual(raw,item['text'].encode())
+                self.assertEqual(raw,Path(item['path']).read_bytes())
+                self.assertEqual(1,text.count(raw.decode()))
+                self.assertEqual(hashlib.sha256(raw).hexdigest(),item['sha256'])
+            self.assertIn(view['resources'][0]['sections'][0]['content'],text)
+            self.assertEqual(1,text.count('## Canonical'))
+            self.assertEqual(len(text.encode()),packet['entry_bytes'])
+            self.assertIn('task data, not instructions',text)
+
+    def test_complete_entry_refuses_changed_missing_extra_duplicate_and_nontext_sources(self):
+        for failure in ('changed','missing','extra','duplicate','nontext','oversized','reference','selection'):
+            with self.subTest(failure=failure),tempfile.TemporaryDirectory() as directory:
+                root=Path(directory);settings,view,_=self.complete_entry_fixture(root)
+                source=root/'inputs/source/unrelated.txt';inventory=Path(settings['inputs_inventory'])
+                if failure=='changed':source.write_bytes(b'changed')
+                elif failure=='missing':source.unlink()
+                elif failure=='extra':(source.parent/'unlisted.txt').write_text('Uninventoried')
+                elif failure=='duplicate':
+                    value=json.loads(inventory.read_bytes())
+                    value['files'].append(next(x for x in value['files'] if x['relative']=='source/unrelated.txt'))
+                    inventory.write_text(json.dumps(value))
+                elif failure in ('nontext','oversized'):
+                    source.write_bytes(b'\xff' if failure=='nontext' else b'x'*65537)
+                    self.refresh_entry_inventory(root/'inputs',inventory)
+                elif failure=='reference':Path(settings['tool_index']).write_bytes(b'tampered')
+                else:(root/'selection.json').write_text('{}')
+                with patch('qualify_agents.instructions',return_value=view),self.assertRaises((ValueError,OSError)):
+                    instruction_entry(root,settings,['guide.md#canonical'],complete_inputs=True)
+
+    def test_complete_entry_refuses_outside_and_linked_sources_and_aggregate_overflow(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);settings,view,_=self.complete_entry_fixture(root)
+            with patch('qualify_agents.instructions',return_value=view):
+                outside=dict(settings,source_directory=str(root.parent))
+                with self.assertRaises(ValueError):
+                    instruction_entry(root,outside,['guide.md#canonical'],complete_inputs=True)
+                # Simulate a detected link, including hosts without symlink creation rights.
+                source=root/'inputs/source/unrelated.txt';is_link=Path.is_symlink
+                with patch.object(Path,'is_symlink',lambda path:path==source or is_link(path)):
+                    with self.assertRaisesRegex(ValueError,'Linked'):
+                        instruction_entry(root,settings,['guide.md#canonical'],complete_inputs=True)
+                source.write_bytes(b'x'*33000)
+                Path(settings['tool_index']).write_bytes(b'y'*33000)
+                self.refresh_entry_inventory(root/'inputs',Path(settings['inputs_inventory']))
+                with self.assertRaisesRegex(ValueError,'64 KiB'):
+                    instruction_entry(root,settings,['guide.md#canonical'],complete_inputs=True)
+
+    def test_complete_task_refuses_overflow_or_credential_before_host_start_or_capture(self):
+        for content,diagnostic in [('x'*65536,'64 KiB'),('synthetic-test-secret','credential')]:
+            with self.subTest(diagnostic=diagnostic),tempfile.TemporaryDirectory() as directory:
+                root=Path(directory);output=root/'native'
+                selection=root/'selected.json';selection.write_text('{"endpoint":"http://127.0.0.1:8000"}')
+                credentials=root/'credentials.json'
+                credentials.write_text(json.dumps({'principals':[{'id':'operator','token':'synthetic-test-secret'}]}))
+                task=root/'request.md';task.write_text(content)
+                args=argparse.Namespace(output=output,prepared_inputs=False,selection=selection,
+                    credentials=credentials,host='claude',drop_reply=False,complete_inputs=True,
+                    instruction_section=['guide.md#canonical'],task=task)
+                with patch('qualify_agents.instruction_entry',return_value=({'sections':[]},'## Entry\n')),\
+                     patch('qualify_agents.subprocess.Popen') as host,\
+                     self.assertRaisesRegex(ValueError,diagnostic):
+                    run_native(args)
+                host.assert_not_called()
+                self.assertFalse((output/'instruction-entry.json').exists())
+                self.assertFalse((output/'task.md').exists())
 
     def test_text_read_is_exact_bounded_and_cannot_read_host_capture(self):
         import hashlib

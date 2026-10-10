@@ -10,14 +10,16 @@ REQUESTED_OUTCOME
 
 ## Entry and tools
 
-Read `SELECTION_FILE`. Begin with the candidate plugin's normal
+Use the effective selection from the complete entry when supplied; otherwise
+read `SELECTION_FILE`. Begin with the candidate plugin's normal
 verity-plane:setup Skill for this explicit hosted selection, then follow its
 current-task routes. The client is installed. Do not install software or activate
 a checkout. The selected released_resources directory contains the exact 0.22.1
 procedures. Reuse canonical sections already delivered in this task.
 
 The selection's tool_index is the single command and file-discovery reference.
-Read it before choosing syntax. Read only applicable procedure sections and
+Apply its content before choosing syntax; reuse it if supplied in the entry.
+Read only applicable procedure sections and
 the typed inputs (or raw schema) for the operation you select.
 
 Use native file tools or the tool index's bounded file-read operation, and only
