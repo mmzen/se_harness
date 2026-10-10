@@ -1,0 +1,58 @@
+{
+  "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+  "case": "EFF-04B",
+  "trial": "claude-114",
+  "content_verdict": "fail",
+  "findings": [
+    "Independent saved bytes match the submitted verification draft. Its verifies link, independent expected text, matrix, usable check, platform/evaluator and concrete proposed evidence plan satisfy the content criteria.",
+    "The document and final reply clearly say the checks are planned, no tests ran and no result is verified. Seven imported records remain unchanged.",
+    "The first create request used the project UUID as context before a context existed and was refused with HTTP404 / HAG_REMOTE_UNKNOWN_IDENTITY. The agent opened a context, then made the corrected request. The report accurately preserves the failed call and recovery. Exactly one new draft exists.",
+    "The report nevertheless labels content readiness Incomplete solely because the evaluator returned content_review=not_assessed. It simultaneously says its own complete checklist review found no missing inputs or content issues. The evaluator does not conduct the agent content review; this is not a substantive missing-input blocker.",
+    "This contradictory readiness result fails positive completion reporting. It is not a saved-document defect, a service validation failure or evidence of unauthorized lifecycle action."
+  ],
+  "metrics": {
+    "wall_seconds": 296.55,
+    "native_calls": 15,
+    "observed_tool_items": 15,
+    "calls_by_tool": {
+      "Read": 2,
+      "Skill": 1,
+      "Bash": 9,
+      "Write": 2,
+      "Edit": 1
+    },
+    "model_turns": 14,
+    "peak_input_context": 63663,
+    "initial_input_context": 15675,
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "repeated_read_paths": {}
+  },
+  "observed_failed_calls": [
+    {
+      "line": 72,
+      "call_id": "toolu_01AC4gAirY7yLhyC9puWDz7K",
+      "source": "native tool_result is_error",
+      "call": {
+        "line": 71,
+        "name": "Bash",
+        "description": "Create a new verification artifact in lifecycle-pilot domain"
+      },
+      "diagnostic": "e\\\\work\\\\create-ver-001.json.stdout.txt\", \"stderr\": \"\", \"client_view\": {\"schema\": \"se-harness-remote-view/v1\", \"result\": {\"schema\": \"se-harness-remote-result/v1\", \"operation_key\": null, \"request_digest\": null, \"project_id\": null, \"view\": null, \"versions\": null, \"affected_revision_ids\": [], \"affected_artifacts\": [], \"evaluator\": null, \"evaluator_output\": null, \"outcome\": \"refused\", \"receipt_id\": null, \"http_status\": 404, \"error\": {\"code\": \"HAG_REMOTE_UNKNOWN_IDENTITY\", \"message\": \"Unknown selected context.\"}}, \"documents\": [], \"omitted\": [], \"findings_complete\": true, \"evidence\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\hag-efficiency-complete-inputs-20261010\\\\claude-114\\\\native\\\\work\\\\create-ver-001.json.evidence\", \"full_response\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\hag-efficiency-complete-inputs-20261010\\\\claude-114\\\\native\\\\work\\\\create-ver-001.json.evidence\\\\1-response.json\"}}"
+    }
+  ],
+  "baseline_records_unchanged": 7,
+  "exact_saved_document": true,
+  "document_sha256": "759f7f23a44856131ad26345601eb81e991580da5e2b962141f88e7216c94773",
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:1cb42f17a1b145ccfe3bb29e28d9b97f2bb134d60826027cef88b2a12f4ac29f"
+  },
+  "final_project_version": 4,
+  "decision": "Retain the failed readiness-reporting result. Complete the planned Codex comparison, but do not count three wholly correct Claude authoring results or prepare verification from this qualification.",
+  "draft_content_verdict": "pass",
+  "reporting_verdict": "fail"
+}

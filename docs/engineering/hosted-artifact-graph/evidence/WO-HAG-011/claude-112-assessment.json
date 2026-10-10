@@ -1,0 +1,45 @@
+{
+  "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+  "case": "EFF-04B",
+  "trial": "claude-112",
+  "content_verdict": "pass",
+  "findings": [
+    "Independent service read matches the exact submitted final document. The draft verifies REQ-P3-900 and fixes the expected Hello rehearsal value from the governing definitions.",
+    "The requirement-to-evidence matrix, function call, exact-string pass condition and failure conditions form a usable check. The platform and evaluator are named.",
+    "The evidence plan names greeting-check.json and records actual/expected output, comparison result and evaluator version.",
+    "No empty optional headings remain. The native report clearly distinguishes planned verification from executed tests and reports the imported W-AUT-022 advisory separately.",
+    "The agent corrected its first revision to name the platform and evaluator. Both successful revisions are retained; no observed denied or failed native call is omitted.",
+    "Seven imported records remain exact original bytes. Exactly one new artifact remains draft. No lifecycle decision or real authority is exercised."
+  ],
+  "metrics": {
+    "wall_seconds": 252.974,
+    "native_calls": 13,
+    "observed_tool_items": 13,
+    "calls_by_tool": {
+      "Read": 3,
+      "Skill": 1,
+      "Bash": 6,
+      "Write": 2,
+      "Edit": 1
+    },
+    "model_turns": 13,
+    "peak_input_context": 59655,
+    "initial_input_context": 15675,
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "repeated_read_paths": {}
+  },
+  "observed_failed_calls": [],
+  "baseline_records_unchanged": 7,
+  "exact_saved_document": true,
+  "document_sha256": "ac13fb42b54555a1bd7cacb594a99fa4c95c15def1006be57bdde2aaec801566",
+  "artifact": {
+    "artifact_id": "VER-P3-901",
+    "revision_id": "sha256:92f856d3057d713dcad32dcdfa1c9d6e31c8ab21c8cdd15d40f2438a90c48e34"
+  },
+  "final_project_version": 5,
+  "decision": "Correct first positive result permits the two required fresh Claude repetitions on the unchanged candidate. Time and context goals are missed; call goal is met."
+}

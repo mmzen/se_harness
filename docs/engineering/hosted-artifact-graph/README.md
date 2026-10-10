@@ -6,14 +6,24 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
-The [latest assessment](evidence/WO-HAG-011/fact-grounding-assessment.md)
-records the failed candidate16 wording trial and restoration of the prior guidance.
-The [complete-input proposal](evidence/WO-HAG-011/input-delivery-20261010/review.md)
-is ready for review; its linked SPEC/VER/WO revisions are not active.
-The [candidate15 assessment](evidence/WO-HAG-011/inputs-qualification-assessment.md)
-retains the approved Codex CLI environment and native results. Claude's missing-input
-case still fails and positive authoring misses the efficiency goals.
-Historical reports below retain their original candidate-specific conclusions.
+The [latest assessment](evidence/WO-HAG-011/complete-input-qualification-assessment.md)
+records the approved complete-input implementation and all six candidate17 trials.
+Both missing-input cases pass. The positive draft documents pass inspection, but
+two Claude trials fail reporting; Codex's positive case passes with recovered read
+refusals. Claude's positive medians are 296.550 seconds, 13 calls and 62,427 peak
+input tokens. The call goal is met; time and context goals are missed.
+
+The [activation record](evidence/WO-HAG-011/input-delivery-20261010/activation.json)
+records mmzen's approval and the exact active SPEC/VER/WO revisions. Previous
+accepted bytes and lifecycle history remain preserved. WO-HAG-011 remains in
+progress; Codex entry recovery, reporting consistency and efficiency need further
+work. No completion or verification is claimed.
+
+The [candidate16 assessment](evidence/WO-HAG-011/fact-grounding-assessment.md)
+preserves the failed wording trial and restored guidance. The
+[candidate15 assessment](evidence/WO-HAG-011/inputs-qualification-assessment.md)
+retains the earlier environment and native results. Historical reports below
+retain their original candidate-specific conclusions.
 
 The [content-review assessment](evidence/WO-HAG-011/content-review-qualification-assessment.md) records the simplified drafting procedure, all fresh Claude trials and failures, and pending Codex qualification. It does not establish completion or verification.
 
