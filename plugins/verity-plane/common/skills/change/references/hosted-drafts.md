@@ -1,5 +1,9 @@
 ## Select the current step
 
+Use exact instructions already delivered with their source identity. Reading that
+content satisfies its read instruction. Open its file only if required content
+is missing, changed or no longer retained. A pointer alone is not content.
+
 Complete [Hosted selection](../../setup/references/hosted-context.md) once for
 the unchanged selection. Draft preparation grants no decision right or Git authority.
 
@@ -22,8 +26,10 @@ For a clarification stop, include three short parts in the final reply:
 - **Questions:** Ask only for missing facts needed now.
 
 This retained reply is the transient report only if no hosted mutation command
-was invoked. Refused or denied mutation commands are still attempts. Missing
-observations do not prove that none occurred. Otherwise use **Report and recover**. The clarification reply
+was invoked and the captured attempted-call record is complete. Refused or denied
+mutation commands are still attempts. If capture is incomplete or its completeness
+is unknown, use the saved report in **Report and recover** and state that limit,
+even when no change was observed. The clarification reply
 needs no duplicate file or new lifecycle checkpoint.
 
 For a requested intent, consult `docs/engineering/ARTIFACT_AUTHORING.md#intent`
@@ -45,9 +51,8 @@ The released `harnessctl ... REPO` examples act on repository files. Hosted work
 uses the selected tool index or `docs/notes/harnessctl-reference.md#concise-hosted-authoring`.
 Do not combine their arguments. The canonical content rules still apply.
 
-Reuse complete sections already delivered with source identity. Obtain missing
-sections together from the selected resource root; batch independent file reads
-with known paths. A pointer is not a read. Missing, ambiguous or changed sources
+Obtain missing sections together from the selected resource root; batch independent
+file reads with known paths. Missing, ambiguous or changed sources
 stop the affected action. For 0.22.1's repeated
 `CONTINUE.md#continue-selected-work` title, read its unique `#procedure` parent.
 Load [lifecycle instructions](hosted-test-lifecycle.md) only for that task.

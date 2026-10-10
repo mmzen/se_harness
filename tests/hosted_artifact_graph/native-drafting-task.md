@@ -16,7 +16,8 @@ plugin directory, then follow its current-task routes. Invoke the native Skill
 tool only when it resolves that selected candidate. The client is installed.
 Do not install software or activate
 a checkout. The selected released_resources directory contains the exact 0.22.1
-procedures. Reuse canonical sections already delivered in this task.
+procedures. Read supplied entries, references and canonical sections directly in
+this task; do not open their files again unless content is missing or changed.
 
 The selection's tool_index is the single command and file-discovery reference.
 Apply its content before choosing syntax; reuse it if supplied in the entry.
@@ -42,6 +43,8 @@ The runner captures calls, read paths, failures, timing and context. Do not copy
 those observations into another JSON file or calculate final metrics during the
 run. Use the observations command before an exhaustive failure claim; its
 in-progress snapshot does not include subsequent calls.
+If observations report `native_call_count_complete: false` or unknown capture
+completeness, use the guide's saved-report branch and state the capture limit.
 
 Use the selected plugin's `change/references/hosted-drafts.md` reporting branch.
 For its clarification-only branch, the captured final reply is the report.

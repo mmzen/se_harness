@@ -199,7 +199,24 @@ class Capture:
         omitted, documents = [], []
         response_name = response_name or str(self.index) + "-response.json"
         remaining = [16000]
+        validation = result.get("evaluator_output") if isinstance(result, dict) else None
+        discovery = validation.get("instruction_discovery", {}) if isinstance(validation, dict) else {}
+        instructions = discovery.get("agent_instructions", {}) if isinstance(discovery, dict) else {}
+        # Keep the selected step, its prerequisites and executable procedure in view.
+        # The full instruction catalogue and machine-policy inputs remain in evidence.
+        deferred = set()
+        if (isinstance(validation, dict) and validation.get("schema") == "se-harness-workflow-result-v2"
+                and isinstance(instructions, dict) and isinstance(instructions.get("current_step"), dict)
+                and instructions["current_step"].get("location")):
+            deferred = {
+                "/evaluator_output/instruction_discovery/agent_instructions/procedure/steps",
+                "/evaluator_output/instruction_discovery/evaluator_only_inputs",
+            }
         def render(value, pointer=""):
+            if pointer in deferred:
+                omitted.append({"pointer": pointer, "reason": "instruction catalogue; selected step retained",
+                                "path": str(self.path / response_name)})
+                return {"omitted": True, "pointer": pointer}
             if isinstance(value, dict) and "document_base64" in value:
                 raw = base64.b64decode(value["document_base64"], validate=True)
                 digest = hashlib.sha256(raw).hexdigest()
@@ -226,7 +243,6 @@ class Capture:
         view = {"schema": "se-harness-remote-view/v1", "result": visible, "documents": documents, "omitted": omitted,
                 "findings_complete": not any(item.get("required_reading") for item in omitted),
                 "evidence": str(self.path), "full_response": str(self.path / response_name)}
-        validation = result.get("evaluator_output") if isinstance(result, dict) else None
         if isinstance(validation, dict) and validation.get("schema") == "se-harness-draft-validation-v1":
             # This describes the evaluator's existing boundary, not a content verdict.
             view["draft_review"] = {"validation_scope": "draft_shape_and_required_links",

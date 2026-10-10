@@ -208,7 +208,9 @@ class NativeCallBoundaries(unittest.TestCase):
             'source/unrelated.txt':'Every source is included, even “unrelated”.\n'.encode(),
             'native-tools.md':b'Original tool capabilities\n',
             'combination.json':b'{"component":"original"}\n',
+            'plugin/skills/setup/SKILL.md':b'Exact setup entry\n',
             'plugin/skills/setup/references/hosted-context.md':b'Exact setup reference\r\n',
+            'plugin/skills/change/SKILL.md':b'Exact change entry\n',
             'plugin/skills/change/references/hosted-drafts.md':b'Exact drafting reference\n',
         }
         for name,raw in paths.items():
@@ -248,6 +250,9 @@ class NativeCallBoundaries(unittest.TestCase):
                 self.assertEqual(raw,Path(item['path']).read_bytes())
                 self.assertEqual(1,text.count(raw.decode()))
                 self.assertEqual(hashlib.sha256(raw).hexdigest(),item['sha256'])
+                relative=Path(item['path']).relative_to(root/'inputs').as_posix()
+                self.assertIn(json.dumps({'path':relative,'sha256':item['sha256'],'bytes':item['bytes']}),text)
+            self.assertIn(str((root/'inputs').resolve()),text)
             self.assertIn(view['resources'][0]['sections'][0]['content'],text)
             self.assertEqual(1,text.count('## Canonical'))
             self.assertEqual(len(text.encode()),packet['entry_bytes'])

@@ -138,7 +138,9 @@ def complete_input_files(root, settings, pointers):
     if not all(Path(item['path']).relative_to(inputs).as_posix() in actual for item in pointers):
         raise ValueError('Complete input source does not contain every manifest artifact')
     references = [Path(settings['tool_index']), Path(settings['combination']),
+                  Path(settings['plugin'])/'skills/setup/SKILL.md',
                   Path(settings['plugin'])/'skills/setup/references/hosted-context.md',
+                  Path(settings['plugin'])/'skills/change/SKILL.md',
                   Path(settings['plugin'])/'skills/change/references/hosted-drafts.md']
     paths = references + [inputs/name for name in sorted(names)]
     if len(paths) != len(set(path.resolve() for path in paths)):
@@ -197,11 +199,16 @@ def instruction_entry(root, settings, selectors, *, complete_inputs=False):
                      'The selection, references and entire staged fixture below are supplied once. '
                      'Apply the applicable instructions and inspect these exact source contents; '
                      'reuse them while retained and unchanged. The original paths remain available. '
+                     'Reading this delivered content satisfies its read instruction; reread a file '
+                     'only if its required content is missing, changed or no longer retained. '
                      'The agent selects all operations, authored content and conclusions.\n\n'
+                     'File identities below use paths relative to this input root: '
+                     + str((root/'inputs').resolve()) + '\n\n'
                      '### Effective selection\n\n' + raw.decode('utf-8'))
         for group, title in [('references', 'Selected reference'), ('sources', 'Source data')]:
             for item in files[group]:
                 identity = {k: item[k] for k in ('path', 'sha256', 'bytes')}
+                identity['path'] = Path(item['path']).relative_to((root/'inputs').resolve()).as_posix()
                 # Fence original text without changing its bytes or interpreting Markdown.
                 fence = '`' * max(3, 1 + max((len(x) for x in re.findall(r'`+', item['text'])), default=0))
                 parts.append('\n### ' + title + '\n\n' + json.dumps(identity) + '\n\n'

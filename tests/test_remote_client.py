@@ -193,6 +193,49 @@ class AuthoringTests(unittest.TestCase):
         with self.assertRaises(RemoteError):
             Capture(capture.path,'synthetic-secret')
 
+    def test_compact_workflow_keeps_action_findings_and_prerequisites_with_exact_catalogue_pointer(self):
+        from se_harness.remote_authoring import Capture
+        current={'id':'STEP-1','location':{'file':'current.md','heading':'act'},
+                 'prerequisites':[{'file':'authority.md','heading':'rights'}]}
+        workflow={'schema':'se-harness-workflow-result-v2',
+            'procedure':{'current_step':'STEP-1','steps':[{'id':'STEP-1','argv':['harnessctl','check']}]},
+            'findings':{'scoped_blockers':[{'id':'GATE-1','message':'Required input missing'}]},
+            'restitution':{'outcome':'blocked','command_or_response':{'kind':'decision','right':'human'}},
+            'instruction_discovery':{'agent_instructions':{'current_step':current,
+                'shared_prerequisites':[{'file':'results.md'}],
+                'procedure':{'id':'PROC-1','prerequisites':[{'file':'additional.md'}],
+                    'steps':{'STEP-1':current,'STEP-2':{'location':{'file':'later.md'}}}}},
+                'evaluator_only_inputs':[{'file':'WORKFLOW.json','sha256':'exact'}]}}
+        result={'outcome':'refused','operation_key':'same-key','evaluator_output':workflow}
+        capture=Capture(self.root/'workflow','synthetic-secret')
+        capture.request('POST','/command',{'operation_key':'same-key'})
+        raw=json.dumps(result,indent=3).encode()+b'\n'
+        capture.response(409,raw)
+        view=capture.compact(result)
+        shown=view['result']['evaluator_output']
+        for key in ('procedure','findings','restitution'):
+            self.assertEqual(workflow[key],shown[key])
+        instructions=shown['instruction_discovery']['agent_instructions']
+        self.assertEqual(current,instructions['current_step'])
+        self.assertEqual([{'file':'additional.md'}],instructions['procedure']['prerequisites'])
+        self.assertEqual([{'file':'results.md'}],instructions['shared_prerequisites'])
+        self.assertEqual(2,len(view['omitted']))
+        for item in view['omitted']:
+            self.assertEqual(raw,Path(item['path']).read_bytes())
+            original=json.loads(Path(item['path']).read_bytes())
+            for segment in item['pointer'].split('/')[1:]:original=original[segment]
+            self.assertTrue(original)
+        self.assertTrue(view['findings_complete'])
+        self.assertEqual('refused',view['result']['outcome'])
+        self.assertEqual('same-key',view['result']['operation_key'])
+        for index,change in enumerate(('unknown-schema','no-current-step')):
+            original=json.loads(raw)
+            if change=='unknown-schema':original['evaluator_output']['schema']='unknown'
+            else:del original['evaluator_output']['instruction_discovery']['agent_instructions']['current_step']
+            other=Capture(self.root/str(index),'synthetic-secret').compact(original)
+            self.assertEqual(original,other['result'])
+            self.assertEqual([],other['omitted'])
+
     def test_wire_version_bounds_and_work_order_type_refuse_before_sending(self):
         from se_harness.remote import run
         import contextlib, io
