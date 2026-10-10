@@ -1,0 +1,76 @@
+{
+  "candidate": "d31e337425696c944ee61eda9957b6ac4bd2c82b",
+  "trial": "claude-203",
+  "case": "EFF-04B",
+  "overall": "pass",
+  "method": "Independent semantic review of saved document, report, visible calls and final reply; separate exact saved-byte and seven imported-revision reads. This script retains the reviewed findings, not a keyword-based content grade.",
+  "findings": [
+    "The saved draft links REQ-P3-900 and plans a direct greeting call with exact string equality. The expected value is independently taken from the requirement. Its matrix, platform/evaluator and exact JSON evidence destination make the check usable.",
+    "A second successful revision adds platform and evaluator details. Project version 5 therefore reflects one import, one draft open, one create and two revisions, not an unexpected mutation. All seven imported records are unchanged.",
+    "The saved report separates proposed tests, evaluator admission and independent source review, retains W-AUT-022, and makes no executed-test or lifecycle-decision claim. Its failure-outcome checklist explanation is terse but the actual contract bounds itself to the exact return value. There are no empty optional headings or untested asserted pass conditions."
+  ],
+  "blocking_findings": [],
+  "metrics": {
+    "snapshot": "complete",
+    "partial_event_line_omitted": false,
+    "non_json_diagnostic_lines": [],
+    "wall_seconds": 219.8,
+    "native_calls": 12,
+    "observed_tool_items": 12,
+    "native_call_count_complete": true,
+    "calls_by_tool": {
+      "Bash": 7,
+      "Read": 2,
+      "Write": 2,
+      "Edit": 1
+    },
+    "model_turns": 12,
+    "peak_input_context": 56440,
+    "initial_input_context": 32813,
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "native_failures": [],
+    "command_records": [],
+    "failed_command_records": [],
+    "file_reads": [
+      {
+        "line": 22,
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-efficiency-compact-pointers-20261010\\claude-203\\native\\inputs\\configuration.json"
+      },
+      {
+        "line": 101,
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-efficiency-compact-pointers-20261010\\claude-203\\native\\work\\VER-P3-001.md"
+      }
+    ],
+    "repeated_read_paths": {},
+    "content_review": "not performed by this summary",
+    "provider_time": "unclassified",
+    "limits": "Observed native calls and command captures only. No private reasoning exported. Provider usage is not billed-token total. Tool durations may overlap; they are not subtracted to infer model time."
+  },
+  "performance_verdict": {
+    "wall_under_180": "missed",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "remote_operations": [
+    "create-artifact",
+    "draft-open",
+    "import",
+    "revise-artifact",
+    "revise-artifact",
+    "status"
+  ],
+  "observed_command_failures": [],
+  "baseline_records_unchanged": 7,
+  "input_changes": [],
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:868e8534f40a2db6d4df51160c2ce5d12f7951ccd3222f91d3f1c94c0ddad0c8"
+  },
+  "document_sha256": "a19df5cf2e840901b14fd9be2f92e5ee39c5bbedfe0f9b8ce452f5a1123f92c3",
+  "final_project_version": 5,
+  "limits": "Draft content and reporting result only. Performance misses remain misses; full NQ qualification, work completion and human verification remain separate. Earlier evidence unchanged."
+}

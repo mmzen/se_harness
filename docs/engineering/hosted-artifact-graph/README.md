@@ -6,16 +6,20 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
+The [latest qualification](evidence/WO-HAG-011/compact-pointers-assessment.md)
+records candidate26. Both missing-input cases and all three Claude plus one Codex
+draft-content reviews pass. Codex now retains the required fallback report.
+Claude context remains above the 40,000-token goal; time and call measurements
+are reported separately. The next cost focus is the large fixed instruction entry
+and routine result volume. WO-HAG-011 and full qualification remain unfinished.
+
+The [candidate25 assessment](evidence/WO-HAG-011/concise-results-assessment.md)
+preserves the untested-condition content failure and the compact-pointer overhead.
+The [candidate24 assessment](evidence/WO-HAG-011/clarification-reply-assessment.md)
+remains historical, including its missing Codex fallback and missed context goal.
 The [clarification-report amendment](evidence/WO-HAG-011/clarification-contract-20261010/review.md)
-is approved and [activated](evidence/WO-HAG-011/clarification-contract-20261010/activation.json).
-It permits the retained final reply only for clarification stops before any hosted
-mutation attempt. Content criteria and previous failures remain unchanged. The
-[latest qualification](evidence/WO-HAG-011/clarification-reply-assessment.md)
-passes Claude clarification and all three Claude draft-content reviews. Positive
-median: 173 seconds, 13 calls and 60,763 peak input tokens. The context target is
-missed. Codex clarification remains unqualified because complete attempted-call
-capture and the fallback report are missing. The report records the separate
-Codex positive result and next bounded focus.
+and its [activation](evidence/WO-HAG-011/clarification-contract-20261010/activation.json)
+remain unchanged.
 
 The [clarification-route assessment](evidence/WO-HAG-011/clarification-route-assessment.md)
 records candidate22. Claude asks for clarification and makes no service write:
