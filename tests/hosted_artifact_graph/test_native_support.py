@@ -73,6 +73,74 @@ class NativeCallBoundaries(unittest.TestCase):
             self.assertIn('before your first explanation', prompt)
             self.assertIn('After compaction', prompt)
 
+    def test_pinned_task_recovery_preserves_chunks_and_refuses_other_root_content(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); task=root/'task.md'
+            raw=('Exact \U0001f600\r\n' * 1000).encode(); task.write_bytes(raw)
+            digest=hashlib.sha256(raw).hexdigest()
+            with patch.dict(os.environ,{'HAG_NATIVE_ENTRY_SHA256':digest}):
+                offset=0; recovered=''
+                while True:
+                    result=read_text_files(root,{},[task],offset=offset,limit=4096)
+                    recovered+=result['text']
+                    self.assertEqual(digest,result['sha256'])
+                    self.assertEqual(len(raw),result['bytes'])
+                    self.assertLessEqual(len(json.dumps(result).encode()),65536)
+                    if result['complete']: break
+                    self.assertGreater(result['next_offset'],offset)
+                    offset=result['next_offset']
+                self.assertEqual(raw,recovered.encode())
+                for name in ('events.jsonl','invocation.json','credentials.json'):
+                    path=root/name; path.write_bytes(raw)
+                    with self.assertRaisesRegex(ValueError,'restricted'):
+                        read_text_files(root,{},[path],offset=0)
+                is_link=Path.is_symlink
+                with patch.object(Path,'is_symlink',lambda path:path==task or is_link(path)):
+                    with self.assertRaisesRegex(ValueError,'Linked'):
+                        read_text_files(root,{},[task],offset=0)
+                for paths,offset,limit in [([task,task],0,1),([task],-1,1),
+                        ([task],len(recovered)+1,1),([task],0,0),([task],0,4097)]:
+                    with self.assertRaises(ValueError):
+                        read_text_files(root,{},paths,offset,limit)
+                task.write_bytes(raw+b'changed')
+                with self.assertRaisesRegex(ValueError,'pinned identity'):
+                    read_text_files(root,{},[task],offset=0)
+            with patch.dict(os.environ,{'HAG_NATIVE_ENTRY_SHA256':''}):
+                with self.assertRaisesRegex(ValueError,'pinned identity'):
+                    read_text_files(root,{},[task],offset=0)
+
+    def test_complete_entry_reaches_host_stdin_once_and_task_recovery_is_pinned(self):
+        for host_name in ('claude','codex'):
+            for complete in (False,True):
+                with self.subTest(host=host_name,complete=complete),tempfile.TemporaryDirectory() as directory:
+                    root=Path(directory);output=root/'native'
+                    selection=root/'selected.json'
+                    selection.write_text(json.dumps({'endpoint':'http://127.0.0.1:8000','plugin':str(root/'plugin')}))
+                    credentials=root/'credentials.json'
+                    credentials.write_text(json.dumps({'principals':[{'id':'operator','token':'synthetic-test-secret'}]}))
+                    task=root/'request.md';task.write_text('Unique requested outcome.\n')
+                    args=argparse.Namespace(output=output,prepared_inputs=False,selection=selection,
+                        credentials=credentials,host=host_name,drop_reply=False,complete_inputs=complete,
+                        instruction_section=['guide.md#canonical'],task=task,executable='native-host',
+                        model=None,permission_settings=None,timeout=10)
+                    with (patch('qualify_agents.instruction_entry',return_value=({'sections':[]},'## Exact\r\nRule.\n')),
+                         patch('qualify_agents.subprocess.Popen') as process,
+                         patch('qualify_agents.write_prompt') as writer,contextlib.redirect_stdout(io.StringIO())):
+                        child=process.return_value.__enter__.return_value
+                        child.stdout=[];child.wait.return_value=0
+                        self.assertEqual(0,run_native(args))
+                    raw=(output/'task.md').read_bytes()
+                    sent=writer.call_args.args[1]
+                    self.assertEqual(raw.decode() if complete else prompt_pointer(output/'task.md'),sent)
+                    self.assertEqual(hashlib.sha256(raw).hexdigest(),process.call_args.kwargs['env']['HAG_NATIVE_ENTRY_SHA256'])
+                    if host_name=='claude':
+                        locator=(output/'CLAUDE.md').read_text()
+                        self.assertNotIn('Unique requested outcome.',locator)
+                        if complete:self.assertNotIn('selection.json',locator)
+                    invocation=json.loads((output/'invocation.json').read_bytes())
+                    self.assertEqual('stdin-complete-entry' if complete else 'stdin-file-pointer',invocation['prompt_transport'])
+                    self.assertEqual(hashlib.sha256(sent.encode()).hexdigest(),invocation['input_sha256']['effective_prompt'])
+
     def test_native_stdin_preserves_utf8_and_mixed_canonical_line_endings(self):
         raw = '## Exact\nUnicode “text”.\r\nNext.\n'.encode()
         with subprocess.Popen([sys.executable, '-I', '-c',

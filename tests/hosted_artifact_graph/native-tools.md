@@ -64,7 +64,8 @@ Choose the exact revision and context from the selected inputs or actual results
 | One exact inventory entry | `lookup-file RELATIVE_NAME` |
 | One saved JSON field | `read-json ABSOLUTE_FILE --pointer '"/field"'`; omit pointer for root; optional `--keys` |
 | A raw base64 field | Add `--decode-base64` to that field read |
-| One text file or independent reads together | `read-text ABSOLUTE_FILE [ABSOLUTE_FILE ...]`; up to eight selected inventoried inputs or work files, at most 64 KiB output |
+| One text file or independent reads together | `read-text ABSOLUTE_FILE [ABSOLUTE_FILE ...]`; up to eight selected inventoried inputs, the launcher-pinned task.md, or work files, at most 64 KiB output |
+| Recover a truncated text read | `read-text ABSOLUTE_FILE --offset 0 --limit 4096`; one file, character offsets; continue from next_offset until complete is true |
 
 For `instructions`, use canonical IDs such as `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`. The earlier `released-resources/` inventory prefix also works. Request known sections together.
 For authoring checklists and the repeated released 0.22.1 continuation heading,

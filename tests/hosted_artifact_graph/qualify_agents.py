@@ -305,7 +305,8 @@ def run(args):
     if entry:
         save(output/'instruction-entry.json', entry)
     (output/'task.md').write_bytes(prompt.encode('utf-8'))
-    initial_prompt = prompt_pointer(output/'task.md')
+    initial_prompt = prompt if complete_inputs else prompt_pointer(output/'task.md')
+    env['HAG_NATIVE_ENTRY_SHA256'] = hashlib.sha256(prompt.encode('utf-8')).hexdigest()
     locator = None
     if args.host == 'claude':
         locator = output/'CLAUDE.md'
@@ -313,8 +314,12 @@ def run(args):
         # This supplies no workflow request, state, actor or decision.
         with locator.open('x', encoding='utf-8') as stream:
             stream.write('# Disposable qualification task inputs\n\n'
-                + initial_prompt + '\n'
-                f'Read `{output / "selection.json"}` before acting.\n'
+                + ('Reuse the complete task entry already supplied in context. Only if it\n'
+                   f'is lost or truncated, read `{output / "task.md"}` to recover it.\n'
+                   if complete_inputs else prompt_pointer(output/'task.md') + '\n')
+                + ('' if complete_inputs else f'Read `{output / "selection.json"}` before acting.\n')
+                + 'For a truncated read, use read-text with --offset 0 --limit 4096;\n'
+                'continue from next_offset until complete is true.\n'
                 'These files retain the task, selected inputs and tool boundary.\n'
                 'Use the selected candidate plugin skills and their required references for the workflow.\n'
                 'This file supplies no lifecycle procedure or new permission.\n')
@@ -375,12 +380,13 @@ def run(args):
         before['instruction_entry'] = hashlib.sha256((output/'instruction-entry.json').read_bytes()).hexdigest()
     save(output/'invocation.json', {'host': args.host, 'argv': argv, 'cwd': str(output),
         'started_at': started, 'timeout_seconds': args.timeout, 'input_sha256': before,
-        'prompt_file': str(output/'task.md'), 'prompt_transport': 'stdin-file-pointer',
+        'prompt_file': str(output/'task.md'),
+        'prompt_transport': 'stdin-complete-entry' if complete_inputs else 'stdin-file-pointer',
         'initial_prompt': initial_prompt,
         'entry_preparation_seconds': round(start-preparation_start, 3),
         'input_delivery': 'complete-inputs' if complete_inputs else 'pointers',
         'environment_keys_added': ['PYTHONUTF8','NO_COLOR','HAG_NATIVE_TEST_TOKEN',
-                                 'HAG_NATIVE_WORK_DIRECTORY','HAG_NATIVE_SELECTION'],
+                                 'HAG_NATIVE_WORK_DIRECTORY','HAG_NATIVE_SELECTION','HAG_NATIVE_ENTRY_SHA256'],
         'claim': 'Observed native calls only; this launcher supplies no workflow requests or decisions.'})
     try:
         with subprocess.Popen(argv, cwd=output, env=env, stdin=subprocess.PIPE,

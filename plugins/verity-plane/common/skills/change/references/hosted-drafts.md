@@ -75,15 +75,21 @@ lifecycle history, decisions and evidence remain immutable.
 Keep complete requests/results in files; read required omitted findings before
 concluding. Keep one short transient report outside the repository:
 
-- **Content readiness:** complete, incomplete or blocked, with the reason. Any
-  unresolved required content finding makes it incomplete, even after a successful save.
+- **Content readiness:** your assessment against the requested type's checklist.
+  Use complete when the required content is supported and reviewed; incomplete
+  when required content is missing or unsupported; blocked when an unavailable
+  input or action prevents assessment. State the actual reason.
 - **Saved state:** selection, revision, versions and exact document/result paths.
 - **Validation and review:** evaluator findings, separate content-review findings,
   missing inputs or uncertain effects, and the returned procedure/step if available.
 
-Draft validation checks template shape and required links. An empty `incomplete`
-list or a complete findings display is not a content verdict. The client's
-`draft_review` states that limit; the agent must perform the content review.
+Draft validation checks template shape and required links. Its `content_review`
+value `not_assessed` means the evaluator did not assess content. It does not by
+itself make your content review incomplete. An empty `incomplete` list does not
+make your review complete. Perform and report that review separately.
+Saving, reading back or reviewing a draft does not verify its planned checks.
+Describe future checks as planned. Use the same readiness and actual-check
+claims in the report and final reply.
 Reuse the report after compaction to locate evidence and obtain fresh context.
 
 Report the observed method: source inspection, executed test or evaluator check.

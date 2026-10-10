@@ -11,9 +11,10 @@ REQUESTED_OUTCOME
 ## Entry and tools
 
 Use the effective selection from the complete entry when supplied; otherwise
-read `SELECTION_FILE`. Begin with the candidate plugin's normal
-verity-plane:setup Skill for this explicit hosted selection, then follow its
-current-task routes. The client is installed. Do not install software or activate
+read `SELECTION_FILE`. Begin with `skills/setup/SKILL.md` under the selection's
+plugin directory, then follow its current-task routes. Invoke the native Skill
+tool only when it resolves that selected candidate. The client is installed.
+Do not install software or activate
 a checkout. The selected released_resources directory contains the exact 0.22.1
 procedures. Reuse canonical sections already delivered in this task.
 
@@ -42,12 +43,9 @@ those observations into another JSON file or calculate final metrics during the
 run. Use the observations command before an exhaustive failure claim; its
 in-progress snapshot does not include subsequent calls.
 
-Keep one short `native-report.md` in WORK_DIRECTORY. Start with content readiness:
-complete, incomplete or blocked, with the actual reason. Then record the saved
-artifact/revision, current versions, exact document/result paths, template-validation
-result, content-review findings and unresolved inputs or effects. A saved draft
-and passed template checks do not establish content readiness. This is also the
-transient progress note. Distinguish planned checks from executed checks.
+Keep one short `native-report.md` in WORK_DIRECTORY, using the selected plugin's
+`change/references/hosted-drafts.md` result fields and readiness rules.
+This is also the transient progress note. Keep the final reply consistent with it.
 Link original evidence instead of reproducing it. Do not write a separate
 native-observations.json or read inventory. End with a brief result and the report
 path. No complete NQ-01 through NQ-05 claim: lifecycle, MCP parity, reply recovery

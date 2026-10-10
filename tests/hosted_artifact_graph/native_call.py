@@ -74,16 +74,21 @@ def find_file(root, config, name, under=''):
 
 
 def read_text(root, config, supplied):
-    """Read selected staged text or a work file when the host lacks native Read."""
+    """Read selected staged text, the pinned task, or a work file."""
     path=contained(root,supplied).resolve()
+    entry_identity = None
     if path.stat().st_size>65536:
         raise ValueError('Text exceeds 64 KiB; select instruction sections or JSON fields')
     if path.is_relative_to((root/'inputs').resolve()):
         name=path.relative_to((root/'inputs').resolve()).as_posix()
         lookup_file(root,config,name)  # Exact staged bytes; never execute them.
+    elif path == root/'task.md':
+        entry_identity = os.environ.get('HAG_NATIVE_ENTRY_SHA256', '')
     elif not path.is_relative_to((root/'work').resolve()):
-        raise ValueError('Text reads are restricted to inventoried inputs or work files')
+        raise ValueError('Text reads are restricted to inventoried inputs, the pinned task, or work files')
     raw=path.read_bytes();token=os.environ.get('HAG_NATIVE_TEST_TOKEN','')
+    if entry_identity is not None and hashlib.sha256(raw).hexdigest() != entry_identity:
+        raise ValueError('Task entry does not match the launcher-pinned identity')
     if len(raw)>65536:
         raise ValueError('Text exceeds 64 KiB')
     if token and token.encode() in raw:
@@ -91,11 +96,21 @@ def read_text(root, config, supplied):
     return {'path':str(path),'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'text':raw.decode('utf-8')}
 
 
-def read_text_files(root, config, paths):
+def read_text_files(root, config, paths, offset=None, limit=4096):
     """Read only the agent-selected files, with the same guards and one output bound."""
     if not 1 <= len(paths) <= 8:
         raise ValueError('Select between one and eight text files')
+    if offset is not None and (len(paths) != 1 or offset < 0 or not 1 <= limit <= 4096):
+        raise ValueError('Chunk reads require one file, a nonnegative offset and a limit from 1 to 4096 characters')
     files = [read_text(root, config, path) for path in paths]
+    if offset is not None:
+        item = files[0]
+        length = len(item['text'])
+        if offset > length:
+            raise ValueError('Offset exceeds the selected text length')
+        end = min(offset + limit, length)
+        item.update(text=item['text'][offset:end], offset=offset,
+                    next_offset=end, complete=end == length, characters=length)
     result = files[0] if len(files) == 1 else {'files':files}
     if len(json.dumps(result,ensure_ascii=True).encode()) > 65536:
         raise ValueError('Selected text output exceeds 64 KiB; select fewer files or sections')
@@ -307,6 +322,8 @@ def main():
     encoded = commands.add_parser('encode-file')
     text=commands.add_parser('read-text',help='Read an inventoried text input or work file, at most 64 KiB')
     text.add_argument('path', nargs='+')
+    text.add_argument('--offset', type=int, help='Read one file from this character offset; retain its complete byte identity')
+    text.add_argument('--limit', type=int, default=4096, help='Chunk size, 1 to 4096 characters; requires --offset')
     encoded.add_argument('path')
     selected = commands.add_parser('read-json', help='Read an exact JSON pointer from a saved result; empty pointer selects its root')
     selected.add_argument('path')
@@ -327,7 +344,9 @@ def main():
     root = Path(os.environ['HAG_NATIVE_WORK_DIRECTORY']).resolve()
     config = json.loads(Path(os.environ['HAG_NATIVE_SELECTION']).read_text(encoding='utf-8'))
     if args.kind == 'read-text':
-        print(json.dumps(read_text_files(root,config,args.path)))
+        if args.offset is None and args.limit != 4096:
+            raise ValueError('--limit requires --offset')
+        print(json.dumps(read_text_files(root,config,args.path,args.offset,args.limit)))
         return 0
     if args.kind == 'observations':
         print(json.dumps(observations(root,config)))
