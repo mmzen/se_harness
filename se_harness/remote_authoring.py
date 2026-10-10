@@ -214,9 +214,11 @@ class Capture:
             }
         def render(value, pointer=""):
             if pointer in deferred:
-                omitted.append({"pointer": pointer, "reason": "instruction catalogue; selected step retained",
-                                "path": str(self.path / response_name)})
-                return {"omitted": True, "pointer": pointer}
+                note = {"pointer": pointer, "reason": "instruction catalogue in full_response"}
+                replacement = {"omitted": True}
+                if len(encoded(value)) > len(encoded(note)) + len(encoded(replacement)):
+                    omitted.append(note)
+                    return replacement
             if isinstance(value, dict) and "document_base64" in value:
                 raw = base64.b64decode(value["document_base64"], validate=True)
                 digest = hashlib.sha256(raw).hexdigest()

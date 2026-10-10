@@ -753,9 +753,10 @@ link. It retains exact request/response bytes, decoded documents and capture
 metadata (exit, timings, uncertainty). The view shows small fields and documents,
 with explicit pointers for omitted content. Required omitted findings still need
 reading. It is a presentation, not an independent verdict.
-For known workflow results with a selected instruction step, the view leaves
-the full instruction-step catalogue and evaluator-only inputs in the response
-file. Their JSON pointers are listed in `omitted`. The selected step, its
+For known workflow results with a selected instruction step, the view can leave
+the full instruction-step catalogue and evaluator-only inputs in `full_response`
+when their pointers are smaller. Their JSON pointers are listed in `omitted`.
+The response path is given once in `full_response`. The selected step, its
 prerequisites, executable procedure, findings and next action stay in view.
 For draft-validation responses, `draft_review` identifies the evaluator's shape
 and required-link checks and reports content review as `not_assessed`. An empty

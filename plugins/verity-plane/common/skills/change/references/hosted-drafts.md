@@ -97,11 +97,13 @@ Inspect the created template through `--include-document` or
 [an exact revision read](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
 Findings are not the document. Complete only supported content and review it
 against the type checklist. Remove unsupported claims, duplicate checks and
-constraints absent from definitions. Each verification assertion must test its
-stated pass condition. Report this content review separately from template checks.
+constraints absent from definitions. For every verification pass condition,
+identify the planned check that assesses it. Add a missing check or narrow the
+claim; an untested condition prevents a complete-content claim. Report this
+review separately from template checks.
 
-Submit the complete UTF-8 file with `revise-artifact`. Inspect the saved document,
-versions, receipt and findings before another draft. Imported records, lifecycle
+Submit the complete UTF-8 file with `revise-artifact`. Apply that review to the saved
+document, then inspect its versions, receipt and findings before another draft. Imported records, lifecycle
 history, decisions and evidence stay immutable. Resolve blocked reads first.
 
 ## Report and recover

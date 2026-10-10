@@ -219,12 +219,16 @@ class AuthoringTests(unittest.TestCase):
         self.assertEqual(current,instructions['current_step'])
         self.assertEqual([{'file':'additional.md'}],instructions['procedure']['prerequisites'])
         self.assertEqual([{'file':'results.md'}],instructions['shared_prerequisites'])
-        self.assertEqual(2,len(view['omitted']))
+        # Small metadata stays inline when a pointer would be larger.
+        self.assertEqual(1,len(view['omitted']))
+        self.assertEqual(workflow['instruction_discovery']['evaluator_only_inputs'],
+                         shown['instruction_discovery']['evaluator_only_inputs'])
         for item in view['omitted']:
-            self.assertEqual(raw,Path(item['path']).read_bytes())
-            original=json.loads(Path(item['path']).read_bytes())
+            self.assertEqual(raw,Path(view['full_response']).read_bytes())
+            original=json.loads(Path(view['full_response']).read_bytes())
             for segment in item['pointer'].split('/')[1:]:original=original[segment]
             self.assertTrue(original)
+        self.assertLess(len(json.dumps(shown,indent=2)),len(json.dumps(workflow,indent=2)))
         self.assertTrue(view['findings_complete'])
         self.assertEqual('refused',view['result']['outcome'])
         self.assertEqual('same-key',view['result']['operation_key'])
