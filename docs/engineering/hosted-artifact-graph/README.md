@@ -6,6 +6,11 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
+The [routing correction review](evidence/WO-HAG-011/routing-review-20261010/review.md)
+proposes using the existing clarification step before dependent drafting and
+loading later instructions when their conditions apply. It preserves the task,
+content criteria and permissions. Product changes and a new trial are not applied.
+
 The [new-request assessment](evidence/WO-HAG-011/new-request-qualification-assessment.md)
 records the activated EFF-04A2 diagnostic on candidate21. Claude's first trial fails:
 it invents required meaning and reports complete content. Saved bytes, imported
