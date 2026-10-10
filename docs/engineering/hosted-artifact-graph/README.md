@@ -10,7 +10,9 @@ The [clarification-report amendment](evidence/WO-HAG-011/clarification-contract-
 is approved and [activated](evidence/WO-HAG-011/clarification-contract-20261010/activation.json).
 It permits the retained final reply only for clarification stops before any hosted
 mutation attempt. Content criteria and previous failures remain unchanged. The
-next fresh Claude case is pending; no new qualification is claimed.
+[fresh Claude case](evidence/WO-HAG-011/clarification-report-assessment.md)
+now asks the required user-outcome questions, but still fails the no-attempt report
+statement. It took 86 seconds and two calls. Further native tests are stopped.
 
 The [clarification-route assessment](evidence/WO-HAG-011/clarification-route-assessment.md)
 records candidate22. Claude asks for clarification and makes no service write:
