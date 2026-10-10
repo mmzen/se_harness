@@ -3,7 +3,7 @@
 Use `selection.json` for the exact `approved_shell_argv_prefix` and absolute
 input/output paths. Append one helper operation per shell call. Use native
 Write/Edit for files; read with native Read or the documented `read-text` helper.
-Prefer one `read-text` call for independent files whose exact paths are known.
+Use one `read-text` call for independent files whose exact paths are known.
 Keep normal permissions: no wrappers, loops, pipes,
 directory listing, direct client commands or permission changes. This index
 describes capabilities; it supplies no workflow or finished artifact.
@@ -92,8 +92,6 @@ schema views use `schemas/remote-v1/OPERATION.json` or `schemas/read-v1/OPERATIO
 Each view retains its original pointer/digest. Lifecycle test-copy schemas are
 separate; do not load them for drafting alone. `--key` reads a receipt, not a document.
 
-Use `observations` before the final failure report. It reads existing native event/command captures and identifies the snapshot boundary; subsequent report writes are not yet counted. Keep its paths as evidence instead of copying every command. It supplies no draft text, content judgement or lifecycle decision.
-
-Retain failed calls and recoveries. Template admission is not a content review.
-Report only inspected facts and actual outcomes; distinguish unresolved content
-from a completed definition. Do not claim an exhaustive failure count from memory.
+Use `observations` before the final failure report. Its snapshot does not include
+later report writes. Link it; it supplies no content judgement or lifecycle decision.
+Follow the hosted drafting guide for review, failure reporting and recovery.
