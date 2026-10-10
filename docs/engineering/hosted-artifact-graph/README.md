@@ -6,7 +6,14 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
-The [latest assessment](evidence/WO-HAG-011/direct-input-qualification-assessment.md)
+The [latest assessment](evidence/WO-HAG-011/grounded-input-qualification-assessment.md)
+records candidate19's distinction between supplied facts and proposed methods.
+Claude still fails the missing-input case by treating synthetic intents as exempt
+from the normal content requirements. The run took 267.731 seconds, 12 calls and
+61,245 peak input tokens. Further native runs stopped; the next bounded correction
+addresses test-copy applicability. Work and verification remain incomplete.
+
+The [candidate18 assessment](evidence/WO-HAG-011/direct-input-qualification-assessment.md)
 records candidate18's direct task delivery, bounded recovery and readiness wording.
 The first Claude missing-input diagnostic fails: it treats verification preparation
 as a supported operational benefit and calls the intent complete. Further native
