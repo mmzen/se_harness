@@ -14,8 +14,17 @@ The clarification procedure produces transient discussion, not a formal artifact
 Use its requester-confirmation process and reuse an existing matching confirmation.
 An instruction to create a draft does not supply the inputs that procedure requires.
 Do not import, open a draft context or create a template merely to ask a question.
-If the requester is unavailable, report the unanswered questions using the
-clarification branch in **Report and recover**. This adds no lifecycle checkpoint.
+For a clarification stop, include three short parts in the final reply:
+
+- **Actions:** State whether any hosted change was attempted. Include observed
+  failures or denials.
+- **Known inputs:** Keep existing definitions and supplied scope limits.
+- **Questions:** Ask only for missing facts needed now.
+
+This retained reply is the transient report only if no hosted mutation command
+was invoked. Refused or denied mutation commands are still attempts. Missing
+observations do not prove that none occurred. Otherwise use **Report and recover**. The clarification reply
+needs no duplicate file or new lifecycle checkpoint.
 
 For a requested intent, consult `docs/engineering/ARTIFACT_AUTHORING.md#intent`
 when identifying missing content. Read other prerequisites when their stated
@@ -92,15 +101,10 @@ history, decisions and evidence stay immutable. Resolve blocked reads first.
 
 ## Report and recover
 
-For a clarification-only stop before any hosted mutation command was invoked,
-use the retained final reply as the transient report. State the missing inputs
-and questions, that no hosted change was attempted, and any observed failures or
-denials. No duplicate file is needed. A refused or denied mutation command is
-still an attempt; missing observations do not prove that none occurred.
-
-Otherwise retain complete requests/results and one short report outside the
-repository, including after a mutation attempt or uncertain effect. Read required
-omitted findings. The report contains:
+For the clarification reply, use **Select the current step**. Otherwise retain
+complete requests/results and one short report outside the repository, including
+after a mutation attempt or uncertain effect. Read required omitted findings.
+The report contains:
 
 - **Content readiness:** complete, incomplete or blocked against the selected
   type checklist. Give the supported content or exact missing input; saving alone
