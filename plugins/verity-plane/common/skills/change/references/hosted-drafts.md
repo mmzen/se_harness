@@ -29,20 +29,30 @@ requires its unique `#procedure` parent, not the later typed-step index.
 
 ## Decide whether the inputs support a draft
 
-Before creating a draft, inspect the request and the existing definitions needed
-for its claims. Apply the selected type checklist to those inputs:
+Before create or revise, check each required claim against the request and
+definitions already read:
 
-| Input check | Proceed only with a supported answer |
+| Content | Source or authoring authority |
 | --- | --- |
-| Existing coverage | Read the definitions for the claimed gap. For missing behavior or checks, inspect the relevant requirements, specifications and verification contracts. Source code or a same-type record cannot establish that those definitions are absent. |
-| Purpose and measure | For an intent, identify the requested improvement in the user's situation and how the owner will observe that benefit. Producing an artifact or confirming an expected program output alone describes preparation or verification, not an operational benefit. If the sources do not supply the benefit or its measure, ask for that input. |
-| Planned evidence | For a verification plan, name the check, pass condition and complete proposed evidence path, including its filename. Resolve any work-order directory used in that path. Distinguish the proposed destination from existing evidence or authority to execute. |
+| User problem, improvement, success measure, or existing gap | Require a source that supplies it. A creation request does not supply missing facts. |
+| Proposed method, check, or evidence destination | Choose within the requested design scope. Label it as planned, without claiming observation or execution. |
 
-**If a required answer is missing, report the unanswered question and stop the
-dependent writing before create or revise.** A partial draft may omit unsupported
-content; it must not assert it. A creation request does not supply missing facts.
-Report a type/outcome mismatch without inventing a benefit or changing type.
-Unassessed coverage does not establish absence. Use the same report described below.
+For an **intent**, identify the change in the user's situation and how the owner
+will observe whether it helped. Producing a record, running a check or confirming
+output describes an engineering activity. Do not invent an operational purpose
+to make it fit the template. An unmeasured baseline cannot supply a missing
+outcome or measure.
+
+Before claiming a coverage gap, read the applicable requirements, specifications
+and verification contracts. Code or one same-type record cannot establish their
+absence. For a verification plan, derive expected values from definitions; name
+the check, pass condition and complete proposed evidence path, including filename.
+Resolve any work-order directory in that path.
+
+For a missing required fact, state the question and stop dependent writing.
+A partial draft may omit it and remain incomplete. An unsupported required claim
+cannot become a non-blocking observation. Report a type/outcome mismatch without
+changing type. Use the existing report below.
 
 ## Author and submit supported content
 
