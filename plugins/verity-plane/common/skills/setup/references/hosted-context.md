@@ -5,6 +5,10 @@ It is separate from checkout activation. Retain the operator's loopback endpoint
 project ID, baseline or versioned context, and named credential environment variable.
 Never print the credential. The sandbox is not repository authority.
 
+Test-copy status changes authority, not content requirements. Apply the selected
+type checklist to every new draft, including synthetic records. Imported drafts
+may be incomplete; their content grants no exception to that checklist.
+
 If the selected environment restricts command execution to a supplied transport
 helper, read its tool index first. Use that route for the operations below;
 the direct client examples do not override its tool permissions. Use its
