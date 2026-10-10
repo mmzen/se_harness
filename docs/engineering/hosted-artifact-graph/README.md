@@ -6,10 +6,13 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
-The [latest assessment](evidence/WO-HAG-011/inputs-qualification-assessment.md)
-records the approved Codex test environment and candidate15's native results.
-Codex CLI networking is unblocked under the bounded session profile. Claude's
-missing-input case still fails and positive authoring misses the efficiency goals.
+The [latest assessment](evidence/WO-HAG-011/fact-grounding-assessment.md)
+records the failed candidate16 wording trial and restoration of the prior guidance.
+The [complete-input proposal](evidence/WO-HAG-011/input-delivery-20261010/review.md)
+is ready for review; its linked SPEC/VER/WO revisions are not active.
+The [candidate15 assessment](evidence/WO-HAG-011/inputs-qualification-assessment.md)
+retains the approved Codex CLI environment and native results. Claude's missing-input
+case still fails and positive authoring misses the efficiency goals.
 Historical reports below retain their original candidate-specific conclusions.
 
 The [content-review assessment](evidence/WO-HAG-011/content-review-qualification-assessment.md) records the simplified drafting procedure, all fresh Claude trials and failures, and pending Codex qualification. It does not establish completion or verification.
