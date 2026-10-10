@@ -14,8 +14,8 @@ The clarification procedure produces transient discussion, not a formal artifact
 Use its requester-confirmation process and reuse an existing matching confirmation.
 An instruction to create a draft does not supply the inputs that procedure requires.
 Do not import, open a draft context or create a template merely to ask a question.
-If the requester is unavailable, retain the unanswered questions and report the
-missing input. This does not create a new approval or lifecycle checkpoint.
+If the requester is unavailable, report the unanswered questions using the
+clarification branch in **Report and recover**. This adds no lifecycle checkpoint.
 
 For a requested intent, consult `docs/engineering/ARTIFACT_AUTHORING.md#intent`
 when identifying missing content. Read other prerequisites when their stated
@@ -52,10 +52,10 @@ Compare the requested type's required content with the request and definitions:
 | User problem, improvement, success measure, existing gap | Require a source that supplies it. A creation request supplies no missing fact. |
 | Proposed method, check, evidence destination | Choose within the requested design scope; label it planned. |
 
-For an intent, identify the change in the user's situation and how the owner
-will observe whether it helped. Producing a record, running a check or confirming
-output is an engineering activity; do not invent an operational purpose.
-An unmeasured baseline cannot supply a missing outcome or measure.
+For an intent, ask which change in the user's situation is needed and how the
+owner will know it helped, when those inputs are missing. An audience name or
+replacement output alone does not answer those questions. Reuse supplied answers;
+do not invent a purpose or measure from an engineering activity or baseline.
 
 Before claiming a coverage gap, read the applicable requirements, specifications
 and verification contracts. Code or one same-type record cannot establish their
@@ -92,8 +92,15 @@ history, decisions and evidence stay immutable. Resolve blocked reads first.
 
 ## Report and recover
 
-Retain complete requests and results in files. Read required omitted findings.
-Keep one short transient report outside the repository:
+For a clarification-only stop before any hosted mutation command was invoked,
+use the retained final reply as the transient report. State the missing inputs
+and questions, that no hosted change was attempted, and any observed failures or
+denials. No duplicate file is needed. A refused or denied mutation command is
+still an attempt; missing observations do not prove that none occurred.
+
+Otherwise retain complete requests/results and one short report outside the
+repository, including after a mutation attempt or uncertain effect. Read required
+omitted findings. The report contains:
 
 - **Content readiness:** complete, incomplete or blocked against the selected
   type checklist. Give the supported content or exact missing input; saving alone
@@ -110,7 +117,7 @@ does not invalidate your separate review; an empty `incomplete` list does not
 complete it. Name the method: source inspection, executed test or evaluator check.
 Planned checks are not executed tests. Keep report and final reply consistent
 about readiness and actual checks. Use only confirmed paths/digests.
-After compaction, reuse this report to locate evidence and obtain fresh context.
+After compaction, recover the retained reply or report and obtain fresh context.
 
 For stale input, inspect the selection without silently refreshing versions.
 For an uncertain reply or capture failure, look up `remote operation --key KEY`

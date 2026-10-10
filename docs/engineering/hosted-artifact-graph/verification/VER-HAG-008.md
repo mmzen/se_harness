@@ -114,6 +114,24 @@ claim fails. Review any saved document through a separate service read; keep
 all imported records unchanged. Include every failed or denied native call,
 even after recovery. A false zero-failure claim fails independently of content.
 
+For new trials after this revision is activated, assess the report form under
+SPEC-HAG-008 / HAG-EFF-004. A retained final reply can satisfy the report obligation
+only for a clarification-only stop with no attempted hosted mutation. Inspect
+the complete captured calls, including refusals and denials, and independently
+read the fresh project's state. Missing capture or an attempted mutation requires
+the existing saved-report/recovery assessment; do not infer eligibility from an
+unchanged project version or the agent's statement. Retain actual failures and
+the reason for the branch decision in the ordinary independent assessment.
+
+The content criterion above is unchanged: the questions must identify the missing
+agreed change in the user's situation and how the owner will know it helped.
+Asking only for an audience and replacement output text does not establish those
+inputs. Do not supply the expected answer or this case's missing inputs to the
+native agent. No extra questions are required for inputs already supplied.
+
+The previous claude-161 trial remains failed under its original contract. This
+amendment neither regrades it nor counts it as the first passing new trial.
+
 #### EFF-04B — Complete one applicable verification contract
 
 Use this requested outcome, with only fixture paths and host identity substituted:
@@ -303,3 +321,14 @@ The activation record must identify the actual human decision and exact
 before/after digests before this revision governs work. Earlier evidence keeps
 its original definition and task references. No machine relation or lifecycle
 event is invented by this link.
+
+## Linked clarification-report revision
+
+This revision preserves the complete accepted VER-HAG-008 at commit
+`7f664d04f69f53fc91287e6c5b71575dfcf9d385`, SHA-256 `c8f66f5cb9aae1dad242653fdcec64a47ceb07b8bb6e6301fe46d67ce7ca4f49`, and recorded
+state `approved` in
+`../evidence/WO-HAG-011/clarification-contract-20261010/VER-HAG-008.accepted.txt`.
+Before this revision governs work, retain the actual human decision, exact
+before/after digests and its effect on WO-HAG-011 in the activation record.
+Earlier evidence keeps its original definition and verdict. This link creates
+no machine relation or lifecycle event.

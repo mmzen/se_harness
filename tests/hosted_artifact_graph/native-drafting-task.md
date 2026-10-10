@@ -43,10 +43,10 @@ those observations into another JSON file or calculate final metrics during the
 run. Use the observations command before an exhaustive failure claim; its
 in-progress snapshot does not include subsequent calls.
 
-Keep one short `native-report.md` in WORK_DIRECTORY, using the selected plugin's
-`change/references/hosted-drafts.md` result fields and readiness rules.
-This is also the transient progress note. Keep the final reply consistent with it.
-Link original evidence instead of reproducing it. Do not write a separate
-native-observations.json or read inventory. End with a brief result and the report
-path. No complete NQ-01 through NQ-05 claim: lifecycle, MCP parity, reply recovery
+Use the selected plugin's `change/references/hosted-drafts.md` reporting branch.
+For its clarification-only branch, the captured final reply is the report.
+Otherwise keep one short `native-report.md` in WORK_DIRECTORY, using that guide's
+fields and readiness rules. This is also the transient progress note; keep the
+final reply consistent with it and include its path. Link original evidence.
+Do not write a separate native-observations.json or read inventory. No complete NQ-01 through NQ-05 claim: lifecycle, MCP parity, reply recovery
 and export are outside this focused diagnostic.

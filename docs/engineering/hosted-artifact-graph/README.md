@@ -7,9 +7,10 @@ This package covers the first complete hosted context and draft-authoring sandbo
 ## Authoring simplification in progress
 
 The [clarification-report amendment](evidence/WO-HAG-011/clarification-contract-20261010/review.md)
-proposes retaining the final reply instead of a duplicate file only before any
-hosted mutation attempt. It preserves the missing-input content criteria and
-previous failures. The proposal is not active; no new qualification is claimed.
+is approved and [activated](evidence/WO-HAG-011/clarification-contract-20261010/activation.json).
+It permits the retained final reply only for clarification stops before any hosted
+mutation attempt. Content criteria and previous failures remain unchanged. The
+next fresh Claude case is pending; no new qualification is claimed.
 
 The [clarification-route assessment](evidence/WO-HAG-011/clarification-route-assessment.md)
 records candidate22. Claude asks for clarification and makes no service write:

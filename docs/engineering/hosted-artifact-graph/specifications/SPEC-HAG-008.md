@@ -118,6 +118,26 @@ independent reads; preserve the order and authorization of dependent mutations.
 An explicit read/receipt lookup remains available even if the preceding result
 already contains the useful fields.
 
+For a clarification-only stop before any hosted mutation is attempted, the
+retained final reply MAY serve as the transient report. No duplicate report
+file is required. The reply MUST state the exact missing input and questions,
+that no hosted change was attempted, and any observed failures or denials.
+Applicable content and evidence rules still apply.
+
+A mutation attempt starts when a mutation command is invoked, even if local
+validation or host permissions refuse it before sending. This includes import,
+draft-context creation, artifact creation or revision, freezing and lifecycle
+actions. After any such attempt, or when its effect is uncertain, keep the
+existing saved report, full command evidence and recovery duties. A read-only
+request is not a mutation attempt. Unknown or missing observations cannot prove
+that none occurred.
+
+Native qualification MUST retain the final reply and actual calls. Independent
+review MUST confirm that the clarification-only conditions hold; the agent's
+claim or an unchanged project version alone is insufficient. If the final reply
+is not retained, the qualification evidence is incomplete. This rule changes
+only the report's medium, not content readiness, recovery or decision authority.
+
 **HAG-EFF-005.** Measure duration as well as context.
 
 Keep Opus10 as historical evidence: 673.18 seconds, 56 native tool calls and
@@ -140,7 +160,7 @@ task, fixture, permissions, candidate and fresh-project work match. Include impo
 draft creation and final reporting inside the clock. Report preparation/build time
 separately. An existing-project trial is a separate case.
 
-Measure session start through final saved output/report. Retain calls, model turns,
+Measure session start through the retained final reply or required saved output/report. Retain calls, model turns,
 provider-reported peak context, initial context, failures and retries. Record tool
 durations only where observable; leave provider time unclassified. A visible-call
 lower bound is not an exact total. A stopped or incomplete draft is not positive
@@ -250,3 +270,14 @@ The activation record must identify the actual human decision and exact
 before/after digests before this revision governs work. Earlier evidence keeps
 its original definition and task references. No machine relation or lifecycle
 event is invented by this link.
+
+## Linked clarification-report revision
+
+This revision preserves the complete accepted SPEC-HAG-008 at commit
+`7f664d04f69f53fc91287e6c5b71575dfcf9d385`, SHA-256 `666dd2a7cac256b6d3f97b86a95819eab7ee5adf7d85572dd06e786b71b7c77b`, and recorded
+state `approved` in
+`../evidence/WO-HAG-011/clarification-contract-20261010/SPEC-HAG-008.accepted.txt`.
+Before this revision governs work, retain the actual human decision, exact
+before/after digests and its effect on WO-HAG-011 in the activation record.
+Earlier evidence keeps its original definition and verdict. This link creates
+no machine relation or lifecycle event.

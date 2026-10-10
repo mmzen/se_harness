@@ -174,6 +174,24 @@ Retain an explanation of private-reasoning/credential omissions when applicable.
 Keep transient plans and helper scripts outside the repository. Preserve historical
 evidence bytes; no correction to an old report may erase its original observation.
 
+## Bounded clarification-report revision
+
+Implement the linked SPEC-HAG-008 / VER-HAG-008 reporting revision only after
+its human approval and recorded activation. Within the existing paths, update
+the hosted drafting guide and native task's result instructions. A retained final
+reply replaces the duplicate report file only for the defined clarification-only
+branch. Keep report/recovery duties after any attempted mutation or uncertain
+effect. Preserve content criteria, all earlier verdicts and captured failures.
+
+Make the existing intent questions explicit at the clarification step: identify
+the missing agreed user outcome and how the owner will observe success. Reuse
+confirmed inputs. Do not add the test answer, new lifecycle gates, driver options,
+dependencies or a second report generator.
+
+Rerun the existing sequence: one fresh Claude EFF-04A2; stop if it fails. After a
+pass, run Codex EFF-04A2 with its boundary probes, then the existing EFF-04B sequence.
+Required commit-bound verification and full WO-HAG-009/010 qualification remain.
+
 ## Stop and escalate conditions
 
 Stop affected work for a new path/component, changed accepted meaning, missing
@@ -302,3 +320,14 @@ The activation record must identify the actual human decision and exact
 before/after digests before this revision governs work. Earlier evidence keeps
 its original definition and task references. No machine relation or lifecycle
 event is invented by this link.
+
+## Linked clarification-report revision
+
+This revision preserves the complete accepted WO-HAG-011 at commit
+`7f664d04f69f53fc91287e6c5b71575dfcf9d385`, SHA-256 `b2908dad0135edab3c2d88f963063ab59352832e8102d899c04d0641b0db1e55`, and recorded
+state `in_progress` in
+`../evidence/WO-HAG-011/clarification-contract-20261010/WO-HAG-011.accepted.txt`.
+Before this revision governs work, retain the actual human decision, exact
+before/after digests and its effect on WO-HAG-011 in the activation record.
+Earlier evidence keeps its original definition and verdict. This link creates
+no machine relation or lifecycle event.
