@@ -1,30 +1,4 @@
-## Check the facts before drafting
-
-Read the request and the existing definitions needed for each claim. Keep three
-things separate: what a source states, its lifecycle state, and what is unknown.
-A draft or untested definition is still an existing record. Do not describe it
-as absent, or invent a problem to justify the requested new artifact.
-
-Apply the selected type's checklist before creating or revising:
-
-- For an intent, establish the present problem, affected user, wanted improvement
-  and how the owner will observe that benefit. An output check alone does not
-  establish an operational benefit. Ask for facts the sources do not provide.
-- For missing behavior or checks, inspect the relevant requirement, specification
-  and verification contract. Code or a same-type record cannot establish absence.
-- For a verification plan, define the check, pass condition and complete proposed
-  evidence filename. Resolve any work-order directory; distinguish planned
-  evidence from existing results and execution authority.
-
-If required input is missing, state the unanswered question in the transient
-report and stop dependent writing. A partial draft may retain supported facts
-and identify unknowns; it must not replace unknowns with plausible statements.
-Before saving, compare its problem and outcome claims with the inspected sources.
-Correct contradictions in the draft itself; an incomplete label in the report
-does not correct false content. Report a type/outcome mismatch without choosing
-a different type or inventing a benefit.
-
-## Read the applicable instructions once
+## Read the selected instructions once
 
 Complete [Hosted selection](../../setup/references/hosted-context.md) once for
 the unchanged selection. Use its separate candidate client and exact baseline
@@ -47,11 +21,28 @@ only when needed; the released evaluator selects the next step.
 
 Reuse exact sections already supplied with source identity. For missing sections,
 use the selected resource root and known IDs; request independent sections together.
-Group independent known file paths into one bounded read. Read their complete
+Batch independent file reads when their exact paths are known. Read their complete
 content; pointers alone do not prove reading. Look up only unknown paths. A missing,
 ambiguous or changed source stops that read.
 For released 0.22.1, the repeated `CONTINUE.md#continue-selected-work` heading
 requires its unique `#procedure` parent, not the later typed-step index.
+
+## Decide whether the inputs support a draft
+
+Before creating a draft, inspect the request and the existing definitions needed
+for its claims. Apply the selected type checklist to those inputs:
+
+| Input check | Proceed only with a supported answer |
+| --- | --- |
+| Existing coverage | Read the definitions for the claimed gap. For missing behavior or checks, inspect the relevant requirements, specifications and verification contracts. Source code or a same-type record cannot establish that those definitions are absent. |
+| Purpose and measure | For an intent, identify the requested improvement in the user's situation and how the owner will observe that benefit. Producing an artifact or confirming an expected program output alone describes preparation or verification, not an operational benefit. If the sources do not supply the benefit or its measure, ask for that input. |
+| Planned evidence | For a verification plan, name the check, pass condition and complete proposed evidence path, including its filename. Resolve any work-order directory used in that path. Distinguish the proposed destination from existing evidence or authority to execute. |
+
+**If a required answer is missing, report the unanswered question and stop the
+dependent writing before create or revise.** A partial draft may omit unsupported
+content; it must not assert it. A creation request does not supply missing facts.
+Report a type/outcome mismatch without inventing a benefit or changing type.
+Unassessed coverage does not establish absence. Use the same report described below.
 
 ## Author and submit supported content
 
@@ -69,9 +60,10 @@ automatic allocation needs an existing domain with an evaluable ID token.
 
 After create, inspect `--include-document` or [read the exact revision](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
 The option reads and saves the template without another mutation. Findings are
-not the document. Fill the template and review it against the type checklist.
-Remove duplicate checks and constraints absent from the definitions. For
-verification, confirm each assertion tests its stated pass condition.
+not the document. Fill only supported content. Review the text against the type
+checklist before submission: remove unsupported claims, duplicate checks and
+constraints absent from the definitions. For verification, confirm each assertion
+tests its stated pass condition. Record the review in the existing report.
 Resolve or report a blocked read before continuing.
 
 Submit the full UTF-8 file through `revise-artifact`. Inspect the actual document,
@@ -90,13 +82,15 @@ concluding. Keep one short transient report outside the repository:
   missing inputs or uncertain effects, and the returned procedure/step if available.
 
 Draft validation checks template shape and required links. An empty `incomplete`
-list is not a content verdict; the agent performs the content review.
+list or a complete findings display is not a content verdict. The client's
+`draft_review` states that limit; the agent must perform the content review.
 Reuse the report after compaction to locate evidence and obtain fresh context.
 
-Report the observed method: inspection, executed test or evaluator check. Include
-failed and denied calls after recovery. Link mechanical observations and exact
-evidence instead of copying their fields into the report. Use them before an
-exhaustive failure claim. Add content findings and limits; omit unconfirmed values.
+Report the observed method: source inspection, executed test or evaluator check.
+Include failed and denied calls after recovery. Use mechanical observations before
+an exhaustive failure claim; link them rather than rewriting inventories or metrics.
+Add content findings and limits to the same report. Use exact evidence paths and
+confirmed inventory digests; omit unconfirmed values.
 
 After stale input, inspect the current selection; do not silently refresh versions.
 After an uncertain reply or capture failure, inspect `remote operation --key KEY`
