@@ -30,6 +30,9 @@ client wheel. The client constructs the existing request and verifies its identi
 | `create-artifact` | `--context UUID --context-version N --domain NAME --artifact-type TYPE`; optional `--artifact ID --include-document` |
 | `revise-artifact` | `--context UUID --context-version N --artifact ID --expected-revision REVISION --document-file FILE` |
 
+Hosted `create-artifact` allocates the ID and writes the draft in one operation.
+It has no `--dry-run` option; the local repository preview command does not apply.
+
 The client never refreshes a version or retries a mutation on its own. Typed and
 raw input cannot be mixed. Documents are exact UTF-8 files. No manual base64 or
 copied client digest is needed. `--include-document` adds one read of the exact

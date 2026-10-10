@@ -6,6 +6,12 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
+The [next correction review](evidence/WO-HAG-011/diagnostic-review-20261010/review.md)
+proposes a separately identified missing-input task and clarifies the hosted
+command route. Its three linked artifact revisions are pending approval; active
+definitions and historical verdicts are unchanged. The instruction clarification
+uses existing scope. No new native qualification result is claimed.
+
 The [latest assessment](evidence/WO-HAG-011/test-copy-qualification-assessment.md)
 records candidate20's clarification that synthetic drafts use the normal checklist.
 Claude still fails content review and omits one failed call from its report.
