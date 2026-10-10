@@ -1,0 +1,127 @@
+{
+  "archive": "proctor-evidence.zip",
+  "sha256": "fbc094e0840b91208e857229e5d8419b4856a4351f18e0306470ad78a2ed5ce8",
+  "files": [
+    {
+      "path": "checks/claude-auth-review.json",
+      "bytes": 138,
+      "sha256": "e0b39a4e28a198fea39f051f94187f248bbde95838212a81b7badb1218df792b"
+    },
+    {
+      "path": "checks/claude-version.json",
+      "bytes": 308,
+      "sha256": "e5772d877ae3fb4d94387616a2dc60b0e2c71648969d2036efa0978244843e68"
+    },
+    {
+      "path": "checks/codex-221-boundary-probe.json",
+      "bytes": 2303,
+      "sha256": "026578a7a70678787e5afa6781807ed1cfce7465d351be2cece3d978a915c182"
+    },
+    {
+      "path": "checks/codex-221-reads-boundary-probe.json",
+      "bytes": 2327,
+      "sha256": "1224b3260734af172c1746b17cec533c0e1b9a77c6f8249429644427dfdcd1d1"
+    },
+    {
+      "path": "checks/codex-auth-review.json",
+      "bytes": 137,
+      "sha256": "f353977e30462577cd525c92988467c1470974ead74da8a5150889e6262af5dd"
+    },
+    {
+      "path": "checks/codex-version.json",
+      "bytes": 352,
+      "sha256": "9266a293f74ace11f9d477b40e0674790a4d7bfc70f5c821ec68b1d49a48aff0"
+    },
+    {
+      "path": "checks/final-evidence-context-WO-HAG-009.json",
+      "bytes": 22299,
+      "sha256": "ef5d3f40712951de089e34bb0098b2a42471d0d049ec75480e38aa4f8d5e32d3"
+    },
+    {
+      "path": "checks/pr-before-evidence.json",
+      "bytes": 10435,
+      "sha256": "bc3bf78af6398c08d9bcc1abcc458ad88a800830a40e917737b283847d3fc64d"
+    },
+    {
+      "path": "components/candidate.json",
+      "bytes": 113,
+      "sha256": "35e1705f5c3038ed1503ab4138e8d31558b5301af35549adb549c9544d6e9121"
+    },
+    {
+      "path": "components/comparison.json",
+      "bytes": 19551,
+      "sha256": "2223574319eb9f76c3407ed07965ac531c5aa064b9e1ae620d79c5fddce55cd8"
+    },
+    {
+      "path": "drivers/hag_assess27.py",
+      "bytes": 4192,
+      "sha256": "abf3d552d3bddc2db9b352f8cc50815bdee7ff1bbef0a4631cad13309468580f"
+    },
+    {
+      "path": "drivers/hag_efficiency_close08.py",
+      "bytes": 1346,
+      "sha256": "998d35cb5293a9e03685134f7e592cf1b1e2de3d4cf0604764f239d7aff24add"
+    },
+    {
+      "path": "drivers/hag_full27.py",
+      "bytes": 9084,
+      "sha256": "8fc22acdc4d65d19bb2dda100c8af02519db63ec6d5b1f9a2405cb385b8d5469"
+    },
+    {
+      "path": "drivers/hag_full27_close.py",
+      "bytes": 476,
+      "sha256": "97e8f22ace264d4efe13c5af493cdb436962d0bde82efe4047477ce5bf40a321"
+    },
+    {
+      "path": "drivers/hag_full27_cost.py",
+      "bytes": 2925,
+      "sha256": "ac5b43e80c1f6cb2327c440d2a7b9d385d8b96a194c9bb7364b302f5512e18c6"
+    },
+    {
+      "path": "drivers/hag_full27_parity.py",
+      "bytes": 522,
+      "sha256": "e582443627f3db27090927f528d3ed5dd294e5ed678664ed11bacfac0f4ff5f6"
+    },
+    {
+      "path": "drivers/hag_full27_probe.py",
+      "bytes": 2654,
+      "sha256": "a4ac0d83c935228026b2d2c751c92a7c09be13ec487c32de84a7526f398346ba"
+    },
+    {
+      "path": "drivers/hag_full27_retain.py",
+      "bytes": 1579,
+      "sha256": "bb2d523d8e34e49b9975f82b00820ad003add7829b030dd1803b038a3da307bc"
+    },
+    {
+      "path": "drivers/hag_full27_review.py",
+      "bytes": 2532,
+      "sha256": "f19c9c8efcb19352223b0d3984e049f9c6839159100f1290b3d6c70c82852697"
+    },
+    {
+      "path": "drivers/hag_full27_trace.py",
+      "bytes": 3254,
+      "sha256": "d19f0cb205aa875d9e61274361205ef1d4854120e2d927dce484432c69009e20"
+    },
+    {
+      "path": "drivers/hag_native_parity19.py",
+      "bytes": 4818,
+      "sha256": "1000402cfa8f26240dfaa96c0711ebd7ec252af74c864ecdf74317753acd3e41"
+    },
+    {
+      "path": "drivers/hag_reads27.py",
+      "bytes": 8256,
+      "sha256": "eb274ab6e5c071ebd6b136eff95b510a9bb9d7f55306bd98e5cfdac2b390573e"
+    },
+    {
+      "path": "drivers/hag_retain26.py",
+      "bytes": 4400,
+      "sha256": "d37f266d694aa036e16d9a423e0806a6c9dd30a275f53d6b67161c7169dfcc32"
+    },
+    {
+      "path": "drivers/hag_supplement27.py",
+      "bytes": 2293,
+      "sha256": "04e4d7d4ac625fbff0a79b53af7e370f8ed0a7294b884227885f1663cf06e78d"
+    }
+  ],
+  "limits": "Selected proctor drivers and noncredential observations only. Authentication probes are summarized; provider logs and secrets are excluded."
+}

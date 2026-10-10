@@ -6,7 +6,14 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
-The [latest qualification](evidence/WO-HAG-011/compact-pointers-assessment.md)
+The [latest lifecycle assessment](evidence/WO-HAG-009/lifecycle27/assessment.md)
+records candidate27. Codex completed the test lifecycle; its 13 accepted operations
+and four native exports replayed independently. A separate fixed-view repeat
+matched all seven MCP read tools. Claude reached the 30-minute limit before
+verification and release. Combined qualification and verification remain pending;
+the report retains the failed observations and remaining simplification work.
+
+The [focused authoring assessment](evidence/WO-HAG-011/compact-pointers-assessment.md)
 records candidate26. Both missing-input cases and all three Claude plus one Codex
 draft-content reviews pass. Codex now retains the required fallback report.
 Claude context remains above the 40,000-token goal; time and call measurements
