@@ -20,7 +20,8 @@ The selection's tool_index is the single command and file-discovery reference.
 Read it before choosing syntax. Read only applicable procedure sections and
 the typed inputs (or raw schema) for the operation you select.
 
-Use native Read/Write/Edit and only approved_shell_argv_prefix for shell calls,
+Use native file tools or the tool index's bounded file-read operation, and only
+approved_shell_argv_prefix for shell calls,
 one helper call per invocation. No scripts, wrappers, pipes, loops, direct client
 calls or other shell commands. Normal permissions and hooks apply. Stop a denied
 action; do not change permissions or try alternate routes.

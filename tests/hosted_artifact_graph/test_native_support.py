@@ -12,11 +12,27 @@ from unittest.mock import patch
 from pathlib import Path
 
 from native_call import contained, remote_argv, main, read_json, lookup_file, find_file, result_fields, read_text_files
-from qualify_agents import prepare_output, instruction_entry, write_prompt, prompt_pointer
+from qualify_agents import prepare_output, instruction_entry, write_prompt, prompt_pointer, codex_loopback_options
 from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_loopback_profile_refuses_other_hosts_and_ambiguous_destinations(self):
+        for host, endpoint in [('claude','http://127.0.0.1:8000'),
+                ('codex','https://example.com:443'),('codex','http://localhost:8000'),
+                ('codex','http://127.0.0.1'),('codex','http://user@127.0.0.1:8000'),
+                ('codex','http://127.0.0.1:8000/path'),('codex','http://127.0.0.1:8000?x')]:
+            with self.subTest(host=host,endpoint=endpoint), self.assertRaises(ValueError):
+                codex_loopback_options(host,endpoint)
+        import tomllib
+        args=codex_loopback_options('codex','http://127.0.0.1:8000')
+        config=tomllib.loads('\n'.join(args[1::2]))
+        profile=config['permissions'][config['default_permissions']]
+        self.assertEqual(':workspace',profile['extends'])
+        self.assertTrue(config['features']['network_proxy'])
+        self.assertEqual({'127.0.0.1':'allow'},profile['network']['domains'])
+        self.assertEqual('auto_review',config['approvals_reviewer'])
+
     def test_batch_text_preserves_exact_selected_bytes_and_refuses_unsafe_inputs(self):
         import hashlib
         with tempfile.TemporaryDirectory() as directory:

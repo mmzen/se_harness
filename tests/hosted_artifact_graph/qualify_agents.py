@@ -178,10 +178,30 @@ def prompt_pointer(path):
             'This explicit test setup is not automatic startup-delivery evidence.')
 
 
+def codex_loopback_options(host, endpoint):
+    """Closed, explicitly selected test profile; never an automatic fallback."""
+    parsed = urllib.parse.urlsplit(endpoint)
+    if (host != 'codex' or parsed.scheme != 'http' or parsed.hostname != '127.0.0.1'
+            or not parsed.port or parsed.username or parsed.password or parsed.path
+            or parsed.query or parsed.fragment):
+        raise ValueError('Codex loopback profile requires an exact local HTTP endpoint')
+    settings = [
+        'windows.sandbox="mxc"', 'features.network_proxy=true',
+        'default_permissions="hag-loopback"',
+        'permissions.hag-loopback={extends=":workspace",network={enabled=true,'
+        'allow_local_binding=true,domains={"127.0.0.1"="allow"},'
+        'proxy_url="http://127.0.0.1:19991",socks_url="http://127.0.0.1:19992"}}',
+        'approval_policy="on-request"', 'approvals_reviewer="auto_review"',
+    ]
+    return [part for setting in settings for part in ('-c', setting)]
+
+
 def run(args):
     output = args.output.resolve()
     prepare_output(output, args.prepared_inputs)
     settings = json.loads(args.selection.read_text(encoding='utf-8'))
+    network_options = (codex_loopback_options(args.host, settings['endpoint'])
+                       if getattr(args, 'codex_loopback_network', False) else None)
     credentials = json.loads(args.credentials.read_text(encoding='utf-8'))
     secrets = [p['token'] for p in credentials['principals']]
     token = next(p['token'] for p in credentials['principals'] if p['id'] == 'operator')
@@ -235,13 +255,14 @@ def run(args):
                     + json.dumps(settings['approved_shell_argv_prefix']) + '\n```\n')
                 stream.write('\nUse one helper command per Bash call. Do not add a pipeline, a second\n'
                     'command (including echo), a shell wrapper or arbitrary Python. The tool\n'
-                    'result already reports the exit status. Use native Read/Write/Edit tools\n'
-                    'for files, including retained results. These are the existing tool limits.\n')
+                    'result already reports the exit status. Use native file tools or the\n'
+                    'tool index\'s bounded file-read operation, including for retained results.\n')
     plugin = Path(settings['plugin'])
     mcp_url = actual_endpoint + '/mcp'
     if args.host == 'codex':
         argv = [str(args.executable), '--no-daemon', 'exec', '--ephemeral', '--skip-git-repo-check',
-                '--json', '-C', str(output), '--approve-for-me',
+                '--json', '-C', str(output),
+                *(network_options if network_options is not None else ['--approve-for-me']),
                 '-c', 'plugins."verity-plane@se-harness".enabled=false',
                 '-c', f'mcp_servers.hag.url={json.dumps(mcp_url)}',
                 '-c', 'mcp_servers.hag.bearer_token_env_var="HAG_NATIVE_TEST_TOKEN"',
@@ -358,4 +379,6 @@ if __name__ == '__main__':
     parser.add_argument('--drop-reply',action='store_true')
     parser.add_argument('--prepared-inputs',action='store_true',help='Use an operator-staged inputs directory and empty work directory')
     parser.add_argument('--permission-settings',type=Path,help='Exact separately approved Claude session-only settings file')
+    parser.add_argument('--codex-loopback-network',action='store_true',
+                        help='Separately approved Windows MXC profile: workspace protections, local service, no external domains; qualify boundaries first. One Codex trial at a time (proxy ports 19991/19992).')
     raise SystemExit(run(parser.parse_args()))

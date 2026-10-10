@@ -1,0 +1,25 @@
+{
+  "schema": "manual-linked-amendment-v1",
+  "decided_by": "mmzen",
+  "recorded_by": "Codex",
+  "recorded_at": "2026-10-10T02:49:06.678324+00:00",
+  "review_commit": "15530192ba0a230c34384b98d86e4ffeb21055ba",
+  "decision": "Approve bounded amendment and qualification",
+  "question": "Approve the linked VER-HAG-008 / WO-HAG-011 amendment in PR #543 for disposable Codex tests: session-only sandbox networking to the local service, no allowed external destinations, and unchanged workspace file protections? MXC may allow other localhost services, so this is not port-level isolation. The exact invocation must pass boundary probes before testing; no global settings or app restart. This also authorizes the documented manual amendment, preserving the accepted versions.",
+  "mechanism": "Explicitly authorized manual amendment; released evaluator has no generic accepted-definition amendment command.",
+  "artifacts": [
+    {
+      "id": "VER-HAG-008",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+      "before_sha256": "e044db24389da3e318c40b97d58f634acccc989afc957d2b60479605369de1a2",
+      "proposed_sha256": "6c1b35ad722facd04047d436b6db0f264fb63064d52b0e9991f05c3213f577f9"
+    },
+    {
+      "id": "WO-HAG-011",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+      "before_sha256": "893c10a1e3835fd9565202e00ac6aa0c575b1c19d5cd59e88f6568c1c93cfae5",
+      "proposed_sha256": "992565fec8044b813a58827ba56b5412c25166567a256f226924ac79c62387e1"
+    }
+  ],
+  "unchanged": "Prior lifecycle events, approval and in_progress status, test outcomes and required verification; no lifecycle transition repeated."
+}

@@ -27,20 +27,7 @@ ambiguous or changed source stops that read.
 For released 0.22.1, the repeated `CONTINUE.md#continue-selected-work` heading
 requires its unique `#procedure` parent, not the later typed-step index.
 
-## Prepare and review one draft
-
-Use typed inputs from the supplied tool index or
-`docs/notes/harnessctl-reference.md#concise-hosted-authoring`. Do not also load
-raw schemas/help for documented fields. Choose the operation, target, expected
-versions, key and document. Supply the evaluator identity file; the client checks
-its installed wheel. Import is operator-only and uses the complete source manifest.
-
-Use `--typed --compact --record-directory NEW_DIRECTORY`, or the restricted
-helper's documented fields and permission route. Raw `--request FILE` instead
-requires its schema and referenced definitions, with source identity and constraints.
-Do not mix modes or manually encode typed documents. Freeze is raw-only and grants
-no approval. Explicit IDs allow a new domain; automatic allocation requires an
-existing domain with an evaluable ID token.
+## Decide whether the inputs support a draft
 
 Before creating a draft, inspect the request and the existing definitions needed
 for its claims. Apply the selected type checklist to those inputs:
@@ -51,19 +38,33 @@ for its claims. Apply the selected type checklist to those inputs:
 | Purpose and measure | For an intent, identify the requested improvement in the user's situation and how the owner will observe that benefit. Producing an artifact or confirming an expected program output alone describes preparation or verification, not an operational benefit. If the sources do not supply the benefit or its measure, ask for that input. |
 | Planned evidence | For a verification plan, name the check, pass condition and complete proposed evidence path, including its filename. Resolve any work-order directory used in that path. Distinguish the proposed destination from existing evidence or authority to execute. |
 
-If a required answer is missing, stop dependent writing and name the needed input.
-Keep any partial draft incomplete. A creation request does not supply missing
-content or waive the checklist. Report a type/outcome mismatch without inventing
-a benefit or changing type. Unassessed coverage does not establish absence.
+**If a required answer is missing, report the unanswered question and stop the
+dependent writing before create or revise.** A partial draft may omit unsupported
+content; it must not assert it. A creation request does not supply missing facts.
+Report a type/outcome mismatch without inventing a benefit or changing type.
+Unassessed coverage does not establish absence. Use the same report described below.
+
+## Author and submit supported content
+
+Use typed inputs from the tool index or
+`docs/notes/harnessctl-reference.md#concise-hosted-authoring`, without also loading
+raw schemas/help for documented fields. Choose the operation, target, versions,
+key and document. Supply the evaluator identity file; the client checks its wheel.
+Import is operator-only and uses the complete source manifest.
+
+Use `--typed --compact --record-directory NEW_DIRECTORY`, or the restricted
+helper's documented permission route. Raw `--request FILE` requires its schema
+and referenced definitions. Do not mix modes or encode typed documents manually.
+Freeze is raw-only and grants no approval. Explicit IDs permit a new domain;
+automatic allocation needs an existing domain with an evaluable ID token.
 
 After create, inspect `--include-document` or [read the exact revision](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
-The option performs one read and saves the template, with no further mutation.
-Creation findings are not the document. Complete the template from the supported
-inputs and check the finished text against the same type checklist. This is one
-content review, recorded in the existing report. For a verification contract,
-confirm that each proposed assertion actually tests its stated pass condition.
-Remove duplicate checks and constraints absent from the governing definitions.
-Resolve a blocked read or report it before continuing.
+The option reads and saves the template without another mutation. Findings are
+not the document. Fill only supported content. Review the text against the type
+checklist before submission: remove unsupported claims, duplicate checks and
+constraints absent from the definitions. For verification, confirm each assertion
+tests its stated pass condition. Record the review in the existing report.
+Resolve or report a blocked read before continuing.
 
 Submit the full UTF-8 file through `revise-artifact`. Inspect the actual document,
 versions, receipt and findings before starting another draft. Imported records,

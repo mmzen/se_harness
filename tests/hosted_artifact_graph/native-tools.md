@@ -2,7 +2,9 @@
 
 Use `selection.json` for the exact `approved_shell_argv_prefix` and absolute
 input/output paths. Append one helper operation per shell call. Use native
-Read/Write/Edit for files. Keep normal permissions: no wrappers, loops, pipes,
+Write/Edit for files; read with native Read or the documented `read-text` helper.
+Prefer one `read-text` call for independent files whose exact paths are known.
+Keep normal permissions: no wrappers, loops, pipes,
 directory listing, direct client commands or permission changes. This index
 describes capabilities; it supplies no workflow or finished artifact.
 

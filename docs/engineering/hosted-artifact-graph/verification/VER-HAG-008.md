@@ -5,7 +5,7 @@ title = "Check concise authoring without weakening evidence or authority"
 status = "approved"
 owners = ["mmzen"]
 created = "2026-10-08"
-updated = "2026-10-09"
+updated = "2026-10-10"
 
 [relations]
 verifies = ["REQ-HAG-014"]
@@ -198,3 +198,41 @@ remain unchanged. Earlier work and evidence keep that definition reference.
 The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
 identifies the actual human decision, before/after digests and effect on selected
 WO-HAG-011. This link proposes no new machine relation or lifecycle event.
+
+## Windows Codex qualification environment
+
+For subsequent Codex CLI trials, the operator MAY select session-only network
+permissions that permit the private hosted test service on Windows host loopback.
+Preserve the workspace filesystem boundaries, approval review, existing hooks,
+helper restriction and all content/evidence criteria. No full-access mode,
+unrestricted external networking, saved host setting, account change, plugin
+installation or restart of the active app is permitted by this amendment.
+
+Use the supported managed network proxy with no allowed external destinations.
+Retain its exact effective configuration. The MXC implementation may permit other
+host-loopback services; do not describe this as port-level isolation. The existing
+qualification helper still fixes the exact selected HAG endpoint and project.
+No test may contact another local service. This local exposure is part of the
+permission change presented to mmzen, not evidence of a narrower OS boundary.
+
+Before a new native qualification attempt, use bounded probes to establish that
+the selected HAG service is reachable, an unallowed external destination remains
+denied, workspace writes still work and writes outside the workspace remain
+denied. Probes send no credentials to an unallowed destination. If supported
+configuration cannot establish these properties, retain the failure and leave
+Codex qualification pending. Do not substitute a weaker boundary.
+
+Keep the original requested outcomes, selected model, exact candidate packages,
+agent-selected workflow operations and independent content assessment. Record the
+changed host environment and preserve earlier blocked trials. Compare performance
+only between trials with the same effective permission configuration. This change
+does not turn a blocked, skipped or unperformed case into a pass.
+
+## Linked Windows qualification revision
+
+This revision preserves the complete accepted VER-HAG-008 at commit `9d4034dc293b6f1de7919400d6f8cc1bda356dbd`
+with SHA-256 `e044db24389da3e318c40b97d58f634acccc989afc957d2b60479605369de1a2` in
+`../evidence/WO-HAG-011/codex-permissions-20261010/VER-HAG-008.accepted.txt`.
+The matching activation record must identify the actual human decision and exact
+before/after digests before this revision is applied. Earlier evidence keeps its
+original environment and definition references.

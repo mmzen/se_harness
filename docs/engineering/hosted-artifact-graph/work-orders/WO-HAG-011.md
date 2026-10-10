@@ -5,7 +5,7 @@ title = "Simplify hosted authoring instructions and client interaction"
 status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-08"
-updated = "2026-10-09"
+updated = "2026-10-10"
 
 [assurance]
 commit_bound_verification = "required"
@@ -219,3 +219,22 @@ remain unchanged. Earlier work and evidence keep that definition reference.
 The [activation record](../evidence/WO-HAG-011/amendment-20261009/activation.json)
 identifies the actual human decision, before/after digests and effect on selected
 WO-HAG-011. This link proposes no new machine relation or lifecycle event.
+
+## Bounded Windows Codex permission amendment
+
+The operator may implement and test the session-only Windows Codex qualification
+environment specified in VER-HAG-008's "Windows Codex qualification environment"
+section, within the existing native-driver and evidence paths. Its explicit
+permission grant applies only after mmzen accepts this proposed amendment.
+Current work remains in_progress. Earlier events, failures and verification
+criteria are preserved. No host-global configuration, permission bypass, human
+verification acceptance, merge or release is authorized.
+
+## Linked Windows qualification revision
+
+This revision preserves the complete accepted WO-HAG-011 at commit `9d4034dc293b6f1de7919400d6f8cc1bda356dbd`
+with SHA-256 `893c10a1e3835fd9565202e00ac6aa0c575b1c19d5cd59e88f6568c1c93cfae5` in
+`../evidence/WO-HAG-011/codex-permissions-20261010/WO-HAG-011.accepted.txt`.
+The matching activation record must identify the actual human decision and exact
+before/after digests before this revision is applied. Earlier evidence keeps its
+original environment and definition references.
