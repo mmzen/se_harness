@@ -1,0 +1,211 @@
+--- a/docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md
++++ b/docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md
+@@ -118,6 +118,26 @@
+ An explicit read/receipt lookup remains available even if the preceding result
+ already contains the useful fields.
+ 
++For a clarification-only stop before any hosted mutation is attempted, the
++retained final reply MAY serve as the transient report. No duplicate report
++file is required. The reply MUST state the exact missing input and questions,
++that no hosted change was attempted, and any observed failures or denials.
++Applicable content and evidence rules still apply.
++
++A mutation attempt starts when a mutation command is invoked, even if local
++validation or host permissions refuse it before sending. This includes import,
++draft-context creation, artifact creation or revision, freezing and lifecycle
++actions. After any such attempt, or when its effect is uncertain, keep the
++existing saved report, full command evidence and recovery duties. A read-only
++request is not a mutation attempt. Unknown or missing observations cannot prove
++that none occurred.
++
++Native qualification MUST retain the final reply and actual calls. Independent
++review MUST confirm that the clarification-only conditions hold; the agent's
++claim or an unchanged project version alone is insufficient. If the final reply
++is not retained, the qualification evidence is incomplete. This rule changes
++only the report's medium, not content readiness, recovery or decision authority.
++
+ **HAG-EFF-005.** Measure duration as well as context.
+ 
+ Keep Opus10 as historical evidence: 673.18 seconds, 56 native tool calls and
+@@ -140,7 +160,7 @@
+ draft creation and final reporting inside the clock. Report preparation/build time
+ separately. An existing-project trial is a separate case.
+ 
+-Measure session start through final saved output/report. Retain calls, model turns,
++Measure session start through the retained final reply or required saved output/report. Retain calls, model turns,
+ provider-reported peak context, initial context, failures and retries. Record tool
+ durations only where observable; leave provider time unclassified. A visible-call
+ lower bound is not an exact total. A stopped or incomplete draft is not positive
+@@ -250,3 +270,14 @@
+ before/after digests before this revision governs work. Earlier evidence keeps
+ its original definition and task references. No machine relation or lifecycle
+ event is invented by this link.
++
++## Linked clarification-report revision
++
++This revision preserves the complete accepted SPEC-HAG-008 at commit
++`7f664d04f69f53fc91287e6c5b71575dfcf9d385`, SHA-256 `666dd2a7cac256b6d3f97b86a95819eab7ee5adf7d85572dd06e786b71b7c77b`, and recorded
++state `approved` in
++`../evidence/WO-HAG-011/clarification-contract-20261010/SPEC-HAG-008.accepted.txt`.
++Before this revision governs work, retain the actual human decision, exact
++before/after digests and its effect on WO-HAG-011 in the activation record.
++Earlier evidence keeps its original definition and verdict. This link creates
++no machine relation or lifecycle event.
+--- a/docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md
++++ b/docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md
+@@ -113,6 +113,24 @@
+ claim fails. Review any saved document through a separate service read; keep
+ all imported records unchanged. Include every failed or denied native call,
+ even after recovery. A false zero-failure claim fails independently of content.
++
++For new trials after this revision is activated, assess the report form under
++SPEC-HAG-008 / HAG-EFF-004. A retained final reply can satisfy the report obligation
++only for a clarification-only stop with no attempted hosted mutation. Inspect
++the complete captured calls, including refusals and denials, and independently
++read the fresh project's state. Missing capture or an attempted mutation requires
++the existing saved-report/recovery assessment; do not infer eligibility from an
++unchanged project version or the agent's statement. Retain actual failures and
++the reason for the branch decision in the ordinary independent assessment.
++
++The content criterion above is unchanged: the questions must identify the missing
++agreed change in the user's situation and how the owner will know it helped.
++Asking only for an audience and replacement output text does not establish those
++inputs. Do not supply the expected answer or this case's missing inputs to the
++native agent. No extra questions are required for inputs already supplied.
++
++The previous claude-161 trial remains failed under its original contract. This
++amendment neither regrades it nor counts it as the first passing new trial.
+ 
+ #### EFF-04B — Complete one applicable verification contract
+ 
+@@ -303,3 +321,14 @@
+ before/after digests before this revision governs work. Earlier evidence keeps
+ its original definition and task references. No machine relation or lifecycle
+ event is invented by this link.
++
++## Linked clarification-report revision
++
++This revision preserves the complete accepted VER-HAG-008 at commit
++`7f664d04f69f53fc91287e6c5b71575dfcf9d385`, SHA-256 `c8f66f5cb9aae1dad242653fdcec64a47ceb07b8bb6e6301fe46d67ce7ca4f49`, and recorded
++state `approved` in
++`../evidence/WO-HAG-011/clarification-contract-20261010/VER-HAG-008.accepted.txt`.
++Before this revision governs work, retain the actual human decision, exact
++before/after digests and its effect on WO-HAG-011 in the activation record.
++Earlier evidence keeps its original definition and verdict. This link creates
++no machine relation or lifecycle event.
+--- a/docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md
++++ b/docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md
+@@ -174,6 +174,24 @@
+ Keep transient plans and helper scripts outside the repository. Preserve historical
+ evidence bytes; no correction to an old report may erase its original observation.
+ 
++## Bounded clarification-report revision
++
++Implement the linked SPEC-HAG-008 / VER-HAG-008 reporting revision only after
++its human approval and recorded activation. Within the existing paths, update
++the hosted drafting guide and native task's result instructions. A retained final
++reply replaces the duplicate report file only for the defined clarification-only
++branch. Keep report/recovery duties after any attempted mutation or uncertain
++effect. Preserve content criteria, all earlier verdicts and captured failures.
++
++Make the existing intent questions explicit at the clarification step: identify
++the missing agreed user outcome and how the owner will observe success. Reuse
++confirmed inputs. Do not add the test answer, new lifecycle gates, driver options,
++dependencies or a second report generator.
++
++Rerun the existing sequence: one fresh Claude EFF-04A2; stop if it fails. After a
++pass, run Codex EFF-04A2 with its boundary probes, then the existing EFF-04B sequence.
++Required commit-bound verification and full WO-HAG-009/010 qualification remain.
++
+ ## Stop and escalate conditions
+ 
+ Stop affected work for a new path/component, changed accepted meaning, missing
+@@ -302,3 +320,14 @@
+ before/after digests before this revision governs work. Earlier evidence keeps
+ its original definition and task references. No machine relation or lifecycle
+ event is invented by this link.
++
++## Linked clarification-report revision
++
++This revision preserves the complete accepted WO-HAG-011 at commit
++`7f664d04f69f53fc91287e6c5b71575dfcf9d385`, SHA-256 `b2908dad0135edab3c2d88f963063ab59352832e8102d899c04d0641b0db1e55`, and recorded
++state `in_progress` in
++`../evidence/WO-HAG-011/clarification-contract-20261010/WO-HAG-011.accepted.txt`.
++Before this revision governs work, retain the actual human decision, exact
++before/after digests and its effect on WO-HAG-011 in the activation record.
++Earlier evidence keeps its original definition and verdict. This link creates
++no machine relation or lifecycle event.
+--- a/plugins/verity-plane/common/skills/change/references/hosted-drafts.md
++++ b/plugins/verity-plane/common/skills/change/references/hosted-drafts.md
+@@ -14,8 +14,8 @@
+ Use its requester-confirmation process and reuse an existing matching confirmation.
+ An instruction to create a draft does not supply the inputs that procedure requires.
+ Do not import, open a draft context or create a template merely to ask a question.
+-If the requester is unavailable, retain the unanswered questions and report the
+-missing input. This does not create a new approval or lifecycle checkpoint.
++If the requester is unavailable, report the unanswered questions using the
++clarification branch in **Report and recover**. This adds no lifecycle checkpoint.
+ 
+ For a requested intent, consult `docs/engineering/ARTIFACT_AUTHORING.md#intent`
+ when identifying missing content. Read other prerequisites when their stated
+@@ -52,10 +52,10 @@
+ | User problem, improvement, success measure, existing gap | Require a source that supplies it. A creation request supplies no missing fact. |
+ | Proposed method, check, evidence destination | Choose within the requested design scope; label it planned. |
+ 
+-For an intent, identify the change in the user's situation and how the owner
+-will observe whether it helped. Producing a record, running a check or confirming
+-output is an engineering activity; do not invent an operational purpose.
+-An unmeasured baseline cannot supply a missing outcome or measure.
++For an intent, ask which change in the user's situation is needed and how the
++owner will know it helped, when those inputs are missing. An audience name or
++replacement output alone does not answer those questions. Reuse supplied answers;
++do not invent a purpose or measure from an engineering activity or baseline.
+ 
+ Before claiming a coverage gap, read the applicable requirements, specifications
+ and verification contracts. Code or one same-type record cannot establish their
+@@ -92,8 +92,15 @@
+ 
+ ## Report and recover
+ 
+-Retain complete requests and results in files. Read required omitted findings.
+-Keep one short transient report outside the repository:
++For a clarification-only stop before any hosted mutation command was invoked,
++use the retained final reply as the transient report. State the missing inputs
++and questions, that no hosted change was attempted, and any observed failures or
++denials. No duplicate file is needed. A refused or denied mutation command is
++still an attempt; missing observations do not prove that none occurred.
++
++Otherwise retain complete requests/results and one short report outside the
++repository, including after a mutation attempt or uncertain effect. Read required
++omitted findings. The report contains:
+ 
+ - **Content readiness:** complete, incomplete or blocked against the selected
+   type checklist. Give the supported content or exact missing input; saving alone
+@@ -110,7 +117,7 @@
+ complete it. Name the method: source inspection, executed test or evaluator check.
+ Planned checks are not executed tests. Keep report and final reply consistent
+ about readiness and actual checks. Use only confirmed paths/digests.
+-After compaction, reuse this report to locate evidence and obtain fresh context.
++After compaction, recover the retained reply or report and obtain fresh context.
+ 
+ For stale input, inspect the selection without silently refreshing versions.
+ For an uncertain reply or capture failure, look up `remote operation --key KEY`
+--- a/tests/hosted_artifact_graph/native-drafting-task.md
++++ b/tests/hosted_artifact_graph/native-drafting-task.md
+@@ -43,10 +43,10 @@
+ run. Use the observations command before an exhaustive failure claim; its
+ in-progress snapshot does not include subsequent calls.
+ 
+-Keep one short `native-report.md` in WORK_DIRECTORY, using the selected plugin's
+-`change/references/hosted-drafts.md` result fields and readiness rules.
+-This is also the transient progress note. Keep the final reply consistent with it.
+-Link original evidence instead of reproducing it. Do not write a separate
+-native-observations.json or read inventory. End with a brief result and the report
+-path. No complete NQ-01 through NQ-05 claim: lifecycle, MCP parity, reply recovery
++Use the selected plugin's `change/references/hosted-drafts.md` reporting branch.
++For its clarification-only branch, the captured final reply is the report.
++Otherwise keep one short `native-report.md` in WORK_DIRECTORY, using that guide's
++fields and readiness rules. This is also the transient progress note; keep the
++final reply consistent with it and include its path. Link original evidence.
++Do not write a separate native-observations.json or read inventory. No complete NQ-01 through NQ-05 claim: lifecycle, MCP parity, reply recovery
+ and export are outside this focused diagnostic.
