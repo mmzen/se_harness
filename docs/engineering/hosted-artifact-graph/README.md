@@ -6,7 +6,14 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
-The [latest assessment](evidence/WO-HAG-011/grounded-input-qualification-assessment.md)
+The [latest assessment](evidence/WO-HAG-011/test-copy-qualification-assessment.md)
+records candidate20's clarification that synthetic drafts use the normal checklist.
+Claude still fails content review and omits one failed call from its report.
+The run took 225.493 seconds, 12 calls and 58,920 peak input tokens. Further native
+tests stopped. The report proposes reviewing conflicting diagnostic and command
+cues before another candidate; no criterion or authority has changed.
+
+The [candidate19 assessment](evidence/WO-HAG-011/grounded-input-qualification-assessment.md)
 records candidate19's distinction between supplied facts and proposed methods.
 Claude still fails the missing-input case by treating synthetic intents as exempt
 from the normal content requirements. The run took 267.731 seconds, 12 calls and
