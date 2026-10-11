@@ -105,6 +105,8 @@ def summarize(root):
                 observed_reads.extend(helper_reads(item.get('command',''),item.get('aggregated_output',''),line))
     records=[]
     for path in sorted((root/'work').rglob('*.json')):
+        if path.is_dir() and not path.is_symlink():
+            continue
         if path.stat().st_size > 4*1024*1024:
             continue
         try:

@@ -377,6 +377,25 @@ class NativeCallBoundaries(unittest.TestCase):
             script.write_bytes(b'raise AssertionError("must not execute changed code")')
             with self.assertRaises(ValueError):observations(root,{'inputs_inventory':str(inventory)})
 
+    def test_observations_reads_records_inside_json_named_export_directory(self):
+        from native_call import observations
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);inputs=root/'inputs';inputs.mkdir()
+            exported=root/'work'/'export-earlier.json';exported.mkdir(parents=True)
+            (root/'events.jsonl').write_text('')
+            script=inputs/'summarize_native.py'
+            script.write_bytes(Path(__file__).with_name('summarize_native.py').read_bytes())
+            inventory=inputs/'inventory.json'
+            inventory.write_text(json.dumps({'files':[{'relative':script.name,'path':str(script),
+                'bytes':script.stat().st_size,'sha256':hashlib.sha256(script.read_bytes()).hexdigest()}]}))
+            (exported/'manifest.json').write_text(json.dumps({'schema':'export-fixture'}))
+            (exported/'failed-command.json').write_text(json.dumps({'argv':['client'],
+                'cwd':str(root),'exit':2,'stdout':'','stderr':'retained failure'}))
+            result=observations(root,{'inputs_inventory':str(inventory)})
+            self.assertEqual(1,len(result['failed_command_records']))
+            self.assertEqual(str(exported/'failed-command.json'),result['failed_command_records'][0]['path'])
+            self.assertEqual('not performed by this summary',result['content_review'])
+
     def test_section_resource_ids_and_legacy_inventory_names_resolve_same_source(self):
         import hashlib
         from native_call import instructions

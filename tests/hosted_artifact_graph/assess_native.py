@@ -105,6 +105,8 @@ def run(args):
         requests={}
         for path in sorted((args.native_root/'work').rglob('*.json')):
             if path.is_symlink():raise ValueError('Linked native input')
+            if path.is_dir():
+                continue
             if path.stat().st_size>4*1024*1024:continue
             try:value=json.loads(path.read_text(encoding='utf-8'))
             except (ValueError,UnicodeError):continue
