@@ -8,6 +8,12 @@ Keep normal permissions: no wrappers, loops, pipes,
 directory listing, direct client commands or permission changes. This index
 describes capabilities; it supplies no workflow or finished artifact.
 
+All records, their companion evidence and export destinations must be new paths
+under the selected `work/` directory. The helper refuses other output locations
+before executing the command. Use absolute paths from the selection; relative
+paths resolve from the native workspace root, so include `work/`.
+The observation index scans that same `work/` directory only.
+
 ## Draft mutations
 
 Prefer typed input for the operations below. This table supplies their CLI fields;

@@ -12,7 +12,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from native_call import contained, remote_argv, main, read_json, lookup_file, find_file, result_fields, read_text_files
+from native_call import contained, work_output, remote_argv, main, read_json, lookup_file, find_file, result_fields, read_text_files
 from qualify_agents import prepare_output, instruction_entry, write_prompt, prompt_pointer, codex_loopback_options, run as run_native
 from assess_native import semantic_assertions
 
@@ -452,7 +452,7 @@ class NativeCallBoundaries(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);document=root/'draft.md';document.write_bytes(b'exact')
             args=argparse.Namespace(operation='revise-artifact',request=None,key=None,destination=None,
-                typed=True,compact=True,include_document=False,record=str(root/'record.json'),
+                typed=True,compact=True,include_document=False,record=str(root/'work/record.json'),
                 document_file=str(document),operation_key='caller-key',expected_project_version='4',
                 context='caller-context',context_version='2',artifact='INT-TST-001',expected_revision='caller-revision')
             config={'endpoint':'http://127.0.0.1:18080','client_python':'candidate-python','project_id':'selected-project','client_wheel':'candidate.whl'}
@@ -460,7 +460,7 @@ class NativeCallBoundaries(unittest.TestCase):
                 argv=remote_argv(config,root,args)
                 self.assertEqual(str(document),argv[argv.index('--document-file')+1])
                 self.assertEqual('caller-key',argv[argv.index('--operation-key')+1])
-                self.assertEqual(str(root/'record.json.evidence'),argv[argv.index('--record-directory')+1])
+                self.assertEqual(str(root/'work/record.json.evidence'),argv[argv.index('--record-directory')+1])
                 self.assertNotIn('--request',argv)
             run.assert_not_called()
 
@@ -626,7 +626,7 @@ class NativeCallBoundaries(unittest.TestCase):
                 'client_python':'candidate-python','project_id':'selected-project'}))
             stdout='{"outcome":"refused","detail":"line one\\nline two"}\n'
             outcome=subprocess.CompletedProcess([],1,stdout,'actual diagnostic')
-            record=root/'result.json'; capture=io.StringIO()
+            record=root/'work/result.json'; capture=io.StringIO()
             with patch.dict(os.environ,{'HAG_NATIVE_WORK_DIRECTORY':str(root),
                     'HAG_NATIVE_SELECTION':str(selection),'HAG_NATIVE_TEST_TOKEN':'private-test-token'}), \
                  patch.object(sys,'argv',['helper','remote','status','--record',str(record)]), \
@@ -648,6 +648,51 @@ class NativeCallBoundaries(unittest.TestCase):
                  patch('native_call.subprocess.run') as run:
                 with self.assertRaises(ValueError):main()
             run.assert_not_called()
+
+    def test_output_boundary_refuses_before_command_or_observation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);selection=root/'selection.json'
+            selection.write_text('{}')
+            for operation in (['remote','status'],['assert-greeting'],['observations']):
+                for target in ['record','inputs/record','work/../record','work']:
+                    with self.subTest(operation=operation,target=target), \
+                         patch.dict(os.environ,{'HAG_NATIVE_WORK_DIRECTORY':str(root),
+                            'HAG_NATIVE_SELECTION':str(selection)}), \
+                         patch.object(sys,'argv',['helper',*operation,'--record',target]), \
+                         patch('native_call.subprocess.run') as run, \
+                         patch('native_call.observations') as observed:
+                        with self.assertRaisesRegex(ValueError,'work/'):main()
+                    run.assert_not_called();observed.assert_not_called()
+            self.assertEqual([selection],list(root.iterdir()))
+
+    def test_output_boundary_covers_export_and_compact_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            config={'endpoint':'http://127.0.0.1:18080','client_python':'candidate-python',
+                    'project_id':'selected-project','client_wheel':'candidate.whl'}
+            args=argparse.Namespace(operation='export',request=None,key=None,
+                destination='inputs/export',compact=False)
+            with self.assertRaisesRegex(ValueError,'work/'):remote_argv(config,root,args)
+            args.destination='work/export'
+            argv=remote_argv(config,root,args)
+            self.assertEqual(str(root/'work/export'),argv[argv.index('--destination')+1])
+            args.operation='status';args.destination=None;args.compact=True;args.record='capture'
+            with self.assertRaisesRegex(ValueError,'work/'):remote_argv(config,root,args)
+            self.assertEqual([],list(root.iterdir()))
+
+    def test_work_outputs_preserve_paths_and_reject_links_and_existing_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);work=root/'work';work.mkdir()
+            target=work/'nested/capture'
+            self.assertEqual(target,work_output(root,'work/nested/capture'))
+            self.assertEqual(target,work_output(root,target))
+            link=work/'linked';link.mkdir();is_link=Path.is_symlink
+            with patch.object(Path,'is_symlink',lambda path:path==link or is_link(path)):
+                with self.assertRaisesRegex(ValueError,'Linked'):work_output(root,link/'capture')
+            saved=work/'capture';saved.write_bytes(b'prior evidence')
+            with self.assertRaisesRegex(ValueError,'exists'):work_output(root,saved)
+            self.assertEqual(b'prior evidence',saved.read_bytes())
+            self.assertFalse(target.parent.exists())
 
     def test_receipt_key_order_is_incidental_but_state_is_not(self):
         value={'state':{'after':[{'id':'WO-T-001','status':'approved'}]},

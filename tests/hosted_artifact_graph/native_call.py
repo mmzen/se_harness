@@ -252,6 +252,15 @@ def contained(root, supplied, *, new=False):
     return path
 
 
+def work_output(root, supplied):
+    """Validate a new output before running a command or creating directories."""
+    path = contained(root, supplied, new=True)
+    work = (root/'work').resolve()
+    if path.resolve() == work or not path.resolve().is_relative_to(work):
+        raise ValueError('Output must be a new path under the selected work/ directory')
+    return path
+
+
 def remote_argv(config, root, args):
     endpoint = urllib.parse.urlsplit(config['endpoint'])
     if endpoint.scheme != 'http' or endpoint.hostname != '127.0.0.1' or endpoint.path or endpoint.username:
@@ -275,7 +284,7 @@ def remote_argv(config, root, args):
     if args.destination:
         if args.operation != 'export':
             raise ValueError('A destination is used only for export')
-        argv += ['--destination',str(contained(root,args.destination,new=True))]
+        argv += ['--destination',str(work_output(root,args.destination))]
     if getattr(args,'typed',False):
         argv += ['--typed']
     for option in TYPED_OPTIONS:
@@ -285,7 +294,7 @@ def remote_argv(config, root, args):
                 value = str(contained(root,value))
             argv += ['--'+option,str(value)]
     if getattr(args,'compact',False):
-        argv += ['--compact','--record-directory',str(contained(root,args.record+'.evidence',new=True))]
+        argv += ['--compact','--record-directory',str(work_output(root,args.record+'.evidence'))]
     if getattr(args,'include_document',False):
         argv += ['--include-document']
     return argv
@@ -385,11 +394,9 @@ def main():
         print(json.dumps(read_text_files(root,config,args.path,args.offset,args.limit)))
         return 0
     if args.kind == 'observations':
+        record = work_output(root,args.record) if args.record else None
         value = observations(root,config)
-        if args.record:
-            record = contained(root,args.record,new=True)
-            if not record.resolve().is_relative_to((root/'work').resolve()):
-                raise ValueError('Observation records must be new files under work/')
+        if record is not None:
             record.parent.mkdir(parents=True,exist_ok=True)
             with record.open('x',encoding='utf-8') as stream:
                 json.dump(value,stream,ensure_ascii=True,indent=2)
@@ -423,12 +430,12 @@ def main():
         print(json.dumps({'wheel':str(wheel),'sha256':hashlib.sha256(wheel.read_bytes()).hexdigest(),
                           'project_id':config['project_id'],'endpoint':config['endpoint']}))
         return 0
-    record = contained(root,args.record,new=True)
+    record = work_output(root,args.record)
     # Keep the original command record for independent replay. Give native file
     # tools a separate, unescaped copy of stdout; do not summarize the result or
     # choose the next operation for the agent. Check both destinations before
     # executing a potentially mutating request.
-    stdout_file = contained(root,record.with_name(record.name + '.stdout.txt'),new=True)
+    stdout_file = work_output(root,record.with_name(record.name + '.stdout.txt'))
     if args.kind == 'assert-greeting':
         source=Path(config['source_directory'])/'src/greeting.py'
         if hashlib.sha256(source.read_bytes()).hexdigest()!=config['greeting_sha256']:
