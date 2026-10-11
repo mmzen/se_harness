@@ -47,6 +47,14 @@ Apply the drafting procedure's prerequisites, including
 `ARTIFACT_AUTHORING.md#design-simplicity` and the type checklist. Use full type
 names such as `#intent`, `#verification`, or `#work_order`, not codes.
 
+For a release contract in a private lifecycle test, the source fixture commit
+is not the disposable Git candidate that verification will capture. Do not
+complete or approve a contract with a guessed candidate. If the final candidate
+is not yet known, defer completing and approving the contract. Take its exact
+`candidate_commit` from the final verified VREC, complete the release scope and
+evidence requirements, then obtain the contract's required decision. An explicitly
+supplied candidate constraint remains binding.
+
 The released `harnessctl ... REPO` examples act on repository files. Hosted work
 uses the selected tool index or `docs/notes/harnessctl-reference.md#concise-hosted-authoring`.
 Do not combine their arguments. The canonical content rules still apply.
@@ -103,8 +111,13 @@ claim; an untested condition prevents a complete-content claim. Report this
 review separately from template checks.
 
 Submit the complete UTF-8 file with `revise-artifact`. Apply that review to the saved
-document, then inspect its versions, receipt and findings before another draft. Imported records, lifecycle
-history, decisions and evidence stay immutable. Resolve blocked reads first.
+document, then inspect its versions, receipt and findings before another draft.
+`revise-artifact` edits an editable draft, not an approved or imported record.
+Lifecycle history, decisions and evidence stay immutable. If a protected-record
+refusal occurs, stop that revision. Do not retry it with changed state, history
+or content. A separate draft proposal does not amend or replace an accepted
+record; use the selected release's amendment boundary and obtain any missing
+authority before dependent work. Resolve blocked reads first.
 
 ## Report and recover
 

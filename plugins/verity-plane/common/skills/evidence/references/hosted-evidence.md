@@ -15,6 +15,11 @@ evaluator result; do not reconstruct lifecycle rules or load all later stages.
 When a supplied helper restricts commands, its tool index gives the export
 spelling; the direct-client example above does not add permission or helper flags.
 
+Before release preparation, read the selected REL and final verified VREC.
+Compare the REL's `candidate_commit`, if present, with the VREC's exact candidate.
+A mismatch blocks preparation. Preserve both accepted records and report the
+required contract correction; do not edit either binding to make them agree.
+
 For each report claim, inspect its exact request/result or exported manifest.
 Use the actual operation and outcome fields, not a filename, earlier summary or
 remembered sequence. Distinguish `previewed`, `accepted` and `refused`.

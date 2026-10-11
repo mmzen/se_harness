@@ -40,6 +40,8 @@ only the current row and its applicable prerequisites. The evaluator's returned
 current-step reference takes precedence if it selects a different section.
 For each selected action file, also read its `#before-this-action` section once.
 Reuse these sections while their exact content remains in context.
+Before applying any supplied decision, read the decision-authority row. Before
+handoff or completion, read the work-approval authority selector in the start row.
 
 | Current task | Released resource selector |
 | --- | --- |
@@ -49,6 +51,7 @@ Reuse these sections while their exact content remains in context.
 | Apply supplied approval decisions | `docs/engineering/harness/AUTHORIZE_WORK.md#apply-the-selected-transitions` |
 | Start approved work | `docs/engineering/harness/EXECUTE_WORK.md#start-the-selected-work` and `docs/engineering/harness/AUTHORITY.md#authority-from-work-approval` |
 | Record a risk and paired decision | `docs/engineering/harness/RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change` and `docs/engineering/harness/RISKS_AND_DECISIONS.md#raised-risks` |
+| Apply a supplied decision disposition | `docs/engineering/harness/AUTHORIZE_WORK.md#resolve-approval-blockers` |
 | Retain handoff evidence | `docs/engineering/harness/EXECUTE_WORK.md#retain-the-implementation-evidence` |
 | Complete work | `docs/engineering/harness/EXECUTE_WORK.md#record-implementation-completion` |
 | Assess verification evidence | `docs/engineering/harness/VERIFY_OUTCOME.md#assess-the-verification-evidence` |
