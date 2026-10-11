@@ -96,6 +96,15 @@ schema views use `schemas/remote-v1/OPERATION.json` or `schemas/read-v1/OPERATIO
 Each view retains its original pointer/digest. Lifecycle test-copy schemas are
 separate; do not load them for drafting alone. `--key` reads a receipt, not a document.
 
+For lifecycle rehearsal use `remote rehearse --request ABSOLUTE_FILE --record
+ABSOLUTE_NEW_RECORD`. The helper supplies the direct client's `--test-copy` flag;
+do not add that flag yourself. The request still needs `test_copy: true`.
+The selected plugin's `change/references/hosted-test-lifecycle.md` provides exact
+released section selectors and pointers to individual action schemas.
+For a handoff file, `encode-file ABSOLUTE_FILE` returns its actual byte count,
+SHA-256 and base64 content. It takes no output flag. Copy those returned values
+unchanged; do not compute or guess a replacement digest.
+
 Use `observations --record ABSOLUTE_NEW_RECORD` before the final report. Read its
 selected fields as needed. `observed_content_reads` contains successful visible
 read metadata; `file_reads` retains Claude Read attempts, including failures.

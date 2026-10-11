@@ -8,12 +8,12 @@ baseline request. Preserve the exported bytes and Git bundle. An incomplete mark
 or failed hash check prevents replay. Report independent replay separately from
 download success; real assurance still requires its own Git record and human decision.
 
-Before preparing or assessing a test record, read the current released section:
-`docs/engineering/harness/VERIFY_OUTCOME.md` for a VREC, or
-`docs/engineering/harness/RELEASE.md` for an RLS, with its applicable
-`AUTHORITY.md` prerequisite. For a refusal or uncertain reply, read
-`docs/engineering/harness/RESULTS.md`. Resolve these from the selected released
-resources. Use the current evaluator result; do not reconstruct lifecycle rules.
+Before preparing or assessing a test record, use the exact current-action selector
+in [Lifecycle instructions](../../change/references/hosted-test-lifecycle.md#read-the-current-procedure).
+Read that released section and its applicable prerequisites. Use the current
+evaluator result; do not reconstruct lifecycle rules or load all later stages.
+When a supplied helper restricts commands, its tool index gives the export
+spelling; the direct-client example above does not add permission or helper flags.
 
 For each report claim, inspect its exact request/result or exported manifest.
 Use the actual operation and outcome fields, not a filename, earlier summary or
@@ -28,4 +28,3 @@ for each required case. Keep detailed requests/results in their evidence files.
 Do not infer missing reads, independent replay or complete coverage from a
 successful operation or process exit. A later read does not prove that a required
 procedure was read before the earlier action.
-

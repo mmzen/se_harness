@@ -10,7 +10,9 @@ checks. Reuse unchanged instructions and recover them after compaction.
 
 When the approved task explicitly selects the hosted rehearsal, use the installed
 candidate client's `remote rehearse --test-copy` command and the closed v2 request
-schema in `server/contracts/lifecycle-v2.json`. Preview the exact action, then
+schema in `server/contracts/lifecycle-v2.json`. If a supplied test helper restricts
+commands, use its documented spelling instead; do not append direct-client flags
+that the helper does not accept. Preview the exact action, then
 apply it with that preview digest and unchanged versions. The service reruns the
 released evaluator. After an uncertain reply, look up the original operation key;
 do not rebase or invent a replacement key to conceal the outcome.
@@ -31,14 +33,30 @@ This is test data. Supplied actors are synthetic inputs, not human consent.
 Imported records stay immutable. Keep real decisions and work in the authoritative
 Git workflow. No rehearsal record authorizes a real release or external action.
 
-| Current task | Released procedure to read |
+## Read the current procedure
+
+Use the exact resource selectors below with the selected section reader. Read
+only the current row and its applicable prerequisites. The evaluator's returned
+current-step reference takes precedence if it selects a different section.
+For each selected action file, also read its `#before-this-action` section once.
+Reuse these sections while their exact content remains in context.
+
+| Current task | Released resource selector |
 | --- | --- |
-| Complete draft content | `docs/engineering/ARTIFACT_AUTHORING.md` and the selected type's checklist |
-| Record supplied definition/work decisions | `docs/engineering/harness/AUTHORITY.md` and `AUTHORIZE_WORK.md` |
-| Start, retain handoff or complete work | The current step in `docs/engineering/harness/EXECUTE_WORK.md` |
-| Prepare or assess a test VREC | The current step in `docs/engineering/harness/VERIFY_OUTCOME.md` |
-| Prepare or assess a test RLS | The current step in `docs/engineering/harness/RELEASE.md` |
-| Report a refusal or unknown reply | `docs/engineering/harness/RESULTS.md` |
+| Complete draft content | Use [Hosted drafting](hosted-drafts.md) for the selected type's exact checklist |
+| Identify decision authority | `docs/engineering/harness/AUTHORITY.md#decision-rights` |
+| Assess an approval package | `docs/engineering/harness/AUTHORIZE_WORK.md#assess-the-proposed-artifact-package` |
+| Apply supplied approval decisions | `docs/engineering/harness/AUTHORIZE_WORK.md#apply-the-selected-transitions` |
+| Start approved work | `docs/engineering/harness/EXECUTE_WORK.md#start-the-selected-work` and `docs/engineering/harness/AUTHORITY.md#authority-from-work-approval` |
+| Record a risk and paired decision | `docs/engineering/harness/RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change` and `docs/engineering/harness/RISKS_AND_DECISIONS.md#raised-risks` |
+| Retain handoff evidence | `docs/engineering/harness/EXECUTE_WORK.md#retain-the-implementation-evidence` |
+| Complete work | `docs/engineering/harness/EXECUTE_WORK.md#record-implementation-completion` |
+| Assess verification evidence | `docs/engineering/harness/VERIFY_OUTCOME.md#assess-the-verification-evidence` |
+| Prepare a test VREC | `docs/engineering/harness/VERIFY_OUTCOME.md#prepare-the-verification-record` |
+| Apply a supplied verification decision | `docs/engineering/harness/VERIFY_OUTCOME.md#record-the-verification-decision` |
+| Prepare a test RLS | `docs/engineering/harness/RELEASE.md#prepare-a-release-record` |
+| Apply a supplied release decision | `docs/engineering/harness/RELEASE.md#record-the-release-decision-when-required` |
+| Report a refusal or unknown reply | `docs/engineering/harness/RESULTS.md#report-a-lifecycle-result` |
 
 These local-style commands run inside the service's disposable projection. Express
 the selected operation through the closed v2 request; do not run it against the
@@ -46,8 +64,44 @@ real checkout. Read the literal target state from the released procedure. Words
 such as "accept" in a task description are not lifecycle-state values to guess.
 A refused edge is not a reason to try arbitrary states or freeze a context.
 
-For `decide`, `action.decision` is the supplied actor identity; explanatory text
-belongs in `action.reason`. Preserve the supplied option exactly: mitigation does
-not authorize risk acceptance. Preparation owners must match the fixture's
+For `decide`, `action.artifact` selects the paired **DEC**, not its RISK.
+`action.decision` is the supplied actor identity, not the decision artifact ID;
+explanatory text belongs in `action.reason`. Read the selected DEC and its current
+evaluator result before choosing the disposition and option-specific fields.
+Do not invent an `authority_owner` value to resolve a refusal. Preserve the
+supplied option exactly: mitigation does not authorize risk acceptance.
+Preparation owners must match the fixture's
 supplied preparation identities. Do not infer a different actor or decision from
 a passed gate, an available owner label or a generated record.
+
+## Read the selected request shape
+
+The v2 schema remains the input contract. In a staged native test its inventory
+name is `reference/server/contracts/lifecycle-v2.json`. Read the complete schema
+once when its envelope constraints are not already in context. Reuse unchanged
+constraints. When only the selected action needs recovery, use its pointer below
+instead of reading the whole schema again. These pointers select unchanged sections;
+they do not replace its constraints or supply an operation sequence.
+
+| Selection | JSON pointer |
+| --- | --- |
+| `validate` | `/properties/action/oneOf/0` |
+| `check` | `/properties/action/oneOf/1` |
+| `preflight` | `/properties/action/oneOf/2` |
+| `transition` | `/properties/action/oneOf/3` |
+| `decide` | `/properties/action/oneOf/4` |
+| `raise-risk` | `/properties/action/oneOf/5` |
+| `handoff` | `/properties/action/oneOf/6` |
+| `capture-verification` | `/properties/action/oneOf/7` |
+| `prepare-release` | `/properties/action/oneOf/8` |
+
+Check that the selected schema's `kind.const` matches the intended action.
+Use the original whole schema if this mapping does not match the selected version.
+Keep all required envelope fields,
+including `preview_digest: null` where the schema permits it for a non-apply
+request. Use a new operation key for a different request; recover an uncertain
+write through its original key and exact bytes.
+
+Before work approval, include the intended generated artifact paths, including
+any paired decision, in the proposed work scope. A later missing path requires
+an authorized correction; do not expand approved scope by editing its record.
