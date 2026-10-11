@@ -6,12 +6,14 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Latest functional qualification
 
-The [11 October functional assessment](evidence/WO-HAG-009/functional29/assessment.md)
-records Codex passing all five native scenarios, with 11 independently replayed
-operations and four exports. Claude reached verified test work, but release
-preparation failed because its contract pinned the fixture commit instead of the
-verified candidate. The stopped run and all remaining gaps are retained. Combined
-qualification remains incomplete; performance improvements are deferred.
+The [Claude correction assessment](evidence/WO-HAG-009/functional30/assessment.md)
+records a complete synthetic release, ten independently replayed lifecycle
+operations and two exact exports. A focused continuation confirmed all seven
+read tools and the identical-retry/conflict checks. Claude still misses required
+instruction reads and makes unsupported report claims; combined qualification
+remains incomplete. Both original reports and failures are preserved.
+The [earlier paired result](evidence/WO-HAG-009/functional29/assessment.md) retains
+Codex's pass on its earlier candidate. Performance improvements remain deferred.
 
 ## Authoring simplification in progress
 
