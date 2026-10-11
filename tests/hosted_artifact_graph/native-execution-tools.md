@@ -1,8 +1,8 @@
 # Execution tools
 
-Read this only when the selected task calls for executing a check. For drafting
-a verification contract, describe the proposed check and retained evidence in
-the artifact. A command listed here does not authorize its execution.
+Read this when choosing a check for a verification plan or executing an
+authorized check. Use these capabilities to assess whether the plan can run in
+the selected environment. A listed command does not authorize execution.
 
 Use the same `approved_shell_argv_prefix` and one-helper-call boundary from
 `selection.json`. The fixture assertion is:
@@ -11,5 +11,19 @@ Use the same `approved_shell_argv_prefix` and one-helper-call boundary from
 assert-greeting --record ABSOLUTE_NEW_RECORD
 ```
 
-This executes the selected fixture's `greeting()` assertion. Retain its actual
-result at the selected new path. Source inspection alone is not an executed test.
+This runs the selected fixture's `greeting()` once and asserts that its result
+equals `Hello rehearsal`. It runs locally through `selection.json`'s
+`client_python`, on the native test host; it does not run inside the Linux
+service. The source digest must match the selected `greeting_sha256` before
+execution. It makes no separate type assertion.
+
+The new record retains the exact command, working directory, exit status,
+stdout, stderr and elapsed time. Exit 0 with `exact greeting passed` records a
+passing equality assertion. A failing assertion returns a nonzero exit. The
+record does not contain a Python version or create commit-bound verification.
+Use the selected source manifest/commit and digest to identify the tested input;
+keep test-fixture identity separate from a later verification candidate.
+
+Retain actual results at the selected new path. Source inspection alone is not
+an executed test. Do not claim a different platform, extra assertions or evidence
+fields from this tool. A required check beyond these capabilities remains a gap.

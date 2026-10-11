@@ -89,9 +89,11 @@ paths are known. Unknown headings must not be guessed;
 read the named file once to locate its actual headings. Request known current
 sections together and reuse unchanged content. A full inventory is not required.
 
-Source inspection and test execution are different actions. Drafting a verification
-contract describes future checks; it does not require running them. If the task
-authorizes execution, use [Execution tools](native-execution-tools.md).
+Read [Execution tools](native-execution-tools.md) when choosing a planned check
+or executing an authorized one. The description establishes the available
+assertion and evidence fields; reading it does not run a test. Source inspection
+is not test execution, and drafting a verification contract grants no execution
+authority.
 
 ## Other operations
 

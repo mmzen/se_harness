@@ -22,6 +22,14 @@ action commits none of its proposed effects, even if earlier sub-commands passed
 Inspect the failed command and correct its inputs before a new preview. Do not
 apply a refused preview or guess a digest.
 
+Before proposing a work order, apply
+`docs/engineering/harness/WORK_AND_EVIDENCE.md#complete-work-scope` to the planned
+handoff comparison. Include every intended changed path: new definitions, their
+approval writes, implementation and generated evidence or paired decisions.
+Definitions approved in the same rehearsal still contribute changes after the
+retained base. Include their actual file paths in the proposed scope, rather than
+limiting it to implementation output. Review this before applying approval.
+
 For a handoff's `from_git`, use a retained comparison base in the service's test
 Git history that covers the complete work. In a fresh test copy, retain
 `provenance.input_git_head` from its first accepted lifecycle mutation. An
@@ -110,6 +118,5 @@ including `preview_digest: null` where the schema permits it for a non-apply
 request. Use a new operation key for a different request; recover an uncertain
 write through its original key and exact bytes.
 
-Before work approval, include the intended generated artifact paths, including
-any paired decision, in the proposed work scope. A later missing path requires
-an authorized correction; do not expand approved scope by editing its record.
+A later missing path requires an authorized correction; do not expand approved
+scope by editing its record.

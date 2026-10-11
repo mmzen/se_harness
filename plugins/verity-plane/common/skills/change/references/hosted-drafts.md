@@ -83,7 +83,12 @@ Before claiming a coverage gap, read the applicable requirements, specifications
 and verification contracts. Code or one same-type record cannot establish their
 absence. For a verification plan, derive expected values from definitions; name
 the check, pass condition and full proposed evidence path, including filename
-and any work-order directory.
+and any work-order directory. In an environment with restricted execution tools,
+read their capability descriptions before choosing the check. This is a planning
+read, not test execution. Match the planned assertions, platform and evidence
+fields to those tools. Do not infer a local test runtime from the service runtime.
+If a required condition cannot be assessed with the available tools, report that
+gap before requesting approval; do not promise an unavailable check.
 
 State a missing required fact as a question and stop dependent writing. A partial
 draft may omit it and remain incomplete. Do not call an unsupported required claim
