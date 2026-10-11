@@ -1,0 +1,18 @@
+{
+  "archive": "report-checks.zip",
+  "sha256": "53859322b377661146587e9ebf61aff8d340a975f7e34207124add51e80bf478",
+  "files": [
+    {
+      "path": "report-opus55-scope.json",
+      "sha256": "af19baedc435671f6e614f7825cc35b19c989fc97302780a692a76c3a26be3f5"
+    },
+    {
+      "path": "report-opus55-preflight.json",
+      "sha256": "6a182e4f06c1297b14836a1195de50a33f19e4d575a404c8f896487c0c14f0c4"
+    },
+    {
+      "path": "report-opus55-validation.json",
+      "sha256": "f06fe32484ff5a784f7df49bd1af976e5d80b3bb50503f09ce25201770526583"
+    }
+  ]
+}

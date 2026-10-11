@@ -6,15 +6,18 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Latest functional qualification
 
-The [canonical entry-condition assessment](evidence/WO-HAG-009/procedure36-result/assessment.md)
-records candidate `c526fcbe7ac59de9fd45cb8ae461cfb558aaf2b7`. Exact entry
-conditions and decision authority now reach Claude. The focused run still times
-out after 20 minutes: one approval replays and Cypher matches, but start, scope
-refusal, the assertion and handoff remain incomplete. Required reads and content
-consistency still fail. PR #543 remains draft; performance work stays deferred.
+The [same-task Opus 5.5 comparison](evidence/WO-HAG-009/opus55-comparison/assessment.md)
+uses unchanged candidate `c526fcbe7ac59de9fd45cb8ae461cfb558aaf2b7`.
+It ends after 13:56 with three independently replayed operations, a greeting
+assertion and two exact Cypher comparisons. Handoff is refused for omitted
+definition paths; the authored verification plan differs from actual execution,
+and the stale-preview demonstration is missing. It remains incomplete despite
+better instruction use and final reporting. Peak input context is 315,053 tokens.
+The comparison also requires a newer CLI and changes no formal test criteria.
 
-The [previous output-boundary result](evidence/WO-HAG-009/boundary35-result/assessment.md)
-remains unchanged, including its failures and three replayed lifecycle operations.
+The [Opus 4.6 canonical entry-condition assessment](evidence/WO-HAG-009/procedure36-result/assessment.md)
+and its 20-minute timeout remain unchanged. PR #543 stays draft; performance
+work remains deferred.
 
 ## Previous paired functional qualification
 
