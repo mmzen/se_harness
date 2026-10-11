@@ -35,6 +35,8 @@ revision and evaluator identities and report the embedded released result unchan
 An accepted read is not an approval. Database-side read-only enforcement remains
 unverified under RISK-HAG-001; use only the private public-data sandbox.
 
+Before writing the results report, read and apply
+[Report observed results](../../evidence/references/hosted-evidence.md#report-observed-results).
 
 ### Read one hosted revision
 
