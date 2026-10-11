@@ -6,6 +6,16 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Latest functional qualification
 
+The [focused output-boundary assessment](evidence/WO-HAG-009/boundary35-result/assessment.md)
+records candidate `cccc3546ed936fda5827f19b26032571c14a0a0e`. The helper now
+restricts outputs to `work/`. Claude demonstrates Cypher and changed-draft
+refusal; three accepted operations replay correctly. Scope-refusal selection,
+required procedure reads and actual assertion execution still fail. The focused
+run reaches its 20-minute limit; combined qualification remains incomplete.
+PR #543 stays draft. Performance improvements remain deferred.
+
+## Previous paired functional qualification
+
 The [paired instruction-pointer assessment](evidence/WO-HAG-009/context34-result/assessment.md)
 records candidate `01476073cb2fa0a86aaec11c70b0b2d605e8e878`. Codex passes its
 native assessment. Claude completes ten independently replayed operations and

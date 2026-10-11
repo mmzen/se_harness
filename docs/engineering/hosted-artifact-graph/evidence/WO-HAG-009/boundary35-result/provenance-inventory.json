@@ -1,0 +1,242 @@
+{
+  "archive": "provenance.zip",
+  "sha256": "28d29bba5a88a753c700fe9ec55147f34909c5e2738499dd4dbed3e11fac976f",
+  "files": [
+    {
+      "path": "checks/build35-replay.json",
+      "sha256": "f5b09f0dacc8da367b55b53f4e85b30715a65ce7070cf25337e3f2a03e805388",
+      "bytes": 7097
+    },
+    {
+      "path": "checks/candidate-35.json",
+      "sha256": "101b7d2e976a9e6451752ce3c5be2860360360079c58ed8366dde7a3d533fd39",
+      "bytes": 113
+    },
+    {
+      "path": "checks/client-build-35.json",
+      "sha256": "2756f56a5f39f2ce9883db84daefc9e6bba5dacd16e888ce3e9b7b112242d506",
+      "bytes": 975
+    },
+    {
+      "path": "checks/client-env-35.json",
+      "sha256": "34fead6648a5c190ae914ebad36f435a60aa2267e38de8ec7e8f4dcf43ed24a6",
+      "bytes": 464
+    },
+    {
+      "path": "checks/client-install-35.json",
+      "sha256": "bb88f34b3920a59cc9201c770361b6397ab2815ed7afa4a2cc6ffd326def6604",
+      "bytes": 1080
+    },
+    {
+      "path": "checks/context-WO-HAG-009.json",
+      "sha256": "49e2107769efeb88d30186ecdce3df72fda28c3f46f41383a3d409e572485798",
+      "bytes": 22299
+    },
+    {
+      "path": "checks/context-WO-HAG-011.json",
+      "sha256": "11836fd6cff7c924efda1a40ea00262ac4d5fc6cc5908a6fe6d3f7b38b6ac17d",
+      "bytes": 21939
+    },
+    {
+      "path": "checks/package-35.json",
+      "sha256": "9fc8166ab653db2aaabfec7a73d31b18837ef67bd9ff8aa7872e05f93ce3dff8",
+      "bytes": 1837
+    },
+    {
+      "path": "checks/package-guidance-comparison.json",
+      "sha256": "18257e9d8457a57dd22ff7f99982ac89576a995f743f62b2fba87ae4f2925806",
+      "bytes": 1240
+    },
+    {
+      "path": "checks/server-wheel-members.json",
+      "sha256": "6f89f72102cad9af9995dfdabb649805b65d416737c3b5bdced88ede3792fa02",
+      "bytes": 4423
+    },
+    {
+      "path": "checks/service-reuse-comparison.json",
+      "sha256": "6e1689596b08db0d5fca6daabd90458c7c9c17ee08a954e139c26446db34d71d",
+      "bytes": 1426
+    },
+    {
+      "path": "drivers/hag_assess35.py",
+      "sha256": "a17568f17e90a2a4d1d37262ddc958183846adcb341d4daa51e9c4b810479edd",
+      "bytes": 8923
+    },
+    {
+      "path": "drivers/hag_correction35.py",
+      "sha256": "524e74201714ca630e02abc3c9828a0bcadd6a5fc221ed71817a1b29da19803a",
+      "bytes": 4856
+    },
+    {
+      "path": "drivers/hag_efficiency_package03.py",
+      "sha256": "ba2acd580854fb009909eb4824c20f1b76e22e4ea39af9d6d08e872344a02393",
+      "bytes": 2721
+    },
+    {
+      "path": "drivers/hag_focus35_task.txt",
+      "sha256": "27301eb09e964f65dd752f9d6d20475c2c775349a57dd4e4fa1595dfd0c02c10",
+      "bytes": 3754
+    },
+    {
+      "path": "drivers/hag_full27.py",
+      "sha256": "8fc22acdc4d65d19bb2dda100c8af02519db63ec6d5b1f9a2405cb385b8d5469",
+      "bytes": 9084
+    },
+    {
+      "path": "drivers/hag_full27_review.py",
+      "sha256": "f19c9c8efcb19352223b0d3984e049f9c6839159100f1290b3d6c70c82852697",
+      "bytes": 2532
+    },
+    {
+      "path": "drivers/hag_full27_trace.py",
+      "sha256": "d19f0cb205aa875d9e61274361205ef1d4854120e2d927dce484432c69009e20",
+      "bytes": 3254
+    },
+    {
+      "path": "drivers/hag_full35.py",
+      "sha256": "eb0d441dfedbb193ca6f0780591d66cc8803b4ec6d59ce7822c642d569ac7eb4",
+      "bytes": 3331
+    },
+    {
+      "path": "drivers/hag_full35_facts.py",
+      "sha256": "093132130ceddf584a471b18977a1bc61ee829c0d303d34ea68c848934e738eb",
+      "bytes": 2092
+    },
+    {
+      "path": "drivers/hag_native27.py",
+      "sha256": "1d6c06c2887c5b4dbcd83ef011311cba0ce32af365c23c98789a6aa75ff9942f",
+      "bytes": 8017
+    },
+    {
+      "path": "drivers/hag_native_parity19.py",
+      "sha256": "1000402cfa8f26240dfaa96c0711ebd7ec252af74c864ecdf74317753acd3e41",
+      "bytes": 4818
+    },
+    {
+      "path": "drivers/hag_package35_review.py",
+      "sha256": "0d4e2ff4033b6ad07e53b2015fccebab0f39c824c331d0d275cf5398d5330d04",
+      "bytes": 3276
+    },
+    {
+      "path": "drivers/hag_parity35.py",
+      "sha256": "a8ca9451d3b14ff78c5961f6eae66d3f16c15a985068161ee611dd50a0eaee38",
+      "bytes": 667
+    },
+    {
+      "path": "drivers/hag_provenance35.py",
+      "sha256": "3930831a99ba2d5ed6491d7e1691da48ddc9308fa33b04dc111b68cabc1f3196",
+      "bytes": 2262
+    },
+    {
+      "path": "drivers/hag_retain26.py",
+      "sha256": "d37f266d694aa036e16d9a423e0806a6c9dd30a275f53d6b67161c7169dfcc32",
+      "bytes": 4400
+    },
+    {
+      "path": "drivers/hag_retain35.py",
+      "sha256": "7832d224a85e38cafd58e0bce22d112f144b34ea75783168df61a2348437f3f6",
+      "bytes": 2083
+    },
+    {
+      "path": "drivers/hag_review35.py",
+      "sha256": "8bb78d5a9ace48bf1942cedff3c93eb10e742a739c905bd4e0ebe19eb25394e8",
+      "bytes": 2208
+    },
+    {
+      "path": "drivers/hag_trace35.py",
+      "sha256": "014110b631bf3c3cab7035377d509ffa3181ae6e50f0dce496e839d43dd7f6e7",
+      "bytes": 297
+    },
+    {
+      "path": "drivers/hag_watch35.py",
+      "sha256": "421b7c2218d0fd6229faf35c9bbed29f554bb264a048f413e5a70c59808ce44e",
+      "bytes": 2080
+    },
+    {
+      "path": "package/combination.json",
+      "sha256": "0c50ec5bd5335e9a2ede848b86cd4f304693bdb20b42f07464e10409235b0259",
+      "bytes": 2807
+    },
+    {
+      "path": "package/image-metadata.json",
+      "sha256": "ac5366ba04c8a8857015b57bf7965a786e0dcc03ac2375266fcecf836d0101fa",
+      "bytes": 1777
+    },
+    {
+      "path": "package/image-package.json",
+      "sha256": "2989048e5cad5bb782cde10bfc051ef39b3e99b1b7b4ad88b7f91561670467e9",
+      "bytes": 799
+    },
+    {
+      "path": "package/plugin-assembly.json",
+      "sha256": "49ae480c6eb72cfc7fe7c2631fadfe87f774e636f005008a6e50d94adc83a27f",
+      "bytes": 1650
+    },
+    {
+      "path": "package/plugin-claude-inventory.json",
+      "sha256": "05e2e7936b34dcec463db8f91d57b22de0bfee23ba19a42db49c8e4d97e08417",
+      "bytes": 5186
+    },
+    {
+      "path": "package/plugin-codex-inventory.json",
+      "sha256": "16d042f7b79f10e5afc27c67041e24517fa49e8bb05b1e63594eb80873e9f290",
+      "bytes": 5185
+    },
+    {
+      "path": "package/server-build.json",
+      "sha256": "57fc16d44aca27d1e4ef72b2e1fdaa82493e9d5fd9314c46e5e9fa320673fe6c",
+      "bytes": 19056
+    },
+    {
+      "path": "package/source-commit.json",
+      "sha256": "fdbb361d0abb004c1b301fd61168a55895f892b46a41304a1d094534cda13d77",
+      "bytes": 278
+    },
+    {
+      "path": "package/source-status.json",
+      "sha256": "cc835e7c2cf2ea3365e7e16515fea7155522a437957e0e3a4295421e98ce414d",
+      "bytes": 240
+    },
+    {
+      "path": "setup/claude301-auth-review.json",
+      "sha256": "e0b39a4e28a198fea39f051f94187f248bbde95838212a81b7badb1218df792b",
+      "bytes": 138
+    },
+    {
+      "path": "setup/claude301-init.json",
+      "sha256": "d67141ada6932d8bd3f8dd491e1765771b62c4e8d43e1be3eaea1938b10cc3f5",
+      "bytes": 980
+    },
+    {
+      "path": "setup/claude301-networks.json",
+      "sha256": "da2cd87e736fc56ca834be0fa0f891e1177d517ce7390c27826367d07280f320",
+      "bytes": 414699
+    },
+    {
+      "path": "setup/claude301-source-stage.json",
+      "sha256": "24d5135b689be78d46500a00bfb0b1678ca0a13615aee3ececd29b4e2792dbce",
+      "bytes": 742
+    },
+    {
+      "path": "setup/claude301-up.json",
+      "sha256": "05eaa8358752c4b2cd1c9d17535092b00ebac0bff02543f443a7f6217c50d598",
+      "bytes": 1716
+    },
+    {
+      "path": "setup/claude301-version.json",
+      "sha256": "5dbd83c0a730f7c73d673ecb1ee5759a537b9baf51d6669ec460c5bb3c7aa523",
+      "bytes": 307
+    },
+    {
+      "path": "setup/claude301-volume-absent.json",
+      "sha256": "4c7e0c8182bf030a1db8b935765fb99d70249dc1c9b4a55483432292c5552194",
+      "bytes": 380
+    },
+    {
+      "path": "setup/claude301-volume-create.json",
+      "sha256": "8ccfe06f43894f63da991129852f49599f498ad44427c0f8c8ab0a7a568ee8b7",
+      "bytes": 327
+    }
+  ],
+  "limits": "No raw provider auth, private reasoning, credentials, account stores or full environments. Exact known test tokens checked absent."
+}
