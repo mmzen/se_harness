@@ -4,6 +4,15 @@
 
 This package covers the first complete hosted context and draft-authoring sandbox. mmzen approved WO-HAG-001 with required commit-bound verification on 2026-10-04. mmzen subsequently approved all 16 governing definitions in the reviewed Phase 0 artifact package. This index grants no authority.
 
+## Latest functional qualification
+
+The [11 October functional assessment](evidence/WO-HAG-009/functional29/assessment.md)
+records Codex passing all five native scenarios, with 11 independently replayed
+operations and four exports. Claude reached verified test work, but release
+preparation failed because its contract pinned the fixture commit instead of the
+verified candidate. The stopped run and all remaining gaps are retained. Combined
+qualification remains incomplete; performance improvements are deferred.
+
 ## Authoring simplification in progress
 
 The [slowness RCA](evidence/WO-HAG-009/slowness-rca-20261011/RCA.md)
@@ -11,7 +20,7 @@ separates observed timing from inferred causes, explains the remaining instructi
 and lifecycle-request overhead, and proposes measured corrections. It includes
 the retained timing breakdown and does not change qualification criteria.
 
-The [latest lifecycle assessment](evidence/WO-HAG-009/lifecycle27/assessment.md)
+The [earlier lifecycle assessment](evidence/WO-HAG-009/lifecycle27/assessment.md)
 records candidate27. Codex completed the test lifecycle; its 13 accepted operations
 and four native exports replayed independently. A separate fixed-view repeat
 matched all seven MCP read tools. Claude reached the 30-minute limit before

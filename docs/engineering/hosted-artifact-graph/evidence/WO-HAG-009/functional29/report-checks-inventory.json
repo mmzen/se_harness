@@ -1,0 +1,30 @@
+{
+  "archive": "report-checks.zip",
+  "sha256": "75d05702f238818fa88aab2dc6b18460f1b0d376f1432a320bd892c3293cb9b7",
+  "files": [
+    {
+      "path": "report29-scope.json",
+      "sha256": "0aa0da779c7bdf44c478a47939403f85bd38671875d92dafd23a5ce6013faa5a"
+    },
+    {
+      "path": "report29-preflight.json",
+      "sha256": "46d594b7d2e47c9ec09a8d8f76846500c08d06aa4f49428a21d8b1fa3db3fe47"
+    },
+    {
+      "path": "report29-validation.json",
+      "sha256": "62488e658a3287e41a0513ec216377a48b67567e62e58c365ad53a7b087b73ce"
+    },
+    {
+      "path": "report29-staged-check.json",
+      "sha256": "fdd792a5cbe8fd1e3c6a546a27b1bc2dab6d50656d9bd87eb3562942f979064f"
+    },
+    {
+      "path": "report29-staged-check-retained.json",
+      "sha256": "6a0ab2257e3c0813b6febd27385e0295a5eedfe04e1da74493b5ce8161b7153f"
+    },
+    {
+      "path": "report29-formatting-review.json",
+      "sha256": "3bc1acf2feba7c1f8439eb5eecef6f43ee84e2514df78f3179b86cdf605470e0"
+    }
+  ]
+}
