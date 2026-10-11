@@ -1,0 +1,38 @@
+{
+  "archive": "checks.zip",
+  "sha256": "cea2e4207b4ffb99bee14a56e274e1d91b20df20ffeb2454c87d365d4cd4dde7",
+  "files": [
+    {
+      "path": "focused.json",
+      "sha256": "f7925f2bb5f992248f76971908ba7e1399989c33a815817b83abf3549e5f66fd"
+    },
+    {
+      "path": "source.json",
+      "sha256": "33379f499005d54e61cae0eaa4fc81b7613e22f7a5f3e3ca6c1a28585da7ca6d"
+    },
+    {
+      "path": "distribution.json",
+      "sha256": "749b3811a8237caeb0cd89489f3aeea221beba5f62e040111ab99bd10a3d9698"
+    },
+    {
+      "path": "smoke.json",
+      "sha256": "7d05a5301eb0c0ff014bfd45f58982eda58fe811f97c927b13f327a358f9b170"
+    },
+    {
+      "path": "scope.json",
+      "sha256": "77c54d8691f408ad05e3221fd2aae63c3b2a911fd489015ee42ef3f9a295b84d"
+    },
+    {
+      "path": "preflight.json",
+      "sha256": "024140a25f17d341973d60b0958e3a4b4eee1131a8cd5c3309c40bcbc57b38c3"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "e0a9b332ba4178fd29f90813e888d698156bebc76a408d5e058345328daaa154"
+    },
+    {
+      "path": "content-review.json",
+      "sha256": "52f08b99a95d3facda4de8cf6b1b7eefb3aa08229a1b0de191c38a86edf0730f"
+    }
+  ]
+}

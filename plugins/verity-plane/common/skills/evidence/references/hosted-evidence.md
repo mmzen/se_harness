@@ -20,16 +20,33 @@ Compare the REL's `candidate_commit`, if present, with the VREC's exact candidat
 A mismatch blocks preparation. Preserve both accepted records and report the
 required contract correction; do not edit either binding to make them agree.
 
-For each report claim, inspect its exact request/result or exported manifest.
-Use the actual operation and outcome fields, not a filename, earlier summary or
-remembered sequence. Distinguish `previewed`, `accepted` and `refused`.
+### Report observed results
+
+Before reporting, inspect the exact request/result or exported manifest for each
+claim. Use its operation key, action and outcome fields. Keep approval, start,
+verification and release as separate observations when their requests are separate.
+Distinguish `previewed`, `accepted` and `refused`. A receipt lookup proves that
+lookup; an identical retry requires a recorded resubmission and matching receipt.
+
+State observed behavior separately from supported behavior. A refused query
+establishes the refusal of that query. Read the public query contract before
+claiming that a label, property or relationship is unsupported, or that a clause
+is required. Link the source for a general capability claim; otherwise omit it.
+
+Include material failures, recovered errors, permission denials and uncertain
+effects. Identify whether the host, client or service refused the action. Use a
+captured call summary for counts when available; do not estimate from memory.
+If the capture is incomplete, say which result or count remains unassessed.
+
 Name identities in full: hosted input baseline B, source fixture commit S,
 test Git candidate P, and actual implementation candidate C. If an identity is
 not established by the cited evidence, report it as unknown. Never substitute
 the fixture commit for the candidate bound in a VREC or RLS.
 
-Keep the report short: outcome, exact evidence path/field, and remaining limit
-for each required case. Keep detailed requests/results in their evidence files.
+Keep one short row per assessed case: outcome, exact evidence path/field, and
+remaining limit. Keep detailed requests/results in their evidence files. When
+correcting an earlier report, check each affected claim and preserve its original
+bytes. A corrected claim does not make other unchecked claims accurate.
 Do not infer missing reads, independent replay or complete coverage from a
 successful operation or process exit. A later read does not prove that a required
 procedure was read before the earlier action.

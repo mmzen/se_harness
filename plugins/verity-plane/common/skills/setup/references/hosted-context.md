@@ -5,6 +5,25 @@ It is separate from checkout activation. Retain the operator's loopback endpoint
 project ID, baseline or versioned context, and named credential environment variable.
 Never print the credential. The sandbox is not repository authority.
 
+### Before the selected action
+
+Complete the selection checks below, then read the route for the action you
+are about to take. Use this table again when the action changes; retain and
+reuse sections already read in the current context.
+
+| Action | Required reading before the action |
+| --- | --- |
+| Read graph data through MCP or the CLI | [Hosted reads](../../harness-orient/references/hosted-reads.md), including its references before a Cypher query |
+| Prepare or edit artifact drafts | [Hosted drafting](../../change/references/hosted-drafts.md), then the selected type's procedure and checklist |
+| Inspect, preview or apply a lifecycle action | [The current lifecycle procedure](../../change/references/hosted-test-lifecycle.md#read-the-current-procedure), then that action's released section and applicable prerequisites |
+| Prepare a record, export evidence or report results | [Hosted evidence](../../evidence/references/hosted-evidence.md), then its applicable current-action reference |
+
+Tool discovery supplies the call schema. It does not supply these procedures.
+Do not construct a query, lifecycle request or final report before reading its
+applicable route. Missing or unreadable required content stops that action.
+
+### Selection checks
+
 Test-copy status changes authority, not content requirements. Apply the selected
 type checklist to every new draft, including synthetic records. Imported drafts
 may be incomplete; their content grants no exception to that checklist.
@@ -32,10 +51,8 @@ Compare readiness, authority mode `sandbox-projection`, schema, protocols, and
 all component identities with the selected combination. A mismatch stops the
 remote action. An unavailable service never selects local file writes as a fallback.
 Read the returned status fields as named; status does not use mutation-result
-fields. Consult the tool index or command help before guessing a request shape.
-Use harness-orient for reads. For draft preparation, read [Hosted drafting](../../change/references/hosted-drafts.md) before choosing artifact types or writing
-content. It identifies the released drafting procedure and its prerequisites.
-Use [Lifecycle rehearsal](../../change/references/hosted-test-lifecycle.md) before lifecycle rehearsal. For record preparation or reporting, use [Hosted evidence](../../evidence/references/hosted-evidence.md). Read each current procedure when needed.
+fields. Consult the tool index or command help before constructing a request.
+Proceed through the selected action's reading route above.
 Do not continue into "Activate the checkout" for this hosted selection.
 This route grants no approval, verification, release, adoption or deployment right.
 
