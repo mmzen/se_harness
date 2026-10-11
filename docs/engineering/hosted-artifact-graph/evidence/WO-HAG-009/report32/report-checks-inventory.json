@@ -1,0 +1,18 @@
+{
+  "archive": "report-checks.zip",
+  "sha256": "46deb21270cbc95f4f4dc3df5d4a58f14af350b462552aab52819bbd9da416dd",
+  "files": [
+    {
+      "path": "report32-scope.json",
+      "sha256": "bbfa608883e21563e0cef01cfa81945461460b3a1ec637b899739879d32cb3d8"
+    },
+    {
+      "path": "report32-preflight.json",
+      "sha256": "bac4b7f3f1f174f0379554ffe70a5b1f7120e129681775f428a839723d0cde78"
+    },
+    {
+      "path": "report32-validation.json",
+      "sha256": "76c14c0affa1c93f83815d818ac2d41dab313030e7a506c20e98ee5c5e0c8163"
+    }
+  ]
+}
