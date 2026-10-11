@@ -6,6 +6,11 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Authoring simplification in progress
 
+The [slowness RCA](evidence/WO-HAG-009/slowness-rca-20261011/RCA.md)
+separates observed timing from inferred causes, explains the remaining instruction
+and lifecycle-request overhead, and proposes measured corrections. It includes
+the retained timing breakdown and does not change qualification criteria.
+
 The [latest lifecycle assessment](evidence/WO-HAG-009/lifecycle27/assessment.md)
 records candidate27. Codex completed the test lifecycle; its 13 accepted operations
 and four native exports replayed independently. A separate fixed-view repeat
