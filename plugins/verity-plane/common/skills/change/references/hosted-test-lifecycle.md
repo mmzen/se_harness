@@ -41,30 +41,29 @@ Git workflow. No rehearsal record authorizes a real release or external action.
 Use the exact resource selectors below with the selected section reader. Read
 only the current row and its applicable prerequisites. The evaluator's returned
 current-step reference takes precedence if it selects a different section.
-For each selected action file, also read its `#before-this-action` section once.
-Reuse these sections while their exact content remains in context.
-Request that section and the selected row together. After compaction, recover
-the current action's sections before sending its request. A previous operation's
-next step does not prove that a different action's prerequisites were read.
-Before applying any supplied decision, read the decision-authority row. Before
-handoff or completion, read the work-approval authority selector in the start row.
+Read the complete current row together. The section view includes the selected
+file's entry conditions; request `#before-this-action` explicitly if the selected
+reader does not return them. Read any further prerequisite whose condition applies.
+Reuse unchanged content while retained. After compaction, recover the current
+row and its prerequisites before sending its request. A previous operation's
+next step does not establish a different action's required reads.
 
 | Current task | Released resource selector |
 | --- | --- |
 | Complete draft content | Use [Hosted drafting](hosted-drafts.md) for the selected type's exact checklist |
 | Identify decision authority | `docs/engineering/harness/AUTHORITY.md#decision-rights` |
-| Assess an approval package | `docs/engineering/harness/AUTHORIZE_WORK.md#assess-the-proposed-artifact-package` |
-| Apply supplied approval decisions | `docs/engineering/harness/AUTHORIZE_WORK.md#apply-the-selected-transitions` |
+| Assess an approval package | `docs/engineering/harness/AUTHORIZE_WORK.md#assess-the-proposed-artifact-package` and `docs/engineering/harness/AUTHORITY.md#decision-rights` |
+| Apply supplied approval decisions | `docs/engineering/harness/AUTHORIZE_WORK.md#apply-the-selected-transitions` and `docs/engineering/harness/AUTHORITY.md#decision-rights` |
 | Start approved work | `docs/engineering/harness/EXECUTE_WORK.md#start-the-selected-work` and `docs/engineering/harness/AUTHORITY.md#authority-from-work-approval` |
 | Record a risk and paired decision | `docs/engineering/harness/RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change` and `docs/engineering/harness/RISKS_AND_DECISIONS.md#raised-risks` |
-| Apply a supplied decision disposition | `docs/engineering/harness/AUTHORIZE_WORK.md#resolve-approval-blockers` |
-| Retain handoff evidence | `docs/engineering/harness/EXECUTE_WORK.md#retain-the-implementation-evidence` |
-| Complete work | `docs/engineering/harness/EXECUTE_WORK.md#record-implementation-completion` |
+| Apply a supplied decision disposition | `docs/engineering/harness/AUTHORIZE_WORK.md#resolve-approval-blockers` and `docs/engineering/harness/AUTHORITY.md#decision-rights` |
+| Retain handoff evidence | `docs/engineering/harness/EXECUTE_WORK.md#retain-the-implementation-evidence` and `docs/engineering/harness/AUTHORITY.md#authority-from-work-approval` |
+| Complete work | `docs/engineering/harness/EXECUTE_WORK.md#record-implementation-completion` and `docs/engineering/harness/AUTHORITY.md#authority-from-work-approval` |
 | Assess verification evidence | `docs/engineering/harness/VERIFY_OUTCOME.md#assess-the-verification-evidence` |
 | Prepare a test VREC | `docs/engineering/harness/VERIFY_OUTCOME.md#prepare-the-verification-record` |
-| Apply a supplied verification decision | `docs/engineering/harness/VERIFY_OUTCOME.md#record-the-verification-decision` |
+| Apply a supplied verification decision | `docs/engineering/harness/VERIFY_OUTCOME.md#record-the-verification-decision` and `docs/engineering/harness/AUTHORITY.md#decision-rights` |
 | Prepare a test RLS | `docs/engineering/harness/RELEASE.md#prepare-a-release-record` |
-| Apply a supplied release decision | `docs/engineering/harness/RELEASE.md#record-the-release-decision-when-required` |
+| Apply a supplied release decision | `docs/engineering/harness/RELEASE.md#record-the-release-decision-when-required` and `docs/engineering/harness/AUTHORITY.md#decision-rights` |
 | Report a refusal or unknown reply | `docs/engineering/harness/RESULTS.md#report-a-lifecycle-result` |
 
 These local-style commands run inside the service's disposable projection. Express

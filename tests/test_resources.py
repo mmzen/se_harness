@@ -485,6 +485,31 @@ class SectionViewTests(unittest.TestCase):
         section = self.view(raw, ['procedure'])['sections'][0]['content']
         self.assertEqual(raw[raw.index(b'## Procedure'):raw.index(b'## Returned typed steps')].decode(), section)
 
+    def test_step_view_includes_exact_entry_conditions_without_following_links(self):
+        raw = (b'# Work\r\n## Read this when\r\nAn approved task is selected.\r\n'
+               b'## Before this action\r\nRead [authority](AUTHORITY.md#decision-rights).\r\n'
+               b'## Procedure\r\n### Start\r\nStart only this task.\r\n'
+               b'### Complete\r\nLater action.\r\n')
+        value = self.view(raw, ['start'])
+        self.assertEqual(['read-this-when', 'before-this-action', 'start'],
+                         [x['heading'] for x in value['sections']])
+        self.assertEqual('## Before this action\r\nRead [authority](AUTHORITY.md#decision-rights).\r\n',
+                         value['sections'][1]['content'])
+        self.assertTrue(value['sections'][0]['entry_condition'])
+        self.assertNotIn('Later action.', json.dumps(value))
+        self.assertEqual(['work'], [x['heading'] for x in self.view(raw, ['work'])['sections']])
+        self.assertEqual(1, sum(x['heading'] == 'before-this-action'
+                              for x in self.view(raw, ['before-this-action', 'start'])['sections']))
+
+    def test_entry_conditions_do_not_hide_an_ambiguous_or_missing_selection(self):
+        raw = b'# Work\n## Before this action\nFirst.\n## Before this action\nSecond.\n## Start\nGo.\n'
+        with self.assertRaisesRegex(resources.ResourceError, 'ambiguous'):
+            self.view(raw, ['start'])
+        with self.assertRaisesRegex(resources.ResourceError, 'missing'):
+            self.view(b'# Work\n## Before this action\nRead.\n', ['absent'])
+        raw = b'# Work\n```md\n## Before this action\nNot a rule.\n```\n## Start\nGo.\n'
+        self.assertEqual(['start'], [x['heading'] for x in self.view(raw, ['start'])['sections']])
+
 
 if __name__ == "__main__":
     unittest.main()

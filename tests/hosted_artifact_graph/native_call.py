@@ -402,7 +402,8 @@ def main():
                 json.dump(value,stream,ensure_ascii=True,indent=2)
             value = {k:value[k] for k in ('snapshot','wall_seconds','native_calls',
                 'observed_tool_items','native_call_count_complete','peak_input_context','limits')}
-            value.update(record=str(record), pointers=['/observed_content_reads',
+            value.update(record=str(record), record_type='file',
+                read_arguments=['read-json',str(record)], pointers=['/observed_content_reads',
                 '/native_failures','/failed_command_records','/command_records'])
         print(json.dumps(value))
         return 0

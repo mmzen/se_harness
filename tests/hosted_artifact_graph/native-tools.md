@@ -76,7 +76,7 @@ Choose the exact revision and context from the selected inputs or actual results
 | One text file or independent reads together | `read-text ABSOLUTE_FILE [ABSOLUTE_FILE ...]`; up to eight selected inventoried inputs, the launcher-pinned task.md, or work files, at most 64 KiB output |
 | Recover a truncated text read | `read-text ABSOLUTE_FILE --offset 0 --limit 4096`; one file, character offsets; continue from next_offset until complete is true |
 
-For `instructions`, use canonical IDs such as `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`. The earlier `released-resources/` inventory prefix also works. Request known sections together.
+For `instructions`, use canonical IDs such as `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`. The earlier `released-resources/` inventory prefix also works. Request known sections together. The public reader includes the selected file's exact entry conditions when present; read their applicable references before acting. It does not follow links or select the next action.
 For authoring checklists and the repeated released 0.22.1 continuation heading,
 use the exact selectors in the selected plugin's `change/references/hosted-drafts.md`.
 
@@ -119,6 +119,10 @@ reads remain unknown; rereading now does not prove an earlier read. The capture
 may be incomplete, and subsequent report writes are not yet counted. Keep the
 record path as evidence instead of copying every command. This supplies no draft
 text, content judgement or lifecycle decision.
+
+The returned `record` is the exact JSON **file**, even when it has no extension.
+Use its `read_arguments` with the approved helper prefix. Do not append a filename
+or treat it as a directory. Add `--pointer` only to select a field in that file.
 
 `command_records` includes extensionless record names. Each row points to its
 original capture and copies selected exact `response_fields`, including available

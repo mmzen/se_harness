@@ -40,8 +40,9 @@ def section_view(raw: bytes, *, resource: str, path: str, release: dict,
                  sha256: str, headings: list[str]) -> dict:
     """Copy complete ATX sections from already selected, identity-bound bytes.
 
-    Selection/authorization belongs to the caller. This reader never chooses a
-    procedure or follows links. Fenced examples are not instruction headings.
+    Selection/authorization belongs to the caller. Include this file's entry
+    conditions with a narrower selection; never choose a procedure or follow
+    links. Fenced examples are not instruction headings.
     """
     if raw_sha256(raw) != sha256:
         raise ResourceError(f"selected resource changed: {resource}")
@@ -71,10 +72,24 @@ def section_view(raw: bytes, *, resource: str, path: str, release: dict,
         start, level, title, slug = matches[0]
         end = next((i for i, depth, _, _ in found if i > start and depth <= level), len(lines))
         selected.append((start, end, heading, title, slug))
+    entry = []
+    for heading in ('read-this-when', 'before-this-action'):
+        matches = [item for item in found if item[3] == heading]
+        if len(matches) > 1:
+            raise ResourceError(f"missing or ambiguous heading: {resource}#{heading}")
+        if not matches:
+            continue
+        start, level, title, slug = matches[0]
+        end = next((i for i, depth, _, _ in found if i > start and depth <= level), len(lines))
+        if not any(a <= start and b >= end for a, b, *_ in selected):
+            entry.append((start, end, heading, title, slug))
+    selected = entry + selected
     sections = []
     for start, end, heading, title, slug in selected:
         parent = next((h for a, b, h, _, _ in selected if a <= start and b >= end and (a, b) != (start, end)), None)
         item = {"heading": heading, "title": title, "anchor": slug, "start_line": start + 1, "end_line": end}
+        if (start, end, heading, title, slug) in entry:
+            item['entry_condition'] = True
         if parent:
             item["included_in"] = parent
         else:

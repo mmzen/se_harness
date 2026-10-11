@@ -782,7 +782,11 @@ harnessctl resources REPO --section docs/engineering/ARTIFACT_AUTHORING.md#desig
 Use actual returned/selected headings. The example does not select a lifecycle
 step. `--section RESOURCE#heading` can repeat up to 12 times. Each complete section
 includes source path, selected release, digest and line range. Overlapping sections
-are included once. Unknown or ambiguous headings and changed resources fail.
+are included once. The view also includes that file's **Read this when** and
+**Before this action** sections when present and not already included. These
+entry conditions retain their exact source bytes. The reader does not follow
+links or choose a procedure; read applicable linked prerequisites separately.
+Unknown or ambiguous headings and changed resources fail.
 Do not mix `--section` with `--resource`/`--content`. Existing resource modes stay
 available. This candidate option does not make an older released evaluator support it.
 The native test adapter can use the same installed reader on byte-verified staged

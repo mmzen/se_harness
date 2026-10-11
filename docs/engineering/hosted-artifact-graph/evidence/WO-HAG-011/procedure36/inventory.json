@@ -1,0 +1,50 @@
+{
+  "archive": "checks.zip",
+  "sha256": "94767683e5f72f6a30ba6069848fb666348e905faf0a39f260e13d0f6c742668",
+  "files": [
+    {
+      "path": "resources.json",
+      "sha256": "fc317e2ad4356f67fa69c400cd8c89beebce1baa6d679e608d1f278968daf6ff"
+    },
+    {
+      "path": "native.json",
+      "sha256": "7fcd963ae099fc9b6f579329d892f9324fc9869c8e4e2c4b05a96bb5e1981ffe"
+    },
+    {
+      "path": "plugin.json",
+      "sha256": "a06c04a84477c04338d81b59270faa0312ce6955cd025f0d811178e223e2e4be"
+    },
+    {
+      "path": "source.json",
+      "sha256": "e0675477f7416907cf04275941f3cfa07b42556a95d40a271e2db3a050790204"
+    },
+    {
+      "path": "distribution.json",
+      "sha256": "59d5ab665d52aa4af403b3f432ee4296ce11a4b2e50622800c630702b1db9edb"
+    },
+    {
+      "path": "smoke.json",
+      "sha256": "dc18975a0af5d89cb0523dd9df825faa4e48b18fea57bece35503d2e4e0ffae5"
+    },
+    {
+      "path": "scope36.json",
+      "sha256": "f60f616592a1b0448d11a65969965b9088cce778e27b4e7d6939a825bc8b21ec"
+    },
+    {
+      "path": "WO-HAG-009-preflight36.json",
+      "sha256": "17ecd34c34810ce2eab5a7ccdb3769d3f7d337d96f057b2d3186c3e185804600"
+    },
+    {
+      "path": "WO-HAG-011-preflight36.json",
+      "sha256": "84329993a4c9f3949dbae2a0f8d0106aed39cf3a9a2326162c616c571003cb21"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "3f2bd45142df9d39394a6f54450d8e978ea34b098b7e5d071ad4facf66979ff2"
+    },
+    {
+      "path": "canonical-section-comparison.json",
+      "sha256": "653c1d798c0a6fff02e04954a041283104083e6c4dc569f3ce9bcd73a8fea5f8"
+    }
+  ]
+}

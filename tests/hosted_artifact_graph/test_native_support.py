@@ -18,6 +18,25 @@ from assess_native import semantic_assertions
 
 
 class NativeCallBoundaries(unittest.TestCase):
+    def test_observation_pointer_reads_the_exact_extensionless_file(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); (root/'work').mkdir()
+            selection=root/'selection.json'; selection.write_text('{}')
+            captured={'snapshot':'in_progress','wall_seconds':None,'native_calls':2,
+                      'observed_tool_items':2,'native_call_count_complete':True,
+                      'peak_input_context':100,'limits':'Observed only.',
+                      'native_failures':[{'diagnostic':'original refusal'}]}
+            output=io.StringIO()
+            with patch.dict(os.environ,{'HAG_NATIVE_WORK_DIRECTORY':str(root),'HAG_NATIVE_SELECTION':str(selection)}), \
+                 patch('sys.argv',['native_call.py','observations','--record','work/capture']), \
+                 patch('native_call.observations',return_value=captured), contextlib.redirect_stdout(output):
+                self.assertEqual(0,main())
+            pointer=json.loads(output.getvalue())
+            self.assertEqual('file',pointer['record_type'])
+            self.assertEqual(['read-json',str(root/'work/capture')],pointer['read_arguments'])
+            self.assertTrue(Path(pointer['record']).is_file())
+            self.assertEqual(captured,read_json(root,pointer['read_arguments'][1],'')['value'])
+
     def test_loopback_profile_refuses_other_hosts_and_ambiguous_destinations(self):
         for host, endpoint in [('claude','http://127.0.0.1:8000'),
                 ('codex','https://example.com:443'),('codex','http://localhost:8000'),
