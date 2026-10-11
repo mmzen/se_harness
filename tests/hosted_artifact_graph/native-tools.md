@@ -114,6 +114,12 @@ may be incomplete, and subsequent report writes are not yet counted. Keep the
 record path as evidence instead of copying every command. This supplies no draft
 text, content judgement or lifecycle decision.
 
+`command_records` includes extensionless record names. Each row points to its
+original capture and copies selected exact `response_fields`, including available
+receipt, outcome and provenance values. Rows are sorted by filename, not time.
+Use an indexed row to locate evidence, then inspect its original request/result
+for the claim. The index does not select a handoff base or certify a retry.
+
 Retain failed calls and recoveries. Template admission is not a content review.
 Report only inspected facts and actual outcomes; distinguish unresolved content
 from a completed definition. Do not claim an exhaustive failure count from memory.

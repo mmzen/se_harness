@@ -104,9 +104,13 @@ def summarize(root):
             elif item['type'] == 'command_execution':
                 observed_reads.extend(helper_reads(item.get('command',''),item.get('aggregated_output',''),line))
     records=[]
-    for path in sorted((root/'work').rglob('*.json')):
+    for path in sorted((root/'work').rglob('*')):
+        # --record imposes no filename suffix. Only the captured command shape
+        # identifies a command record; a JSON-named export directory is not one.
         if path.is_dir() and not path.is_symlink():
             continue
+        if path.is_symlink() or not path.resolve().is_relative_to((root/'work').resolve()):
+            raise ValueError('Command record must remain inside the native work directory')
         if path.stat().st_size > 4*1024*1024:
             continue
         try:
@@ -114,8 +118,27 @@ def summarize(root):
         except (ValueError,UnicodeError):
             continue
         if isinstance(value,dict) and {'argv','cwd','exit','stdout','stderr'} <= value.keys():
-            records.append({'path':str(path),'exit':value['exit'],'elapsed_seconds':value.get('elapsed_seconds'),
-                            'argv':value['argv']})
+            record={'path':str(path),'exit':value['exit'],'elapsed_seconds':value.get('elapsed_seconds'),
+                    'argv':value['argv']}
+            try:
+                response=json.loads(value['stdout'])
+            except (ValueError,TypeError):
+                response=None
+            if isinstance(response,dict):
+                pointer=''
+                if response.get('schema')=='se-harness-remote-view/v1':
+                    response=response.get('result');pointer='/result'
+                if isinstance(response,dict):
+                    fields={};omitted=[]
+                    for key in ('outcome','operation_key','receipt_id','baseline_id','error','provenance','versions'):
+                        if key not in response:continue
+                        field=pointer+'/'+key
+                        if len(json.dumps(response[key]).encode())<=4096:
+                            fields[field]=response[key]
+                        else:omitted.append(field)
+                    record['response_fields']={'source':'JSON decoded from this record\'s stdout',
+                        'fields':fields,'omitted_pointers':omitted,'interpretation':False}
+            records.append(record)
     peak=max((x['tokens'] for x in messages.values()),default=None)
     wall=session.get('elapsed_seconds')
     # Codex JSON omits some orchestrated tool calls. Its item count is a lower
@@ -136,7 +159,7 @@ def summarize(root):
             'observed_content_reads':observed_reads,
             'repeated_read_paths':{p:n for p,n in collections.Counter(x['path'] for x in reads).items() if n>1},
             'content_review':'not performed by this summary','provider_time':'unclassified',
-            'limits':'Observed native calls and command captures only. file_reads lists attempts; observed_content_reads lists successful visible reads, not complete capture or proof of full-file reading. Metadata comes from the captured result, never a later source read. No private reasoning exported. Provider usage is not billed-token total. Tool durations may overlap; they are not subtracted to infer model time.'}
+            'limits':'Observed native calls and command captures only. Command records are sorted by path, not execution time; response_fields copies selected exact values, not a verdict or proof of a retry. Inspect argv and its request to distinguish submissions from lookups. file_reads lists attempts; observed_content_reads lists successful visible reads, not complete capture or proof of full-file reading. Metadata comes from the captured result, never a later source read. No private reasoning exported. Provider usage is not billed-token total. Tool durations may overlap; they are not subtracted to infer model time.'}
 
 
 if __name__=='__main__':

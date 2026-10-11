@@ -28,6 +28,9 @@ Git history that covers the complete work. In a fresh test copy, retain
 unapplied preview's head may not be retained. The imported source commit identifies
 provenance; it is not automatically present in this separate Git history. Do not
 replace the retained base with a later head to omit changed files.
+Keep the head, operation key and exact receipt path in transient working material
+before continuing. Recover that evidence after compaction. A start result's head
+does not replace the earlier approval input head.
 
 This is test data. Supplied actors are synthetic inputs, not human consent.
 Imported records stay immutable. Keep real decisions and work in the authoritative
@@ -40,6 +43,9 @@ only the current row and its applicable prerequisites. The evaluator's returned
 current-step reference takes precedence if it selects a different section.
 For each selected action file, also read its `#before-this-action` section once.
 Reuse these sections while their exact content remains in context.
+Request that section and the selected row together. After compaction, recover
+the current action's sections before sending its request. A previous operation's
+next step does not prove that a different action's prerequisites were read.
 Before applying any supplied decision, read the decision-authority row. Before
 handoff or completion, read the work-approval authority selector in the start row.
 

@@ -396,6 +396,40 @@ class NativeCallBoundaries(unittest.TestCase):
             self.assertEqual(str(exported/'failed-command.json'),result['failed_command_records'][0]['path'])
             self.assertEqual('not performed by this summary',result['content_review'])
 
+    def test_summary_indexes_extensionless_receipts_without_conflating_outcomes(self):
+        from summarize_native import summarize
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);work=root/'work';work.mkdir()
+            (root/'events.jsonl').write_text('')
+            accepted={'outcome':'accepted','operation_key':'same-key','receipt_id':'same-receipt',
+                      'provenance':{'input_git_head':'first-head','output_git_head':'later-head'}}
+            refused={'outcome':'refused','receipt_id':None,'error':{'code':'HAG_REMOTE_KEY_REUSE'}}
+            for name,operation,response in [('lookup','operation',accepted),('retry','rehearse',accepted),
+                                             ('changed','rehearse',refused)]:
+                (work/name).write_text(json.dumps({'argv':['client','remote',operation],
+                    'cwd':str(root),'exit':0,'stdout':json.dumps(response),'stderr':''}))
+            exported=work/'export.json';exported.mkdir()
+            (exported/'manifest.json').write_text('{"outcome":"not a command"}')
+            (work/'notes.md').write_text('not a record')
+            result=summarize(root)
+            rows={Path(row['path']).name:row for row in result['command_records']}
+            self.assertEqual({'lookup','retry','changed'},set(rows))
+            self.assertEqual([],result['failed_command_records'])  # Service refusal is not process failure.
+            self.assertEqual(accepted['provenance'],rows['retry']['response_fields']['fields']['/provenance'])
+            self.assertEqual('accepted',rows['lookup']['response_fields']['fields']['/outcome'])
+            self.assertEqual(refused['error'],rows['changed']['response_fields']['fields']['/error'])
+            self.assertNotEqual(rows['lookup']['argv'],rows['retry']['argv'])
+            self.assertFalse(rows['retry']['response_fields']['interpretation'])
+
+    def test_summary_refuses_command_capture_symlink_outside_work(self):
+        from summarize_native import summarize
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);work=root/'work';work.mkdir()
+            (root/'events.jsonl').write_text('');outside=root/'outside';outside.write_text('private')
+            try:(work/'capture').symlink_to(outside)
+            except OSError:self.skipTest('Host cannot create a test symlink')
+            with self.assertRaisesRegex(ValueError,'inside'):summarize(root)
+
     def test_section_resource_ids_and_legacy_inventory_names_resolve_same_source(self):
         import hashlib
         from native_call import instructions
@@ -525,6 +559,32 @@ class NativeCallBoundaries(unittest.TestCase):
         self.assertEqual(result_fields('{"accepted":false}')['fields'][''],{'accepted':False})
         many=result_fields(json.dumps({'x'*100+str(i):'y'*9000 for i in range(1000)}))
         self.assertEqual(many['omitted_pointers'],[''])
+
+    def test_lifecycle_view_exposes_exact_current_reading_without_catalogue(self):
+        step={'id':'STEP-FROM-EVALUATOR','location':{'file':'exact.md','heading':'selected'},
+              'prerequisites':[{'file':'authority.md','heading':'decision','when':'Before a decision'}]}
+        discovery={'status':'available','agent_instructions':{'current_step':step,
+            'shared_prerequisites':[{'file':'results.md','heading':'report'}],
+            'procedure':{'id':'EXACT-PROCEDURE','steps':{'large':'x'*20000}}},
+            'evaluator_only_inputs':['x'*20000]}
+        response={'outcome':'accepted','provenance':{'input_git_head':'retain-this-head'},
+                  'evaluator_output':{'commands':[{'command':'transition','exit':0,
+                    'result':{'restitution':{'next':{'step_id':step['id']}},
+                              'instruction_discovery':discovery,'large':'x'*20000}}]}}
+        response['evaluator_output']['commands'] *= 2
+        raw=json.dumps(response);view=result_fields(raw)
+        base='/evaluator_output/commands/0/result/instruction_discovery'
+        self.assertEqual(step,view['fields'][base+'/agent_instructions/current_step'])
+        self.assertEqual(step,view['fields'][base.replace('/0/','/1/')+'/agent_instructions/current_step'])
+        self.assertEqual('available',view['fields'][base+'/status'])
+        self.assertEqual(response['provenance'],view['fields']['/provenance'])
+        self.assertIn(base+'/agent_instructions/procedure/steps',view['omitted_pointers'])
+        for pointer,value in view['fields'].items():
+            original=response
+            for part in pointer.strip('/').split('/'):
+                original=original[int(part)] if isinstance(original,list) else original[part]
+            self.assertEqual(original,value)
+        self.assertFalse(view['complete']);self.assertFalse(view['interpretation'])
 
     def test_json_read_preserves_exact_values_and_pointers_without_execution(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -126,6 +126,8 @@ def result_fields(stdout):
     shown, omitted, used = {}, [], 0
     def visit(value, pointer, depth):
         nonlocal used
+        if pointer in shown:
+            return
         size = len(json.dumps({pointer:value}, ensure_ascii=False).encode())
         if size <= 2048 and used + size <= 8192:
             shown[pointer] = value
@@ -137,14 +139,37 @@ def result_fields(stdout):
                            0 if isinstance(value[i], dict) and value[i].get('exit') not in (None, 0) else 1)
             for index in order:
                 visit(value[index], pointer+'/'+str(index), 0)
-        elif isinstance(value, dict) and depth < 2:
-            priority = ('outcome', 'command', 'exit', 'restitution', 'result')
+        elif isinstance(value, dict) and (depth < 2 or pointer.endswith(
+                ('/instruction_discovery', '/agent_instructions', '/procedure'))):
+            # Render returned instruction pointers, not a copied procedure catalogue
+            # or a helper-selected next step. Large fields remain explicit omissions.
+            priority = ('outcome', 'error', 'operation_key', 'receipt_id', 'provenance',
+                        'command', 'exit', 'restitution', 'instruction_discovery',
+                        'result', 'status', 'agent_instructions', 'current_step',
+                        'shared_prerequisites', 'location', 'prerequisites')
             keys = [k for k in priority if k in value] + [k for k in value if k not in priority]
             for key in keys:
                 child = value[key]
                 visit(child, pointer+'/'+key.replace('~','~0').replace('/','~1'), depth+1)
         else:
             omitted.append(pointer)
+    if isinstance(value, dict) and len(stdout.encode()) > 2048:
+        for key in ('outcome', 'error', 'operation_key', 'receipt_id', 'provenance'):
+            if key in value:visit(value[key], '/'+key, 0)
+        evaluator=value.get('evaluator_output', {})
+        commands=evaluator.get('commands', []) if isinstance(evaluator, dict) else []
+        # Reserve room for each command's returned current reading before large
+        # candidate/inventory fields consume it. Preserve exact command indices.
+        for index, command in enumerate(commands if isinstance(commands, list) else []):
+            result=command.get('result', {}) if isinstance(command, dict) else {}
+            discovery=result.get('instruction_discovery', {}) if isinstance(result, dict) else {}
+            if not isinstance(discovery, dict):continue
+            base='/evaluator_output/commands/'+str(index)+'/result/instruction_discovery'
+            if 'status' in discovery:visit(discovery['status'], base+'/status', 0)
+            agent=discovery.get('agent_instructions', {})
+            if isinstance(agent, dict):
+                for key in ('current_step', 'shared_prerequisites'):
+                    if key in agent:visit(agent[key], base+'/agent_instructions/'+key, 0)
     visit(value, '', 0)
     result = {'json':True, 'fields':shown, 'omitted_pointers':omitted,
               'complete':not omitted, 'interpretation':False,

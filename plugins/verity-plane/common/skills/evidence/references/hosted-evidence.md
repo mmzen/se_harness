@@ -27,6 +27,9 @@ claim. Use its operation key, action and outcome fields. Keep approval, start,
 verification and release as separate observations when their requests are separate.
 Distinguish `previewed`, `accepted` and `refused`. A receipt lookup proves that
 lookup; an identical retry requires a recorded resubmission and matching receipt.
+For a retry claim, compare the original submission, lookup, identical retry and
+changed-request attempt separately. Cite each retained request/result; do not
+combine their outcomes. Keep the import baseline distinct from later exports.
 
 State observed behavior separately from supported behavior. A refused query
 establishes the refusal of that query. Read the public query contract before
