@@ -1,0 +1,122 @@
+{
+  "archive": "provenance.zip",
+  "sha256": "552a2261151b37e5f9327ab04d26d0a5f6db830b110df05fe03caa277bccab29",
+  "files": [
+    {
+      "path": "candidate-28.json",
+      "bytes": 113,
+      "sha256": "e6c0e12eb2707cd120b053b99f6c3f88744fa52ba71362450871886e38427263"
+    },
+    {
+      "path": "component-comparison.json",
+      "bytes": 1953,
+      "sha256": "16e4f847fa0a7db8aef54ac29241db048687fba936633bcb02faa1f68b89bf41"
+    },
+    {
+      "path": "build28-replay.json",
+      "bytes": 7097,
+      "sha256": "69399ace3e815087bdad56cd28dceb470b122e7c16765808bfb6e45040ee1f53"
+    },
+    {
+      "path": "client-build-28.json",
+      "bytes": 959,
+      "sha256": "bee99d6ce0eb6729d44a713c9cdfcf62dc93dcabd81bf83f26da7b7ebf07b838"
+    },
+    {
+      "path": "package-28.json",
+      "bytes": 1806,
+      "sha256": "5c5267eb015e192d159f597ea868500dd64a386d810c8482a408696ec553e0f2"
+    },
+    {
+      "path": "client-env-28.json",
+      "bytes": 456,
+      "sha256": "36c03511704a8b9704c4d674e9be9b3fc0af714c634f07c62fbf7736a1881af2"
+    },
+    {
+      "path": "client-install-28.json",
+      "bytes": 1048,
+      "sha256": "cc2614bfb4ae83e2f6e4a169d1339de0cde5720651d166442ead71b15e520ca1"
+    },
+    {
+      "path": "claude-auth-review.json",
+      "bytes": 121,
+      "sha256": "2a949a44c6a63a0e7c3e23ce15cbb45349588efd4553785a8350138c4d1c152e"
+    },
+    {
+      "path": "claude-version.json",
+      "bytes": 309,
+      "sha256": "a410fecd0153f76050aaed58a7a3081e8a43b8ea072a552735d7595c64f86855"
+    },
+    {
+      "path": "fixture-clone.json",
+      "bytes": 3483,
+      "sha256": "36bd77183d5ca7616185600733780452f128487c9b7caf39d12f60a19d89422f"
+    },
+    {
+      "path": "fixture-clone-host.json",
+      "bytes": 765,
+      "sha256": "357ee2fac1d347241bc518435b69b9ff3385ec18c0aa44f8ca411cce89c83126"
+    },
+    {
+      "path": "fixture-approval-preview.json",
+      "bytes": 24249,
+      "sha256": "9f966c7152f36e259c09b51950695275beb19f6de619ddaa7212f5c9d7e0110a"
+    },
+    {
+      "path": "fixture-approval-apply.json",
+      "bytes": 24254,
+      "sha256": "945e8e887cb20a0c0481b645c8591f782eced375a8ed7ba792f218d95b6ffd06"
+    },
+    {
+      "path": "approved-fixture-validation.json",
+      "bytes": 2568,
+      "sha256": "4b18b807570f0664dab6ce74acac11a8944d4b97294f0be91b96d700f4f2484c"
+    },
+    {
+      "path": "fixture-stage.json",
+      "bytes": 491,
+      "sha256": "7fcae8695d944bcafb2882419fa62ef0c864c99ac9027f6d176396f898f4ba6a"
+    },
+    {
+      "path": "fixture-commit.json",
+      "bytes": 690,
+      "sha256": "5795e47aedc82052534b3dd42cdccd66e59801bad1d2d96df531ab2b053ca211"
+    },
+    {
+      "path": "fixture-source-stage.json",
+      "bytes": 1358,
+      "sha256": "e1fd1ebdeb35650623e1b105100811fc0b410b0e304c5a7ecf85b80ff8bbacf5"
+    },
+    {
+      "path": "package28/combination.json",
+      "bytes": 2807,
+      "sha256": "b3402234badb44730c20c36403dd9be53ad472ad77044527edf6914d6534b6d6"
+    },
+    {
+      "path": "approved-source/manifest.json",
+      "bytes": 2290,
+      "sha256": "1dc0f5140d85253a288644711bb56e222ea88eefa6fa58d27c7c5a3946976544"
+    },
+    {
+      "path": "approved-source/staged/source-manifest.json",
+      "bytes": 2349,
+      "sha256": "3aa1004f11e033ee80f8aaa28684c8bbe3880ec7f28698126f44f3336d2a3b76"
+    },
+    {
+      "path": "approved-source/staged/source-inventory.json",
+      "bytes": 3119,
+      "sha256": "ecdb62b7fea989f97507ccd93fab526600066da2e3d30f3e2a9145e556ddf6a7"
+    },
+    {
+      "path": "WO-HAG-009-recovered-context.json",
+      "bytes": 22298,
+      "sha256": "d529bf17dbe139f68b4c852fa42abeb0db9df7d2a3052bc51bdc4c097f36678c"
+    },
+    {
+      "path": "WO-HAG-011-recovered-context.json",
+      "bytes": 21939,
+      "sha256": "0a1886b8c99aaf8b8b414e7b259f5d5088c6f13dcf8f227951601b1594387869"
+    }
+  ],
+  "limits": "No provider account stores, credentials, raw provider stream or private reasoning. Exact selected build, source fixture, evaluator and observed-auth status records only."
+}

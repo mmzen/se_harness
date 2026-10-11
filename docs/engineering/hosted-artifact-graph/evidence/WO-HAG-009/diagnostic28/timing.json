@@ -1,0 +1,517 @@
+{
+  "schema": "hag-diagnostic-timing/v1",
+  "trial": "claude-232",
+  "elapsed_seconds": 900.063,
+  "matched_tool_calls": 70,
+  "unmatched_tool_calls": 0,
+  "tool_interval_seconds": 48.458,
+  "outside_tool_intervals_seconds": 851.605,
+  "groups": {
+    "Read": {
+      "calls": 21,
+      "seconds": 1.6059999465942383
+    },
+    "Bash": {
+      "calls": 32,
+      "seconds": 47.182000398635864
+    },
+    "Write": {
+      "calls": 17,
+      "seconds": 0.690000057220459
+    }
+  },
+  "intervals": [
+    {
+      "tool": "Read",
+      "use_line": 6,
+      "start_second": 4.587323904037476,
+      "result_line": 7,
+      "end_second": 4.636323928833008
+    },
+    {
+      "tool": "Read",
+      "use_line": 8,
+      "start_second": 5.285323858261108,
+      "result_line": 9,
+      "end_second": 5.31632399559021
+    },
+    {
+      "tool": "Read",
+      "use_line": 18,
+      "start_second": 18.76832389831543,
+      "result_line": 19,
+      "end_second": 18.78132390975952
+    },
+    {
+      "tool": "Read",
+      "use_line": 20,
+      "start_second": 19.505323886871338,
+      "result_line": 21,
+      "end_second": 19.51832389831543
+    },
+    {
+      "tool": "Read",
+      "use_line": 26,
+      "start_second": 26.886323928833008,
+      "result_line": 27,
+      "end_second": 26.90432381629944
+    },
+    {
+      "tool": "Bash",
+      "use_line": 32,
+      "start_second": 34.42932391166687,
+      "result_line": 35,
+      "end_second": 36.03232383728027
+    },
+    {
+      "tool": "Read",
+      "use_line": 33,
+      "start_second": 35.14732384681702,
+      "result_line": 36,
+      "end_second": 36.045323848724365
+    },
+    {
+      "tool": "Read",
+      "use_line": 34,
+      "start_second": 35.91032385826111,
+      "result_line": 37,
+      "end_second": 36.04732394218445
+    },
+    {
+      "tool": "Read",
+      "use_line": 48,
+      "start_second": 53.53632402420044,
+      "result_line": 49,
+      "end_second": 53.551323890686035
+    },
+    {
+      "tool": "Read",
+      "use_line": 50,
+      "start_second": 54.444324016571045,
+      "result_line": 51,
+      "end_second": 54.493323802948
+    },
+    {
+      "tool": "Read",
+      "use_line": 52,
+      "start_second": 55.331323862075806,
+      "result_line": 53,
+      "end_second": 55.349323987960815
+    },
+    {
+      "tool": "Read",
+      "use_line": 54,
+      "start_second": 61.819324016571045,
+      "result_line": 55,
+      "end_second": 61.83532381057739
+    },
+    {
+      "tool": "Read",
+      "use_line": 56,
+      "start_second": 62.67432379722595,
+      "result_line": 57,
+      "end_second": 62.6953239440918
+    },
+    {
+      "tool": "Read",
+      "use_line": 58,
+      "start_second": 63.509323835372925,
+      "result_line": 59,
+      "end_second": 63.5243239402771
+    },
+    {
+      "tool": "Read",
+      "use_line": 60,
+      "start_second": 64.33832383155823,
+      "result_line": 61,
+      "end_second": 64.35132384300232
+    },
+    {
+      "tool": "Read",
+      "use_line": 62,
+      "start_second": 65.10132384300232,
+      "result_line": 63,
+      "end_second": 65.12032389640808
+    },
+    {
+      "tool": "Bash",
+      "use_line": 72,
+      "start_second": 81.2833240032196,
+      "result_line": 73,
+      "end_second": 81.82432389259338
+    },
+    {
+      "tool": "Read",
+      "use_line": 74,
+      "start_second": 82.18932390213013,
+      "result_line": 75,
+      "end_second": 82.20232391357422
+    },
+    {
+      "tool": "Read",
+      "use_line": 76,
+      "start_second": 82.90632390975952,
+      "result_line": 77,
+      "end_second": 82.92232394218445
+    },
+    {
+      "tool": "Bash",
+      "use_line": 84,
+      "start_second": 95.47132396697998,
+      "result_line": 85,
+      "end_second": 95.96632385253906
+    },
+    {
+      "tool": "Read",
+      "use_line": 86,
+      "start_second": 96.60932397842407,
+      "result_line": 87,
+      "end_second": 96.61932396888733
+    },
+    {
+      "tool": "Bash",
+      "use_line": 97,
+      "start_second": 113.45732402801514,
+      "result_line": 98,
+      "end_second": 115.20032382011414
+    },
+    {
+      "tool": "Bash",
+      "use_line": 106,
+      "start_second": 129.45932388305664,
+      "result_line": 107,
+      "end_second": 130.40232396125793
+    },
+    {
+      "tool": "Bash",
+      "use_line": 125,
+      "start_second": 156.01232385635376,
+      "result_line": 126,
+      "end_second": 158.06032395362854
+    },
+    {
+      "tool": "Bash",
+      "use_line": 132,
+      "start_second": 168.60432386398315,
+      "result_line": 133,
+      "end_second": 171.2283239364624
+    },
+    {
+      "tool": "Write",
+      "use_line": 146,
+      "start_second": 197.6913239955902,
+      "result_line": 147,
+      "end_second": 197.732323884964
+    },
+    {
+      "tool": "Bash",
+      "use_line": 149,
+      "start_second": 209.79332399368286,
+      "result_line": 150,
+      "end_second": 211.6163239479065
+    },
+    {
+      "tool": "Bash",
+      "use_line": 157,
+      "start_second": 225.44832396507263,
+      "result_line": 158,
+      "end_second": 225.77132391929626
+    },
+    {
+      "tool": "Read",
+      "use_line": 159,
+      "start_second": 231.38032388687134,
+      "result_line": 160,
+      "end_second": 231.5833239555359
+    },
+    {
+      "tool": "Bash",
+      "use_line": 172,
+      "start_second": 252.74832391738892,
+      "result_line": 173,
+      "end_second": 253.2703239917755
+    },
+    {
+      "tool": "Bash",
+      "use_line": 176,
+      "start_second": 263.7063238620758,
+      "result_line": 178,
+      "end_second": 264.25132393836975
+    },
+    {
+      "tool": "Write",
+      "use_line": 199,
+      "start_second": 299.7523238658905,
+      "result_line": 200,
+      "end_second": 299.79732394218445
+    },
+    {
+      "tool": "Bash",
+      "use_line": 201,
+      "start_second": 305.7193238735199,
+      "result_line": 202,
+      "end_second": 308.0703239440918
+    },
+    {
+      "tool": "Bash",
+      "use_line": 213,
+      "start_second": 327.85832381248474,
+      "result_line": 214,
+      "end_second": 328.2743239402771
+    },
+    {
+      "tool": "Write",
+      "use_line": 222,
+      "start_second": 351.18532395362854,
+      "result_line": 223,
+      "end_second": 351.2263238430023
+    },
+    {
+      "tool": "Bash",
+      "use_line": 224,
+      "start_second": 365.73832392692566,
+      "result_line": 225,
+      "end_second": 367.9343240261078
+    },
+    {
+      "tool": "Bash",
+      "use_line": 232,
+      "start_second": 380.5093238353729,
+      "result_line": 233,
+      "end_second": 380.875324010849
+    },
+    {
+      "tool": "Write",
+      "use_line": 239,
+      "start_second": 400.60832381248474,
+      "result_line": 240,
+      "end_second": 400.6533238887787
+    },
+    {
+      "tool": "Bash",
+      "use_line": 241,
+      "start_second": 406.7653238773346,
+      "result_line": 242,
+      "end_second": 407.62832403182983
+    },
+    {
+      "tool": "Write",
+      "use_line": 247,
+      "start_second": 420.57832384109497,
+      "result_line": 248,
+      "end_second": 420.6203238964081
+    },
+    {
+      "tool": "Bash",
+      "use_line": 249,
+      "start_second": 427.261323928833,
+      "result_line": 250,
+      "end_second": 429.2173240184784
+    },
+    {
+      "tool": "Write",
+      "use_line": 255,
+      "start_second": 442.62632393836975,
+      "result_line": 256,
+      "end_second": 442.665323972702
+    },
+    {
+      "tool": "Bash",
+      "use_line": 257,
+      "start_second": 448.4853239059448,
+      "result_line": 258,
+      "end_second": 450.71832394599915
+    },
+    {
+      "tool": "Write",
+      "use_line": 267,
+      "start_second": 479.0703239440918,
+      "result_line": 268,
+      "end_second": 479.1123239994049
+    },
+    {
+      "tool": "Bash",
+      "use_line": 269,
+      "start_second": 485.32132387161255,
+      "result_line": 270,
+      "end_second": 487.58932399749756
+    },
+    {
+      "tool": "Bash",
+      "use_line": 276,
+      "start_second": 499.7043240070343,
+      "result_line": 277,
+      "end_second": 500.0853238105774
+    },
+    {
+      "tool": "Read",
+      "use_line": 278,
+      "start_second": 504.28632402420044,
+      "result_line": 279,
+      "end_second": 504.3113238811493
+    },
+    {
+      "tool": "Read",
+      "use_line": 280,
+      "start_second": 507.76432394981384,
+      "result_line": 281,
+      "end_second": 507.7783238887787
+    },
+    {
+      "tool": "Write",
+      "use_line": 291,
+      "start_second": 538.7683238983154,
+      "result_line": 292,
+      "end_second": 538.8043239116669
+    },
+    {
+      "tool": "Bash",
+      "use_line": 293,
+      "start_second": 545.7343239784241,
+      "result_line": 294,
+      "end_second": 547.7833240032196
+    },
+    {
+      "tool": "Write",
+      "use_line": 299,
+      "start_second": 571.705323934555,
+      "result_line": 300,
+      "end_second": 571.7443239688873
+    },
+    {
+      "tool": "Bash",
+      "use_line": 301,
+      "start_second": 576.4233238697052,
+      "result_line": 302,
+      "end_second": 578.5303239822388
+    },
+    {
+      "tool": "Bash",
+      "use_line": 310,
+      "start_second": 590.078323841095,
+      "result_line": 311,
+      "end_second": 591.0933239459991
+    },
+    {
+      "tool": "Write",
+      "use_line": 317,
+      "start_second": 603.0123238563538,
+      "result_line": 318,
+      "end_second": 603.0593240261078
+    },
+    {
+      "tool": "Bash",
+      "use_line": 319,
+      "start_second": 607.0743238925934,
+      "result_line": 320,
+      "end_second": 609.493323802948
+    },
+    {
+      "tool": "Write",
+      "use_line": 326,
+      "start_second": 632.4843239784241,
+      "result_line": 327,
+      "end_second": 632.5243239402771
+    },
+    {
+      "tool": "Bash",
+      "use_line": 328,
+      "start_second": 638.6593239307404,
+      "result_line": 329,
+      "end_second": 640.8743238449097
+    },
+    {
+      "tool": "Bash",
+      "use_line": 339,
+      "start_second": 660.7703239917755,
+      "result_line": 340,
+      "end_second": 661.0993239879608
+    },
+    {
+      "tool": "Write",
+      "use_line": 350,
+      "start_second": 696.3253238201141,
+      "result_line": 351,
+      "end_second": 696.3653240203857
+    },
+    {
+      "tool": "Bash",
+      "use_line": 352,
+      "start_second": 704.0353238582611,
+      "result_line": 353,
+      "end_second": 706.5723237991333
+    },
+    {
+      "tool": "Write",
+      "use_line": 361,
+      "start_second": 758.0733239650726,
+      "result_line": 362,
+      "end_second": 758.1213238239288
+    },
+    {
+      "tool": "Bash",
+      "use_line": 363,
+      "start_second": 764.8633239269257,
+      "result_line": 365,
+      "end_second": 767.7663238048553
+    },
+    {
+      "tool": "Write",
+      "use_line": 371,
+      "start_second": 790.0293238162994,
+      "result_line": 372,
+      "end_second": 790.0773239135742
+    },
+    {
+      "tool": "Bash",
+      "use_line": 373,
+      "start_second": 796.647323846817,
+      "result_line": 374,
+      "end_second": 798.9023239612579
+    },
+    {
+      "tool": "Write",
+      "use_line": 380,
+      "start_second": 809.7063238620758,
+      "result_line": 381,
+      "end_second": 809.7393238544464
+    },
+    {
+      "tool": "Bash",
+      "use_line": 382,
+      "start_second": 814.8593239784241,
+      "result_line": 383,
+      "end_second": 817.2303240299225
+    },
+    {
+      "tool": "Bash",
+      "use_line": 392,
+      "start_second": 829.1003239154816,
+      "result_line": 393,
+      "end_second": 829.4993238449097
+    },
+    {
+      "tool": "Bash",
+      "use_line": 395,
+      "start_second": 834.1453239917755,
+      "result_line": 396,
+      "end_second": 834.4883239269257
+    },
+    {
+      "tool": "Write",
+      "use_line": 402,
+      "start_second": 874.1383240222931,
+      "result_line": 403,
+      "end_second": 874.1703238487244
+    },
+    {
+      "tool": "Write",
+      "use_line": 404,
+      "start_second": 896.6353240013123,
+      "result_line": 405,
+      "end_second": 896.6673238277435
+    }
+  ],
+  "method": "Provider tool_use to matching tool_result timestamps; interval union avoids double counting. Only timing metadata exported. Outside-tool time is unclassified provider/host activity, not measured reasoning time. This diagnostic differs from full NQ and is not a speed comparison.",
+  "source_events_sha256": "8561df86767526f72670cdc05a22e1f0815e37f99aedfb4c3a3d5d39df874a7f"
+}

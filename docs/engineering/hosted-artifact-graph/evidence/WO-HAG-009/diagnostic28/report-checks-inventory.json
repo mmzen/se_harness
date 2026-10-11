@@ -1,0 +1,18 @@
+{
+  "archive": "report-checks.zip",
+  "sha256": "092851070de3745777b3f1b5cec9b8d907162158e78a1e422e18880001db56ad",
+  "files": [
+    {
+      "path": "report28-scope.json",
+      "sha256": "2cdf2fb152c517ccb667102760a6190e0a31e80b17257bfd30468e02e053d827"
+    },
+    {
+      "path": "report28-preflight.json",
+      "sha256": "cd71ad3986432d9e20d2ad64396579f4d6545ec028021bf7ea69d5c1718af75d"
+    },
+    {
+      "path": "report28-validation.json",
+      "sha256": "8aafb22eeb60cf8b5d84009ddaef8d28576f86ab7ecf1ec28af62ebaf20488c9"
+    }
+  ]
+}

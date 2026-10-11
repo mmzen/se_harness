@@ -327,3 +327,7 @@ The [revised qualification assessment](evidence/WO-HAG-011/revised-qualification
 ## Draft readiness observations
 
 The [10 October assessment](evidence/WO-HAG-011/readiness-qualification-assessment.md) records the incomplete-result correction, remaining Claude content failure and Codex localhost blocker. Its permission amendment is proposed and unapplied. WO-HAG-011 and full qualification remain incomplete.
+
+## Focused hosted lifecycle diagnostic
+
+The [11 October focused diagnostic](evidence/WO-HAG-009/diagnostic28/assessment.md) records six independently replayed Claude lifecycle operations and the remaining 15-minute timeout. It preserves the invalid first setup, both transcripts and exact evidence. Full native qualification and efficiency remain incomplete; WO-HAG-009 and WO-HAG-011 remain in progress.
