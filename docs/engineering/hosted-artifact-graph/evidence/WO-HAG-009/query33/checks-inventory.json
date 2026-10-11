@@ -1,0 +1,46 @@
+{
+  "archive": "checks.zip",
+  "sha256": "c62c1d596890680cf2a922aed7c85e9001f5087de4ceca3725683d19fb8f1a99",
+  "files": [
+    {
+      "path": "focused.json",
+      "sha256": "7ec2b1441f11ec9e65cecc8ed784cd4fd2fb12787a53160c2a520a8a9edd4901"
+    },
+    {
+      "path": "source.json",
+      "sha256": "bb917136fff6dc48fe26310f94c4f98ee072238f1f389a8d2047f44b86af8f9f"
+    },
+    {
+      "path": "distribution.json",
+      "sha256": "5e6aba45966c6dc029a2cc3b4931ad8967a76bbd06fcd65511cf2887d9793d2c"
+    },
+    {
+      "path": "smoke.json",
+      "sha256": "6e1f3f754afc05a3759deea759c0cddd495e8660080da09fc873cf8b5989dd31"
+    },
+    {
+      "path": "WO-HAG-009-scope33.json",
+      "sha256": "db499747b8ef4143acfb5d2d3fd7edfa2d091b030e8140b97bb7c701f11bd173"
+    },
+    {
+      "path": "WO-HAG-011-scope33.json",
+      "sha256": "f64430844abedfcda2c06338cb32a1e70c815cdc29abbc5d0961490a4e6a1cc6"
+    },
+    {
+      "path": "WO-HAG-009-preflight33.json",
+      "sha256": "d42836fcb4c986891115c9b6084c31f7157d736912291b7ff786a1f9cf8e84cf"
+    },
+    {
+      "path": "WO-HAG-011-preflight33.json",
+      "sha256": "3b14d6b7dddce6b1ca0705cf7eee319f11290fd8761db48d54ee1c6641b799eb"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "f604fde24a5191522a2dbb691fc03cfde0d47f04acc3b3f2df604cbb07523a2d"
+    },
+    {
+      "path": "cypher-contract-observation.json",
+      "sha256": "f4db65aea3297683f416bc3683ef1998fb5f4ef8aca231a388aab41b88ecbe76"
+    }
+  ]
+}

@@ -36,6 +36,8 @@ is required. Link the source for a general capability claim; otherwise omit it.
 Include material failures, recovered errors, permission denials and uncertain
 effects. Identify whether the host, client or service refused the action. Use a
 captured call summary for counts when available; do not estimate from memory.
+State what each count measures. Tool-error counts can exclude service refusals
+returned inside normal tool responses; report those refusals separately.
 If the capture is incomplete, say which result or count remains unassessed.
 
 Name identities in full: hosted input baseline B, source fixture commit S,

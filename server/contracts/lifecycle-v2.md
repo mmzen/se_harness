@@ -81,6 +81,14 @@ before selecting a query. `Artifact` and `Revision` are distinct public labels.
 
 The admitted form has one `MATCH` or `OPTIONAL MATCH` path, labelled nodes,
 optional parameterized property comparisons, `RETURN`, and a numeric `LIMIT`.
+
+Relationship paths are supported. Use `-[edge:TYPE]->` or `<-[edge:TYPE]-` between
+labelled nodes, with a public relationship type from the physical representation.
+Each node and relationship needs a distinct variable name. Anonymous relationship
+syntax such as `-[:TYPE]->` is refused; a refusal of that form does not mean
+relationship traversal is unsupported. Return-column aliases (`AS alias`) are
+optional.
+
 For example, with `parameters` containing a selected artifact ID under `artifact`:
 
 ```cypher
