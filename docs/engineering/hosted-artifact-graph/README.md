@@ -6,6 +6,16 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Latest functional qualification
 
+The [paired instruction-pointer assessment](evidence/WO-HAG-009/context34-result/assessment.md)
+records candidate `01476073cb2fa0a86aaec11c70b0b2d605e8e878`. Codex passes its
+native assessment. Claude completes ten independently replayed operations and
+two exports, but misses required procedure reads, uses the wrong refusal cases
+and makes unsupported report claims. Combined qualification remains incomplete.
+The report also identifies a test-helper write-boundary gap. Exact failures and
+both native reports are preserved; PR #543 remains draft.
+
+## Previous functional qualification
+
 The [Claude correction assessment](evidence/WO-HAG-009/functional30/assessment.md)
 records a complete synthetic release, ten independently replayed lifecycle
 operations and two exact exports. A focused continuation confirmed all seven
