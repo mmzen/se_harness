@@ -6,19 +6,21 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Latest functional qualification
 
-The [approval instruction discovery rerun](evidence/WO-HAG-009/authority38-result/assessment.md)
-uses candidate `ee86a842550c19fb6a56913841757b42df9ecaec` with Opus 5.5.
-The required delegation section was read before approval. The run reached an
-accepted handoff in 11:43; all three accepted operations independently replayed.
-Its stale request reached the project-version guard, so preview-digest coverage
-is not established for this run. Full paired-host qualification remains pending.
-Peak input context is 340,733 tokens. PR #543 stays draft.
+The [focused preview-digest diagnostic](evidence/WO-HAG-009/digest39-result/assessment.md)
+uses the unchanged candidate `ee86a842550c19fb6a56913841757b42df9ecaec` with Opus 5.5.
+Claude reached the stale-preview digest guard with current versions, confirmed
+no effect and recovered to one accepted approval. Independent replay and all
+three Cypher/HTTP comparisons passed. The specific missing diagnostic is closed.
+Full paired-host qualification and required Opus 4.6 cases remain pending.
+PR #543 stays draft.
 
-The [previous scope and verification planning run](evidence/WO-HAG-009/scope37-result/assessment.md),
+This narrower task took 7:39, 62 calls and 177,692 peak input-context tokens.
+It is not a comparable performance sample. The [prior authority-reading run](evidence/WO-HAG-009/authority38-result/assessment.md),
+[scope/planning run](evidence/WO-HAG-009/scope37-result/assessment.md),
 [earlier Opus 5.5 comparison](evidence/WO-HAG-009/opus55-comparison/assessment.md)
 and [Opus 4.6 entry-condition assessment](evidence/WO-HAG-009/procedure36-result/assessment.md)
-retain their original failures and candidates. Formal qualification criteria
-are unchanged; broad performance work remains deferred.
+retain their original results. Criteria are unchanged; broad performance work
+remains deferred.
 
 ## Previous paired functional qualification
 
