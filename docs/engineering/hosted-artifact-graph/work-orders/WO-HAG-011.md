@@ -2,10 +2,10 @@
 id = "WO-HAG-011"
 type = "work_order"
 title = "Simplify hosted authoring instructions and client interaction"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-08"
-updated = "2026-10-10"
+updated = "2026-10-12"
 
 [assurance]
 commit_bound_verification = "required"
@@ -61,6 +61,13 @@ to = "in_progress"
 decided_at = "2026-10-08T16:09:01Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Human mmzen answered \"I approve\" to the reviewed REQ-HAG-014, SPEC-HAG-008, VER-HAG-008 and WO-HAG-011 package on 2026-10-08. Approves the bounded client and instruction implementation with required commit-bound verification. Includes ordinary review pushes and updates to draft PR #543 in mmzen/se_harness, source codex/hosted-agent-qualification, target main, its ready verification record and the later separately supplied verification-decision commit. Keep the PR draft while WO-HAG-009/010 qualification remains incomplete. Git remains authoritative. No human verification acceptance, merge, force-push, release, adoption, host-plugin update, permission bypass or changed qualification criterion is granted."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-12T13:07:25Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Simplify hosted authoring instructions and client interaction

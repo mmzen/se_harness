@@ -6,19 +6,21 @@ This package covers the first complete hosted context and draft-authoring sandbo
 
 ## Current native qualification
 
-Both Windows CLI hosts pass all five VER-HAG-007 native lifecycle cases for
-candidate `2f6ecb1433ef98cf643e0f604ed2c4258a2261e2`. The
-[consolidated evidence](evidence/WO-HAG-009/consolidation.md) retains exact
-component identities, twelve replayed operations per host, six reconstructed
-exports and seven MCP/HTTP tool comparisons per host. Codex includes the disclosed
-two-tool read-only supplement. WO-HAG-009 and WO-HAG-010 handoff checks pass;
-their completion and verification preparation follow the released evaluator.
-Human verification of this native qualification remains pending.
+mmzen verified [VREC-HAG-006](verification-records/VREC-HAG-006.md) for
+WO-HAG-009/010 at its exact recorded candidate. Both CLI hosts passed all five
+VER-HAG-007 lifecycle cases. The [consolidation](evidence/WO-HAG-009/consolidation.md)
+retains twelve replayed operations and seven MCP/HTTP comparisons per host,
+including the disclosed Codex two-tool read-only supplement.
 
-[WO-HAG-011's focused assessment](evidence/WO-HAG-011/focused44-result/assessment.md)
-still has two failed Claude positive repetitions and unmet efficiency targets.
-Those are separate VER-HAG-008 results. PR #543 remains draft. Git remains
-authoritative; no production, desktop, public delivery or risk acceptance is claimed.
+The [new focused drafting assessment](evidence/WO-HAG-011/qualified45-result/assessment.md)
+records the WO-HAG-011 correction and its exact candidate. Both missing-input
+diagnostics, three fresh Claude positive drafts and one Codex positive draft pass.
+Earlier failures remain in their original reports. Duration and context goals
+remain missed or unavailable; they are separate from correctness. Human
+verification of this correction is pending. PR #543 remains draft.
+
+Git remains authoritative. No production, desktop, public delivery, host update
+or risk acceptance is claimed.
 
 ## Historical qualification observations
 

@@ -16,8 +16,12 @@ scenarios passed, and mmzen verified
 [VREC-HAG-005](../engineering/hosted-artifact-graph/verification-records/VREC-HAG-005.md).
 PR #542 integrated that result. Both native Codex/Claude CLI runs pass all five
 VER-HAG-007 cases; [the consolidated evidence](../engineering/hosted-artifact-graph/evidence/WO-HAG-009/consolidation.md)
-records their exact inputs and limits. Human verification remains pending.
-The separate WO-HAG-011 focused drafting failures remain unresolved.
+records their exact inputs and limits. mmzen verified
+[VREC-HAG-006](../engineering/hosted-artifact-graph/verification-records/VREC-HAG-006.md)
+for that recorded candidate. The subsequent
+[WO-HAG-011 drafting correction](../engineering/hosted-artifact-graph/evidence/WO-HAG-011/qualified45-result/assessment.md)
+passes its focused content checks and awaits separate human verification.
+Duration and context goals remain missed or unavailable.
 Authentication and database ACL implementation remain deferred. The existing
 private access controls and RISK-HAG-001 remain in place.
 
