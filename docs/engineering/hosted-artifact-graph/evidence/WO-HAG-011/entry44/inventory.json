@@ -1,0 +1,91 @@
+{
+  "archive": "checks.zip",
+  "sha256": "5ffac17059144bfd4f3d1eb23ec4e581f7bfcd1f88bc6f9e11c8741fb9e82613",
+  "files": [
+    {
+      "path": "WO-HAG-009-preflight36.json",
+      "bytes": 2294,
+      "sha256": "ca94de3b58e4f6749d473cebf936b87c8b621d885eebe1dee6dc53f5383c6351"
+    },
+    {
+      "path": "WO-HAG-011-preflight36.json",
+      "bytes": 1978,
+      "sha256": "260beefdc8a1ece96f61c146669ee2c493d145bb99a83be9de5e91811468e9ea"
+    },
+    {
+      "path": "change.json",
+      "bytes": 670,
+      "sha256": "d7b3652920de085575e3b72f9b799cca3670552c67afe33bd99d4ec98a470a9d"
+    },
+    {
+      "path": "distribution.json",
+      "bytes": 506,
+      "sha256": "6ec4d4151434696cc0f2ceea712cc2a125991c2f4e60641dcb7347cb6a8ad769"
+    },
+    {
+      "path": "native.json",
+      "bytes": 643,
+      "sha256": "566e9f81e8210ffbaed57abb2ac2e026b36e82849cb814ae43f6273786fd87d7"
+    },
+    {
+      "path": "observers/hag_assess_full43.py",
+      "bytes": 5943,
+      "sha256": "c597b944922f3d2e546cc2f56537cb24a5b386190326823d932a4d31dca523c4"
+    },
+    {
+      "path": "observers/hag_commit44.py",
+      "bytes": 4024,
+      "sha256": "629815bf9d7e4b596dd32637f5b77e62ca882026f0c19fb6081bcd252d9b8b84"
+    },
+    {
+      "path": "observers/hag_control44.py",
+      "bytes": 802,
+      "sha256": "e4397c7a081af9798cfde5c595db215be2aed87d9619ee52fb528674c02096cc"
+    },
+    {
+      "path": "observers/hag_retain43.py",
+      "bytes": 3573,
+      "sha256": "2033e2dbb4e12c2c67fe7e69ba4a4e85d6898b1ebbedf98dce2c898b274122e4"
+    },
+    {
+      "path": "plugin.json",
+      "bytes": 1009,
+      "sha256": "11560331247def635c96e46dae1ae3430a761516520d14cfd23f753ee7bd8d0b"
+    },
+    {
+      "path": "resources.json",
+      "bytes": 600,
+      "sha256": "75c288cbdf97b6a67a9b74ddada94f5104bd023d8a25991ae144d92cbe20a78f"
+    },
+    {
+      "path": "retained-archive-check.json",
+      "bytes": 59,
+      "sha256": "b78b2b76503f62c1333fe451fe4f3401ec82ad19a4a71e572214fd3b419d5d05"
+    },
+    {
+      "path": "scope36.json",
+      "bytes": 20756,
+      "sha256": "5da321988f6b87479416c7e861ba336c4f06650b895739488c9e7a37da340780"
+    },
+    {
+      "path": "smoke.json",
+      "bytes": 4388,
+      "sha256": "db6cfd53a2cceb5cda90a8d6369a747180a04bd87822aacd06d809f8b9f07c9a"
+    },
+    {
+      "path": "source.json",
+      "bytes": 5510,
+      "sha256": "90c4fcdca5065922490786498b5e0493c45ade7a61419ecd2330cf1de6a4947c"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 428737,
+      "sha256": "6f2768474ac1171fb7bfa3837c99c6aa9476e5a93c8f6ec187919f0b7b8dbdbe"
+    },
+    {
+      "path": "review-staged-check-initial.json",
+      "bytes": 12383,
+      "sha256": "434ef1446cf8248c49921ac2fab216d51c2d1e279cfa3c1d147e107a7443e887"
+    }
+  ]
+}

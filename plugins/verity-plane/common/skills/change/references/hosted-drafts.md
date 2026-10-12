@@ -74,10 +74,12 @@ Compare the requested type's required content with the request and definitions:
 | User problem, improvement, success measure, existing gap | Require a source that supplies it. A creation request supplies no missing fact. |
 | Proposed method, check, evidence destination | Choose within the requested design scope; label it planned. |
 
-For an intent, ask which change in the user's situation is needed and how the
-owner will know it helped, when those inputs are missing. An audience name or
-replacement output alone does not answer those questions. Reuse supplied answers;
-do not invent a purpose or measure from an engineering activity or baseline.
+For an intent, resolve the user's problem, desired improvement and way to observe
+that improvement. Ask for missing inputs and reuse confirmed ones. Message text,
+channels or function signatures describe a solution; they do not explain why the
+user needs it. An unmeasured baseline is allowed; a missing success measure stays
+missing. Do not offer `not measured` as a replacement for how the owner will know
+the change helped. Do not invent a purpose or measure from engineering activity.
 
 Before claiming a coverage gap, read the applicable requirements, specifications
 and verification contracts. Code or one same-type record cannot establish their
