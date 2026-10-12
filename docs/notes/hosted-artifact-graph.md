@@ -14,8 +14,10 @@ SPEC-HAG-007. Git remains authoritative. The pilot uses separately versioned
 snapshots and ordinary disposable Git history. Its eight required VER-HAG-006
 scenarios passed, and mmzen verified
 [VREC-HAG-005](../engineering/hosted-artifact-graph/verification-records/VREC-HAG-005.md).
-PR #542 integrated that result. The separate native Codex/Claude qualification is
-[in progress under WO-HAG-009](../engineering/hosted-artifact-graph/evidence/WO-HAG-009/report.md).
+PR #542 integrated that result. Both native Codex/Claude CLI runs pass all five
+VER-HAG-007 cases; [the consolidated evidence](../engineering/hosted-artifact-graph/evidence/WO-HAG-009/consolidation.md)
+records their exact inputs and limits. Human verification remains pending.
+The separate WO-HAG-011 focused drafting failures remain unresolved.
 Authentication and database ACL implementation remain deferred. The existing
 private access controls and RISK-HAG-001 remain in place.
 

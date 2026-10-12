@@ -1,0 +1,127 @@
+{
+  "archive": "completion-checks.zip",
+  "sha256": "4fc767e14eaa3d28e49eea5712b1c238d7fbab9b502e24c907e239af301e2a0d",
+  "bytes": 94968,
+  "files": [
+    {
+      "path": "candidate-validation.json",
+      "bytes": 429357,
+      "sha256": "3123a1992f713cdbaba97e7317376149340b32cdef71eccceb1f0e9a68b20f32"
+    },
+    {
+      "path": "pr-before.json",
+      "bytes": 11993,
+      "sha256": "53dbe317db3f908dc80a0245fc75b01961adef972202db8de65361f24b795007"
+    },
+    {
+      "path": "WO-HAG-009-complete-apply.json",
+      "bytes": 13711,
+      "sha256": "a197ced218efae5967f3a5b7fc9e88f52abd3f010539ad2aeaf55e1c10054cf2"
+    },
+    {
+      "path": "WO-HAG-009-complete-preview.json",
+      "bytes": 13707,
+      "sha256": "7433f2815b8b6484f781f5b463548ce61e5bc7c357cda8564cace16228502c1c"
+    },
+    {
+      "path": "WO-HAG-009-completed-context.json",
+      "bytes": 14860,
+      "sha256": "857d106cfd08d8a1645c784afec8750172d8f1648bf5cf2dcf6ac15f7fdc3e26"
+    },
+    {
+      "path": "WO-HAG-009-context.json",
+      "bytes": 22298,
+      "sha256": "00380ea2fd5e9ac029f973a7f456e9220199506916c292b7132cc613be748343"
+    },
+    {
+      "path": "WO-HAG-009-final-handoff-rebound.json",
+      "bytes": 57221,
+      "sha256": "8bca62ed6e3125e3a22a7eee15db18d735333e830a448e69feeda41cb6938f7a"
+    },
+    {
+      "path": "WO-HAG-009-final-handoff.json",
+      "bytes": 57699,
+      "sha256": "3a78fe3f6b662c8365fbf6a7898c1aec1494364d4ecba77263bd7ef318e75c7c"
+    },
+    {
+      "path": "WO-HAG-009-final-review.json",
+      "bytes": 2294,
+      "sha256": "4a877bb674b284f6c98223bbc95d9c91606fcd06e4d14ff0f7d90067323a7c16"
+    },
+    {
+      "path": "WO-HAG-009-handoff-before-rebind.md",
+      "bytes": 1109,
+      "sha256": "4188a3bbcfb0d7b9d6162f62181433103736ec3046644d30d15d15e3ed5c6c35"
+    },
+    {
+      "path": "WO-HAG-009-handoff.json",
+      "bytes": 56816,
+      "sha256": "b5cc247f46d8072d87422322bb1909af16dcf7db607314630ccc74f1096537b5"
+    },
+    {
+      "path": "WO-HAG-009-preparation-scope.json",
+      "bytes": 21092,
+      "sha256": "fef55cc958576195fb3c607e4200b0124f7587dd9f19c496834150ce9135a088"
+    },
+    {
+      "path": "WO-HAG-009-rebind.json",
+      "bytes": 18629,
+      "sha256": "dd8337acd26a41171f3487f5367ab2c92880145a948a91f475a79bdaf31c68f4"
+    },
+    {
+      "path": "WO-HAG-010-complete-apply.json",
+      "bytes": 13119,
+      "sha256": "0f90457268bccb08492ce7d39f49d5d66b863260520761c2d1b36e6c4ddc7f30"
+    },
+    {
+      "path": "WO-HAG-010-complete-preview.json",
+      "bytes": 13116,
+      "sha256": "053aae376b6928c57f4941840dcd4a2cc0652ac9285a4bde5f30a7dfe1b96106"
+    },
+    {
+      "path": "WO-HAG-010-completed-context.json",
+      "bytes": 13090,
+      "sha256": "98d4873b3af845e8b63ce4be69ae1364efe1ad91cae5fd3551b73beaa73f1027"
+    },
+    {
+      "path": "WO-HAG-010-context.json",
+      "bytes": 20528,
+      "sha256": "9b9751384f58d7e1c5a097206947159fa9ef027173b8379c698a2fb449745e1e"
+    },
+    {
+      "path": "WO-HAG-010-final-handoff.json",
+      "bytes": 22766,
+      "sha256": "fe08ae3a2e3c980bb68fb4d9984eb207d3511f3017783eb8bcc8c995c6152c61"
+    },
+    {
+      "path": "WO-HAG-010-final-review.json",
+      "bytes": 2117,
+      "sha256": "dbba4fe849cc9407146418bfd3542d7693c6bf030415a964ba35c254a0065b91"
+    },
+    {
+      "path": "WO-HAG-010-handoff.json",
+      "bytes": 22656,
+      "sha256": "4459f7d6c7143d0ec2d71f4334d937ae4967c0e41ecb751871581972d0e8a417"
+    },
+    {
+      "path": "WO-HAG-010-preparation-scope.json",
+      "bytes": 19280,
+      "sha256": "18e4c7c828162676ed90bd0e13d1e5d952dc8cf7c653f51e19ce4f11b1bb9e1c"
+    },
+    {
+      "path": "hag_native_candidate_checks.py",
+      "bytes": 3016,
+      "sha256": "6324b613cf4f297a4b60d3820dfacdd8350770d9d1c640399f83b6143d2a9e39"
+    },
+    {
+      "path": "hag_verify_native.py",
+      "bytes": 13889,
+      "sha256": "975227e2429e20dafbfb9c996decd55fd9a6499312bc5b51df07329910c03572"
+    },
+    {
+      "path": "hag_verify_native_begin.py",
+      "bytes": 1043,
+      "sha256": "403cb8d33eb1f61326d88aaa95b3f8c5d5794fb5042bdf06c3b06e07e9bed632"
+    }
+  ]
+}

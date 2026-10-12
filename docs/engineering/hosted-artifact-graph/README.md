@@ -4,7 +4,28 @@
 
 This package covers the first complete hosted context and draft-authoring sandbox. mmzen approved WO-HAG-001 with required commit-bound verification on 2026-10-04. mmzen subsequently approved all 16 governing definitions in the reviewed Phase 0 artifact package. This index grants no authority.
 
-## Latest functional qualification
+## Current native qualification
+
+Both Windows CLI hosts pass all five VER-HAG-007 native lifecycle cases for
+candidate `2f6ecb1433ef98cf643e0f604ed2c4258a2261e2`. The
+[consolidated evidence](evidence/WO-HAG-009/consolidation.md) retains exact
+component identities, twelve replayed operations per host, six reconstructed
+exports and seven MCP/HTTP tool comparisons per host. Codex includes the disclosed
+two-tool read-only supplement. WO-HAG-009 and WO-HAG-010 handoff checks pass;
+their completion and verification preparation follow the released evaluator.
+Human verification of this native qualification remains pending.
+
+[WO-HAG-011's focused assessment](evidence/WO-HAG-011/focused44-result/assessment.md)
+still has two failed Claude positive repetitions and unmet efficiency targets.
+Those are separate VER-HAG-008 results. PR #543 remains draft. Git remains
+authoritative; no production, desktop, public delivery or risk acceptance is claimed.
+
+## Historical qualification observations
+
+The sections below preserve earlier candidates' observations and outstanding
+work at the time of each report. They do not replace the current result above.
+
+### Earlier preview-digest diagnostic
 
 The [focused preview-digest diagnostic](evidence/WO-HAG-009/digest39-result/assessment.md)
 uses the unchanged candidate `ee86a842550c19fb6a56913841757b42df9ecaec` with Opus 5.5.
