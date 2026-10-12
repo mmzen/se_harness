@@ -1,0 +1,8 @@
+{
+  "source": "Exact five-file proposal approved by mmzen at review commit 670ae9e4181799ae8f626c55373c7f251002aa99",
+  "observed": "All five active files match reviewed proposed SHA-256 values. Accepted copies and lifecycle metadata/history are preserved.",
+  "design": "One conditional report form in the existing guide; task links to it. No command, driver option, extra reporter or dependency.",
+  "retained_cost": "Guide 986 to 1057 words, task 383 to 390 words; actual native cost pending.",
+  "checks": "31 native-support tests, released validation, scope and review preflight pass. Full source/package checks still running at this checkpoint.",
+  "limits": "Local candidate checkpoint only, not work completion, verification or publication. Native qualification has not run."
+}

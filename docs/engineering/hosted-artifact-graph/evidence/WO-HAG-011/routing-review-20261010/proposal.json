@@ -1,0 +1,45 @@
+{
+  "base_commit": "8f5b3631e82a3413c4c50c9fc2d25894ec178ac9",
+  "active_path": "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+  "active_sha256": "363ba26ef3720b859855d11c714331aed05cde37948a6a7db3d85e29d50cd151",
+  "proposed_sha256": "6936bcd60bf9d5cc3fb8ca85731b7412265d32f7ee96443cf2d8e118152ea2a6",
+  "active_words": 825,
+  "proposed_words": 986,
+  "active_bytes": 5996,
+  "proposed_bytes": 7129,
+  "proposed_initial_sections": [
+    {
+      "resource": "docs/engineering/harness/COMMUNICATION.md",
+      "heading": "Communication",
+      "bytes": 1960,
+      "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+    },
+    {
+      "resource": "docs/engineering/harness/DEFINE_CHANGE.md",
+      "heading": "Read this when",
+      "bytes": 94,
+      "sha256": "c2cb6d6aa5d04e2579b2641ce2d738fd1359afb9a7b30a63652e4dfa3b8db8d9"
+    },
+    {
+      "resource": "docs/engineering/harness/DEFINE_CHANGE.md",
+      "heading": "Before this action",
+      "bytes": 216,
+      "sha256": "3ce477685d52f9c993e2006dcb2e0e67c0beb152b3570f7b808f5af8367ec631"
+    },
+    {
+      "resource": "docs/engineering/harness/DEFINE_CHANGE.md",
+      "heading": "Describe the intended outcome",
+      "bytes": 2348,
+      "sha256": "c2c3f4b617ae6dbbbde65026fedfe5b005ef2adaee622fe8a4d22ea1782be6fb"
+    },
+    {
+      "resource": "docs/engineering/ARTIFACT_AUTHORING.md",
+      "heading": "intent",
+      "bytes": 371,
+      "sha256": "291e8274f0c400a3d2d1ecdd56f2c10d68ab6cb40f667076a034e44d87c05e42"
+    }
+  ],
+  "proposed_initial_canonical_bytes": 4989,
+  "previous_initial_canonical_bytes": 21262,
+  "limit": "Offline section-size projection, not a native entry, token measurement or performance result. Active product and formal artifacts are unchanged."
+}

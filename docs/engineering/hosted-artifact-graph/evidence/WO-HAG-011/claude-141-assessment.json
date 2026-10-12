@@ -1,0 +1,70 @@
+{
+  "candidate": "f834c76a153466c3db557282c9610cb05ff0314d",
+  "trial": "claude-141",
+  "contract": "VER-HAG-008 EFF-04A",
+  "assessor": "Codex agent, independent post-run document and visible-result review; not human verification acceptance",
+  "verdict": "fail",
+  "findings": [
+    {
+      "subject": "Unsupported current problem",
+      "evidence": "independent-document.md / Problem",
+      "observation": "The draft claims the operator has no recorded confirmation and that downstream verification and release lack an established starting point. Neither absence nor downstream effect is established by the supplied request and fixture."
+    },
+    {
+      "subject": "Missing operational outcome and measure",
+      "evidence": "independent-document.md / Success measures; native/work/native-report.md / Content-review finding",
+      "observation": "Inspection of the expected greeting is an engineering check. The report acknowledges this and exempts the synthetic fixture from an operational observation. The active checklist and test-copy guidance grant no exception. The agreed operational outcome and measure remain absent."
+    },
+    {
+      "subject": "Incorrect readiness claim",
+      "evidence": "native/work/native-report.md / Content readiness; final visible response",
+      "observation": "Both claim complete supported content and no missing inputs. EFF-04A requires an incomplete draft or an exact missing-input blocker."
+    },
+    {
+      "subject": "Omitted failed call",
+      "evidence": "native event 67; metrics.native_failures",
+      "observation": "The helper rejected create-artifact --dry-run with exit 2. The report and final response claim no failed calls. No observations call precedes that exhaustive claim."
+    }
+  ],
+  "mechanical_results": {
+    "saved_bytes_exact": true,
+    "input_changes": [],
+    "imported_records_unchanged": 7,
+    "new_artifact": "INT-P3-001",
+    "state": "draft",
+    "project_version": 4,
+    "lifecycle_decisions": false
+  },
+  "measurements": {
+    "wall_seconds": 225.493,
+    "native_calls": 12,
+    "calls_by_tool": {
+      "Read": 3,
+      "Bash": 7,
+      "Write": 2
+    },
+    "model_turns": 11,
+    "initial_input_context": 32898,
+    "peak_input_context": 58920,
+    "native_failures": [
+      {
+        "line": 67,
+        "call_id": "toolu_01DNvJjHM7nJ5gqFAUgni1Xx",
+        "source": "native tool_result is_error",
+        "call": {
+          "line": 66,
+          "name": "Bash",
+          "description": "Preview intent artifact creation to get allocated ID"
+        },
+        "diagnostic": "Exit code 2\nusage: native_call.py [-h]\r\n                      {remote,instructions,encode-file,read-text,read-json,lookup-file,find-file,identity,observations,assert-greeting} ...\r\nnative_call.py: error: unrecognized arguments: --dry-run"
+      }
+    ],
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    }
+  },
+  "subsequent_native_trials": "Not run on this candidate, following the approved stop condition.",
+  "limit": "Mechanical admission does not establish content completeness. This is a failed focused diagnostic, not full NQ qualification or a verification decision."
+}

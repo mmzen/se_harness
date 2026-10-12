@@ -1,0 +1,16 @@
+{
+  "finding": {
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+    "exit": 2,
+    "elapsed_seconds": 0.10900849999961792,
+    "stdout": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md:109: trailing whitespace.\n+> \n",
+    "stderr": ""
+  },
+  "resolution": "Preserve exact human-approved bytes. The one space follows the Markdown blockquote marker on an empty line in the approved task text. No formatter/lint requirement exists; no behavior or missing check is waived. Other edited files pass diff --check. All four active files match approved digests.",
+  "scope": "Four-file exact amendment plus one plugin reference, native tool index, driver startup reading and resource regression; no client/service/protocol policy change."
+}

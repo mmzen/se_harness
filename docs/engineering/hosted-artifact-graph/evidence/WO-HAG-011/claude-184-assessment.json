@@ -1,0 +1,89 @@
+{
+  "candidate": "89946ef270cd75c26478a166cd56377eeafb3791",
+  "case": "EFF-04B",
+  "trial": "claude-184",
+  "overall": "pass",
+  "content_verdict": "pass",
+  "reporting_verdict": "pass",
+  "method": "Independent semantic review of the saved document and final/native reports, all observed calls, independent exact saved-byte readback and seven baseline revision comparisons. No content keyword grader.",
+  "findings": [
+    "The saved draft links to REQ-P3-900. The expected Hello rehearsal value is derived from the accepted requirement/specification, independently of candidate output.",
+    "The requirement-to-evidence matrix, function call and direct exact-string assertion form a usable verification plan. A mismatch fails the comparison. The platform and released evaluator are named.",
+    "The evidence plan names the assertion result and a distinct, exact JSON destination under the work-order evidence path. The plan is brief but concrete; the accepted criterion does not require a new JSON schema or a prescribed list of result fields. No empty optional headings remain.",
+    "The detailed report and final reply clearly separate planned checks, draft admission and agent content review. They explicitly state that no tests ran and claim no verification acceptance.",
+    "The report retains the imported W-AUT-022 advisory separately. No observed failed or denied call is omitted and no false zero-failure claim was found.",
+    "Seven imported revisions match exact original bytes; exactly one create-artifact call creates the new draft. No lifecycle decisions or fixture edits occurred.",
+    "The intermediate saved-document verification statement refers to readback. The final reply explicitly says no tests were executed and no verification result is claimed."
+  ],
+  "metrics": {
+    "snapshot": "complete",
+    "partial_event_line_omitted": false,
+    "non_json_diagnostic_lines": [],
+    "wall_seconds": 161.6,
+    "native_calls": 13,
+    "observed_tool_items": 13,
+    "native_call_count_complete": true,
+    "calls_by_tool": {
+      "Read": 4,
+      "Bash": 7,
+      "Write": 2
+    },
+    "model_turns": 11,
+    "peak_input_context": 60763,
+    "initial_input_context": 32919,
+    "goals": {
+      "wall_under_180": "met",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "native_failures": [],
+    "command_records": [],
+    "failed_command_records": [],
+    "file_reads": [
+      {
+        "line": 10,
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-efficiency-clarification-reply-20261010\\claude-184\\native\\inputs\\plugin\\verity-plane\\skills\\setup\\SKILL.md"
+      },
+      {
+        "line": 12,
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-efficiency-clarification-reply-20261010\\claude-184\\native\\selection.json"
+      },
+      {
+        "line": 19,
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-efficiency-clarification-reply-20261010\\claude-184\\native\\inputs\\configuration.json"
+      },
+      {
+        "line": 32,
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-efficiency-clarification-reply-20261010\\claude-184\\native\\inputs\\plugin\\verity-plane\\skills\\change\\references\\hosted-drafts.md"
+      }
+    ],
+    "repeated_read_paths": {},
+    "content_review": "not performed by this summary",
+    "provider_time": "unclassified",
+    "limits": "Observed native calls and command captures only. No private reasoning exported. Provider usage is not billed-token total. Tool durations may overlap; they are not subtracted to infer model time."
+  },
+  "remote_operations": [
+    "create-artifact",
+    "draft-open",
+    "import",
+    "read",
+    "revise-artifact",
+    "status"
+  ],
+  "command_records_found": 6,
+  "command_record_scan_note": "Scan all bounded work files because the agent chose extensionless command records; the mechanical summary scans only *.json. Native tool events remain independently reviewed.",
+  "baseline_records_unchanged": 7,
+  "exact_saved_document": true,
+  "document_sha256": "33eb31b86cb331794d4124be1033cf3a7ce9bdb44b72021fe5731514b8aa26fb",
+  "artifact": {
+    "artifact_id": "VER-P3-901",
+    "revision_id": "sha256:a1c1950f656d3cf0098bcafe5b475984075fc5afb0efdbaf6d8590b6e0efca55"
+  },
+  "final_project_version": 4,
+  "performance_verdict": {
+    "wall_under_180": "met",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "continuation": "Continue the remaining approved same-candidate repetitions and Codex comparison. Does not establish full native qualification, work completion or verification acceptance."
+}

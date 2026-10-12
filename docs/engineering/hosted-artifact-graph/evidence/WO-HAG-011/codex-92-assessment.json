@@ -1,0 +1,37 @@
+{
+  "candidate": "a2499d21f154e7682ff160cc122a72dd597936a3",
+  "case": "EFF-04B",
+  "trial": "codex-92",
+  "content_verdict": "pass",
+  "criteria": {
+    "draft_state": "pass; VER-P3-001",
+    "verifies_REQ-P3-900": "pass",
+    "independent_expected_result": "pass; fixed literal from REQ Acceptance and SPEC rule",
+    "requirement_matrix": "pass",
+    "usable_check_and_pass_condition": "pass; isolated runpy load then isinstance(actual, str) and exact equality; exceptions fail",
+    "concrete_evidence_file": "pass; complete native/work/planned-verification-GREETING-EXACT.json path and retained content fields",
+    "no_test_execution_or_lifecycle_claim": "pass; all behavior testing explicitly planned",
+    "no_empty_optional_heading": "pass; residual uncertainty accurately limits the claim"
+  },
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "observed_failed_calls": [],
+  "metrics": {
+    "wall_seconds": 193.065,
+    "native_calls": null,
+    "observed_tool_items": 17,
+    "calls_by_tool": {
+      "command_execution": 15,
+      "file_change": 2
+    },
+    "peak_input_context": null,
+    "model_turns": null
+  },
+  "efficiency_goals": {
+    "wall_under_180": "missed",
+    "calls_at_most_15": "missed on observed lower bound; exact total unavailable",
+    "peak_under_40000": "unavailable"
+  },
+  "environment": "Explicit approved session-only Codex loopback profile; this selected service passed boundary probes before the attempt.",
+  "limits": "CLI explicit test entry only. No automatic startup, compaction, Windows desktop, full NQ qualification, work completion or verification acceptance."
+}

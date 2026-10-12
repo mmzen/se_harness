@@ -1,0 +1,25 @@
+{
+  "candidate": "a2499d21f154e7682ff160cc122a72dd597936a3",
+  "case": "EFF-04A",
+  "trial": "codex-91",
+  "verdict": "pass",
+  "findings": [
+    "Acknowledges existing INT/CAP/REQ/SPEC/VER content and their draft state without claiming authority.",
+    "Identifies the missing distinct operational benefit and success measure; states the unanswered question.",
+    "Stops before import or draft creation. Final independent service status remains version zero; no remote mutation is captured.",
+    "Makes no completed-positive-authoring or exhaustive-failure-count claim. Distinguishes inspection from unperformed validation and tests."
+  ],
+  "metrics": {
+    "wall_seconds": 120.868,
+    "native_tool_calls": null,
+    "observed_tool_items": 12,
+    "calls_by_tool": {
+      "command_execution": 11,
+      "file_change": 1
+    },
+    "model_turns": null,
+    "peak_input_context": null,
+    "native_failures": []
+  },
+  "limit": "Correct refusal is assessed only as missing-input handling, not successful positive authoring or complete host qualification."
+}

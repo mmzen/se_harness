@@ -1,0 +1,32 @@
+{
+  "candidate": "a2499d21f154e7682ff160cc122a72dd597936a3",
+  "case": "EFF-04B",
+  "trial": "claude-92",
+  "content_verdict": "pass",
+  "criteria": {
+    "draft_state": "pass",
+    "verifies_REQ-P3-900": "pass",
+    "independent_expected_result": "pass; derived from REQ and the literal SPEC rule",
+    "requirement_matrix": "pass",
+    "usable_check_and_pass_condition": "pass; exact string equality",
+    "concrete_evidence_file": "pass; docs/engineering/lifecycle-pilot/evidence/WO-P3-900/ver-p3-901-greeting-check.json",
+    "no_test_execution_or_lifecycle_claim": "pass",
+    "no_empty_optional_heading": "pass"
+  },
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "observed_failure": {
+    "count": 1,
+    "operation": "create-ver-001",
+    "error": "HAG_REMOTE_UNKNOWN_IDENTITY",
+    "recovery": "Agent imported the baseline, opened a context and created using its returned context ID. No accepted mutation was duplicated."
+  },
+  "native_report_limit": "The report omits the recovered failed call and does not link mechanical observations. This is a reporting-guidance gap, not a false zero-failure claim. The independent assessment and retained command evidence report the failure as required by VER-HAG-008.",
+  "metrics": {
+    "wall_seconds": 286.94,
+    "native_calls": 21,
+    "peak_input_context": 57952,
+    "model_turns": 14
+  },
+  "efficiency_goals": "All three missed. Content pass does not complete WO-HAG-011 or waive the failed Claude EFF-04A case."
+}

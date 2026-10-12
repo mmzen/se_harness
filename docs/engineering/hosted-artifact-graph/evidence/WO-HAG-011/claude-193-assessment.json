@@ -1,0 +1,71 @@
+{
+  "candidate": "032379d9fb17db5e38ea2de2603f65567041ebdb",
+  "trial": "claude-193",
+  "case": "EFF-04B",
+  "overall": "fail",
+  "method": "Independent semantic review of saved bytes and report against REQ-P3-900, SPEC-P3-900 and the current authoring guide; separate revision and baseline readbacks.",
+  "blocking_findings": [
+    {
+      "id": "content-check-coverage",
+      "finding": "The matrix pass condition includes no side effects observed. The only planned check calls greeting() and compares its return value. It supplies no observation method or evidence for side effects. The report nevertheless claims complete content and checklist compliance.",
+      "source_boundary": "SPEC-P3-900 mentions no external effects, so the condition is not invented. The failure is the untested assertion and inaccurate completeness claim, not a new obligation to test every specification detail."
+    }
+  ],
+  "satisfied_parts": [
+    "Correct verifies link, independently fixed Hello rehearsal expectation, direct comparison and mismatch/exception cases, concrete evidence filename, draft-only state, no executed-test claim, exact saved bytes and seven unchanged baseline records."
+  ],
+  "metrics": {
+    "snapshot": "complete",
+    "partial_event_line_omitted": false,
+    "non_json_diagnostic_lines": [],
+    "wall_seconds": 234.264,
+    "native_calls": 13,
+    "observed_tool_items": 13,
+    "native_call_count_complete": true,
+    "calls_by_tool": {
+      "Read": 2,
+      "Bash": 9,
+      "Write": 2
+    },
+    "model_turns": 11,
+    "peak_input_context": 60069,
+    "initial_input_context": 32801,
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "native_failures": [],
+    "command_records": [],
+    "failed_command_records": [],
+    "file_reads": [
+      {
+        "line": 12,
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-efficiency-concise-results-20261010\\claude-193\\native\\selection.json"
+      },
+      {
+        "line": 14,
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-efficiency-concise-results-20261010\\claude-193\\native\\inputs\\configuration.json"
+      }
+    ],
+    "repeated_read_paths": {},
+    "content_review": "not performed by this summary",
+    "provider_time": "unclassified",
+    "limits": "Observed native calls and command captures only. No private reasoning exported. Provider usage is not billed-token total. Tool durations may overlap; they are not subtracted to infer model time."
+  },
+  "performance_verdict": {
+    "wall_under_180": "missed",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:f2110629d5f4e2657beb00bb6134cba601e536329d4d8288c537665604437695"
+  },
+  "document_sha256": "cfa950f802a5587990c21192165e899b216e7680899fcdd140378ee2e8f65cf2",
+  "final_project_version": 4,
+  "input_changes": [],
+  "baseline_records_unchanged": 7,
+  "continuation": "Retain this failed attempt. Candidate25 repetition set stops before the third Claude B and Codex B because the display correction and the saved-content review clarification produce a new candidate. Do not combine candidate25 repetitions with the new candidate.",
+  "limits": "No acceptance criterion or historical verdict is changed."
+}

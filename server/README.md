@@ -7,8 +7,11 @@ can rehearse lifecycle actions on new test records. It cannot replace imported
 decisions or authorize real work or publication. RISK-HAG-001 remains raised:
 application query controls do not prove database-enforced read-only access.
 
-Phase 2 was verified in VREC-HAG-004. WO-HAG-008 extends that implementation with
-the private lifecycle pilot; its independent VER-HAG-006 qualification is pending.
+Phase 2 was verified in VREC-HAG-004. The private lifecycle pilot under WO-HAG-008
+was verified in [VREC-HAG-005](../docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-005.md)
+and integrated through PR #542. Its eight VER-HAG-006 scenarios passed.
+The separate native Codex/Claude qualification under WO-HAG-009 is
+[in progress](../docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/report.md).
 No public service, release, authority cutover or production claim is supplied here.
 
 ## Inputs

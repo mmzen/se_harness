@@ -1,0 +1,26 @@
+{
+  "archive": "report-checks.zip",
+  "sha256": "32eb984839e7b5a0a0d550daef6e03e7e61bf29057bd0d9bf7d4f86c664e8f31",
+  "files": [
+    {
+      "path": "WO-HAG-009-scope.json",
+      "sha256": "6ea82e77a3db86ba7905862c2b478eda773748fb54f50e255b1845d65a9859d5"
+    },
+    {
+      "path": "WO-HAG-011-scope.json",
+      "sha256": "f75ba6c8dd1251f27c9cdc834d4c4ea00c1a7377b9b2f92a0abcfc3234bdb26f"
+    },
+    {
+      "path": "WO-HAG-009-preflight.json",
+      "sha256": "c9b104b1202294ac2640d1750dcc023a219bc599d9ede65f554b93180ca7f63a"
+    },
+    {
+      "path": "WO-HAG-011-preflight.json",
+      "sha256": "a65416909aef2444da403fbe29b9ae724ee3e3483b66e27ba732ef57caa74865"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "0a6da63905574329517b4ad4eb7c9d5bb0cd660f0cc960aef0c569e0bea0d3e0"
+    }
+  ]
+}

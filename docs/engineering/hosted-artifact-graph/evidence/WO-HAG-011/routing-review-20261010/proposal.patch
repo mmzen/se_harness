@@ -1,0 +1,54 @@
+--- a/plugins/verity-plane/common/skills/change/references/hosted-drafts.md
++++ b/plugins/verity-plane/common/skills/change/references/hosted-drafts.md
+@@ -1,26 +1,40 @@
+-## Select the instructions
++## Select the current step
+ 
+ Complete [Hosted selection](../../setup/references/hosted-context.md) once for
+-the unchanged selection. Use its separate client and exact baseline or context
+-version. Draft preparation grants no decision right or Git authority.
++the unchanged selection. Draft preparation grants no decision right or Git authority.
+ 
+-Read the selected release's `docs/engineering/harness/DRAFT_DEFINITIONS.md`:
+-**Read this when**, **Before this action**, and the requested type's procedure:
++Match the request and existing confirmed context to the current step:
+ 
+-| Type | Procedure |
++| Available inputs | Read from the selected release |
++| --- | --- |
++| The intended outcome or scope still needs clarification | `docs/engineering/harness/DEFINE_CHANGE.md`: **Read this when**, **Before this action**, then **Describe the intended outcome**. Use **Define the limits of the change** when its inputs are available. |
++| Confirmed outcome, scope and selected definitions; a definition draft is needed | `docs/engineering/harness/DRAFT_DEFINITIONS.md`: **Read this when**, **Before this action**, then the requested type's procedure below. |
++
++The clarification procedure produces transient discussion, not a formal artifact.
++Use its requester-confirmation process and reuse an existing matching confirmation.
++An instruction to create a draft does not supply the inputs that procedure requires.
++Do not import, open a draft context or create a template merely to ask a question.
++If the requester is unavailable, retain the unanswered questions and report the
++missing input. This does not create a new approval or lifecycle checkpoint.
++
++For a requested intent, consult `docs/engineering/ARTIFACT_AUTHORING.md#intent`
++when identifying missing content. Read other prerequisites when their stated
++condition applies. Before selecting artifacts, load the clarification procedure's
++artifact and link references. Before drafting, use this type table:
++
++| Type | Drafting procedure |
+ | --- | --- |
+ | Verification | **Define how the result will be verified** |
+ | Release or operating contract | **Prepare a release or operating contract** |
+ | Other definition | **Draft any missing definitions** |
+ 
+-Follow its applicable content rules and prerequisites, including
++Apply the drafting procedure's prerequisites, including
+ `ARTIFACT_AUTHORING.md#design-simplicity` and the type checklist. Use full type
+ names such as `#intent`, `#verification`, or `#work_order`, not codes.
+ 
+-The released procedure's `harnessctl ... REPO` examples act on repository files.
+-For this hosted selection, use the remote operations in the selected tool index
+-or `docs/notes/harnessctl-reference.md#concise-hosted-authoring`. Do not combine
+-their arguments with local command examples. The content rules still apply.
++The released `harnessctl ... REPO` examples act on repository files. Hosted work
++uses the selected tool index or `docs/notes/harnessctl-reference.md#concise-hosted-authoring`.
++Do not combine their arguments. The canonical content rules still apply.
+ 
+ Reuse complete sections already delivered with source identity. Obtain missing
+ sections together from the selected resource root; batch independent file reads

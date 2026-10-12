@@ -1,0 +1,134 @@
+{
+  "outcome": "stopped_unqualified",
+  "session": {
+    "host": "claude",
+    "exit": 4294967295,
+    "timed_out": false,
+    "elapsed_seconds": 164.141,
+    "reply_dropped": false,
+    "redactions": 0,
+    "events_sha256": "864ba3d636b03d4989ac249033f5846abb690287b94eacc2100de26d332fce0e",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "stop": {
+    "time": "2026-10-07T08:35:47.0535333+02:00",
+    "parent": 39016,
+    "stopped": 30108,
+    "reason": "Approved helper identity call was denied with a quoted helper path. Retain the rule-format mismatch before a fresh diagnostic."
+  },
+  "finding": "The exact permitted helper was called with a quoted script path. The original literal Bash rule did not match that spelling in dontAsk mode. The action was denied and no hosted mutation was observed. The operator stopped the trial before a separate read-only diagnostic.",
+  "shell_calls": [
+    {
+      "type": "tool_use",
+      "id": "toolu_01FhZhd93K3gCPNBp8KZCaSu",
+      "name": "Bash",
+      "input": {
+        "command": "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe -I \"C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py\" identity 2>&1",
+        "description": "Run native_call.py identity subcommand to verify client installation"
+      },
+      "caller": {
+        "type": "direct"
+      }
+    }
+  ],
+  "permission_denials": [
+    {
+      "type": "tool_result",
+      "content": "Permission to use Bash has been denied because Claude Code is running in don't ask mode. IMPORTANT: You *may* attempt to accomplish this action using other tools that might naturally be used to accomplish this goal, e.g. using head instead of cat. But you *should not* attempt to work around this denial in malicious ways, e.g. do not use your ability to run tests to execute non-test actions. You should only try to work around this restriction in reasonable ways that do not attempt to bypass the intent behind this denial. If you believe this capability is essential to complete the user's request, STOP and explain to the user what you were trying to do and why you need this permission. Let the user decide how to proceed.",
+      "is_error": true,
+      "tool_use_id": "toolu_01FhZhd93K3gCPNBp8KZCaSu"
+    }
+  ],
+  "service_readback": {
+    "ready": true,
+    "project_id": "e8fe619a-75ac-4a40-afb2-10d6563463ab",
+    "schema_revision": 2,
+    "project_version": 0,
+    "evaluator": {
+      "version": "0.22.1",
+      "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+      "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff"
+    },
+    "components": {
+      "client": {
+        "version": "0.22.2",
+        "wheel_sha256": "84a24a0824fabc22f72142efc9cbc1f46651f75a5c814fb3de179259e2fa494b"
+      },
+      "database": {
+        "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce",
+        "version": "3.13.1"
+      },
+      "deployment_sha256": "ca7215c1419ea0de9f665cdfee6c5d670548ff85deb1d9d289ec2b6e2187fd86",
+      "evaluator": {
+        "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+        "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+        "version": "0.22.1"
+      },
+      "plugins": {
+        "claude": {
+          "archive_sha256": "a9f14bcf34b948d693052d3da53d9163c3df4b27e69316ccee2dc9b651ccbcb0",
+          "inventory_sha256": "4a7b99c7e2c842dc3ea63af32e14d3921c61300f2f8d9d84dd4e75cb8f28f2d6",
+          "version": "0.2.7"
+        },
+        "codex": {
+          "archive_sha256": "e4a740ce310facf7a517b68a5849d47b473bb9c91513fdcd4bc25700b49af4c7",
+          "inventory_sha256": "2cafbc010b3bece7903ebe7c86a63543122a8d35e33472e099238a1992e823ce",
+          "version": "0.2.7"
+        }
+      },
+      "protocols": [
+        "se-harness-remote-command/v1",
+        "se-harness-remote-result/v1",
+        "se-harness-graph-read/v1",
+        "se-harness-artifact-revision/v1",
+        "se-harness-artifact-baseline/v1",
+        "se-harness-lifecycle-command/v2",
+        "se-harness-lifecycle-result/v2",
+        "se-harness-lifecycle-export/v2",
+        "se-harness-graph-read/v2"
+      ],
+      "required_secret_keys": [
+        "principals[].token"
+      ],
+      "runtime": {
+        "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4",
+        "platform": "linux/amd64",
+        "python": "3.13.16"
+      },
+      "schema": "se-harness-hosted-combination/v1",
+      "schema_revision": 2,
+      "server": {
+        "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+        "image_manifest": "sha256:1700dcfbc71ab6a3e411e3d206235a377c09e6b407511e55ac62caf4239b3791",
+        "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d",
+        "version": "0.1.0.dev1",
+        "wheel_sha256": "9c0f5ab12a96a8697fdaf6a650644f3bb8817dea3af9a5bf1e71be8be9deb9ae"
+      },
+      "source": {
+        "candidate_commit": "0dbb8ea19f28994da7abc7ecbab08c8db430dc0c",
+        "repository": "https://github.com/mmzen/se_harness.git"
+      }
+    },
+    "client": {
+      "version": "0.22.2",
+      "wheel_sha256": "84a24a0824fabc22f72142efc9cbc1f46651f75a5c814fb3de179259e2fa494b"
+    },
+    "authority_mode": "sandbox-projection",
+    "protocols": [
+      "se-harness-remote-command/v1",
+      "se-harness-remote-result/v1",
+      "se-harness-graph-read/v1",
+      "se-harness-artifact-revision/v1",
+      "se-harness-artifact-baseline/v1",
+      "se-harness-lifecycle-command/v2",
+      "se-harness-lifecycle-result/v2",
+      "se-harness-lifecycle-export/v2",
+      "se-harness-graph-read/v2"
+    ],
+    "database_read_only_enforcement": "deferred: RISK-HAG-001",
+    "test_copy": true,
+    "authority": "rehearsal-only; Git remains authoritative"
+  },
+  "limits": "Project version remains zero. This incomplete trial supplies no native lifecycle qualification."
+}

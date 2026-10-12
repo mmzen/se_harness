@@ -1,0 +1,39 @@
+{
+  "candidate": "a2499d21f154e7682ff160cc122a72dd597936a3",
+  "case": "EFF-04A",
+  "trial": "claude-91",
+  "verdict": "fail",
+  "findings": [
+    "Report correctly marks incomplete and requests the missing operational benefit/measure.",
+    "Saved Problem falsely claims no recorded intent and no governing artifact for verification. Its report acknowledges INT-P3-900; source REQ/SPEC/VER already cover the behavior. The saved content and review contradict one another.",
+    "The unsupported absence claim fails EFF-04A despite the incomplete label. Exact saved bytes were independently read; seven imported records remain unchanged.",
+    "The unknown-context create call is accurately disclosed and recovered: it used project UUID before import/draft-open. One failed native call remains evidence."
+  ],
+  "metrics": {
+    "wall_seconds": 304.362,
+    "native_tool_calls": null,
+    "observed_tool_items": 19,
+    "calls_by_tool": {
+      "Read": 5,
+      "Skill": 1,
+      "Bash": 11,
+      "Write": 2
+    },
+    "model_turns": 15,
+    "peak_input_context": 59565,
+    "native_failures": [
+      {
+        "line": 88,
+        "call_id": "toolu_015dmCaAyRS5cheiMXkj2dMy",
+        "source": "native tool_result is_error",
+        "call": {
+          "line": 87,
+          "name": "Bash",
+          "description": "Create a new intent artifact in lifecycle-pilot domain"
+        },
+        "diagnostic": "10\\\\claude-91\\\\native\\\\work\\\\create-int-001.json.stdout.txt\", \"stderr\": \"\", \"client_view\": {\"schema\": \"se-harness-remote-view/v1\", \"result\": {\"schema\": \"se-harness-remote-result/v1\", \"operation_key\": null, \"request_digest\": null, \"project_id\": null, \"view\": null, \"versions\": null, \"affected_revision_ids\": [], \"affected_artifacts\": [], \"evaluator\": null, \"evaluator_output\": null, \"outcome\": \"refused\", \"receipt_id\": null, \"http_status\": 404, \"error\": {\"code\": \"HAG_REMOTE_UNKNOWN_IDENTITY\", \"message\": \"Unknown selected context.\"}}, \"documents\": [], \"omitted\": [], \"findings_complete\": true, \"evidence\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\hag-efficiency-inputs-20261010\\\\claude-91\\\\native\\\\work\\\\create-int-001.json.evidence\", \"full_response\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\hag-efficiency-inputs-20261010\\\\claude-91\\\\native\\\\work\\\\create-int-001.json.evidence\\\\1-response.json\"}}"
+      }
+    ]
+  },
+  "limit": "Correct refusal is assessed only as missing-input handling, not successful positive authoring or complete host qualification."
+}

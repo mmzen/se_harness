@@ -1,0 +1,44 @@
+{
+  "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+  "case": "EFF-04A",
+  "trial": "codex-111",
+  "content_verdict": "pass",
+  "meaning": "Correct missing-input stop before import or draft mutation; not completed positive authoring.",
+  "findings": [
+    "The report acknowledges INT-P3-900, REQ-P3-900, SPEC-P3-900 and VER-P3-900, and asserts no missing definition or coverage gap.",
+    "It identifies the missing operational benefit and agreed measure, asks the unanswered question and creates no artifact.",
+    "The independent final status confirms project version zero. No imported records or new draft exist; staged input bytes remain unchanged.",
+    "The initial task read was truncated. The helper refused a later task.md read because that root file is outside inventoried inputs and work. The report discloses the failed call and reads applicable source sections through permitted input paths.",
+    "The under-development prefer_mxc warning is a host warning, separate from the failed helper call. Boundary probes passed before the run.",
+    "The report states the observations snapshot was incomplete and makes no exhaustive failure-count claim. This independent capture includes the one observed failed call."
+  ],
+  "metrics": {
+    "wall_seconds": 148.438,
+    "native_calls": null,
+    "observed_tool_items": 12,
+    "calls_by_tool": {
+      "command_execution": 11,
+      "file_change": 1
+    },
+    "model_turns": null,
+    "peak_input_context": null,
+    "initial_input_context": null,
+    "goals": {
+      "wall_under_180": "met",
+      "calls_at_most_15": "unavailable",
+      "peak_under_40000": "unavailable"
+    },
+    "repeated_read_paths": {}
+  },
+  "observed_failed_calls": [
+    {
+      "line": 13,
+      "call_id": "item_2",
+      "source": "native failed item"
+    }
+  ],
+  "final_project_version": 0,
+  "exact_saved_document": "Not applicable: no mutation or new document.",
+  "delivery_verdict": "Recovery defect observed: complete assembled input was not delivered by the initial host tool read without truncation.",
+  "decision": "Continue the existing approved positive sequence on this unchanged candidate; retain the transport defect and do not infer efficiency success."
+}

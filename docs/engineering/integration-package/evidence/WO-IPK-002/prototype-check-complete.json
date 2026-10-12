@@ -1,0 +1,8 @@
+{
+  "method": "Unapplied proposal tested in owned scratch with exact existing json_bytes dependency; prior TEMP and missing dependency failures retained.",
+  "exit": 0,
+  "tests": 19,
+  "skips": 0,
+  "elapsed_seconds": 2.995,
+  "output": "...................\n----------------------------------------------------------------------\nRan 19 tests in 2.995s\n\nOK\n"
+}

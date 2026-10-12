@@ -1,0 +1,282 @@
+{
+  "record": "VREC-HAG-006",
+  "status": "ready",
+  "candidate": "f6b6663a655d7227d967f3b7b0e202576eed739b",
+  "work_orders": [
+    "WO-HAG-009",
+    "WO-HAG-010"
+  ],
+  "verification_contract": "VER-HAG-007",
+  "native_test_candidate": "2f6ecb1433ef98cf643e0f604ed2c4258a2261e2",
+  "published_consolidation_head": "4f4165727547929b1481d34f359c59bb13ce6a49",
+  "candidate_changes": [
+    "docs/engineering/hosted-artifact-graph/README.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/WO-HAG-009-handoff.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/completion-checks-inventory.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/completion-checks.zip",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/verification-assessment.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/verification-change-set.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/verification-change-set.json",
+    "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-009.md",
+    "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-010.md",
+    "docs/notes/hosted-artifact-graph.md"
+  ],
+  "supporting_checks": {
+    "candidate": "f6b6663a655d7227d967f3b7b0e202576eed739b",
+    "checkout": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-o1yawo46\\checkout",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "governor": "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+    "environment_changes": {
+      "process_only_git_config": "core.longpaths=true",
+      "TEMP": "C:\\Users\\mathi\\AppData\\Local\\Temp\\hagnative-checks-cyrbf2xq",
+      "TMP": "C:\\Users\\mathi\\AppData\\Local\\Temp\\hagnative-checks-cyrbf2xq"
+    },
+    "commands": [
+      {
+        "check": "source",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "scripts/run_tests.py",
+          "--timings",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-native-verification\\candidate-test-outputs\\source-timings.json"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-o1yawo46\\checkout",
+        "exit": 0,
+        "seconds": 198.35555680003017,
+        "full_result_sha256": "da547541703ac1cc83ba9424f8fc17e2cf3376270dc8d641e718a15bf54180be",
+        "result": "cs/cli.md\", \"docs/procedure.md\", \"templates/work.md\", \"tests/test_guidance.py\"], \"uncovered_paths\": []}, \"record\": {\"commit\": \"bbe9e8a70604d7cfb2d4fe087ec936175ded5a0f\", \"id\": \"VREC-001\", \"status\": \"ready\"}, \"regression_exit\": 1, \"work_order_count\": 1}\n0.22.2\n----------------------------------------------------------------------\nRan 1339 tests in 193.650s (193 classes, 8 workers)\n\nOK (skipped=24)\n"
+      },
+      {
+        "check": "distribution",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "scripts/validate_release_distributions.py",
+          "--root",
+          "."
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-o1yawo46\\checkout",
+        "exit": 0,
+        "seconds": 4.951492999971379,
+        "full_result_sha256": "dd3b89c9952f7899835d13163b527dcdc2df9b11e6014325e98ee077c97096d3",
+        "result": "SE Harness release distribution validation: PASS (23 distribution-bearing records)"
+      },
+      {
+        "check": "cli",
+        "argv": [
+          "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "se_harness",
+          "--help"
+        ],
+        "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-o1yawo46\\checkout",
+        "exit": 0,
+        "seconds": 0.34067409997805953,
+        "full_result_sha256": "cac2cf259ded0993b5bc3001ae13ba2410a006a1a28cba211685a3053bbd46be"
+      },
+      {
+        "check": "validation",
+        "argv": [
+          "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "validate",
+          "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-o1yawo46\\checkout",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+        "exit": 0,
+        "seconds": 6.561118800018448,
+        "full_result_sha256": "33cbe45476b6d5ed1b26b823819cc74b5ac959f541c559e120316e91ab1cd5ab",
+        "result": {
+          "valid": true,
+          "artifact_count": 1994,
+          "error_count": 0,
+          "warning_count": 63,
+          "advisory_count": 0
+        }
+      }
+    ],
+    "clean_after": true
+  },
+  "full_test_archive": {
+    "archive": "candidate-tests.zip",
+    "bytes": 46560,
+    "sha256": "e3c2ab40180a0cd65388c2b49d9fa87e6d92ac48448936b28267565686146440",
+    "files": [
+      {
+        "path": "cli.json",
+        "bytes": 4346,
+        "sha256": "cac2cf259ded0993b5bc3001ae13ba2410a006a1a28cba211685a3053bbd46be"
+      },
+      {
+        "path": "distribution.json",
+        "bytes": 464,
+        "sha256": "dd3b89c9952f7899835d13163b527dcdc2df9b11e6014325e98ee077c97096d3"
+      },
+      {
+        "path": "source-timings.json",
+        "bytes": 12246,
+        "sha256": "b79b276e97a9c640894b67c71f0686397ac82507936e0a4af3ab56615aac2e2e"
+      },
+      {
+        "path": "source.json",
+        "bytes": 5699,
+        "sha256": "da547541703ac1cc83ba9424f8fc17e2cf3376270dc8d641e718a15bf54180be"
+      },
+      {
+        "path": "summary.json",
+        "bytes": 3848,
+        "sha256": "e615f013a23873959047c613609b4341c7f02856726a087fad45a0db40913322"
+      },
+      {
+        "path": "validation.json",
+        "bytes": 429314,
+        "sha256": "33cbe45476b6d5ed1b26b823819cc74b5ac959f541c559e120316e91ab1cd5ab"
+      },
+      {
+        "path": "capture.json",
+        "bytes": 15794,
+        "sha256": "dde83e1f05c6faa301d93949a25fd996b9fe7e5d01985f69a18384cc02a9c5fd"
+      },
+      {
+        "path": "capture-inputs.json",
+        "bytes": 7365,
+        "sha256": "402a78b0b173ec30ab4fb5816259f0bda372c87a94ad7ca5e3f02419ae03034e"
+      },
+      {
+        "path": "candidate.json",
+        "bytes": 1039,
+        "sha256": "bb3e791df8afb14f23d36488ed1bbb0e4c86ea5f8043a2ac510d4477fde40d12"
+      },
+      {
+        "path": "candidate-diff-check.json",
+        "bytes": 406,
+        "sha256": "ce222e5075c00ab2233e18b1b4aaa9cf1b530e669769c2f6821d81e6e9acab2a"
+      },
+      {
+        "path": "candidate-diff-check-retry.json",
+        "bytes": 291,
+        "sha256": "b3fbe304b6377436b30e2c13267d4871779d96e5ac80d410e4f89f813898d12f"
+      },
+      {
+        "path": "actual-generated-scope.json",
+        "bytes": 11143,
+        "sha256": "5b38266d357c0d519f548c1e23caf5b98829aeaf995deb82b8f165756a6d6bf3"
+      },
+      {
+        "path": "review-publication.json",
+        "bytes": 12153,
+        "sha256": "00305f357b11f3dfa064e49a9381e71c7f9b47ed61782a3a73dfe07d9130d97a"
+      },
+      {
+        "path": "verification-eligibility.json",
+        "bytes": 12286,
+        "sha256": "3e4587961b2d3dd2a8e2594eb6c2e70cf3da82d13241880bfb8622e8407fe425"
+      },
+      {
+        "path": "review-diff-check.json",
+        "bytes": 4822,
+        "sha256": "d2d6cd0a54a0ae83f9541c178e6761666901c2b220e958d7ed81ca1ce915ce26"
+      },
+      {
+        "path": "review-complete-pr-check.json",
+        "bytes": 1065,
+        "sha256": "855185f6d9dfd99c0bd922449b65e59417b49ebe1d7aa69196523f836a4a8d17"
+      }
+    ]
+  },
+  "generated_outputs": [
+    "docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-006.md",
+    "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-006-evaluator.json"
+  ],
+  "generated_evidence_sha256": "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899",
+  "test_digest_binding": "The generated record body retains every full result SHA-256 shown in the supporting-check summary; the archive retains those exact full command outputs. The wrapper is retained in the candidate completion-checks.zip.",
+  "bounded_native_reuse": "Native source, instruction package and drivers unchanged from C44. Later differences are the separately verified IPK correction, formal records/evidence and status documentation. No new native session claimed.",
+  "historical_failure": "The first staged whitespace check found one added blank line at EOF in the authored assessment. It was removed before committing; original failure and passing retry retained.",
+  "separate_work": "WO-HAG-011 focused content failures and unmet efficiency targets remain unresolved; no human verification, merge, release or risk acceptance supplied.",
+  "readiness": {
+    "review-publication": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated pre-action compliance for VREC-HAG-006."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VREC-HAG-006 is ready."
+      ],
+      "decision_required": {
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner",
+        "artifact": "VREC-HAG-006",
+        "decision": "the bounded branch and draft PR publication for review before verification",
+        "outcomes": [
+          "authorize",
+          "stop"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-REVIEW-PUBLISH",
+        "step_id": "STEP-REVIEW-PUBLISH",
+        "action": "the bounded branch and draft PR publication for review before verification"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "Use matching review-publication authority for VREC-HAG-006; obtain only missing authorization for the exact branch and draft PR."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-REVIEW-PUBLISH.",
+        "Use complete alternative procedure PROC-VREC-REJECT.",
+        "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+      ]
+    },
+    "verification-eligibility": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated transition compliance for VREC-HAG-006."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VREC-HAG-006 is ready."
+      ],
+      "decision_required": {
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-HAG-006",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-VREC-DECIDE",
+        "step_id": "STEP-VREC-DECIDE",
+        "action": "whether the retained evidence verifies the exact candidate"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "I verify VREC-HAG-006 as assurance owner."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-REVIEW-PUBLISH.",
+        "Use complete alternative procedure PROC-VREC-REJECT.",
+        "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+      ]
+    }
+  },
+  "generated_output_format": "Default git diff --check reports CR bytes at the end of the five exact Windows test-output lines in the evaluator-generated record. Preserve those protected bytes; the command-only cr-at-eol check treats their line ending correctly. No repository/global Git config is changed. The original diagnostic is retained. An early PR check could not read its event because the format diagnostic interrupted commit preparation; it made no external write and is retained."
+}

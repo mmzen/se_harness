@@ -1,0 +1,26 @@
+{
+  "candidate": "a2499d21f154e7682ff160cc122a72dd597936a3",
+  "case": "EFF-04B",
+  "trial": "claude-93",
+  "content_verdict": "pass",
+  "criteria": {
+    "draft_state": "pass",
+    "verifies_REQ-P3-900": "pass",
+    "independent_expected_result": "pass; Hello rehearsal from REQ and SPEC",
+    "requirement_matrix": "pass",
+    "usable_check_and_pass_condition": "pass; import greeting and assert exact string equality",
+    "concrete_evidence_file": "pass; docs/engineering/lifecycle-pilot/evidence/WO-P3-900/ver-p3-901-greeting-check.json",
+    "no_test_execution_or_lifecycle_claim": "pass",
+    "no_empty_optional_heading": "pass"
+  },
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "observed_failed_calls": [],
+  "metrics": {
+    "wall_seconds": 247.157,
+    "native_calls": 20,
+    "peak_input_context": 57592,
+    "model_turns": 14
+  },
+  "efficiency_goals": "All three missed. The separate Claude EFF-04A failure remains open."
+}

@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\9691020b546a15b2\\codex.exe",
+    "-c",
+    "windows.sandbox=\"mxc\"",
+    "sandbox",
+    "--include-managed-config",
+    "--permission-profile",
+    ":workspace",
+    "--cd",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\codex-sandbox-repair-20261010",
+    "--",
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\codex_network_probe_20261010.py",
+    "inside"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\codex-sandbox-repair-20261010",
+  "exit": 0,
+  "stdout": "{\"CODEX_SANDBOX_NETWORK_DISABLED\": \"1\", \"tcp\": {\"connected\": false, \"error\": \"PermissionError\", \"detail\": \"[WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions\"}, \"http\": {\"connected\": false, \"error\": \"URLError\", \"detail\": \"<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>\"}}\n",
+  "stderr": "",
+  "elapsed_seconds": 0.578,
+  "observed_at": "2026-10-10T02:18:50.772520+00:00"
+}

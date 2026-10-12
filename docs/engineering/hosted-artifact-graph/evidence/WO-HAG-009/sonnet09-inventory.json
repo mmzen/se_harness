@@ -1,0 +1,218 @@
+{
+  "archive": "sonnet09-incomplete.zip",
+  "bytes": 128224,
+  "sha256": "a3763b4a29dc92e15201d0f7d18c026832cf5bd8f94c43525e4041671933c76c",
+  "files": [
+    {
+      "path": "checks/claude-guidance09-auth-probe.json",
+      "bytes": 2833,
+      "sha256": "030cce2a717135c0db31454c462ebde8932984affcffadcce56dc8fe867711e0"
+    },
+    {
+      "path": "checks/claude-guidance09-final-status.json",
+      "bytes": 4394,
+      "sha256": "ec422ae1aade21e8ac91f192e2e0bdf290a7d5928e9096be161ea47615af9569"
+    },
+    {
+      "path": "checks/claude-guidance09-init.json",
+      "bytes": 1031,
+      "sha256": "47590f1ab47188959b5974cb58cdfc104cc0222275755a9d125f49392e26d7e5"
+    },
+    {
+      "path": "checks/claude-guidance09-initial-status.json",
+      "bytes": 4394,
+      "sha256": "4a79e222defe2705904827eeb76c454f1ccec742235f9f916ebc20046bde44bc"
+    },
+    {
+      "path": "checks/claude-guidance09-networks.json",
+      "bytes": 141827,
+      "sha256": "6fce7e91cec02d5b3688cacb57cfc4e8c5b3d0c3d932aaaae2364d00406618a1"
+    },
+    {
+      "path": "checks/claude-guidance09-source-stage.json",
+      "bytes": 749,
+      "sha256": "28fdfac49613d1fb42a2c86df4b7161a0b2614a081c6793f568bc9044ef07fc1"
+    },
+    {
+      "path": "checks/claude-guidance09-up.json",
+      "bytes": 1886,
+      "sha256": "c09c4f6a11d3d5f229ccd83b7ac21d7ce7062d0e678e4904b6ef118e2d49a91f"
+    },
+    {
+      "path": "checks/claude-guidance09-version.json",
+      "bytes": 308,
+      "sha256": "b5b5612b41d31da224020d9d73a23f79c815b7d4ea205bd34f4fd6c672911895"
+    },
+    {
+      "path": "checks/claude-guidance09-volume-absent.json",
+      "bytes": 394,
+      "sha256": "5c2a04985318904f9d841e0e96f5270596d4c49f4dfd636e405e3fd5dd773d8a"
+    },
+    {
+      "path": "checks/claude-guidance09-volume-create.json",
+      "bytes": 341,
+      "sha256": "54f3f74fba485075c951eb05fff6488977b23243ba7057866a790fce83e352f9"
+    },
+    {
+      "path": "checks/guidance09-state-after.json",
+      "bytes": 775,
+      "sha256": "5d633a4056d0064d1ee4d7d34a4afa8462adb7bf9bbe4761627dabfb1c8abd43"
+    },
+    {
+      "path": "checks/guidance09-state-before.json",
+      "bytes": 775,
+      "sha256": "5d633a4056d0064d1ee4d7d34a4afa8462adb7bf9bbe4761627dabfb1c8abd43"
+    },
+    {
+      "path": "checks/locator-recovery-wo-009.json",
+      "bytes": 22293,
+      "sha256": "f2834cd73a7561f2df0340ceb3d88097300c9a4b4f8fa5142778db279cdd6e7a"
+    },
+    {
+      "path": "checks/locator-recovery-wo-010.json",
+      "bytes": 20523,
+      "sha256": "334f0aa54312114b20ac97daa8847c01d99fb8552e77a7c91b5fbea766a52840"
+    },
+    {
+      "path": "checks/native09-current-pr.json",
+      "bytes": 7191,
+      "sha256": "3bf72d24a9e660882baefc612d09a3019deba8b70c8304250fde8e3d9b267d7a"
+    },
+    {
+      "path": "checks/task-locator-cli.json",
+      "bytes": 4383,
+      "sha256": "413b596777d6a1cf8050e9ff89d4b1f893adff68081898dd0bb353781166f779"
+    },
+    {
+      "path": "checks/task-locator-commit.json",
+      "bytes": 856,
+      "sha256": "f26646889ab328aedb5a59e41a5b4c01bbd0d4c739e455999ded6b0d4df7ffaf"
+    },
+    {
+      "path": "checks/task-locator-diff-check.json",
+      "bytes": 273,
+      "sha256": "cce728755ebef774920f147d002bb3d5ad08e0356192795b9ebee3c4fb35221c"
+    },
+    {
+      "path": "checks/task-locator-distributions.json",
+      "bytes": 503,
+      "sha256": "ebc4e8816a7a389b4374fd3198937f4d39d287f283ad1b639494efa714e75697"
+    },
+    {
+      "path": "checks/task-locator-focused.json",
+      "bytes": 583,
+      "sha256": "5be20b6dae897c31f893401f6c3d8588e711a05c473abaa96c87982b9b719916"
+    },
+    {
+      "path": "checks/task-locator-scope-wo-hag-009.json",
+      "bytes": 32709,
+      "sha256": "acf1334f88e1379d108ebc05dc5bc687e500320d396ac6b0160a9078517b237a"
+    },
+    {
+      "path": "checks/task-locator-scope-wo-hag-010.json",
+      "bytes": 21157,
+      "sha256": "29ca5d179c010fb1eb4e8ccc743a2b49288c7f34be9eb81132bd57ccabb4511f"
+    },
+    {
+      "path": "checks/task-locator-source-suite.json",
+      "bytes": 5499,
+      "sha256": "78ee718c69df3a9691a920c622c7b1cb380b7b53cf05cc7cc6bb5eb6ab1ccb54"
+    },
+    {
+      "path": "checks/task-locator-stage.json",
+      "bytes": 667,
+      "sha256": "6dd079790f78458194df7c651c96e20d1570c3aba27a9e2883c5576be59d9240"
+    },
+    {
+      "path": "checks/task-locator-validation.json",
+      "bytes": 427921,
+      "sha256": "92bd9864a3bbffb9358e50fca91e0504378f04c0b336c6ce9e92ec737d7f9d89"
+    },
+    {
+      "path": "native/CLAUDE.md",
+      "bytes": 985,
+      "sha256": "162a0c506e542578e2cad42f535d5f19101440e05b29375c02b2e33c7016268a"
+    },
+    {
+      "path": "native/events.jsonl",
+      "bytes": 111537,
+      "sha256": "24ec07f3f475c1a68d646339ed21977b2e027b095273a4bae81d4162650aaece"
+    },
+    {
+      "path": "native/inputs/inventory.json",
+      "bytes": 35253,
+      "sha256": "79a784117cd5144865fdcbf3b3d9572a7d229ab6ab7797dbb1d6f84c08fb5144"
+    },
+    {
+      "path": "native/invocation.json",
+      "bytes": 12159,
+      "sha256": "45deb844a0567bbcc4cd3ba190ea9d2410aea6de85d41a273a137665d4768f24"
+    },
+    {
+      "path": "native/mcp.json",
+      "bytes": 233,
+      "sha256": "7081c228c9818f18212b36187cb875176981ee407330d101b764b79423cdeb68"
+    },
+    {
+      "path": "native/selection.json",
+      "bytes": 3733,
+      "sha256": "88da74dec5d3175d6438a8170a45d19a459a4fd384a9d4b5973d2705a985370b"
+    },
+    {
+      "path": "native/session.json",
+      "bytes": 321,
+      "sha256": "6ce94cc3847a4ea9f5349b8a6a14eff551281f74ee0cd29250f4c74a88098e47"
+    },
+    {
+      "path": "native/task.md",
+      "bytes": 9976,
+      "sha256": "35f90f6715e504e1b131fdf782966d786d93c2fb5b64941e0f60daabe9aa09c4"
+    },
+    {
+      "path": "operator/comparison.py",
+      "bytes": 4820,
+      "sha256": "e390028ca5830ac34e9e3377f11d645105dbc69cb113b25b848bc03882f6e836"
+    },
+    {
+      "path": "operator/setup.py",
+      "bytes": 16270,
+      "sha256": "7c510767ac009179e3a7c703b8b9b4dc90d58ca9d0c2968ec27f74c11c9b2e36"
+    },
+    {
+      "path": "setup/combination.json",
+      "bytes": 2542,
+      "sha256": "aea2b848055db39c6c60b8ea387d2be7793b095510392b31a9f02d77c698a222"
+    },
+    {
+      "path": "setup/native-selection.json",
+      "bytes": 3607,
+      "sha256": "4ec36d4080b0673998ae5c48b1ef983d34d7f4288292160570236ffb1391f44c"
+    },
+    {
+      "path": "setup/native-task.md",
+      "bytes": 9688,
+      "sha256": "1eb9a71995b9662adc57eba99742f35325dce11f27d149769560797d8252eed9"
+    },
+    {
+      "path": "setup/network.json",
+      "bytes": 306,
+      "sha256": "717bfdc11201c483daa031c210d03da1c31e4bd2b46bb256c7c4ce85ff48392a"
+    },
+    {
+      "path": "setup/permissions.json",
+      "bytes": 2491,
+      "sha256": "935dd6752e677d6116cfbf482cdb57d7ba70a02ab2b0100276ec921cfe808c2a"
+    },
+    {
+      "path": "setup/selection.json",
+      "bytes": 1574,
+      "sha256": "6c6fa99631314062de348fcc8741fa7d74a471eb9271be73fa6e48a935e1c1bf"
+    },
+    {
+      "path": "setup/stage-evidence.json",
+      "bytes": 885,
+      "sha256": "16b579e2986b13b40bce67d95ce945f511f591d99d88b3c3779b9db7cc4a4eac"
+    }
+  ],
+  "excluded": "Credentials, account stores, copied repository/resources and virtual environments. Exact failed native outputs preserved."
+}

@@ -1,0 +1,259 @@
+{
+  "scope": "RCA and retained derived timing evidence only; no runtime, instruction, policy or lifecycle changes.",
+  "selected_work_order": "WO-HAG-009",
+  "checks": {
+    "initial-context": {
+      "argv": [
+        "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+        "--artifact",
+        "WO-HAG-009",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit": 0,
+      "elapsed_seconds": 43.013056299998425,
+      "stderr": "",
+      "stdout_sha256": "a7e99c63a1c32ed2fbdf9589e591ec27199e9ba15f3ced19f137a05e4b8a384f",
+      "selected_exact_result_fields": {
+        "selection": {
+          "primary": "WO-HAG-009",
+          "artifacts": [
+            "WO-HAG-009"
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-HAG-009",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-HAG-009",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Projected the selected scope for WO-HAG-009."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-HAG-009 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-HAG-009",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "alternatives": []
+        }
+      }
+    },
+    "scope": {
+      "argv": [
+        "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+        "--artifact",
+        "WO-HAG-009",
+        "--checkpoint",
+        "scope",
+        "--changes-complete",
+        "--changed-path",
+        "docs/engineering/hosted-artifact-graph/README.md",
+        "--changed-path",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/slowness-rca-20261011/RCA.md",
+        "--changed-path",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/slowness-rca-20261011/timing-evidence.json",
+        "--changed-path",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/slowness-rca-20261011/review-checks.json",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit": 0,
+      "elapsed_seconds": 19.449512799998047,
+      "stderr": "",
+      "stdout_sha256": "bf39eb6d2c3d2ff86a7c05d96ad2557755ad3836408e3b062bb4f3e06962513a",
+      "selected_exact_result_fields": {
+        "selection": {
+          "primary": "WO-HAG-009",
+          "artifacts": [
+            "WO-HAG-009"
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-HAG-009",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-HAG-009",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "compliance": {
+          "checkpoint": "scope",
+          "workflow_rule_id": "WFL-WO-IMPLEMENT",
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "status": "pass",
+          "gates": [
+            {
+              "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+              "status": "pass",
+              "predicates": [
+                {
+                  "id": "QGP-G4I-SCOPE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-HAG-009:[execution_scope]"
+                    }
+                  ],
+                  "message": "WO-HAG-009 declares 18 normalized scope path(s); this inspection grants no execution authority."
+                },
+                {
+                  "id": "QGP-G4I-COMPLETE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "declared-change-set:WO-HAG-009"
+                    }
+                  ],
+                  "message": "The caller explicitly asserted that the declared change set is complete."
+                },
+                {
+                  "id": "QGP-G4I-PATHS",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "path",
+                      "reference": "declared-change-set:WO-HAG-009"
+                    }
+                  ],
+                  "message": "All 4 declared changed path(s) are within execution scope."
+                }
+              ]
+            }
+          ],
+          "formal_snapshot_sha256": "87c38b4c9972e5a0edae9b22dd82a14228a8e95f624543e08c75bdd294e83565",
+          "change_set_source": "arguments"
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 63
+        }
+      }
+    },
+    "review-preflight": {
+      "argv": [
+        "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+        "--work-order",
+        "WO-HAG-009",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit": 0,
+      "elapsed_seconds": 13.782318200013833,
+      "stderr": "",
+      "stdout_sha256": "5d6f56583c4a0e736bbbbeb9c7c877cfed7af3b534f63c7c67e3ba44f8addbf5",
+      "selected_exact_result_fields": {
+        "schema": "se-harness-preflight-v2",
+        "phase": "review",
+        "ready": true,
+        "diagnostics": [],
+        "work_order": {
+          "id": "WO-HAG-009",
+          "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-009.md",
+          "status": "in_progress"
+        }
+      }
+    },
+    "validation": {
+      "argv": [
+        "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit": 0,
+      "elapsed_seconds": 18.83619429997634,
+      "stderr": "",
+      "stdout_sha256": "00f9ed6664c3f1fe374028bcdfc4b09d7c8696f80669a52a803aa974ed77b71c",
+      "selected_exact_result_fields": {
+        "valid": true,
+        "artifact_count": 1991,
+        "error_count": 0,
+        "warning_count": 63,
+        "advisory_count": 0
+      }
+    }
+  },
+  "selection_notice": "Exact selected structured fields retained; unrelated artifact inventories and warning bodies omitted. Native evidence is not replaced.",
+  "report_sha256": "31f6a346bcb04367793499171d5ef486b11f23120db913da93f950e7d3865431",
+  "timing_sha256": "95ca616c3d265eb012d495f19e434cfccbe818fefd79242e9d044a1b74ad942d",
+  "content_review": {
+    "relative_links_exist": 12,
+    "native_archive_entries_verified": {
+      "codex-221": 648,
+      "claude-221": 348,
+      "codex-221-reads": 177
+    },
+    "phase_totals_match_sessions": true,
+    "claude_tool_intervals_matched": 130,
+    "timing_metadata_only": true,
+    "claims_limits": "No measured reasoning-time claim, service bottleneck claim, local-workflow timing extrapolation or qualification pass. Corrective actions remain proposals.",
+    "simplicity": "One report, one timing dataset and this check record; reuse existing evidence archives. No new tests or implementation.",
+    "report_preparation_correction": "Initial staged diff check found CRLF line endings in the newly derived timing JSON. Converted that new file to LF without changing parsed values; original native evidence remains unchanged."
+  },
+  "not_run": [
+    "native host sessions",
+    "full source suite",
+    "distribution builds"
+  ],
+  "reason": "Analysis-only update; existing candidate results remain separately bound.",
+  "known_blocker": "WO-HAG-009 lacks completed qualification/handoff evidence; existing draft review-publication grant is reused."
+}

@@ -67,3 +67,13 @@ separately installed remote client and the repository's `server/README.md` Phase
 procedure. Git remains authoritative. Test approvals, VRECs, RLSs and exports do
 not authorize real work or publication. Packaged guidance checks do not prove
 live Claude authentication, startup or compaction delivery.
+
+## Candidate hosted authoring
+
+The common skill entry points now select a task reference. Hosted drafting uses
+`change/references/hosted-drafts.md`; setup and orientation have their matching
+hosted references. Load the selected route and applicable released sections.
+The candidate remote client supports typed file inputs and compact results backed
+by exact local evidence. This is unpublished test functionality; existing host
+installation and selected released-evaluator policy stay unchanged. Qualification
+results must identify the exact package and native host used.

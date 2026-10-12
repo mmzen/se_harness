@@ -1,0 +1,76 @@
+{
+  "archive": "review-checks.zip",
+  "sha256": "1f8b68adc680a41c6dbca12885fde8c5bb15bf052e7bbd372b770cba60e99621",
+  "files": [
+    {
+      "path": "active-preflight.json",
+      "bytes": 1978,
+      "sha256": "afd513d908261a9aeb1b30ee40a39c299914c73a17bd76e172f1e0495a669241"
+    },
+    {
+      "path": "active-validation.json",
+      "bytes": 428739,
+      "sha256": "1a62191dd3543cd523aab25e9896cde3db9e18726337f7bf428cb58b83ce0211"
+    },
+    {
+      "path": "ci-failure.json",
+      "bytes": 3436,
+      "sha256": "d58ed1829fff4243804d63856e7744ea3d08bfd2948342213d09c18b41277cdf"
+    },
+    {
+      "path": "cli-smoke.json",
+      "bytes": 4388,
+      "sha256": "5c6a2ada5f71bdfa7a3afb24efa9c8804e9d31438e05b808dd0f799a1cb41ced"
+    },
+    {
+      "path": "distributions.json",
+      "bytes": 506,
+      "sha256": "006d219370ac61ead05bf64717e44b4875ece176edc848305edba4e310526dd3"
+    },
+    {
+      "path": "final-plugin-checks.json",
+      "bytes": 999,
+      "sha256": "7ffdbbb9bd4f4082de2f47d80af6965c0c9be0c7d66ac340758d46f1e4648d0b"
+    },
+    {
+      "path": "guidance-review.json",
+      "bytes": 1098,
+      "sha256": "16443422a259d2967d9e879ef037df11d7c94617d04ff2aea33745636806c678"
+    },
+    {
+      "path": "initial-check.json",
+      "bytes": 21939,
+      "sha256": "f3be7b7a458f1d67e4891ce5e61c50976f99a17a1fbe21be45e467a7c730d596"
+    },
+    {
+      "path": "pr-before.json",
+      "bytes": 29416,
+      "sha256": "557cbe1488371a8fd019703b410fd3e39c9d1e9b32d737e44701bf3934c4e411"
+    },
+    {
+      "path": "proposed-preflight.json",
+      "bytes": 2011,
+      "sha256": "5009721b68776b9dc345117bd8ed611472f2121f2828eba3671b5b818f419d32"
+    },
+    {
+      "path": "proposed-validation.json",
+      "bytes": 428771,
+      "sha256": "abcfd1ab4e42af5d98e4f90f03812fa4c64eb7cd1c37649c0f635de081873abe"
+    },
+    {
+      "path": "scope.json",
+      "bytes": 22738,
+      "sha256": "cf8be25ba1fcda24f0fae4f3a2872953ab4ab57cacc1e16a4aefb2b9b02b4513"
+    },
+    {
+      "path": "source-tests.json",
+      "bytes": 5501,
+      "sha256": "d6fda4f2d8eb3788f44fbd081d6e1ad8502798237c0e2490d6e1264631420e9b"
+    },
+    {
+      "path": "validation-worktree.json",
+      "bytes": 4401,
+      "sha256": "888462371f0a6b2a2eaaf9f6f160cf592001dc6663d5dc24ea0e33d7dcd23b51"
+    }
+  ]
+}

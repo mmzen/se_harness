@@ -1,0 +1,438 @@
+{
+  "archive": "instruction-discovery-checks16.zip",
+  "bytes": 171317,
+  "sha256": "f6ecf99b29129f63df1458cbf1d14936fe7151d7b29e6eb1bda65cb4b9ad4929",
+  "files": [
+    {
+      "path": "checks/build15-replay.json",
+      "bytes": 7097,
+      "sha256": "f40b9407beccf278daed634b81924339c2a03eea0693d294e0d9f15f55587213"
+    },
+    {
+      "path": "checks/improve15-candidate.json",
+      "bytes": 113,
+      "sha256": "c486e5c54b628d0a5cfa88cb9f6e34758111bfd96232adcb01a8565387572159"
+    },
+    {
+      "path": "checks/improve15-cli-smoke.json",
+      "bytes": 4383,
+      "sha256": "9fedabbbf4d4c9e8c881a10bc866ba2b5b402d763159a3a9b1752e0ccba924f2"
+    },
+    {
+      "path": "checks/improve15-client-build.json",
+      "bytes": 991,
+      "sha256": "c7a6f33d4a25e564117677d11d850042735e6faa67a813f67f798da9e7179448"
+    },
+    {
+      "path": "checks/improve15-client-env.json",
+      "bytes": 472,
+      "sha256": "41057b93b6b4ce12806398dad0a142839523d419758a6295d58acf86cc1d73fc"
+    },
+    {
+      "path": "checks/improve15-client-install.json",
+      "bytes": 1112,
+      "sha256": "e233922dee3be4ff4659e30486d025d7a2d2ebc2bf35d45f682d2abadf2af24b"
+    },
+    {
+      "path": "checks/improve15-commit.json",
+      "bytes": 666,
+      "sha256": "6f4f2fbc0987ba3500b80b952c6692e0c6beee42929f06ed6c6a014a7c92455a"
+    },
+    {
+      "path": "checks/improve15-context009.json",
+      "bytes": 22293,
+      "sha256": "ff6192316c8268cb2f402abd046a895f969d98fcc91c9d3dc3229e52828fade5"
+    },
+    {
+      "path": "checks/improve15-context010.json",
+      "bytes": 20523,
+      "sha256": "9c8f0cedd748124f27ad5d02f0e1625e40151ac7e69ef74d0b7b7cd4d6854ac9"
+    },
+    {
+      "path": "checks/improve15-diff-check.json",
+      "bytes": 435,
+      "sha256": "12d165463ac48afac5c2e38ceacd2b372b3ef6145bb07a5d8e6ca03c9fa6248f"
+    },
+    {
+      "path": "checks/improve15-diff-check2.json",
+      "bytes": 273,
+      "sha256": "b4bbaa6fbe43f493edd3e24ef395bce73658c10cc90e1d07271e6eac4a114e66"
+    },
+    {
+      "path": "checks/improve15-distributions.json",
+      "bytes": 503,
+      "sha256": "99df35b0b7d69bcff657c64758c668fcc1a89261f811ac136ff507320f62fda5"
+    },
+    {
+      "path": "checks/improve15-helper-binding.json",
+      "bytes": 528,
+      "sha256": "be89bce4edbe9aeb681f244d93c5c6f325fbb83809bb3f29155a80e27c6c3ccd"
+    },
+    {
+      "path": "checks/improve15-package.json",
+      "bytes": 1869,
+      "sha256": "abc6dedeb4f9fad0ccba18567543cfdbdb4550bed7ee5667d0422f6a43367547"
+    },
+    {
+      "path": "checks/improve15-plugin-tests.json",
+      "bytes": 945,
+      "sha256": "d61bb0a3224c7cc1b796a02bdac3a63355b9bed9fda940d1713d94645aa19cb8"
+    },
+    {
+      "path": "checks/improve15-reader-tests.json",
+      "bytes": 517,
+      "sha256": "96b59b2c60eda33f4cf73cec3fe65f5a8959636217e44d9c3cb18b2beeb0b3a1"
+    },
+    {
+      "path": "checks/improve15-resume-context009.json",
+      "bytes": 22293,
+      "sha256": "8edd9e5cc2fcf42c749d45f20fcb8b01d47f754ec0e90c1ff46e67ba8cbe3fc2"
+    },
+    {
+      "path": "checks/improve15-resume-context010.json",
+      "bytes": 20523,
+      "sha256": "5e2e5b312a56d10abde3be84b9b4ef8bf20272b0b4580945090823e57bf322d0"
+    },
+    {
+      "path": "checks/improve15-scope-WO-HAG-009.json",
+      "bytes": 37221,
+      "sha256": "d1f95f0b6197831dccefe621d12e0ca75054bd9341c4ed5915c6568e7c9891fb"
+    },
+    {
+      "path": "checks/improve15-scope-WO-HAG-010.json",
+      "bytes": 21157,
+      "sha256": "9e4eff89bd1fc38ee36c8bea00d889384874372a5a3bc846ae747a5d2bf4b238"
+    },
+    {
+      "path": "checks/improve15-source-suite.json",
+      "bytes": 5499,
+      "sha256": "0fadc44fb0d9b4263cbd998d75893aecd2098a018b616ecca66cc34eb0a3a4be"
+    },
+    {
+      "path": "checks/improve15-stage.json",
+      "bytes": 650,
+      "sha256": "bd19d3f8f338633957464e07f9ea28fab55a8c7bd5db0b7500b9000949f45117"
+    },
+    {
+      "path": "checks/improve15-validation.json",
+      "bytes": 427921,
+      "sha256": "78b9acdc19ccaee85ddaff7dab9f9881c7c89806854b87aa5b8912a101ed86d4"
+    },
+    {
+      "path": "checks/improve16-candidate.json",
+      "bytes": 234,
+      "sha256": "bddb0d05578e0971dfd1fc3f6144f6308211ec86ff1c52253d242a88b9fb5c0f"
+    },
+    {
+      "path": "checks/improve16-cli-smoke.json",
+      "bytes": 4383,
+      "sha256": "4bf50be3d4fb5c5e5ed85574f9247d750aea5e294078c97d65254098bef2610f"
+    },
+    {
+      "path": "checks/improve16-commit.json",
+      "bytes": 493,
+      "sha256": "d5bcd04a3c69299d43952f86a1fa1e9d4f62303fcbc686f9ca617457401c64b8"
+    },
+    {
+      "path": "checks/improve16-diff-check.json",
+      "bytes": 273,
+      "sha256": "39bfcc294db5df3e8bcad56ff92577ad617b278526c1e0cb3e8d797a62dd26bf"
+    },
+    {
+      "path": "checks/improve16-diff-check2.json",
+      "bytes": 273,
+      "sha256": "e0a41730ab0df5453cfa97e9a4fa3ba0fa53f0a4b8c563578999e05931ec2e70"
+    },
+    {
+      "path": "checks/improve16-distributions.json",
+      "bytes": 503,
+      "sha256": "0abdead51457d07f980ca4b954b14a636f82952030a45df64f451e1b21124c7a"
+    },
+    {
+      "path": "checks/improve16-helper-binding.json",
+      "bytes": 515,
+      "sha256": "011f830963abca6eed17e04b483125d9ce37b463eecbf8a648a57c806fb73b1f"
+    },
+    {
+      "path": "checks/improve16-msys-forms.json",
+      "bytes": 854,
+      "sha256": "d43e3861d07d321f9370c6ef35b88a4733ff016b54dfe053bf7602887223514a"
+    },
+    {
+      "path": "checks/improve16-msys-helper.json",
+      "bytes": 1067,
+      "sha256": "6f510f166e34dbeeaf2db944d4e91f1cd9e62c2f08991c713d77e166eff667a0"
+    },
+    {
+      "path": "checks/improve16-msys-reproduction.json",
+      "bytes": 635,
+      "sha256": "06627bdb72cd804b365e99149ee21d24593e9fa26f59656b64c8b09fa2679682"
+    },
+    {
+      "path": "checks/improve16-reader-tests.json",
+      "bytes": 586,
+      "sha256": "9ea5dc149a225c64ac3dd36f6a998840ab6ced991be99892cdbc86f554b3ad0f"
+    },
+    {
+      "path": "checks/improve16-reader-tests2.json",
+      "bytes": 586,
+      "sha256": "d6fe6a52c111ed1388f48e1934a10acf0286a6c3e9ba597fd8b9bd5f534c002d"
+    },
+    {
+      "path": "checks/improve16-retain-scope-WO-HAG-009.json",
+      "bytes": 39575,
+      "sha256": "95d486a2fc6472e043c5a5619f5d902ce54ad7ab83f3a1ad29da965ec0854de3"
+    },
+    {
+      "path": "checks/improve16-retain-scope-WO-HAG-010.json",
+      "bytes": 21157,
+      "sha256": "2d2b5b12b983bceb9d52677f36546cb95e4e83c81162223e2c19916d07c4bb48"
+    },
+    {
+      "path": "checks/improve16-scope.json",
+      "bytes": 20010,
+      "sha256": "67edc7624f897b9b93a4e815925808662e783b0d837e776ea532413f9962cd51"
+    },
+    {
+      "path": "checks/improve16-source-suite.json",
+      "bytes": 5499,
+      "sha256": "37ff5e89547d294e3ec16c87cee77cafc436167f5b4bd88114c710c4129f3d5a"
+    },
+    {
+      "path": "checks/improve16-stage.json",
+      "bytes": 375,
+      "sha256": "a0a590fb6a41c96d896e27300c2c672d3c1c9e23d96c4bb15b5d56fe164c72cb"
+    },
+    {
+      "path": "checks/native15-check-pr.json",
+      "bytes": 1132,
+      "sha256": "b5111e130aa1a33dc4fcaaf4432ae39e99181c4bed67d73e0091630016a0d6cf"
+    },
+    {
+      "path": "checks/native15-ci-failure.json",
+      "bytes": 3433,
+      "sha256": "5cc4bb0da3f36037dcbec829896a603178c7746e5dca6598c5e654a72b583c5b"
+    },
+    {
+      "path": "checks/native15-pr-after.json",
+      "bytes": 651,
+      "sha256": "352bec183c740660bdc132f84ad097a390b4ab0a220768f3e19c99d787549233"
+    },
+    {
+      "path": "checks/native15-pr-before.json",
+      "bytes": 7191,
+      "sha256": "43d91ec9dd8a7f14db536f50013dae6ad29eae5b583a0c38d921f99d9f6ecaaf"
+    },
+    {
+      "path": "checks/native15-pr-event.json",
+      "bytes": 3367,
+      "sha256": "54c0ad50ae107151da96c7d6262f12ceefa1cd88f3a6d1b70aa378dc5f381151"
+    },
+    {
+      "path": "checks/native15-pr-update.json",
+      "bytes": 527,
+      "sha256": "1e62a56335e28b06bb18534408b0e4b3ca6e000af0980a7771bec32ef1e4cf03"
+    },
+    {
+      "path": "checks/native15-provider-detail.json",
+      "bytes": 1662,
+      "sha256": "6b26df1837fc3d89cffb466d2ee9d6af29171beadf20d64f984a4b453d367002"
+    },
+    {
+      "path": "checks/native15-provider-rules.json",
+      "bytes": 1339,
+      "sha256": "183ab8c1ce2b124e5868c76d71a0ef7ac20efd5126c555a70de850f808f9ba34"
+    },
+    {
+      "path": "checks/native15-push.json",
+      "bytes": 449,
+      "sha256": "5c347fab50492d641f857b9e34c85696a0b974103daac437e5fe0cc07b8cc088"
+    },
+    {
+      "path": "checks/native15-report-readable.json",
+      "bytes": 42002,
+      "sha256": "178a6ede01ddd38aff29d0a49793d6b3cded1991a555ec209e653e09bfe3d55f"
+    },
+    {
+      "path": "checks/native15-source-rules.json",
+      "bytes": 322,
+      "sha256": "9897a541e2e74270d5931bfe939875e0ca45df1a2ee22aa2c91cd31e7b27707e"
+    },
+    {
+      "path": "checks/opus06-final-status.json",
+      "bytes": 4394,
+      "sha256": "f39417e216df0214fa6221ee5605489b3de938c3621fbb8898de29344e28a4b8"
+    },
+    {
+      "path": "checks/opus06-native-audit.json",
+      "bytes": 28290,
+      "sha256": "59041323b421d5bdb155b424073e79e3ca5e696ee392a0a3e5d1d84cef87c9d4"
+    },
+    {
+      "path": "checks/opus06-receipt-create-cap-001.json",
+      "bytes": 4182,
+      "sha256": "12382a45fbe1b94a25cfa7566be4b3829f292f5a6faf69b6a5f799e766ddb3d4"
+    },
+    {
+      "path": "checks/opus06-receipt-create-int-001.json",
+      "bytes": 5820,
+      "sha256": "6edafe9c9fa06270fa2e68dd3cf83b33146a79b8fe672576eeccaa97f4872737"
+    },
+    {
+      "path": "checks/opus06-receipt-draft-open-001.json",
+      "bytes": 10402,
+      "sha256": "8e6b2ed12e671d5ce18a480488cafaedd4c01bbeff6b8e5a500ffda861553101"
+    },
+    {
+      "path": "checks/opus06-receipt-import-001.json",
+      "bytes": 5664,
+      "sha256": "04bfa00b9dc687edb707d280232026e17f59acf670bcac3b340e5889bb381812"
+    },
+    {
+      "path": "checks/opus06-stop.json",
+      "bytes": 268,
+      "sha256": "fa0dfa40bd0c5ad8dcf6f8c6992b0d70dbf2eb82636c836a143cf52a8fac7371"
+    },
+    {
+      "path": "checks/opus07-final-status.json",
+      "bytes": 4395,
+      "sha256": "47917cc248ace24e67ed73369108cdd12a6771b683a8ba7e9a745afe7be07bcf"
+    },
+    {
+      "path": "checks/opus07-native-audit.json",
+      "bytes": 35570,
+      "sha256": "8e0c14914d8f4cf9c8f34e787cf68d82685677ae45b167a36b962c058058c2fa"
+    },
+    {
+      "path": "checks/opus07-receipt-create-cap-001.json",
+      "bytes": 4182,
+      "sha256": "c314a2fb87b64da9c1c158e6fee97cc2cb07f5f056bc178a8cfbe65a266f0fcf"
+    },
+    {
+      "path": "checks/opus07-receipt-create-int-001.json",
+      "bytes": 5820,
+      "sha256": "236f3d67aa6320c947538f8a1253691c6858d51e484d8bb0b881c1c8bb4f6a60"
+    },
+    {
+      "path": "checks/opus07-receipt-create-rel-001.json",
+      "bytes": 7242,
+      "sha256": "7c77a0c1e11734440304b6c0b8e8147a5d0704e751e93dff030c3f86f21164ae"
+    },
+    {
+      "path": "checks/opus07-receipt-create-req-001.json",
+      "bytes": 6084,
+      "sha256": "c490bd78fe73b46df785b68038d2be7b3c406b6e401ece915f663c4b956d71fa"
+    },
+    {
+      "path": "checks/opus07-receipt-create-spec-001.json",
+      "bytes": 8732,
+      "sha256": "ccf2815ccdef72dfea5b7c6956ba53e9622c2f7c9a3d46002ad9ad96798ccc8c"
+    },
+    {
+      "path": "checks/opus07-receipt-create-ver-001.json",
+      "bytes": 4833,
+      "sha256": "1200ed951dd106fedd1a126b62bb1318671c4cc5eb0d3456746de12ba3496d44"
+    },
+    {
+      "path": "checks/opus07-receipt-create-wo-001.json",
+      "bytes": 7980,
+      "sha256": "d2120fc09375144370876078d649e14b64f042cd5b6f3911fea6a394f084c74a"
+    },
+    {
+      "path": "checks/opus07-receipt-draft-open-002.json",
+      "bytes": 10402,
+      "sha256": "2e17e26d420518ecf607c945165cab37e7923247f2f2b25743250504558f2528"
+    },
+    {
+      "path": "checks/opus07-receipt-import-source-001.json",
+      "bytes": 5678,
+      "sha256": "92c18d7260be1ce665ca9cd24c1e886d1ec3c80b466cfd7516f9d0710f6327d0"
+    },
+    {
+      "path": "checks/opus07-receipt-revise-cap-001.json",
+      "bytes": 5385,
+      "sha256": "a7445963dbcc75489e78346d3dbbb0a77d1b186d19d0c752620d8d6d2753d833"
+    },
+    {
+      "path": "checks/opus07-receipt-revise-int-001.json",
+      "bytes": 5683,
+      "sha256": "ca416dfdea55134971618dca033b941c437be60e895833ff80bb1130582392e5"
+    },
+    {
+      "path": "checks/opus07-receipt-revise-req-001.json",
+      "bytes": 5079,
+      "sha256": "82c80589bd10f10ded315b08dbffe7ae7a537fb6f5478181c2f42e07ce9b612f"
+    },
+    {
+      "path": "checks/opus07-stop.json",
+      "bytes": 349,
+      "sha256": "29cd110bd58ed51f7c965bf6e5361988d259c661cf2ed7d77315ff323aa4fe2a"
+    },
+    {
+      "path": "checks/runtime-reuse-guidance15.json",
+      "bytes": 32610,
+      "sha256": "095b40253a84ed61c7dd7b561602bfb346108b6dce924d142591c874b7da5f62"
+    },
+    {
+      "path": "operator/hag_assess16.py",
+      "bytes": 4757,
+      "sha256": "cf518e331ff7c08304e2c445985e1bec899eda341fa684b4a8279232fcc3051b"
+    },
+    {
+      "path": "operator/hag_audit15.py",
+      "bytes": 3657,
+      "sha256": "65c2aefae046756d44baa24fd61690b6d75c9a60dfa956e8be6756ac0d1c562d"
+    },
+    {
+      "path": "operator/hag_audit16.py",
+      "bytes": 3657,
+      "sha256": "c19d9a7841d91d842a5d430653483f45a8351b0abb2cc3dfa7d6ffce0e8281a2"
+    },
+    {
+      "path": "operator/hag_audit_reads16.py",
+      "bytes": 3285,
+      "sha256": "ce42a71fb14a0057584cb0377d435d8a3aabb5eb9c3facb9c252156c95fdb1d9"
+    },
+    {
+      "path": "operator/hag_check16.py",
+      "bytes": 1883,
+      "sha256": "a77eaa176a779e47dd3cb221bb5731c8d5811aca408e5b34c921e0ae3e39ce45"
+    },
+    {
+      "path": "operator/hag_metrics16.py",
+      "bytes": 2731,
+      "sha256": "6316ef292810651e68dc36eb0550f379d52ce6a1a78ef2f793dca9edbf353069"
+    },
+    {
+      "path": "operator/hag_msys16.py",
+      "bytes": 583,
+      "sha256": "15f237d4cb63db9b690285653d814c497ea769f7a1dbad3a7b411c2708fdb986"
+    },
+    {
+      "path": "operator/hag_prepare16.py",
+      "bytes": 1818,
+      "sha256": "38821f10cbb467139cfcc60e9c458bc5bd28e4f7cbc8940011baf6194bcf8237"
+    },
+    {
+      "path": "operator/hag_report16.py",
+      "bytes": 12264,
+      "sha256": "9c527b41d323fb50b75495e0f87086bcbdde9b525d758dbfcd2849dc35104d32"
+    },
+    {
+      "path": "operator/hag_retain_trial16.py",
+      "bytes": 3123,
+      "sha256": "51828a98ccb610825feedfa58be48c2b2fb65306c174d5e1c1b93da0de033e27"
+    },
+    {
+      "path": "prior-helper/improve15-helper-before.py",
+      "bytes": 6096,
+      "sha256": "e122001bfc976c147f78d81554f4db8fd84fbd4b4a90e14f81e8acb0edb40fa8"
+    },
+    {
+      "path": "prior-helper/improve16-helper-before.py",
+      "bytes": 8457,
+      "sha256": "3436a86c0b5b195256825ce3c8887d06c706cc21e18022aa82c5dd51194bafae"
+    }
+  ],
+  "redaction": "Credential files excluded. Exact retained bytes checked against known private test keys and provider-token prefixes. Only named checks, helper versions and test orchestration source included."
+}

@@ -1,0 +1,41 @@
+{
+  "archive": "checks.zip",
+  "sha256": "1810148b3ef8e341c35e0be3bedefc1b288e645410d06355df1c7d1c3790e59d",
+  "files": [
+    {
+      "path": "source.json",
+      "bytes": 5533,
+      "sha256": "f41997e0fad231dcfdc1414a10c3ee5f730d40d71d31aba24fc2aefb2bdeb0a6"
+    },
+    {
+      "path": "distribution.json",
+      "bytes": 505,
+      "sha256": "a95ebd83cbad43ef7c477b5187f94f0f9a5e159e5e6157e43a37b50cadf9851e"
+    },
+    {
+      "path": "smoke.json",
+      "bytes": 4387,
+      "sha256": "b4a348c43574c7c517168c97ed407d92652ca984c807190e96d09b337bbd34db"
+    },
+    {
+      "path": "scope.json",
+      "bytes": 20786,
+      "sha256": "37ec929c8c1809523404c92ff9fe7ef88930fa699e8c857cc082f0c9ad0ff4f3"
+    },
+    {
+      "path": "preflight.json",
+      "bytes": 1978,
+      "sha256": "0f6eeb70b8740b921b5a294701ff026cc92d0689982d3cb9789e5bd54db4d4ae"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 429576,
+      "sha256": "3736d7bc136bd3cb9b7a5fa72185b5b22999ec180f776cd3dcca0fe2a969005b"
+    },
+    {
+      "path": "observer.py",
+      "bytes": 6914,
+      "sha256": "7d1174fc512174a8d559998060a761a5be18d5cb10b2c876e33e371fcf96a117"
+    }
+  ]
+}

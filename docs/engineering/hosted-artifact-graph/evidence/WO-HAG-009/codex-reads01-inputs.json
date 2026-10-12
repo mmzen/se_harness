@@ -1,0 +1,19 @@
+{
+  "kind": "Correction of omitted existing test input for an independent read-only case",
+  "source": "docs/notes/hosted-artifact-graph.md",
+  "sha256": "91a0ae79ecd094a2547d54c427d7e9a115e71de57006dd4f2e8f2779585cda71",
+  "replaced_instructions": false,
+  "product_guidance_changed": false,
+  "task_sha256": "fb210bbfa277422559da49ad39fbb9d01e87dbe2dac860440774e0bc1a4b5d37",
+  "selected_views": {
+    "earlier": {
+      "kind": "baseline",
+      "baseline_id": "se-harness-artifact-baseline/v1:sha256:9f4c37933a05ca7c96cb60596c5cc53262feb2fa6c22dd7436506a9b86b3a7f9"
+    },
+    "later": {
+      "kind": "baseline",
+      "baseline_id": "se-harness-artifact-baseline/v1:sha256:80cdffcf457c9631a6442df36b471782cde393ba824814aa9d0d74f6b7e64020"
+    }
+  },
+  "limits": "This case covers the seven bounded reads only. Earlier refused Cypher calls remain failures; lifecycle/refusal/retry/export evidence is assessed separately."
+}

@@ -1,0 +1,25 @@
+{
+  "settings": [
+    {
+      "path": "C:\\Users\\mathi\\.codex\\config.toml",
+      "sha256": "217189ce1081bbd8672fc29ff163df06706400a2522b6e94f76cbd6f01027126",
+      "mtime_ns": 1791597830912778800,
+      "matches_during": true
+    },
+    {
+      "path": "C:\\Users\\mathi\\.claude\\settings.json",
+      "sha256": "741ee3a3088bd9c9ed1b1eaf45eb8e571710d05c198e51a61a26c6974a789749",
+      "mtime_ns": 1790935177569024300,
+      "matches_during": true
+    },
+    {
+      "path": "C:\\Users\\mathi\\.claude\\plugins\\installed_plugins.json",
+      "sha256": "1f580b6bd8c1b58e2553e1535444c61ae8746eef8232a4edec1373eee866acf8",
+      "mtime_ns": 1790935177645363400,
+      "matches_during": true
+    }
+  ],
+  "repository_head": "3d504f531d44b3bdcfa0a5a3269d2fd47ff418fd",
+  "tracked_diff": "",
+  "limits": "The earlier Codex global-config hash did not match; no fresh pre-run baseline. During/after hashes agree. Claude settings match the earlier retained baseline."
+}

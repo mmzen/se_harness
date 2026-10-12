@@ -1,0 +1,47 @@
+{
+  "host": "Claude Code",
+  "model": "claude-opus-4-6",
+  "trial": "opus03 continuation of opus02",
+  "status": "incomplete",
+  "session": {
+    "host": "claude",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 1124.557,
+    "reply_dropped": false,
+    "redactions": 0,
+    "events_sha256": "222549348ffafc440fd7e0784ea4b2156d64d383ca8090b3aa747ade39dc7c15",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "driver_source": "fb6d804324f3972e468a673a297f71298a5d6be7",
+  "package_source": "0dbb8ea19f28994da7abc7ecbab08c8db430dc0c",
+  "observations": {
+    "continued_operations": 3,
+    "independent_replay_exit": 0,
+    "native_exports": 2,
+    "all_seven_mcp_responses_match_http": true,
+    "all_seven_complete": true,
+    "real_repository_and_selected_host_settings_unchanged": true
+  },
+  "report_findings": [
+    {
+      "claim": "All five outcomes complete; stale preview followed a selected draft change.",
+      "finding": "False. Previous receipt 042 is an apply without a matching preview; receipt 044 follows a newly raised risk, not a selected draft revision. Required NQ-03 case remains pending."
+    },
+    {
+      "claim": "DEC-P3-001 mitigated RISK-P3-001.",
+      "finding": "Incorrect identity. The supported paired decision mitigated RISK-P3-002. The first unpaired risk remains raised."
+    },
+    {
+      "claim": "Two compactions; endpoint changed because service restarted.",
+      "finding": "The transcripts show three automatic compactions in Opus02 and one in Opus03. The session timeout/continuation is separate. The old address was the dropped-reply proxy; the service endpoint stayed 18332, with no service restart."
+    },
+    {
+      "claim": "Final read trace records all reads.",
+      "finding": "The native file lists only a subset and no complete per-resource hashes. Full observed tool calls and staged input inventories remain available for independent trace reconstruction."
+    }
+  ],
+  "conclusion": "Lifecycle, receipt recovery, scope refusal, seven MCP reads and exact exports have supporting observations and independent checks. This is not a combined Claude pass: the selected-draft stale case and accurate final host reporting remain pending. Preserve the native report unchanged as model output, not an authoritative verdict.",
+  "next": "Run the existing selected-draft criterion as a focused native scenario, then require an evidence-audited host report. No completed requests, corrective commands, direct operator mutations or waived criteria."
+}

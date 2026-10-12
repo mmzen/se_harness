@@ -1,0 +1,38 @@
+{
+  "archive": "checks.zip",
+  "sha256": "880fa099ab579a573c763555798f56ce5b7f53c3db2d4a147220c131c83d181f",
+  "files": [
+    {
+      "path": "focused.json",
+      "sha256": "c00a405ef2cd605d32388bc690297d64ca5bd681ccf1b3e8c4025956fb986bfb"
+    },
+    {
+      "path": "source.json",
+      "sha256": "acb08f88f01942004229c9be4f0b98af1277639e39e493b9d05c70d7b4852648"
+    },
+    {
+      "path": "distribution.json",
+      "sha256": "98e38d9c3c95cc06d192f2960225d7eaa2b56b5f3685c6d381acc79d971e2372"
+    },
+    {
+      "path": "smoke.json",
+      "sha256": "ba92f6d9049120e4e6880655677441e6a2d9f932979b08d0fec84a4ae89f4a9d"
+    },
+    {
+      "path": "scope.json",
+      "sha256": "dc8b16e99063963de7e1ea1c21a81ece77e7578879a2891dbe073bb766426ba1"
+    },
+    {
+      "path": "preflight.json",
+      "sha256": "2da5ecc744b54575de49b26ceeabe5b84f9a77f3f30f58f6cbfd73ffc3bf7ecb"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "5c13fc8eec403f8e01217a88992ce3cb0bcfcfc0cf90278d5d895d2e852d6e8c"
+    },
+    {
+      "path": "content-review.json",
+      "sha256": "0e8cf60bc7c1dc2c6dc5a884779384a63c198bd40a94eb5d047ad14b37e11677"
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "archive": "candidate12-checks.zip",
+  "bytes": 71114,
+  "sha256": "0a67d3a633e8368c22a8cb23f05c0c6f06dfdac806a7aa8c0ed6e928ce1e2538",
+  "files": [
+    {
+      "path": "probe-reuse.json",
+      "bytes": 1266,
+      "sha256": "b6510659843ff74c8d3bfd2ac8903702b6d1ec309a02b00984a772b77be04d4b"
+    },
+    {
+      "path": "assertion-consistency-proof.json",
+      "bytes": 782,
+      "sha256": "18ac03f8ca01487d642249c6e4cf51752b0650a022e9d4745de76c06ac8d34ec"
+    },
+    {
+      "path": "assertion-counterexample-label-correction.json",
+      "bytes": 391,
+      "sha256": "7e21e75589e4668e1509b7cf7f64e833dc27c9a40c6438d9026788ef84dba1fb"
+    },
+    {
+      "path": "instruction-diff-review.json",
+      "bytes": 1011,
+      "sha256": "2c08ac9e3d7b502a8e51a0190b530d975fd9bfd6aff7ce00e0429e4aa8ce756a"
+    },
+    {
+      "path": "native-tests.json",
+      "bytes": 609,
+      "sha256": "a6e968ef4e97a2b1dc31e60a37cc87cf2cde12270308e9a17b27ef764ca9844a"
+    },
+    {
+      "path": "source-tests.json",
+      "bytes": 5501,
+      "sha256": "b8c5fde0631435387400ca1a49c8426d702d657f3e1311c4924b051276474f0d"
+    },
+    {
+      "path": "distributions.json",
+      "bytes": 506,
+      "sha256": "c970d63a8643d37f022691cde3de3d7a32f326c85563a29e5ecfa2b59c7fa050"
+    },
+    {
+      "path": "cli-smoke.json",
+      "bytes": 4388,
+      "sha256": "86f1ad49b6aea8d568f6839ceb20d5a134b8d03fff96286126342aa7576a067f"
+    },
+    {
+      "path": "scope.json",
+      "bytes": 23072,
+      "sha256": "f1bd03ec263c1d518958fda8bf38380f5f5af2dde9043ce33cf243637bd483c7"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 428738,
+      "sha256": "e7f3a47cf62a51838f459c0c14f7be99224cd4cefe53ca162b2fd400fabec9de"
+    },
+    {
+      "path": "preflight.json",
+      "bytes": 1978,
+      "sha256": "b1b3b6d4a3e2cd9cd4fe87d2b27f096e17fed932f92b73cdaa87bd8774786ae2"
+    },
+    {
+      "path": "diff-check.json",
+      "bytes": 273,
+      "sha256": "0d11d874b1f3de3e42a3aeef48da7cb762ac133d91c2655a44c381b59ca67abe"
+    },
+    {
+      "path": "commit.json",
+      "bytes": 2018,
+      "sha256": "3d95ed8a852dee7e9b34af96c7cc370f6c82faecc216760cce503dc7bd192bde"
+    },
+    {
+      "path": "candidate-12.json",
+      "bytes": 249,
+      "sha256": "89691d2204fed606c1c4e25913dd03cebebfaba489645f9042d9d04eaff63e4b"
+    },
+    {
+      "path": "client-build-12.json",
+      "bytes": 975,
+      "sha256": "f1c6745ae816637ccb6ec9dff02c6eeeebc46ef1d229047bee3797ffe49efd7f"
+    },
+    {
+      "path": "package-12.json",
+      "bytes": 1839,
+      "sha256": "d4e8c097e6e73a6a2c114703d9c138ac425d91584a564cb5b55b250e1501b0b5"
+    },
+    {
+      "path": "client-env-12.json",
+      "bytes": 464,
+      "sha256": "0e5a9f1cce9f46640db51e909f5eaec03ff5dbab3aeaf319581aaeb894ce6bf8"
+    },
+    {
+      "path": "client-install-12.json",
+      "bytes": 1080,
+      "sha256": "0cbb56546fa7a7efa3dd669f1a054d6e4756503b45ce41b565aba15104862d87"
+    },
+    {
+      "path": "build12-replay.json",
+      "bytes": 7097,
+      "sha256": "91da328312b08ace95ad91e901669a27c59cd2ac2a191e6c039e0a9f1528e588"
+    },
+    {
+      "path": "candidate12-component-review.json",
+      "bytes": 1730,
+      "sha256": "8b16876569e7b3680ea4b8c59f54436a9cb7372821a0f9e14d38bf288bb05dbb"
+    },
+    {
+      "path": "installed12-ambiguous.json",
+      "bytes": 2532,
+      "sha256": "e3a8fe212aecc1f29254b127c72546bccfd939115cb4a28af378787dea14e9b2"
+    },
+    {
+      "path": "assertions-native-metrics.json",
+      "bytes": 12233,
+      "sha256": "68aa3b022ee9c30510925d80e79a2034ef2604d25c60e25912103826d6af87d1"
+    },
+    {
+      "path": "claude-version.json",
+      "bytes": 309,
+      "sha256": "0173e4f41f98b65b93a67ae9c37ea0e9d908175cf36b21442c4ef6a11b2c9a75"
+    },
+    {
+      "path": "codex-version.json",
+      "bytes": 353,
+      "sha256": "dde754df2c4f2fcf59543eac6ed7e1449cabe689307b79b0efa9d925cbbb3182"
+    },
+    {
+      "path": "claude-61-baseline-CAP-P3-900.json",
+      "bytes": 3386,
+      "sha256": "313759d24302cc94ea7d14cf7d7098c6234ad757ea51d3b4ec2a474f4a35f8a3"
+    },
+    {
+      "path": "claude-61-baseline-INT-P3-900.json",
+      "bytes": 3426,
+      "sha256": "dd7289f58e8f3bc5f9791128136ece88e21350c97345e8037c29f986b29cdb74"
+    },
+    {
+      "path": "claude-61-baseline-REL-P3-900.json",
+      "bytes": 3513,
+      "sha256": "0b70bd4271036c00d6fbb7c2efbabaef63bd3e9a5aa5f706611ad9ebc3980cf6"
+    },
+    {
+      "path": "claude-61-baseline-REQ-P3-900.json",
+      "bytes": 3538,
+      "sha256": "1931774cbefb355e98b239faac80a569aca2bd3e59d6369b008e852ca2b4b613"
+    },
+    {
+      "path": "claude-61-baseline-SPEC-P3-900.json",
+      "bytes": 3540,
+      "sha256": "1503b6765f54e07dfb6c786af4b518f4f1d640b006e763a10c90f03297f6c64e"
+    },
+    {
+      "path": "claude-61-baseline-VER-P3-900.json",
+      "bytes": 3734,
+      "sha256": "a3ed19778eec2adddca131ff1a1b51655cdf0176baa597887a0e68a6eaab561f"
+    },
+    {
+      "path": "claude-61-baseline-WO-P3-900.json",
+      "bytes": 4413,
+      "sha256": "98dba45860c1deed2950198ef78e17ed20b6c7005c7e44cf19dbed3f30bd51d3"
+    },
+    {
+      "path": "claude-61-containers.json",
+      "bytes": 553,
+      "sha256": "e8652d38c8a2549dae4595e7f54d38a7de15056cb324d7c2c94d4eabef1c0a5c"
+    },
+    {
+      "path": "claude-61-final-status.json",
+      "bytes": 4386,
+      "sha256": "e1b29503b140be06a4a1ae6c89eb11d5e94df0b39300b1e4c6d43df5b9a09706"
+    },
+    {
+      "path": "claude-61-independent-read.json",
+      "bytes": 4218,
+      "sha256": "93f2042b3cb247752621427c55b885399462d318895a6b867d129719dc55f7fa"
+    },
+    {
+      "path": "claude-61-stop.json",
+      "bytes": 405,
+      "sha256": "ab2d982eea157062cdbc382b231e35626f0d914359702a80119b3b3fcec89e55"
+    },
+    {
+      "path": "claude-61-summary.json",
+      "bytes": 11400,
+      "sha256": "7a684b20f54c15fa1d06a908678a47ac4dc9d77c9b8ec7194ad7ad33fe390c55"
+    },
+    {
+      "path": "claude-61/baseline-CAP-P3-900.json",
+      "bytes": 486,
+      "sha256": "94630a43fbcc60a8d4e39ed64562b6b32520dc9cca5c5f4f90a1c347e5abd955"
+    },
+    {
+      "path": "claude-61/baseline-INT-P3-900.json",
+      "bytes": 486,
+      "sha256": "5f93ad480cec0edad306c1f57e2080576ee7a5396073043b7b81c5cf24c592f8"
+    },
+    {
+      "path": "claude-61/baseline-REL-P3-900.json",
+      "bytes": 486,
+      "sha256": "48110644e8d9cf224fccfe8666c607094c62fb7dd8e49f4123071a209e7d0f09"
+    },
+    {
+      "path": "claude-61/baseline-REQ-P3-900.json",
+      "bytes": 486,
+      "sha256": "61def4f237132fa75ba5229c6104fdb787ffc0b51eb66e6660ca8eae079c626c"
+    },
+    {
+      "path": "claude-61/baseline-SPEC-P3-900.json",
+      "bytes": 487,
+      "sha256": "2e33737328bfcc7f5d8ef0b18ac969c21b4512df2c3ae360607a31a0d49b45b2"
+    },
+    {
+      "path": "claude-61/baseline-VER-P3-900.json",
+      "bytes": 486,
+      "sha256": "ac5d71ec614dffc740146ba7e3578591e8a153fb6fccb9984958aedaf66d9236"
+    },
+    {
+      "path": "claude-61/baseline-WO-P3-900.json",
+      "bytes": 485,
+      "sha256": "42e65184316f4a79386ee725a59c4ae7ab32fd886c6a157ebc8489c73f8d4ba7"
+    },
+    {
+      "path": "claude-61/immutable-baseline-review.json",
+      "bytes": 2006,
+      "sha256": "f712d0a8dfd60f99814a1d1c8937aa0d1c8c34ac49bf19c75b2180c0718e4bc5"
+    },
+    {
+      "path": "claude-61/independent-assessment.json",
+      "bytes": 1396,
+      "sha256": "7c550f14fbe0dfc8a952a98c0b4d1996f669d1e376f032f1a717491a42b66231"
+    },
+    {
+      "path": "claude-61/independent-observation.json",
+      "bytes": 424,
+      "sha256": "579f5d6c4ac48e12bdca185c943aed463eb16d6d82785687ad8be9ec33fc7e09"
+    },
+    {
+      "path": "preparation/claude61-volume-absent.json",
+      "bytes": 390,
+      "sha256": "bf3a53a5163094cad3c51c865b72bbd096b2cf8e6c939ecaa77c19841c2e4331"
+    },
+    {
+      "path": "preparation/claude61-volume-create.json",
+      "bytes": 337,
+      "sha256": "296d7ef3f0a280d81736bf4ccfc5825d98bcab0f0379d8726d81cd2e4035edde"
+    },
+    {
+      "path": "preparation/claude61-source-stage.json",
+      "bytes": 749,
+      "sha256": "53ffca3b62f9b6f3397a826b1504d882ec48e5ef7cb479883a5c667b7adcbad9"
+    },
+    {
+      "path": "preparation/claude61-up.json",
+      "bytes": 1820,
+      "sha256": "ef69ca994abbb0b43be780b318da8e26df6eca16a16b65b842e25f1a816d5edc"
+    },
+    {
+      "path": "preparation/claude61-init.json",
+      "bytes": 999,
+      "sha256": "59c1dfa0cc46a258c5e891a53b3829148faa42661832e87a3f14b29a104be4a9"
+    },
+    {
+      "path": "preparation/claude61-initial-status.json",
+      "bytes": 4386,
+      "sha256": "7588442c1c68fed4d552af15598e85c4cbe1a3a06de0d4f0e9dc606ee680e1b7"
+    },
+    {
+      "path": "preparation/claude-61-network.json",
+      "bytes": 305,
+      "sha256": "cdd1f3fa06c56a765b4e050018558cc8ec170c9f44fd3dc08a0daf9465f0d0a4"
+    }
+  ],
+  "omissions": "Raw native and authentication-probe streams, private reasoning, credentials and wheel binaries are excluded. Component review identifies probe records by digest. Native visible transcripts are separate. Transient orchestration is outside the repository."
+}

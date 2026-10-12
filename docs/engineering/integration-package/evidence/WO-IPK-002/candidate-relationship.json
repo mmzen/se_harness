@@ -1,0 +1,16 @@
+{
+  "tested_head": "039443f333bea8aaa135526a99d7d4ead9c1e295",
+  "tested_merge": "fc7021c82512c3359ea54063671a9b8a97689fa3",
+  "later_candidate_changes": [
+    "docs/engineering/integration-package/evidence/WO-IPK-002/WO-IPK-002-handoff.md",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/ci-evidence-inventory.json",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/ci-evidence.zip",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/handoff-completion.zip",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/handoff.json",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/verification-assessment.md",
+    "docs/engineering/integration-package/work-orders/WO-IPK-002.md"
+  ],
+  "implementation_unchanged": true,
+  "qualification": "CI qualified the complete tree at the exact tested head/merge. The later verification candidate adds only this work order completion and retained evidence. No claim that CI used the later Git identity.",
+  "generated_outputs": "Planned VREC destinations are unresolved until evaluator creation; assess actual returned paths under WORK_AND_EVIDENCE.md Generated outputs."
+}

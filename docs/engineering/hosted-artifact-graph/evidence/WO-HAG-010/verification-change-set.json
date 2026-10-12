@@ -1,0 +1,22 @@
+{
+  "schema": "se-harness-change-set-v1",
+  "complete": true,
+  "paths": [
+    "docs/engineering/hosted-artifact-graph/README.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/WO-HAG-010-handoff.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/approval.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/consolidation.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/execution-support.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/execution-support.zip",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/handoff-change-set.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/implementation-review.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/preparation-checks.json",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/review.md",
+    "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/verification-change-set.json",
+    "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md",
+    "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md",
+    "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-010.md",
+    "plugins/verity-plane/common/assets/bootstrap.md",
+    "plugins/verity-plane/common/skills/setup/SKILL.md"
+  ]
+}

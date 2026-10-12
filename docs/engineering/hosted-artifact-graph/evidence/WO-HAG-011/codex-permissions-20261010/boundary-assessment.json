@@ -1,0 +1,35 @@
+{
+  "status": "qualified configuration for subsequent exact selected-service probes",
+  "actual_checks": {
+    "workspace_write": {
+      "succeeded": true,
+      "status": null
+    },
+    "outside_write_open": {
+      "succeeded": false,
+      "error": "PermissionError",
+      "detail": "[Errno 13] Permission denied: 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\codex-network-outside-sentinel.txt'"
+    },
+    "service_http": {
+      "succeeded": true,
+      "status": 200
+    },
+    "external_proxy_http": {
+      "succeeded": false,
+      "error": "URLError",
+      "detail": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    "external_direct_tcp": {
+      "succeeded": false,
+      "error": "PermissionError",
+      "detail": "[WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions"
+    },
+    "network_disabled": "1",
+    "proxy_present": true
+  },
+  "live_session": "Local service 200, workspace write succeeds and outside write denied. External proxy request separately denied by native tool policy.",
+  "limit": "MXC may reach other localhost services. Not port-level isolation. No global config, credential or app change.",
+  "permission_source": "mmzen approved the exact linked amendment in this conversation; activation.json records it.",
+  "observed_warning": "CODEX_SANDBOX_NETWORK_DISABLED remains 1 despite proxied localhost access; actual probes determine behavior.",
+  "recovered_failure": "Dotted CLI quoting for 127.0.0.1 was parsed incorrectly. Replaced by one inline TOML profile; failed attempt preserved."
+}

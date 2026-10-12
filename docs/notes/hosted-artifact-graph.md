@@ -12,7 +12,16 @@ Phase 3 adds an explicit private test-copy lifecycle pilot under WO-HAG-008 and
 SPEC-HAG-007. Git remains authoritative. The pilot uses separately versioned
 [closed operations](../../server/contracts/lifecycle-v2.md), exact multi-file
 snapshots and ordinary disposable Git history. Its eight required VER-HAG-006
-scenarios remain pending until the new qualification evidence is assessed.
+scenarios passed, and mmzen verified
+[VREC-HAG-005](../engineering/hosted-artifact-graph/verification-records/VREC-HAG-005.md).
+PR #542 integrated that result. Both native Codex/Claude CLI runs pass all five
+VER-HAG-007 cases; [the consolidated evidence](../engineering/hosted-artifact-graph/evidence/WO-HAG-009/consolidation.md)
+records their exact inputs and limits. mmzen verified
+[VREC-HAG-006](../engineering/hosted-artifact-graph/verification-records/VREC-HAG-006.md)
+for that recorded candidate. The subsequent
+[WO-HAG-011 drafting correction](../engineering/hosted-artifact-graph/evidence/WO-HAG-011/qualified45-result/assessment.md)
+passes its focused content checks and awaits separate human verification.
+Duration and context goals remain missed or unavailable.
 Authentication and database ACL implementation remain deferred. The existing
 private access controls and RISK-HAG-001 remain in place.
 
@@ -387,3 +396,11 @@ linked work orders and verification record for current lifecycle state. Codex
 candidate guidance was read explicitly; automatic loading and desktop were not
 tested. Database-side read-only enforcement remains RISK-HAG-001. Phase 3 pilot
 authority and Phase 4 production/release obligations require later work.
+
+## Authoring cost and candidate guidance
+
+WO-HAG-011 adds typed file inputs and compact evidence-backed results to the
+existing client. See [the concrete interface](harnessctl-reference.md#concise-hosted-authoring).
+Skills route hosted drafting, lifecycle rehearsal and repository work separately.
+These candidate changes require their own tests; earlier service qualification
+does not establish improved task duration or context use. Git remains authoritative.

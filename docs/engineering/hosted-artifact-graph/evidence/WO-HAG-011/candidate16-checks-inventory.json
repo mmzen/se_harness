@@ -1,0 +1,282 @@
+{
+  "archive": "candidate16-checks.zip",
+  "sha256": "db322bf40edb0921de0b29fb5e1271fee38105f9d867c016e8ef573b2dd4ad1b",
+  "files": [
+    {
+      "path": "commands/build16-replay.json",
+      "bytes": 7097,
+      "sha256": "a1ef656d5361cd2cb3260d12062a48912bf1ce2f79b771762c434e9edc7d30be"
+    },
+    {
+      "path": "commands/candidate-16.json",
+      "bytes": 108,
+      "sha256": "34aa8ad1f2fdfd577b4f9fa21e33d4fd84d6742d8ce65eaeed4456e6ec744cc4"
+    },
+    {
+      "path": "commands/candidate16-component-review.json",
+      "bytes": 1154,
+      "sha256": "939dd5f9c8b1f42805dfb1feac6564039a5f6427ef4d8644966bfc550e7eac56"
+    },
+    {
+      "path": "commands/change-review.json",
+      "bytes": 1033,
+      "sha256": "4eaef1cc92a9ccb9e37e1594f7c25dbe484c918607f42e263d1444cfbd7db551"
+    },
+    {
+      "path": "commands/claude-101-baseline-CAP-P3-900.json",
+      "bytes": 3377,
+      "sha256": "7a3061d5b86323f6e6c94cdd4277996ce0c543769b113f2989433bc67f66caaa"
+    },
+    {
+      "path": "commands/claude-101-baseline-INT-P3-900.json",
+      "bytes": 3417,
+      "sha256": "49a42824db60cd5e4b3cca85d9f0c3dba5e7c634a0395819951458643f6af47d"
+    },
+    {
+      "path": "commands/claude-101-baseline-REL-P3-900.json",
+      "bytes": 3504,
+      "sha256": "b383f73ee1de46a3771bc5795813193e0540df0f8a5cd25b9e643fff89da3ba3"
+    },
+    {
+      "path": "commands/claude-101-baseline-REQ-P3-900.json",
+      "bytes": 3529,
+      "sha256": "e9eca0c6202ee0b928934cf6b67716bbd98b6ccafb67e381e2535a2d9251f6ff"
+    },
+    {
+      "path": "commands/claude-101-baseline-SPEC-P3-900.json",
+      "bytes": 3531,
+      "sha256": "a98caacc58ecf6bfc8ca304eef6dfa1a2f6e7707cea7514fab8f92d77df4bf14"
+    },
+    {
+      "path": "commands/claude-101-baseline-VER-P3-900.json",
+      "bytes": 3725,
+      "sha256": "def6dbfabbb3b1df005192188ea73c4558acf7cad4882eb153ee469bca1c3109"
+    },
+    {
+      "path": "commands/claude-101-baseline-WO-P3-900.json",
+      "bytes": 4404,
+      "sha256": "310c3ad15a45366515c21959e0d9af86c0b4ae31e84b3b73a1555436fbc34570"
+    },
+    {
+      "path": "commands/claude-101-containers.json",
+      "bytes": 559,
+      "sha256": "bb6d8829d0639212d18cbca143351c063853d8343779368f9a27ef6b77c0336f"
+    },
+    {
+      "path": "commands/claude-101-final-status.json",
+      "bytes": 4381,
+      "sha256": "8713acb0c4ad153eef6c165f5584c8d717dcbaa0f4ff99a20145f10d3f43adc8"
+    },
+    {
+      "path": "commands/claude-101-independent-read.json",
+      "bytes": 4133,
+      "sha256": "a131421b3def694935c8ee44e4422e1283948c828530431967856e6227406731"
+    },
+    {
+      "path": "commands/claude-101-stop.json",
+      "bytes": 409,
+      "sha256": "c1ffc62c106c339c17dfa28e91900a6e9f87ed568a393794713ead2ca69ac0b2"
+    },
+    {
+      "path": "commands/claude-101-summary.json",
+      "bytes": 3018,
+      "sha256": "42185e821ecb7e261c8d0f89743ddd84a2aeb5dc14fcfc3df6081b5d9d5a4487"
+    },
+    {
+      "path": "commands/claude-live-probe.json",
+      "bytes": 2816,
+      "sha256": "ae3acf25bf6f1d14814ab504964956a5fb6f464621d32c6bf0056c8c340bfd52"
+    },
+    {
+      "path": "commands/claude-version.json",
+      "bytes": 309,
+      "sha256": "e53faef8a5e92b0369cac9c6b96f2642deb04438a2e05d777faa340e8a27f847"
+    },
+    {
+      "path": "commands/claude101-init.json",
+      "bytes": 994,
+      "sha256": "47c8405e60aaadae6c3d758c71e861ca585bf80d3299b888baca8fee4b176789"
+    },
+    {
+      "path": "commands/claude101-initial-status.json",
+      "bytes": 4381,
+      "sha256": "dbd7123404dd895bc062b93a8a520ce2ff64fe24eaf44732962d981b9c6c9658"
+    },
+    {
+      "path": "commands/claude101-networks.json",
+      "bytes": 258823,
+      "sha256": "0240b4153d8dd50f23ef5f13cbc4aa19232401c9accda2ea7394ba5df48896a4"
+    },
+    {
+      "path": "commands/claude101-source-stage.json",
+      "bytes": 750,
+      "sha256": "79b4fa19dd5843543681febb7122f8c535c3b437a24c67573c181f3ea5f702f2"
+    },
+    {
+      "path": "commands/claude101-up.json",
+      "bytes": 1832,
+      "sha256": "9af95114a1e5b208da9ecb60da97cc6a29a05738218eb1238070fb7ac660bdac"
+    },
+    {
+      "path": "commands/claude101-volume-absent.json",
+      "bytes": 392,
+      "sha256": "305ebc2f91e262fdc16d59de4abaa578e38d03f4ca8c3787287e34dc34ed9899"
+    },
+    {
+      "path": "commands/claude101-volume-create.json",
+      "bytes": 339,
+      "sha256": "09bd8e2c44dd87cb7a03d8b853e95a0709abb474943250bf3b0ebb96726fd926"
+    },
+    {
+      "path": "commands/cli-smoke.json",
+      "bytes": 4387,
+      "sha256": "f8c0ae928bb34dec553b85ae47c8a19513c76f897de737c6f90e9d946310b34f"
+    },
+    {
+      "path": "commands/client-build-16.json",
+      "bytes": 965,
+      "sha256": "980966e851118e3cdae9b714fcb4d481418dd805f30320cd6d17f597c74d0c82"
+    },
+    {
+      "path": "commands/client-env-16.json",
+      "bytes": 459,
+      "sha256": "810d529f6fb37d29bb4030bc54bd3480d2a36f6552e0a46d59d1a814c0a457b9"
+    },
+    {
+      "path": "commands/client-install-16.json",
+      "bytes": 1060,
+      "sha256": "92c6f9bf14b809d53db6c9099241bc9ed1b89198cfa228fe7b07ea1c30013020"
+    },
+    {
+      "path": "commands/client-reuse-proof.json",
+      "bytes": 428,
+      "sha256": "590f393dd662909ce167f2d32332f7969516096286e76eff1f5a4dbe467e48b8"
+    },
+    {
+      "path": "commands/commit.json",
+      "bytes": 561,
+      "sha256": "ff4b9467999d81670830b15d2ec52227d66e0ce5d817502063a2db860ccc9a26"
+    },
+    {
+      "path": "commands/diff-check.json",
+      "bytes": 273,
+      "sha256": "9dcd37a4eff7a2e584b6a5c5bcd9a36f6c1eb20b06b552a3ed03866d079ca48a"
+    },
+    {
+      "path": "commands/distributions.json",
+      "bytes": 506,
+      "sha256": "b1b77dad721737c59a17324869a914ab20dd80ef9518cb851ea26cd78c7d661a"
+    },
+    {
+      "path": "commands/installed16-ambiguous.json",
+      "bytes": 2507,
+      "sha256": "0e836e11f84fdb3f5310bca6056727cf976cb0d439f5f27503cd163f560cb828"
+    },
+    {
+      "path": "commands/native-tests.json",
+      "bytes": 611,
+      "sha256": "48b6775a49cb6495aebdf3684c4d35c92b13332400511bb02385798bbc27f489"
+    },
+    {
+      "path": "commands/package-16.json",
+      "bytes": 1819,
+      "sha256": "b91134322165857678275a98148afcb3d06804d8e537adb133dde27b2ec819a3"
+    },
+    {
+      "path": "commands/preflight.json",
+      "bytes": 1979,
+      "sha256": "13c64005770d5f7bf1833f3bdcbcb99413343ee1981bafb9b7e0d9e6e1d1bea3"
+    },
+    {
+      "path": "commands/restoration-commit.json",
+      "bytes": 555,
+      "sha256": "ad2e6af1a6503e4cd0f8fbc484d04cce14e4eb15350dbe8bcf67c6d94055d4b4"
+    },
+    {
+      "path": "commands/restoration-diff-check.json",
+      "bytes": 274,
+      "sha256": "ca9fbf3b03e3f75aba3dbfed24141b1b1caba3b907baa25eedf7e057143236da"
+    },
+    {
+      "path": "commands/restoration-stage.json",
+      "bytes": 458,
+      "sha256": "e9657c5317d078d4fb901904ccfdc2f4284acdb03f3fdbbe0f88ea7d72a21a0a"
+    },
+    {
+      "path": "commands/restoration.json",
+      "bytes": 1127,
+      "sha256": "b852c6bd7a0b31436f5fbda03bf066a7327ea10864bfa446af491f3751852371"
+    },
+    {
+      "path": "commands/scope.json",
+      "bytes": 20430,
+      "sha256": "90c9c4d24b42babc66d465f49dfe810b1fdcdc24edb7cc69debab10c52f24d80"
+    },
+    {
+      "path": "commands/source-tests.json",
+      "bytes": 5501,
+      "sha256": "b790bf4048efc5cae22eb26f2a0dc11a10b19277b9dbbbadcc7e3e56bc79cfe2"
+    },
+    {
+      "path": "commands/stage.json",
+      "bytes": 458,
+      "sha256": "0e737db76d1e146c670da01bde5a7e03acace7cf75a257abe6ed3ddc31511e85"
+    },
+    {
+      "path": "commands/validation.json",
+      "bytes": 428739,
+      "sha256": "ad12335828b206a652a9f5793f1aa18bb46fe901cef96c52372fec7f76e63b58"
+    },
+    {
+      "path": "package/combination.json",
+      "bytes": 2807,
+      "sha256": "1450d92e61092a255009c6206714a410744af6e46220f527ea44b0d23d03bd39"
+    },
+    {
+      "path": "package/image-metadata.json",
+      "bytes": 1779,
+      "sha256": "d8292a772599951aacfb44a5ecc169c97cc95baa2016238977499a68f84cbae2"
+    },
+    {
+      "path": "package/image-package.json",
+      "bytes": 796,
+      "sha256": "a477575bb36b49430af33e7c8396a145a4467e58e584101bf1dd395decc827c8"
+    },
+    {
+      "path": "package/plugin-assembly.json",
+      "bytes": 1625,
+      "sha256": "aa2ff9297f698fa50636d8db8ac74ea26a0ad52ad5d3c7dcb973c9ec6f19fafb"
+    },
+    {
+      "path": "package/plugin-claude-inventory.json",
+      "bytes": 5186,
+      "sha256": "ea8f9e34e63497b83501384bcfbd446f2ded2ac37795cbd1114258b37f02c409"
+    },
+    {
+      "path": "package/plugin-codex-inventory.json",
+      "bytes": 5185,
+      "sha256": "03dff0d49872f1b5318d36bd5b7028cf2814c51c42e066fc561153a139b341b5"
+    },
+    {
+      "path": "package/server-build.json",
+      "bytes": 19049,
+      "sha256": "1e1fabff670ce7f68a924e91a10bb0494046aa44928eaf1c0fd4e123c4d654d8"
+    },
+    {
+      "path": "package/source-commit.json",
+      "bytes": 278,
+      "sha256": "607582e47fc891bab42ea8676dd013f5c9e5ce7a685bcb72882d2bb0346e1571"
+    },
+    {
+      "path": "package/source-status.json",
+      "bytes": 240,
+      "sha256": "cc835e7c2cf2ea3365e7e16515fea7155522a437957e0e3a4295421e98ce414d"
+    }
+  ],
+  "limits": "No credentials, raw host events, private reasoning, binary packages or service volumes. Known test tokens checked absent.",
+  "preparation_observations": [
+    "Initial whole-wheel equality assertion failed. All 127 member payloads match the earlier wheel; all timestamps differ. No binary equality is claimed.",
+    "Recovery used git status once from the workspace parent, which is not a repository; repeated only that read in the selected checkout.",
+    "A historical amendment README lookup did not exist; it produced no write or result claim. Current review and linked sources are retained directly."
+  ]
+}

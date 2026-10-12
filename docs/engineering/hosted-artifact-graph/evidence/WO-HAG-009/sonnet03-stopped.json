@@ -1,0 +1,33 @@
+{
+  "archive": "sonnet03-stopped.zip",
+  "bytes": 31817,
+  "sha256": "bf10b43827f281bc6f2f6ae3d29161d6cd08b5097351893308587882eba60c44",
+  "files": [
+    {
+      "path": "events.jsonl",
+      "bytes": 92486,
+      "sha256": "aa1bd65c43f2f154e4d0471bfd1a4671d4dd378518d9ca0c267261efef036fcd"
+    },
+    {
+      "path": "session.json",
+      "bytes": 329,
+      "sha256": "bc3cd57de66be0a0e2b088c7cb53e063ab3a7eae7950e7789b4fe747dbd72650"
+    },
+    {
+      "path": "invocation.json",
+      "bytes": 10451,
+      "sha256": "1d77c483375180f29d5ea50b2f405b3630ccc2d531d6de94b9b36390c00f0e4b"
+    },
+    {
+      "path": "selection.json",
+      "bytes": 2882,
+      "sha256": "78e090f1a775d730254b0d42062a15eb7f9eb26bcd44a8284a874085d9d198b5"
+    },
+    {
+      "path": "task.md",
+      "bytes": 8374,
+      "sha256": "0ce2dd61fcfa483dd0a29a26ee804cc50e1d08aad50d9d254fa341f351402490"
+    }
+  ],
+  "redaction": "Native recorder redaction preserved; selected files scanned for the private sandbox keys. No credential file or copied environment retained."
+}

@@ -1,0 +1,49 @@
+{
+  "base_commit": "7f664d04f69f53fc91287e6c5b71575dfcf9d385",
+  "status": "proposed_not_active",
+  "files": [
+    {
+      "id": "SPEC-HAG-008",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md",
+      "recorded_state": "approved",
+      "accepted_commit": "7f664d04f69f53fc91287e6c5b71575dfcf9d385",
+      "accepted_sha256": "666dd2a7cac256b6d3f97b86a95819eab7ee5adf7d85572dd06e786b71b7c77b",
+      "proposed_sha256": "f1b400f3a723fc222fde648e9bc965fa9a6f6950a7bab7d87d0082b268f51c24",
+      "metadata_unchanged": true
+    },
+    {
+      "id": "VER-HAG-008",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+      "recorded_state": "approved",
+      "accepted_commit": "7f664d04f69f53fc91287e6c5b71575dfcf9d385",
+      "accepted_sha256": "c8f66f5cb9aae1dad242653fdcec64a47ceb07b8bb6e6301fe46d67ce7ca4f49",
+      "proposed_sha256": "9520cb685d9920eb4e9c953d938490618ed4a6c4ce345525b205c92311bde96d",
+      "metadata_unchanged": true
+    },
+    {
+      "id": "WO-HAG-011",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+      "recorded_state": "in_progress",
+      "accepted_commit": "7f664d04f69f53fc91287e6c5b71575dfcf9d385",
+      "accepted_sha256": "b2908dad0135edab3c2d88f963063ab59352832e8102d899c04d0641b0db1e55",
+      "proposed_sha256": "fc5339ebda67c2054444bc004f63e6b3ec4c6c38d12de3d8017962ff378eec10",
+      "metadata_unchanged": true
+    },
+    {
+      "path": "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+      "accepted_sha256": "6936bcd60bf9d5cc3fb8ca85731b7412265d32f7ee96443cf2d8e118152ea2a6",
+      "proposed_sha256": "c43079cf9bbecf9d99365be8ab92e80457aa0d7e3d67cef3d51337e389665ac5",
+      "old_words": 986,
+      "new_words": 1057
+    },
+    {
+      "path": "tests/hosted_artifact_graph/native-drafting-task.md",
+      "accepted_sha256": "6389201b405c0a43ae00ab7ed0662eab37c240ee10082cf2d7fc160795d44b35",
+      "proposed_sha256": "9c5c99436158a2378bf05669d544980559a6444c4403ab314e5abe2f47afcf4a",
+      "old_words": 383,
+      "new_words": 390
+    }
+  ],
+  "activation": "Requires human review and explicit bounded manual activation; released 0.22.1 has no supported linked-revision command.",
+  "test_result": "No new native trial run; previous failed trials remain failed."
+}

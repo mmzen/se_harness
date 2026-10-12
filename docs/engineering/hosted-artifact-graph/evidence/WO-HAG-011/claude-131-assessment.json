@@ -1,0 +1,43 @@
+{
+  "candidate": "6586d4637b2f0849d497283e408d0fcb5f442181",
+  "case": "EFF-04A",
+  "trial": "claude-131",
+  "content_verdict": "fail",
+  "reporting_verdict": "fail",
+  "findings": [
+    "The saved intent says no independent confirmation of the return value exists yet. Inspection of the fixture and its definitions does not establish that absence. The report repeats this unsupported claim.",
+    "The intent substitutes confirming the expected greeting for the missing operational improvement and uses assertion evidence as its success measure. The report explicitly says an operational observation is required for a real intent but not for this synthetic rehearsal. Neither the selected task nor the governing checklist grants that exception.",
+    "The native report declares all inputs available and no unsupported claims; the final reply calls the draft complete. This fails the required missing-input response, even though the agent correctly distinguishes planned behavior checks from executed tests.",
+    "Independent service read matches the exact submitted final document. One new intent remains draft at project version four. All seven imported records preserve their original Git-blob bytes. No fixture input changed.",
+    "No denied or failed native tool calls were observed. Complete entry delivery and package identities pass independent comparison. This is a content/applicability judgment failure, not a transport failure or unauthorized lifecycle transition."
+  ],
+  "metrics": {
+    "wall_seconds": 267.731,
+    "native_calls": 12,
+    "observed_tool_items": 12,
+    "calls_by_tool": {
+      "Read": 3,
+      "Bash": 7,
+      "Write": 2
+    },
+    "model_turns": 11,
+    "peak_input_context": 61245,
+    "initial_input_context": 32849,
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "repeated_read_paths": {}
+  },
+  "observed_failed_calls": [],
+  "exact_saved_document": true,
+  "document_sha256": "73826659ecc16426238d6c2fe91fa5479985458569e13dc0c44bf6cf898231df",
+  "artifact": {
+    "artifact_id": "INT-P3-001",
+    "revision_id": "sha256:9bc47ed5604366d9358bda414af1ad98b00ed150a1228b870db06e9aa5b4cc4b"
+  },
+  "final_project_version": 4,
+  "baseline_records_unchanged": 7,
+  "decision": "Stop native trials on candidate19 under VER-HAG-008. No Codex or positive cases were run on this candidate. Preserve the failure before a separately identified in-scope correction; no lifecycle completion or verification acceptance."
+}

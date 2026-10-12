@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/**)",
+      "Edit(//c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/work/**)",
+      "Edit(//c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/native-report.md)",
+      "Edit(//c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/native-observations.json)",
+      "Bash(C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe -I C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/native_call.py *)",
+      "mcp__hag__revision",
+      "mcp__hag__work-context",
+      "mcp__hag__compare",
+      "mcp__hag__impact",
+      "mcp__hag__lineage",
+      "mcp__hag__check",
+      "mcp__hag__cypher"
+    ],
+    "deny": [
+      "Edit(//c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/claude/native02/inputs/**)"
+    ]
+  }
+}

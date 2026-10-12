@@ -1,0 +1,17 @@
+{
+  "assessment": "Claude native qualification not established",
+  "criterion": "NQ-01 and the instruction-following requirement across the native lifecycle",
+  "missing_observed_procedure_reads": [
+    "AUTHORITY.md",
+    "EXECUTE_WORK.md",
+    "VERIFY_OUTCOME.md",
+    "RELEASE.md",
+    "RESULTS.md"
+  ],
+  "evidence": "claude-independent-read-trace.json plus original Opus02/03/04 event streams",
+  "basis": "The candidate change skill was read in Opus02. Its Private lifecycle test copy section explicitly requires current procedures and applicable prerequisites before constructing a lifecycle request. No successful Read/Skill call for these five procedure files is present in the full three-trial event streams. The wire schema and operation success cannot replace those reads.",
+  "observation_scope": "File/Skill calls and their returned results; no assertion about the model remembering unread file contents. A later audit read does not establish the earlier required read.",
+  "functional_observations": "The accepted lifecycle operations, greeting assertion, receipt recovery, seven MCP responses, two exports and selected-draft/scope refusals retain independent evidence. They do not establish full instruction compliance.",
+  "review": "The bounded bootstrap/setup and readability changes have useful observed effects, but the combined native result does not satisfy the approved contract. Preserve the final handoff and actual VREC as absent; do not turn partial success into completion.",
+  "next_correction": "Reduce test context load while retaining complete raw outputs; make the already-required instruction resource for the current action easier to discover, without supplying workflow answers. Narrow session shell rules and rerun the affected native scenarios from a clean test starting point. This requires new observed evidence, not approval of the current failure."
+}

@@ -12,8 +12,6 @@ import subprocess
 import tomllib
 from pathlib import Path
 
-from hosted_artifact_graph.service import Service
-
 
 def commands(action):
     a=action; kind=a['kind']
@@ -81,6 +79,7 @@ def semantics(value):
 
 
 def run(args):
+    from hosted_artifact_graph.service import Service
     args.output.mkdir(parents=True,exist_ok=False)
     service=Service(json.loads(args.config.read_text()),json.loads(args.credentials.read_text()))
     principal=next(p for p in service.credentials['principals'] if p['id']=='operator')

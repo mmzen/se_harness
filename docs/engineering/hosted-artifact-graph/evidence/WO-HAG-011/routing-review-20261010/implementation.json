@@ -1,0 +1,10 @@
+{
+  "candidate": "c374a960b16a2e64cd0d39da3888ea19ab1842a7",
+  "review_commit": "db2c43718470832e0c89dd0478b015449db93d56",
+  "applied_path": "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+  "proposed_sha256": "6936bcd60bf9d5cc3fb8ca85731b7412265d32f7ee96443cf2d8e118152ea2a6",
+  "applied_sha256": "6936bcd60bf9d5cc3fb8ca85731b7412265d32f7ee96443cf2d8e118152ea2a6",
+  "behavior": "Select the existing clarification procedure when its prerequisite inputs are missing; defer dependent drafting instructions. No canonical policy or native requested-outcome changes.",
+  "preserved": "All guide content from Check the inputs before writing onward matches the preceding candidate byte for byte. All formal metadata and histories unchanged.",
+  "qualification": "Pending first Claude EFF-04A2. Existing stop rule applies."
+}

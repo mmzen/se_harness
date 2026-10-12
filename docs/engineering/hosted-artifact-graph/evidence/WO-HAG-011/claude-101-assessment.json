@@ -1,0 +1,30 @@
+{
+  "candidate": "0d896137bca8791e7d4b17002c1e814915f184a8",
+  "case": "EFF-04A",
+  "trial": "claude-101",
+  "content_verdict": "fail",
+  "findings": [
+    "Claims Complete, with no required content findings, although the original request supplies no distinct operational benefit or agreed operational success measure.",
+    "Invents rehearsal confidence as an operational benefit and asserts that downstream activities cannot establish a known baseline without recorded confirmation. These claims are not supplied by the request or inspected definitions.",
+    "Treats the binary fixture-output confirmation as an operational observation; this does not meet the accepted missing-input criterion.",
+    "Did not use the requested grouped read; nine separate Read calls remain. No repeated read path or failed native tool call was observed.",
+    "All seven imported records remain unchanged; exact saved bytes match the independently retrieved revision. This preservation does not pass content review."
+  ],
+  "metrics": {
+    "wall_seconds": 256.74,
+    "native_calls": 18,
+    "peak_input_context": 55067,
+    "model_turns": 14,
+    "calls_by_tool": {
+      "Read": 9,
+      "Skill": 1,
+      "Bash": 6,
+      "Write": 2
+    }
+  },
+  "observed_failed_calls": [],
+  "baseline_records_unchanged": 7,
+  "exact_saved_document": true,
+  "final_project_version": 4,
+  "decision": "Reject this instruction trial as an improvement; preserve it and its evidence, restore the previous three instruction files. Do not run a full positive repetition set on this failed trial."
+}

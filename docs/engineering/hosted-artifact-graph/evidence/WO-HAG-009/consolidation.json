@@ -1,0 +1,1310 @@
+{
+  "scope": [
+    "WO-HAG-009",
+    "WO-HAG-010"
+  ],
+  "contract": "VER-HAG-007",
+  "head_before_consolidation": "9fc3f4e2aa857e32ead50da8fa00fdca8e5e639a",
+  "complete_pr_base": "55caaada508495bea7d97effd27644d1ce8373da",
+  "native_test_candidate": "2f6ecb1433ef98cf643e0f604ed2c4258a2261e2",
+  "archive_integrity": [
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/claude-421-evidence.zip",
+      "bytes": 2347133,
+      "sha256": "655bcd961f8ec7a4112e62c8b8d3978a7a52efcb7118b011f41b144511e1bdea",
+      "inventory": {
+        "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/claude-421-inventory.json",
+        "bytes": 92109,
+        "sha256": "7cb69c3b0e33f52ccd752807f7af65c99eaf43bb9db7bd43c50ea9dd8906ac10"
+      },
+      "verified_members": 492
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-evidence.zip",
+      "bytes": 2786638,
+      "sha256": "82596250f1fb1d2312a2f1c2be33683d5cdde26541259543eeefe5921ad8eb77",
+      "inventory": {
+        "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-inventory.json",
+        "bytes": 113908,
+        "sha256": "df5730cbb72e5b70d47f23916d4f7bab1ef4fd6f0c244da1bdfa1f0b2356e71c"
+      },
+      "verified_members": 599
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-reads-evidence.zip",
+      "bytes": 363976,
+      "sha256": "2c0e5f6cd62fbc522ea4131ac3d035113211d895409a44b2de0f2e47c92b534c",
+      "inventory": {
+        "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-reads-inventory.json",
+        "bytes": 28930,
+        "sha256": "dd144c78d08101fd1e9bd511e0470d38ebbcf596af3de00ff1ba7cd6f44bf636"
+      },
+      "verified_members": 149
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/provenance.zip",
+      "bytes": 207110,
+      "sha256": "50863ca64bc4ab5bb6f54b15dcca5b702b1fc39e1cdb0e33fd7468619a2d3351",
+      "inventory": {
+        "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/provenance-inventory.json",
+        "bytes": 11282,
+        "sha256": "4d21552249cb80e5ec1b0758c96298579262c6eb43a5f8bb227264bd4bf0ec19"
+      },
+      "verified_members": 66
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/report-checks.zip",
+      "bytes": 30039,
+      "sha256": "79717bd67061b5063de91fa63231495baccee483e307edd1998a5e369604195b",
+      "inventory": {
+        "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/report-checks-inventory.json",
+        "bytes": 941,
+        "sha256": "41c379a234588f0422d8404addcf5ac9ce28d46a9dbd3c6a79904f19e3c8d405"
+      },
+      "verified_members": 6
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/execution-support.zip",
+      "bytes": 71407,
+      "sha256": "8dcb5c1bac8935622ea4f1b8ad8047c168171f8397301b1250bf2783c3e60e6c",
+      "inventory": {
+        "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/execution-support.json",
+        "bytes": 4915,
+        "sha256": "e16ace66b058deafe24e201d4b03d4f4c23391c38cc15e67efe3b76edb3db3fd"
+      },
+      "verified_members": 28
+    },
+    {
+      "path": "docs/engineering/integration-package/evidence/WO-IPK-002/local-checks.zip",
+      "bytes": 58039,
+      "sha256": "e9d78f04d97e658c76ca63af455696489edbb6e8ab199c6a4a729752a36be0ea",
+      "inventory": {
+        "path": "docs/engineering/integration-package/evidence/WO-IPK-002/local-checks-inventory.json",
+        "bytes": 3218,
+        "sha256": "a86f9e2f3775f44631a393b0ae27a96dbcc5044af2ec3ac81f86f8fa18d4d8e2"
+      },
+      "verified_members": 20
+    },
+    {
+      "path": "docs/engineering/integration-package/evidence/WO-IPK-002/ci-evidence.zip",
+      "bytes": 46529,
+      "sha256": "5d12bc7910e53f47dbb592c8640cdbe548a1975f8f5721eec62ebd94f6fde1c1",
+      "inventory": {
+        "path": "docs/engineering/integration-package/evidence/WO-IPK-002/ci-evidence-inventory.json",
+        "bytes": 2299,
+        "sha256": "ecba54eb27a00aca98a18873fa5962c46663d7dc5360543843be43557b0e5a3a"
+      },
+      "verified_members": 14
+    }
+  ],
+  "native_qualification": {
+    "claude-421": {
+      "archive": "final44-result/claude-421-evidence.zip",
+      "assessment_member": "assessment/independent-assessment.json",
+      "assessment": {
+        "candidate": "2f6ecb1433ef98cf643e0f604ed2c4258a2261e2",
+        "trial": "claude-421",
+        "accepted_operations_replayed": 12,
+        "native_exports": 2,
+        "mcp_observations": 8,
+        "mcp_tools_exactly_matched": [
+          "check",
+          "compare",
+          "cypher",
+          "impact",
+          "lineage",
+          "revision",
+          "work-context"
+        ],
+        "mcp_unmatched_observations": [],
+        "test_candidate": "09397830d7489422774bb7f155bbb77a3d30272b",
+        "actors": [
+          {
+            "id": "CAP-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "DEC-P3-001",
+            "to": "decided",
+            "actor": "test-owner"
+          },
+          {
+            "id": "INT-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "REL-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "RLS-P3-001",
+            "to": "released",
+            "actor": "release-owner"
+          },
+          {
+            "id": "REQ-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "RISK-P3-001",
+            "to": "raised",
+            "actor": "test-executor"
+          },
+          {
+            "id": "RISK-P3-001",
+            "to": "mitigating",
+            "actor": "test-owner"
+          },
+          {
+            "id": "SPEC-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "VER-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "VREC-P3-001",
+            "to": "verified",
+            "actor": "quality-owner"
+          },
+          {
+            "id": "WO-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "WO-P3-001",
+            "to": "in_progress",
+            "actor": "test-executor"
+          },
+          {
+            "id": "WO-P3-001",
+            "to": "implemented",
+            "actor": "test-executor"
+          }
+        ],
+        "originals": [
+          {
+            "export": "exports/earlier-vrec-ready",
+            "original_files": 8
+          },
+          {
+            "export": "exports/later-rls-released",
+            "original_files": 8
+          }
+        ],
+        "boundaries_unchanged": true,
+        "metrics": {
+          "wall_seconds": 1201.79,
+          "native_calls": 181,
+          "observed_tool_items": 181,
+          "native_call_count_complete": true,
+          "peak_input_context": 603273
+        },
+        "native_failed_items": 8,
+        "content_review": {
+          "method": "Manual review of authored intent, verification and release content, actual command/refusal records and final report, with independent mechanical replay and exact exports.",
+          "outcome": "pass",
+          "observations": [
+            "Intent describes the requested operator inspection/export outcome; original definitions are preserved.",
+            "Verification derives Hello rehearsal from definitions; assertion capabilities, local Windows platform, unavailable type/version coverage and source-to-candidate digest comparison are explicit.",
+            "Synthetic definition approval uses test-owner, execution test-executor, verification quality-owner, and RLS release-owner.",
+            "All eight failed tool results are retained; expected refusals, unknown reply and recovered guessed-path/export-parent errors are disclosed.",
+            "All seven MCP tools returned complete results and match independent exact HTTP requests; an extra lineage read is retained.",
+            "Two exports and all twelve accepted operations replay with released 0.22.1; native agent correctly leaves independent replay to the assessor."
+          ]
+        },
+        "overall": "pass",
+        "cases": {
+          "NQ-01": "pass",
+          "NQ-02": "pass",
+          "NQ-03": "pass",
+          "NQ-04": "pass",
+          "NQ-05": "pass"
+        },
+        "interventions": {
+          "corrective_prompts": 0,
+          "operator_workflow_mutations": 0,
+          "scripted_completion": false
+        },
+        "observations_preserved": [
+          "Native report raises uncertainty about the tag label test-v0.0.1 and risk preview/apply hash difference. No actual tag or external action occurred. These observations remain visible; receipt replay passes and the synthetic release contract explicitly limits any recorded tag to a label.",
+          "The independent read observer initially watched the previous trial directories. Later reads of the exact immutable Claude views all matched. Comparison timestamps and original helper are retained; this is not claimed contemporaneous."
+        ],
+        "limits": [
+          "Observed Windows CLI and model combination only; no desktop or automatic startup/compaction qualification.",
+          "Synthetic decisions do not authorize real verification, release, deployment or authority cutover.",
+          "Parallel disposable sessions prevent isolated performance claims.",
+          "This full lifecycle pass does not repair the failed focused Claude repetitions."
+        ]
+      },
+      "component_identity": {
+        "payload": {
+          "client": {
+            "version": "0.22.2",
+            "wheel_sha256": "25f1d5afa10fa8c006ad1f267f3e8b60b0f110740659908faf16e27d8c39413b"
+          },
+          "database": {
+            "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce",
+            "version": "3.13.1"
+          },
+          "deployment_sha256": "be3cda06afe5127444a37b4fda33416334854278159cad073174ef0b5765e33d",
+          "evaluator": {
+            "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+            "version": "0.22.1"
+          },
+          "plugins": {
+            "claude": {
+              "archive_sha256": "15153452289cbf854ffe5a7aeeb53f1a193cb8f3fa12776ea2244e1887a249a1",
+              "inventory_sha256": "72cc0e8e4fb0b4eaad09366b195d1a421369b4dbd11fdcf592fa05897733fdf3",
+              "version": "0.2.7"
+            },
+            "codex": {
+              "archive_sha256": "9644bb433bca0f40910dd51db35d8c2ebf5dae98cbd78990999a33d44c2b7de7",
+              "inventory_sha256": "3df835a17062bca27bac4c502815e59e73a9c2160edc12af5d95e21f067e51e5",
+              "version": "0.2.7"
+            }
+          },
+          "protocols": [
+            "se-harness-remote-command/v1",
+            "se-harness-remote-result/v1",
+            "se-harness-graph-read/v1",
+            "se-harness-artifact-revision/v1",
+            "se-harness-artifact-baseline/v1",
+            "se-harness-lifecycle-command/v2",
+            "se-harness-lifecycle-result/v2",
+            "se-harness-lifecycle-export/v2",
+            "se-harness-graph-read/v2"
+          ],
+          "required_secret_keys": [
+            "principals[].token"
+          ],
+          "runtime": {
+            "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4",
+            "platform": "linux/amd64",
+            "python": "3.13.16"
+          },
+          "schema": "se-harness-hosted-combination/v1",
+          "schema_revision": 2,
+          "server": {
+            "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+            "image_manifest": "sha256:7cf8b8b483395cbfb60da25e64b6b9c6557a557e619aecb2acb18b4fd6b9e2ef",
+            "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d",
+            "version": "0.1.0.dev1",
+            "wheel_sha256": "377572e9dd265b430333c877cc53734d5839c62955445114c28c6e81fb5f48be"
+          },
+          "source": {
+            "candidate_commit": "2f6ecb1433ef98cf643e0f604ed2c4258a2261e2",
+            "repository": "https://github.com/mmzen/se_harness.git"
+          }
+        },
+        "combination_id": "sha256:b49a3f8cfa908594dae8c2d0ee4ba85cd90493ad83768b2c78cb0f08c2675ebb"
+      }
+    },
+    "codex-421": {
+      "archive": "final44-result/codex-421-evidence.zip",
+      "assessment_member": "assessment/independent-assessment.json",
+      "assessment": {
+        "candidate": "2f6ecb1433ef98cf643e0f604ed2c4258a2261e2",
+        "trial": "codex-421",
+        "accepted_operations_replayed": 12,
+        "native_exports": 4,
+        "mcp_observations": 9,
+        "mcp_tools_exactly_matched": [
+          "check",
+          "compare",
+          "impact",
+          "lineage",
+          "revision"
+        ],
+        "mcp_unmatched_observations": [
+          {
+            "tool": "work-context",
+            "status": 409,
+            "native_call_id": "item_62"
+          },
+          {
+            "tool": "check",
+            "status": 409,
+            "native_call_id": "item_79"
+          },
+          {
+            "tool": "check",
+            "status": 409,
+            "native_call_id": "item_93"
+          },
+          {
+            "tool": "cypher",
+            "status": 409,
+            "native_call_id": "item_152"
+          }
+        ],
+        "test_candidate": "fc8b1f48ed5258a65a5aad271f91429605496911",
+        "actors": [
+          {
+            "id": "CAP-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "DEC-P3-001",
+            "to": "decided",
+            "actor": "test-owner"
+          },
+          {
+            "id": "INT-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "REL-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "RLS-P3-001",
+            "to": "released",
+            "actor": "release-owner"
+          },
+          {
+            "id": "REQ-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "RISK-P3-001",
+            "to": "raised",
+            "actor": "test-executor"
+          },
+          {
+            "id": "RISK-P3-001",
+            "to": "mitigating",
+            "actor": "test-owner"
+          },
+          {
+            "id": "SPEC-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "VER-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "VREC-P3-001",
+            "to": "verified",
+            "actor": "quality-owner"
+          },
+          {
+            "id": "WO-P3-001",
+            "to": "approved",
+            "actor": "test-owner"
+          },
+          {
+            "id": "WO-P3-001",
+            "to": "in_progress",
+            "actor": "test-executor"
+          },
+          {
+            "id": "WO-P3-001",
+            "to": "implemented",
+            "actor": "test-executor"
+          }
+        ],
+        "originals": [
+          {
+            "export": "export-early",
+            "original_files": 8
+          },
+          {
+            "export": "export-later",
+            "original_files": 8
+          },
+          {
+            "export": "export-release-review",
+            "original_files": 8
+          },
+          {
+            "export": "export-verification-review",
+            "original_files": 8
+          }
+        ],
+        "boundaries_unchanged": true,
+        "metrics": {
+          "wall_seconds": 1914.355,
+          "native_calls": null,
+          "observed_tool_items": 299,
+          "native_call_count_complete": false,
+          "peak_input_context": null
+        },
+        "native_failed_items": 9,
+        "content_review": {
+          "outcome": "pass",
+          "method": "Manual review of new intent, verification and release contract; native report, actual refusal/recovery records, trace and independent receipt/export replay.",
+          "observations": [
+            "The new intent names the operator outcome and an observable package-availability measure. Historical records and fixture source remain byte-identical.",
+            "The verification contract derives Hello rehearsal from accepted test definitions and specifies the exact local helper, source digest, Windows context, 0.22.1 governor and evidence destination. It claims no separate type assertion.",
+            "Twelve accepted operations replay and four exact native exports reconstruct with the original candidate binding. Synthetic actor roles match the supplied test decisions.",
+            "Stale preview, out-of-scope handoff, lost reply, identical retry and changed-key conflict are retained and correctly explained.",
+            "Nine visible failed native items remain recorded; capture limits and recovered local command errors are disclosed.",
+            "All seven MCP tool comparisons pass when the original five successful tool comparisons are combined with the separately assessed two-tool immutable-view recovery."
+          ]
+        },
+        "overall": "pass",
+        "cases": {
+          "NQ-01": "pass",
+          "NQ-02": "pass",
+          "NQ-03": "pass",
+          "NQ-04": "pass",
+          "NQ-05": "pass"
+        },
+        "interventions": {
+          "corrective_prompts": 0,
+          "operator_workflow_mutations": 0,
+          "scripted_completion": false
+        },
+        "read_recovery": "../codex-421-reads/independent-assessment.json",
+        "observations_preserved": [
+          "The original proctor observer watched earlier trial directories. Four delayed Codex comparisons returned stale HTTP 409; they remain retained and do not count as matches. Later original checks supply check parity; the separate read session supplies work-context and cypher.",
+          "Native report preserves null archive/payload fields in the VREC origin-version inspection, distinct from the fully pinned RLS payload inspection. Exact sidecars and successful independent released replay are retained."
+        ],
+        "limits": [
+          "Observed Windows CLI/component combination only; no desktop or automatic startup/compaction qualification.",
+          "Synthetic records do not verify the real candidate or authorize delivery.",
+          "Concurrent disposable sessions do not establish isolated performance.",
+          "Passing full lifecycle qualification does not repair the two failed Claude focused repetitions."
+        ]
+      },
+      "component_identity": {
+        "payload": {
+          "client": {
+            "version": "0.22.2",
+            "wheel_sha256": "25f1d5afa10fa8c006ad1f267f3e8b60b0f110740659908faf16e27d8c39413b"
+          },
+          "database": {
+            "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce",
+            "version": "3.13.1"
+          },
+          "deployment_sha256": "b131e22db246f858729ce51863c3dfdd2bb82088ce6d21651c2c098e68e43392",
+          "evaluator": {
+            "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+            "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff",
+            "version": "0.22.1"
+          },
+          "plugins": {
+            "claude": {
+              "archive_sha256": "15153452289cbf854ffe5a7aeeb53f1a193cb8f3fa12776ea2244e1887a249a1",
+              "inventory_sha256": "72cc0e8e4fb0b4eaad09366b195d1a421369b4dbd11fdcf592fa05897733fdf3",
+              "version": "0.2.7"
+            },
+            "codex": {
+              "archive_sha256": "9644bb433bca0f40910dd51db35d8c2ebf5dae98cbd78990999a33d44c2b7de7",
+              "inventory_sha256": "3df835a17062bca27bac4c502815e59e73a9c2160edc12af5d95e21f067e51e5",
+              "version": "0.2.7"
+            }
+          },
+          "protocols": [
+            "se-harness-remote-command/v1",
+            "se-harness-remote-result/v1",
+            "se-harness-graph-read/v1",
+            "se-harness-artifact-revision/v1",
+            "se-harness-artifact-baseline/v1",
+            "se-harness-lifecycle-command/v2",
+            "se-harness-lifecycle-result/v2",
+            "se-harness-lifecycle-export/v2",
+            "se-harness-graph-read/v2"
+          ],
+          "required_secret_keys": [
+            "principals[].token"
+          ],
+          "runtime": {
+            "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4",
+            "platform": "linux/amd64",
+            "python": "3.13.16"
+          },
+          "schema": "se-harness-hosted-combination/v1",
+          "schema_revision": 2,
+          "server": {
+            "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+            "image_manifest": "sha256:7cf8b8b483395cbfb60da25e64b6b9c6557a557e619aecb2acb18b4fd6b9e2ef",
+            "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d",
+            "version": "0.1.0.dev1",
+            "wheel_sha256": "377572e9dd265b430333c877cc53734d5839c62955445114c28c6e81fb5f48be"
+          },
+          "source": {
+            "candidate_commit": "2f6ecb1433ef98cf643e0f604ed2c4258a2261e2",
+            "repository": "https://github.com/mmzen/se_harness.git"
+          }
+        },
+        "combination_id": "sha256:5db88ebf8914b1cc63a35cc0f395dbbbafe511130cc567c942b25d0707ce624a"
+      }
+    },
+    "codex-421-reads": {
+      "archive": "final44-result/codex-421-reads-evidence.zip",
+      "assessment_member": "assessment/independent-assessment.json",
+      "assessment": {
+        "trial": "codex-421-reads",
+        "candidate": "2f6ecb1433ef98cf643e0f604ed2c4258a2261e2",
+        "overall": "pass",
+        "scope": "NQ-03 two-tool read-only supplement; not a new full lifecycle run.",
+        "tools": [
+          "work-context",
+          "cypher"
+        ],
+        "exact_mcp_http_matches": 2,
+        "project_version_before_and_after": 29,
+        "service_status_equal": true,
+        "repository_and_settings_unchanged": true,
+        "inputs_unchanged": true,
+        "content_review": "Manually inspected native report and exact requests/responses. Complete envelopes are accurately separated from checkpoint-free not_assessable lifecycle context. Report leaves HTTP parity to this independent review and discloses the recovered reader-size failures.",
+        "failed_native_items": 2,
+        "interventions": {
+          "corrective_prompts": 0,
+          "operator_workflow_mutations": 0,
+          "scripted_completion": false
+        },
+        "limits": [
+          "Two early comparisons were missing because the proctor observer watched the wrong trial directories. This separate fresh native session recovers only those tool comparisons at the unchanged final baseline. Original stale HTTP 409 comparisons remain failures of observation timing.",
+          "No automatic startup, desktop, real assurance, release or authority-switch claim.",
+          "Only visible native tool/result evidence is assessed; incomplete capture is not an exhaustive call count."
+        ]
+      }
+    }
+  },
+  "source_comparisons": [
+    {
+      "tested_commit": "2f6ecb1433ef98cf643e0f604ed2c4258a2261e2",
+      "purpose": "native test candidate",
+      "compared_head": "9fc3f4e2aa857e32ead50da8fa00fdca8e5e639a",
+      "all_changed_paths": [
+        ".github/scripts/build_integration_package.py",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/assessment.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/claude-421-evidence.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/claude-421-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/claude-421-visible.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-evidence.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-reads-evidence.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-reads-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-reads-visible.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-visible.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/provenance-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/provenance.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/report-checks-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/report-checks.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/retention-recovery.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/assessment.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-431-evidence.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-431-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-431-visible.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-432-evidence.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-432-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-432-visible.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-433-evidence.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-433-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-433-visible.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-434-evidence.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-434-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-434-visible.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/codex-431-evidence.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/codex-431-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/codex-431-visible.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/codex-432-evidence.zip",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/codex-432-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/codex-432-visible.md",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/provenance-inventory.json",
+        "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/provenance.zip",
+        "docs/engineering/integration-package/evidence/VREC-IPK-002-evaluator.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/WO-IPK-002-handoff.md",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/assessment.md",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/candidate-relationship.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/ci-evidence-inventory.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/ci-evidence.zip",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/create-verification-retry.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/create-verification.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/create-work-order.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/draft-planned.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/draft-validation.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/handoff-completion.zip",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/handoff.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/implementation.diff",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/local-checks-inventory.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/local-checks.zip",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/proposed.diff",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/prototype-check-complete.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/prototype-check-owned-scratch.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/prototype-check.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/publication-checks.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/publication-checks.zip",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/review.md",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/verification-assessment.md",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/verification-preparation.json",
+        "docs/engineering/integration-package/verification-records/VREC-IPK-002.md",
+        "docs/engineering/integration-package/verification/VER-IPK-002.md",
+        "docs/engineering/integration-package/work-orders/WO-IPK-002.md",
+        "tests/test_integration_package.py"
+      ],
+      "changes_outside_formal_artifacts_and_evidence": [
+        ".github/scripts/build_integration_package.py",
+        "tests/test_integration_package.py"
+      ],
+      "unchanged_components": [
+        {
+          "path": "server",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 34,
+          "listing_sha256": "f962cbccf14975845d1091d7a8136d07ec39e842b0b7400e3bc0c251ff1cbd09"
+        },
+        {
+          "path": "plugins",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 39,
+          "listing_sha256": "07e8299261c605369261bb7e02e58caf8687077f977c4695168ce34990a9b8d7"
+        },
+        {
+          "path": "repository_tools",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 21,
+          "listing_sha256": "ba934a78d909757d4fbd9d2dee32eb428185ec7af81c807c0f61162b775fbbe8"
+        },
+        {
+          "path": "tests/hosted_artifact_graph",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 33,
+          "listing_sha256": "383de62d8f61a2d717f06858b68c645e7c0ab8b8cc04ea7a69f8e7f9bb32c18c"
+        },
+        {
+          "path": "tests/plugin_integration",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 366,
+          "listing_sha256": "bc2ac83f246152dc22a253b6b2687f1efcda18507f9220871bff0717fb773861"
+        },
+        {
+          "path": "pyproject.toml",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 1,
+          "listing_sha256": "30750eb234e08db83a2bc0c9e283f5d58969dc0eccaaa6bf06f5b8c44332f0f0"
+        }
+      ]
+    },
+    {
+      "tested_commit": "039443f333bea8aaa135526a99d7d4ead9c1e295",
+      "purpose": "later source and package checks",
+      "compared_head": "9fc3f4e2aa857e32ead50da8fa00fdca8e5e639a",
+      "all_changed_paths": [
+        "docs/engineering/integration-package/evidence/VREC-IPK-002-evaluator.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/WO-IPK-002-handoff.md",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/candidate-relationship.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/ci-evidence-inventory.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/ci-evidence.zip",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/handoff-completion.zip",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/handoff.json",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/verification-assessment.md",
+        "docs/engineering/integration-package/evidence/WO-IPK-002/verification-preparation.json",
+        "docs/engineering/integration-package/verification-records/VREC-IPK-002.md",
+        "docs/engineering/integration-package/work-orders/WO-IPK-002.md"
+      ],
+      "changes_outside_formal_artifacts_and_evidence": [],
+      "unchanged_components": [
+        {
+          "path": "server",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 34,
+          "listing_sha256": "f962cbccf14975845d1091d7a8136d07ec39e842b0b7400e3bc0c251ff1cbd09"
+        },
+        {
+          "path": "plugins",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 39,
+          "listing_sha256": "07e8299261c605369261bb7e02e58caf8687077f977c4695168ce34990a9b8d7"
+        },
+        {
+          "path": "repository_tools",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 21,
+          "listing_sha256": "ba934a78d909757d4fbd9d2dee32eb428185ec7af81c807c0f61162b775fbbe8"
+        },
+        {
+          "path": "tests/hosted_artifact_graph",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 33,
+          "listing_sha256": "383de62d8f61a2d717f06858b68c645e7c0ab8b8cc04ea7a69f8e7f9bb32c18c"
+        },
+        {
+          "path": "tests/plugin_integration",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 366,
+          "listing_sha256": "bc2ac83f246152dc22a253b6b2687f1efcda18507f9220871bff0717fb773861"
+        },
+        {
+          "path": "pyproject.toml",
+          "identical_blob_ids_and_modes": true,
+          "file_count": 1,
+          "listing_sha256": "30750eb234e08db83a2bc0c9e283f5d58969dc0eccaaa6bf06f5b8c44332f0f0"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/assessment.md",
+      "bytes": 5736,
+      "sha256": "1ae76f542db8a6e2136ba032712bbec9d3d4f3df2fdeab5c0e36ea3576acabcf"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/implementation-review.md",
+      "bytes": 1316,
+      "sha256": "b9f76c1814f0ad07a5fec23c8a0bce6c477de453b2948f2e6d7d35533f2ec45f"
+    },
+    {
+      "path": "docs/engineering/integration-package/evidence/WO-IPK-002/verification-assessment.md",
+      "bytes": 3341,
+      "sha256": "d6b2ea1314547d40973694e7e8a709bef287d265277225246189dc3cd0978f4d"
+    },
+    {
+      "path": "docs/engineering/integration-package/evidence/WO-IPK-002/candidate-relationship.json",
+      "bytes": 1171,
+      "sha256": "82a74df37102308ea9661d2d26ed2c9de882bddbc9749fb1caf993ff4346d1f8"
+    },
+    {
+      "path": "docs/engineering/integration-package/evidence/WO-IPK-002/verification-preparation.json",
+      "bytes": 782,
+      "sha256": "295d2d2b6426458253854534434cc1e9c6d7fd95831e702cc5e0110e18f43940"
+    },
+    {
+      "path": "docs/engineering/integration-package/verification-records/VREC-IPK-002.md",
+      "bytes": 2468,
+      "sha256": "c69ecb37bd913eb7d06ddfedb55060fb4de783b00baf8aa931b114fa2538220f"
+    }
+  ],
+  "check_reuse": {
+    "local_source": "1,339 tests, 24 skips, exit 0; local-checks.zip/source-retry.json",
+    "source_failure_preserved": "Original Windows Git long-path failure and diagnostic remain in local-checks.zip. Retry used process-local core.longpaths=true, not a global or repository setting.",
+    "distribution": "23 records, exit 0; local-checks.zip/distribution.json",
+    "cli": "exit 0; local-checks.zip/smoke.json",
+    "runtime": "local-checks.zip/runtime.json",
+    "native_rerun": false,
+    "reason": "Exact Git blob/mode comparisons above establish unchanged native inputs; later IPK correction changes only the CI helper and its tests. No claim that the new consolidation commit itself ran the earlier tests."
+  },
+  "ci_at_inspected_head": {
+    "head": "9fc3f4e2aa857e32ead50da8fa00fdca8e5e639a",
+    "checks": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:45:08Z",
+        "conclusion": "FAILURE",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225431931/job/114731660616",
+        "name": "validate",
+        "startedAt": "2026-10-12T08:44:34Z",
+        "status": "COMPLETED",
+        "workflowName": "Engineering Harness"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:45:27Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225428937/job/114731654097",
+        "name": "Analyze (actions)",
+        "startedAt": "2026-10-12T08:44:32Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:44:51Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225431902/job/114731660871",
+        "name": "Predecessor evaluator assessment",
+        "startedAt": "2026-10-12T08:44:34Z",
+        "status": "COMPLETED",
+        "workflowName": "Predecessor Evaluator Assessment"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:44:50Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225431972/job/114731660992",
+        "name": "Select release rehearsals",
+        "startedAt": "2026-10-12T08:44:33Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:46:12Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225432019/job/114731660734",
+        "name": "Candidate source evidence",
+        "startedAt": "2026-10-12T08:44:33Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:46:12Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225428937/job/114731655782",
+        "name": "Analyze (javascript-typescript)",
+        "startedAt": "2026-10-12T08:44:33Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:46:09Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225428937/job/114731654450",
+        "name": "Analyze (python)",
+        "startedAt": "2026-10-12T08:44:33Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:44:50Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225431972/job/114731770499",
+        "name": "Rehearse the qualification of this candidate",
+        "startedAt": "2026-10-12T08:44:50Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:46:45Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225432019/job/114732261179",
+        "name": "Candidate package evidence",
+        "startedAt": "2026-10-12T08:46:15Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:44:50Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225431972/job/114731769758",
+        "name": "Rehearse the qualification of the release record",
+        "startedAt": "2026-10-12T08:44:50Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:48:12Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225432019/job/114732449797",
+        "name": "Upgrade rehearsal (Linux)",
+        "startedAt": "2026-10-12T08:46:48Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:50:04Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225432019/job/114732449569",
+        "name": "Upgrade rehearsal (Windows)",
+        "startedAt": "2026-10-12T08:46:48Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:44:50Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225431972/job/114731769770",
+        "name": "Rehearse complete delivery and recovery without publication",
+        "startedAt": "2026-10-12T08:44:50Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:50:42Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225432019/job/114733607827",
+        "name": "Build deterministic integration package",
+        "startedAt": "2026-10-12T08:50:07Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:44:56Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225431972/job/114731769226",
+        "name": "Publication rehearsal",
+        "startedAt": "2026-10-12T08:44:53Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:51:05Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225432019/job/114733832090",
+        "name": "Verify integration package (Linux)",
+        "startedAt": "2026-10-12T08:50:45Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:51:43Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225432019/job/114733832184",
+        "name": "Verify integration package (Windows)",
+        "startedAt": "2026-10-12T08:50:45Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:52:04Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/38225432019/job/114734178489",
+        "name": "Retain verified integration package",
+        "startedAt": "2026-10-12T08:51:46Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T08:45:22Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/runs/114731933593",
+        "name": "CodeQL",
+        "startedAt": "2026-10-12T08:45:18Z",
+        "status": "COMPLETED",
+        "workflowName": ""
+      }
+    ]
+  },
+  "separate_work": {
+    "WO-HAG-011": "Two focused Claude positive repetitions fail under VER-HAG-008. No criterion waiver or completion claim. Not a declared dependency of WO-HAG-009/010. Combined PR integration remains pending."
+  },
+  "limits": [
+    "Individual handoff checks pass; exact results are retained in handoff-checks.zip. No lifecycle transition or human verification was applied.",
+    "Codex MCP parity includes a disclosed separate read-only two-tool recovery. Original stale comparisons and failures remain unchanged.",
+    "Synthetic VREC/RLS decisions are test data, not verification of this implementation.",
+    "Desktop, automatic startup/compaction, public delivery, production security and Git authority cutover remain excluded."
+  ],
+  "handoff_results": {
+    "WO-HAG-009": {
+      "compliance": {
+        "checkpoint": "handoff",
+        "workflow_rule_id": "WFL-WO-IMPLEMENT",
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4I-STATUS",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "WO-HAG-009"
+                  }
+                ],
+                "message": "WO-HAG-009 status is in_progress."
+              },
+              {
+                "id": "QGP-G4I-GRAPH",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "formal-graph:WO-HAG-009"
+                  }
+                ],
+                "message": "The selected formal graph is valid."
+              },
+              {
+                "id": "QGP-G4I-INTEGRITY",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "repository-integrity:handoff"
+                  }
+                ],
+                "message": "No repository-integrity blocker prevents selected evaluation."
+              },
+              {
+                "id": "QGP-G4I-SCOPE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "WO-HAG-009:[execution_scope]"
+                  }
+                ],
+                "message": "WO-HAG-009 has recorded execution approval for its 18 scope path(s)."
+              },
+              {
+                "id": "QGP-G4I-COMPLETE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "declared-change-set:WO-HAG-009"
+                  }
+                ],
+                "message": "The caller explicitly asserted that the declared change set is complete."
+              },
+              {
+                "id": "QGP-G4I-PATHS",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "path",
+                    "reference": "declared-change-set:WO-HAG-009"
+                  }
+                ],
+                "message": "All 348 declared changed path(s) are within execution scope."
+              },
+              {
+                "id": "QGP-G4I-PREFLIGHT",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "preflight:WO-HAG-009:review"
+                  }
+                ],
+                "message": "Released-installation review preflight inputs are ready."
+              },
+              {
+                "id": "QGP-G4I-EVIDENCE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "path",
+                    "reference": "work-order-evidence:WO-HAG-009"
+                  }
+                ],
+                "message": "Fresh retained evidence is bound at docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/WO-HAG-009-handoff.md."
+              },
+              {
+                "id": "QGP-G4I-DECISION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "decision-register:WO-HAG-009"
+                  }
+                ],
+                "message": "No open decision blocks WO-HAG-009."
+              }
+            ]
+          }
+        ],
+        "formal_snapshot_sha256": "affd987ea7dcc53b39cc72d7acd31d0a416e842a7d892a227931f5d393d414bb",
+        "change_set_source": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/handoff-change-set.json"
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Evaluated handoff compliance for WO-HAG-009."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-HAG-009 is in_progress."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "transition",
+            ".",
+            "--set",
+            "WO-HAG-009=implemented",
+            "--decision",
+            "WO-HAG-009=delegated-executor"
+          ]
+        },
+        "alternatives": []
+      },
+      "source_log": "WO-HAG-009-individual-handoff.json",
+      "change_manifest": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/handoff-change-set.json"
+    },
+    "WO-HAG-010": {
+      "compliance": {
+        "checkpoint": "handoff",
+        "workflow_rule_id": "WFL-WO-IMPLEMENT",
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4I-STATUS",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "WO-HAG-010"
+                  }
+                ],
+                "message": "WO-HAG-010 status is in_progress."
+              },
+              {
+                "id": "QGP-G4I-GRAPH",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "formal-graph:WO-HAG-010"
+                  }
+                ],
+                "message": "The selected formal graph is valid."
+              },
+              {
+                "id": "QGP-G4I-INTEGRITY",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "repository-integrity:handoff"
+                  }
+                ],
+                "message": "No repository-integrity blocker prevents selected evaluation."
+              },
+              {
+                "id": "QGP-G4I-SCOPE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "WO-HAG-010:[execution_scope]"
+                  }
+                ],
+                "message": "WO-HAG-010 has recorded execution approval for its 7 scope path(s)."
+              },
+              {
+                "id": "QGP-G4I-COMPLETE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "declared-change-set:WO-HAG-010"
+                  }
+                ],
+                "message": "The caller explicitly asserted that the declared change set is complete."
+              },
+              {
+                "id": "QGP-G4I-PATHS",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "path",
+                    "reference": "declared-change-set:WO-HAG-010"
+                  }
+                ],
+                "message": "All 15 declared changed path(s) are within execution scope."
+              },
+              {
+                "id": "QGP-G4I-PREFLIGHT",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "preflight:WO-HAG-010:review"
+                  }
+                ],
+                "message": "Released-installation review preflight inputs are ready."
+              },
+              {
+                "id": "QGP-G4I-EVIDENCE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "path",
+                    "reference": "work-order-evidence:WO-HAG-010"
+                  }
+                ],
+                "message": "Fresh retained evidence is bound at docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/WO-HAG-010-handoff.md."
+              },
+              {
+                "id": "QGP-G4I-DECISION",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "decision-register:WO-HAG-010"
+                  }
+                ],
+                "message": "No open decision blocks WO-HAG-010."
+              }
+            ]
+          }
+        ],
+        "formal_snapshot_sha256": "879aacd0fac8ab6e49f550897d45793fb01799775bf43a6ba333eeb073bc193a",
+        "change_set_source": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/handoff-change-set.json"
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Evaluated handoff compliance for WO-HAG-010."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-HAG-010 is in_progress."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "transition",
+            ".",
+            "--set",
+            "WO-HAG-010=implemented",
+            "--decision",
+            "WO-HAG-010=delegated-executor"
+          ]
+        },
+        "alternatives": []
+      },
+      "source_log": "WO-HAG-010-individual-handoff.json",
+      "change_manifest": "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-010/handoff-change-set.json"
+    }
+  },
+  "repository_validation": {
+    "valid": true,
+    "artifact_count": 1994,
+    "error_count": 0,
+    "warning_count": 63,
+    "advisory_count": 0,
+    "source_log": "consolidated-validation.json"
+  }
+}

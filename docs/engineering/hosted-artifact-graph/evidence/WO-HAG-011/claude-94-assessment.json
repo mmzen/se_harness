@@ -1,0 +1,26 @@
+{
+  "candidate": "a2499d21f154e7682ff160cc122a72dd597936a3",
+  "case": "EFF-04B",
+  "trial": "claude-94",
+  "content_verdict": "pass",
+  "criteria": {
+    "draft_state": "pass",
+    "verifies_REQ-P3-900": "pass",
+    "independent_expected_result": "pass; requirement and SPEC rule define Hello rehearsal",
+    "requirement_matrix": "pass",
+    "usable_check_and_pass_condition": "pass; exact string comparison; English phrasing is not Python identity-operator code",
+    "concrete_evidence_file": "pass; docs/engineering/lifecycle-pilot/evidence/WO-P3-900/ver-p3-901-assertion.json with expected, actual, comparison and source digest",
+    "no_test_execution_or_lifecycle_claim": "pass",
+    "no_empty_optional_heading": "pass; optional residual uncertainty describes scope limitations"
+  },
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "observed_failed_calls": [],
+  "metrics": {
+    "wall_seconds": 249.398,
+    "native_calls": 21,
+    "peak_input_context": 58929,
+    "model_turns": 14
+  },
+  "efficiency_goals": "All three missed. Three positive content passes do not waive Claude91 missing-input failure or full native qualification."
+}

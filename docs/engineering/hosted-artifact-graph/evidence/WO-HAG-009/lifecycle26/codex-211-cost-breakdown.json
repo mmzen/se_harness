@@ -1,0 +1,108 @@
+{
+  "trial": "codex-211",
+  "categories": [
+    {
+      "category": "read-json",
+      "observed_commands": 49,
+      "visible_characters": 593609
+    },
+    {
+      "category": "read-text",
+      "observed_commands": 27,
+      "visible_characters": 356733
+    },
+    {
+      "category": "remote rehearse",
+      "observed_commands": 32,
+      "visible_characters": 86901
+    },
+    {
+      "category": "instructions",
+      "observed_commands": 11,
+      "visible_characters": 69868
+    },
+    {
+      "category": "remote create-artifact",
+      "observed_commands": 7,
+      "visible_characters": 65572
+    },
+    {
+      "category": "remote read",
+      "observed_commands": 11,
+      "visible_characters": 54022
+    },
+    {
+      "category": "observations",
+      "observed_commands": 3,
+      "visible_characters": 53674
+    },
+    {
+      "category": "remote revise-artifact",
+      "observed_commands": 8,
+      "visible_characters": 21190
+    },
+    {
+      "category": "lookup-file",
+      "observed_commands": 34,
+      "visible_characters": 17647
+    },
+    {
+      "category": "other shell",
+      "observed_commands": 1,
+      "visible_characters": 14241
+    },
+    {
+      "category": "remote draft-open",
+      "observed_commands": 1,
+      "visible_characters": 7137
+    },
+    {
+      "category": "remote export",
+      "observed_commands": 4,
+      "visible_characters": 5359
+    },
+    {
+      "category": "remote import",
+      "observed_commands": 1,
+      "visible_characters": 4677
+    },
+    {
+      "category": "remote operation",
+      "observed_commands": 1,
+      "visible_characters": 4636
+    },
+    {
+      "category": "remote status",
+      "observed_commands": 1,
+      "visible_characters": 3907
+    },
+    {
+      "category": "--help",
+      "observed_commands": 1,
+      "visible_characters": 1515
+    },
+    {
+      "category": "encode-file",
+      "observed_commands": 2,
+      "visible_characters": 1293
+    },
+    {
+      "category": "find-file",
+      "observed_commands": 2,
+      "visible_characters": 958
+    },
+    {
+      "category": "assert-greeting",
+      "observed_commands": 1,
+      "visible_characters": 570
+    },
+    {
+      "category": "identity",
+      "observed_commands": 1,
+      "visible_characters": 370
+    }
+  ],
+  "tool_items_after_last_export": 59,
+  "last_export_event_line": 428,
+  "limits": "Post-export items include final validation, comparisons and report work; they are not all unnecessary. Counts exclude private reasoning and missing native events."
+}

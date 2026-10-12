@@ -1,0 +1,54 @@
+{
+  "archive": "checks.zip",
+  "sha256": "eea0c3531e03deb924cea5671d1a9985f4dca3601f8e5bb1b3d4761c8c280bf5",
+  "files": [
+    {
+      "path": "guidance-reference-check.json",
+      "sha256": "6e11ba3b7d693930bf84345894c43d5bdc31a64ae204a7792c50d5c6041a551a"
+    },
+    {
+      "path": "focused-tests.json",
+      "sha256": "ab3b8d6e6f3fc820aa892f52df29cc37fab14e77cb9636c941ff9ac194c437e2"
+    },
+    {
+      "path": "focused-tests-workspace-temp.json",
+      "sha256": "887a3601a239404454d737e03e36085e2ffd01d6393babfe0998489deb86afe6"
+    },
+    {
+      "path": "source-tests.json",
+      "sha256": "e7cb43a33ec5fb17884e5f50ef7506e95f8106421a035dc229625cb89c04e528"
+    },
+    {
+      "path": "fixture-recheck.json",
+      "sha256": "a00d420736a59f1765144760952155e6eaef7aa51d2f98ae7cf7a3bacaff4dbd"
+    },
+    {
+      "path": "fixture-recheck-root.json",
+      "sha256": "94ed318f51488ae65c6daf01e27a0c289a339e12a1fd8662053070423e30e0de"
+    },
+    {
+      "path": "source-tests-short-temp.json",
+      "sha256": "636dd9d17b781170d711a176d21a54569ad56d0b52245f1373101a3d98a2f3f4"
+    },
+    {
+      "path": "distributions.json",
+      "sha256": "69ff03b20c4d2db86b37387c799004bf4db4674357e705da2d008e0bab53a851"
+    },
+    {
+      "path": "cli-smoke.json",
+      "sha256": "37f51d0622ffb0ef05291c2fc2ebe539ba101b727fd1bf0ffb8b044f2b3598db"
+    },
+    {
+      "path": "scope.json",
+      "sha256": "0e34d580cc2b5f4cfe3c94f6df5e70bc176e0f90c4ec3c192841a703c016afc5"
+    },
+    {
+      "path": "preflight.json",
+      "sha256": "64ed76f43b7e0d98f1ff5e83845f840f56b36deb89684de1d85b6a60f7c89705"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "0c199b9211ceee9fd1719f135d75c34bad0641c402a3dad704864a6eaf2e6390"
+    }
+  ]
+}

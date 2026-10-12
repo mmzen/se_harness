@@ -1,0 +1,50 @@
+{
+  "archive": "checks.zip",
+  "sha256": "f8a98e63772ba87fbec5ce19ed30216a9c6b8e553f45186ce7cceae7edadd570",
+  "files": [
+    {
+      "path": "focused.json",
+      "sha256": "d96294a47d778b3908de4dc45782a7b54f7241caa61c75c0dae3131fb8495f05"
+    },
+    {
+      "path": "focused-final.json",
+      "sha256": "fa8c0bb8af4425bf60bafd55bcd0ae25ecc75ec0084ebe0705e54bd57cc0b151"
+    },
+    {
+      "path": "source.json",
+      "sha256": "f7bd85f8c83ea5c3b838cdc4c33322f546dac288924bad53989b23158f055ee5"
+    },
+    {
+      "path": "distribution.json",
+      "sha256": "119acfcdb35acad1c8f5ddb97ca31cb0f3069ff9b8c35df81be1db64e92dacc2"
+    },
+    {
+      "path": "smoke.json",
+      "sha256": "b2bc685a455810043beaefc7d2586757ba77fcfae7c8250d823dfb5b2a83e436"
+    },
+    {
+      "path": "WO-HAG-009-scope.json",
+      "sha256": "4188b9d2b3ebc7930a2664cd38d5966f833bc309e00b1114f60029212284a874"
+    },
+    {
+      "path": "WO-HAG-011-scope.json",
+      "sha256": "07e626413450db00b0c891f9d53c3d8a1f013ab13513bd0e2d71c27d8f2d5ba1"
+    },
+    {
+      "path": "WO-HAG-009-preflight34.json",
+      "sha256": "2e52494f177e890b559c20675bdf818884c2558671c3cf0743f2068b9ceba6b2"
+    },
+    {
+      "path": "WO-HAG-011-preflight34.json",
+      "sha256": "48a1e0405306a260d754dfe76e0ad2000e82e0d407ea2fe22b85f7ef0867f0bc"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "96a748a104d16c4f4f65ff48b8ed572b5f42895b3d901612d2058c409e417890"
+    },
+    {
+      "path": "retained-observation-check.json",
+      "sha256": "1b3d17d67fa1693dc54dd7c830a2b868c5e88b9cc60337a661145ebd9158e750"
+    }
+  ]
+}

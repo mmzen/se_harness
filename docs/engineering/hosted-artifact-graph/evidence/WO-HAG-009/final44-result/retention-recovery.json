@@ -1,0 +1,27 @@
+{
+  "command": [
+    "hag_retain44.py",
+    "retain"
+  ],
+  "exit": 1,
+  "stage": "compile transformed retention helper before any archive creation",
+  "failure": "SyntaxError: unterminated string literal in nested string replacement",
+  "effect": "Created only an empty final44-result directory; no original evidence modified.",
+  "correction": "Build the bounded exporter directly from the inspected base helper and compile it before processing trials. Allow retry only if the created directory is empty.",
+  "inventory_newline_correction": {
+    "failure": "git diff --cached --check flagged CRLF in nine newly generated inventory JSON files.",
+    "paths": [
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/claude-421-inventory.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-inventory.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/final44-result/codex-421-reads-inventory.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-431-inventory.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-432-inventory.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-433-inventory.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/claude-434-inventory.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/codex-431-inventory.json",
+      "docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/focused44-result/codex-432-inventory.json"
+    ],
+    "effect": "Normalize only new, unpublished index line endings to LF. Parsed index values, archives and all captured native evidence bytes stay unchanged.",
+    "original_diagnostic": "Private local report-publication/staged-check.json retained."
+  }
+}

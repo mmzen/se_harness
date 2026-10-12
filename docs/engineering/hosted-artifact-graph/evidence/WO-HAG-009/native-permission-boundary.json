@@ -1,0 +1,140 @@
+{
+  "source": "https://code.claude.com/docs/en/permissions#permission-modes",
+  "observed_at": "2026-10-07",
+  "driver_path": "tests/hosted_artifact_graph/qualify_agents.py",
+  "driver_sha256": "6b4395de24955cfc2180df100800e154647650f28f8329c3ed69b43cf89bd76b",
+  "change": "auto -> dontAsk for Claude only. This denies calls that would need new approval while retaining pre-approved tools and normal deny precedence. No global settings or bypass mode changed.",
+  "approved_allow_list_sha256": "48af73d913845721f895c8266af843c5265ffdbbd960b7ea24346d749874457d",
+  "probe_session": {
+    "host": "claude",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 16.228,
+    "reply_dropped": false,
+    "redactions": 0,
+    "events_sha256": "9ddf9bf9fb377eee8b6a27fe2f39086ee8e81482c7258aeecd8a24bb7f5060b1",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "probe_result": {
+    "duration_api_ms": 14281,
+    "stop_reason": "end_turn",
+    "session_id": "71ad5419-c572-4e98-974b-08ffa034770a",
+    "total_cost_usd": 0.0828256,
+    "usage": {
+      "input_tokens": 5,
+      "cache_creation_input_tokens": 8895,
+      "cache_read_input_tokens": 38992,
+      "output_tokens": 1102,
+      "output_tokens_details": {
+        "thinking_tokens": 384
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 8895,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "not_available",
+      "iterations": [
+        {
+          "input_tokens": 1,
+          "output_tokens": 167,
+          "cache_read_input_tokens": 16035,
+          "cache_creation_input_tokens": 570,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 570
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard"
+    },
+    "modelUsage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 1158,
+        "outputTokens": 11,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.0012129999999999999,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-sonnet-4-6": {
+        "inputTokens": 5,
+        "outputTokens": 1102,
+        "cacheReadInputTokens": 38992,
+        "cacheCreationInputTokens": 8895,
+        "webSearchRequests": 0,
+        "costUSD": 0.0816126,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 384,
+        "canonicalModel": "claude-sonnet-4-6",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "permission_denials": [
+      {
+        "tool_name": "Bash",
+        "tool_use_id": "toolu_01BSvwYDisGCX7qQ5skA2bqT",
+        "tool_input": {
+          "command": "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/hag-agent-qualification-execution-20261007/client03/Scripts/python.exe -I -m se_harness --version",
+          "description": "Attempt deliberately unapproved control: client03 python se_harness --version"
+        }
+      }
+    ],
+    "terminal_reason": "completed",
+    "fast_mode_state": "off",
+    "fast_mode_disabled_reason": "sdk_opt_in_required",
+    "subagent_stats": {
+      "spawned": 0,
+      "requested": {
+        "background": 0,
+        "foreground": 0,
+        "unset": 0
+      },
+      "started_in_background": 0,
+      "max_depth": 0,
+      "spawned_by_subagents": 0,
+      "completed": 0,
+      "failed": 0,
+      "killed": {
+        "parent": 0,
+        "user": 0,
+        "system": 0
+      },
+      "refused": {
+        "depth_limit": 0,
+        "concurrency_limit": 0,
+        "budget": 0
+      },
+      "by_type": {}
+    },
+    "is_error": false,
+    "num_turns": 3,
+    "subtype": "success",
+    "api_error_status": null,
+    "result": "**Result 2 (denied — not retried or wrapped):**\n\nThe second Bash call was denied by the permission system. The exact error returned was:\n\n> Permission to use Bash has been denied because Claude Code is running in don't ask mode.\n\nThe command did **not** run. This is the expected outcome — the `client03/Scripts/python.exe` path was not pre-approved, and the permission system blocked it before execution.\n\n**Summary:**\n- Command 1 (`native_call.py identity` via the approved Python executable): ran and returned identity JSON.\n- Command 2 (`client03/Scripts/python.exe -I -m se_harness --version`): denied by the permission system, did not execute.",
+    "ttft_ms": 5263,
+    "type": "result",
+    "duration_ms": 14825,
+    "uuid": "83427de8-8001-41c1-bc76-45e35912968c",
+    "ttft_stream_ms": 927,
+    "time_to_request_ms": 52,
+    "first_content_frame_ms": 931,
+    "queued_turn_count": 0,
+    "result_index": 0
+  },
+  "limits": "A read-only permission diagnostic, not the five native lifecycle qualification cases. Fresh Claude qualification remains required."
+}

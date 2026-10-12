@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.codex\\plugins\\data\\verity-plane-se-harness\\evaluators\\0.22.1\\cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "create-artifact",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+    "--domain",
+    "integration-package",
+    "--type",
+    "verification",
+    "--id",
+    "VER-IPK-002",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit": 2,
+  "elapsed_seconds": 6.217512400005944,
+  "stdout": "",
+  "stderr": "harnessctl: cannot create destination atomically: [WinError 5] Access is denied: 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\hag221proposal\\\\docs\\\\engineering\\\\integration-package\\\\verification\\\\.VER-IPK-002.md.6yi72zja' -> 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\hag221proposal\\\\docs\\\\engineering\\\\integration-package\\\\verification\\\\VER-IPK-002.md'\n"
+}

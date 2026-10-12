@@ -1,0 +1,51 @@
+{
+  "action": "bounded manual linked-revision activation",
+  "accountable_human": "mmzen",
+  "executor": "Codex agent",
+  "observed_at": "2026-10-10T08:05:03.555211+00:00",
+  "review_commit": "acfc1bc547e248971cac975f785b5610202575f4",
+  "question_item_id": "[\"request_user_input_async\",\"call_dab06313f052440ba908eeb25eb43f7f\",0]",
+  "actual_response": "Approve amendment and manual activation",
+  "decision_scope": "The exact reviewed SPEC-HAG-008, VER-HAG-008 and WO-HAG-011 revision, bounded manual activation preserving accepted versions, and existing required commit-bound verification. Historical failures, other content requirements and permissions remain unchanged.",
+  "records": [
+    {
+      "id": "SPEC-HAG-008",
+      "path": "docs/engineering/hosted-artifact-graph/specifications/SPEC-HAG-008.md",
+      "state": "approved",
+      "accepted_commit": "8ed1ae5391ec1b405b132b9d120ab91a47803cca",
+      "accepted_sha256": "805c9da66ca26c1d56b767bbd3e8545229a0c1f9a46a2846b95fcc04c98da343",
+      "proposed_sha256": "666dd2a7cac256b6d3f97b86a95819eab7ee5adf7d85572dd06e786b71b7c77b",
+      "accepted_copy": "SPEC-HAG-008.accepted.txt",
+      "proposed_copy": "SPEC-HAG-008.proposed.txt"
+    },
+    {
+      "id": "VER-HAG-008",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md",
+      "state": "approved",
+      "accepted_commit": "8ed1ae5391ec1b405b132b9d120ab91a47803cca",
+      "accepted_sha256": "6464d4009e1cfb1036d49ce2fba51a1565639ecf777b9a8d2623b5d04d583833",
+      "proposed_sha256": "c8f66f5cb9aae1dad242653fdcec64a47ceb07b8bb6e6301fe46d67ce7ca4f49",
+      "accepted_copy": "VER-HAG-008.accepted.txt",
+      "proposed_copy": "VER-HAG-008.proposed.txt"
+    },
+    {
+      "id": "WO-HAG-011",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+      "state": "in_progress",
+      "accepted_commit": "8ed1ae5391ec1b405b132b9d120ab91a47803cca",
+      "accepted_sha256": "b40b961ff3c775f8b4afc7335415cf62f63b866858029c890471bd4f92faa05b",
+      "proposed_sha256": "b2908dad0135edab3c2d88f963063ab59352832e8102d899c04d0641b0db1e55",
+      "accepted_copy": "WO-HAG-011.accepted.txt",
+      "proposed_copy": "WO-HAG-011.proposed.txt"
+    }
+  ],
+  "effect": "EFF-04A2 governs subsequent missing-input qualification under WO-HAG-011. EFF-04A remains historical. Existing states and all lifecycle metadata are byte-equivalent in meaning and unchanged in text; no approval/start/completion transition was fabricated or replayed.",
+  "not_authorized": [
+    "human verification acceptance",
+    "merge",
+    "release",
+    "host settings change",
+    "canonical evaluator policy change"
+  ],
+  "activation_limitation": "Released 0.22.1 has no linked-revision activation command. This exact manual operation was explicitly authorized by the human."
+}

@@ -1,0 +1,1490 @@
+{
+  "schema": "hag-slowness-observation-v1",
+  "observation_date": "2026-10-10",
+  "analysis_date": "2026-10-11",
+  "tested_candidate": "1b4ca16833b3908882e4a961c150156aca417f3c",
+  "prior_evidence_commit": "05da5b74e30cc0b80f9e5f0fff9a72cf1fa27b71",
+  "method": {
+    "phases": "Differences between captured NTFS last-write times of immutable helper records, relative to invocation.started_at; final boundary is session elapsed time. Approximate wall intervals, not CPU attribution. Metadata is captured here because Git blobs do not retain it.",
+    "tools": "Claude assistant tool_use timestamp to matching user tool_result timestamp; union of intervals avoids double counting. Only tool names, line numbers and timestamps are exported.",
+    "limits": "Outside-tool time includes provider generation/waits, compaction, startup and other host activity. It is not measured reasoning time. Helper subprocess totals are a subset and may overlap. Codex lacks comparable tool-event timestamps. No local-versus-hosted matched baseline exists."
+  },
+  "trials": {
+    "codex-221": {
+      "started_at": "2026-10-10T13:27:01.006036+00:00",
+      "elapsed_seconds": 1639.322,
+      "exit": 0,
+      "timed_out": false,
+      "archive": {
+        "path": "../lifecycle27/codex-221-evidence.zip",
+        "sha256": "c19b7df0bb3d62ae5ffccb5042aa1f759e1732a52e37206361744a3f74482a25",
+        "entries_verified": 648,
+        "raw_events_sha256": "8d403df7cd81e6aaf35c3c1933affb404ff1962f8b0fd02b66824e847ed3e02c"
+      },
+      "phases": [
+        {
+          "phase": "Discovery, import, open",
+          "start_second": 0.0,
+          "record": "native/work/open.json",
+          "sha256": "ee419e19356aa189616222a595871d208f7ac20f0a1e3879784749c6ccd0e052",
+          "captured_mtime_ns": 1791638910131991900,
+          "end_second": 89.125956,
+          "elapsed_seconds": 89.125956
+        },
+        {
+          "phase": "Seven initial artifacts",
+          "start_second": 89.125956,
+          "record": "native/work/revise-rel.json",
+          "sha256": "20c0c3c59884a06c0f5b1698192b04bc620f289545de37ac58146620c6cc8f8e",
+          "captured_mtime_ns": 1791639126273409300,
+          "end_second": 305.267373,
+          "elapsed_seconds": 216.141418
+        },
+        {
+          "phase": "Validation, approval, start and initial reads",
+          "start_second": 305.267373,
+          "record": "native/work/start.json",
+          "sha256": "800af4425d612233fb1ba87228dd59e29a77705518c3d35c3557edd93ee2d962",
+          "captured_mtime_ns": 1791639432383920200,
+          "end_second": 611.377884,
+          "elapsed_seconds": 306.110511
+        },
+        {
+          "phase": "Assertion, risk and decision",
+          "start_second": 611.377884,
+          "record": "native/work/read-dec-decided.json",
+          "sha256": "9dabbc55f5683699ed22aced6826bf9b434aa3b3e6383177a7d3154bcb5d83be",
+          "captured_mtime_ns": 1791639526582547800,
+          "end_second": 705.576512,
+          "elapsed_seconds": 94.198628
+        },
+        {
+          "phase": "Handoff, scope correction and completion",
+          "start_second": 705.576512,
+          "record": "native/work/implement902.json",
+          "sha256": "e5f27930714a0c0b038e80fe63cfc53a5efab500e6bd66bf666f4b2003a2390c",
+          "captured_mtime_ns": 1791640022763268600,
+          "end_second": 1201.757233,
+          "elapsed_seconds": 496.180721
+        },
+        {
+          "phase": "Verification, release and exports",
+          "start_second": 1201.757233,
+          "record": "native/work/export-late.json",
+          "sha256": "9ccbc9d7bb262d510ab3a2f1b48e615a30c7aa4c43d9d1cf5c6d64ed28b7e254",
+          "captured_mtime_ns": 1791640226355386200,
+          "end_second": 1405.34935,
+          "elapsed_seconds": 203.592118
+        },
+        {
+          "phase": "Evidence inspection and final reports",
+          "start_second": 1405.34935,
+          "end_second": 1639.322,
+          "elapsed_seconds": 233.97265
+        }
+      ],
+      "helper_records": 73,
+      "helper_subprocess_seconds": 114.479551,
+      "visible_tool_result_characters": 1817151,
+      "supplemental_anchors": {
+        "handoff-preview.json": {
+          "sha256": "61e78f03df72cf6b0f91a6702b7b96f62ff1cdfddf3f7ba8cc6b7060b3e6269a",
+          "captured_mtime_ns": 1791639586607542500,
+          "second": 765.601506
+        },
+        "start902.json": {
+          "sha256": "ef2a2c9a2d31242fc97bcffbfe3b4ee0825ffd33baceff48af79d6bad5e762fb",
+          "captured_mtime_ns": 1791639772823058600,
+          "second": 951.817023
+        },
+        "handoff902-preview.json": {
+          "sha256": "d5f97f723fb892d70af4b3b224e497b518a61e94c3afa31b3807059905dd8a93",
+          "captured_mtime_ns": 1791639811243047900,
+          "second": 990.237012
+        },
+        "handoff902.json": {
+          "sha256": "2bb8a15544fedad1c4f7ff123ef6948d11294a6bb063af154af2eeb4da2e23c6",
+          "captured_mtime_ns": 1791639990272810800,
+          "second": 1169.266775
+        }
+      },
+      "supplemental_intervals": [
+        {
+          "label": "Scope refusal to correction start",
+          "seconds": 186.215517
+        },
+        {
+          "label": "Corrected handoff preview to apply",
+          "seconds": 179.029763
+        }
+      ]
+    },
+    "claude-221": {
+      "started_at": "2026-10-10T13:26:29.339491+00:00",
+      "elapsed_seconds": 1800.122,
+      "exit": 1,
+      "timed_out": true,
+      "archive": {
+        "path": "../lifecycle27/claude-221-evidence.zip",
+        "sha256": "34cd751d14339a37cba531753dabe4d826726b59abe495c70b6d76275189fd9e",
+        "entries_verified": 348,
+        "raw_events_sha256": "2ff42f2379784be95360ee1046bdb6963393da6b7fcb5e5d64efb466c8b4026b"
+      },
+      "phases": [
+        {
+          "phase": "Discovery, import, open",
+          "start_second": 0.0,
+          "record": "native/work/draft-open-01",
+          "sha256": "d5e69403922b5f85412f07f932215d545d92eac161125ef97edaef0642827598",
+          "captured_mtime_ns": 1791638964991585000,
+          "end_second": 175.652094,
+          "elapsed_seconds": 175.652094
+        },
+        {
+          "phase": "Seven initial artifacts",
+          "start_second": 175.652094,
+          "record": "native/work/revise-rel-01",
+          "sha256": "f15e549fc134d94319e4dd8ed9be5b6a99da3496acc2f62aa80083e0e7e5afe6",
+          "captured_mtime_ns": 1791639243079968800,
+          "end_second": 453.740478,
+          "elapsed_seconds": 278.088384
+        },
+        {
+          "phase": "Validation, approval and start",
+          "start_second": 453.740478,
+          "record": "native/work/start-wo-apply",
+          "sha256": "6049d2f9f8cb5be9e6cf2ecdf0612ac5f7fda15c0c2dba0cee1a45188c9844da",
+          "captured_mtime_ns": 1791639676974549400,
+          "end_second": 887.635058,
+          "elapsed_seconds": 433.894581
+        },
+        {
+          "phase": "Assertion, risk and decision",
+          "start_second": 887.635058,
+          "record": "native/work/decide-risk-apply",
+          "sha256": "73298a69bed488ed86c9fda4ad33e29024cd1c0d14724e199daad668deed05bf",
+          "captured_mtime_ns": 1791640172289527600,
+          "end_second": 1382.950037,
+          "elapsed_seconds": 495.314978
+        },
+        {
+          "phase": "Handoff attempts until timeout",
+          "start_second": 1382.950037,
+          "end_second": 1800.122,
+          "elapsed_seconds": 417.171963
+        }
+      ],
+      "helper_records": 43,
+      "helper_subprocess_seconds": 64.030087,
+      "visible_tool_result_characters": 430213,
+      "timestamped_tools": {
+        "groups": {
+          "Read": {
+            "calls": 37,
+            "seconds": 0.986
+          },
+          "Bash": {
+            "calls": 65,
+            "seconds": 87.292
+          },
+          "Write": {
+            "calls": 28,
+            "seconds": 1.095
+          }
+        },
+        "intervals": [
+          {
+            "tool": "Read",
+            "use_line": 6,
+            "use_timestamp": "2026-10-10T13:26:34.374Z",
+            "start_second": 5.034509,
+            "result_line": 7,
+            "result_timestamp": "2026-10-10T13:26:34.429Z",
+            "end_second": 5.089509
+          },
+          {
+            "tool": "Read",
+            "use_line": 8,
+            "use_timestamp": "2026-10-10T13:26:35.073Z",
+            "start_second": 5.733509,
+            "result_line": 9,
+            "result_timestamp": "2026-10-10T13:26:35.106Z",
+            "end_second": 5.766509
+          },
+          {
+            "tool": "Read",
+            "use_line": 18,
+            "use_timestamp": "2026-10-10T13:26:46.580Z",
+            "start_second": 17.240509,
+            "result_line": 19,
+            "result_timestamp": "2026-10-10T13:26:46.594Z",
+            "end_second": 17.254509
+          },
+          {
+            "tool": "Read",
+            "use_line": 20,
+            "use_timestamp": "2026-10-10T13:26:47.306Z",
+            "start_second": 17.966509,
+            "result_line": 21,
+            "result_timestamp": "2026-10-10T13:26:47.320Z",
+            "end_second": 17.980509
+          },
+          {
+            "tool": "Read",
+            "use_line": 22,
+            "use_timestamp": "2026-10-10T13:26:48.081Z",
+            "start_second": 18.741509,
+            "result_line": 23,
+            "result_timestamp": "2026-10-10T13:26:48.094Z",
+            "end_second": 18.754509
+          },
+          {
+            "tool": "Read",
+            "use_line": 24,
+            "use_timestamp": "2026-10-10T13:26:48.781Z",
+            "start_second": 19.441509,
+            "result_line": 25,
+            "result_timestamp": "2026-10-10T13:26:48.795Z",
+            "end_second": 19.455509
+          },
+          {
+            "tool": "Read",
+            "use_line": 28,
+            "use_timestamp": "2026-10-10T13:26:55.621Z",
+            "start_second": 26.281509,
+            "result_line": 29,
+            "result_timestamp": "2026-10-10T13:26:55.631Z",
+            "end_second": 26.291509
+          },
+          {
+            "tool": "Read",
+            "use_line": 30,
+            "use_timestamp": "2026-10-10T13:26:56.339Z",
+            "start_second": 26.999509,
+            "result_line": 31,
+            "result_timestamp": "2026-10-10T13:26:56.349Z",
+            "end_second": 27.009509
+          },
+          {
+            "tool": "Read",
+            "use_line": 32,
+            "use_timestamp": "2026-10-10T13:26:57.117Z",
+            "start_second": 27.777509,
+            "result_line": 33,
+            "result_timestamp": "2026-10-10T13:26:57.132Z",
+            "end_second": 27.792509
+          },
+          {
+            "tool": "Read",
+            "use_line": 41,
+            "use_timestamp": "2026-10-10T13:27:07.141Z",
+            "start_second": 37.801509,
+            "result_line": 42,
+            "result_timestamp": "2026-10-10T13:27:07.154Z",
+            "end_second": 37.814509
+          },
+          {
+            "tool": "Read",
+            "use_line": 43,
+            "use_timestamp": "2026-10-10T13:27:08.394Z",
+            "start_second": 39.054509,
+            "result_line": 44,
+            "result_timestamp": "2026-10-10T13:27:08.407Z",
+            "end_second": 39.067509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 45,
+            "use_timestamp": "2026-10-10T13:27:10.333Z",
+            "start_second": 40.993509,
+            "result_line": 46,
+            "result_timestamp": "2026-10-10T13:27:11.436Z",
+            "end_second": 42.096509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 52,
+            "use_timestamp": "2026-10-10T13:27:19.348Z",
+            "start_second": 50.008509,
+            "result_line": 53,
+            "result_timestamp": "2026-10-10T13:27:20.203Z",
+            "end_second": 50.863509
+          },
+          {
+            "tool": "Read",
+            "use_line": 54,
+            "use_timestamp": "2026-10-10T13:27:20.478Z",
+            "start_second": 51.138509,
+            "result_line": 55,
+            "result_timestamp": "2026-10-10T13:27:20.488Z",
+            "end_second": 51.148509
+          },
+          {
+            "tool": "Read",
+            "use_line": 56,
+            "use_timestamp": "2026-10-10T13:27:21.306Z",
+            "start_second": 51.966509,
+            "result_line": 57,
+            "result_timestamp": "2026-10-10T13:27:21.317Z",
+            "end_second": 51.977509
+          },
+          {
+            "tool": "Read",
+            "use_line": 67,
+            "use_timestamp": "2026-10-10T13:27:36.407Z",
+            "start_second": 67.067509,
+            "result_line": 68,
+            "result_timestamp": "2026-10-10T13:27:36.419Z",
+            "end_second": 67.079509
+          },
+          {
+            "tool": "Read",
+            "use_line": 69,
+            "use_timestamp": "2026-10-10T13:27:37.315Z",
+            "start_second": 67.975509,
+            "result_line": 70,
+            "result_timestamp": "2026-10-10T13:27:37.330Z",
+            "end_second": 67.990509
+          },
+          {
+            "tool": "Read",
+            "use_line": 71,
+            "use_timestamp": "2026-10-10T13:27:38.156Z",
+            "start_second": 68.816509,
+            "result_line": 72,
+            "result_timestamp": "2026-10-10T13:27:38.169Z",
+            "end_second": 68.829509
+          },
+          {
+            "tool": "Read",
+            "use_line": 73,
+            "use_timestamp": "2026-10-10T13:27:38.993Z",
+            "start_second": 69.653509,
+            "result_line": 74,
+            "result_timestamp": "2026-10-10T13:27:39.007Z",
+            "end_second": 69.667509
+          },
+          {
+            "tool": "Read",
+            "use_line": 75,
+            "use_timestamp": "2026-10-10T13:27:39.826Z",
+            "start_second": 70.486509,
+            "result_line": 76,
+            "result_timestamp": "2026-10-10T13:27:39.842Z",
+            "end_second": 70.502509
+          },
+          {
+            "tool": "Read",
+            "use_line": 77,
+            "use_timestamp": "2026-10-10T13:27:40.702Z",
+            "start_second": 71.362509,
+            "result_line": 78,
+            "result_timestamp": "2026-10-10T13:27:40.714Z",
+            "end_second": 71.374509
+          },
+          {
+            "tool": "Read",
+            "use_line": 84,
+            "use_timestamp": "2026-10-10T13:27:48.699Z",
+            "start_second": 79.359509,
+            "result_line": 85,
+            "result_timestamp": "2026-10-10T13:27:48.714Z",
+            "end_second": 79.374509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 86,
+            "use_timestamp": "2026-10-10T13:27:52.734Z",
+            "start_second": 83.394509,
+            "result_line": 87,
+            "result_timestamp": "2026-10-10T13:27:53.283Z",
+            "end_second": 83.943509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 97,
+            "use_timestamp": "2026-10-10T13:28:09.611Z",
+            "start_second": 100.271509,
+            "result_line": 98,
+            "result_timestamp": "2026-10-10T13:28:10.154Z",
+            "end_second": 100.814509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 99,
+            "use_timestamp": "2026-10-10T13:28:12.178Z",
+            "start_second": 102.838509,
+            "result_line": 100,
+            "result_timestamp": "2026-10-10T13:28:12.690Z",
+            "end_second": 103.350509
+          },
+          {
+            "tool": "Read",
+            "use_line": 103,
+            "use_timestamp": "2026-10-10T13:28:17.131Z",
+            "start_second": 107.791509,
+            "result_line": 104,
+            "result_timestamp": "2026-10-10T13:28:17.141Z",
+            "end_second": 107.801509
+          },
+          {
+            "tool": "Read",
+            "use_line": 105,
+            "use_timestamp": "2026-10-10T13:28:18.069Z",
+            "start_second": 108.729509,
+            "result_line": 106,
+            "result_timestamp": "2026-10-10T13:28:18.080Z",
+            "end_second": 108.740509
+          },
+          {
+            "tool": "Read",
+            "use_line": 108,
+            "use_timestamp": "2026-10-10T13:28:26.263Z",
+            "start_second": 116.923509,
+            "result_line": 109,
+            "result_timestamp": "2026-10-10T13:28:26.272Z",
+            "end_second": 116.932509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 110,
+            "use_timestamp": "2026-10-10T13:28:29.591Z",
+            "start_second": 120.251509,
+            "result_line": 111,
+            "result_timestamp": "2026-10-10T13:28:30.368Z",
+            "end_second": 121.028509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 116,
+            "use_timestamp": "2026-10-10T13:28:42.149Z",
+            "start_second": 132.809509,
+            "result_line": 117,
+            "result_timestamp": "2026-10-10T13:28:43.851Z",
+            "end_second": 134.511509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 142,
+            "use_timestamp": "2026-10-10T13:29:22.520Z",
+            "start_second": 173.180509,
+            "result_line": 143,
+            "result_timestamp": "2026-10-10T13:29:25.043Z",
+            "end_second": 175.703509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 150,
+            "use_timestamp": "2026-10-10T13:29:37.993Z",
+            "start_second": 188.653509,
+            "result_line": 151,
+            "result_timestamp": "2026-10-10T13:29:40.388Z",
+            "end_second": 191.048509
+          },
+          {
+            "tool": "Write",
+            "use_line": 159,
+            "use_timestamp": "2026-10-10T13:29:56.407Z",
+            "start_second": 207.067509,
+            "result_line": 160,
+            "result_timestamp": "2026-10-10T13:29:56.453Z",
+            "end_second": 207.113509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 161,
+            "use_timestamp": "2026-10-10T13:30:05.925Z",
+            "start_second": 216.585509,
+            "result_line": 162,
+            "result_timestamp": "2026-10-10T13:30:07.735Z",
+            "end_second": 218.395509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 167,
+            "use_timestamp": "2026-10-10T13:30:16.942Z",
+            "start_second": 227.602509,
+            "result_line": 168,
+            "result_timestamp": "2026-10-10T13:30:19.345Z",
+            "end_second": 230.005509
+          },
+          {
+            "tool": "Write",
+            "use_line": 173,
+            "use_timestamp": "2026-10-10T13:30:28.684Z",
+            "start_second": 239.344509,
+            "result_line": 174,
+            "result_timestamp": "2026-10-10T13:30:28.719Z",
+            "end_second": 239.379509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 175,
+            "use_timestamp": "2026-10-10T13:30:38.713Z",
+            "start_second": 249.373509,
+            "result_line": 176,
+            "result_timestamp": "2026-10-10T13:30:40.546Z",
+            "end_second": 251.206509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 181,
+            "use_timestamp": "2026-10-10T13:30:49.745Z",
+            "start_second": 260.405509,
+            "result_line": 182,
+            "result_timestamp": "2026-10-10T13:30:52.116Z",
+            "end_second": 262.776509
+          },
+          {
+            "tool": "Write",
+            "use_line": 187,
+            "use_timestamp": "2026-10-10T13:31:05.475Z",
+            "start_second": 276.135509,
+            "result_line": 188,
+            "result_timestamp": "2026-10-10T13:31:05.506Z",
+            "end_second": 276.166509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 189,
+            "use_timestamp": "2026-10-10T13:31:17.405Z",
+            "start_second": 288.065509,
+            "result_line": 190,
+            "result_timestamp": "2026-10-10T13:31:19.169Z",
+            "end_second": 289.829509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 195,
+            "use_timestamp": "2026-10-10T13:31:28.638Z",
+            "start_second": 299.298509,
+            "result_line": 196,
+            "result_timestamp": "2026-10-10T13:31:31.011Z",
+            "end_second": 301.671509
+          },
+          {
+            "tool": "Write",
+            "use_line": 199,
+            "use_timestamp": "2026-10-10T13:31:40.087Z",
+            "start_second": 310.747509,
+            "result_line": 200,
+            "result_timestamp": "2026-10-10T13:31:40.130Z",
+            "end_second": 310.790509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 201,
+            "use_timestamp": "2026-10-10T13:31:52.890Z",
+            "start_second": 323.550509,
+            "result_line": 202,
+            "result_timestamp": "2026-10-10T13:31:54.698Z",
+            "end_second": 325.358509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 207,
+            "use_timestamp": "2026-10-10T13:32:06.168Z",
+            "start_second": 336.828509,
+            "result_line": 208,
+            "result_timestamp": "2026-10-10T13:32:08.517Z",
+            "end_second": 339.177509
+          },
+          {
+            "tool": "Write",
+            "use_line": 213,
+            "use_timestamp": "2026-10-10T13:32:20.913Z",
+            "start_second": 351.573509,
+            "result_line": 214,
+            "result_timestamp": "2026-10-10T13:32:20.956Z",
+            "end_second": 351.616509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 215,
+            "use_timestamp": "2026-10-10T13:32:31.787Z",
+            "start_second": 362.447509,
+            "result_line": 217,
+            "result_timestamp": "2026-10-10T13:32:33.586Z",
+            "end_second": 364.246509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 222,
+            "use_timestamp": "2026-10-10T13:32:42.449Z",
+            "start_second": 373.109509,
+            "result_line": 223,
+            "result_timestamp": "2026-10-10T13:32:44.853Z",
+            "end_second": 375.513509
+          },
+          {
+            "tool": "Write",
+            "use_line": 228,
+            "use_timestamp": "2026-10-10T13:32:58.455Z",
+            "start_second": 389.115509,
+            "result_line": 229,
+            "result_timestamp": "2026-10-10T13:32:58.484Z",
+            "end_second": 389.144509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 230,
+            "use_timestamp": "2026-10-10T13:33:12.097Z",
+            "start_second": 402.757509,
+            "result_line": 231,
+            "result_timestamp": "2026-10-10T13:33:13.901Z",
+            "end_second": 404.561509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 236,
+            "use_timestamp": "2026-10-10T13:33:21.516Z",
+            "start_second": 412.176509,
+            "result_line": 237,
+            "result_timestamp": "2026-10-10T13:33:22.029Z",
+            "end_second": 412.689509
+          },
+          {
+            "tool": "Read",
+            "use_line": 239,
+            "use_timestamp": "2026-10-10T13:33:28.069Z",
+            "start_second": 418.729509,
+            "result_line": 240,
+            "result_timestamp": "2026-10-10T13:33:28.085Z",
+            "end_second": 418.745509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 241,
+            "use_timestamp": "2026-10-10T13:33:36.745Z",
+            "start_second": 427.405509,
+            "result_line": 242,
+            "result_timestamp": "2026-10-10T13:33:39.190Z",
+            "end_second": 429.850509
+          },
+          {
+            "tool": "Write",
+            "use_line": 247,
+            "use_timestamp": "2026-10-10T13:33:50.719Z",
+            "start_second": 441.379509,
+            "result_line": 248,
+            "result_timestamp": "2026-10-10T13:33:50.754Z",
+            "end_second": 441.414509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 249,
+            "use_timestamp": "2026-10-10T13:34:01.342Z",
+            "start_second": 452.002509,
+            "result_line": 250,
+            "result_timestamp": "2026-10-10T13:34:03.116Z",
+            "end_second": 453.776509
+          },
+          {
+            "tool": "Read",
+            "use_line": 258,
+            "use_timestamp": "2026-10-10T13:34:14.081Z",
+            "start_second": 464.741509,
+            "result_line": 259,
+            "result_timestamp": "2026-10-10T13:34:14.090Z",
+            "end_second": 464.750509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 260,
+            "use_timestamp": "2026-10-10T13:34:17.279Z",
+            "start_second": 467.939509,
+            "result_line": 261,
+            "result_timestamp": "2026-10-10T13:34:17.822Z",
+            "end_second": 468.482509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 264,
+            "use_timestamp": "2026-10-10T13:34:22.925Z",
+            "start_second": 473.585509,
+            "result_line": 265,
+            "result_timestamp": "2026-10-10T13:34:23.229Z",
+            "end_second": 473.889509
+          },
+          {
+            "tool": "Read",
+            "use_line": 266,
+            "use_timestamp": "2026-10-10T13:34:23.985Z",
+            "start_second": 474.645509,
+            "result_line": 267,
+            "result_timestamp": "2026-10-10T13:34:23.996Z",
+            "end_second": 474.656509
+          },
+          {
+            "tool": "Read",
+            "use_line": 268,
+            "use_timestamp": "2026-10-10T13:34:24.910Z",
+            "start_second": 475.570509,
+            "result_line": 269,
+            "result_timestamp": "2026-10-10T13:34:24.920Z",
+            "end_second": 475.580509
+          },
+          {
+            "tool": "Read",
+            "use_line": 274,
+            "use_timestamp": "2026-10-10T13:34:31.535Z",
+            "start_second": 482.195509,
+            "result_line": 275,
+            "result_timestamp": "2026-10-10T13:34:31.551Z",
+            "end_second": 482.211509
+          },
+          {
+            "tool": "Read",
+            "use_line": 276,
+            "use_timestamp": "2026-10-10T13:34:32.728Z",
+            "start_second": 483.388509,
+            "result_line": 277,
+            "result_timestamp": "2026-10-10T13:34:32.739Z",
+            "end_second": 483.399509
+          },
+          {
+            "tool": "Read",
+            "use_line": 278,
+            "use_timestamp": "2026-10-10T13:34:33.779Z",
+            "start_second": 484.439509,
+            "result_line": 279,
+            "result_timestamp": "2026-10-10T13:34:33.788Z",
+            "end_second": 484.448509
+          },
+          {
+            "tool": "Read",
+            "use_line": 289,
+            "use_timestamp": "2026-10-10T13:34:47.210Z",
+            "start_second": 497.870509,
+            "result_line": 290,
+            "result_timestamp": "2026-10-10T13:34:47.444Z",
+            "end_second": 498.104509
+          },
+          {
+            "tool": "Write",
+            "use_line": 304,
+            "use_timestamp": "2026-10-10T13:35:20.219Z",
+            "start_second": 530.879509,
+            "result_line": 305,
+            "result_timestamp": "2026-10-10T13:35:20.253Z",
+            "end_second": 530.913509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 306,
+            "use_timestamp": "2026-10-10T13:35:26.565Z",
+            "start_second": 537.225509,
+            "result_line": 307,
+            "result_timestamp": "2026-10-10T13:35:26.884Z",
+            "end_second": 537.544509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 311,
+            "use_timestamp": "2026-10-10T13:35:32.608Z",
+            "start_second": 543.268509,
+            "result_line": 312,
+            "result_timestamp": "2026-10-10T13:35:34.270Z",
+            "end_second": 544.930509
+          },
+          {
+            "tool": "Write",
+            "use_line": 330,
+            "use_timestamp": "2026-10-10T13:36:12.469Z",
+            "start_second": 583.129509,
+            "result_line": 331,
+            "result_timestamp": "2026-10-10T13:36:12.512Z",
+            "end_second": 583.172509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 332,
+            "use_timestamp": "2026-10-10T13:36:19.607Z",
+            "start_second": 590.267509,
+            "result_line": 333,
+            "result_timestamp": "2026-10-10T13:36:21.454Z",
+            "end_second": 592.114509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 352,
+            "use_timestamp": "2026-10-10T13:36:47.572Z",
+            "start_second": 618.232509,
+            "result_line": 353,
+            "result_timestamp": "2026-10-10T13:36:48.119Z",
+            "end_second": 618.779509
+          },
+          {
+            "tool": "Write",
+            "use_line": 362,
+            "use_timestamp": "2026-10-10T13:37:09.555Z",
+            "start_second": 640.215509,
+            "result_line": 363,
+            "result_timestamp": "2026-10-10T13:37:09.586Z",
+            "end_second": 640.246509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 364,
+            "use_timestamp": "2026-10-10T13:37:15.445Z",
+            "start_second": 646.105509,
+            "result_line": 365,
+            "result_timestamp": "2026-10-10T13:37:17.536Z",
+            "end_second": 648.196509
+          },
+          {
+            "tool": "Write",
+            "use_line": 373,
+            "use_timestamp": "2026-10-10T13:37:48.262Z",
+            "start_second": 678.922509,
+            "result_line": 374,
+            "result_timestamp": "2026-10-10T13:37:48.294Z",
+            "end_second": 678.954509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 375,
+            "use_timestamp": "2026-10-10T13:37:55.155Z",
+            "start_second": 685.815509,
+            "result_line": 376,
+            "result_timestamp": "2026-10-10T13:37:57.416Z",
+            "end_second": 688.076509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 381,
+            "use_timestamp": "2026-10-10T13:38:06.909Z",
+            "start_second": 697.569509,
+            "result_line": 382,
+            "result_timestamp": "2026-10-10T13:38:07.682Z",
+            "end_second": 698.342509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 387,
+            "use_timestamp": "2026-10-10T13:38:18.657Z",
+            "start_second": 709.317509,
+            "result_line": 388,
+            "result_timestamp": "2026-10-10T13:38:18.993Z",
+            "end_second": 709.653509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 393,
+            "use_timestamp": "2026-10-10T13:38:27.183Z",
+            "start_second": 717.843509,
+            "result_line": 394,
+            "result_timestamp": "2026-10-10T13:38:27.899Z",
+            "end_second": 718.559509
+          },
+          {
+            "tool": "Write",
+            "use_line": 400,
+            "use_timestamp": "2026-10-10T13:38:52.457Z",
+            "start_second": 743.117509,
+            "result_line": 401,
+            "result_timestamp": "2026-10-10T13:38:52.497Z",
+            "end_second": 743.157509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 402,
+            "use_timestamp": "2026-10-10T13:38:59.063Z",
+            "start_second": 749.723509,
+            "result_line": 403,
+            "result_timestamp": "2026-10-10T13:38:59.790Z",
+            "end_second": 750.450509
+          },
+          {
+            "tool": "Write",
+            "use_line": 411,
+            "use_timestamp": "2026-10-10T13:39:17.186Z",
+            "start_second": 767.846509,
+            "result_line": 412,
+            "result_timestamp": "2026-10-10T13:39:17.215Z",
+            "end_second": 767.875509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 413,
+            "use_timestamp": "2026-10-10T13:39:23.068Z",
+            "start_second": 773.728509,
+            "result_line": 414,
+            "result_timestamp": "2026-10-10T13:39:25.340Z",
+            "end_second": 776.000509
+          },
+          {
+            "tool": "Write",
+            "use_line": 423,
+            "use_timestamp": "2026-10-10T13:39:55.576Z",
+            "start_second": 806.236509,
+            "result_line": 424,
+            "result_timestamp": "2026-10-10T13:39:55.620Z",
+            "end_second": 806.280509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 425,
+            "use_timestamp": "2026-10-10T13:40:05.822Z",
+            "start_second": 816.482509,
+            "result_line": 427,
+            "result_timestamp": "2026-10-10T13:40:08.005Z",
+            "end_second": 818.665509
+          },
+          {
+            "tool": "Write",
+            "use_line": 437,
+            "use_timestamp": "2026-10-10T13:40:34.331Z",
+            "start_second": 844.991509,
+            "result_line": 438,
+            "result_timestamp": "2026-10-10T13:40:34.369Z",
+            "end_second": 845.029509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 439,
+            "use_timestamp": "2026-10-10T13:40:40.137Z",
+            "start_second": 850.797509,
+            "result_line": 440,
+            "result_timestamp": "2026-10-10T13:40:42.399Z",
+            "end_second": 853.059509
+          },
+          {
+            "tool": "Write",
+            "use_line": 449,
+            "use_timestamp": "2026-10-10T13:41:09.236Z",
+            "start_second": 879.896509,
+            "result_line": 450,
+            "result_timestamp": "2026-10-10T13:41:09.269Z",
+            "end_second": 879.929509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 451,
+            "use_timestamp": "2026-10-10T13:41:14.693Z",
+            "start_second": 885.353509,
+            "result_line": 452,
+            "result_timestamp": "2026-10-10T13:41:17.009Z",
+            "end_second": 887.669509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 459,
+            "use_timestamp": "2026-10-10T13:41:29.592Z",
+            "start_second": 900.252509,
+            "result_line": 460,
+            "result_timestamp": "2026-10-10T13:41:29.934Z",
+            "end_second": 900.594509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 461,
+            "use_timestamp": "2026-10-10T13:41:31.411Z",
+            "start_second": 902.071509,
+            "result_line": 462,
+            "result_timestamp": "2026-10-10T13:41:31.789Z",
+            "end_second": 902.449509
+          },
+          {
+            "tool": "Read",
+            "use_line": 463,
+            "use_timestamp": "2026-10-10T13:41:35.053Z",
+            "start_second": 905.713509,
+            "result_line": 464,
+            "result_timestamp": "2026-10-10T13:41:35.071Z",
+            "end_second": 905.731509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 467,
+            "use_timestamp": "2026-10-10T13:41:39.846Z",
+            "start_second": 910.506509,
+            "result_line": 469,
+            "result_timestamp": "2026-10-10T13:41:39.855Z",
+            "end_second": 910.515509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 470,
+            "use_timestamp": "2026-10-10T13:41:45.043Z",
+            "start_second": 915.703509,
+            "result_line": 471,
+            "result_timestamp": "2026-10-10T13:41:45.376Z",
+            "end_second": 916.036509
+          },
+          {
+            "tool": "Read",
+            "use_line": 477,
+            "use_timestamp": "2026-10-10T13:41:54.016Z",
+            "start_second": 924.676509,
+            "result_line": 478,
+            "result_timestamp": "2026-10-10T13:41:54.032Z",
+            "end_second": 924.692509
+          },
+          {
+            "tool": "Read",
+            "use_line": 479,
+            "use_timestamp": "2026-10-10T13:41:58.614Z",
+            "start_second": 929.274509,
+            "result_line": 480,
+            "result_timestamp": "2026-10-10T13:41:58.634Z",
+            "end_second": 929.294509
+          },
+          {
+            "tool": "Write",
+            "use_line": 488,
+            "use_timestamp": "2026-10-10T13:42:25.045Z",
+            "start_second": 955.705509,
+            "result_line": 489,
+            "result_timestamp": "2026-10-10T13:42:25.082Z",
+            "end_second": 955.742509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 502,
+            "use_timestamp": "2026-10-10T13:45:21.382Z",
+            "start_second": 1132.042509,
+            "result_line": 503,
+            "result_timestamp": "2026-10-10T13:45:23.413Z",
+            "end_second": 1134.073509
+          },
+          {
+            "tool": "Write",
+            "use_line": 513,
+            "use_timestamp": "2026-10-10T13:45:51.684Z",
+            "start_second": 1162.344509,
+            "result_line": 514,
+            "result_timestamp": "2026-10-10T13:45:51.739Z",
+            "end_second": 1162.399509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 515,
+            "use_timestamp": "2026-10-10T13:45:56.304Z",
+            "start_second": 1166.964509,
+            "result_line": 516,
+            "result_timestamp": "2026-10-10T13:45:58.369Z",
+            "end_second": 1169.029509
+          },
+          {
+            "tool": "Write",
+            "use_line": 522,
+            "use_timestamp": "2026-10-10T13:46:20.261Z",
+            "start_second": 1190.921509,
+            "result_line": 523,
+            "result_timestamp": "2026-10-10T13:46:20.294Z",
+            "end_second": 1190.954509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 524,
+            "use_timestamp": "2026-10-10T13:46:24.746Z",
+            "start_second": 1195.406509,
+            "result_line": 525,
+            "result_timestamp": "2026-10-10T13:46:25.477Z",
+            "end_second": 1196.137509
+          },
+          {
+            "tool": "Read",
+            "use_line": 530,
+            "use_timestamp": "2026-10-10T13:46:31.977Z",
+            "start_second": 1202.637509,
+            "result_line": 531,
+            "result_timestamp": "2026-10-10T13:46:32.199Z",
+            "end_second": 1202.859509
+          },
+          {
+            "tool": "Write",
+            "use_line": 538,
+            "use_timestamp": "2026-10-10T13:47:19.198Z",
+            "start_second": 1249.858509,
+            "result_line": 539,
+            "result_timestamp": "2026-10-10T13:47:19.237Z",
+            "end_second": 1249.897509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 540,
+            "use_timestamp": "2026-10-10T13:47:24.846Z",
+            "start_second": 1255.506509,
+            "result_line": 541,
+            "result_timestamp": "2026-10-10T13:47:25.188Z",
+            "end_second": 1255.848509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 544,
+            "use_timestamp": "2026-10-10T13:47:30.346Z",
+            "start_second": 1261.006509,
+            "result_line": 545,
+            "result_timestamp": "2026-10-10T13:47:32.126Z",
+            "end_second": 1262.786509
+          },
+          {
+            "tool": "Write",
+            "use_line": 578,
+            "use_timestamp": "2026-10-10T13:48:31.356Z",
+            "start_second": 1322.016509,
+            "result_line": 579,
+            "result_timestamp": "2026-10-10T13:48:31.393Z",
+            "end_second": 1322.053509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 580,
+            "use_timestamp": "2026-10-10T13:48:58.639Z",
+            "start_second": 1349.299509,
+            "result_line": 581,
+            "result_timestamp": "2026-10-10T13:49:00.917Z",
+            "end_second": 1351.577509
+          },
+          {
+            "tool": "Write",
+            "use_line": 586,
+            "use_timestamp": "2026-10-10T13:49:25.193Z",
+            "start_second": 1375.853509,
+            "result_line": 587,
+            "result_timestamp": "2026-10-10T13:49:25.241Z",
+            "end_second": 1375.901509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 588,
+            "use_timestamp": "2026-10-10T13:49:30.077Z",
+            "start_second": 1380.737509,
+            "result_line": 589,
+            "result_timestamp": "2026-10-10T13:49:32.330Z",
+            "end_second": 1382.990509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 609,
+            "use_timestamp": "2026-10-10T13:50:00.822Z",
+            "start_second": 1411.482509,
+            "result_line": 610,
+            "result_timestamp": "2026-10-10T13:50:01.154Z",
+            "end_second": 1411.814509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 611,
+            "use_timestamp": "2026-10-10T13:50:04.814Z",
+            "start_second": 1415.474509,
+            "result_line": 613,
+            "result_timestamp": "2026-10-10T13:50:05.133Z",
+            "end_second": 1415.793509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 614,
+            "use_timestamp": "2026-10-10T13:50:08.591Z",
+            "start_second": 1419.251509,
+            "result_line": 615,
+            "result_timestamp": "2026-10-10T13:50:08.949Z",
+            "end_second": 1419.609509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 617,
+            "use_timestamp": "2026-10-10T13:50:12.796Z",
+            "start_second": 1423.456509,
+            "result_line": 618,
+            "result_timestamp": "2026-10-10T13:50:13.102Z",
+            "end_second": 1423.762509
+          },
+          {
+            "tool": "Write",
+            "use_line": 626,
+            "use_timestamp": "2026-10-10T13:50:40.282Z",
+            "start_second": 1450.942509,
+            "result_line": 627,
+            "result_timestamp": "2026-10-10T13:50:40.323Z",
+            "end_second": 1450.983509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 628,
+            "use_timestamp": "2026-10-10T13:50:45.966Z",
+            "start_second": 1456.626509,
+            "result_line": 629,
+            "result_timestamp": "2026-10-10T13:50:47.534Z",
+            "end_second": 1458.194509
+          },
+          {
+            "tool": "Write",
+            "use_line": 637,
+            "use_timestamp": "2026-10-10T13:51:30.549Z",
+            "start_second": 1501.209509,
+            "result_line": 638,
+            "result_timestamp": "2026-10-10T13:51:30.588Z",
+            "end_second": 1501.248509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 639,
+            "use_timestamp": "2026-10-10T13:51:36.740Z",
+            "start_second": 1507.400509,
+            "result_line": 640,
+            "result_timestamp": "2026-10-10T13:51:38.575Z",
+            "end_second": 1509.235509
+          },
+          {
+            "tool": "Write",
+            "use_line": 651,
+            "use_timestamp": "2026-10-10T13:52:32.879Z",
+            "start_second": 1563.539509,
+            "result_line": 652,
+            "result_timestamp": "2026-10-10T13:52:32.931Z",
+            "end_second": 1563.591509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 653,
+            "use_timestamp": "2026-10-10T13:52:37.965Z",
+            "start_second": 1568.625509,
+            "result_line": 654,
+            "result_timestamp": "2026-10-10T13:52:40.569Z",
+            "end_second": 1571.229509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 671,
+            "use_timestamp": "2026-10-10T13:53:06.041Z",
+            "start_second": 1596.701509,
+            "result_line": 672,
+            "result_timestamp": "2026-10-10T13:53:06.348Z",
+            "end_second": 1597.008509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 681,
+            "use_timestamp": "2026-10-10T13:53:21.071Z",
+            "start_second": 1611.731509,
+            "result_line": 682,
+            "result_timestamp": "2026-10-10T13:53:21.395Z",
+            "end_second": 1612.055509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 688,
+            "use_timestamp": "2026-10-10T13:53:31.633Z",
+            "start_second": 1622.293509,
+            "result_line": 689,
+            "result_timestamp": "2026-10-10T13:53:32.293Z",
+            "end_second": 1622.953509
+          },
+          {
+            "tool": "Write",
+            "use_line": 692,
+            "use_timestamp": "2026-10-10T13:53:37.613Z",
+            "start_second": 1628.273509,
+            "result_line": 693,
+            "result_timestamp": "2026-10-10T13:53:37.654Z",
+            "end_second": 1628.314509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 694,
+            "use_timestamp": "2026-10-10T13:53:41.939Z",
+            "start_second": 1632.599509,
+            "result_line": 695,
+            "result_timestamp": "2026-10-10T13:53:42.596Z",
+            "end_second": 1633.256509
+          },
+          {
+            "tool": "Read",
+            "use_line": 699,
+            "use_timestamp": "2026-10-10T13:53:47.203Z",
+            "start_second": 1637.863509,
+            "result_line": 700,
+            "result_timestamp": "2026-10-10T13:53:47.226Z",
+            "end_second": 1637.886509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 704,
+            "use_timestamp": "2026-10-10T13:53:56.525Z",
+            "start_second": 1647.185509,
+            "result_line": 705,
+            "result_timestamp": "2026-10-10T13:53:56.852Z",
+            "end_second": 1647.512509
+          },
+          {
+            "tool": "Read",
+            "use_line": 706,
+            "use_timestamp": "2026-10-10T13:54:00.779Z",
+            "start_second": 1651.439509,
+            "result_line": 707,
+            "result_timestamp": "2026-10-10T13:54:00.798Z",
+            "end_second": 1651.458509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 713,
+            "use_timestamp": "2026-10-10T13:54:10.868Z",
+            "start_second": 1661.528509,
+            "result_line": 714,
+            "result_timestamp": "2026-10-10T13:54:12.941Z",
+            "end_second": 1663.601509
+          },
+          {
+            "tool": "Write",
+            "use_line": 720,
+            "use_timestamp": "2026-10-10T13:55:01.285Z",
+            "start_second": 1711.945509,
+            "result_line": 721,
+            "result_timestamp": "2026-10-10T13:55:01.331Z",
+            "end_second": 1711.991509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 722,
+            "use_timestamp": "2026-10-10T13:55:07.164Z",
+            "start_second": 1717.824509,
+            "result_line": 723,
+            "result_timestamp": "2026-10-10T13:55:08.027Z",
+            "end_second": 1718.687509
+          },
+          {
+            "tool": "Write",
+            "use_line": 730,
+            "use_timestamp": "2026-10-10T13:55:50.794Z",
+            "start_second": 1761.454509,
+            "result_line": 731,
+            "result_timestamp": "2026-10-10T13:55:50.835Z",
+            "end_second": 1761.495509
+          },
+          {
+            "tool": "Bash",
+            "use_line": 732,
+            "use_timestamp": "2026-10-10T13:55:55.247Z",
+            "start_second": 1765.907509,
+            "result_line": 734,
+            "result_timestamp": "2026-10-10T13:55:57.896Z",
+            "end_second": 1768.556509
+          }
+        ],
+        "unmatched_calls": 0,
+        "nonoverlapping_seconds": 89.372999,
+        "outside_intervals_seconds": 1710.749001,
+        "outside_intervals_percent": 95.035,
+        "phase_anchor_crosschecks": [
+          {
+            "record": "native/work/draft-open-01",
+            "result_line": 143,
+            "record_minus_tool_result_seconds": -0.051415
+          },
+          {
+            "record": "native/work/revise-rel-01",
+            "result_line": 250,
+            "record_minus_tool_result_seconds": -0.036031
+          },
+          {
+            "record": "native/work/start-wo-apply",
+            "result_line": 452,
+            "record_minus_tool_result_seconds": -0.034451
+          },
+          {
+            "record": "native/work/decide-risk-apply",
+            "result_line": 589,
+            "record_minus_tool_result_seconds": -0.040472
+          }
+        ],
+        "largest_gaps": [
+          {
+            "seconds": 176.3,
+            "from_second": 955.742509,
+            "to_second": 1132.042509,
+            "after_result_line": 489,
+            "before_use_line": 502,
+            "compaction_events": [
+              {
+                "line": 490,
+                "subtype": "status",
+                "status": "compacting"
+              },
+              {
+                "line": 491,
+                "subtype": "status",
+                "status": "compacting"
+              },
+              {
+                "line": 492,
+                "subtype": "status",
+                "status": "compacting"
+              },
+              {
+                "line": 493,
+                "subtype": "status",
+                "status": "compacting"
+              },
+              {
+                "line": 494,
+                "subtype": "status",
+                "status": "compacting"
+              },
+              {
+                "line": 495,
+                "subtype": "status",
+                "status": "compacting"
+              },
+              {
+                "line": 499,
+                "subtype": "compact_boundary",
+                "status": null
+              }
+            ]
+          },
+          {
+            "seconds": 59.23,
+            "from_second": 1262.786509,
+            "to_second": 1322.016509,
+            "after_result_line": 545,
+            "before_use_line": 578,
+            "compaction_events": []
+          },
+          {
+            "seconds": 54.304,
+            "from_second": 1509.235509,
+            "to_second": 1563.539509,
+            "after_result_line": 640,
+            "before_use_line": 651,
+            "compaction_events": []
+          },
+          {
+            "seconds": 48.344,
+            "from_second": 1663.601509,
+            "to_second": 1711.945509,
+            "after_result_line": 714,
+            "before_use_line": 720,
+            "compaction_events": []
+          },
+          {
+            "seconds": 46.999,
+            "from_second": 1202.859509,
+            "to_second": 1249.858509,
+            "after_result_line": 531,
+            "before_use_line": 538,
+            "compaction_events": []
+          }
+        ]
+      }
+    },
+    "codex-221-reads": {
+      "started_at": "2026-10-10T14:03:52.184664+00:00",
+      "elapsed_seconds": 286.159,
+      "exit": 0,
+      "timed_out": false,
+      "archive": {
+        "path": "../lifecycle27/codex-221-reads-evidence.zip",
+        "sha256": "74e9a05151ddfffbea6b257b2ecf5eeb8b554a1d67ac84fd128744e0e295c2a4",
+        "entries_verified": 177,
+        "raw_events_sha256": "7cb2ce787f78ddd9785413aea4bd346804e9d048a6592aa6bc396c8aa004f1fe"
+      },
+      "phases": [],
+      "helper_records": 3,
+      "helper_subprocess_seconds": 1.8981949999999999,
+      "visible_tool_result_characters": 108046
+    }
+  }
+}

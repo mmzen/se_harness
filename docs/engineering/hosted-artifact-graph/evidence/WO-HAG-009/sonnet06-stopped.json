@@ -1,0 +1,184 @@
+{
+  "archive": "sonnet06-stopped.zip",
+  "bytes": 151766,
+  "sha256": "0c13fa4de6d99878d8cee9f7f509e0794a3a0e300825e160436c3979ba59e977",
+  "files": [
+    {
+      "path": "sonnet06/events.jsonl",
+      "bytes": 270508,
+      "sha256": "864ba3d636b03d4989ac249033f5846abb690287b94eacc2100de26d332fce0e"
+    },
+    {
+      "path": "sonnet06/session.json",
+      "bytes": 331,
+      "sha256": "17c173f1833f97786a222844f997ba1bd6fad38cb30b46ff4115d9bc1a43ee97"
+    },
+    {
+      "path": "sonnet06/invocation.json",
+      "bytes": 11740,
+      "sha256": "bdd42080be71a3e11705b9a7cee3d8e9e3b84a275e60fd2d876ed0c05c031cc1"
+    },
+    {
+      "path": "sonnet06/selection.json",
+      "bytes": 2918,
+      "sha256": "ba923b6c1151639c2974731ceaead73bfa275e3bb84f38b1680624c3a8702c5a"
+    },
+    {
+      "path": "sonnet06/task.md",
+      "bytes": 9646,
+      "sha256": "8beffc1412731622c4f09d29366d4f84728dc772f1379b67caf7d1c3e2878c64"
+    },
+    {
+      "path": "permission-probe02/events.jsonl",
+      "bytes": 25000,
+      "sha256": "fd939d1e94dbe5cb8cce36f30eda7b1dee9c73598f8e258ea9173c9a74fbe133"
+    },
+    {
+      "path": "permission-probe02/session.json",
+      "bytes": 321,
+      "sha256": "e79ee5fa25fdecd871ba93245e35ba1b72941babca67fa8c684f0481107f128d"
+    },
+    {
+      "path": "permission-probe02/invocation.json",
+      "bytes": 2859,
+      "sha256": "87fd7b8974253a7d6c52229e39c559ab2210162cba127c853b58debbcd0d0d39"
+    },
+    {
+      "path": "permission-probe02/selection.json",
+      "bytes": 2918,
+      "sha256": "a546cf6d1d86047fd41fb700bba0f8a4f723954d62b4d343eb93d137004af447"
+    },
+    {
+      "path": "permission-probe02/task.md",
+      "bytes": 851,
+      "sha256": "079da9cb64ea4ccf460310a9ca9b56e8c2ab57847e13347777798ef1247d4cac"
+    },
+    {
+      "path": "support/native-permission-quoted-rules.json",
+      "bytes": 2127,
+      "sha256": "7beec77f8a807d81709c2f628b370fddd885efda8dccf02f47ea326469b1293d"
+    },
+    {
+      "path": "support/sonnet06-process-stop.json",
+      "bytes": 237,
+      "sha256": "54a5878f191509e128a5260c0c6b25a4586de2133986b7fae082225b18b7f209"
+    },
+    {
+      "path": "support/sonnet06-post-stop-status.json",
+      "bytes": 4391,
+      "sha256": "405b562fc70031aab3e00db7bd904ce8fa71ee89cf356832154514f462cb9050"
+    },
+    {
+      "path": "support/native-mode-source-suite.json",
+      "bytes": 5499,
+      "sha256": "d252ecbf82e360c04d1875a29d1f999d16465427cadc1dbf77506821b0a0ea1d"
+    },
+    {
+      "path": "support/native-mode-distributions.json",
+      "bytes": 503,
+      "sha256": "b2cce527fb0008950854ceda265d6af33567f1d53967d73e64155c92a9e20828"
+    },
+    {
+      "path": "support/native-mode-cli-smoke.json",
+      "bytes": 4383,
+      "sha256": "0c1f105d380365d40e149a6cb60c5e67d8dcd0caeb8755875925cd8a19457fc2"
+    },
+    {
+      "path": "support/native-mode-validation.json",
+      "bytes": 427935,
+      "sha256": "7eb1cdbad877ce70ac3b1e46a21badb7e0969afcfe6e7e1d0d93dd0a15495d44"
+    },
+    {
+      "path": "support/resumed-quoted-rules-wo-hag-009.json",
+      "bytes": 14593,
+      "sha256": "4e6355bc31b8a86b0fb4d4100c6a7659a8cc58504f58df8d7c208eb7cc774f97"
+    },
+    {
+      "path": "support/resumed-quoted-rules-wo-hag-010.json",
+      "bytes": 13157,
+      "sha256": "ee6fd5e3dee1fd683c4460851f25037f7d956f9eed54f5fa259e3c13d00038a9"
+    },
+    {
+      "path": "support/resumed-correct-0221-wo-hag-009.json",
+      "bytes": 22293,
+      "sha256": "6ba6d8b4252014ad9e734588fdd527ad641f211eb9838dcf6efa0c73efe6468e"
+    },
+    {
+      "path": "support/resumed-correct-0221-wo-hag-010.json",
+      "bytes": 20523,
+      "sha256": "1e77bdf9af5e4778c163a14d5f5b7161cf7b5dd92c3f1261165a503cbe0f5b5d"
+    },
+    {
+      "path": "support/claude-guidance06-auth-probe.json",
+      "bytes": 2819,
+      "sha256": "c5d06fc13eacb0e774663e5d86331e766c6c1fe7f3b143e9a24cb172309d5131"
+    },
+    {
+      "path": "support/claude-guidance06-init.json",
+      "bytes": 1031,
+      "sha256": "98ef43ffbe687bf0610a631f0bcbf78a08c9de9926776329f79f5490af36e219"
+    },
+    {
+      "path": "support/claude-guidance06-initial-status.json",
+      "bytes": 4394,
+      "sha256": "9d0bf4c7cc3aa68c0801a9357a93ab97ff9fd3adec08199b9498625626b576c9"
+    },
+    {
+      "path": "support/claude-guidance06-networks.json",
+      "bytes": 127960,
+      "sha256": "02a3fd14bfeb5154b816fea42ba69908fd838e819e083b56aff86f516f910c9f"
+    },
+    {
+      "path": "support/claude-guidance06-source-stage.json",
+      "bytes": 749,
+      "sha256": "3f030a0707630abed01a6722c8f6015209d4d166dfa1421c789198985ec107ea"
+    },
+    {
+      "path": "support/claude-guidance06-up.json",
+      "bytes": 1886,
+      "sha256": "317ab577a35e9ce4952ac48dd7846e0ac2d714ebd0d2ba488ea6e47149f6799e"
+    },
+    {
+      "path": "support/claude-guidance06-version.json",
+      "bytes": 308,
+      "sha256": "a1479e442fe7b9d15f81c9f2ac2cbe07002b3ec8d9511f1ddcd879e452029995"
+    },
+    {
+      "path": "support/claude-guidance06-volume-absent.json",
+      "bytes": 394,
+      "sha256": "2d2a3c17933c301ca2ec7012cbc7c48156cd55098c47a9e29d6396d6743c6ed7"
+    },
+    {
+      "path": "support/claude-guidance06-volume-create.json",
+      "bytes": 341,
+      "sha256": "fb031003a8cda806233e01fb5ff2c8407e9d5982411c82b053f7955e5c775cf9"
+    },
+    {
+      "path": "support/guidance06/stage-evidence.json",
+      "bytes": 756,
+      "sha256": "497dd48439453cdef22c7f9e2f02a6998264711d201a5c6f9e2eecb836210648"
+    },
+    {
+      "path": "support/guidance06/permissions.json",
+      "bytes": 1543,
+      "sha256": "66548d5c68cb93db75f34312fff8c49b99eab5e72beba3385b6f34675c828b47"
+    },
+    {
+      "path": "support/guidance06/native-selection.json",
+      "bytes": 2800,
+      "sha256": "488cd6c64b00efa25cdd743ffea2155a01310c499ea80473243f79af99b92501"
+    },
+    {
+      "path": "support/guidance06/selection.json",
+      "bytes": 1574,
+      "sha256": "708faf4010e573580a3cf8fb8a0d08a5c76baf926c0440494e00edb60532bd1e"
+    },
+    {
+      "path": "support/guidance06/combination.json",
+      "bytes": 2542,
+      "sha256": "effc0850381a5b4725e558bdef2ffbc73517898691c31800e653d9bb153dbb89"
+    }
+  ],
+  "redaction": "Native recorder redaction preserved. Retained files scanned for this pair of project keys; credentials, copied inputs and account stores excluded.",
+  "operator_invocation_failure": "Resumed read-only checks accidentally selected the temporary helper default 0.22.0 and reported incompatible discovery. The failed invocations are retained with the corrected explicit 0.22.1 checks. No lifecycle writes occurred."
+}

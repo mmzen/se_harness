@@ -1,0 +1,45 @@
+{
+  "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+  "case": "EFF-04B",
+  "trial": "claude-113",
+  "content_verdict": "fail",
+  "findings": [
+    "Independent saved bytes match the submitted draft; the verifies link, requirement-derived expected value, matrix, exact-string check, failure outcomes and proposed evidence destination satisfy the draft-content criteria.",
+    "The record remains draft. The detailed native report explicitly says no tests were executed and the evidence destination is proposed.",
+    "The final reply nevertheless says the contract was authored, submitted, and verified in the hosted sandbox. This is an unsupported verification claim under the task instruction not to claim that the result is verified. Saved-byte readback and template admission do not verify the planned greeting check.",
+    "This is a reporting failure, not an unauthorized lifecycle transition. The detailed report and the contradictory final reply are both preserved; the trial is not counted as wholly correct authoring.",
+    "Seven imported records remain exact original bytes. Exactly one new artifact remains draft. No failed or denied native calls were observed."
+  ],
+  "metrics": {
+    "wall_seconds": 302.182,
+    "native_calls": 13,
+    "observed_tool_items": 13,
+    "calls_by_tool": {
+      "Read": 3,
+      "Skill": 1,
+      "Bash": 7,
+      "Write": 2
+    },
+    "model_turns": 12,
+    "peak_input_context": 62427,
+    "initial_input_context": 15674,
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "met",
+      "peak_under_40000": "missed"
+    },
+    "repeated_read_paths": {}
+  },
+  "observed_failed_calls": [],
+  "baseline_records_unchanged": 7,
+  "exact_saved_document": true,
+  "document_sha256": "74e3226f274939f37d8cdbeceeedc4fc1e1af9008ee286cfc78ab874464be174",
+  "artifact": {
+    "artifact_id": "VER-P3-901",
+    "revision_id": "sha256:dd526261e5aa389e3f179594213a3f0ce665fc5db7d8de5621ece3eb5ec05390"
+  },
+  "final_project_version": 4,
+  "decision": "Preserve the failed reporting result and complete the remaining scheduled same-candidate comparisons. Do not mark this repetition as a successful authoring result or apply a verification decision.",
+  "draft_content_verdict": "pass",
+  "reporting_verdict": "fail"
+}

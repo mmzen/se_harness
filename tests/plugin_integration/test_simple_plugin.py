@@ -47,6 +47,8 @@ class SimplePluginTests(unittest.TestCase):
                     guidance = archive.read(f'verity-plane/skills/{skill}/SKILL.md')
                     self.assertEqual((ROOT/f'plugins/verity-plane/common/skills/{skill}/SKILL.md').read_bytes(), guidance)
                     self.assertIn(b'test', guidance)
+                    for reference in (ROOT/f'plugins/verity-plane/common/skills/{skill}/references').glob('*.md'):
+                        self.assertEqual(reference.read_bytes(), archive.read(f'verity-plane/skills/{skill}/references/{reference.name}'))
                 self.assertIn('verity-plane/hooks/hooks.json', names)
                 for member in ('scripts/harness_runtime.py','scripts/activate.py','assets/bootstrap.md'):
                     self.assertEqual((ROOT/'plugins/verity-plane/common'/member).read_bytes(),

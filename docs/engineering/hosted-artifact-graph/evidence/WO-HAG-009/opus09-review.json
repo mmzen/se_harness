@@ -1,0 +1,116 @@
+{
+  "source_candidate": "a772ea264c7a68cc456a8af7df2ccf3ea3474947",
+  "template_decode_before_draft_authorship": true,
+  "template_revision": "sha256:0b416dced615741d8b9169eea300c72aef42139cf8313807753ff8081ec4532d",
+  "template_sha256": "376ad84a748bf670f9ccf463248a4bd576bc90a751f9ec2c8220de3b23e829d7",
+  "template_read_complete": true,
+  "readback": {
+    "completed_revision_observed": true,
+    "artifact_id": "INT-P3-001",
+    "revision_id": "sha256:57b80c72c57b78ec1eeea887a4f41a187b27230c1b4e709a7d07ee654b489fad",
+    "view": {
+      "kind": "context",
+      "context_id": "dbee6059-5a66-4b27-9689-f00b7e99ae86",
+      "context_version": 2
+    },
+    "document_sha256": "57b267bea065645a6c260f5164c9b11e6be825c9701a700790b406b23030172b",
+    "document_bytes": 1241,
+    "native_submitted_bytes_equal_independent_service_bytes": true,
+    "status": "draft",
+    "type": "intent",
+    "evaluator_output": {
+      "schema": "se-harness-draft-validation-v1",
+      "selection": {
+        "id": "INT-P3-001",
+        "type": "intent",
+        "status": "draft",
+        "path": "docs/engineering/lifecycle-pilot/intent/INT-P3-001.md"
+      },
+      "admissible": true,
+      "errors": [],
+      "incomplete": [],
+      "background": [
+        {
+          "code": "W-AUT-022",
+          "message": "Coverage row REQ-P3-900 names undefined rule P3-GREET-900.",
+          "path": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+          "plane": "maintenance",
+          "severity": "advisory"
+        }
+      ]
+    },
+    "native_record": "work/revise-intent-result.json",
+    "limits": "Readback confirms exact submitted draft and evaluator findings. It approves no artifact or work and does not qualify the full lifecycle."
+  },
+  "inventory_file_read_observed": false,
+  "source_file_reads": [
+    {
+      "line": 109,
+      "name": "Read",
+      "input": {
+        "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\opus09\\inputs\\source\\src\\greeting.py"
+      },
+      "id": "toolu_01RB46R4dSoZ2m8fQmdmdfV4",
+      "result_line": 110,
+      "returned_error": false,
+      "staged_sha256": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1",
+      "extent": "Only the requested offset/limit; no full-file inference."
+    }
+  ],
+  "fixture_assertion_executed": false,
+  "reported_instruction_digest_comparison": [
+    {
+      "path": "plugin/verity-plane/skills/setup/SKILL.md",
+      "reported": "b20f51d5b0ea5dfbd3e9d2bf1e3cb4205b7baa3ba811382c49e197165fe9271d",
+      "actual": "a276eb37ab57eeee593bf5fd80ec149960c12f392183b699a960a3b3d54f1bc8",
+      "matches": false
+    },
+    {
+      "path": "plugin/verity-plane/skills/change/SKILL.md",
+      "reported": "574ad6af1c31576d994d6abaf26e0e8799fc44fea34b60add9871e133b3830ba",
+      "actual": "574ad6af1c31576d994d6abaf26e0e8799fc44fea34b60add9871e133b3830ba",
+      "matches": true
+    },
+    {
+      "path": "plugin/verity-plane/skills/harness-orient/SKILL.md",
+      "reported": "b20f51d5b0ea5dfbd3e9d2bf1e3cb4205b7baa3ba811382c49e197165fe9271d",
+      "actual": "b20f51d5b0ea5dfbd3e9d2bf1e3cb4205b7baa3ba811382c49e197165fe9271d",
+      "matches": true
+    },
+    {
+      "path": "released-resources/docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "reported": "a2041b84342c2b2e4b5ec0f26e3a70702a894c57d9810855cfe514881e5a0c28",
+      "actual": "a2041b84342c2b2e4b5ec0f26e3a70702a894c57d9810855cfe514881e5a0c28",
+      "matches": true
+    },
+    {
+      "path": "released-resources/docs/engineering/ARTIFACT_AUTHORING.md",
+      "reported": "71de2cc92a470e2da25d525e3ad002b77faedb6ef0e69e2fa476a2fa4cb78ff5",
+      "actual": "71de2cc92a470e2da25d525e3ad002b77faedb6ef0e69e2fa476a2fa4cb78ff5",
+      "matches": true
+    },
+    {
+      "path": "released-resources/docs/engineering/harness/ARTIFACTS.md",
+      "reported": "2fa84648afedc03f3b811cb0e61d77ee1a1d52421ba3b3fa3eb435c4abd6eb89",
+      "actual": "2fa84648afedc03f3b811cb0e61d77ee1a1d52421ba3b3fa3eb435c4abd6eb89",
+      "matches": true
+    }
+  ],
+  "schema_views_read": [
+    "\\remote-v1\\draft-open.json",
+    "\\remote-v1\\create-artifact.json",
+    "\\remote-v1\\import.json",
+    "\\read-v1\\revision.json",
+    "\\remote-v1\\revise-artifact.json"
+  ],
+  "find_file_calls": 21,
+  "create_artifact_calls": 1,
+  "native_final_report_present": true,
+  "judgement_findings": [
+    "The source was inspected at trace lines 109-110; no assertion was executed. The native report should identify inspection as the method.",
+    "The submitted success-measure target is Confirmed by verification; this conflicts with the generated intent template distinction between operational measures and acceptance checks.",
+    "The draft claim that no formal record exists is unsupported by a content read of imported records.",
+    "The native reports omit six observed command errors or denials; reported instruction digests require the independent comparison below."
+  ],
+  "conclusion": "The exact template-read correction and source inspection worked. Content review and evidence reporting remain incomplete; draft admission does not establish a clean diagnostic pass or full native qualification."
+}

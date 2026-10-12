@@ -1,0 +1,237 @@
+{
+  "archive": "provenance.zip",
+  "sha256": "977b0ccc3119b6d1e10cec960437e899b9605ed5e427ee86dbc63b405256e4ef",
+  "files": [
+    {
+      "path": "checks/WO-HAG-009-context-resume1.json",
+      "bytes": 22299,
+      "sha256": "bb34659c43d6c149bc673258ab1b0864628ca8808a6431eb9478b5bb3159be53"
+    },
+    {
+      "path": "checks/WO-HAG-010-context-resume1.json",
+      "bytes": 20529,
+      "sha256": "737db3b54c625b525f27ead3a8332f62ba35ce641a3563c96ea6981fab6284bf"
+    },
+    {
+      "path": "checks/WO-HAG-011-context-resume1.json",
+      "bytes": 21939,
+      "sha256": "8828600380f38efd37dabd66b9ff6f14d3f55f1e3ea3ac659faed052d87d9287"
+    },
+    {
+      "path": "checks/claude-auth-review.json",
+      "bytes": 138,
+      "sha256": "e0b39a4e28a198fea39f051f94187f248bbde95838212a81b7badb1218df792b"
+    },
+    {
+      "path": "checks/claude-version.json",
+      "bytes": 308,
+      "sha256": "b2a2b4aa1f3ca03b4f1f5e1379cc265ca2f5ef82b483616c8eeaafba7fafdc83"
+    },
+    {
+      "path": "checks/codex-241-boundary-probe.json",
+      "bytes": 2273,
+      "sha256": "adaf280d476adb7e3639b2ea877513a13f579dc924c66a067bc6c9a6cc34de59"
+    },
+    {
+      "path": "checks/codex-auth-review.json",
+      "bytes": 137,
+      "sha256": "f353977e30462577cd525c92988467c1470974ead74da8a5150889e6262af5dd"
+    },
+    {
+      "path": "checks/codex-version.json",
+      "bytes": 352,
+      "sha256": "04d454bacb3cc3d146e00368bf1bbbb517d7a9bc93f07bdfbe5c61d34babf158"
+    },
+    {
+      "path": "checks/pr-before-functional29.json",
+      "bytes": 13265,
+      "sha256": "fe58bf048a129789d5c7999ddf344daf69b775bf7d396154c2fca9efafcf2e73"
+    },
+    {
+      "path": "checks/server-wheel-members.json",
+      "bytes": 4392,
+      "sha256": "448b8dca2f3bd3963e75756fc534bd8cc371ef14b00812ccbbe6d65dfc0e057e"
+    },
+    {
+      "path": "checks/service-reuse-comparison.json",
+      "bytes": 1045,
+      "sha256": "3562f40b1bb25ce49e803fa4b5b4ed13f1d2f9d4b85ff9f3733f3376fc361622"
+    },
+    {
+      "path": "components/candidate-28.json",
+      "bytes": 113,
+      "sha256": "e6c0e12eb2707cd120b053b99f6c3f88744fa52ba71362450871886e38427263"
+    },
+    {
+      "path": "components/combination.json",
+      "bytes": 2807,
+      "sha256": "b3402234badb44730c20c36403dd9be53ad472ad77044527edf6914d6534b6d6"
+    },
+    {
+      "path": "components/component-comparison.json",
+      "bytes": 1953,
+      "sha256": "16e4f847fa0a7db8aef54ac29241db048687fba936633bcb02faa1f68b89bf41"
+    },
+    {
+      "path": "components/guidance-reference-check.json",
+      "bytes": 1999,
+      "sha256": "6e11ba3b7d693930bf84345894c43d5bdc31a64ae204a7792c50d5c6041a551a"
+    },
+    {
+      "path": "components/package-28.json",
+      "bytes": 1806,
+      "sha256": "5c5267eb015e192d159f597ea868500dd64a386d810c8482a408696ec553e0f2"
+    },
+    {
+      "path": "drivers/hag_assess_claude29.py",
+      "bytes": 5846,
+      "sha256": "d25ddde868893dd8aa84af5ffc159ae3b4c89efcf0f0a628f1fa44b7a34e2994"
+    },
+    {
+      "path": "drivers/hag_assess_codex29.py",
+      "bytes": 6226,
+      "sha256": "c7ab47b8272e3e677d1f66f816a57345ab4b946c24213feb17144908c5605dab"
+    },
+    {
+      "path": "drivers/hag_full27.py",
+      "bytes": 9084,
+      "sha256": "8fc22acdc4d65d19bb2dda100c8af02519db63ec6d5b1f9a2405cb385b8d5469"
+    },
+    {
+      "path": "drivers/hag_full27_probe.py",
+      "bytes": 2654,
+      "sha256": "a4ac0d83c935228026b2d2c751c92a7c09be13ec487c32de84a7526f398346ba"
+    },
+    {
+      "path": "drivers/hag_full27_retain.py",
+      "bytes": 1579,
+      "sha256": "bb2d523d8e34e49b9975f82b00820ad003add7829b030dd1803b038a3da307bc"
+    },
+    {
+      "path": "drivers/hag_full27_review.py",
+      "bytes": 2532,
+      "sha256": "f19c9c8efcb19352223b0d3984e049f9c6839159100f1290b3d6c70c82852697"
+    },
+    {
+      "path": "drivers/hag_full27_trace.py",
+      "bytes": 3254,
+      "sha256": "d19f0cb205aa875d9e61274361205ef1d4854120e2d927dce484432c69009e20"
+    },
+    {
+      "path": "drivers/hag_full29.py",
+      "bytes": 1727,
+      "sha256": "947c202a519481eb170774882794f4a56b9fa13cb09f0b2ffe2cd8c4ad5e5ba5"
+    },
+    {
+      "path": "drivers/hag_native27.py",
+      "bytes": 8017,
+      "sha256": "1d6c06c2887c5b4dbcd83ef011311cba0ce32af365c23c98789a6aa75ff9942f"
+    },
+    {
+      "path": "drivers/hag_native_parity19.py",
+      "bytes": 4818,
+      "sha256": "1000402cfa8f26240dfaa96c0711ebd7ec252af74c864ecdf74317753acd3e41"
+    },
+    {
+      "path": "drivers/hag_parity29.py",
+      "bytes": 639,
+      "sha256": "5783c1ae33a056e3c6358f4a7f86ec7f67ea8e9d87a494a16eec016fadfbc34c"
+    },
+    {
+      "path": "drivers/hag_probe29.py",
+      "bytes": 262,
+      "sha256": "49ddb5f6f7da2a441ce7d2514f1082f4162cf1889e8740f8345af5e84d9feabc"
+    },
+    {
+      "path": "drivers/hag_provenance29.py",
+      "bytes": 2844,
+      "sha256": "bf2cc6806df6df78a88cb68eefe512d3851c5e4ba5ee45bd030f359d8988d637"
+    },
+    {
+      "path": "drivers/hag_retain26.py",
+      "bytes": 4400,
+      "sha256": "d37f266d694aa036e16d9a423e0806a6c9dd30a275f53d6b67161c7169dfcc32"
+    },
+    {
+      "path": "drivers/hag_retain29.py",
+      "bytes": 623,
+      "sha256": "853220a214af3f848b5fbc3a0d073619d87ccbe98b54ecc7957e0287200d59dc"
+    },
+    {
+      "path": "drivers/hag_review28.py",
+      "bytes": 2173,
+      "sha256": "b2e5686c2db9f99b4903662ca43a3a995f4841dae4815b925b6052802b91a16c"
+    },
+    {
+      "path": "drivers/hag_review29.py",
+      "bytes": 556,
+      "sha256": "4d4ccc29e9ac647534154011731f5cf6f37b97ed2c496a1d5f1c3d9917bbe186"
+    },
+    {
+      "path": "drivers/hag_trace29.py",
+      "bytes": 284,
+      "sha256": "4a7db440750652e8107d7658800a8e89762fb525500941eeb2e2fb936d5377d2"
+    },
+    {
+      "path": "setup/claude241-init.json",
+      "bytes": 963,
+      "sha256": "73a8f02572823e1775c7eeb4fd25b97f99935b32c745673cc823c7e94898ce46"
+    },
+    {
+      "path": "setup/claude241-networks.json",
+      "bytes": 384989,
+      "sha256": "53dc9a1dd09abe34d46b6aeb8393baa12c14a8f86b378434fcd7c7c878e9d46e"
+    },
+    {
+      "path": "setup/claude241-source-stage.json",
+      "bytes": 743,
+      "sha256": "f614c45fe6ebe674211c0b585f37809466d093a1ea64602935ce747517d58d5c"
+    },
+    {
+      "path": "setup/claude241-up.json",
+      "bytes": 1699,
+      "sha256": "c6c01546d31c18263a75fe70f7292af3690258b82e7b586642de0101c2f4770d"
+    },
+    {
+      "path": "setup/claude241-volume-absent.json",
+      "bytes": 380,
+      "sha256": "a4b2a2fe4bdae49b1b9c157f3063b7e58d098df1bb0ab78be52573286a88b512"
+    },
+    {
+      "path": "setup/claude241-volume-create.json",
+      "bytes": 327,
+      "sha256": "25a6bd8a501a257aebb15a55f2e0a27cb4bdda507d0c509b8796f0429031b80f"
+    },
+    {
+      "path": "setup/codex241-init.json",
+      "bytes": 958,
+      "sha256": "8db59c4a4ccab89688fea66240ad05f2995b09f2a5fd427012f4041341a168a3"
+    },
+    {
+      "path": "setup/codex241-networks.json",
+      "bytes": 389567,
+      "sha256": "1e1a673a8a9db95cacc4cfb52cf938f682dd759cab88d2531730b47c45bd2f0c"
+    },
+    {
+      "path": "setup/codex241-source-stage.json",
+      "bytes": 742,
+      "sha256": "ca8ea651aacd5f75c576c2fae9553b8d1e27f047414361b8fbbcd6a0fc0f86d8"
+    },
+    {
+      "path": "setup/codex241-up.json",
+      "bytes": 1677,
+      "sha256": "b019165b2c85cc705a7ad1dbab31e5a5c4a9142fa93a333f110d45b5705fe1c0"
+    },
+    {
+      "path": "setup/codex241-volume-absent.json",
+      "bytes": 378,
+      "sha256": "cb6ec059d7274b6050b2fb7104dc453e04e4b21a7f3c913c26383c711dcfdd4c"
+    },
+    {
+      "path": "setup/codex241-volume-create.json",
+      "bytes": 325,
+      "sha256": "9cb6f8a7b367724be4433fe7811da9971faf8278d69b42f6463d4ab245d5ec68"
+    }
+  ],
+  "limits": "Selected exact proctor drivers and noncredential observations only. Authentication results summarized; raw provider probes, private reasoning, tokens, credential stores and full environments excluded. Candidate source/package checks retained by reference to diagnostic28 and lifecycle-correction28."
+}

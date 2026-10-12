@@ -1,0 +1,30 @@
+{
+  "archive": "report-checks.zip",
+  "sha256": "79717bd67061b5063de91fa63231495baccee483e307edd1998a5e369604195b",
+  "files": [
+    {
+      "path": "WO-HAG-009-scope.json",
+      "sha256": "2a2fc5881d0ffa5bbcc5da08bd8085f6d7c18c52e2e1d3d6b9601f1252af4861"
+    },
+    {
+      "path": "WO-HAG-011-scope.json",
+      "sha256": "0bbb822aec6d3708a967b90514043b97e39bd5cd9bfe14c38886a126f098744f"
+    },
+    {
+      "path": "WO-HAG-009-review.json",
+      "sha256": "b2a0ceae61bd39f35d7dfd36e9cc36b6c96fba8ab0569888631d24db889645f7"
+    },
+    {
+      "path": "WO-HAG-011-review.json",
+      "sha256": "91a82039f3b73ea938fa280602fc821a3c6f5d285935e565b7d815b00e8f5980"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "75fe7762615b0c3a05b9d968c81422d2b810ad1dfbc0d398954faa29ab90ad11"
+    },
+    {
+      "path": "archive-integrity.json",
+      "sha256": "b9b2c36e0f46c65e773fc86680d61853bd7922a0eb1819a6c991e7cbb7f3578f"
+    }
+  ]
+}

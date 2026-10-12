@@ -1,0 +1,56 @@
+{
+  "candidate": "db7f2d241dfe680a48328014e584909d10335835",
+  "case": "EFF-04B",
+  "trial": "codex-112",
+  "content_verdict": "pass",
+  "findings": [
+    "Independent service read matches the exact submitted draft. Its verifies link and independent expected value come from REQ-P3-900; it acknowledges existing VER-P3-900 instead of inventing a coverage gap.",
+    "The matrix, executable Python equality check, candidate/fixture identities, chosen platform and proposed JSON evidence file provide a usable verification plan. Expected output is fixed before running the fixture.",
+    "The document, detailed report and final reply all distinguish saved draft, template validation, independent content review and unperformed behavior checks. No verified outcome is claimed.",
+    "The report retains the two denied reads: the installed host-plugin path outside the selected workspace and root task.md outside permitted inventoried/work text paths. It locates the staged plugin through selection and uses permitted files; no alternate permission route or global setting change occurred.",
+    "Both Codex trials report initial entry truncation. This remains a delivery defect despite correct task completion. The selected-service boundary probes passed.",
+    "Seven imported records remain exact original bytes. Exactly one new artifact is draft at final project version four. The report retains the pre-existing W-AUT-022 advisory and claims no complete NQ qualification.",
+    "Twenty observed tool items exceed the fifteen-call goal even though the exact native call total and provider peak context are unavailable. Duration also misses the goal."
+  ],
+  "metrics": {
+    "wall_seconds": 241.615,
+    "native_calls": null,
+    "observed_tool_items": 20,
+    "calls_by_tool": {
+      "command_execution": 18,
+      "file_change": 2
+    },
+    "model_turns": null,
+    "peak_input_context": null,
+    "initial_input_context": null,
+    "goals": {
+      "wall_under_180": "missed",
+      "calls_at_most_15": "missed",
+      "peak_under_40000": "unavailable"
+    },
+    "repeated_read_paths": {}
+  },
+  "observed_failed_calls": [
+    {
+      "line": 12,
+      "call_id": "item_2",
+      "source": "native failed item"
+    },
+    {
+      "line": 16,
+      "call_id": "item_4",
+      "source": "native failed item"
+    }
+  ],
+  "baseline_records_unchanged": 7,
+  "exact_saved_document": true,
+  "document_sha256": "b8d61046f11678fadaf422d5abdc9e30607b68126d3cfd31ee0cefd0519a9ae6",
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:48fb40a75ab7e9031101713b2a6d9cb3b40f45c437e209f786b09ba1f40af25a"
+  },
+  "final_project_version": 4,
+  "decision": "The positive content/reporting case passes with two retained recovered read refusals. Preserve unresolved input-delivery defects and failed Claude reporting cases; no implementation completion or verification acceptance is inferred.",
+  "draft_content_verdict": "pass",
+  "reporting_verdict": "pass"
+}

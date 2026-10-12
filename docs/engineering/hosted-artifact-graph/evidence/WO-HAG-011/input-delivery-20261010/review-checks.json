@@ -1,0 +1,16 @@
+{
+  "status": "proposal_only",
+  "validation": {
+    "valid": true,
+    "artifact_count": 1991,
+    "error_count": 0,
+    "warning_count": 63
+  },
+  "lifecycle_metadata": "All fields except updated preserved, including states, owners, scope paths, assurance and events.",
+  "active_records": "All three match accepted digests; no activation or lifecycle transition.",
+  "fixture_files": 12,
+  "fixture_bytes": 5490,
+  "estimated_entry_content_bytes": 58194,
+  "size_limit": "Estimate uses candidate16 task with restored guide and existing read-only inputs, before entry framing/deduplication. No native or performance claim. Actual final entry must fit 64 KiB.",
+  "authoring_review": "Requirement and goals unchanged; full-source presentation clarifies existing no-semantic-preselection constraint. New adapter entry and its boundary tests stay within approved paths. Original expected results and prior failures remain unchanged. No new framework, dependency or decision right."
+}

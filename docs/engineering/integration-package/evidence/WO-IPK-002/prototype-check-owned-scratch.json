@@ -1,0 +1,8 @@
+{
+  "method": "Unapplied proposal tested with owned workspace scratch. Prior sandbox TEMP denial retained separately.",
+  "exit": 1,
+  "tests": 19,
+  "skips": 0,
+  "elapsed_seconds": 2.996,
+  "output": "................F..\n======================================================================\nFAIL: test_verify_cli_rechecks_the_complete_workflow_binding (ci_cap_review.IntegrationPackageContractTests.test_verify_cli_rechecks_the_complete_workflow_binding)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-ci-cap-proposal\\tests\\test_integration_package.py\", line 376, in test_verify_cli_rechecks_the_complete_workflow_binding\n    self.assertEqual(0, result.returncode, result.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 1 : Traceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-ci-cap-proposal\\.github\\scripts\\build_integration_package.py\", line 32, in <module>\n    from repository_tools import json_bytes  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'repository_tools'\n\n\n----------------------------------------------------------------------\nRan 19 tests in 2.996s\n\nFAILED (failures=1)\n"
+}

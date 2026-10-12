@@ -1,0 +1,157 @@
+{
+  "archive": "candidate06-checks.zip",
+  "sha256": "8eec77c21c19425199207cf35e929f94451813190dd2818166e1ef7ca8d02341",
+  "files": [
+    {
+      "path": "build06-replay.json",
+      "bytes": 7097,
+      "sha256": "c3ba17d7697436bb2f47db694e1ef2ce9652842e68487e5ea48252f33df508c3"
+    },
+    {
+      "path": "candidate-06.json",
+      "bytes": 113,
+      "sha256": "c019bbabafa17d19c094d394eedbff1b9b748959d5d63e56c69e2f8f4604e445"
+    },
+    {
+      "path": "candidate06-component-review.json",
+      "bytes": 1845,
+      "sha256": "95eb9756e660ba5d2ae2d6de791ea98e94aef7a12c3040e39512bf90fb7a4aef"
+    },
+    {
+      "path": "claude-11-containers.json",
+      "bytes": 553,
+      "sha256": "9f653e191bdb2ba56c4fc427d4cfa12bcfda02c3014338a3929e47ecafdace3c"
+    },
+    {
+      "path": "claude-11-final-status.json",
+      "bytes": 4383,
+      "sha256": "29d42e5f46cfac648bcb2b5123b857edebf9987585bb5e03ecc725a45ebdf845"
+    },
+    {
+      "path": "claude-11-independent-read.json",
+      "bytes": 4628,
+      "sha256": "5771ae90ccaae7e443a417fa36eeec6f18a03a8e548acc11e50b7c7948b09318"
+    },
+    {
+      "path": "claude-11-stop.json",
+      "bytes": 405,
+      "sha256": "92a319175963da1097363fe7ed9b81634fc2334b158a1ea4c0d96a3ba40f5a0a"
+    },
+    {
+      "path": "claude-11/independent-assessment.json",
+      "bytes": 2463,
+      "sha256": "fd9d9b04000642aa21a413b25ded779e8aa989f65f75846b0d8702ceedd53738"
+    },
+    {
+      "path": "claude-11/independent-document.md",
+      "bytes": 1690,
+      "sha256": "9fe0ef5f6c48b84337011918fa8a17d8fb963f56c99486bbc6d02f5f05bed2b5"
+    },
+    {
+      "path": "claude-11/independent-observation.json",
+      "bytes": 190,
+      "sha256": "0f5c605b40737537ff989275717c9826bf9e7b6b76a5ba350d8828ae1d24c963"
+    },
+    {
+      "path": "claude-11/independent-observation02.json",
+      "bytes": 424,
+      "sha256": "dae4adca52fc3044893f8a2bdfa3e734d10a92935b356a35d2e676e0438d54f9"
+    },
+    {
+      "path": "claude-12-containers.json",
+      "bytes": 553,
+      "sha256": "21ddf79b90523fab2678e665e41674057cbb20be81d38abcac640139d8601d4b"
+    },
+    {
+      "path": "claude-12-final-status.json",
+      "bytes": 4383,
+      "sha256": "1d97132e4f87e30e8339ea85a96b11420918d29960da72d0da668491a12e7120"
+    },
+    {
+      "path": "claude-12-independent-read.json",
+      "bytes": 4253,
+      "sha256": "1c662d07d9d12aa61ce998fc60e5b51e138fb31891f12aa9eaee78432f8e98cf"
+    },
+    {
+      "path": "claude-12-stop.json",
+      "bytes": 405,
+      "sha256": "3e66f20aa585b74ccc449ff3be99a91111d03c1ff07f4c0d18c1973afa968b3e"
+    },
+    {
+      "path": "claude-12/independent-assessment.json",
+      "bytes": 3176,
+      "sha256": "7e05d0e3661780aa017ac8ed6d415c32c2c8d1d57f5a7bd9d6fe17288fab5ad3"
+    },
+    {
+      "path": "claude-12/independent-document.md",
+      "bytes": 1355,
+      "sha256": "d47c529c24d81bd343828ab1c261a3c4c8e8ce99ba7994cdc51aab2b8c053bc2"
+    },
+    {
+      "path": "claude-12/independent-observation.json",
+      "bytes": 424,
+      "sha256": "e54c9334d96424c5199a06899a452466b325452ec9dfba0e57b4c4a7ba4a3c3d"
+    },
+    {
+      "path": "client-build-06.json",
+      "bytes": 969,
+      "sha256": "74d49987b2c4d50f60c982eed2e519a5bff112be504b448e863fb54fe721480d"
+    },
+    {
+      "path": "client-env-06.json",
+      "bytes": 461,
+      "sha256": "cb9b13c8f56be3a1e47f21224f4d19544afd9d124a7ff2197cf7c936242a03e5"
+    },
+    {
+      "path": "client-install-06.json",
+      "bytes": 1068,
+      "sha256": "65609e38f3f74367c314ff493fa73ddc0cf7bfbcdd2142390b0c0013fec92961"
+    },
+    {
+      "path": "codex-11-containers.json",
+      "bytes": 547,
+      "sha256": "69cb53dbaa01ff00cfaadc66aebbe2696fad31482ce99896b15f0610018c9643"
+    },
+    {
+      "path": "codex-11-final-status.json",
+      "bytes": 4383,
+      "sha256": "0838e184e988e51c7ba504012caaed25cf1ac98b8a5496a394ebcb8cff274c28"
+    },
+    {
+      "path": "codex-11-stop.json",
+      "bytes": 401,
+      "sha256": "32c0f9b87bfc4883f9337c15d56f9f68919b889845cf656493e1e5b25560ccd9"
+    },
+    {
+      "path": "codex-11/independent-assessment.json",
+      "bytes": 1389,
+      "sha256": "a6904a316e0711aae8b1bcefa6867f4af92627c570438b2d8def3bef9bb05b70"
+    },
+    {
+      "path": "codex-11/independent-observation.json",
+      "bytes": 189,
+      "sha256": "6e24141380d0d12c0ba8843163b450f8b5ffa834530f84592163cca4353c0ec0"
+    },
+    {
+      "path": "installed06-ambiguous.json",
+      "bytes": 2514,
+      "sha256": "877b32067e16fda4f752681353825dc053a3ad2381e6b28e654df5732c72ba1e"
+    },
+    {
+      "path": "installed06-sections.json",
+      "bytes": 11543,
+      "sha256": "96a3b12ddd405970e2b120a56b2f54ae140ca63d26fddcaa437bf36bf21dd664"
+    },
+    {
+      "path": "package-06.json",
+      "bytes": 1827,
+      "sha256": "63cf0d93880dfc59d194cd497453a0cd29524cb46e772632fcca602771e50b7c"
+    },
+    {
+      "path": "revised-native-metrics.json",
+      "bytes": 28655,
+      "sha256": "edbc1bb07b116a37c8cc03a21a863b2da93ccb31eeed2087bd9b1fb8ba86531a"
+    }
+  ],
+  "exclusions": "No credentials, private reasoning, raw native event streams, auth probe transcripts, account stores or binary wheels."
+}

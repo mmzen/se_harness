@@ -1,0 +1,42 @@
+{
+  "host": "Claude Code",
+  "trial": "sonnet09",
+  "status": "unqualified",
+  "native_session": {
+    "host": "claude",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 60.039,
+    "reply_dropped": false,
+    "redactions": 0,
+    "events_sha256": "24ec07f3f475c1a68d646339ed21977b2e027b095273a4bae81d4162650aaece",
+    "outcome": "observation_retained",
+    "qualification": "requires independent assessment"
+  },
+  "observed_shell_commands": [
+    "\"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe\" -I \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\inputs\\native_call.py\" --help 2>&1"
+  ],
+  "reads": [
+    {
+      "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\sonnet09\\task.md"
+    },
+    {
+      "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\sonnet09\\selection.json"
+    },
+    {
+      "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\sonnet09\\inputs\\combination.json"
+    },
+    {
+      "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\sonnet09\\inputs\\configuration.json"
+    },
+    {
+      "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag-agent-qualification-execution-20261007\\claude\\native02\\work\\sonnet09\\inputs\\client-help.txt"
+    }
+  ],
+  "service_project_version": 0,
+  "real_repository_and_selected_settings_unchanged": true,
+  "reason": "The task locator used backslash-form Windows paths. The allow list names forward-slash equivalents; the single helper --help command was denied. The agent stopped. No lifecycle/MCP/assertion/export scenario completed.",
+  "correction": "Present approved_shell_argv_prefix with forward slashes in the next fresh selection. No permission allow expansion or workflow steps.",
+  "source_candidate": "05745c7e2c3abb0d91a2aa36381153c622999645",
+  "test_locator_sha256": "162a0c506e542578e2cad42f535d5f19101440e05b29375c02b2e33c7016268a"
+}
