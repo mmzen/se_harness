@@ -2,6 +2,10 @@
 
 Status: **Package approved by mmzen. WO-RLS-045/046/048 are in progress; qualification and final verification remain pending. WO-RLS-047 is approved and unstarted.**
 
+The [current qualification report](evidence/WO-RLS-045/qualification-progress.md)
+records passing package/service checks and the failed Claude diagnostic.
+The [WO-RLS-049 correction](evidence/WO-RLS-049/review.md) is draft and unapplied.
+
 Read the [preparation review](evidence/WO-RLS-045/preparation-review.md) for the
 requested decision, concrete changes, evidence and limits.
 
@@ -15,6 +19,7 @@ the tagged source. Git remains authoritative; no public service is proposed.
 | [WO-RLS-045](work-orders/WO-RLS-045.md), [VER-RLS-039](verification/VER-RLS-039.md) | Candidate versions, bounded build-helper correction, current docs and aggregate assurance. |
 | [WO-RLS-046](work-orders/WO-RLS-046.md), [VER-RLS-040](verification/VER-RLS-040.md) | Exact plugin and hosted combination qualification, with marketplace review staging. |
 | [WO-RLS-048](work-orders/WO-RLS-048.md) | Approved exact client-admission and instruction-map correction; linked release membership amendment. |
+| [WO-RLS-049](work-orders/WO-RLS-049.md) | Draft one-file clarification/reporting correction; approval pending. |
 | [WO-RLS-047](work-orders/WO-RLS-047.md), [VER-RLS-041](verification/VER-RLS-041.md) | Public delivery and independently observed closeout after complete-release approval. |
 
 Base: merged main `4fb5dbc29ffd7a2ccdc9a081c9c9b9f82b99d999`.
