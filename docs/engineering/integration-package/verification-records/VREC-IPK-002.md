@@ -2,7 +2,7 @@
 id = "VREC-IPK-002"
 type = "verification_record"
 title = "Verification candidate for WO-IPK-002"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-12"
 updated = "2026-10-12"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/integration-package/evidence/WO-IPK-002/WO-I
 evaluator_evidence_path = "docs/engineering/integration-package/evidence/VREC-IPK-002-evaluator.json"
 evaluator_evidence_sha256 = "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899"
 
+verified_at = "2026-10-12T08:42:06Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-IPK-002"]
 conforms_to = ["VER-IPK-002"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-12T08:42:06Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied \"Verify result\" to the published VREC-IPK-002 request for candidate 938126a437514451166af7b66db1d9996abbbd68 and its unchanged retained evidence in PR #543. Accepts only WO-IPK-002 under VER-IPK-002. Does not verify remaining HAG work or authorize merge or release."
 +++
 
 # Verification Record Candidate
