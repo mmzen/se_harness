@@ -4,10 +4,11 @@
 
 ## Product and governance domains
 
-- [hosted-artifact-graph/](hosted-artifact-graph/README.md): draft hosted context and draft-authoring sandbox, with Memgraph, immutable baselines, evaluator reuse and an unresolved database-side Cypher read-only boundary.
+- [release-0-23-0/](release-0-23-0/README.md): approved preparation of evaluator/client 0.23.0 and plugin 0.2.7; exact-package and private-service qualification remain pending.
+- [hosted-artifact-graph/](hosted-artifact-graph/README.md): verified private context, authoring and lifecycle-test sandbox, with Memgraph, immutable baselines and evaluator reuse. Git remains authoritative; the database-side Cypher read-only boundary remains unresolved.
 - [release-0-22-1/](release-0-22-1/README.md): published evaluator 0.22.1 and plugin 0.2.6;
   [verified public delivery](release-0-22-1/verification-records/VREC-RLS-004.md) covers the five surfaces.
-- [Repository adoption](repository-harness-upgrade/README.md): WO-HUP-030 selects 0.22.1; development source is unpublished 0.22.2.
+- [Repository adoption](repository-harness-upgrade/README.md): WO-HUP-030 selects 0.22.1. Release preparation now selects unpublished candidate source 0.23.0; it does not change the root evaluator.
 
 - [release-0-22-0/](release-0-22-0/README.md): published evaluator 0.22.0 and plugin 0.2.5;
   [completed public delivery](release-0-22-0/evidence/WO-RLS-036/closeout.md) covers all five delivery surfaces.

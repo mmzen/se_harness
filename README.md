@@ -63,7 +63,20 @@ record completed delivery, verified in
 [VREC-RLS-004](docs/engineering/release-0-22-1/verification-records/VREC-RLS-004.md).
 Repository evaluator: 0.22.1, adopted under
 [WO-HUP-030](docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-030.md).
-Development source: unpublished 0.22.2. The hosted-service contract still pins 0.22.0.
+Release candidate source: unpublished 0.23.0. The hosted-service contract pins
+the separate released evaluator 0.22.1.
+
+### Preparing evaluator 0.23.0 and plugin 0.2.7
+
+The [release package](docs/engineering/release-0-23-0/README.md) prepares the
+merged remote client and plugin guidance for normal distribution. Git remains
+authoritative. The service remains a private sandbox built from tagged source;
+no public service or container registry is proposed.
+
+Plugin 0.2.7 will bundle the exact 0.23.0 evaluator/client. The hosted service
+keeps its separately pinned evaluator 0.22.1. Builds and qualification of this
+new combination are still required. The public identities and evidence above
+remain those of the completed 0.22.1 / 0.2.6 release.
 
 ## Fewer repository files
 

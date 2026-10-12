@@ -39,7 +39,7 @@ The gates array defines exact membership: the first hosted implementation and
 reconciliation (WO-HAG-001/005/006/007), private lifecycle pilot (008), native
 qualification/instruction correction (009/010), authoring simplification (011),
 root-compatibility baseline (WO-HUP-030), integration-package correction
-(WO-IPK-002), new release preparation/qualification (WO-RLS-045/046), and the bounded client-admission correction (WO-RLS-048).
+(WO-IPK-002), new release preparation/qualification (WO-RLS-045/046), and the bounded client-admission and instruction-packaging correction (WO-RLS-048).
 WO-RLS-047 owns later public observations and is excluded to avoid circularity.
 
 The advisory census also finds prior-release WO-RLS-042 and untraced merge

@@ -1,0 +1,18 @@
+{
+  "source_commit": "943982bf356df1787da51feaf2c177433ede3d68",
+  "plan_sha256": "b9dd5e39a89b91f855bd848f09985c502193b157d05cf7cc600e57b1325bfaac",
+  "missing": [
+    "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+    "plugins/verity-plane/common/skills/change/references/hosted-test-lifecycle.md",
+    "plugins/verity-plane/common/skills/change/references/repository-change.md",
+    "plugins/verity-plane/common/skills/evidence/references/hosted-evidence.md",
+    "plugins/verity-plane/common/skills/evidence/references/repository-evidence.md",
+    "plugins/verity-plane/common/skills/harness-orient/references/hosted-reads.md",
+    "plugins/verity-plane/common/skills/harness-orient/references/repository-orientation.md",
+    "plugins/verity-plane/common/skills/setup/references/checkout.md",
+    "plugins/verity-plane/common/skills/setup/references/hosted-context.md",
+    "plugins/verity-plane/common/skills/setup/references/repository-context.md"
+  ],
+  "count": 10,
+  "observation": "Files are tracked in common plugin source but absent from the fixed release assembly map. Development assembly includes them."
+}

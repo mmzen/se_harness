@@ -16,8 +16,15 @@ The [new focused drafting assessment](evidence/WO-HAG-011/qualified45-result/ass
 records the WO-HAG-011 correction and its exact candidate. Both missing-input
 diagnostics, three fresh Claude positive drafts and one Codex positive draft pass.
 Earlier failures remain in their original reports. Duration and context goals
-remain missed or unavailable; they are separate from correctness. Human
-verification of this correction is pending. PR #543 remains draft.
+remain missed or unavailable; they are separate from correctness. mmzen verified
+[VREC-HAG-007](verification-records/VREC-HAG-007.md), including the final correction
+at its bound candidate. [PR #543](https://github.com/mmzen/se_harness/pull/543)
+merged on 2026-10-12. Historical reports below retain their original observations.
+
+The [0.23.0 / plugin 0.2.7 release package](../release-0-23-0/README.md) now prepares
+the public client/plugin distribution and a private source-built service. The
+new release combination requires its own qualification; previous verification
+does not establish new package identities or public availability.
 
 Git remains authoritative. No production, desktop, public delivery, host update
 or risk acceptance is claimed.

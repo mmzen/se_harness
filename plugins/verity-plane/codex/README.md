@@ -1,6 +1,6 @@
 # Verity Plane
 
-Verity Plane 0.2.7 is an unpublished development candidate. It exposes shared skills through the host's native skill discovery.
+Verity Plane 0.2.7 is an unpublished release candidate for SE Harness 0.23.0. It exposes shared skills through the host's native skill discovery.
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
@@ -15,16 +15,17 @@ changed, incompatible or oversized input reports a delivery gap without fallback
 Setup retains separate immutable evaluator environments outside repositories.
 Activation immediately returns the complete entry; it grants no lifecycle authority.
 
-This candidate adds explicit hosted sandbox read/draft guidance. Its development
-archive reuses the unchanged evaluator 0.22.1 wheel. Remote commands use a
-separately installed candidate client 0.22.2; that client never governs a checkout.
+This candidate adds hosted sandbox read, drafting and lifecycle-rehearsal guidance.
+Release staging bundles the exact 0.23.0 evaluator/client wheel. The hosted service
+keeps its separate pinned 0.22.1 evaluator. Remote commands use the qualified
+client in another environment; selecting it never changes a checkout's governor.
 Use setup's **Hosted sandbox selection** section with the exact combination
 report. This candidate has no public release or host qualification claim.
 
 The historical public plugin 0.2.6 qualification is in VREC-SEH-033. Its desktop
 omission and accepted risk do not qualify this changed candidate.
 
-Read the [release review](https://github.com/mmzen/se_harness/blob/main/docs/engineering/release-0-22-1/README.md)
+Read the [release review](https://github.com/mmzen/se_harness/blob/main/docs/engineering/release-0-23-0/README.md)
 and its delivery evidence for publication status. Compare installed bytes with
 the [public identity](https://github.com/mmzen/se_harness/blob/plugin-marketplace/PACKAGE-IDENTITY.json).
 Qualified archives keep their original preparation README snapshots; source

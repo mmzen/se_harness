@@ -6,7 +6,10 @@ The original volumes and the restored copy are preserved for inspection.
 from __future__ import annotations
 
 import argparse
+import ast
+from email.parser import BytesParser
 import hashlib
+import io
 import json
 import os
 import subprocess
@@ -14,8 +17,9 @@ import sys
 import secrets
 import shutil
 import time
+import tomllib
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 RUNTIME = "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4"
 OBSERVE = r'''
@@ -38,8 +42,94 @@ finally:s.store.driver.close()
 '''
 
 
+def client_identity(root, commit, wheel, replay):
+    """Check the wheel against committed versions and both retained builds."""
+    if not wheel.is_file() or wheel.is_symlink():
+        raise ValueError("Select a regular client wheel")
+    raw = wheel.read_bytes()
+    with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+        names = [name for name in archive.namelist() if name.endswith(".dist-info/METADATA")]
+        if len(names) != 1:
+            raise ValueError("Client wheel must contain one distribution metadata record")
+        metadata = BytesParser().parsebytes(archive.read(names[0]))
+    if metadata.get_all("Name") != ["se-harness"] or len(metadata.get_all("Version", [])) != 1:
+        raise ValueError("Select one se-harness client distribution")
+    version = metadata["Version"]
+    project = tomllib.loads(subprocess.check_output(["git", "show", commit + ":pyproject.toml"], cwd=root).decode())
+    module = ast.parse(subprocess.check_output(["git", "show", commit + ":se_harness/__init__.py"], cwd=root))
+    versions = [ast.literal_eval(node.value) for node in module.body if isinstance(node, ast.Assign)
+                and any(isinstance(target, ast.Name) and target.id == "__version__" for target in node.targets)]
+    if project["project"]["version"] != version or versions != [version]:
+        raise ValueError("Client wheel version differs from the committed source")
+    if wheel.name != f"se_harness-{version}-py3-none-any.whl":
+        raise ValueError("Client wheel filename differs from its metadata")
+    client = {"version": version, "wheel_sha256": hashlib.sha256(raw).hexdigest()}
+    manifest = replay["manifest"]
+    if (replay["candidate"]["commit"] != commit or manifest["commit"] != commit
+            or manifest["version"] != version or manifest["wheel"] != wheel.name
+            or manifest["wheel_sha256"] != client["wheel_sha256"]):
+        raise ValueError("Client replay does not bind this clean commit, version and wheel")
+    if len(replay["builds"]) != 2 or any(b["wheel_sha256"] != client["wheel_sha256"] for b in replay["builds"]):
+        raise ValueError("Both pinned builds must reproduce the supplied wheel")
+    return client
+
+
+def staged_plugin_inputs(args):
+    selected = [getattr(args, name, None) is not None
+                for name in ("plugin_marketplace", "client_bundle", "evaluator_python")]
+    if any(selected) and not all(selected):
+        raise ValueError("Staged plugins require --plugin-marketplace, --client-bundle and --evaluator-python together")
+    return all(selected)
+
+
+def snapshot_plugins(marketplace, output, accepted):
+    """Retain the already-checked archive bytes and their exact extracted files."""
+    archives = {}
+    for host in ("codex", "claude"):
+        name = f"verity-plane-{host}.zip"
+        raw = (marketplace / "packages" / name).read_bytes()
+        if hashlib.sha256(raw).hexdigest() != accepted["archives"][name]:
+            raise ValueError("Staged plugin changed after its content check")
+        with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+            for name in archive.namelist():
+                parts = PurePosixPath(name).parts
+                if not parts or parts[0] != "verity-plane" or len(parts) < 2 or ".." in parts or "\\" in name:
+                    raise ValueError("Invalid staged plugin archive path")
+        archives[host] = raw
+    output.mkdir()
+    for host, raw in archives.items():
+        (output / f"verity-plane-{host}.zip").write_bytes(raw)
+        with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+            for entry in archive.infolist():
+                target = output / host / entry.filename
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(archive.read(entry))
+                target.chmod((entry.external_attr >> 16) & 0o777)
+
+
+def prepare_plugins(args, root, source, commit, client, evaluator, plugin_dir, run):
+    """Reuse exact staged packages, or the existing development-only assembler."""
+    digest = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+    if staged_plugin_inputs(args):
+        accepted = json.loads(run("plugin-staging-check", [sys.executable, "-B", root / "scripts/build_plugin_marketplace.py",
+            "check-stage", "--repository", root, "--revision", commit,
+            "--candidate-manifest", args.client_bundle, "--expected-manifest-sha256", digest(args.client_bundle),
+            "--expected-wheel-sha256", client["wheel_sha256"], "--wheel", args.client_wheel,
+            "--evaluator-python", args.evaluator_python, "--output-directory", args.plugin_marketplace]))
+        if accepted.get("accepted") is not True:
+            raise ValueError("Staged plugins did not pass the existing marketplace content check")
+        snapshot_plugins(args.plugin_marketplace, plugin_dir, accepted)
+        return args.client_wheel, {key: accepted["evaluator"][key]
+                                  for key in ("version", "archive_sha256", "payload_sha256")}
+    run("plugin-assembly", [sys.executable, "-B", "-c",
+        "import sys,json;from pathlib import Path;sys.path.insert(0,sys.argv[1]);from repository_tools.plugin_distribution import develop;print(json.dumps(develop(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]))))",
+        root, source, args.evaluator_wheel, plugin_dir])
+    return args.evaluator_wheel, evaluator
+
+
 def prepare(args):
     """Build the exact source combination; this does not claim qualification."""
+    staged_plugin_inputs(args)
     root, output = args.repository.resolve(), args.output.resolve()
     if output == root or output.is_relative_to(root):
         raise ValueError("Choose a new output directory outside the repository")
@@ -61,11 +151,7 @@ def prepare(args):
         raise ValueError("Commit the reviewed implementation before building its combination")
     replay = json.loads(args.client_replay.read_text(encoding="utf-8"))
     digest = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
-    client = {"version": "0.22.2", "wheel_sha256": digest(args.client_wheel)}
-    if replay["candidate"]["commit"] != commit or replay["manifest"]["wheel_sha256"] != client["wheel_sha256"]:
-        raise ValueError("Client replay does not bind this clean commit and wheel")
-    if len(replay["builds"]) != 2 or any(b["wheel_sha256"] != client["wheel_sha256"] for b in replay["builds"]):
-        raise ValueError("Both pinned builds must reproduce the supplied wheel")
+    client = client_identity(root, commit, args.client_wheel, replay)
     evaluator = {"version": "0.22.1", "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
                  "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff"}
     if digest(args.evaluator_wheel) != evaluator["archive_sha256"]:
@@ -82,9 +168,7 @@ def prepare(args):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(subprocess.check_output(["git", "cat-file", "blob", oid], cwd=root))
     plugin_dir = output / "plugin"
-    run("plugin-assembly", [sys.executable, "-B", "-c",
-        "import sys,json;from pathlib import Path;sys.path.insert(0,sys.argv[1]);from repository_tools.plugin_distribution import develop;print(json.dumps(develop(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]))))",
-        root, source, args.evaluator_wheel, plugin_dir])
+    plugin_wheel, plugin_evaluator = prepare_plugins(args, root, source, commit, client, evaluator, plugin_dir, run)
     canonical = lambda value: json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
     plugins = {}
     for host in ("codex", "claude"):
@@ -93,12 +177,15 @@ def prepare(args):
             inventory = [{"path": name, "sha256": hashlib.sha256(archive.read(name)).hexdigest()} for name in sorted(archive.namelist())]
             manifest_name = ".codex-plugin" if host == "codex" else ".claude-plugin"
             version = json.loads(archive.read(f"verity-plane/{manifest_name}/plugin.json"))["version"]
-            if version != "0.2.7":
-                raise ValueError("Select the distinct unpublished plugin candidate")
-            if hashlib.sha256(archive.read("verity-plane/packages/" + args.evaluator_wheel.name)).hexdigest() != evaluator["archive_sha256"]:
-                raise ValueError("Plugin changed the governing evaluator")
+            directory = "codex" if host == "codex" else "claude-code"
+            expected_version = json.loads((source / "plugins/verity-plane" / directory / manifest_name / "plugin.json").read_bytes())["version"]
+            if version != expected_version:
+                raise ValueError("Plugin version differs from its committed source")
+            if hashlib.sha256(archive.read("verity-plane/packages/" + plugin_wheel.name)).hexdigest() != plugin_evaluator["archive_sha256"]:
+                raise ValueError("Plugin changed the selected embedded evaluator")
         (output / f"plugin-{host}-inventory.json").write_bytes(canonical(inventory))
-        plugins[host] = {"version": version, "archive_sha256": digest(archive_path), "inventory_sha256": hashlib.sha256(canonical(inventory)).hexdigest()}
+        plugins[host] = {"version": version, "archive_sha256": digest(archive_path),
+                         "inventory_sha256": hashlib.sha256(canonical(inventory)).hexdigest(), "evaluator": plugin_evaluator}
     context = source / "server"
     (context / "vendor").mkdir()
     shutil.copy2(args.evaluator_wheel, context / "vendor" / args.evaluator_wheel.name)
@@ -229,6 +316,9 @@ if __name__ == "__main__":
     for name in ("repository", "output", "client-wheel", "client-replay", "evaluator-wheel"):
         build.add_argument("--" + name, type=Path, required=True)
     build.add_argument("--image", required=True)
+    build.add_argument("--plugin-marketplace", type=Path, help="existing exact staged marketplace; omit for development assembly")
+    build.add_argument("--client-bundle", type=Path, help="recipe-bound client bundle used to stage that marketplace")
+    build.add_argument("--evaluator-python", type=Path, help="absolute released evaluator Python for existing package checks")
     build.add_argument("--phase3", action="store_true", help="explicit test-copy configuration on a new schema-2 volume; no real authority")
     restore = commands.add_parser("recover", help="restart and restore the private initialized sandbox")
     restore.add_argument("--compose", type=Path, required=True)

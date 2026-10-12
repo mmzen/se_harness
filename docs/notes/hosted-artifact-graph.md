@@ -402,5 +402,13 @@ authority and Phase 4 production/release obligations require later work.
 WO-HAG-011 adds typed file inputs and compact evidence-backed results to the
 existing client. See [the concrete interface](harnessctl-reference.md#concise-hosted-authoring).
 Skills route hosted drafting, lifecycle rehearsal and repository work separately.
-These candidate changes require their own tests; earlier service qualification
-does not establish improved task duration or context use. Git remains authoritative.
+mmzen verified the final correction in
+[VREC-HAG-007](../engineering/hosted-artifact-graph/verification-records/VREC-HAG-007.md),
+and PR #543 merged on 2026-10-12. The paired lifecycle and focused drafting results
+are indexed in the [current qualification](../engineering/hosted-artifact-graph/README.md#current-native-qualification).
+The missed or unavailable duration/context goals remain distinct from correctness.
+Git remains authoritative.
+
+The [0.23.0 / plugin 0.2.7 release package](../engineering/release-0-23-0/README.md)
+requires new qualification of its exact archives and private service combination.
+Earlier verification does not establish public delivery or production support.
