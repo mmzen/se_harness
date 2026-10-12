@@ -2,7 +2,7 @@
 id = "WO-IPK-002"
 type = "work_order"
 title = "Allow the retained source evidence within a fixed integration archive budget"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-12"
 updated = "2026-10-12"
@@ -41,6 +41,13 @@ to = "in_progress"
 decided_at = "2026-10-12T07:51:31Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-12T08:18:35Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Restore the integration-package build

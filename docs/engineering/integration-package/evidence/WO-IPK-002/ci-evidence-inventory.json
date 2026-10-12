@@ -1,0 +1,76 @@
+{
+  "archive": "ci-evidence.zip",
+  "sha256": "5d12bc7910e53f47dbb592c8640cdbe548a1975f8f5721eec62ebd94f6fde1c1",
+  "files": [
+    {
+      "path": "ci-final-run.json",
+      "bytes": 13530,
+      "sha256": "547bd75a6b0ff533523e26a74217d461b99af6b5fc10b5753b70709cc36a8069"
+    },
+    {
+      "path": "ci-final-jobs.json",
+      "bytes": 30653,
+      "sha256": "3f7cd18f67fa3e1a0ca16e363c8504231d234eb361a5285c900b878cb8ff680c"
+    },
+    {
+      "path": "ci-final-artifacts.json",
+      "bytes": 6626,
+      "sha256": "9bf8b2eac420a709e1739c1bc877acc24a979285fbe46236e7a63c63e8c7fdfd"
+    },
+    {
+      "path": "ci-summary.json",
+      "bytes": 4769,
+      "sha256": "22417f12459db6ec37402b1eaf1e6f8f4169bc1232cbeb6c72c3f49a969ff65e"
+    },
+    {
+      "path": "ci-tree-comparison.json",
+      "bytes": 272,
+      "sha256": "579aaab9ae505e7752ca322085d1d87e5a55a8efc1cbbd184f4a5ad03f4b3a89"
+    },
+    {
+      "path": "ci-log-build.json",
+      "bytes": 85375,
+      "sha256": "597d008f370f56213ba1fb3f6d7f49909494c5bbec1a461535ceea8428ad4ef5"
+    },
+    {
+      "path": "ci-log-linux.json",
+      "bytes": 63805,
+      "sha256": "d67f350225c20edef44e45a133434ba033ba790bf5b4263c98a6a9145a6790e1"
+    },
+    {
+      "path": "ci-log-windows.json",
+      "bytes": 73040,
+      "sha256": "e8b14b27bda3f8af8e17212b08f02dd0f8310140255ea465bce232ee36bee37a"
+    },
+    {
+      "path": "ci-log-retention.json",
+      "bytes": 70702,
+      "sha256": "c47d1f89c37185ca08f0b5cd8c7e89c4cb82d0c61d62a8d416971b997d2dbc9a"
+    },
+    {
+      "path": "archive-facts.json",
+      "bytes": 474,
+      "sha256": "bfbb59b1ecb3f634dbd738ce3223afc092a76d3853c85a3413e0c1c215143164"
+    },
+    {
+      "path": "candidate-archive.json",
+      "bytes": 509,
+      "sha256": "ae7bec28140cb8bbea284aa085738893a6a28c7b895d7ba5e476e24cbfd056d5"
+    },
+    {
+      "path": "preserved-blob-comparison.json",
+      "bytes": 1873,
+      "sha256": "3f6efa8891cd6019fa577ddb944e3ed5accbeabe7624643f4e8ff8db0eea864a"
+    },
+    {
+      "path": "integration-manifest.json",
+      "bytes": 1134,
+      "sha256": "60181bd24002c269b87e66e6a241830e7b786c047770b900b8868516c80c591d"
+    },
+    {
+      "path": "SHA256SUMS",
+      "bytes": 213,
+      "sha256": "ffcc1eedd6003e92bffe80d0981ce0454606abda74c06ead308e2e47073d2737"
+    }
+  ]
+}
