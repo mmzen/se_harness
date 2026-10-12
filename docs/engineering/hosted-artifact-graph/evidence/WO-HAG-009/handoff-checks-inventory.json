@@ -1,0 +1,143 @@
+{
+  "archive": "handoff-checks.zip",
+  "bytes": 80794,
+  "sha256": "d0ef1c2125a3ba0ffbf48292943a7c52065e20afc98f0292b5ca08798ea24964",
+  "files": [
+    {
+      "path": "authored-diff-check.json",
+      "bytes": 274,
+      "sha256": "fa6d0f6c4b1666df27da11167b3be5676e036402e5c503dd61fa6eb2fe747388"
+    },
+    {
+      "path": "combined-handoff.json",
+      "bytes": 1108,
+      "sha256": "c8c34d477fefa8ac3b06498c9036ae34d4fa4ffda3ea98fdf2e3fd026956a20c"
+    },
+    {
+      "path": "compare-039443f3.json",
+      "bytes": 2354,
+      "sha256": "5cacce0f4620bb339364cdc3008bfc1d89d932be4d0f85bdd37937dbeb8b8ec3"
+    },
+    {
+      "path": "compare-2f6ecb14.json",
+      "bytes": 12862,
+      "sha256": "20be03cfe591291f8b04573d5b53fdc9b2538b6a51ee52351c80261ad3e4a4b2"
+    },
+    {
+      "path": "consolidated-validation.json",
+      "bytes": 429356,
+      "sha256": "0687058789d3127f7d176dc8a70719ddd5097322c90804fe5b621263eb2f6290"
+    },
+    {
+      "path": "pr-current-network.json",
+      "bytes": 11114,
+      "sha256": "4379a34576cb062ed0bac5aa865b6ac347a91e465e18622c51f308cc4e3f2191"
+    },
+    {
+      "path": "pr-current.json",
+      "bytes": 495,
+      "sha256": "6caec930a94d36ad7a45d610eba085020fe11c2f432a90ff891ccfdbf94ee2f7"
+    },
+    {
+      "path": "pr-event.json",
+      "bytes": 4201,
+      "sha256": "f4aaa61b93e586d104631ed9b702f5c8a0638f94a2602d37cd7a943a17e4f57f"
+    },
+    {
+      "path": "WO-HAG-009-consolidation-scope.json",
+      "bytes": 20955,
+      "sha256": "55a701e5437539722ee04809cf03779f3710483c6ced46a1392293d5c521c96a"
+    },
+    {
+      "path": "WO-HAG-009-context.json",
+      "bytes": 22299,
+      "sha256": "310010f0be3e9a88dc7eb6db3314e77902fa322e03b1e236f1e72445454ce9d1"
+    },
+    {
+      "path": "WO-HAG-009-declared-paths.json",
+      "bytes": 32523,
+      "sha256": "bc857a859b9150812aa60ed3583475abf772fd2b9190d250b1e96a56633b7863"
+    },
+    {
+      "path": "WO-HAG-009-individual-handoff.json",
+      "bytes": 56816,
+      "sha256": "22f11c405122206872e7d6c75e4b695fabd276d7555991e0c91f6b9afb120738"
+    },
+    {
+      "path": "WO-HAG-009-manifest-scope.json",
+      "bytes": 19958,
+      "sha256": "9bf927eaa713226eb880226542779ae0b02b59eed8f4168e00360fa7c4878747"
+    },
+    {
+      "path": "WO-HAG-009-packet.json",
+      "bytes": 18627,
+      "sha256": "eeaecb6f4283b68baf10e87df754b80b370bb7119ad8f1840f83a68abd90de46"
+    },
+    {
+      "path": "WO-HAG-009-review-preflight.json",
+      "bytes": 2295,
+      "sha256": "cce7a059884beba36cffff345d5a7388400b21d1bc11ee9c1b4041e9cc43d35a"
+    },
+    {
+      "path": "WO-HAG-010-consolidation-scope.json",
+      "bytes": 19647,
+      "sha256": "61309d51392a3cefccdd79d6861b9728853bb802560e66145e49ff64edbc19ff"
+    },
+    {
+      "path": "WO-HAG-010-context.json",
+      "bytes": 20529,
+      "sha256": "0e7d7f3355c671856bf804173d2233f3a61f87c26f020f8051c088333fde03df"
+    },
+    {
+      "path": "WO-HAG-010-declared-paths.json",
+      "bytes": 1050,
+      "sha256": "faceb1ee42e5456c7eed059d0d01424fdba9c8909c0bea66ec93bdc0dd5a1a76"
+    },
+    {
+      "path": "WO-HAG-010-individual-handoff.json",
+      "bytes": 22656,
+      "sha256": "0d432721f5812d8a4184850982ad77054e2ea81ce5113c77d42a94c9b260eed3"
+    },
+    {
+      "path": "WO-HAG-010-manifest-scope.json",
+      "bytes": 19269,
+      "sha256": "cdc399bc33c1e46e4cc043f34239a1e1fc2d42e546654358a568317ee64ffa69"
+    },
+    {
+      "path": "WO-HAG-010-packet.json",
+      "bytes": 17940,
+      "sha256": "8edd51e7c11373b01cc6fd6ec7800ae79f87acc0a4a0808281ec0751005e96b5"
+    },
+    {
+      "path": "WO-HAG-010-review-preflight.json",
+      "bytes": 2118,
+      "sha256": "c901381686b9debbdb957672ca10baf09fc9f0c8e9a914e98cd8fced07589799"
+    },
+    {
+      "path": "hag_consolidate.py",
+      "bytes": 12907,
+      "sha256": "7db02568f1330c5a96f310f5154acad01cfdd4c008584e14db3d8d7e83bef8f7"
+    },
+    {
+      "path": "hag_handoff_begin.py",
+      "bytes": 1116,
+      "sha256": "627551293cacaeb37ee9d988aa678d2c9d1fa20235eae30db1c234aa95c73cda"
+    },
+    {
+      "path": "hag_handoff_individual.py",
+      "bytes": 1517,
+      "sha256": "d4d257298aee1b38fa0d421d78b79233dc34cd7eb5b50c40c439f62cf59d3386"
+    },
+    {
+      "path": "combined-handoff-final.json",
+      "bytes": 1108,
+      "sha256": "a39cfa7e6546e964df5743723e11d2f27116040b187cabc5b320fd3a155bde89"
+    },
+    {
+      "path": "hag_handoff_finalize.py",
+      "bytes": 3072,
+      "sha256": "0ddaecc8a90dfd74fa0c8417aedf82b3c70a2005a97236ad1fcafacde783b95d"
+    }
+  ],
+  "status": "Individual handoffs pass. Both complete-PR checks pass their scope union and WO-HAG-009/010, then stop at the separate WO-HAG-011 evidence predicate. No lifecycle transition."
+}
