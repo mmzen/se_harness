@@ -1,0 +1,18 @@
+{
+  "archive": "report-checks.zip",
+  "sha256": "62ba6e23e732fe935d5fb5a6808c96e42dd39d4fa10afea1399e579b3a0fe908",
+  "files": [
+    {
+      "path": "report38-scope.json",
+      "sha256": "89aef524f8c16dca4c78984f380e7f59d8c42cf1fcbf5fc76738172d9e751f58"
+    },
+    {
+      "path": "report38-preflight.json",
+      "sha256": "11a13fce30b4b9f271970dc60d9ab4bb1d85c1e5d1c246981e064d1e90c65df7"
+    },
+    {
+      "path": "report38-validation.json",
+      "sha256": "e4891007362df808346d0816a8fd6bc8edebc35c8ec33338592d4ec136af96ab"
+    }
+  ]
+}
