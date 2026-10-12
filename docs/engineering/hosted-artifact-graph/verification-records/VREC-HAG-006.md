@@ -2,7 +2,7 @@
 id = "VREC-HAG-006"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-12"
 updated = "2026-10-12"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/WO
 evaluator_evidence_path = "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-006-evaluator.json"
 evaluator_evidence_sha256 = "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899"
 
+verified_at = "2026-10-12T11:10:23Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HAG-009", "WO-HAG-010"]
 conforms_to = ["VER-HAG-007"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-12T11:10:23Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied \"Verify result\" to the published VREC-HAG-006 review at 009da873cf8f4fa80cec6ada984b4574e837a0c4 for candidate f6b6663a655d7227d967f3b7b0e202576eed739b. Accept verification of WO-HAG-009 and WO-HAG-010 against VER-HAG-007, including the disclosed Codex read-only supplement. WO-HAG-011 remains unfinished; no merge, release, deployment, changed criterion or risk acceptance is granted."
 +++
 
 # Verification Record Candidate
