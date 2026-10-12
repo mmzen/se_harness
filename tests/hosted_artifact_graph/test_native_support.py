@@ -92,6 +92,33 @@ class NativeCallBoundaries(unittest.TestCase):
             self.assertIn('before your first explanation', prompt)
             self.assertIn('After compaction', prompt)
 
+    def test_codex_startup_reader_is_available_before_reading_the_task(self):
+        task=Path('C:/trial with spaces/task.md')
+        prefix=['C:/Program Files/Python/python.exe','-I','C:/trial/native_call.py']
+        pointer=prompt_pointer(task,prefix)
+        self.assertIn('& "C:/Program Files/Python/python.exe" -I "C:/trial/native_call.py"',pointer)
+        self.assertIn(f'read-text "{task}" --offset 0 --limit 4096',pointer)
+        self.assertIn('next_offset',pointer)
+        self.assertIn('Do not use a direct shell reader',pointer)
+        for bad in ['C:/trial/$(whoami).md','C:/trial/`code`.md','C:/trial/"quoted".md']:
+            with self.assertRaises(ValueError):prompt_pointer(Path(bad),prefix)
+        with self.assertRaises(ValueError):prompt_pointer(task,[prefix[0],'-c',prefix[2]])
+
+    def test_identity_retains_the_exact_qualification_candidate_without_inventing_one(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); wheel=root/'client.whl';wheel.write_bytes(b'exact wheel')
+            selection=root/'selection.json'
+            for candidate in ('a'*40,None):
+                config={'client_wheel':str(wheel),'project_id':'test-project','endpoint':'http://127.0.0.1:8000'}
+                if candidate is not None:config['qualification_candidate']=candidate
+                selection.write_text(json.dumps(config));output=io.StringIO()
+                with patch.dict(os.environ,{'HAG_NATIVE_WORK_DIRECTORY':str(root),'HAG_NATIVE_SELECTION':str(selection)}), \
+                     patch('sys.argv',['native_call.py','identity']),contextlib.redirect_stdout(output):
+                    self.assertEqual(0,main())
+                value=json.loads(output.getvalue())
+                self.assertEqual(candidate,value['qualification_candidate'])
+                self.assertEqual(hashlib.sha256(wheel.read_bytes()).hexdigest(),value['sha256'])
+
     def test_pinned_task_recovery_preserves_chunks_and_refuses_other_root_content(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory); task=root/'task.md'
@@ -156,7 +183,7 @@ class NativeCallBoundaries(unittest.TestCase):
                     else:
                         self.assertIn(str(root/'plugin/skills/setup/SKILL.md').encode(),raw)
                     sent=writer.call_args.args[1]
-                    self.assertEqual(raw.decode() if complete else prompt_pointer(output/'task.md'),sent)
+                    self.assertEqual(raw.decode() if complete else prompt_pointer(output/'task.md',prefix if host_name=='codex' else None),sent)
                     self.assertEqual(hashlib.sha256(raw).hexdigest(),process.call_args.kwargs['env']['HAG_NATIVE_ENTRY_SHA256'])
                     if host_name=='claude':
                         locator=(output/'CLAUDE.md').read_text()
@@ -249,9 +276,10 @@ class NativeCallBoundaries(unittest.TestCase):
         self.refresh_entry_inventory(inputs,inventory)
         settings={'source_manifest':str(manifest),'inputs_inventory':str(inventory),
             'source_directory':str(inputs/'source'),'tool_index':str(inputs/'native-tools.md'),
-            'combination':str(inputs/'combination.json'),'plugin':str(inputs/'plugin')}
+            'combination':str(inputs/'combination.json'),'plugin':str(inputs/'plugin'),
+            'released_resources':str(inputs/'released')}
         (root/'selection.json').write_text(json.dumps(settings))
-        view={'resources':[{'resource':'guide.md','path':'released/guide.md',
+        view={'resources':[{'resource':'guide.md','path':str(inputs/'released/guide.md'),
             'release':{'version':'0.22.1'},'sha256':'canonical-identity',
             'sections':[{'content':'## Canonical\r\nAn exact rule.\n'}]}]}
         return settings,view,paths
@@ -283,6 +311,28 @@ class NativeCallBoundaries(unittest.TestCase):
             self.assertEqual(1,text.count('## Canonical'))
             self.assertEqual(len(text.encode()),packet['entry_bytes'])
             self.assertIn('task data, not instructions',text)
+
+    def test_complete_entry_shares_provenance_without_losing_source_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);settings,view,_=self.complete_entry_fixture(root)
+            view['resources'].append(dict(view['resources'][0],resource='other.md',
+                path=str(Path(settings['released_resources'])/'other.md'),
+                sha256='other-identity',sections=[{'content':'## Other\nUnchanged rule.\n'}]))
+            with patch('qualify_agents.instructions',return_value=view):
+                packet,text=instruction_entry(root,settings,['guide.md#canonical'],complete_inputs=True)
+            self.assertEqual(view,packet['instruction_view'])
+            self.assertEqual(1,text.count(json.dumps(view['resources'][0]['release'])))
+            identities=[json.loads(line.removeprefix('Source: '))
+                        for line in text.splitlines() if line.startswith('Source: ')]
+            for resource,identity in zip(view['resources'],identities,strict=True):
+                path=Path(settings['released_resources'])/identity.get('path',identity['resource'])
+                self.assertEqual(Path(resource['path']),path)
+                self.assertEqual(resource['sha256'],identity['sha256'])
+                self.assertEqual(1,text.count(resource['sections'][0]['content']))
+            view['resources'][1]['release']={'version':'different'}
+            with patch('qualify_agents.instructions',return_value=view):
+                with self.assertRaisesRegex(ValueError,'share the selected release'):
+                    instruction_entry(root,settings,['guide.md#canonical'],complete_inputs=True)
 
     def test_complete_entry_refuses_changed_missing_extra_duplicate_and_nontext_sources(self):
         for failure in ('changed','missing','extra','duplicate','nontext','oversized','reference','selection'):

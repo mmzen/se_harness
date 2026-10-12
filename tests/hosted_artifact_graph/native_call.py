@@ -429,7 +429,8 @@ def main():
     if args.kind == 'identity':
         wheel=Path(config['client_wheel'])
         print(json.dumps({'wheel':str(wheel),'sha256':hashlib.sha256(wheel.read_bytes()).hexdigest(),
-                          'project_id':config['project_id'],'endpoint':config['endpoint']}))
+                          'project_id':config['project_id'],'endpoint':config['endpoint'],
+                          'qualification_candidate':config.get('qualification_candidate')}))
         return 0
     record = work_output(root,args.record)
     # Keep the original command record for independent replay. Give native file

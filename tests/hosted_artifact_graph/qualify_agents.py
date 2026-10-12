@@ -181,9 +181,22 @@ def instruction_entry(root, settings, selectors, *, complete_inputs=False):
              'read additional references only when their conditions apply. '
              'After compaction, recover this entry from task.md. '
              + packet['claim'] + '\n']
+    if complete_inputs:
+        resource_root = Path(settings['released_resources'])
+        release = view['resources'][0]['release']
+        parts.append('\nCanonical source paths below are relative to: '
+                     + str(resource_root) + '\nSelected release: ' + json.dumps(release) + '\n')
     for resource in view['resources']:
-        parts.append('\nSource: ' + json.dumps({k: resource[k] for k in
-                     ('resource', 'path', 'release', 'sha256')}) + '\n')
+        if complete_inputs:
+            if resource['release'] != release:
+                raise ValueError('Complete entry resources must share the selected release')
+            identity = {'resource': resource['resource'], 'sha256': resource['sha256']}
+            relative = Path(resource['path']).relative_to(resource_root).as_posix()
+            if relative != resource['resource']:
+                identity['path'] = relative
+        else:
+            identity = {k: resource[k] for k in ('resource', 'path', 'release', 'sha256')}
+        parts.append('\nSource: ' + json.dumps(identity) + '\n')
         for section in resource['sections']:
             if 'content' in section:
                 parts.append('\n' + section['content'])
@@ -234,13 +247,23 @@ def write_prompt(stream, prompt):
     stream.close()
 
 
-def prompt_pointer(path):
+def prompt_pointer(path, helper_argv=None):
     """Deliver the task once, through a file read that is visible in the capture."""
-    return (f'Read `{path}` before your first explanation or action. '
+    pointer = (f'Read `{path}` before your first explanation or action. '
             'It contains the complete task and selected instruction entry. '
             'Apply that content directly; do not reread it while retained and unchanged. '
             'After compaction, recover from the same file. '
             'This explicit test setup is not automatic startup-delivery evidence.')
+    if helper_argv is not None:
+        if any(c in str(path) for c in '\"$`\r\n'):
+            raise ValueError('Task path is unsafe for literal shell display')
+        pointer += ('\nUse the existing bounded reader for this initial read and recovery. '
+                    'In PowerShell execute exactly one helper invocation:\n```text\n& '
+                    + shell_prefix(helper_argv) + f' read-text "{path}" --offset 0 --limit 4096\n```\n'
+                    'Continue with the returned next_offset until complete is true. '
+                    'Do not use a direct shell reader. This supplies file access only, '
+                    'not workflow operations or new permission.')
+    return pointer
 
 
 def shell_prefix(argv):
@@ -310,7 +333,7 @@ def run(args):
             'before acting; reuse unchanged content already retained in context.\n')
     if args.host == 'codex' and settings.get('approved_shell_argv_prefix'):
         prompt += ('\n\n## Codex file discovery\n\n'
-            'If native Read is unavailable, use this existing approved helper prefix:\n\n```json\n'
+            'For task recovery after compaction and other file reads, use this approved helper prefix:\n\n```json\n'
             + json.dumps(settings['approved_shell_argv_prefix']) + '\n```\n'
             'Append `read-json ABSOLUTE_FILE` to read selection.json, or '
             '`read-text ABSOLUTE_FILE` for an inventoried input or work text file. '
@@ -326,7 +349,8 @@ def run(args):
     if entry:
         save(output/'instruction-entry.json', entry)
     (output/'task.md').write_bytes(prompt.encode('utf-8'))
-    initial_prompt = prompt if complete_inputs else prompt_pointer(output/'task.md')
+    initial_prompt = prompt if complete_inputs else prompt_pointer(output/'task.md',
+        settings.get('approved_shell_argv_prefix') if args.host == 'codex' else None)
     env['HAG_NATIVE_ENTRY_SHA256'] = hashlib.sha256(prompt.encode('utf-8')).hexdigest()
     locator = None
     if args.host == 'claude':

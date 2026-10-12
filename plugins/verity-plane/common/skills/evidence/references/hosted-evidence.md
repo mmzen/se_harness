@@ -44,8 +44,10 @@ returned inside normal tool responses; report those refusals separately.
 If the capture is incomplete, say which result or count remains unassessed.
 
 Name identities in full: hosted input baseline B, source fixture commit S,
-test Git candidate P, and actual implementation candidate C. If an identity is
-not established by the cited evidence, report it as unknown. Never substitute
+test Git candidate P, and actual implementation candidate C. The selected test
+inputs name C in `qualification_candidate`; the bounded helper's `identity` result
+also returns that value. Inspect and cite this input before calling C unknown.
+If an identity is not established by the cited evidence, report it as unknown. Never substitute
 the fixture commit for the candidate bound in a VREC or RLS.
 
 Keep one short row per assessed case: outcome, exact evidence path/field, and
