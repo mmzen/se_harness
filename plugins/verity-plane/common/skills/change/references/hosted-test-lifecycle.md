@@ -60,8 +60,8 @@ next step does not establish a different action's required reads.
 | --- | --- |
 | Complete draft content | Use [Hosted drafting](hosted-drafts.md) for the selected type's exact checklist |
 | Identify decision authority | `docs/engineering/harness/AUTHORITY.md#decision-rights` |
-| Assess an approval package | `docs/engineering/harness/AUTHORIZE_WORK.md#assess-the-proposed-artifact-package` and `docs/engineering/harness/AUTHORITY.md#decision-rights` |
-| Apply supplied approval decisions | `docs/engineering/harness/AUTHORIZE_WORK.md#apply-the-selected-transitions` and `docs/engineering/harness/AUTHORITY.md#decision-rights` |
+| Assess an approval package | `docs/engineering/harness/AUTHORIZE_WORK.md#assess-the-proposed-artifact-package`, `docs/engineering/harness/AUTHORITY.md#decision-rights` and `docs/engineering/harness/AUTHORITY.md#delegation-and-separation` |
+| Apply supplied approval decisions | `docs/engineering/harness/AUTHORIZE_WORK.md#apply-the-selected-transitions`, `docs/engineering/harness/AUTHORITY.md#decision-rights` and `docs/engineering/harness/AUTHORITY.md#delegation-and-separation` |
 | Start approved work | `docs/engineering/harness/EXECUTE_WORK.md#start-the-selected-work` and `docs/engineering/harness/AUTHORITY.md#authority-from-work-approval` |
 | Record a risk and paired decision | `docs/engineering/harness/RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change` and `docs/engineering/harness/RISKS_AND_DECISIONS.md#raised-risks` |
 | Apply a supplied decision disposition | `docs/engineering/harness/AUTHORIZE_WORK.md#resolve-approval-blockers` and `docs/engineering/harness/AUTHORITY.md#decision-rights` |
