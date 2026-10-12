@@ -92,9 +92,11 @@ fields to those tools. Distinguish the local test runtime from the service and l
 If a required condition cannot be assessed with the available tools, report that
 gap before requesting approval; do not promise an unavailable check.
 
-State a missing required fact as a question and stop dependent writing. A partial
-draft may omit it and remain incomplete. Do not call an unsupported required claim
-a non-blocking observation. Report a type/outcome mismatch without changing type.
+Distinguish a missing input from a draft omission. Ask for a required fact absent
+from the confirmed inputs and stop dependent writing. If the fact is available
+and only the draft omits it, correct the editable draft within the requested
+scope. A partial draft stays incomplete. Report a type/outcome mismatch without
+changing type or inventing a fact.
 
 ## Author and submit
 
@@ -111,14 +113,15 @@ allocation requires an existing domain with an evaluable ID token.
 Inspect the created template through `--include-document` or
 [an exact revision read](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
 Findings are not the document. Complete only supported content and review it
-against the type checklist. Remove unsupported claims, duplicate checks and
-constraints absent from definitions. For every verification pass condition,
-identify the planned check that assesses it. Add a missing check or narrow the
-claim; an untested condition prevents a complete-content claim. Report this
-review separately from template checks.
+against the type checklist. Trace each verification pass condition to its
+governing definition and planned check. Remove unsupported claims, duplicate
+checks and constraints absent from definitions; an unrequested extra check is
+not a required gap. Correct omissions from confirmed inputs before stopping.
+Report the content review separately from template checks.
 
-Submit the complete UTF-8 file with `revise-artifact`. Apply that review to the saved
-document, then inspect its versions, receipt and findings before another draft.
+Submit the complete UTF-8 file with `revise-artifact`. Review the saved document
+and its returned versions, receipt and findings. If this review finds a supported
+in-scope correction, revise the draft and review the new saved revision.
 `revise-artifact` edits an editable draft, not an approved or imported record.
 Lifecycle history, decisions and evidence stay immutable. If a protected-record
 refusal occurs, stop that revision. Do not retry it with changed state, history
@@ -133,9 +136,9 @@ complete requests/results and one short report outside the repository, including
 after a mutation attempt or uncertain effect. Read required omitted findings.
 The report contains:
 
-- **Content readiness:** complete, incomplete or blocked against the selected
-  type checklist. Give the supported content or exact missing input; saving alone
-  establishes no completeness.
+- **Content readiness:** one conclusion: complete, incomplete or blocked against
+  the selected type checklist. Refer to the latest saved revision. A correction
+  resolves the earlier omission; an unresolved required gap prevents completion.
 - **Saved state:** selection, revision, versions and exact document/result paths.
 - **Validation and review:** evaluator findings, independent content findings,
   local and remote failures (including recovered ones), denials, uncertain effects,
@@ -147,8 +150,10 @@ Draft validation checks template shape and required links. `content_review`
 being `not_assessed` means only that the evaluator did not assess content. It
 does not invalidate your separate review; an empty `incomplete` list does not
 complete it. Name the method: source inspection, executed test or evaluator check.
-Planned checks are not executed tests. Keep report and final reply consistent
-about readiness and actual checks. Use only confirmed paths/digests.
+Planned checks are not executed tests. Keep report and final reply consistent.
+Separate successful reads from accepted mutations. Attribute facts to their
+actual source: response metadata is not content in the saved artifact. Use only
+confirmed paths/digests; saving alone establishes no completeness.
 After compaction, recover the retained reply or report and obtain fresh context.
 
 For stale input, inspect the selection without silently refreshing versions.
