@@ -183,6 +183,23 @@ class RefreshGuidanceTests(unittest.TestCase):
         files["README.md"] += b"\n[Setup](packages/codex/verity-plane/skills/setup/SKILL.md#missing-heading)\n"
         self.assertTrue(any("missing heading" in finding for finding in link_findings(files, sources)))
 
+    def test_packaged_skill_routes_resolve_for_both_hosts(self):
+        plan = json.loads((ROOT / "release/plugin-assembly.json").read_bytes())
+        for host, mapping in plan["hosts"].items():
+            files = {target: (ROOT / source).read_bytes() for target, source
+                     in {**plan["shared"], **mapping}.items()}
+            pages = [name for name in files if name.startswith("skills/") and name.endswith(".md")]
+            with self.subTest(host=host):
+                self.assertEqual([], link_findings(files, pages))
+                # Missing deep references must fail even when the entry file
+                # and the package README still exist.
+                for name in ("skills/setup/references/checkout.md",
+                             "skills/change/references/hosted-drafts.md",
+                             "skills/evidence/references/hosted-evidence.md"):
+                    broken = {key: value for key, value in files.items() if key != name}
+                    findings = link_findings(broken, [p for p in pages if p != name])
+                    self.assertTrue(any("missing file" in finding for finding in findings), (host, name))
+
 
 if __name__ == "__main__":
     unittest.main()

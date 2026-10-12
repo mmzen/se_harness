@@ -2,10 +2,15 @@
 id = "WO-RLS-048"
 type = "work_order"
 title = "Correct 0.23.0 client admission and release instruction packaging"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-12"
 updated = "2026-10-12"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen confirmed required commit-bound verification for client admission, instruction packaging and release membership."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = ["docs/engineering/release-0-23-0/", "server/hosted_artifact_graph/service.py", "tests/hosted_artifact_graph/qualify_boundaries.py", "tests/hosted_artifact_graph/test_release_combination.py", "release/plugin-assembly.json", "tests/plugin_integration/package_assembly/test_refresh_guidance.py"]
@@ -15,6 +20,21 @@ implements = ["REQ-HAG-008", "REQ-PLG-002", "REQ-IAR-030"]
 specifications = ["SPEC-HAG-003", "SPEC-PLG-001", "SPEC-IAR-016"]
 verification = ["VER-RLS-039", "VER-RLS-040"]
 architecture = ["ARCH-HAG-001", "ADR-HAG-001", "ARCH-PLG-001", "ADR-PLG-001", "ARCH-IAR-012", "ADR-IAR-012"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-12T16:16:57Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied \"I approve\" to the revised WO-RLS-048 review published at 321fe678d982505d55d8531c6ca63fee6b606275. This approves exact 0.23.0 client admission, the ten existing instruction mappings, five named implementation/test paths and release-domain evidence, with required commit-bound verification under VER-RLS-039/040. It explicitly authorizes the linked manual REL-SEH-036 membership amendment, preserving accepted bytes and lifecycle history, and inclusion in the existing review-publication grant for codex/release-0-23-0 to mmzen/se_harness:main, PR #544, including a later separately given verification-decision push. This supersedes the earlier narrow unapproved proposal. Human verification, merge, complete-release approval, adoption and host updates remain separate. Reviewed work-order SHA-256 26304636c8dc58a6d2cbb513107540e66324c8fd57c531d184a2b6aedf2c7b0d; release amendment before 87dba9065a6c855b660e395060e04373378155695bfe6f421374d44e5758cf0f and after fdb373581bd98b334536b9212f72f9d15739d5b20d1834641f48c94ad832f464."
+scope_paths = ["docs/engineering/release-0-23-0/", "server/hosted_artifact_graph/service.py", "tests/hosted_artifact_graph/qualify_boundaries.py", "tests/hosted_artifact_graph/test_release_combination.py", "release/plugin-assembly.json", "tests/plugin_integration/package_assembly/test_refresh_guidance.py"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-12T16:19:50Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Correct 0.23.0 client admission and release instruction packaging

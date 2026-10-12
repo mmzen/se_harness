@@ -1,0 +1,14 @@
+{
+  "kind": "Explicitly authorized manual membership amendment; not a generic evaluator operation",
+  "artifact": "REL-SEH-036",
+  "actor": "mmzen",
+  "applied_by": "Codex",
+  "applied_at": "2026-10-12T16:20:04.663186+00:00",
+  "decision": "Human mmzen replied \"I approve\" to the revised WO-RLS-048 review published at 321fe678d982505d55d8531c6ca63fee6b606275. This approves exact 0.23.0 client admission, the ten existing instruction mappings, five named implementation/test paths and release-domain evidence, with required commit-bound verification under VER-RLS-039/040. It explicitly authorizes the linked manual REL-SEH-036 membership amendment, preserving accepted bytes and lifecycle history, and inclusion in the existing review-publication grant for codex/release-0-23-0 to mmzen/se_harness:main, PR #544, including a later separately given verification-decision push. This supersedes the earlier narrow unapproved proposal. Human verification, merge, complete-release approval, adoption and host updates remain separate. Reviewed work-order SHA-256 26304636c8dc58a6d2cbb513107540e66324c8fd57c531d184a2b6aedf2c7b0d; release amendment before 87dba9065a6c855b660e395060e04373378155695bfe6f421374d44e5758cf0f and after fdb373581bd98b334536b9212f72f9d15739d5b20d1834641f48c94ad832f464.",
+  "before_sha256": "87dba9065a6c855b660e395060e04373378155695bfe6f421374d44e5758cf0f",
+  "after_sha256": "fdb373581bd98b334536b9212f72f9d15739d5b20d1834641f48c94ad832f464",
+  "preserved_before": "REL-SEH-036-accepted-before.txt",
+  "reviewed_proposal": "REL-SEH-036-proposed.txt",
+  "lifecycle_history_preserved": true,
+  "added_gate": "WO-RLS-048"
+}
