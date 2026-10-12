@@ -277,7 +277,7 @@ class IntegrationPackageContractTests(unittest.TestCase):
 
     def test_archive_byte_budgets_remain_enforced_before_extraction(self) -> None:
         self.assertEqual(128 * 1024 * 1024, integration.MAX_ARCHIVE_MEMBER)
-        self.assertEqual(512 * 1024 * 1024, integration.MAX_ARCHIVE_TOTAL)
+        self.assertEqual(1024 * 1024 * 1024, integration.MAX_ARCHIVE_TOTAL)
         archive = self.root / "byte-budget.tar"
         self.write_tar(archive, [("pyproject.toml", b"abc"), ("se_harness/__init__.py", b"x")])
         with mock.patch.object(integration, "MAX_ARCHIVE_MEMBER", 2):
@@ -290,7 +290,7 @@ class IntegrationPackageContractTests(unittest.TestCase):
         self.assertFalse((self.root / "archive-budget").exists())
 
         # Test declared expanded sizes without allocating hundreds of MiB.
-        members = [tarfile.TarInfo(f"large-{index}") for index in range(5)]
+        members = [tarfile.TarInfo(f"large-{index}") for index in range(9)]
         for member in members:
             member.size = 128 * 1024 * 1024
         with mock.patch.object(integration.tarfile, "open") as open_archive:

@@ -1,0 +1,15 @@
+{
+  "raw_evidence_paths": [
+    "docs/engineering/integration-package/evidence/WO-IPK-002/create-verification-retry.json",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/create-verification.json",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/create-work-order.json",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/draft-planned.json",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/draft-validation.json",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/implementation.diff",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/proposed.diff",
+    "docs/engineering/integration-package/evidence/WO-IPK-002/review.md"
+  ],
+  "explanation": "The all-file whitespace check flags retained CRLF machine outputs and literal blank patch-context lines. Preserve these exact evidence bytes; the authored code, formal artifacts, new assessment and inventory pass the unchanged whitespace check. This repository defines no lint/format requirement.",
+  "archive": "publication-checks.zip",
+  "sha256": "5d26ba578f05e52a1cb52739b862bf989a99634885f0449a55207f2c802e674f"
+}
