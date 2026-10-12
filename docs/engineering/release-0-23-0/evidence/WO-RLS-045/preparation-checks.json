@@ -1,0 +1,260 @@
+{
+  "purpose": "Review evidence for a proposed release package; no implementation or approval",
+  "base_commit": "4fb5dbc29ffd7a2ccdc9a081c9c9b9f82b99d999",
+  "branch": "codex/release-0-23-0",
+  "governor": "0.22.1",
+  "proposed_evaluator": "0.23.0",
+  "proposed_plugin": "0.2.7",
+  "validation": {
+    "valid": true,
+    "artifact_count": 2003,
+    "error_count": 0,
+    "warning_count": 63,
+    "advisory_count": 0
+  },
+  "planned_scope": {
+    "WO-RLS-045": 42,
+    "WO-RLS-046": 5,
+    "WO-RLS-047": 22,
+    "uncovered_paths": [],
+    "invalid_paths": [],
+    "limit": "Supplied planned paths only; no complete implementation impact assessment is claimed. The retained packet is inside the proposed release-domain prefix."
+  },
+  "approval_checkpoint": {
+    "status": "pending",
+    "predicate": "QGS-ASSURANCE",
+    "reason": "The human has not yet confirmed required commit-bound verification. No assurance decision has been fabricated; all three work orders remain draft."
+  },
+  "next_decision": "Approve the reviewed package and required verification, including bounded review publication.",
+  "constraints": [
+    "Private source-built sandbox; Git remains authoritative.",
+    "Hosted service evaluator stays pinned to public 0.22.1.",
+    "Prior release desktop omission is not renewed.",
+    "Implementation, builds, native qualification and publication have not started."
+  ],
+  "artifact_files": [
+    {
+      "path": "docs/engineering/release-0-23-0/release/REL-SEH-036.md",
+      "sha256": "d3c43d948767a103d03c67a40bc05842a3436a55e0a1fdcb329d0371f13d1135",
+      "state": "draft"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/verification/VER-RLS-039.md",
+      "sha256": "9e6e03016fee36b14e0d0129627985970782b0efb51bfc061c8e206d9168a0cb",
+      "state": "draft"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/verification/VER-RLS-040.md",
+      "sha256": "da00e0ae895809506a851885be657279460c810562b3d9be86d33bed3167ee6c",
+      "state": "draft"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/verification/VER-RLS-041.md",
+      "sha256": "ea87d111791b983d6347c6ea5c864b81200f8ff38fdb7fa83ba6dbac8a27b661",
+      "state": "draft"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-045.md",
+      "sha256": "4852bdda660b9ee6fa8b1132c3b97106be95732a33af3f87d069053a18b85107",
+      "state": "draft"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-046.md",
+      "sha256": "2c00ff992f11047387571ad73efcdd6269d7a23fe4710ca641dba66b7b5e2d88",
+      "state": "draft"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-047.md",
+      "sha256": "854eaa7df9f5a0d7ba0c006e84998e7a8b482e78aa43c7962669390e618e1f54",
+      "state": "draft"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-001.md",
+      "sha256": "24034d6abebb67991d783e4e2930658d324719011a90c2ff1a7186c364ea3392",
+      "state": "raised",
+      "change": "Links to preparation work only; no acceptance"
+    },
+    {
+      "path": "docs/engineering/hosted-artifact-graph/risks/RISK-HAG-002.md",
+      "sha256": "82347063d4df9c9e694366193623dfc4406d4e4e072105dc032a6dccdf3d3629",
+      "state": "raised",
+      "change": "Links to preparation work only; no acceptance"
+    }
+  ],
+  "evidence_archive": {
+    "path": "preparation-checks.zip",
+    "sha256": "a84be0e0b23d77ab7715d7d032bbe27abc448d764c6386f6f505a8688c9a31a4",
+    "entries": [
+      {
+        "path": "commands/approval-WO-RLS-045-02.json",
+        "sha256": "71ed6df46db6cb677fad6988915adad4891043bd8fe12b129283980c77079f4e",
+        "bytes": 11887
+      },
+      {
+        "path": "commands/approval-WO-RLS-045.json",
+        "sha256": "915d3388ba02c441b19b090049805cd5383018f2607b5c90b0c1d93c85f169d0",
+        "bytes": 11807
+      },
+      {
+        "path": "commands/approval-WO-RLS-046.json",
+        "sha256": "a2cd102b9b56a8c0014b53280137d1f0c4c42e19482859b66292eeab64679538",
+        "bytes": 10489
+      },
+      {
+        "path": "commands/approval-WO-RLS-047.json",
+        "sha256": "5779526c858683eddd0b027628b45e6bc96b5cf0f19ad9ac14cf59a51542d6c8",
+        "bytes": 10528
+      },
+      {
+        "path": "commands/census.json",
+        "sha256": "36b6e5528839e7fc00971757316a1c0376441771c7a3cbc31f8a5964d9ce69cc",
+        "bytes": 3817
+      },
+      {
+        "path": "commands/create-REL-SEH-036.json",
+        "sha256": "70ba5a6d2aeafa58c76cd9d2b9461999f78f93db1fa5859dbde28e898fd137dc",
+        "bytes": 992
+      },
+      {
+        "path": "commands/create-VER-RLS-039.json",
+        "sha256": "5911730dd67316ca1ee4ef21f72ed2b536a8902c7cac08165270b0de17289df4",
+        "bytes": 993
+      },
+      {
+        "path": "commands/create-VER-RLS-040.json",
+        "sha256": "da2678de48c78b4f733499e0d19470e488d91f254414592cd25229a824e24bf8",
+        "bytes": 993
+      },
+      {
+        "path": "commands/create-VER-RLS-041.json",
+        "sha256": "24993c49d224202bf12ad587ae5166f9543a3693b8a7895f2cff1a71348986d3",
+        "bytes": 993
+      },
+      {
+        "path": "commands/create-WO-RLS-045.json",
+        "sha256": "a64117830f04935f6c492c9ccfa1be6340727cded280e5ee5c321d38e92f3604",
+        "bytes": 988
+      },
+      {
+        "path": "commands/create-WO-RLS-046.json",
+        "sha256": "873316c5eda5a99d52fafd71f349457b199fb8ff9784128b4e3f6d440e6de900",
+        "bytes": 988
+      },
+      {
+        "path": "commands/create-WO-RLS-047.json",
+        "sha256": "c28285e18eec1508a72002d04400300b4d4483db02ba0f8c57535245826663e4",
+        "bytes": 988
+      },
+      {
+        "path": "commands/domain-create-retry.json",
+        "sha256": "da250e814a99b9556aab9d4d96322c13dfd185f83e7b31765f4441864038a7fa",
+        "bytes": 2778
+      },
+      {
+        "path": "commands/domain-create.json",
+        "sha256": "d154660c851cdd4b7d9355eb29ee7e9f009c251f6736c988ae79815d03e78804",
+        "bytes": 1081
+      },
+      {
+        "path": "commands/domain-preview.json",
+        "sha256": "76dd933d5e8bee5a0394117466c091e5fbc8853585514ed48d8c05e041462478",
+        "bytes": 2795
+      },
+      {
+        "path": "commands/handoff-focus-WO-RLS-045.json",
+        "sha256": "540c1e12d045eccceb267ccd0a89276029c8cade2b5ba3e308ce8bdda05cd217",
+        "bytes": 18756
+      },
+      {
+        "path": "commands/inspect.json",
+        "sha256": "4634167f0f7679fc5370cdb8b6a2114bad812d90a0adea4fd1f152922ccd97cc",
+        "bytes": 313367
+      },
+      {
+        "path": "commands/plan-WO-RLS-045-02.json",
+        "sha256": "80f9248a3c14ecf715e787547d67b5bba9af5ecdce7cecea69ba6b7c048f1f56",
+        "bytes": 32180
+      },
+      {
+        "path": "commands/plan-WO-RLS-045.json",
+        "sha256": "965701591d180b74d7631fb7b2758e218507c741f20962cfbc47ca3b32d81fd8",
+        "bytes": 31609
+      },
+      {
+        "path": "commands/plan-WO-RLS-046.json",
+        "sha256": "5b16e8a9a102e8caa045ce8c1946a952c4dfd80d44e39174401116a3c5735da9",
+        "bytes": 18376
+      },
+      {
+        "path": "commands/plan-WO-RLS-047.json",
+        "sha256": "f0a1398074c62c70aa88a97bbca50c82d798a3a7a8a37e7a0cb9ea97c47e9565",
+        "bytes": 19565
+      },
+      {
+        "path": "commands/planned-paths.json",
+        "sha256": "d01c1e82f7996ace88417c409c07ef445e64b7d83d2fb1f9c20ed64c8079f799",
+        "bytes": 2383
+      },
+      {
+        "path": "commands/preview-REL-SEH-036.json",
+        "sha256": "01688b096b888b22e8180c1774f35ea6e94a9b04d7f17027594d9160fb5ab5a6",
+        "bytes": 1009
+      },
+      {
+        "path": "commands/preview-VER-RLS-039.json",
+        "sha256": "a91d70a687f37fa909330eb28e90cccd9431c2a5ee3db1cf300b121cf56b350b",
+        "bytes": 1010
+      },
+      {
+        "path": "commands/preview-VER-RLS-040.json",
+        "sha256": "66688347cc025ab8b36b3d73e77bd6f5d26cc08150916fa10a903e4a2e231993",
+        "bytes": 1010
+      },
+      {
+        "path": "commands/preview-VER-RLS-041.json",
+        "sha256": "ad71cb821027e329f6319b5666f1c464cef8cb79eecfbad9d3d8f251b29a069d",
+        "bytes": 1010
+      },
+      {
+        "path": "commands/preview-WO-RLS-045.json",
+        "sha256": "684f2e2a35b0b46591a742adf8ea89e8e6bb7304bca00f15b1397da624588082",
+        "bytes": 1005
+      },
+      {
+        "path": "commands/preview-WO-RLS-046.json",
+        "sha256": "c16b892fbadafa60f166aee7c85a9c33c33ec28aa155892e1ac6affd9b5aca7d",
+        "bytes": 1005
+      },
+      {
+        "path": "commands/preview-WO-RLS-047.json",
+        "sha256": "4ec802afcf974d6ae01c06785a23e5a44fc876a9742bb5662b6df6792eb5ca92",
+        "bytes": 1005
+      },
+      {
+        "path": "commands/prior-release-packaging-diff.json",
+        "sha256": "774c8bc8a1c6f67a17e5ac61073c19e1ac3feb1c92c676df807c60efbaa2f1bb",
+        "bytes": 638
+      },
+      {
+        "path": "commands/validate-01.json",
+        "sha256": "9e044acd067fc06baa7150d4a77799460c8f7d25aac93e50ee634ed0e01de1ef",
+        "bytes": 431131
+      },
+      {
+        "path": "commands/validate-02.json",
+        "sha256": "53dffa8fd9e439461b6435a25219a6f9ba07f1e2405d53f2ab07bdb7e9529903",
+        "bytes": 431132
+      },
+      {
+        "path": "preserved-base/RISK-HAG-001.md",
+        "sha256": "6e4524b3666043f3cd5b88fb83dbca0b50fb9f60835789c14290af34b5828a99",
+        "bytes": 2346
+      },
+      {
+        "path": "preserved-base/RISK-HAG-002.md",
+        "sha256": "4ab383cb05bcb7a883f58fae4d8447fd0e1e9f34cde2022c0039b7ffaaa47aba",
+        "bytes": 1666
+      }
+    ]
+  }
+}

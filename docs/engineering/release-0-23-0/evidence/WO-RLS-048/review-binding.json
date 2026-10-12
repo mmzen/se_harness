@@ -1,0 +1,13 @@
+{
+  "work_order": {
+    "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-048.md",
+    "sha256": "38bb67466dee91ca538e48321594b238e7c21f100ee0759685f25d9b20e63b8b"
+  },
+  "release_amendment": {
+    "path": "docs/engineering/release-0-23-0/release/REL-SEH-036.md",
+    "before_sha256": "87dba9065a6c855b660e395060e04373378155695bfe6f421374d44e5758cf0f",
+    "after_sha256": "c40005189efc47eb881850c83e78393424c7b378aea24d1538d2b15b307a6b2b",
+    "proposed_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-048/REL-SEH-036-proposed.txt"
+  },
+  "runtime_unchanged_sha256": "49347e853e49d9bab7c106561a8861e874255909e2a7869f32cf5349faac46bd"
+}

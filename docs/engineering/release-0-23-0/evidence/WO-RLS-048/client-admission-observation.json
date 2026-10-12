@@ -1,0 +1,14 @@
+{
+  "kind": "Exact current client-admission predicate evaluated independently; not a full service run",
+  "source": "server/hosted_artifact_graph/service.py",
+  "source_sha256": "49347e853e49d9bab7c106561a8861e874255909e2a7869f32cf5349faac46bd",
+  "line": 80,
+  "expression": "value['client'] == self.config['client'] and value['client']['version'] == '0.22.2'",
+  "observations": {
+    "0.22.2": true,
+    "0.23.0": false,
+    "9.9.9": false
+  },
+  "runtime": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "reproduction_script": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release023_correction.py"
+}

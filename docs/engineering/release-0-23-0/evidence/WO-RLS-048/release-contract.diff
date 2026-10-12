@@ -1,0 +1,20 @@
+--- accepted/REL-SEH-036.md
++++ proposed/REL-SEH-036.md
+@@ -13,7 +13,7 @@
+ route = "complete-release"
+ 
+ [relations]
+-gates = ["WO-HAG-001", "WO-HAG-005", "WO-HAG-006", "WO-HAG-007", "WO-HAG-008", "WO-HAG-009", "WO-HAG-010", "WO-HAG-011", "WO-HUP-030", "WO-IPK-002", "WO-RLS-045", "WO-RLS-046"]
++gates = ["WO-HAG-001", "WO-HAG-005", "WO-HAG-006", "WO-HAG-007", "WO-HAG-008", "WO-HAG-009", "WO-HAG-010", "WO-HAG-011", "WO-HUP-030", "WO-IPK-002", "WO-RLS-045", "WO-RLS-046", "WO-RLS-048"]
+ 
+ [[lifecycle_events]]
+ from = "draft"
+@@ -39,7 +39,7 @@
+ reconciliation (WO-HAG-001/005/006/007), private lifecycle pilot (008), native
+ qualification/instruction correction (009/010), authoring simplification (011),
+ root-compatibility baseline (WO-HUP-030), integration-package correction
+-(WO-IPK-002), and new release preparation/qualification (WO-RLS-045/046).
++(WO-IPK-002), new release preparation/qualification (WO-RLS-045/046), and the bounded client-admission correction (WO-RLS-048).
+ WO-RLS-047 owns later public observations and is excluded to avoid circularity.
+ 
+ The advisory census also finds prior-release WO-RLS-042 and untraced merge
