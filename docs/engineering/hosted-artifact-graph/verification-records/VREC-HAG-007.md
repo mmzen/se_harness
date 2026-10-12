@@ -2,7 +2,7 @@
 id = "VREC-HAG-007"
 type = "verification_record"
 title = "Verification candidate for WO-HAG-011"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-12"
 updated = "2026-10-12"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/hosted-artifact-graph/evidence/WO-HAG-011/WO
 evaluator_evidence_path = "docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-007-evaluator.json"
 evaluator_evidence_sha256 = "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899"
 
+verified_at = "2026-10-12T13:24:10Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HAG-011"]
 conforms_to = ["VER-HAG-008"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-12T13:24:10Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied \"Verify result\" to the published VREC-HAG-007 review at f87596b7736d7c194d9e00ae518e200ceac976e3 for candidate b4ae797347dc9cee15cd981517452c2adbced0e3. Accept verification of WO-HAG-011 against VER-HAG-008, including the disclosed report wording limitation, unmet performance goals and Codex observation limits. Earlier failures and historical evidence remain preserved. This records acceptance of the assessed result only; no merge, release, deployment, changed criterion or risk acceptance is granted."
 +++
 
 # Verification Record Candidate
