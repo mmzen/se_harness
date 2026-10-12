@@ -26,9 +26,10 @@ Before proposing a work order, apply
 `docs/engineering/harness/WORK_AND_EVIDENCE.md#complete-work-scope` to the planned
 handoff comparison. Include every intended changed path: new definitions, their
 approval writes, implementation and generated evidence or paired decisions.
-Definitions approved in the same rehearsal still contribute changes after the
-retained base. Include their actual file paths in the proposed scope, rather than
-limiting it to implementation output. Review this before applying approval.
+Definitions approved in the same rehearsal contribute changes after the retained
+base. Before approval, compare each planned artifact-producing action with
+`execution_scope.paths`, including each paired record. Future-output prose does
+not add paths to that list; use the command preview or template to resolve them.
 
 For a handoff's `from_git`, use a retained comparison base in the service's test
 Git history that covers the complete work. In a fresh test copy, retain
@@ -86,6 +87,9 @@ explanatory text belongs in `action.reason`. Read the selected DEC and its curre
 evaluator result before choosing the disposition and option-specific fields.
 Do not invent an `authority_owner` value to resolve a refusal. Preserve the
 supplied option exactly: mitigation does not authorize risk acceptance.
+A release contract (REL) is a definition. Use its supplied definition-approval
+decision. An RLS decision or an artifact owner field does not grant that right.
+
 Preparation owners must match the fixture's
 supplied preparation identities. Do not infer a different actor or decision from
 a passed gate, an available owner label or a generated record.

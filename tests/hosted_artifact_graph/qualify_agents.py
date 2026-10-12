@@ -303,6 +303,9 @@ def run(args):
     secrets = [p['token'] for p in credentials['principals']]
     token = next(p['token'] for p in credentials['principals'] if p['id'] == 'operator')
     env = dict(os.environ, PYTHONUTF8='1', NO_COLOR='1', HAG_NATIVE_TEST_TOKEN=token)
+    # JSON pointers are data, not paths for Git Bash to rewrite.
+    if args.host == 'claude' and os.name == 'nt':
+        env['MSYS_NO_PATHCONV'] = '1'
     env.update(HAG_NATIVE_WORK_DIRECTORY=str(output), HAG_NATIVE_SELECTION=str(output/'selection.json'))
     settings.pop('credentials', None)
     actual_endpoint = settings['endpoint']

@@ -67,7 +67,7 @@ Choose the exact revision and context from the selected inputs or actual results
 | --- | --- |
 | Service readiness and selected components | `remote status --record ABSOLUTE_NEW_RECORD` |
 | Local wheel metadata | `identity` |
-| Captured calls, reads and failures so far | `observations --record ABSOLUTE_NEW_RECORD`; retains the full snapshot and returns its field pointers, no content verdict |
+| Captured calls, reads and failures so far | `observations --record ABSOLUTE_NEW_RECORD`; retains the full snapshot; returns bounded failure details or explicit file pointers, no verdict |
 | Complete released instruction sections | `instructions --section "RESOURCE_ID#HEADING"`; repeat for up to 12 sections |
 | One unknown input location | `find-file BASENAME --under RELATIVE_DIRECTORY/` |
 | One exact inventory entry | `lookup-file RELATIVE_NAME` |

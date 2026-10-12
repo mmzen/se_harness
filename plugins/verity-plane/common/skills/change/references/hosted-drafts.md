@@ -86,7 +86,7 @@ the check, pass condition and full proposed evidence path, including filename
 and any work-order directory. In an environment with restricted execution tools,
 read their capability descriptions before choosing the check. This is a planning
 read, not test execution. Match the planned assertions, platform and evidence
-fields to those tools. Do not infer a local test runtime from the service runtime.
+fields to those tools. Distinguish the local test runtime from the service and lifecycle evaluator.
 If a required condition cannot be assessed with the available tools, report that
 gap before requesting approval; do not promise an unavailable check.
 
@@ -136,9 +136,10 @@ The report contains:
   establishes no completeness.
 - **Saved state:** selection, revision, versions and exact document/result paths.
 - **Validation and review:** evaluator findings, independent content findings,
-  captured command observations including recovered failures and denials, uncertain
-  effects, and any returned procedure/step. Use mechanical observations before an
-  exhaustive failure claim. Link original evidence; do not copy its inventories.
+  local and remote failures (including recovered ones), denials, uncertain effects,
+  and any returned procedure/step. Use observations before exhaustive failure claims.
+  Its snapshot excludes later calls: add their failures, including failed reads of
+  that snapshot. Link evidence; do not copy inventories.
 
 Draft validation checks template shape and required links. `content_review`
 being `not_assessed` means only that the evaluator did not assess content. It

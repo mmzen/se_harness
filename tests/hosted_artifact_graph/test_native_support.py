@@ -37,6 +37,32 @@ class NativeCallBoundaries(unittest.TestCase):
             self.assertTrue(Path(pointer['record']).is_file())
             self.assertEqual(captured,read_json(root,pointer['read_arguments'][1],'')['value'])
 
+    def test_observation_failure_details_are_exact_or_explicitly_left_in_the_record(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'work').mkdir();selection=root/'selection.json';selection.write_text('{}')
+            for label,detail in [('small','actual local read failure'),('large','x'*20000)]:
+                captured={'snapshot':'in_progress','wall_seconds':None,'native_calls':3,
+                    'observed_tool_items':3,'native_call_count_complete':True,'peak_input_context':123,
+                    'limits':'Snapshot only','native_failures':[{'diagnostic':detail}],
+                    'failed_command_records':[],'observed_content_reads':[{'path':'unchanged input'}]}
+                output=io.StringIO()
+                with patch.dict(os.environ,{'HAG_NATIVE_WORK_DIRECTORY':str(root),'HAG_NATIVE_SELECTION':str(selection)}), \
+                     patch('sys.argv',['native_call.py','observations','--record','work/'+label]), \
+                     patch('native_call.observations',return_value=captured),contextlib.redirect_stdout(output):
+                    self.assertEqual(0,main())
+                rendered=json.loads(output.getvalue())
+                self.assertEqual(captured,json.loads((root/'work'/label).read_text()))
+                self.assertIn('excludes later calls',rendered['snapshot_limit'])
+                self.assertNotIn('observed_content_reads',rendered)
+                if label=='small':
+                    self.assertTrue(rendered['failure_details_included'])
+                    self.assertEqual(captured['native_failures'],rendered['native_failures'])
+                else:
+                    self.assertFalse(rendered['failure_details_included'])
+                    self.assertNotIn('native_failures',rendered)
+                    self.assertEqual(['read-json',str(root/'work'/label)],rendered['read_arguments'])
+                    self.assertLess(len(output.getvalue().encode()),16384)
+
     def test_loopback_profile_refuses_other_hosts_and_ambiguous_destinations(self):
         for host, endpoint in [('claude','http://127.0.0.1:8000'),
                 ('codex','https://example.com:443'),('codex','http://localhost:8000'),
@@ -185,6 +211,8 @@ class NativeCallBoundaries(unittest.TestCase):
                     sent=writer.call_args.args[1]
                     self.assertEqual(raw.decode() if complete else prompt_pointer(output/'task.md',prefix if host_name=='codex' else None),sent)
                     self.assertEqual(hashlib.sha256(raw).hexdigest(),process.call_args.kwargs['env']['HAG_NATIVE_ENTRY_SHA256'])
+                    if host_name=='claude' and os.name=='nt':
+                        self.assertEqual('1',process.call_args.kwargs['env']['MSYS_NO_PATHCONV'])
                     if host_name=='claude':
                         locator=(output/'CLAUDE.md').read_text()
                         self.assertNotIn('Unique requested outcome.',locator)

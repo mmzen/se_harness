@@ -400,8 +400,14 @@ def main():
             record.parent.mkdir(parents=True,exist_ok=True)
             with record.open('x',encoding='utf-8') as stream:
                 json.dump(value,stream,ensure_ascii=True,indent=2)
+            failures = {k:value.get(k, []) for k in ('native_failures','failed_command_records')}
             value = {k:value[k] for k in ('snapshot','wall_seconds','native_calls',
                 'observed_tool_items','native_call_count_complete','peak_input_context','limits')}
+            included = len(json.dumps(failures).encode('utf-8')) <= 16384
+            value.update(failure_details_included=included,
+                snapshot_limit='This snapshot excludes later calls. Include their errors separately.')
+            if included:
+                value.update(failures)
             value.update(record=str(record), record_type='file',
                 read_arguments=['read-json',str(record)], pointers=['/observed_content_reads',
                 '/native_failures','/failed_command_records','/command_records'])
