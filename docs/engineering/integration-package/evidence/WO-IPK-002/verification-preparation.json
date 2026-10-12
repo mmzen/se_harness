@@ -1,0 +1,18 @@
+{
+  "verification_candidate": "938126a437514451166af7b66db1d9996abbbd68",
+  "record": "VREC-IPK-002",
+  "status": "ready",
+  "archive_bytes": 564971520,
+  "expanded_bytes": 552515048,
+  "members": 17391,
+  "archive_sha256": "a670541993182b100c9f4ddc5633ad417e530042e6d7b140cd9cb7e20886797d",
+  "complete_tree_present": true,
+  "tested_source": "039443f333bea8aaa135526a99d7d4ead9c1e295",
+  "candidate_difference": "Only completion and retained evidence; source, tests, workflow and build inputs are unchanged.",
+  "human_verification_applied": false,
+  "actual_generated_paths": [
+    "docs/engineering/integration-package/verification-records/VREC-IPK-002.md",
+    "docs/engineering/integration-package/evidence/VREC-IPK-002-evaluator.json"
+  ],
+  "actual_path_coverage": "pass"
+}
