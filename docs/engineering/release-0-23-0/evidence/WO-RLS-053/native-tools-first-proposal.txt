@@ -1,0 +1,108 @@
+# Native test tools
+
+Use `selection.json`'s exact `approved_shell_argv_prefix` and absolute paths.
+Append one helper operation per shell call. Use native Write/Edit for files;
+native Read takes absolute paths. No wrappers, loops, pipes, directory listing,
+direct client commands or permission changes. This guide supplies capabilities,
+not workflow, authored content or decisions.
+
+Records, companion evidence and exports require new paths under selected `work/`.
+Other destinations are refused before execution. Relative paths start at the
+native workspace root: include `work/`. Observations scan only that directory.
+
+## Draft mutations
+
+Prefer typed input; read raw schemas/help only for missing fields. Select the
+operation, target, versions, key and content yourself.
+
+```text
+remote OPERATION --typed --compact --record ABSOLUTE_NEW_RECORD [FIELDS]
+```
+
+All typed mutations take `--operation-key KEY --expected-project-version N
+--evaluator-file FILE` (selected `evaluator_file`). The adapter supplies the selected
+endpoint/project/token environment and exact installed client wheel. The client
+builds the existing request and checks its identity; it never refreshes versions
+or retries automatically. Do not mix typed and raw input.
+
+| Operation | Other fields |
+| --- | --- |
+| `import` | `--source-manifest FILE` (selected `source_manifest`) |
+| `draft-open` | `--baseline ID --work-order WO-ID` |
+| `create-artifact` | `--context UUID --context-version N --domain NAME --artifact-type TYPE`; optional `--artifact ID --include-document` |
+| `revise-artifact` | `--context UUID --context-version N --artifact ID --expected-revision REVISION --document-file FILE` |
+
+Hosted creation allocates and writes at once: no `--dry-run` or local preview.
+Documents are exact UTF-8 files; no manual base64 or copied client digest.
+`--include-document` reads the created revision, returning text or its decoded
+file path. Inspect it before editing.
+
+`--record` saves the command; its new `.evidence` directory saves exact
+requests/responses and decoded documents. `client_view` is the client's view.
+Inspect outcomes/findings and required omitted content; reuse displayed fields.
+Capture failure after sending can hide a committed effect. Reconcile its original
+key with `remote operation --key KEY --record ABSOLUTE_NEW_RECORD`.
+
+## Read one revision
+
+```text
+remote read --typed --compact --record ABSOLUTE_NEW_RECORD --artifact ID --expected-revision REVISION --context UUID --context-version N
+```
+
+For imported content, replace context fields with `--baseline ID`. Reads take no
+`--operation-key`, `--expected-project-version` or `--evaluator-file`.
+Select the exact revision/context from inputs or actual results.
+
+## Reads and discovery
+
+| Need | Operation |
+| --- | --- |
+| Service readiness/components | `remote status --record ABSOLUTE_NEW_RECORD` |
+| Local wheel metadata | `identity` |
+| Captured calls/reads/failures | `observations --record ABSOLUTE_NEW_RECORD` |
+| Complete released sections | `instructions --section "RESOURCE_ID#HEADING"`; repeat up to 12 |
+| Unknown input location | `find-file BASENAME --under RELATIVE_DIRECTORY/` |
+| Exact inventory entry | `lookup-file RELATIVE_NAME` |
+| JSON field | `read-json ABSOLUTE_FILE --pointer '"/field"'`; omit pointer for root; optional `--keys` or `--decode-base64` for a raw base64 field |
+| Text | `read-text ABSOLUTE_FILE [ABSOLUTE_FILE ...]`; up to eight inventoried inputs, launcher-pinned task.md or work files; 64 KiB output limit |
+| Truncated text | `read-text ABSOLUTE_FILE --offset 0 --limit 4096`; single file, character offsets; follow next_offset until complete is true |
+
+Use canonical instruction IDs, e.g. `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`.
+The legacy `released-resources/` prefix also works. The reader includes exact
+entry conditions when present, but follows no links and selects no action.
+Read applicable prerequisites. For checklist/repeated continuation selectors,
+use selected plugin `change/references/hosted-drafts.md`.
+
+Use known paths directly. Inventory names are relative to staged inputs:
+`source/src/greeting.py`, not `inputs/source/src/greeting.py`. Lookup/digest is
+not a content read. Batch known independent reads and reuse unchanged content.
+Do not guess headings: read the file once to locate them. Request known sections
+together; no full inventory is required.
+
+Read [Execution tools](native-execution-tools.md) before planning or executing a
+check, for its assertions/evidence fields. Reading, source inspection and drafting
+a verification contract do not execute a test or authorize execution.
+
+## Other operations
+
+Before raw requests, lifecycle rehearsal or handoff encoding, read
+[Raw requests and lifecycle rehearsal](native-execution-tools.md#raw-requests-and-lifecycle-rehearsal).
+These capabilities remain available; their detail is not needed for typed drafting.
+
+## Report evidence
+
+Run `observations --record ABSOLUTE_NEW_RECORD` before reporting. It retains the
+full snapshot, returning bounded failures or explicit pointers, without verdicts.
+`observed_content_reads` records successful visible reads; `file_reads` includes
+Claude Read failures. Use the trace, not new inventory lookups. Missing reads
+stay unknown; rereading cannot prove earlier reading. Capture can be incomplete
+and excludes subsequent report writes. Retain the record path, not every command.
+
+Returned `record` is a JSON file, including extensionless names, not a directory.
+Use `read_arguments` with the approved prefix; add `--pointer` for a field, not a
+filename. `command_records` rows include extensionless captures and exact available
+`response_fields` (receipt, outcome, provenance). They sort by filename, not time.
+Inspect the original request/result for claims. The index selects no handoff base
+and certifies no retry. Retain failures/recoveries; never infer exhaustive failure
+counts from memory. Report inspected facts and actual outcomes. Template admission
+is not content review; unresolved content is not a completed definition.
