@@ -5,7 +5,8 @@ content satisfies its read instruction. Open its file only if required content
 is missing, changed or no longer retained. A pointer alone is not content.
 
 Complete [Hosted selection](../../setup/references/hosted-context.md) once for
-the unchanged selection. Draft preparation grants no decision right or Git authority.
+the unchanged selection. Use its supplied absolute file path; do not guess a
+location from its filename. Draft preparation grants no decision right or Git authority.
 
 Match the request and existing confirmed context to the current step:
 
@@ -18,10 +19,20 @@ The clarification procedure produces transient discussion, not a formal artifact
 Use its requester-confirmation process and reuse an existing matching confirmation.
 An instruction to create a draft does not supply the inputs that procedure requires.
 Do not import, open a draft context or create a template merely to ask a question.
-For a clarification stop, include three short parts in the final reply:
 
-- **Actions:** State whether any hosted change was attempted. Include observed
-  failures or denials.
+For an intent, resolve the user's problem, desired improvement and way to observe
+that improvement. Ask for missing inputs and reuse confirmed ones. Message text,
+channels or function signatures describe a solution; they do not explain why the
+user needs it. An unmeasured baseline is allowed; a missing success measure stays
+missing. Do not offer `not measured` as a replacement for how the owner will know
+the change helped. Do not invent a purpose or measure from engineering activity.
+Keep unknown facts explicit; do not fill them with a guessed outcome statement.
+
+Apply the shared check in **Report and recover** before an exhaustive failure
+claim. For a clarification stop, include three short parts in the final reply:
+
+- **Actions:** State whether any hosted change was attempted. Include every
+  observed failure or denial, including local reads and recovered failures.
 - **Known inputs:** Keep existing definitions and supplied scope limits.
 - **Questions:** Ask only for missing facts needed now.
 
@@ -74,13 +85,6 @@ Compare the requested type's required content with the request and definitions:
 | User problem, improvement, success measure, existing gap | Require a source that supplies it. A creation request supplies no missing fact. |
 | Proposed method, check, evidence destination | Choose within the requested design scope; label it planned. |
 
-For an intent, resolve the user's problem, desired improvement and way to observe
-that improvement. Ask for missing inputs and reuse confirmed ones. Message text,
-channels or function signatures describe a solution; they do not explain why the
-user needs it. An unmeasured baseline is allowed; a missing success measure stays
-missing. Do not offer `not measured` as a replacement for how the owner will know
-the change helped. Do not invent a purpose or measure from engineering activity.
-
 Before claiming a coverage gap, read the applicable requirements, specifications
 and verification contracts. Code or one same-type record cannot establish their
 absence. For a verification plan, derive expected values from definitions; name
@@ -131,6 +135,12 @@ authority before dependent work. Resolve blocked reads first.
 
 ## Report and recover
 
+Before an exhaustive failure claim in either report form, inspect the captured
+observations and account for calls made after that snapshot. A later success does
+not erase a failed call. If complete capture cannot be established, state that
+limit and use the saved-report route. Reuse retained observations; no duplicate
+report or extra read is needed when they already cover the claim.
+
 For the clarification reply, use **Select the current step**. Otherwise retain
 complete requests/results and one short report outside the repository, including
 after a mutation attempt or uncertain effect. Read required omitted findings.
@@ -142,9 +152,8 @@ The report contains:
 - **Saved state:** selection, revision, versions and exact document/result paths.
 - **Validation and review:** evaluator findings, independent content findings,
   local and remote failures (including recovered ones), denials, uncertain effects,
-  and any returned procedure/step. Use observations before exhaustive failure claims.
-  Its snapshot excludes later calls: add their failures, including failed reads of
-  that snapshot. Link evidence; do not copy inventories.
+  and any returned procedure/step. Apply the shared report check above. Link
+  evidence; do not copy inventories.
 
 Draft validation checks template shape and required links. `content_review`
 being `not_assessed` means only that the evaluator did not assess content. It
