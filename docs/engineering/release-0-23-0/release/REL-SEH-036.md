@@ -13,7 +13,7 @@ previous_release_tag = "v0.22.1"
 route = "complete-release"
 
 [relations]
-gates = ["WO-HAG-001", "WO-HAG-005", "WO-HAG-006", "WO-HAG-007", "WO-HAG-008", "WO-HAG-009", "WO-HAG-010", "WO-HAG-011", "WO-HUP-030", "WO-IPK-002", "WO-RLS-045", "WO-RLS-046", "WO-RLS-048", "WO-RLS-049"]
+gates = ["WO-HAG-001", "WO-HAG-005", "WO-HAG-006", "WO-HAG-007", "WO-HAG-008", "WO-HAG-009", "WO-HAG-010", "WO-HAG-011", "WO-HUP-030", "WO-IPK-002", "WO-RLS-045", "WO-RLS-046", "WO-RLS-048", "WO-RLS-049", "WO-RLS-050"]
 
 [[lifecycle_events]]
 from = "draft"
