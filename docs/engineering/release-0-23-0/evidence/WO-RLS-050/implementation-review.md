@@ -26,3 +26,11 @@ candidates remain unchanged, and desktop evidence stays separately pending.
 Temporary runners use distinct candidate/output paths and fresh local sandbox
 identities. They do not change the task, fixture, model, permissions or criteria.
 No test-specific answer is added to agent input. No new native result is claimed.
+
+## Observed new-candidate result
+
+Candidate `74feac0767f33658b31fb9e9ad2b6a13a188c13c` passed source/package checks but failed the first Claude
+content review. The report still calls content complete with missing operational
+inputs. Native repetitions are stopped. See the [full result](../WO-RLS-045/qualification-progress-74feac07.md)
+and [assessment](../WO-RLS-046/candidate-74feac07-claude-assessment.json).
+No implementation completion or human verification is inferred.

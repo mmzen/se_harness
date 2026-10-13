@@ -2,11 +2,11 @@
 
 Status: **Package approved by mmzen. WO-RLS-045/046/048/049/050 are in progress; qualification and final verification remain pending. WO-RLS-047 is approved and unstarted.**
 
-The [current qualification report](evidence/WO-RLS-045/qualification-progress-f2ddb5af.md)
+The [current qualification report](evidence/WO-RLS-045/qualification-progress-74feac07.md)
 records passing package/service checks and the failed Claude diagnostic.
 The [WO-RLS-049 correction](evidence/WO-RLS-049/implementation-review.md) is approved and implemented in source; its fresh Claude diagnostic failed content review; native repetitions are stopped and qualification remains incomplete.
 
-The [WO-RLS-050 correction](evidence/WO-RLS-050/implementation-review.md) is approved and applied in source. New-candidate qualification is pending.
+The [WO-RLS-050 correction](evidence/WO-RLS-050/implementation-review.md) is approved and applied. Its fresh Claude diagnostic failed independent content review; native repetitions are stopped and qualification remains incomplete.
 
 Read the [preparation review](evidence/WO-RLS-045/preparation-review.md) for the
 requested decision, concrete changes, evidence and limits.
@@ -22,7 +22,7 @@ the tagged source. Git remains authoritative; no public service is proposed.
 | [WO-RLS-046](work-orders/WO-RLS-046.md), [VER-RLS-040](verification/VER-RLS-040.md) | Exact plugin and hosted combination qualification, with marketplace review staging. |
 | [WO-RLS-048](work-orders/WO-RLS-048.md) | Approved exact client-admission and instruction-map correction; linked release membership amendment. |
 | [WO-RLS-049](work-orders/WO-RLS-049.md) | Approved one-file clarification/reporting correction; qualification pending. |
-| [WO-RLS-050](work-orders/WO-RLS-050.md) | Approved content-readiness correction and membership amendment; new-candidate qualification pending. |
+| [WO-RLS-050](work-orders/WO-RLS-050.md) | Approved content-readiness correction; first new-candidate diagnostic failed. Qualification remains incomplete. |
 | [WO-RLS-047](work-orders/WO-RLS-047.md), [VER-RLS-041](verification/VER-RLS-041.md) | Public delivery and independently observed closeout after complete-release approval. |
 
 Base: merged main `4fb5dbc29ffd7a2ccdc9a081c9c9b9f82b99d999`.
