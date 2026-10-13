@@ -2,15 +2,15 @@
 
 Status: **Package approved by mmzen. WO-RLS-045/046/048/049/050/051/052 are in progress; qualification and final verification remain pending. WO-RLS-047 is approved and unstarted.**
 
-The [current qualification report](evidence/WO-RLS-045/qualification-progress-32f2834e.md)
-records passing package/service checks and the failed Claude diagnostic.
+The [current qualification report](evidence/WO-RLS-045/qualification-progress-05c629dd.md)
+records passing source/package checks and both missing-input diagnostics. Positive qualification is blocked by the complete-input size limit.
 The [WO-RLS-049 correction](evidence/WO-RLS-049/implementation-review.md) is approved and implemented in source; its fresh Claude diagnostic failed content review; native repetitions are stopped and qualification remains incomplete.
 
 The [WO-RLS-050 correction](evidence/WO-RLS-050/implementation-review.md) is approved and applied. Its fresh Claude diagnostic failed independent content review; native repetitions are stopped and qualification remains incomplete.
 
 The [WO-RLS-051 correction](evidence/WO-RLS-051/implementation-review.md) is approved and applied. Its fresh Claude diagnostic failed; further native tests on this candidate are stopped.
 
-The [WO-RLS-052 correction](evidence/WO-RLS-052/implementation-review.md) is approved and applied. New-candidate qualification is pending.
+The [WO-RLS-052 correction](evidence/WO-RLS-052/implementation-review.md) is approved and applied. Both missing-input diagnostics pass; the positive case is blocked before provider invocation by the 64 KiB input limit.
 
 Read the [preparation review](evidence/WO-RLS-045/preparation-review.md) for the
 requested decision, concrete changes, evidence and limits.
@@ -28,7 +28,7 @@ the tagged source. Git remains authoritative; no public service is proposed.
 | [WO-RLS-049](work-orders/WO-RLS-049.md) | Approved one-file clarification/reporting correction; qualification pending. |
 | [WO-RLS-050](work-orders/WO-RLS-050.md) | Approved content-readiness correction; first new-candidate diagnostic failed. Qualification remains incomplete. |
 | [WO-RLS-051](work-orders/WO-RLS-051.md) | Approved input-assessment correction; first Claude diagnostic failed and is retained. |
-| [WO-RLS-052](work-orders/WO-RLS-052.md) | Approved source-support correction; new-candidate qualification pending. |
+| [WO-RLS-052](work-orders/WO-RLS-052.md) | Approved source-support correction; both diagnostics pass; positive input assembly remains blocked. |
 | [WO-RLS-047](work-orders/WO-RLS-047.md), [VER-RLS-041](verification/VER-RLS-041.md) | Public delivery and independently observed closeout after complete-release approval. |
 
 Base: merged main `4fb5dbc29ffd7a2ccdc9a081c9c9b9f82b99d999`.

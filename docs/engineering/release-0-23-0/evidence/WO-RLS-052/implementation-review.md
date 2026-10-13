@@ -27,3 +27,7 @@ desktop evidence is separately pending; no previous omission is reused.
 Temporary runners use distinct output paths, loopback ports and fresh projects.
 They preserve the task, fixture, model, permissions and criteria. The new result
 will be independently assessed; no prior verdict or expected answer is supplied.
+
+## Qualification result
+
+Candidate `05c629ddfc0f40924823160d8aaf0fa4e77940a2` passed source/package checks and both missing-input diagnostics. The positive case was refused before provider invocation because its complete input exceeds 64 KiB. See the [retained report](../WO-RLS-045/qualification-progress-05c629dd.md). Required qualification and work completion remain pending.
