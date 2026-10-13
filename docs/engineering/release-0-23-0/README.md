@@ -1,6 +1,6 @@
 # Proposed evaluator 0.23.0 and plugin 0.2.7 release
 
-Status: **Package approved by mmzen. WO-RLS-045/046/048/049/050 are in progress; qualification and final verification remain pending. WO-RLS-047 is approved and unstarted.**
+Status: **Package approved by mmzen. WO-RLS-045/046/048/049/050/051 are in progress; qualification and final verification remain pending. WO-RLS-047 is approved and unstarted.**
 
 The [current qualification report](evidence/WO-RLS-045/qualification-progress-74feac07.md)
 records passing package/service checks and the failed Claude diagnostic.
@@ -8,7 +8,7 @@ The [WO-RLS-049 correction](evidence/WO-RLS-049/implementation-review.md) is app
 
 The [WO-RLS-050 correction](evidence/WO-RLS-050/implementation-review.md) is approved and applied. Its fresh Claude diagnostic failed independent content review; native repetitions are stopped and qualification remains incomplete.
 
-The [WO-RLS-051 proposal](evidence/WO-RLS-051/review.md) makes the input assessment visible before drafting. It is draft and unapplied; exact approval is pending.
+The [WO-RLS-051 correction](evidence/WO-RLS-051/implementation-review.md) is approved and applied. New-candidate qualification is pending.
 
 Read the [preparation review](evidence/WO-RLS-045/preparation-review.md) for the
 requested decision, concrete changes, evidence and limits.
@@ -25,7 +25,7 @@ the tagged source. Git remains authoritative; no public service is proposed.
 | [WO-RLS-048](work-orders/WO-RLS-048.md) | Approved exact client-admission and instruction-map correction; linked release membership amendment. |
 | [WO-RLS-049](work-orders/WO-RLS-049.md) | Approved one-file clarification/reporting correction; qualification pending. |
 | [WO-RLS-050](work-orders/WO-RLS-050.md) | Approved content-readiness correction; first new-candidate diagnostic failed. Qualification remains incomplete. |
-| [WO-RLS-051](work-orders/WO-RLS-051.md) | Draft input-assessment correction; exact edit and release-membership amendment pending approval. |
+| [WO-RLS-051](work-orders/WO-RLS-051.md) | Approved input-assessment correction; new-candidate qualification pending. |
 | [WO-RLS-047](work-orders/WO-RLS-047.md), [VER-RLS-041](verification/VER-RLS-041.md) | Public delivery and independently observed closeout after complete-release approval. |
 
 Base: merged main `4fb5dbc29ffd7a2ccdc9a081c9c9b9f82b99d999`.

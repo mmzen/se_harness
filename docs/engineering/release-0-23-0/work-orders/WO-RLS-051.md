@@ -2,10 +2,15 @@
 id = "WO-RLS-051"
 type = "work_order"
 title = "Assess supplied inputs before hosted drafting"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-13"
 updated = "2026-10-13"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen confirmed required commit-bound verification because release decisions depend on exact instructions and their independently observed native behavior."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = ["plugins/verity-plane/common/skills/change/references/hosted-drafts.md", "docs/engineering/release-0-23-0/"]
@@ -14,6 +19,21 @@ paths = ["plugins/verity-plane/common/skills/change/references/hosted-drafts.md"
 implements = ["REQ-HAG-014"]
 specifications = ["SPEC-HAG-008"]
 verification = ["VER-HAG-008", "VER-RLS-040"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-13T10:35:14Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied \"I approve\" on 2026-10-13 to WO-RLS-051, required commit-bound verification and its linked release-membership amendment, reviewed in PR #544 at ac15fbdf00619351a737266135d151c56a4c5f74. This authorizes the exact one-file pre-drafting input-assessment correction, bounded local checks and new-candidate qualification under unchanged VER-HAG-008 and VER-RLS-040. It explicitly authorizes the reviewed manual REL-SEH-036 gates amendment, preserving accepted bytes and lifecycle history, and includes this work in the existing review-publication grant for codex/release-0-23-0 to mmzen/se_harness:main, including later separately given verification-decision pushes. Human verification, merge, complete-release approval, desktop omission, adoption and host updates remain separate. Reviewed work-order SHA-256 0c61ae5c427c026ff90ec98658b650b1b6680823d72135462d866941784aca24; instruction before 669c9f141f4d219aab1ad2b90f29c610e1e1a91280be87e6d7f34f9c1f7071cf and after 57a6fb26a8710381620ca0d579c53f442c397db66e2d7be1004db686604b6b64; release amendment before 609e424ba14cde14ef45ffb4e432972fe6c36b56a22623edea08611eb1a5010b and after 141e1708e5a3c6293641f8d09865459444fedd189e984adc0580989ed1fc54e9."
+scope_paths = ["plugins/verity-plane/common/skills/change/references/hosted-drafts.md", "docs/engineering/release-0-23-0/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-13T10:38:23Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Assess supplied inputs before hosted drafting

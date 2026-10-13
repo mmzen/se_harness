@@ -74,24 +74,36 @@ Load [lifecycle instructions](hosted-test-lifecycle.md) only for that task.
 
 ## Check the inputs before writing
 
-Compare the type checklist with the request, definitions and requester
-clarifications. Use one content-readiness decision in the report and final reply.
+Before creating or editing a draft, show one short input assessment in the
+conversation or existing transient report. Use one row per required item from
+the type checklist:
 
-| Evidence available | Content readiness and action |
-| --- | --- |
-| Required input absent from supplied sources | **Incomplete.** Ask for it; stop dependent writing. Calling it `unknown` or `not yet defined` does not satisfy it. |
-| Supplied input omitted from the editable draft | **Incomplete.** Add it within scope and review the saved revision. |
-| Every required item supported in the latest saved revision | **Complete.** Identify the source inspection or executed check supporting this conclusion. |
-| Access, evidence or operation uncertainty prevents assessment | **Blocked.** State the limitation and follow the recovery procedure. |
+| Required input | Supplied fact and source, or **Missing** | Question if missing |
+| --- | --- | --- |
 
-A partial draft may remain saved. A successful save, an empty `incomplete` list,
-or `content_review: not_assessed` cannot establish completeness. Unknown optional
-facts do not become required inputs.
+Use the request, definitions and requester clarifications as sources. Record
+what they actually establish, not text you intend to write. A source reference
+alone does not support a claim. Reuse a matching assessment and retained sources;
+do not create another file or repeat reads just to fill the table.
+
+- If a required input is **Missing**, report content as **Incomplete**, ask the
+  corresponding question and stop dependent writing. An existing partial draft
+  may remain saved. `Unknown` is not an answer. Optional facts stay optional.
+- If all required inputs are supplied, author supported content. A supplied
+  input omitted from the draft must be added and reviewed before completion.
+- If access or operation uncertainty prevents assessment, report **Blocked**
+  and follow the recovery procedure.
+
+After submission, update this same assessment against the latest saved revision.
+Report **Complete** only when every required item is supported and present there.
+Use this result in both the report and final reply. A successful save, an empty
+`incomplete` list or `content_review: not_assessed` cannot establish completeness.
 
 For an intent, a software output is not the user's operational improvement.
 Establish the user's problem, desired change and how they will know it helped.
 An unmeasured baseline is allowed; a missing success measure is still missing.
-Do not invent these inputs or scope limits. Label proposed limits for confirmation.
+Do not invent these inputs or scope limits. Label proposed limits for confirmation
+in both the draft and report.
 Choose methods, checks and evidence destinations within scope; label them planned.
 
 Before claiming a coverage gap, read the applicable requirements, specifications
@@ -151,8 +163,8 @@ complete requests/results and one short report outside the repository, including
 after a mutation attempt or uncertain effect. Read required omitted findings.
 The report contains:
 
-- **Content readiness:** use the decision from **Check the inputs before writing**
-  for the latest saved revision. State unresolved required inputs and questions.
+- **Content readiness:** reuse the assessment from **Check the inputs before
+  writing**, updated for the latest saved revision. Keep missing inputs and questions visible.
 - **Saved state:** selection, revision, versions and exact document/result paths.
 - **Validation and review:** evaluator findings, independent content findings,
   local and remote failures (including recovered ones), denials, uncertain effects,
