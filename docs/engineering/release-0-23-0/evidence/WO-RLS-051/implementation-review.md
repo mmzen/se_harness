@@ -26,3 +26,7 @@ desktop evidence is separately pending; no previous omission is reused.
 Temporary runners use distinct output paths, loopback ports and fresh projects.
 They preserve the task, fixture, model, permissions and criteria. The new result
 will be independently assessed; no prior verdict or expected answer is supplied.
+
+## Qualification result
+
+Candidate `32f2834e82b92e773536808c16b00256ffaae896` passed source and package checks, but its first Claude diagnostic failed. The input table was present and still misclassified missing inputs. See the [retained report](../WO-RLS-045/qualification-progress-32f2834e.md). No further native trial or completion transition occurred.
