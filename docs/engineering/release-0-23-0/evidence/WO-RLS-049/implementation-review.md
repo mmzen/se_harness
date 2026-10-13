@@ -32,3 +32,10 @@ and keep desktop evidence separately pending.
 The change reuses one existing instruction owner and both package routes. It adds
 no helper, automatic authoring sequence, policy copy, gate or approval step. No
 content keyword test was added as a substitute for independent native review.
+
+## New-candidate qualification result
+
+Candidate `f2ddb5afe42d40cc7c4a426b5c9cb985156a28a3` passed package and service checks but failed its first Claude
+diagnostic. See [the retained assessment and report](../WO-RLS-045/qualification-progress-f2ddb5af.md).
+The exact applied correction did not establish the required native behavior.
+WO-RLS-049 remains in progress; no completion or verification was recorded.

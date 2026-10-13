@@ -2,9 +2,9 @@
 
 Status: **Package approved by mmzen. WO-RLS-045/046/048/049 are in progress; qualification and final verification remain pending. WO-RLS-047 is approved and unstarted.**
 
-The [current qualification report](evidence/WO-RLS-045/qualification-progress.md)
+The [current qualification report](evidence/WO-RLS-045/qualification-progress-f2ddb5af.md)
 records passing package/service checks and the failed Claude diagnostic.
-The [WO-RLS-049 correction](evidence/WO-RLS-049/implementation-review.md) is approved and implemented in source; its new-candidate qualification is pending.
+The [WO-RLS-049 correction](evidence/WO-RLS-049/implementation-review.md) is approved and implemented in source; its fresh Claude diagnostic failed content review; native repetitions are stopped and qualification remains incomplete.
 
 Read the [preparation review](evidence/WO-RLS-045/preparation-review.md) for the
 requested decision, concrete changes, evidence and limits.
