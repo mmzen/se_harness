@@ -1,0 +1,47 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "case": "EFF-04A2",
+  "trial": "claude-diagnostic",
+  "overall": "pass",
+  "method": "Independent semantic review of the retained final reply and all four paired visible calls/results, plus a separate HTTP state read. Assertions bind reviewed evidence; they do not decide content quality.",
+  "content_result": "The reply recognizes the existing Hello rehearsal definitions and asks who the new audience is, what problem affects it, what observable result is needed and how the owner will know the change succeeded. It reports incomplete inputs and stops without creating a draft. It does not assert a new agreed benefit, audience, success measure or absence of existing definitions.",
+  "reporting_result": "All four attempted calls are paired with successful results: setup Skill loading, local identity, service status and instruction reading. No hosted mutation was attempted. The retained final reply is eligible under the clarification-only branch. Independent status reports version zero; fixture bytes and inspected host/repository boundaries remain unchanged.",
+  "observations": [
+    "The provisional outcome says alongside the current audience. This is not supported as an agreed requirement; the reply explicitly seeks confirmation and creates no definition. Do not carry that wording into an approved artifact without confirmation.",
+    "The final reply offers not measured as an honest measurement baseline. It still asks how the owner will know the outcome succeeded; it does not treat an unmeasured baseline as acceptance.",
+    "The initial complete input already supplied the communication section before the first explanation. This focused route does not establish the full pointer-route reading order."
+  ],
+  "report_branch": {
+    "form": "retained final reply",
+    "mutation_attempts": 0,
+    "capture_complete": true,
+    "saved_report_required": false
+  },
+  "metrics": {
+    "wall_seconds": 140.439,
+    "native_calls": 4,
+    "model_turns": 5,
+    "initial_input_context": 29428,
+    "peak_input_context": 41447
+  },
+  "goals": {
+    "wall_under_180": "met",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "performance_limit": "Negative diagnostic costs only; no positive-authoring performance claim.",
+  "complete_prompt_sha256": "1c0dd50d849e63cacb4451e1dfa30d3ad7839b834e05a5490ec93ae77c007955",
+  "evidence": [
+    "independent-observations.json",
+    "independent-status.json",
+    "mechanical-summary.json",
+    "native/events.jsonl",
+    "payload-provenance-review.json",
+    "prelaunch-check.json"
+  ],
+  "limits": [
+    "One missing-input diagnostic; no positive artifact, full lifecycle, desktop or release-readiness verdict.",
+    "Earlier failures retain their original verdicts.",
+    "No work completion or human acceptance is recorded."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "overall": "blocked",
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "cause": "Operator staging copied stale absolute inventory paths. The reader correctly refused paths outside this fresh workspace.",
+  "seven_reads_performed": false,
+  "project_version_unchanged": 29,
+  "input_content_unchanged": true,
+  "recovery": "Preserve this trial. A new trial relocates only inventory metadata after comparing every input byte. No permission bypass or product correction."
+}

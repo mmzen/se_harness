@@ -1,0 +1,83 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "case": "EFF-04B",
+  "trial": "claude-positive3",
+  "overall": "pass",
+  "method": "Independent review of separately read saved document, source requirement/specification, paired native calls, report and final reply. Seven separate baseline reads establish unchanged imported bytes.",
+  "content_result": "The new draft links REQ-P3-900 and derives Hello rehearsal independently from the requirement and specification. It contains a requirement/method/check/pass-condition matrix, the existing assert-greeting invocation with a source digest precondition, and a concrete work-order evidence path and retained fields. It remains draft and does not claim an executed test or human verification. No empty optional headings remain.",
+  "reporting_result": "All paired calls succeeded. Independent reads confirm the exact saved document, project version four and unchanged imported records. The report retains the existing W-AUT-022 advisory and records each actual operation; no failure or denied operation is omitted.",
+  "observations": [
+    "The report groups three artifact writes separately from one draft-open context projection. Draft-open also mutates project state: the correct total is four accepted project mutations. Its evidence table and body explicitly retain that operation; the final short summary alone is incomplete.",
+    "The statement that all operations have accepted outcomes is imprecise for reads. All mutation receipts are accepted and the actual reads succeeded; this is recorded separately from the content verdict."
+  ],
+  "artifact": {
+    "artifact_id": "VER-P3-901",
+    "revision_id": "sha256:316a09300b911a77c480a578d2a5ce4b8f799b19774577755623f4b2c3e80bff"
+  },
+  "document_sha256": "374af46a24b3e43ca71aa953221e1f6a6eb6f5148226040f1e7e9fd240930416",
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "accepted_project_mutations": 4,
+  "operations": [
+    {
+      "record": "work/create-ver.json",
+      "exit": 0,
+      "operation": "create-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/draft-open.json",
+      "exit": 0,
+      "operation": "draft-open",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/import-source.json",
+      "exit": 0,
+      "operation": "import",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/read-ver-901.json",
+      "exit": 0,
+      "operation": "read",
+      "outcome": null
+    },
+    {
+      "record": "work/revise-ver.json",
+      "exit": 0,
+      "operation": "revise-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/status-check.json",
+      "exit": 0,
+      "operation": "status",
+      "outcome": null
+    }
+  ],
+  "metrics": {
+    "wall_seconds": 165.552,
+    "native_calls": 12,
+    "model_turns": 11,
+    "initial_input_context": 32853,
+    "peak_input_context": 56954
+  },
+  "goals": {
+    "wall_under_180": "met",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "evidence": [
+    "independent-document.md",
+    "independent-readback.json",
+    "independent-revision.json",
+    "independent-observations.json",
+    "mechanical-summary.json",
+    "native/work/native-report.md"
+  ],
+  "limits": [
+    "Complete applicable instructions were already in the bounded initial input; the separate full test must establish pointer-based communication discovery.",
+    "No desktop, full lifecycle or release-readiness verdict."
+  ]
+}
