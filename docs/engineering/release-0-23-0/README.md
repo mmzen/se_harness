@@ -1,11 +1,11 @@
 # Proposed evaluator 0.23.0 and plugin 0.2.7 release
 
-Current status: **WO-RLS-055 correction is implemented for qualification.**
-The historical-rehearsal blocker remains open until the real rehearsal passes.
-WO-RLS-045/046/048–054 are implemented; WO-RLS-055 is in progress;
-WO-RLS-047 is approved and unstarted. The approved linked membership amendment
-is applied. Read the [correction review](evidence/WO-RLS-055/implementation-review.md)
-for current results; the earlier candidate report below remains historical.
+Current status: **WO-RLS-055 correction passed actual qualification.**
+The historical-rehearsal blocker is resolved. WO-RLS-045/046/048–055 are
+implemented; WO-RLS-047 remains approved and unstarted. Read the
+[correction qualification](evidence/WO-RLS-055/qualification-review.md).
+Final clean-candidate package/staging qualification and aggregate verification
+remain pending. Native findings remain open and desktop remains unverified.
 
 Read the [current qualification report](evidence/WO-RLS-045/qualification-progress-6fa4d1a6.md),
 [open instruction/desktop items](evidence/WO-RLS-054/open-items.md), and
