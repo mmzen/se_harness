@@ -2,7 +2,7 @@
 artifact = "WO-RLS-046"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "97ac03c14481802619702516fe51dc9916df79d1e5911a306988a06dac4f4eeb"
-rebound_at = "2026-10-13T13:19:59Z"
+rebound_at = "2026-10-16T09:19:53Z"
 ```
 
 # WO-RLS-046 handoff evidence
