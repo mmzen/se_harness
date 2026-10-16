@@ -32,3 +32,7 @@ sections, selected plugin references and 64 KiB refusal stay unchanged.
 Run one fresh Claude EFF-04A2 diagnostic first. A failure stops native repetitions;
 a pass permits the remaining accepted sequence. Previous candidates and their
 verdicts remain unchanged. Separate desktop evidence is still pending.
+
+## Candidate qualification
+
+[Current report](../WO-RLS-045/qualification-progress-a98a1571.md): exact inputs fit and focused drafting passes. Full hosted functionality, CLI delivery and recovery pass their observed checks. Instruction timing and remaining delivery/desktop evidence keep aggregate verification pending. WO-RLS-053 remains in progress.

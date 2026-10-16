@@ -1,0 +1,162 @@
+{
+  "candidate": "a98a1571292f5bbf34cd2c7cff0af793d00fa12f",
+  "trial": "codex-full",
+  "overall": "incomplete",
+  "functional_lifecycle": "pass",
+  "cases": {
+    "NQ-01": {
+      "result": "incomplete",
+      "passed": "Selected identities, test-only authority, actual route reads and checkpoint/gate distinctions are retained.",
+      "finding": "R23-NATIVE-009: communication prerequisite read after the first eligible explanation. Later reading cannot establish compliance at that earlier point.",
+      "first_explanation_event_line": 23,
+      "first_explanation": "I\u2019m using the selected candidate\u2019s setup, change, and evidence guidance for the disposable hosted test. I\u2019ll verify its identities first, then retain the lifecycle requests, local assertion evidence, and exports under `work/`.\n",
+      "communication_command_event_line": 54
+    },
+    "NQ-02": {
+      "result": "pass",
+      "review": "Authored definitions align with the supplied immutable greeting task. Requirement/specification/verification/work links agree, risk and paired mitigation are supported, and exact local assertion evidence is retained. Twelve accepted lifecycle operations independently replayed with released 0.22.1. Synthetic actors and candidate P remain distinct from real work and candidate C."
+    },
+    "NQ-03": {
+      "result": "pass",
+      "review": "Stale preview and actual evaluator scope refusals committed no effects. The first protected-path refusal is recorded separately. Each of seven native MCP tools exactly matches independent HTTP for its selected versioned view. Saved or truncated results and recovery reads are disclosed."
+    },
+    "NQ-04": {
+      "result": "pass",
+      "review": "Dropped accepted reply reported unknown, original-key lookup recovered receipt, identical resubmission retained the same receipt/version effect, changed content with the same key conflicted. No helper chose the recovery commands."
+    },
+    "NQ-05": {
+      "result": "pass",
+      "review": "Earlier/later native exports independently reconstructed and checked. Imported records and greeting source hashes remain unchanged. VREC/RLS bind the same original test candidate; real repository/inspected host settings and staged input bytes are unchanged. Reports explicitly leave independent replay to the reviewer and grant no real external authority."
+    }
+  },
+  "content_review": "Complete exported intent/capability/requirement/specification/verification/work/release content, decision/risk and generated VREC/RLS were reviewed against the task and actual receipts. No unsupported new audience or behavior is supplied. Preparatory and final artifacts accurately distinguish planned checks, observed assertion and test decisions.",
+  "mechanical_assessment": "mechanical-assessment.json",
+  "mechanical": {
+    "candidate": "a98a1571292f5bbf34cd2c7cff0af793d00fa12f",
+    "trial": "codex-full",
+    "accepted_operations_replayed": 12,
+    "native_exports": 4,
+    "mcp_observations": 8,
+    "mcp_tools_exactly_matched": [
+      "check",
+      "compare",
+      "cypher",
+      "impact",
+      "lineage",
+      "revision",
+      "work-context"
+    ],
+    "mcp_unmatched_observations": [],
+    "test_candidate": "af4b6c9268f8c01b3303ad9e6ef2136059c32929",
+    "actors": [
+      {
+        "id": "CAP-NAT-001",
+        "to": "approved",
+        "actor": "test-owner"
+      },
+      {
+        "id": "DEC-NAT-001",
+        "to": "decided",
+        "actor": "test-owner"
+      },
+      {
+        "id": "INT-NAT-001",
+        "to": "approved",
+        "actor": "test-owner"
+      },
+      {
+        "id": "REL-NAT-001",
+        "to": "approved",
+        "actor": "test-owner"
+      },
+      {
+        "id": "RLS-NAT-001",
+        "to": "released",
+        "actor": "release-owner"
+      },
+      {
+        "id": "REQ-NAT-001",
+        "to": "approved",
+        "actor": "test-owner"
+      },
+      {
+        "id": "RISK-NAT-001",
+        "to": "raised",
+        "actor": "test-owner"
+      },
+      {
+        "id": "RISK-NAT-001",
+        "to": "mitigating",
+        "actor": "test-owner"
+      },
+      {
+        "id": "SPEC-NAT-001",
+        "to": "approved",
+        "actor": "test-owner"
+      },
+      {
+        "id": "VER-NAT-001",
+        "to": "approved",
+        "actor": "test-owner"
+      },
+      {
+        "id": "VREC-NAT-001",
+        "to": "verified",
+        "actor": "quality-owner"
+      },
+      {
+        "id": "WO-NAT-001",
+        "to": "approved",
+        "actor": "test-owner"
+      },
+      {
+        "id": "WO-NAT-001",
+        "to": "in_progress",
+        "actor": "test-executor"
+      },
+      {
+        "id": "WO-NAT-001",
+        "to": "implemented",
+        "actor": "test-executor"
+      }
+    ],
+    "originals": [
+      {
+        "export": "export-earlier",
+        "original_files": 8
+      },
+      {
+        "export": "export-later",
+        "original_files": 8
+      },
+      {
+        "export": "export-rls-review",
+        "original_files": 8
+      },
+      {
+        "export": "export-vrec-review",
+        "original_files": 8
+      }
+    ],
+    "boundaries_unchanged": true,
+    "metrics": {
+      "wall_seconds": 1866.185,
+      "native_calls": null,
+      "observed_tool_items": 276,
+      "native_call_count_complete": false,
+      "model_turns": null,
+      "initial_input_context": null,
+      "peak_input_context": null
+    },
+    "native_failed_items": 8,
+    "content_review": "Separate manual assessment required; this script does not decide completeness."
+  },
+  "limits": [
+    "This is explicit packaged guidance, not automatic instruction delivery or desktop qualification.",
+    "Full-run instruction timing remains unresolved; no overall five-case pass is claimed.",
+    "Native helper/operator mistakes remain in the reports, including recovered read/export errors and planned refusals.",
+    "Performance is observational, not a new gate; do not mix this full lifecycle task with one-contract drafting costs."
+  ],
+  "reporting_observation": "Codex explicitly disclosed the late communication read. Exact total calls, turns and context are unavailable; visible items are a lower bound.",
+  "next": "Review a bounded instruction-discovery correction before changing packaged guidance; preserve these functional results and failed timing observation."
+}

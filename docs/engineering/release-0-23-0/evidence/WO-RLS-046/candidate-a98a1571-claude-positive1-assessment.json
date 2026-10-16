@@ -1,0 +1,87 @@
+{
+  "candidate": "a98a1571292f5bbf34cd2c7cff0af793d00fa12f",
+  "case": "EFF-04B",
+  "trial": "claude-positive1",
+  "overall": "pass",
+  "method": "Independent semantic review of exact separately read saved bytes, the request and original definitions, report and all paired visible calls/results. Seven independent baseline reads confirm original Git-blob bytes. Assertions bind facts; no content keyword grader.",
+  "content_result": "The draft links REQ-P3-900 and contains a requirement/method/case/pass-condition matrix. Expected Hello rehearsal derives from the requirement and specification. The planned assert-greeting capability is available and accurately described: selected-source digest guard, local Windows equality assertion, exit zero and exact greeting passed. The evidence plan names the full repository-relative work-order destination and filename. One exact equality check covers this literal requirement; no invented scenarios or missing-contract claim.",
+  "reporting_result": "The report distinguishes draft admission from content review, retains the pre-existing W-AUT-022 advisory and all actual command records, and makes no executed-test or verified-outcome claim. The final says the contract plans a check. Complete capture establishes no failed or denied call. The last successful report write follows the observation snapshot and is accounted for.",
+  "observations": [
+    "The report says two mutations then explicitly limits those to VER-P3-001 content writes and separately lists import and draft-open. The actual total is four accepted project mutations: import, draft-open, create, revise. The final correctly says two content writes; do not reuse this as a total-mutation count.",
+    "No explicit no-tests-ran sentence appears, but all checks are written as plans, no assertion was invoked, and no executed/verified result is claimed.",
+    "Additional reads and returned data increased context. This is a correct draft but misses duration and peak-context goals."
+  ],
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:70b7ee06b50608438c50a0eb2da8db2d86b30cc58b4b678fd06c8aa0b7c5d92a"
+  },
+  "document_sha256": "d5a1042346bc9d27a8ba4e4d67079765d36cadaa1a0c605647f733de49211490",
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "final_project_version": 4,
+  "metrics": {
+    "wall_seconds": 180.987,
+    "native_calls": 15,
+    "model_turns": 13,
+    "initial_input_context": 32799,
+    "peak_input_context": 63296
+  },
+  "goals": {
+    "wall_under_180": "missed",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "operations": [
+    {
+      "record": "work/create-ver",
+      "exit": 0,
+      "operation": "create-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/draft-open",
+      "exit": 0,
+      "operation": "draft-open",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/import-source",
+      "exit": 0,
+      "operation": "import",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/read-ver",
+      "exit": 0,
+      "operation": "read",
+      "outcome": null
+    },
+    {
+      "record": "work/revise-ver",
+      "exit": 0,
+      "operation": "revise-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/status-check",
+      "exit": 0,
+      "operation": "status",
+      "outcome": null
+    }
+  ],
+  "host_boundary_unchanged": true,
+  "input_changes": [],
+  "evidence": [
+    "independent-document.md",
+    "independent-readback.json",
+    "independent-revision.json",
+    "native/work/native-report.md",
+    "independent-observations.json",
+    "mechanical-summary.json"
+  ],
+  "limits": [
+    "One positive attempt; the two further Claude repetitions and Codex positive remain required.",
+    "Ran concurrently with the separate Codex diagnostic; timing is an observation, not an isolated benchmark.",
+    "No full lifecycle/delivery, desktop, verification acceptance or release claim."
+  ]
+}

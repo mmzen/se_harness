@@ -1,0 +1,49 @@
+{
+  "candidate": "a98a1571292f5bbf34cd2c7cff0af793d00fa12f",
+  "case": "EFF-04A2",
+  "trial": "claude-diagnostic",
+  "overall": "pass",
+  "method": "Independent semantic review of final reply, all six paired visible calls/results and separately observed service status. Mechanical assertions bind evidence; no text matcher decides the semantic verdict.",
+  "content_result": "The reply identifies existing Hello rehearsal definitions, distinguishes the new audience and its present problem as unknown, requests the observable outcome and how the owner will know it helped, and reports Incomplete. It creates no artifact and claims no agreed benefit, success condition or absence of prior definitions.",
+  "reporting_result": "The retained final reply is eligible: all six attempted calls are captured and paired with successful results; there is one status read and five instruction reads, no hosted mutation attempt, failure or denial. It explicitly states no hosted mutation was attempted. Separate HTTP status confirms project version zero; all staged bytes and inspected host settings are unchanged.",
+  "observations": [
+    "The proposed statement adds alongside the existing rehearsal greeting. It is explicitly marked proposed and pending answers, not a supported or agreed product requirement. Do not carry this wording into a formal definition without requester confirmation.",
+    "Five additional prerequisite reads increased peak context beyond the efficiency goal. They do not constitute a content failure, and this negative diagnostic does not establish positive drafting performance."
+  ],
+  "report_branch": {
+    "form": "retained final reply",
+    "mutation_attempts": 0,
+    "capture_complete": true,
+    "saved_report_required": false
+  },
+  "metrics": {
+    "wall_seconds": 138.534,
+    "native_calls": 6,
+    "model_turns": 3,
+    "initial_input_context": 29359,
+    "peak_input_context": 40766
+  },
+  "goals": {
+    "wall_under_180": "met",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "project_version": 0,
+  "input_changes": [],
+  "host_boundary_unchanged": true,
+  "complete_prompt_sha256": "0b13312e7b1604bfe5ab2ddb3a7e309956cf114ecd1936e362eb62a94c1b72d8",
+  "evidence": [
+    "independent-observations.json",
+    "independent-status.json",
+    "mechanical-summary.json",
+    "native/events.jsonl",
+    "payload-provenance-review.json",
+    "prelaunch-check.json"
+  ],
+  "limits": [
+    "One missing-input diagnostic; no positive artifact-authoring, full lifecycle, desktop or release-readiness verdict.",
+    "Prior failures retain their original verdicts.",
+    "No completion, human verification, merge or release decision is recorded."
+  ],
+  "next": "Run the authorized Codex diagnostic with boundary probes and the original positive sequence."
+}
