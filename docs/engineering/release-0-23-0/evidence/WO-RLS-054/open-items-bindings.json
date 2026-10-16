@@ -1,0 +1,26 @@
+{
+  "source_candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "files": [
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-054/open-items.md",
+      "sha256": "df91ecfc0fa2f1d520135916426265af8aa906aecc4f39b368b99c8d4c6fac68"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/decisions/DEC-RLS-010.md",
+      "sha256": "f8074b870e2e04abcdd4f343854c246cb07fbef8f8038594c495403ea7994dde"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/decisions/DEC-RLS-011.md",
+      "sha256": "ea4060d7c78051e90c5ad5b63b75bc0d6fb251c18543c9942711cbd9c197b7a7"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/risks/RISK-RLS-008.md",
+      "sha256": "048d3e91cda5e8ae3193612ad54dd8009ff2601e03a41f9381e98d9fe6392a13"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/risks/RISK-RLS-009.md",
+      "sha256": "1997a0ee9391dd6cdbe302e0d4a24098b13580e3f85c0f542f4cb5a9e4aab3e2"
+    }
+  ],
+  "original_observations_unchanged": true
+}

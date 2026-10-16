@@ -1,5 +1,7 @@
 # Proposed evaluator 0.23.0 and plugin 0.2.7 release
 
+Current continuation: [open release items](evidence/WO-RLS-054/open-items.md) records mmzen's release-only dispositions. R23-NATIVE-010/011 remain open; Codex Windows desktop remains deferred and unverified. Final aggregate verification and complete-release approval remain pending.
+
 Status: **Package approved by mmzen. WO-RLS-045/046/048/049/050/051/052/053/054 are in progress; qualification and final verification remain pending. WO-RLS-047 is approved and unstarted.**
 
 The [current qualification report](evidence/WO-RLS-045/qualification-progress-a98a1571.md)
