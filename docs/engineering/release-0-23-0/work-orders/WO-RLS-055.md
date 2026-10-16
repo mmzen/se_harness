@@ -2,10 +2,15 @@
 id = "WO-RLS-055"
 type = "work_order"
 title = "Qualify historical releases without treating them as live delivery"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-16"
 updated = "2026-10-16"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen confirmed required commit-bound verification for the release resolver, workflow and qualification correction."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = [".github/scripts/publish_release.py", ".github/workflows/release-qualification.yml", ".github/workflows/publication-rehearsal.yml", "tests/test_release_orchestration.py", "docs/notes/release-publication-rehearsal.md", "docs/notes/developing-se-harness.md", "docs/engineering/release-0-23-0/"]
@@ -15,6 +20,21 @@ implements = ["REQ-RLO-022"]
 specifications = ["SPEC-RLO-007"]
 verification = ["VER-RLS-039"]
 architecture = ["ARCH-RLO-006", "ADR-RLO-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-16T12:14:31Z"
+decided_by = "mmzen"
+reason = "Human mmzen answered \"I approve\" on 2026-10-16 to the explicit WO-RLS-055 request and review at PR #544 head 9c42b4d00e744bc1f3b2461a0819081141dd4c3b. Approves the bounded historical-rehearsal correction, required commit-bound verification under VER-RLS-039, and manual activation of the exact linked REL-SEH-036 membership amendment preserving accepted bytes and lifecycle history. Includes local implementation/checks, actual read-only rehearsal qualification, and ordinary updates to draft PR #544, codex/release-0-23-0 to mmzen/se_harness:main, including the ready aggregate record and a later separately supplied verification decision. Keeps live publication checks, original findings and desktop deferral unchanged. Human verification, merge and exact complete-release approval remain separate. Reviewed WO SHA-256 3b8ce814b940f09615059fd78aaf386907b2a7429d3abe4949be7b72593a064a."
+scope_paths = [".github/scripts/publish_release.py", ".github/workflows/release-qualification.yml", ".github/workflows/publication-rehearsal.yml", "tests/test_release_orchestration.py", "docs/notes/release-publication-rehearsal.md", "docs/notes/developing-se-harness.md", "docs/engineering/release-0-23-0/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-16T12:15:28Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Qualify historical releases without treating them as live delivery

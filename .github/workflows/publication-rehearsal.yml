@@ -115,6 +115,7 @@ jobs:
       contents: read
     with:
       mode: release-record
+      historical: true
       release_record: ${{ needs.select.outputs.release_record }}
       require_status: ${{ needs.select.outputs.status }}
       default_ref: refs/remotes/origin/main

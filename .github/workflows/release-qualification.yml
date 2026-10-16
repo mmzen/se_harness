@@ -39,6 +39,11 @@ on:
         required: false
         type: string
         default: released
+      historical:
+        description: Read-only rehearsal of a released record; never supplies publication inputs
+        required: false
+        type: boolean
+        default: false
       ref:
         description: ref to check out; the candidate commit in candidate mode, the trusted default branch in release-record mode
         required: true
@@ -63,6 +68,7 @@ jobs:
       RELEASE_RECORD: ${{ inputs.release_record }}
       REQUIRE_STATUS: ${{ inputs.require_status }}
       DEFAULT_REF: ${{ inputs.default_ref }}
+      HISTORICAL: ${{ inputs.historical }}
       SE_HARNESS_TEST_SCALE: full  # WO-TST-003: a release qualification runs the 1,000-artifact scale size
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
@@ -95,6 +101,11 @@ jobs:
             *)
               echo "mode must be candidate or release-record" >&2; exit 1 ;;
           esac
+          if [[ "$HISTORICAL" == "true" ]]; then
+            test "$MODE" = release-record && test "$REQUIRE_STATUS" = released || {
+              echo "historical rehearsal requires a released record" >&2; exit 1;
+            }
+          fi
 
       - name: Resolve the subject
         id: subject
@@ -104,10 +115,13 @@ jobs:
           if [[ "$MODE" == "release-record" ]]; then
             python -m se_harness validate .
             python scripts/validate_release_distributions.py --root . --require-record "$RELEASE_RECORD"
+            resolution_args=()
+            if [[ "$HISTORICAL" == "true" ]]; then resolution_args+=(--historical); fi
             python .github/scripts/publish_release.py resolve \
               --repository "$GITHUB_WORKSPACE" \
               --default-ref "$DEFAULT_REF" \
               --release-record "$RELEASE_RECORD" \
+              "${resolution_args[@]}" \
               --output "$RUNNER_TEMP/release-plan.json" \
               --github-output "$GITHUB_OUTPUT"
             schema="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["distribution_schema"])' "$RUNNER_TEMP/release-plan.json")"
@@ -203,11 +217,13 @@ jobs:
             ${{ runner.temp }}/release-test-evidence/
             ${{ runner.temp }}/release-build-replay.json
             ${{ runner.temp }}/qualification.json
+            ${{ runner.temp }}/release-plan.json
+            ${{ runner.temp }}/rebuilt-manifest-result.json
           if-no-files-found: warn
           retention-days: 14
 
       - name: Transfer only verified inert release bytes
-        if: inputs.mode == 'release-record'
+        if: inputs.mode == 'release-record' && !inputs.historical
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: release-bundle-${{ inputs.release_record }}

@@ -1,8 +1,11 @@
 # Proposed evaluator 0.23.0 and plugin 0.2.7 release
 
-Current status: **Final qualification blocked by R23-REHEARSAL-001.**
-WO-RLS-045/046/048–054 are implemented. WO-RLS-047 is approved and unstarted.
-WO-RLS-055 is a draft correction; no implementation or membership amendment is applied.
+Current status: **WO-RLS-055 correction is implemented for qualification.**
+The historical-rehearsal blocker remains open until the real rehearsal passes.
+WO-RLS-045/046/048–054 are implemented; WO-RLS-055 is in progress;
+WO-RLS-047 is approved and unstarted. The approved linked membership amendment
+is applied. Read the [correction review](evidence/WO-RLS-055/implementation-review.md)
+for current results; the earlier candidate report below remains historical.
 
 Read the [current qualification report](evidence/WO-RLS-045/qualification-progress-6fa4d1a6.md),
 [open instruction/desktop items](evidence/WO-RLS-054/open-items.md), and
@@ -38,7 +41,7 @@ the tagged source. Git remains authoritative; no public service is proposed.
 | [WO-RLS-052](work-orders/WO-RLS-052.md) | Implemented. Source-support correction. Earlier failures are retained; see current qualification report. |
 | [WO-RLS-053](work-orders/WO-RLS-053.md) | Implemented. Two-guide input-size correction. Earlier failures are retained; see current qualification report. |
 | [WO-RLS-054](work-orders/WO-RLS-054.md) | Implemented. Early communication pointer and exact linked membership amendment. Earlier failures are retained; see current qualification report. |
-| [WO-RLS-055](work-orders/WO-RLS-055.md) | Draft historical-rehearsal correction. Approval and exact linked membership amendment pending. |
+| [WO-RLS-055](work-orders/WO-RLS-055.md) | Approved historical-rehearsal correction and exact linked amendment applied; required qualification in progress. |
 | [WO-RLS-047](work-orders/WO-RLS-047.md), [VER-RLS-041](verification/VER-RLS-041.md) | Public delivery and independently observed closeout after complete-release approval. |
 
 Base: merged main `4fb5dbc29ffd7a2ccdc9a081c9c9b9f82b99d999`.

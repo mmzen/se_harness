@@ -264,6 +264,13 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 
 ## Release sequences
 
+The historical-record rehearsal uses the existing qualification workflow with
+`historical: true`. It checks approved documentation at the recorded and
+integration commits; later main documentation may differ. All other provenance
+and recipe checks remain. Its output cannot be consumed as a publication plan.
+Live publication keeps the default mode and its current-main documentation check.
+See [release rehearsals](release-publication-rehearsal.md) for the inputs and evidence.
+
 The [0.23.0 / plugin 0.2.7 package](../engineering/release-0-23-0/README.md)
 is in preparation from merged main. It includes the remote client and qualified
 plugin guidance. Qualification of the new archives and hosted combination is
