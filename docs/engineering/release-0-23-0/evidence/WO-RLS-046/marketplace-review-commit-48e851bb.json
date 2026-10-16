@@ -1,0 +1,15 @@
+{
+  "phase": "qualified payload review staging; no final assurance or public promotion",
+  "candidate_commit": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "marketplace_parent": "85ae003769f53908addbdcf46c820a8af530ac24",
+  "marketplace_commit": "d04776866046b60b14ffef14ced1453c4aafa7d9",
+  "marketplace_tree": "0e0ff666693ad7f00564435e2f35ce8e31a2fb4e",
+  "package_identity_sha256": "f3d3f808d06d09f15628fbbe7958a8bf6e72807f0536a8c9905d947d78376a5e",
+  "file_count": 89,
+  "all_git_blob_bytes_match": true,
+  "public_ref_changed": false,
+  "staging_ref_pushed": false,
+  "planned_staging_ref": "refs/heads/codex/plugin-0-2-7-staging",
+  "open_items": "DEC-RLS-010 and DEC-RLS-011 record release-only dispositions. R23-NATIVE-010/011 remain unrepaired; Windows desktop remains unverified.",
+  "limitations": "The final aggregate verification and release-plan binding remain separate; no package is rebuilt or relabeled."
+}

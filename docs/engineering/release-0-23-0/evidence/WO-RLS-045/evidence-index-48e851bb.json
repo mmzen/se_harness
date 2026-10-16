@@ -1,0 +1,83 @@
+{
+  "candidate": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "records": [
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-48e851bb-combination-build.zip",
+      "name": "candidate-48e851bb-combination-build.zip",
+      "sha256": "287a75a609a93ff8ea9d97cea9fdc9c78540fac43a226d771a9c0c6bec19ae15",
+      "bytes": 20253,
+      "files": 11,
+      "private_reasoning_files_sanitized": 0
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-48e851bb-qualification.zip",
+      "name": "candidate-48e851bb-qualification.zip",
+      "sha256": "c5e25990b4830cf5364e8c06306dc982fe985a8b911f50ac65c46a1c6f194fd0",
+      "bytes": 203251,
+      "files": 109,
+      "private_reasoning_files_sanitized": 0
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-48e851bb-service.zip",
+      "name": "candidate-48e851bb-service.zip",
+      "sha256": "06458448defe0566dfb2562b4ede51c4e27e0c81b1a4efa73c18d8f212b6cee7",
+      "bytes": 1588904,
+      "files": 53,
+      "private_reasoning_files_sanitized": 0
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-48e851bb-bundle-manifest.json",
+      "bytes": 1109,
+      "sha256": "0bb1ae35e350b7a70b73aa45c24fe9c9ed2aa12e60321ad1b48fe4c486482747"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-48e851bb-ci-source-comparison.json",
+      "bytes": 574,
+      "sha256": "5ab63ab8795d5bcda38b2c5444e3e225ea7befd09821e3711e0273cf55af01b4"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-48e851bb-source-package-reuse-comparison.json",
+      "bytes": 103471,
+      "sha256": "2ea27d0e097a9aa4341af008587647a4f4b25c311f26ba781ba4a86ffb1ff0c5"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-48e851bb-service-runtime-reuse-comparison.json",
+      "bytes": 10826,
+      "sha256": "4bc322a30207a8bc56f70ac814f969355105397bfafddb146ad9dbcb52c91566"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-48e851bb-integration-staging.zip",
+      "name": "candidate-48e851bb-integration-staging.zip",
+      "sha256": "83d1df90410fcbd38da551add2bd1c6ef4dae8e4148be92561a8964a7bf53081",
+      "bytes": 49533,
+      "files": 21,
+      "private_reasoning_files_sanitized": 0
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/marketplace-review-commit-48e851bb.json",
+      "sha256": "2cdf3a1601ae08b74d4c2876509cfd9bcd480e02b8976946a6f6c52e8b653775",
+      "bytes": 925
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/marketplace-review-publication-48e851bb.json",
+      "sha256": "6d2df2866fc552dbe6036a181dffba7bd1b88cacc923913e8d8ce22b959231af",
+      "bytes": 553
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-48e851bb-service-boundary-reuse.json",
+      "sha256": "8e6c36d93053b1158ac95762d2e5eb29325fa393640f65659530fdb0974ab0cc",
+      "bytes": 1938
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-48e851bb-windows-source-applicability.json",
+      "sha256": "44105d84f39ec37ad48af3095901218961a7dc26f5d82a4dacbc6cfa33a936d5",
+      "bytes": 1313
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-48e851bb-final-coverage.json",
+      "sha256": "8c39eb79aa85d9f0be76e51cfeecdfbf8ca93f21cab8fba070eb95dee304e4b2",
+      "bytes": 5845
+    }
+  ],
+  "limit": "No new host-native runs. Earlier native observations retain source bb089004 and original results; explicit runtime comparisons are included. New instruction findings remain open; desktop remains unverified. Historical-record rehearsal correction passed. Final observations and explicit historical reuse remain distinct."
+}

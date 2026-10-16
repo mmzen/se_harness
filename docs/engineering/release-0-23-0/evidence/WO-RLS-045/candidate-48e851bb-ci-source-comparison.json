@@ -1,0 +1,19 @@
+{
+  "candidate": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "ci_tested_commit": "b058eb29500e96ffa5844eaf69da44e5bb0af748",
+  "tree": "84b92d2db21c8efaea8082c05babe8b5b97317ab",
+  "whole_tree_equal": true,
+  "run_id": "38903250284",
+  "result": "pass",
+  "tests": 1346,
+  "skips": 2,
+  "test_seconds": 38.429,
+  "manual_candidate_replay": {
+    "run_id": 38903274786,
+    "result": "pass",
+    "manifest_equals_local": true,
+    "historical_record": "RLS-SEH-033",
+    "historical_qualification": "pass",
+    "complete_delivery_recovery": "pass"
+  }
+}

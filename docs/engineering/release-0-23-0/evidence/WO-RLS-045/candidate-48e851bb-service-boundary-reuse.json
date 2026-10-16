@@ -1,0 +1,31 @@
+{
+  "candidate": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "tested_candidate": "6fa4d1a645660cd8022dfc5c3ee7ba35bda3d162",
+  "result": "reused pass; no new boundary run",
+  "source_fixtures_identical": {
+    "source-manifest.json": "3b8ebce0757e1eeaa939af6d210bf53bccb27b07b2c28020c3340639d4140e4d",
+    "source-inventory.json": "e898536bf4ac87d1e035b6f9525de40c4982a2beb56c7d707e9c8380564ae696"
+  },
+  "operational_configuration_identical": {
+    "authority_mode": "sandbox-projection",
+    "database_uri": "bolt://graph:7687",
+    "evaluator_python": "/opt/evaluator/bin/python",
+    "evaluator_wheel": "/opt/evaluator-wheel/se_harness-0.22.1-py3-none-any.whl",
+    "project_id": "11111111-1111-4111-8111-111111111111",
+    "protocols": [
+      "se-harness-remote-command/v1",
+      "se-harness-remote-result/v1",
+      "se-harness-graph-read/v1",
+      "se-harness-artifact-revision/v1",
+      "se-harness-artifact-baseline/v1"
+    ],
+    "source_directory": "/source/source",
+    "source_inventory": "/source/source-inventory.json",
+    "source_manifest": "/source/source-manifest.json"
+  },
+  "changed_component_provenance": "Client/plugin archives, inventories, service image and source identity; expanded runtime bytes, versions and fixed dependencies identical as separately compared. New archive admission and packaged operation tested in fresh walkthrough.",
+  "prior_record_sha256": "ba064c18086ff38c9681357c514d17e6ee52be1cd8731babff3e4d173634a989",
+  "evidence": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-6fa4d1a6-service.zip",
+  "evidence_sha256": "d6e827a07bed5a7196c8d754dce15173d8e1244b4488820dc6af585bd6a15529",
+  "reuse_scope": "Unchanged compatibility refusals, role/authority, concurrency, retry/fault, HTTP/MCP parity and resource boundaries. Contract allows unchanged runtime/dependency/input reuse. Final walkthrough and recovery are assessed separately."
+}

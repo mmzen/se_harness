@@ -1,11 +1,14 @@
 # Proposed evaluator 0.23.0 and plugin 0.2.7 release
 
-Current status: **WO-RLS-055 correction passed actual qualification.**
-The historical-rehearsal blocker is resolved. WO-RLS-045/046/048–055 are
-implemented; WO-RLS-047 remains approved and unstarted. Read the
-[correction qualification](evidence/WO-RLS-055/qualification-review.md).
-Final clean-candidate package/staging qualification and aggregate verification
-remain pending. Native findings remain open and desktop remains unverified.
+Current status: **VREC-SEH-034 is ready for human verification.**
+Candidate `48e851bbc94d7fb0c06e9b80666c3860cb5f8c15` covers 20 implemented work orders and 11 verification contracts.
+Read the [final assessment](evidence/WO-RLS-045/verification-assessment-48e851bb.md)
+and [ready record](verification-records/VREC-SEH-034.md). The final candidate has 19 passing
+CI checks. The historical-rehearsal correction is resolved; native findings stay
+open and Codex Windows desktop stays unverified under DEC-RLS-010/011.
+WO-RLS-047 remains approved and unstarted. Human verification, merge and the
+exact complete-release decision remain separate. Earlier reports below keep
+their historical subjects and findings.
 
 Read the [current qualification report](evidence/WO-RLS-045/qualification-progress-6fa4d1a6.md),
 [open instruction/desktop items](evidence/WO-RLS-054/open-items.md), and
