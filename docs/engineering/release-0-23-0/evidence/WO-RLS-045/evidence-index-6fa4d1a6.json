@@ -1,0 +1,58 @@
+{
+  "candidate": "6fa4d1a645660cd8022dfc5c3ee7ba35bda3d162",
+  "records": [
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-6fa4d1a6-combination-build.zip",
+      "name": "candidate-6fa4d1a6-combination-build.zip",
+      "sha256": "10be9547792f550f8c2939d8269b819da75181e126f669aede9a80dfe8227d02",
+      "bytes": 20232,
+      "files": 11,
+      "private_reasoning_files_sanitized": 0
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-6fa4d1a6-qualification.zip",
+      "name": "candidate-6fa4d1a6-qualification.zip",
+      "sha256": "aebb067a847d9512db839b4c81bf81434b5ef02d7ffb6b7e3dc202aaf1604c2b",
+      "bytes": 206308,
+      "files": 101,
+      "private_reasoning_files_sanitized": 0
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-6fa4d1a6-service.zip",
+      "name": "candidate-6fa4d1a6-service.zip",
+      "sha256": "d6e827a07bed5a7196c8d754dce15173d8e1244b4488820dc6af585bd6a15529",
+      "bytes": 1751730,
+      "files": 117,
+      "private_reasoning_files_sanitized": 0
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-6fa4d1a6-bundle-manifest.json",
+      "bytes": 1109,
+      "sha256": "b952a8623136ea8c76855cf31199d94821fd605b7dd00352ea6c010eef3db46f"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-6fa4d1a6-ci-source-comparison.json",
+      "bytes": 597,
+      "sha256": "2d2d93e7ff37e245a28ae92240ced02eec40f5a7fab38b0535ce6d4c98106fd5"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-6fa4d1a6-source-package-reuse-comparison.json",
+      "bytes": 105469,
+      "sha256": "256585e3191003bb969a21f6d5d6da984fb61ac387ca543896bfafe3cc0c5adf"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-6fa4d1a6-service-runtime-reuse-comparison.json",
+      "bytes": 10823,
+      "sha256": "a93e0030da9cf550e0e9544d6d533f79760636b451fa9bb1a03e1157df95c8e3"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-055/WO-RLS-055-proposal-checks.zip",
+      "name": "WO-RLS-055-proposal-checks.zip",
+      "sha256": "01411b8237715b8e74ff750bd44dd29d49671250c00b5fbc5ae6a73020430d87",
+      "bytes": 23609,
+      "files": 4,
+      "private_reasoning_files_sanitized": 0
+    }
+  ],
+  "limit": "No new host-native runs. Earlier native observations retain source bb089004 and original results; explicit runtime comparisons are included. New instruction findings remain open; desktop remains unverified. Historical-record rehearsal failed and blocks final qualification."
+}

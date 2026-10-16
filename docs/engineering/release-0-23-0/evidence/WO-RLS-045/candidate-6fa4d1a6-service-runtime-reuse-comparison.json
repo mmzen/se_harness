@@ -1,0 +1,187 @@
+{
+  "previous_combination": {
+    "combination_id": "sha256:daafaefc677b3afe37a9c891dd1f85710e01b18307691233688203b0fa10c394",
+    "payload": {
+      "schema": "se-harness-hosted-combination/v1",
+      "source": {
+        "repository": "https://github.com/mmzen/se_harness.git",
+        "candidate_commit": "bb0890045f462343ecae66ca30b20b06cf6e8ae6"
+      },
+      "client": {
+        "version": "0.23.0",
+        "wheel_sha256": "fe431265298cb94d5205c231729f920ce31e77c3f250f525870d214a079fb519"
+      },
+      "plugins": {
+        "codex": {
+          "version": "0.2.7",
+          "archive_sha256": "45ea9efc9361895ec805398f67bbfcbeb0b261d3a89be2dd537dbd0e30b101d5",
+          "inventory_sha256": "8ed41d0548a4ae18cebb1838a58a997269c1c44bf4757ae4542585a287ad3244",
+          "evaluator": {
+            "version": "0.23.0",
+            "archive_sha256": "fe431265298cb94d5205c231729f920ce31e77c3f250f525870d214a079fb519",
+            "payload_sha256": "8b5671743d56fceb81bf6117fca97c807f407bafaf9137d629ac60b91ffa14b6"
+          }
+        },
+        "claude": {
+          "version": "0.2.7",
+          "archive_sha256": "1682652b0f827066e2616ca7bae9257f73c171bf8a8d1fd2f4877d01d5f7e313",
+          "inventory_sha256": "7fc5d25b783525bb6327a217cfa757c6db000089934afc5d2ef2a4340dbc29cb",
+          "evaluator": {
+            "version": "0.23.0",
+            "archive_sha256": "fe431265298cb94d5205c231729f920ce31e77c3f250f525870d214a079fb519",
+            "payload_sha256": "8b5671743d56fceb81bf6117fca97c807f407bafaf9137d629ac60b91ffa14b6"
+          }
+        }
+      },
+      "server": {
+        "version": "0.1.0.dev1",
+        "wheel_sha256": "35bc960f78371fe69032117be6e2f1929e2b18e8c7f7587f6807b7cf538fc989",
+        "image_manifest": "sha256:67ce6073cca9400f88b400ee2bb2cd95b4ba6bd0c1e8135308cb04a0f41b4db9",
+        "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+        "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d"
+      },
+      "evaluator": {
+        "version": "0.22.1",
+        "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+        "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff"
+      },
+      "runtime": {
+        "python": "3.13.16",
+        "platform": "linux/amd64",
+        "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4"
+      },
+      "database": {
+        "version": "3.13.1",
+        "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce"
+      },
+      "schema_revision": 1,
+      "protocols": [
+        "se-harness-remote-command/v1",
+        "se-harness-remote-result/v1",
+        "se-harness-graph-read/v1",
+        "se-harness-artifact-revision/v1",
+        "se-harness-artifact-baseline/v1"
+      ],
+      "deployment_sha256": "6e511e0aaa767119dcce31cc995deb95ca756f45f81f6b3dfa93fd9d26ba1e5c",
+      "required_secret_keys": [
+        "principals[].token"
+      ]
+    },
+    "state": "built; qualification pending",
+    "commands": [
+      "source-commit.json",
+      "source-status.json",
+      "plugin-staging-check.json",
+      "server-build.json",
+      "image-package.json"
+    ]
+  },
+  "current_combination": {
+    "combination_id": "sha256:395fcb39130c32635102f9a8ba12852701a31649963081592b7d112a030aa97a",
+    "payload": {
+      "schema": "se-harness-hosted-combination/v1",
+      "source": {
+        "repository": "https://github.com/mmzen/se_harness.git",
+        "candidate_commit": "6fa4d1a645660cd8022dfc5c3ee7ba35bda3d162"
+      },
+      "client": {
+        "version": "0.23.0",
+        "wheel_sha256": "b6d654c8543e2c665550dbe346dae53415d98807d2c8bfc1383125c0a180cd87"
+      },
+      "plugins": {
+        "codex": {
+          "version": "0.2.7",
+          "archive_sha256": "7a8b499a8c8a5ff31dd1ff652a4076f6f83962396fea50e7f6e483e08e65a62a",
+          "inventory_sha256": "f478aad59485a0220b46907301f18f9732769ad697ab2d7ae00491c8567bff08",
+          "evaluator": {
+            "version": "0.23.0",
+            "archive_sha256": "b6d654c8543e2c665550dbe346dae53415d98807d2c8bfc1383125c0a180cd87",
+            "payload_sha256": "8b5671743d56fceb81bf6117fca97c807f407bafaf9137d629ac60b91ffa14b6"
+          }
+        },
+        "claude": {
+          "version": "0.2.7",
+          "archive_sha256": "f73614889c0b8872209479cb2da791e11ba3edc7023e3febb27908594d07f0c2",
+          "inventory_sha256": "ebb5f039867b2ca61e50787eb3335c72139683f6e6add477877dff90dd4cf895",
+          "evaluator": {
+            "version": "0.23.0",
+            "archive_sha256": "b6d654c8543e2c665550dbe346dae53415d98807d2c8bfc1383125c0a180cd87",
+            "payload_sha256": "8b5671743d56fceb81bf6117fca97c807f407bafaf9137d629ac60b91ffa14b6"
+          }
+        }
+      },
+      "server": {
+        "version": "0.1.0.dev1",
+        "wheel_sha256": "12a1dff1127aca81bf21c6ff1728770a6beb7fcf74defad4c9b7c526740d1d25",
+        "image_manifest": "sha256:8f46c28defc6b048d8603cf313a113a95d6c2c9615cddb77f16c7e1b3d609fbb",
+        "dependency_lock_sha256": "b1b1f24330aeafc5f13b00d138e0b87a501975c7bc65fd92fb9c519a2f02eeca",
+        "system_packages_sha256": "3b79cfbc2fb5844a952a7e17b401771dc412dfaae78723c9b0665111212c278d"
+      },
+      "evaluator": {
+        "version": "0.22.1",
+        "archive_sha256": "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053",
+        "payload_sha256": "0e7b7c2bc10b06150c6c1ebe88d796d047f5d906bdfb5ef4e00914a56c79e7ff"
+      },
+      "runtime": {
+        "python": "3.13.16",
+        "platform": "linux/amd64",
+        "image": "python@sha256:88310c082760d93ac7c74d579e95e53a4ab6ea52dd8901abc61a103daf488ac4"
+      },
+      "database": {
+        "version": "3.13.1",
+        "image": "memgraph/memgraph@sha256:4710bee1ab5b47599876e30f17ae1679d0bbb2262d84dc06641521fecb7c89ce"
+      },
+      "schema_revision": 1,
+      "protocols": [
+        "se-harness-remote-command/v1",
+        "se-harness-remote-result/v1",
+        "se-harness-graph-read/v1",
+        "se-harness-artifact-revision/v1",
+        "se-harness-artifact-baseline/v1"
+      ],
+      "deployment_sha256": "e82c2d40226b7a38e719faa157e069127c6387d5e129deb6148b94a55296fa7c",
+      "required_secret_keys": [
+        "principals[].token"
+      ]
+    },
+    "state": "built; qualification pending",
+    "commands": [
+      "source-commit.json",
+      "source-status.json",
+      "plugin-staging-check.json",
+      "server-build.json",
+      "image-package.json"
+    ]
+  },
+  "expanded_server_wheel_members": {
+    "hosted_artifact_graph/__init__.py": "16219d7e416fdd333a17d2247d914de404c0a13c019edd4dd8a7e78313373759",
+    "hosted_artifact_graph/__main__.py": "207ac65e1cfa98d7dd74db64106c79ee586b6fdfd834cb038f2af1de5f95c699",
+    "hosted_artifact_graph/app.py": "0e446bce5705c26b35c5a1b0c4dfc5712d1a2092d3e47b8569e1e6fc7849dd2b",
+    "hosted_artifact_graph/canonical.py": "7163868a43cf7b7fe20fa8298117fceb25cab26479ab1b2f70b78c880cf23317",
+    "hosted_artifact_graph/cypher.py": "f4b50e8468a4b01f61e0f0ea6cd00631e608bfdc9671320c61cb38cbdcb87ab2",
+    "hosted_artifact_graph/evaluator.py": "b93453dd3abede48f078ffc3ccbb10295edd3f5049d61ed33da913d9bec27aa2",
+    "hosted_artifact_graph/evaluator_bridge.py": "6e987c2efe9f047198edb4160cd11e8c995b3e0c4fa96258c4cf59d75b0fca0e",
+    "hosted_artifact_graph/lifecycle.py": "9deeeab0e6feb8929f060abb0e90f4a05b50a20e7c12f81446db8f3d63c24be5",
+    "hosted_artifact_graph/pilot_git.py": "87824ab1327696c2d437eac284df190a027dc8040321c9e4c1defc6dae4e054f",
+    "hosted_artifact_graph/protocol.py": "a2c5bb4b5fbb000e7b12660e3a529dec28341d8f897577798ebef15f2c976a3a",
+    "hosted_artifact_graph/reads.py": "d04a7add11cf5fd122fba56031e1276e93f1b2bc446864d18c93d4e08a3e9243",
+    "hosted_artifact_graph/service.py": "a0029ef192b05a699fceb55103635c2e074a4f9823a26358cf978975d20b0fbc",
+    "hosted_artifact_graph/store.py": "77ac9b93deed48e6ddf3e60f4368f5ad2962276e4881e405dd4e605f668d376c",
+    "se_harness_hosted_sandbox-0.1.0.dev1.data/data/share/se-harness-hosted/contracts/export-v2.json": "13e9936bc41e6cf2c8c362cf7d07fcdeb589e7cd32715618a478b21df0841520",
+    "se_harness_hosted_sandbox-0.1.0.dev1.data/data/share/se-harness-hosted/contracts/graph-v1.cypher": "e30681aa4e7d5cd9ce858dec6c5606db39f5c8ce39b85682c05d8523c56c3331",
+    "se_harness_hosted_sandbox-0.1.0.dev1.data/data/share/se-harness-hosted/contracts/graph-v2.cypher": "6d2f859ca01568f3eed47e54f823e90db175041d44f647a038b5d5d3c349fb75",
+    "se_harness_hosted_sandbox-0.1.0.dev1.data/data/share/se-harness-hosted/contracts/lifecycle-result-v2.json": "b89c23c64caca912e12b9b9d7e07de821e7c95464037602f7b31f62eb4b68c33",
+    "se_harness_hosted_sandbox-0.1.0.dev1.data/data/share/se-harness-hosted/contracts/lifecycle-v2.json": "be57fc3e78f0ec2e683faf1e29433a7d604ecba4fb0e7fc981bf9096d47b16ae",
+    "se_harness_hosted_sandbox-0.1.0.dev1.data/data/share/se-harness-hosted/contracts/read-result-v2.json": "6e2e74799d8ac5c35f846981f9773098842610d35345beaad6a1c98bad048c7d",
+    "se_harness_hosted_sandbox-0.1.0.dev1.data/data/share/se-harness-hosted/contracts/read-v1.json": "b3da02bdc5f44920a9b18c70403cf4c3cd0f4fcc8053021fb66409303f9c4898",
+    "se_harness_hosted_sandbox-0.1.0.dev1.data/data/share/se-harness-hosted/contracts/remote-v1.json": "93761fa1f246bc39f0568b09b6bab9294ecc22f7a6eab8404e854c55f6b524e4",
+    "se_harness_hosted_sandbox-0.1.0.dev1.data/data/share/se-harness-hosted/contracts/result-v1.json": "8e39d853d70e17448e0c122f40a3c517b5281a4a378aa13da83703113a88cb90",
+    "se_harness_hosted_sandbox-0.1.0.dev1.dist-info/METADATA": "aba2d0d1bd2d45800bd57707ee84c66cc20b04bb3e59ecabd5fbcf88eea4c0ce",
+    "se_harness_hosted_sandbox-0.1.0.dev1.dist-info/WHEEL": "61532836a2b3111b7ec23519c09df7c41180c27165fb872a6d8913b566b88ad1",
+    "se_harness_hosted_sandbox-0.1.0.dev1.dist-info/entry_points.txt": "e5da685d52fdd75d2280cf18cf627db855dc998572bf23e6f8e1903927941e7c",
+    "se_harness_hosted_sandbox-0.1.0.dev1.dist-info/top_level.txt": "ae00bb51ef801cdf8c27feb1b64c71bcd1eabbd9b30a0c4d723d031d51abd387",
+    "se_harness_hosted_sandbox-0.1.0.dev1.dist-info/RECORD": "206660b3d35f14ff9095639490a4b3a8af5d10f39e30f1fab79e8c40d0bf031e"
+  },
+  "runtime_and_dependency_identities_equal": true,
+  "assessment": "Source/image/archive/configuration identities differ and remain explicit. Expanded server runtime bytes, fixed dependencies, database/runtime image and released evaluator are identical. Reuse only unaffected historical scenarios; final packaged walkthrough, boundaries and restart/restore are fresh observations, separately retained."
+}
