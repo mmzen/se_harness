@@ -1,6 +1,6 @@
 # Proposed evaluator 0.23.0 and plugin 0.2.7 release
 
-Status: **Package approved by mmzen. WO-RLS-045/046/048/049/050/051/052/053 are in progress; qualification and final verification remain pending. WO-RLS-047 is approved and unstarted.**
+Status: **Package approved by mmzen. WO-RLS-045/046/048/049/050/051/052/053/054 are in progress; qualification and final verification remain pending. WO-RLS-047 is approved and unstarted.**
 
 The [current qualification report](evidence/WO-RLS-045/qualification-progress-a98a1571.md)
 records passing focused drafting, packages, hosted functionality and CLI delivery. Communication timing, local handoff and desktop evidence remain incomplete.
@@ -14,7 +14,7 @@ The [WO-RLS-052 correction](evidence/WO-RLS-052/implementation-review.md) is app
 
 The [WO-RLS-053 correction](evidence/WO-RLS-053/implementation-review.md) is approved and applied. Both complete positive inputs fit and all focused cases pass. Full instruction timing and remaining delivery qualification are incomplete.
 
-The [WO-RLS-054 proposal](evidence/WO-RLS-054/preparation-review.md) adds an early pointer to the existing communication section. It is draft and unapplied; validation reports zero errors and planned paths are covered.
+The [WO-RLS-054 correction](evidence/WO-RLS-054/implementation-review.md) is approved and applied. New-candidate qualification and the requested desktop check are pending.
 
 Read the [preparation review](evidence/WO-RLS-045/preparation-review.md) for the
 requested decision, concrete changes, evidence and limits.
@@ -34,7 +34,7 @@ the tagged source. Git remains authoritative; no public service is proposed.
 | [WO-RLS-051](work-orders/WO-RLS-051.md) | Approved input-assessment correction; first Claude diagnostic failed and is retained. |
 | [WO-RLS-052](work-orders/WO-RLS-052.md) | Approved source-support correction; both diagnostics pass; positive input assembly remains blocked. |
 | [WO-RLS-053](work-orders/WO-RLS-053.md) | Approved two-guide correction; focused cases pass, full release readiness remains pending. |
-| [WO-RLS-054](work-orders/WO-RLS-054.md) | Unapproved one-file early communication pointer; linked membership amendment is proposed only. |
+| [WO-RLS-054](work-orders/WO-RLS-054.md) | Approved one-file early communication pointer; exact linked membership amendment applied; fresh qualification pending. |
 | [WO-RLS-047](work-orders/WO-RLS-047.md), [VER-RLS-041](verification/VER-RLS-041.md) | Public delivery and independently observed closeout after complete-release approval. |
 
 Base: merged main `4fb5dbc29ffd7a2ccdc9a081c9c9b9f82b99d999`.

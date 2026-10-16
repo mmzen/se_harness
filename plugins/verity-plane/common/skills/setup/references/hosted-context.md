@@ -7,6 +7,12 @@ Never print the credential. The sandbox is not repository authority.
 
 ### Before the selected action
 
+Before your first English explanation, read the selected released
+`docs/engineering/harness/COMMUNICATION.md#communication` section. Reuse its
+complete current content if it is already supplied. In a restricted test
+environment, use the supplied helper's documented instruction reader. The
+communication policy remains in that released resource.
+
 Complete the selection checks below, then read the route for the action you
 are about to take. Use this table again when the action changes; retain and
 reuse sections already read in the current context.

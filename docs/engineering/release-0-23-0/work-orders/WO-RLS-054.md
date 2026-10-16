@@ -2,10 +2,15 @@
 id = "WO-RLS-054"
 type = "work_order"
 title = "Discover communication instructions before hosted explanations"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-16"
 updated = "2026-10-16"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen confirmed required commit-bound verification because release assurance depends on the exact native test instructions and observed behavior."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = ["plugins/verity-plane/common/skills/setup/references/hosted-context.md", "docs/engineering/release-0-23-0/"]
@@ -14,6 +19,21 @@ paths = ["plugins/verity-plane/common/skills/setup/references/hosted-context.md"
 implements = ["REQ-HAG-014"]
 specifications = ["SPEC-HAG-008"]
 verification = ["VER-HAG-008", "VER-HAG-007", "VER-RLS-040"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-16T09:03:07Z"
+decided_by = "mmzen"
+reason = "Human mmzen answered \"Approve correction and linked amendment\" on 2026-10-16 to the explicit WO-RLS-054 request at PR #544 head 76d7eff18bfc0b28fbbe29e563d72a01c281d0da. Approves the exact one-paragraph hosted-context correction, required commit-bound verification, affected qualification and manual activation of the exact linked REL-SEH-036 gates amendment preserving accepted bytes and lifecycle history. Includes ordinary review publication to mmzen/se_harness, codex/release-0-23-0, target main, draft PR #544 under the reviewed envelope. Human verification, merge, complete release, desktop omission, adoption and host updates remain separate. Reviewed work-order SHA-256 c7bf248a538458db615895a6511f6f19e7048f86ea2ee8ea3c6730cfc1b0ec99; exact source and release digests in evidence/WO-RLS-054/review-binding.json."
+scope_paths = ["plugins/verity-plane/common/skills/setup/references/hosted-context.md", "docs/engineering/release-0-23-0/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-16T09:04:49Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Discover communication instructions before hosted explanations
