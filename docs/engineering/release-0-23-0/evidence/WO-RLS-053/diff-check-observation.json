@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "core.whitespace=cr-at-eol",
+    "diff",
+    "--check"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+  "exit": 2,
+  "elapsed_seconds": 0.15173240000149235,
+  "stdout": "tests/hosted_artifact_graph/native-execution-tools.md:51: new blank line at EOF.\n",
+  "stderr": "",
+  "assessment": "Only the approved exact appended blank line is reported. AGENTS.md configures no lint/format gate. Preserve the reviewed bytes; no instruction or acceptance rule is changed."
+}

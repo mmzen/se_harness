@@ -2,10 +2,15 @@
 id = "WO-RLS-053"
 type = "work_order"
 title = "Fit complete native inputs with a smaller tool guide"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-13"
-updated = "2026-10-13"
+updated = "2026-10-16"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "mmzen confirmed required commit-bound verification because release assurance depends on the exact native test instructions and observed behavior."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = ["tests/hosted_artifact_graph/native-tools.md", "tests/hosted_artifact_graph/native-execution-tools.md", "docs/engineering/release-0-23-0/"]
@@ -14,6 +19,21 @@ paths = ["tests/hosted_artifact_graph/native-tools.md", "tests/hosted_artifact_g
 implements = ["REQ-HAG-014"]
 specifications = ["SPEC-HAG-008"]
 verification = ["VER-HAG-008", "VER-RLS-040"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-10-16T07:11:14Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied \"i approve\" on 2026-10-16 to the explicit request for WO-RLS-053, required commit-bound verification and its one-line release-membership amendment, reviewed in PR #544 at 6a4db1c8a4372168dedf59bd38a8c7761d20b81a. This authorizes the exact two-guide correction, bounded checks and new-candidate qualification under unchanged VER-HAG-008 and VER-RLS-040, and explicitly authorizes manual activation of the exact REL-SEH-036 gates amendment preserving accepted bytes and lifecycle history. It includes ordinary review pushes to codex/release-0-23-0 in mmzen/se_harness, target main, draft PR #544, including later separately supplied verification decisions. Human verification, merge, complete-release approval, desktop omission, adoption and host updates remain separate. Reviewed work-order SHA-256 2744505f4f0debb07521e5a08dcb2b170dbf436d7a537a453d093966d5a9132d; exact guide and release digests retained in evidence/WO-RLS-053/review-binding.json."
+scope_paths = ["tests/hosted_artifact_graph/native-tools.md", "tests/hosted_artifact_graph/native-execution-tools.md", "docs/engineering/release-0-23-0/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-16T07:17:26Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Fit complete native inputs with a smaller tool guide

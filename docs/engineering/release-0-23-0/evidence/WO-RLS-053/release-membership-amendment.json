@@ -1,0 +1,14 @@
+{
+  "kind": "Explicitly authorized bounded manual membership amendment",
+  "artifact": "REL-SEH-036",
+  "actor": "mmzen",
+  "applied_by": "Codex",
+  "applied_at": "2026-10-16T07:18:03.740117+00:00",
+  "decision": "Human mmzen replied \"i approve\" on 2026-10-16 to the explicit request for WO-RLS-053, required commit-bound verification and its one-line release-membership amendment, reviewed in PR #544 at 6a4db1c8a4372168dedf59bd38a8c7761d20b81a. This authorizes the exact two-guide correction, bounded checks and new-candidate qualification under unchanged VER-HAG-008 and VER-RLS-040, and explicitly authorizes manual activation of the exact REL-SEH-036 gates amendment preserving accepted bytes and lifecycle history. It includes ordinary review pushes to codex/release-0-23-0 in mmzen/se_harness, target main, draft PR #544, including later separately supplied verification decisions. Human verification, merge, complete-release approval, desktop omission, adoption and host updates remain separate. Reviewed work-order SHA-256 2744505f4f0debb07521e5a08dcb2b170dbf436d7a537a453d093966d5a9132d; exact guide and release digests retained in evidence/WO-RLS-053/review-binding.json.",
+  "before_sha256": "3cdd7f1616e9450e9649bccd27d777113bf39d9799297cc6ee34178be41b1f1b",
+  "after_sha256": "26851c9d9346329d4cfea271ee7edc29698e3c9569f63b66072dcc947ada9151",
+  "preserved_before": "REL-SEH-036-accepted-before.txt",
+  "reviewed_after": "REL-SEH-036-proposed.txt",
+  "added_gate": "WO-RLS-053",
+  "lifecycle_history_preserved": true
+}

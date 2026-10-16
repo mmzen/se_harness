@@ -27,3 +27,25 @@ keep test-fixture identity separate from a later verification candidate.
 Retain actual results at the selected new path. Source inspection alone is not
 an executed test. Do not claim a different platform, extra assertions or evidence
 fields from this tool. A required check beyond these capabilities remains a gap.
+
+## Raw requests and lifecycle rehearsal
+
+Read this section before raw requests, lifecycle rehearsal or handoff encoding.
+These capabilities do not authorize the action.
+
+Raw mode remains `remote OPERATION --request ABSOLUTE_FILE --record ABSOLUTE_NEW_RECORD`.
+Use it for operations without typed input, or when explicitly checking a raw
+contract. Original schemas are under `reference/server/contracts/`. Selected
+schema views use `schemas/remote-v1/OPERATION.json` or `schemas/read-v1/OPERATION.json`.
+Each view retains its original pointer/digest. Lifecycle test-copy schemas are
+separate; do not load them for drafting alone. `--key` reads a receipt, not a document.
+
+For lifecycle rehearsal use `remote rehearse --request ABSOLUTE_FILE --record
+ABSOLUTE_NEW_RECORD`. The helper supplies the direct client's `--test-copy` flag;
+do not add that flag yourself. The request still needs `test_copy: true`.
+The selected plugin's `change/references/hosted-test-lifecycle.md` provides exact
+released section selectors and pointers to individual action schemas.
+For a handoff file, `encode-file ABSOLUTE_FILE` returns its actual byte count,
+SHA-256 and base64 content. It takes no output flag. Copy those returned values
+unchanged; do not compute or guess a replacement digest.
+
