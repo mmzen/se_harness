@@ -1,6 +1,6 @@
 # Verity Plane
 
-Verity Plane 0.2.6 exposes shared skills through the host's native skill discovery.
+Verity Plane 0.2.7 is an unpublished release candidate for SE Harness 0.23.0. It exposes shared skills through the host's native skill discovery.
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
@@ -15,11 +15,21 @@ changed, incompatible or oversized input reports a delivery gap without fallback
 Setup retains separate immutable evaluator environments outside repositories.
 Activation immediately returns the complete entry; it grants no lifecycle authority.
 
-This source prepares plugin 0.2.6 with evaluator 0.22.1; qualification is in progress.
-The current public plugin 0.2.5 with evaluator 0.22.0 is published at
-`7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. VREC-PLG-032 verifies the qualified package.
-Source documentation updates do not rewrite the published bytes or inventories.
-Claude Code installation/update and native session tests, and Codex Windows desktop tests, were not run for this release and remain unverified under DEC-RLS-005/006. Both distributed packages were byte-checked.
+This candidate adds hosted sandbox read, drafting and lifecycle-rehearsal guidance.
+Release staging bundles the exact 0.23.0 evaluator/client wheel. The hosted service
+keeps its separate pinned 0.22.1 evaluator. Remote commands use the qualified
+client in another environment; selecting it never changes a checkout's governor.
+Use setup's **Hosted sandbox selection** section with the exact combination
+report. This candidate has no public release or host qualification claim.
+
+The historical public plugin 0.2.6 qualification is in VREC-SEH-033. Its desktop
+omission and accepted risk do not qualify this changed candidate.
+
+Read the [release review](https://github.com/mmzen/se_harness/blob/main/docs/engineering/release-0-23-0/README.md)
+and its delivery evidence for publication status. Compare installed bytes with
+the [public identity](https://github.com/mmzen/se_harness/blob/plugin-marketplace/PACKAGE-IDENTITY.json).
+Qualified archives keep their original preparation README snapshots; source
+documentation corrections do not rewrite those bytes or inventories.
 
 Development archives cannot establish release or marketplace eligibility.
 Python 3.11+ must be available to the hook launcher. Codex also requires the
@@ -50,3 +60,21 @@ An existing project's selected evaluator remains authoritative.
 See [setup](skills/setup/SKILL.md) and its shared references for initialization,
 connection and repair. Read `assembly-inventory.json` for this package's exact
 source and released-wheel identity when using a release assembly.
+
+## Hosted lifecycle rehearsal
+
+Candidate packages include guidance for an explicit private test copy. Use the
+separately installed remote client and the repository's `server/README.md` Phase 3
+procedure. Git remains authoritative. Test approvals, VRECs, RLSs and exports do
+not authorize real work or publication. Packaged guidance checks do not prove
+live Claude authentication, startup or compaction delivery.
+
+## Candidate hosted authoring
+
+The common skill entry points now select a task reference. Hosted drafting uses
+`change/references/hosted-drafts.md`; setup and orientation have their matching
+hosted references. Load the selected route and applicable released sections.
+The candidate remote client supports typed file inputs and compact results backed
+by exact local evidence. This is unpublished test functionality; existing host
+installation and selected released-evaluator policy stay unchanged. Qualification
+results must identify the exact package and native host used.

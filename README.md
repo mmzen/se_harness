@@ -1,27 +1,29 @@
 # Verity Plane marketplace
 
 Verity Plane brings SE Harness setup, orientation, change and evidence workflows
-to Codex and Claude Code. Plugin **0.2.6** targets **SE Harness 0.22.1** and five
+to Codex and Claude Code. Plugin **0.2.7** targets **SE Harness 0.23.0** and five
 shared skills, including an explicitly requested operator brief.
 
-This is the staged 0.2.6 distribution input; it is not yet public.
-The current public plugin 0.2.5 with evaluator 0.22.0 is published at
-`7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. Its PACKAGE-IDENTITY.json and assembly inventories
-record exact source, wheel and package digests. Use them to compare installed files.
-Source documentation updates do not replace the published package's original bytes.
-Plugin updates do not adopt a repository's evaluator.
+This source snapshot prepares the 0.23.0 / 0.2.7 release. Its package, native-host
+and hosted-sandbox qualification remain separate from public delivery. Previous
+release verification and desktop omissions do not qualify these new bytes.
 
-Qualification of staged 0.2.6 is in progress. Earlier release-specific accepted omissions do not establish its host support. The public 0.2.5 release retains its original evidence and later Claude follow-up.
+Use the [release review and delivery evidence](https://github.com/mmzen/se_harness/blob/main/docs/engineering/release-0-23-0/README.md)
+for publication status. PACKAGE-IDENTITY.json and assembly inventories record
+exact source, wheel and package digests. Compare installed files with those
+identities. Qualified packages retain the preparation README snapshots from
+their original source commit; this source correction does not replace them.
+Plugin updates do not adopt a repository's evaluator.
 
 ## Install from Git
 
 These commands select the `plugin-marketplace` distribution branch of
 `mmzen/se_harness`. The development branch contains assembly inputs; install the
 complete distribution branch. Check that
-the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.5, evaluator 0.22.0 and
-the expected qualified source commit. After an authorized 0.2.6 promotion, require
-plugin 0.2.6 and evaluator 0.22.1 with their newly qualified identities before
-claiming that delivery.
+the branch's `PACKAGE-IDENTITY.json` matches the selected release's exact
+versions and qualified source commit. For the 0.2.7 delivery, require plugin
+0.2.7 and evaluator 0.23.0 with the identities from its reviewed plan. An older
+public tree does not establish that the selected delivery has completed.
 Package installation, native session delivery and repository adoption are separate.
 
 **Codex**
@@ -79,12 +81,12 @@ claude plugin install verity-plane@se-harness
 ## Instruction delivery
 
 This package includes native startup and post-compaction instruction hooks.
-Plugin 0.2.5 resolves the entry from its exact selected wheel for the
+Plugin 0.2.7 resolves the entry from its exact selected wheel for the
 external-resource layout, while retaining the repository-copy route for older
 selections. It bootstraps an unselected session and activates the actual checkout
 after cloning. Follow the packaged activation procedure for
-[Codex](packages/codex/verity-plane/skills/setup/SKILL.md#activate-the-checkout) or
-[Claude Code](packages/claude/verity-plane/skills/setup/SKILL.md#activate-the-checkout).
+[Codex](packages/codex/verity-plane/skills/setup/references/checkout.md#activate-the-checkout) or
+[Claude Code](packages/claude/verity-plane/skills/setup/references/checkout.md#activate-the-checkout).
 Native host qualification belongs to this exact release's evidence. Confirm
 startup, compaction and resume for the actual loaded inputs. CLI observations
 do not establish desktop support; older release-specific omissions do not apply.
@@ -120,8 +122,8 @@ inside its own directory; neither host needs the other host's files.
 
 Native qualification targets disposable Windows profiles on both hosts. Package identity alone does not
 prove a model-driven session, another operating system, public Git installation
-or provider approval. Consult the source repository's WO-PLG-030 qualification
-evidence and WO-PLG-031 public-route evidence for this package's actual results.
+or provider approval. Consult the source repository's WO-RLS-041 qualification
+evidence and WO-RLS-042 public-route evidence for 0.2.6 results.
 Neither a local result nor
 this guide establishes successful public installation. Desktop UI, automatic
 threshold compaction and other platforms require their own observations.

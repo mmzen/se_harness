@@ -1,5 +1,17 @@
 # Select the working repository
 
+First use the target already selected by the operator.
+
+## Explicit hosted sandbox
+
+If the operator selected a hosted sandbox, follow setup's
+[Hosted selection](../skills/setup/references/hosted-context.md). This is a
+separate route; do not continue into checkout activation.
+
+## Local checkout
+
+Use this route for work in a cloned or existing repository.
+
 When asked to clone, clone to the intended destination, then activate that exact
 checkout. For existing work, reuse the known checkout path. Ask for a path only
 when the intended repository is ambiguous. Do not scan child repositories.

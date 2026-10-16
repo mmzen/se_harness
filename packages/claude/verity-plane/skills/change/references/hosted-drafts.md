@@ -1,0 +1,186 @@
+## Select the current step
+
+Use exact instructions already delivered with their source identity. Reading that
+content satisfies its read instruction. Open its file only if required content
+is missing, changed or no longer retained. A pointer alone is not content.
+
+Complete [Hosted selection](../../setup/references/hosted-context.md) once for
+the unchanged selection. Use its supplied absolute file path; do not guess a
+location from its filename. Draft preparation grants no decision right or Git authority.
+
+Match the request and existing confirmed context to the current step:
+
+| Available inputs | Read from the selected release |
+| --- | --- |
+| The intended outcome or scope still needs clarification | `docs/engineering/harness/DEFINE_CHANGE.md`: **Read this when**, **Before this action**, then **Describe the intended outcome**. Use **Define the limits of the change** when its inputs are available. |
+| Confirmed outcome, scope and selected definitions; a definition draft is needed | `docs/engineering/harness/DRAFT_DEFINITIONS.md`: **Read this when**, **Before this action**, then the requested type's procedure below. |
+
+Before choosing the drafting route, apply **Check the inputs before writing**.
+The clarification route produces transient discussion, not a formal artifact.
+
+Apply the shared check in **Report and recover** before an exhaustive failure
+claim. For a clarification stop, include three short parts in the final reply:
+
+- **Actions:** State whether any hosted change was attempted. Include every
+  observed failure or denial, including local reads and recovered failures.
+- **Known inputs:** Keep existing definitions and supplied scope limits.
+- **Questions:** Ask only for missing facts needed now.
+
+This retained reply is the transient report only if no hosted mutation command
+was invoked and the captured attempted-call record is complete. Refused or denied
+mutation commands are still attempts. If capture is incomplete or its completeness
+is unknown, use the saved report in **Report and recover** and state that limit,
+even when no change was observed. The clarification reply
+needs no duplicate file or new lifecycle checkpoint.
+
+For a requested intent, consult `docs/engineering/ARTIFACT_AUTHORING.md#intent`
+when identifying missing content. Read other prerequisites when their stated
+condition applies. Before selecting artifacts, load the clarification procedure's
+artifact and link references. Before drafting, use this type table:
+
+| Type | Drafting procedure |
+| --- | --- |
+| Verification | **Define how the result will be verified** |
+| Release or operating contract | **Prepare a release or operating contract** |
+| Other definition | **Draft any missing definitions** |
+
+Apply the drafting procedure's prerequisites, including
+`ARTIFACT_AUTHORING.md#design-simplicity` and the type checklist. Use full type
+names such as `#intent`, `#verification`, or `#work_order`, not codes.
+
+For a release contract in a private lifecycle test, the source fixture commit
+is not the disposable Git candidate that verification will capture. Do not
+complete or approve a contract with a guessed candidate. If the final candidate
+is not yet known, defer completing and approving the contract. Take its exact
+`candidate_commit` from the final verified VREC, complete the release scope and
+evidence requirements, then obtain the contract's required decision. An explicitly
+supplied candidate constraint remains binding.
+
+The released `harnessctl ... REPO` examples act on repository files. Hosted work
+uses the selected tool index or `docs/notes/harnessctl-reference.md#concise-hosted-authoring`.
+Do not combine their arguments. The canonical content rules still apply.
+
+Obtain missing sections together from the selected resource root; batch independent
+file reads with known paths. Missing, ambiguous or changed sources
+stop the affected action. For 0.22.1's repeated
+`CONTINUE.md#continue-selected-work` title, read its unique `#procedure` parent.
+Load [lifecycle instructions](hosted-test-lifecycle.md) only for that task.
+
+## Check the inputs before writing
+
+First locate the requester's confirmation of the outcome and scope required
+by **Describe the intended outcome**. Reuse a matching confirmation, including
+one recorded in an accepted definition. If it is
+absent, present the proposed wording and ask for confirmation before dependent
+drafting. Do not import, open a draft context or create a template to ask.
+
+Use one short assessment for the requested type's required checklist items:
+
+| Required input | Direct support: short source passage and location, or **Missing** | Question if missing |
+| --- | --- | --- |
+
+A passage must answer the item for this change. A citation, your interpretation
+or text you plan to write is not direct support. Reuse delivered sources and an
+unchanged assessment; no new file or repeated read is required.
+
+Code describes existing behavior. Existing definitions establish their stated
+scope. Neither establishes an unstated user need for a different change. A task's
+execution restrictions alone do not establish product scope limits. Keep deductions and
+proposed limits unconfirmed in both the draft and report.
+
+For an intent, assess the affected user and present problem, wanted improvement,
+and success measure separately. A baseline states today's value; `not measured`
+does not supply a success condition. Restating the requested software output
+does not establish its benefit. Use the checklist, not template shape, to decide.
+
+- **Missing required input:** report **Incomplete**, ask only the missing question
+  and stop dependent writing. Preserve any existing partial draft.
+- **All required inputs supported:** author the supported content. After saving,
+  check each item against the saved revision before reporting **Complete**.
+- **Assessment prevented by access or operation uncertainty:** report **Blocked**
+  and recover the missing evidence.
+
+Reuse this assessment in the report and final reply. Optional facts stay optional.
+A successful save, empty `incomplete` list or `content_review: not_assessed` does
+not establish completeness. Choose in-scope methods and evidence paths as plans,
+not observed results.
+
+Before claiming a coverage gap, read the applicable requirements, specifications
+and verification contracts. Code or one same-type record cannot establish their
+absence. For a verification plan, derive expected values from definitions; name
+the check, pass condition and full proposed evidence path, including filename
+and any work-order directory. In an environment with restricted execution tools,
+read their capability descriptions before choosing the check. This is a planning
+read, not test execution. Match the planned assertions, platform and evidence
+fields to those tools. Distinguish the local test runtime from the service and lifecycle evaluator.
+If a required condition cannot be assessed with the available tools, report that
+gap before requesting approval; do not promise an unavailable check.
+
+Report a type/outcome mismatch without changing type or inventing a fact.
+
+## Author and submit
+
+Choose the operation, target, expected versions, retry key and content. Use the
+documented typed fields and evaluator identity file; do not also load raw schemas
+for those fields. Import is operator-only and uses the complete source manifest.
+
+Use `--typed --compact --record-directory NEW_DIRECTORY`, or the selected helper's
+documented permission route. Raw `--request FILE` needs its schema and referenced
+definitions. Do not mix modes or manually encode typed documents. Freeze is
+raw-only and grants no approval. Explicit IDs permit a new domain; automatic
+allocation requires an existing domain with an evaluable ID token.
+
+Inspect the created template through `--include-document` or
+[an exact revision read](../../harness-orient/references/hosted-reads.md#read-one-hosted-revision).
+Findings are not the document. Complete only supported content and review it
+against the type checklist. Trace each verification pass condition to its
+governing definition and planned check. Remove unsupported claims, duplicate
+checks and constraints absent from definitions; an unrequested extra check is
+not a required gap. Correct omissions from confirmed inputs before stopping.
+Report the content review separately from template checks.
+
+Submit the complete UTF-8 file with `revise-artifact`. Review the saved document
+and its returned versions, receipt and findings. If this review finds a supported
+in-scope correction, revise the draft and review the new saved revision.
+`revise-artifact` edits an editable draft, not an approved or imported record.
+Lifecycle history, decisions and evidence stay immutable. If a protected-record
+refusal occurs, stop that revision. Do not retry it with changed state, history
+or content. A separate draft proposal does not amend or replace an accepted
+record; use the selected release's amendment boundary and obtain any missing
+authority before dependent work. Resolve blocked reads first.
+
+## Report and recover
+
+Before an exhaustive failure claim in either report form, inspect the captured
+observations and account for calls made after that snapshot. A later success does
+not erase a failed call. If complete capture cannot be established, state that
+limit and use the saved-report route. Reuse retained observations; no duplicate
+report or extra read is needed when they already cover the claim.
+
+For the clarification reply, use **Select the current step**. Otherwise retain
+complete requests/results and one short report outside the repository, including
+after a mutation attempt or uncertain effect. Read required omitted findings.
+The report contains:
+
+- **Content readiness:** reuse the assessment from **Check the inputs before
+  writing**, updated for the latest saved revision. Keep missing inputs and questions visible.
+- **Saved state:** selection, revision, versions and exact document/result paths.
+- **Validation and review:** evaluator findings, independent content findings,
+  local and remote failures (including recovered ones), denials, uncertain effects,
+  and any returned procedure/step. Apply the shared report check above. Link
+  evidence; do not copy inventories.
+
+Draft validation checks template shape and required links; it does not assess
+content. Planned checks are not executed tests. Keep report and final reply
+consistent with the content-readiness decision.
+Classify effects from operation receipts: accepted writes, successful reads and
+failed or uncertain attempts. Count only accepted writes as mutations; a read
+does not add one. Attribute facts to their actual source. Response metadata is
+not saved content. Use only confirmed paths and digests.
+After compaction, recover the retained reply or report and obtain fresh context.
+
+For stale input, inspect the selection without silently refreshing versions.
+For an uncertain reply or capture failure, look up `remote operation --key KEY`
+with the same selection and credential, or retry identical bytes and key. Resolve
+the effect before selecting another key. Changed bytes under an accepted key are
+refused. Never fall back to local writes.
