@@ -2,10 +2,10 @@
 id = "VREC-SEH-034"
 type = "verification_record"
 title = "Verification candidate for 20 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-16"
-updated = "2026-10-16"
+updated = "2026-10-17"
 commit = "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15"
 git_object_format = "sha1"
 worktree_state = "clean"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/hosted-artifact-graph/evidence/VREC-HAG-001-
 evaluator_evidence_path = "docs/engineering/release-0-23-0/evidence/VREC-SEH-034-evaluator.json"
 evaluator_evidence_sha256 = "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899"
 
+verified_at = "2026-10-17T05:31:08Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HAG-001", "WO-HAG-005", "WO-HAG-006", "WO-HAG-007", "WO-HAG-008", "WO-HAG-009", "WO-HAG-010", "WO-HAG-011", "WO-HUP-030", "WO-IPK-002", "WO-RLS-045", "WO-RLS-046", "WO-RLS-048", "WO-RLS-049", "WO-RLS-050", "WO-RLS-051", "WO-RLS-052", "WO-RLS-053", "WO-RLS-054", "WO-RLS-055"]
 conforms_to = ["VER-HAG-001", "VER-HAG-004", "VER-HAG-005", "VER-HAG-006", "VER-HAG-007", "VER-HAG-008", "VER-HUP-025", "VER-IAR-021", "VER-IPK-002", "VER-RLS-039", "VER-RLS-040"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-17T05:31:08Z"
+decided_by = "mmzen"
+reason = "Human mmzen selected \"Verify result\" on 2026-10-17 in response to the exact VREC-SEH-034 assurance request for evaluator/client 0.23.0 and plugin 0.2.7, candidate 48e851bbc94d7fb0c06e9b80666c3860cb5f8c15. Accepts the assessed candidate and disclosed limits in PR #544 at review head af51bcd8927352ad086bd077bf03e2a2d9804402. R23-NATIVE-010/011 remain open under DEC-RLS-010 / RISK-RLS-008; Codex Windows desktop remains unverified under DEC-RLS-011 / RISK-RLS-009. Merge and the exact complete-release decision remain separate. Codex records this supplied human decision only."
 +++
 
 # Verification Record Candidate
