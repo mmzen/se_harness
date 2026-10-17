@@ -1,0 +1,137 @@
+# Native test tools
+
+Use `selection.json` for the exact `approved_shell_argv_prefix` and absolute
+input/output paths. Append one helper operation per shell call. Use native
+Write/Edit for files; read with native Read or the documented `read-text` helper.
+Prefer one `read-text` call for independent files whose exact paths are known.
+Keep normal permissions: no wrappers, loops, pipes,
+directory listing, direct client commands or permission changes. This index
+describes capabilities; it supplies no workflow or finished artifact.
+
+All records, their companion evidence and export destinations must be new paths
+under the selected `work/` directory. The helper refuses other output locations
+before executing the command. Use absolute paths from the selection; relative
+paths resolve from the native workspace root, so include `work/`.
+The observation index scans that same `work/` directory only.
+
+## Draft mutations
+
+Prefer typed input for the operations below. This table supplies their CLI fields;
+you do not also need their raw schemas or help files unless a needed field is
+missing. Choose the operation, target, versions, key and content yourself.
+
+```text
+remote OPERATION --typed --compact --record ABSOLUTE_NEW_RECORD [FIELDS]
+```
+
+Every typed mutation takes `--operation-key KEY --expected-project-version N
+--evaluator-file FILE`. Use the selected `evaluator_file` path. The fixed adapter
+supplies the selected endpoint/project/token environment and exact installed
+client wheel. The client constructs the existing request and verifies its identity.
+
+| Operation | Other fields |
+| --- | --- |
+| `import` | `--source-manifest FILE`; use selected `source_manifest` |
+| `draft-open` | `--baseline ID --work-order WO-ID` |
+| `create-artifact` | `--context UUID --context-version N --domain NAME --artifact-type TYPE`; optional `--artifact ID --include-document` |
+| `revise-artifact` | `--context UUID --context-version N --artifact ID --expected-revision REVISION --document-file FILE` |
+
+Hosted `create-artifact` allocates the ID and writes the draft in one operation.
+It has no `--dry-run` option; the local repository preview command does not apply.
+
+The client never refreshes a version or retries a mutation on its own. Typed and
+raw input cannot be mixed. Documents are exact UTF-8 files. No manual base64 or
+copied client digest is needed. `--include-document` adds one read of the exact
+created revision, returning text or a decoded file path. Inspect it before editing.
+
+`--record` retains the command. Its new `.evidence` directory retains exact
+requests/responses and decoded documents. The displayed `client_view` is the
+client's own view. Inspect outcomes and findings; read required omitted content.
+Do not reread a whole receipt just to extract a small field already displayed.
+A capture error after send can leave a committed effect. Reconcile its original
+key with `remote operation --key KEY --record ABSOLUTE_NEW_RECORD`.
+
+## Read one revision
+
+```text
+remote read --typed --compact --record ABSOLUTE_NEW_RECORD --artifact ID --expected-revision REVISION --context UUID --context-version N
+```
+
+For an imported baseline, replace the context fields with `--baseline ID`.
+Reads take no `--operation-key`, `--expected-project-version` or `--evaluator-file`.
+Choose the exact revision and context from the selected inputs or actual results.
+
+## Reads and discovery
+
+| Need | Operation |
+| --- | --- |
+| Service readiness and selected components | `remote status --record ABSOLUTE_NEW_RECORD` |
+| Local wheel metadata | `identity` |
+| Captured calls, reads and failures so far | `observations --record ABSOLUTE_NEW_RECORD`; retains the full snapshot; returns bounded failure details or explicit file pointers, no verdict |
+| Complete released instruction sections | `instructions --section "RESOURCE_ID#HEADING"`; repeat for up to 12 sections |
+| One unknown input location | `find-file BASENAME --under RELATIVE_DIRECTORY/` |
+| One exact inventory entry | `lookup-file RELATIVE_NAME` |
+| One saved JSON field | `read-json ABSOLUTE_FILE --pointer '"/field"'`; omit pointer for root; optional `--keys` |
+| A raw base64 field | Add `--decode-base64` to that field read |
+| One text file or independent reads together | `read-text ABSOLUTE_FILE [ABSOLUTE_FILE ...]`; up to eight selected inventoried inputs, the launcher-pinned task.md, or work files, at most 64 KiB output |
+| Recover a truncated text read | `read-text ABSOLUTE_FILE --offset 0 --limit 4096`; one file, character offsets; continue from next_offset until complete is true |
+
+For `instructions`, use canonical IDs such as `docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when`. The earlier `released-resources/` inventory prefix also works. Request known sections together. The public reader includes the selected file's exact entry conditions when present; read their applicable references before acting. It does not follow links or select the next action.
+For authoring checklists and the repeated released 0.22.1 continuation heading,
+use the exact selectors in the selected plugin's `change/references/hosted-drafts.md`.
+
+For known paths, use them directly. Inventory names are relative to the staged
+inputs directory: `released-resources/docs/engineering/ARTIFACT_AUTHORING.md`,
+`source/src/greeting.py`, `client-help/create-artifact.txt`. **Do not add `inputs/`
+to these names.** Native Read takes the absolute path, not an inventory name.
+A digest or lookup is not a content read. Batch independent reads when their exact
+paths are known. Unknown headings must not be guessed;
+read the named file once to locate its actual headings. Request known current
+sections together and reuse unchanged content. A full inventory is not required.
+
+Read [Execution tools](native-execution-tools.md) when choosing a planned check
+or executing an authorized one. The description establishes the available
+assertion and evidence fields; reading it does not run a test. Source inspection
+is not test execution, and drafting a verification contract grants no execution
+authority.
+
+## Other operations
+
+Raw mode remains `remote OPERATION --request ABSOLUTE_FILE --record ABSOLUTE_NEW_RECORD`.
+Use it for operations without typed input, or when explicitly checking a raw
+contract. Original schemas are under `reference/server/contracts/`. Selected
+schema views use `schemas/remote-v1/OPERATION.json` or `schemas/read-v1/OPERATION.json`.
+Each view retains its original pointer/digest. Lifecycle test-copy schemas are
+separate; do not load them for drafting alone. `--key` reads a receipt, not a document.
+
+For lifecycle rehearsal use `remote rehearse --request ABSOLUTE_FILE --record
+ABSOLUTE_NEW_RECORD`. The helper supplies the direct client's `--test-copy` flag;
+do not add that flag yourself. The request still needs `test_copy: true`.
+The selected plugin's `change/references/hosted-test-lifecycle.md` provides exact
+released section selectors and pointers to individual action schemas.
+For a handoff file, `encode-file ABSOLUTE_FILE` returns its actual byte count,
+SHA-256 and base64 content. It takes no output flag. Copy those returned values
+unchanged; do not compute or guess a replacement digest.
+
+Use `observations --record ABSOLUTE_NEW_RECORD` before the final report. Read its
+selected fields as needed. `observed_content_reads` contains successful visible
+read metadata; `file_reads` retains Claude Read attempts, including failures.
+Use the observed trace instead of rebuilding it with inventory lookups. Missing
+reads remain unknown; rereading now does not prove an earlier read. The capture
+may be incomplete, and subsequent report writes are not yet counted. Keep the
+record path as evidence instead of copying every command. This supplies no draft
+text, content judgement or lifecycle decision.
+
+The returned `record` is the exact JSON **file**, even when it has no extension.
+Use its `read_arguments` with the approved helper prefix. Do not append a filename
+or treat it as a directory. Add `--pointer` only to select a field in that file.
+
+`command_records` includes extensionless record names. Each row points to its
+original capture and copies selected exact `response_fields`, including available
+receipt, outcome and provenance values. Rows are sorted by filename, not time.
+Use an indexed row to locate evidence, then inspect its original request/result
+for the claim. The index does not select a handoff base or certify a retry.
+
+Retain failed calls and recoveries. Template admission is not a content review.
+Report only inspected facts and actual outcomes; distinguish unresolved content
+from a completed definition. Do not claim an exhaustive failure count from memory.

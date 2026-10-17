@@ -10,8 +10,10 @@ application query controls do not prove database-enforced read-only access.
 Phase 2 was verified in VREC-HAG-004. The private lifecycle pilot under WO-HAG-008
 was verified in [VREC-HAG-005](../docs/engineering/hosted-artifact-graph/verification-records/VREC-HAG-005.md)
 and integrated through PR #542. Its eight VER-HAG-006 scenarios passed.
-The separate native Codex/Claude qualification under WO-HAG-009 is
-[in progress](../docs/engineering/hosted-artifact-graph/evidence/WO-HAG-009/report.md).
+The separate native Codex/Claude qualification and focused drafting corrections
+were verified in VREC-HAG-006/007 and merged through PR #543. Read the
+[current qualification index](../docs/engineering/hosted-artifact-graph/README.md#current-native-qualification)
+for exact candidates, observations and remaining performance limits.
 No public service, release, authority cutover or production claim is supplied here.
 
 ## Inputs
@@ -25,15 +27,20 @@ and qualification finish. The API binds loopback; the database has no host port.
 
 The governor is public evaluator 0.22.1, wheel SHA-256
 `cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053`.
-Candidate remote client 0.22.2 lives in another environment. Unpublished plugin
-0.2.7 bundles the unchanged evaluator and matching remote guidance. Service
-0.1.0.dev1 owns server dependencies; the core checker keeps zero runtime dependencies.
+Release candidate client 0.23.0 lives in another environment. Plugin 0.2.7 release
+staging bundles that exact 0.23.0 wheel; the service keeps its separate 0.22.1
+evaluator. The development-only assembly route bundles the selected 0.22.1
+evaluator instead. The combination records both embedded identities explicitly.
+Service 0.1.0.dev1 owns server dependencies; the core checker keeps zero runtime
+dependencies. [REL-SEH-036](../docs/engineering/release-0-23-0/README.md) tracks
+qualification of the new tuple. The WO-RLS-048 runtime-admission correction is
+proposed separately; the 0.23.0 combination is not yet qualified.
 
 ## Build the exact combination
 
 Commit the reviewed implementation. Follow the existing
 [release build sequence](../docs/notes/developing-se-harness.md#release-sequences)
-to produce the 0.22.2 candidate wheel and its two-build replay JSON at that commit.
+to produce the selected candidate wheel and its two-build replay JSON at that commit.
 Use the public 0.22.1 wheel as `EVALUATOR_WHEEL`. Resolve uppercase placeholders
 to absolute paths or selected values. Keep each path as one argument.
 
@@ -41,14 +48,27 @@ to absolute paths or selected values. Keep each path as one argument.
 python REPO/server/scripts/qualify.py prepare --repository REPO --output PACKAGE_OUT --client-wheel CLIENT_WHEEL --client-replay CLIENT_REPLAY_JSON --evaluator-wheel EVALUATOR_WHEEL --image LOCAL_IMAGE
 ```
 
-The command refuses a dirty checkout or client replay from another commit. It
-reads exact Git blobs, uses the existing development plugin assembler, builds
-the service image, and records actual component identities. Outputs are:
+That command uses the existing development plugin assembler. For release
+qualification, first stage both plugins through the existing
+`scripts/build_plugin_marketplace.py stage` procedure, using the recipe-bound
+client bundle and exact client wheel. Supply that same bundle, staged marketplace
+and the absolute released evaluator Python to the preparation command:
+
+```text
+python REPO/server/scripts/qualify.py prepare --repository REPO --output PACKAGE_OUT --client-wheel CLIENT_WHEEL --client-replay CLIENT_REPLAY_JSON --evaluator-wheel EVALUATOR_WHEEL --image LOCAL_IMAGE --plugin-marketplace STAGED_MARKETPLACE --client-bundle CLIENT_BUNDLE_JSON --evaluator-python EVALUATOR_PYTHON
+```
+
+These three staging options must be supplied together. The helper runs the
+existing `check-stage` check, then snapshots both checked archives without
+rebuilding them. In either route, it refuses dirty source, conflicting source/
+wheel/replay versions, wrong digests and incomplete packages before Docker builds.
+It reads exact Git blobs and records actual component identities. Outputs are:
 
 - `combination.json`: built identities, marked qualification pending.
 - `configuration/config.json`: non-secret selection for that combination.
 - `credentials.json`: generated test principals; keep this file private.
-- `plugin/`: separate Codex and Claude development archives and extracted trees.
+- `plugin/`: the selected Codex and Claude archives and extracted trees. Release
+  preparation preserves staged bytes; the default route remains development-only.
 - `candidate-source/server/compose.yaml`: the selected deployment recipe.
 - Command results and image metadata, including failures.
 

@@ -20,6 +20,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import urllib.error
 import urllib.request
 import uuid
+import zipfile
+from email.parser import BytesParser
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -143,6 +145,69 @@ class Boundaries:
     def accept(self, result):
         self.context = result["view"]
         self.binding = result["affected_artifacts"][0]
+
+    def compatibility(self):
+        """Run the installed service's complete admission checks without writes."""
+        clients = {}
+        for wheel in self.args.compatibility_client_wheel:
+            with zipfile.ZipFile(wheel) as archive:
+                names = [n for n in archive.namelist() if n.endswith(".dist-info/METADATA")]
+                assert len(names) == 1
+                metadata = BytesParser().parsebytes(archive.read(names[0]))
+            assert metadata.get_all("Name") == ["se-harness"]
+            assert len(metadata.get_all("Version", [])) == 1
+            version = metadata["Version"]
+            assert version not in clients and wheel.name == f"se_harness-{version}-py3-none-any.whl"
+            clients[version] = {"version": version, "wheel_sha256": hashlib.sha256(wheel.read_bytes()).hexdigest()}
+        assert set(clients) == {"0.22.2", "0.23.0"}, "Supply both actual client wheels"
+        original = self.service.config
+        self.service.compatibility()
+        before = self.snapshot()
+
+        def assess(name, client, mutation=None, accepted=False):
+            config = copy.deepcopy(original)
+            config["client"] = copy.deepcopy(client)
+            config["components"]["client"] = copy.deepcopy(client)
+            if mutation:
+                mutation(config)
+            # Bind this test-only variant as a complete deployment input. Never
+            # change the running service's configuration or its mounted files.
+            config["components"]["deployment_sha256"] = hashlib.sha256(canonical_json({
+                "configuration": {k: v for k, v in config.items() if k != "components"},
+                "compose_sha256": hashlib.sha256(Path("/opt/compose.yaml").read_bytes()).hexdigest(),
+            })).hexdigest()
+            self.service.config = config
+            try:
+                try:
+                    self.service.compatibility()
+                    outcome = "accepted"
+                except Refusal as error:
+                    assert error.status == 409 and error.code == "HAG_REMOTE_UNSUPPORTED_TUPLE"
+                    outcome = error.code
+                assert (outcome == "accepted") == accepted, (name, outcome)
+            finally:
+                self.service.config = original
+            after = self.snapshot()
+            assert before == after, name + ": compatibility changed the graph"
+            self.record(name, {"client": client, "outcome": outcome, "before": before, "after": after,
+                "method": "Installed Service.compatibility on a complete test-only configuration; no HTTP client scenario implied."})
+
+        for version, client in clients.items():
+            assess("compatible-client-" + version, client, accepted=True)
+        selected = clients["0.23.0"]
+        assess("unsupported-client-version", {**selected, "version": "0.23.1"})
+        variants = {
+            "client-config-version-mismatch": lambda c: c["components"]["client"].update(version="0.22.2"),
+            "client-config-digest-mismatch": lambda c: c["components"]["client"].update(wheel_sha256="0" * 64),
+            "wrong-plugin-version": lambda c: c["components"]["plugins"]["codex"].update(version="0.2.8"),
+            "wrong-evaluator-identity": lambda c: c["components"]["evaluator"].update(archive_sha256="0" * 64),
+            "wrong-service-wheel": lambda c: c["components"]["server"].update(wheel_sha256="1" * 32 + "2" * 32),
+            "wrong-runtime": lambda c: c["components"]["runtime"].update(python="3.13.15"),
+            "wrong-database": lambda c: c["components"]["database"].update(version="3.13.0"),
+            "wrong-schema": lambda c: c["components"].update(schema_revision=99),
+        }
+        for name, mutation in variants.items():
+            assess(name, selected, mutation)
 
     def concurrent(self):
         before = self.snapshot()
@@ -341,6 +406,8 @@ if __name__ == "__main__":
     parser.add_argument("--only", default="invalid_and_rights,concurrent,faults,parity,resource_boundaries")
     parser.add_argument("--client-python", type=Path)
     parser.add_argument("--client-wheel", type=Path)
+    parser.add_argument("--compatibility-client-wheel", type=Path, action="append", default=[],
+                        help="actual client wheel; supply 0.22.2 and 0.23.0 when --only includes compatibility")
     args = parser.parse_args()
     suite = Boundaries(args)
     try:

@@ -1,0 +1,102 @@
+{
+  "candidate": "f2ddb5afe42d40cc7c4a426b5c9cb985156a28a3",
+  "case": "EFF-04A2",
+  "trial": "claude-diagnostic",
+  "overall": "fail",
+  "method": "Independent semantic review against the accepted VER-HAG-008 EFF-04A2 criterion, complete paired native call/result capture, separate authenticated saved-revision reads and original-byte comparison. Assertions bind observations; keywords do not determine the content verdict.",
+  "blocking_findings": [
+    {
+      "id": "R23-NATIVE-003",
+      "criterion": "Missing-input handling and honest content readiness",
+      "finding": "The agent did not ask for the missing agreed operational outcome or success measure. It authored a solution description, left the specific audience and observation point unidentified, then explicitly called the draft complete in both the saved report and final reply. VER-HAG-008 explicitly rejects a complete-content claim for this request.",
+      "evidence": [
+        "native/work/INT-P3-001.md: outcome and Success measures",
+        "native/work/native-report.md: Content readiness",
+        "independent-observations.json: final_reply"
+      ],
+      "effect": "Stop further native repetitions on this candidate. Qualification and aggregate verification remain pending."
+    },
+    {
+      "id": "R23-NATIVE-004",
+      "criterion": "Do not invent the user problem, operational benefit or requested limits",
+      "finding": "The draft presents the lack of an adaptable greeting as an operator problem without an agreed operational reason. It also excludes changes to existing greeting behavior and limits the initiative to one additional audience, neither of which the request established. The saved report inaccurately says there are no unsupported claims or constraints.",
+      "evidence": [
+        "native/work/INT-P3-001.md: Problem and Not this",
+        "native/work/native-report.md: Independent content findings"
+      ],
+      "effect": "A structurally admissible draft is not accepted content; preserve the actual saved bytes and failed review."
+    }
+  ],
+  "passed_observations": [
+    "Exactly one new intent remained draft with the selected domain and synthetic owner.",
+    "All seven imported artifact revisions match their original staged bytes.",
+    "No failed native tool or command result appears in the complete capture. The saved report and final reply correctly report no failures or denials.",
+    "Saved revision bytes match the authored file and separate readback.",
+    "Staged inputs and inspected host settings are unchanged."
+  ],
+  "reporting_limit": "Four hosted mutations were accepted: import, draft-open, create-artifact and revise-artifact. The saved report says three while listing all four receipts. The final reply is not a clarification-only report; the saved-report route applies.",
+  "service_result": "Draft admission returned zero structural errors/incomplete fields and content_review=not_assessed. This is not a service admission defect and does not establish semantic completeness.",
+  "previous_candidate": "The earlier candidate remains failed. The earlier failed-Read reporting symptom did not recur here, but one failure-free trial does not prove reliable reporting after errors.",
+  "readback": {
+    "document_sha256": "6a65da73d34b510f0370ae650841c27d2a3645c9019dda6373290b81f7351639",
+    "project_version": 4,
+    "imported_artifacts": [
+      {
+        "artifact_id": "CAP-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md",
+        "sha256": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "INT-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md",
+        "sha256": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "REL-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/release/REL-P3-900.md",
+        "sha256": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "REQ-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md",
+        "sha256": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "SPEC-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+        "sha256": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "VER-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md",
+        "sha256": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "WO-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md",
+        "sha256": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332",
+        "matches_original": true
+      }
+    ]
+  },
+  "metrics": {
+    "wall_seconds": 311.368,
+    "native_calls": 12,
+    "model_turns": 13,
+    "initial_input_context": 30042,
+    "peak_input_context": 60269
+  },
+  "limits": [
+    "This failed missing-input diagnostic is not completed authoring success.",
+    "Its performance is reported separately; EFF-04B positive-case goals are not applied to it.",
+    "No further native tests or retry on this candidate is authorized by the stop rule.",
+    "No criterion waiver, human verification or release decision is inferred."
+  ],
+  "next": "Retain and publish this failed assessment. A changed correction requires a new reviewed scope/candidate; do not retry until a pass or supply expected answers."
+}

@@ -1,0 +1,143 @@
+{
+  "candidate": "32f2834e82b92e773536808c16b00256ffaae896",
+  "case": "EFF-04A2",
+  "trial": "claude-diagnostic",
+  "overall": "fail",
+  "method": "Independent semantic review against unchanged VER-HAG-008 using the request, original fixture, visible input table, authored document, report, final reply and complete paired calls/results. Separate HTTP revision reads confirm the actual saved bytes and every imported record. No table/keyword detector decides content readiness.",
+  "blocking_findings": [
+    {
+      "id": "R23-NATIVE-007",
+      "criterion": "Missing-input handling and supported completeness",
+      "finding": "The new table is present but incorrectly marks every required input supplied. It treats not measured, an allowed baseline, as the success measure, and infers the user problem from the fixed greeting. It asks no question about the missing agreed operational outcome or measure. The saved draft and final reply still claim complete content. This directly fails the unchanged EFF-04A2 criterion.",
+      "evidence": [
+        "native/events.jsonl: visible input assessment at event 125",
+        "native/work/INT-P3-001.md: Problem and Success measures",
+        "native/work/native-report.md: Content readiness and Independent content review",
+        "independent-observations.json: final_reply"
+      ],
+      "effect": "Required diagnostic fails; stop further native repetitions on this candidate and keep aggregate verification unready."
+    },
+    {
+      "id": "R23-NATIVE-008",
+      "criterion": "Supported statements and faithful reporting of effects",
+      "finding": "The table asserts that operators cannot use the current greeting for a new audience, and the draft says an operator has no way to produce a different greeting. The fixture establishes one fixed function, not those wider usage/capability facts. The draft also treats retaining the current fixed greeting for its audience as confirmed scope, whereas the task protects imported records and the fixture during this exercise. Separately, the final reply calls the saved-revision read a fifth mutation; actual accepted writes are import, draft-open, create and revise, reaching project version 4.",
+      "evidence": [
+        "native/events.jsonl: visible input assessment at event 125",
+        "native/work/INT-P3-001.md: Problem and Not this",
+        "native/work/native-report.md: No unsupported claims statement",
+        "independent-observations.json: final_reply and actual calls/results",
+        "independent-status.json: project_version"
+      ],
+      "effect": "The content/report does not satisfy the existing source-support and actual-effect reporting rules."
+    }
+  ],
+  "instruction_adherence_observation": "The explicit input table appeared after create-artifact, not before creating the draft as the reviewed guide requests. It did appear before writing the authored document. Exposing the table made the reasoning error visible but did not correct it; this observation is not a new acceptance gate.",
+  "passed_observations": [
+    "Exactly one new intent remains draft with the selected synthetic owner and domain.",
+    "The revised guide was delivered with SHA-256 57a6fb26a8710381620ca0d579c53f442c397db66e2d7be1004db686604b6b64.",
+    "An explicit input-assessment table appeared, and the final report reused its categories.",
+    "The newly proposed infrastructure limit is labeled proposed in both draft and report; that part improved.",
+    "The separate saved-revision read matches authored and native-readback bytes.",
+    "All seven imported records retain their original staged bytes.",
+    "No native tool call failed or was denied; the reported observation snapshot accurately excludes the later report write.",
+    "Staged inputs and inspected host settings are unchanged."
+  ],
+  "service_boundary": "Storage and draft admission worked. Structural admissibility and an empty incomplete list do not establish semantic completeness; no service defect is inferred from allowing an incomplete draft.",
+  "readback": {
+    "document_sha256": "d2c4d9454570a0b4b7f6958ff95632b52d59d1b9860766c99341b533acd86a20",
+    "project_version": 4,
+    "accepted_mutations": [
+      {
+        "record": "import-001",
+        "outcome": "accepted",
+        "project_version": null
+      },
+      {
+        "record": "draft-open-001",
+        "outcome": "accepted",
+        "project_version": null
+      },
+      {
+        "record": "create-intent-001",
+        "outcome": "accepted",
+        "project_version": null
+      },
+      {
+        "record": "revise-intent-001",
+        "outcome": "accepted",
+        "project_version": null
+      }
+    ],
+    "imported_artifacts": [
+      {
+        "artifact_id": "CAP-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md",
+        "sha256": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "INT-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md",
+        "sha256": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "REL-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/release/REL-P3-900.md",
+        "sha256": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "REQ-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md",
+        "sha256": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "SPEC-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+        "sha256": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "VER-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md",
+        "sha256": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4",
+        "matches_original": true
+      },
+      {
+        "artifact_id": "WO-P3-900",
+        "path": "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md",
+        "sha256": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332",
+        "matches_original": true
+      }
+    ]
+  },
+  "metrics": {
+    "wall_seconds": 271.716,
+    "native_calls": 10,
+    "model_turns": 9,
+    "initial_input_context": 30116,
+    "peak_input_context": 57550
+  },
+  "comparison": {
+    "previous_candidate": "74feac0767f33658b31fb9e9ad2b6a13a188c13c",
+    "previous_seconds": 502.774,
+    "previous_peak_input_context": 71591,
+    "current_seconds": 271.716,
+    "current_peak_input_context": 57550,
+    "limit": "Different instruction candidates, one failed negative diagnostic each. Lower observed cost is not proven general speed improvement or successful authoring."
+  },
+  "simplicity_review": "One shared guide gained 75 words, with no new runtime, tool or required repository file. The explicit assessment is observable and reused, but its supplied-versus-missing judgment is still wrong. Another unsupported completion claim prevents success despite lower observed cost.",
+  "separate_execution_events": [
+    "A pre-run provenance inspection guessed the wrong plugin archive root. The path was recovered from native-selection.json and all checks passed before the first native invocation; no native trial was retried."
+  ],
+  "limits": [
+    "First diagnostic failed; no subsequent native repetition, Codex, positive or full native case on this candidate.",
+    "Earlier failures retain their original verdicts.",
+    "Remaining current-combination walkthrough/recovery, local upgrade and native lifecycle/delivery checks are not claimed by this result.",
+    "Separate desktop evidence remains pending.",
+    "No completion, human verification, merge, release or public delivery decision is inferred."
+  ],
+  "next": "Retain and publish the exact result. A different correction needs reviewed scope and a new candidate. Do not repeat this candidate until a pass, feed expected answers or weaken its criteria."
+}

@@ -1096,7 +1096,7 @@ class CompleteReleaseTests(unittest.TestCase):
         with self.assertRaisesRegex(RELEASE.ReleaseError,'accepted artifact content'):
             RELEASE.verify_integration(self.root,base,git(self.root,'rev-parse','HEAD'),self.envelope)
 
-    def test_resolver_binds_one_real_git_review_and_refuses_later_plan_changes(self):
+    def complete_release_fixture(self, *, integration_readme=None, documentation_commit=None):
         fixture = dashboard_tests.GitReleaseFixture()
         fixture.setUp()
         self.addCleanup(fixture.tearDown)
@@ -1115,7 +1115,7 @@ class CompleteReleaseTests(unittest.TestCase):
         value['complete_release']['documentation'] = {'README.md':hashlib.sha256(b'candidate\n').hexdigest()}
         value['surfaces'][0]['expected']['wheel_sha256'] = self.selected.wheel_sha256
         value['surfaces'][1]['expected'].update(source_commit=fixture.candidate,wheel_sha256=self.selected.wheel_sha256)
-        value['surfaces'][2]['expected']['commit'] = fixture.candidate
+        value['surfaces'][2]['expected']['commit'] = documentation_commit or fixture.candidate
         value['surfaces'][4]['expected']['last'] = fixture.candidate
         readiness = {'candidate_commit':fixture.candidate,'controls_ready':True,'qualification':'passed','verification_records':['VREC-TST-001']}
         readiness_raw = json.dumps(readiness)+'\n'
@@ -1135,6 +1135,8 @@ class CompleteReleaseTests(unittest.TestCase):
         for artifact_id, artifact_type in [('REL-TST-001','release_contract'),('WO-TST-001','work_order'),('VREC-TST-001','verification_record')]:
             extra = '\n[delivery]\nroute="complete-release"\n' if artifact_type=='release_contract' else ''
             write(fixture.root/f'docs/engineering/example/{artifact_id}.md',f'+++\nid="{artifact_id}"\ntype="{artifact_type}"\nstatus="verified"\ncommit="{fixture.candidate}"\ngit_object_format="sha1"\n{extra}+++\n')
+        if integration_readme is not None:
+            write(fixture.root/'README.md', integration_readme)
         fixture.commit('prepared and reviewed complete package')
         review = git(fixture.root,'rev-parse','HEAD')
         binding = {'plan':plan_path,'sha256':hashlib.sha256(raw.encode()).hexdigest(),'decided_by':'Example human',
@@ -1145,15 +1147,89 @@ class CompleteReleaseTests(unittest.TestCase):
         write(fixture.root/fixture.record_path,released)
         fixture.commit('apply one complete release decision')
         git(fixture.root,'update-ref','refs/heads/main','HEAD')
+        return fixture, binding, plan_path, raw
+
+    def test_resolver_binds_one_real_git_review_and_refuses_later_plan_changes(self):
+        fixture, binding, plan_path, raw = self.complete_release_fixture()
         resolved = RELEASE.resolve_plan(fixture.root,'RLS-TST-001','refs/heads/main')
         self.assertEqual('se-harness-release-plan/v3',resolved.schema)
         self.assertEqual(binding['sha256'],resolved.complete_delivery['sha256'])
-        self.assertEqual(market['commit'],resolved.complete_delivery['plan']['complete_release']['marketplace']['commit'])
+        self.assertEqual(self.value['complete_release']['marketplace']['commit'],resolved.complete_delivery['plan']['complete_release']['marketplace']['commit'])
         (fixture.root/plan_path).write_bytes((' '+raw).encode())
         fixture.commit('unauthorized byte change after approval')
         git(fixture.root,'update-ref','refs/heads/main','HEAD')
         with self.assertRaisesRegex(RELEASE.ReleaseError,'plan digest differs'):
             RELEASE.resolve_plan(fixture.root,'RLS-TST-001','refs/heads/main')
+
+    def test_historical_rehearsal_allows_later_docs_but_live_delivery_still_refuses(self):
+        fixture, binding, _, _ = self.complete_release_fixture()
+        original = RELEASE.resolve_plan(fixture.root, 'RLS-TST-001', 'refs/heads/main')
+        write(fixture.root/'README.md', 'Documentation for a later release\n')
+        fixture.commit('later legitimate documentation')
+        git(fixture.root, 'update-ref', 'refs/heads/main', 'HEAD')
+        with self.assertRaisesRegex(RELEASE.ReleaseError, 'approved documentation differs: README.md'):
+            RELEASE.resolve_plan(fixture.root, 'RLS-TST-001', 'refs/heads/main')
+        historical = RELEASE.resolve_plan(fixture.root, 'RLS-TST-001', 'refs/heads/main', historical=True)
+        self.assertEqual(RELEASE.QUALIFICATION_SCHEMA, historical.schema)
+        self.assertEqual(original, replace(historical, schema=original.schema))
+        self.assertEqual(binding['sha256'], historical.complete_delivery['sha256'])
+
+    def test_historical_rehearsal_preserves_plan_record_evidence_and_candidate_checks(self):
+        fixture, _, plan_path, _ = self.complete_release_fixture()
+        record_path = fixture.root/fixture.record_path
+        changes = [
+            (fixture.root/plan_path, lambda raw: b' ' + raw),
+            (fixture.root/fixture.evaluator_evidence_path, lambda raw: b'{}\n'),
+            (record_path, lambda raw: raw.replace(b'version = "1.2.3"', b'version = "1.2.4"')),
+            (record_path, lambda raw: raw.replace(fixture.candidate.encode(), b'f'*40)),
+            (record_path, lambda raw: raw.replace(b'review_commit="', b'review_commit="f', 1)),
+        ]
+        for index, (path, mutate) in enumerate(changes):
+            with self.subTest(path=path.name, mutation=index):
+                original = path.read_bytes(); changed = mutate(original)
+                self.assertNotEqual(original, changed)
+                path.write_bytes(changed); fixture.commit('tampered historical input')
+                git(fixture.root, 'update-ref', 'refs/heads/main', 'HEAD')
+                with self.assertRaises((RELEASE.ReleaseError, RELEASE.dashboard.PublicationError, ValueError)):
+                    RELEASE.resolve_plan(fixture.root, 'RLS-TST-001', 'refs/heads/main', historical=True)
+                path.write_bytes(original); fixture.commit('restore original bytes')
+                git(fixture.root, 'update-ref', 'refs/heads/main', 'HEAD')
+
+    def test_historical_rehearsal_refuses_changed_record_body(self):
+        fixture, _, _, _ = self.complete_release_fixture()
+        path = fixture.root/fixture.record_path
+        path.write_bytes(path.read_bytes() + b'\nUnreviewed record body change.\n')
+        fixture.commit('change historical record body')
+        git(fixture.root, 'update-ref', 'refs/heads/main', 'HEAD')
+        with self.assertRaisesRegex(RELEASE.ReleaseError, 'historical release record differs'):
+            RELEASE.resolve_plan(fixture.root, 'RLS-TST-001', 'refs/heads/main', historical=True)
+
+    def test_historical_rehearsal_requires_documentation_at_integration(self):
+        fixture, _, _, _ = self.complete_release_fixture(integration_readme='Unreviewed integration content\n')
+        with self.assertRaisesRegex(RELEASE.ReleaseError, 'approved documentation differs: README.md'):
+            RELEASE.resolve_plan(fixture.root, 'RLS-TST-001', 'refs/heads/main', historical=True)
+
+    def test_historical_rehearsal_requires_recorded_documentation_history(self):
+        fixture, _, _, _ = self.complete_release_fixture(documentation_commit='f'*40)
+        with self.assertRaisesRegex(RELEASE.ReleaseError, 'approved documentation is not integrated'):
+            RELEASE.resolve_plan(fixture.root, 'RLS-TST-001', 'refs/heads/main', historical=True)
+
+    def test_qualification_output_is_refused_by_publication_consumers(self):
+        path = self.root/'historical.json'
+        for complete in (None, self.envelope):
+            with self.subTest(complete=complete is not None):
+                value = asdict(replace(self.selected, schema=RELEASE.QUALIFICATION_SCHEMA, complete_delivery=complete))
+                if complete is None:
+                    value.pop('complete_delivery')  # Canonical legacy output omits it.
+                path.write_text(json.dumps(value))
+                self.assertEqual(RELEASE.QUALIFICATION_SCHEMA, RELEASE.read_plan(path, qualification=True).schema)
+                with self.assertRaises(RELEASE.ReleaseError):
+                    RELEASE.read_plan(path)
+                with mock.patch.object(RELEASE, 'resume_github') as publish:
+                    self.assertEqual(1, RELEASE.main(['resume-github', '--plan', str(path), '--directory', str(self.root), '--metadata', str(path)]))
+                    publish.assert_not_called()
+        args = RELEASE.build_parser().parse_args(['resolve', '--repository', str(self.root), '--release-record', 'RLS-TST-001'])
+        self.assertFalse(args.historical)
 
 
 class ReleaseWorkflowPolicyTests(unittest.TestCase):
@@ -1227,6 +1303,17 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("uses: ./.github/workflows/pages-publication.yml", self.pages)
         self.assertNotIn("pages_build", self.workflow)
         self.assertEqual(1, self.pages_definition.count('mkdir "$RUNNER_TEMP/generation-snapshot"'))
+
+    def test_only_readonly_rehearsal_selects_historical_resolution(self):
+        rehearsal = (REPOSITORY_ROOT/'.github/workflows/publication-rehearsal.yml').read_text()
+        earlier = rehearsal.split('  rehearse-record:\n', 1)[1].split('  rehearse-delivery:\n', 1)[0]
+        self.assertIn('historical: true', earlier)
+        self.assertNotIn('historical:', self.workflow)
+        self.assertNotIn('--historical', self.workflow)
+        self.assertIn('default: false', self.qualification.split('      historical:\n', 1)[1].split('      ref:\n', 1)[0])
+        self.assertIn('resolution_args+=(--historical)', self.qualification)
+        transfer = self.qualification.split('      - name: Transfer only verified inert release bytes', 1)[1]
+        self.assertIn("if: inputs.mode == 'release-record' && !inputs.historical", transfer)
 
     def test_repository_policy_is_explicit_and_imported_only_from_trusted_main(self) -> None:
         self.assertIn("Check out trusted main history", self.workflow)

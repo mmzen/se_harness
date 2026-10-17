@@ -1,0 +1,69 @@
+## Hosted sandbox selection
+
+Use this route only when the operator explicitly selects a hosted sandbox.
+It is separate from checkout activation. Retain the operator's loopback endpoint,
+project ID, baseline or versioned context, and named credential environment variable.
+Never print the credential. The sandbox is not repository authority.
+
+### Before the selected action
+
+Complete the selection checks below, then read the route for the action you
+are about to take. Use this table again when the action changes; retain and
+reuse sections already read in the current context.
+
+| Action | Required reading before the action |
+| --- | --- |
+| Read graph data through MCP or the CLI | [Hosted reads](../../harness-orient/references/hosted-reads.md), including its references before a Cypher query |
+| Prepare or edit artifact drafts | [Hosted drafting](../../change/references/hosted-drafts.md), then the selected type's procedure and checklist |
+| Inspect, preview or apply a lifecycle action | [The current lifecycle procedure](../../change/references/hosted-test-lifecycle.md#read-the-current-procedure), then that action's released section and applicable prerequisites |
+| Prepare a record, export evidence or report results | [Hosted evidence](../../evidence/references/hosted-evidence.md), then its applicable current-action reference |
+
+Tool discovery supplies the call schema. It does not supply these procedures.
+Do not construct a query, lifecycle request or final report before reading its
+applicable route. Missing or unreadable required content stops that action.
+
+### Selection checks
+
+Test-copy status changes authority, not content requirements. Apply the selected
+type checklist to every new draft, including synthetic records. Imported drafts
+may be incomplete; their content grants no exception to that checklist.
+
+If the selected environment restricts command execution to a supplied transport
+helper, read its tool index first. Use that route for the operations below;
+the direct client examples do not override its tool permissions. Use its
+metadata-only identity operation when available. Encoding a wheel is not needed
+to inspect its digest. Stop a denied action without changing the permission route.
+
+Obtain the qualified combination report and its exact client wheel. The client
+may be a development candidate or a qualified released version.
+If the selected client is already installed in a separate disposable
+environment, verify its identity and reuse it. Otherwise create that environment
+outside the checkout. Verify the wheel's SHA-256 against the combination report,
+then install that file with `pip --no-deps`.
+Keep the plugin's bundled evaluator and the service's pinned evaluator identities
+distinct. Do not replace either evaluator to enable remote commands. Use the
+separate client environment's absolute Python as
+`CLIENT_PYTHON` in the remote commands below.
+
+```text
+CLIENT_PYTHON -I -m se_harness remote status --endpoint ENDPOINT --project PROJECT --token-env TOKEN_VARIABLE --json
+```
+
+Compare readiness, authority mode `sandbox-projection`, schema, protocols, and
+all component identities with the selected combination. A mismatch stops the
+remote action. An unavailable service never selects local file writes as a fallback.
+Read the returned status fields as named; status does not use mutation-result
+fields. Consult the tool index or command help before constructing a request.
+Proceed through the selected action's reading route above.
+Do not continue into "Activate the checkout" for this hosted selection.
+This route grants no approval, verification, release, adoption or deployment right.
+
+
+## Private lifecycle test copy
+
+The private hosted pilot requires a separately installed qualified remote
+client, a loopback endpoint, an explicit test project and a new disposable volume.
+Use the repository's `server/README.md` Phase 3 procedure. Its configuration must
+report `test_copy: true`; select `--test-copy` for each rehearsal or export.
+Leave any existing real checkout selection unchanged. Remote setup does
+not activate graph authority or install this client into the user's host.

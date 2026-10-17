@@ -1,0 +1,88 @@
+--- a/plugins/verity-plane/common/skills/change/references/hosted-drafts.md
++++ b/plugins/verity-plane/common/skills/change/references/hosted-drafts.md
+@@ -20,13 +20,9 @@
+ An instruction to create a draft does not supply the inputs that procedure requires.
+ Do not import, open a draft context or create a template merely to ask a question.
+ 
+-For an intent, resolve the user's problem, desired improvement and way to observe
+-that improvement. Ask for missing inputs and reuse confirmed ones. Message text,
+-channels or function signatures describe a solution; they do not explain why the
+-user needs it. An unmeasured baseline is allowed; a missing success measure stays
+-missing. Do not offer `not measured` as a replacement for how the owner will know
+-the change helped. Do not invent a purpose or measure from engineering activity.
+-Keep unknown facts explicit; do not fill them with a guessed outcome statement.
++Before choosing the drafting route, apply **Check the inputs before writing**.
++The requested type's checklist determines which inputs are required. Reuse
++confirmed inputs; ask only for those that are missing.
+ 
+ Apply the shared check in **Report and recover** before an exhaustive failure
+ claim. For a clarification stop, include three short parts in the final reply:
+@@ -78,12 +74,25 @@
+ 
+ ## Check the inputs before writing
+ 
+-Compare the requested type's required content with the request and definitions:
++Compare the type checklist with the request, definitions and requester
++clarifications. Use one content-readiness decision in the report and final reply.
+ 
+-| Content | Source or authoring authority |
++| Evidence available | Content readiness and action |
+ | --- | --- |
+-| User problem, improvement, success measure, existing gap | Require a source that supplies it. A creation request supplies no missing fact. |
+-| Proposed method, check, evidence destination | Choose within the requested design scope; label it planned. |
++| Required input absent from supplied sources | **Incomplete.** Ask for it; stop dependent writing. Calling it `unknown` or `not yet defined` does not satisfy it. |
++| Supplied input omitted from the editable draft | **Incomplete.** Add it within scope and review the saved revision. |
++| Every required item supported in the latest saved revision | **Complete.** Identify the source inspection or executed check supporting this conclusion. |
++| Access, evidence or operation uncertainty prevents assessment | **Blocked.** State the limitation and follow the recovery procedure. |
++
++A partial draft may remain saved. A successful save, an empty `incomplete` list,
++or `content_review: not_assessed` cannot establish completeness. Unknown optional
++facts do not become required inputs.
++
++For an intent, a software output is not the user's operational improvement.
++Establish the user's problem, desired change and how they will know it helped.
++An unmeasured baseline is allowed; a missing success measure is still missing.
++Do not invent these inputs or scope limits. Label proposed limits for confirmation.
++Choose methods, checks and evidence destinations within scope; label them planned.
+ 
+ Before claiming a coverage gap, read the applicable requirements, specifications
+ and verification contracts. Code or one same-type record cannot establish their
+@@ -96,11 +105,7 @@
+ If a required condition cannot be assessed with the available tools, report that
+ gap before requesting approval; do not promise an unavailable check.
+ 
+-Distinguish a missing input from a draft omission. Ask for a required fact absent
+-from the confirmed inputs and stop dependent writing. If the fact is available
+-and only the draft omits it, correct the editable draft within the requested
+-scope. A partial draft stays incomplete. Report a type/outcome mismatch without
+-changing type or inventing a fact.
++Report a type/outcome mismatch without changing type or inventing a fact.
+ 
+ ## Author and submit
+ 
+@@ -146,20 +151,17 @@
+ after a mutation attempt or uncertain effect. Read required omitted findings.
+ The report contains:
+ 
+-- **Content readiness:** one conclusion: complete, incomplete or blocked against
+-  the selected type checklist. Refer to the latest saved revision. A correction
+-  resolves the earlier omission; an unresolved required gap prevents completion.
++- **Content readiness:** use the decision from **Check the inputs before writing**
++  for the latest saved revision. State unresolved required inputs and questions.
+ - **Saved state:** selection, revision, versions and exact document/result paths.
+ - **Validation and review:** evaluator findings, independent content findings,
+   local and remote failures (including recovered ones), denials, uncertain effects,
+   and any returned procedure/step. Apply the shared report check above. Link
+   evidence; do not copy inventories.
+ 
+-Draft validation checks template shape and required links. `content_review`
+-being `not_assessed` means only that the evaluator did not assess content. It
+-does not invalidate your separate review; an empty `incomplete` list does not
+-complete it. Name the method: source inspection, executed test or evaluator check.
+-Planned checks are not executed tests. Keep report and final reply consistent.
++Draft validation checks template shape and required links; it does not assess
++content. Planned checks are not executed tests. Keep report and final reply
++consistent with the content-readiness decision.
+ Separate successful reads from accepted mutations. Attribute facts to their
+ actual source: response metadata is not content in the saved artifact. Use only
+ confirmed paths/digests; saving alone establishes no completeness.

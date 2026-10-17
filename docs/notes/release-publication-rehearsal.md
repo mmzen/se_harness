@@ -26,6 +26,18 @@ the recorded candidate, replays its recipe, and checks the recorded hashes.
 On a PR, the earlier record comes from its base commit. If no suitable record
 exists, that leg is skipped with an explanation.
 
+The earlier-record caller sets `historical: true`. It uses the same resolver,
+candidate checks and recipe replay, but checks approved documentation at its
+recorded commit and release integration rather than requiring today's main
+documentation to match an old release. All other provenance checks remain.
+The resolver's `--historical` output uses a qualification-only schema. Only
+the inert bundle and manifest verifiers accept it; publication commands refuse it.
+Historical rehearsal does not upload a `release-bundle-<RLS>` for publication.
+
+The publication caller keeps the default `historical: false`. It still checks
+current main's documentation against the approved inputs before delivery. A
+passing historical rehearsal does not establish current publication readiness.
+
 When the earlier-record leg is selected, the same rehearsal also runs the
 complete-delivery fixture tests. These use disposable Git repositories, inert
 package bytes and simulated provider responses. They exercise frozen approval
@@ -48,8 +60,10 @@ publication credentials or protected environment. They do not approve or publish
 The recipe runs on Linux; ordinary installed-package coverage retains both
 Windows and Ubuntu.
 
-Results stay in the existing CI artifacts: `qualification-candidate-<sha>`,
-`qualification-release-record-<RLS>` and `release-bundle-<RLS>` (two-day retention).
+Results stay in the existing CI artifacts: `qualification-candidate-<sha>` and
+`qualification-release-record-<RLS>`. The latter retains the resolved subject
+and manifest comparison. Only live qualification transfers
+`release-bundle-<RLS>` (two-day retention) to publication jobs.
 
 ## Retry an interrupted draft
 

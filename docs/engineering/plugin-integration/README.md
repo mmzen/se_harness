@@ -1,6 +1,19 @@
 # Plugin integration
 
-## Current public package: plugin 0.2.5
+## Current public package: plugin 0.2.6
+
+[Evaluator 0.22.1 and plugin 0.2.6](../release-0-22-1/README.md) completed public
+delivery. [VREC-RLS-004](../release-0-22-1/verification-records/VREC-RLS-004.md)
+binds the closeout; its evidence records the actual marketplace identities and
+Codex/Claude CLI fresh/update observations. The accepted desktop omission applies
+to that release only.
+
+[Plugin 0.2.7 with evaluator/client 0.23.0](../release-0-23-0/README.md) is now in
+preparation. Its exact staged packages and private hosted combination require
+new qualification. The service keeps its separate evaluator 0.22.1; Git remains
+authoritative. This proposal is not a public availability or desktop-support claim.
+
+## Historical public package: plugin 0.2.5
 
 Evaluator 0.22.0 and both plugin 0.2.5 packages are public at
 `7d30907f15bd7e06fb632e1ebf4e88e01b68726c`. VREC-PLG-032 verifies qualification.

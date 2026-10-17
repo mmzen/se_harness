@@ -1,0 +1,325 @@
+{
+  "basis": "b9620f58ab018d75a463b38c34422371874778e8",
+  "results": [
+    {
+      "host": "claude",
+      "variant": "accepted",
+      "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release023-053-proposal\\offline-claude-accepted\\native",
+      "root_characters": 137,
+      "prompt_bytes": 67462,
+      "headroom_bytes": -1926,
+      "error": "Complete task entry exceeds 64 KiB; no input was truncated",
+      "source_files": [
+        {
+          "relative": ".engineering-harness.lock",
+          "sha256": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252"
+        },
+        {
+          "relative": ".engineering-harness.toml",
+          "sha256": "069622e02d80bdec13240889f7e83b1063b01208b9e4a5f6f37fdcdcf53a8d22"
+        },
+        {
+          "relative": ".gitattributes",
+          "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
+        },
+        {
+          "relative": "REHEARSAL.txt",
+          "sha256": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md",
+          "sha256": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md",
+          "sha256": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/release/REL-P3-900.md",
+          "sha256": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md",
+          "sha256": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+          "sha256": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md",
+          "sha256": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md",
+          "sha256": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332"
+        },
+        {
+          "relative": "src/greeting.py",
+          "sha256": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1"
+        }
+      ],
+      "source_bytes": 5490,
+      "reference_bytes": 29026,
+      "selected_sections": [
+        "docs/engineering/harness/COMMUNICATION.md#communication",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#before-this-action",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#define-how-the-result-will-be-verified",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-types",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-locations",
+        "docs/engineering/harness/DEFINITION_LINKS.md#links-between-definitions",
+        "docs/engineering/ARTIFACT_AUTHORING.md#design-simplicity",
+        "docs/engineering/ARTIFACT_AUTHORING.md#verification"
+      ],
+      "task_source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\h44\\e\\claude-432\\native-task.md",
+      "original_task_sha256": "5b6aed483ce711c449e897aaa08fcc796ecd95a5ea0c0a49efabb8c3c0bf40d8",
+      "assembled_task_sha256": "5be1b2387128e765d26a91a13daa75ab81e88c9e3a8091cdce3de7919fb1b265",
+      "qualifier_sha256": "534576c9cb5682707b85aeb8c1b5bd99ab059de48affbd44cafe4040a4bc419b",
+      "guide_sha256": "47990db4e3ea3720702838ed68021919038a0fffcacbea67071185058055405d",
+      "provider_invoked": false,
+      "service_contacted": false,
+      "method": "Unchanged run() statements through the 64 KiB/credential guard, with provider/capture code excluded by AST boundary; no prompt substitution."
+    },
+    {
+      "host": "claude",
+      "variant": "proposed",
+      "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release023-053-proposal\\offline-claude-proposed\\native",
+      "root_characters": 137,
+      "prompt_bytes": 64844,
+      "headroom_bytes": 692,
+      "error": null,
+      "source_files": [
+        {
+          "relative": ".engineering-harness.lock",
+          "sha256": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252"
+        },
+        {
+          "relative": ".engineering-harness.toml",
+          "sha256": "069622e02d80bdec13240889f7e83b1063b01208b9e4a5f6f37fdcdcf53a8d22"
+        },
+        {
+          "relative": ".gitattributes",
+          "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
+        },
+        {
+          "relative": "REHEARSAL.txt",
+          "sha256": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md",
+          "sha256": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md",
+          "sha256": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/release/REL-P3-900.md",
+          "sha256": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md",
+          "sha256": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+          "sha256": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md",
+          "sha256": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md",
+          "sha256": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332"
+        },
+        {
+          "relative": "src/greeting.py",
+          "sha256": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1"
+        }
+      ],
+      "source_bytes": 5490,
+      "reference_bytes": 26408,
+      "selected_sections": [
+        "docs/engineering/harness/COMMUNICATION.md#communication",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#before-this-action",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#define-how-the-result-will-be-verified",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-types",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-locations",
+        "docs/engineering/harness/DEFINITION_LINKS.md#links-between-definitions",
+        "docs/engineering/ARTIFACT_AUTHORING.md#design-simplicity",
+        "docs/engineering/ARTIFACT_AUTHORING.md#verification"
+      ],
+      "task_source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\h44\\e\\claude-432\\native-task.md",
+      "original_task_sha256": "5b6aed483ce711c449e897aaa08fcc796ecd95a5ea0c0a49efabb8c3c0bf40d8",
+      "assembled_task_sha256": "e6f128ec57a07612231dd6ae7f747c7cc28e67bb92054e658725392f0f53b5cb",
+      "qualifier_sha256": "534576c9cb5682707b85aeb8c1b5bd99ab059de48affbd44cafe4040a4bc419b",
+      "guide_sha256": "72479ea9be95428152e9102302296bdb60b1a13291d5e8bed520faef7d1c47d1",
+      "provider_invoked": false,
+      "service_contacted": false,
+      "method": "Unchanged run() statements through the 64 KiB/credential guard, with provider/capture code excluded by AST boundary; no prompt substitution."
+    },
+    {
+      "host": "codex",
+      "variant": "accepted",
+      "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release023-053-proposal\\offline-codex-accepted\\native",
+      "root_characters": 136,
+      "prompt_bytes": 68231,
+      "headroom_bytes": -2695,
+      "error": "Complete task entry exceeds 64 KiB; no input was truncated",
+      "source_files": [
+        {
+          "relative": ".engineering-harness.lock",
+          "sha256": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252"
+        },
+        {
+          "relative": ".engineering-harness.toml",
+          "sha256": "069622e02d80bdec13240889f7e83b1063b01208b9e4a5f6f37fdcdcf53a8d22"
+        },
+        {
+          "relative": ".gitattributes",
+          "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
+        },
+        {
+          "relative": "REHEARSAL.txt",
+          "sha256": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md",
+          "sha256": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md",
+          "sha256": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/release/REL-P3-900.md",
+          "sha256": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md",
+          "sha256": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+          "sha256": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md",
+          "sha256": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md",
+          "sha256": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332"
+        },
+        {
+          "relative": "src/greeting.py",
+          "sha256": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1"
+        }
+      ],
+      "source_bytes": 5490,
+      "reference_bytes": 29026,
+      "selected_sections": [
+        "docs/engineering/harness/COMMUNICATION.md#communication",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#before-this-action",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#define-how-the-result-will-be-verified",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-types",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-locations",
+        "docs/engineering/harness/DEFINITION_LINKS.md#links-between-definitions",
+        "docs/engineering/ARTIFACT_AUTHORING.md#design-simplicity",
+        "docs/engineering/ARTIFACT_AUTHORING.md#verification"
+      ],
+      "task_source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\h44\\e\\codex-432\\native-task.md",
+      "original_task_sha256": "ee7f62d85b3d6c86c4bbfc6686c765deb8f666b2099edcc41085980dafa111b3",
+      "assembled_task_sha256": "7cb029fe771c7c758e93d03722e3d13fa5d54cf28b5e825999b593307f257c1c",
+      "qualifier_sha256": "534576c9cb5682707b85aeb8c1b5bd99ab059de48affbd44cafe4040a4bc419b",
+      "guide_sha256": "47990db4e3ea3720702838ed68021919038a0fffcacbea67071185058055405d",
+      "provider_invoked": false,
+      "service_contacted": false,
+      "method": "Unchanged run() statements through the 64 KiB/credential guard, with provider/capture code excluded by AST boundary; no prompt substitution."
+    },
+    {
+      "host": "codex",
+      "variant": "proposed",
+      "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\release023-053-proposal\\offline-codex-proposed\\native",
+      "root_characters": 136,
+      "prompt_bytes": 65613,
+      "headroom_bytes": -77,
+      "error": "Complete task entry exceeds 64 KiB; no input was truncated",
+      "source_files": [
+        {
+          "relative": ".engineering-harness.lock",
+          "sha256": "1ec80dbed14b379d2b33a53ba8d84d1af87d7ab2436dcf753761bcd1bcbf8252"
+        },
+        {
+          "relative": ".engineering-harness.toml",
+          "sha256": "069622e02d80bdec13240889f7e83b1063b01208b9e4a5f6f37fdcdcf53a8d22"
+        },
+        {
+          "relative": ".gitattributes",
+          "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
+        },
+        {
+          "relative": "REHEARSAL.txt",
+          "sha256": "feb75968b83b4fa18865b23e3b2a8b498915e4c7ab770fee2dd9cd3418ac8e8c"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/capabilities/CAP-P3-900.md",
+          "sha256": "f00af6febc1d62752cab0364e3f4e80e227438f494d98d9f02a9a5c7fdc30bc0"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/intent/INT-P3-900.md",
+          "sha256": "20649db79738fdf649578286679d6fe05491e460c5a41e68ba0ed3161c47e7ed"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/release/REL-P3-900.md",
+          "sha256": "a7cc92f770027bae2ffbf987a1a83eb36bd5e012632e1db07cf5f377f6b12935"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/requirements/REQ-P3-900.md",
+          "sha256": "99028b8605edfd6e85d3cbfb0ee5243f43df69059e314ed1f0b9ab0bde0bbba4"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/specifications/SPEC-P3-900.md",
+          "sha256": "0904f98bddc075f26c87e2e2ce603e3d74a497b8df85e1093bf3b0f5f35a45f9"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/verification/VER-P3-900.md",
+          "sha256": "9c975ff911c736f30dab7688df8f136e66eefd81eebc09362d0345cef813e8b4"
+        },
+        {
+          "relative": "docs/engineering/lifecycle-pilot/work-orders/WO-P3-900.md",
+          "sha256": "98ac1fa85021ac8a6f4d7a74973e2148dac97aa6ca69064d847818efc3771332"
+        },
+        {
+          "relative": "src/greeting.py",
+          "sha256": "dcbd486a7e9993f4aac9824f5099957b1909e5f1fce3f0ccb81adf4b13cecab1"
+        }
+      ],
+      "source_bytes": 5490,
+      "reference_bytes": 26408,
+      "selected_sections": [
+        "docs/engineering/harness/COMMUNICATION.md#communication",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#before-this-action",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#define-how-the-result-will-be-verified",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-types",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-locations",
+        "docs/engineering/harness/DEFINITION_LINKS.md#links-between-definitions",
+        "docs/engineering/ARTIFACT_AUTHORING.md#design-simplicity",
+        "docs/engineering/ARTIFACT_AUTHORING.md#verification"
+      ],
+      "task_source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\h44\\e\\codex-432\\native-task.md",
+      "original_task_sha256": "ee7f62d85b3d6c86c4bbfc6686c765deb8f666b2099edcc41085980dafa111b3",
+      "assembled_task_sha256": "6ceae09c17143dfa6e499755dd3e62eecf9e278e6d1b2c6b1823ff985c1c9b3a",
+      "qualifier_sha256": "534576c9cb5682707b85aeb8c1b5bd99ab059de48affbd44cafe4040a4bc419b",
+      "guide_sha256": "72479ea9be95428152e9102302296bdb60b1a13291d5e8bed520faef7d1c47d1",
+      "provider_invoked": false,
+      "service_contacted": false,
+      "method": "Unchanged run() statements through the 64 KiB/credential guard, with provider/capture code excluded by AST boundary; no prompt substitution."
+    }
+  ]
+}

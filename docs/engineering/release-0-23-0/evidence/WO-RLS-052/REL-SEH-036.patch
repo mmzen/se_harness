@@ -1,0 +1,11 @@
+--- a/docs/engineering/release-0-23-0/release/REL-SEH-036.md
++++ b/docs/engineering/release-0-23-0/release/REL-SEH-036.md
+@@ -13,7 +13,7 @@
+ route = "complete-release"
+ 
+ [relations]
+-gates = ["WO-HAG-001", "WO-HAG-005", "WO-HAG-006", "WO-HAG-007", "WO-HAG-008", "WO-HAG-009", "WO-HAG-010", "WO-HAG-011", "WO-HUP-030", "WO-IPK-002", "WO-RLS-045", "WO-RLS-046", "WO-RLS-048", "WO-RLS-049", "WO-RLS-050", "WO-RLS-051"]
++gates = ["WO-HAG-001", "WO-HAG-005", "WO-HAG-006", "WO-HAG-007", "WO-HAG-008", "WO-HAG-009", "WO-HAG-010", "WO-HAG-011", "WO-HUP-030", "WO-IPK-002", "WO-RLS-045", "WO-RLS-046", "WO-RLS-048", "WO-RLS-049", "WO-RLS-050", "WO-RLS-051", "WO-RLS-052"]
+ 
+ [[lifecycle_events]]
+ from = "draft"

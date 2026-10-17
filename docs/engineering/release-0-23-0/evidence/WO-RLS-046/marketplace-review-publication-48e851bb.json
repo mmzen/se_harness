@@ -1,0 +1,11 @@
+{
+  "source_candidate": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "staging_ref": "refs/heads/codex/plugin-0-2-7-staging",
+  "staging_commit": "d04776866046b60b14ffef14ced1453c4aafa7d9",
+  "staging_tree": "0e0ff666693ad7f00564435e2f35ce8e31a2fb4e",
+  "public_ref": "refs/heads/plugin-marketplace",
+  "public_before": "85ae003769f53908addbdcf46c820a8af530ac24",
+  "public_after": "85ae003769f53908addbdcf46c820a8af530ac24",
+  "exact_remote_commit_and_tree_readback": true,
+  "publication": "review branch only; public promotion remains unperformed"
+}

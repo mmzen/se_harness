@@ -1,0 +1,67 @@
+{
+  "candidate": "05c629ddfc0f40924823160d8aaf0fa4e77940a2",
+  "case": "EFF-04A2",
+  "trial": "codex-diagnostic",
+  "overall": "pass",
+  "method": "Independent semantic review of supplied originals, saved report, final reply, visible calls/results and independent HTTP status. Native-call capture remains incomplete and no exact total is inferred.",
+  "content_result": "The report identifies the unspecified audience, problem, benefit, success condition and confirmed product scope. It distinguishes the existing -900 rehearsal outcome from this new request, does not invent an agreed outcome or claim complete content, and requests confirmation with explicit missing facts.",
+  "reporting_result": "The saved-report route is correct because capture is incomplete. Both report and final reply limit their failure statements to observed calls. Five successful helper commands and one report write are visible. They include no hosted mutation; the separate service read confirms project version zero. This does not infer an exact native-call total from the visible subset.",
+  "findings": [],
+  "wording_observation": "The report ends with \"No checks were executed\" after a table accurately describing readiness checks. In context this refers to planned artifact verification; no tests or artifact validation ran. The final reply explicitly says service checks passed. This phrasing does not negate the correctly retained actions and is not a new failure criterion.",
+  "host_diagnostics": [
+    {
+      "line": 1,
+      "text": "2026-10-13T13:45:02.847488Z  WARN codex_skills::interface: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 2,
+      "text": "2026-10-13T13:45:02.847541Z  WARN codex_skills::interface: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 3,
+      "text": "2026-10-13T13:45:02.870440Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell"
+    },
+    {
+      "line": 7,
+      "text": "2026-10-13T13:45:03.211150Z  WARN codex_skills::interface: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 8,
+      "text": "2026-10-13T13:45:03.211181Z  WARN codex_skills::interface: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 24,
+      "text": "2026-10-13T13:47:15.932559Z  WARN codex_core::hook_runtime: after_agent hook failed; continuing turn_id=01a13582-6f60-7b60-8d42-deb86ee42f6f hook_name=legacy_notify error=The filename or extension is too long. (os error 206)"
+    }
+  ],
+  "host_diagnostic_limit": "Captured host warnings include icon path validation, unsupported PowerShell snapshots and a legacy_notify after-agent hook failure (Windows error 206). These are retained separately from the successful visible native tools. The report does not make an exhaustive zero-failure claim. They do not establish instruction-delivery or desktop qualification.",
+  "metrics": {
+    "wall_seconds": 134.79,
+    "native_calls": null,
+    "model_turns": null,
+    "initial_input_context": null,
+    "peak_input_context": null
+  },
+  "visible_call_lower_bound": 6,
+  "native_call_count_complete": false,
+  "report_sha256": "66c7eef2ad01f09a0ec05a9ab59cc61e1de27f45ea8a7205276614d5e5d1523e",
+  "project_version": 0,
+  "input_changes": [],
+  "host_boundary_unchanged": true,
+  "evidence": [
+    "native/work/native-report.md",
+    "native/events.jsonl",
+    "independent-status.json",
+    "independent-observations.json",
+    "mechanical-summary.json",
+    "boundary-probe.json",
+    "boundary-probe-assessment.json",
+    "payload-provenance-review.json"
+  ],
+  "limits": [
+    "Missing-input diagnostic only; no new hosted artifact or completed positive authoring result.",
+    "Exact native call count, model-turn count and input-context measurements are unavailable.",
+    "The provider/model default was not overridden; configured gpt-6-astra/high. No equivalent-model performance comparison with earlier defaults is claimed.",
+    "Other release qualification and human decisions remain pending."
+  ]
+}

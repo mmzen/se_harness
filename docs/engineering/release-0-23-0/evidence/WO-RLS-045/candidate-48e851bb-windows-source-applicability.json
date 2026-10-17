@@ -1,0 +1,20 @@
+{
+  "candidate": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "tested_source": "c740d49e30da74bab27ad29bb59fef2e785a6eae",
+  "test_result": "pass",
+  "tests": 1346,
+  "skips": 24,
+  "source_log_sha256": "e9f17155d0cfb20049c86406136deeeacf0b95fd67cb7ac927aa90e4a5209a39",
+  "source_changes": [
+    "docs/engineering/release-0-23-0/README.md",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-055/WO-RLS-055-handoff.md",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-055/WO-RLS-055-pre-action.md",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-055/completion-checks.zip",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-055/qualification-checks.zip",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-055/qualification-review.md",
+    "docs/engineering/release-0-23-0/work-orders/WO-RLS-055.md"
+  ],
+  "product_code_tests_fixtures_and_build_inputs_identical": true,
+  "reuse": "The final candidate adds only qualified correction evidence, completion history and its index. Windows source result is reused, not a new run. Final Linux source and clean-candidate integration checks assess the current governance tree; final packages have separate fresh installation checks.",
+  "initial_sandbox_run": "failed due to temporary-directory access; retained under WO-RLS-055"
+}

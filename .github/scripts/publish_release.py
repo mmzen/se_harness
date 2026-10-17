@@ -13,7 +13,7 @@ import subprocess
 import sys
 import tempfile
 import tomllib
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -33,6 +33,7 @@ from repository_tools.release_distribution import ReleaseDistribution, validate_
 
 
 RESULT_SCHEMA = "se-harness-release-result/v1"
+QUALIFICATION_SCHEMA = "se-harness-release-qualification/v1"
 RELEASE_RECORD_PATTERN = re.compile(r"RLS-[A-Z0-9-]+-[0-9]{3}")
 STAGE_STATES = frozenset({"not_run", "absent", "exact", "partial", "mismatched", "created", "failed"})
 
@@ -180,6 +181,8 @@ def resolve_plan(
     repository: Path,
     release_record: str,
     default_ref: str = "refs/remotes/origin/main",
+    *,
+    historical: bool = False,
 ) -> ReleasePlan:
     repository = repository.resolve()
     if RELEASE_RECORD_PATTERN.fullmatch(release_record) is None:
@@ -207,6 +210,9 @@ def resolve_plan(
     if dashboard._resolve_commit(repository, candidate) != candidate:
         raise ReleaseError("candidate commit does not resolve exactly")
     governance_commit, record_path = _integration_commit(repository, default_head, binding)
+    if historical:
+        _require(_blob(repository, default_head, selected[0][0]) == _blob(repository, governance_commit, record_path),
+                 "historical release record differs from its integration")
     evaluator_binding = dashboard._validated_evaluator_binding(
         repository,
         default_head,
@@ -280,23 +286,30 @@ def resolve_plan(
         evaluator_evidence_path=evaluator_binding["path"],
         evaluator_evidence_sha256=evaluator_binding["sha256"],
     )
-    envelope = resolve_complete_delivery(repository, default_head, metadata, catalog, plan)
+    envelope = resolve_complete_delivery(repository, default_head, metadata, catalog, plan, historical=historical)
     if envelope is not None:
-        from dataclasses import replace
         plan = replace(plan, schema="se-harness-release-plan/v3", complete_delivery=envelope)
+    if historical:
+        # Qualification inputs are not a plan accepted by publication commands.
+        plan = replace(plan, schema=QUALIFICATION_SCHEMA)
     return plan
 
 
-def read_plan(path: Path) -> ReleasePlan:
+def read_plan(path: Path, *, qualification: bool = False) -> ReleasePlan:
     value = _read_json(path)
     if value.get("schema") == "se-harness-release-plan/v2":
         if value.get("complete_delivery") is not None:
             raise ReleaseError("legacy release plan cannot carry complete delivery")
         value.setdefault("complete_delivery", None)
+    if qualification and value.get("schema") == QUALIFICATION_SCHEMA:
+        value.setdefault("complete_delivery", None)
     fields = set(ReleasePlan.__dataclass_fields__)
     if set(value) != fields:
         raise ReleaseError("release plan field set is not canonical")
-    if value.get("schema") not in {"se-harness-release-plan/v2", "se-harness-release-plan/v3"}:
+    schemas = {"se-harness-release-plan/v2", "se-harness-release-plan/v3"}
+    if qualification:
+        schemas.add(QUALIFICATION_SCHEMA)
+    if value.get("schema") not in schemas:
         raise ReleaseError("unsupported release plan schema")
     if value["schema"] == "se-harness-release-plan/v3" and not isinstance(value.get("complete_delivery"), dict):
         raise ReleaseError("complete release plan requires a bound delivery envelope")
@@ -402,7 +415,9 @@ def verify_integration(repository: Path, base: str, head: str, envelope: dict, *
     return paths
 
 
-def resolve_complete_delivery(repository: Path, head: str, record: dict, catalog: dict, plan: ReleasePlan) -> dict | None:
+def resolve_complete_delivery(
+    repository: Path, head: str, record: dict, catalog: dict, plan: ReleasePlan, *, historical: bool = False,
+) -> dict | None:
     binding = record.get("delivery")
     contract = catalog.get(plan.release_contract)
     route = contract[1].get("delivery", {}).get("route") if contract else None
@@ -439,7 +454,8 @@ def resolve_complete_delivery(repository: Path, head: str, record: dict, catalog
     _require(_run_git(repository, "merge-base", "--is-ancestor", doc_commit, plan.governance_commit, check=False).returncode == 0,
              "approved documentation is not integrated")
     for path, digest in value["complete_release"]["documentation"].items():
-        for ref in (doc_commit, plan.governance_commit, head):
+        refs = (doc_commit, plan.governance_commit) if historical else (doc_commit, plan.governance_commit, head)
+        for ref in refs:
             _require(hashlib.sha256(_blob(repository, ref, path)).hexdigest() == digest, "approved documentation differs: " + path)
     verify_marketplace(repository, plan, value)
     return envelope
@@ -883,6 +899,8 @@ def build_parser() -> argparse.ArgumentParser:
     resolve.add_argument("--repository", type=Path, required=True)
     resolve.add_argument("--release-record", required=True)
     resolve.add_argument("--default-ref", default="refs/remotes/origin/main")
+    resolve.add_argument("--historical", action="store_true",
+                         help="Read-only historical qualification; output cannot authorize publication")
     resolve.add_argument("--output", type=Path)
     resolve.add_argument("--github-output", type=Path)
     verify = commands.add_parser("verify-bundle")
@@ -947,11 +965,11 @@ def main(argv: Iterable[str] | None = None) -> int:
     args = build_parser().parse_args(list(argv) if argv is not None else None)
     try:
         if args.command == "resolve":
-            _emit(resolve_plan(args.repository, args.release_record, args.default_ref), args.output, args.github_output)
+            _emit(resolve_plan(args.repository, args.release_record, args.default_ref, historical=args.historical), args.output, args.github_output)
         elif args.command == "verify-bundle":
-            _emit(verify_bundle(read_plan(args.plan), args.directory), args.output, None)
+            _emit(verify_bundle(read_plan(args.plan, qualification=True), args.directory), args.output, None)
         elif args.command == "verify-build-manifest":
-            _emit(verify_build_manifest(read_plan(args.plan), _read_json(args.manifest)), args.output, None)
+            _emit(verify_build_manifest(read_plan(args.plan, qualification=True), _read_json(args.manifest)), args.output, None)
         elif args.command == "select-rehearsal-record":
             selection = select_rehearsal_record(args.repository, args.release_record or None, args.base_ref or None)
             if args.github_output is not None:

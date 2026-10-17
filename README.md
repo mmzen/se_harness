@@ -8,7 +8,7 @@
 
 SE Harness is an **open source harness for AI coding agents**. It connects intent, requirements, design, code, and evidence through engineering records stored in your repository.
 
-The **`harnessctl` checker** checks the installed policy, traceability, and approved work scope. The **Verity Plane plugin** gives Codex and Claude Code skills to set up the harness, understand a project, carry out approved changes, and prepare evidence.
+The **`harnessctl` checker** checks policy, traceability, and approved scope. The **Verity Plane plugin** gives Codex and Claude Code skills for setup, project orientation, approved changes, and evidence.
 
 **Agents operate within bounded authority. Verification stays independent. Decisions stay human.**
 
@@ -16,7 +16,7 @@ The **`harnessctl` checker** checks the installed policy, traceability, and appr
 
 ## Get started
 
-Requires **Python 3.11+**. The checker runs on Windows, Linux, and macOS using the Python standard library. No hosted service is required for the checker.
+Requires **Python 3.11+** with its standard library on Windows, Linux, or macOS. No hosted service is required.
 
 ### With Codex or Claude Code
 
@@ -38,7 +38,7 @@ claude plugin install verity-plane@se-harness
 
 Start a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.
 
-Observed public delivery (2026-10-05): Plugin **0.2.6** bundles released **SE Harness 0.22.1**. On Windows, Codex and Claude Code CLI fresh installation, update from 0.2.5 and offline setup passed. [Public evidence](docs/engineering/release-0-22-1/evidence/WO-RLS-042/closeout-assessment.md) records exact identities and limits.
+Observed public delivery (2026-10-05): Plugin **0.2.6** bundles released **SE Harness 0.22.1**. Windows Codex/Claude CLI installation, update from 0.2.5 and offline setup passed. [Public evidence](docs/engineering/release-0-22-1/evidence/WO-RLS-042/closeout-assessment.md) records identities and limits.
 
 Historical [0.22.0 Claude results and limitations](docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md) remain unchanged.
 
@@ -49,21 +49,25 @@ See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-mar
 
 ### Evaluator 0.22.1 and plugin 0.2.6
 
-[0.22.1 / plugin 0.2.6](docs/engineering/release-0-22-1/README.md)
-adds standalone draft validation and decision attribution.
-mmzen verified `4f640284ec496b88cd7aa4ba88ca537d9374a2f8`:
-[VREC-SEH-033](docs/engineering/release-0-22-1/verification-records/VREC-SEH-033.md).
-Windows/Linux package and Codex/Claude CLI checks passed.
-Codex Windows desktop remains unverified (accepted DEC-RLS-009 / RISK-RLS-007).
+[0.22.1 / plugin 0.2.6](docs/engineering/release-0-22-1/README.md) adds standalone
+draft validation and decision attribution. [VREC-SEH-033](docs/engineering/release-0-22-1/verification-records/VREC-SEH-033.md)
+records mmzen's verification, passing Windows/Linux package and Codex/Claude CLI
+checks. Codex Windows desktop remains unverified (accepted DEC-RLS-009 / RISK-RLS-007).
 
 [Release record](docs/engineering/release-0-22-1/releases/RLS-SEH-033.md),
 [delivery evidence](docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md)
 and [public identity](https://github.com/mmzen/se_harness/blob/plugin-marketplace/PACKAGE-IDENTITY.json)
 record completed delivery, verified in
 [VREC-RLS-004](docs/engineering/release-0-22-1/verification-records/VREC-RLS-004.md).
-Repository evaluator: 0.22.1, adopted under
-[WO-HUP-030](docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-030.md).
-Development source: unpublished 0.22.2. The hosted-service contract still pins 0.22.0.
+Repository evaluator: 0.22.1 ([adoption](docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-030.md)).
+
+### Preparing evaluator 0.23.0 and plugin 0.2.7
+
+The unpublished [release package](docs/engineering/release-0-23-0/README.md) adds
+the remote client and plugin guidance. Plugin 0.2.7 will bundle 0.23.0; the
+service keeps evaluator 0.22.1. Qualification remains pending. Git remains
+authoritative; the service stays a private source-built sandbox, without public
+service or container-registry publication.
 
 ## Fewer repository files
 
@@ -89,7 +93,7 @@ We are building toward a contract where agents implement approved changes to tha
 
 ## See the whole change
 
-Verity Plane Explorer shows the connections between requirements, work, evidence, and decisions. This repository uses it to document its own development.
+Verity Plane Explorer connects requirements, work, evidence, and decisions from this repository.
 
 **Lineage**
 

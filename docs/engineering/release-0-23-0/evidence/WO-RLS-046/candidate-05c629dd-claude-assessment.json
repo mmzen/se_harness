@@ -1,0 +1,44 @@
+{
+  "candidate": "05c629ddfc0f40924823160d8aaf0fa4e77940a2",
+  "case": "EFF-04A2",
+  "trial": "claude-diagnostic",
+  "overall": "pass",
+  "method": "Independent semantic review of the retained final reply, complete paired visible calls/results, unchanged original fixture and instructions, plus a separate authenticated HTTP status read. Assertions bind mechanical observations; no keyword or table detector determines the verdict.",
+  "content_result": "Claude acknowledges the existing greeting and governing -900 definitions. It separates the unspecified audience/present problem, partial wanted improvement and missing success condition. It asks what problem the audience has, what observable result is wanted and how the owner will know it helped. The outcome sentence is explicitly proposed, not represented as agreed. It reports Incomplete and does not claim a complete draft or invent an agreed benefit.",
+  "reporting_result": "The retained final reply is eligible as the transient clarification report. The complete two-call capture contains only local client identity and a service status read; both succeeded. No hosted mutation was attempted. The independent service read confirms project version zero. There is no authored record or imported baseline to read back; the complete staged fixture bytes are unchanged.",
+  "findings": [],
+  "report_branch": {
+    "form": "retained final reply",
+    "mutation_attempts": 0,
+    "capture_complete": true,
+    "independent_project_version": 0,
+    "saved_report_required": false
+  },
+  "evidence": [
+    "independent-observations.json",
+    "independent-status.json",
+    "mechanical-summary.json",
+    "native/events.jsonl",
+    "payload-provenance-review.json",
+    "boundary-before-native.json",
+    "boundary-after-native.json"
+  ],
+  "metrics": {
+    "wall_seconds": 154.206,
+    "native_calls": 2,
+    "model_turns": 2,
+    "initial_input_context": 30097,
+    "peak_input_context": 34602
+  },
+  "input_changes": [],
+  "host_boundary_unchanged": true,
+  "guide_sha256": "09912f982b0dbcaadcd3d79f895d91aa83fb3de0f1a32d45f666de8400879be6",
+  "simplicity_review": "The shared guide is 19 words shorter (1607 to 1588). It reuses existing requester confirmation and a transient source assessment, with no new tool or mandatory file. This run stopped before unnecessary draft writes. Two calls establish client identity and service readiness. Provider time remains unclassified.",
+  "limits": [
+    "One negative clarification diagnostic, not positive artifact authoring or proof of general speed improvement.",
+    "No current-candidate Codex, positive drafting, full native lifecycle or delivery verdict follows from this result.",
+    "Other required release qualification and separate desktop evidence remain pending.",
+    "Prior failures retain their original verdicts; no human verification, completion, merge or release decision is recorded."
+  ],
+  "next": "Continue the authorized Codex diagnostic with boundary probes and EFF-04B sequence under unchanged criteria."
+}

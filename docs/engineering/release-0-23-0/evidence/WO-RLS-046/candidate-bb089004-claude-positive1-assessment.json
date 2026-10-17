@@ -1,0 +1,84 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "case": "EFF-04B",
+  "trial": "claude-positive1",
+  "overall": "pass",
+  "method": "Independent semantic review of separately read saved bytes, original definitions, report and paired tool evidence; seven independent baseline reads establish unchanged imported Git blobs.",
+  "content_result": "VER-P3-901 links REQ-P3-900, derives Hello rehearsal from accepted definitions, and contains the requirement/method/case/pass-condition matrix. Its planned assert-greeting check accurately describes the existing digest guard, single exact equality call, zero exit and expected success text. The evidence plan names a concrete work-order-relative destination. Optional headings without content are absent.",
+  "reporting_result": "The draft remains draft. The final explicitly says no test was executed and no verification is claimed. Four accepted project mutations and two reads are correctly distinguished. The report retains the imported W-AUT-022 advisory. All captured calls succeeded; no denied, failed or uncertain command was omitted.",
+  "observations": [
+    "The report uses accepted outcomes loosely for all six successful command records; its separate mutation table and final explicitly distinguish four writes from two reads. No extra accepted mutation is claimed.",
+    "The check is planned at a future verified candidate; this wording does not establish actual verification of the current source."
+  ],
+  "artifact": {
+    "artifact_id": "VER-P3-901",
+    "revision_id": "sha256:bb87418e68e0b6630bbf424d4bc5ca945d89d23d84b827d767a234d0b8501e6f"
+  },
+  "document_sha256": "6c2a3bc4918b3e7326f7013eec235f91b24c7ddc5921ab045911a4e67950cd45",
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "final_project_version": 4,
+  "metrics": {
+    "wall_seconds": 232.215,
+    "native_calls": 13,
+    "model_turns": 12,
+    "initial_input_context": 32864,
+    "peak_input_context": 61780
+  },
+  "goals": {
+    "wall_under_180": "missed",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "operations": [
+    {
+      "record": "work/create-ver-001.json",
+      "exit": 0,
+      "operation": "create-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/draft-open-001.json",
+      "exit": 0,
+      "operation": "draft-open",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/import-001.json",
+      "exit": 0,
+      "operation": "import",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/read-ver-001.json",
+      "exit": 0,
+      "operation": "read",
+      "outcome": null
+    },
+    {
+      "record": "work/revise-ver-001.json",
+      "exit": 0,
+      "operation": "revise-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/status-001.json",
+      "exit": 0,
+      "operation": "status",
+      "outcome": null
+    }
+  ],
+  "evidence": [
+    "independent-document.md",
+    "independent-readback.json",
+    "independent-revision.json",
+    "native/work/native-report.md",
+    "independent-observations.json",
+    "mechanical-summary.json"
+  ],
+  "limits": [
+    "One positive attempt; two more fresh Claude attempts and one Codex attempt remain required.",
+    "Duration and context goals missed; call goal met. This is not an isolated performance benchmark.",
+    "No full lifecycle, desktop or release-readiness verdict."
+  ]
+}

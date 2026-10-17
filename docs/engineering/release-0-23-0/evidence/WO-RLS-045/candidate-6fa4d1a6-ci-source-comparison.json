@@ -1,0 +1,18 @@
+{
+  "candidate": "6fa4d1a645660cd8022dfc5c3ee7ba35bda3d162",
+  "ci_tested_commit": "a261ddc0d17ad622cd4fea2e56b9fc9074846d69",
+  "tree": "23d5cc54f78bacca43d7a6223938ac573a2e6e37",
+  "whole_tree_equal": true,
+  "run_id": 38895211912,
+  "result": "pass",
+  "tests": 1339,
+  "skips": 2,
+  "test_seconds": 70.301,
+  "manual_candidate_replay": {
+    "run_id": 38895333553,
+    "manifest_equals_local": true,
+    "replay_path": "ci-manual-replay\\release-build-replay.json",
+    "run_overall": "failure",
+    "historical_record_rehearsal": "failed; separate unresolved blocker"
+  }
+}

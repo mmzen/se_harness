@@ -1,0 +1,102 @@
+{
+  "candidate": "a98a1571292f5bbf34cd2c7cff0af793d00fa12f",
+  "archives": [
+    {
+      "name": "candidate-a98a1571-claude-diagnostic.zip",
+      "sha256": "8ba57ddc9f5a96e1bb583989dad4b0d44e8a217e17c1d603edd9c1c23f530893",
+      "bytes": 421334,
+      "files": 128,
+      "private_reasoning_files_sanitized": 1,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-claude-diagnostic.zip"
+    },
+    {
+      "name": "candidate-a98a1571-claude-full.zip",
+      "sha256": "c4a1475874682ad6db25c4ee1b224a637c203503720d56e20fe338bf3fbdf8a4",
+      "bytes": 2808584,
+      "files": 522,
+      "private_reasoning_files_sanitized": 1,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-claude-full.zip"
+    },
+    {
+      "name": "candidate-a98a1571-claude-positive1.zip",
+      "sha256": "f92a2d7909b7f61f6e901a472e82652c73f798e80c0d984529fb23322f55034a",
+      "bytes": 525691,
+      "files": 167,
+      "private_reasoning_files_sanitized": 1,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-claude-positive1.zip"
+    },
+    {
+      "name": "candidate-a98a1571-claude-positive2.zip",
+      "sha256": "442e2536742f4f67ebcdb8b66d623f47631e13f671c98bc0274a915afe06a316",
+      "bytes": 519398,
+      "files": 167,
+      "private_reasoning_files_sanitized": 1,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-claude-positive2.zip"
+    },
+    {
+      "name": "candidate-a98a1571-claude-positive3.zip",
+      "sha256": "ffe4d0c7249fd71ab69859e6ff5eb2932c7a11a0e52f1d1081d3c84bdb68316d",
+      "bytes": 513209,
+      "files": 167,
+      "private_reasoning_files_sanitized": 1,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-claude-positive3.zip"
+    },
+    {
+      "name": "candidate-a98a1571-codex-diagnostic.zip",
+      "sha256": "ea6c4b3825fc08c05a7c2f908e42c8390f5d27737dd44f739e01414fb6770fc4",
+      "bytes": 409465,
+      "files": 129,
+      "private_reasoning_files_sanitized": 0,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-codex-diagnostic.zip"
+    },
+    {
+      "name": "candidate-a98a1571-codex-full.zip",
+      "sha256": "56d6d9747d0e23661f477658ea160ed113f65bb98960b54a5950a45e06eb8773",
+      "bytes": 3301471,
+      "files": 684,
+      "private_reasoning_files_sanitized": 0,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-codex-full.zip"
+    },
+    {
+      "name": "candidate-a98a1571-codex-positive1.zip",
+      "sha256": "c41637df01f06d98875f1690bb6f677ba1964cc9b730be408680db18cf40f8a0",
+      "bytes": 523260,
+      "files": 168,
+      "private_reasoning_files_sanitized": 0,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-codex-positive1.zip"
+    },
+    {
+      "name": "candidate-a98a1571-combination-build.zip",
+      "sha256": "a997421b96450c0ac0a82fa1153f08cd9c942cf23d4621b03ee2f2fa71069205",
+      "bytes": 20252,
+      "files": 11,
+      "private_reasoning_files_sanitized": 0,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-combination-build.zip"
+    },
+    {
+      "name": "candidate-a98a1571-delivery.zip",
+      "sha256": "e67372adadf3b2c9e4ac130468d17bef7ab0dfcbd15935426f97deea50831a95",
+      "bytes": 286754,
+      "files": 97,
+      "private_reasoning_files_sanitized": 0,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-delivery.zip"
+    },
+    {
+      "name": "candidate-a98a1571-qualification.zip",
+      "sha256": "84c9167c4e8efdbc33e3044bde644ab01e14c2ffb301a4f421146b6639cdd160",
+      "bytes": 149557,
+      "files": 83,
+      "private_reasoning_files_sanitized": 1,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-a98a1571-qualification.zip"
+    },
+    {
+      "name": "candidate-a98a1571-service.zip",
+      "sha256": "8b98c67e13c8b24aaab632887a20393859130aa6befc4497770eb7cca75336da",
+      "bytes": 1746215,
+      "files": 113,
+      "private_reasoning_files_sanitized": 0,
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-a98a1571-service.zip"
+    }
+  ],
+  "scope": "Partial qualification; no aggregate VREC/RLS ready. Full hosted functional evidence passes; communication timing and remaining delivery/desktop qualification are incomplete."
+}

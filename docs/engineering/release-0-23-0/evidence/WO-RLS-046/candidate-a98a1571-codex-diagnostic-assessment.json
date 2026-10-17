@@ -1,0 +1,68 @@
+{
+  "candidate": "a98a1571292f5bbf34cd2c7cff0af793d00fa12f",
+  "case": "EFF-04A2",
+  "trial": "codex-diagnostic",
+  "overall": "pass",
+  "method": "Independent semantic review of the saved report and final reply against the supplied request and original fixture, all visible calls, and a separate HTTP service-status read. Incomplete telemetry remains explicit.",
+  "content_result": "Identifies missing audience/problem, intended benefit, success condition and product scope. Acknowledges existing definitions and treats the proposed outcome as unconfirmed. Reports Incomplete, asks for missing facts, and makes no completeness or coverage-gap claim.",
+  "reporting_result": "Uses the saved-report branch because capture completeness is unavailable. The report and final reply limit failure claims to observations. Four successful read/identity/observation helper calls and the successful report write are visible. No hosted mutation is visible; independent status is version zero. No exhaustive call total is inferred.",
+  "metrics": {
+    "wall_seconds": 102.329,
+    "native_calls": null,
+    "model_turns": null,
+    "initial_input_context": null,
+    "peak_input_context": null
+  },
+  "goals": {
+    "wall_under_180": "met",
+    "calls_at_most_15": "unavailable",
+    "peak_under_40000": "unavailable"
+  },
+  "visible_call_lower_bound": 5,
+  "native_call_count_complete": false,
+  "host_diagnostics": [
+    {
+      "line": 1,
+      "text": "2026-10-16T07:41:44.956201Z  WARN codex_skills::interface: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 2,
+      "text": "2026-10-16T07:41:44.956251Z  WARN codex_skills::interface: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 3,
+      "text": "2026-10-16T07:41:45.063505Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell"
+    },
+    {
+      "line": 4,
+      "text": "2026-10-16T07:41:45.491029Z  WARN codex_skills::interface: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 5,
+      "text": "2026-10-16T07:41:45.491064Z  WARN codex_skills::interface: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 22,
+      "text": "2026-10-16T07:43:25.674224Z  WARN codex_core::hook_runtime: after_agent hook failed; continuing turn_id=01a143a8-e965-7c43-9225-4fe6e0f7addf hook_name=legacy_notify error=The filename or extension is too long. (os error 206)"
+    }
+  ],
+  "host_diagnostic_limit": "Icon-path, unsupported PowerShell snapshot and legacy_notify Windows error 206 warnings are retained separately. They do not constitute hosted mutation failures or establish desktop/delivery qualification.",
+  "report_sha256": "cfb5729c56b4d419700a9189f4cd5c34caafd4cafbb1691f99e4522d2057c63c",
+  "project_version": 0,
+  "input_changes": [],
+  "host_boundary_unchanged": true,
+  "limits": [
+    "Missing-input diagnostic only.",
+    "Exact native-call count, model turns and input-context measurements unavailable.",
+    "Concurrent with separate Claude positive project; timings are observations, not isolated benchmarks.",
+    "Remaining positive/native lifecycle/delivery and desktop evidence remain pending."
+  ],
+  "evidence": [
+    "independent-observations.json",
+    "independent-status.json",
+    "mechanical-summary.json",
+    "native/work/native-report.md",
+    "boundary-probe-assessment.json",
+    "payload-provenance-review.json"
+  ]
+}

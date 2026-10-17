@@ -1,0 +1,12 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "user_instruction": "let's defer codex app tests",
+  "effect": "Do not run the pending Codex Windows desktop checks now. Keep their criterion unverified and continue the independent approved CLI and service qualification.",
+  "desktop_test_executed": false,
+  "desktop_result": "unverified",
+  "criterion_waived": false,
+  "release_omission_accepted": false,
+  "verification_contract_changed": false,
+  "prepared_test_kit": "C:\\Users\\mathi\\Documents\\Codex\\desktop-023",
+  "limits": "CLI and app-server results do not establish Codex Windows desktop delivery. This is the retained scheduling instruction, not a risk acceptance, formal decision disposition or release-readiness claim."
+}

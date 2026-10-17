@@ -1,0 +1,32 @@
+{
+  "work_order": {
+    "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-048.md",
+    "sha256": "26304636c8dc58a6d2cbb513107540e66324c8fd57c531d184a2b6aedf2c7b0d"
+  },
+  "release_amendment": {
+    "path": "docs/engineering/release-0-23-0/release/REL-SEH-036.md",
+    "before_sha256": "87dba9065a6c855b660e395060e04373378155695bfe6f421374d44e5758cf0f",
+    "after_sha256": "fdb373581bd98b334536b9212f72f9d15739d5b20d1834641f48c94ad832f464",
+    "proposed_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-048/REL-SEH-036-proposed.txt"
+  },
+  "runtime_unchanged_sha256": "49347e853e49d9bab7c106561a8861e874255909e2a7869f32cf5349faac46bd",
+  "plugin_assembly": {
+    "path": "release/plugin-assembly.json",
+    "before_sha256": "b9dd5e39a89b91f855bd848f09985c502193b157d05cf7cc600e57b1325bfaac",
+    "after_sha256": "418704977f42cc54d8372a0afbbed14c78781d0e4f17566d89e6abf83c859df9",
+    "proposed_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-048/plugin-assembly-proposed.txt",
+    "additions": [
+      "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+      "plugins/verity-plane/common/skills/change/references/hosted-test-lifecycle.md",
+      "plugins/verity-plane/common/skills/change/references/repository-change.md",
+      "plugins/verity-plane/common/skills/evidence/references/hosted-evidence.md",
+      "plugins/verity-plane/common/skills/evidence/references/repository-evidence.md",
+      "plugins/verity-plane/common/skills/harness-orient/references/hosted-reads.md",
+      "plugins/verity-plane/common/skills/harness-orient/references/repository-orientation.md",
+      "plugins/verity-plane/common/skills/setup/references/checkout.md",
+      "plugins/verity-plane/common/skills/setup/references/hosted-context.md",
+      "plugins/verity-plane/common/skills/setup/references/repository-context.md"
+    ]
+  },
+  "supersedes": "Earlier unapproved narrow WO-RLS-048 request; no decision has been applied."
+}

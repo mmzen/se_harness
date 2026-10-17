@@ -1,0 +1,24 @@
+{
+  "status": "unapplied proposal; approval pending",
+  "basis_head": "41e731e532146e31be096fa7eef1908961a5faa2",
+  "failed_candidate": "f2ddb5afe42d40cc7c4a426b5c9cb985156a28a3",
+  "work_order_sha256": "7002a8faea25d368413206acb50b4b27c94a38549abbb79354fbd5cb9a3e5969",
+  "instruction": {
+    "path": "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+    "before_sha256": "cdd3d9f13a7998a36ff5f2c293dff8dad6f61c54997f69f41edd48c6b096c23e",
+    "proposed_sha256": "669c9f141f4d219aab1ad2b90f29c610e1e1a91280be87e6d7f34f9c1f7071cf",
+    "before_words": 1529,
+    "proposed_words": 1532
+  },
+  "release_membership": {
+    "id": "REL-SEH-036",
+    "before_sha256": "e56efa4b4b4a2e5045db06e68995423f3ddbb7b2bcebd0a9d6d6ccdc543d2c2c",
+    "proposed_sha256": "609e424ba14cde14ef45ffb4e432972fe6c36b56a22623edea08611eb1a5010b",
+    "change": "Add only WO-RLS-050 to gates; preserve complete prior accepted bytes and lifecycle history."
+  },
+  "decisions_required": [
+    "WO-RLS-050 approval and required commit-bound verification",
+    "explicit bounded manual activation of linked REL-SEH-036 membership revision",
+    "include the correction in existing PR #544 review-publication grant"
+  ]
+}

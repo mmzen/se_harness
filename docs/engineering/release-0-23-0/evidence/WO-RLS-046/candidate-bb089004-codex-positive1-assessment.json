@@ -1,0 +1,46 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "case": "EFF-04B",
+  "trial": "codex-positive1",
+  "overall": "pass",
+  "method": "Independent review of the separately retrieved saved bytes, governing fixture definitions, visible calls, complete saved report and actual receipts. Imported records were checked through seven independent revision reads.",
+  "content_result": "The draft has the verifies link, requirement-to-evidence matrix, independent expected literal, exact usable assertion command, source digest precondition, platform and concrete evidence filename. It distinguishes digest refusal from assertion failure, and a planned check from an executed result. The artifact stays draft; imported records and existing verification contract are unchanged.",
+  "reporting_result": "The saved report distinguishes accepted mutations, successful reads, incomplete initial template, pre-existing W-AUT-022 advisory and unavailable complete native metrics. Four actual writes and project version four agree with independent readback. No observed failure or denied call is hidden. No independent human verification, actual test execution or publication is claimed.",
+  "observations": [
+    "Preserve the host prefer_mxc, icon-path, unsupported PowerShell snapshot and legacy_notify filename-length diagnostics separately from executed tool failures.",
+    "The full report is required because exact capture completeness is unavailable. Its no-observed-failure claim is explicitly bounded; it does not assert an exhaustive count."
+  ],
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:8cd585a8aa90642948f455262f8adfe92f04617bd9aaed2d57aa1097f90ec51d"
+  },
+  "document_sha256": "fed9be0cc57e0855b28aae00778ba1a8a95d71c927575ba07b5d0fe0db39b2db",
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "accepted_project_mutations": 4,
+  "observed_tool_items_lower_bound": 12,
+  "metrics": {
+    "wall_seconds": 203.414,
+    "native_calls": null,
+    "model_turns": null,
+    "initial_input_context": null,
+    "peak_input_context": null
+  },
+  "goals": {
+    "wall_under_180": "missed",
+    "calls_at_most_15": "unavailable",
+    "peak_under_40000": "unavailable"
+  },
+  "evidence": [
+    "independent-document.md",
+    "independent-readback.json",
+    "independent-observations.json",
+    "mechanical-summary.json",
+    "native/work/native-report.md"
+  ],
+  "limits": [
+    "Duration goal missed; exact call count and context metrics unavailable.",
+    "Complete initial instruction content does not prove pointer-based full-run discovery or automatic delivery.",
+    "No desktop or release-readiness verdict."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "work_order": {
+    "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-049.md",
+    "sha256": "93db645f0dbaf36a49a3f696077c655849acfcd694e5909badf057cabe6813a6"
+  },
+  "instruction": {
+    "path": "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+    "before_sha256": "55a07b9eee409692014db67d2758ea9dfc5224cd38f349a1d0a21ed19a581985",
+    "after_sha256": "cdd3d9f13a7998a36ff5f2c293dff8dad6f61c54997f69f41edd48c6b096c23e",
+    "proposed_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-049/hosted-drafts-proposed.txt"
+  },
+  "release_amendment": {
+    "path": "docs/engineering/release-0-23-0/release/REL-SEH-036.md",
+    "before_sha256": "fdb373581bd98b334536b9212f72f9d15739d5b20d1834641f48c94ad832f464",
+    "after_sha256": "e56efa4b4b4a2e5045db06e68995423f3ddbb7b2bcebd0a9d6d6ccdc543d2c2c",
+    "proposed_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-049/REL-SEH-036-proposed.txt",
+    "only_change": "Add WO-RLS-049 to gates; preserve all other bytes."
+  }
+}

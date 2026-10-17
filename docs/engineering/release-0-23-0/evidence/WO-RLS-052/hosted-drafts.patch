@@ -1,0 +1,100 @@
+--- a/plugins/verity-plane/common/skills/change/references/hosted-drafts.md
++++ b/plugins/verity-plane/common/skills/change/references/hosted-drafts.md
+@@ -15,14 +15,8 @@
+ | The intended outcome or scope still needs clarification | `docs/engineering/harness/DEFINE_CHANGE.md`: **Read this when**, **Before this action**, then **Describe the intended outcome**. Use **Define the limits of the change** when its inputs are available. |
+ | Confirmed outcome, scope and selected definitions; a definition draft is needed | `docs/engineering/harness/DRAFT_DEFINITIONS.md`: **Read this when**, **Before this action**, then the requested type's procedure below. |
+ 
+-The clarification procedure produces transient discussion, not a formal artifact.
+-Use its requester-confirmation process and reuse an existing matching confirmation.
+-An instruction to create a draft does not supply the inputs that procedure requires.
+-Do not import, open a draft context or create a template merely to ask a question.
+-
+ Before choosing the drafting route, apply **Check the inputs before writing**.
+-The requested type's checklist determines which inputs are required. Reuse
+-confirmed inputs; ask only for those that are missing.
++The clarification route produces transient discussion, not a formal artifact.
+ 
+ Apply the shared check in **Report and recover** before an exhaustive failure
+ claim. For a clarification stop, include three short parts in the final reply:
+@@ -74,37 +68,42 @@
+ 
+ ## Check the inputs before writing
+ 
+-Before creating or editing a draft, show one short input assessment in the
+-conversation or existing transient report. Use one row per required item from
+-the type checklist:
++First locate the requester's confirmation of the outcome and scope required
++by **Describe the intended outcome**. Reuse a matching confirmation, including
++one recorded in an accepted definition. If it is
++absent, present the proposed wording and ask for confirmation before dependent
++drafting. Do not import, open a draft context or create a template to ask.
+ 
+-| Required input | Supplied fact and source, or **Missing** | Question if missing |
++Use one short assessment for the requested type's required checklist items:
++
++| Required input | Direct support: short source passage and location, or **Missing** | Question if missing |
+ | --- | --- | --- |
+ 
+-Use the request, definitions and requester clarifications as sources. Record
+-what they actually establish, not text you intend to write. A source reference
+-alone does not support a claim. Reuse a matching assessment and retained sources;
+-do not create another file or repeat reads just to fill the table.
++A passage must answer the item for this change. A citation, your interpretation
++or text you plan to write is not direct support. Reuse delivered sources and an
++unchanged assessment; no new file or repeated read is required.
+ 
+-- If a required input is **Missing**, report content as **Incomplete**, ask the
+-  corresponding question and stop dependent writing. An existing partial draft
+-  may remain saved. `Unknown` is not an answer. Optional facts stay optional.
+-- If all required inputs are supplied, author supported content. A supplied
+-  input omitted from the draft must be added and reviewed before completion.
+-- If access or operation uncertainty prevents assessment, report **Blocked**
+-  and follow the recovery procedure.
++Code describes existing behavior. Existing definitions establish their stated
++scope. Neither establishes an unstated user need for a different change. A task's
++execution restrictions alone do not establish product scope limits. Keep deductions and
++proposed limits unconfirmed in both the draft and report.
+ 
+-After submission, update this same assessment against the latest saved revision.
+-Report **Complete** only when every required item is supported and present there.
+-Use this result in both the report and final reply. A successful save, an empty
+-`incomplete` list or `content_review: not_assessed` cannot establish completeness.
++For an intent, assess the affected user and present problem, wanted improvement,
++and success measure separately. A baseline states today's value; `not measured`
++does not supply a success condition. Restating the requested software output
++does not establish its benefit. Use the checklist, not template shape, to decide.
+ 
+-For an intent, a software output is not the user's operational improvement.
+-Establish the user's problem, desired change and how they will know it helped.
+-An unmeasured baseline is allowed; a missing success measure is still missing.
+-Do not invent these inputs or scope limits. Label proposed limits for confirmation
+-in both the draft and report.
+-Choose methods, checks and evidence destinations within scope; label them planned.
++- **Missing required input:** report **Incomplete**, ask only the missing question
++  and stop dependent writing. Preserve any existing partial draft.
++- **All required inputs supported:** author the supported content. After saving,
++  check each item against the saved revision before reporting **Complete**.
++- **Assessment prevented by access or operation uncertainty:** report **Blocked**
++  and recover the missing evidence.
++
++Reuse this assessment in the report and final reply. Optional facts stay optional.
++A successful save, empty `incomplete` list or `content_review: not_assessed` does
++not establish completeness. Choose in-scope methods and evidence paths as plans,
++not observed results.
+ 
+ Before claiming a coverage gap, read the applicable requirements, specifications
+ and verification contracts. Code or one same-type record cannot establish their
+@@ -174,9 +173,10 @@
+ Draft validation checks template shape and required links; it does not assess
+ content. Planned checks are not executed tests. Keep report and final reply
+ consistent with the content-readiness decision.
+-Separate successful reads from accepted mutations. Attribute facts to their
+-actual source: response metadata is not content in the saved artifact. Use only
+-confirmed paths/digests; saving alone establishes no completeness.
++Classify effects from operation receipts: accepted writes, successful reads and
++failed or uncertain attempts. Count only accepted writes as mutations; a read
++does not add one. Attribute facts to their actual source. Response metadata is
++not saved content. Use only confirmed paths and digests.
+ After compaction, recover the retained reply or report and obtain fresh context.
+ 
+ For stale input, inspect the selection without silently refreshing versions.

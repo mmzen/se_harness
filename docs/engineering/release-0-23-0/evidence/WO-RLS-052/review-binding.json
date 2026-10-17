@@ -1,0 +1,19 @@
+{
+  "status": "unapplied proposal; exact approval pending",
+  "basis_head": "16a4cf3cf41f6c3abd7cf9b8499151e755138998",
+  "failed_candidate": "32f2834e82b92e773536808c16b00256ffaae896",
+  "work_order_sha256": "67473adf749a6754d7e80ad8f47e3a95393675630b52b375e89d8563abba9aeb",
+  "instruction": {
+    "path": "plugins/verity-plane/common/skills/change/references/hosted-drafts.md",
+    "before_sha256": "57a6fb26a8710381620ca0d579c53f442c397db66e2d7be1004db686604b6b64",
+    "proposed_sha256": "09912f982b0dbcaadcd3d79f895d91aa83fb3de0f1a32d45f666de8400879be6",
+    "before_words": 1607,
+    "proposed_words": 1588
+  },
+  "release_membership": {
+    "id": "REL-SEH-036",
+    "before_sha256": "141e1708e5a3c6293641f8d09865459444fedd189e984adc0580989ed1fc54e9",
+    "proposed_sha256": "3cdd7f1616e9450e9649bccd27d777113bf39d9799297cc6ee34178be41b1f1b",
+    "change": "Add only WO-RLS-052; preserve accepted bytes and lifecycle history."
+  }
+}

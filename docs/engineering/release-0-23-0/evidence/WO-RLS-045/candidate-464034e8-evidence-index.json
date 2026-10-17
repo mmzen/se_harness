@@ -1,0 +1,23 @@
+{
+  "candidate": "464034e8f0b189d330c3a8c5d8ce64c090b5cc86",
+  "packages": {
+    "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-464034e8-qualification.zip",
+    "bytes": 119568,
+    "sha256": "747516762979171915a640014aa935f7319bb4fa9fe67ac36ad9e1b7fd9ec2ce",
+    "files": 87
+  },
+  "hosted": {
+    "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-464034e8-service.zip",
+    "bytes": 1768229,
+    "sha256": "7ab15bcd23d99965e1b5028a885d05e64fde1075104b67408922f47728b7bc85",
+    "files": 124
+  },
+  "native": {
+    "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-464034e8-claude-diagnostic.zip",
+    "bytes": 271214,
+    "sha256": "b6cbb57f27a08df9f57a76d81d404e37729cd6156195d4e03ef2e081f10053a0",
+    "files": 78
+  },
+  "claim": "Partial qualification only; first required Claude diagnostic failed. No ready aggregate verification record.",
+  "archive_policy": "Actual logs, manifests and bounded test sources. Credentials, private reasoning, build environments, copied runtime trees and database/source archives excluded."
+}

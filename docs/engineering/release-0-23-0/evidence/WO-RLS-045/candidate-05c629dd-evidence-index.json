@@ -1,0 +1,37 @@
+{
+  "candidate": "05c629ddfc0f40924823160d8aaf0fa4e77940a2",
+  "packages": {
+    "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-05c629dd-qualification.zip",
+    "sha256": "13bd530bc1392e0357b92de98251fed85f81f5f250ee1c7610e6ace4e5be5b36",
+    "bytes": 54571,
+    "files": 57
+  },
+  "combination_build": {
+    "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-05c629dd-combination-build.zip",
+    "sha256": "6fc12547f568b0cfb9a70116ba250289c3b827b891f98363ebb153e1999c9d50",
+    "bytes": 19914,
+    "files": 11
+  },
+  "native": [
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-05c629dd-claude-diagnostic.zip",
+      "sha256": "44b278651092ff680b00ee99657e5b92d9a07788967330c60278cf02b9a441fd",
+      "bytes": 351113,
+      "files": 99
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-05c629dd-codex-diagnostic.zip",
+      "sha256": "ed737b40939efa609fd8034b8aa1b51e77f6d294bc776bf9a763b01098e5c44c",
+      "bytes": 358244,
+      "files": 101
+    }
+  ],
+  "positive_prelaunch": {
+    "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-05c629dd-positive-prelaunch.zip",
+    "sha256": "fd93c9555b612496338fc5c7e66bacc44876ed00100eabfddae70a548c828765",
+    "bytes": 153490,
+    "files": 47
+  },
+  "claim": "Partial release qualification. Both missing-input diagnostics pass independent content/reporting review. Positive case unavailable: complete-entry assembly refused before provider invocation. No ready aggregate VREC/RLS.",
+  "publication": "Private reasoning, credentials, runtime trees, package archives/images and database backups excluded; exact identities and omission method retained."
+}

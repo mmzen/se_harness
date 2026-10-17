@@ -1,0 +1,14 @@
+{
+  "kind": "Explicitly authorized bounded manual membership amendment",
+  "artifact": "REL-SEH-036",
+  "actor": "mmzen",
+  "applied_by": "Codex",
+  "applied_at": "2026-10-16T09:05:16.514394+00:00",
+  "decision": "Human mmzen answered \"Approve correction and linked amendment\" on 2026-10-16 to the explicit WO-RLS-054 request at PR #544 head 76d7eff18bfc0b28fbbe29e563d72a01c281d0da. Approves the exact one-paragraph hosted-context correction, required commit-bound verification, affected qualification and manual activation of the exact linked REL-SEH-036 gates amendment preserving accepted bytes and lifecycle history. Includes ordinary review publication to mmzen/se_harness, codex/release-0-23-0, target main, draft PR #544 under the reviewed envelope. Human verification, merge, complete release, desktop omission, adoption and host updates remain separate. Reviewed work-order SHA-256 c7bf248a538458db615895a6511f6f19e7048f86ea2ee8ea3c6730cfc1b0ec99; exact source and release digests in evidence/WO-RLS-054/review-binding.json.",
+  "before_sha256": "26851c9d9346329d4cfea271ee7edc29698e3c9569f63b66072dcc947ada9151",
+  "after_sha256": "de6c81618967652e07a3dc722a290a3ac8d52c1ddcb3b0e2cc7a3825a83eaa41",
+  "preserved_before": "REL-SEH-036-accepted-before.txt",
+  "reviewed_after": "REL-SEH-036-proposed.txt",
+  "added_gate": "WO-RLS-054",
+  "lifecycle_history_preserved": true
+}

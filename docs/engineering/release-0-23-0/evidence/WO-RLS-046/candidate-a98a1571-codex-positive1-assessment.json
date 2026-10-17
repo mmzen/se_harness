@@ -1,0 +1,111 @@
+{
+  "candidate": "a98a1571292f5bbf34cd2c7cff0af793d00fa12f",
+  "case": "EFF-04B",
+  "trial": "codex-positive1",
+  "overall": "pass",
+  "method": "Independent semantic review of the separately read saved document, original fixture/definitions, report, final reply and every visible tool result. Seven separate baseline reads establish immutable original bytes. Incomplete host telemetry is not inferred complete.",
+  "content_result": "The draft verifies REQ-P3-900 with a complete requirement-to-evidence matrix and independently fixed Hello rehearsal expectation. It gives the exact available PowerShell helper command, native Windows runtime, source hash guard, equality pass/fail and unassessed error outcomes. A full proposed work/WO-P3-900/assertion.json path supplies concrete evidence retention. It distinguishes service evaluator, tested input and planned local assertion, and accurately states helper limitations.",
+  "reporting_result": "The report correctly separates content review from evaluator shape admission, retains the original advisory and incomplete-template findings, lists accepted writes and saved-revision read, and discloses incomplete capture. It explicitly says no tests ran and no verification is claimed. No failed or denied action is visible, but no exhaustive count is asserted.",
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:24dafd4172c19308fbce65f2fe821c127e5fde63163ef5e0c54db33c9f80c18b"
+  },
+  "document_sha256": "56793f06d4cbaaf5f9e51ed334fec4f6931b7127eed03fc0ef7bfa2e5ee9a86b",
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "final_project_version": 4,
+  "metrics": {
+    "wall_seconds": 211.466,
+    "native_calls": null,
+    "model_turns": null,
+    "initial_input_context": null,
+    "peak_input_context": null
+  },
+  "goals": {
+    "wall_under_180": "missed",
+    "calls_at_most_15": "unavailable",
+    "peak_under_40000": "unavailable"
+  },
+  "visible_call_lower_bound": 13,
+  "native_call_count_complete": false,
+  "operations": [
+    {
+      "record": "work/create.json",
+      "exit": 0,
+      "operation": "create-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/import.json",
+      "exit": 0,
+      "operation": "import",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/open.json",
+      "exit": 0,
+      "operation": "draft-open",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/readback.json",
+      "exit": 0,
+      "operation": "read",
+      "outcome": null
+    },
+    {
+      "record": "work/revise.json",
+      "exit": 0,
+      "operation": "revise-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/status.json",
+      "exit": 0,
+      "operation": "status",
+      "outcome": null
+    }
+  ],
+  "input_changes": [],
+  "host_boundary_unchanged": true,
+  "host_diagnostics": [
+    {
+      "line": 1,
+      "text": "2026-10-16T07:52:04.777139Z  WARN codex_skills::interface: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 2,
+      "text": "2026-10-16T07:52:04.777544Z  WARN codex_skills::interface: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 3,
+      "text": "2026-10-16T07:52:04.869763Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell"
+    },
+    {
+      "line": 4,
+      "text": "2026-10-16T07:52:05.369472Z  WARN codex_skills::interface: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 5,
+      "text": "2026-10-16T07:52:05.369497Z  WARN codex_skills::interface: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/"
+    },
+    {
+      "line": 39,
+      "text": "2026-10-16T07:55:34.539218Z  WARN codex_core::hook_runtime: after_agent hook failed; continuing turn_id=01a143b2-5e69-7b82-ba29-49625544be56 hook_name=legacy_notify error=The filename or extension is too long. (os error 206)"
+    }
+  ],
+  "limits": [
+    "211.466 seconds misses the duration goal; exact call total, peak context and model-turn count unavailable.",
+    "Host icon, PowerShell snapshot and legacy_notify warnings remain separate from successful visible native commands.",
+    "All six focused cases pass; this does not establish full native lifecycle/delivery, desktop, human verification or release readiness."
+  ],
+  "evidence": [
+    "independent-document.md",
+    "independent-readback.json",
+    "independent-revision.json",
+    "native/work/native-report.md",
+    "independent-observations.json",
+    "mechanical-summary.json",
+    "boundary-probe-assessment.json"
+  ]
+}

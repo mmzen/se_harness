@@ -1,0 +1,12 @@
+{
+  "basis": "a98a1571292f5bbf34cd2c7cff0af793d00fa12f",
+  "work_order": "WO-RLS-054",
+  "work_order_sha256": "c7bf248a538458db615895a6511f6f19e7048f86ea2ee8ea3c6730cfc1b0ec99",
+  "target": "plugins/verity-plane/common/skills/setup/references/hosted-context.md",
+  "before_sha256": "2694293ce0c5a532179b7c936ee2906908250f08c6ae27eb209d1b056813fc08",
+  "proposed_sha256": "0fe8fef3b0b5c986e2602a9f05768fc962e0cbece2739c02a8c68050ad99ef37",
+  "added_bytes": 347,
+  "release_before_sha256": "26851c9d9346329d4cfea271ee7edc29698e3c9569f63b66072dcc947ada9151",
+  "release_proposed_sha256": "de6c81618967652e07a3dc722a290a3ac8d52c1ddcb3b0e2cc7a3825a83eaa41",
+  "implemented": false
+}

@@ -1,0 +1,14 @@
+{
+  "kind": "Explicitly authorized bounded manual membership amendment",
+  "artifact": "REL-SEH-036",
+  "actor": "mmzen",
+  "applied_by": "Codex",
+  "applied_at": "2026-10-13T10:38:52.898792+00:00",
+  "decision": "Human mmzen replied \"I approve\" on 2026-10-13 to WO-RLS-051, required commit-bound verification and its linked release-membership amendment, reviewed in PR #544 at ac15fbdf00619351a737266135d151c56a4c5f74. This authorizes the exact one-file pre-drafting input-assessment correction, bounded local checks and new-candidate qualification under unchanged VER-HAG-008 and VER-RLS-040. It explicitly authorizes the reviewed manual REL-SEH-036 gates amendment, preserving accepted bytes and lifecycle history, and includes this work in the existing review-publication grant for codex/release-0-23-0 to mmzen/se_harness:main, including later separately given verification-decision pushes. Human verification, merge, complete-release approval, desktop omission, adoption and host updates remain separate. Reviewed work-order SHA-256 0c61ae5c427c026ff90ec98658b650b1b6680823d72135462d866941784aca24; instruction before 669c9f141f4d219aab1ad2b90f29c610e1e1a91280be87e6d7f34f9c1f7071cf and after 57a6fb26a8710381620ca0d579c53f442c397db66e2d7be1004db686604b6b64; release amendment before 609e424ba14cde14ef45ffb4e432972fe6c36b56a22623edea08611eb1a5010b and after 141e1708e5a3c6293641f8d09865459444fedd189e984adc0580989ed1fc54e9.",
+  "before_sha256": "609e424ba14cde14ef45ffb4e432972fe6c36b56a22623edea08611eb1a5010b",
+  "after_sha256": "141e1708e5a3c6293641f8d09865459444fedd189e984adc0580989ed1fc54e9",
+  "preserved_before": "REL-SEH-036-accepted-before.txt",
+  "reviewed_after": "REL-SEH-036-proposed.txt",
+  "added_gate": "WO-RLS-051",
+  "lifecycle_history_preserved": true
+}

@@ -1,0 +1,23 @@
+{
+  "candidate": "74feac0767f33658b31fb9e9ad2b6a13a188c13c",
+  "packages": {
+    "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-74feac07-qualification.zip",
+    "sha256": "f8fc7f0563370bbb5c5c77d370c957b5a872b1aee42e1150d555a64e6f7d6890",
+    "bytes": 48493,
+    "files": 50
+  },
+  "combination_build": {
+    "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-74feac07-combination-build.zip",
+    "sha256": "50229b10467fa706c9482a2fd01e6b082522021bb1d7b89b02eacc7eba5d13ac",
+    "bytes": 19899,
+    "files": 11
+  },
+  "native": {
+    "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-74feac07-claude-diagnostic.zip",
+    "sha256": "5cc54c46afec88c7e80b408e4b0ffa806d667ca30901c4206903087fa7c0e429",
+    "bytes": 448358,
+    "files": 140
+  },
+  "claim": "Partial release qualification. First required Claude diagnostic failed; further native repetitions stopped. No ready aggregate VREC/RLS.",
+  "publication": "Credentials, private reasoning, runtime trees, archives/images and database backups excluded; exact identities and omission method retained."
+}

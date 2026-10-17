@@ -1,0 +1,83 @@
+{
+  "candidate": "a98a1571292f5bbf34cd2c7cff0af793d00fa12f",
+  "case": "EFF-04B",
+  "trial": "claude-positive2",
+  "overall": "pass",
+  "method": "Independent semantic review of separately read saved bytes against request, original definitions and actual execution capability; paired calls/results, final reply, saved report and seven baseline reads inspected. No keyword grader.",
+  "content_result": "The draft links REQ-P3-900, derives Hello rehearsal from the requirement/specification, supplies a complete matrix and the available assert-greeting equality check with concrete pass/fail outcomes. The evidence path includes the domain, work-order directory and distinct JSON filename. The check runs on the native test host; the released evaluator identity is distinguished from the client runtime. Imported history and fixture are unchanged.",
+  "reporting_result": "The saved report and final reply separate the plan from executed verification. Four accepted project mutations and actual saved versions are correctly reported. No test execution or outcome verification is claimed. Complete paired capture contains no failed/denied call; the successful final report write after the observation snapshot is accounted for. The imported W-AUT-022 advisory is retained.",
+  "specific_review": "The second draft names Windows, selected client_python, evaluator archive identity and actual record fields. Its saved report explicitly says no tests were executed.",
+  "artifact": {
+    "artifact_id": "VER-P3-001",
+    "revision_id": "sha256:e285cecb13ec05d752f1fe3b7395d0af9898afe6ab7a025a7ce0832194ef9ce5"
+  },
+  "document_sha256": "f8d683f42221cd2af8c81ece178e26ac4480cae0b91844a9fe76c498076d7912",
+  "exact_saved_document": true,
+  "baseline_records_unchanged": 7,
+  "final_project_version": 4,
+  "metrics": {
+    "wall_seconds": 192.288,
+    "native_calls": 13,
+    "model_turns": 9,
+    "initial_input_context": 32809,
+    "peak_input_context": 60510
+  },
+  "goals": {
+    "wall_under_180": "missed",
+    "calls_at_most_15": "met",
+    "peak_under_40000": "missed"
+  },
+  "operations": [
+    {
+      "record": "work/create-ver.json",
+      "exit": 0,
+      "operation": "create-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/draft-open.json",
+      "exit": 0,
+      "operation": "draft-open",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/import-source.json",
+      "exit": 0,
+      "operation": "import",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/read-ver.json",
+      "exit": 0,
+      "operation": "read",
+      "outcome": null
+    },
+    {
+      "record": "work/revise-ver.json",
+      "exit": 0,
+      "operation": "revise-artifact",
+      "outcome": "accepted"
+    },
+    {
+      "record": "work/status-check.json",
+      "exit": 0,
+      "operation": "status",
+      "outcome": null
+    }
+  ],
+  "input_changes": [],
+  "host_boundary_unchanged": true,
+  "limits": [
+    "Duration and peak-context goals missed; tool-call goal met. Correctness and efficiency have distinct verdicts.",
+    "Repetitions ran concurrently in separate fresh projects; record the range/median as observed costs, not an isolated benchmark.",
+    "Full lifecycle/delivery, desktop and accountable release decisions remain separate."
+  ],
+  "evidence": [
+    "independent-document.md",
+    "independent-readback.json",
+    "independent-revision.json",
+    "native/work/native-report.md",
+    "independent-observations.json",
+    "mechanical-summary.json"
+  ]
+}

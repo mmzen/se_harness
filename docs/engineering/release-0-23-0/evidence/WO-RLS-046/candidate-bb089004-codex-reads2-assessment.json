@@ -1,0 +1,26 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "overall": "incomplete",
+  "functional_reads": "pass",
+  "communication_prerequisite": "fail",
+  "observed_project_version_unchanged": 29,
+  "tools": [
+    "check",
+    "compare",
+    "cypher",
+    "impact",
+    "lineage",
+    "revision",
+    "work-context"
+  ],
+  "review": "All seven exact requests match independent HTTP. The report accurately states complete responses, checkpoint-free unassessed gates, candidate distinctions, bounded Cypher, the recovered invalid read-limit error and capture limits. It reports no actual assurance or external action.",
+  "instruction_order": {
+    "first_explanation_line": 11,
+    "hosted_context_first_read_line": 19,
+    "communication_completed_read_line": 31
+  },
+  "finding": "R23-NATIVE-010: First explanation preceded required communication reading in the separate read-only case. Later reading and successful graph operations do not repair that event.",
+  "earlier_attempt": "codex-reads remains blocked by operator-staged stale absolute inventory paths. reads2 changes only that metadata, with all source/instruction bytes checked unchanged and the original permission boundary reproved.",
+  "prior_full_run": "The full Codex lifecycle read communication before its first explanation and retains that narrower pass. Its old mutable-view HTTP comparisons returned stale-context refusals; these fresh immutable reads provide separate functional coverage.",
+  "limits": "No overall release qualification, desktop result, authority cutover, human verification or risk acceptance is inferred."
+}

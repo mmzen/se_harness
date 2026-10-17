@@ -1,0 +1,61 @@
+{
+  "validation": {
+    "artifact_count": 2010,
+    "error_count": 0,
+    "warning_count": 63
+  },
+  "preparation": {
+    "planned_paths": [
+      "docs/engineering/release-0-23-0/evidence/WO-RLS-054/preparation-review.md",
+      "docs/engineering/release-0-23-0/release/REL-SEH-036.md",
+      "plugins/verity-plane/common/skills/setup/references/hosted-context.md"
+    ],
+    "coverage": "covered",
+    "explicit_matches": [
+      {
+        "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-054/preparation-review.md",
+        "scope_entry": "docs/engineering/release-0-23-0/"
+      },
+      {
+        "path": "docs/engineering/release-0-23-0/release/REL-SEH-036.md",
+        "scope_entry": "docs/engineering/release-0-23-0/"
+      },
+      {
+        "path": "plugins/verity-plane/common/skills/setup/references/hosted-context.md",
+        "scope_entry": "plugins/verity-plane/common/skills/setup/references/hosted-context.md"
+      }
+    ],
+    "automatic_matches": [],
+    "uncovered_paths": [],
+    "invalid_declarations": [],
+    "impact_analysis": "not_assessed"
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Projected the selected scope for WO-RLS-054."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-RLS-054 is draft."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "step_id": "STEP-FOCUS-SELECTED",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-RLS-054"
+      ]
+    },
+    "alternatives": []
+  }
+}

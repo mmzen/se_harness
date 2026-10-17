@@ -1,0 +1,57 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "host": "claude",
+  "overall": "pass",
+  "cases": {
+    "NQ-01": {
+      "result": "pass",
+      "review": "The exact hosted setup pointer and released communication section were read before the first explanation. Selected client/governor, fixture and test-only scope were identified; explicit reads are not automatic delivery."
+    },
+    "NQ-02": {
+      "result": "pass",
+      "review": "New definitions state the operator, missing test record, exact greeting, independently fixed expectation, bounded work and evidence. The observed assertion and candidate digest support the synthetic decisions. Eleven accepted operations replay successfully; definition approval was batched. Imported records remain unchanged."
+    },
+    "NQ-03": {
+      "result": "pass",
+      "review": "Stale project/preview and actual QGP-G4I-PATHS refusals precede valid recovery. The initial protected-file refusal is separately identified. Eight observations cover all seven native MCP tools and match independent HTTP at the exact selected views."
+    },
+    "NQ-04": {
+      "result": "pass",
+      "review": "The dropped risk-apply reply was treated as unknown. Original-key lookup and identical resubmission retain the same receipt and versions; a changed request under the key is refused."
+    },
+    "NQ-05": {
+      "result": "pass",
+      "review": "Both native exports independently reconstruct and replay. VREC and RLS preserve original test candidate c50c47cad7dba77ac7098e37ce10a8fc79e44480. The report identifies all nine visible failed tool results, synthetic actor labels, no real external action, and reviewer replay as unperformed at native completion. The reviewer subsequently performed it."
+    }
+  },
+  "communication": {
+    "completed_reads": [
+      {
+        "call_line": 19,
+        "result_line": 20,
+        "call_id": "toolu_014FUFVCdGSBjrX6BHtCjNrY"
+      }
+    ],
+    "first_explanation_line": 30
+  },
+  "mechanical_assessment_sha256": "b84699b2b52fd8af296edf35d28b810f8a936ad38e8b2e868ca4e2d7a25b8f4d",
+  "reviewed_native_report_sha256": "78e4d572ac0f3afe86d336dfca002effd8faad1ebef5eeeda40a9b28d4104963",
+  "metrics": {
+    "wall_seconds": 1341.105,
+    "native_calls": 172,
+    "observed_tool_items": 172,
+    "native_call_count_complete": true,
+    "model_turns": 149,
+    "initial_input_context": 14687,
+    "peak_input_context": 616674
+  },
+  "limits": [
+    "These results cover the exact CLI/model/component combination and private test projects only. Codex Windows desktop is deferred and unverified.",
+    "The assertion checks equality once and records no separate Python version or type assertion; the report states these limits.",
+    "The report transcribes MCP highlights, while full native event responses and independent HTTP evidence retain the complete originals.",
+    "The generated VREC/RLS prose still describes preparation; machine lifecycle fields and replay establish the later test states.",
+    "Lineage returned an empty complete result for the selected REQ; no stronger semantic coverage is inferred.",
+    "No real verification, release, publication, deployment, authority cutover or risk acceptance is supplied by synthetic test decisions."
+  ],
+  "simplicity_review": "The production change is one pointer to the existing canonical communication policy. It adds no duplicated policy or mechanism. Full workflow duration and large context remain visible; this correction establishes discovery order, not a performance improvement."
+}

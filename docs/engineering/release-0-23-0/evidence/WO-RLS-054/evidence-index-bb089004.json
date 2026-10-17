@@ -1,0 +1,139 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "archives": [
+    {
+      "name": "candidate-bb089004-claude-diagnostic.zip",
+      "sha256": "f23a1e01758152d3f93aa399eeaec2456a130eabaf471a51c278cd9ddd78972b",
+      "bytes": 439730,
+      "files": 127,
+      "private_reasoning_files_sanitized": 1,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-diagnostic.zip"
+    },
+    {
+      "name": "candidate-bb089004-claude-full.zip",
+      "sha256": "39fe59ba141f413440eca55c060f1c67272bfcc1ccfc78cb393c603d585a30bb",
+      "bytes": 2723069,
+      "files": 510,
+      "private_reasoning_files_sanitized": 1,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-full.zip"
+    },
+    {
+      "name": "candidate-bb089004-claude-positive1.zip",
+      "sha256": "04adcd00017dc35f1074266a3542992aaf4c61798faa4b88a647f2fa1a7fa47f",
+      "bytes": 540338,
+      "files": 168,
+      "private_reasoning_files_sanitized": 1,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-positive1.zip"
+    },
+    {
+      "name": "candidate-bb089004-claude-positive2.zip",
+      "sha256": "a3f33f68d8587bb855263d18ccd85498946c528ef0658c85013403a71390c15d",
+      "bytes": 537386,
+      "files": 168,
+      "private_reasoning_files_sanitized": 1,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-positive2.zip"
+    },
+    {
+      "name": "candidate-bb089004-claude-positive3.zip",
+      "sha256": "822127db143628433616c960239fcf118012f9b50c533b97fab14abce9384976",
+      "bytes": 540841,
+      "files": 168,
+      "private_reasoning_files_sanitized": 1,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-positive3.zip"
+    },
+    {
+      "name": "candidate-bb089004-codex-diagnostic.zip",
+      "sha256": "ce50b50cbfb82024297fc32851e093e2d0c6feca48ac41ca26e57e3842d6c686",
+      "bytes": 431042,
+      "files": 130,
+      "private_reasoning_files_sanitized": 0,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-diagnostic.zip"
+    },
+    {
+      "name": "candidate-bb089004-codex-full.zip",
+      "sha256": "615509441a2bd30fa4a8ca39fd8cbd217350d014c6197e60b5bb69c603ca1e5b",
+      "bytes": 2999576,
+      "files": 643,
+      "private_reasoning_files_sanitized": 0,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-full.zip"
+    },
+    {
+      "name": "candidate-bb089004-codex-positive1.zip",
+      "sha256": "4929bb95f821b85a7361def4bca03f64a2b810d8511290593b41dd5dbf9823c7",
+      "bytes": 550707,
+      "files": 170,
+      "private_reasoning_files_sanitized": 0,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-positive1.zip"
+    },
+    {
+      "name": "candidate-bb089004-codex-reads.zip",
+      "sha256": "94ac7fc06b2149311c702594d2a4cd11f7a3a1c883f777fb971304c4da802f4f",
+      "bytes": 264671,
+      "files": 109,
+      "private_reasoning_files_sanitized": 0,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-reads.zip"
+    },
+    {
+      "name": "candidate-bb089004-codex-reads2.zip",
+      "sha256": "04edfd6c3e729303d3cb599bb583b74a7f6e8d05d68657f3df34da929b1d150d",
+      "bytes": 449317,
+      "files": 137,
+      "private_reasoning_files_sanitized": 0,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-reads2.zip"
+    },
+    {
+      "name": "candidate-bb089004-combination-build.zip",
+      "sha256": "bb6a04b11f71ea3ab693a1a2804f3e4f73ec83ec300ac24cdfaef03562fefae6",
+      "bytes": 20232,
+      "files": 11,
+      "private_reasoning_files_sanitized": 0,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-combination-build.zip"
+    },
+    {
+      "name": "candidate-bb089004-delivery.zip",
+      "sha256": "029e76841be6f14ce2378f21f97d8b1759b9f1b9c58576d21980366e31a181ca",
+      "bytes": 445633,
+      "files": 173,
+      "private_reasoning_files_sanitized": 0,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-delivery.zip"
+    },
+    {
+      "name": "candidate-bb089004-qualification.zip",
+      "sha256": "b191321d4e05bbe3a0e5a7403327b3c8d5f10dd79cbbd47e5a1cf83a53911056",
+      "bytes": 151820,
+      "files": 90,
+      "private_reasoning_files_sanitized": 1,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/candidate-bb089004-qualification.zip"
+    },
+    {
+      "name": "candidate-bb089004-reading-supplement.zip",
+      "sha256": "b7f44891e8f8b42ba6b6fd6725dcc73c2c39636b30c5d127d65087d443f1657e",
+      "bytes": 16536,
+      "files": 10,
+      "private_reasoning_files_sanitized": 0,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-reading-supplement.zip"
+    },
+    {
+      "name": "candidate-bb089004-service.zip",
+      "sha256": "aecdd7d6f311dc053a768d3fea67b2d02d2e21b29190a1d71e568f68ebed83f4",
+      "bytes": 1746717,
+      "files": 113,
+      "private_reasoning_files_sanitized": 0,
+      "repository_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-service.zip"
+    }
+  ],
+  "assessments": [
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-diagnostic-assessment.json",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-diagnostic-assessment.json",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-positive1-assessment.json",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-positive2-assessment.json",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-positive3-assessment.json",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-positive1-assessment.json",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-claude-full-assessment.json",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-full-assessment.json",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-reads-assessment.json",
+    "docs/engineering/release-0-23-0/evidence/WO-RLS-046/candidate-bb089004-codex-reads2-assessment.json"
+  ],
+  "desktop": "deferred; unverified; no release omission accepted",
+  "native_readiness": "incomplete; R23-NATIVE-010 and R23-NATIVE-011 remain"
+}

@@ -1,0 +1,33 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "overall": "incomplete",
+  "full_lifecycle_functional": "pass",
+  "cases": {
+    "NQ-01": "Full run passed: communication completed at event 30 before first explanation at event 31; client/governor and test scope were identified.",
+    "NQ-02": "Passed: authored records provide the requested operator outcome, exact greeting definition, independent expectation, bounded scope and retained actual test. Twelve accepted operations replay. Test actors are supplied labels; imported history is preserved.",
+    "NQ-03": "Functional coverage passes through full-run refusals and separate reads2. Original MCP observations used context version 13; later exact HTTP repeats are correctly stale. Seven fresh immutable-view reads exactly match independent HTTP. reads2 nevertheless fails its communication prerequisite and is not an overall qualification pass.",
+    "NQ-04": "Passed: original-key lookup and byte-identical retry share receipt/digest/versions; changed-content reuse is refused. No accepted duplicate or unknown write remains.",
+    "NQ-05": "Passed: five native exports reconstruct and replay, preserving test candidate d54f90430f866ab38456e2fa95941f3db563ca1a in VREC/RLS. The report distinguishes synthetic release, actual implementation C, fixture S and baseline B; no external action occurred."
+  },
+  "content_review": "INT/CAP/REQ/SPEC state the exact supplied outcome without invented users or operational benefits. VER derives equality from the request and definitions, specifies concrete evidence and acknowledges one-call/type/runtime limits. WO lists bounded files and existing generated-record admission; REL binds the verified test candidate, limits the test version to 0.0.1 and grants no publication. The report retains refusals, native/helper errors and incomplete JSON read-trace capture; exported records and full events independently support the reviewed statements.",
+  "native_failures": 8,
+  "metrics": {
+    "wall_seconds": 1503.51,
+    "native_calls": null,
+    "observed_tool_items": 230,
+    "native_call_count_complete": false,
+    "model_turns": null,
+    "initial_input_context": null,
+    "peak_input_context": null
+  },
+  "report_sha256": "5cfc03595bf3100ab683afc0bf085f4782381d075e3786760ed9942ce1f65056",
+  "finding": "R23-NATIVE-010: First explanation preceded required communication reading in the separate read-only case. Later reading and successful graph operations do not repair that event.",
+  "limitations": [
+    "R23-NATIVE-010 remains unresolved; no rerun-to-pass or policy waiver.",
+    "The helper read-summary omits JSON selection traces. Full events and command records remain retained; no complete automatic read-trace claim.",
+    "Exact Codex call total, model turns and provider context are unavailable; 230 visible tool items are a lower bound.",
+    "Codex Windows desktop remains deferred and unverified.",
+    "No real human verification, release, publication, deployment or risk decision occurred."
+  ],
+  "simplicity_review": "The production correction is one canonical-policy pointer. It fixes discovery order in both observed full workflows, but the later separate read-only run speaks before discovering it. Do not add more duplicate policy or claim deterministic compliance from those two successes."
+}

@@ -1,0 +1,38 @@
+{
+  "candidate": "bb0890045f462343ecae66ca30b20b06cf6e8ae6",
+  "case": "EFF-04A2",
+  "trial": "codex-diagnostic",
+  "overall": "pass",
+  "method": "Independent review of the saved report, final reply, all visible command/file-change items, separately read service status and original fixture.",
+  "content_result": "The report distinguishes existing definitions from the new audience request. It asks who is affected, the present problem, what the adaptation should help the audience do or understand, the smallest useful improvement and an observable success condition. It marks the proposed outcome unconfirmed and makes no hosted definition or new authority claim.",
+  "reporting_result": "Codex retained the required report because capture completeness is unavailable. It states no observed failed calls, without claiming exhaustive zero failures. The seven visible items consist of six successful read-only/helper commands and the report write. Independent service version remains zero and staged bytes are unchanged.",
+  "observations": [
+    "Native capture gives a lower bound of seven items, not an exact call count or token metric.",
+    "The host emitted its prefer_mxc warning, ignored icon-path warnings, an unsupported PowerShell snapshot warning and a post-turn legacy_notify filename-too-long warning. Preserve these host diagnostics separately; they are not hidden as successful delivery checks. No global setting was changed to suppress them."
+  ],
+  "metrics": {
+    "wall_seconds": 119.73,
+    "native_calls": null,
+    "model_turns": null,
+    "initial_input_context": null,
+    "peak_input_context": null
+  },
+  "observed_tool_items_lower_bound": 7,
+  "goals": {
+    "wall_under_180": "met",
+    "calls_at_most_15": "unavailable",
+    "peak_under_40000": "unavailable"
+  },
+  "report_branch": "saved report; complete capture unavailable",
+  "evidence": [
+    "independent-observations.json",
+    "independent-status.json",
+    "mechanical-summary.json",
+    "native/events.jsonl",
+    "native/work/native-report.md"
+  ],
+  "limits": [
+    "Negative diagnostic only; positive authoring, full lifecycle and delivery remain separate.",
+    "No desktop, release or actual verification decision."
+  ]
+}

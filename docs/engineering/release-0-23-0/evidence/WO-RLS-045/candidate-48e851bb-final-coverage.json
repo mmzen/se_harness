@@ -1,0 +1,219 @@
+{
+  "work": [
+    {
+      "id": "WO-HAG-001",
+      "state": "implemented",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-001.md",
+      "verification": [
+        "VER-HAG-001"
+      ]
+    },
+    {
+      "id": "WO-HAG-005",
+      "state": "implemented",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-005.md",
+      "verification": [
+        "VER-HAG-004"
+      ]
+    },
+    {
+      "id": "WO-HAG-006",
+      "state": "implemented",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-006.md",
+      "verification": [
+        "VER-HAG-005"
+      ]
+    },
+    {
+      "id": "WO-HAG-007",
+      "state": "implemented",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-007.md",
+      "verification": [
+        "VER-HAG-001"
+      ]
+    },
+    {
+      "id": "WO-HAG-008",
+      "state": "implemented",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-008.md",
+      "verification": [
+        "VER-HAG-006"
+      ]
+    },
+    {
+      "id": "WO-HAG-009",
+      "state": "implemented",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-009.md",
+      "verification": [
+        "VER-HAG-007"
+      ]
+    },
+    {
+      "id": "WO-HAG-010",
+      "state": "implemented",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-010.md",
+      "verification": [
+        "VER-HAG-007"
+      ]
+    },
+    {
+      "id": "WO-HAG-011",
+      "state": "implemented",
+      "path": "docs/engineering/hosted-artifact-graph/work-orders/WO-HAG-011.md",
+      "verification": [
+        "VER-HAG-008"
+      ]
+    },
+    {
+      "id": "WO-HUP-030",
+      "state": "implemented",
+      "path": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-030.md",
+      "verification": [
+        "VER-HUP-025"
+      ]
+    },
+    {
+      "id": "WO-IPK-002",
+      "state": "implemented",
+      "path": "docs/engineering/integration-package/work-orders/WO-IPK-002.md",
+      "verification": [
+        "VER-IPK-002"
+      ]
+    },
+    {
+      "id": "WO-RLS-045",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-045.md",
+      "verification": [
+        "VER-RLS-039"
+      ]
+    },
+    {
+      "id": "WO-RLS-046",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-046.md",
+      "verification": [
+        "VER-RLS-040",
+        "VER-IAR-021"
+      ]
+    },
+    {
+      "id": "WO-RLS-048",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-048.md",
+      "verification": [
+        "VER-RLS-039",
+        "VER-RLS-040"
+      ]
+    },
+    {
+      "id": "WO-RLS-049",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-049.md",
+      "verification": [
+        "VER-HAG-008",
+        "VER-RLS-040"
+      ]
+    },
+    {
+      "id": "WO-RLS-050",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-050.md",
+      "verification": [
+        "VER-HAG-008",
+        "VER-RLS-040"
+      ]
+    },
+    {
+      "id": "WO-RLS-051",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-051.md",
+      "verification": [
+        "VER-HAG-008",
+        "VER-RLS-040"
+      ]
+    },
+    {
+      "id": "WO-RLS-052",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-052.md",
+      "verification": [
+        "VER-HAG-008",
+        "VER-RLS-040"
+      ]
+    },
+    {
+      "id": "WO-RLS-053",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-053.md",
+      "verification": [
+        "VER-HAG-008",
+        "VER-RLS-040"
+      ]
+    },
+    {
+      "id": "WO-RLS-054",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-054.md",
+      "verification": [
+        "VER-HAG-008",
+        "VER-HAG-007",
+        "VER-RLS-040"
+      ]
+    },
+    {
+      "id": "WO-RLS-055",
+      "state": "implemented",
+      "path": "docs/engineering/release-0-23-0/work-orders/WO-RLS-055.md",
+      "verification": [
+        "VER-RLS-039"
+      ]
+    }
+  ],
+  "verification": [
+    {
+      "id": "VER-HAG-001",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-001.md"
+    },
+    {
+      "id": "VER-HAG-004",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-004.md"
+    },
+    {
+      "id": "VER-HAG-005",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-005.md"
+    },
+    {
+      "id": "VER-HAG-006",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-006.md"
+    },
+    {
+      "id": "VER-HAG-007",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-007.md"
+    },
+    {
+      "id": "VER-HAG-008",
+      "path": "docs/engineering/hosted-artifact-graph/verification/VER-HAG-008.md"
+    },
+    {
+      "id": "VER-HUP-025",
+      "path": "docs/engineering/repository-harness-upgrade/verification/VER-HUP-025.md"
+    },
+    {
+      "id": "VER-IAR-021",
+      "path": "docs/engineering/instruction-architecture/verification/VER-IAR-021.md"
+    },
+    {
+      "id": "VER-IPK-002",
+      "path": "docs/engineering/integration-package/verification/VER-IPK-002.md"
+    },
+    {
+      "id": "VER-RLS-039",
+      "path": "docs/engineering/release-0-23-0/verification/VER-RLS-039.md"
+    },
+    {
+      "id": "VER-RLS-040",
+      "path": "docs/engineering/release-0-23-0/verification/VER-RLS-040.md"
+    }
+  ]
+}

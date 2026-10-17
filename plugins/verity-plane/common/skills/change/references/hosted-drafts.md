@@ -5,7 +5,8 @@ content satisfies its read instruction. Open its file only if required content
 is missing, changed or no longer retained. A pointer alone is not content.
 
 Complete [Hosted selection](../../setup/references/hosted-context.md) once for
-the unchanged selection. Draft preparation grants no decision right or Git authority.
+the unchanged selection. Use its supplied absolute file path; do not guess a
+location from its filename. Draft preparation grants no decision right or Git authority.
 
 Match the request and existing confirmed context to the current step:
 
@@ -14,14 +15,14 @@ Match the request and existing confirmed context to the current step:
 | The intended outcome or scope still needs clarification | `docs/engineering/harness/DEFINE_CHANGE.md`: **Read this when**, **Before this action**, then **Describe the intended outcome**. Use **Define the limits of the change** when its inputs are available. |
 | Confirmed outcome, scope and selected definitions; a definition draft is needed | `docs/engineering/harness/DRAFT_DEFINITIONS.md`: **Read this when**, **Before this action**, then the requested type's procedure below. |
 
-The clarification procedure produces transient discussion, not a formal artifact.
-Use its requester-confirmation process and reuse an existing matching confirmation.
-An instruction to create a draft does not supply the inputs that procedure requires.
-Do not import, open a draft context or create a template merely to ask a question.
-For a clarification stop, include three short parts in the final reply:
+Before choosing the drafting route, apply **Check the inputs before writing**.
+The clarification route produces transient discussion, not a formal artifact.
 
-- **Actions:** State whether any hosted change was attempted. Include observed
-  failures or denials.
+Apply the shared check in **Report and recover** before an exhaustive failure
+claim. For a clarification stop, include three short parts in the final reply:
+
+- **Actions:** State whether any hosted change was attempted. Include every
+  observed failure or denial, including local reads and recovered failures.
 - **Known inputs:** Keep existing definitions and supplied scope limits.
 - **Questions:** Ask only for missing facts needed now.
 
@@ -67,19 +68,42 @@ Load [lifecycle instructions](hosted-test-lifecycle.md) only for that task.
 
 ## Check the inputs before writing
 
-Compare the requested type's required content with the request and definitions:
+First locate the requester's confirmation of the outcome and scope required
+by **Describe the intended outcome**. Reuse a matching confirmation, including
+one recorded in an accepted definition. If it is
+absent, present the proposed wording and ask for confirmation before dependent
+drafting. Do not import, open a draft context or create a template to ask.
 
-| Content | Source or authoring authority |
-| --- | --- |
-| User problem, improvement, success measure, existing gap | Require a source that supplies it. A creation request supplies no missing fact. |
-| Proposed method, check, evidence destination | Choose within the requested design scope; label it planned. |
+Use one short assessment for the requested type's required checklist items:
 
-For an intent, resolve the user's problem, desired improvement and way to observe
-that improvement. Ask for missing inputs and reuse confirmed ones. Message text,
-channels or function signatures describe a solution; they do not explain why the
-user needs it. An unmeasured baseline is allowed; a missing success measure stays
-missing. Do not offer `not measured` as a replacement for how the owner will know
-the change helped. Do not invent a purpose or measure from engineering activity.
+| Required input | Direct support: short source passage and location, or **Missing** | Question if missing |
+| --- | --- | --- |
+
+A passage must answer the item for this change. A citation, your interpretation
+or text you plan to write is not direct support. Reuse delivered sources and an
+unchanged assessment; no new file or repeated read is required.
+
+Code describes existing behavior. Existing definitions establish their stated
+scope. Neither establishes an unstated user need for a different change. A task's
+execution restrictions alone do not establish product scope limits. Keep deductions and
+proposed limits unconfirmed in both the draft and report.
+
+For an intent, assess the affected user and present problem, wanted improvement,
+and success measure separately. A baseline states today's value; `not measured`
+does not supply a success condition. Restating the requested software output
+does not establish its benefit. Use the checklist, not template shape, to decide.
+
+- **Missing required input:** report **Incomplete**, ask only the missing question
+  and stop dependent writing. Preserve any existing partial draft.
+- **All required inputs supported:** author the supported content. After saving,
+  check each item against the saved revision before reporting **Complete**.
+- **Assessment prevented by access or operation uncertainty:** report **Blocked**
+  and recover the missing evidence.
+
+Reuse this assessment in the report and final reply. Optional facts stay optional.
+A successful save, empty `incomplete` list or `content_review: not_assessed` does
+not establish completeness. Choose in-scope methods and evidence paths as plans,
+not observed results.
 
 Before claiming a coverage gap, read the applicable requirements, specifications
 and verification contracts. Code or one same-type record cannot establish their
@@ -92,11 +116,7 @@ fields to those tools. Distinguish the local test runtime from the service and l
 If a required condition cannot be assessed with the available tools, report that
 gap before requesting approval; do not promise an unavailable check.
 
-Distinguish a missing input from a draft omission. Ask for a required fact absent
-from the confirmed inputs and stop dependent writing. If the fact is available
-and only the draft omits it, correct the editable draft within the requested
-scope. A partial draft stays incomplete. Report a type/outcome mismatch without
-changing type or inventing a fact.
+Report a type/outcome mismatch without changing type or inventing a fact.
 
 ## Author and submit
 
@@ -131,29 +151,32 @@ authority before dependent work. Resolve blocked reads first.
 
 ## Report and recover
 
+Before an exhaustive failure claim in either report form, inspect the captured
+observations and account for calls made after that snapshot. A later success does
+not erase a failed call. If complete capture cannot be established, state that
+limit and use the saved-report route. Reuse retained observations; no duplicate
+report or extra read is needed when they already cover the claim.
+
 For the clarification reply, use **Select the current step**. Otherwise retain
 complete requests/results and one short report outside the repository, including
 after a mutation attempt or uncertain effect. Read required omitted findings.
 The report contains:
 
-- **Content readiness:** one conclusion: complete, incomplete or blocked against
-  the selected type checklist. Refer to the latest saved revision. A correction
-  resolves the earlier omission; an unresolved required gap prevents completion.
+- **Content readiness:** reuse the assessment from **Check the inputs before
+  writing**, updated for the latest saved revision. Keep missing inputs and questions visible.
 - **Saved state:** selection, revision, versions and exact document/result paths.
 - **Validation and review:** evaluator findings, independent content findings,
   local and remote failures (including recovered ones), denials, uncertain effects,
-  and any returned procedure/step. Use observations before exhaustive failure claims.
-  Its snapshot excludes later calls: add their failures, including failed reads of
-  that snapshot. Link evidence; do not copy inventories.
+  and any returned procedure/step. Apply the shared report check above. Link
+  evidence; do not copy inventories.
 
-Draft validation checks template shape and required links. `content_review`
-being `not_assessed` means only that the evaluator did not assess content. It
-does not invalidate your separate review; an empty `incomplete` list does not
-complete it. Name the method: source inspection, executed test or evaluator check.
-Planned checks are not executed tests. Keep report and final reply consistent.
-Separate successful reads from accepted mutations. Attribute facts to their
-actual source: response metadata is not content in the saved artifact. Use only
-confirmed paths/digests; saving alone establishes no completeness.
+Draft validation checks template shape and required links; it does not assess
+content. Planned checks are not executed tests. Keep report and final reply
+consistent with the content-readiness decision.
+Classify effects from operation receipts: accepted writes, successful reads and
+failed or uncertain attempts. Count only accepted writes as mutations; a read
+does not add one. Attribute facts to their actual source. Response metadata is
+not saved content. Use only confirmed paths and digests.
 After compaction, recover the retained reply or report and obtain fresh context.
 
 For stale input, inspect the selection without silently refreshing versions.

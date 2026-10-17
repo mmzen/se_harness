@@ -1,0 +1,27 @@
+{
+  "status": "draft, unapplied proposal",
+  "basis_head": "b9620f58ab018d75a463b38c34422371874778e8",
+  "work_order_sha256": "2744505f4f0debb07521e5a08dcb2b170dbf436d7a537a453d093966d5a9132d",
+  "files": [
+    {
+      "path": "tests/hosted_artifact_graph/native-tools.md",
+      "before_sha256": "47990db4e3ea3720702838ed68021919038a0fffcacbea67071185058055405d",
+      "proposed_sha256": "7bced8eebbb8eb8570ce78b1c78cbf86340776dff325e92e7b4dcf9252b42dfc",
+      "before_bytes": 8684,
+      "proposed_bytes": 5303
+    },
+    {
+      "path": "tests/hosted_artifact_graph/native-execution-tools.md",
+      "before_sha256": "0f75e218679790e6ecccd90764bea5f2f256b51a61ad8f73cb14aee29e182ebf",
+      "proposed_sha256": "88d4e5a6618657eae1e0ce4556eb3c9d8cfccd0af4557c6eaaf5881dae0ba6b2",
+      "before_bytes": 1475,
+      "proposed_bytes": 2750
+    }
+  ],
+  "release_membership": {
+    "id": "REL-SEH-036",
+    "before_sha256": "3cdd7f1616e9450e9649bccd27d777113bf39d9799297cc6ee34178be41b1f1b",
+    "proposed_sha256": "26851c9d9346329d4cfea271ee7edc29698e3c9569f63b66072dcc947ada9151",
+    "change": "Add only WO-RLS-053; preserve accepted bytes/history."
+  }
+}

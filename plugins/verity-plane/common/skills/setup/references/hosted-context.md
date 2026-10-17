@@ -7,6 +7,12 @@ Never print the credential. The sandbox is not repository authority.
 
 ### Before the selected action
 
+Before your first English explanation, read the selected released
+`docs/engineering/harness/COMMUNICATION.md#communication` section. Reuse its
+complete current content if it is already supplied. In a restricted test
+environment, use the supplied helper's documented instruction reader. The
+communication policy remains in that released resource.
+
 Complete the selection checks below, then read the route for the action you
 are about to take. Use this table again when the action changes; retain and
 reuse sections already read in the current context.
@@ -34,13 +40,15 @@ the direct client examples do not override its tool permissions. Use its
 metadata-only identity operation when available. Encoding a wheel is not needed
 to inspect its digest. Stop a denied action without changing the permission route.
 
-Obtain the qualified combination report and exact candidate client wheel.
-If the selected candidate client is already installed in a separate disposable
+Obtain the qualified combination report and its exact client wheel. The client
+may be a development candidate or a qualified released version.
+If the selected client is already installed in a separate disposable
 environment, verify its identity and reuse it. Otherwise create that environment
 outside the checkout. Verify the wheel's SHA-256 against the combination report,
 then install that file with `pip --no-deps`.
-The plugin's bundled released evaluator remains unchanged; do not replace it with
-the candidate client. Use the candidate environment's absolute Python as
+Keep the plugin's bundled evaluator and the service's pinned evaluator identities
+distinct. Do not replace either evaluator to enable remote commands. Use the
+separate client environment's absolute Python as
 `CLIENT_PYTHON` in the remote commands below.
 
 ```text
@@ -59,9 +67,9 @@ This route grants no approval, verification, release, adoption or deployment rig
 
 ## Private lifecycle test copy
 
-The unpublished hosted pilot requires a separately installed candidate remote
+The private hosted pilot requires a separately installed qualified remote
 client, a loopback endpoint, an explicit test project and a new disposable volume.
 Use the repository's `server/README.md` Phase 3 procedure. Its configuration must
 report `test_copy: true`; select `--test-copy` for each rehearsal or export.
 Leave any existing real checkout selection unchanged. Remote setup does
-not activate graph authority or install this candidate into the user's host.
+not activate graph authority or install this client into the user's host.

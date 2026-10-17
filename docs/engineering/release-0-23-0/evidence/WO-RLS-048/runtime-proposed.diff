@@ -1,0 +1,11 @@
+--- current/server/hosted_artifact_graph/service.py
++++ proposed/server/hosted_artifact_graph/service.py
+@@ -77,7 +77,7 @@
+             expect(value["source"]["repository"] == "https://github.com/mmzen/se_harness.git")
+             expect(re.fullmatch(r"[0-9a-f]{40}", value["source"]["candidate_commit"]))
+             expect(value["source"]["candidate_commit"] == os.environ.get("HAG_SOURCE_COMMIT"))
+-            expect(value["client"] == self.config["client"] and value["client"]["version"] == "0.22.2")
++            expect(value["client"] == self.config["client"] and value["client"]["version"] in {"0.22.2", "0.23.0"})
+             expect(value["evaluator"] == EVALUATOR and value["schema_revision"] == self.store.schema_revision)
+             protocols = ["se-harness-remote-command/v1", "se-harness-remote-result/v1", "se-harness-graph-read/v1",
+                          "se-harness-artifact-revision/v1", "se-harness-artifact-baseline/v1"]
