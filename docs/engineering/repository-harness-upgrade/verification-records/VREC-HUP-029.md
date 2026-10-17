@@ -2,7 +2,7 @@
 id = "VREC-HUP-029"
 type = "verification_record"
 title = "Verification candidate for WO-HUP-031"
-status = "ready"
+status = "verified"
 owners = ["codex"]
 created = "2026-10-17"
 updated = "2026-10-17"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-029-evaluator.json"
 evaluator_evidence_sha256 = "96942883cfe1283f9ebdbd0fc7cf5bda2d58fa72b5ab1dadc2e415a1e230685c"
 
+verified_at = "2026-10-17T10:22:55Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-HUP-031"]
 conforms_to = ["VER-HUP-026"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-17T10:22:55Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied \"Verify result\" to the exact VREC-HUP-029 review request for candidate 58b477006b445e6da96645069a758c6d35e3a17d in PR #549. Accepts repository adoption of public evaluator 0.23.0 and development source 0.23.1 against VER-HUP-026, with the displayed retained limits. Merge and host-plugin updates remain separate."
 +++
 
 # Verification Record Candidate
