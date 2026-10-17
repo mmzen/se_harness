@@ -61,3 +61,9 @@ used an installed-package runtime. The corrected invocation uses candidate sourc
 for this evidence-only check; released 0.22.1 remains the lifecycle governor.
 Both failed attempts and helper versions are retained in closeout-capture-recovery.zip.
 No release payload, public observation, requirement or human decision changed.
+
+Base Python also resolved installed distribution metadata outside the checkout
+and was refused with RID018. The final retry uses the existing disposable
+source-test environment after confirming that it has no installed se-harness
+distribution. This additional refusal and environment check are preserved in
+closeout-capture-runtime-recovery.zip. The same identity checks remain required.
