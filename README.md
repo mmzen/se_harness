@@ -61,13 +61,16 @@ record completed delivery, verified in
 [VREC-RLS-004](docs/engineering/release-0-22-1/verification-records/VREC-RLS-004.md).
 Repository evaluator: 0.22.1 ([adoption](docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-030.md)).
 
-### Preparing evaluator 0.23.0 and plugin 0.2.7
+### Evaluator 0.23.0 and plugin 0.2.7
 
-The unpublished [release package](docs/engineering/release-0-23-0/README.md) adds
-the remote client and plugin guidance. Plugin 0.2.7 will bundle 0.23.0; the
-service keeps evaluator 0.22.1. Qualification remains pending. Git remains
-authoritative; the service stays a private source-built sandbox, without public
-service or container-registry publication.
+[Release package](docs/engineering/release-0-23-0/README.md): plugin evaluator 0.23.0;
+service 0.22.1.
+[VREC-SEH-034](docs/engineering/release-0-23-0/verification-records/VREC-SEH-034.md)
+records verification with two open instruction findings and unverified Codex desktop.
+Use the [release record](docs/engineering/release-0-23-0/releases/RLS-SEH-034.md)
+for authority and [delivery evidence](docs/engineering/release-0-23-0/evidence/WO-RLS-047/README.md)
+for public availability. Git remains authoritative. The service stays private
+and source-built.
 
 ## Fewer repository files
 

@@ -4,9 +4,10 @@ Verity Plane brings SE Harness setup, orientation, change and evidence workflows
 to Codex and Claude Code. Plugin **0.2.7** targets **SE Harness 0.23.0** and five
 shared skills, including an explicitly requested operator brief.
 
-This source snapshot prepares the 0.23.0 / 0.2.7 release. Its package, native-host
-and hosted-sandbox qualification remain separate from public delivery. Previous
-release verification and desktop omissions do not qualify these new bytes.
+VREC-SEH-034 records mmzen's verification of the exact 0.23.0 / 0.2.7 candidate.
+Its assessment keeps R23-NATIVE-010/011 open and Codex Windows desktop unverified
+under DEC-RLS-010/011. Package and hosted-sandbox qualification remain separate
+from public delivery; use the release's retained observations for availability.
 
 Use the [release review and delivery evidence](https://github.com/mmzen/se_harness/blob/main/docs/engineering/release-0-23-0/README.md)
 for publication status. PACKAGE-IDENTITY.json and assembly inventories record

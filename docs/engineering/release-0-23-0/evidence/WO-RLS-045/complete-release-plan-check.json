@@ -1,0 +1,22 @@
+{
+  "plan_sha256": "420b4b82891b2fe77244cc3c4a995ddab8153a11f649324f01b1f37e83e51b34",
+  "candidate": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "documentation_commit": "92f948ad9faea69e00485d59c0680694e21bc30e",
+  "surfaces": [
+    "evaluator",
+    "marketplace",
+    "documentation",
+    "demonstration",
+    "release_markers"
+  ],
+  "marketplace": {
+    "state": "exact",
+    "commit": "d04776866046b60b14ffef14ced1453c4aafa7d9",
+    "tree": "0e0ff666693ad7f00564435e2f35ce8e31a2fb4e",
+    "identity_sha256": "f3d3f808d06d09f15628fbbe7958a8bf6e72807f0536a8c9905d947d78376a5e"
+  },
+  "documentation": "All 10 source files match their exact Git blobs; 7 supported paths also match the canonical plan map.",
+  "candidate_evidence": "All 216 captured files unchanged.",
+  "readiness": "All referenced evidence hashes match. Public observations remain pending.",
+  "authority": "Prepared for human decision; no release or external authorization supplied."
+}

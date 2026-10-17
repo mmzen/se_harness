@@ -1,0 +1,166 @@
+{
+  "schema": "se-harness-delivery-plan/v2",
+  "release": {
+    "contract": "REL-SEH-036",
+    "record": "RLS-SEH-034",
+    "version": "0.23.0",
+    "wheel_sha256": "ffa486d386383992349e75e2890b36ded105c797acaa483783d1380cfd520d5c"
+  },
+  "review": {
+    "by": "mmzen",
+    "reference": "PR #545 complete-release review. The matching human response is still required. The immutable review commit binds this plan and complete-release-review.md."
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://pypi.org/project/se-harness/0.23.0/",
+      "work_reference": "WO-RLS-047",
+      "next_action": "Integrate only the reviewed preparation plus exact RLS decision through protected PR #545 using a merge commit at its checked head. Dispatch publish-pypi.yml from main for RLS-SEH-034. Reconcile v0.23.0, GitHub assets, PyPI and release/0.23 at the exact candidate; independently download and install the public wheel. Stop on a conflicting immutable version or missing control.",
+      "expected": {
+        "record": "RLS-SEH-034",
+        "version": "0.23.0",
+        "wheel_sha256": "ffa486d386383992349e75e2890b36ded105c797acaa483783d1380cfd520d5c"
+      },
+      "required_observations": [
+        "publisher",
+        "public_install"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness.git#plugin-marketplace",
+      "work_reference": "WO-RLS-047",
+      "next_action": "After public-wheel equality, promote the exact reviewed child to plugin-marketplace. Run public fresh installation and 0.2.6-to-0.2.7 update on both Windows CLIs in disposable profiles, using explicit qualified Opus 5.5 for Claude live calls. Preserve original inventories and archive bytes. No desktop pass or user-host update is authorized.",
+      "expected": {
+        "plugin_version": "0.2.7",
+        "source_commit": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+        "evaluator_version": "0.23.0",
+        "wheel_sha256": "ffa486d386383992349e75e2890b36ded105c797acaa483783d1380cfd520d5c",
+        "public_revision": "d04776866046b60b14ffef14ced1453c4aafa7d9",
+        "codex_content_sha256": "07af329d4e342e346235d1d8049838125d606b76dd87422c2e225bf76495332a",
+        "claude-code_content_sha256": "7e7682548dc2fd15c707223335c777c401bc52359e5f8d6f186d756494ee1de1"
+      },
+      "required_observations": [
+        "assembly",
+        "qualification",
+        "public_ref"
+      ],
+      "hosts": [
+        "codex",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness/tree/main",
+      "work_reference": "WO-RLS-047",
+      "next_action": "Integrate the reviewed source guidance from the named documentation commit with the release decision. Compare every frozen Git-blob hash at review, integration and live main. Preserve qualified README snapshots. Retain later public availability as named JSON receipts; no post-approval prose edits or hash substitutions.",
+      "expected": {
+        "commit": "92f948ad9faea69e00485d59c0680694e21bc30e"
+      },
+      "required_observations": [
+        "claims_review",
+        "links"
+      ]
+    },
+    {
+      "id": "demonstration",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://mmzen.github.io/se_harness/",
+      "work_reference": "WO-RLS-047",
+      "next_action": "Use the existing Pages workflow at the first main commit with the exact released RLS and binding. Observe canonical URL and existing domain provenance. Do not change provider settings; failed or unknown deployments remain pending.",
+      "expected": {
+        "governance_commit": "release-governance"
+      },
+      "required_observations": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "release_markers",
+      "owner": "mmzen",
+      "disposition": "update",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "WO-RLS-047",
+      "next_action": "Only after every required non-marker observation passes, mark GitHub v0.23.0 latest and move last from the exact previous object to the release candidate. Use the existing serialized workflow and exact last lease; stop on unexpected movement. Integrate named receipts and check complete delivery.",
+      "expected": {
+        "latest": "v0.23.0",
+        "last": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15"
+      },
+      "required_observations": [
+        "authorization",
+        "readback"
+      ]
+    }
+  ],
+  "complete_release": {
+    "repository": "mmzen/se_harness",
+    "candidate_commit": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+    "actions": [
+      "release-integration",
+      "version-tag",
+      "github-release",
+      "pypi",
+      "maintenance-line",
+      "marketplace",
+      "documentation",
+      "pages",
+      "latest",
+      "last",
+      "receipts"
+    ],
+    "marketplace": {
+      "parent": "85ae003769f53908addbdcf46c820a8af530ac24",
+      "commit": "d04776866046b60b14ffef14ced1453c4aafa7d9",
+      "tree": "0e0ff666693ad7f00564435e2f35ce8e31a2fb4e",
+      "identity_sha256": "f3d3f808d06d09f15628fbbe7958a8bf6e72807f0536a8c9905d947d78376a5e"
+    },
+    "markers": {
+      "previous_latest": "v0.22.1",
+      "previous_last": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8"
+    },
+    "integration": {
+      "decision_paths": [
+        "docs/engineering/release-0-23-0/releases/RLS-SEH-034.md"
+      ],
+      "receipt_paths": [
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/observations.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/publisher.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/evaluator-public-install.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/marketplace-public-ref.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/codex-public-fresh.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/codex-public-update.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/claude-code-public-fresh.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/claude-code-public-update.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/documentation-observations.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/pages-observations.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/release-marker-receipt.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/delivery-result.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/maintenance-line.json",
+        "docs/engineering/release-0-23-0/evidence/WO-RLS-047/integration-receipts.json"
+      ]
+    },
+    "readiness": {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/complete-release-readiness.json",
+      "sha256": "0fdf754357532746a70b3765cc38dee3c2bb7437b4cff0487f3c7ca0598f4ea2"
+    },
+    "observations": "docs/engineering/release-0-23-0/evidence/WO-RLS-047/observations.json",
+    "evidence_root": "docs/engineering/release-0-23-0/evidence/WO-RLS-047",
+    "documentation": {
+      "README.md": "5a43ded264071388de30e800bc937772fa2cd485797cc27ed8e41ebbbb42c940",
+      "docs/notes/plugin-installation-guide.md": "22474d27a9d81931e96d930152cbe12876aceb9dec93a0f0edf2ed50c4cb38b7",
+      "docs/notes/plugin-marketplace-publication.md": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58",
+      "docs/notes/developing-se-harness.md": "998993410965121f0817ae6c63256d2fd1af7da33c5ad63c3914a15b79abb412",
+      "docs/notes/harness-installation-and-upgrades.md": "0f99f65b22e737116ae599a2e0a75fdfdf83bbd31cf61c6d07a070617fd27203",
+      "docs/notes/hosted-artifact-graph.md": "04d11a302f3bdb892be2d49e57191fa446b35081b661d01f8ddef9ca9b0c7dbc",
+      "docs/engineering/release-0-23-0/evidence/WO-RLS-047/README.md": "9c755ca77710a2e5bc09b83f2d413323d1ec57920e5f3f289bdb12a6a2784218"
+    }
+  }
+}

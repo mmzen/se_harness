@@ -2,6 +2,17 @@
 
 ## Select the release and its evidence
 
+For evaluator 0.23.0 / plugin 0.2.7,
+[VREC-SEH-034](../engineering/release-0-23-0/verification-records/VREC-SEH-034.md)
+records mmzen's verification. The [assessment](../engineering/release-0-23-0/evidence/WO-RLS-045/verification-assessment-48e851bb.md)
+keeps R23-NATIVE-010/011 open and Codex Windows desktop unverified under
+DEC-RLS-010/011. Read [RLS-SEH-034](../engineering/release-0-23-0/releases/RLS-SEH-034.md)
+for release authority and the [delivery evidence index](../engineering/release-0-23-0/evidence/WO-RLS-047/README.md)
+for actual public fresh/update observations. Do not infer publication from qualification.
+Compare the public distribution identity with the selected release before installation.
+
+## Historical public delivery: 0.22.1 / 0.2.6
+
 For evaluator 0.22.1 / plugin 0.2.6, use the [release review](../engineering/release-0-22-1/README.md)
 and [public delivery evidence](../engineering/release-0-22-1/evidence/WO-RLS-042/README.md).
 VREC-SEH-033 records mmzen's verification of the exact candidate. Local native
@@ -52,7 +63,7 @@ source guidance. The historical 0.2.5 public package uses qualified source
 names plugin 0.2.5, evaluator 0.22.0 and wheel SHA-256
 `44543f242ed19bb30cfd65da415372a87508a6e439204d7f3e37f9f45aefe4e4`.
 Qualified packages retain the README snapshot from their source commit. For
-0.2.6, that snapshot describes staging and the earlier 0.2.5 delivery. Those
+0.2.6 and 0.2.7, those snapshots describe their preparation state. Those
 historical preparation statements are not a live publication status report.
 Source corrections do not rewrite the qualified archives or inventories.
 Use this guide and the selected release's separate public delivery evidence
