@@ -8,7 +8,10 @@ records mmzen's verification. The [assessment](../engineering/release-0-23-0/evi
 keeps R23-NATIVE-010/011 open and Codex Windows desktop unverified under
 DEC-RLS-010/011. Read [RLS-SEH-034](../engineering/release-0-23-0/releases/RLS-SEH-034.md)
 for release authority and the [delivery evidence index](../engineering/release-0-23-0/evidence/WO-RLS-047/README.md)
-for actual public fresh/update observations. Do not infer publication from qualification.
+for actual public fresh/update observations. [VREC-RLS-005](../engineering/release-0-23-0/verification-records/VREC-RLS-005.md)
+verifies completed delivery. Windows Codex and Claude CLI fresh installation,
+0.2.6-to-0.2.7 update and offline setup passed. Codex used the recovery below
+after ordinary marketplace upgrade timed out; those attempts remain failures.
 Compare the public distribution identity with the selected release before installation.
 
 ## Historical public delivery: 0.22.1 / 0.2.6
@@ -116,6 +119,18 @@ its location and inspect the host's marketplace list. Remove only the selected
 source through the native marketplace command, then add the intended source
 and update the plugin. Preserve other installations. A cache directory or a
 successful refresh alone does not prove the new package is loaded.
+
+### Observed Codex marketplace recovery
+
+The 0.23.0 public qualification used Codex CLI 0.162.0-alpha.17.2. Its ordinary
+marketplace upgrade timed out twice. Re-adding the same source alone returned
+`alreadyAdded` and kept the old snapshot. In the disposable profile, native
+marketplace remove/add with the same repository and explicit `plugin-marketplace`
+ref refreshed registration. The installed 0.2.6 plugin and its files remained
+intact before the successful native update to 0.2.7. See the
+[retained recovery](../engineering/release-0-23-0/evidence/WO-RLS-047/closeout-assessment.md#failures-and-recovery).
+This qualifies that recovery route, not the timed-out ordinary update attempts.
+Inspect the actual source and installed bytes before using this recovery.
 
 ## Connect a disposable project and check it
 

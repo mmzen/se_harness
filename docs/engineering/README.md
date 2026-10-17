@@ -4,11 +4,11 @@
 
 ## Product and governance domains
 
-- [release-0-23-0/](release-0-23-0/README.md): approved preparation of evaluator/client 0.23.0 and plugin 0.2.7; exact-package and private-service qualification remain pending.
+- [release-0-23-0/](release-0-23-0/README.md): published evaluator/client 0.23.0 and plugin 0.2.7; candidate verification is VREC-SEH-034 and public-delivery verification is VREC-RLS-005. Accepted instruction findings and the desktop omission remain open.
 - [hosted-artifact-graph/](hosted-artifact-graph/README.md): verified private context, authoring and lifecycle-test sandbox, with Memgraph, immutable baselines and evaluator reuse. Git remains authoritative; the database-side Cypher read-only boundary remains unresolved.
 - [release-0-22-1/](release-0-22-1/README.md): published evaluator 0.22.1 and plugin 0.2.6;
   [verified public delivery](release-0-22-1/verification-records/VREC-RLS-004.md) covers the five surfaces.
-- [Repository adoption](repository-harness-upgrade/README.md): WO-HUP-030 selects 0.22.1. Release preparation now selects unpublished candidate source 0.23.0; it does not change the root evaluator.
+- [Repository adoption](repository-harness-upgrade/README.md): WO-HUP-031 selects released evaluator 0.23.0 and unpublished development source 0.23.1. The private service remains on 0.22.1.
 
 - [release-0-22-0/](release-0-22-0/README.md): published evaluator 0.22.0 and plugin 0.2.5;
   [completed public delivery](release-0-22-0/evidence/WO-RLS-036/closeout.md) covers all five delivery surfaces.

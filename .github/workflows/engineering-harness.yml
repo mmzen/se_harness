@@ -22,7 +22,7 @@ permissions:
   pull-requests: read
 
 env:
-  SE_HARNESS_VERSION: "0.22.1"
+  SE_HARNESS_VERSION: "0.23.0"
 
 jobs:
   validate:

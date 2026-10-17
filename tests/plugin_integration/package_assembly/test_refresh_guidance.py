@@ -1,5 +1,6 @@
-"""Keep the unpublished HAG candidate separate from public release evidence."""
+"""Check package identities and current claims against independent public receipts."""
 from copy import deepcopy
+import hashlib
 import json
 import posixpath
 from pathlib import Path
@@ -8,16 +9,17 @@ import tomllib
 import unittest
 
 ROOT = Path(__file__).resolve().parents[3]
-# REL-SEH-036 selects these unpublished release identities.
+# REL-SEH-036 selects these package identities; development source may advance.
 # Expected identities are explicit inputs, never derived from tested manifests.
-CANDIDATE_PLUGIN = "0.2.7"
-CANDIDATE_EVALUATOR = "0.23.0"
-PUBLIC_PLUGIN = "0.2.6"
-# Published identities come from RLS-SEH-033 and independent public readback.
-EVALUATOR = "0.22.1"
-WHEEL_SHA = "cb35c3c4eb51fe0fca575a9340b1cba6cd63b5f7133a0ebeb3fd32b4ed863053"
-RELEASE = "docs/engineering/release-0-22-1/releases/RLS-SEH-033.md"
-OBSERVATION = "docs/engineering/release-0-22-1/evidence/WO-RLS-042/marketplace-public-ref.json"
+PACKAGE_PLUGIN = "0.2.7"
+PACKAGE_EVALUATOR = "0.23.0"
+PUBLIC_PLUGIN = "0.2.7"
+# Published identities come from RLS-SEH-034 and independent public readback.
+EVALUATOR = "0.23.0"
+WHEEL_SHA = "ffa486d386383992349e75e2890b36ded105c797acaa483783d1380cfd520d5c"
+RELEASE = "docs/engineering/release-0-23-0/releases/RLS-SEH-034.md"
+OBSERVATION = "docs/engineering/release-0-23-0/evidence/WO-RLS-047/marketplace-public-ref.json"
+QUALIFIED = "docs/engineering/release-0-23-0/evidence/WO-RLS-046/marketplace-review-commit-48e851bb.json"
 
 
 def selected_inputs():
@@ -27,6 +29,7 @@ def selected_inputs():
             "plugins/verity-plane/claude-code/.claude-plugin/plugin.json")],
         "release": tomllib.loads((ROOT / RELEASE).read_text(encoding="utf-8").split("+++")[1]),
         "observation": json.loads((ROOT / OBSERVATION).read_text(encoding="utf-8")),
+        "qualified_bytes": (ROOT / QUALIFIED).read_bytes(),
         "root": (ROOT / "README.md").read_text(encoding="utf-8"),
         "marketplace": (ROOT / "release/plugin-marketplace/README.md").read_text(encoding="utf-8"),
     }
@@ -34,18 +37,18 @@ def selected_inputs():
 
 def identity_findings(inputs):
     findings = []
-    if any(m.get("version") != CANDIDATE_PLUGIN for m in inputs["manifests"]):
-        findings.append("candidate manifest version")
+    if any(m.get("version") != PACKAGE_PLUGIN for m in inputs["manifests"]):
+        findings.append("package manifest version")
     release = inputs["release"]
     if (release.get("id"), release.get("status"), release.get("version")) != (
-            "RLS-SEH-033", "released", EVALUATOR):
+            "RLS-SEH-034", "released", EVALUATOR):
         findings.append("released evaluator selection")
     distribution = release.get("distribution", {})
     if (distribution.get("wheel"), distribution.get("wheel_sha256")) != (
             f"se_harness-{EVALUATOR}-py3-none-any.whl", WHEEL_SHA):
         findings.append("released wheel identity")
     guide = " ".join(inputs["marketplace"].split())
-    if (f"Plugin **{CANDIDATE_PLUGIN}**" not in guide or f"**SE Harness {CANDIDATE_EVALUATOR}**" not in guide):
+    if (f"Plugin **{PACKAGE_PLUGIN}**" not in guide or f"**SE Harness {PACKAGE_EVALUATOR}**" not in guide):
         findings.append("assembled guide selection")
     root = " ".join(inputs["root"].split())
     observed = re.search(
@@ -58,13 +61,17 @@ def identity_findings(inputs):
     publisher = observation["publisher"]
     readback = observation["readback"]
     public_refs = dict(line.split()[::-1] for line in readback["stdout"].splitlines())
-    qualified = observation["qualification"]["retained_evidence_index"]["content"]["marketplace"]
+    # The verified release receipt binds the separate marketplace proof by bytes.
+    index = observation["qualification"]["retained_evidence_index"]["content"]
+    binding = next((entry for entry in index["files"] if entry["path"] == QUALIFIED), {})
+    qualified = json.loads(inputs["qualified_bytes"])
     if not (
         observation["status"] == "pass"
-        and observation["release_record"] == "RLS-SEH-033"
+        and observation["release_record"] == "RLS-SEH-034"
         and readback["exit_code"] == 0
         and publisher["state"] == "exact"
         and publisher["applied"] is True
+        and binding.get("sha256") == hashlib.sha256(inputs["qualified_bytes"]).hexdigest()
         and public_refs.get("refs/heads/plugin-marketplace") == publisher["commit"] == qualified["marketplace_commit"]
         and publisher["tree"] == qualified["marketplace_tree"]
         and publisher["identity_sha256"] == observation["assembly"]["sha256"] == qualified["package_identity_sha256"]
@@ -101,23 +108,23 @@ def link_findings(files, sources):
 
 
 class RefreshGuidanceTests(unittest.TestCase):
-    def test_selected_candidate_and_public_claims_have_independent_inputs(self):
+    def test_package_and_public_claims_have_independent_inputs(self):
         self.assertEqual([], identity_findings(selected_inputs()))
 
-    def test_each_host_must_match_the_unpublished_candidate(self):
+    def test_each_host_must_match_the_selected_package(self):
         for index in range(2):
-            for version in (PUBLIC_PLUGIN, "0.2.8"):
+            for version in ("0.2.6", "0.2.8"):
                 data = selected_inputs()
                 data["manifests"][index]["version"] = version
                 with self.subTest(host=index, version=version):
-                    self.assertIn("candidate manifest version", identity_findings(data))
+                    self.assertIn("package manifest version", identity_findings(data))
 
-    def test_candidate_version_does_not_replace_public_evidence(self):
+    def test_wrong_package_or_public_claim_is_rejected(self):
         data = selected_inputs()
-        data["marketplace"] = data["marketplace"].replace(CANDIDATE_PLUGIN, PUBLIC_PLUGIN)
+        data["marketplace"] = data["marketplace"].replace(PACKAGE_PLUGIN, "0.2.6")
         self.assertIn("assembled guide selection", identity_findings(data))
         data = selected_inputs()
-        data["root"] = data["root"].replace(PUBLIC_PLUGIN, CANDIDATE_PLUGIN)
+        data["root"] = data["root"].replace(PUBLIC_PLUGIN, "0.2.8")
         self.assertIn("public claim lacks matching observation", identity_findings(data))
 
     def test_wrong_manifest_or_wheel_is_rejected(self):
@@ -135,7 +142,7 @@ class RefreshGuidanceTests(unittest.TestCase):
     def test_mutually_stale_documents_do_not_establish_identity(self):
         data = selected_inputs()
         for name in ("root", "marketplace"):
-            data[name] = data[name].replace(PUBLIC_PLUGIN, "0.1.0").replace(CANDIDATE_PLUGIN, "0.1.0").replace(EVALUATOR, "0.18.0").replace(CANDIDATE_EVALUATOR, "0.18.0")
+            data[name] = data[name].replace(PUBLIC_PLUGIN, "0.1.0").replace(PACKAGE_PLUGIN, "0.1.0").replace(EVALUATOR, "0.18.0").replace(PACKAGE_EVALUATOR, "0.18.0")
         self.assertIn("assembled guide selection", identity_findings(data))
 
     def test_premature_public_claim_is_rejected(self):
@@ -150,6 +157,15 @@ class RefreshGuidanceTests(unittest.TestCase):
             data = selected_inputs()
             data["observation"]["publisher"][field] = "unconfirmed"
             with self.subTest(field=field):
+                self.assertIn("public tree lacks accepted-package comparison", identity_findings(data))
+        for defect in ("missing proof binding", "changed proof bytes"):
+            data = selected_inputs()
+            if defect == "missing proof binding":
+                index = data["observation"]["qualification"]["retained_evidence_index"]["content"]
+                index["files"] = [entry for entry in index["files"] if entry["path"] != QUALIFIED]
+            else:
+                data["qualified_bytes"] += b"\n"
+            with self.subTest(defect=defect):
                 self.assertIn("public tree lacks accepted-package comparison", identity_findings(data))
 
     def test_published_guide_rejects_pending_publication_status(self):

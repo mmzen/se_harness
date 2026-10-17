@@ -2,19 +2,21 @@
 
 ## Release status and immutable packages
 
-For evaluator 0.22.1 / plugin 0.2.6, [VREC-SEH-033](../engineering/release-0-22-1/verification-records/VREC-SEH-033.md)
-records mmzen's verification of the exact candidate. The [release record](../engineering/release-0-22-1/releases/RLS-SEH-033.md)
-records its release decision; the [delivery evidence](../engineering/release-0-22-1/evidence/WO-RLS-042/README.md)
-records completed publication and public-route results separately.
-[VREC-RLS-004](../engineering/release-0-22-1/verification-records/VREC-RLS-004.md)
-records mmzen's verification of those observations. Read those records
-and the actual public identity before claiming a current version or complete delivery.
-Codex Windows desktop remains unverified under accepted DEC-RLS-009 / RISK-RLS-007.
+Evaluator/client 0.23.0 and plugin 0.2.7 are public.
+[VREC-SEH-034](../engineering/release-0-23-0/verification-records/VREC-SEH-034.md)
+records binary verification; [RLS-SEH-034](../engineering/release-0-23-0/releases/RLS-SEH-034.md)
+records the release decision. [VREC-RLS-005](../engineering/release-0-23-0/verification-records/VREC-RLS-005.md)
+verifies the [public delivery observations](../engineering/release-0-23-0/evidence/WO-RLS-047/closeout-assessment.md).
+Compare the actual public identity with those records before claiming delivery.
+R23-NATIVE-010/011 and the desktop omission remain under DEC-RLS-010/011 and
+RISK-RLS-008/009. Public CLI checks do not remove those limits.
 
-Staged package READMEs are immutable snapshots of preparation. In 0.2.6 they
-include earlier 0.2.5 status and qualification wording. Preserve those bytes
-and inventories. Current source guidance and the delivery receipts describe
-later verification and publication; do not rewrite a qualified package in place.
+Package READMEs are immutable snapshots from their qualified source. The 0.2.6
+and 0.2.7 snapshots include earlier status and preparation wording. Preserve
+their bytes and inventories. Current source guidance and delivery receipts
+describe later publication; do not rewrite a qualified package in place.
+The [0.22.1 public evidence](../engineering/release-0-22-1/evidence/WO-RLS-042/README.md)
+retains that earlier release's observations and decisions.
 
 ## Historical public delivery: 0.22.0 / 0.2.5
 
@@ -38,7 +40,7 @@ the original release omissions and accepted risks under DEC-RLS-005/006 remain
 historical records.
 
 This rollout used the existing delivery route under selected evaluator 0.21.0.
-The repository now selects 0.22.1 under WO-HUP-030. The separately authorized reviewer-only
+The repository now selects 0.23.0 under WO-HUP-031. The separately authorized reviewer-only
 provider change for 0.22.1 is recorded in the
 [configuration readback](../engineering/release-0-22-1/evidence/WO-RLS-040/provider-configuration-applied.json).
 Recheck actual provider controls before each authorized publication.
@@ -92,7 +94,7 @@ and instructions come from the same source commit; no output overlay is needed.
 
 ## Stage before release approval
 
-The [0.22.1 / plugin 0.2.6 preparation](../engineering/release-0-22-1/README.md)
+The [0.23.0 / plugin 0.2.7 release](../engineering/release-0-23-0/README.md)
 uses the complete-release route. Candidate qualification, exact final approval
 and public delivery are separate observed stages. Consult its current records
 for the observed public state. Repository adoption and the hosted evaluator

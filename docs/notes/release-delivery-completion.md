@@ -27,7 +27,7 @@ and reviewed provider configuration enabled the complete-release route used by
 ## One approval for the complete release
 
 **Availability:** Evaluator 0.22.0 and plugin 0.2.5 contain this route. This
-repository selects 0.22.1 under WO-HUP-030. The separately authorized
+repository selects 0.23.0 under WO-HUP-031. The separately authorized
 [provider configuration](../engineering/release-0-22-1/evidence/WO-RLS-040/provider-configuration-applied.json)
 was applied for 0.22.1. Recheck provider controls before each release.
 Existing releases keep their original decisions and procedures.
@@ -419,7 +419,23 @@ the required marketplace update remains absent. That case returns incomplete
 and retains the marketplace owner and next action. Live public qualification
 belongs to the subsequent marketplace work and its verification contract.
 
-## Current 0.22.1 delivery
+## Current 0.23.0 delivery
+
+Evaluator/client 0.23.0 and plugin 0.2.7 are public. Marketplace commit:
+`d04776866046b60b14ffef14ced1453c4aafa7d9`. The
+[delivery result](../engineering/release-0-23-0/evidence/WO-RLS-047/delivery-result.json)
+records all five surfaces complete, including Pages, latest v0.23.0 and last at
+the released candidate. [VREC-RLS-005](../engineering/release-0-23-0/verification-records/VREC-RLS-005.md)
+records mmzen's verification of the public observations.
+
+Windows Codex and Claude CLI fresh installation, update from 0.2.6 and offline
+setup passed. The [assessment](../engineering/release-0-23-0/evidence/WO-RLS-047/closeout-assessment.md)
+retains Codex's marketplace timeouts and supported registration recovery.
+R23-NATIVE-010/011 remain open; desktop remains unverified under DEC-RLS-010/011
+and RISK-RLS-008/009. Repository adoption is separately governed by WO-HUP-031.
+These public-route checks do not qualify live model sessions or the private service.
+
+## Historical 0.22.1 delivery
 
 Evaluator 0.22.1 and plugin 0.2.6 are public. The marketplace commit is
 `85ae003769f53908addbdcf46c820a8af530ac24`. The
