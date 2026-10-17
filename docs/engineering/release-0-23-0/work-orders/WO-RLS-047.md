@@ -2,10 +2,10 @@
 id = "WO-RLS-047"
 type = "work_order"
 title = "Deliver and confirm evaluator 0.23.0 and plugin 0.2.7"
-status = "approved"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-10-12"
-updated = "2026-10-12"
+updated = "2026-10-17"
 
 [assurance]
 commit_bound_verification = "required"
@@ -28,6 +28,13 @@ decided_at = "2026-10-12T14:05:21Z"
 decided_by = "mmzen"
 reason = "Human mmzen answered \"Approve preparation, verification and review publication\" to the exact evaluator/client 0.23.0 and plugin 0.2.7 package: REL-SEH-036, WO-RLS-045/046/047 and VER-RLS-039/040/041, with required commit-bound verification. This approves the bounded build-helper/setup-guide correction, current documentation, qualification, review pushes and a draft PR from codex/release-0-23-0 to mmzen/se_harness:main, later verification-decision pushes, read-only CI rehearsals and codex/plugin-0-2-7-staging review staging. The hosted service remains a private source-built sandbox and Git remains authoritative. Human verification, merge and the exact complete-release approval remain separate; adoption and host updates are excluded. Reviewed byte digests matched; only confirmed assurance fields were added before preview. Reviewed SHA-256 854eaa7df9f5a0d7ba0c006e84998e7a8b482e78aa43c7962669390e618e1f54."
 scope_paths = ["docs/engineering/release-0-23-0/", "README.md", "release/plugin-marketplace/README.md", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md", "docs/notes/developing-se-harness.md", "docs/notes/release-delivery-completion.md", "docs/notes/release-publication-rehearsal.md", "docs/notes/harness-installation-and-upgrades.md", "docs/notes/harnessctl-reference.md", "docs/notes/hosted-artifact-graph.md", "docs/engineering/plugin-integration/README.md", "docs/engineering/hosted-artifact-graph/README.md", "docs/engineering/README.md", "server/README.md", "tests/test_progressive_documentation.py", "tests/plugin_integration/package_assembly/test_refresh_guidance.py"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-10-17T05:48:58Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Begin the approved local current-status documentation and delivery-input preparation only. Public actions remain conditional on the later exact complete-release decision. Public qualification and final VER-RLS-041 assurance remain pending; no release or external authority is supplied by this start."
 +++
 
 # Deliver and confirm evaluator 0.23.0 and plugin 0.2.7

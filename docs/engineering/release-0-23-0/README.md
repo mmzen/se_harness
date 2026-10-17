@@ -1,21 +1,25 @@
 # Proposed evaluator 0.23.0 and plugin 0.2.7 release
 
-Current status: **VREC-SEH-034 is ready for human verification.**
+Current status: **VREC-SEH-034 is verified by mmzen; RLS-SEH-034 is ready.**
 Candidate `48e851bbc94d7fb0c06e9b80666c3860cb5f8c15` covers 20 implemented work orders and 11 verification contracts.
 Read the [final assessment](evidence/WO-RLS-045/verification-assessment-48e851bb.md)
-and [ready record](verification-records/VREC-SEH-034.md). The final candidate has 19 passing
+and [verified record](verification-records/VREC-SEH-034.md). The final candidate has 19 passing
 CI checks. The historical-rehearsal correction is resolved; native findings stay
 open and Codex Windows desktop stays unverified under DEC-RLS-010/011.
-WO-RLS-047 remains approved and unstarted. Human verification, merge and the
-exact complete-release decision remain separate. Earlier reports below keep
-their historical subjects and findings.
+PR #544 merged the verification in `b43bef8c213ecabee94447a8fb52c32294c7ab75`.
+[RLS-SEH-034](releases/RLS-SEH-034.md) binds the same candidate and archives.
+WO-RLS-047 is preparing current source guidance and the public delivery inputs;
+public execution and its later assurance remain pending. The exact complete-release
+plan and ready-record replay are being prepared for the separate release decision.
+Use the [public evidence index](evidence/WO-RLS-047/README.md) for observed delivery.
 
-Read the [current qualification report](evidence/WO-RLS-045/qualification-progress-6fa4d1a6.md),
+Historical preparation: read the [earlier qualification report](evidence/WO-RLS-045/qualification-progress-6fa4d1a6.md),
 [open instruction/desktop items](evidence/WO-RLS-054/open-items.md), and
 [historical-rehearsal correction proposal](evidence/WO-RLS-055/preparation-review.md).
-The assessed candidate is `6fa4d1a645660cd8022dfc5c3ee7ba35bda3d162`. Its package, source and hosted checks passed;
-the separate manual historical-release rehearsal failed. Final aggregate verification,
-merge and complete-release approval remain pending.
+That earlier candidate was `6fa4d1a645660cd8022dfc5c3ee7ba35bda3d162`.
+Its package, source and hosted checks passed; the separate historical-release
+rehearsal failed at that point. WO-RLS-055 corrected that defect; the final
+assessment above records the subsequent passing qualification and human verification.
 
 R23-NATIVE-010/011 remain open under DEC-RLS-010 / RISK-RLS-008.
 Codex Windows desktop remains deferred and unverified under DEC-RLS-011 / RISK-RLS-009.
@@ -44,7 +48,7 @@ the tagged source. Git remains authoritative; no public service is proposed.
 | [WO-RLS-052](work-orders/WO-RLS-052.md) | Implemented. Source-support correction. Earlier failures are retained; see current qualification report. |
 | [WO-RLS-053](work-orders/WO-RLS-053.md) | Implemented. Two-guide input-size correction. Earlier failures are retained; see current qualification report. |
 | [WO-RLS-054](work-orders/WO-RLS-054.md) | Implemented. Early communication pointer and exact linked membership amendment. Earlier failures are retained; see current qualification report. |
-| [WO-RLS-055](work-orders/WO-RLS-055.md) | Approved historical-rehearsal correction and exact linked amendment applied; required qualification in progress. |
+| [WO-RLS-055](work-orders/WO-RLS-055.md) | Implemented historical-rehearsal correction, included in verified VREC-SEH-034. |
 | [WO-RLS-047](work-orders/WO-RLS-047.md), [VER-RLS-041](verification/VER-RLS-041.md) | Public delivery and independently observed closeout after complete-release approval. |
 
 Base: merged main `4fb5dbc29ffd7a2ccdc9a081c9c9b9f82b99d999`.

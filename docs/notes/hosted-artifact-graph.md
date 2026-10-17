@@ -6,7 +6,7 @@ qualification is retained in VREC-HAG-004. Use [the operating procedure](../../s
 the exact combination. Git remains authoritative. This is not a public service.
 
 DEC-HAG-001 is decided. The bounded revision in DEC-HAG-002 selects public
-evaluator 0.22.1 for this sandbox; candidate client 0.22.2 is separate.
+evaluator 0.22.1 for this sandbox; the 0.23.0 remote client uses a separate environment.
 
 Phase 3 adds an explicit private test-copy lifecycle pilot under WO-HAG-008 and
 SPEC-HAG-007. Git remains authoritative. The pilot uses separately versioned
@@ -20,7 +20,8 @@ records their exact inputs and limits. mmzen verified
 [VREC-HAG-006](../engineering/hosted-artifact-graph/verification-records/VREC-HAG-006.md)
 for that recorded candidate. The subsequent
 [WO-HAG-011 drafting correction](../engineering/hosted-artifact-graph/evidence/WO-HAG-011/qualified45-result/assessment.md)
-passes its focused content checks and awaits separate human verification.
+passed its focused content checks and was verified by mmzen in
+[VREC-HAG-007](../engineering/hosted-artifact-graph/verification-records/VREC-HAG-007.md).
 Duration and context goals remain missed or unavailable.
 Authentication and database ACL implementation remain deferred. The existing
 private access controls and RISK-HAG-001 remain in place.
@@ -410,5 +411,8 @@ The missed or unavailable duration/context goals remain distinct from correctnes
 Git remains authoritative.
 
 The [0.23.0 / plugin 0.2.7 release package](../engineering/release-0-23-0/README.md)
-requires new qualification of its exact archives and private service combination.
-Earlier verification does not establish public delivery or production support.
+has exact archive and private-service qualification assessed in
+[VREC-SEH-034](../engineering/release-0-23-0/verification-records/VREC-SEH-034.md).
+The assessment retains the accepted open instruction findings and unverified desktop.
+Use the release's separate delivery observations for public availability;
+candidate verification does not establish public delivery or production support.

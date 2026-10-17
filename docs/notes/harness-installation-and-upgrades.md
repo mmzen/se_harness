@@ -11,6 +11,12 @@ layout introduced by WO-HUP-003. Updating a host plugin does not change a
 repository selection. Provider configuration for the single-approval release
 route remains separate.
 
+For 0.23.0 / plugin 0.2.7, [VREC-SEH-034](../engineering/release-0-23-0/verification-records/VREC-SEH-034.md)
+records candidate verification with the accepted open findings and desktop omission.
+Use [the delivery evidence](../engineering/release-0-23-0/evidence/WO-RLS-047/README.md)
+to establish public availability. Release publication does not adopt the evaluator
+for this repository or change the service's pinned 0.22.1 environment.
+
 <a id="minimal-installation-successor-candidate"></a>
 
 ## Minimal installation (0.21.0)

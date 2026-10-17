@@ -272,12 +272,13 @@ Live publication keeps the default mode and its current-main documentation check
 See [release rehearsals](release-publication-rehearsal.md) for the inputs and evidence.
 
 The [0.23.0 / plugin 0.2.7 package](../engineering/release-0-23-0/README.md)
-is in preparation from merged main. It includes the remote client and qualified
-plugin guidance. Qualification of the new archives and hosted combination is
-still required. The service remains a private source build, with its evaluator
-pinned to 0.22.1; the plugin will bundle the exact 0.23.0 archive. Retain the
-combination manifest with the release bundle. Use the existing complete-release
-route after final verification; this preparation does not change public latest.
+has candidate verification in VREC-SEH-034, including the exact archives and
+hosted combination. Its assessment retains R23-NATIVE-010/011 as open and
+Codex Windows desktop as unverified under DEC-RLS-010/011. The service remains
+a private source build with evaluator 0.22.1; the plugin bundles the exact 0.23.0
+archive. RLS-SEH-034 and the release's delivery evidence record authority and
+public observations separately. Use the existing complete-release route and
+retained combination manifest; qualification alone does not change public latest.
 
 The [0.22.1 / plugin 0.2.6 release](../engineering/release-0-22-1/README.md)
 completed the complete-release route. Candidate qualification, final approval
