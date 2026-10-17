@@ -75,7 +75,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-004`: authenticated decision records.
 - `WO-ECP-005`: one result schema and one rule selector.
 - `WO-ECP-006`: remove the Phase 4 envelope, bundle and broker, keep the journaled apply as retained code, retire the stubbed skills (revised 2026-08-29 from the 08-27 draft; `REQ-ECP-018`, `REQ-ECP-014`, new `VER-ECP-014`; the shared write path `REQ-ECP-017` and the delegation class `REQ-ECP-011` follow under later work orders).
-- `WO-ECP-007`: evict the bootstrap bridge and this repository's identifiers from the product.
+- `WO-ECP-007`: close remaining product-boundary gaps; narrowed draft, with definition activation tracked by `DEC-ECP-003`.
 - `WO-ECP-008`: retire stubbed skills, trim the manifest, scope the handoff snapshot.
 - `WO-ECP-009`: one precondition engine: transition evaluates the contract's gates (split from `WO-ECP-005` on 2026-08-28).
 - `WO-ECP-010`: replace the governance-migration rehearsal with a real upgrade rehearsal (split from `WO-ECP-007` on 2026-08-28 for issue #210).
@@ -91,7 +91,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-005` independent, and before `WO-ECP-009`.
 - `WO-ECP-009` after `WO-ECP-005`, and before `WO-ECP-006`.
 - `WO-ECP-006` after `WO-ECP-003` and `WO-ECP-009` (both merged); before the work orders that wire the journal (`REQ-ECP-017`) and add the delegation class (`REQ-ECP-011`).
-- `WO-ECP-007` independent.
+- `WO-ECP-007` depends on reviewed definition revisions and `DEC-ECP-003`; existing release and adoption checks remain intact.
 - `WO-ECP-010` independent; `WO-HBI-005` (merged) precedes it.
 - `WO-ECP-011` after `WO-ECP-010` (merged) and `WO-HUP-008` (merged).
 - `WO-ECP-012` independent; repair of issue #254 under the new `REQ-ECP-019` / `SPEC-ECP-008` / `VER-ECP-008`, drafted 2026-08-29 after `WO-HUP-009` moved the root to 0.9.0.

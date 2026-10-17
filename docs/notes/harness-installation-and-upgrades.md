@@ -74,18 +74,26 @@ external-resource repository. Each selected file appears in the plan:
 | `--integration ci` | Editable `.github/workflows/engineering-harness.yml` and the generated-output block in `.gitignore`. |
 | `--integration pr` | Editable `.github/PULL_REQUEST_TEMPLATE.md`. |
 
-For example, establish Git evidence attributes before producing hash-bound
-evidence. Review the preview and apply the same choice:
+In a Git repository, `doctor` requires effective evidence attributes even before
+the first evidence file exists. Default `init` does not select this integration:
+the two-file installation can succeed while `doctor` reports
+`FAIL hash-bound-attribute-effective`. Select Git integration explicitly, or
+provide an equivalent owner rule.
+
+For an existing minimal installation, review the preview and apply the same choice:
 
 ```text
 "CHECKER" -I -m se_harness upgrade "REPO" --integration git --json
 "CHECKER" -I -m se_harness upgrade "REPO" --integration git --apply --json
+git -C "REPO" add .engineering-harness.toml .engineering-harness.lock .gitattributes
+git -C "REPO" commit -m "Configure engineering evidence attributes"
 "CHECKER" -I -m se_harness doctor "REPO" --json
 ```
 
 The effective rule remains `docs/engineering/**/evidence/*.json text eol=lf`.
 An equivalent owner rule is valid. Missing or overriding rules are readiness
-findings; checks do not relax hashing. Use `scaffold-domain` and `create-artifact`
+failures; a successful `doctor` result also requires its other checks to pass.
+The check does not create evidence or relax hashing. Use `scaffold-domain` and `create-artifact`
 for requested formal content, rather than copying the template collection.
 
 ### Migrate a repository-copy installation

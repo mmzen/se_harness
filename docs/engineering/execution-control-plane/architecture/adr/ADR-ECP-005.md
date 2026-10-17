@@ -5,7 +5,7 @@ title = "Evict self-hosting machinery from the shipped product"
 status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-28"
+updated = "2026-10-17"
 
 [relations]
 decides = ["ARCH-ECP-001"]
@@ -19,6 +19,10 @@ reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP de
 +++
 
 # ADR: Evict self-hosting machinery from the shipped product
+
+## Selected WO-ECP-007 revision
+
+This revision applies only to remaining work under WO-ECP-007. The [preserved accepted version](../../evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/ADR-ECP-005.txt) has complete-file SHA-256 `a4d955f6908ea0489b091ed4a29c57d708c6458cf4ea274773566482dc8e50c0` and Git blob `e327758c1d6354ab7df107d0b9837984201ce8b5` at commit `0b93e92ceabdb4cae85e1f4fdab943f955aa1c38`. The [activation receipt](../../evidence/WO-ECP-007/definition-revisions/2026-10-17/activation.json) records the actual human authority and before/after identities. Without that recorded authority this replacement does not govern work. Original lifecycle events remain unchanged; this is not a native evaluator revision event. Earlier completed work and evidence retain their original definition meaning. Retained historical problem descriptions are context, not claims about current code. Unrelated skills and capabilities retain their existing obligations.
 
 ## Status
 
@@ -47,79 +51,60 @@ identifiers as a code constant.
 
 ## Decision drivers
 
-- Principle 6: orchestration and self-hosting are host detail, not product.
-- A consumer's first `doctor` must pass.
-- No product code names this repository's own records.
-- Keep every published record and its evidence tracked and hash-bound.
-- Skills must do what their `SKILL.md` says or not ship.
-- Deletions that touch approved artifacts are amendments, not silent edits.
+- Remove the remaining shipped repository-ID exception.
+- Preserve the minimal-install boundary and explicitly resolve Git readiness.
+- Keep required release and adoption controls working.
+- Reuse the existing build patches, checker and tests.
+- Preserve accepted definitions and historical evidence.
+- Leave unrelated skill and execution-model work with its existing authority.
 
 ## Considered options
 
-### Option A: keep the bridge behind a feature flag
+### Preserve the old broad eviction plan
 
-Gate the class, the `predecessor-view` role, and the rehearsal behind
-`[harness] self_hosting = true`, default off. Consequences: consumer
-`doctor` passes; but the code, its four ARCH and four SPEC artifacts, the
-CI lanes, and the 19% of the validator devoted to it remain in the wheel
-and in every reader's path; the flag is one more concept; the `RLS-SEH`
-constants stay in generic code; the stubbed skills stay shipped.
+This would remove active release/adoption functions and recreate retired legacy
+declarations. It increases work and risk without being needed to remove the
+remaining product exception. Reject for narrowed WO-ECP-007.
 
-### Option B: evict to `repository_tools/` and to data
+### Correct the remaining boundary through existing components
 
-Remove the class and fragment lines; treat "pattern matches nothing" as a
-warning for template-region classes; move `candidate-package`,
-`public-install`, and `predecessor-view` self-checks and
-`candidate_acceptance.py` to `repository_tools/`; replace the six
-identifiers with a rule-5 declaration on an approved upgrade work order;
-delete `validate_governor_transition.py`, the migration stage machine, the
-recovery rehearsal, `accept-candidate`, and lock schema-1 writes; run the
-real `upgrade --apply` as the rehearsal; exclude skills with stub clients
-from the template. Consequences: about 6,000 lines leave the product; a
-fresh consumer passes `doctor`; history is preserved through data;
-`ADR-REB-009`, `SPEC-REB-002` rule 14, and `SPEC-LRE-001` rule 11 require
-amendment records.
+Use the existing Explorer build patch mechanism and portable-surface check.
+Reconcile the installation criterion, keep release/adoption controls, and preserve
+historical definitions. This is the proposed choice. Its cost is a bounded UI
+correction, regression checks and explicit definition revision.
 
-### Option C: delete the bridge and the history together
+### Leave the product unchanged
 
-Also drop the predecessor-view validator rules and the `RLS-SEH-014` and
-`RLS-SEH-015` evidence. Consequences: simplest code; orphans two published
-release records whose evidence is hash-bound, which the repository's own
-rules forbid.
+No implementation cost, but the viewer retains a repository-ID exception and the
+current package guard does not detect it. This does not satisfy the agreed outcome.
 
 ## Decision
 
-Select Option B (`SPEC-ECP-007`, `ECP-PRD-*` and `ECP-SKL-*`). Once
-accepted, this ADR supersedes the five-operation `qualify` decision of
-`ADR-REB-009` with a two-operation consumer namespace plus repository
-tools, amends `SPEC-REB-002` rule 14 so the disposable rehearsal is a real
-installer run, and amends `SPEC-LRE-001` rule 11 so the compatibility set is
-declared through rule 5 rather than frozen in code. `WO-ECP-007` writes the
-amendment records on `ADR-REB-009`, `SPEC-REB-002`, and `SPEC-LRE-001`.
+For the remaining consumer-boundary work, retain the active qualification
+operations, independent verifier boundary and repository adoption checker.
+Correct the shipped viewer's repository-ID exception using the existing build
+patch mechanism and extend the existing wheel check to detect its return.
+Preserve minimal initialization and require effective Git evidence attributes before doctor passes. Do not revive retired legacy declarations or repeat completed removals.
+
+This revises only the unexecuted cleanup direction associated with WO-ECP-007.
+Do not supersede ADR-REB-009 through this work. Earlier retirement decisions and
+historical evidence retain their original references. The accepted source record
+is preserved and this proposal cannot govern before recorded activation.
 
 ## Consequences
 
-- Positive: a green `init` is followed by a green `doctor`; the wheel
-  carries no `RLS-SEH` string; the validator's predecessor-view rules run
-  only where a `[bootstrap]` tuple exists; the template ships one honest
-  skill.
-- Negative: re-validation of `RLS-SEH-012` by the 0.5.0 evaluator is no
-  longer runnable from the wheel; it remains recorded evidence.
-- Operational: consumers see `update` and `remove` entries on upgrade; this
-  repository's CI loses the predecessor-evaluator lane and gains a
-  `git diff --quiet` lock-drift step; `scripts/` needs a header saying which
-  files are pinned payload.
-- Security: the removed rehearsal ran a private transaction with fake
-  digests; the replacement exercises `installer.apply_changes` itself.
-- Migration: `WO-ECP-007` performs the eviction and writes the three
-  amendment records; `WO-ECP-008` removes the stubbed skills; the six
-  historical exemptions are re-declared under rule 5 before the constant is
-  deleted, so no published record loses its exemption at any commit.
+- The viewer uses the same selection rules for equivalent records regardless of ID.
+- Package checks catch a return of the known exception, including generated UI.
+- Historical documentation links remain permitted; executable exceptions do not.
+- Release qualification, candidate verification and adoption checks remain active.
+- The installation sequence is explicit; the confirmed current-behavior choice changes guidance and tests, not installer behavior.
+- Definition activation still needs a supported route or a separately reviewed, explicit user authorization. Existing accepted versions and earlier evidence remain intact.
+- No new scanner service, general parser or release framework is introduced.
 
 ## Validation
 
-`ECP-PRD-003` fresh-consumer `doctor` test on Linux and Windows against the
-built wheel; `ECP-PRD-004` grep over the wheel; `ECP-PRD-007` import test
-without `repository_tools`; `ECP-SKL-003` template grep; a test that
-`W024` is still produced for each of the six records with a rule-5
-declarer; presence tests for the three amendment records.
+Use the activated VER-ECP-007 revision for the selected REQ-ECP-012/013 work:
+paired viewer behavior, deterministic generation, built-wheel boundary checks,
+negative package controls and Windows/Linux installed-consumer checks. Retain
+existing release/adoption regression checks and historical-byte comparisons.
+This work does not re-qualify the unrelated shipped-skills contract.

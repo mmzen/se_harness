@@ -4,6 +4,8 @@ import hashlib
 import importlib.util
 import json
 import re
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -321,6 +323,68 @@ class DashboardWebUIContractTests(unittest.TestCase):
             source = (builder.SOURCES / f"{name}.dc.html").read_text(encoding="utf-8")
             with self.subTest(source=name):
                 self.assertIn("class Component extends DCLogic", source)
+
+    @unittest.skipUnless(shutil.which("node"), "Node is required to exercise the shipped viewer")
+    def test_lineage_prefers_verified_records_independently_of_id(self) -> None:
+        content = self.canonical.read_text(encoding="utf-8")
+        marker = '"./Lineage%20View.dc.html": new Blob(['
+        view, _ = json.JSONDecoder().raw_decode(content[content.index(marker) + len(marker):])
+        script = re.search(r'<script type="text/x-dc"[^>]*>(.*?)</script>', view, re.S)
+        self.assertIsNotNone(script)
+        # Execute the shipped component, including its real roster selection.
+        # The older ready record sorts first, so excluding a verified ID is observable.
+        runner = r"""
+const input = JSON.parse(require('fs').readFileSync(0, 'utf8'));
+const window = { HarnessExplorer: { prefs: { getItem: () => null } } };
+const Component = new Function('DCLogic', 'window', input + '; return Component;')(class {}, window);
+const outcomes = [];
+for (const id of ['VREC-SEH-021', 'VREC-TST-021']) {
+  for (const status of ['verified', 'ready']) {
+    const component = new Component();
+    component.props = {};
+    const artifacts = [
+      {id: 'RLS-TST-001', type: 'release_record', status: 'released'},
+      {id: 'WO-TST-001', type: 'work_order', status: 'implemented'},
+      {id: 'VREC-AAA-001', type: 'verification_record', status: 'ready'},
+      {id, type: 'verification_record', status},
+      {id: 'VREC-OTHER-001', type: 'verification_record', status: 'verified'},
+      {id: 'WO-OTHER-001', type: 'work_order', status: 'implemented'}
+    ].map(a => ({...a, title: a.id}));
+    const relations = [
+      {source: 'RLS-TST-001', relation: 'releases_work', target: 'WO-TST-001'},
+      {source: 'VREC-AAA-001', relation: 'verifies_work_order', target: 'WO-TST-001'},
+      {source: id, relation: 'verifies_work_order', target: 'WO-TST-001'},
+      {source: 'VREC-OTHER-001', relation: 'verifies_work_order', target: 'WO-OTHER-001'}
+    ];
+    component._bundle = {artifacts, relations};
+    component._byId = new Map(artifacts.map(a => [a.id, a]));
+    component._details = new Map(); component._coverage = new Map();
+    component._in = new Map(); component._out = new Map(); component._stageOf = {};
+    for (const stage of component.STAGES) for (const type of stage.types) component._stageOf[type] = stage.id;
+    for (const relation of relations) {
+      if (!component._out.has(relation.source)) component._out.set(relation.source, []);
+      component._out.get(relation.source).push(relation);
+      if (!component._in.has(relation.target)) component._in.set(relation.target, []);
+      component._in.get(relation.target).push(relation);
+    }
+    component.state.data = component._bundle;
+    component.state.selId = 'RLS-TST-001';
+    outcomes.push({id, status, selected: component.renderVals().sel.roster.rows[0].vrecId});
+  }
+}
+process.stdout.write(JSON.stringify(outcomes));
+"""
+        result = subprocess.run(
+            [shutil.which("node"), "-e", runner], input=json.dumps(script.group(1)),
+            text=True, encoding="utf-8", capture_output=True, timeout=30,
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        outcomes = json.loads(result.stdout)
+        self.assertEqual(4, len(outcomes))
+        for outcome in outcomes:
+            with self.subTest(**outcome):
+                expected = outcome["id"] if outcome["status"] == "verified" else "VREC-AAA-001"
+                self.assertEqual(expected, outcome["selected"])
 
     def test_distribution_table_admits_only_scalar_fields(self) -> None:
         table = GENERATOR.distribution_table(

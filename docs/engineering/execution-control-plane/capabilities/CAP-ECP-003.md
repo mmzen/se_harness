@@ -5,7 +5,7 @@ title = "The shipped product carries only machinery a consumer repository needs"
 status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-27"
-updated = "2026-08-28"
+updated = "2026-10-17"
 
 [relations]
 derives_from = ["INT-ECP-001"]
@@ -19,6 +19,10 @@ reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP de
 +++
 
 # Capability: The shipped product carries only machinery a consumer repository needs
+
+## Selected WO-ECP-007 revision
+
+This revision applies only to remaining work under WO-ECP-007. The [preserved accepted version](../evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/CAP-ECP-003.txt) has complete-file SHA-256 `7688ca3c641dd84312d304c688f67d86e075cd25b9498e89064a36b161473d37` and Git blob `c661f2c22356d86bd41840b814d8be331de7afb6` at commit `0b93e92ceabdb4cae85e1f4fdab943f955aa1c38`. The [activation receipt](../evidence/WO-ECP-007/definition-revisions/2026-10-17/activation.json) records the actual human authority and before/after identities. Without that recorded authority this replacement does not govern work. Original lifecycle events remain unchanged; this is not a native evaluator revision event. Earlier completed work and evidence retain their original definition meaning. Retained historical problem descriptions are context, not claims about current code. Unrelated skills and capabilities retain their existing obligations.
 
 ## Actor and need
 
@@ -52,11 +56,12 @@ applied to the harness's own multi-file writes.
 ## Capability statement
 
 `A consumer repository owner can install the released evaluator, initialise
-a repository, commit, and pass doctor, and can rely on a distributed product
-whose code, templates, and scripts name no record of this repository's
-releases, whose skills invoke the evaluator they describe, whose multi-file
-writes are journaled with rollback, and whose CLI and public API expose no
-autonomy-envelope apparatus.`
+a repository with only selection files, select Git evidence integration (or an
+equivalent owner rule), commit, and pass doctor. The distributed product has no
+repository-specific record exception in executable code, templates or scripts.
+Its skills invoke the evaluator they describe, its multi-file writes are
+journaled with rollback, and its CLI and public API expose no autonomy-envelope
+apparatus.`
 
 ## Boundaries
 
@@ -67,16 +72,16 @@ repository. It does not decide whether this repository keeps private tooling
 under `repository_tools/` for its own releases; it decides that such tooling
 is not the product. It retires skills rather than rewriting them; a skill
 returns to the template when it invokes the evaluator for real. Nothing here
-rewrites a verified or released record; the records that today are exempt by
-identifier stay exempt through data.
+rewrites a verified or released record; legacy unbound release records follow the accepted evaluator-evidence floor
+under SPEC-LRE-002. Do not restore the retired declaration mechanism.
 
 ## Outcomes
 
-- A fresh consumer repository: `init`, commit, `doctor` exits 0 with no
+- A fresh consumer repository: minimal `init`, explicit Git evidence setup, commit, `doctor` exits 0 with no
   failed check, on Linux and Windows, from the released wheel.
-- No product code, template, or installed script names an `RLS-SEH-*`
-  identifier; the same records stay exempt through the specification's own
-  rule.
+- Executable product code, templates and generated UI carry no repository-specific
+  artifact-ID exception. Historical documentation references are not executable policy.
+  Historical unbound releases follow SPEC-LRE-002 without an ID list.
 - The distributed template carries no skill whose script cannot invoke the
   evaluator for the operation its `SKILL.md` describes.
 - The product CLI and public Python API expose no envelope, nonce, lifetime,

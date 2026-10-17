@@ -1,0 +1,59 @@
+{
+  "baseline": "0b93e92ceabdb4cae85e1f4fdab943f955aa1c38",
+  "historical_evidence_paths_checked": 12475,
+  "changed_existing_evidence_paths": [],
+  "changed_retained_design_exports": [],
+  "preserved_accepted_definitions": [
+    {
+      "id": "ADR-ECP-005",
+      "path": "docs/engineering/execution-control-plane/architecture/adr/ADR-ECP-005.md",
+      "snapshot": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/ADR-ECP-005.txt",
+      "sha256": "a4d955f6908ea0489b091ed4a29c57d708c6458cf4ea274773566482dc8e50c0",
+      "exact_git_blob_bytes": true
+    },
+    {
+      "id": "CAP-ECP-003",
+      "path": "docs/engineering/execution-control-plane/capabilities/CAP-ECP-003.md",
+      "snapshot": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/CAP-ECP-003.txt",
+      "sha256": "7688ca3c641dd84312d304c688f67d86e075cd25b9498e89064a36b161473d37",
+      "exact_git_blob_bytes": true
+    },
+    {
+      "id": "INT-ECP-001",
+      "path": "docs/engineering/execution-control-plane/intent/INT-ECP-001.md",
+      "snapshot": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/INT-ECP-001.txt",
+      "sha256": "533c263e41a1d0d6993e32d50307ab069e0429132d7950a622959298119d532e",
+      "exact_git_blob_bytes": true
+    },
+    {
+      "id": "REQ-ECP-012",
+      "path": "docs/engineering/execution-control-plane/requirements/REQ-ECP-012.md",
+      "snapshot": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/REQ-ECP-012.txt",
+      "sha256": "6fcaf0f6b601286efb593e081512f80b4eca2acfa7c4b4101c0030c0f492ce8a",
+      "exact_git_blob_bytes": true
+    },
+    {
+      "id": "REQ-ECP-013",
+      "path": "docs/engineering/execution-control-plane/requirements/REQ-ECP-013.md",
+      "snapshot": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/REQ-ECP-013.txt",
+      "sha256": "3c7d41ea28442d16bad05a3e24fe76824102a244e7641d689acf8f0c5d9cdb15",
+      "exact_git_blob_bytes": true
+    },
+    {
+      "id": "SPEC-ECP-007",
+      "path": "docs/engineering/execution-control-plane/specifications/SPEC-ECP-007.md",
+      "snapshot": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/SPEC-ECP-007.txt",
+      "sha256": "a73e8578d6e355073c9781f00eb2cff109019540794004f173cd8bee046c881e",
+      "exact_git_blob_bytes": true
+    },
+    {
+      "id": "VER-ECP-007",
+      "path": "docs/engineering/execution-control-plane/verification/VER-ECP-007.md",
+      "snapshot": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/VER-ECP-007.txt",
+      "sha256": "77d2a98593f344d67327e93e5ae93e6b15fce288f55e8981d8edce41b0634041",
+      "exact_git_blob_bytes": true
+    }
+  ],
+  "method": "Git diff against the complete baseline for existing evidence/design exports; byte comparison of seven preserved accepted files with their original Git blobs.",
+  "passed": true
+}

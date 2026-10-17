@@ -326,6 +326,33 @@ class ReleaseArtifactDiscoveryTests(unittest.TestCase):
 
 
 class DistributionManifestTests(unittest.TestCase):
+    def test_portable_wheel_rejects_repository_ids_in_executable_members(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            wheel = Path(temporary) / "candidate.whl"
+
+            def write_wheel(name: str, content: str) -> None:
+                with zipfile.ZipFile(wheel, "w") as archive:
+                    for member in sorted(SURFACE.REQUIRED_QUALIFICATION_MEMBERS | SURFACE.REQUIRED_INTERPRETER_SAFETY_MEMBERS):
+                        archive.writestr(member, "# portable\n")
+                    archive.writestr("share/se-harness/README.md", "History: VREC-SEH-021\n")
+                    archive.writestr("se_harness-1.0.dist-info/METADATA", "Description: RLS-SEH-033\n")
+                    archive.writestr(name, content)
+
+            write_wheel("se_harness/view.py", "record = 'VREC-TST-021'\n")
+            SURFACE.inspect_wheel(wheel)
+            for name, content in (
+                ("se_harness/view.py", "# policy\nrecord = 'VREC-SEH-021'\n"),
+                ("se_harness/view.js", "// policy\nconst record = 'VREC-SEH-021';\n"),
+                ("se_harness/view.html", '<html>\n<script>const code = "record !== \'VREC-SEH-021\'";</script>'),
+                ("share/se-harness/policy.json", '{\n"record": "VREC-SEH-021"\n}'),
+            ):
+                with self.subTest(member=name):
+                    write_wheel(name, content)
+                    with self.assertRaises(SURFACE.SurfaceError) as raised:
+                        SURFACE.inspect_wheel(wheel)
+                    self.assertIn(name + ":2:", str(raised.exception))
+                    self.assertIn("VREC-SEH-021", str(raised.exception))
+
     def test_portable_wheel_checker_accepts_clean_and_rejects_repository_policy(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
