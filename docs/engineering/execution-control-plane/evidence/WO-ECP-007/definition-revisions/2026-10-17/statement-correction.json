@@ -1,0 +1,17 @@
+{
+  "status": "applied",
+  "applied_at": "2026-10-17T12:50:55.634974+00:00",
+  "decision_by": "mmzen",
+  "applied_by": "Codex",
+  "human_response": "Ok continue",
+  "decision_context": "Direct response to the displayed statement-only correction request, preserving previous bytes. Existing implementation, verification-preparation and review-publication authority remains unchanged.",
+  "artifact": "REQ-ECP-012",
+  "active_path": "docs/engineering/execution-control-plane/requirements/REQ-ECP-012.md",
+  "before_sha256": "d097624ebf877fdc8e5870ab3ea0bb0bf184e92d7f67cd683b349cf18f2f03fd",
+  "after_sha256": "608a807f7ab96df1836e3b45a15a49ea4bb58dde427b07403c82ba3c6814b87e",
+  "preserved_first_revision": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/REQ-ECP-012-before-statement-correction.txt",
+  "first_activation": "activation.json",
+  "first_activation_sha256": "020e9ff7875a8848723f83b944b500fb8c4aa447cde6f444cb5ff6ee42bc6e0c",
+  "scope": "Correct the statement field to the already-confirmed Git-readiness choice and add the reviewed correction-receipt link. No other content changes.",
+  "native_revision_command_used": false
+}

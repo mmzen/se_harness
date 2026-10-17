@@ -1,0 +1,677 @@
+{
+  "candidate": "49b4f3fb7715d42d8c096a3fdcc57ca4bc7d2e71",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "wheel_sha256": "57bfed79d107021fb0ea3136709cf71edf57ef0db497de87719cb78d92daaaf7",
+  "viewer_sha256": "694b643b80f3a72d760343f255eca6388a36682cbe8a44eda7f2e07240d16c92",
+  "fixture_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\source\\tests\\test_dashboard_webui.py",
+  "fixture_sha256": "bd074637278e30e55acf08b132f30aa0428e13514e5c4dab32e8bf957d9dae83",
+  "argv": [
+    "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.EXE",
+    "-e",
+    "\nconst input = JSON.parse(require('fs').readFileSync(0, 'utf8'));\nconst window = { HarnessExplorer: { prefs: { getItem: () => null } } };\nconst Component = new Function('DCLogic', 'window', input + '; return Component;')(class {}, window);\nconst outcomes = [];\nfor (const id of ['VREC-SEH-021', 'VREC-TST-021']) {\n  for (const status of ['verified', 'ready']) {\n    const component = new Component();\n    component.props = {};\n    const artifacts = [\n      {id: 'RLS-TST-001', type: 'release_record', status: 'released'},\n      {id: 'WO-TST-001', type: 'work_order', status: 'implemented'},\n      {id: 'VREC-AAA-001', type: 'verification_record', status: 'ready'},\n      {id, type: 'verification_record', status},\n      {id: 'VREC-OTHER-001', type: 'verification_record', status: 'verified'},\n      {id: 'WO-OTHER-001', type: 'work_order', status: 'implemented'}\n    ].map(a => ({...a, title: a.id}));\n    const relations = [\n      {source: 'RLS-TST-001', relation: 'releases_work', target: 'WO-TST-001'},\n      {source: 'VREC-AAA-001', relation: 'verifies_work_order', target: 'WO-TST-001'},\n      {source: id, relation: 'verifies_work_order', target: 'WO-TST-001'},\n      {source: 'VREC-OTHER-001', relation: 'verifies_work_order', target: 'WO-OTHER-001'}\n    ];\n    component._bundle = {artifacts, relations};\n    component._byId = new Map(artifacts.map(a => [a.id, a]));\n    component._details = new Map(); component._coverage = new Map();\n    component._in = new Map(); component._out = new Map(); component._stageOf = {};\n    for (const stage of component.STAGES) for (const type of stage.types) component._stageOf[type] = stage.id;\n    for (const relation of relations) {\n      if (!component._out.has(relation.source)) component._out.set(relation.source, []);\n      component._out.get(relation.source).push(relation);\n      if (!component._in.has(relation.target)) component._in.set(relation.target, []);\n      component._in.get(relation.target).push(relation);\n    }\n    component.state.data = component._bundle;\n    component.state.selId = 'RLS-TST-001';\n    outcomes.push({id, status, selected: component.renderVals().sel.roster.rows[0].vrecId});\n  }\n}\nprocess.stdout.write(JSON.stringify(outcomes));\n"
+  ],
+  "input_script_sha256": "b9383fcaf0a5f2d13bc6838dd34233c141051fa37f635040e15860f9b99c2c35",
+  "exit_code": 0,
+  "stdout": "[{\"id\":\"VREC-SEH-021\",\"status\":\"verified\",\"selected\":\"VREC-SEH-021\"},{\"id\":\"VREC-SEH-021\",\"status\":\"ready\",\"selected\":\"VREC-AAA-001\"},{\"id\":\"VREC-TST-021\",\"status\":\"verified\",\"selected\":\"VREC-TST-021\"},{\"id\":\"VREC-TST-021\",\"status\":\"ready\",\"selected\":\"VREC-AAA-001\"}]",
+  "stderr": "",
+  "outcomes": [
+    {
+      "id": "VREC-SEH-021",
+      "status": "verified",
+      "selected": "VREC-SEH-021"
+    },
+    {
+      "id": "VREC-SEH-021",
+      "status": "ready",
+      "selected": "VREC-AAA-001"
+    },
+    {
+      "id": "VREC-TST-021",
+      "status": "verified",
+      "selected": "VREC-TST-021"
+    },
+    {
+      "id": "VREC-TST-021",
+      "status": "ready",
+      "selected": "VREC-AAA-001"
+    }
+  ],
+  "passed": true,
+  "wheel_inventory": [
+    {
+      "path": "se_harness/__init__.py",
+      "size": 82,
+      "sha256": "4d6fbd4c613cd716164f7d05683872442b8135a8db373b64585d82cbb4eaa02e"
+    },
+    {
+      "path": "se_harness/__main__.py",
+      "size": 60,
+      "sha256": "3e8974beadf44ccb856397c62d1f94b3f14364ce73da2b9856ac6325123ccf26"
+    },
+    {
+      "path": "se_harness/_process.py",
+      "size": 4109,
+      "sha256": "b961484368aa5aa4d52355dabb321ce567e57e07c757b44a031930b0eeeef143"
+    },
+    {
+      "path": "se_harness/artifact_layout.py",
+      "size": 23599,
+      "sha256": "2b781dd255c70d0cd370fa49568636395057604c056cdf0ee03f1f7859fd79ea"
+    },
+    {
+      "path": "se_harness/candidate_acceptance.py",
+      "size": 18588,
+      "sha256": "5a0bcc331031bd3fbe735760e0fec9bd4a43b473d1807482f597b30f43055fb4"
+    },
+    {
+      "path": "se_harness/cli.py",
+      "size": 66463,
+      "sha256": "1dca0078b2a567e90786991e4586597fe2bd64def464d59c24427c4ff7e0683e"
+    },
+    {
+      "path": "se_harness/codes.py",
+      "size": 8163,
+      "sha256": "7f294e342851716bb20898440526b81e8f31e0edb77cd205d5d8a303d3a7c047"
+    },
+    {
+      "path": "se_harness/decisions.py",
+      "size": 8694,
+      "sha256": "745c23af41c614b062a2baa3e9938197936410ebfaf5073335e201bfbc985cd0"
+    },
+    {
+      "path": "se_harness/draft_validation.py",
+      "size": 14463,
+      "sha256": "fcd206ef1e85420f51f1c13a88d6fe42a1e68cd838ebdaf0b058a900d7c9ebf6"
+    },
+    {
+      "path": "se_harness/evaluator_evidence.py",
+      "size": 13488,
+      "sha256": "ffc31b5ae980e7ec5f1e3f6c7298a36b3a372efc4db7c937edf4217ede639ca6"
+    },
+    {
+      "path": "se_harness/evaluator_identity.py",
+      "size": 10451,
+      "sha256": "44e8a3d9a4f376c4177b591b396be96e66ca07dc299d81e4a718fa154d689159"
+    },
+    {
+      "path": "se_harness/front_matter.py",
+      "size": 5745,
+      "sha256": "8d50c43e7c14c464a84476326f8f92c0d6465fe509d18e611d3dd96a83b93bf3"
+    },
+    {
+      "path": "se_harness/gate_source.py",
+      "size": 4970,
+      "sha256": "8636dc2dd630b4c28adea5f67e8a740122b5b9342d52958ff4ef847ff41083aa"
+    },
+    {
+      "path": "se_harness/github_ci.py",
+      "size": 9024,
+      "sha256": "55bc2d7d467474d54aedcb815fb4db47a357a1d72aa7cb6b135467af2a91918b"
+    },
+    {
+      "path": "se_harness/hash_bound.py",
+      "size": 15205,
+      "sha256": "a76291cbbc1ea9cd0d2ec63d9acb87ae90ddc5cff0c646fc5059e3bcbf425a84"
+    },
+    {
+      "path": "se_harness/hash_bound_classes.json",
+      "size": 428,
+      "sha256": "6fe9e73d04d7aa222bd005775583d77744d9a2cdecd86905ef435610363c0aa0"
+    },
+    {
+      "path": "se_harness/installer.py",
+      "size": 49621,
+      "sha256": "2adfbbbcfff88c9a314eeedf7308c248fc2ae1f2633aa96ffea4759d75ac4e7f"
+    },
+    {
+      "path": "se_harness/instruction_discovery.json",
+      "size": 23292,
+      "sha256": "39301c82f9fe91361d7a23c461864bdbfeabd3664dd873f17e6a54d091a7dc43"
+    },
+    {
+      "path": "se_harness/instruction_discovery.py",
+      "size": 11438,
+      "sha256": "c019707ee54992eb6deee1225a4abff4f83379f20ce2a2337555eca8870c546c"
+    },
+    {
+      "path": "se_harness/integrity.py",
+      "size": 12526,
+      "sha256": "b253ec25ea8a4cf80be938c9e130c0f231b0a3641c145d460c2f7613d323843f"
+    },
+    {
+      "path": "se_harness/interpreter_safety.py",
+      "size": 5921,
+      "sha256": "767cf511cee03dd1ed05a95449f6b161a22229c0f7fcf90bf074526c603b0c0f"
+    },
+    {
+      "path": "se_harness/mutation_guard.py",
+      "size": 8511,
+      "sha256": "0d8859887c16f325b43d60b7e694d61defb9d2197178935d6b8eef9a6249eb20"
+    },
+    {
+      "path": "se_harness/preflight.py",
+      "size": 33360,
+      "sha256": "9d744800e578ed49b74cabe153747a3bb70b8cf263ef54fde2ca1edbd95c2978"
+    },
+    {
+      "path": "se_harness/provenance.py",
+      "size": 32136,
+      "sha256": "7e80eaa0fac03ef9b5e16e19c6d67661679a0a1f134721cc5e05af94d68e329b"
+    },
+    {
+      "path": "se_harness/quality_gates_contract.json",
+      "size": 12313,
+      "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+    },
+    {
+      "path": "se_harness/relation_policy.py",
+      "size": 5148,
+      "sha256": "de0c066c84c799646d0fb9e9a95a53218706d3e83b1e307fe6da9a07ad359961"
+    },
+    {
+      "path": "se_harness/release_qualification.py",
+      "size": 26926,
+      "sha256": "b20a9529dc9225d5eefb9ce6a48948247867365ca4aec84283a9d746512aff3c"
+    },
+    {
+      "path": "se_harness/release_unit.py",
+      "size": 8923,
+      "sha256": "7513992a1eeb45d69c4d00c09371d93844bc2393ae8c3cd29df125dd74cc9beb"
+    },
+    {
+      "path": "se_harness/remote.py",
+      "size": 19913,
+      "sha256": "79555ad74a2d5b4e2ef83127e30599d378413174ecf1c72048e9c2972d5f51fb"
+    },
+    {
+      "path": "se_harness/remote_authoring.py",
+      "size": 14695,
+      "sha256": "46a085b2c42bdb5de2522ba0863ce79b9fe8827fec084cd589c98ab417c25b7a"
+    },
+    {
+      "path": "se_harness/repository_graph.py",
+      "size": 7125,
+      "sha256": "c595eed7063b8dfe82a719f04cb74077a800230545ea0a1d06d6d82a80256aec"
+    },
+    {
+      "path": "se_harness/resources.py",
+      "size": 15542,
+      "sha256": "d8f4b52693e90b8275ec3b2e5b1e3e55e06ef8bc95d1d7e65908fe141721058a"
+    },
+    {
+      "path": "se_harness/risks.py",
+      "size": 27721,
+      "sha256": "a0e8494e77458e2a48a29343303bd1fd0d2357293a13c3ba252b91f77d4fe1ae"
+    },
+    {
+      "path": "se_harness/runtime_identity.py",
+      "size": 15459,
+      "sha256": "d951c133de401eb43d3daa583bd93999f824867c1b4208249dc22578c983477a"
+    },
+    {
+      "path": "se_harness/scope_preparation.py",
+      "size": 3152,
+      "sha256": "664430406ba4c9b96155c6cd8b5760230457a21cffecb0f718e1fe757d91d8a0"
+    },
+    {
+      "path": "se_harness/skill_ownership.py",
+      "size": 6747,
+      "sha256": "6e844f13ed52dae1cd8197a9c333385e3ee2f6aea5bc1f186eeaf149a6d07e84"
+    },
+    {
+      "path": "se_harness/skill_ownership_contract.json",
+      "size": 413,
+      "sha256": "a89b75429d894c54b422f69de59f885010fcba0c11db3249fca3d413eccecbdb"
+    },
+    {
+      "path": "se_harness/workflow.py",
+      "size": 32780,
+      "sha256": "8d2d33e4642864d252ae10049c8165511faabccc8c1aa42d488fecc364cd6136"
+    },
+    {
+      "path": "se_harness/workflow_change_set.py",
+      "size": 15205,
+      "sha256": "0d6f80b37880f64529f361bc7f4f4f00301e71f989b4abc10aaf0f22af9f86be"
+    },
+    {
+      "path": "se_harness/workflow_compliance.py",
+      "size": 38990,
+      "sha256": "44a57c5ef87105ec9989028c509f6f5bce24ce79088bb6f88cd153ace2b166ef"
+    },
+    {
+      "path": "se_harness/workflow_contract.json",
+      "size": 40390,
+      "sha256": "00c222a9c71d95cb1162e6d6bacdb03cd9e43431303466077a85ceb8f921f0c2"
+    },
+    {
+      "path": "se_harness/workflow_contract.py",
+      "size": 42069,
+      "sha256": "ddea4a70df5a7f1c5bdb4d04fe7237cd8775b76cfb8962a2f2acc223d6915f50"
+    },
+    {
+      "path": "se_harness/workflow_edges.py",
+      "size": 12067,
+      "sha256": "b0690f1aff8f67cbaa99030af22edfbd58e5b6488f93c9077b1c831984362767"
+    },
+    {
+      "path": "se_harness/workflow_evidence_packet.py",
+      "size": 6232,
+      "sha256": "60159532b24c70ffffbc379c955dd43784d4054053d477d40e3f369d1aa5b2e7"
+    },
+    {
+      "path": "se_harness/workflow_predicates.py",
+      "size": 11141,
+      "sha256": "f5a87bfb90dfabd8cefa4fe7066193431a1ffa5cb9aedb2a37f801aac9e35334"
+    },
+    {
+      "path": "se_harness/workflow_procedures.py",
+      "size": 9665,
+      "sha256": "e32cf844f4e8303ece4622a67a07ac4a983fcbfe6fa1570c627b1e2870aae304"
+    },
+    {
+      "path": "se_harness/workflow_result.py",
+      "size": 14066,
+      "sha256": "5716f8f6beda73d7bdf05b8bca222beb8935fdbf7b018b961a59ae0cdb1d71b3"
+    },
+    {
+      "path": "se_harness/engine/__init__.py",
+      "size": 566,
+      "sha256": "20cb306bfe43e26e6cd09d08cf6ce701cfcdb1ebc21fb5ce04b4f662340cd00e"
+    },
+    {
+      "path": "se_harness/engine/dashboard_bundle.py",
+      "size": 32660,
+      "sha256": "d99fc313ccf1ca027290d859121bddd73d0d3c19b78983743cda865059378592"
+    },
+    {
+      "path": "se_harness/engine/dashboard_snapshot.py",
+      "size": 89268,
+      "sha256": "4fcf260e6a8272dabc4e6d4460f7fda790e8ccbabaee753c5f70749a2bf1fae9"
+    },
+    {
+      "path": "se_harness/engine/generate_harness_dashboard.py",
+      "size": 9534,
+      "sha256": "e639f0b4d3418e14819ec1c8add6c15426d32505b5ceda5dadbeb84af9883a25"
+    },
+    {
+      "path": "se_harness/engine/inspect_engineering_artifacts.py",
+      "size": 33824,
+      "sha256": "0721ae21ac12dac957303a8382e2e9661ae77b0324726bbecca962175e63a5db"
+    },
+    {
+      "path": "se_harness/engine/validate_engineering_artifacts.py",
+      "size": 9620,
+      "sha256": "3060bc4c1946e1add57471a8574ac81c3a6d1f0a4ec8cc7dda19793becdcff5c"
+    },
+    {
+      "path": "se_harness/engine/validation_architecture.py",
+      "size": 7458,
+      "sha256": "4dad69d0b96cef95a4b31f259c2b3b83bd7d8f6459e409e78c99d6de965976d4"
+    },
+    {
+      "path": "se_harness/engine/validation_authoring.py",
+      "size": 7234,
+      "sha256": "75961928185b72815a2fc8a8d26e8f1cc8f42e33579351a5b43b2d1586c167ba"
+    },
+    {
+      "path": "se_harness/engine/validation_core.py",
+      "size": 7166,
+      "sha256": "215fc6473c8caffe5891fc0f59d7eb9bd6e4de531f7d9716fc9eed58d8c3e66f"
+    },
+    {
+      "path": "se_harness/engine/validation_decisions.py",
+      "size": 38482,
+      "sha256": "dc06a9b9b4ae735c626acf981038e5f4c91ca36815e973fb9ddafeb369f47136"
+    },
+    {
+      "path": "se_harness/engine/validation_evidence.py",
+      "size": 23995,
+      "sha256": "c053cd4b6273315883cb9ef137273d770180414cf17ff8f6aa1e9c69b066d53f"
+    },
+    {
+      "path": "se_harness/engine/validation_layout.py",
+      "size": 3988,
+      "sha256": "7dd576a476ea1f0fa8900118c3795bd439563c40099bb80cf9308300c78b1b03"
+    },
+    {
+      "path": "se_harness/engine/validation_lifecycle.py",
+      "size": 13130,
+      "sha256": "aaa9536d05ffcca14ec02898128a5c57a5d39efeeebbd12494114992734e8482"
+    },
+    {
+      "path": "se_harness/engine/validation_report.py",
+      "size": 3622,
+      "sha256": "de2a4a6eadd43d3bcf8d6310b1b30625c59eacb8a18b57edca3daf665899e82f"
+    },
+    {
+      "path": "se_harness/engine/validation_revision.py",
+      "size": 18213,
+      "sha256": "84dbf0405533a38938190bf7efc7bbc975336cabe8c3aaef5482f9e32426bd9e"
+    },
+    {
+      "path": "se_harness/engine/harness_explorer/index.template.html",
+      "size": 442587,
+      "sha256": "694b643b80f3a72d760343f255eca6388a36682cbe8a44eda7f2e07240d16c92"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.engineering-harness.toml.tpl",
+      "size": 200,
+      "sha256": "c08c1a5d68f4238557f30af3029d31619b49bc361134ddaa3b9c69316e2d76ca"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+      "size": 9146,
+      "sha256": "3d122a7e1803911df24c4ef277d4dca28e2b09bb9b63569422aee20f6182f550"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/GLOSSARY.md.seed",
+      "size": 1419,
+      "sha256": "519d8ef28702c0c3c431bbadbcb6a6b1261b9167247092a8b9dbd3ed5a6c341a"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/gitattributes.fragment",
+      "size": 137,
+      "sha256": "38e401b81d4abf8c36fb055b6a51d174eca713b28cd9ee2f64f8e362428d80e7"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/gitignore.fragment",
+      "size": 81,
+      "sha256": "cb8b7434467a9ff4baa9519a4df5ad34d28994a53db6598295dd46fdfbfee45d"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/SKILL.md",
+      "size": 3844,
+      "sha256": "79091878d95ec4bedd019ca0f2aae402fa1781f3c5b7f18846078e10c780b9ce"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/skill-contract.json",
+      "size": 4376,
+      "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/scripts/check_brief.py",
+      "size": 9175,
+      "sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-orient/SKILL.md",
+      "size": 3488,
+      "sha256": "6368a89f46174805f0700d9c100cf2094c212210ef88f63dfff3d276971dbdfc"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-orient/skill-contract.json",
+      "size": 2921,
+      "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py",
+      "size": 36425,
+      "sha256": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.claude/skills/harness-orient/SKILL.md",
+      "size": 1125,
+      "sha256": "8da58e3e22b3e9d7a7fc332aaf1df1fd45463b65208c3798c30b0d99d9548295"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed",
+      "size": 1114,
+      "sha256": "9c655e1a5d0424f2d620db4ff9762a7c2883abfce8aef34a92115faff674a90e"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/.github/workflows/engineering-harness.yml",
+      "size": 3755,
+      "sha256": "9dc9d16210b2b21f734bc6b1b49dbd30837917cda91868476d087e4cf2d72304"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "size": 11691,
+      "sha256": "71de2cc92a470e2da25d525e3ad002b77faedb6ef0e69e2fa476a2fa4cb78ff5"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/QUALITY_GATES.json",
+      "size": 12313,
+      "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/README.md.seed",
+      "size": 1611,
+      "sha256": "9dc5532c55cf97ae12d56b241647017714b43efda492d3d39c6e6be57d2a8a28"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/WORKFLOW.json",
+      "size": 40390,
+      "sha256": "00c222a9c71d95cb1162e6d6bacdb03cd9e43431303466077a85ceb8f921f0c2"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/AMEND_DEFINITIONS.md",
+      "size": 4179,
+      "sha256": "bbaf523c782cfd5abeb824d0ccba3d756426d7a8103ac7ad1c6aa6120c9f4272"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/ARTIFACTS.md",
+      "size": 9622,
+      "sha256": "2fa84648afedc03f3b811cb0e61d77ee1a1d52421ba3b3fa3eb435c4abd6eb89"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/AUTHORITY.md",
+      "size": 16163,
+      "sha256": "da7202bf8d1beee631e9b4b5ba01c04b440fbf76d200ccbccbb8781a59f88431"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/AUTHORIZE_WORK.md",
+      "size": 15212,
+      "sha256": "991b526d6280554dcca6901c1790e5519b8894e08635a1f10618aa84a29aaf28"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/COMMUNICATION.md",
+      "size": 1960,
+      "sha256": "2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/CONTINUE.md",
+      "size": 8738,
+      "sha256": "7d5478fca5f80f996fc0a7a64627bbd2763401ff500a16671a592cb04394c304"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DEFINE_CHANGE.md",
+      "size": 10552,
+      "sha256": "7f41ea6b62df110755524d88293019406d6cf6a238abc67e795db98234024f52"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md",
+      "size": 3505,
+      "sha256": "75b0c06f90fbb219fc31684a1a2d97987215dbada20e335656e45a57532c3010"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DELIVER_RESULT.md",
+      "size": 12123,
+      "sha256": "13405ba32a2227a5c20abb59e806de18ed60b4ecf3c010508f053587cd8bf6b2"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "size": 13484,
+      "sha256": "a2041b84342c2b2e4b5ec0f26e3a70702a894c57d9810855cfe514881e5a0c28"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DRAFT_WORK_ORDERS.md",
+      "size": 8654,
+      "sha256": "c4ffde0efff3a57df41cf6b282896e6827ea289607f8b73faa8f7c09d0c70213"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/EXCEPTIONS.md",
+      "size": 1530,
+      "sha256": "a11c34a1a0fbcea91ff15e0f536f9e3403ef95c609f92097c94b944c5e39e387"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/EXECUTE_WORK.md",
+      "size": 11979,
+      "sha256": "f094e7bc796ba1002c3fb2848adaccce6c4887e3d92503911bcafa4504a644fe"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/PULL_REQUEST.md",
+      "size": 11389,
+      "sha256": "a7022bdaa3ffb4db10ae435ffcb33e0ea951dd82e5b6d31ae8cf40cb5e99a410"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RECORD_STATE.md",
+      "size": 4150,
+      "sha256": "0495c7cd684545b53e3e3f9c12f00334ca1d739bba52d95212a0eb361116cfc2"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RELEASE.md",
+      "size": 7849,
+      "sha256": "ce700f8f764c4425978f070d978d48eacafb927601f45e298c765f46dae90f7f"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RESULTS.md",
+      "size": 5242,
+      "sha256": "090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RISKS_AND_DECISIONS.md",
+      "size": 11817,
+      "sha256": "8dbc5fb4bb80fc3c2fbf1ec34a2419e8b5856972485226af46ae324fbd9aca5c"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/SETUP.md",
+      "size": 5356,
+      "sha256": "a4706beb3aca308ef6de3c3adc4aa79ba1d3ddbb3868deade56b6e42c5262496"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/SKILL_PROVIDER.md",
+      "size": 3079,
+      "sha256": "c7fbba9256695653c6766b4c5dc3f526fd873da8d25836a045238143111a3ea4"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/UPGRADE.md",
+      "size": 12013,
+      "sha256": "145d69cff2355bb555222fbf2f391461d25b633909d98f15aa5b6f49ee3423f8"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/VERIFY_OUTCOME.md",
+      "size": 18538,
+      "sha256": "84686ea50e0e220aadc024145b88e05d83a0eab01be361ab50e12716a8cf950a"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "size": 8641,
+      "sha256": "892ec2fedefc272f6bc2580268395e487f392cf5d92a3ea81fac015761bc87a8"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+      "size": 4346,
+      "sha256": "8467bd0a7a16cbac0de573a0742daf65ae97257c8154639f937ea77da5cec792"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/migration/REFERENCE_MAP.md",
+      "size": 8712,
+      "sha256": "48d0190021373205103e2f36f49c68d7dccd08d3c7389937f89facd701acd0e4"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/ADR.template.md",
+      "size": 959,
+      "sha256": "d29d7b23b97a5197d5063d6c58dacb9f374b731b7277751c8249a019f3a1c244"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/ARCHITECTURE.template.md",
+      "size": 2530,
+      "sha256": "954cebe714c4caff7780337ada80f30500cf14a7993eacd21fbf7bdf46706f66"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/CAPABILITY.template.md",
+      "size": 1260,
+      "sha256": "2988efbefab507a3a3352ce08fc0cf940073e1c055c66464c8f3d2c87de4fdcb"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/DECISION.template.md",
+      "size": 1828,
+      "sha256": "7eee2639aed2960b7f3537641b1a1112fa19c2901a76dbd6f994f8db3901953e"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/INTENT.template.md",
+      "size": 1457,
+      "sha256": "55a174639a8b43f9da3e93328725fcd1d19a8def24ffc4213d1127c29385b13a"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/OPERATING_CONTRACT.template.md",
+      "size": 496,
+      "sha256": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/README.md",
+      "size": 1896,
+      "sha256": "7d0b822af791a7cdf8601bff4b6b6566a002f1b2d3e2b8fab5fb93e491a3cf74"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/RELEASE_CONTRACT.template.md",
+      "size": 2157,
+      "sha256": "dc3cdad2b613963aab9f93d9fd1002a53e709000d09807d0883dac29fa425bf9"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/RELEASE_RECORD.template.md",
+      "size": 1174,
+      "sha256": "df2b4811554d3f78961df5e65ec6723f1f43a364af04996548496ed6bb0c350d"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/REQUIREMENT.template.md",
+      "size": 1313,
+      "sha256": "8b55c568957b2f973d7e69fa63dbac148763a21fdf5c98e155676c24534a4066"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/RISK.template.md",
+      "size": 605,
+      "sha256": "9bb38731685d3327dba81a91ea1877a237c5541f976778ae012eb31e49b635af"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/SPECIFICATION.template.md",
+      "size": 2078,
+      "sha256": "7db68f540604cc177be2e87141a0c20ea963498ca3f6a0817df9577632d352ff"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/VERIFICATION.template.md",
+      "size": 943,
+      "sha256": "d4963c33640ac6af755657b261079a1f8321692edb9dc84f7a31b0c7c5a7e7a7"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/VERIFICATION_RECORD.template.md",
+      "size": 3016,
+      "sha256": "20d93b9a2ed3fe20966b3aaf577f114333d868cfed4279169512972db8c4bcec"
+    },
+    {
+      "path": "se_harness-0.23.1.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md",
+      "size": 4364,
+      "sha256": "a3d5226f004b1b0cd8f58381490aecb49687bd6c034e98684b249d619c013b8b"
+    },
+    {
+      "path": "se_harness-0.23.1.dist-info/licenses/LICENSE",
+      "size": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "se_harness-0.23.1.dist-info/METADATA",
+      "size": 47918,
+      "sha256": "c5b54141752889770310e013358f4a5573b29837f72aed7162994b96a7acc524"
+    },
+    {
+      "path": "se_harness-0.23.1.dist-info/WHEEL",
+      "size": 91,
+      "sha256": "61532836a2b3111b7ec23519c09df7c41180c27165fb872a6d8913b566b88ad1"
+    },
+    {
+      "path": "se_harness-0.23.1.dist-info/entry_points.txt",
+      "size": 51,
+      "sha256": "38ef737c39ec3a4c5e1d619a59c714e1f17485e4bf889021a701b44015134ed0"
+    },
+    {
+      "path": "se_harness-0.23.1.dist-info/top_level.txt",
+      "size": 11,
+      "sha256": "573155b431ba135944063893609d2b65d54641c80ffd09a8f8b39d0e04b89e9a"
+    },
+    {
+      "path": "se_harness-0.23.1.dist-info/RECORD",
+      "size": 16228,
+      "sha256": "9a78c8c50b7f5ccea56122d8d2d10800d9db5ff12d36d785e6041e51c008c155"
+    }
+  ]
+}

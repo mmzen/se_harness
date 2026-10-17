@@ -5,7 +5,7 @@ title = "The consumer product boundary"
 status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-28"
+updated = "2026-10-17"
 
 [relations]
 specifies = ["REQ-ECP-012", "REQ-ECP-013", "REQ-ECP-014"]
@@ -20,94 +20,80 @@ reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP de
 
 # Specification: The consumer product boundary
 
+## Selected WO-ECP-007 revision
+
+This revision applies only to remaining work under WO-ECP-007. The [preserved accepted version](../evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/SPEC-ECP-007.txt) has complete-file SHA-256 `a73e8578d6e355073c9781f00eb2cff109019540794004f173cd8bee046c881e` and Git blob `49c0152d18c1e5d52beaf0c0085ed82bf99802ee` at commit `0b93e92ceabdb4cae85e1f4fdab943f955aa1c38`. The [activation receipt](../evidence/WO-ECP-007/definition-revisions/2026-10-17/activation.json) records the actual human authority and before/after identities. Without that recorded authority this replacement does not govern work. Original lifecycle events remain unchanged; this is not a native evaluator revision event. Earlier completed work and evidence retain their original definition meaning. Retained historical problem descriptions are context, not claims about current code. Unrelated skills and capabilities retain their existing obligations.
+
 ## Scope
 
-This specification draws the line between what ships to a consumer
-repository and what serves only this repository's self-hosting. Today
-`hash_bound_classes.json` declares the `governance-migration-protocol` class
-whose patterns match files that exist only here
-(`se_harness/hash_bound_classes.json:19-32`;
-`templates/repository/standard/gitattributes.fragment:4-6`), the checker
-fails any class whose pattern matches no tracked path
-(`se_harness/hash_bound.py:454-457`, `:485-499`), so `init`, a commit, then
-`doctor` exits 1 in every fresh repository
-(`docs/notes/complexity-audit-2026-08.md`, P0-1). Six `RLS-SEH-*`
-identifiers are hard-coded in `se_harness/legacy_release_evidence.py:36`,
-the template validator, and the dashboard publisher (audit P1-2), and three
-shipped skill scripts inject a stub client and print
-`"evaluator_invoked": false`
-(`templates/repository/standard/.agents/skills/harness-execute-work-order/scripts/check_scope.py:190-199`).
+This linked revision governs the remaining product-boundary correction selected
+by narrowed WO-ECP-007. Its product rules reconcile the current minimal layout,
+record-independent viewer selection and the existing packaged-surface check.
+Earlier bootstrap, migration, lock-floor and legacy-evidence retirements remain
+completed work. The shipped-skills rules and their later amendments are unchanged;
+this work does not execute or reopen them.
 
 ## Actors and external systems
 
-- A consumer repository owner runs `init`, `doctor`, and `upgrade`.
-- This repository's release tooling under `repository_tools/` runs the
-  self-checks that leave the product.
-- The released evaluator runs `doctor`.
-- The template validator runs in consumers and here.
+- A consumer repository owner selects integrations and runs `init`, `doctor` and `upgrade`.
+- The released evaluator checks repository readiness and lifecycle actions.
+- Repository build tools generate the viewer and check the built wheel.
+- Existing release workflows run the retained qualification operations.
+- The artifact validator checks consumers and this repository.
 
 ## Terms
 
-- **Product surface:** the wheel's `se_harness` package, its package data,
-  and the standard template tree.
-- **Repository region:** a hash-bound class whose `region` is
-  `repository`; **template region** is `template`.
-- **Self-check:** a `qualify` operation that asserts a property of the
-  `se-harness` distribution by name (`candidate-package`, `public-install`,
-  `predecessor-view`).
-- **Rule-5 declaration:** the `[legacy_release_evidence]` declaration
-  mechanism of `SPEC-LRE-001` rule 5.
-- **Stub client:** a skill script that substitutes a lambda for the
-  evaluator invocation and reports `evaluator_invoked = false`.
+- **Product surface:** the wheel's `se_harness` package, package data and released resources.
+- **Executable members:** Python, JavaScript, HTML and machine-policy JSON shipped in that surface. HTML includes embedded JavaScript.
+- **Repository-specific ID literal:** a packaged literal matching `[A-Z]+-SEH-[0-9]+`.
+- **Documentation reference:** an artifact link in Markdown prose or package-description metadata, without an executable exception.
+- **Git evidence integration:** effective attributes required to preserve evidence bytes, selected explicitly or provided by an equivalent owner rule.
+- **Stub client:** a skill script that substitutes a lambda for evaluator invocation and reports `evaluator_invoked = false`.
 
 ## Behavioral rules
 
 ### Product boundary
 
-**ECP-PRD-001:** `hash_bound_classes.json` declares no class whose pattern
-names a path that the standard template does not install; the
-`governance-migration-protocol` class and the three corresponding
-`gitattributes.fragment` lines are removed, and this repository pins its
-own LF bytes in `.gitattributes` outside the managed block.
+**ECP-PRD-001:** The removed governance-migration class and repository-only
+fragment lines remain absent from the shipped product. Completed retirement is
+not new implementation scope.
 
-**ECP-PRD-002:** For a template-region class, a pattern that matches no
-tracked path is warning `W-ECP-006`, not a failure; for a repository-region
-class it remains a failure, because such a class is declared by the
-consumer.
+**ECP-PRD-002:** Preserve current hash-bound checks. No missing repository-only
+file may be required in a consumer. Missing effective Git evidence attributes
+remain a readiness failure; neither absent evidence files nor warnings grant authority.
 
-**ECP-PRD-003:** `init` on an empty directory, followed by `git init`,
-`git add -A`, one commit, and `doctor`, exits 0 with zero `FAIL` lines on
-Linux and Windows; a test in the package suite performs exactly this
-sequence against the packaged template.
+**ECP-PRD-003:** Minimal init writes exactly configuration and lock. For a fresh
+Git repository, explicitly select --integration git or provide an equivalent owner
+rule, commit, then require doctor exit 0 when other checks pass. Preserve refusal
+for missing or damaged required attributes. Verify both supported platforms.
 
-**ECP-PRD-004:** No file under `se_harness/`, `templates/`, or an installed
-script matches the regular expression `RLS-SEH-\d{3}`; a test asserts it
-over the built wheel's contents.
+**ECP-PRD-004:** Reject [A-Z]+-SEH-[0-9]+ literals in wheel implementation members
+(Python, JavaScript, HTML and machine-policy JSON) and installed implementation
+assets, including generated embedded JavaScript. Scan the actual wheel after
+building. Historical Markdown prose and package-description METADATA may name
+records; do not exempt executable members. Report the member and location.
+Reuse existing archive safety limits and CI callers.
 
-**ECP-PRD-005:** The six identifiers of `SPEC-LRE-001` rule 11 are declared
-through rule 5 by an approved upgrade work order of this repository;
-`legacy_release_evidence.py` resolves exemptions only from declarations,
-and the `self-hosting-compatibility-set` declarer rendering is removed.
+**ECP-PRD-005:** Preserve the SPEC-LRE-002 evidence floor. Do not restore rule-5
+legacy declarations, the self-hosting compatibility set or W024 behavior.
 
-**ECP-PRD-006:** `qualify` exposes exactly `released-root` and
-`complete-candidate`; `candidate-package`, `public-install`, and
-`predecessor-view` move to `repository_tools/` and are invoked only by this
-repository's workflows, and `check_portable_release_surface.py` no longer
-pins `predecessor-view` in `--help`.
+**ECP-PRD-006:** Retain the current released-root, complete-candidate,
+candidate-package and public-install qualification operations and their
+independence checks. Retain the repository adoption checker and its CI use.
+Relocation or removal requires a separate architecture decision and scope.
 
-**ECP-PRD-007:** The wheel imports nothing from `repository_tools`; a test
-imports every module under `se_harness/` in an environment where
-`repository_tools` is absent from `sys.path`.
+**ECP-PRD-007:** The packaged evaluator imports no repository_tools module.
+Retain the existing dependency boundary; repository build helpers stay outside
+the wheel.
 
-**ECP-PRD-008:** `recovery-rehearsal`, `accept-candidate`, the
-governance-migration stage machine, and lock schema-1 write paths leave the
-product; the migration rehearsal lane runs the real `upgrade --apply`
-against a throwaway copy holding the predecessor lock.
+**ECP-PRD-008:** Previously retired bootstrap/migration/recovery commands and
+schema-1/2 lock support stay retired. Existing real upgrade rehearsals remain.
+No deletion of active qualification or adoption checks is authorized here.
 
-**ECP-PRD-009:** The template validator's predecessor-view rules run only
-when a `[bootstrap]` tuple is present in a release record, so a consumer
-tree with no such record never executes them, while `RLS-SEH-014` and
-`RLS-SEH-015` continue to validate here.
+**ECP-PRD-009:** Viewer selection uses record types, statuses and graph relations,
+not a known repository artifact ID. Apply the correction through the existing
+count-checked build patches, preserve retained design exports and regenerate the
+shipped template deterministically. Preserve other selection rules.
 
 ### Shipped skills
 
@@ -134,41 +120,38 @@ skill files as `remove` rather than as drift.
 
 | Requirement | Rules |
 | --- | --- |
-| REQ-ECP-012 | ECP-PRD-001 to ECP-PRD-003, ECP-PRD-008, ECP-PRD-009 |
-| REQ-ECP-013 | ECP-PRD-004 to ECP-PRD-007 |
-| REQ-ECP-014 | ECP-SKL-001 to ECP-SKL-004 |
+| REQ-ECP-012 | ECP-PRD-001 to ECP-PRD-003 |
+| REQ-ECP-013 | ECP-PRD-004 to ECP-PRD-009 |
+| REQ-ECP-014 | ECP-SKL-001 to ECP-SKL-004; unchanged, outside narrowed WO-ECP-007 |
 
 ## Inputs and outputs
 
-Inputs: the packaged template, `init`, `doctor`, `upgrade`, and the rule-5
-declaration on an upgrade work order. Outputs: a `doctor` exit status, the
-`W-ECP-006` warning, the reduced `qualify` namespace, and a template with
-one skill.
+Inputs are the exact built wheel, generated viewer, representative artifact
+graphs and disposable consumer repositories. Outputs are the package-check
+findings, viewer selections and `doctor` results. No new qualification command,
+legacy declaration or lifecycle transition is introduced.
 
 ## Failure behaviour
 
-Every retained check fails closed: a repository-region pattern matching
-nothing still fails `doctor`; an `RLS-SEH` match in the wheel fails the
-test suite; an import of `repository_tools` from the package fails the
-isolation test. Nothing here changes lifecycle state.
+A forbidden packaged ID literal fails the portable-surface check with its member
+and location. A missing or damaged required Git attribute fails `doctor` under
+the confirmed current-behavior choice. An invalid or unsafe package remains
+rejected by existing checks. No result in this specification changes lifecycle
+state or authorizes work.
 
 ## Compatibility and migration
 
-Consumers see managed-file `update` and `remove` entries for the fragment
-lines, the workflow, and the removed skills on their next `upgrade`. The
-six historical records stay exempt through data with the same `W024`
-diagnostics. `ADR-REB-009`'s five-operation decision, `SPEC-REB-002` rule 14,
-and `SPEC-LRE-001` rule 11 receive amendment records under `WO-ECP-007`.
-Removed subcommands have no window: none is invoked by any consumer
-template.
+Keep existing installation, upgrade, release qualification and evidence-floor
+behavior. The candidate corrects only the viewer exception and adds a package
+regression check; installation documentation states the chosen readiness rule.
+No CLI operation, adoption check, historical record or design export is removed.
+Earlier work and evidence retain their original definition references. Activate
+linked revisions only through an explicitly authorized, recorded route.
 
 ## Explicitly unspecified decisions
 
-- Whether `scripts/` is split into managed payload and `tools/` in the same
-  work order (audit P2-15) or later.
-- The exact `repository_tools` module names for the relocated self-checks.
-- Whether a rewritten `harness-execute-work-order` returns to the template
-  in a later work order; this specification only sets its admission rule.
+- The reviewed linked-revision representation and activation route, tracked by DEC-ECP-003.
+- Future skill changes and broader release-tool architecture, which are outside narrowed WO-ECP-007.
 
 ## Amendment record
 

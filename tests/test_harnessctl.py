@@ -4,6 +4,7 @@ import contextlib
 import io
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -204,6 +205,57 @@ class HarnessCtlTests(unittest.TestCase):
         code, _, error = invoke("dashboard", str(target))
         self.assertEqual(0, code, error)
         self.assertTrue((target / "target/harness-dashboard/index.html").is_file())
+
+    @unittest.skipUnless(shutil.which("git"), "Git is required for evidence-attribute checks")
+    def test_minimal_git_install_requires_explicit_or_owner_evidence_attributes(self) -> None:
+        for integration in ("git", "owner"):
+            with self.subTest(integration=integration):
+                target = self.root / integration
+                target.mkdir()
+                owner = target / "AGENTS.md"
+                owner.write_bytes(b"Owner instructions remain unchanged.\n")
+                code, _, error = invoke("init", str(target), "--project-name", "Consumer")
+                self.assertEqual(0, code, error)
+                self.assertEqual(
+                    {"AGENTS.md", ".engineering-harness.toml", ".engineering-harness.lock"},
+                    {p.relative_to(target).as_posix() for p in target.rglob("*") if p.is_file()},
+                )
+
+                def git(*arguments: str) -> None:
+                    result = subprocess.run(
+                        ["git", "-C", str(target), *arguments], capture_output=True,
+                        text=True, encoding="utf-8", timeout=30,
+                    )
+                    self.assertEqual(0, result.returncode, result.stderr)
+
+                git("init", "--quiet")
+                git("config", "user.name", "Consumer test")
+                git("config", "user.email", "consumer@example.invalid")
+                git("config", "core.autocrlf", "false")
+                git("add", ".")
+                git("commit", "--quiet", "-m", "Minimal installation")
+                code, output, error = invoke("doctor", str(target))
+                self.assertEqual(1, code, error)
+                self.assertIn("FAIL hash-bound-attribute-effective", output)
+                self.assertFalse((target / "docs").exists())
+
+                if integration == "git":
+                    code, _, error = invoke("upgrade", str(target), "--integration", "git", "--apply")
+                    self.assertEqual(0, code, error)
+                else:
+                    (target / ".gitattributes").write_bytes(b"docs/engineering/**/evidence/*.json text eol=lf\n")
+                git("add", ".")
+                git("commit", "--quiet", "-m", "Select evidence attributes")
+                code, output, error = invoke("doctor", str(target))
+                self.assertEqual(0, code, output + error)
+                self.assertFalse((target / "docs").exists())
+                self.assertEqual(b"Owner instructions remain unchanged.\n", owner.read_bytes())
+
+                with (target / ".gitattributes").open("ab") as attributes:
+                    attributes.write(b"docs/engineering/**/evidence/*.json -text\n")
+                code, output, error = invoke("doctor", str(target))
+                self.assertEqual(1, code, error)
+                self.assertIn("FAIL hash-bound-attribute-effective", output)
 
     def test_adopt_preserves_existing_content_and_labels_observations(self) -> None:
         target = self.root / "existing"

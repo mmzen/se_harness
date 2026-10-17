@@ -1,0 +1,85 @@
+{
+  "tested_source_commit": "49b4f3fb7715d42d8c096a3fdcc57ca4bc7d2e71",
+  "comparison_head": "3bf3f06c9bf2fed9867d40bae1ec738aee5683e8",
+  "unchanged_test_build_and_runtime_inputs": [
+    {
+      "path": "se_harness",
+      "git_object": "5399c45b7e37e4d21129578809b7a3b2d0f87c57",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": "templates",
+      "git_object": "ef672e8e486d7bfa4697963404952071f1114efe",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": "repository_tools",
+      "git_object": "9ea061947e9d39abd79b14f4c05e42dd1dbec2a3",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": "scripts",
+      "git_object": "ce575e8bc02639f82452b2ef97961b52138eb0cb",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": "tests",
+      "git_object": "3d9a7c5232414c21b1a3a1036b3729908ab94fa3",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": ".github",
+      "git_object": "6aa40fa2180259b537d74aea407ba2e0d081b36c",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": "pyproject.toml",
+      "git_object": "ff607d075126e000bc5b93e790df66193669cf74",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": "MANIFEST.in",
+      "git_object": "98351edfd0d1b095bb72615b72ac0bff31dbafab",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": "README.md",
+      "git_object": "ac53e957387fc5e5de7582cacf42abdb639eb8c3",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": "LICENSE",
+      "git_object": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": ".engineering-harness.toml",
+      "git_object": "00d51c83f7dce55648f19982dc5f21577640b9d2",
+      "equal_to_tested_source": true
+    },
+    {
+      "path": ".engineering-harness.lock",
+      "git_object": "fe6fdddef73e9ecf753b7199f30ea941a22f4b24",
+      "equal_to_tested_source": true
+    }
+  ],
+  "later_paths": [
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/README.md",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/installed_consumer_probe.py",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/candidate-build.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/commands.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/full-windows-timings.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/installed-consumer-linux.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/installed-consumer-windows.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/packaged-viewer-linux.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/packaged-viewer-windows.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/summary.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/transcript-index.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-007/qualification-2026-10-17/transcripts.zip",
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-012.md",
+    "docs/engineering/execution-control-plane/work-orders/WO-ECP-007.md"
+  ],
+  "interpretation": "Qualification observations retain their exact tested source and wheel. Subsequent differences are definition clarification, lifecycle recording and retained evidence; no package, test or build input changed.",
+  "requirement_statement_sha256": "608a807f7ab96df1836e3b45a15a49ea4bb58dde427b07403c82ba3c6814b87e",
+  "passed": true
+}

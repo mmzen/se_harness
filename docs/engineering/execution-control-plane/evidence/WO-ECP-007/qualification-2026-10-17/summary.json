@@ -1,0 +1,66 @@
+{
+  "classification": "Observed implementation checks; not human verification or completed handoff",
+  "work_order": "WO-ECP-007",
+  "candidate": "49b4f3fb7715d42d8c096a3fdcc57ca4bc7d2e71",
+  "tree": "64f7745a96452c395efbd48815446afb11c86b2c",
+  "wheel_sha256": "57bfed79d107021fb0ea3136709cf71edf57ef0db497de87719cb78d92daaaf7",
+  "wheel_purpose": "non-promotable candidate evidence; no release or adoption",
+  "windows_full": {
+    "tests": 1349,
+    "skipped": 24,
+    "exit_code": 0,
+    "scale": "full"
+  },
+  "windows_focused": {
+    "tests": 120,
+    "skipped": 2,
+    "exit_code": 0
+  },
+  "linux_focused": {
+    "tests": 120,
+    "skipped": 0,
+    "exit_code": 0,
+    "runtime": "Ubuntu 24.04 / WSL2 / Python 3.12.3"
+  },
+  "required_scenarios": {
+    "installed_consumers": [
+      "Windows",
+      "Linux"
+    ],
+    "packaged_viewer": [
+      "Windows",
+      "Linux"
+    ],
+    "package_positive_and_contamination_checks": [
+      "Windows",
+      "Linux"
+    ],
+    "all_executed": true
+  },
+  "generated_template": {
+    "bytes": 442587,
+    "sha256": "694b643b80f3a72d760343f255eca6388a36682cbe8a44eda7f2e07240d16c92",
+    "two_builds_equal": true,
+    "builder_check_exit_code": 0
+  },
+  "released_validation": {
+    "artifact_count": 2022,
+    "error_count": 0,
+    "warning_count": 65
+  },
+  "limits": [
+    "24 Windows full-suite skips remain skips; the required selected scenarios ran on both platforms.",
+    "No full Linux suite was claimed; the three affected modules and installed-wheel scenarios ran.",
+    "Pending exact correction to REQ-ECP-012 statement; implementation completion and review publication remain pending.",
+    "The candidate is not a released or adopted evaluator."
+  ],
+  "retained_failures": [
+    "Old implementation: viewer failure and four executable-member contamination failures.",
+    "Initial restrictive-shell temporary-directory failure.",
+    "Approval preview CLI usage error, corrected before applying approval.",
+    "First installed Linux probe resolved the virtual-environment symlink to system Python; helper corrected.",
+    "Windows-mount Linux suite interrupted after 611 seconds of filesystem-bound execution.",
+    "Native Linux archive lacked commit/origin metadata: two existing checks failed.",
+    "Two Linux Git metadata transfers failed on Windows-specific worktree/object-alternate pointers; independent exact-commit object copy resolved this."
+  ]
+}

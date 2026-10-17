@@ -88,6 +88,8 @@ BASE_PATCHES: tuple[Patch, ...] = (
     Patch("href: 'Lineage View.dc.html'", "href: '?view=lineage'", 2, ("Overview",)),
     Patch("'Lineage View.dc.html?artifact=' + encodeURIComponent(", "'?view=lineage&artifact=' + encodeURIComponent(", 2, ("Overview", "Graph")),
     Patch(' <a href="Rationale.dc.html">Design rationale</a>', "", 1, ("Lineage View",)),
+    # Verification selection depends on status and links, never a prototype ID.
+    Patch(" && r.source !== 'VREC-SEH-021'", "", 1, ("Lineage View",)),
     # Same-view deep links keep the current view.
     Patch("window.location.pathname", "window.HarnessExplorer.viewHref()", 3, ("Lineage View", "Graph")),
     Patch("'?artifact=' + encodeURIComponent(", "window.HarnessExplorer.artifactHref(", 2, ("Lineage View", "Graph")),

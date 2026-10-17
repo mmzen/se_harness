@@ -5,7 +5,7 @@ title = "Make the harness an execution control plane: state and boundary, not in
 status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-27"
-updated = "2026-08-28"
+updated = "2026-10-17"
 
 [relations]
 
@@ -18,6 +18,10 @@ reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP de
 +++
 
 # Intent: Make the harness an execution control plane: state and boundary, not instructions
+
+## Selected WO-ECP-007 revision
+
+This revision applies only to remaining work under WO-ECP-007. The [preserved accepted version](../evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/INT-ECP-001.txt) has complete-file SHA-256 `533c263e41a1d0d6993e32d50307ab069e0429132d7950a622959298119d532e` and Git blob `d2685c785d8612b39a3f73a215768c877d2561a6` at commit `0b93e92ceabdb4cae85e1f4fdab943f955aa1c38`. The [activation receipt](../evidence/WO-ECP-007/definition-revisions/2026-10-17/activation.json) records the actual human authority and before/after identities. Without that recorded authority this replacement does not govern work. Original lifecycle events remain unchanged; this is not a native evaluator revision event. Earlier completed work and evidence retain their original definition meaning. Retained historical problem descriptions are context, not claims about current code. Unrelated skills and capabilities retain their existing obligations.
 
 ## Problem
 
@@ -99,7 +103,8 @@ stale evidence binding (`WO-HUP-007`), rebase orphaning a ready record
 - Evidence packets and identifiers are produced and re-bound by the harness,
   so the recurring agent failures become things an agent cannot get wrong.
 - A consumer repository receives only the machinery it needs: a green
-  `doctor` after `init`, no identifiers of this repository's releases, no
+  `doctor` after minimal installation and explicit Git evidence setup in a Git
+  repository, no repository-specific record exceptions in executable product policy, no
   skill that describes behaviour it does not have, and no second execution
   model to recognise and ignore.
 - Delegation to an agent is an attribute a human sets on a work order and a
@@ -133,7 +138,7 @@ stale evidence binding (`WO-HUP-007`), rebase orphaning a ready record
 | Pull requests whose scope is evaluated by CI without a volunteered trailer (`engineering-harness.yml:56-89`) | 0% | 100% | Every pull-request event after adoption |
 | Identity checks behind a `--decision` actor (`se_harness/workflow.py:606`) | 0 | 1 per decision, role checked against decision rights | Every applied transition |
 | Distinct next-step selectors and precondition engines in the workflow core (audit P0-6) | 2 selectors, 3 precondition engines, 2 result schemas | 1, 1, 1 | Package at the packet's completion commit |
-| `doctor` exit status in a fresh consumer repository after `init` and a commit (audit P0-1) | 1 | 0 | Every release qualification |
+| `doctor` exit status after minimal `init`, explicit Git evidence setup and a commit (audit P0-1) | 1 | 0 | Every release qualification |
 | This repository's release identifiers in generic product code (audit P1-2) | 6 | 0 | Package at the packet's completion commit |
 | Phase 4 lines in the package (audit P0-5) | 8,766 (39%) | Journaled apply and scope narrowing only | Package at the packet's completion commit |
 | Shipped skills that describe an evaluator call they do not make (`check_scope.py:190-199`) | 3 | 0 | Distributed template at the packet's completion commit |

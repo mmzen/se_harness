@@ -87,6 +87,8 @@ ACTIVE_ROOTS = (
 ACTIVE_SCAN_ALLOWLIST = frozenset({"scripts/check_portable_release_surface.py"})
 CURRENT_OPERATOR_ROOTS = ("README.md", "docs/notes")
 RETIRED_OPERATOR_TERM = re.compile(rb"\bgovernor\b", re.IGNORECASE)
+REPOSITORY_ARTIFACT_ID = re.compile(rb"[A-Z]+-SEH-[0-9]+")
+EXECUTABLE_MEMBER_SUFFIXES = (".py", ".js", ".html", ".json")
 MAX_MEMBER_SIZE = 16 * 1024 * 1024
 MAX_MEMBER_COUNT = 4096
 MAX_TOTAL_SIZE = 128 * 1024 * 1024
@@ -133,6 +135,14 @@ def inspect_wheel(path: Path) -> None:
                     hits.append(name)
                 elif any(term in content for term in FORBIDDEN_ACTIVE_CONTENT):
                     hits.append(name)
+                # Markdown history and distribution metadata may link records.
+                # Generated HTML is executable too, including its embedded views.
+                if name.lower().endswith(EXECUTABLE_MEMBER_SUFFIXES):
+                    match = REPOSITORY_ARTIFACT_ID.search(content)
+                    if match:
+                        line = content.count(b"\n", 0, match.start()) + 1
+                        identifier = match.group().decode("ascii")
+                        hits.append(f"{name}:{line}: {identifier} (byte offset {match.start()})")
     except (KeyError, OSError, RuntimeError, zipfile.BadZipFile, zipfile.LargeZipFile) as exc:
         raise SurfaceError(f"cannot inspect wheel: {path}") from exc
     if hits:

@@ -1,0 +1,156 @@
+{
+  "status": "proposed; no accepted file changed",
+  "work_order": "WO-ECP-007",
+  "decision": "DEC-ECP-003",
+  "installation_clarification": {
+    "actor": "mmzen",
+    "date": "2026-10-17",
+    "response": "doctor: yes, go",
+    "effect": "Confirms the installation criterion and continuation of preparation; does not supply manual activation or implementation approval."
+  },
+  "authorization_needed": "Explicit bounded manual amendment overriding the missing supported revision mechanism, then required-verification work approval and bounded review publication.",
+  "receipt_path": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/activation.json",
+  "authority_effect": "Applies only to future WO-ECP-007 work. Does not reopen or reinterpret earlier completed work or evidence.",
+  "steps": [
+    "Recheck accepted-byte hashes and every reviewed replacement hash immediately before applying.",
+    "After exact human authorization, copy the accepted files without changing any byte to the seven named .txt destinations.",
+    "Write the exact reviewed replacements at the existing definition paths; preserve ID, approved state, owners and original lifecycle events.",
+    "Record actual human identity, authorization, timestamp, selected work, preserved paths, before/after SHA-256 values and original Git blobs in activation.json. Do not fabricate a native revision event or relation.",
+    "Read back all files and validate. Refuse implementation if any identity, authority or gate differs.",
+    "Resolve DEC-ECP-003 through released decide under the actual human identity and established owner right.",
+    "Record the confirmed assurance classification and preview/apply work approval through the released evaluator; start only after required checks pass."
+  ],
+  "files": [
+    {
+      "id": "INT-ECP-001",
+      "active_path": "docs/engineering/execution-control-plane/intent/INT-ECP-001.md",
+      "accepted_path": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/INT-ECP-001.txt",
+      "accepted_sha256": "533c263e41a1d0d6993e32d50307ab069e0429132d7950a622959298119d532e",
+      "original_git_blob": "d2685c785d8612b39a3f73a215768c877d2561a6",
+      "original_commit": "0b93e92ceabdb4cae85e1f4fdab943f955aa1c38",
+      "proposed_file": "proposed-full/INT-ECP-001.txt",
+      "proposed_sha256": "a46c0002392742dc8341c6d6f0c23fba47e89108c369d3b291352bca971c5feb",
+      "sections": [
+        "## Desired outcomes",
+        "## Success measures"
+      ]
+    },
+    {
+      "id": "CAP-ECP-003",
+      "active_path": "docs/engineering/execution-control-plane/capabilities/CAP-ECP-003.md",
+      "accepted_path": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/CAP-ECP-003.txt",
+      "accepted_sha256": "7688ca3c641dd84312d304c688f67d86e075cd25b9498e89064a36b161473d37",
+      "original_git_blob": "c661f2c22356d86bd41840b814d8be331de7afb6",
+      "original_commit": "0b93e92ceabdb4cae85e1f4fdab943f955aa1c38",
+      "proposed_file": "proposed-full/CAP-ECP-003.txt",
+      "proposed_sha256": "f2bc43c8409b255507ae9b979408f223982b7d6774f877b35487d70e66aab6c2",
+      "sections": [
+        "## Capability statement",
+        "## Boundaries",
+        "## Outcomes"
+      ]
+    },
+    {
+      "id": "REQ-ECP-012",
+      "active_path": "docs/engineering/execution-control-plane/requirements/REQ-ECP-012.md",
+      "accepted_path": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/REQ-ECP-012.txt",
+      "accepted_sha256": "6fcaf0f6b601286efb593e081512f80b4eca2acfa7c4b4101c0030c0f492ce8a",
+      "original_git_blob": "231f6947f4ff2b426c40a202e9cc690fb0e09ab0",
+      "original_commit": "0b93e92ceabdb4cae85e1f4fdab943f955aa1c38",
+      "proposed_file": "proposed-full/REQ-ECP-012.txt",
+      "proposed_sha256": "d097624ebf877fdc8e5870ab3ea0bb0bf184e92d7f67cd683b349cf18f2f03fd",
+      "sections": [
+        "## Behavior",
+        "## Assumptions and dependencies",
+        "## Acceptance examples"
+      ]
+    },
+    {
+      "id": "REQ-ECP-013",
+      "active_path": "docs/engineering/execution-control-plane/requirements/REQ-ECP-013.md",
+      "accepted_path": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/REQ-ECP-013.txt",
+      "accepted_sha256": "3c7d41ea28442d16bad05a3e24fe76824102a244e7641d689acf8f0c5d9cdb15",
+      "original_git_blob": "595905cb2717bdf986b5fab07bea868fe4ae9eac",
+      "original_commit": "0b93e92ceabdb4cae85e1f4fdab943f955aa1c38",
+      "proposed_file": "proposed-full/REQ-ECP-013.txt",
+      "proposed_sha256": "867b456dfba1bc0604fd8847015d1b6cdf59714daa104a34b80ecc84f91707b1",
+      "sections": [
+        "## Behavior",
+        "## Assumptions and dependencies",
+        "## Acceptance examples"
+      ]
+    },
+    {
+      "id": "SPEC-ECP-007",
+      "active_path": "docs/engineering/execution-control-plane/specifications/SPEC-ECP-007.md",
+      "accepted_path": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/SPEC-ECP-007.txt",
+      "accepted_sha256": "a73e8578d6e355073c9781f00eb2cff109019540794004f173cd8bee046c881e",
+      "original_git_blob": "49c0152d18c1e5d52beaf0c0085ed82bf99802ee",
+      "original_commit": "0b93e92ceabdb4cae85e1f4fdab943f955aa1c38",
+      "proposed_file": "proposed-full/SPEC-ECP-007.txt",
+      "proposed_sha256": "5dd17a88b284e7aeed5e6af2241d1b55be4c99dfa3d2ab65b10f4387b33407b5",
+      "sections": [
+        "## Scope",
+        "## Actors and external systems",
+        "## Terms",
+        "### Product boundary",
+        "## Coverage",
+        "## Inputs and outputs",
+        "## Failure behaviour",
+        "## Compatibility and migration",
+        "## Explicitly unspecified decisions"
+      ]
+    },
+    {
+      "id": "VER-ECP-007",
+      "active_path": "docs/engineering/execution-control-plane/verification/VER-ECP-007.md",
+      "accepted_path": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/VER-ECP-007.txt",
+      "accepted_sha256": "77d2a98593f344d67327e93e5ae93e6b15fce288f55e8981d8edce41b0634041",
+      "original_git_blob": "8fa0d2e4a6e23aba643b943bc94e7239008cac4e",
+      "original_commit": "0b93e92ceabdb4cae85e1f4fdab943f955aa1c38",
+      "proposed_file": "proposed-full/VER-ECP-007.txt",
+      "proposed_sha256": "ea4713af3e320787c9357cb641344bcf6073c04dc70c7e3387a19eb25ccd45bc",
+      "sections": [
+        "## Independence",
+        "## Requirement-to-evidence matrix",
+        "## Acceptance scenarios",
+        "## Property and invariant tests",
+        "## Static and architecture checks",
+        "## Security and privacy checks",
+        "## Performance and resilience checks",
+        "## Evidence retention",
+        "## Pass criteria",
+        "## Residual uncertainty"
+      ]
+    },
+    {
+      "id": "ADR-ECP-005",
+      "active_path": "docs/engineering/execution-control-plane/architecture/adr/ADR-ECP-005.md",
+      "accepted_path": "docs/engineering/execution-control-plane/evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/ADR-ECP-005.txt",
+      "accepted_sha256": "a4d955f6908ea0489b091ed4a29c57d708c6458cf4ea274773566482dc8e50c0",
+      "original_git_blob": "e327758c1d6354ab7df107d0b9837984201ce8b5",
+      "original_commit": "0b93e92ceabdb4cae85e1f4fdab943f955aa1c38",
+      "proposed_file": "proposed-full/ADR-ECP-005.txt",
+      "proposed_sha256": "d6797ad307179d8a7ef8208f5e2a83f167c2902743ef37f9311a1c800f35a38e",
+      "sections": [
+        "## Decision drivers",
+        "## Considered options",
+        "## Decision",
+        "## Consequences",
+        "## Validation"
+      ]
+    }
+  ],
+  "reviewed_drafts": [
+    {
+      "id": "WO-ECP-007",
+      "path": "docs/engineering/execution-control-plane/work-orders/WO-ECP-007.md",
+      "sha256": "3173bfc3e0f79c9fd0d8766191dfa58f9a5552000700418e4d404d90b8a9b98b"
+    },
+    {
+      "id": "DEC-ECP-003",
+      "path": "docs/engineering/execution-control-plane/decisions/DEC-ECP-003.md",
+      "sha256": "b93c1eb6c33f35030da387aea761e104e1813e57938ab5a78fe2dde48ea555d4"
+    }
+  ]
+}
