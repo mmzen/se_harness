@@ -52,3 +52,12 @@ desktop remains unverified under DEC-RLS-011 / RISK-RLS-009. These public-route
 checks do not claim live model or desktop testing. Git remains authoritative;
 the hosted service stays private and source-built, with evaluator 0.22.1.
 Repository adoption, user-host updates and public service deployment are excluded.
+
+## Verification preparation recovery
+
+The initial capture could not create its Windows temporary worktree. A second
+attempt assessed the receipts but refused source qualification because the helper
+used an installed-package runtime. The corrected invocation uses candidate source
+for this evidence-only check; released 0.22.1 remains the lifecycle governor.
+Both failed attempts and helper versions are retained in closeout-capture-recovery.zip.
+No release payload, public observation, requirement or human decision changed.
