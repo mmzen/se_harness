@@ -2,7 +2,7 @@
 id = "VREC-RLS-005"
 type = "verification_record"
 title = "Verification candidate for WO-RLS-047"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-17"
 updated = "2026-10-17"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-23-0/evidence/WO-RLS-047/claude-co
 evaluator_evidence_path = "docs/engineering/release-0-23-0/evidence/VREC-RLS-005-evaluator.json"
 evaluator_evidence_sha256 = "5396a2aa38a2e0e1c858c04f63697d13a2f7aae16e977256b931a8d4f9c0c899"
 
+verified_at = "2026-10-17T08:46:08Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-RLS-047"]
 conforms_to = ["VER-RLS-041"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-17T08:46:08Z"
+decided_by = "mmzen"
+reason = "Human mmzen replied \"Verify result\" to the exact VREC-RLS-005 review in PR #548, candidate 56d26b6110cd37355d9ee2956a55ec26d46f25d0. This accepts the public-delivery observations under WO-RLS-047 and VER-RLS-041, including the disclosed supported Codex update recovery, retained failures and accepted DEC-RLS-010 / DEC-RLS-011 limitations. Binary release authorization remains the earlier RLS-SEH-034 decision. This decision supplies no merge, repository adoption or host-update authority. Codex applies the human decision under the existing review-publication grant."
 +++
 
 # Verification Record Candidate
