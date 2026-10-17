@@ -2,7 +2,7 @@
 id = "VREC-ECP-042"
 type = "verification_record"
 title = "Verification candidate for WO-ECP-007"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-10-17"
 updated = "2026-10-17"
@@ -16,9 +16,17 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-007/
 evaluator_evidence_path = "docs/engineering/execution-control-plane/evidence/VREC-ECP-042-evaluator.json"
 evaluator_evidence_sha256 = "96942883cfe1283f9ebdbd0fc7cf5bda2d58fa72b5ab1dadc2e415a1e230685c"
 
+verified_at = "2026-10-17T13:07:21Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-ECP-007"]
 conforms_to = ["VER-ECP-007"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-10-17T13:07:21Z"
+decided_by = "mmzen"
 +++
 
 # Verification Record Candidate
