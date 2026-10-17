@@ -1,0 +1,230 @@
+{
+  "release_record": "RLS-SEH-034",
+  "candidate_commit": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "plan_sha256": "420b4b82891b2fe77244cc3c4a995ddab8153a11f649324f01b1f37e83e51b34",
+  "observed_at": "2026-10-17T06:53:27.079966+00:00",
+  "public_main": "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7",
+  "source_file_checks": [
+    {
+      "path": "README.md",
+      "expected_sha256": "5a43ded264071388de30e800bc937772fa2cd485797cc27ed8e41ebbbb42c940",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "5a43ded264071388de30e800bc937772fa2cd485797cc27ed8e41ebbbb42c940",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "5a43ded264071388de30e800bc937772fa2cd485797cc27ed8e41ebbbb42c940"
+      }
+    },
+    {
+      "path": "release/plugin-marketplace/README.md",
+      "expected_sha256": "c332eec96d9dc844c1f63265d0fd7c245c581974d4aca3eb3e22214bcd1cdb4c",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "c332eec96d9dc844c1f63265d0fd7c245c581974d4aca3eb3e22214bcd1cdb4c",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "c332eec96d9dc844c1f63265d0fd7c245c581974d4aca3eb3e22214bcd1cdb4c"
+      }
+    },
+    {
+      "path": "plugins/verity-plane/codex/README.md",
+      "expected_sha256": "1e5ddb4d7399eb0d8535ba6758e49a0e9cdddae25fa06b86bb757cfbbd91e57d",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "1e5ddb4d7399eb0d8535ba6758e49a0e9cdddae25fa06b86bb757cfbbd91e57d",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "1e5ddb4d7399eb0d8535ba6758e49a0e9cdddae25fa06b86bb757cfbbd91e57d"
+      }
+    },
+    {
+      "path": "plugins/verity-plane/claude-code/README.md",
+      "expected_sha256": "585d8e150f7523612dc34d4818a31c26f8c67331cf48eefb8e37b65e8079adba",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "585d8e150f7523612dc34d4818a31c26f8c67331cf48eefb8e37b65e8079adba",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "585d8e150f7523612dc34d4818a31c26f8c67331cf48eefb8e37b65e8079adba"
+      }
+    },
+    {
+      "path": "docs/notes/plugin-installation-guide.md",
+      "expected_sha256": "22474d27a9d81931e96d930152cbe12876aceb9dec93a0f0edf2ed50c4cb38b7",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "22474d27a9d81931e96d930152cbe12876aceb9dec93a0f0edf2ed50c4cb38b7",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "22474d27a9d81931e96d930152cbe12876aceb9dec93a0f0edf2ed50c4cb38b7"
+      }
+    },
+    {
+      "path": "docs/notes/plugin-marketplace-publication.md",
+      "expected_sha256": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58"
+      }
+    },
+    {
+      "path": "docs/notes/developing-se-harness.md",
+      "expected_sha256": "998993410965121f0817ae6c63256d2fd1af7da33c5ad63c3914a15b79abb412",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "998993410965121f0817ae6c63256d2fd1af7da33c5ad63c3914a15b79abb412",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "998993410965121f0817ae6c63256d2fd1af7da33c5ad63c3914a15b79abb412"
+      }
+    },
+    {
+      "path": "docs/notes/harness-installation-and-upgrades.md",
+      "expected_sha256": "0f99f65b22e737116ae599a2e0a75fdfdf83bbd31cf61c6d07a070617fd27203",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "0f99f65b22e737116ae599a2e0a75fdfdf83bbd31cf61c6d07a070617fd27203",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "0f99f65b22e737116ae599a2e0a75fdfdf83bbd31cf61c6d07a070617fd27203"
+      }
+    },
+    {
+      "path": "docs/notes/hosted-artifact-graph.md",
+      "expected_sha256": "04d11a302f3bdb892be2d49e57191fa446b35081b661d01f8ddef9ca9b0c7dbc",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "04d11a302f3bdb892be2d49e57191fa446b35081b661d01f8ddef9ca9b0c7dbc",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "04d11a302f3bdb892be2d49e57191fa446b35081b661d01f8ddef9ca9b0c7dbc"
+      }
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-047/README.md",
+      "expected_sha256": "9c755ca77710a2e5bc09b83f2d413323d1ec57920e5f3f289bdb12a6a2784218",
+      "observed": {
+        "92f948ad9faea69e00485d59c0680694e21bc30e": "9c755ca77710a2e5bc09b83f2d413323d1ec57920e5f3f289bdb12a6a2784218",
+        "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "9c755ca77710a2e5bc09b83f2d413323d1ec57920e5f3f289bdb12a6a2784218"
+      }
+    }
+  ],
+  "status": "pass",
+  "source_link_findings": [],
+  "package_link_findings": [],
+  "source_links": "passed",
+  "public_package_links": "passed",
+  "public_package_revision": "d04776866046b60b14ffef14ced1453c4aafa7d9",
+  "public_package_file_count": 88,
+  "tagged_sandbox": {
+    "tag": "v0.23.0",
+    "commit": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+    "candidate": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+    "matching_files": 35,
+    "source_paths": [
+      "docs/notes/hosted-artifact-graph.md",
+      "server/Dockerfile",
+      "server/README.md",
+      "server/compose.yaml",
+      "server/config.example.json",
+      "server/contracts/export-v2.json",
+      "server/contracts/graph-v1.cypher",
+      "server/contracts/graph-v2.cypher",
+      "server/contracts/lifecycle-result-v2.json",
+      "server/contracts/lifecycle-v2.json",
+      "server/contracts/lifecycle-v2.md",
+      "server/contracts/read-result-v2.json",
+      "server/contracts/read-v1.json",
+      "server/contracts/remote-v1.json",
+      "server/contracts/result-v1.json",
+      "server/hosted_artifact_graph/__init__.py",
+      "server/hosted_artifact_graph/__main__.py",
+      "server/hosted_artifact_graph/app.py",
+      "server/hosted_artifact_graph/canonical.py",
+      "server/hosted_artifact_graph/cypher.py",
+      "server/hosted_artifact_graph/evaluator.py",
+      "server/hosted_artifact_graph/evaluator_bridge.py",
+      "server/hosted_artifact_graph/lifecycle.py",
+      "server/hosted_artifact_graph/pilot_git.py",
+      "server/hosted_artifact_graph/protocol.py",
+      "server/hosted_artifact_graph/reads.py",
+      "server/hosted_artifact_graph/service.py",
+      "server/hosted_artifact_graph/store.py",
+      "server/pyproject.toml",
+      "server/requirements.in",
+      "server/requirements.lock",
+      "server/scripts/fetch_system_packages.py",
+      "server/scripts/qualify.py",
+      "server/scripts/stage.py",
+      "server/system-packages.lock.json"
+    ],
+    "public_service_claim": false
+  },
+  "claims_review": "All ten frozen source files match the reviewed documentation commit, release governance and current main. Both public package README snapshots and all package bytes match qualification. Dated historical observations remain historical. Actual current public availability is retained in these named receipts. R23-NATIVE-010/011 remain open; Codex Windows desktop remains unverified under accepted DEC-RLS-010/011. Git remains authoritative and the service remains private and source-built with evaluator 0.22.1.",
+  "link_context": "Seven source documents resolve in the source tree. Three package README templates resolve in their composed marketplace locations, as required by the existing test_package_links_resolve_after_composition. The first observation wrongly tried to resolve a package-relative link under release/plugin-marketplace in the source tree; that helper failure is retained separately.",
+  "earlier_helper_failure": {
+    "observed_at": "2026-10-17T06:52:43.314119+00:00",
+    "public_main": "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7",
+    "source_file_checks": [
+      {
+        "path": "README.md",
+        "expected_sha256": "5a43ded264071388de30e800bc937772fa2cd485797cc27ed8e41ebbbb42c940",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "5a43ded264071388de30e800bc937772fa2cd485797cc27ed8e41ebbbb42c940",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "5a43ded264071388de30e800bc937772fa2cd485797cc27ed8e41ebbbb42c940"
+        }
+      },
+      {
+        "path": "release/plugin-marketplace/README.md",
+        "expected_sha256": "c332eec96d9dc844c1f63265d0fd7c245c581974d4aca3eb3e22214bcd1cdb4c",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "c332eec96d9dc844c1f63265d0fd7c245c581974d4aca3eb3e22214bcd1cdb4c",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "c332eec96d9dc844c1f63265d0fd7c245c581974d4aca3eb3e22214bcd1cdb4c"
+        }
+      },
+      {
+        "path": "plugins/verity-plane/codex/README.md",
+        "expected_sha256": "1e5ddb4d7399eb0d8535ba6758e49a0e9cdddae25fa06b86bb757cfbbd91e57d",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "1e5ddb4d7399eb0d8535ba6758e49a0e9cdddae25fa06b86bb757cfbbd91e57d",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "1e5ddb4d7399eb0d8535ba6758e49a0e9cdddae25fa06b86bb757cfbbd91e57d"
+        }
+      },
+      {
+        "path": "plugins/verity-plane/claude-code/README.md",
+        "expected_sha256": "585d8e150f7523612dc34d4818a31c26f8c67331cf48eefb8e37b65e8079adba",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "585d8e150f7523612dc34d4818a31c26f8c67331cf48eefb8e37b65e8079adba",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "585d8e150f7523612dc34d4818a31c26f8c67331cf48eefb8e37b65e8079adba"
+        }
+      },
+      {
+        "path": "docs/notes/plugin-installation-guide.md",
+        "expected_sha256": "22474d27a9d81931e96d930152cbe12876aceb9dec93a0f0edf2ed50c4cb38b7",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "22474d27a9d81931e96d930152cbe12876aceb9dec93a0f0edf2ed50c4cb38b7",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "22474d27a9d81931e96d930152cbe12876aceb9dec93a0f0edf2ed50c4cb38b7"
+        }
+      },
+      {
+        "path": "docs/notes/plugin-marketplace-publication.md",
+        "expected_sha256": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58"
+        }
+      },
+      {
+        "path": "docs/notes/developing-se-harness.md",
+        "expected_sha256": "998993410965121f0817ae6c63256d2fd1af7da33c5ad63c3914a15b79abb412",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "998993410965121f0817ae6c63256d2fd1af7da33c5ad63c3914a15b79abb412",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "998993410965121f0817ae6c63256d2fd1af7da33c5ad63c3914a15b79abb412"
+        }
+      },
+      {
+        "path": "docs/notes/harness-installation-and-upgrades.md",
+        "expected_sha256": "0f99f65b22e737116ae599a2e0a75fdfdf83bbd31cf61c6d07a070617fd27203",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "0f99f65b22e737116ae599a2e0a75fdfdf83bbd31cf61c6d07a070617fd27203",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "0f99f65b22e737116ae599a2e0a75fdfdf83bbd31cf61c6d07a070617fd27203"
+        }
+      },
+      {
+        "path": "docs/notes/hosted-artifact-graph.md",
+        "expected_sha256": "04d11a302f3bdb892be2d49e57191fa446b35081b661d01f8ddef9ca9b0c7dbc",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "04d11a302f3bdb892be2d49e57191fa446b35081b661d01f8ddef9ca9b0c7dbc",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "04d11a302f3bdb892be2d49e57191fa446b35081b661d01f8ddef9ca9b0c7dbc"
+        }
+      },
+      {
+        "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-047/README.md",
+        "expected_sha256": "9c755ca77710a2e5bc09b83f2d413323d1ec57920e5f3f289bdb12a6a2784218",
+        "observed": {
+          "92f948ad9faea69e00485d59c0680694e21bc30e": "9c755ca77710a2e5bc09b83f2d413323d1ec57920e5f3f289bdb12a6a2784218",
+          "38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7": "9c755ca77710a2e5bc09b83f2d413323d1ec57920e5f3f289bdb12a6a2784218"
+        }
+      }
+    ],
+    "status": "failed",
+    "error": "Command '['git', 'show', '38c9d3e5493693edaaed61f3dfb1a1d9cd2ca6a7:release/plugin-marketplace/packages/codex/verity-plane/skills/setup/references/checkout.md']' returned non-zero exit status 128."
+  }
+}
