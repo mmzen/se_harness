@@ -1,0 +1,12 @@
+{
+  "schema": "release-ready-record-replay-receipt/v1",
+  "record": "RLS-SEH-034",
+  "candidate": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "review_commit": "c7be3ce0e3f28dc19b13691e00bdf2ab93474dde",
+  "run": "https://github.com/mmzen/se_harness/actions/runs/39007950424",
+  "status": "success",
+  "replay_path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/ready-record-replay-034.json",
+  "replay_sha256": "e7f5326191396238a56b369a415b9e702a447298d7d3e8810bc70091bf404fe5",
+  "two_builds_match_bound_archives": true,
+  "authority": "Read-only corroboration; no release or publication decision."
+}

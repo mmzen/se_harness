@@ -10,7 +10,9 @@ PR #544 merged the verification in `b43bef8c213ecabee94447a8fb52c32294c7ab75`.
 [RLS-SEH-034](releases/RLS-SEH-034.md) binds the same candidate and archives.
 WO-RLS-047 is preparing current source guidance and the public delivery inputs;
 public execution and its later assurance remain pending. The exact complete-release
-plan and ready-record replay are being prepared for the separate release decision.
+[plan and review](evidence/WO-RLS-045/complete-release-review.md) are ready for the separate release decision.
+Two ready-record replay builds reproduce the exact archives. The source README
+correction passes all 47 focused checks; final review CI must pass before approval.
 Use the [public evidence index](evidence/WO-RLS-047/README.md) for observed delivery.
 
 Historical preparation: read the [earlier qualification report](evidence/WO-RLS-045/qualification-progress-6fa4d1a6.md),

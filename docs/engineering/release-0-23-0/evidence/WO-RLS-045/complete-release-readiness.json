@@ -1,0 +1,96 @@
+{
+  "schema": "se-harness-complete-release-readiness/v1",
+  "candidate_commit": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
+  "verification_records": [
+    "VREC-SEH-034"
+  ],
+  "qualification": "passed",
+  "controls_ready": true,
+  "observed_at": "2026-10-17T06:03:43.126951+00:00",
+  "evidence": [
+    {
+      "path": "docs/engineering/release-0-23-0/verification-records/VREC-SEH-034.md",
+      "sha256": "92e247483e6cb87c7e97057918083c7c32342bc8ba98865d0b5c31e90d29feae"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/verification-assessment-48e851bb.md",
+      "sha256": "9f61d21d02ffe74fc96a80757600f27e768429dce428abf3dd4e063ad61e6115"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/capture-receipt-48e851bb.json",
+      "sha256": "6c05cccb328a27037576157de31863c4c06d7ca09c24ec76139979f63bd5ffbb"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/ready-release-preparation-20261017.zip",
+      "sha256": "56657d035b5a9c25e583764c249a0a83e2990977b78d1f3e8188b5bc346d3324"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/ready-release-review.md",
+      "sha256": "5f7aebb72b57987169a4d431fc39583128548a240a43aa1c423761d132ea5d00"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/ready-record-replay-034.json",
+      "sha256": "e7f5326191396238a56b369a415b9e702a447298d7d3e8810bc70091bf404fe5"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/ready-record-replay-034-receipt.json",
+      "sha256": "db6ac01beb48807e90d0370c2d90155876f9bf0da65d9a56f7cebe8cddac7f9a"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-046/marketplace-review-publication-48e851bb.json",
+      "sha256": "6d2df2866fc552dbe6036a181dffba7bd1b88cacc923913e8d8ce22b959231af"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-045/complete-release-preparation.zip",
+      "sha256": "d1b51b62d7acd8ec4fa47a3080bed95d293f2877f0286f25890d94551e39f441"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-047/source-guide-bound-correction.md",
+      "sha256": "6feca9bd636a48ded094a3a773bb8714112d100a9add44490328e3adc53f2a28"
+    },
+    {
+      "path": "docs/engineering/release-0-23-0/evidence/WO-RLS-047/source-guide-bound-correction.zip",
+      "sha256": "93be4c29304deae4ed13fa444cde40c2ea02e52f18dadf1650435950424d3071"
+    }
+  ],
+  "documentation": {
+    "commit": "92f948ad9faea69e00485d59c0680694e21bc30e",
+    "work_order": "WO-RLS-047",
+    "checks": "47 existing onboarding/documentation/identity/link tests pass. README: 643 words within the unchanged 650-word limit. Candidate evidence and qualified package bytes unchanged.",
+    "authority": "Already-approved local source-status preparation. Public observations and final VER-RLS-041 assurance remain pending; no completed-work or new verification decision is claimed.",
+    "source_files": {
+      "README.md": "5a43ded264071388de30e800bc937772fa2cd485797cc27ed8e41ebbbb42c940",
+      "release/plugin-marketplace/README.md": "c332eec96d9dc844c1f63265d0fd7c245c581974d4aca3eb3e22214bcd1cdb4c",
+      "plugins/verity-plane/codex/README.md": "1e5ddb4d7399eb0d8535ba6758e49a0e9cdddae25fa06b86bb757cfbbd91e57d",
+      "plugins/verity-plane/claude-code/README.md": "585d8e150f7523612dc34d4818a31c26f8c67331cf48eefb8e37b65e8079adba",
+      "docs/notes/plugin-installation-guide.md": "22474d27a9d81931e96d930152cbe12876aceb9dec93a0f0edf2ed50c4cb38b7",
+      "docs/notes/plugin-marketplace-publication.md": "8f41926cb06525046f264f283fb3fe0bd39383db94d20362e9556e7e5cf1ce58",
+      "docs/notes/developing-se-harness.md": "998993410965121f0817ae6c63256d2fd1af7da33c5ad63c3914a15b79abb412",
+      "docs/notes/harness-installation-and-upgrades.md": "0f99f65b22e737116ae599a2e0a75fdfdf83bbd31cf61c6d07a070617fd27203",
+      "docs/notes/hosted-artifact-graph.md": "04d11a302f3bdb892be2d49e57191fa446b35081b661d01f8ddef9ca9b0c7dbc",
+      "docs/engineering/release-0-23-0/evidence/WO-RLS-047/README.md": "9c755ca77710a2e5bc09b83f2d413323d1ec57920e5f3f289bdb12a6a2784218"
+    },
+    "binding_note": "The existing plan validator accepts only README.md and docs/ paths in its canonical documentation map. All ten reviewed source files are bound here, including three packaging-source README files. Qualified public package bytes remain bound independently by the staged marketplace identity.",
+    "ci": "Earlier source CI failed only the README word limit. That failure and the correction are retained. CI on the final review head must pass before the human complete-release request."
+  },
+  "provider_controls": {
+    "main": "Protected PR with required validate; merge commits only; no bypass",
+    "pypi": "Existing main-only environment; approved reviewer removal remains; OIDC workflow unchanged",
+    "trusted_publisher": "mmzen account-side confirmation for owner mmzen, repository se_harness, workflow publish-pypi.yml and environment pypi retained from 0.22.1 activation; not a new authenticated PyPI settings read",
+    "marketplace_and_maintenance": "Non-fast-forward and deletion denied; observed exact parent and absent new maintenance ref",
+    "pages": "Existing Pages workflow and domain unchanged"
+  },
+  "authentication": {
+    "codex": "Live probe passes",
+    "claude-code": "Explicit claude-opus-5-5 live probe passes; configured global.anthropic.claude-fable-5-1 default returns 404 and is not usable",
+    "limit": "Point-in-time readiness, not a promise that credentials cannot expire; required public tests remain future observations."
+  },
+  "limitations": [
+    "R23-NATIVE-010/011 remain open under DEC-RLS-010 / RISK-RLS-008.",
+    "Codex Windows desktop remains not run/unverified under DEC-RLS-011 / RISK-RLS-009.",
+    "Git remains authoritative; source-built private service only, fixed hosted evaluator 0.22.1; RISK-HAG-001/002 remain.",
+    "Performance work, adoption, host update and production service deployment are excluded.",
+    "Public fresh/update tests and delivery receipts remain pending until authorized publication."
+  ],
+  "authority": "Prepared input for the exact human complete-release decision; this file authorizes nothing."
+}

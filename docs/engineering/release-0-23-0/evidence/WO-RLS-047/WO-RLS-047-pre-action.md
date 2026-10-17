@@ -11,8 +11,8 @@ Retained by `harnessctl evidence`; body content is owner-authored.
 
 ## Local preparation only
 
-See [the preparation review](../WO-RLS-045/ready-release-review.md).
-31 documentation checks pass. This handoff covers current source guidance and
+See [the complete-release review](../WO-RLS-045/complete-release-review.md).
+47 onboarding and documentation checks pass. This handoff covers current source guidance and
 ready-release input review, not public execution or work-order completion.
 The existing grant permits ordinary review publication from
 `codex/release-0-23-0` to `mmzen/se_harness:main`. Public actions and final
