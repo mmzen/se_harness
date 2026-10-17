@@ -20,7 +20,8 @@ def main():
     args = parser.parse_args()
     workspace = Path(args.workspace).resolve()
     workspace.mkdir(parents=True, exist_ok=False)
-    executable = str(Path(args.python).resolve())
+    # Preserve a virtual environment's interpreter symlink on POSIX hosts.
+    executable = str(Path(args.python).absolute())
     report = {
         "candidate": args.candidate,
         "wheel_sha256": hashlib.sha256(Path(args.wheel).read_bytes()).hexdigest(),

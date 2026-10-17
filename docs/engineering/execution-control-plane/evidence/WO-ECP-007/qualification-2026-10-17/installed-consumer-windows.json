@@ -1,0 +1,538 @@
+{
+  "candidate": "49b4f3fb7715d42d8c096a3fdcc57ca4bc7d2e71",
+  "wheel_sha256": "57bfed79d107021fb0ea3136709cf71edf57ef0db497de87719cb78d92daaaf7",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+  "started_at": "2026-10-17T12:13:31.836853+00:00",
+  "commands": [
+    {
+      "label": "runtime",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,se_harness,importlib.metadata,json; print(json.dumps({'python':sys.version,'package':se_harness.__file__,'version':importlib.metadata.version('se-harness')}))"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.2277,
+      "stdout": "{\"python\": \"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\", \"package\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\ecp007-candidate\\\\windows-env\\\\Lib\\\\site-packages\\\\se_harness\\\\__init__.py\", \"version\": \"0.23.1\"}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "git-version",
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0413,
+      "stdout": "git version 2.45.1.windows.1\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "--project-name",
+        "Consumer",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 1.2698,
+      "stdout": "{\r\n  \"changes\": [\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".engineering-harness.lock\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".engineering-harness.toml\"\r\n    }\r\n  ],\r\n  \"command\": \"init\",\r\n  \"outcome\": \"completed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"written\": true\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-init",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "init",
+        "--quiet"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0601,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "config",
+        "user.name",
+        "Consumer qualification"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0412,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "config",
+        "user.email",
+        "consumer@example.invalid"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0391,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0398,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-add",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "add",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0565,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "commit",
+        "--quiet",
+        "-m",
+        "Minimal installation"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0924,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/missing-attributes",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "seconds": 0.6277,
+      "stdout": "{\r\n  \"checks\": [\r\n    {\r\n      \"detail\": \".engineering-harness.toml\",\r\n      \"name\": \"config\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \".engineering-harness.lock\",\r\n      \"name\": \"lock\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"3.14.6\",\r\n      \"name\": \"python\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\r\n      \"name\": \"released-resources\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\r\n      \"name\": \"hash-bound-class-declared\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unspecified, eol=unspecified; requires text eol=lf\",\r\n      \"name\": \"hash-bound-attribute-effective\",\r\n      \"passed\": false\r\n    },\r\n    {\r\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\r\n      \"name\": \"hash-bound-mode-consistent\",\r\n      \"passed\": true\r\n    }\r\n  ],\r\n  \"command\": \"doctor\",\r\n  \"outcome\": \"failed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"warnings\": []\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/preview",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "--integration",
+        "git",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.5975,
+      "stdout": "{\r\n  \"changes\": [\r\n    {\r\n      \"action\": \"update\",\r\n      \"path\": \".engineering-harness.lock\"\r\n    },\r\n    {\r\n      \"action\": \"unchanged\",\r\n      \"path\": \".engineering-harness.toml\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".gitattributes\"\r\n    }\r\n  ],\r\n  \"command\": \"upgrade\",\r\n  \"instruction_delivery_required\": false,\r\n  \"outcome\": \"completed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"written\": false\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/apply",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "--integration",
+        "git",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 1.3711,
+      "stdout": "{\r\n  \"changes\": [\r\n    {\r\n      \"action\": \"update\",\r\n      \"path\": \".engineering-harness.lock\"\r\n    },\r\n    {\r\n      \"action\": \"unchanged\",\r\n      \"path\": \".engineering-harness.toml\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".gitattributes\"\r\n    }\r\n  ],\r\n  \"command\": \"upgrade\",\r\n  \"evidence_output\": null,\r\n  \"outcome\": \"completed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"written\": true\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-add",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "add",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0463,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "commit",
+        "--quiet",
+        "-m",
+        "Select evidence attributes"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0813,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/ready",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.823,
+      "stdout": "{\r\n  \"checks\": [\r\n    {\r\n      \"detail\": \".engineering-harness.toml\",\r\n      \"name\": \"config\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"unchanged\",\r\n      \"name\": \"integration:.gitattributes\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \".engineering-harness.lock\",\r\n      \"name\": \"lock\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"3.14.6\",\r\n      \"name\": \"python\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\r\n      \"name\": \"released-resources\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\r\n      \"name\": \"hash-bound-class-declared\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"1 raw classes effective for 1 tracked paths\",\r\n      \"name\": \"hash-bound-attribute-effective\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\r\n      \"name\": \"hash-bound-mode-consistent\",\r\n      \"passed\": true\r\n    }\r\n  ],\r\n  \"command\": \"doctor\",\r\n  \"outcome\": \"completed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"warnings\": []\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/damaged-attributes",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\explicit-git",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "seconds": 0.6268,
+      "stdout": "{\r\n  \"checks\": [\r\n    {\r\n      \"detail\": \".engineering-harness.toml\",\r\n      \"name\": \"config\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"unchanged\",\r\n      \"name\": \"integration:.gitattributes\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \".engineering-harness.lock\",\r\n      \"name\": \"lock\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"3.14.6\",\r\n      \"name\": \"python\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\r\n      \"name\": \"released-resources\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\r\n      \"name\": \"hash-bound-class-declared\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unset, eol=lf; requires text eol=lf\",\r\n      \"name\": \"hash-bound-attribute-effective\",\r\n      \"passed\": false\r\n    },\r\n    {\r\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\r\n      \"name\": \"hash-bound-mode-consistent\",\r\n      \"passed\": true\r\n    }\r\n  ],\r\n  \"command\": \"doctor\",\r\n  \"outcome\": \"failed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"warnings\": []\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "--project-name",
+        "Consumer",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.9325,
+      "stdout": "{\r\n  \"changes\": [\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".engineering-harness.lock\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".engineering-harness.toml\"\r\n    }\r\n  ],\r\n  \"command\": \"init\",\r\n  \"outcome\": \"completed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"written\": true\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-init",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "init",
+        "--quiet"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0567,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "config",
+        "user.name",
+        "Consumer qualification"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0394,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "config",
+        "user.email",
+        "consumer@example.invalid"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0404,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0391,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-add",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "add",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0517,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "commit",
+        "--quiet",
+        "-m",
+        "Minimal installation"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0856,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/missing-attributes",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "seconds": 0.6201,
+      "stdout": "{\r\n  \"checks\": [\r\n    {\r\n      \"detail\": \".engineering-harness.toml\",\r\n      \"name\": \"config\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \".engineering-harness.lock\",\r\n      \"name\": \"lock\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"3.14.6\",\r\n      \"name\": \"python\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\r\n      \"name\": \"released-resources\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\r\n      \"name\": \"hash-bound-class-declared\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unspecified, eol=unspecified; requires text eol=lf\",\r\n      \"name\": \"hash-bound-attribute-effective\",\r\n      \"passed\": false\r\n    },\r\n    {\r\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\r\n      \"name\": \"hash-bound-mode-consistent\",\r\n      \"passed\": true\r\n    }\r\n  ],\r\n  \"command\": \"doctor\",\r\n  \"outcome\": \"failed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"warnings\": []\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-add",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "add",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.042,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "commit",
+        "--quiet",
+        "-m",
+        "Select evidence attributes"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.078,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/ready",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.6096,
+      "stdout": "{\r\n  \"checks\": [\r\n    {\r\n      \"detail\": \".engineering-harness.toml\",\r\n      \"name\": \"config\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \".engineering-harness.lock\",\r\n      \"name\": \"lock\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"3.14.6\",\r\n      \"name\": \"python\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\r\n      \"name\": \"released-resources\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\r\n      \"name\": \"hash-bound-class-declared\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"1 raw classes effective for 1 tracked paths\",\r\n      \"name\": \"hash-bound-attribute-effective\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\r\n      \"name\": \"hash-bound-mode-consistent\",\r\n      \"passed\": true\r\n    }\r\n  ],\r\n  \"command\": \"doctor\",\r\n  \"outcome\": \"completed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"warnings\": []\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/damaged-attributes",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers\\owner-rule",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\windows-consumers",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "seconds": 0.6048,
+      "stdout": "{\r\n  \"checks\": [\r\n    {\r\n      \"detail\": \".engineering-harness.toml\",\r\n      \"name\": \"config\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \".engineering-harness.lock\",\r\n      \"name\": \"lock\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"3.14.6\",\r\n      \"name\": \"python\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\r\n      \"name\": \"released-resources\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\r\n      \"name\": \"hash-bound-class-declared\",\r\n      \"passed\": true\r\n    },\r\n    {\r\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unset, eol=lf; requires text eol=lf\",\r\n      \"name\": \"hash-bound-attribute-effective\",\r\n      \"passed\": false\r\n    },\r\n    {\r\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\r\n      \"name\": \"hash-bound-mode-consistent\",\r\n      \"passed\": true\r\n    }\r\n  ],\r\n  \"command\": \"doctor\",\r\n  \"outcome\": \"failed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"warnings\": []\r\n}\r\n",
+      "stderr": ""
+    }
+  ],
+  "scenarios": [
+    {
+      "mode": "explicit-git",
+      "passed": true,
+      "initial_files": [
+        ".engineering-harness.lock",
+        ".engineering-harness.toml",
+        "AGENTS.md"
+      ],
+      "init_seconds": 1.2698,
+      "doctor_seconds": 0.823,
+      "no_evidence_directory_created": true,
+      "owner_bytes_preserved": true,
+      "missing_and_damaged_attributes_rejected": true
+    },
+    {
+      "mode": "owner-rule",
+      "passed": true,
+      "initial_files": [
+        ".engineering-harness.lock",
+        ".engineering-harness.toml",
+        "AGENTS.md"
+      ],
+      "init_seconds": 0.9325,
+      "doctor_seconds": 0.6096,
+      "no_evidence_directory_created": true,
+      "owner_bytes_preserved": true,
+      "missing_and_damaged_attributes_rejected": true
+    }
+  ],
+  "passed": true
+}

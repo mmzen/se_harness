@@ -1,0 +1,83 @@
+{
+  "purpose": "non-promotable candidate evidence; no release or adoption",
+  "candidate": "49b4f3fb7715d42d8c096a3fdcc57ca4bc7d2e71",
+  "tree": "64f7745a96452c395efbd48815446afb11c86b2c",
+  "builder": {
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "setuptools": "84.0.0",
+    "wheel": "0.48.0"
+  },
+  "source_export": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\source",
+  "source_tar_sha256": "3b9c10590d9c5ba76b9e1c1b948776e7453a1c8dea145873f70c5ab707eb36c3",
+  "wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\dist\\se_harness-0.23.1-py3-none-any.whl",
+  "wheel_sha256": "57bfed79d107021fb0ea3136709cf71edf57ef0db497de87719cb78d92daaaf7",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.eol=lf",
+        "archive",
+        "--format=tar",
+        "--output",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\source.tar",
+        "49b4f3fb7715d42d8c096a3fdcc57ca4bc7d2e71"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+      "seconds": 2.897,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\retirement-build-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,importlib.metadata,json; print(json.dumps({'python':sys.version, 'setuptools':importlib.metadata.version('setuptools'), 'wheel':importlib.metadata.version('wheel')}))"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "seconds": 0.35,
+      "exit_code": 0,
+      "stdout": "{\"python\": \"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\", \"setuptools\": \"84.0.0\", \"wheel\": \"0.48.0\"}\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\retirement-build-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "pip",
+        "wheel",
+        "--no-index",
+        "--no-build-isolation",
+        "--disable-pip-version-check",
+        "--no-deps",
+        "--wheel-dir",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\dist",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ecp007-candidate\\source"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "seconds": 6.378,
+      "exit_code": 0,
+      "stdout": "Processing .\\ecp007-candidate\\source\r\n  Preparing metadata (pyproject.toml): started\r\n  Preparing metadata (pyproject.toml): finished with status 'done'\r\nBuilding wheels for collected packages: se-harness\r\n  Building wheel for se-harness (pyproject.toml): started\r\n  Building wheel for se-harness (pyproject.toml): finished with status 'done'\r\n  Created wheel for se-harness: filename=se_harness-0.23.1-py3-none-any.whl size=576379 sha256=57bfed79d107021fb0ea3136709cf71edf57ef0db497de87719cb78d92daaaf7\r\n  Stored in directory: C:\\Users\\mathi\\AppData\\Local\\Temp\\pip-ephem-wheel-cache-r2p13yz6\\wheels\\36\\c2\\95\\afdbc58de5bccec12fa9abdfc32baa3adf0d0c3f48cfaf3013\r\nSuccessfully built se-harness\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "49b4f3fb7715d42d8c096a3fdcc57ca4bc7d2e71^{tree}"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\hag221proposal",
+      "seconds": 0.042,
+      "exit_code": 0,
+      "stdout": "64f7745a96452c395efbd48815446afb11c86b2c\n",
+      "stderr": ""
+    }
+  ]
+}

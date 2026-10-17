@@ -1,0 +1,538 @@
+{
+  "candidate": "49b4f3fb7715d42d8c096a3fdcc57ca4bc7d2e71",
+  "wheel_sha256": "57bfed79d107021fb0ea3136709cf71edf57ef0db497de87719cb78d92daaaf7",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+  "started_at": "2026-10-17T12:14:44.005844+00:00",
+  "commands": [
+    {
+      "label": "runtime",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,se_harness,importlib.metadata,json; print(json.dumps({'python':sys.version,'package':se_harness.__file__,'version':importlib.metadata.version('se-harness')}))"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0513,
+      "stdout": "{\"python\": \"3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]\", \"package\": \"/tmp/wo-ecp-007-49b4f3fb-env/lib/python3.12/site-packages/se_harness/__init__.py\", \"version\": \"0.23.1\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "git-version",
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0082,
+      "stdout": "git version 2.43.0\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/init",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "init",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "--project-name",
+        "Consumer",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.346,
+      "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-init",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "init",
+        "--quiet"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0101,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "config",
+        "user.name",
+        "Consumer qualification"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0014,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "config",
+        "user.email",
+        "consumer@example.invalid"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0021,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.002,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0042,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "commit",
+        "--quiet",
+        "-m",
+        "Minimal installation"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0134,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/missing-attributes",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "seconds": 0.1749,
+      "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unspecified, eol=unspecified; requires text eol=lf\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/preview",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "--integration",
+        "git",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.1963,
+      "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitattributes\"\n    }\n  ],\n  \"command\": \"upgrade\",\n  \"instruction_delivery_required\": false,\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/apply",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "--integration",
+        "git",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.5052,
+      "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"unchanged\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitattributes\"\n    }\n  ],\n  \"command\": \"upgrade\",\n  \"evidence_output\": null,\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0025,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "commit",
+        "--quiet",
+        "-m",
+        "Select evidence attributes"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0046,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/ready",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.1843,
+      "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"unchanged\",\n      \"name\": \"integration:.gitattributes\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"1 raw classes effective for 1 tracked paths\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "explicit-git/damaged-attributes",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/explicit-git",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "seconds": 0.1848,
+      "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"unchanged\",\n      \"name\": \"integration:.gitattributes\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unset, eol=lf; requires text eol=lf\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/init",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "init",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "--project-name",
+        "Consumer",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.326,
+      "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.lock\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-init",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "init",
+        "--quiet"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0037,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "config",
+        "user.name",
+        "Consumer qualification"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0017,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "config",
+        "user.email",
+        "consumer@example.invalid"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0013,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-config",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0016,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0023,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "commit",
+        "--quiet",
+        "-m",
+        "Minimal installation"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0047,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/missing-attributes",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "seconds": 0.1799,
+      "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unspecified, eol=unspecified; requires text eol=lf\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0021,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "commit",
+        "--quiet",
+        "-m",
+        "Select evidence attributes"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.0062,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/ready",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "seconds": 0.1884,
+      "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"1 raw classes effective for 1 tracked paths\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "owner-rule/damaged-attributes",
+      "argv": [
+        "/tmp/wo-ecp-007-49b4f3fb-env/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "/tmp/wo-ecp-007-49b4f3fb-consumers-02/owner-rule",
+        "--json"
+      ],
+      "cwd": "/tmp/wo-ecp-007-49b4f3fb-consumers-02",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "seconds": 0.1747,
+      "stdout": "{\n  \"checks\": [\n    {\n      \"detail\": \".engineering-harness.toml\",\n      \"name\": \"config\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"selected wheel payload and declared instruction headings are available\",\n      \"name\": \"released-resources\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"2 file formats declared; consuming formats validate their own fields\",\n      \"name\": \"hash-bound-class-declared\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"evaluator-evidence: docs/engineering/_attribute_probe/evidence/_attribute_probe.json resolves text=unset, eol=lf; requires text eol=lf\",\n      \"name\": \"hash-bound-attribute-effective\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\",\n      \"name\": \"hash-bound-mode-consistent\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n",
+      "stderr": ""
+    }
+  ],
+  "scenarios": [
+    {
+      "mode": "explicit-git",
+      "passed": true,
+      "initial_files": [
+        ".engineering-harness.lock",
+        ".engineering-harness.toml",
+        "AGENTS.md"
+      ],
+      "init_seconds": 0.346,
+      "doctor_seconds": 0.1843,
+      "no_evidence_directory_created": true,
+      "owner_bytes_preserved": true,
+      "missing_and_damaged_attributes_rejected": true
+    },
+    {
+      "mode": "owner-rule",
+      "passed": true,
+      "initial_files": [
+        ".engineering-harness.lock",
+        ".engineering-harness.toml",
+        "AGENTS.md"
+      ],
+      "init_seconds": 0.326,
+      "doctor_seconds": 0.1884,
+      "no_evidence_directory_created": true,
+      "owner_bytes_preserved": true,
+      "missing_and_damaged_attributes_rejected": true
+    }
+  ],
+  "passed": true
+}
