@@ -63,17 +63,14 @@ Repository evaluator: 0.22.1 ([adoption](docs/engineering/repository-harness-upg
 
 ### Evaluator 0.23.0 and plugin 0.2.7
 
-The [release package](docs/engineering/release-0-23-0/README.md) adds the remote
-client and plugin guidance. Plugin 0.2.7 bundles evaluator/client 0.23.0; the
-service keeps evaluator 0.22.1. mmzen verified the exact candidate in
-[VREC-SEH-034](docs/engineering/release-0-23-0/verification-records/VREC-SEH-034.md).
-The [assessment](docs/engineering/release-0-23-0/evidence/WO-RLS-045/verification-assessment-48e851bb.md)
-retains two open instruction findings and the unverified Codex Windows desktop.
+[Release package](docs/engineering/release-0-23-0/README.md): plugin evaluator 0.23.0;
+service 0.22.1.
+[VREC-SEH-034](docs/engineering/release-0-23-0/verification-records/VREC-SEH-034.md)
+records verification with two open instruction findings and unverified Codex desktop.
 Use the [release record](docs/engineering/release-0-23-0/releases/RLS-SEH-034.md)
-for release authority and [delivery evidence](docs/engineering/release-0-23-0/evidence/WO-RLS-047/README.md)
-for observed public availability. Verification alone does not establish publication.
-Git remains authoritative; the service stays a private source-built sandbox,
-without public service or container-registry publication.
+for authority and [delivery evidence](docs/engineering/release-0-23-0/evidence/WO-RLS-047/README.md)
+for public availability. Git remains authoritative. The service stays private
+and source-built.
 
 ## Fewer repository files
 
