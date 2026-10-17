@@ -32,7 +32,7 @@ supply an absolute `TARGET` for repository operations from the external director
 ## Command shape
 
 These rules describe the local evaluator commands (`WO-ECP-022`).
-The unpublished hosted `remote` client has the separate contract below:
+The hosted `remote` client has the separate contract below:
 
 - **The repository is the positional `TARGET`**, default `.`, on every
   command that reads or writes one. `select-work-order` reads an event file,
@@ -65,13 +65,13 @@ The unpublished hosted `remote` client has the separate contract below:
 
 | Command | Principal actor | State effect | Intended use |
 | --- | --- | --- | --- |
-| `remote` | authorized sandbox operator or author; reader for reads | explicit remote reads or bounded sandbox draft writes; no local fallback | use the separately installed unpublished client; see [Hosted sandbox client](#hosted-sandbox-client-unpublished) |
+| `remote` | authorized sandbox operator or author; reader for reads | explicit remote reads or bounded sandbox draft writes; no local fallback | use the released 0.23.0 client; see [Hosted sandbox client](#hosted-sandbox-client) |
 | `init` | repository owner or authorized agent | writes the complete standard harness into an absent or empty target; into a target with content it preserves existing files, integrates the bounded fragments and writes `docs/engineering/ADOPTION_REPORT.md` | install the harness into any repository, new or existing |
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
 | `validate-draft` | human or agent | read-only | inspect one supported draft, separating invalidity, unfinished authoring slots and background findings |
 | `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer; under `--json` an engine refusal exits 2 and a failed generation carries the engine's standard error in `error` |
-| `resources` | human or agent | read-only | resolve instructions and templates from the selected external resource package; available since 0.21.0 and in the selected released 0.22.1 evaluator |
+| `resources` | human or agent | read-only | resolve instructions and templates from the selected external resource package; available since 0.21.0 and in the selected released 0.23.0 evaluator |
 | `doctor` | human or agent | read-only | inspect installation integrity, required supplied files and evaluator identity |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
@@ -94,14 +94,16 @@ The unpublished hosted `remote` client has the separate contract below:
 | `refresh-verification` | coding agent after an unchanged rebase | writes a new `ready` VREC | compare relevant Git entries and reuse evidence while preserving the original |
 | `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS plus canonical evaluator evidence | bind release policy, eligible VRECs, exact work coverage, released evaluator wheel identity, version, and the same candidate commit |
 
-## Hosted sandbox client (unpublished)
+<a id="hosted-sandbox-client-unpublished"></a>
 
-`harnessctl remote` is available in candidate client 0.22.2, installed into a
-separate test environment. The selected released evaluator 0.22.1 does not
-provide this command. Keep the released evaluator selected for repository and server checks.
+## Hosted sandbox client
 
-In these examples, `CLIENT_PYTHON` is the absolute Python path in the separate
-candidate environment. Run from outside the checkout. `HAG_TEST_TOKEN` is the
+`harnessctl remote` is available in released evaluator/client 0.23.0, now selected
+for this repository. The private service remains pinned to its separate released
+0.22.1 evaluator. A client upgrade does not change the service selection.
+
+In these examples, `CLIENT_PYTHON` is the absolute Python path in the isolated
+released 0.23.0 client environment. Run from outside the checkout. `HAG_TEST_TOKEN` is the
 name of a private environment variable; do not put its value in the command.
 
 ```text
@@ -205,7 +207,7 @@ verification or release gates, and includes no lifecycle next step.
 
 Released evaluators since 0.21.0 provide this command for repositories selecting
 the `released-resources-v1` layout. This repository uses independently installed
-0.22.1 after explicit adoption under WO-HUP-030. Publication alone does not
+0.23.0 after explicit adoption under WO-HUP-031. Publication alone does not
 change a repository's selection.
 
 ```text
@@ -694,10 +696,12 @@ The module route works without a console launcher. Runtime identity schema v4
 reports Python version without hashing the executable. New evaluator evidence
 schema v2 binds canonical validated values; legacy schema v1 remains readable.
 
-## Hosted lifecycle rehearsal (candidate client)
+<a id="hosted-lifecycle-rehearsal-candidate-client"></a>
 
-These commands belong to the separately installed candidate client. The selected
-released evaluator remains 0.22.1 and is the service's sole lifecycle evaluator.
+## Hosted lifecycle rehearsal
+
+These commands belong to the released 0.23.0 client. The service's separately
+selected evaluator remains 0.22.1 and is its sole lifecycle evaluator.
 
 ```text
 CLIENT_PYTHON -I -m se_harness remote rehearse --endpoint ENDPOINT --project PROJECT_ID --token-env TOKEN_VARIABLE --client-wheel CLIENT_WHEEL --test-copy --request REQUEST_JSON --json
@@ -718,7 +722,7 @@ replay. All these records are test data; Git remains authoritative for real work
 
 ## Concise hosted authoring
 
-The candidate client supports explicit typed inputs for existing operations.
+The released client supports explicit typed inputs for existing operations.
 This does not change service schemas, select lifecycle actions or grant authority.
 Use the installed candidate Python with `-I -m se_harness remote OPERATION`.
 Common selection is `--endpoint URL --project UUID --token-env VARIABLE`.

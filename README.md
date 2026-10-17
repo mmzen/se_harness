@@ -38,7 +38,7 @@ claude plugin install verity-plane@se-harness
 
 Start a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.
 
-Observed public delivery (2026-10-05): Plugin **0.2.6** bundles released **SE Harness 0.22.1**. Windows Codex/Claude CLI installation, update from 0.2.5 and offline setup passed. [Public evidence](docs/engineering/release-0-22-1/evidence/WO-RLS-042/closeout-assessment.md) records identities and limits.
+Observed public delivery (2026-10-17): Plugin **0.2.7** bundles released **SE Harness 0.23.0**. Windows Codex/Claude CLI installation, update from 0.2.6 and offline setup passed. [Public evidence](docs/engineering/release-0-23-0/evidence/WO-RLS-047/closeout-assessment.md) records the supported Codex update recovery, retained timeouts and limits.
 
 Historical [0.22.0 Claude results and limitations](docs/engineering/release-0-22-0/evidence/WO-RLS-038/README.md) remain unchanged.
 
@@ -47,30 +47,22 @@ Startup/compaction hooks deliver the selected repository's instructions; they do
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
 
-### Evaluator 0.22.1 and plugin 0.2.6
-
-[0.22.1 / plugin 0.2.6](docs/engineering/release-0-22-1/README.md) adds standalone
-draft validation and decision attribution. [VREC-SEH-033](docs/engineering/release-0-22-1/verification-records/VREC-SEH-033.md)
-records mmzen's verification, passing Windows/Linux package and Codex/Claude CLI
-checks. Codex Windows desktop remains unverified (accepted DEC-RLS-009 / RISK-RLS-007).
-
-[Release record](docs/engineering/release-0-22-1/releases/RLS-SEH-033.md),
-[delivery evidence](docs/engineering/release-0-22-1/evidence/WO-RLS-042/README.md)
-and [public identity](https://github.com/mmzen/se_harness/blob/plugin-marketplace/PACKAGE-IDENTITY.json)
-record completed delivery, verified in
-[VREC-RLS-004](docs/engineering/release-0-22-1/verification-records/VREC-RLS-004.md).
-Repository evaluator: 0.22.1 ([adoption](docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-030.md)).
-
 ### Evaluator 0.23.0 and plugin 0.2.7
 
-[Release package](docs/engineering/release-0-23-0/README.md): plugin evaluator 0.23.0;
-service 0.22.1.
-[VREC-SEH-034](docs/engineering/release-0-23-0/verification-records/VREC-SEH-034.md)
-records verification with two open instruction findings and unverified Codex desktop.
-Use the [release record](docs/engineering/release-0-23-0/releases/RLS-SEH-034.md)
-for authority and [delivery evidence](docs/engineering/release-0-23-0/evidence/WO-RLS-047/README.md)
-for public availability. Git remains authoritative. The service stays private
-and source-built.
+The [release](docs/engineering/release-0-23-0/README.md) delivers the hosted client
+and plugin guidance. [VREC-SEH-034](docs/engineering/release-0-23-0/verification-records/VREC-SEH-034.md)
+records candidate verification. R23-NATIVE-010/011 remain open; Codex Windows
+desktop remains unverified under accepted DEC-RLS-010/011 and RISK-RLS-008/009.
+
+[RLS-SEH-034](docs/engineering/release-0-23-0/releases/RLS-SEH-034.md) records release
+authority. [VREC-RLS-005](docs/engineering/release-0-23-0/verification-records/VREC-RLS-005.md)
+verifies completed public delivery. The repository selects evaluator 0.23.0 under
+[WO-HUP-031](docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-031.md);
+development source is unpublished 0.23.1. The private, source-built service keeps
+evaluator 0.22.1. Git remains authoritative.
+
+Historical [0.22.1 / plugin 0.2.6](docs/engineering/release-0-22-1/README.md)
+records retain their original results.
 
 ## Fewer repository files
 
@@ -114,6 +106,6 @@ Verity Plane Explorer connects requirements, work, evidence, and decisions from 
 - [Follow a complete example](docs/notes/harness-lineage-example.md)
 - [Look up a command](docs/notes/harnessctl-reference.md)
 - [Develop and contribute](docs/notes/developing-se-harness.md)
-- [Future complete-release procedure](docs/notes/release-delivery-completion.md#one-approval-for-the-complete-release)
+- [Complete-release procedure](docs/notes/release-delivery-completion.md#one-approval-for-the-complete-release)
 
 [Report an issue](https://github.com/mmzen/se_harness/issues) · [Releases](https://github.com/mmzen/se_harness/releases) · [License](LICENSE)
