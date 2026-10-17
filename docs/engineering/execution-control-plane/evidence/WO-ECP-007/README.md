@@ -1,8 +1,9 @@
 # WO-ECP-007 implementation review
 
 The remaining product-boundary correction is implemented and tested locally.
-WO-ECP-007 remains `in_progress`. One definition-content finding remains open;
-no completed handoff, ready verification record or review PR is claimed here.
+The definition-content finding was resolved under the human's subsequent
+approval. This assessment supports handoff and verification preparation; it
+does not record human verification or merge authority.
 
 ## Result
 
@@ -56,13 +57,16 @@ is claimed.
 
 ## Review findings and resolution
 
-1. **Open: REQ-ECP-012 statement field.** The activated revision's body records
+1. **Resolved: REQ-ECP-012 statement field.** The activated revision's body records
    the human's Git-readiness choice, but its frontmatter still contains the old
    unconditional init/commit/doctor statement. The agent omitted that field in
    the reviewed amendment. An exact statement-only correction and provenance
    link were prepared outside the repository and submitted for human authority.
-   They have not been applied. Complete handoff and review publication remain
-   pending this correction.
+   The human answered "Ok continue" to that correction request. The exact
+   reviewed correction was applied with the first revision preserved in the
+   [correction receipt](definition-revisions/2026-10-17/statement-correction.json).
+   The earlier qualification summary retains the then-pending finding as an
+   historical observation; this resolution supersedes that readiness limit.
 2. **Resolved: repository-ID exception.** A count-checked patch in the existing
    builder removes the exception. The retained design export is unchanged. The
    behavioral regression fails on the old viewer and passes on the generated
@@ -96,6 +100,10 @@ boundary. Installation behavior did not need a product-code change.
   [Linux](qualification-2026-10-17/packaged-viewer-linux.json).
 - [Preservation check](preservation.json) and the
   [authorized definition activation](definition-revisions/2026-10-17/activation.json).
+- [Final input comparison](input-equivalence.json),
+  [requirement assessment](verification-assessment.md), and
+  [handoff and completion observations](completion-observations.json), with
+  [their raw transcripts](completion-transcripts.zip).
 
 The initial restrictive-shell failure, CLI-preview usage error, expected
 pre-fix failures, interrupted run and later corrections remain in the raw

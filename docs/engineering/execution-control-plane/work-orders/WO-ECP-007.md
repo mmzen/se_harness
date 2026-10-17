@@ -2,7 +2,7 @@
 id = "WO-ECP-007"
 type = "work_order"
 title = "Close remaining product-boundary gaps"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-10-17"
@@ -53,6 +53,13 @@ to = "in_progress"
 decided_at = "2026-10-17T11:55:21Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-17T12:56:12Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Close remaining product-boundary gaps

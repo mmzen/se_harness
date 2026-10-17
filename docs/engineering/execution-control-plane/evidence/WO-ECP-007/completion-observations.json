@@ -1,0 +1,240 @@
+{
+  "archive_sha256": "ee6ecf22b604daae32fd7844f3946edc704ab067d60be6dda94a44036405a340",
+  "transcripts": [
+    {
+      "path": "bind-handoff-evidence.json",
+      "bytes": 683,
+      "sha256": "f8db35ae9f02a98731d2d02a6a33cff824fe93bd49abd2be8ea2da61a88fbad5"
+    },
+    {
+      "path": "bind-handoff-evidence.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bind-handoff-evidence.stdout",
+      "bytes": 16902,
+      "sha256": "a827c127766f168dce5e62135f866aa8e4fbc633a8240dd4eb560c7f71cab36f"
+    },
+    {
+      "path": "complete-handoff-02.json",
+      "bytes": 748,
+      "sha256": "f78d2d7816cd11f6bfdddd33134db91ff1aed5a816ee4e5942c21951bf4eb456"
+    },
+    {
+      "path": "complete-handoff-02.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "complete-handoff-02.stdout",
+      "bytes": 24925,
+      "sha256": "1aafc1d329ae2721641141b27bc7a18b5235259fce9b26e55f591c8e3e09d379"
+    },
+    {
+      "path": "complete-handoff.json",
+      "bytes": 748,
+      "sha256": "b911ee53e27375e782b18142e46c0c20ca9e30e13a4de6f54afd1451816b6ab4"
+    },
+    {
+      "path": "complete-handoff.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "complete-handoff.stdout",
+      "bytes": 25099,
+      "sha256": "b606a8418fb7c03275db3de6dc00c42c8891aaac8afbc8b6b1c89779c7628842"
+    },
+    {
+      "path": "continue-approved-correction.json",
+      "bytes": 644,
+      "sha256": "a18a28a9536e532f171b8da380d66db34651f3c488fb9250c4fbb9e9c56a6986"
+    },
+    {
+      "path": "continue-approved-correction.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "continue-approved-correction.stdout",
+      "bytes": 19905,
+      "sha256": "3dd4d20bbb9b7597db4369f1dbdd13bda973c088d235f63d27c30cab94d3a820"
+    },
+    {
+      "path": "final-implementation-scope.json",
+      "bytes": 747,
+      "sha256": "2a90fa071f3d7bc0aeb1d4214a356a034787171b2dafe434fb3e39c5cfbfb3c6"
+    },
+    {
+      "path": "final-implementation-scope.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "final-implementation-scope.stdout",
+      "bytes": 22001,
+      "sha256": "ab57739b8320f1e92d29a36eb896aa88b1eebcfac7818057479b2bb0614170fe"
+    },
+    {
+      "path": "implementation-complete-apply.json",
+      "bytes": 716,
+      "sha256": "3854fbea655fb6cdfb4447465a88b8085df448fe107d0c07ac3a29b1ab04253a"
+    },
+    {
+      "path": "implementation-complete-apply.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "implementation-complete-apply.stdout",
+      "bytes": 12421,
+      "sha256": "a2f82b93e47840755ec10240a6a1d5c42a05805a2e4a56af3fa4fbf030104942"
+    },
+    {
+      "path": "implementation-complete-preview.json",
+      "bytes": 700,
+      "sha256": "2e56db0dc3707a09bb65d8529b384bf1c08c0d6f5c74d2a4ae40a6c30043c238"
+    },
+    {
+      "path": "implementation-complete-preview.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "implementation-complete-preview.stdout",
+      "bytes": 12433,
+      "sha256": "639d9f70740a8640434d689d9b4462d5878acea7c1470c8e91e122ba4c758998"
+    },
+    {
+      "path": "post-correction-review-preflight.json",
+      "bytes": 681,
+      "sha256": "0f757572e0531fefae57064ae650a2ea3c014a6a0058b013a8e05dc3d5272046"
+    },
+    {
+      "path": "post-correction-review-preflight.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "post-correction-review-preflight.stdout",
+      "bytes": 1405,
+      "sha256": "4b15935b1f1b6fc37f4bfb1f18f07e32072c8a6d1f34b33f68d750f182fd3348"
+    },
+    {
+      "path": "post-correction-validation.json",
+      "bytes": 609,
+      "sha256": "c6ae2382c20e455165265df90805a4c01da89f448f5d068a6e132271a0c92e53"
+    },
+    {
+      "path": "post-correction-validation.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "post-correction-validation.stdout",
+      "bytes": 401538,
+      "sha256": "1823465fe84b6932ebc96672b95bbb88203b4905fe67c20f30d474da7b2f5fc1"
+    }
+  ],
+  "validation": {
+    "artifact_count": 2022,
+    "error_count": 0,
+    "warning_count": 65
+  },
+  "review_preflight": {
+    "assurance": {
+      "commit_bound_verification": "required",
+      "decided_by": "mmzen",
+      "rationale": "mmzen confirmed required commit-bound verification for the reviewed definition amendments, viewer behavior, package checks and installation guidance. Later verification and release decisions rely on the exact implemented result."
+    },
+    "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+    "background": [],
+    "diagnostics": [],
+    "phase": "review",
+    "reading_manifest": [
+      "docs/engineering/execution-control-plane/intent/INT-ECP-001.md",
+      "docs/engineering/execution-control-plane/capabilities/CAP-ECP-003.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-012.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-013.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-007.md",
+      "docs/engineering/execution-control-plane/verification/VER-ECP-007.md",
+      "docs/engineering/execution-control-plane/work-orders/WO-ECP-007.md"
+    ],
+    "ready": true,
+    "schema": "se-harness-preflight-v2",
+    "skew": [],
+    "work_order": {
+      "id": "WO-ECP-007",
+      "path": "docs/engineering/execution-control-plane/work-orders/WO-ECP-007.md",
+      "status": "in_progress"
+    }
+  },
+  "handoff_restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated handoff compliance for WO-ECP-007."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-ECP-007 is in_progress."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-ECP-007=implemented",
+        "--decision",
+        "WO-ECP-007=delegated-executor"
+      ]
+    },
+    "alternatives": []
+  },
+  "completion_restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 1 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-ECP-007 is implemented."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "capture-verification",
+        ".",
+        "--work-order",
+        "WO-ECP-007",
+        "--owner",
+        "delegated-executor",
+        "--id",
+        "VREC-...",
+        "--verification",
+        "VER-...",
+        "--evidence",
+        "..."
+      ]
+    },
+    "alternatives": []
+  },
+  "verification": "not decided; preparation is the selected next step"
+}

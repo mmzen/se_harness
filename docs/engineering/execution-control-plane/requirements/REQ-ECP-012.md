@@ -6,7 +6,7 @@ status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
 updated = "2026-10-17"
-statement = "WHEN a consumer runs `harnessctl init`, commits the result, and runs `harnessctl doctor`, THE SYSTEM SHALL exit 0 with no failed check."
+statement = "THE SYSTEM SHALL require effective Git evidence attributes before doctor passes in a Git repository, including before the first evidence file. Default init SHALL write only the configuration and lock; Git integration SHALL require an explicit owner selection or an equivalent owner rule."
 verification_method = ["test", "demonstration"]
 priority = "must"
 source = "complexity audit P0-1"
@@ -27,6 +27,8 @@ reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP de
 ## Selected WO-ECP-007 revision
 
 This revision applies only to remaining work under WO-ECP-007. The [preserved accepted version](../evidence/WO-ECP-007/definition-revisions/2026-10-17/accepted/REQ-ECP-012.txt) has complete-file SHA-256 `6fcaf0f6b601286efb593e081512f80b4eca2acfa7c4b4101c0030c0f492ce8a` and Git blob `231f6947f4ff2b426c40a202e9cc690fb0e09ab0` at commit `0b93e92ceabdb4cae85e1f4fdab943f955aa1c38`. The [activation receipt](../evidence/WO-ECP-007/definition-revisions/2026-10-17/activation.json) records the actual human authority and before/after identities. Without that recorded authority this replacement does not govern work. Original lifecycle events remain unchanged; this is not a native evaluator revision event. Earlier completed work and evidence retain their original definition meaning. Retained historical problem descriptions are context, not claims about current code. Unrelated skills and capabilities retain their existing obligations.
+
+The subsequent statement-only correction and preserved first revision are recorded in [the correction receipt](../evidence/WO-ECP-007/definition-revisions/2026-10-17/statement-correction.json).
 
 ## Rationale
 
