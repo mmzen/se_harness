@@ -2,7 +2,7 @@
 id = "WO-RLS-047"
 type = "work_order"
 title = "Deliver and confirm evaluator 0.23.0 and plugin 0.2.7"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-10-12"
 updated = "2026-10-17"
@@ -35,6 +35,13 @@ to = "in_progress"
 decided_at = "2026-10-17T05:48:58Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Begin the approved local current-status documentation and delivery-input preparation only. Public actions remain conditional on the later exact complete-release decision. Public qualification and final VER-RLS-041 assurance remain pending; no release or external authority is supplied by this start."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-10-17T07:28:15Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Execution completion under the approved WO-RLS-047 scope and unchanged complete-release grant. All five surfaces pass independent retained public observations, the final publisher is successful, and both claimed CLIs pass fresh/update installation and evaluator setup. Earlier failures, supported recovery and accepted native/desktop limitations remain explicit. This applies no human assurance decision; VER-RLS-041 requires separate commit-bound verification."
 +++
 
 # Deliver and confirm evaluator 0.23.0 and plugin 0.2.7
