@@ -2,7 +2,7 @@
 id = "RLS-SEH-034"
 type = "release_record"
 title = "Release candidate 0.23.0"
-status = "ready"
+status = "released"
 owners = ["mmzen"]
 created = "2026-10-17"
 updated = "2026-10-17"
@@ -14,6 +14,15 @@ prepared_by = "Codex"
 evaluator_evidence_path = "docs/engineering/release-0-23-0/evidence/RLS-SEH-034-evaluator.json"
 evaluator_evidence_sha256 = "950c3c1fe2ecd3ad530ac454b185dfffebe4440d7617e6d512db815bfa257fdb"
 tag = "v0.23.0"
+
+released_at = "2026-10-17T06:34:11Z"
+authorized_by = "mmzen"
+[delivery]
+plan = "docs/engineering/release-0-23-0/evidence/WO-RLS-045/complete-release-plan.json"
+sha256 = "420b4b82891b2fe77244cc3c4a995ddab8153a11f649324f01b1f37e83e51b34"
+decided_by = "mmzen"
+decision_reference = "Codex session 01a0bd7b-24c7-7503-8955-4a24231fb2a4, 2026-10-17: mmzen replied \"Approve the complete release\" to the exact RLS-SEH-034 evaluator/client 0.23.0 and plugin 0.2.7 review in PR #545 at d463e42d6c5e4386fc07b0b6173b1c43f8908237. mmzen then replied \"Approve the owner correction and continue.\" to the exact one-line owner/base amendment reviewed at bfc2e24606c883f34e9920ef61112745d3f9fa03. The explicitly approved corrected pre-decision base is 8430edb957ceae79e144ce13e56bea1fb5019ec2"
+review_commit = "8430edb957ceae79e144ce13e56bea1fb5019ec2"
 
 [distribution]
 schema = 2
@@ -34,6 +43,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-036"]
 includes_verification = ["VREC-SEH-034"]
 releases_work = ["WO-HAG-001", "WO-HAG-005", "WO-HAG-006", "WO-HAG-007", "WO-HAG-008", "WO-HAG-009", "WO-HAG-010", "WO-HAG-011", "WO-HUP-030", "WO-IPK-002", "WO-RLS-045", "WO-RLS-046", "WO-RLS-048", "WO-RLS-049", "WO-RLS-050", "WO-RLS-051", "WO-RLS-052", "WO-RLS-053", "WO-RLS-054", "WO-RLS-055"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-10-17T06:34:11Z"
+decided_by = "mmzen"
+reason = "Codex session 01a0bd7b-24c7-7503-8955-4a24231fb2a4, 2026-10-17: mmzen replied \"Approve the complete release\" to the exact RLS-SEH-034 evaluator/client 0.23.0 and plugin 0.2.7 review in PR #545 at d463e42d6c5e4386fc07b0b6173b1c43f8908237. mmzen then replied \"Approve the owner correction and continue.\" to the exact one-line owner/base amendment reviewed at bfc2e24606c883f34e9920ef61112745d3f9fa03. The explicitly approved corrected pre-decision base is 8430edb957ceae79e144ce13e56bea1fb5019ec2. Frozen plan docs/engineering/release-0-23-0/evidence/WO-RLS-045/complete-release-plan.json SHA-256 420b4b82891b2fe77244cc3c4a995ddab8153a11f649324f01b1f37e83e51b34. One complete-release grant covers all listed actions, protected release/receipt integrations and recovery. Accepted DEC-RLS-010/011 and RISK-RLS-008/009 limitations remain. No adoption, user-host update, provider-setting change, production service or changed input is authorized."
 +++
 
 # Release Record Candidate
