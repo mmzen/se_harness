@@ -1,0 +1,48 @@
+{
+  "base": "ed29d435f37b5c2c8b81b1e1375d504edc98787a",
+  "implementation_commit": "ee0f723112bb09dc4c65edebaadd1a4e66c57ed1",
+  "assessed_file_sha256": {
+    ".engineering-harness.lock": "0ba3d1e5ab496a1aaa345161bd8d3a0d65fa0812769325ad4d06b4480b8658f9",
+    ".engineering-harness.toml": "83d78eca995ceb9951a7dd70eeabf65e8c176c17a178ba10aabf3b9aba4075a6",
+    ".github/workflows/engineering-harness.yml": "8fd56fe223d66a2a1566a708f189def215c5868812563cbd277f17d5eb3d93ef",
+    "README.md": "c522f3940edee1032f16eee7e7f773ef8055126883d655c0e5ce58c6ef6c4713",
+    "docs/engineering/README.md": "5540554e7b4575906aa98aded9d09608cbd0014a14569dce6f93891ae9a3edea",
+    "docs/engineering/release-0-23-0/README.md": "0c4718536d74b5cfc18f6e2fe66bef9a55dea59f41e74fca2b3168b2a4dfb2ef",
+    "docs/engineering/repository-harness-upgrade/README.md": "5298fe00012689ab74d7287e8854a81eda2d2272e499b1c1131f94aecee118ac",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-031-evaluator-upgrade.json": "40b11b18296804e2605664c0e65d5d6f4097b4f9708c610a5108edd2e673b59c",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-031/approval.json": "64ca8ea81adb2a5a9f155a8f8ec064c55865698a4ca986464e2d26098a59ffba",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-031/preparation-checks.zip": "8fd44f5ce310a408769dd48a22a003c85579d96e0e8ba14e657d3aebfc7c8c41",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-031/review.md": "698122ca411be9a4f3181554da997ba4f002b44bb17626a7714119273e50af5f",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-031/reviewed-artifacts.json": "80b1dcd3d9da0f444605162238b3efcc0ce29406ab033f5df2e52f641244d6c9",
+    "docs/engineering/repository-harness-upgrade/verification/VER-HUP-026.md": "c39eb610c1edf9a68ff3d9f1ca249fb9c2d9abb7dc91f21239df616c780f8084",
+    "docs/engineering/self-hosting-boundary/SELF_HOSTING.md": "444e6908a364a42f34fdf268f6a69ce75dcf690072b4f615185da141b7c031a5",
+    "docs/notes/developing-se-harness.md": "81979933e76549437305676fce41f04441dcb0ba17a4a4878bd6570a4760c838",
+    "docs/notes/harness-installation-and-upgrades.md": "a650353e55eadd5f649101ce45d37a353aa05a4a34fae19eb5b2e78a85d8fe40",
+    "docs/notes/harnessctl-reference.md": "75dd468b91c54c50a7f953ab8c4efd0ce6584169216797ea53edf7c6f19f85f7",
+    "docs/notes/plugin-installation-guide.md": "f22cfbb89c3993e8356eea4dd7caf9be9da3156110e7d037ccf5335d859649af",
+    "docs/notes/plugin-marketplace-publication.md": "979bd325e35af2d303460e5d734145d354099b02b5963dc4946ca86c699bae18",
+    "docs/notes/release-delivery-completion.md": "77e676459dc3bd8f24dc45c8818a5749303758bcbc917b453f83f1f217fef8ed",
+    "pyproject.toml": "debee6c4cfb7e8400285715ffa9c94d362008f9d04aaf9333258afdefd10a08f",
+    "se_harness/__init__.py": "4d6fbd4c613cd716164f7d05683872442b8135a8db373b64585d82cbb4eaa02e",
+    "tests/plugin_integration/package_assembly/test_refresh_guidance.py": "a1d0d868e754d26b6b874dca6154ae7f86c020b7af3d23cd10d851c14ba50d98"
+  },
+  "commands_sha256": "4f62c55681d9e1e5a918f58ad44d93067560e6518ff5b12db03663d061993850",
+  "source_suite": {
+    "tests": 1346,
+    "reported_skips": 24,
+    "exit": 0
+  },
+  "focused_recovery": {
+    "tests": 47,
+    "exit": 0
+  },
+  "preserved_files": 14625,
+  "current_index_exclusions": [
+    "docs/engineering/README.md",
+    "docs/engineering/release-0-23-0/README.md",
+    "docs/engineering/repository-harness-upgrade/README.md",
+    "docs/engineering/self-hosting-boundary/SELF_HOSTING.md"
+  ],
+  "ci": "Pending review publication; required CI must pass before merge.",
+  "limits": "Repository adoption only. Host plugin and private service unchanged. Existing open instruction findings and desktop omission retained."
+}
