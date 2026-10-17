@@ -3,7 +3,7 @@
   "candidate_commit": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15",
   "plan_sha256": "420b4b82891b2fe77244cc3c4a995ddab8153a11f649324f01b1f37e83e51b34",
   "schema": "se-harness-delivery-observations/v1",
-  "observed_at": "2026-10-17T06:59:14.094280+00:00",
+  "observed_at": "2026-10-17T07:11:33.597556+00:00",
   "release": {
     "record": "RLS-SEH-034",
     "status": "released",
@@ -201,28 +201,27 @@
     },
     {
       "id": "release_markers",
-      "status": "pending",
-      "observed_at": "2026-10-17T06:59:14.069159+00:00",
+      "status": "pass",
+      "observed_at": "2026-10-17T07:11:33.597567+00:00",
       "source": "https://github.com/mmzen/se_harness",
       "identity": {
-        "latest": "v0.22.1",
-        "last": "4f640284ec496b88cd7aa4ba88ca537d9374a2f8"
+        "latest": "v0.23.0",
+        "last": "48e851bbc94d7fb0c06e9b80666c3860cb5f8c15"
       },
       "evidence": {
         "authorization": [
           {
-            "path": "publisher.json",
-            "sha256": "05a52850a7fb24ef773c05f758cf43c5974426ed171b9a450f978ca303960dc2"
+            "path": "release-marker-receipt.json",
+            "sha256": "1c17cfe832e09fef8d14a3d4e64e5fab9aef1eb76e94a6182f043f697e2fe3ee"
           }
         ],
         "readback": [
           {
-            "path": "maintenance-line.json",
-            "sha256": "1e0e828d0bc4f9cb3ba66c36256000eea0df66f0582655741f88324abd2f8d64"
+            "path": "release-marker-receipt.json",
+            "sha256": "1c17cfe832e09fef8d14a3d4e64e5fab9aef1eb76e94a6182f043f697e2fe3ee"
           }
         ]
-      },
-      "note": "Markers unchanged until this exact public observation package is integrated and assessed."
+      }
     }
   ]
 }
